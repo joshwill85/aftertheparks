@@ -1,0 +1,54 @@
+name: Activity Ingest Pipeline
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"  # Weekly Monday 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/ingest/requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install chromium
+
+      - name: Run ingest pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/ingest/run_pipeline.py --no-playwright
+
+      - name: Post-publish health check
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python - <<'PY'
+          import os, sys
+          sys.path.insert(0, "scripts/ingest")
+          from db import SupabaseClient
+          db = SupabaseClient()
+          issues = db.rpc("check_activity_data_health")
+          if issues:
+              for row in issues:
+                  print(f"HEALTH: {row}")
+              # Warn but do not fail on needs_review during bootstrap
+              blocking = [r for r in issues if r.get("check_name") == "missing_current_edition"]
+              if blocking:
+                  sys.exit(1)
+          print("Health check passed")
+          PY

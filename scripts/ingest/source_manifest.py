@@ -1,0 +1,229 @@
+"""Official Disney recreation source manifest for all 31 Walt Disney World resorts."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class ActivitySource:
+    calendar_group_key: str
+    resort_slugs: tuple[str, ...]
+    recreation_page_url: str
+    pdf_url: str | None
+    pdf_edition: str | None
+    notes: str | None = None
+
+
+# Prefer fy26-q2 collateral when available; fall back to newest verified official PDF.
+CDN_COLLATERAL = (
+    "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/"
+    "parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation"
+)
+CDN_GUIDE = (
+    "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/"
+    "parks-platform/parks-global-assets/disney-world/recreation/guide"
+)
+CDN_AOA = (
+    "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/"
+    "parks-platform/parks-global-assets/disney-world/resorts/art-of-animation/experience"
+)
+
+DISNEY_RESORT_BASE = "https://disneyworld.disney.go.com/resorts"
+
+
+def recreation_url(slug: str) -> str:
+    return f"{DISNEY_RESORT_BASE}/{slug}/recreation/"
+
+
+ACTIVITY_SOURCES: list[ActivitySource] = [
+  ActivitySource(
+    "all-star-movies",
+    ("all-star-movies-resort",),
+    recreation_url("all-star-movies-resort"),
+    f"{CDN_GUIDE}/All-Star-Movies_Aframe_Recreation_1125.pdf",
+    "guide-1125",
+  ),
+  ActivitySource(
+    "all-star-music",
+    ("all-star-music-resort",),
+    recreation_url("all-star-music-resort"),
+    f"{CDN_COLLATERAL}/fy26-q1/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf",
+    "fy26-q1-0126",
+  ),
+  ActivitySource(
+    "all-star-sports",
+    ("all-star-sports-resort",),
+    recreation_url("all-star-sports-resort"),
+    f"{CDN_COLLATERAL}/fy26-q1/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf",
+    "fy26-q1-0126",
+  ),
+  ActivitySource(
+    "art-of-animation",
+    ("art-of-animation-resort",),
+    recreation_url("art-of-animation-resort"),
+    f"{CDN_AOA}/DAAR_Aframe_Recreation-0525_DIGITAL.pdf",
+    "0525-digital",
+  ),
+  ActivitySource(
+    "pop-century",
+    ("pop-century-resort",),
+    recreation_url("pop-century-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/POP_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+  ),
+  ActivitySource(
+    "caribbean-beach",
+    ("caribbean-beach-resort",),
+    recreation_url("caribbean-beach-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/CBR_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+  ),
+  ActivitySource(
+    "coronado-springs",
+    ("coronado-springs-resort",),
+    recreation_url("coronado-springs-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+  ),
+  ActivitySource(
+    "port-orleans-french-quarter",
+    ("port-orleans-resort-french-quarter",),
+    recreation_url("port-orleans-resort-french-quarter"),
+    f"{CDN_COLLATERAL}/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+    "Guests may participate in activities at Riverside and French Quarter.",
+  ),
+  ActivitySource(
+    "port-orleans-riverside",
+    ("port-orleans-resort-riverside",),
+    recreation_url("port-orleans-resort-riverside"),
+    f"{CDN_COLLATERAL}/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+    "Guests may participate in activities at Riverside and French Quarter.",
+  ),
+  ActivitySource(
+    "animal-kingdom-jambo",
+    ("animal-kingdom-lodge", "animal-kingdom-villas-jambo-house"),
+    recreation_url("animal-kingdom-lodge"),
+    f"{CDN_COLLATERAL}/fy26-q1/DAKL_Aframe_Recreation_0126_Jambo.pdf",
+    "fy26-q1-0126-jambo",
+    "Jambo House calendar; Kidani Village has a separate calendar.",
+  ),
+  ActivitySource(
+    "animal-kingdom-kidani",
+    ("animal-kingdom-villas-kidani-village",),
+    recreation_url("animal-kingdom-villas-kidani-village"),
+    f"{CDN_COLLATERAL}/fy26-q1/DAKL_Aframe_Recreation_0126_Kidani.pdf",
+    "fy26-q1-0126-kidani",
+    "Kidani Village calendar; Jambo House has a separate calendar.",
+  ),
+  ActivitySource(
+    "beach-yacht-club",
+    (
+      "beach-club-resort",
+      "yacht-club-resort",
+      "beach-club-villas",
+    ),
+    recreation_url("beach-club-resort"),
+    f"{CDN_GUIDE}/YB_Aframe_Recreation-1125.pdf",
+    "guide-1125",
+    "Shared calendar for Disney's Beach Club and Yacht Club Resorts.",
+  ),
+  ActivitySource(
+    "boardwalk",
+    ("boardwalk-inn", "boardwalk-villas"),
+    recreation_url("boardwalk-inn"),
+    f"{CDN_COLLATERAL}/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+    "Shared calendar for Disney's BoardWalk Inn and BoardWalk Villas.",
+  ),
+  ActivitySource(
+    "contemporary",
+    ("contemporary-resort", "bay-lake-tower-at-contemporary-resort"),
+    recreation_url("contemporary-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/CTR_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+    "Shared calendar for Contemporary Resort and Bay Lake Tower.",
+  ),
+  ActivitySource(
+    "grand-floridian",
+    ("grand-floridian-resort-and-spa", "villas-at-grand-floridian-resort-and-spa"),
+    recreation_url("grand-floridian-resort-and-spa"),
+    f"{CDN_GUIDE}/GF_Aframe_Recreation-1125.pdf",
+    "guide-1125",
+    "Shared calendar for Grand Floridian Resort & Spa and Villas.",
+  ),
+  ActivitySource(
+    "polynesian",
+    ("polynesian-village-resort", "polynesian-villas-and-bungalows"),
+    recreation_url("polynesian-village-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+    "Shared calendar for Polynesian Village Resort and Polynesian Villas & Bungalows.",
+  ),
+  ActivitySource(
+    "wilderness-lodge",
+    (
+      "wilderness-lodge",
+      "boulder-ridge-villas-at-wilderness-lodge",
+      "copper-creek-villas-and-cabins-at-wilderness-lodge",
+    ),
+    recreation_url("wilderness-lodge"),
+    f"{CDN_COLLATERAL}/fy26-q2/WL_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+    "Shared calendar for Wilderness Lodge and DVC villa wings.",
+  ),
+  ActivitySource(
+    "old-key-west",
+    ("old-key-west-resort",),
+    recreation_url("old-key-west-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/OKWR_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+  ),
+  ActivitySource(
+    "riviera",
+    ("riviera-resort",),
+    recreation_url("riviera-resort"),
+    f"{CDN_COLLATERAL}/fy26-q2/DRR_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+  ),
+  ActivitySource(
+    "saratoga-springs",
+    ("saratoga-springs-resort-and-spa",),
+    recreation_url("saratoga-springs-resort-and-spa"),
+    f"{CDN_COLLATERAL}/fy26-q2/SSR_Aframe_Recreation-0326.pdf",
+    "fy26-q2-0326",
+  ),
+  ActivitySource(
+    "fort-wilderness",
+    ("campsites-at-fort-wilderness-resort", "cabins-at-fort-wilderness-resort"),
+    recreation_url("campsites-at-fort-wilderness-resort"),
+    None,
+    None,
+    "No A-frame recreation PDF found; activities sourced from official recreation page.",
+  ),
+]
+
+# Verify coverage of all 31 resorts
+ALL_RESORT_SLUGS = {
+  "pop-century-resort", "caribbean-beach-resort", "animal-kingdom-lodge",
+  "saratoga-springs-resort-and-spa", "port-orleans-resort-riverside",
+  "all-star-music-resort", "all-star-movies-resort", "coronado-springs-resort",
+  "port-orleans-resort-french-quarter", "all-star-sports-resort",
+  "art-of-animation-resort", "polynesian-village-resort",
+  "grand-floridian-resort-and-spa", "wilderness-lodge", "beach-club-resort",
+  "contemporary-resort", "yacht-club-resort", "boardwalk-inn",
+  "old-key-west-resort", "polynesian-villas-and-bungalows",
+  "bay-lake-tower-at-contemporary-resort", "villas-at-grand-floridian-resort-and-spa",
+  "animal-kingdom-villas-kidani-village", "boardwalk-villas", "beach-club-villas",
+  "boulder-ridge-villas-at-wilderness-lodge", "animal-kingdom-villas-jambo-house",
+  "campsites-at-fort-wilderness-resort",
+  "copper-creek-villas-and-cabins-at-wilderness-lodge", "riviera-resort",
+  "cabins-at-fort-wilderness-resort",
+}
+
+_manifest_slugs = {slug for src in ACTIVITY_SOURCES for slug in src.resort_slugs}
+assert _manifest_slugs == ALL_RESORT_SLUGS, (
+  f"Manifest slug mismatch. Missing: {_manifest_slugs ^ ALL_RESORT_SLUGS}"
+)

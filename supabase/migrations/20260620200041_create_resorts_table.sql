@@ -1,0 +1,1 @@
+-- Placeholder migration created by supabase CLI (no schema changes)

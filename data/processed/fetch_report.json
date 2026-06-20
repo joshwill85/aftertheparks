@@ -1,0 +1,153 @@
+{
+  "fetched_at": "2026-06-20T20:57:49.093098+00:00",
+  "ingest_run_id": null,
+  "results": [
+    {
+      "calendar_group_key": "all-star-movies",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "784923e9f8dec8207a1cdb91987b425f42c4ec7450e6f9eadb8f64075d0db276",
+      "message": "all-star-movies/guide-1125/784923e9f8dec8207a1cdb91987b425f42c4ec7450e6f9eadb8f64075d0db276.pdf"
+    },
+    {
+      "calendar_group_key": "all-star-music",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "4dccc4ee28b84bff4401205429601aa202ed67f2609933da089d032ec5e118c2",
+      "message": "all-star-music/fy26-q1-0126/4dccc4ee28b84bff4401205429601aa202ed67f2609933da089d032ec5e118c2.pdf"
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "f6c6360fee9a12d84f02d55b2b33cf3b435048b963630c186b9b616981ea9263",
+      "message": "all-star-sports/fy26-q1-0126/f6c6360fee9a12d84f02d55b2b33cf3b435048b963630c186b9b616981ea9263.pdf"
+    },
+    {
+      "calendar_group_key": "art-of-animation",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "e5ab25356a30708fc43657ad90053d6f59a303d4e11046a880e68c3be7ce30df",
+      "message": "art-of-animation/0525-digital/e5ab25356a30708fc43657ad90053d6f59a303d4e11046a880e68c3be7ce30df.pdf"
+    },
+    {
+      "calendar_group_key": "pop-century",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "ed41c527922e72a8a3ba92ee3d12f0104fd2d1305ab24af4b59d6f2bdac1d6f0",
+      "message": "pop-century/fy26-q2-0326/ed41c527922e72a8a3ba92ee3d12f0104fd2d1305ab24af4b59d6f2bdac1d6f0.pdf"
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "51e2d919497fd714aa8af1167b7e7daaa2561ab650e96101ee7878b0daea0a29",
+      "message": "caribbean-beach/fy26-q2-0326/51e2d919497fd714aa8af1167b7e7daaa2561ab650e96101ee7878b0daea0a29.pdf"
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+      "message": "coronado-springs/fy26-q2-0326/f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f.pdf"
+    },
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+      "message": "port-orleans-french-quarter/fy26-q2-0326/811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c.pdf"
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
+      "message": "port-orleans-riverside/fy26-q2-0326/5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978.pdf"
+    },
+    {
+      "calendar_group_key": "animal-kingdom-jambo",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "dd505b20010522e87208de51ef8bbaca6894f5f398a436cb7df496218497a1fc",
+      "message": "animal-kingdom-jambo/fy26-q1-0126-jambo/dd505b20010522e87208de51ef8bbaca6894f5f398a436cb7df496218497a1fc.pdf"
+    },
+    {
+      "calendar_group_key": "animal-kingdom-kidani",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "e26d7aac066fa8aa6d11dfaea99371edddede768e73d0c4a41a1cf98aaab2214",
+      "message": "animal-kingdom-kidani/fy26-q1-0126-kidani/e26d7aac066fa8aa6d11dfaea99371edddede768e73d0c4a41a1cf98aaab2214.pdf"
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "fb154afff1f442857eb610b53c770158c3a29b7db3d99f636917ec12f7337470",
+      "message": "beach-yacht-club/guide-1125/fb154afff1f442857eb610b53c770158c3a29b7db3d99f636917ec12f7337470.pdf"
+    },
+    {
+      "calendar_group_key": "boardwalk",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+      "message": "boardwalk/fy26-q2-0326/7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b.pdf"
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "7e211f9972fb47a554a34ade40864a6304eea41c421cc67a4026f2a2519631a5",
+      "message": "contemporary/fy26-q2-0326/7e211f9972fb47a554a34ade40864a6304eea41c421cc67a4026f2a2519631a5.pdf"
+    },
+    {
+      "calendar_group_key": "grand-floridian",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "dfa4072efce3903da84b8079c3a778284a4806245ba5107a6403df7929cc4ea0",
+      "message": "grand-floridian/guide-1125/dfa4072efce3903da84b8079c3a778284a4806245ba5107a6403df7929cc4ea0.pdf"
+    },
+    {
+      "calendar_group_key": "polynesian",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+      "message": "polynesian/fy26-q2-0326/1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985.pdf"
+    },
+    {
+      "calendar_group_key": "wilderness-lodge",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "896a5736f6d89ebae3b607d1dc6f1bb011b06576a8d5a935209a092c1b723442",
+      "message": "wilderness-lodge/fy26-q2-0326/896a5736f6d89ebae3b607d1dc6f1bb011b06576a8d5a935209a092c1b723442.pdf"
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
+      "message": "old-key-west/fy26-q2-0326/8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e.pdf"
+    },
+    {
+      "calendar_group_key": "riviera",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842",
+      "message": "riviera/fy26-q2-0326/34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842.pdf"
+    },
+    {
+      "calendar_group_key": "saratoga-springs",
+      "status": "fetched",
+      "source_document_id": null,
+      "content_sha256": "2a084971eacc44d430d201d32ded314520dc47ffd7412507ebdcc80e6a5e3db5",
+      "message": "saratoga-springs/fy26-q2-0326/2a084971eacc44d430d201d32ded314520dc47ffd7412507ebdcc80e6a5e3db5.pdf"
+    },
+    {
+      "calendar_group_key": "fort-wilderness",
+      "status": "no_pdf",
+      "source_document_id": null,
+      "content_sha256": null,
+      "message": "HTML-only source"
+    }
+  ]
+}

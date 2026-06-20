@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="After the Parks — Walt Disney World resort activity guides and planning." />
+    <title>After the Parks</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b1220;
+        --fg: #f4f7fb;
+        --accent: #5b9dff;
+        --muted: #9aa8bc;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(circle at top, #152238, var(--bg) 55%);
+        color: var(--fg);
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+      }
+      main {
+        max-width: 40rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin: 0 0 0.75rem;
+        letter-spacing: -0.02em;
+      }
+      p { color: var(--muted); line-height: 1.6; margin: 0 0 1.5rem; }
+      .badge {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid #2a3a55;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="badge">aftertheparks.com</p>
+      <h1>After the Parks</h1>
+      <p>
+        Resort recreation guides and planning for Walt Disney World — built from
+        official Disney sources.
+      </p>
+    </main>
+  </body>
+</html>

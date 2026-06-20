@@ -1,0 +1,352 @@
+{
+  "discovered_at": "2026-06-20T20:59:10.805598+00:00",
+  "entries": [
+    {
+      "calendar_group_key": "all-star-movies",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/guide/All-Star-Movies_Aframe_Recreation_1125.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/guide/All-Star-Movies_Aframe_Recreation_1125.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"94b73a528b0d520eac76d3c08bfef0f8\"",
+        "content_length": 4250365,
+        "last_modified": "Fri, 24 Oct 2025 15:40:04 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "all-star-movies-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "all-star-music",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"fe89cc6b4dafb12c1824895c308af1fe\"",
+        "content_length": 2584690,
+        "last_modified": "Thu, 15 Jan 2026 19:17:42 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "all-star-music-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"2f61824ed9743c85d0636d1acc086d93\"",
+        "content_length": 4017184,
+        "last_modified": "Tue, 20 Jan 2026 15:16:01 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "all-star-sports-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "art-of-animation",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/resorts/art-of-animation/experience/DAAR_Aframe_Recreation-0525_DIGITAL.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/resorts/art-of-animation/experience/DAAR_Aframe_Recreation-0525_DIGITAL.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"9fcb60c3f8a4d2b615ef575b5b2ea2b6\"",
+        "content_length": 1594853,
+        "last_modified": "Wed, 14 May 2025 16:25:11 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "art-of-animation-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "pop-century",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POP_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POP_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"4e531b5161da6a907a7e9371d73992c9\"",
+        "content_length": 7151204,
+        "last_modified": "Mon, 02 Mar 2026 10:26:41 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "pop-century-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CBR_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CBR_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"5fe7cf46989efd53001275ad3304aa61\"",
+        "content_length": 7418289,
+        "last_modified": "Fri, 27 Feb 2026 12:00:21 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "caribbean-beach-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"201cdc69a269ce223e3ee4d774dca15e-2\"",
+        "content_length": 8432551,
+        "last_modified": "Fri, 27 Feb 2026 12:00:21 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "coronado-springs-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"4577a8df20c9a6167f5d5de5b33e2c21\"",
+        "content_length": 7321465,
+        "last_modified": "Mon, 02 Mar 2026 10:26:40 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "port-orleans-resort-french-quarter"
+      ]
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"f2e1abd45e8b7106554379bdf7fafbc2\"",
+        "content_length": 7782972,
+        "last_modified": "Mon, 02 Mar 2026 10:26:41 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "port-orleans-resort-riverside"
+      ]
+    },
+    {
+      "calendar_group_key": "animal-kingdom-jambo",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/DAKL_Aframe_Recreation_0126_Jambo.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/DAKL_Aframe_Recreation_0126_Jambo.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"3ede8e97fbfa0a7a0bcb2afb707f63b2\"",
+        "content_length": 315196,
+        "last_modified": "Tue, 20 Jan 2026 15:15:58 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "animal-kingdom-lodge",
+        "animal-kingdom-villas-jambo-house"
+      ]
+    },
+    {
+      "calendar_group_key": "animal-kingdom-kidani",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/DAKL_Aframe_Recreation_0126_Kidani.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/DAKL_Aframe_Recreation_0126_Kidani.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"0d70a5c94b87a09626d3f334ea791060\"",
+        "content_length": 2207773,
+        "last_modified": "Tue, 20 Jan 2026 15:16:03 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "animal-kingdom-villas-kidani-village"
+      ]
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/guide/YB_Aframe_Recreation-1125.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/guide/YB_Aframe_Recreation-1125.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"c4abe7cfc6b3029b678bfa23e5787732\"",
+        "content_length": 1717181,
+        "last_modified": "Mon, 27 Oct 2025 17:47:57 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "beach-club-resort",
+        "yacht-club-resort",
+        "beach-club-villas"
+      ]
+    },
+    {
+      "calendar_group_key": "boardwalk",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"0d1371831a84b3e7481d692a02c6d3bf\"",
+        "content_length": 7129700,
+        "last_modified": "Fri, 27 Feb 2026 12:00:22 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "boardwalk-inn",
+        "boardwalk-villas"
+      ]
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CTR_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CTR_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"c55b726920345e5cde04f026dcafa2ea\"",
+        "content_length": 6551528,
+        "last_modified": "Fri, 27 Feb 2026 12:00:23 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "contemporary-resort",
+        "bay-lake-tower-at-contemporary-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "grand-floridian",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/guide/GF_Aframe_Recreation-1125.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/guide/GF_Aframe_Recreation-1125.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"c643ccb633ce00d55aad901f45a050de\"",
+        "content_length": 3425600,
+        "last_modified": "Mon, 27 Oct 2025 17:47:53 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "grand-floridian-resort-and-spa",
+        "villas-at-grand-floridian-resort-and-spa"
+      ]
+    },
+    {
+      "calendar_group_key": "polynesian",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"02fd4bfd507ee35d82baa59864bc7c7e\"",
+        "content_length": 8062562,
+        "last_modified": "Mon, 02 Mar 2026 10:26:41 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "polynesian-village-resort",
+        "polynesian-villas-and-bungalows"
+      ]
+    },
+    {
+      "calendar_group_key": "wilderness-lodge",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/WL_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/WL_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"e7ba49fef34924e7e4fdc6b0180075cb\"",
+        "content_length": 6767652,
+        "last_modified": "Mon, 02 Mar 2026 10:26:37 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "wilderness-lodge",
+        "boulder-ridge-villas-at-wilderness-lodge",
+        "copper-creek-villas-and-cabins-at-wilderness-lodge"
+      ]
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/OKWR_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/OKWR_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"28700fdb4f664c2d4c01b65d8aa21e9b\"",
+        "content_length": 6927174,
+        "last_modified": "Mon, 02 Mar 2026 10:26:36 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "old-key-west-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "riviera",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/DRR_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/DRR_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"7ee3a40c27f1a223b40091218e0d1e99\"",
+        "content_length": 7499244,
+        "last_modified": "Mon, 02 Mar 2026 10:26:41 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "riviera-resort"
+      ]
+    },
+    {
+      "calendar_group_key": "saratoga-springs",
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/SSR_Aframe_Recreation-0326.pdf",
+      "discovered_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/SSR_Aframe_Recreation-0326.pdf",
+      "status": "unchanged",
+      "head": {
+        "etag": "\"b62b24bf1578f7eda269ca6be5f7cf0c\"",
+        "content_length": 6540535,
+        "last_modified": "Mon, 02 Mar 2026 10:26:41 GMT",
+        "http_status": 200
+      },
+      "scrape_error": null,
+      "resort_slugs": [
+        "saratoga-springs-resort-and-spa"
+      ]
+    },
+    {
+      "calendar_group_key": "fort-wilderness",
+      "manifest_url": null,
+      "discovered_url": null,
+      "status": "missing",
+      "head": {},
+      "scrape_error": null,
+      "resort_slugs": [
+        "campsites-at-fort-wilderness-resort",
+        "cabins-at-fort-wilderness-resort"
+      ]
+    }
+  ],
+  "summary": {
+    "unchanged": 20,
+    "url_changed": 0,
+    "content_changed": 0,
+    "missing": 1
+  }
+}

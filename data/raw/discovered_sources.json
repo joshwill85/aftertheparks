@@ -1,0 +1,157 @@
+[
+  {
+    "resort_slug": "pop-century-resort",
+    "recreation_slug": "pop-century-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/pop-century-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/pop-century-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "caribbean-beach-resort",
+    "recreation_slug": "caribbean-beach-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/caribbean-beach-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/caribbean-beach-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "animal-kingdom-lodge",
+    "recreation_slug": "animal-kingdom-lodge",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/animal-kingdom-lodge/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/animal-kingdom-lodge/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "saratoga-springs-resort-and-spa",
+    "recreation_slug": "saratoga-springs-resort-and-spa",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/saratoga-springs-resort-and-spa/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/saratoga-springs-resort-and-spa/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "port-orleans-resort-riverside",
+    "recreation_slug": "port-orleans-resort-riverside",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/port-orleans-resort-riverside/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/port-orleans-resort-riverside/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "all-star-music-resort",
+    "recreation_slug": "all-star-music-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/all-star-music-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/all-star-music-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "all-star-movies-resort",
+    "recreation_slug": "all-star-movies-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/all-star-movies-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/all-star-movies-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "coronado-springs-resort",
+    "recreation_slug": "coronado-springs-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/coronado-springs-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/coronado-springs-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "port-orleans-resort-french-quarter",
+    "recreation_slug": "port-orleans-resort-french-quarter",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/port-orleans-resort-french-quarter/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/port-orleans-resort-french-quarter/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "all-star-sports-resort",
+    "recreation_slug": "all-star-sports-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/all-star-sports-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/all-star-sports-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "art-of-animation-resort",
+    "recreation_slug": "art-of-animation-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/art-of-animation-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/art-of-animation-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "polynesian-village-resort",
+    "recreation_slug": "polynesian-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/polynesian-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/polynesian-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "grand-floridian-resort-and-spa",
+    "recreation_slug": "grand-floridian-resort-and-spa",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "wilderness-lodge",
+    "recreation_slug": "wilderness-lodge-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/wilderness-lodge-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/wilderness-lodge-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "beach-club-resort",
+    "recreation_slug": "beach-club-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/beach-club-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/beach-club-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "contemporary-resort",
+    "recreation_slug": "contemporary-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/contemporary-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/contemporary-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "yacht-club-resort",
+    "recreation_slug": "yacht-club-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/yacht-club-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/yacht-club-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "boardwalk-inn",
+    "recreation_slug": "boardwalk-inn",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "old-key-west-resort",
+    "recreation_slug": "old-key-west-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/old-key-west-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/old-key-west-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "polynesian-villas-and-bungalows",
+    "recreation_slug": "polynesian-villas-and-bungalows",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/polynesian-villas-and-bungalows/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/polynesian-villas-and-bungalows/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "bay-lake-tower-at-contemporary-resort",
+    "recreation_slug": "bay-lake-tower-at-contemporary-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/bay-lake-tower-at-contemporary-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/bay-lake-tower-at-contemporary-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "villas-at-grand-floridian-resort-and-spa",
+    "recreation_slug": "villas-at-grand-floridian-resort-and-spa",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/villas-at-grand-floridian-resort-and-spa/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/villas-at-grand-floridian-resort-and-spa/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "animal-kingdom-villas-kidani-village",
+    "recreation_slug": "animal-kingdom-villas-kidani-village",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/animal-kingdom-villas-kidani-village/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/animal-kingdom-villas-kidani-village/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "boardwalk-villas",
+    "recreation_slug": "boardwalk-villas",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/boardwalk-villas/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/boardwalk-villas/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "beach-club-villas",
+    "recreation_slug": "beach-club-villas",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/beach-club-villas/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/beach-club-villas/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "boulder-ridge-villas-at-wilderness-lodge",
+    "recreation_slug": "boulder-ridge-villas-at-wilderness-lodge",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/boulder-ridge-villas-at-wilderness-lodge/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/boulder-ridge-villas-at-wilderness-lodge/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "animal-kingdom-villas-jambo-house",
+    "recreation_slug": "animal-kingdom-villas-jambo-house",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/animal-kingdom-villas-jambo-house/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/animal-kingdom-villas-jambo-house/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "campsites-at-fort-wilderness-resort",
+    "recreation_slug": "campsites-at-fort-wilderness-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "copper-creek-villas-and-cabins-at-wilderness-lodge",
+    "recreation_slug": "copper-creek-villas-and-cabins-at-wilderness-lodge",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/copper-creek-villas-and-cabins-at-wilderness-lodge/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/copper-creek-villas-and-cabins-at-wilderness-lodge/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "riviera-resort",
+    "recreation_slug": "riviera-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/riviera-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/riviera-resort/recreation/\", waiting until \"networkidle\"\n"
+  },
+  {
+    "resort_slug": "cabins-at-fort-wilderness-resort",
+    "recreation_slug": "cabins-at-fort-wilderness-resort",
+    "error": "Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://disneyworld.disney.go.com/resorts/cabins-at-fort-wilderness-resort/recreation/\nCall log:\n  - navigating to \"https://disneyworld.disney.go.com/resorts/cabins-at-fort-wilderness-resort/recreation/\", waiting until \"networkidle\"\n"
+  }
+]
