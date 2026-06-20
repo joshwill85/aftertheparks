@@ -1,5 +1,5 @@
 {
-  "ingested_at": "2026-06-20T20:57:52.645110+00:00",
+  "ingested_at": "2026-06-20T22:12:43.601842+00:00",
   "parser_version": "2.0.0",
   "sources": [
     {
@@ -333,7 +333,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -360,7 +360,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -387,7 +387,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -414,7 +414,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -441,7 +441,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -470,7 +470,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -499,7 +499,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -529,7 +529,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -556,7 +556,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -583,7 +583,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -612,7 +612,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -639,7 +639,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -666,7 +666,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -698,7 +698,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -725,7 +725,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -757,7 +757,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -788,7 +788,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -815,7 +815,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -842,7 +842,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -871,7 +871,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -898,7 +898,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -927,7 +927,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -954,7 +954,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -981,7 +981,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1011,7 +1011,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1040,7 +1040,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1067,7 +1067,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1096,7 +1096,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1123,7 +1123,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1150,7 +1150,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1177,7 +1177,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1204,7 +1204,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1231,7 +1231,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1258,7 +1258,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1287,7 +1287,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1317,7 +1317,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1346,7 +1346,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1373,7 +1373,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1400,7 +1400,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1429,7 +1429,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1458,7 +1458,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1485,7 +1485,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1518,7 +1518,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1549,7 +1549,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1579,7 +1579,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1608,7 +1608,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1639,7 +1639,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1668,7 +1668,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1701,7 +1701,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1733,7 +1733,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1764,7 +1764,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1793,7 +1793,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1824,7 +1824,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1855,7 +1855,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1882,7 +1882,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -1909,7 +1909,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -1936,7 +1936,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -1963,7 +1963,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -1994,7 +1994,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2024,7 +2024,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2053,7 +2053,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2080,7 +2080,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2110,7 +2110,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2142,7 +2142,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2169,7 +2169,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2196,7 +2196,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2223,7 +2223,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2254,7 +2254,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2286,7 +2286,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2313,7 +2313,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2346,7 +2346,7 @@
       ],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2375,7 +2375,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2404,7 +2404,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2431,7 +2431,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2458,7 +2458,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2485,7 +2485,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2512,7 +2512,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2539,7 +2539,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2568,7 +2568,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2599,7 +2599,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2626,7 +2626,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2657,7 +2657,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2686,7 +2686,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2716,7 +2716,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2743,7 +2743,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2772,7 +2772,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2799,7 +2799,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2833,7 +2833,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2860,7 +2860,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2890,7 +2890,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2917,7 +2917,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2946,7 +2946,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2975,7 +2975,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3004,7 +3004,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3033,7 +3033,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3060,7 +3060,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3087,7 +3087,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3114,7 +3114,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3141,7 +3141,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3171,7 +3171,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3223,7 +3223,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3250,7 +3250,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3283,7 +3283,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3313,7 +3313,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3340,7 +3340,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3369,7 +3369,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3399,7 +3399,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3426,7 +3426,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3456,7 +3456,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3486,7 +3486,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3516,7 +3516,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3544,7 +3544,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3574,7 +3574,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3602,7 +3602,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3630,7 +3630,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3658,7 +3658,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3688,7 +3688,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3720,7 +3720,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3748,7 +3748,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3776,7 +3776,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3804,7 +3804,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3832,7 +3832,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3860,7 +3860,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3892,7 +3892,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3924,7 +3924,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3955,7 +3955,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3985,7 +3985,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4014,7 +4014,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4043,7 +4043,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4072,7 +4072,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4101,7 +4101,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4131,7 +4131,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4160,7 +4160,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4189,7 +4189,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4216,7 +4216,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4249,7 +4249,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4281,7 +4281,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4310,7 +4310,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4339,7 +4339,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4371,7 +4371,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4400,7 +4400,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4431,7 +4431,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4458,7 +4458,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4485,7 +4485,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4512,7 +4512,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4543,7 +4543,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4570,7 +4570,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4601,7 +4601,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4632,7 +4632,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4661,7 +4661,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4692,7 +4692,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4723,7 +4723,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4754,7 +4754,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4787,7 +4787,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4818,7 +4818,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4852,7 +4852,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4885,7 +4885,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4914,7 +4914,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4944,7 +4944,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4974,7 +4974,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5004,7 +5004,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5034,7 +5034,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5062,7 +5062,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5090,7 +5090,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5118,7 +5118,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5146,7 +5146,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5179,7 +5179,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5211,7 +5211,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5239,7 +5239,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5267,7 +5267,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5295,7 +5295,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5326,7 +5326,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5356,7 +5356,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5386,7 +5386,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5433,7 +5433,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5461,7 +5461,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5489,7 +5489,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5520,7 +5520,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5552,7 +5552,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5580,7 +5580,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5613,7 +5613,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5644,7 +5644,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5675,7 +5675,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5705,7 +5705,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5735,7 +5735,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5763,7 +5763,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5793,7 +5793,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5821,7 +5821,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5851,7 +5851,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5879,7 +5879,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5909,7 +5909,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5941,7 +5941,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5972,7 +5972,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -6000,7 +6000,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -6028,7 +6028,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -6060,7 +6060,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -6088,7 +6088,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6118,7 +6118,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6148,7 +6148,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6180,7 +6180,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6208,7 +6208,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6241,7 +6241,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6276,7 +6276,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6308,7 +6308,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6341,7 +6341,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6375,7 +6375,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6404,7 +6404,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6435,7 +6435,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6464,7 +6464,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6495,7 +6495,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6524,7 +6524,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6555,7 +6555,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6584,7 +6584,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6613,7 +6613,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6646,7 +6646,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6675,7 +6675,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6707,7 +6707,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6738,7 +6738,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6769,7 +6769,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6798,7 +6798,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6827,7 +6827,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6856,7 +6856,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6883,7 +6883,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6910,7 +6910,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6962,7 +6962,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6989,7 +6989,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7016,7 +7016,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7048,7 +7048,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7075,7 +7075,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7106,7 +7106,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7135,7 +7135,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7165,7 +7165,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7194,7 +7194,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7221,7 +7221,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7250,7 +7250,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7277,7 +7277,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7304,7 +7304,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7334,7 +7334,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7363,7 +7363,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7396,7 +7396,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7423,7 +7423,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7456,7 +7456,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7487,7 +7487,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7516,7 +7516,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7545,7 +7545,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7574,7 +7574,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7601,7 +7601,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7628,7 +7628,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7660,7 +7660,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7687,7 +7687,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7714,7 +7714,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7745,7 +7745,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7772,7 +7772,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7802,7 +7802,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7831,7 +7831,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7860,7 +7860,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -7888,7 +7888,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -7916,7 +7916,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -7944,7 +7944,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -7972,7 +7972,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8000,7 +8000,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8028,7 +8028,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8056,7 +8056,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8084,7 +8084,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8112,7 +8112,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8140,7 +8140,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8168,7 +8168,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8196,7 +8196,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8224,7 +8224,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8252,7 +8252,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-20T20:57:52.645110+00:00"
+      "ingested_at": "2026-06-20T22:12:43.601842+00:00"
     }
   ]
 }

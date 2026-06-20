@@ -293,6 +293,23 @@ def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | Non
                         "show_time": show_time or "",
                         "rain_backup_location": rain_backup or "",
                     })
+                continue
+            # Tab or multi-space separated: Monday    Title
+            m2 = re.match(
+                r"^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*\s{2,}(.+)$",
+                clean,
+                re.I,
+            )
+            if m2:
+                day = _normalize_day_token(m2.group(1))
+                title = re.sub(r"\|.*$", "", m2.group(2)).strip()
+                if day and title and _movie_title_quality(title) >= 0.25:
+                    movie_nights.append({
+                        "day_of_week": day,
+                        "movie_title": title,
+                        "show_time": show_time or "",
+                        "rain_backup_location": rain_backup or "",
+                    })
 
     conf = 0.9 if movie_nights else 0.4
     if warnings:

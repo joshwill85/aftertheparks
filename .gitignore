@@ -1,9 +1,14 @@
 .cursor/mcp.env
+.env
+.env.local
+.env*.local
 
 # Dependencies & build
 node_modules/
 .vercel/
 .next/
+public/sw.js
+public/sw.js.map
 
 # Python
 __pycache__/

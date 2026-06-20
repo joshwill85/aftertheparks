@@ -1,8 +1,5 @@
 {
-  "framework": null,
-  "buildCommand": null,
-  "outputDirectory": ".",
-  "cleanUrls": true,
+  "framework": "nextjs",
   "headers": [
     {
       "source": "/(.*)",
