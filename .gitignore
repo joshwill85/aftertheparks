@@ -21,3 +21,4 @@ supabase/.branches/
 # OS / editor
 .DS_Store
 *.swp
+.vercel

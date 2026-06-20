@@ -1,0 +1,6 @@
+data/raw/pdfs/
+data/raw/*.html
+docs/
+supabase/.temp/
+*.pdf
+*.docx
