@@ -14,6 +14,7 @@ from config import CONFIDENCE_PUBLISH_THRESHOLD, PROCESSED_DIR
 from db import SupabaseClient
 from pdf_parser import _clean_movie_title, _movie_title_quality
 from source_manifest import ACTIVITY_SOURCES
+from time_utils import parse_time_24h
 
 INGEST_PATH = PROCESSED_DIR / "activities_ingest.json"
 
@@ -41,19 +42,65 @@ def catalog_id(group: str, normalized_name: str) -> str:
     return _md5_uuid(f"act:{group}:{normalized_name}")
 
 
+DAY_TO_INT = {
+    "sunday": 0,
+    "monday": 1,
+    "tuesday": 2,
+    "wednesday": 3,
+    "thursday": 4,
+    "friday": 5,
+    "saturday": 6,
+}
+
+EVENING_CATEGORIES = frozenset(
+    {"movies_under_stars", "campfire", "nighttime_entertainment"}
+)
+
+
 def schedule_id(group: str, normalized_name: str, suffix: str = "") -> str:
     return _md5_uuid(f"sched:act:{group}:{normalized_name}{suffix}")
+
+
+def occurrence_rule_id(group: str, normalized_name: str, suffix: str = "") -> str:
+    return _md5_uuid(f"rule:act:{group}:{normalized_name}{suffix}")
+
+
+def is_evening_category(category: str | None) -> bool:
+    return category in EVENING_CATEGORIES
+
+
+def upsert_occurrence_rule(
+    db: SupabaseClient,
+    *,
+    rule_key: str,
+    catalog_id: str,
+    edition_id: str,
+    schedule: dict[str, Any],
+) -> None:
+    day = schedule.get("day_of_week")
+    dow = DAY_TO_INT.get(day) if day else None
+    db.upsert(
+        "activity_occurrence_rules",
+        {
+            "id": rule_key,
+            "activity_catalog_id": catalog_id,
+            "edition_id": edition_id,
+            "day_of_week": dow,
+            "start_time": schedule.get("start_time"),
+            "end_time": schedule.get("end_time"),
+            "schedule_notes": schedule.get("schedule_notes"),
+            "is_daily": schedule.get("is_daily", False),
+        },
+        on_conflict="id",
+    )
 
 
 def movie_id(group: str, normalized_name: str, day: str) -> str:
     return _md5_uuid(f"movie:act:{group}:{normalized_name}:{day}")
 
 
-def parse_time(value: str | None) -> str | None:
-    if not value:
-        return None
-    match = re.search(r"(\d{1,2}:\d{2})", value)
-    return match.group(1) if match else None
+def parse_time(value: str | None, *, evening_default: bool = False) -> str | None:
+    return parse_time_24h(value, evening_default=evening_default)
 
 
 def get_resort_id_map(db: SupabaseClient) -> dict[str, str]:
@@ -176,28 +223,72 @@ def publish_group(
         }, on_conflict="calendar_group_key,normalized_name")
 
         # Schedules
+        evening = is_evening_category(act.get("category"))
+        schedule_rows: list[dict[str, Any]] = []
+
         if act.get("is_daily"):
-            db.upsert("activity_schedules", {
+            row = {
                 "id": schedule_id(group_key, act["normalized_name"]),
                 "activity_id": legacy_id,
                 "edition_id": edition_id,
                 "activity_catalog_id": cat_id,
                 "is_daily": True,
-                "start_time": parse_time(act.get("start_time") or act.get("schedule_text")),
-                "end_time": parse_time(act.get("end_time")),
+                "start_time": parse_time(
+                    act.get("start_time") or act.get("schedule_text"),
+                    evening_default=evening,
+                ),
+                "end_time": parse_time(act.get("end_time"), evening_default=evening),
                 "schedule_notes": act.get("schedule_text"),
-            }, on_conflict="id")
+            }
+            db.upsert("activity_schedules", row, on_conflict="id")
+            schedule_rows.append(row)
+
         for day in act.get("days_of_week") or []:
-            db.upsert("activity_schedules", {
+            row = {
                 "id": schedule_id(group_key, act["normalized_name"], f":{day}"),
                 "activity_id": legacy_id,
                 "edition_id": edition_id,
                 "activity_catalog_id": cat_id,
                 "day_of_week": day,
-                "start_time": parse_time(act.get("start_time") or act.get("schedule_text")),
-                "end_time": parse_time(act.get("end_time")),
+                "start_time": parse_time(
+                    act.get("start_time") or act.get("schedule_text"),
+                    evening_default=evening,
+                ),
+                "end_time": parse_time(act.get("end_time"), evening_default=evening),
                 "schedule_notes": act.get("schedule_text"),
-            }, on_conflict="id")
+            }
+            db.upsert("activity_schedules", row, on_conflict="id")
+            schedule_rows.append(row)
+
+        if (
+            not schedule_rows
+            and act.get("schedule_text")
+            and parse_time(act.get("schedule_text"), evening_default=evening)
+        ):
+            row = {
+                "id": schedule_id(group_key, act["normalized_name"]),
+                "activity_id": legacy_id,
+                "edition_id": edition_id,
+                "activity_catalog_id": cat_id,
+                "is_daily": True,
+                "start_time": parse_time(
+                    act.get("schedule_text"),
+                    evening_default=evening,
+                ),
+                "schedule_notes": act.get("schedule_text"),
+            }
+            db.upsert("activity_schedules", row, on_conflict="id")
+            schedule_rows.append(row)
+
+        for row in schedule_rows:
+            suffix = f":{row['day_of_week']}" if row.get("day_of_week") else ""
+            upsert_occurrence_rule(
+                db,
+                rule_key=occurrence_rule_id(group_key, act["normalized_name"], suffix),
+                catalog_id=cat_id,
+                edition_id=edition_id,
+                schedule=row,
+            )
 
         for movie in act.get("movie_nights") or []:
             title = _clean_movie_title(movie.get("movie_title", ""))
@@ -209,7 +300,10 @@ def publish_group(
                 "activity_catalog_id": cat_id,
                 "day_of_week": movie["day_of_week"],
                 "movie_title": title,
-                "show_time": parse_time(movie.get("show_time") or act.get("schedule_text")),
+                "show_time": parse_time(
+                    movie.get("show_time") or act.get("schedule_text"),
+                    evening_default=True,
+                ),
                 "location": act.get("location"),
                 "rain_backup_location": movie.get("rain_backup_location"),
                 "parse_confidence": 0.3 if movie_needs_review else 0.9,

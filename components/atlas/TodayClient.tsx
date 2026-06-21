@@ -10,14 +10,19 @@ import { usePlan } from "@/components/atlas/PlanProvider";
 
 export function TodayClient({
   initialActivities,
+  tomorrowPreview = [],
 }: {
   initialActivities: ActivityOccurrence[];
+  tomorrowPreview?: ActivityOccurrence[];
 }) {
   const [activities, setActivities] = useState(initialActivities);
   const { addActivity } = usePlan();
 
   const refresh = useCallback(async () => {
-    const res = await fetch("/api/today");
+    const params = new URLSearchParams(window.location.search);
+    const resort = params.get("resort");
+    const url = resort ? `/api/today?resort=${encodeURIComponent(resort)}` : "/api/today";
+    const res = await fetch(url);
     const data = await res.json();
     setActivities(data.activities ?? []);
   }, []);
@@ -35,13 +40,30 @@ export function TodayClient({
             { label: "Explore all", href: "/activities" },
           ]}
         />
+        {tomorrowPreview.length > 0 && (
+          <section className="mt-10" aria-labelledby="tomorrow-preview-heading">
+            <h2
+              id="tomorrow-preview-heading"
+              className="font-display mb-4 text-xl font-semibold"
+            >
+              Tomorrow&apos;s first activities
+            </h2>
+            <ul className="space-y-4">
+              {tomorrowPreview.map((activity) => (
+                <li key={activity.id}>
+                  <ActivityCard activity={activity} showResort onSave={addActivity} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </PalmRefresh>
     );
   }
 
   return (
     <PalmRefresh onRefresh={refresh}>
-      <div className="relative">
+      <div id="activities" className="relative scroll-mt-24">
         <div
           className="absolute bottom-0 left-4 top-0 w-0.5 bg-gradient-to-b from-[var(--color-citrus)] via-[var(--accent)] to-[var(--color-lantern)]"
           aria-hidden

@@ -1,5 +1,12 @@
 export type Daypart = "morning" | "afternoon" | "evening" | "late";
 
+export type ActivitySortKey =
+  | "time"
+  | "resort"
+  | "category"
+  | "free"
+  | "quality";
+
 export type ActivityStatus = "active" | "seasonal" | "paused";
 
 export interface ActivityOccurrence {
@@ -79,6 +86,7 @@ export interface PlanItem {
   title: string;
   resortSlug: string;
   resortName: string;
+  category?: string;
   startDateTime?: string;
   endDateTime?: string;
   notes?: string;
@@ -97,6 +105,7 @@ export interface ActivityFilters {
   daypart?: Daypart;
   free?: boolean;
   q?: string;
+  sort?: ActivitySortKey;
   limit?: number;
 }
 

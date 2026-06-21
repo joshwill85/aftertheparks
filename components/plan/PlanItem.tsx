@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -14,7 +15,7 @@ import { cn } from "@/lib/utils";
 function planItemToDisplayInput(item: PlanItemType) {
   return occurrenceToDisplayInput({
     title: item.title,
-    category: "resort_activity",
+    category: item.category ?? "resort_activity",
     activitySlug: item.activitySlug,
     startDateTime: item.startDateTime,
     endDateTime: item.endDateTime,
@@ -25,6 +26,7 @@ function planItemToDisplayInput(item: PlanItemType) {
 interface PlanItemCardProps {
   item: PlanItemType;
   onRemove: (id: string) => void;
+  onUpdateNotes?: (id: string, notes: string) => void;
   dragHandle?: React.ReactNode;
   style?: React.CSSProperties;
   setNodeRef?: (node: HTMLElement | null) => void;
@@ -33,13 +35,21 @@ interface PlanItemCardProps {
 function PlanItemCard({
   item,
   onRemove,
+  onUpdateNotes,
   dragHandle,
   style,
   setNodeRef,
 }: PlanItemCardProps) {
+  const [editingNotes, setEditingNotes] = useState(false);
+  const [draftNotes, setDraftNotes] = useState(item.notes ?? "");
   const display = planItemToDisplayInput(item);
   const title = getDisplayTitle(display);
   const time = getDisplayTime(display);
+
+  const saveNotes = () => {
+    onUpdateNotes?.(item.id, draftNotes.trim());
+    setEditingNotes(false);
+  };
 
   return (
     <li
@@ -59,25 +69,81 @@ function PlanItemCard({
         <p className="mt-1 text-sm font-bold text-[var(--color-foreground)]/72">
           {item.resortName}
         </p>
-        <p
-          className={cn(
-            "mt-1.5 text-sm font-bold",
-            time.uncertain
-              ? "text-[#7a4a00]"
-              : "text-[var(--color-lagoon)]"
-          )}
-        >
-          {time.label}
-        </p>
-        {item.notes && (
+        {item.startDateTime && (
+          <time
+            dateTime={item.startDateTime}
+            className={cn(
+              "mt-1.5 block text-sm font-bold",
+              time.uncertain
+                ? "text-[#7a4a00]"
+                : "text-[var(--color-lagoon)]"
+            )}
+          >
+            {time.label}
+          </time>
+        )}
+        {!item.startDateTime && (
+          <p className="mt-1.5 text-sm font-bold text-[var(--color-muted)]">
+            {time.label}
+          </p>
+        )}
+
+        {item.notes && !editingNotes && (
           <p className="mt-2 text-sm text-[var(--color-muted)]">{item.notes}</p>
+        )}
+
+        {onUpdateNotes && (
+          <div className="mt-3">
+            {editingNotes ? (
+              <div className="space-y-2">
+                <label className="sr-only" htmlFor={`notes-${item.id}`}>
+                  Notes for {title}
+                </label>
+                <textarea
+                  id={`notes-${item.id}`}
+                  value={draftNotes}
+                  onChange={(e) => setDraftNotes(e.target.value)}
+                  rows={2}
+                  placeholder="Add a reminder — stroller parking, s'mores kits, etc."
+                  className="form-control mt-3"
+                />
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={saveNotes}
+                    className="min-h-9 rounded-full bg-[var(--accent)] px-3 text-xs font-bold text-white"
+                  >
+                    Save note
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDraftNotes(item.notes ?? "");
+                      setEditingNotes(false);
+                    }}
+                    className="min-h-9 rounded-full px-3 text-xs font-bold text-[var(--color-muted)]"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setEditingNotes(true)}
+                className="text-xs font-bold text-[var(--accent)] hover:underline"
+              >
+                {item.notes ? "Edit note" : "Add note"}
+              </button>
+            )}
+          </div>
         )}
       </div>
 
       <button
         type="button"
         onClick={() => onRemove(item.id)}
-        className="shrink-0 text-sm font-bold text-[var(--color-muted)] hover:text-[var(--color-lantern)]"
+        className="plan-item__remove shrink-0"
       >
         Remove
       </button>
@@ -88,23 +154,43 @@ function PlanItemCard({
 interface PlanItemProps {
   item: PlanItemType;
   onRemove: (id: string) => void;
+  onUpdateNotes?: (id: string, notes: string) => void;
   sortable?: boolean;
 }
 
-export function PlanItem({ item, onRemove, sortable = false }: PlanItemProps) {
+export function PlanItem({
+  item,
+  onRemove,
+  onUpdateNotes,
+  sortable = false,
+}: PlanItemProps) {
   if (sortable) {
-    return <SortablePlanItem item={item} onRemove={onRemove} />;
+    return (
+      <SortablePlanItem
+        item={item}
+        onRemove={onRemove}
+        onUpdateNotes={onUpdateNotes}
+      />
+    );
   }
 
-  return <PlanItemCard item={item} onRemove={onRemove} />;
+  return (
+    <PlanItemCard
+      item={item}
+      onRemove={onRemove}
+      onUpdateNotes={onUpdateNotes}
+    />
+  );
 }
 
 function SortablePlanItem({
   item,
   onRemove,
+  onUpdateNotes,
 }: {
   item: PlanItemType;
   onRemove: (id: string) => void;
+  onUpdateNotes?: (id: string, notes: string) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: item.id });
@@ -132,6 +218,7 @@ function SortablePlanItem({
     <PlanItemCard
       item={item}
       onRemove={onRemove}
+      onUpdateNotes={onUpdateNotes}
       dragHandle={dragHandle}
       style={style}
       setNodeRef={setNodeRef}

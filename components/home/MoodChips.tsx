@@ -1,28 +1,32 @@
-import Link from "next/link";
+"use client";
 
-export const HOME_MOOD_CHIPS = [
-  { id: "tonight", label: "Tonight", href: "/tonight" },
-  { id: "free", label: "Free", href: "/activities?free=true" },
-  { id: "little_kids", label: "Little kids", href: "/activities?category=arts_crafts" },
-  { id: "rainy", label: "Rain-friendly", href: "/activities?category=arcade" },
-  { id: "pool_break", label: "Pool break", href: "/activities?category=poolside" },
-  { id: "movies", label: "Movies", href: "/activities?category=movies_under_stars" },
-  { id: "campfires", label: "Campfires", href: "/activities?category=campfire" },
-  {
-    id: "before_checkin",
-    label: "Before check-in",
-    href: "/guides/first-night-at-the-resort",
-  },
-] as const;
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { isMoodChipActive } from "@/lib/ui/moodChipActive";
+import { cn } from "@/lib/utils";
+import { HOME_MOOD_CHIPS } from "./MoodChips.data";
 
 export function MoodChips() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   return (
-    <div className="mood-chips flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      {HOME_MOOD_CHIPS.map((chip) => (
-        <Link key={chip.id} href={chip.href} className="mood-chip">
-          {chip.label}
-        </Link>
-      ))}
+    <div className="mood-chips-scroll">
+      <div className="mood-chips">
+        {HOME_MOOD_CHIPS.map((chip) => {
+          const active = isMoodChipActive(chip.href, pathname, searchParams);
+          return (
+            <Link
+              key={chip.id}
+              href={chip.href}
+              className={cn("mood-chip", active && "mood-chip--active")}
+              aria-current={active ? "page" : undefined}
+            >
+              {chip.label}
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -1,41 +1,51 @@
 import { ActivityDetailClient } from "@/components/atlas/ActivityDetailClient";
-import { getActivityBySlug } from "@/lib/data/activities";
-import { getCategoryMeta } from "@/lib/categories/meta";
-import { getDisplayTitle, occurrenceToDisplayInput } from "@/lib/activityDisplay";
+import {
+  getActivitiesByArea,
+  getActivityBySlug,
+  getResortBySlug,
+  getSimilarActivities,
+} from "@/lib/data/activities";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function ActivityDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ resort?: string }>;
 }) {
   const { slug } = await params;
+  const { resort: homeResortSlug } = await searchParams;
   const result = await getActivityBySlug(slug);
 
   if (!result) notFound();
 
   const { activity, upcoming } = result;
-  const meta = getCategoryMeta(activity.category);
-  const displayTitle = getDisplayTitle(occurrenceToDisplayInput(activity));
+  const [similar, nearbyActivities, homeResort] = await Promise.all([
+    getSimilarActivities(activity),
+    getActivitiesByArea(activity.resort.area),
+    homeResortSlug ? getResortBySlug(homeResortSlug) : Promise.resolve(null),
+  ]);
+
+  const homeBase = homeResort
+    ? { slug: homeResort.slug, area: homeResort.area }
+    : undefined;
+
+  const nearby = nearbyActivities.filter(
+    (item) => item.activitySlug !== activity.activitySlug
+  );
 
   return (
     <article>
-      <header className="mb-8">
-        <span className="stamp-badge">
-          <span aria-hidden>{meta.icon}</span>
-          {meta.label} · {activity.resort.name}
-        </span>
-        <h1 className="font-display mt-4 text-4xl font-bold leading-tight md:text-5xl">
-          {displayTitle}
-        </h1>
-        {activity.location.label && activity.location.label !== "Resort" && (
-          <p className="mt-2 text-lg text-[var(--color-muted)]">{activity.location.label}</p>
-        )}
-      </header>
-
-      <ActivityDetailClient activity={activity} upcoming={upcoming} />
+      <ActivityDetailClient
+        activity={activity}
+        upcoming={upcoming}
+        similar={similar}
+        nearbyActivities={nearby}
+        homeResort={homeBase}
+      />
     </article>
   );
 }

@@ -3,13 +3,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { MOOD_CHIPS } from "@/lib/categories/meta";
+import { isMoodChipActive } from "@/lib/ui/moodChipActive";
+import { cn } from "@/lib/utils";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { FilterRail } from "@/components/explore/FilterRail";
 import { FilterSheet } from "@/components/explore/FilterSheet";
+import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
 import { ResultSummary } from "@/components/explore/ResultSummary";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface ExploreLayoutProps {
   activities: ActivityOccurrence[];
@@ -19,6 +22,7 @@ interface ExploreLayoutProps {
 export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
   const { items, addActivity } = usePlan();
   const [sheetOpen, setSheetOpen] = useState(false);
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const activeCount = [
@@ -26,6 +30,7 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
     searchParams.get("category"),
     searchParams.get("daypart"),
     searchParams.get("free") === "true",
+    searchParams.get("q"),
   ].filter(Boolean).length;
 
   return (
@@ -42,11 +47,19 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
         <div className="results-column min-w-0 space-y-4">
           {/* Mobile sticky controls */}
           <div className="explore-controls sticky top-[64px] z-40 -mx-4 border-b border-[var(--color-card-border)] bg-[var(--color-sun-cream)]/92 px-4 py-3 backdrop-blur-[18px] min-[900px]:static min-[900px]:mx-0 min-[900px]:border-0 min-[900px]:bg-transparent min-[900px]:p-0 min-[900px]:backdrop-blur-none">
-            <div className="flex items-center gap-3 min-[900px]:hidden">
+            <ExploreSearchBar />
+            <Link href="/search" className="explore-search__global-link">
+              Search everything →
+            </Link>
+            <Link href="/search" className="explore-search__global-link">
+              Search everything →
+            </Link>
+
+            <div className="mt-3 flex items-center gap-3 min-[900px]:hidden">
               <button
                 type="button"
                 onClick={() => setSheetOpen(true)}
-                className="flex min-h-11 flex-1 items-center justify-between rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] px-4 text-sm font-bold"
+                className="explore-filters-btn btn-secondary justify-between px-4 text-sm font-bold"
               >
                 <span>
                   Filters
@@ -60,16 +73,22 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
               </button>
             </div>
 
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] min-[900px]:mt-0 min-[900px]:hidden [&::-webkit-scrollbar]:hidden">
-              {MOOD_CHIPS.map((chip) => (
-                <Link
-                  key={chip.id}
-                  href={chip.href}
-                  className="shrink-0 rounded-full border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2 text-xs font-bold"
-                >
-                  {chip.label}
-                </Link>
-              ))}
+            <div className="mood-chips-scroll mt-3 min-[900px]:mt-0 min-[900px]:hidden">
+              <div className="mood-chips">
+                {MOOD_CHIPS.map((chip) => {
+                  const active = isMoodChipActive(chip.href, pathname, searchParams);
+                  return (
+                    <Link
+                      key={chip.id}
+                      href={chip.href}
+                      className={cn("mood-chip", active && "mood-chip--active")}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {chip.label}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="mt-3 min-[900px]:mt-0">
@@ -77,7 +96,7 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
             </div>
           </div>
 
-          <div className="results-grid">
+          <div id="activities" className="results-grid scroll-mt-24">
             <ActivityGrid
               activities={activities}
               onSave={addActivity}
@@ -123,7 +142,7 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
             {items.length > 0 && (
               <Link
                 href="/plan"
-                className="btn-primary inline-flex w-full min-h-11 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-lagoon)] to-[var(--color-palm)] text-sm font-bold text-white"
+                className="btn-primary w-full text-sm"
               >
                 View full plan ({items.length})
               </Link>

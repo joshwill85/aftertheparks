@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -70,7 +71,7 @@ export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProp
             <Link
               key={chip.id}
               href={chip.href}
-              className="rounded-full border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-1.5 text-xs font-bold transition-colors hover:border-[var(--accent)]"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 text-xs font-bold transition-colors hover:border-[var(--accent)]"
             >
               {chip.label}
             </Link>
@@ -107,6 +108,7 @@ export function FilterFields({
   activeDaypart,
   freeOnly,
   update,
+  searchableResorts = false,
 }: {
   resorts: { slug: string; name: string }[];
   activeResort: string | null;
@@ -114,7 +116,16 @@ export function FilterFields({
   activeDaypart: string | null;
   freeOnly: boolean;
   update: (key: string, value: string | null) => void;
+  searchableResorts?: boolean;
 }) {
+  const [resortQuery, setResortQuery] = useState("");
+
+  const filteredResorts = useMemo(() => {
+    const q = resortQuery.trim().toLowerCase();
+    if (!q) return resorts;
+    return resorts.filter((r) => r.name.toLowerCase().includes(q));
+  }, [resorts, resortQuery]);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="space-y-2">
@@ -130,10 +141,8 @@ export function FilterFields({
                 update("daypart", activeDaypart === d.value ? null : d.value)
               }
               className={cn(
-                "rounded-full px-3 py-1.5 text-sm font-medium transition-all",
-                activeDaypart === d.value
-                  ? "bg-[var(--color-citrus)] text-white shadow-sm"
-                  : "border border-[var(--color-card-border)]"
+                "filter-pill",
+                activeDaypart === d.value && "filter-pill--active"
               )}
             >
               {d.label}
@@ -143,23 +152,70 @@ export function FilterFields({
       </div>
 
       {resorts.length > 0 && (
-        <label className="block text-sm">
-          <span className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
+        <div className="space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
             Resort
-          </span>
-          <select
-            value={activeResort ?? ""}
-            onChange={(e) => update("resort", e.target.value || null)}
-            className="w-full rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2.5 text-sm"
-          >
-            <option value="">All resorts</option>
-            {resorts.map((r) => (
-              <option key={r.slug} value={r.slug}>
-                {r.name}
-              </option>
-            ))}
-          </select>
-        </label>
+          </p>
+          {(searchableResorts || resorts.length > 10) && (
+            <input
+              type="search"
+              value={resortQuery}
+              onChange={(e) => setResortQuery(e.target.value)}
+              placeholder="Search resorts…"
+                  className="form-control"
+                  aria-label="Search resorts"
+                />
+          )}
+          {searchableResorts ? (
+            <div className="max-h-48 space-y-1 overflow-y-auto overscroll-contain rounded-xl border border-[var(--color-card-border)] p-2">
+              <button
+                type="button"
+                onClick={() => update("resort", null)}
+                className={cn(
+                  "flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm font-medium transition-colors",
+                  !activeResort
+                    ? "bg-[var(--accent)]/15 text-[var(--accent)]"
+                    : "hover:bg-[var(--color-sun-cream)]"
+                )}
+              >
+                All resorts
+              </button>
+              {filteredResorts.map((r) => (
+                <button
+                  key={r.slug}
+                  type="button"
+                  onClick={() => update("resort", r.slug)}
+                  className={cn(
+                    "flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm font-medium transition-colors",
+                    activeResort === r.slug
+                      ? "bg-[var(--accent)]/15 text-[var(--accent)]"
+                      : "hover:bg-[var(--color-sun-cream)]"
+                  )}
+                >
+                  {r.name}
+                </button>
+              ))}
+              {filteredResorts.length === 0 && (
+                <p className="px-3 py-2 text-sm text-[var(--color-muted)]">
+                  No resorts match &ldquo;{resortQuery}&rdquo;
+                </p>
+              )}
+            </div>
+          ) : (
+            <select
+              value={activeResort ?? ""}
+              onChange={(e) => update("resort", e.target.value || null)}
+              className="form-control"
+            >
+              <option value="">All resorts</option>
+              {filteredResorts.map((r) => (
+                <option key={r.slug} value={r.slug}>
+                  {r.name}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
       )}
 
       <label className="block text-sm">
@@ -169,7 +225,7 @@ export function FilterFields({
         <select
           value={activeCategory ?? ""}
           onChange={(e) => update("category", e.target.value || null)}
-          className="w-full rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2.5 text-sm"
+          className="form-control"
         >
           <option value="">All categories</option>
           {CATEGORIES.map((c) => (
@@ -184,10 +240,8 @@ export function FilterFields({
         type="button"
         onClick={() => update("free", freeOnly ? null : "true")}
         className={cn(
-          "w-full rounded-xl px-4 py-2.5 text-sm font-bold transition-colors",
-          freeOnly
-            ? "bg-[var(--accent)]/15 text-[var(--accent)]"
-            : "border border-[var(--color-card-border)]"
+          "filter-pill w-full",
+          freeOnly && "filter-pill--active"
         )}
       >
         {freeOnly ? "✓ Free only" : "Free only"}

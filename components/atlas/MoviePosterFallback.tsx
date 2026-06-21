@@ -1,6 +1,7 @@
-function formatDay(day: string): string {
-  return day.charAt(0).toUpperCase() + day.slice(1);
-}
+import {
+  formatMovieDay as formatMovieDayFromLib,
+  formatMovieShowTime as formatMovieShowTimeFromLib,
+} from "@/lib/movies/time";
 
 interface MoviePosterFallbackProps {
   title: string;
@@ -22,14 +23,14 @@ export function MoviePosterFallback({ title, releaseYear }: MoviePosterFallbackP
       />
       <div className="pointer-events-none absolute inset-0 movie-stars opacity-40" aria-hidden />
       <div className="relative">
-        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-xl font-bold text-[var(--color-lantern)] backdrop-blur-sm">
+        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(253,185,78,0.4)] bg-white/90 text-xl font-bold text-[var(--lagoon-deep)] shadow-sm">
           {initial}
         </div>
-        <p className="font-display text-lg font-semibold leading-snug text-white drop-shadow-sm">
+        <p className="font-display text-lg font-semibold leading-snug text-[var(--brand-ink)]">
           {title}
         </p>
         {releaseYear && (
-          <p className="mt-1 text-sm text-white/60">{releaseYear}</p>
+          <p className="mt-1 text-sm text-[var(--muted)]">{releaseYear}</p>
         )}
       </div>
     </div>
@@ -37,12 +38,9 @@ export function MoviePosterFallback({ title, releaseYear }: MoviePosterFallbackP
 }
 
 export function formatMovieShowTime(time: string): string {
-  const [h, m] = time.split(":").map(Number);
-  const period = h >= 12 ? "PM" : "AM";
-  const hour12 = h % 12 || 12;
-  return `${hour12}:${String(m).padStart(2, "0")} ${period}`;
+  return formatMovieShowTimeFromLib(time);
 }
 
 export function formatMovieDay(day: string): string {
-  return formatDay(day);
+  return formatMovieDayFromLib(day);
 }

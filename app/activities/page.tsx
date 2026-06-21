@@ -4,6 +4,7 @@ import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { ExploreLayout } from "@/components/explore/ExploreLayout";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
 import type { Daypart } from "@/lib/types/occurrence";
+import type { ActivitySortKey } from "@/lib/activities/sort";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,8 @@ interface PageProps {
     category?: string;
     daypart?: string;
     free?: string;
+    sort?: string;
+    q?: string;
   }>;
 }
 
@@ -24,6 +27,8 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     category: params.category,
     daypart,
     free: params.free === "true",
+    sort: (params.sort as ActivitySortKey | undefined) ?? "time",
+    q: params.q,
   });
   const resorts = await getResorts();
 

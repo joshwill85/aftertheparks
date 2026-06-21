@@ -1,3 +1,17 @@
+function dedupeRepeatedTitle(title: string): string {
+  const trimmed = title.trim().replace(/\s+/g, " ");
+  const words = trimmed.split(" ");
+  if (words.length >= 2 && words.length % 2 === 0) {
+    const half = words.length / 2;
+    const left = words.slice(0, half).join(" ");
+    const right = words.slice(half).join(" ");
+    if (left.toLowerCase() === right.toLowerCase()) return left;
+  }
+  const match = trimmed.match(/^(.+?)\s+\1$/i);
+  if (match) return match[1].trim();
+  return trimmed;
+}
+
 /** Strip OCR border noise and trailing parse artifacts from movie titles. */
 export function sanitizeMovieTitle(raw: string): string {
   let title = raw.trim().replace(/\s+/g, " ");
@@ -7,7 +21,7 @@ export function sanitizeMovieTitle(raw: string): string {
   title = title.replace(/\s+PG\)?\s*$/i, "");
 
   const quoted = title.match(/"([^"]+)"/);
-  if (quoted) return cleanTitleTail(quoted[1]);
+  if (quoted) return dedupeRepeatedTitle(cleanTitleTail(quoted[1]));
 
   const orTitle = title.match(/\bor\s+([A-Z][\w\s'':,-]+(?:\s+PG)?)\s*$/i);
   if (orTitle) {
@@ -15,13 +29,14 @@ export function sanitizeMovieTitle(raw: string): string {
     const leftClean = extractTitleSegment(left);
     const rightClean = cleanTitleTail(orTitle[1]);
     if (leftClean && rightClean && leftClean !== rightClean) {
-      return `${leftClean} or ${rightClean}`;
+      return dedupeRepeatedTitle(`${leftClean} or ${rightClean}`);
     }
-    return rightClean || leftClean || title;
+    return dedupeRepeatedTitle(rightClean || leftClean || title);
   }
 
   const extracted = extractTitleSegment(title);
-  return extracted || cleanTitleTail(title);
+  const result = extracted || cleanTitleTail(title);
+  return dedupeRepeatedTitle(result);
 }
 
 function extractTitleSegment(title: string): string | null {

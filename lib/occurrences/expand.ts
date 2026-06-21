@@ -26,6 +26,8 @@ import {
   getDisplayTitle,
   toDisplayInput,
 } from "@/lib/activityDisplay";
+import { sanitizeLocationLabel } from "@/lib/location/sanitize";
+import { parseScheduleTime24h, toTimeSql } from "@/lib/text/time";
 
 interface ResortMeta {
   category: string;
@@ -114,6 +116,40 @@ function mapAges(enrichment?: EnrichmentRow | null): string[] {
     .map(([k]) => k);
 }
 
+function isEveningCategory(category: string): boolean {
+  return (
+    category === "movies_under_stars" ||
+    category === "campfire" ||
+    category === "nighttime_entertainment"
+  );
+}
+
+function resolveRuleTime(
+  ruleTime: string | null | undefined,
+  scheduleNotes: string | null | undefined,
+  category: string
+): string {
+  const eveningDefault = isEveningCategory(category);
+  const fromNotes = parseScheduleTime24h(scheduleNotes ?? undefined, {
+    eveningDefault,
+  });
+  if (fromNotes) {
+    return toTimeSql(fromNotes.hour, fromNotes.minute);
+  }
+
+  if (ruleTime) {
+    const [h, m] = ruleTime.split(":");
+    let hour = Number.parseInt(h, 10);
+    const minute = Number.parseInt(m ?? "0", 10);
+    if (eveningDefault && hour >= 1 && hour < 12) {
+      hour += 12;
+    }
+    return toTimeSql(hour, minute);
+  }
+
+  return eveningDefault ? "20:30:00" : "09:00:00";
+}
+
 export function expandOccurrences(
   row: RawActivityRow,
   rules: OccurrenceRuleRow[],
@@ -139,21 +175,31 @@ export function expandOccurrences(
         : [];
 
     if (applicableRules.length === 0 && row.schedule_text) {
-      const fallbackStart = parseTimeOnDate("09:00:00", dateStr);
-      const fallbackEnd = parseTimeOnDate("21:00:00", dateStr);
+      const startTime = resolveRuleTime(
+        null,
+        row.schedule_text,
+        row.category
+      );
+      const start = parseTimeOnDate(startTime, dateStr);
+      const end = addHours(start, 2);
       occurrences.push(
-        buildOccurrence(row, enrichment, resortMeta, fallbackStart, fallbackEnd, row.schedule_text)
+        buildOccurrence(row, enrichment, resortMeta, start, end, row.schedule_text)
       );
       continue;
     }
 
     for (const rule of applicableRules) {
-      const start = rule.start_time
-        ? parseTimeOnDate(rule.start_time, dateStr)
-        : parseTimeOnDate("09:00:00", dateStr);
-      const end = rule.end_time
-        ? parseTimeOnDate(rule.end_time, dateStr)
+      const scheduleNotes = rule.schedule_notes ?? row.schedule_text ?? undefined;
+      const startTime = resolveRuleTime(
+        rule.start_time,
+        scheduleNotes,
+        row.category
+      );
+      const endTime = rule.end_time
+        ? resolveRuleTime(rule.end_time, scheduleNotes, row.category)
         : undefined;
+      const start = parseTimeOnDate(startTime, dateStr);
+      const end = endTime ? parseTimeOnDate(endTime, dateStr) : undefined;
       occurrences.push(
         buildOccurrence(
           row,
@@ -161,7 +207,7 @@ export function expandOccurrences(
           resortMeta,
           start,
           end,
-          rule.schedule_notes ?? row.schedule_text ?? undefined
+          scheduleNotes
         )
       );
     }
@@ -211,7 +257,9 @@ function buildOccurrence(
     daypart,
     price: mapPrice(row, enrichment),
     location: {
-      label: enrichment?.meeting_location_detail ?? row.location ?? "Resort",
+      label: sanitizeLocationLabel(
+        enrichment?.meeting_location_detail ?? row.location
+      ),
       lat: enrichment?.geo_lat ?? undefined,
       lng: enrichment?.geo_lng ?? undefined,
     },

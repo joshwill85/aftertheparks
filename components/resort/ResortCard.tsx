@@ -1,18 +1,23 @@
 import Link from "next/link";
 import type { ResortSummary } from "@/lib/types/occurrence";
+import {
+  formatResortArea,
+  getResortInitial,
+  getResortTagline,
+} from "@/lib/resorts/display";
 import { cn, formatResortTier } from "@/lib/utils";
 
 const TIER_GRADIENTS: Record<string, string> = {
   value:
-    "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.72), transparent 34%), linear-gradient(145deg, #fdb94e, #ff9c6b)",
+    "radial-gradient(circle at 28% 18%, rgba(255,255,255,0.78), transparent 38%), linear-gradient(145deg, #ffcf6b 0%, #fdb94e 42%, #ff9c6b 100%)",
   moderate:
-    "radial-gradient(circle at 70% 15%, rgba(255,255,255,0.58), transparent 38%), linear-gradient(145deg, #16a6b6, #08798a)",
+    "radial-gradient(circle at 72% 14%, rgba(255,255,255,0.62), transparent 36%), linear-gradient(145deg, #4ec4d4 0%, #16a6b6 48%, #08798a 100%)",
   deluxe:
-    "radial-gradient(circle at 25% 80%, rgba(255,200,87,0.38), transparent 42%), linear-gradient(145deg, #071a26 0%, #102d3a 55%, #16a6b6 100%)",
+    "radial-gradient(circle at 22% 78%, rgba(255,200,87,0.42), transparent 40%), linear-gradient(145deg, #071a26 0%, #102d3a 52%, #16a6b6 100%)",
   deluxe_villa:
-    "radial-gradient(circle at 60% 30%, rgba(255,255,255,0.55), transparent 35%), linear-gradient(145deg, #ffc857, #08798a)",
+    "radial-gradient(circle at 64% 24%, rgba(255,255,255,0.58), transparent 34%), linear-gradient(145deg, #ffc857 0%, #16a6b6 100%)",
   campground:
-    "radial-gradient(circle at 40% 25%, rgba(255,255,255,0.52), transparent 32%), linear-gradient(145deg, #27724b, #fdb94e)",
+    "radial-gradient(circle at 38% 22%, rgba(255,255,255,0.55), transparent 32%), linear-gradient(145deg, #27724b 0%, #4ec4d4 55%, #fdb94e 100%)",
 };
 
 export function getResortTierGradient(category: string): string {
@@ -22,56 +27,103 @@ export function getResortTierGradient(category: string): string {
 interface ResortCardProps {
   resort: ResortSummary;
   tonightCount?: number;
+  todayCount?: number;
+  highlights?: string[];
 }
 
-export function ResortCard({ resort, tonightCount }: ResortCardProps) {
+export function ResortCard({
+  resort,
+  tonightCount,
+  todayCount,
+  highlights = [],
+}: ResortCardProps) {
   const tierLabel = formatResortTier(resort.category);
-  const isDarkTier = resort.category === "deluxe";
+  const isDarkBanner = resort.category === "deluxe";
+  const initial = getResortInitial(resort.name);
+  const areaLabel = formatResortArea(resort.area);
+  const tagline = getResortTagline(resort.category);
+  const hasLiveCounts =
+    (todayCount != null && todayCount > 0) ||
+    (tonightCount != null && tonightCount > 0);
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[28px] border border-[var(--color-card-border)] bg-[var(--color-card)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)]/40 hover:shadow-lg">
-      <div
-        className="relative flex min-h-[108px] items-end p-4"
-        style={{ background: getResortTierGradient(resort.category) }}
+    <article
+      className={cn(
+        "resort-card",
+        "resort-card--clickable",
+        `resort-card--${resort.category}`
+      )}
+    >
+      <Link
+        href={`/resorts/${resort.slug}`}
+        className="resort-card__hit-area"
+        aria-label={`View ${resort.name} resort guide`}
       >
-        <span
-          className={cn(
-            "rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur-md",
-            isDarkTier
-              ? "bg-black/35 text-white/95"
-              : "bg-white/55 text-[var(--brand-ink)]"
-          )}
+        <div
+          className="resort-card__banner"
+          style={{ background: getResortTierGradient(resort.category) }}
         >
-          {tierLabel}
-        </span>
-      </div>
-
-      <div className="flex flex-1 flex-col p-4 pt-3">
-        <h3 className="font-display text-xl font-semibold leading-tight group-hover:text-[var(--accent)]">
-          {resort.name}
-        </h3>
-
-        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm text-[var(--color-muted)]">
-          <span>
-            {resort.activityCount}{" "}
-            {resort.activityCount === 1 ? "activity" : "activities"}
+          <span
+            className={cn(
+              "resort-card__initial",
+              isDarkBanner && "resort-card__initial--light"
+            )}
+            aria-hidden
+          >
+            {initial}
           </span>
-          {tonightCount != null && tonightCount > 0 && (
-            <span className="font-semibold text-[var(--color-lantern)]">
-              {tonightCount} tonight
+          <span
+            className={cn(
+              "resort-card__tier",
+              isDarkBanner ? "resort-card__tier--dark" : "resort-card__tier--light"
+            )}
+          >
+            {tierLabel}
+          </span>
+        </div>
+
+        <div className="resort-card__body">
+          <div className="resort-card__topline">
+            <span className="resort-card__area">{areaLabel}</span>
+          </div>
+
+          <h3 className="resort-card__title">{resort.name}</h3>
+          <p className="resort-card__tagline">{tagline}</p>
+
+          <div className="resort-card__stats">
+            <span className="resort-card__stat">
+              {resort.activityCount}{" "}
+              {resort.activityCount === 1 ? "activity" : "activities"} listed
             </span>
+            {todayCount != null && todayCount > 0 && (
+              <span className="resort-card__stat resort-card__stat--today">
+                {todayCount} today
+              </span>
+            )}
+            {tonightCount != null && tonightCount > 0 && (
+              <span className="resort-card__stat resort-card__stat--tonight">
+                {tonightCount} tonight
+              </span>
+            )}
+          </div>
+
+          {highlights.length > 0 ? (
+            <div className="resort-card__highlights">
+              {highlights.map((label) => (
+                <span key={label} className="resort-card__chip">
+                  {label}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="resort-card__hint">
+              {hasLiveCounts
+                ? "Schedules, movies, and campfires inside"
+                : "Browse resort fun and official sources"}
+            </p>
           )}
         </div>
-
-        <div className="mt-4">
-          <Link
-            href={`/resorts/${resort.slug}`}
-            className="btn-secondary inline-flex min-h-11 items-center rounded-full border border-[var(--color-card-border)] bg-[var(--color-card)] px-4 text-sm font-bold hover:border-[var(--accent)] hover:text-[var(--accent)]"
-          >
-            View resort
-          </Link>
-        </div>
-      </div>
+      </Link>
     </article>
   );
 }

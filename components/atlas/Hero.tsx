@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { useDaypart } from "@/components/atlas/DaypartProvider";
 import { LagoonHeroEasterEgg } from "@/components/magic/LagoonHeroEasterEgg";
 
 interface HeroProps {
@@ -22,8 +21,7 @@ export function Hero({
   image = false,
   dark = false,
 }: HeroProps) {
-  const { daypart } = useDaypart();
-  const isNight = dark || daypart === "evening" || daypart === "late";
+  const isOverlayText = dark || image;
 
   return (
     <section
@@ -58,14 +56,14 @@ export function Hero({
       <LagoonHeroEasterEgg>
         <div
           className={`relative ${image ? "flex min-h-[320px] flex-col justify-end p-8 md:min-h-[380px] md:p-12" : ""} ${
-            isNight || image ? "text-white" : ""
+            isOverlayText ? "text-white" : ""
           }`}
         >
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className={`mb-2 text-sm font-medium uppercase tracking-widest ${
-              isNight || image ? "text-[var(--color-lantern)]" : "text-[var(--accent)]"
+              isOverlayText ? "text-[var(--color-lantern)]" : "text-[var(--accent)]"
             }`}
           >
             {eyebrow}
@@ -76,7 +74,7 @@ export function Hero({
             transition={{ delay: 0.1 }}
             className="font-display max-w-3xl text-4xl font-bold leading-tight md:text-5xl"
             style={{
-              textShadow: isNight || image ? "0 2px 24px rgba(0,0,0,0.35)" : undefined,
+              textShadow: isOverlayText ? "0 2px 24px rgba(0,0,0,0.35)" : undefined,
             }}
           >
             {title}
@@ -86,7 +84,7 @@ export function Hero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className={`mt-4 max-w-2xl text-lg ${
-              isNight || image ? "text-white/85" : "text-[var(--color-muted)]"
+              isOverlayText ? "text-white/85" : "text-[var(--color-muted)]"
             }`}
           >
             {subtitle}

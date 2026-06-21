@@ -8,7 +8,7 @@ interface EmptyStateProps {
 
 export function EmptyState({ title, description, actions = [] }: EmptyStateProps) {
   return (
-    <div className="postcard-texture rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-8 text-center md:p-12">
+    <div className="journal-empty postcard-texture p-8 text-center md:p-12">
       <p className="text-3xl" aria-hidden>
         🌴
       </p>
@@ -22,8 +22,8 @@ export function EmptyState({ title, description, actions = [] }: EmptyStateProps
               href={action.href}
               className={
                 action.variant === "primary"
-                  ? "rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white shadow-sm"
-                  : "rounded-full border border-[var(--color-card-border)] bg-[var(--color-postcard)]/50 px-5 py-2.5 text-sm font-medium hover:border-[var(--accent)]"
+                  ? "btn-primary px-5 text-sm"
+                  : "btn-secondary text-sm"
               }
             >
               {action.label}

@@ -1,25 +1,32 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
-import type { ActivityOccurrence, MovieNightOccurrence } from "@/lib/types/occurrence";
-import { EmptyState } from "@/components/atlas/EmptyState";
+import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { TmdbAttribution } from "@/components/atlas/TmdbAttribution";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { useDaypart } from "@/components/atlas/DaypartProvider";
-import { shouldHideActivity } from "@/lib/activityDisplay";
-import { occurrenceToDisplayInput } from "@/lib/activityDisplay";
+import { shouldHideActivity, occurrenceToDisplayInput } from "@/lib/activityDisplay";
+import { dedupeOccurrences } from "@/lib/api/publicActivities";
 import { MovieCard } from "@/components/tonight/MovieCard";
+import { NightEmptyState } from "@/components/tonight/NightEmptyState";
 import { NightActivityCard } from "@/components/tonight/NightActivityCard";
+import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import { TonightHero } from "@/components/tonight/TonightHero";
+import type { MovieNightOccurrence } from "@/lib/types/occurrence";
+
+const AFTER_DINNER_CATEGORIES = new Set([
+  "nighttime_entertainment",
+  "music",
+  "movies_under_stars",
+]);
+
+const RAIN_FRIENDLY_CATEGORIES = new Set(["arcade", "arts_crafts"]);
 
 const LOW_ENERGY_CATEGORIES = new Set([
   "fitness_wellness",
   "resort_activity",
-  "nighttime_entertainment",
-  "music",
   "nature",
-  "arts_crafts",
-  "arcade",
   "scavenger_hunt",
   "poolside",
   "signature",
@@ -34,15 +41,23 @@ function NightSectionEmpty({
   description: string;
   actions: { label: string; href: string; variant?: "primary" | "secondary" }[];
 }) {
-  return (
-    <div className="night-card p-8 md:p-10">
-      <EmptyState title={title} description={description} actions={actions} />
-    </div>
-  );
+  return <NightEmptyState title={title} description={description} actions={actions} />;
 }
 
 function filterVisible(activities: ActivityOccurrence[]): ActivityOccurrence[] {
-  return activities.filter((a) => !shouldHideActivity(occurrenceToDisplayInput(a)));
+  return dedupeOccurrences(
+    activities.filter((a) => !shouldHideActivity(occurrenceToDisplayInput(a)))
+  );
+}
+
+function dedupeBySlot(activities: ActivityOccurrence[]): ActivityOccurrence[] {
+  const seen = new Set<string>();
+  return activities.filter((a) => {
+    const key = `${a.activityCatalogId}:${a.resort.slug}:${a.startDateTime}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 export function TonightClient({
@@ -60,17 +75,29 @@ export function TonightClient({
     return () => setForceDaypart(null);
   }, [setForceDaypart]);
 
-  const visibleActivities = filterVisible(activities);
+  const visibleActivities = dedupeBySlot(filterVisible(activities));
   const campfires = visibleActivities.filter((a) => a.category === "campfire");
+  const afterDinner = visibleActivities.filter((a) =>
+    AFTER_DINNER_CATEGORIES.has(a.category)
+  );
+  const rainFriendly = visibleActivities.filter((a) =>
+    RAIN_FRIENDLY_CATEGORIES.has(a.category)
+  );
   const lowEnergy = visibleActivities.filter(
-    (a) => a.category !== "campfire" && LOW_ENERGY_CATEGORIES.has(a.category)
+    (a) =>
+      LOW_ENERGY_CATEGORIES.has(a.category) &&
+      !AFTER_DINNER_CATEGORIES.has(a.category)
   );
 
   const tonightMovies = movieNights.filter((m) => m.isTonight);
   const weekMovies = movieNights.filter((m) => !m.isTonight);
 
   const hasAnyContent =
-    movieNights.length > 0 || campfires.length > 0 || lowEnergy.length > 0;
+    movieNights.length > 0 ||
+    campfires.length > 0 ||
+    afterDinner.length > 0 ||
+    rainFriendly.length > 0 ||
+    lowEnergy.length > 0;
 
   if (!hasAnyContent) {
     return (
@@ -91,15 +118,20 @@ export function TonightClient({
   }
 
   return (
-    <div className="space-y-14 pb-8">
+    <div id="activities" className="space-y-14 scroll-mt-24 pb-8">
       <TonightHero />
+
+      <p className="tonight-callout">
+        Confirm showtimes with your resort before heading out — outdoor schedules
+        can shift with weather.
+      </p>
 
       <section id="movies" className="scroll-mt-24">
         <div className="mb-5">
-          <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="home-section__title text-2xl md:text-3xl">
             Movies under the stars
           </h2>
-          <p className="mt-2 text-sm text-white/62 md:text-base">
+          <p className="home-section__subtitle md:text-base">
             Outdoor cinema schedules from resort recreation calendars.
           </p>
         </div>
@@ -118,39 +150,43 @@ export function TonightClient({
           <div className="space-y-10">
             {tonightMovies.length > 0 && (
               <div>
-                <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.1em] text-[var(--lantern)]">
+                <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.1em] text-[var(--lagoon-deep)]">
                   Tonight
                 </h3>
-                <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                <EventCardList>
                   {tonightMovies.map((movie) => (
-                    <MovieCard key={movie.id} movie={movie} />
+                    <EventCardListItem key={movie.id}>
+                      <MovieCard movie={movie} />
+                    </EventCardListItem>
                   ))}
-                </div>
+                </EventCardList>
               </div>
             )}
             {weekMovies.length > 0 && (
               <div>
-                <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.1em] text-white/55">
+                <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.1em] text-[var(--muted)]">
                   {tonightMovies.length > 0 ? "Rest of the week" : "This week"}
                 </h3>
-                <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                <EventCardList>
                   {weekMovies.map((movie) => (
-                    <MovieCard key={movie.id} movie={movie} />
+                    <EventCardListItem key={movie.id}>
+                      <MovieCard movie={movie} />
+                    </EventCardListItem>
                   ))}
-                </div>
+                </EventCardList>
               </div>
             )}
-            <TmdbAttribution className="border-t border-white/12 pt-6 text-white/45" />
+            <TmdbAttribution className="border-t border-[var(--border-soft)] pt-6 text-[var(--muted)]" />
           </div>
         )}
       </section>
 
       <section id="campfires" className="scroll-mt-24">
         <div className="mb-5">
-          <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="home-section__title text-2xl md:text-3xl">
             Campfires
           </h2>
-          <p className="mt-2 text-sm text-white/62 md:text-base">
+          <p className="home-section__subtitle md:text-base">
             Marshmallows, stories, and lantern-lit evenings across the resorts.
           </p>
         </div>
@@ -166,22 +202,52 @@ export function TonightClient({
             ]}
           />
         ) : (
-          <ul className="grid gap-4 md:grid-cols-2">
-            {campfires.map((activity) => (
-              <li key={activity.id}>
+          <EventCardList columns={2}>
+            {campfires.slice(0, 6).map((activity) => (
+              <EventCardListItem key={activity.id}>
                 <NightActivityCard activity={activity} onSave={addActivity} />
-              </li>
+              </EventCardListItem>
             ))}
-          </ul>
+          </EventCardList>
+        )}
+      </section>
+
+      <section id="after-dinner" className="scroll-mt-24">
+        <div className="mb-5">
+          <h2 className="home-section__title text-2xl md:text-3xl">
+            After-dinner activities
+          </h2>
+          <p className="home-section__subtitle md:text-base">
+            Music, entertainment, and evening resort moments once the parks wind down.
+          </p>
+        </div>
+
+        {afterDinner.length === 0 ? (
+          <NightSectionEmpty
+            title="No after-dinner picks confirmed"
+            description="Try movies or campfires, or browse all evening activities."
+            actions={[
+              { label: "Movies", href: "#movies", variant: "primary" },
+              { label: "Explore evening", href: "/activities?daypart=evening" },
+            ]}
+          />
+        ) : (
+          <EventCardList columns={2}>
+            {afterDinner.slice(0, 6).map((activity) => (
+              <EventCardListItem key={activity.id}>
+                <NightActivityCard activity={activity} onSave={addActivity} />
+              </EventCardListItem>
+            ))}
+          </EventCardList>
         )}
       </section>
 
       <section id="low-energy" className="scroll-mt-24">
         <div className="mb-5">
-          <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="home-section__title text-2xl md:text-3xl">
             Low-energy evening ideas
           </h2>
-          <p className="mt-2 text-sm text-white/62 md:text-base">
+          <p className="home-section__subtitle md:text-base">
             Cozy crafts, wellness, and easy resort moments when you want to wind down.
           </p>
         </div>
@@ -197,15 +263,69 @@ export function TonightClient({
             ]}
           />
         ) : (
-          <ul className="grid gap-4 md:grid-cols-2">
-            {lowEnergy.map((activity) => (
-              <li key={activity.id}>
+          <EventCardList columns={2}>
+            {lowEnergy.slice(0, 6).map((activity) => (
+              <EventCardListItem key={activity.id}>
                 <NightActivityCard activity={activity} onSave={addActivity} />
-              </li>
+              </EventCardListItem>
             ))}
-          </ul>
+          </EventCardList>
         )}
       </section>
+
+      <section id="rain-friendly" className="scroll-mt-24">
+        <div className="mb-5">
+          <h2 className="home-section__title text-2xl md:text-3xl">
+            Rain-friendly evening ideas
+          </h2>
+          <p className="home-section__subtitle md:text-base">
+            Indoor arcade and craft options when the Florida sky has other plans.
+          </p>
+        </div>
+
+        {rainFriendly.length === 0 ? (
+          <NightSectionEmpty
+            title="No indoor evening picks listed"
+            description="Browse arcade and craft activities across all resorts."
+            actions={[
+              { label: "Arcade", href: "/activities?category=arcade", variant: "primary" },
+              { label: "Crafts", href: "/activities?category=arts_crafts" },
+            ]}
+          />
+        ) : (
+          <EventCardList columns={2}>
+            {rainFriendly.slice(0, 6).map((activity) => (
+              <EventCardListItem key={activity.id}>
+                <NightActivityCard activity={activity} onSave={addActivity} />
+              </EventCardListItem>
+            ))}
+          </EventCardList>
+        )}
+      </section>
+
+      {weekMovies.length > 0 && (
+        <section id="tomorrow-preview" className="scroll-mt-24">
+          <div className="mb-5">
+            <h2 className="home-section__title text-2xl md:text-3xl">
+              Coming up this week
+            </h2>
+            <p className="home-section__subtitle">
+              Plan ahead —{" "}
+              <Link href="/tonight" className="home-section__link">
+                see the full week
+              </Link>
+              .
+            </p>
+          </div>
+          <EventCardList compact>
+            {weekMovies.slice(0, 4).map((movie) => (
+              <EventCardListItem key={movie.id}>
+                <MovieCard movie={movie} />
+              </EventCardListItem>
+            ))}
+          </EventCardList>
+        </section>
+      )}
     </div>
   );
 }

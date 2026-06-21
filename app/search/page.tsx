@@ -1,21 +1,57 @@
-import { Suspense } from "react";
 import { SearchClient } from "@/components/atlas/SearchClient";
 import { Hero } from "@/components/atlas/Hero";
 import { StarlightSearchEffect } from "@/components/magic/StarlightSearchEffect";
+import { runSearch } from "@/lib/search/runSearch";
 
-export default function SearchPage() {
+const SUGGESTIONS = [
+  "campfire tonight",
+  "free pool",
+  "polynesian",
+  "movie",
+  "crafts kids",
+  "arcade rainy",
+  "contemporary",
+  "yoga",
+];
+
+interface SearchPageProps {
+  searchParams: Promise<{ q?: string }>;
+}
+
+export default async function SearchPage({ searchParams }: SearchPageProps) {
+  const { q } = await searchParams;
+  const query = q?.trim() ?? "";
+
+  const initialPayload = query
+    ? await runSearch(query, { limit: 50 })
+    : undefined;
+
   return (
     <div className="relative">
-      <Suspense fallback={null}>
-        <StarlightSearchEffect />
-      </Suspense>
+      <StarlightSearchEffect />
       <Hero
         title="Search"
-        subtitle="Find campfires, movies, crafts, and free resort moments — like asking the concierge."
+        subtitle="One search across activities, resorts, movies, guides, and categories — best matches first."
       />
-      <Suspense fallback={<p className="text-[var(--color-muted)]">Loading…</p>}>
-        <SearchClient />
-      </Suspense>
+      <SearchClient
+        initialQuery={query}
+        initialPayload={
+          initialPayload
+            ? {
+                activities: initialPayload.activities,
+                resorts: initialPayload.resorts,
+                guides: initialPayload.guides,
+                movies: initialPayload.movies,
+                topHits: initialPayload.topHits,
+                categories: initialPayload.categories,
+                pages: initialPayload.pages,
+                total: initialPayload.total,
+                query: initialPayload.query,
+              }
+            : undefined
+        }
+        suggestions={SUGGESTIONS}
+      />
     </div>
   );
 }

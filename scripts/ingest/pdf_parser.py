@@ -45,7 +45,7 @@ CATEGORY_RULES: list[tuple[str, str]] = [
     (r"arcade|video game", "arcade"),
     (r"character|greeting", "character_experience"),
     (r"trivia|bingo|disco|dance party|glow|nighttime", "nighttime_entertainment"),
-    (r"find a friend|scavenger|nature walk|nature guide", "resort_activity"),
+    (r"find a friend|scavenger|nature walk|nature guide", "scavenger_hunt"),
     (r"bike|bicycle|surrey|boat|cabana|rental|marina", "rental"),
     (r"archery|pony|wagon|sleigh|carriage|chip.*dale|tri-circle", "resort_activity"),
     (r"community hall|lobby", "resort_activity"),
@@ -132,10 +132,22 @@ def _clean_activity_name(name: str) -> str:
 
 
 def categorize(name: str, section: str) -> str:
-    hay = f"{section} {name}".lower()
+    """Match activity name first; use section only as a tiebreaker."""
+    name_hay = name.lower()
+    section_hay = section.lower()
+
     for pattern, category in CATEGORY_RULES:
-        if re.search(pattern, hay):
+        if re.search(pattern, name_hay):
             return category
+
+    # Section-only wellness header should not classify arcade/craft by name miss
+    if re.search(r"yoga|fitness|wellness|tai chi|pickleball|aqua", name_hay):
+        return "fitness_wellness"
+
+    for pattern, category in CATEGORY_RULES:
+        if re.search(pattern, section_hay):
+            return category
+
     if section == "SIGNATURE ACTIVITIES":
         return "signature"
     return "other"

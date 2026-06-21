@@ -1,11 +1,15 @@
 import { formatOrlandoTime } from "@/lib/daypart";
 import { getCategoryMeta } from "@/lib/categories/meta";
 import {
+  formatScheduleTimeLabel,
+} from "@/lib/text/time";
+import {
   isPdfGarbageText,
   isUncertainSchedule,
   normalizeActivityTitle,
 } from "@/lib/text/normalize";
 import { slugToTitle } from "@/lib/utils";
+import { shouldHideByQuality, trustStateFromQuality } from "@/lib/displayQuality";
 
 export type TrustState =
   | "verified"
@@ -256,8 +260,8 @@ function isSuspiciousAllDayBlock(
   const endHour = parseHourFromIso(endIso);
   if (startHour == null || endHour == null) return false;
 
-  const isEarlyStart = startHour <= 6 || startHour === 5;
-  const isLateEnd = endHour >= 17;
+  const isEarlyStart = startHour <= 9;
+  const isLateEnd = endHour >= 20;
   const spansMostOfDay = endHour - startHour >= 10;
 
   return isEarlyStart && isLateEnd && spansMostOfDay;
@@ -269,8 +273,22 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
   uncertain: boolean;
 } {
   const scheduleText = getScheduleText(activity);
+  const eveningDefault =
+    activity.category === "movies_under_stars" ||
+    activity.category === "campfire" ||
+    activity.category === "nighttime_entertainment";
 
   if (scheduleText && !isUncertainSchedule(scheduleText)) {
+    const fromText = formatScheduleTimeLabel(scheduleText, {
+      eveningDefault,
+    });
+    if (fromText) {
+      if (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime)) {
+        return { label: "Time needs confirmation", uncertain: true };
+      }
+      return { label: fromText, uncertain: false };
+    }
+
     if (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime)) {
       return { label: "Time needs confirmation", uncertain: true };
     }
@@ -289,6 +307,9 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
     const start = formatOrlandoTime(activity.startDateTime);
     if (activity.endDateTime) {
       const end = formatOrlandoTime(activity.endDateTime);
+      if (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime)) {
+        return { label: "Time needs confirmation", uncertain: true };
+      }
       if (start === end) return { label: start, uncertain: false };
       return { label: `${start} – ${end}`, uncertain: false };
     }
@@ -319,19 +340,31 @@ export function getTrustState(activity: ActivityDisplayInput): TrustState {
     (activity.parse_confidence != null && activity.parse_confidence < 0.6);
 
   if (weatherDependent && (time.uncertain || priceUnclear)) {
-    return "confirm_before_going";
+    return trustStateFromQuality(activity, "confirm_before_going");
   }
-  if (weatherDependent) return "weather_dependent";
-  if (time.uncertain && priceUnclear) return "confirm_before_going";
-  if (time.uncertain) return "time_unclear";
-  if (priceUnclear) return "price_unclear";
-  if (sourceStale) return "source_unclear";
+  if (weatherDependent) {
+    return trustStateFromQuality(activity, "weather_dependent");
+  }
+  if (time.uncertain && priceUnclear) {
+    return trustStateFromQuality(activity, "confirm_before_going");
+  }
+  if (time.uncertain) {
+    return trustStateFromQuality(activity, "time_unclear");
+  }
+  if (priceUnclear) {
+    return trustStateFromQuality(activity, "price_unclear");
+  }
+  if (sourceStale) {
+    return trustStateFromQuality(activity, "source_unclear");
+  }
   if (recentlyUpdated && activity.freshness?.badge === "verified") {
-    return "recently_updated";
+    return trustStateFromQuality(activity, "recently_updated");
   }
-  if (activity.freshness?.badge === "verified") return "verified";
+  if (activity.freshness?.badge === "verified") {
+    return trustStateFromQuality(activity, "verified");
+  }
 
-  return "confirm_before_going";
+  return trustStateFromQuality(activity, "confirm_before_going");
 }
 
 export function getTrustLabel(state: TrustState): string {
@@ -366,6 +399,15 @@ export function shouldHideActivity(activity: ActivityDisplayInput): boolean {
   ) {
     return true;
   }
+
+  if (shouldHideByQuality(activity)) return true;
+
+  const displayTitle = getDisplayTitle(activity);
+  const genericFallback =
+    /^(Wellness|Resort|Evening|Arcade|Nature|Signature) Activity$/i.test(
+      displayTitle
+    );
+  if (genericFallback && (rawCorrupted || slugCorrupted)) return true;
 
   return false;
 }

@@ -1,50 +1,134 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { ActivityOccurrence, MovieNightOccurrence, ResortSummary } from "@/lib/types/occurrence";
+import type { GuideEntry } from "@/lib/guides";
+import type { SearchHit } from "@/lib/search/types";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { usePlan } from "@/components/atlas/PlanProvider";
+import { ResortCard } from "@/components/resort/ResortCard";
+import { MovieListingCard } from "@/components/movies/MovieListingCard";
+import { SearchHitRow } from "@/components/search/SearchHitRow";
 
-const SUGGESTIONS = [
-  "campfire",
+interface SearchPayload {
+  activities: ActivityOccurrence[];
+  resorts: ResortSummary[];
+  guides: GuideEntry[];
+  movies: MovieNightOccurrence[];
+  topHits: SearchHit[];
+  categories: SearchHit[];
+  pages: SearchHit[];
+  total: number;
+  query: string;
+}
+
+interface SearchClientProps {
+  initialQuery?: string;
+  initialPayload?: SearchPayload;
+  suggestions?: string[];
+}
+
+const DEFAULT_SUGGESTIONS = [
+  "campfire tonight",
+  "free pool",
+  "polynesian",
   "movie",
-  "free",
-  "crafts",
-  "pool",
-  "arcade",
-  "scavenger hunt",
+  "crafts kids",
+  "arcade rainy",
+  "contemporary",
   "yoga",
 ];
 
-export function SearchClient() {
+export function SearchClient({
+  initialQuery = "",
+  initialPayload,
+  suggestions = DEFAULT_SUGGESTIONS,
+}: SearchClientProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const q = searchParams.get("q") ?? "";
+  const q = searchParams.get("q") ?? initialQuery;
   const [query, setQuery] = useState(q);
-  const [results, setResults] = useState<ActivityOccurrence[]>([]);
+  const [payload, setPayload] = useState<SearchPayload | null>(
+    q === initialQuery && initialPayload ? initialPayload : null
+  );
+  const [previewHits, setPreviewHits] = useState<SearchHit[]>([]);
   const [loading, setLoading] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
   const { addActivity } = usePlan();
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const fetchSearch = useCallback(async (term: string, signal?: AbortSignal) => {
+    const trimmed = term.trim();
+    if (!trimmed) {
+      return {
+        activities: [],
+        resorts: [],
+        guides: [],
+        movies: [],
+        topHits: [],
+        categories: [],
+        pages: [],
+        total: 0,
+        query: "",
+      } satisfies SearchPayload;
+    }
+
+    const response = await fetch(`/api/search?q=${encodeURIComponent(trimmed)}`, {
+      signal,
+    });
+    const data = await response.json();
+    return {
+      activities: data.activities ?? [],
+      resorts: data.resorts ?? [],
+      guides: data.guides ?? [],
+      movies: data.movies ?? [],
+      topHits: data.topHits ?? [],
+      categories: data.categories ?? [],
+      pages: data.pages ?? [],
+      total: data.total ?? 0,
+      query: data.query ?? trimmed,
+    } satisfies SearchPayload;
+  }, []);
 
   useEffect(() => {
-    if (!q) return;
+    setQuery(q);
+    if (!q) {
+      setPayload(null);
+      setPreviewHits([]);
+      return;
+    }
+
+    if (q === initialQuery && initialPayload) {
+      setPayload(initialPayload);
+      return;
+    }
+
     setLoading(true);
-    fetch(`/api/search?q=${encodeURIComponent(q)}`)
-      .then((r) => r.json())
-      .then((d) => setResults(d.activities ?? []))
-      .finally(() => setLoading(false));
-  }, [q]);
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    fetchSearch(q, controller.signal)
+      .then((data) => setPayload(data))
+      .catch(() => {
+        if (!controller.signal.aborted) setPayload(null);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+  }, [q, initialQuery, initialPayload, fetchSearch]);
 
   const runSearch = (term: string) => {
     const params = new URLSearchParams();
-    if (term) params.set("q", term);
-    window.history.pushState(null, "", `/search?${params.toString()}`);
-    setQuery(term);
-    setLoading(true);
-    fetch(`/api/search?q=${encodeURIComponent(term)}`)
-      .then((r) => r.json())
-      .then((d) => setResults(d.activities ?? []))
-      .finally(() => setLoading(false));
+    const trimmed = term.trim();
+    if (trimmed) params.set("q", trimmed);
+    const qs = params.toString();
+    router.push(qs ? `/search?${qs}` : "/search");
+    setPreviewOpen(false);
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -52,59 +136,240 @@ export function SearchClient() {
     runSearch(query);
   };
 
+  const handleQueryChange = (value: string) => {
+    setQuery(value);
+    setPreviewOpen(true);
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    const trimmed = value.trim();
+
+    if (trimmed.length < 2) {
+      setPreviewHits([]);
+      return;
+    }
+
+    debounceRef.current = setTimeout(() => {
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      fetchSearch(trimmed, controller.signal)
+        .then((data) => setPreviewHits(data.topHits.slice(0, 6)))
+        .catch(() => {
+          if (!controller.signal.aborted) setPreviewHits([]);
+        });
+    }, 180);
+  };
+
+  const hasResults =
+    payload &&
+    (payload.total > 0 ||
+      payload.activities.length > 0 ||
+      payload.resorts.length > 0);
+
+  const quickLinks = payload
+    ? [...payload.pages, ...payload.categories].slice(0, 6)
+    : [];
+
   return (
-    <div>
-      <form onSubmit={handleSearch} className="postcard-texture mb-4 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-4">
-        <label className="block text-sm font-medium text-[var(--color-muted)]">
-          Search like a concierge
+    <div className="search-shell">
+      <form onSubmit={handleSearch} className="search-form" role="search">
+        <label htmlFor="global-search-input" className="search-form__label">
+          Search everything
         </label>
-        <div className="mt-2 flex gap-2">
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder='Try "campfire", "movie", or "free"'
-            className="flex-1 rounded-xl border border-[var(--color-card-border)] bg-transparent px-4 py-3"
-            aria-label="Search query"
-          />
-          <button
-            type="submit"
-            className="rounded-xl bg-[var(--accent)] px-5 py-3 font-medium text-white"
-          >
+        <p className="search-form__hint">
+          Activities, resorts, movies, guides, and categories — ranked by what
+          matches best.
+        </p>
+        <div className="search-form__row">
+          <div className="search-form__input-wrap">
+            <input
+              ref={inputRef}
+              id="global-search-input"
+              type="search"
+              value={query}
+              onChange={(e) => handleQueryChange(e.target.value)}
+              onFocus={() => setPreviewOpen(true)}
+              onBlur={() => window.setTimeout(() => setPreviewOpen(false), 160)}
+              placeholder='Try "campfire", "Polynesian", or "free pool"'
+              className="form-control search-form__input"
+              autoComplete="off"
+              aria-autocomplete="list"
+              aria-controls={previewOpen ? "search-preview-list" : undefined}
+              aria-expanded={previewOpen && previewHits.length > 0}
+            />
+            {previewOpen && previewHits.length > 0 && query.trim().length >= 2 && (
+              <div className="search-preview" id="search-preview-list" role="listbox">
+                {previewHits.map((hit) => (
+                  <SearchHitRow
+                    key={hit.id}
+                    hit={hit}
+                    compact
+                    onNavigate={() => setPreviewOpen(false)}
+                  />
+                ))}
+                <button
+                  type="button"
+                  className="search-preview__more"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => runSearch(query)}
+                >
+                  See all results for &ldquo;{query.trim()}&rdquo;
+                </button>
+              </div>
+            )}
+          </div>
+          <button type="submit" className="btn-primary search-form__submit">
             Search
           </button>
         </div>
       </form>
 
-      <div className="mb-6 flex flex-wrap gap-2">
-        {SUGGESTIONS.map((s) => (
+      <div className="search-suggestions">
+        {suggestions.map((suggestion) => (
           <button
-            key={s}
+            key={suggestion}
             type="button"
-            onClick={() => runSearch(s)}
-            className="rounded-full border border-[var(--color-card-border)] px-3 py-1 text-sm hover:border-[var(--accent)]"
+            className="search-suggestion"
+            onClick={() => runSearch(suggestion)}
           >
-            {s}
+            {suggestion}
           </button>
         ))}
       </div>
 
-      {loading ? (
-        <p className="text-[var(--color-muted)]">Searching…</p>
-      ) : q && results.length === 0 ? (
-        <p className="text-[var(--color-muted)]">
-          No matches for &ldquo;{q}&rdquo;. Try a broader term or{" "}
-          <Link href="/activities" className="text-[var(--accent)] hover:underline">
-            explore all activities
-          </Link>
-          .
+      {!q && (
+        <p className="search-empty-intro">
+          Ask like a concierge — campfires near your resort, free pool games,
+          tonight&apos;s movies, or rainy-day arcade time.
         </p>
-      ) : (
-        <ActivityGrid
-          activities={results}
-          onSave={addActivity}
-          emptyMessage="Search for campfires, movies, crafts, and more."
-        />
+      )}
+
+      {loading && q && (
+        <p className="search-status" aria-live="polite">
+          Searching across activities, resorts, movies, and guides…
+        </p>
+      )}
+
+      {!loading && q && payload && !hasResults && (
+        <div className="search-no-results">
+          <p className="search-no-results__title">
+            No strong matches for &ldquo;{q}&rdquo;
+          </p>
+          <p className="search-no-results__copy">
+            Try a shorter phrase, a resort name, or browse by category.
+          </p>
+          <div className="search-no-results__actions">
+            <Link href="/activities" className="btn-secondary text-sm">
+              Explore activities
+            </Link>
+            <Link href="/resorts" className="btn-secondary text-sm">
+              Browse resorts
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {!loading && q && payload && hasResults && (
+        <div className="search-results">
+          {payload.topHits.length > 0 && (
+            <section className="search-section" aria-labelledby="search-top-heading">
+              <div className="search-section__header">
+                <h2 id="search-top-heading" className="search-section__title">
+                  Best matches
+                </h2>
+                <p className="search-section__meta">{payload.total} results</p>
+              </div>
+              <div className="search-hit-list">
+                {payload.topHits.map((hit) => (
+                  <SearchHitRow key={hit.id} hit={hit} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {quickLinks.length > 0 && (
+            <section className="search-section" aria-labelledby="search-quick-heading">
+              <h2 id="search-quick-heading" className="search-section__title">
+                Quick jumps
+              </h2>
+              <div className="search-quick-grid">
+                {quickLinks.map((hit) => (
+                  <SearchHitRow key={hit.id} hit={hit} compact />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {payload.resorts.length > 0 && (
+            <section className="search-section" aria-labelledby="search-resorts-heading">
+              <h2 id="search-resorts-heading" className="search-section__title">
+                Resorts
+              </h2>
+              <div className="search-resort-grid">
+                {payload.resorts.map((resort) => (
+                  <ResortCard key={resort.slug} resort={resort} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {payload.movies.length > 0 && (
+            <section className="search-section" aria-labelledby="search-movies-heading">
+              <h2 id="search-movies-heading" className="search-section__title">
+                Movies under the stars
+              </h2>
+              <div className="search-movie-list">
+                {payload.movies.map((movie) => (
+                  <MovieListingCard
+                    key={movie.id}
+                    movie={movie}
+                    variant="day"
+                    linkToTonight
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {payload.guides.length > 0 && (
+            <section className="search-section" aria-labelledby="search-guides-heading">
+              <h2 id="search-guides-heading" className="search-section__title">
+                Guides
+              </h2>
+              <div className="search-hit-list">
+                {payload.guides.map((guide) => (
+                  <SearchHitRow
+                    key={guide.slug}
+                    hit={{
+                      id: `guide-${guide.slug}`,
+                      kind: "guide",
+                      title: guide.title,
+                      subtitle: "Planning guide",
+                      description: guide.description,
+                      href: guide.href,
+                      score: 0,
+                      badges: ["Guide"],
+                      guide,
+                    }}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {payload.activities.length > 0 && (
+            <section className="search-section" aria-labelledby="search-activities-heading">
+              <h2 id="search-activities-heading" className="search-section__title">
+                Activities
+              </h2>
+              <ActivityGrid
+                activities={payload.activities}
+                onSave={addActivity}
+                emptyMessage="No activities matched."
+              />
+            </section>
+          )}
+        </div>
       )}
     </div>
   );

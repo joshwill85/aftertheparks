@@ -44,4 +44,11 @@
   --radius-field: 20px;
   --header-height: 72px;
   --content-max: 1440px;
+
+  /* Semantic surfaces (Phase 10) */
+  --surface-0: var(--brand-cream);
+  --surface-1: var(--brand-paper);
+  --surface-2: var(--brand-white);
+  --text-primary: var(--brand-ink);
+  --text-secondary: var(--muted);
 }

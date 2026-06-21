@@ -21,12 +21,14 @@ interface CategoryIconProps {
   category: string;
   className?: string;
   size?: "sm" | "md";
+  showStamp?: boolean;
 }
 
 export function CategoryIcon({
   category,
   className,
   size = "md",
+  showStamp = true,
 }: CategoryIconProps) {
   const meta = getCategoryMeta(category);
   const gradient = CATEGORY_GRADIENTS[category] ?? CATEGORY_GRADIENTS.other;
@@ -34,7 +36,7 @@ export function CategoryIcon({
   return (
     <div
       className={cn(
-        "icon-bubble relative grid place-items-center overflow-hidden rounded-[22px] bg-gradient-to-br shadow-inner",
+        "icon-bubble category-stamp relative grid place-items-center overflow-hidden rounded-[22px] bg-gradient-to-br shadow-inner",
         size === "sm" ? "h-14 w-14" : "h-16 w-16",
         gradient,
         className
@@ -45,9 +47,10 @@ export function CategoryIcon({
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.75),transparent_36%)]"
         aria-hidden
       />
+      {showStamp && <span className="category-stamp__ring" aria-hidden />}
       <span
         className={cn(
-          "relative select-none",
+          "relative select-none drop-shadow-sm",
           size === "sm" ? "text-2xl" : "text-3xl"
         )}
         role="img"
@@ -55,6 +58,11 @@ export function CategoryIcon({
       >
         {meta.icon}
       </span>
+      {showStamp && size === "md" && (
+        <span className="category-stamp__label" aria-hidden>
+          {meta.stamp}
+        </span>
+      )}
     </div>
   );
 }

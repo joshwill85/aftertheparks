@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Nunito_Sans } from "next/font/google";
 import { DaypartShell } from "@/components/atlas/DaypartShell";
 import { PlanProvider } from "@/components/atlas/PlanProvider";
+import { WebVitals } from "@/components/analytics/WebVitals";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -35,10 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#16a6b6" },
-    { media: "(prefers-color-scheme: dark)", color: "#071a26" },
-  ],
+  themeColor: "#16a6b6",
 };
 
 export default function RootLayout({
@@ -49,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${fraunces.variable} ${nunitoSans.variable} antialiased`}>
+        <WebVitals />
         <PlanProvider>
           <DaypartShell>{children}</DaypartShell>
         </PlanProvider>

@@ -9,6 +9,7 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   images: {
+    qualities: [75, 82, 85],
     remotePatterns: [
       {
         protocol: "https",

@@ -29,7 +29,7 @@ export function SaveButton({
     onSave();
     if (!reducedMotion) {
       setStamping(true);
-      window.setTimeout(() => setStamping(false), 600);
+      window.setTimeout(() => setStamping(false), 650);
     }
     if (navigator.vibrate) navigator.vibrate(10);
   }, [onSave, reducedMotion, saved]);
@@ -43,7 +43,7 @@ export function SaveButton({
         aria-pressed={saved}
         className={cn(
           variant === "day" ? "btn-save" : "btn-save-night",
-          "relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full border px-4 text-sm font-bold transition-transform",
+          "relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border px-4 text-sm font-bold transition-transform",
           variant === "day" &&
             (saved
               ? "border-[var(--color-palm)]/40 bg-[var(--color-palm)]/10 text-[var(--color-palm)]"
@@ -58,7 +58,10 @@ export function SaveButton({
         {saved ? "Saved ✓" : "Save"}
       </button>
       {stamping && !reducedMotion && (
-        <span className="postcard-stamp" aria-hidden>
+        <span
+          className={cn("postcard-stamp", variant === "night" && "postcard-stamp--night")}
+          aria-hidden
+        >
           Saved
         </span>
       )}

@@ -19,8 +19,10 @@ import {
 interface PlanContextValue {
   items: PlanItem[];
   addActivity: (activity: ActivityOccurrence) => void;
+  addActivities: (activities: ActivityOccurrence[]) => void;
   removeItem: (id: string) => void;
   reorderItems: (items: PlanItem[]) => void;
+  updateNotes: (id: string, notes: string) => void;
   isInPlan: (catalogId: string) => boolean;
   shareUrl: string | null;
   createShare: () => Promise<string | null>;
@@ -54,6 +56,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       title: activity.title,
       resortSlug: activity.resort.slug,
       resortName: activity.resort.name,
+      category: activity.category,
       startDateTime: activity.startDateTime,
       endDateTime: activity.endDateTime,
     });
@@ -64,6 +67,40 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       return [...prev, item];
     });
     setLastSavedId(item.id);
+  }, []);
+
+  const addActivities = useCallback((activities: ActivityOccurrence[]) => {
+    setItems((prev) => {
+      const existing = new Set(prev.map((p) => p.activityCatalogId));
+      const next = [...prev];
+      let lastId: string | null = null;
+
+      for (const activity of activities) {
+        if (existing.has(activity.activityCatalogId)) continue;
+        const item = createPlanItem({
+          activityCatalogId: activity.activityCatalogId,
+          activitySlug: activity.activitySlug,
+          title: activity.title,
+          resortSlug: activity.resort.slug,
+          resortName: activity.resort.name,
+          category: activity.category,
+          startDateTime: activity.startDateTime,
+          endDateTime: activity.endDateTime,
+        });
+        existing.add(item.activityCatalogId);
+        next.push(item);
+        lastId = item.id;
+      }
+
+      if (lastId) setLastSavedId(lastId);
+      return next;
+    });
+  }, []);
+
+  const updateNotes = useCallback((id: string, notes: string) => {
+    setItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, notes } : item))
+    );
   }, []);
 
   const removeItem = useCallback((id: string) => {
@@ -102,8 +139,10 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     () => ({
       items,
       addActivity,
+      addActivities,
       removeItem,
       reorderItems,
+      updateNotes,
       isInPlan,
       shareUrl,
       createShare,
@@ -112,8 +151,10 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     [
       items,
       addActivity,
+      addActivities,
       removeItem,
       reorderItems,
+      updateNotes,
       isInPlan,
       shareUrl,
       createShare,

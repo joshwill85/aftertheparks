@@ -26,6 +26,34 @@ interface CacheRow {
 
 const memoryCache = new Map<string, MoviePosterMeta>();
 
+let posterCacheDbAvailable: boolean | null = null;
+
+function isMissingPosterCacheTable(error: { code?: string; message?: string } | null): boolean {
+  if (!error) return false;
+  return (
+    error.code === "PGRST205" ||
+    Boolean(error.message?.includes("movie_poster_cache"))
+  );
+}
+
+async function ensurePosterCacheDb(): Promise<boolean> {
+  if (posterCacheDbAvailable !== null) return posterCacheDbAvailable;
+
+  const supabase = createServiceClient();
+  if (!supabase) {
+    posterCacheDbAvailable = false;
+    return false;
+  }
+
+  const { error } = await supabase
+    .from("movie_poster_cache")
+    .select("title_key")
+    .limit(1);
+
+  posterCacheDbAvailable = !isMissingPosterCacheTable(error);
+  return posterCacheDbAvailable;
+}
+
 function rowToMeta(row: CacheRow): MoviePosterMeta {
   return {
     titleKey: row.title_key,
@@ -57,6 +85,8 @@ function hitToMeta(titleKey: string, displayTitle: string, hit: TmdbMovieResult)
 async function getCachedPoster(titleKey: string): Promise<MoviePosterMeta | null> {
   if (memoryCache.has(titleKey)) return memoryCache.get(titleKey)!;
 
+  if (!(await ensurePosterCacheDb())) return null;
+
   const supabase = createServiceClient();
   if (!supabase) return null;
 
@@ -65,6 +95,11 @@ async function getCachedPoster(titleKey: string): Promise<MoviePosterMeta | null
     .select("*")
     .eq("title_key", titleKey)
     .maybeSingle();
+
+  if (isMissingPosterCacheTable(error)) {
+    posterCacheDbAvailable = false;
+    return null;
+  }
 
   if (error || !data) return null;
 
@@ -103,6 +138,8 @@ async function persistFromHit(
   displayTitle: string,
   hit: TmdbMovieResult | null
 ): Promise<void> {
+  if (!(await ensurePosterCacheDb())) return;
+
   const supabase = createServiceClient();
   if (!supabase) return;
 
@@ -126,7 +163,13 @@ async function persistFromHit(
     { onConflict: "title_key" }
   );
 
-  if (error) console.error("movie_poster_cache upsert:", error.message);
+  if (error) {
+    if (isMissingPosterCacheTable(error)) {
+      posterCacheDbAvailable = false;
+      return;
+    }
+    console.error("movie_poster_cache upsert:", error.message);
+  }
 }
 
 export async function loadPostersForTitles(
@@ -149,14 +192,18 @@ export async function loadPostersForTitles(
 
   if (toResolve.length > 0) {
     const supabase = createServiceClient();
-    if (supabase) {
-      const { data } = await supabase
+    if (supabase && (await ensurePosterCacheDb())) {
+      const { data, error } = await supabase
         .from("movie_poster_cache")
         .select("*")
         .in(
           "title_key",
           toResolve.map((m) => m.key)
         );
+
+      if (isMissingPosterCacheTable(error)) {
+        posterCacheDbAvailable = false;
+      } else {
 
       const stillMissing: typeof items = [];
       const dbKeys = new Set<string>();
@@ -173,6 +220,7 @@ export async function loadPostersForTitles(
         if (!dbKeys.has(item.key)) stillMissing.push(item);
       }
       toResolve = stillMissing;
+      }
     }
   }
 

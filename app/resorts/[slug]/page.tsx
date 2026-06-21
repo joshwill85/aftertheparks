@@ -1,12 +1,52 @@
 import Link from "next/link";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { getResortTierGradient } from "@/components/resort/ResortCard";
-import { getResortBySlug, getResortActivities } from "@/lib/data/activities";
-import { filterTonight } from "@/lib/occurrences/expand";
+import { ResortCategorySections } from "@/components/resort/ResortCategorySections";
+import { ResortEmptyState } from "@/components/resort/ResortEmptyState";
+import { ResortSourceBlock } from "@/components/resort/ResortSourceBlock";
+import {
+  getResortBySlug,
+  getResortActivities,
+  getTodayActivities,
+  getTonightActivities,
+} from "@/lib/data/activities";
+import {
+  filterFreeActivities,
+  groupByCategory,
+} from "@/lib/resorts/sections";
 import { formatResortTier } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
+
+function ResortSectionHeader({
+  title,
+  description,
+  href,
+  linkLabel,
+}: {
+  title: string;
+  description: string;
+  href?: string;
+  linkLabel?: string;
+}) {
+  return (
+    <div className="mb-4 flex items-end justify-between gap-3">
+      <div>
+        <h2 className="font-display text-2xl font-semibold">{title}</h2>
+        <p className="mt-1 text-sm text-[var(--color-muted)]">{description}</p>
+      </div>
+      {href && linkLabel && (
+        <Link
+          href={href}
+          className="text-sm font-bold text-[var(--accent)] hover:underline"
+        >
+          {linkLabel}
+        </Link>
+      )}
+    </div>
+  );
+}
 
 export default async function ResortDetailPage({
   params,
@@ -14,17 +54,23 @@ export default async function ResortDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [resort, activities] = await Promise.all([
-    getResortBySlug(slug),
-    getResortActivities(slug),
-  ]);
+  const [resort, activities, todayActivities, tonightActivities] =
+    await Promise.all([
+      getResortBySlug(slug),
+      getResortActivities(slug),
+      getTodayActivities({ resort: slug }),
+      getTonightActivities({ resort: slug }),
+    ]);
 
   if (!resort) notFound();
 
   const uniqueActivities = Array.from(
     new Map(activities.map((a) => [a.activitySlug, a])).values()
   );
-  const tonightCount = filterTonight(activities).length;
+  const freeActivities = filterFreeActivities(uniqueActivities);
+  const categoryGroups = groupByCategory(uniqueActivities).filter(
+    (group) => group.activities.length >= 2
+  );
   const isDarkTier = resort.category === "deluxe";
 
   return (
@@ -66,12 +112,21 @@ export default async function ResortDetailPage({
               {uniqueActivities.length}{" "}
               {uniqueActivities.length === 1 ? "activity" : "activities"} in
               the current recreation calendar
-              {tonightCount > 0 && (
+              {todayActivities.length > 0 && (
+                <>
+                  {" "}
+                  ·{" "}
+                  <span className="font-semibold text-[var(--accent)]">
+                    {todayActivities.length} today
+                  </span>
+                </>
+              )}
+              {tonightActivities.length > 0 && (
                 <>
                   {" "}
                   ·{" "}
                   <span className="font-semibold text-[var(--color-lantern)]">
-                    {tonightCount} tonight
+                    {tonightActivities.length} tonight
                   </span>
                 </>
               )}
@@ -87,7 +142,13 @@ export default async function ResortDetailPage({
             Filter activities
           </Link>
           <Link
-            href="/tonight"
+            href={`/today?resort=${resort.slug}`}
+            className="btn-secondary inline-flex min-h-11 items-center rounded-full border border-[var(--color-card-border)] px-5 text-sm font-bold"
+          >
+            Today at this resort
+          </Link>
+          <Link
+            href={`/tonight?resort=${resort.slug}`}
             className="btn-secondary inline-flex min-h-11 items-center rounded-full border border-[var(--color-card-border)] px-5 text-sm font-bold"
           >
             Tonight at this resort
@@ -95,11 +156,77 @@ export default async function ResortDetailPage({
         </div>
       </header>
 
-      <ActivityGrid
-        activities={uniqueActivities}
-        showResort={false}
-        emptyMessage="No activities published for this resort yet."
-      />
+      {uniqueActivities.length === 0 ? (
+        <ResortEmptyState resort={resort} />
+      ) : (
+        <>
+          {todayActivities.length > 0 && (
+            <section className="mb-10">
+              <ResortSectionHeader
+                title="Today"
+                description="What's on the calendar for the rest of today."
+                href={`/today?resort=${resort.slug}`}
+                linkLabel="View all"
+              />
+              <ActivityGrid
+                activities={todayActivities.slice(0, 6)}
+                showResort={false}
+              />
+            </section>
+          )}
+
+          {tonightActivities.length > 0 && (
+            <section className="mb-10">
+              <ResortSectionHeader
+                title="Tonight"
+                description={`Evening and late activities at ${resort.name}.`}
+                href={`/tonight?resort=${resort.slug}`}
+                linkLabel="View all"
+              />
+              <ActivityGrid
+                activities={tonightActivities.slice(0, 6)}
+                showResort={false}
+              />
+            </section>
+          )}
+
+          {freeActivities.length > 0 && (
+            <section className="mb-10">
+              <ResortSectionHeader
+                title="Free activities"
+                description="Included with your resort stay — no extra ticket needed."
+                href={`/activities?resort=${resort.slug}&free=true`}
+                linkLabel="View all free"
+              />
+              <ActivityGrid
+                activities={freeActivities.slice(0, 6)}
+                showResort={false}
+              />
+            </section>
+          )}
+
+          <ResortCategorySections
+            groups={categoryGroups.slice(0, 4)}
+            resortSlug={resort.slug}
+          />
+
+          <section className="mb-10">
+            <ResortSectionHeader
+              title="Full schedule"
+              description="Every activity in the current recreation calendar."
+            />
+            <ActivityGrid
+              activities={uniqueActivities}
+              showResort={false}
+              emptyMessage="No activities published for this resort yet."
+            />
+          </section>
+        </>
+      )}
+
+      <div className="mt-10">
+        <ResortSourceBlock resort={resort} />
+      </div>
     </>
   );
 }

@@ -8,7 +8,7 @@ const ACTIONS = [
 
 export function PlanEmptyState() {
   return (
-    <section className="plan-empty postcard-texture rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-8 text-center md:p-12">
+    <section className="plan-empty journal-empty postcard-texture p-8 text-center md:p-12">
       <div className="passport-stamp" aria-hidden>
         Rest Day
       </div>

@@ -10,29 +10,29 @@ export const TONIGHT_START_CHIPS = [
 export function TonightHero() {
   return (
     <header className="pb-10 pt-4 md:pt-8">
-      <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-[0.1em] text-[var(--lantern)]">
-        Starlight
+      <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(253,185,78,0.45)] bg-[rgba(255,249,239,0.92)] px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-[0.1em] text-[#7a4a00]">
+        Evening magic
       </p>
-      <h1 className="max-w-3xl text-white">Tonight feels different.</h1>
-      <p className="mt-5 max-w-2xl text-lg text-white/78 md:text-xl">
+      <h1 className="max-w-3xl font-display text-[var(--brand-ink)]">
+        Tonight feels different.
+      </h1>
+      <p className="mt-5 max-w-2xl text-lg text-[var(--muted)] md:text-xl">
         Find outdoor movies, campfires, cozy activities, and low-stress resort moments
         after the park day winds down.
       </p>
 
       <div className="mt-8">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.08em] text-white/55">
+        <p className="mb-3 text-sm font-bold uppercase tracking-[0.08em] text-[var(--muted)]">
           Start here
         </p>
-        <div className="start-here mood-chips flex flex-wrap gap-2.5">
-          {TONIGHT_START_CHIPS.map((chip) => (
-            <Link
-              key={chip.id}
-              href={chip.href}
-              className="mood-chip rounded-full border border-white/18 bg-white/10 px-4 py-2.5 text-sm font-extrabold text-white backdrop-blur-sm transition-colors hover:border-[var(--lantern)]/50 hover:bg-white/16"
-            >
-              {chip.label}
-            </Link>
-          ))}
+        <div className="mood-chips-scroll">
+          <div className="start-here mood-chips">
+            {TONIGHT_START_CHIPS.map((chip) => (
+              <Link key={chip.id} href={chip.href} className="mood-chip">
+                {chip.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </header>

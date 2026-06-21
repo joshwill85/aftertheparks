@@ -80,7 +80,7 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
             <select
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="quick-finder__select"
+              className="quick-finder__select form-control"
             >
               {DATE_OPTIONS.map((opt) => (
                 <option key={opt.value || "any"} value={opt.value}>
@@ -95,7 +95,7 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
             <select
               value={where}
               onChange={(e) => setWhere(e.target.value)}
-              className="quick-finder__select"
+              className="quick-finder__select form-control"
             >
               <option value="">All resorts</option>
               {resorts.map((r) => (
@@ -111,7 +111,7 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
             <select
               value={vibe}
               onChange={(e) => setVibe(e.target.value)}
-              className="quick-finder__select"
+              className="quick-finder__select form-control"
             >
               {VIBE_OPTIONS.map((opt) => (
                 <option key={opt.value || "any"} value={opt.value}>
@@ -122,7 +122,7 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
           </label>
         </div>
 
-        <button type="submit" className="quick-finder__cta">
+        <button type="submit" className="quick-finder__cta btn-primary">
           Find activities
         </button>
       </form>

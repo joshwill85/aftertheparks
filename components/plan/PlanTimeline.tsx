@@ -14,38 +14,14 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { parseISO } from "date-fns";
 import { PlanItem } from "@/components/plan/PlanItem";
-import { daypartFromHour, hourInOrlando } from "@/lib/daypart";
-import type { Daypart, PlanItem as PlanItemType } from "@/lib/types/occurrence";
-
-const DAYPART_ORDER: Daypart[] = ["morning", "afternoon", "evening", "late"];
-
-const SECTION_META: Record<
-  Daypart,
-  { title: string; icon: string }
-> = {
-  morning: { title: "Morning", icon: "☀️" },
-  afternoon: { title: "Afternoon", icon: "🌴" },
-  evening: { title: "Evening", icon: "🏮" },
-  late: { title: "Starlight", icon: "🌙" },
-};
-
-function itemDaypart(item: PlanItemType): Daypart {
-  if (!item.startDateTime) return "afternoon";
-  const hour = hourInOrlando(parseISO(item.startDateTime));
-  return daypartFromHour(hour);
-}
-
-function groupByDaypart(items: PlanItemType[]): Map<Daypart, PlanItemType[]> {
-  const groups = new Map<Daypart, PlanItemType[]>(
-    DAYPART_ORDER.map((dp) => [dp, []])
-  );
-  for (const item of items) {
-    groups.get(itemDaypart(item))!.push(item);
-  }
-  return groups;
-}
+import {
+  groupPlanByDate,
+  PLAN_SECTION_ORDER,
+  PLAN_SECTION_META,
+  type PlanSectionKey,
+} from "@/lib/plan/sections";
+import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
 
 function PlanSection({
   title,
@@ -62,7 +38,7 @@ function PlanSection({
         <span className="text-xl" aria-hidden>
           {icon}
         </span>
-        <h3 className="font-display text-xl font-semibold">{title}</h3>
+        <h4 className="font-display text-lg font-semibold">{title}</h4>
       </header>
       <ul className="space-y-3">{children}</ul>
     </section>
@@ -73,9 +49,15 @@ interface PlanTimelineProps {
   items: PlanItemType[];
   onRemove: (id: string) => void;
   onReorder: (items: PlanItemType[]) => void;
+  onUpdateNotes: (id: string, notes: string) => void;
 }
 
-export function PlanTimeline({ items, onRemove, onReorder }: PlanTimelineProps) {
+export function PlanTimeline({
+  items,
+  onRemove,
+  onReorder,
+  onUpdateNotes,
+}: PlanTimelineProps) {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -83,10 +65,7 @@ export function PlanTimeline({ items, onRemove, onReorder }: PlanTimelineProps) 
     })
   );
 
-  const grouped = groupByDaypart(items);
-  const visibleSections = DAYPART_ORDER.filter(
-    (dp) => (grouped.get(dp)?.length ?? 0) > 0
-  );
+  const dayGroups = groupPlanByDate(items);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -109,22 +88,38 @@ export function PlanTimeline({ items, onRemove, onReorder }: PlanTimelineProps) 
       onDragEnd={handleDragEnd}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <div className="plan-timeline space-y-8">
-          {visibleSections.map((daypart) => {
-            const sectionItems = grouped.get(daypart) ?? [];
-            const { title, icon } = SECTION_META[daypart];
+        <div className="plan-timeline space-y-10">
+          {dayGroups.map((day) => {
+            const visibleSections = PLAN_SECTION_ORDER.filter(
+              (key) => (day.sections.get(key)?.length ?? 0) > 0
+            );
 
             return (
-              <PlanSection key={daypart} title={title} icon={icon}>
-                {sectionItems.map((item) => (
-                  <PlanItem
-                    key={item.id}
-                    item={item}
-                    onRemove={onRemove}
-                    sortable
-                  />
-                ))}
-              </PlanSection>
+              <div key={day.dateKey} className="plan-daybook">
+                <h3 className="font-display mb-5 text-2xl font-semibold">
+                  {day.label}
+                </h3>
+                <div className="space-y-8">
+                  {visibleSections.map((sectionKey: PlanSectionKey) => {
+                    const sectionItems = day.sections.get(sectionKey) ?? [];
+                    const { title, icon } = PLAN_SECTION_META[sectionKey];
+
+                    return (
+                      <PlanSection key={sectionKey} title={title} icon={icon}>
+                        {sectionItems.map((item) => (
+                          <PlanItem
+                            key={item.id}
+                            item={item}
+                            onRemove={onRemove}
+                            onUpdateNotes={onUpdateNotes}
+                            sortable
+                          />
+                        ))}
+                      </PlanSection>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
         </div>

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { publicActivitiesResponse } from "@/lib/api/publicActivities";
-import { searchActivities } from "@/lib/data/activities";
+import { runSearch } from "@/lib/search/runSearch";
 import type { Daypart } from "@/lib/types/occurrence";
 
 export const dynamic = "force-dynamic";
@@ -11,10 +11,20 @@ export async function GET(request: Request) {
   const resort = searchParams.get("resort") ?? undefined;
   const category = searchParams.get("category") ?? undefined;
   const daypart = (searchParams.get("daypart") as Daypart) ?? undefined;
+  const free = searchParams.get("free") === "true";
 
-  const activities = await searchActivities(q, { resort, category, daypart });
+  const result = await runSearch(q, { resort, category, daypart, free });
+
   return NextResponse.json({
-    ...publicActivitiesResponse(activities),
-    query: q,
+    ...publicActivitiesResponse(result.activities),
+    query: result.query,
+    tokens: result.tokens,
+    total: result.total,
+    topHits: result.topHits,
+    resorts: result.resorts,
+    guides: result.guides,
+    movies: result.movies,
+    categories: result.categories,
+    pages: result.pages,
   });
 }

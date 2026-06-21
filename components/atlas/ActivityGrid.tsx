@@ -1,8 +1,8 @@
 "use client";
 
 import { ActivityCard } from "@/components/activity/ActivityCard";
+import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
-import { cn } from "@/lib/utils";
 
 export function ActivityGrid({
   activities,
@@ -26,20 +26,16 @@ export function ActivityGrid({
   }
 
   return (
-    <div
-      className={cn(
-        "grid gap-4",
-        columns === 2 ? "md:grid-cols-2" : "grid-cols-1"
-      )}
-    >
+    <EventCardList columns={columns === 2 ? 2 : 1}>
       {activities.map((activity) => (
-        <ActivityCard
-          key={activity.id}
-          activity={activity}
-          showResort={showResort}
-          onSave={onSave}
-        />
+        <EventCardListItem key={activity.id}>
+          <ActivityCard
+            activity={activity}
+            showResort={showResort}
+            onSave={onSave}
+          />
+        </EventCardListItem>
       ))}
-    </div>
+    </EventCardList>
   );
 }

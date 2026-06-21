@@ -26,7 +26,7 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-3">
           <Link
             href="/"
-            className="font-display truncate text-lg font-semibold tracking-tight text-[var(--brand-ink)]"
+            className="font-display truncate text-lg font-semibold tracking-tight text-[var(--color-foreground)]"
           >
             After the Parks
           </Link>
@@ -44,8 +44,8 @@ export function SiteHeader() {
               className={cn(
                 "rounded-full px-3 py-2 text-sm font-semibold transition-colors",
                 isActive(pathname, item.href)
-                  ? "bg-[var(--lagoon)]/12 text-[var(--lagoon-deep)]"
-                  : "text-[var(--muted)] hover:text-[var(--brand-ink)]"
+                  ? "bg-[var(--accent)]/15 text-[var(--accent)]"
+                  : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
               )}
             >
               {item.label}
@@ -55,7 +55,7 @@ export function SiteHeader() {
 
         <Link
           href="/search"
-          className="btn-secondary shrink-0 text-sm"
+          className="btn-secondary inline-flex min-h-11 shrink-0 items-center justify-center text-sm"
           aria-label="Search activities"
         >
           Search

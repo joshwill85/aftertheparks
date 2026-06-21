@@ -11,7 +11,18 @@ import {
   filterTonight,
 } from "@/lib/occurrences/expand";
 import { shouldHideActivity } from "@/lib/activityDisplay";
-import { sanitizePublicActivities, ensurePublicActivity } from "@/lib/api/publicActivities";
+import { rankActivitiesByQuery, runSearch } from "@/lib/search/runSearch";
+import { sortActivities, type ActivitySortKey } from "@/lib/activities/sort";
+import {
+  annotateHappeningNow,
+  getActivityAvailability,
+} from "@/lib/availability";
+import { sanitizePublicActivities, ensurePublicActivity, dedupeOccurrences } from "@/lib/api/publicActivities";
+import {
+  addOrlandoDays,
+  nowInstant,
+  orlandoDateString,
+} from "@/lib/daypart";
 import type {
   ActivityFilters,
   ActivityOccurrence,
@@ -243,10 +254,18 @@ export async function getFilteredActivities(
   occurrences = occurrences.filter(
     (o) =>
       !shouldHideActivity({
+        activity_name: o.title,
         category: o.category,
         normalized_name: o.activitySlug,
+        description: o.summary,
+        schedule_text: o.scheduleText,
+        location: o.location,
+        startDateTime: o.startDateTime,
+        endDateTime: o.endDateTime,
       })
   );
+
+  occurrences = dedupeOccurrences(occurrences);
 
   const deduped = new Map<string, ActivityOccurrence>();
   for (const o of occurrences) {
@@ -268,17 +287,17 @@ export async function getFilteredActivities(
     occurrences = occurrences.filter((o) => o.price.state === "free");
   }
   if (filters.q) {
-    const q = filters.q.toLowerCase();
-    occurrences = occurrences.filter(
-      (o) =>
-        o.title.toLowerCase().includes(q) ||
-        o.resort.name.toLowerCase().includes(q) ||
-        o.summary.toLowerCase().includes(q)
-    );
+    occurrences = rankActivitiesByQuery(occurrences, filters.q);
   }
 
+  const sortKey = (filters.sort ?? "time") as ActivitySortKey;
+  occurrences = sortActivities(occurrences, sortKey);
+
   const limit = filters.limit ?? 100;
-  return sanitizePublicActivities(occurrences.slice(0, limit));
+  return sanitizePublicActivities(
+    occurrences.slice(0, limit),
+    { minTier: "medium" }
+  );
 }
 
 export async function getActivityBySlug(
@@ -302,19 +321,127 @@ export async function getActivityBySlug(
   };
 }
 
-export async function getTodayActivities(): Promise<ActivityOccurrence[]> {
-  const all = await getAllOccurrences(1);
-  return sanitizePublicActivities(filterToday(all));
+export interface ActivityQueryOptions {
+  resort?: string;
 }
 
-export async function getTonightActivities(): Promise<ActivityOccurrence[]> {
-  const all = await getAllOccurrences(1);
-  return sanitizePublicActivities(filterTonight(all));
+function filterByResort(
+  activities: ActivityOccurrence[],
+  resort?: string
+): ActivityOccurrence[] {
+  if (!resort) return activities;
+  return activities.filter((o) => o.resort.slug === resort);
 }
 
-export async function getHappeningNow(): Promise<ActivityOccurrence[]> {
-  const all = await getAllOccurrences(1);
-  return sanitizePublicActivities(filterHappeningNow(all));
+function filterTodayAvailability(
+  activities: ActivityOccurrence[],
+  now = nowInstant()
+): ActivityOccurrence[] {
+  return activities
+    .filter((o) => {
+      const { state } = getActivityAvailability(o, now);
+      return state === "happening_now" || state === "later_today";
+    })
+    .sort(
+      (a, b) =>
+        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
+    );
+}
+
+function filterTonightAvailability(
+  activities: ActivityOccurrence[],
+  now = nowInstant()
+): ActivityOccurrence[] {
+  return activities
+    .filter((o) => {
+      const { state } = getActivityAvailability(o, now);
+      const evening =
+        o.daypart === "evening" ||
+        o.daypart === "late" ||
+        o.category === "movies_under_stars" ||
+        o.category === "campfire" ||
+        o.category === "nighttime_entertainment";
+      return (
+        state === "tonight" || (state === "happening_now" && evening)
+      );
+    })
+    .sort(
+      (a, b) =>
+        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
+    );
+}
+
+export async function getTodayActivities(
+  options: ActivityQueryOptions = {}
+): Promise<ActivityOccurrence[]> {
+  const all = annotateHappeningNow(await getAllOccurrences(1));
+  const today = filterTodayAvailability(all);
+  return sanitizePublicActivities(
+    dedupeOccurrences(filterByResort(today, options.resort))
+  );
+}
+
+export async function getTonightActivities(
+  options: ActivityQueryOptions = {}
+): Promise<ActivityOccurrence[]> {
+  const all = annotateHappeningNow(await getAllOccurrences(1));
+  const tonight = filterTonightAvailability(all);
+  return sanitizePublicActivities(
+    dedupeOccurrences(filterByResort(tonight, options.resort))
+  );
+}
+
+export async function getHappeningNow(
+  options: ActivityQueryOptions = {}
+): Promise<ActivityOccurrence[]> {
+  const all = annotateHappeningNow(await getAllOccurrences(1));
+  const now = nowInstant();
+  const happening = all.filter(
+    (o) => getActivityAvailability(o, now).state === "happening_now"
+  );
+  return sanitizePublicActivities(
+    dedupeOccurrences(filterByResort(happening, options.resort))
+  );
+}
+
+export async function getTomorrowPreview(
+  options: ActivityQueryOptions = {},
+  limit = 4
+): Promise<ActivityOccurrence[]> {
+  const tomorrow = addOrlandoDays(orlandoDateString(nowInstant()), 1);
+  const all = annotateHappeningNow(await getAllOccurrences(3));
+  const tomorrowOnly = all.filter((o) =>
+    o.startDateTime.startsWith(tomorrow)
+  );
+
+  return sanitizePublicActivities(
+    dedupeOccurrences(filterByResort(tomorrowOnly, options.resort)).slice(
+      0,
+      limit
+    ),
+    { minTier: "medium" }
+  );
+}
+
+export async function getCuratedHomeActivities(options: {
+  freeLimit?: number;
+  kidsLimit?: number;
+} = {}): Promise<{
+  freeToday: ActivityOccurrence[];
+  littleKids: ActivityOccurrence[];
+}> {
+  const [today, kidsPool] = await Promise.all([
+    getTodayActivities(),
+    getFilteredActivities({ category: "arts_crafts", limit: 12 }),
+  ]);
+
+  const freeToday = today
+    .filter((o) => o.price.state === "free")
+    .slice(0, options.freeLimit ?? 6);
+
+  const littleKids = kidsPool.slice(0, options.kidsLimit ?? 4);
+
+  return { freeToday, littleKids };
 }
 
 export async function getResorts(): Promise<ResortSummary[]> {
@@ -354,45 +481,75 @@ export async function getResortBySlug(slug: string): Promise<ResortSummary | nul
   return resorts.find((r) => r.slug === slug) ?? null;
 }
 
-export async function getResortActivities(
-  slug: string
-): Promise<ActivityOccurrence[]> {
-  return getFilteredActivities({ resort: slug, limit: 200 });
+export async function searchResorts(
+  query: string,
+  limit = 12
+): Promise<ResortSummary[]> {
+  const q = query.trim();
+  if (!q) return [];
+  const result = await runSearch(q, { limit });
+  return result.resorts.slice(0, limit);
 }
 
 export async function searchActivities(
   query: string,
   filters: ActivityFilters = {}
 ): Promise<ActivityOccurrence[]> {
-  const supabase = createServiceClient();
-  if (!supabase || !query.trim()) {
-    return getFilteredActivities({ ...filters, q: query });
-  }
+  const q = query.trim();
+  if (!q) return getFilteredActivities(filters);
 
-  const { data, error } = await supabase.rpc("search_activities", {
-    query_text: query,
-    filters: {
-      resort: filters.resort ?? null,
-      category: filters.category ?? null,
-      limit: filters.limit ?? 50,
-    },
+  const result = await runSearch(q, {
+    resort: filters.resort,
+    category: filters.category,
+    daypart: filters.daypart,
+    free: filters.free,
+    limit: filters.limit ?? 50,
   });
 
-  if (error || !data?.length) {
-    return getFilteredActivities({ ...filters, q: query });
+  return result.activities;
+}
+
+export async function getSimilarActivities(
+  activity: ActivityOccurrence,
+  limit = 4
+): Promise<ActivityOccurrence[]> {
+  const matches = await getFilteredActivities({
+    resort: activity.resort.slug,
+    category: activity.category,
+    limit: limit + 1,
+  });
+
+  return matches
+    .filter((item) => item.activitySlug !== activity.activitySlug)
+    .slice(0, limit);
+}
+
+export async function getActivitiesByArea(
+  area: string
+): Promise<ActivityOccurrence[]> {
+  const [today, tonight] = await Promise.all([
+    getTodayActivities(),
+    getTonightActivities(),
+  ]);
+
+  const seen = new Set<string>();
+  const result: ActivityOccurrence[] = [];
+
+  for (const activity of [...today, ...tonight]) {
+    if (activity.resort.area !== area) continue;
+    const key = activity.activityCatalogId;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(activity);
   }
 
-  const slugs = new Set(
-    (data as { normalized_name: string }[]).map((d) => d.normalized_name)
-  );
-  const all = await getAllOccurrences();
-  const unique = new Map<string, ActivityOccurrence>();
-  for (const o of all) {
-    if (slugs.has(o.activitySlug) && !unique.has(o.activitySlug)) {
-      unique.set(o.activitySlug, o);
-    }
-  }
-  return Array.from(unique.values());
+  return result;
+}
+
+export async function getResortActivities(
+  slug: string
+): Promise<ActivityOccurrence[]> {
+  return getFilteredActivities({ resort: slug, limit: 200 });
 }
 
 export async function getMovieNights(): Promise<MovieNightOccurrence[]> {
