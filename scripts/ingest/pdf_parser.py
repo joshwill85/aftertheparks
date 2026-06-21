@@ -87,6 +87,50 @@ def normalize_name(name: str) -> str:
     return text.strip("-")
 
 
+def _title_case_words(words: list[str]) -> str:
+    parts: list[str] = []
+    for w in words:
+        if re.fullmatch(r"\d+", w):
+            parts.append(w)
+        elif len(w) <= 2 and w.isupper():
+            parts.append(w)
+        else:
+            parts.append(w[:1].upper() + w[1:].lower() if w else w)
+    return " ".join(parts)
+
+
+def _split_words(s: str) -> list[str]:
+    s = re.sub(r"([a-z])([A-Z])", r"\1 \2", s)
+    s = s.replace("-", " ")
+    return [w for w in s.split() if w]
+
+
+def _clean_activity_name(name: str) -> str:
+    """Fix OCR-spaced titles like 'R E E L F U N A R C A D E' → 'Reel Fun Arcade'."""
+    name = re.sub(r"\s+", " ", name).strip()
+    if not name:
+        return name
+
+    tokens = name.split()
+    short_tokens = sum(1 for t in tokens if len(t) <= 2)
+    looks_spaced = len(tokens) >= 4 and short_tokens / len(tokens) >= 0.65
+
+    if looks_spaced or re.match(r"^(?:[A-Za-z]\s+){4,}[A-Za-z]$", name):
+        collapsed = re.sub(r"\s+", "", name)
+        try:
+            import wordninja
+
+            return _title_case_words(wordninja.split(collapsed.lower()))
+        except ImportError:
+            return _title_case_words(_split_words(collapsed))
+
+    for sep in (" – ", " - "):
+        if sep in name:
+            return sep.join(_clean_activity_name(part) for part in name.split(sep))
+
+    return name
+
+
 def categorize(name: str, section: str) -> str:
     hay = f"{section} {name}".lower()
     for pattern, category in CATEGORY_RULES:
@@ -104,8 +148,35 @@ def _clean_line(line: str) -> str:
 def _movie_title_quality(title: str) -> float:
     if not title:
         return 0.0
-    alpha = sum(c.isalpha() for c in title)
-    return alpha / len(title)
+    cleaned = _clean_movie_title(title)
+    if not cleaned:
+        return 0.0
+    alpha = sum(c.isalpha() for c in cleaned)
+    return alpha / len(cleaned)
+
+
+def _clean_movie_title(title: str) -> str:
+    title = re.sub(r"\s+", " ", title).strip()
+    title = re.sub(r"\s*\[[A-Za-z]{0,4}$", "", title)
+    title = re.sub(r"\s*\([¢$Pe]{0,4}$", "", title)
+    title = re.sub(r"\s+PG\)?\s*$", "", title, flags=re.I)
+
+    quoted = re.search(r'"([^"]+)"', title)
+    if quoted:
+        return quoted.group(1).strip(' "\'|')
+
+    match = re.search(
+        r"(?:^|[.\s])([A-Z][\w\s'':,&-]+(?:\(\d{4}\))?(?:\s+PG)?)\s*$",
+        title,
+    )
+    if match:
+        return match.group(1).strip(' "\'|')
+
+    segments = re.findall(r"[A-Z][a-zA-Z0-9\s'':,&-]+(?:\(\d{4}\))?", title)
+    if segments:
+        return segments[-1].strip(' "\'|')
+
+    return title.strip(' "\'|')
 
 
 def extract_text_layer(pdf_bytes: bytes) -> str | None:
@@ -266,7 +337,8 @@ def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | Non
                 title = re.sub(r"\[[^\]]*\]", "", title_part).strip(" .|")
                 title = re.sub(r"^[^A-Za-z0-9]+", "", title)
                 title = re.sub(r"\|.*$", "", title).strip()
-                if day and title and _movie_title_quality(title) >= 0.3:
+                title = _clean_movie_title(title)
+                if day and title and _movie_title_quality(title) >= 0.55:
                     movie_nights.append({
                         "day_of_week": day,
                         "movie_title": title,
@@ -286,7 +358,8 @@ def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | Non
             if m:
                 day = _normalize_day_token(m.group(1))
                 title = m.group(2).strip()
-                if day and title and _movie_title_quality(title) >= 0.3:
+                title = _clean_movie_title(title)
+                if day and title and _movie_title_quality(title) >= 0.55:
                     movie_nights.append({
                         "day_of_week": day,
                         "movie_title": title,
@@ -303,7 +376,8 @@ def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | Non
             if m2:
                 day = _normalize_day_token(m2.group(1))
                 title = re.sub(r"\|.*$", "", m2.group(2)).strip()
-                if day and title and _movie_title_quality(title) >= 0.25:
+                title = _clean_movie_title(title)
+                if day and title and _movie_title_quality(title) >= 0.55:
                     movie_nights.append({
                         "day_of_week": day,
                         "movie_title": title,
@@ -431,7 +505,7 @@ def _parse_activity_block(name: str, lines: list[str], section: str) -> ParsedAc
 
     warnings: list[str] = []
     is_fee = "($)" in name or any("($)" in l for l in lines)
-    name = re.sub(r"\s*\(\$\)\s*", "", name).strip()
+    name = _clean_activity_name(re.sub(r"\s*\(\$\)\s*", "", name).strip())
 
     location = None
     schedule = None

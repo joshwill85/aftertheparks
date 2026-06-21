@@ -6,7 +6,7 @@ export default function PlanPage() {
     <>
       <Hero
         title="My Plan"
-        subtitle="Build your resort itinerary, share with travel companions, and export to your calendar."
+        subtitle="Line up pool breaks, campfires, and movie nights into one easy rest day."
       />
       <PlanPageClient />
     </>

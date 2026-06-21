@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { publicActivitiesResponse } from "@/lib/api/publicActivities";
 import { getFilteredActivities } from "@/lib/data/activities";
 import type { Daypart } from "@/lib/types/occurrence";
 
@@ -24,5 +25,5 @@ export async function GET(request: Request) {
     limit,
   });
 
-  return NextResponse.json({ activities, count: activities.length });
+  return NextResponse.json(publicActivitiesResponse(activities));
 }

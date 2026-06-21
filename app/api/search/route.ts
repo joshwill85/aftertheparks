@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { publicActivitiesResponse } from "@/lib/api/publicActivities";
 import { searchActivities } from "@/lib/data/activities";
 import type { Daypart } from "@/lib/types/occurrence";
 
@@ -12,5 +13,8 @@ export async function GET(request: Request) {
   const daypart = (searchParams.get("daypart") as Daypart) ?? undefined;
 
   const activities = await searchActivities(q, { resort, category, daypart });
-  return NextResponse.json({ activities, count: activities.length, query: q });
+  return NextResponse.json({
+    ...publicActivitiesResponse(activities),
+    query: q,
+  });
 }

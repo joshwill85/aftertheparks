@@ -61,9 +61,15 @@ export interface MovieNightOccurrence {
   resortSlug: string;
   resortName: string;
   movieTitle: string;
+  displayTitle: string;
   showTime: string;
   location?: string;
   dayOfWeek: string;
+  posterUrl?: string | null;
+  backdropUrl?: string | null;
+  releaseYear?: number;
+  tmdbId?: number;
+  isTonight?: boolean;
 }
 
 export interface PlanItem {

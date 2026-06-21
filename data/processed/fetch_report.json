@@ -1,143 +1,143 @@
 {
-  "fetched_at": "2026-06-20T22:12:42.992915+00:00",
-  "ingest_run_id": "bfc4f15e-dfbf-47a2-bc63-8a6dfcd367e6",
+  "fetched_at": "2026-06-20T23:15:36.051155+00:00",
+  "ingest_run_id": "ff25273f-09f3-4209-be7d-52159c5719f0",
   "results": [
     {
       "calendar_group_key": "all-star-movies",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "6bfd0e45-f53d-4bcc-bf25-982bda441ae3",
       "content_sha256": "784923e9f8dec8207a1cdb91987b425f42c4ec7450e6f9eadb8f64075d0db276",
       "message": null
     },
     {
       "calendar_group_key": "all-star-music",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "d7a77e84-0e57-4182-aba2-62acc2fab4da",
       "content_sha256": "4dccc4ee28b84bff4401205429601aa202ed67f2609933da089d032ec5e118c2",
       "message": null
     },
     {
       "calendar_group_key": "all-star-sports",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "cf53b15f-ac21-4061-abf1-09e120cc4382",
       "content_sha256": "f6c6360fee9a12d84f02d55b2b33cf3b435048b963630c186b9b616981ea9263",
       "message": null
     },
     {
       "calendar_group_key": "art-of-animation",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "d04dcce1-1685-417f-a03b-bfa78c6b951b",
       "content_sha256": "e5ab25356a30708fc43657ad90053d6f59a303d4e11046a880e68c3be7ce30df",
       "message": null
     },
     {
       "calendar_group_key": "pop-century",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "54f6f751-145d-4d32-bd93-be06e4969eca",
       "content_sha256": "ed41c527922e72a8a3ba92ee3d12f0104fd2d1305ab24af4b59d6f2bdac1d6f0",
       "message": null
     },
     {
       "calendar_group_key": "caribbean-beach",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "a52dc28a-b823-4fb3-a457-1d7f0395cbd5",
       "content_sha256": "51e2d919497fd714aa8af1167b7e7daaa2561ab650e96101ee7878b0daea0a29",
       "message": null
     },
     {
       "calendar_group_key": "coronado-springs",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "6bb39f18-1664-4531-bc9a-530fc062cd1f",
       "content_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
       "message": null
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "9ea22554-8bc1-4baf-9be5-ca053958a7d1",
       "content_sha256": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
       "message": null
     },
     {
       "calendar_group_key": "port-orleans-riverside",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "9c9df293-193a-4fb4-8fb3-163c7565c8c3",
       "content_sha256": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
       "message": null
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "db6e17e2-12ae-4231-9e7b-4eb8ca14100c",
       "content_sha256": "dd505b20010522e87208de51ef8bbaca6894f5f398a436cb7df496218497a1fc",
       "message": null
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "31c4b78d-ae71-449e-bb02-0d271203c0ee",
       "content_sha256": "e26d7aac066fa8aa6d11dfaea99371edddede768e73d0c4a41a1cf98aaab2214",
       "message": null
     },
     {
       "calendar_group_key": "beach-yacht-club",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "191394c0-e83d-4195-b656-26b1fa9b1cb6",
       "content_sha256": "fb154afff1f442857eb610b53c770158c3a29b7db3d99f636917ec12f7337470",
       "message": null
     },
     {
       "calendar_group_key": "boardwalk",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "a362073b-4419-48c4-b3fa-f8229b85e686",
       "content_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
       "message": null
     },
     {
       "calendar_group_key": "contemporary",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "5fbbdeca-f5f4-4670-b871-5083430696f3",
       "content_sha256": "7e211f9972fb47a554a34ade40864a6304eea41c421cc67a4026f2a2519631a5",
       "message": null
     },
     {
       "calendar_group_key": "grand-floridian",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "4e276de9-ae17-4197-ab72-4e29b7df6e4c",
       "content_sha256": "dfa4072efce3903da84b8079c3a778284a4806245ba5107a6403df7929cc4ea0",
       "message": null
     },
     {
       "calendar_group_key": "polynesian",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "cf279db4-7724-4949-925b-4773231d1cd1",
       "content_sha256": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
       "message": null
     },
     {
       "calendar_group_key": "wilderness-lodge",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "99303fec-958c-4e09-99b1-cbf0c7dc1b53",
       "content_sha256": "896a5736f6d89ebae3b607d1dc6f1bb011b06576a8d5a935209a092c1b723442",
       "message": null
     },
     {
       "calendar_group_key": "old-key-west",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "c12ce3ed-be9f-49ba-a98a-791e5e0ba890",
       "content_sha256": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
       "message": null
     },
     {
       "calendar_group_key": "riviera",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "c8a308dc-793d-4031-a236-82f4d6465b3f",
       "content_sha256": "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842",
       "message": null
     },
     {
       "calendar_group_key": "saratoga-springs",
-      "status": "fetched",
+      "status": "unchanged",
       "source_document_id": "d51340ba-584e-4cd1-9e63-5fd832626629",
       "content_sha256": "2a084971eacc44d430d201d32ded314520dc47ffd7412507ebdcc80e6a5e3db5",
       "message": null

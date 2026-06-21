@@ -1,3 +1,7 @@
+import { formatInTimeZone } from "date-fns-tz";
+import { enrichMovieNightsWithPosters } from "@/lib/movies/posters";
+import { isUsableMovieTitle, sanitizeMovieTitle } from "@/lib/movies/sanitize";
+import { TIMEZONE } from "@/lib/daypart";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import {
   expandOccurrences,
@@ -6,6 +10,8 @@ import {
   filterToday,
   filterTonight,
 } from "@/lib/occurrences/expand";
+import { shouldHideActivity } from "@/lib/activityDisplay";
+import { sanitizePublicActivities, ensurePublicActivity } from "@/lib/api/publicActivities";
 import type {
   ActivityFilters,
   ActivityOccurrence,
@@ -188,6 +194,21 @@ export async function getAllOccurrences(
   const all: ActivityOccurrence[] = [];
 
   for (const row of raw) {
+    if (row.needs_review) continue;
+
+    if (
+      shouldHideActivity({
+        activity_name: row.activity_name,
+        category: row.category,
+        normalized_name: row.normalized_name,
+        description: row.description,
+        schedule_text: row.schedule_text,
+        parse_confidence: row.parse_confidence,
+      })
+    ) {
+      continue;
+    }
+
     if (seen.has(row.activity_catalog_id)) continue;
     seen.add(row.activity_catalog_id);
 
@@ -199,6 +220,7 @@ export async function getAllOccurrences(
       area: "unknown",
     };
     const enrichment = enrichmentMap.get(row.activity_catalog_id);
+    if (enrichment?.status === "needs_review") continue;
 
     const expanded = expandOccurrences(
       row,
@@ -217,6 +239,21 @@ export async function getFilteredActivities(
   filters: ActivityFilters
 ): Promise<ActivityOccurrence[]> {
   let occurrences = await getAllOccurrences();
+
+  occurrences = occurrences.filter(
+    (o) =>
+      !shouldHideActivity({
+        category: o.category,
+        normalized_name: o.activitySlug,
+      })
+  );
+
+  const deduped = new Map<string, ActivityOccurrence>();
+  for (const o of occurrences) {
+    const key = `${o.activityCatalogId}:${o.resort.slug}`;
+    if (!deduped.has(key)) deduped.set(key, o);
+  }
+  occurrences = Array.from(deduped.values());
 
   if (filters.resort) {
     occurrences = occurrences.filter((o) => o.resort.slug === filters.resort);
@@ -241,7 +278,7 @@ export async function getFilteredActivities(
   }
 
   const limit = filters.limit ?? 100;
-  return occurrences.slice(0, limit);
+  return sanitizePublicActivities(occurrences.slice(0, limit));
 }
 
 export async function getActivityBySlug(
@@ -260,24 +297,24 @@ export async function getActivityBySlug(
     );
 
   return {
-    activity: upcoming[0] ?? matches[0],
-    upcoming: upcoming.slice(0, 14),
+    activity: ensurePublicActivity(upcoming[0] ?? matches[0]),
+    upcoming: sanitizePublicActivities(upcoming.slice(0, 14)),
   };
 }
 
 export async function getTodayActivities(): Promise<ActivityOccurrence[]> {
   const all = await getAllOccurrences(1);
-  return filterToday(all);
+  return sanitizePublicActivities(filterToday(all));
 }
 
 export async function getTonightActivities(): Promise<ActivityOccurrence[]> {
   const all = await getAllOccurrences(1);
-  return filterTonight(all);
+  return sanitizePublicActivities(filterTonight(all));
 }
 
 export async function getHappeningNow(): Promise<ActivityOccurrence[]> {
   const all = await getAllOccurrences(1);
-  return filterHappeningNow(all);
+  return sanitizePublicActivities(filterHappeningNow(all));
 }
 
 export async function getResorts(): Promise<ResortSummary[]> {
@@ -362,29 +399,77 @@ export async function getMovieNights(): Promise<MovieNightOccurrence[]> {
   const supabase = createServiceClient();
   if (!supabase) return [];
 
-  const { data, error } = await supabase
-    .from("movie_nights")
-    .select(
-      "id, day_of_week, movie_title, show_time, location, activity_id, resort_activities!inner(normalized_name)"
-    );
+  const [{ data, error }, { data: resortRows }] = await Promise.all([
+    supabase
+      .from("movie_nights")
+      .select(
+        "id, day_of_week, movie_title, show_time, location, parse_confidence, activity_catalog_id"
+      )
+      .gte("parse_confidence", 0.5),
+    supabase
+      .from("v_resort_activities_today")
+      .select("activity_catalog_id, resort_slug, resort_name")
+      .eq("needs_review", false),
+  ]);
 
   if (error) {
     console.error("getMovieNights:", error.message);
     return [];
   }
 
-  const resorts = await getResorts();
-  const defaultResort = resorts[0];
+  const resortByCatalog = new Map<
+    string,
+    { resort_slug: string; resort_name: string }
+  >();
+  for (const row of resortRows ?? []) {
+    if (row.activity_catalog_id && !resortByCatalog.has(row.activity_catalog_id)) {
+      resortByCatalog.set(row.activity_catalog_id, {
+        resort_slug: row.resort_slug,
+        resort_name: row.resort_name,
+      });
+    }
+  }
 
-  return (data ?? []).map((mn) => ({
-    id: mn.id,
-    resortSlug: defaultResort?.slug ?? "unknown",
-    resortName: defaultResort?.name ?? "Resort",
-    movieTitle: mn.movie_title,
-    showTime: mn.show_time ?? "20:00:00",
-    location: mn.location ?? undefined,
-    dayOfWeek: mn.day_of_week,
-  }));
+  const tonightDay = formatInTimeZone(new Date(), TIMEZONE, "EEEE").toLowerCase();
+
+  const mapped: MovieNightOccurrence[] = [];
+
+  for (const mn of data ?? []) {
+    if (!isUsableMovieTitle(mn.movie_title)) continue;
+    const displayTitle = sanitizeMovieTitle(mn.movie_title);
+    const resort = mn.activity_catalog_id
+      ? resortByCatalog.get(mn.activity_catalog_id)
+      : undefined;
+    if (!resort) continue;
+
+    mapped.push({
+      id: mn.id,
+      resortSlug: resort.resort_slug,
+      resortName: resort.resort_name.replace(/^Disney's\s+/i, ""),
+      movieTitle: mn.movie_title,
+      displayTitle,
+      showTime: mn.show_time ?? "20:00:00",
+      location: mn.location ?? undefined,
+      dayOfWeek: mn.day_of_week,
+      isTonight: mn.day_of_week === tonightDay,
+    });
+  }
+
+  mapped.sort((a, b) => {
+      if (a.isTonight !== b.isTonight) return a.isTonight ? -1 : 1;
+      const dayOrder = [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+      ];
+      return dayOrder.indexOf(a.dayOfWeek) - dayOrder.indexOf(b.dayOfWeek);
+    });
+
+  return enrichMovieNightsWithPosters(mapped);
 }
 
 export async function createPlanShare(

@@ -1,8 +1,7 @@
 import { Suspense } from "react";
-import { ActivitiesClient } from "@/components/atlas/ActivitiesClient";
-import { FilterBar } from "@/components/atlas/FilterBar";
 import { Hero } from "@/components/atlas/Hero";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
+import { ExploreLayout } from "@/components/explore/ExploreLayout";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
 import type { Daypart } from "@/lib/types/occurrence";
 
@@ -32,18 +31,14 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     <>
       <Hero
         title="Explore activities"
-        subtitle="Filter by resort, daypart, and category to find your next resort moment."
+        subtitle="Discover resort moments by mood, resort, and time of day — curated for rest days between park visits."
       />
-      <Suspense fallback={null}>
-        <FilterBar
+      <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
+        <ExploreLayout
+          activities={activities}
           resorts={resorts.map((r) => ({ slug: r.slug, name: r.name }))}
         />
       </Suspense>
-      <div className="mt-6">
-        <Suspense fallback={<ActivityGridSkeleton />}>
-          <ActivitiesClient initialActivities={activities} />
-        </Suspense>
-      </div>
     </>
   );
 }

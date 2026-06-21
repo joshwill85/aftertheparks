@@ -1,18 +1,21 @@
 "use client";
 
-import { ActivityCard } from "@/components/atlas/ActivityCard";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import { cn } from "@/lib/utils";
 
 export function ActivityGrid({
   activities,
   emptyMessage = "No activities match your filters.",
   showResort = true,
   onSave,
+  columns = 1,
 }: {
   activities: ActivityOccurrence[];
   emptyMessage?: string;
   showResort?: boolean;
   onSave?: (a: ActivityOccurrence) => void;
+  columns?: 1 | 2;
 }) {
   if (activities.length === 0) {
     return (
@@ -23,7 +26,12 @@ export function ActivityGrid({
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={cn(
+        "grid gap-4",
+        columns === 2 ? "md:grid-cols-2" : "grid-cols-1"
+      )}
+    >
       {activities.map((activity) => (
         <ActivityCard
           key={activity.id}

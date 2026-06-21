@@ -15,8 +15,6 @@ import {
   loadPlanItems,
   savePlanItems,
 } from "@/lib/plan/store";
-import { SaveStamp } from "@/components/magic/SaveStamp";
-import { EmberBurst } from "@/components/magic/EmberBurst";
 
 interface PlanContextValue {
   items: PlanItem[];
@@ -35,15 +33,19 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<PlanItem[]>([]);
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [lastSavedId, setLastSavedId] = useState<string | null>(null);
-  const [showEmber, setShowEmber] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    loadPlanItems().then(setItems);
+    loadPlanItems().then((loaded) => {
+      setItems(loaded);
+      setHydrated(true);
+    });
   }, []);
 
   useEffect(() => {
-    if (items.length > 0) savePlanItems(items);
-  }, [items]);
+    if (!hydrated) return;
+    savePlanItems(items);
+  }, [items, hydrated]);
 
   const addActivity = useCallback((activity: ActivityOccurrence) => {
     const item = createPlanItem({
@@ -62,9 +64,6 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       return [...prev, item];
     });
     setLastSavedId(item.id);
-    setShowEmber(true);
-    if (navigator.vibrate) navigator.vibrate(10);
-    setTimeout(() => setShowEmber(false), 600);
   }, []);
 
   const removeItem = useCallback((id: string) => {
@@ -94,7 +93,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         return url;
       }
     } catch {
-      /* offline fallback */
+      /* offline — plan still saved locally */
     }
     return null;
   }, [items]);
@@ -122,13 +121,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     ]
   );
 
-  return (
-    <PlanContext.Provider value={value}>
-      {children}
-      <EmberBurst active={showEmber} />
-      {lastSavedId && <SaveStamp itemId={lastSavedId} />}
-    </PlanContext.Provider>
-  );
+  return <PlanContext.Provider value={value}>{children}</PlanContext.Provider>;
 }
 
 export function usePlan() {

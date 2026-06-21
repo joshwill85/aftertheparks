@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Source_Sans_3 } from "next/font/google";
+import { Fraunces, Nunito_Sans } from "next/font/google";
 import { DaypartShell } from "@/components/atlas/DaypartShell";
 import { PlanProvider } from "@/components/atlas/PlanProvider";
 import "./globals.css";
 
-const outfit = Outfit({
+const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
+const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1a8f9e" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
+    { media: "(prefers-color-scheme: light)", color: "#16a6b6" },
+    { media: "(prefers-color-scheme: dark)", color: "#071a26" },
   ],
 };
 
@@ -48,7 +48,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.variable} ${sourceSans.variable} antialiased`}>
+      <body className={`${fraunces.variable} ${nunitoSans.variable} antialiased`}>
         <PlanProvider>
           <DaypartShell>{children}</DaypartShell>
         </PlanProvider>

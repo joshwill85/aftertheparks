@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { publicActivitiesResponse } from "@/lib/api/publicActivities";
 import { getTonightActivities, getMovieNights } from "@/lib/data/activities";
 
 export const dynamic = "force-dynamic";
@@ -9,10 +10,12 @@ export async function GET() {
     getMovieNights(),
   ]);
 
+  const { activities: sanitized, count } = publicActivitiesResponse(activities);
+
   return NextResponse.json({
-    activities,
+    activities: sanitized,
     movieNights,
-    count: activities.length,
+    count,
     movieCount: movieNights.length,
   });
 }

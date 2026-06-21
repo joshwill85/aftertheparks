@@ -12,6 +12,7 @@ from typing import Any
 
 from config import CONFIDENCE_PUBLISH_THRESHOLD, PROCESSED_DIR
 from db import SupabaseClient
+from pdf_parser import _clean_movie_title, _movie_title_quality
 from source_manifest import ACTIVITY_SOURCES
 
 INGEST_PATH = PROCESSED_DIR / "activities_ingest.json"
@@ -199,9 +200,8 @@ def publish_group(
             }, on_conflict="id")
 
         for movie in act.get("movie_nights") or []:
-            title = movie.get("movie_title", "")
-            garbage = sum(not c.isalpha() for c in title) / max(len(title), 1)
-            movie_needs_review = garbage > 0.2
+            title = _clean_movie_title(movie.get("movie_title", ""))
+            movie_needs_review = _movie_title_quality(title) < 0.55
             db.upsert("movie_nights", {
                 "id": movie_id(group_key, act["normalized_name"], movie["day_of_week"]),
                 "activity_id": legacy_id,

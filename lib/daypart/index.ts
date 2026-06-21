@@ -1,13 +1,32 @@
-import { formatInTimeZone, toZonedTime } from "date-fns-tz";
-import { getHours, getMinutes, isAfter, isBefore, isEqual, parseISO } from "date-fns";
+import { formatInTimeZone, fromZonedTime, toZonedTime } from "date-fns-tz";
+import {
+  addDays,
+  addHours,
+  getHours,
+  getMinutes,
+  isAfter,
+  isBefore,
+  isEqual,
+  parseISO,
+} from "date-fns";
 import type { Daypart } from "@/lib/types/occurrence";
 
 export type { Daypart };
 
 export const TIMEZONE = "America/New_York";
 
+/** Current instant — use for all range comparisons. */
+export function nowInstant(): Date {
+  return new Date();
+}
+
+/** Wall-clock components in Orlando (for display / daypart only). */
 export function getNowInOrlando(): Date {
-  return toZonedTime(new Date(), TIMEZONE);
+  return toZonedTime(nowInstant(), TIMEZONE);
+}
+
+export function orlandoDateString(date: Date = nowInstant()): string {
+  return formatInTimeZone(date, TIMEZONE, "yyyy-MM-dd");
 }
 
 export function getDaypart(date: Date = getNowInOrlando(), force?: Daypart): Daypart {
@@ -36,23 +55,40 @@ export function formatOrlandoDate(iso: string): string {
 
 export function isWithinRange(now: Date, start: Date, end?: Date): boolean {
   if (isBefore(now, start)) return false;
-  if (!end) return true;
-  return isBefore(now, end) || isEqual(now, end);
+  const effectiveEnd = end ?? addHours(start, 1);
+  return isBefore(now, effectiveEnd) || isEqual(now, effectiveEnd);
 }
 
-export function parseTimeOnDate(timeStr: string, date: Date): Date {
-  const [h, m, s] = timeStr.split(":").map(Number);
-  const zoned = toZonedTime(date, TIMEZONE);
-  zoned.setHours(h, m ?? 0, s ?? 0, 0);
-  return zoned;
+/** Parse a wall-clock time on a specific Orlando calendar date → UTC instant. */
+export function parseTimeOnDate(timeStr: string, dateOrStr: Date | string): Date {
+  const dateStr =
+    typeof dateOrStr === "string" ? dateOrStr : orlandoDateString(dateOrStr);
+  const parts = timeStr.split(":");
+  const h = parts[0]?.padStart(2, "0") ?? "00";
+  const m = parts[1]?.padStart(2, "0") ?? "00";
+  const s = parts[2]?.padStart(2, "0") ?? "00";
+  return fromZonedTime(`${dateStr}T${h}:${m}:${s}`, TIMEZONE);
+}
+
+export function endOfOrlandoDay(dateStr: string): Date {
+  return fromZonedTime(`${dateStr}T23:59:59`, TIMEZONE);
 }
 
 export function toIsoInOrlando(date: Date): string {
   return formatInTimeZone(date, TIMEZONE, "yyyy-MM-dd'T'HH:mm:ssXXX");
 }
 
-export function getDayOfWeekIndex(date: Date): number {
-  return toZonedTime(date, TIMEZONE).getDay();
+export function getDayOfWeekIndex(dateStr: string): number {
+  return fromZonedTime(`${dateStr}T12:00:00`, TIMEZONE).getUTCDay();
+}
+
+export function orlandoDayStart(dateStr: string): Date {
+  return fromZonedTime(`${dateStr}T00:00:00`, TIMEZONE);
+}
+
+export function addOrlandoDays(dateStr: string, days: number): string {
+  const noon = fromZonedTime(`${dateStr}T12:00:00`, TIMEZONE);
+  return orlandoDateString(addDays(noon, days));
 }
 
 export function isTonightWindow(date: Date = getNowInOrlando()): boolean {
@@ -75,4 +111,12 @@ export function getEndOfDay(date: Date = getNowInOrlando()): Date {
 
 export function minutesSinceMidnight(date: Date): number {
   return getHours(date) * 60 + getMinutes(date);
+}
+
+export function isSameOrlandoDay(iso: string, dateStr: string): boolean {
+  return formatInTimeZone(parseISO(iso), TIMEZONE, "yyyy-MM-dd") === dateStr;
+}
+
+export function hourInOrlando(date: Date): number {
+  return Number(formatInTimeZone(date, TIMEZONE, "H"));
 }

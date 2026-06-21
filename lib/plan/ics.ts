@@ -1,19 +1,11 @@
+import { formatInTimeZone } from "date-fns-tz";
+import { TIMEZONE } from "@/lib/daypart";
 import type { PlanItem } from "@/lib/types/occurrence";
 
-function formatIcsDate(iso?: string): string {
+function formatIcsLocal(iso?: string): string {
   if (!iso) return "";
-  const d = new Date(iso);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return (
-    d.getUTCFullYear().toString() +
-    pad(d.getUTCMonth() + 1) +
-    pad(d.getUTCDate()) +
-    "T" +
-    pad(d.getUTCHours()) +
-    pad(d.getUTCMinutes()) +
-    pad(d.getUTCSeconds()) +
-    "Z"
-  );
+  // Floating local time in Orlando — correct for Apple/Google calendar import
+  return formatInTimeZone(new Date(iso), TIMEZONE, "yyyyMMdd'T'HHmmss");
 }
 
 export function generateIcs(items: PlanItem[]): string {
@@ -24,12 +16,13 @@ export function generateIcs(items: PlanItem[]): string {
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "X-WR-CALNAME:After the Parks Plan",
+    "X-WR-TIMEZONE:America/New_York",
   ];
 
   for (const item of items) {
     const uid = `${item.id}@aftertheparks.com`;
-    const start = formatIcsDate(item.startDateTime);
-    const end = formatIcsDate(
+    const start = formatIcsLocal(item.startDateTime);
+    const end = formatIcsLocal(
       item.endDateTime ??
         (item.startDateTime
           ? new Date(
@@ -43,8 +36,8 @@ export function generateIcs(items: PlanItem[]): string {
     lines.push(`SUMMARY:${escapeIcs(item.title)}`);
     lines.push(`DESCRIPTION:${escapeIcs(item.notes ?? `At ${item.resortName}`)}`);
     lines.push(`LOCATION:${escapeIcs(item.resortName)}`);
-    if (start) lines.push(`DTSTART:${start}`);
-    if (end) lines.push(`DTEND:${end}`);
+    if (start) lines.push(`DTSTART;TZID=America/New_York:${start}`);
+    if (end) lines.push(`DTEND;TZID=America/New_York:${end}`);
     lines.push("END:VEVENT");
   }
 
@@ -53,11 +46,20 @@ export function generateIcs(items: PlanItem[]): string {
 }
 
 function escapeIcs(text: string): string {
-  return text.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+  return text
+    .replace(/\\/g, "\\\\")
+    .replace(/;/g, "\\;")
+    .replace(/,/g, "\\,")
+    .replace(/\n/g, "\\n");
 }
 
-export function downloadIcs(items: PlanItem[], filename = "after-the-parks-plan.ics") {
-  const blob = new Blob([generateIcs(items)], { type: "text/calendar;charset=utf-8" });
+export function downloadIcs(
+  items: PlanItem[],
+  filename = "after-the-parks-plan.ics"
+) {
+  const blob = new Blob([generateIcs(items)], {
+    type: "text/calendar;charset=utf-8",
+  });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;

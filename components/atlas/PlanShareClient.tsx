@@ -1,19 +1,27 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import type { PlanItem } from "@/lib/types/occurrence";
 import { savePlanItems } from "@/lib/plan/store";
 import { useRouter } from "next/navigation";
 
 export function PlanShareClient({ items }: { items: PlanItem[] }) {
   const router = useRouter();
+  const [imported, setImported] = useState(false);
 
-  const importPlan = async () => {
-    await savePlanItems(items);
-    router.push("/plan");
-  };
+  useEffect(() => {
+    if (!items?.length || imported) return;
+    savePlanItems(items).then(() => {
+      setImported(true);
+      router.replace("/plan");
+    });
+  }, [items, imported, router]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" role="status" aria-live="polite">
+      <p className="text-[var(--color-muted)]">
+        {imported ? "Opening your plan…" : "Loading shared plan…"}
+      </p>
       <ul className="space-y-2">
         {(items ?? []).map((item) => (
           <li
@@ -25,13 +33,6 @@ export function PlanShareClient({ items }: { items: PlanItem[] }) {
           </li>
         ))}
       </ul>
-      <button
-        type="button"
-        onClick={importPlan}
-        className="rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm text-white"
-      >
-        Save to my plan
-      </button>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { ActivityDetailClient } from "@/components/atlas/ActivityDetailClient";
 import { getActivityBySlug } from "@/lib/data/activities";
-import { formatCategory } from "@/lib/utils";
+import { getCategoryMeta } from "@/lib/categories/meta";
+import { getDisplayTitle, occurrenceToDisplayInput } from "@/lib/activityDisplay";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -16,17 +17,22 @@ export default async function ActivityDetailPage({
   if (!result) notFound();
 
   const { activity, upcoming } = result;
+  const meta = getCategoryMeta(activity.category);
+  const displayTitle = getDisplayTitle(occurrenceToDisplayInput(activity));
 
   return (
     <article>
       <header className="mb-8">
-        <p className="text-sm font-medium text-[var(--accent)]">
-          {formatCategory(activity.category)} · {activity.resort.name}
-        </p>
-        <h1 className="font-display mt-2 text-4xl font-bold">{activity.title}</h1>
-        <p className="mt-4 max-w-2xl text-lg text-[var(--color-muted)]">
-          {activity.summary}
-        </p>
+        <span className="stamp-badge">
+          <span aria-hidden>{meta.icon}</span>
+          {meta.label} · {activity.resort.name}
+        </span>
+        <h1 className="font-display mt-4 text-4xl font-bold leading-tight md:text-5xl">
+          {displayTitle}
+        </h1>
+        {activity.location.label && activity.location.label !== "Resort" && (
+          <p className="mt-2 text-lg text-[var(--color-muted)]">{activity.location.label}</p>
+        )}
       </header>
 
       <ActivityDetailClient activity={activity} upcoming={upcoming} />

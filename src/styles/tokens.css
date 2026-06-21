@@ -1,0 +1,47 @@
+:root {
+  /* Core brand */
+  --brand-ink: #16212a;
+  --brand-cream: #fff7ea;
+  --brand-paper: #f8ecd7;
+  --brand-white: #ffffff;
+
+  /* Sunshine palette */
+  --sun-gold: #fdb94e;
+  --sun-peach: #ff9c6b;
+  --sun-coral: #f36f5c;
+  --sun-pink: #ff8fb7;
+
+  /* Resort palette */
+  --lagoon: #16a6b6;
+  --lagoon-deep: #08798a;
+  --palm: #27724b;
+  --palm-soft: #ddeedb;
+
+  /* Starlight palette */
+  --night: #071a26;
+  --night-soft: #102d3a;
+  --starlight: #d9e7ff;
+  --lantern: #ffc857;
+  --ember: #f66a3d;
+
+  /* Utility */
+  --success: #2f8e5b;
+  --warning: #b56b00;
+  --danger: #b83232;
+  --muted: #6b7280;
+  --border-soft: rgba(22, 33, 42, 0.12);
+  --shadow-soft: 0 14px 40px rgba(22, 33, 42, 0.12);
+  --shadow-card: 0 8px 24px rgba(22, 33, 42, 0.1);
+  --shadow-glow: 0 0 30px rgba(255, 200, 87, 0.32);
+
+  /* Typography */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Nunito Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Spacing & radius */
+  --radius-card: 28px;
+  --radius-chip: 999px;
+  --radius-field: 20px;
+  --header-height: 72px;
+  --content-max: 1440px;
+}

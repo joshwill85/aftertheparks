@@ -11,7 +11,7 @@ export default function SearchPage() {
       </Suspense>
       <Hero
         title="Search"
-        subtitle="Find activities by name, resort, or category."
+        subtitle="Find campfires, movies, crafts, and free resort moments — like asking the concierge."
       />
       <Suspense fallback={<p className="text-[var(--color-muted)]">Loading…</p>}>
         <SearchClient />

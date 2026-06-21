@@ -1,4 +1,25 @@
 {
   "passed": true,
-  "issues": []
+  "issues": [
+    {
+      "level": "warning",
+      "check": "ocr_garbage_movie",
+      "detail": "port-orleans-riverside: 'Frozen 2'"
+    },
+    {
+      "level": "warning",
+      "check": "ocr_garbage_movie",
+      "detail": "contemporary: 'Frozen 2'"
+    },
+    {
+      "level": "warning",
+      "check": "ocr_garbage_movie",
+      "detail": "contemporary: 'The Little Mermaid (1989)'"
+    },
+    {
+      "level": "warning",
+      "check": "ocr_garbage_movie",
+      "detail": "old-key-west: 'Freaky Friday (2003)'"
+    }
+  ]
 }

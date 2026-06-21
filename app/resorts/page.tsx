@@ -1,12 +1,29 @@
-import Link from "next/link";
 import { Hero } from "@/components/atlas/Hero";
-import { getResorts } from "@/lib/data/activities";
+import { ResortCard } from "@/components/resort/ResortCard";
+import { getResorts, getTonightActivities } from "@/lib/data/activities";
 import { formatResortTier } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
+const TIER_ORDER = [
+  "value",
+  "moderate",
+  "deluxe",
+  "deluxe_villa",
+  "campground",
+] as const;
+
 export default async function ResortsPage() {
-  const resorts = await getResorts();
+  const [resorts, tonightActivities] = await Promise.all([
+    getResorts(),
+    getTonightActivities(),
+  ]);
+
+  const tonightByResort = new Map<string, number>();
+  for (const activity of tonightActivities) {
+    const slug = activity.resort.slug;
+    tonightByResort.set(slug, (tonightByResort.get(slug) ?? 0) + 1);
+  }
 
   const grouped = resorts.reduce(
     (acc, r) => {
@@ -18,33 +35,40 @@ export default async function ResortsPage() {
     {} as Record<string, typeof resorts>
   );
 
+  const orderedTiers = [
+    ...TIER_ORDER.filter((tier) => grouped[tier]?.length),
+    ...Object.keys(grouped).filter(
+      (tier) => !TIER_ORDER.includes(tier as (typeof TIER_ORDER)[number])
+    ),
+  ];
+
   return (
     <>
       <Hero
         title="Resorts"
         subtitle="All 31 Disney-owned and operated Walt Disney World resort hotels."
       />
-      {Object.entries(grouped).map(([tier, list]) => (
-        <section key={tier} className="mb-10">
-          <h2 className="font-display mb-4 text-xl font-semibold">
-            {formatResortTier(tier)}
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {list.map((resort) => (
-              <Link
-                key={resort.slug}
-                href={`/resorts/${resort.slug}`}
-                className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-4 hover:border-[var(--accent)]"
-              >
-                <h3 className="font-display font-semibold">{resort.name}</h3>
-                <p className="mt-1 text-sm text-[var(--color-muted)]">
-                  {resort.activityCount} activities
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+      {orderedTiers.map((tier) => {
+        const list = grouped[tier];
+        if (!list?.length) return null;
+
+        return (
+          <section key={tier} className="mb-10">
+            <h2 className="font-display mb-4 text-xl font-semibold">
+              {formatResortTier(tier)}
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {list.map((resort) => (
+                <ResortCard
+                  key={resort.slug}
+                  resort={resort}
+                  tonightCount={tonightByResort.get(resort.slug)}
+                />
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </>
   );
 }
