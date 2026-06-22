@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
+import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
 import { getResortTierGradient } from "@/components/resort/ResortCard";
 import { ResortCategorySections } from "@/components/resort/ResortCategorySections";
 import { ResortEmptyState } from "@/components/resort/ResortEmptyState";
@@ -10,6 +11,7 @@ import {
   getTodayActivities,
   getTonightActivities,
 } from "@/lib/data/activities";
+import { getOfficialOfferingsForResort } from "@/lib/data/officialOfferings";
 import {
   filterFreeActivities,
   groupByCategory,
@@ -54,12 +56,13 @@ export default async function ResortDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [resort, activities, todayActivities, tonightActivities] =
+  const [resort, activities, todayActivities, tonightActivities, officialOfferings] =
     await Promise.all([
       getResortBySlug(slug),
       getResortActivities(slug),
       getTodayActivities({ resort: slug }),
       getTonightActivities({ resort: slug }),
+      getOfficialOfferingsForResort(slug),
     ]);
 
   if (!resort) notFound();
@@ -67,11 +70,15 @@ export default async function ResortDetailPage({
   const uniqueActivities = Array.from(
     new Map(activities.map((a) => [a.activitySlug, a])).values()
   );
+  const uniqueOfferings = Array.from(
+    new Map(officialOfferings.map((a) => [a.offeringKey, a])).values()
+  );
   const freeActivities = filterFreeActivities(uniqueActivities);
   const categoryGroups = groupByCategory(uniqueActivities).filter(
     (group) => group.activities.length >= 2
   );
   const isDarkTier = resort.category === "deluxe";
+  const hasAnyActivities = uniqueActivities.length > 0 || uniqueOfferings.length > 0;
 
   return (
     <>
@@ -109,9 +116,18 @@ export default async function ResortDetailPage({
                 isDarkTier ? "text-white/85" : "text-[var(--brand-ink)]/80"
               }`}
             >
-              {uniqueActivities.length}{" "}
-              {uniqueActivities.length === 1 ? "activity" : "activities"} in
-              the current recreation calendar
+              {uniqueActivities.length} scheduled{" "}
+              {uniqueActivities.length === 1 ? "activity" : "activities"}
+              {uniqueOfferings.length > 0 && (
+                <>
+                  {" "}
+                  ·{" "}
+                  <span className="font-semibold text-[var(--accent)]">
+                    {uniqueOfferings.length} standing{" "}
+                    {uniqueOfferings.length === 1 ? "offering" : "offerings"}
+                  </span>
+                </>
+              )}
               {todayActivities.length > 0 && (
                 <>
                   {" "}
@@ -156,7 +172,7 @@ export default async function ResortDetailPage({
         </div>
       </header>
 
-      {uniqueActivities.length === 0 ? (
+      {!hasAnyActivities ? (
         <ResortEmptyState resort={resort} />
       ) : (
         <>
@@ -210,17 +226,32 @@ export default async function ResortDetailPage({
             resortSlug={resort.slug}
           />
 
-          <section className="mb-10">
-            <ResortSectionHeader
-              title="Full schedule"
-              description="Every activity in the current recreation calendar."
-            />
-            <ActivityGrid
-              activities={uniqueActivities}
-              showResort={false}
-              emptyMessage="No activities published for this resort yet."
-            />
-          </section>
+          {uniqueOfferings.length > 0 && (
+            <section className="mb-10">
+              <ResortSectionHeader
+                title="Available at this resort"
+                description="Official Disney recreation offerings that are not tied to a dated calendar time."
+              />
+              <ActivityOfferingGrid
+                offerings={uniqueOfferings}
+                showResort={false}
+              />
+            </section>
+          )}
+
+          {uniqueActivities.length > 0 && (
+            <section className="mb-10">
+              <ResortSectionHeader
+                title="Full schedule"
+                description="Every timed activity in the current recreation calendar."
+              />
+              <ActivityGrid
+                activities={uniqueActivities}
+                showResort={false}
+                emptyMessage="No activities published for this resort yet."
+              />
+            </section>
+          )}
         </>
       )}
 

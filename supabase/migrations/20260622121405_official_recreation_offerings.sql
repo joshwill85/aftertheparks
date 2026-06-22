@@ -133,9 +133,9 @@ select
   coalesce(o.description, p.description) as description,
   o.category,
   array(
-    select distinct tag
-    from unnest(coalesce(p.tags, '{}'::text[]) || coalesce(o.tags, '{}'::text[])) as tag
-    where tag <> ''
+    select distinct tag_value
+    from unnest(coalesce(p.tags, '{}'::text[]) || coalesce(o.tags, '{}'::text[])) as tags(tag_value)
+    where tag_value <> ''
   ) as tags,
   o.location,
   o.availability,

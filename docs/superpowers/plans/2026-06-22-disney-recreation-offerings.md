@@ -13,5 +13,5 @@
 - [x] Add a Supabase migration for normalized official recreation programs, resort offerings, quarantine, RLS, grants, and a public view.
 - [x] Implement the official recreation offering extractor with source-backed resort alias resolution and quarantine gates.
 - [x] Implement a publisher that upserts programs, offerings, and quarantine records from deterministic web snapshots.
-- [ ] Add a TypeScript data mapper for official offerings and wire resort/detail consumers to load them separately from timed occurrences.
+- [x] Add a TypeScript data mapper for official offerings and wire resort/detail consumers to load them separately from timed occurrences.
 - [ ] Run focused tests, then the repository contract validation suite as far as feasible.

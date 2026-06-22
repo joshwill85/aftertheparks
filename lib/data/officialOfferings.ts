@@ -1,9 +1,11 @@
+import { createServiceClient } from "@/lib/supabase/server";
 import type {
   ActivityClaim,
-  ActivitySourceEvidence,
+  ActivityOffering,
+  ActivityPriceOption,
   SourceSpan,
 } from "@/lib/types/occurrence";
-import { formatResortTier } from "@/lib/utils";
+import { formatResortTier, slugToTitle } from "@/lib/utils";
 
 export interface OfficialOfferingRow {
   id: string;
@@ -14,6 +16,7 @@ export interface OfficialOfferingRow {
   resort_name: string;
   resort_category: string;
   resort_area: string;
+  variant_key?: string | null;
   title: string;
   description?: string | null;
   category: string;
@@ -21,94 +24,73 @@ export interface OfficialOfferingRow {
   location?: {
     label?: string | null;
     value?: string | null;
+    lat?: number;
+    lng?: number;
   } | null;
   availability?: {
-    kind?: string;
-    hours_state?: string;
-    label?: string;
+    kind?: ActivityOffering["availability"]["kind"];
+    hours_state?: string | null;
+    label?: string | null;
   } | null;
   price?: {
     state?: "free" | "fee" | "unknown";
     notes?: string;
     amountCents?: number;
+    amount_cents?: number;
+    minAmountCents?: number;
+    min_amount_cents?: number;
+    maxAmountCents?: number;
+    max_amount_cents?: number;
+    options?: Array<Record<string, unknown>>;
   } | null;
   booking?: {
     reservation_required?: boolean;
+    reservationRequired?: boolean;
     reservation_recommended?: boolean;
+    reservationRecommended?: boolean;
     cancellation_notice_hours?: number;
+    cancellationNoticeHours?: number;
+    method?: string;
+    phone?: string;
+    url?: string;
   } | null;
   eligibility?: {
+    ages?: string[];
     resort_guest_only?: boolean;
+    resortGuestOnly?: boolean;
   } | null;
   amenities?: string[] | null;
   claims?: Record<string, ActivityClaim> | null;
-  source_url?: string | null;
+  source_url: string;
   source_sha256?: string | null;
   source_document_id?: string | null;
-  field_provenance?: {
-    title?: SourceSpan[];
-    resort_join?: SourceSpan[];
-    description?: SourceSpan[];
-    location?: SourceSpan[];
-  } | null;
-  trust_state?: "source_backed" | "reviewed" | "confirm_before_going" | "needs_review" | null;
+  field_provenance?: Record<string, SourceSpan[]> | null;
+  trust_state?: ActivityOffering["trustState"] | null;
 }
 
-export interface OfficialActivityOffering {
-  id: string;
-  activitySlug: string;
-  programId: string;
-  programKey: string;
-  offeringKey: string;
-  title: string;
-  summary: string;
-  category: string;
-  tags: string[];
-  resort: {
-    slug: string;
-    name: string;
-    tier: string;
-    area: string;
-  };
-  location: {
-    label: string;
-  };
-  availability: {
-    kind: string;
-    hoursState: string;
-    label: string;
-  };
-  price: {
-    state: "free" | "fee" | "unknown";
-    notes?: string;
-    amountCents?: number;
-  };
-  booking?: {
-    reservationRequired?: boolean;
-    reservationRecommended?: boolean;
-    cancellationNoticeHours?: number;
-  };
-  eligibility: {
-    resortGuestOnly?: boolean;
-  };
-  amenities: string[];
-  source?: ActivitySourceEvidence;
-  fieldProvenance?: {
-    title?: SourceSpan[];
-    resortJoin?: SourceSpan[];
-    description?: SourceSpan[];
-    location?: SourceSpan[];
-  };
-  claims?: Record<string, ActivityClaim>;
-  freshness: {
-    lastVerified: string;
-    sourceUrl: string;
-    badge: "verified" | "stale";
-  };
-  trustState: "source_backed" | "reviewed" | "confirm_before_going" | "needs_review" | "source_unclear";
+function stringValue(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value : undefined;
 }
 
-function hasVerifiedSourceContract(row: OfficialOfferingRow): boolean {
+function numberValue(value: unknown): number | undefined {
+  return typeof value === "number" ? value : undefined;
+}
+
+function normalizePriceOptions(
+  options?: Array<Record<string, unknown>> | null
+): ActivityPriceOption[] | undefined {
+  if (!Array.isArray(options) || options.length === 0) return undefined;
+  return options.map((option) => ({
+    optionName: stringValue(option.optionName ?? option.option_name),
+    priceCentsMin: numberValue(option.priceCentsMin ?? option.price_cents_min),
+    priceCentsMax: numberValue(option.priceCentsMax ?? option.price_cents_max),
+    priceBasis: stringValue(option.priceBasis ?? option.price_basis),
+    dayOfWeek: stringValue(option.dayOfWeek ?? option.day_of_week),
+    notes: stringValue(option.notes),
+  }));
+}
+
+function sourceBacked(row: OfficialOfferingRow): boolean {
   return Boolean(
     row.source_url &&
       row.source_sha256 &&
@@ -117,76 +99,143 @@ function hasVerifiedSourceContract(row: OfficialOfferingRow): boolean {
   );
 }
 
+function mapFieldProvenance(
+  provenance: OfficialOfferingRow["field_provenance"]
+): ActivityOffering["fieldProvenance"] | undefined {
+  if (!provenance) return undefined;
+  return {
+    title: provenance.title,
+    resortJoin: provenance.resort_join,
+    location: provenance.location,
+    description: provenance.description,
+    availability: provenance.availability,
+    booking: provenance.booking,
+    amenities: provenance.amenities,
+  };
+}
+
+function mapAvailability(
+  row: OfficialOfferingRow
+): ActivityOffering["availability"] {
+  return {
+    kind: row.availability?.kind ?? "evergreen_all_day",
+    hoursState: row.availability?.hours_state ?? undefined,
+    label: row.availability?.label ?? "Available daily; hours vary",
+  };
+}
+
+function mapPrice(row: OfficialOfferingRow): ActivityOffering["price"] {
+  const price = row.price ?? {};
+  return {
+    state: price.state ?? "unknown",
+    notes: price.notes,
+    amountCents: price.amountCents ?? price.amount_cents,
+    minAmountCents: price.minAmountCents ?? price.min_amount_cents,
+    maxAmountCents: price.maxAmountCents ?? price.max_amount_cents,
+    options: normalizePriceOptions(price.options),
+  };
+}
+
+function mapBooking(
+  booking: OfficialOfferingRow["booking"]
+): ActivityOffering["booking"] {
+  if (!booking) return undefined;
+  const mapped: ActivityOffering["booking"] = {
+    reservationRequired:
+      booking.reservationRequired ?? booking.reservation_required,
+    reservationRecommended:
+      booking.reservationRecommended ?? booking.reservation_recommended,
+    cancellationNoticeHours:
+      booking.cancellationNoticeHours ?? booking.cancellation_notice_hours,
+    method: booking.method,
+    phone: booking.phone,
+    url: booking.url,
+  };
+  return Object.values(mapped).some((value) => value !== undefined)
+    ? mapped
+    : undefined;
+}
+
 export function mapOfficialOfferingRow(
   row: OfficialOfferingRow
-): OfficialActivityOffering {
-  const sourceUrl = row.source_url ?? "";
-  const sourceHash = row.source_sha256 ?? undefined;
-  const sourceVerified = hasVerifiedSourceContract(row);
+): ActivityOffering {
+  const location = row.location ?? {};
+  const eligibility = row.eligibility ?? {};
+  const verified = sourceBacked(row);
 
   return {
     id: row.id,
     activitySlug: row.program_key,
-    programId: row.program_id,
-    programKey: row.program_key,
+    activityCatalogId: row.program_id,
     offeringKey: row.offering_key,
+    resort: {
+      slug: row.resort_slug,
+      name: row.resort_name?.replace(/^Disney's\s+/i, "") ?? slugToTitle(row.resort_slug),
+      tier: formatResortTier(row.resort_category ?? "unknown"),
+      area: row.resort_area ?? "unknown",
+    },
     title: row.title,
     summary: row.description ?? "",
     category: row.category,
     tags: row.tags ?? [],
-    resort: {
-      slug: row.resort_slug,
-      name: row.resort_name.replace(/^Disney's\s+/i, ""),
-      tier: formatResortTier(row.resort_category),
-      area: row.resort_area,
-    },
+    availability: mapAvailability(row),
+    price: mapPrice(row),
     location: {
-      label: row.location?.label ?? row.location?.value ?? row.resort_name,
+      label: location.label ?? location.value ?? row.resort_name ?? slugToTitle(row.resort_slug),
+      lat: location.lat,
+      lng: location.lng,
     },
-    availability: {
-      kind: row.availability?.kind ?? "source_unspecified",
-      hoursState: row.availability?.hours_state ?? "source_unspecified",
-      label: row.availability?.label ?? "Availability varies",
-    },
-    price: {
-      state: row.price?.state ?? "unknown",
-      notes: row.price?.notes,
-      amountCents: row.price?.amountCents,
-    },
-    booking: row.booking
-      ? {
-          reservationRequired: row.booking.reservation_required,
-          reservationRecommended: row.booking.reservation_recommended,
-          cancellationNoticeHours: row.booking.cancellation_notice_hours,
-        }
-      : undefined,
+    booking: mapBooking(row.booking),
     eligibility: {
-      resortGuestOnly: row.eligibility?.resort_guest_only,
+      ages: eligibility.ages ?? ["all_ages"],
+      resortGuestOnly:
+        eligibility.resortGuestOnly ?? eligibility.resort_guest_only,
     },
     amenities: row.amenities ?? [],
-    source: {
-      url: sourceUrl,
-      documentHash: sourceHash,
-      documentId: row.source_document_id ?? undefined,
-    },
-    fieldProvenance: {
-      title: row.field_provenance?.title,
-      resortJoin: row.field_provenance?.resort_join,
-      description: row.field_provenance?.description,
-      location: row.field_provenance?.location,
-    },
-    claims: row.claims ?? undefined,
     freshness: {
       lastVerified: new Date().toISOString(),
-      sourceUrl,
-      badge: sourceVerified ? "verified" : "stale",
+      sourceUrl: row.source_url,
+      badge: verified ? "verified" : "stale",
     },
-    trustState: row.trust_state ?? (sourceVerified ? "source_backed" : "source_unclear"),
+    source: {
+      url: row.source_url,
+      documentHash: row.source_sha256 ?? undefined,
+      documentId: row.source_document_id ?? undefined,
+    },
+    fieldProvenance: mapFieldProvenance(row.field_provenance),
+    claims: row.claims ?? undefined,
+    trustState: row.trust_state ?? "source_backed",
+    status: "active",
   };
 }
 
 export function mapOfficialOfferingRows(
   rows: OfficialOfferingRow[]
-): OfficialActivityOffering[] {
+): ActivityOffering[] {
   return rows.map(mapOfficialOfferingRow);
+}
+
+export async function fetchOfficialActivityOfferings(): Promise<ActivityOffering[]> {
+  const supabase = createServiceClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("v_public_activity_offerings")
+    .select("*");
+
+  if (error) {
+    if (!/does not exist|schema cache/i.test(error.message)) {
+      console.error("fetchOfficialActivityOfferings:", error.message);
+    }
+    return [];
+  }
+
+  return mapOfficialOfferingRows((data ?? []) as OfficialOfferingRow[]);
+}
+
+export async function getOfficialOfferingsForResort(
+  resortSlug: string
+): Promise<ActivityOffering[]> {
+  const offerings = await fetchOfficialActivityOfferings();
+  return offerings.filter((offering) => offering.resort.slug === resortSlug);
 }
