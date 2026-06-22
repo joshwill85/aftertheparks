@@ -24,6 +24,14 @@ def _source_type(row: dict[str, Any]) -> str:
     return "pdf" if source_url.lower().endswith(".pdf") or source_path.lower().endswith(".pdf") else "html"
 
 
+def _db_category(row: dict[str, Any]) -> str:
+    category = str(row.get("category") or "other")
+    return {
+        "scavenger_hunt": "resort_activity",
+        "sports_games": "resort_activity",
+    }.get(category, category)
+
+
 def _source_document_row(row: dict[str, Any]) -> dict[str, Any]:
     source_url = str(row.get("source_url") or row.get("source", {}).get("url") or "")
     source = row.get("source") if isinstance(row.get("source"), dict) else {}
@@ -44,7 +52,7 @@ def _catalog_row(row: dict[str, Any]) -> dict[str, Any]:
         "calendar_group_key": row["calendar_group_key"],
         "canonical_name": row["title"],
         "normalized_name": row["canonical_slug"],
-        "default_category": row["category"],
+        "default_category": _db_category(row),
     }
 
 
@@ -56,7 +64,7 @@ def _public_gold_row(row: dict[str, Any], source_document_id: str) -> dict[str, 
         "resort_slugs": row.get("resort_slugs") or [],
         "canonical_slug": row["canonical_slug"],
         "title": row["title"],
-        "category": row["category"],
+        "category": _db_category(row),
         "schedule": row["schedule"],
         "location": row["location"],
         "description": row.get("description"),
