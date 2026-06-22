@@ -1,0 +1,855 @@
+{
+  "programs": [
+    {
+      "program_key": "fort-wilderness-archery-experience",
+      "title": "Fort Wilderness Archery Experience",
+      "description": "LocatedinWalt Disney World® Resort",
+      "category": "resort_activity",
+      "tags": [],
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Fort Wilderness Archery Experience | Walt Disney World Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinWalt Disney World® Resort"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fort-wilderness-archery-experience/",
+      "source_sha256": "18b324b36423c1b8cd34c07fb9e409e042e5d200fcf19bafe6c403a0b1c9e103"
+    },
+    {
+      "program_key": "canoes",
+      "title": "Canoes",
+      "description": "LocatedinWalt Disney World® Resort",
+      "category": "resort_activity",
+      "tags": [],
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Canoes | Walt Disney World Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinWalt Disney World® Resort"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/canoes/",
+      "source_sha256": ""
+    },
+    {
+      "program_key": "kayak-rentals",
+      "title": "Kayak Rentals",
+      "description": "LocatedinWalt Disney World® Resort",
+      "category": "rental",
+      "tags": [],
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Kayak Rentals | Walt Disney World Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinWalt Disney World® Resort"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/kayaks/",
+      "source_sha256": ""
+    },
+    {
+      "program_key": "pony-rides",
+      "title": "Pony Rides",
+      "description": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride.",
+      "category": "resort_activity",
+      "tags": [],
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pony Rides | Walt Disney World Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/pony-rides/",
+      "source_sha256": "454fd45ca89fe019d30328188cb1157b2cf3d8c1403ace9bf903babaddb99cf5"
+    },
+    {
+      "program_key": "recreation",
+      "title": "Recreation",
+      "description": "Enjoy a refreshing dip at one of our pool locations—sporting whirlpool spas and more!",
+      "category": "resort_activity",
+      "tags": [],
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "varies",
+        "label": "Available daily; hours vary"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 212,
+            "text": "## Recreation"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 216,
+            "text": "Enjoy a refreshing dip at one of our pool locations—sporting whirlpool spas and more!"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "source_sha256": ""
+    },
+    {
+      "program_key": "wagon-rides-at-fort-wilderness-resort",
+      "title": "Wagon Rides at Fort Wilderness Resort",
+      "description": "Horse Drawn Excursion - Wagon Ride",
+      "category": "resort_activity",
+      "tags": [],
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Wagon Rides at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Horse Drawn Excursion - Wagon Ride"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/wagon-rides/",
+      "source_sha256": "1ee6b71fd07e929c10cbb156b86f239cdf7058fe2884194a7e690d21f2c20353"
+    }
+  ],
+  "offerings": [
+    {
+      "program_key": "canoes",
+      "offering_key": "canoes:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "campsites-at-fort-wilderness-resort",
+      "title": "Canoes",
+      "description": "LocatedinWalt Disney World® Resort",
+      "category": "resort_activity",
+      "tags": [],
+      "location": {
+        "label": "Canoe Rentals at Disney's Fort Wilderness Resort and Campground"
+      },
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "price": {
+        "state": "unknown"
+      },
+      "booking": {
+        "reservation_recommended": false,
+        "reservation_required": true
+      },
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Canoes | Walt Disney World Resort"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Canoe Rentals at Disney's Fort Wilderness Resort and Campground"
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Learn about Kayak rentals at Disney's Fort Wilderness Resort and Campground."
+          },
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Times for Canoe Rentals at Disney's Fort Wilderness Resort and Campground"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinWalt Disney World® Resort"
+          }
+        ],
+        "booking": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Reservations are not required."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "During peak times of the year, only Disney’s Fort Wilderness Resort Guests or Guests with dining or recreation reservations may be allowed to enter the Resort hotel area to park."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/canoes/",
+      "source_sha256": ""
+    },
+    {
+      "program_key": "kayak-rentals",
+      "offering_key": "kayak-rentals:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "campsites-at-fort-wilderness-resort",
+      "title": "Kayak Rentals",
+      "description": "LocatedinWalt Disney World® Resort",
+      "category": "rental",
+      "tags": [],
+      "location": {
+        "label": "Kayak Rentals at Disney's Fort Wilderness Resort and Campground"
+      },
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "price": {
+        "state": "unknown"
+      },
+      "booking": {
+        "reservation_recommended": false,
+        "reservation_required": true
+      },
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Kayak Rentals | Walt Disney World Resort"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Kayak Rentals at Disney's Fort Wilderness Resort and Campground"
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Learn about Canoe rentals at Disney's Fort Wilderness Resort and Campground."
+          },
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Times for Kayak Rentals at Disney's Fort Wilderness Resort and Campground"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinWalt Disney World® Resort"
+          }
+        ],
+        "booking": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Reservations are not required."
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "During peak times of the year, only Disney’s Fort Wilderness Resort Guests or Guests with dining or recreation reservations may be allowed to enter the Resort hotel area to park."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/kayaks/",
+      "source_sha256": ""
+    },
+    {
+      "program_key": "pony-rides",
+      "offering_key": "pony-rides:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "campsites-at-fort-wilderness-resort",
+      "title": "Pony Rides",
+      "description": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride.",
+      "category": "resort_activity",
+      "tags": [],
+      "location": {
+        "label": "LocatedinThe Campsites at Disney's Fort Wilderness Resort"
+      },
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "price": {
+        "state": "unknown"
+      },
+      "booking": {
+        "reservation_recommended": false
+      },
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pony Rides | Walt Disney World Resort"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinThe Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Pony rides are offered daily at Disney’s Fort Wilderness Resort & Campground with the last ride of the day 30 minutes prior to close. Riders must be at least 3 years of age, under 80 pounds, no taller than 48 inches and able to hang on by themselves. A parent or guardian must lead the pony at all times."
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride."
+          }
+        ],
+        "booking": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "A fee is associated with this activity. No reservations are necessary."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/pony-rides/",
+      "source_sha256": "454fd45ca89fe019d30328188cb1157b2cf3d8c1403ace9bf903babaddb99cf5"
+    },
+    {
+      "program_key": "recreation",
+      "offering_key": "recreation:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "campsites-at-fort-wilderness-resort",
+      "title": "Recreation",
+      "description": "Enjoy a refreshing dip at one of our pool locations—sporting whirlpool spas and more!",
+      "category": "resort_activity",
+      "tags": [],
+      "location": {
+        "label": "Shoot some hoops at one of several basketball courts located throughout Disney’s Fort Wilderness Resort & Campground. Basketballs are available in a designated box at each court. If the box is empty, simply call Housekeeping from a Comfort Station phone and a basketball will be delivered to the court."
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "varies",
+        "label": "Available daily; hours vary"
+      },
+      "price": {
+        "state": "unknown"
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 212,
+            "text": "## Recreation"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 273,
+            "text": "Shoot some hoops at one of several basketball courts located throughout Disney’s Fort Wilderness Resort & Campground. Basketballs are available in a designated box at each court. If the box is empty, simply call Housekeeping from a Comfort Station phone and a basketball will be delivered to the court."
+          },
+          {
+            "page": 1,
+            "line": 306,
+            "text": "* ## Horse Drawn Excursion – Carriage Ride at Disney’s Fort Wilderness Resort & Campground"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 216,
+            "text": "Enjoy a refreshing dip at one of our pool locations—sporting whirlpool spas and more!"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "source_sha256": ""
+    },
+    {
+      "program_key": "wagon-rides-at-fort-wilderness-resort",
+      "offering_key": "wagon-rides-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "campsites-at-fort-wilderness-resort",
+      "title": "Wagon Rides at Fort Wilderness Resort",
+      "description": "Horse Drawn Excursion - Wagon Ride",
+      "category": "resort_activity",
+      "tags": [],
+      "location": {
+        "label": "LocatedinThe Campsites at Disney's Fort Wilderness Resort"
+      },
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "price": {
+        "state": "unknown"
+      },
+      "booking": {
+        "reservation_recommended": false
+      },
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Wagon Rides at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinThe Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "The ride departs across from Pioneer Hall at Disney's Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "If arriving by your own vehicle, please park in the main entrance of Disney's Fort Wilderness Resort & Campground and take a complimentary bus ride to the Settlement Depot."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Recreation at The Campsites at Disney’s Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Recreation at The Cabins at Disney’s Fort Wilderness Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Horse Drawn Excursion - Wagon Ride"
+          }
+        ],
+        "booking": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Rides are only available on Friday, Saturday and Sunday evenings, and available on a first-come, first-served basis. Reservations are not accepted."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/wagon-rides/",
+      "source_sha256": "1ee6b71fd07e929c10cbb156b86f239cdf7058fe2884194a7e690d21f2c20353"
+    },
+    {
+      "program_key": "wagon-rides-at-fort-wilderness-resort",
+      "offering_key": "wagon-rides-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
+      "resort_slug": "cabins-at-fort-wilderness-resort",
+      "variant_key": "cabins-at-fort-wilderness-resort",
+      "title": "Wagon Rides at Fort Wilderness Resort",
+      "description": "Horse Drawn Excursion - Wagon Ride",
+      "category": "resort_activity",
+      "tags": [],
+      "location": {
+        "label": "Recreation at The Cabins at Disney’s Fort Wilderness Resort"
+      },
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "source_unspecified",
+        "label": "Reservations recommended"
+      },
+      "price": {
+        "state": "unknown"
+      },
+      "booking": {
+        "reservation_recommended": false
+      },
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Wagon Rides at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinThe Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "The ride departs across from Pioneer Hall at Disney's Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "If arriving by your own vehicle, please park in the main entrance of Disney's Fort Wilderness Resort & Campground and take a complimentary bus ride to the Settlement Depot."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Recreation at The Campsites at Disney’s Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Recreation at The Cabins at Disney’s Fort Wilderness Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Horse Drawn Excursion - Wagon Ride"
+          }
+        ],
+        "booking": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Rides are only available on Friday, Saturday and Sunday evenings, and available on a first-come, first-served basis. Reservations are not accepted."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/wagon-rides/",
+      "source_sha256": "1ee6b71fd07e929c10cbb156b86f239cdf7058fe2884194a7e690d21f2c20353"
+    }
+  ],
+  "quarantine": [
+    {
+      "program_key": "fort-wilderness-archery-experience",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fort-wilderness-archery-experience/",
+      "source_sha256": "18b324b36423c1b8cd34c07fb9e409e042e5d200fcf19bafe6c403a0b1c9e103",
+      "reason_code": "unresolved_resort_join",
+      "detail": "No supported Disney-owned resort names were found in the source text.",
+      "source_spans": [
+        {
+          "page": 1,
+          "line": 1,
+          "text": "Fort Wilderness Archery Experience | Walt Disney World Resort"
+        },
+        {
+          "page": 1,
+          "line": 2,
+          "text": "Fort Wilderness Archery Experience"
+        },
+        {
+          "page": 1,
+          "line": 3,
+          "text": "LocatedinWalt Disney World® Resort"
+        },
+        {
+          "page": 1,
+          "line": 4,
+          "text": "Guests 7 years of age and older can test out their skills—and experience the thrill—of archery during this 75 minute session."
+        },
+        {
+          "page": 1,
+          "line": 5,
+          "text": "Kids"
+        },
+        {
+          "page": 1,
+          "line": 6,
+          "text": "Tweens"
+        },
+        {
+          "page": 1,
+          "line": 7,
+          "text": "Teens"
+        },
+        {
+          "page": 1,
+          "line": 8,
+          "text": "Adults"
+        },
+        {
+          "page": 1,
+          "line": 9,
+          "text": "$49 per Person (tax not included)"
+        },
+        {
+          "page": 1,
+          "line": 10,
+          "text": "Show Safety, Accessibility and Guest Policies"
+        },
+        {
+          "page": 1,
+          "line": 11,
+          "text": "Operating Hours –"
+        },
+        {
+          "page": 1,
+          "line": 12,
+          "text": "11:30 AM"
+        },
+        {
+          "page": 1,
+          "line": 13,
+          "text": ","
+        },
+        {
+          "page": 1,
+          "line": 14,
+          "text": "2:45 PM"
+        },
+        {
+          "page": 1,
+          "line": 15,
+          "text": "Check Available Days"
+        },
+        {
+          "page": 1,
+          "line": 16,
+          "text": "Ready, Aim, Release!"
+        },
+        {
+          "page": 1,
+          "line": 17,
+          "text": "Put pro tips to the test and zero in on the coveted bull’s-eye after receiving a short training lesson."
+        },
+        {
+          "page": 1,
+          "line": 18,
+          "text": "At the Bike Barn at Disney's Fort Wilderness Resort, Archery Guides teach Guests 7 years of age and up how to use a compound bow; then it's time for target practice! Most of this 75-minute experience is dedicated to firing at range targets. With class sizes limited to 10 Guests, each marksman receives personalized advice from the Archery Guides to best help you hone your archery skills."
+        },
+        {
+          "page": 1,
+          "line": 19,
+          "text": "Know Before You Go"
+        },
+        {
+          "page": 1,
+          "line": 20,
+          "text": "View important information about reservations, check-in and travel time."
+        },
+        {
+          "page": 1,
+          "line": 21,
+          "text": "Reservations"
+        },
+        {
+          "page": 1,
+          "line": 22,
+          "text": "Advance reservations are highly recommended. Learn when advance reservations can be made."
+        },
+        {
+          "page": 1,
+          "line": 23,
+          "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within one day or fails to show up for the reservation."
+        },
+        {
+          "page": 1,
+          "line": 24,
+          "text": "Walk-ups are welcome as space permits."
+        },
+        {
+          "page": 1,
+          "line": 25,
+          "text": "Family and friends who prefer to watch may do so from a designated viewing area located a safe distance from the archers."
+        },
+        {
+          "page": 1,
+          "line": 26,
+          "text": "Check-In"
+        },
+        {
+          "page": 1,
+          "line": 27,
+          "text": "Please arrive at the Bike Barn 15 minutes prior to training session to check in."
+        },
+        {
+          "page": 1,
+          "line": 28,
+          "text": "Travel Time"
+        },
+        {
+          "page": 1,
+          "line": 29,
+          "text": "Please allow up to 1.5 hours when traveling within Walt Disney World Resort."
+        },
+        {
+          "page": 1,
+          "line": 30,
+          "text": "Guests who plan on driving may park at the entrance to Disney's Fort Wilderness Resort and take the Yellow or Orange Line buses to Bike Barn."
+        },
+        {
+          "page": 1,
+          "line": 31,
+          "text": "Safety, Accessibility and Guest Policies"
+        },
+        {
+          "page": 1,
+          "line": 32,
+          "text": "Make a Reservation"
+        },
+        {
+          "page": 1,
+          "line": 33,
+          "text": "Times for Fort Wilderness Archery Experience"
+        }
+      ]
+    }
+  ]
+}
