@@ -34,6 +34,39 @@ function dedupeUpcoming(upcoming: ActivityOccurrence[]): ActivityOccurrence[] {
   return result;
 }
 
+function formatDateOnly(value?: string): string | undefined {
+  if (!value) return undefined;
+  const date = new Date(`${value}T12:00:00Z`);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
+function formatCentsRange(min?: number, max?: number): string | undefined {
+  if (min == null && max == null) return undefined;
+  const low = min ?? max;
+  const high = max ?? min;
+  const money = (value: number) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: value % 100 === 0 ? 0 : 2,
+    }).format(value / 100);
+  return low === high ? money(low!) : `${money(low!)}-${money(high!)}`;
+}
+
+function formatOccurrenceWhen(occurrence: ActivityOccurrence): string {
+  const start = formatOrlandoTime(occurrence.startDateTime);
+  const end = occurrence.endDateTime
+    ? ` – ${formatOrlandoTime(occurrence.endDateTime)}`
+    : "";
+  return `${formatOrlandoDate(occurrence.startDateTime)} · ${start}${end}`;
+}
+
 export function ActivityDetailClient({
   activity,
   upcoming,
@@ -64,7 +97,7 @@ export function ActivityDetailClient({
   const whenLabel = scheduleRows[0]
     ? uncertainTime
       ? "Confirm with resort"
-      : `${formatOrlandoDate(scheduleRows[0].startDateTime)} · ${formatOrlandoTime(scheduleRows[0].startDateTime)}`
+      : formatOccurrenceWhen(scheduleRows[0])
     : uncertainTime
       ? "Confirm with resort"
       : display.timeLabel;
@@ -72,18 +105,71 @@ export function ActivityDetailClient({
   const whenDateTime = scheduleRows[0]?.startDateTime ?? activity.startDateTime;
 
   const goodToKnow: string[] = [];
+  const addGoodToKnow = (note?: string | null) => {
+    if (note && !goodToKnow.includes(note)) goodToKnow.push(note);
+  };
   if (display.trustState === "confirm_before_going") {
-    goodToKnow.push("Confirm the latest schedule with the resort before heading out.");
+    addGoodToKnow("Confirm the latest schedule with the resort before heading out.");
   }
   if (display.trustState === "time_unclear") {
-    goodToKnow.push("Published times may be incomplete — check the recreation guide.");
+    addGoodToKnow("Published times may be incomplete — check the recreation guide.");
   }
   if (display.costLabel === "Price unclear") {
-    goodToKnow.push("Pricing wasn't clear in the source calendar — ask at the front desk.");
+    addGoodToKnow("Pricing wasn't clear in the source calendar — ask at the front desk.");
   }
   if (activity.price.notes) {
-    goodToKnow.push(activity.price.notes);
+    addGoodToKnow(activity.price.notes);
   }
+  for (const option of activity.price.options ?? []) {
+    const price = formatCentsRange(option.priceCentsMin, option.priceCentsMax);
+    if (price) {
+      addGoodToKnow(
+        option.optionName ? `${option.optionName}: ${price}` : `Price option: ${price}`
+      );
+    }
+  }
+  if (activity.enrichment?.ageMinimum) {
+    addGoodToKnow(`Ages ${activity.enrichment.ageMinimum} and up.`);
+  }
+  if (activity.enrichment?.reservationRequired) {
+    const phone = activity.enrichment.reservationPhone
+      ? ` at ${activity.enrichment.reservationPhone}`
+      : "";
+    addGoodToKnow(`Reservations required${phone}.`);
+  } else if (activity.enrichment?.reservationRecommended) {
+    addGoodToKnow("Reservations recommended.");
+  }
+  if (activity.enrichment?.walkUpsAllowed) {
+    addGoodToKnow("Walk-ups may be available.");
+  }
+  if (activity.enrichment?.checkInOffsetMinutes) {
+    addGoodToKnow(
+      `Arrive ${activity.enrichment.checkInOffsetMinutes} minutes before the start time.`
+    );
+  }
+  if (activity.enrichment?.resortGuestOnly) {
+    addGoodToKnow("Limited to guests staying at the resort.");
+  }
+  if (activity.enrichment?.sisterResortAccess) {
+    addGoodToKnow("Sister-resort guest access may apply.");
+  }
+  if (activity.enrichment?.poolGated) {
+    addGoodToKnow("Held inside or near a gated pool area.");
+  }
+  const validFrom = formatDateOnly(activity.validFrom);
+  const validUntil = formatDateOnly(activity.validUntil);
+  const nextSchedule = formatDateOnly(activity.enrichment?.nextScheduleExpectedDate);
+  if (validFrom && validUntil) {
+    addGoodToKnow(`Current schedule window: ${validFrom} through ${validUntil}.`);
+  }
+  if (nextSchedule) {
+    addGoodToKnow(`Next schedule update expected ${nextSchedule}.`);
+  }
+
+  const exactVenue = activity.enrichment?.exactVenue;
+  const showOfficialLocation =
+    exactVenue &&
+    exactVenue.trim().toLowerCase() !== display.locationLabel.trim().toLowerCase();
 
   return (
     <div className="space-y-8">
@@ -113,7 +199,12 @@ export function ActivityDetailClient({
           </EventDetailSection>
 
           <EventDetailSection title="Where to go" tone="lagoon">
-            <p className="font-display text-lg font-semibold">{display.locationLabel}</p>
+            <p className="font-display text-lg font-semibold">
+              {exactVenue ?? display.locationLabel}
+            </p>
+            {showOfficialLocation && (
+              <p className="event-detail-prose mt-1">{display.locationLabel}</p>
+            )}
             <p className="event-detail-prose mt-1">{display.resortName}</p>
           </EventDetailSection>
 
@@ -135,7 +226,12 @@ export function ActivityDetailClient({
               </p>
             )}
             <ul className="event-detail-schedule">
-              {scheduleRows.length > 0 ? (
+              {uncertainTime ? (
+                <li className="event-detail-prose">
+                  {activity.scheduleText?.trim() ||
+                    "See the official resort recreation guide for the latest schedule."}
+                </li>
+              ) : scheduleRows.length > 0 ? (
                 scheduleRows.map((o) => (
                   <li key={o.id} className="event-detail-schedule__row">
                     <time dateTime={o.startDateTime}>

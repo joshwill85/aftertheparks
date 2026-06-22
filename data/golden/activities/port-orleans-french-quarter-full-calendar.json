@@ -1,0 +1,236 @@
+{
+  "calendar_group_key": "port-orleans-french-quarter",
+  "source_pdf": "data/raw/pdfs/POFQ_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+  "expected_records": [
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 10:00am-11:00pm",
+      "start_time": "10:00am",
+      "end_time": "11:00pm",
+      "location": "Throughout Disney’s Port Orleans Resort - French Quarter",
+      "description": "Search the Resort for a hidden Louis photo prop. Once located, snap a photo and then head to the Concierge Desk to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 23, "text": "FIND A FRIEND" }],
+        "location": [
+          { "page": 1, "line": 24, "text": "Throughout Disney’s Port Orleans Resort -" },
+          { "page": 1, "line": 26, "text": "French Quarter" }
+        ],
+        "schedule": [{ "page": 1, "line": 28, "text": "Daily from 10:00am-11:00pm" }],
+        "description": [
+          { "page": 1, "line": 29, "text": "Search the Resort for a hidden Louis photo prop." },
+          { "page": 1, "line": 32, "text": "Once located, snap a photo and then head to the" },
+          { "page": 1, "line": 33, "text": "Concierge Desk to receive a surprise!" }
+        ]
+      }
+    },
+    {
+      "title": "South Quarter Games Arcade",
+      "slug": "south-quarter-games-arcade",
+      "category": "arcade",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm",
+      "location": "South Quarter Games Arcade",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [
+          { "page": 1, "line": 25, "text": "SOUTH QUARTER" },
+          { "page": 1, "line": 27, "text": "GAMES ARCADE ($)" }
+        ],
+        "location": [
+          { "page": 1, "line": 25, "text": "SOUTH QUARTER" },
+          { "page": 1, "line": 27, "text": "GAMES ARCADE ($)" }
+        ],
+        "schedule": [{ "page": 1, "line": 30, "text": "Daily from 8:00am-11:00pm" }],
+        "description": [
+          { "page": 1, "line": 31, "text": "Play the latest and greatest family-friendly video games." }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Sunday, Monday, Tuesday, Thursday, Friday and Saturday from 12:30pm-2:00pm",
+      "start_time": "12:30pm",
+      "end_time": "2:00pm",
+      "location": "Doubloon Lagoon Pool Deck",
+      "description": "Soak in the sun with some family-friendly activities, both in and out of the water. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 34, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 35, "text": "Doubloon Lagoon Pool Deck" }],
+        "schedule": [
+          { "page": 1, "line": 36, "text": "Sunday, Monday, Tuesday, Thursday, Friday and Saturday" },
+          { "page": 1, "line": 38, "text": "from 12:30pm-2:00pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 39, "text": "Soak in the sun with some family-friendly activities, both" },
+          { "page": 1, "line": 40, "text": "in and out of the water. See a Recreation Cast Member for" },
+          { "page": 1, "line": 42, "text": "more information." }
+        ]
+      }
+    },
+    {
+      "title": "Painting On De’ Bayou",
+      "slug": "painting-on-de-bayou",
+      "category": "other",
+      "schedule_text": "Monday at 1:00pm",
+      "start_time": "1:00pm",
+      "end_time": null,
+      "location": "Scat Cat’s Club - Lounge",
+      "description": "Get in touch with your inner artist in this unique 2-hour instructor-led painting class! This experience is recommended for ages 12 and up. Space is limited. To book, visit or call the Riverside Levee Marina at 407-934-5507.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 41, "text": "PAINTING ON DE’ BAYOU ($)" }],
+        "location": [{ "page": 1, "line": 43, "text": "Scat Cat’s Club - Lounge" }],
+        "schedule": [{ "page": 1, "line": 44, "text": "Monday at 1:00pm" }],
+        "description": [
+          { "page": 1, "line": 46, "text": "Get in touch with your inner artist in this unique" },
+          { "page": 1, "line": 48, "text": "2-hour instructor-led painting class! This experience is" },
+          { "page": 1, "line": 52, "text": "recommended for ages 12 and up. Space is limited. To book," },
+          { "page": 1, "line": 54, "text": "visit or call the Riverside Levee Marina at 407-934-5507." }
+        ]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Tuesday and Saturday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Doubloon Lagoon Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 55, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 57, "text": "Doubloon Lagoon Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 59, "text": "Tuesday and Saturday from 3:00pm-4:00pm" }],
+        "description": [
+          { "page": 1, "line": 61, "text": "Get creative with a Disney twist on this arts and" },
+          { "page": 1, "line": 63, "text": "crafts favorite!" }
+        ]
+      }
+    },
+    {
+      "title": "Mosaic Class",
+      "slug": "mosaic-class",
+      "category": "arts_crafts",
+      "schedule_text": "Wednesday at 1:00pm",
+      "start_time": "1:00pm",
+      "end_time": null,
+      "location": "Scat Cat’s Club - Lounge",
+      "description": "Immerse yourself in a famous art tradition as you design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Class may take up to 2 hours. Space is limited. To book, visit or call the Riverside Levee Marina at 407-934-5507.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 56, "text": "MOSAIC CLASS ($)" }],
+        "location": [{ "page": 1, "line": 58, "text": "Scat Cat’s Club - Lounge" }],
+        "schedule": [{ "page": 1, "line": 60, "text": "Wednesday at 1:00pm" }],
+        "description": [
+          { "page": 1, "line": 62, "text": "Immerse yourself in a famous art tradition as you design" },
+          { "page": 1, "line": 64, "text": "your own mosaic showpiece with a touch of Disney flair." },
+          { "page": 1, "line": 66, "text": "This experience is recommended for Guests ages 12 and up." },
+          { "page": 1, "line": 68, "text": "Class may take up to 2 hours. Space is limited. To book," },
+          { "page": 1, "line": 70, "text": "visit or call the Riverside Levee Marina at 407-934-5507." }
+        ]
+      }
+    },
+    {
+      "title": "Cajun Campfire",
+      "slug": "cajun-campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "start_time": "6:00pm",
+      "end_time": "7:00pm",
+      "location": "Campfire Pit Between Buildings 5 and 6",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 65, "text": "CAJUN CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 67, "text": "Campfire" }],
+        "schedule": [{ "page": 1, "line": 69, "text": "Nightly from 6:00pm-7:00pm" }],
+        "description": [
+          { "page": 1, "line": 71, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 72, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Nighttime Trivia Challenge",
+      "slug": "nighttime-trivia-challenge",
+      "category": "other",
+      "schedule_text": "Wednesday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Doubloon Lagoon Pool Deck",
+      "description": "Put your knowledge to the test!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 74, "text": "NIGHTTIME TRIVIA CHALLENGE" }],
+        "location": [{ "page": 1, "line": 75, "text": "Lagoon Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 77, "text": "Wednesday at 8:00pm" }],
+        "description": [{ "page": 1, "line": 78, "text": "Put your knowledge to the test!" }]
+      }
+    },
+    {
+      "title": "Glow With The Flow",
+      "slug": "glow-with-the-flow",
+      "category": "other",
+      "schedule_text": "Friday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Doubloon Lagoon Pool Deck",
+      "description": "Light the night with our evening poolside activities.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 80, "text": "GLOW WITH THE FLOW" }],
+        "location": [{ "page": 1, "line": 83, "text": "Doubloon Lagoon Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 86, "text": "Friday at 8:00pm" }],
+        "description": [
+          { "page": 1, "line": 87, "text": "Light the night with our evening poolside activities." }
+        ]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "category": "arts_crafts",
+      "schedule_text": "From 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Doubloon Lagoon Pool Deck",
+      "description": "Sunday and Friday",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 45, "text": "ARTS & CRAFTS ($)" }],
+        "location": [{ "page": 1, "line": 47, "text": "Doubloon Lagoon Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 49, "text": "From 3:00pm-4:00pm" }],
+        "description": [{ "page": 1, "line": 50, "text": "Sunday and Friday" }]
+      },
+      "warnings": ["description:text_quality_low"]
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "",
+      "start_time": null,
+      "end_time": null,
+      "location": "",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 73, "text": "MOVIE UNDER THE STARS" }]
+      },
+      "warnings": ["schedule:missing_source_span", "location:missing_source_span"]
+    }
+  ]
+}

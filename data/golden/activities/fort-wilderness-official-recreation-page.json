@@ -1,0 +1,237 @@
+{
+  "calendar_group_key": "fort-wilderness",
+  "source_kind": "official_web",
+  "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+  "source_web_snapshot": "data/raw/web/fort-wilderness-recreation-page.snapshot.json",
+  "source_web_sha256": "fb38dfa62030576e356048dfc116accb31f4ca5c25fb1bc52354e65e123ea399",
+  "source_detail_pages": [
+    {
+      "slug": "canoe-rentals",
+      "source_url": "https://disneyworld.disney.go.com/recreation/canoes/",
+      "source_web_snapshot": "data/raw/web/fort-wilderness-canoe-rentals.snapshot.json",
+      "source_web_sha256": "9a559f063eb4581ac10bfe87216ec3afebceff78e95889e3697c86f9ccb2e7c3"
+    },
+    {
+      "slug": "kayak-rentals",
+      "source_url": "https://disneyworld.disney.go.com/recreation/kayaks/",
+      "source_web_snapshot": "data/raw/web/fort-wilderness-kayak-rentals.snapshot.json",
+      "source_web_sha256": "a8b6e41fc60cf76feeae41f235b7448995cee36843eb55c670599713200d704e"
+    },
+    {
+      "slug": "fort-wilderness-archery-experience",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fort-wilderness-archery-experience/",
+      "source_web_snapshot": "data/raw/web/fort-wilderness-archery-experience.snapshot.json",
+      "source_web_sha256": "18b324b36423c1b8cd34c07fb9e409e042e5d200fcf19bafe6c403a0b1c9e103"
+    },
+    {
+      "slug": "pony-rides",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/pony-rides/",
+      "source_web_snapshot": "data/raw/web/fort-wilderness-pony-rides.snapshot.json",
+      "source_web_sha256": "454fd45ca89fe019d30328188cb1157b2cf3d8c1403ace9bf903babaddb99cf5"
+    }
+  ],
+  "expected_records": [
+    {
+      "title": "Canoe Rentals",
+      "slug": "canoe-rentals",
+      "category": "rental",
+      "schedule_text": "Daily from 9:00 AM–5:00 PM",
+      "start_time": "9:00 AM",
+      "end_time": "5:00 PM",
+      "location": "The Bike Barn at the Meadow Recreation Area",
+      "description": "Set off on your own excursion along the tranquil waters of Disney’s Fort Wilderness Resort.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 7, "text": "Canoe Rentals" }],
+        "description": [{ "page": 1, "line": 8, "text": "Set off on your own excursion along the tranquil waters of Disney’s Fort Wilderness Resort." }],
+        "location": [{ "page": 1, "line": 9, "text": "Rental location: The Bike Barn at the Meadow Recreation Area" }],
+        "schedule": [{ "page": 1, "line": 10, "text": "Hours: 9:00 AM and 5:00 PM daily" }]
+      }
+    },
+    {
+      "title": "Kayak Rentals",
+      "slug": "kayak-rentals",
+      "category": "rental",
+      "schedule_text": "Daily from 9:00 AM–5:00 PM",
+      "start_time": "9:00 AM",
+      "end_time": "5:00 PM",
+      "location": "The Bike Barn at the Meadow Recreation Area",
+      "description": "Enjoy a family paddling adventure on our scenic streams and ponds.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 11, "text": "Kayak Rentals" }],
+        "description": [{ "page": 1, "line": 12, "text": "Enjoy a family paddling adventure on our scenic streams and ponds." }],
+        "location": [{ "page": 1, "line": 13, "text": "Rental location: The Bike Barn at the Meadow Recreation Area" }],
+        "schedule": [{ "page": 1, "line": 14, "text": "Hours: 9:00 AM and 5:00 PM daily" }]
+      }
+    },
+    {
+      "title": "Fort Wilderness Archery Experience",
+      "slug": "fort-wilderness-archery-experience",
+      "category": "sports_games",
+      "schedule_text": "Operating Hours: 11:30 AM, 2:45 PM",
+      "start_time": "11:30 AM",
+      "end_time": null,
+      "location": "Bike Barn at Disney's Fort Wilderness Resort",
+      "description": "Guests 7 years of age and older can test out their skills—and experience the thrill—of archery during this 75 minute session.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 2, "text": "Fort Wilderness Archery Experience" }],
+        "description": [{ "page": 1, "line": 4, "text": "Guests 7 years of age and older can test out their skills—and experience the thrill—of archery during this 75 minute session." }],
+        "location": [{ "page": 1, "line": 18, "text": "At the Bike Barn at Disney's Fort Wilderness Resort, Archery Guides teach Guests 7 years of age and up how to use a compound bow; then it's time for target practice! Most of this 75-minute experience is dedicated to firing at range targets. With class sizes limited to 10 Guests, each marksman receives personalized advice from the Archery Guides to best help you hone your archery skills." }],
+        "schedule": [
+          { "page": 1, "line": 11, "text": "Operating Hours –" },
+          { "page": 1, "line": 12, "text": "11:30 AM" },
+          { "page": 1, "line": 14, "text": "2:45 PM" }
+        ]
+      }
+    },
+    {
+      "title": "Pony Rides",
+      "slug": "pony-rides",
+      "category": "resort_activity",
+      "schedule_text": "Pony rides are offered daily at Disney’s Fort Wilderness Resort & Campground with the last ride of the day 30 minutes prior to close.",
+      "start_time": null,
+      "end_time": null,
+      "location": "the stable near Pioneer Hall",
+      "description": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 2, "text": "Pony Rides" }],
+        "description": [{ "page": 1, "line": 4, "text": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride." }],
+        "location": [{ "page": 1, "line": 7, "text": "Pony Rides are available at the stable near Pioneer Hall on a walk-in basis only." }],
+        "schedule": [{ "page": 1, "line": 10, "text": "Pony rides are offered daily at Disney’s Fort Wilderness Resort & Campground with the last ride of the day 30 minutes prior to close. Riders must be at least 3 years of age, under 80 pounds, no taller than 48 inches and able to hang on by themselves. A parent or guardian must lead the pony at all times." }]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Pools",
+      "slug": "pools",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 214, "text": "* ## Pools" }]
+      }
+    },
+    {
+      "title": "Chip ‘N’ Dale’s Campfire Sing-A-Long",
+      "slug": "chip-n-dales-campfire-sing-a-long",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 218, "text": "* ## Chip ‘N’ Dale’s Campfire Sing-A-Long" }]
+      }
+    },
+    {
+      "title": "Tri-Circle-D Ranch",
+      "slug": "tri-circle-d-ranch",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 227, "text": "* ## Tri-Circle-D Ranch" }]
+      }
+    },
+    {
+      "title": "Holiday Sleigh Rides",
+      "slug": "holiday-sleigh-rides",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 231, "text": "* ## Holiday Sleigh Rides" }]
+      }
+    },
+    {
+      "title": "Wagon Rides",
+      "slug": "wagon-rides",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 239, "text": "* ## Wagon Rides" }]
+      }
+    },
+    {
+      "title": "Fishing",
+      "slug": "fishing",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 245, "text": "* ## Fishing" }]
+      }
+    },
+    {
+      "title": "Electrical Water Pageant",
+      "slug": "electrical-water-pageant",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 250, "text": "* ## Electrical Water Pageant" }]
+      }
+    },
+    {
+      "title": "Bike Rentals",
+      "slug": "bike-rentals",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 258, "text": "* ## Bike Rentals" }]
+      }
+    },
+    {
+      "title": "Basketball Courts",
+      "slug": "basketball-courts",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 272, "text": "* ## Basketball Courts" }]
+      }
+    },
+    {
+      "title": "Jogging Trails",
+      "slug": "jogging-trails",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 275, "text": "* ## Jogging Trails" }]
+      }
+    },
+    {
+      "title": "Volleyball",
+      "slug": "volleyball",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 281, "text": "* ## Volleyball" }]
+      }
+    },
+    {
+      "title": "Playgrounds",
+      "slug": "playgrounds",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 286, "text": "* ## Playgrounds" }]
+      }
+    },
+    {
+      "title": "Davy Crockett’s Wilderness Arcade",
+      "slug": "davy-crocketts-wilderness-arcade",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 292, "text": "* ## Davy Crockett’s Wilderness Arcade" }]
+      }
+    },
+    {
+      "title": "Daniel Boone’s Wilderness Arcade",
+      "slug": "daniel-boones-wilderness-arcade",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 297, "text": "* ## Daniel Boone’s Wilderness Arcade" }]
+      }
+    },
+    {
+      "title": "Wilderness Back Trail Adventure",
+      "slug": "wilderness-back-trail-adventure",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 303, "text": "* ## Wilderness Back Trail Adventure" }]
+      }
+    },
+    {
+      "title": "Horse Drawn Excursion – Carriage Ride at Disney’s Fort Wilderness Resort & Campground",
+      "slug": "horse-drawn-excursion-carriage-ride-at-disneys-fort-wilderness-resort-campground",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 306, "text": "* ## Horse Drawn Excursion – Carriage Ride at Disney’s Fort Wilderness Resort & Campground" }]
+      }
+    }
+  ]
+}

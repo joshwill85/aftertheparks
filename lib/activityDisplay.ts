@@ -2,12 +2,17 @@ import { formatOrlandoTime } from "@/lib/daypart";
 import { getCategoryMeta } from "@/lib/categories/meta";
 import {
   formatScheduleTimeLabel,
+  parseScheduleTimeRange24h,
 } from "@/lib/text/time";
 import {
   isPdfGarbageText,
   isUncertainSchedule,
   normalizeActivityTitle,
 } from "@/lib/text/normalize";
+import {
+  isBlockedActivityTitle,
+  isOcrSpacedTitle,
+} from "@/lib/text/titleRepairs";
 import { slugToTitle } from "@/lib/utils";
 import { shouldHideByQuality, trustStateFromQuality } from "@/lib/displayQuality";
 
@@ -115,7 +120,9 @@ export function looksCorruptedTitle(raw: string): boolean {
   if (title.length > 80) return true;
   if (REPEATED_JUNK.test(title)) return true;
   if (PDF_DOTS.test(title)) return true;
+  if (isBlockedActivityTitle(title)) return true;
   if (SPACED_CAPS.test(title) || SPACED_MIXED.test(title)) return true;
+  if (isOcrSpacedTitle(title)) return true;
   if (SOURCE_FRAGMENT.test(title)) return true;
   if (SCHEDULE_FRAGMENT.test(title)) return true;
   if (isPdfGarbageText(title)) return true;
@@ -176,6 +183,12 @@ export function getDisplayTitle(activity: ActivityDisplayInput): string {
 
   const raw = getRawTitle(activity);
   const normalized = normalizeActivityTitle(raw);
+  const hasReliableRepair =
+    normalized &&
+    normalized !== raw &&
+    !looksCorruptedTitle(normalized);
+
+  if (hasReliableRepair) return normalized;
 
   if (!raw || looksCorruptedTitle(raw) || looksCorruptedTitle(normalized)) {
     return (
@@ -191,10 +204,14 @@ function stripPdfGarbage(text: string): string {
   let cleaned = text.trim().replace(/\s+/g, " ");
   cleaned = cleaned.replace(PDF_DOTS, " ");
   cleaned = cleaned.replace(/\s{2,}/g, " ").trim();
-  if (!cleaned || isPdfGarbageText(cleaned) || looksCorruptedTitle(cleaned)) {
+  if (!cleaned || isPdfGarbageText(cleaned)) {
     return "";
   }
-  return cleaned.length > 280 ? `${cleaned.slice(0, 277)}…` : cleaned;
+
+  if (cleaned.length <= 80 && looksCorruptedTitle(cleaned)) {
+    return "";
+  }
+  return cleaned;
 }
 
 function buildFallbackSummary(activity: ActivityDisplayInput): string {
@@ -279,17 +296,27 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
     activity.category === "nighttime_entertainment";
 
   if (scheduleText && !isUncertainSchedule(scheduleText)) {
+    const parsedRange = parseScheduleTimeRange24h(scheduleText, {
+      eveningDefault,
+    });
+    const hasExplicitRange = Boolean(parsedRange?.end);
     const fromText = formatScheduleTimeLabel(scheduleText, {
       eveningDefault,
     });
     if (fromText) {
-      if (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime)) {
+      if (
+        isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime) &&
+        !hasExplicitRange
+      ) {
         return { label: "Time needs confirmation", uncertain: true };
       }
       return { label: fromText, uncertain: false };
     }
 
-    if (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime)) {
+    if (
+      isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime) &&
+      !hasExplicitRange
+    ) {
       return { label: "Time needs confirmation", uncertain: true };
     }
     const label =
@@ -297,6 +324,10 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
         ? `${scheduleText.slice(0, 77)}…`
         : scheduleText;
     return { label, uncertain: false };
+  }
+
+  if (scheduleText && isUncertainSchedule(scheduleText)) {
+    return { label: "Time needs confirmation", uncertain: true };
   }
 
   if (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime)) {

@@ -5,7 +5,7 @@ import {
   type TrustState,
 } from "@/lib/activityDisplay";
 import { getCategoryMeta } from "@/lib/categories/meta";
-import { formatScheduleTimeLabel } from "@/lib/text/time";
+import { formatScheduleTimeLabel, parseScheduleTimeRange24h } from "@/lib/text/time";
 import { isPdfGarbageText, isUncertainSchedule, normalizeActivityTitle } from "@/lib/text/normalize";
 
 export type DisplayQualityTier = "hide" | "low" | "medium" | "high";
@@ -32,7 +32,7 @@ const BAD_LOCATION_PATTERNS = [
   /^(?:r\s*){3,}/i,
   /resort\s*activit/i,
   /\.{4,}/,
-  /^[a-z].{60,}$/i,
+  /^[a-z].{60,}$/,
 ];
 
 const SCHEDULE_FRAGMENT =
@@ -63,10 +63,9 @@ function isSuspiciousAllDayBlock(startIso?: string, endIso?: string): boolean {
 }
 
 function isCamelCaseSmash(title: string): boolean {
-  const collapsed = title.replace(/\s+/g, "");
-  if (collapsed.length < 8) return false;
-  if (/^[a-z]+$/.test(collapsed) && collapsed.length >= 10) return true;
-  return /[a-z][A-Z]/.test(collapsed) || /^[A-Z][a-z]+[A-Z]/.test(collapsed);
+  return title
+    .split(/\s+/)
+    .some((token) => token.length >= 8 && /[a-z][A-Z]/.test(token));
 }
 
 function resolveLocation(
@@ -97,9 +96,15 @@ export function computeDisplayQuality(
     activity.name ??
     activity.activity_name ??
     "";
+  const normalized = normalizeActivityTitle(raw);
+  const repairedDisplayTitle =
+    normalized && normalized !== raw && !looksCorruptedTitle(normalized)
+      ? normalized
+      : "";
   const slug = activity.normalized_name ?? activity.activitySlug ?? "";
   const displayTitle =
     activity.cleanTitle?.trim() ||
+    repairedDisplayTitle ||
     (raw && !looksCorruptedTitle(raw)
       ? normalizeActivityTitle(raw)
       : "") ||
@@ -109,11 +114,10 @@ export function computeDisplayQuality(
   const location = resolveLocation(activity.location);
 
   if (looksCorruptedTitle(raw)) {
-    score -= 30;
-    flags.push("corrupt_raw_title");
+    score -= repairedDisplayTitle ? 8 : 30;
+    flags.push(repairedDisplayTitle ? "repaired_raw_title" : "corrupt_raw_title");
   }
 
-  const normalized = normalizeActivityTitle(raw);
   if (normalized && looksCorruptedTitle(normalized)) {
     score -= 15;
     flags.push("corrupt_normalized_title");
@@ -136,23 +140,32 @@ export function computeDisplayQuality(
 
   if (location) {
     if (
-      looksCorruptedTitle(location) ||
+      (looksCorruptedTitle(location) && !/^throughout\b/i.test(location)) ||
       BAD_LOCATION_PATTERNS.some((p) => p.test(location)) ||
       isPdfGarbageText(location)
     ) {
       score -= 18;
       flags.push("bad_location");
     }
-    if (location.length > 72) {
+    if (location.length > 120) {
       score -= 8;
       flags.push("long_location");
     }
   }
 
+  const eveningDefault =
+    activity.category === "movies_under_stars" ||
+    activity.category === "campfire" ||
+    activity.category === "nighttime_entertainment";
+  const parsedRange = scheduleText
+    ? parseScheduleTimeRange24h(scheduleText, { eveningDefault })
+    : null;
+  const hasExplicitRange = Boolean(parsedRange?.end);
+
   if (scheduleText) {
     if (
       isPdfGarbageText(scheduleText) ||
-      SCHEDULE_FRAGMENT.test(scheduleText.trim())
+      (SCHEDULE_FRAGMENT.test(scheduleText.trim()) && !parsedRange)
     ) {
       score -= 12;
       flags.push("bad_schedule");
@@ -161,10 +174,6 @@ export function computeDisplayQuality(
 
   const timeUncertain = (() => {
     if (scheduleText && !isUncertainSchedule(scheduleText)) {
-      const eveningDefault =
-        activity.category === "movies_under_stars" ||
-        activity.category === "campfire" ||
-        activity.category === "nighttime_entertainment";
       if (formatScheduleTimeLabel(scheduleText, { eveningDefault })) {
         return false;
       }
@@ -181,8 +190,9 @@ export function computeDisplayQuality(
   }
 
   if (
-    isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime) ||
-    isBroadDayWindow(activity.startDateTime, activity.endDateTime)
+    !hasExplicitRange &&
+    (isSuspiciousAllDayBlock(activity.startDateTime, activity.endDateTime) ||
+      isBroadDayWindow(activity.startDateTime, activity.endDateTime))
   ) {
     score -= 18;
     flags.push("suspicious_time_window");
@@ -204,7 +214,6 @@ export function computeDisplayQuality(
   if (
     activity.category === "fitness_wellness" &&
     (titleLower.includes("arcade") ||
-      titleLower.includes("scavenger") ||
       titleLower.includes("tie") ||
       titleLower.includes("craft") ||
       titleLower.includes("game"))

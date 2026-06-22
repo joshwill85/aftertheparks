@@ -10,6 +10,18 @@ from dataclasses import dataclass, field
 import fitz
 import pytesseract
 from PIL import Image
+try:
+    from title_quality import (
+        is_blocked_activity_title,
+        is_ocr_spaced_title,
+        repair_known_activity_title,
+    )
+except ImportError:  # pragma: no cover - supports package-style imports in tests
+    from .title_quality import (
+        is_blocked_activity_title,
+        is_ocr_spaced_title,
+        repair_known_activity_title,
+    )
 
 try:
     import pdfplumber
@@ -111,9 +123,16 @@ def _clean_activity_name(name: str) -> str:
     if not name:
         return name
 
+    repaired = repair_known_activity_title(name)
+    if repaired:
+        return repaired
+
     tokens = name.split()
     short_tokens = sum(1 for t in tokens if len(t) <= 2)
     looks_spaced = len(tokens) >= 4 and short_tokens / len(tokens) >= 0.65
+
+    if is_ocr_spaced_title(name):
+        return name
 
     if looks_spaced or re.match(r"^(?:[A-Za-z]\s+){4,}[A-Za-z]$", name):
         collapsed = re.sub(r"\s+", "", name)
@@ -163,8 +182,11 @@ def _movie_title_quality(title: str) -> float:
     cleaned = _clean_movie_title(title)
     if not cleaned:
         return 0.0
-    alpha = sum(c.isalpha() for c in cleaned)
-    return alpha / len(cleaned)
+    basis = re.sub(r"\(\d{4}\)", "", cleaned).strip()
+    if not basis:
+        return 0.0
+    alpha = sum(c.isalpha() for c in basis)
+    return alpha / len(basis)
 
 
 def _clean_movie_title(title: str) -> str:
@@ -243,6 +265,11 @@ def extract_pdf_text(pdf_bytes: bytes) -> tuple[str, str]:
 
 
 HEADING_BLOCKLIST = ("activities schedule", "information digitally", "scan this qr code")
+PDF_BOILERPLATE_RE = re.compile(
+    r"ACTIVITIES SCHEDULE TO VIEW|THIS INFORMATION DIGITALLY!?|SCAN THIS QR CODE(?: AND SELECT)?|S\s*O\s*R\s*C",
+    re.I,
+)
+OCR_BLEED_RE = re.compile(r"\b(?:[A-Za-z]{1,2}\s+){4,}[A-Za-z]{1,2}\b(?:\s*\(\$\))?", re.I)
 
 
 def _is_heading(line: str, section_headers: set[str]) -> bool:
@@ -318,6 +345,89 @@ def _normalize_day_token(token: str) -> str | None:
     return DAY_ALIASES.get(cleaned)
 
 
+def _strip_source_noise(text: str) -> str:
+    cleaned = re.sub(r"\s+", " ", text).strip()
+    cleaned = PDF_BOILERPLATE_RE.sub(" ", cleaned)
+    cleaned = OCR_BLEED_RE.sub(" ", cleaned)
+    cleaned = re.sub(r"\s*\(\$\)\s*", " ", cleaned)
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip(" .|-")
+    return cleaned
+
+
+def _clean_location_field(location: str | None) -> str | None:
+    if not location:
+        return None
+    cleaned = _strip_source_noise(location)
+    if not cleaned:
+        return None
+    if is_blocked_activity_title(cleaned) or is_ocr_spaced_title(cleaned):
+        return None
+    if PDF_BOILERPLATE_RE.search(cleaned):
+        return None
+    return cleaned
+
+
+def _clean_schedule_field(schedule: str | None) -> str | None:
+    if not schedule:
+        return None
+    cleaned = _strip_source_noise(schedule)
+    if not cleaned:
+        return None
+    schedule_start = re.search(
+        rf"\b(Daily|Nightly|{DAY_NAME_PATTERN})\b.*",
+        cleaned,
+        flags=re.I,
+    )
+    if schedule_start:
+        cleaned = schedule_start.group(0).strip()
+    if is_ocr_spaced_title(cleaned) and not repair_known_activity_title(cleaned):
+        return None
+    if PDF_BOILERPLATE_RE.search(cleaned):
+        return None
+    return cleaned
+
+
+def _clean_description_field(description: str | None) -> str | None:
+    if not description:
+        return None
+    cleaned = _strip_source_noise(description)
+    if not cleaned:
+        return None
+    if PDF_BOILERPLATE_RE.search(cleaned):
+        cleaned = PDF_BOILERPLATE_RE.sub(" ", cleaned)
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip(" .|-")
+    return cleaned or None
+
+
+DAY_NAME_PATTERN = r"Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
+MOVIE_DAY_TITLE_RE = re.compile(
+    rf"\b({DAY_NAME_PATTERN})\b\s*(?:[.\s…]{{3,}}|[-–]\s+)(.+)",
+    re.I,
+)
+
+
+def _extract_movie_day_title(clean: str) -> tuple[str, str] | None:
+    match = MOVIE_DAY_TITLE_RE.search(clean)
+    if not match:
+        return None
+
+    day = _normalize_day_token(match.group(1))
+    if not day:
+        return None
+
+    title = match.group(2).strip(" .|")
+    next_day = MOVIE_DAY_TITLE_RE.search(title)
+    if next_day:
+        title = title[: next_day.start()].strip(" .|")
+    title = re.split(
+        rf"\s+\b(?:{DAY_NAME_PATTERN})\b\s+(?:and|at|from)\b",
+        title,
+        maxsplit=1,
+        flags=re.I,
+    )[0].strip(" .|")
+    return day, title
+
+
 def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | None:
     if not lines:
         return None
@@ -338,6 +448,25 @@ def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | Non
             location = parts[0]
             show_time = parts[1] if len(parts) > 1 else None
             continue
+        extracted_day_title = _extract_movie_day_title(clean)
+        if extracted_day_title:
+            day, title = extracted_day_title
+            title = re.sub(r"\[[^\]]*\]", "", title).strip(" .|")
+            title = re.sub(r"^[^A-Za-z0-9“\"]+", "", title)
+            title = re.sub(r"\|.*$", "", title).strip()
+            title = _clean_movie_title(title)
+            if title and _movie_title_quality(title) >= 0.55:
+                if not any(row["day_of_week"] == day for row in movie_nights):
+                    movie_nights.append({
+                        "day_of_week": day,
+                        "movie_title": title,
+                        "show_time": show_time or "",
+                        "rain_backup_location": rain_backup or "",
+                    })
+            elif title:
+                warnings.append(f"low_quality_movie_title:{title[:40]}")
+            continue
+
         if re.search(r"\d{1,2}:\d{2}", clean) and not movie_nights:
             show_time = clean
 
@@ -414,6 +543,114 @@ def _parse_movie_section(lines: list[str], section: str) -> ParsedActivity | Non
     )
 
 
+def _recover_movie_section(lines: list[str]) -> ParsedActivity | None:
+    for index, line in enumerate(lines):
+        upper = line.upper()
+        repaired = repair_known_activity_title(line)
+        if upper == "MOVIE UNDER THE STARS" or repaired in {
+            "Movie Under the Stars",
+            "Movies Under the Stars",
+        }:
+            window = lines[index + 1 : index + 32]
+            movie = _parse_movie_section(window, "MOVIE UNDER THE STARS")
+            if movie and movie.movie_nights:
+                return movie
+    return None
+
+
+def _recover_wellness_scavenger_description(lines: list[str]) -> str | None:
+    start = None
+    for index, line in enumerate(lines):
+        if "Find hidden wellness challenges" in line:
+            start = index
+            break
+    if start is None:
+        return None
+
+    collected: list[str] = []
+    saw_merchandise = False
+
+    def wellness_fragment(clean: str) -> bool:
+        lower = clean.lower()
+        if "play the latest and greatest family-friendly video games" in lower:
+            clean = clean[: lower.index("play the latest and greatest family-friendly video games")].strip()
+            lower = clean.lower()
+        if not clean:
+            return False
+        if "find hidden wellness challenges" in lower:
+            return True
+        if "scavenger hunt" in lower:
+            return True
+        if "pick up a map" in lower:
+            return True
+        if "donald" in lower or "maestro mickey" in lower or "sport goofy" in lower:
+            return True
+        if "sundries to start exploring" in lower:
+            return True
+        if "start exploring" in lower:
+            return True
+        if "finished the challenges" in lower or "challenges, pick up" in lower:
+            return True
+        if "pick up a prize" in lower:
+            return True
+        if "any merchandise location" in lower:
+            return True
+        if saw_merchandise and "disney" in lower and "all-star resorts" in lower:
+            return True
+        if "location at disney" in lower and "all-star resorts" in lower:
+            return True
+        return False
+
+    for line in lines[start : start + 22]:
+        clean = _clean_line(line)
+        if not clean:
+            continue
+        clean = re.sub(
+            r".*?(Find hidden wellness challenges.*)",
+            r"\1",
+            clean,
+            flags=re.I,
+        )
+        clean = re.sub(
+            r"\s*Play the latest and greatest family-friendly video games\.?.*$",
+            "",
+            clean,
+            flags=re.I,
+        ).strip()
+        if repair_known_activity_title(clean) in {
+            "Reel Fun Arcade",
+            "Poolside Activities",
+            "Find A Friend",
+        }:
+            continue
+        if is_blocked_activity_title(clean) or is_ocr_spaced_title(clean):
+            continue
+        if clean in {
+            "Inside Cinema Hall",
+            "Inside Melody Hall",
+            "Inside Stadium Hall",
+            "Note’able Games Arcade",
+            "Game Point Arcade",
+        }:
+            continue
+        if re.search(r"\b(?:Pool Deck|Fantasia Pool|Calypso Pool|Grand Slam Pool)\b", clean, re.I):
+            continue
+        if "Play the latest and greatest family-friendly video games" in clean:
+            continue
+        if re.search(r"\bDaily from 8:00am[–-]11:00pm\b", clean, re.I):
+            continue
+        if not wellness_fragment(clean):
+            continue
+        if "any merchandise location" in clean.lower():
+            saw_merchandise = True
+        collected.append(clean)
+        if saw_merchandise and re.search(r"Disney.s All-Star Resorts\.", clean, re.I):
+            break
+
+    description = _clean_description_field(" ".join(collected))
+    return description
+
+
 def parse_ocr_text(
     text: str,
     *,
@@ -452,12 +689,27 @@ def parse_ocr_text(
 
     for line in lines:
         upper = line.upper()
-        if upper in headers or upper.startswith("SIGNATURE ACTIVIT"):
+        repaired_heading = repair_known_activity_title(line)
+        is_movie_heading = (
+            upper == "MOVIE UNDER THE STARS" or repaired_heading in {
+                "Movie Under the Stars",
+                "Movies Under the Stars",
+            }
+        )
+        if upper in headers or upper.startswith("SIGNATURE ACTIVIT") or is_movie_heading:
             flush_block()
-            current_section = "SIGNATURE ACTIVITIES" if "SIGNATURE" in upper else upper
+            if is_movie_heading:
+                current_section = "MOVIE UNDER THE STARS"
+                current_name = "Movie Under the Stars"
+            else:
+                current_section = "SIGNATURE ACTIVITIES" if "SIGNATURE" in upper else upper
+                current_name = None
+            buffer = []
             continue
         if _is_heading(line, headers) and not line.lower().startswith("($)"):
             flush_block()
+            if current_section == "MOVIE UNDER THE STARS":
+                current_section = "RESORT ACTIVITIES"
             current_name = line.title() if line.isupper() else line
             buffer = []
             continue
@@ -484,6 +736,33 @@ def parse_ocr_text(
             act = _parse_activity_block(name, chunk_lines, current_section)
             if act:
                 activities.append(act)
+
+    recovered_movie = _recover_movie_section(lines)
+    if recovered_movie:
+        replaced = False
+        for index, act in enumerate(activities):
+            if act.normalized_name == "movie-under-the-stars" and not act.movie_nights:
+                activities[index] = recovered_movie
+                replaced = True
+                break
+        if not replaced and not any(
+            act.normalized_name == "movie-under-the-stars" for act in activities
+        ):
+            activities.append(recovered_movie)
+
+    wellness_description = _recover_wellness_scavenger_description(lines)
+    if wellness_description:
+        for act in activities:
+            if act.normalized_name != "wellness-scavenger-hunt":
+                continue
+            has_complete_description = (
+                act.description
+                and "any merchandise location" in act.description.lower()
+                and "latest and greatest family-friendly video games" not in act.description.lower()
+            )
+            if not has_complete_description:
+                act.description = wellness_description
+            act.is_fee_based = False
 
     merged: dict[str, ParsedActivity] = {}
     for act in activities:
@@ -516,8 +795,10 @@ def _parse_activity_block(name: str, lines: list[str], section: str) -> ParsedAc
         return None
 
     warnings: list[str] = []
-    is_fee = "($)" in name or any("($)" in l for l in lines)
+    is_fee = "($)" in name
     name = _clean_activity_name(re.sub(r"\s*\(\$\)\s*", "", name).strip())
+    if is_blocked_activity_title(name):
+        return None
 
     location = None
     schedule = None
@@ -538,6 +819,9 @@ def _parse_activity_block(name: str, lines: list[str], section: str) -> ParsedAc
         description_lines.append(line)
 
     schedule = schedule or (lines[1] if len(lines) > 1 else None)
+    location = _clean_location_field(location)
+    schedule = _clean_schedule_field(schedule)
+    description = _clean_description_field(" ".join(description_lines)[:500] if description_lines else None)
     is_daily, days = _parse_days(schedule or "")
     start, end = _parse_times(schedule or "")
     category = categorize(name, section)
@@ -556,7 +840,7 @@ def _parse_activity_block(name: str, lines: list[str], section: str) -> ParsedAc
         section=section,
         location=location,
         schedule_text=schedule,
-        description=" ".join(description_lines)[:500] if description_lines else None,
+        description=description,
         is_fee_based=is_fee,
         is_daily=is_daily,
         days_of_week=days,

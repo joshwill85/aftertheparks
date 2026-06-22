@@ -14,8 +14,8 @@ export function sanitizeLocationLabel(
 ): string {
   const label = value?.trim().replace(/\s+/g, " ") ?? "";
   if (!label) return "Resort";
-  if (label.length > 72) return "Resort";
-  if (looksCorruptedTitle(label)) return "Resort";
+  if (label.length > 120) return "Resort";
+  if (looksCorruptedTitle(label) && !/^throughout\b/i.test(label)) return "Resort";
   if (isPdfGarbageText(label)) return "Resort";
   if (BAD_LOCATION_PATTERNS.some((p) => p.test(label))) return "Resort";
   if (/^[a-z]/.test(label) && label.length > 40) return "Resort";

@@ -46,9 +46,6 @@ jobs:
           if issues:
               for row in issues:
                   print(f"HEALTH: {row}")
-              # Warn but do not fail on needs_review during bootstrap
-              blocking = [r for r in issues if r.get("check_name") == "missing_current_edition"]
-              if blocking:
-                  sys.exit(1)
+              sys.exit(1)
           print("Health check passed")
           PY

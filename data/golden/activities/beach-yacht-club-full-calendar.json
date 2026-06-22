@@ -1,0 +1,209 @@
+{
+  "calendar_group_key": "beach-yacht-club",
+  "source_pdf": "data/raw/pdfs/YB_Aframe_Recreation-1125.pdf",
+  "source_pdf_sha256": "fb154afff1f442857eb610b53c770158c3a29b7db3d99f636917ec12f7337470",
+  "expected_records": [
+    {
+      "title": "Lafferty Place Arcade",
+      "slug": "lafferty-place-arcade",
+      "category": "arcade",
+      "schedule_text": "Daily from 8:00am–11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm",
+      "location": "Lafferty Place Arcade",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 3 }],
+        "location": [{ "page": 1, "line": 3 }],
+        "schedule": [{ "page": 1, "line": 6 }],
+        "description": [{ "page": 1, "line": 7 }]
+      }
+    },
+    {
+      "title": "Boat Rentals",
+      "slug": "boat-rentals",
+      "category": "other",
+      "schedule_text": "Daily from 11:00am–5:00pm",
+      "start_time": "11:00am",
+      "end_time": "5:00pm",
+      "location": "Bayside Marina",
+      "description": "",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 8 }],
+        "location": [{ "page": 1, "line": 9 }],
+        "schedule": [{ "page": 1, "line": 10 }]
+      }
+    },
+    {
+      "title": "Featured Craft",
+      "slug": "featured-craft",
+      "category": "other",
+      "schedule_text": "Daily from 11:30am–12:30pm",
+      "start_time": "11:30am",
+      "end_time": "12:30pm",
+      "location": "Beach Club Solarium",
+      "description": "Join us to create a seasonal craft to take home!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 12 }],
+        "location": [{ "page": 1, "line": 13 }],
+        "schedule": [{ "page": 1, "line": 14 }],
+        "description": [{ "page": 1, "line": 16 }]
+      }
+    },
+    {
+      "title": "Ship Shape Fitness Center",
+      "slug": "ship-shape-fitness-center",
+      "category": "other",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "start_time": "12:00am",
+      "end_time": "11:59pm",
+      "location": "Ship Shape Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 15 }],
+        "location": [{ "page": 1, "line": 15 }],
+        "schedule": [{ "page": 1, "line": 17 }],
+        "description": [{ "page": 1, "line": 19 }, { "page": 1, "line": 20 }]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily at 1:00pm",
+      "start_time": "1:00pm",
+      "end_time": null,
+      "location": "Stormalong Bay Pool",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 18 }],
+        "location": [{ "page": 1, "line": 21 }],
+        "schedule": [{ "page": 1, "line": 22 }],
+        "description": [{ "page": 1, "line": 23 }, { "page": 1, "line": 24 }]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Shipwreck Beach | 7:30PM",
+      "start_time": "7:30pm",
+      "end_time": null,
+      "location": "Shipwreck Beach",
+      "description": "",
+      "is_fee_based": false,
+      "movie_nights": [
+        { "day_of_week": "sunday", "movie_title": "Toy Story", "show_time": "7:30PM" },
+        { "day_of_week": "tuesday", "movie_title": "101 Dalmatians (1961)", "show_time": "7:30PM" },
+        { "day_of_week": "thursday", "movie_title": "The Santa Clause", "show_time": "7:30PM" },
+        { "day_of_week": "saturday", "movie_title": "Tangled", "show_time": "7:30PM" }
+      ],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 25 }],
+        "location": [{ "page": 1, "line": 28 }],
+        "schedule": [{ "page": 1, "line": 28 }],
+        "movie_nights": [
+          { "page": 1, "line": 30 },
+          { "page": 1, "line": 32 },
+          { "page": 1, "line": 35 },
+          { "page": 1, "line": 37 }
+        ]
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "category": "arts_crafts",
+      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm–4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Beach Club Beach",
+      "description": "Join us for arts and crafts that are fun for the whole family!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 26 }],
+        "location": [{ "page": 1, "line": 27 }],
+        "schedule": [{ "page": 1, "line": 29 }],
+        "description": [{ "page": 1, "line": 31 }]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm–4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Beach Club Beach",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite! In the event of inclement weather, an alternative activity will be offered in the Solarium at Disney’s Beach Club Resort.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 33 }],
+        "location": [{ "page": 1, "line": 34 }],
+        "schedule": [{ "page": 1, "line": 36 }, { "page": 1, "line": 38 }],
+        "description": [
+          { "page": 1, "line": 39 },
+          { "page": 1, "line": 41 },
+          { "page": 1, "line": 43 },
+          { "page": 1, "line": 44 }
+        ]
+      }
+    },
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 5:30pm–7:00pm",
+      "start_time": "5:30pm",
+      "end_time": "7:00pm",
+      "location": "Shipwreck Beach",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 45 }],
+        "location": [{ "page": 1, "line": 46 }],
+        "schedule": [{ "page": 1, "line": 47 }],
+        "description": [{ "page": 1, "line": 48 }, { "page": 1, "line": 49 }]
+      }
+    },
+    {
+      "title": "Silent Disco",
+      "slug": "silent-disco",
+      "category": "other",
+      "schedule_text": "Monday and Friday from 7:30pm–8:30pm",
+      "start_time": "7:30pm",
+      "end_time": "8:30pm",
+      "location": "Shipwreck Beach",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 50 }],
+        "location": [{ "page": 1, "line": 51 }],
+        "schedule": [{ "page": 1, "line": 52 }],
+        "description": [{ "page": 1, "line": 53 }, { "page": 1, "line": 54 }]
+      }
+    },
+    {
+      "title": "Ultimate Trivia Challenge",
+      "slug": "ultimate-trivia-challenge",
+      "category": "other",
+      "schedule_text": "Wednesday at 7:30pm",
+      "start_time": "7:30pm",
+      "end_time": null,
+      "location": "Beach Club Villas Drawing Room",
+      "description": "Bring the family and put your Disney knowledge to the test with the ultimate trivia challenge.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 55 }],
+        "location": [{ "page": 1, "line": 56 }],
+        "schedule": [{ "page": 1, "line": 57 }],
+        "description": [{ "page": 1, "line": 58 }, { "page": 1, "line": 59 }]
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "knownFieldRepairs": [
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "slug": "cajun-campfire",
+      "field": "location",
+      "raw_value": "Campfire",
+      "value": "Campfire Pit Between Buildings 5 and 6",
+      "reason": "Reviewed visual source: OCR truncated the green location line after the first word."
+    },
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "slug": "nighttime-trivia-challenge",
+      "field": "location",
+      "raw_value": "Lagoon Pool Deck",
+      "value": "Doubloon Lagoon Pool Deck",
+      "reason": "Reviewed visual source: OCR dropped the leading word from the green location line."
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "slug": "under-the-seashell-painting",
+      "field": "is_fee_based",
+      "raw_value": "UNDER THE SEASHELL PAINTING",
+      "value": "true",
+      "reason": "Reviewed visual source: the activity title includes a ($) fee marker, but the full-page enhanced OCR dropped the marker while preserving the title text."
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "slug": "cabana-rentals",
+      "field": "description",
+      "raw_value": "To make a reservation, please call 407-WWDW-PLAY.",
+      "value": "To make a reservation, please call 407-WDW-PLAY.",
+      "reason": "Reviewed visual source: OCR duplicated the W in the Disney phone wordmark while preserving the rest of the reservation sentence."
+    },
+    {
+      "calendar_group_key": "pop-century",
+      "slug": "poolside-activities",
+      "field": "schedule",
+      "raw_value": "Daily from 1:;00pm-2:30pm",
+      "value": "Daily from 1:00pm-2:30pm",
+      "reason": "Reviewed visual source: OCR inserted a semicolon into the 1:00pm time while preserving the rest of the schedule range."
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "slug": "disney-fit-yoga",
+      "field": "description",
+      "raw_value": "Ground yourself with a gentle yoga session to start your day. Designed for al levels, this experience incorporates various poses set to your favorite Disney music!",
+      "value": "Ground yourself with a gentle yoga session to start your day. Designed for all skill levels, this experience incorporates various poses set to your favorite Disney music!",
+      "reason": "Reviewed visual source: OCR dropped one l and the word skill from the yoga description."
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "slug": "conch-crazy-bingo",
+      "field": "description",
+      "raw_value": "Bring the family toaether for an unforaettable binao night ull of fun, joy, and prizes!",
+      "value": "Bring the family together for an unforgettable bingo night full of fun, joy, and prizes!",
+      "reason": "Reviewed visual source: OCR damaged together, unforgettable, bingo, and full in the bingo description."
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "slug": "conch-flats-mosaics",
+      "field": "description",
+      "raw_value": "Design your own mosaic showpiece with a touch of Disney and up. Class may take up to 2 hours. Reservations are required. Please visit Community Hall or call 407-827-1183 to reserve your spot. Space is limited. Weather permitting.",
+      "value": "Design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Class may take up to 2 hours. Reservations are required. Please visit Community Hall or call 407-827-1183 to reserve your spot. Space is limited. Weather permitting.",
+      "reason": "Reviewed visual source: OCR skipped the line containing flair and the recommended age phrase in the mosaics description."
+    }
+  ]
+}

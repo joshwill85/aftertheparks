@@ -9,18 +9,18 @@ export const NEARBY_TIER_META: Record<
   { label: string; description: string; icon: string }
 > = {
   at_resort: {
-    label: "At your resort",
-    description: "Walkable — no transportation needed.",
+    label: "At this resort",
+    description: "Listed for this resort; confirm the exact meeting spot.",
     icon: "🏨",
   },
   one_ride: {
-    label: "One ride away",
-    description: "Same resort area — a quick bus or boat hop.",
+    label: "Nearby resort area",
+    description: "Same resort area; check the best route before heading over.",
     icon: "🚐",
   },
   worth_travel: {
-    label: "Worth traveling for",
-    description: "A standout moment if you have the evening free.",
+    label: "Worth checking travel for",
+    description: "A standout moment if timing and transportation work.",
     icon: "✨",
   },
 };

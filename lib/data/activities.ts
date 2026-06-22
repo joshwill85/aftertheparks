@@ -11,15 +11,21 @@ import {
   filterTonight,
 } from "@/lib/occurrences/expand";
 import { shouldHideActivity } from "@/lib/activityDisplay";
+import { canonicalActivitySlug } from "@/lib/activities/legacySlugs";
 import { rankActivitiesByQuery, runSearch } from "@/lib/search/runSearch";
 import { sortActivities, type ActivitySortKey } from "@/lib/activities/sort";
 import {
   annotateHappeningNow,
   getActivityAvailability,
 } from "@/lib/availability";
+import {
+  fetchGoldActivityOccurrences,
+  loadGoldPreviewOccurrences,
+} from "@/lib/data/goldActivities";
 import { sanitizePublicActivities, ensurePublicActivity, dedupeOccurrences } from "@/lib/api/publicActivities";
 import {
   addOrlandoDays,
+  isSameOrlandoDay,
   nowInstant,
   orlandoDateString,
 } from "@/lib/daypart";
@@ -54,6 +60,16 @@ const DEMO_RESORTS: ResortSummary[] = [
   },
 ];
 
+export const DEFAULT_ACTIVITY_DATA_PIPELINE = "gold-v2";
+
+export function activityDataPipeline(): string {
+  return (
+    process.env.ACTIVITY_DATA_PIPELINE ??
+    process.env.NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE ??
+    DEFAULT_ACTIVITY_DATA_PIPELINE
+  );
+}
+
 function demoOccurrences(): ActivityOccurrence[] {
   const now = new Date();
   const evening = new Date(now);
@@ -85,7 +101,7 @@ function demoOccurrences(): ActivityOccurrence[] {
       eligibility: { ages: ["all_ages"] },
       freshness: {
         lastVerified: now.toISOString(),
-        sourceUrl: "https://aftertheparks.com/data-sources",
+        sourceUrl: "",
         badge: "verified",
       },
       status: "active",
@@ -113,7 +129,7 @@ function demoOccurrences(): ActivityOccurrence[] {
       eligibility: { ages: ["all_ages"] },
       freshness: {
         lastVerified: now.toISOString(),
-        sourceUrl: "https://aftertheparks.com/data-sources",
+        sourceUrl: "",
         badge: "verified",
       },
       status: "active",
@@ -190,6 +206,14 @@ async function fetchResortMeta(): Promise<
 export async function getAllOccurrences(
   dateRangeDays = 7
 ): Promise<ActivityOccurrence[]> {
+  const pipeline = activityDataPipeline();
+  if (pipeline === "gold-v2-preview") {
+    return loadGoldPreviewOccurrences(dateRangeDays);
+  }
+  if (pipeline === "gold-v2") {
+    return fetchGoldActivityOccurrences(dateRangeDays);
+  }
+
   if (!isSupabaseConfigured()) return demoOccurrences();
 
   const [raw, enrichmentMap, rules, resortMeta] = await Promise.all([
@@ -304,10 +328,12 @@ export async function getActivityBySlug(
   slug: string
 ): Promise<{ activity: ActivityOccurrence; upcoming: ActivityOccurrence[] } | null> {
   const all = await getAllOccurrences(14);
-  const matches = all.filter((o) => o.activitySlug === slug);
+  const canonicalSlug = canonicalActivitySlug(slug);
+  const matches = all.filter((o) => o.activitySlug === canonicalSlug);
   if (matches.length === 0) return null;
 
-  const now = new Date();
+  const now = nowInstant();
+  const todayStr = orlandoDateString(now);
   const upcoming = matches
     .filter((o) => new Date(o.startDateTime) >= now)
     .sort(
@@ -315,8 +341,13 @@ export async function getActivityBySlug(
         new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
     );
 
+  const featured =
+    upcoming.find((o) => isSameOrlandoDay(o.startDateTime, todayStr)) ??
+    upcoming[0] ??
+    matches[0];
+
   return {
-    activity: ensurePublicActivity(upcoming[0] ?? matches[0]),
+    activity: ensurePublicActivity(featured),
     upcoming: sanitizePublicActivities(upcoming.slice(0, 14)),
   };
 }
@@ -439,7 +470,10 @@ export async function getCuratedHomeActivities(options: {
     .filter((o) => o.price.state === "free")
     .slice(0, options.freeLimit ?? 6);
 
-  const littleKids = kidsPool.slice(0, options.kidsLimit ?? 4);
+  const todayKids = today.filter((o) => o.category === "arts_crafts");
+  const littleKids = (
+    todayKids.length > 0 ? todayKids : kidsPool
+  ).slice(0, options.kidsLimit ?? 4);
 
   return { freeToday, littleKids };
 }

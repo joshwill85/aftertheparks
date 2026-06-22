@@ -1,0 +1,282 @@
+{
+  "calendar_group_key": "contemporary",
+  "source_pdf": "data/raw/pdfs/CTR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "7e211f9972fb47a554a34ade40864a6304eea41c421cc67a4026f2a2519631a5",
+  "expected_records": [
+    {
+      "title": "Cabana Rentals",
+      "slug": "cabana-rentals",
+      "category": "other",
+      "schedule_text": "Daily from 10:00am-7:00pm",
+      "start_time": "10:00am",
+      "end_time": "7:00pm",
+      "location": "Contemporary Feature Pool",
+      "description": "To make a reservation, please call 407-WDW-PLAY.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 4, "text": "CABANA RENTALS ($)" }],
+        "location": [{ "page": 1, "line": 8, "text": "Contemporary Feature Pool" }],
+        "schedule": [{ "page": 1, "line": 9, "text": "Daily from 10:00am-7:00pm" }],
+        "description": [{ "page": 1, "line": 11, "text": "To make a reservation, please call 407-WWDW-PLAY." }]
+      }
+    },
+    {
+      "title": "Motorized Boat Rentals",
+      "slug": "motorized-boat-rentals",
+      "category": "other",
+      "schedule_text": "Daily from 11:00am-5:00pm",
+      "start_time": "11:00am",
+      "end_time": "5:00pm",
+      "location": "The Boat Nook Marina",
+      "description": "",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 15, "text": "MOTORIZED BOAT RENTALS ($)" }],
+        "location": [{ "page": 1, "line": 17, "text": "The Boat Nook Marina" }],
+        "schedule": [{ "page": 1, "line": 18, "text": "Daily from 11:00am-5:00pm" }]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Sunday, Tuesday, Wednesday, Thursday and Saturday at 1:00pm; Monday and Friday at 2:30pm",
+      "start_time": "1:00pm",
+      "end_time": null,
+      "location": "Contemporary Feature Pool",
+      "description": "Join us for fun-filled games and dancing, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 19, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [
+          { "page": 1, "line": 21, "text": "Contemporary Feature Pool: Sunday, Tuesday," },
+          { "page": 1, "line": 23, "text": "Contemporary Feature Pool: Monday and Friday at 2:30pm" }
+        ],
+        "schedule": [
+          { "page": 1, "line": 21, "text": "Contemporary Feature Pool: Sunday, Tuesday," },
+          { "page": 1, "line": 22, "text": "Wednesday, Thursday and Saturday at 1:00pm" },
+          { "page": 1, "line": 23, "text": "Contemporary Feature Pool: Monday and Friday at 2:30pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 25, "text": "Join us for fun-filled games and dancing, both in and" },
+          { "page": 1, "line": 27, "text": "out of the pool. See a Recreation Cast Member for" },
+          { "page": 1, "line": 29, "text": "more information." }
+        ]
+      }
+    },
+    {
+      "title": "Olympiad Fitness Center",
+      "slug": "olympiad-fitness-center",
+      "category": "other",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "start_time": "12:00am",
+      "end_time": "11:59pm",
+      "location": "Olympiad Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 24, "text": "OLYMPIAD FITNESS CENTER" }],
+        "location": [{ "page": 1, "line": 24, "text": "OLYMPIAD FITNESS CENTER" }],
+        "schedule": [{ "page": 1, "line": 28, "text": "Open 24 hours a day, 7 days a week" }],
+        "description": [
+          { "page": 1, "line": 30, "text": "Continue pushing towards your wellness goals in" },
+          { "page": 1, "line": 31, "text": "our full-service fitness center." }
+        ]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Outside of Community Hall at Bay Lake Tower",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 32, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 33, "text": "Outside of Community Hall at Bay Lake Tower" }],
+        "schedule": [
+          { "page": 1, "line": 35, "text": "Sunday, Tuesday, Thursday" },
+          { "page": 1, "line": 37, "text": "and Saturday from 3:00pm-4:00pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 38, "text": "Get creative with a Disney twist on this arts and" },
+          { "page": 1, "line": 40, "text": "crafts favorite!" }
+        ]
+      }
+    },
+    {
+      "title": "Pickleball Clinic",
+      "slug": "pickleball-clinic",
+      "category": "other",
+      "schedule_text": "Wednesday from 9:00am-10:00am",
+      "start_time": "9:00am",
+      "end_time": "10:00am",
+      "location": "Bay Lake Tower Sports Court",
+      "description": "This complimentary introduction to pickleball will teach the basics of the game everyone is talking about. Learn skills and techniques, then compete in our Pickleball Challenge at the end of the clinic! Visit Community Hall or call 407-824-1347 to pre-register. Space is limited.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 39, "text": "PICKLEBALL CLINIC" }],
+        "location": [{ "page": 1, "line": 41, "text": "Bay Lake Tower Sports Court" }],
+        "schedule": [{ "page": 1, "line": 42, "text": "Wednesday from 9:00am-10:00am" }],
+        "description": [
+          { "page": 1, "line": 44, "text": "This complimentary introduction to pickleball will" },
+          { "page": 1, "line": 46, "text": "teach the basics of the game everyone is talking" },
+          { "page": 1, "line": 48, "text": "about. Learn skills and techniques, then compete" },
+          { "page": 1, "line": 50, "text": "in our Pickleball Challenge at the end of the clinic!" },
+          { "page": 1, "line": 52, "text": "Visit Community Hall or call 407-824-1347 to" },
+          { "page": 1, "line": 54, "text": "pre-register. Space is limited." }
+        ]
+      }
+    },
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "start_time": "6:00pm",
+      "end_time": "7:00pm",
+      "location": "Courtyard Campfire Pit between Contemporary Tower and Bay Lake Tower",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 43, "text": "CAMPFIRE" }],
+        "location": [
+          { "page": 1, "line": 45, "text": "Courtyard Campfire Pit between Contemporary Tower" },
+          { "page": 1, "line": 47, "text": "and Bay Lake Tower" }
+        ],
+        "schedule": [{ "page": 1, "line": 49, "text": "Nightly from 6:00pm-7:00pm" }],
+        "description": [
+          { "page": 1, "line": 51, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 53, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Silent Disco",
+      "slug": "silent-disco",
+      "category": "other",
+      "schedule_text": "Sunday, Monday, Wednesday and Friday from 8:00pm-9:00pm",
+      "start_time": "8:00pm",
+      "end_time": "9:00pm",
+      "location": "Contemporary Courtyard",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 55, "text": "SILENT DISCO" }],
+        "location": [{ "page": 1, "line": 57, "text": "Contemporary Courtyard" }],
+        "schedule": [
+          { "page": 1, "line": 59, "text": "Sunday, Monday, Wednesday and Friday" },
+          { "page": 1, "line": 61, "text": "from 8:00pm-9:00pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 63, "text": "Choose your favorite music, don your own headphones," },
+          { "page": 1, "line": 65, "text": "and “silently” dance the night away with us!" }
+        ]
+      }
+    },
+    {
+      "title": "Disney Fit Yoga",
+      "slug": "disney-fit-yoga",
+      "category": "fitness_wellness",
+      "schedule_text": "Friday at 8:00am",
+      "start_time": "8:00am",
+      "end_time": null,
+      "location": "The Lawn between Contemporary Tower and Bay Lake Tower",
+      "description": "Ground yourself with a gentle yoga session. Designed for all levels, this experience incorporates various poses set to your favorite Disney music!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 56, "text": "DISNEY FIT YOGA" }],
+        "location": [
+          { "page": 1, "line": 58, "text": "The Lawn between Contemporary Tower" },
+          { "page": 1, "line": 60, "text": "and Bay Lake Tower" }
+        ],
+        "schedule": [{ "page": 1, "line": 62, "text": "Friday at 8:00am" }],
+        "description": [
+          { "page": 1, "line": 64, "text": "Ground yourself with a gentle yoga session." },
+          { "page": 1, "line": 66, "text": "Designed for all levels, this experience incorporates" },
+          { "page": 1, "line": 67, "text": "various poses set to your favorite Disney music!" }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "The Lawn Near Contemporary Courtyard | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "The Lawn Near Contemporary Courtyard",
+      "description": "",
+      "is_fee_based": false,
+      "movie_nights": [
+        { "day_of_week": "tuesday", "movie_title": "Frozen 2", "show_time": "8:30PM" },
+        { "day_of_week": "thursday", "movie_title": "A Goofy Movie", "show_time": "8:30PM" },
+        { "day_of_week": "saturday", "movie_title": "The Little Mermaid (1989)", "show_time": "8:30PM" }
+      ],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 69, "text": "MOVIE UNDER THE STARS" }],
+        "location": [
+          { "page": 1, "line": 72, "text": "THE LAWN NEAR" },
+          { "page": 1, "line": 74, "text": "CONTEMPORARY COURTYARD | 8:30PM" }
+        ],
+        "schedule": [
+          { "page": 1, "line": 72, "text": "THE LAWN NEAR" },
+          { "page": 1, "line": 74, "text": "CONTEMPORARY COURTYARD | 8:30PM" }
+        ],
+        "movie_nights": [
+          { "page": 1, "line": 77, "text": "Tuesday" },
+          { "page": 1, "line": 78, "text": "Frozen 2" },
+          { "page": 1, "line": 81, "text": "Thursday" },
+          { "page": 1, "line": 80, "text": "A Goofy Movie |" },
+          { "page": 1, "line": 84, "text": "Saturday" },
+          { "page": 1, "line": 83, "text": "The Little Mermaid (1989)" }
+        ]
+      }
+    },
+    {
+      "title": "The Magic Of Mosaics",
+      "slug": "the-magic-of-mosaics",
+      "category": "arts_crafts",
+      "schedule_text": "Monday and Friday from 1:00pm-3:00pm",
+      "start_time": "1:00pm",
+      "end_time": "3:00pm",
+      "location": "Lakeside Landing between the Boat Nook Marina and Contemporary Feature Pool",
+      "description": "Create your own one-of-a-kind mosaic inspired by the artwork of Mary Blair! Visit Community Hall or call 407-824-1347 to book this experience. Check-in begins at 12:45pm to participate.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 70, "text": "THE MAGIC OF MOSAICS ($)" }],
+        "location": [
+          { "page": 1, "line": 71, "text": "Lakeside Landing between the Boat Nook Marina" },
+          { "page": 1, "line": 73, "text": "and Contemporary Feature Pool" }
+        ],
+        "schedule": [{ "page": 1, "line": 75, "text": "Monday and Friday from 1:00pm-3:00pm" }],
+        "description": [
+          { "page": 1, "line": 76, "text": "Create your own one-of-a-kind mosaic inspired by" },
+          { "page": 1, "line": 79, "text": "the artwork of Mary Blair! Visit Community Hall or" },
+          { "page": 1, "line": 82, "text": "call 407-824-1347 to book this experience. Check-in" },
+          { "page": 1, "line": 85, "text": "begins at 12:45pm to participate." }
+        ]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Sports Courts",
+      "slug": "sports-courts",
+      "category": "other",
+      "schedule_text": "",
+      "start_time": null,
+      "end_time": null,
+      "location": "",
+      "description": "Offerings include Basketball, Tennis and Pickleball.",
+      "is_fee_based": false,
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 34, "text": "SPORTS COURTS" }]
+      }
+    }
+  ]
+}

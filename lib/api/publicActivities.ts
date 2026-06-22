@@ -9,7 +9,7 @@ import {
 } from "@/lib/displayQuality";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
-const FALLBACK_SOURCE = "https://aftertheparks.com/data-sources";
+const REQUIRED_PROVENANCE_FIELDS = ["title", "schedule", "location"] as const;
 
 function toDisplayInput(activity: ActivityOccurrence) {
   return occurrenceToDisplayInput({
@@ -22,23 +22,56 @@ function toDisplayInput(activity: ActivityOccurrence) {
   });
 }
 
+function hasSourceEvidence(activity: ActivityOccurrence): boolean {
+  return Boolean(activity.source?.url && activity.source?.documentHash);
+}
+
+function hasRequiredProvenance(activity: ActivityOccurrence): boolean {
+  return REQUIRED_PROVENANCE_FIELDS.every((field) => {
+    const spans = activity.fieldProvenance?.[field];
+    return Array.isArray(spans) && spans.length > 0;
+  });
+}
+
+function hasUnsupportedClaims(activity: ActivityOccurrence): boolean {
+  return Object.values(activity.claims ?? {}).some((claim) => {
+    const value = claim.value?.trim().toLowerCase();
+    if (!value || value === "unknown" || value === "not_applicable") return false;
+    return !claim.evidence || claim.evidence.length === 0;
+  });
+}
+
+function hasVerifiedSourceContract(activity: ActivityOccurrence): boolean {
+  return (
+    hasSourceEvidence(activity) &&
+    hasRequiredProvenance(activity) &&
+    !hasUnsupportedClaims(activity)
+  );
+}
+
 /** Ensure every public activity has honest freshness metadata. */
 export function ensurePublicActivity(
   activity: ActivityOccurrence
 ): ActivityOccurrence {
   const quality = computeDisplayQuality(toDisplayInput(activity));
+  const sourceContractVerified = hasVerifiedSourceContract(activity);
+  const displaySafe = quality.tier !== "hide" && quality.tier !== "low";
   const badge =
     activity.freshness?.badge === "stale"
       ? "stale"
-      : quality.tier === "high"
+      : displaySafe && sourceContractVerified
         ? "verified"
         : "stale";
+  const trustState =
+    activity.trustState ??
+    (sourceContractVerified ? "source_backed" : "source_unclear");
 
   return {
     ...activity,
+    trustState,
     freshness: {
       lastVerified: activity.freshness?.lastVerified ?? new Date().toISOString(),
-      sourceUrl: activity.freshness?.sourceUrl || FALLBACK_SOURCE,
+      sourceUrl: activity.freshness?.sourceUrl ?? "",
       badge,
     },
   };

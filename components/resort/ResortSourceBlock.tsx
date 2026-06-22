@@ -30,14 +30,6 @@ export function ResortSourceBlock({ resort }: { resort: ResortSummary }) {
         )}
         <li>
           <Link
-            href="/data-sources"
-            className="inline-flex min-h-11 items-center font-bold text-[var(--accent)] hover:underline"
-          >
-            How we source data →
-          </Link>
-        </li>
-        <li>
-          <Link
             href="/corrections"
             className="inline-flex min-h-11 items-center font-bold text-[var(--accent)] hover:underline"
           >

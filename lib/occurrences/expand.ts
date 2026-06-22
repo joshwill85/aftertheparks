@@ -27,7 +27,11 @@ import {
   toDisplayInput,
 } from "@/lib/activityDisplay";
 import { sanitizeLocationLabel } from "@/lib/location/sanitize";
-import { parseScheduleTime24h, toTimeSql } from "@/lib/text/time";
+import {
+  parseScheduleTime24h,
+  parseScheduleTimeRange24h,
+  toTimeSql,
+} from "@/lib/text/time";
 
 interface ResortMeta {
   category: string;
@@ -103,7 +107,7 @@ function mapFreshness(
   const sourceUrl =
     enrichment?.verification_source_url ??
     row.source_url ??
-    "https://aftertheparks.com/data-sources";
+    "";
   const ageMs = Date.now() - new Date(lastVerified).getTime();
   const badge = ageMs > 14 * 24 * 60 * 60 * 1000 ? "stale" : "verified";
   return { lastVerified, sourceUrl, badge };
@@ -114,6 +118,60 @@ function mapAges(enrichment?: EnrichmentRow | null): string[] {
   return Object.entries(enrichment.age_fit)
     .filter(([, v]) => v)
     .map(([k]) => k);
+}
+
+function mapClaims(row: RawActivityRow): ActivityOccurrence["claims"] {
+  const feeEvidence =
+    row.is_fee_based && row.source_sha256
+      ? [{ field: "is_fee_based", documentHash: row.source_sha256 }]
+      : row.fee_amount_cents != null
+        ? [{ field: "fee_amount_cents" }]
+        : [];
+
+  return {
+    fee: {
+      value: row.is_fee_based || row.fee_amount_cents ? "fee" : "unknown",
+      evidence: feeEvidence,
+    },
+    walkability: {
+      value: "unknown",
+      evidence: [],
+    },
+    transportation: {
+      value: "unknown",
+      evidence: [],
+    },
+    environment: {
+      value: "unknown",
+      evidence: [],
+    },
+    weather: {
+      value: "unknown",
+      evidence: [],
+    },
+    age_fit: {
+      value: "unknown",
+      evidence: [],
+    },
+  };
+}
+
+function fieldTextEvidence(
+  text: string | null | undefined
+): NonNullable<ActivityOccurrence["fieldProvenance"]>["title"] {
+  const value = text?.trim();
+  return value ? [{ text: value }] : [];
+}
+
+function mapFieldProvenance(
+  row: RawActivityRow
+): ActivityOccurrence["fieldProvenance"] {
+  return {
+    title: fieldTextEvidence(row.activity_name),
+    schedule: fieldTextEvidence(row.schedule_text),
+    location: fieldTextEvidence(row.location),
+    description: fieldTextEvidence(row.description),
+  };
 }
 
 function isEveningCategory(category: string): boolean {
@@ -150,6 +208,17 @@ function resolveRuleTime(
   return eveningDefault ? "20:30:00" : "09:00:00";
 }
 
+function resolveScheduleRangeEnd(
+  scheduleNotes: string | null | undefined,
+  category: string
+): string | undefined {
+  const range = parseScheduleTimeRange24h(scheduleNotes ?? undefined, {
+    eveningDefault: isEveningCategory(category),
+  });
+  if (!range?.end) return undefined;
+  return toTimeSql(range.end.hour, range.end.minute);
+}
+
 export function expandOccurrences(
   row: RawActivityRow,
   rules: OccurrenceRuleRow[],
@@ -169,22 +238,25 @@ export function expandOccurrences(
       rules.length > 0
         ? rules.filter(
             (r) =>
-              r.activity_catalog_id === row.activity_catalog_id &&
-              (r.is_daily || r.day_of_week === null || r.day_of_week === dow)
+              r.is_daily || r.day_of_week === null || r.day_of_week === dow
           )
         : [];
 
-    if (applicableRules.length === 0 && row.schedule_text) {
-      const startTime = resolveRuleTime(
-        null,
-        row.schedule_text,
-        row.category
-      );
-      const start = parseTimeOnDate(startTime, dateStr);
-      const end = addHours(start, 2);
-      occurrences.push(
-        buildOccurrence(row, enrichment, resortMeta, start, end, row.schedule_text)
-      );
+    if (applicableRules.length === 0) {
+      // Only synthesize from schedule_text when there are no structured rules.
+      // If rules exist but none match this weekday (e.g. Mon–Fri on Sunday), skip.
+      if (rules.length === 0 && row.schedule_text) {
+        const startTime = resolveRuleTime(
+          null,
+          row.schedule_text,
+          row.category
+        );
+        const start = parseTimeOnDate(startTime, dateStr);
+        const end = addHours(start, 2);
+        occurrences.push(
+          buildOccurrence(row, enrichment, resortMeta, start, end, row.schedule_text)
+        );
+      }
       continue;
     }
 
@@ -195,9 +267,16 @@ export function expandOccurrences(
         scheduleNotes,
         row.category
       );
-      const endTime = rule.end_time
+      const scheduleRangeEnd = resolveScheduleRangeEnd(scheduleNotes, row.category);
+      const ruleEndTime = rule.end_time
         ? resolveRuleTime(rule.end_time, scheduleNotes, row.category)
         : undefined;
+      const endTime =
+        scheduleRangeEnd && scheduleRangeEnd !== startTime
+          ? scheduleRangeEnd
+          : ruleEndTime && ruleEndTime !== startTime
+            ? ruleEndTime
+            : undefined;
       const start = parseTimeOnDate(startTime, dateStr);
       const end = endTime ? parseTimeOnDate(endTime, dateStr) : undefined;
       occurrences.push(
@@ -274,6 +353,16 @@ function buildOccurrence(
           : undefined,
     },
     freshness: mapFreshness(row, enrichment),
+    source: {
+      url: row.source_url ?? undefined,
+      documentHash: row.source_sha256 ?? undefined,
+    },
+    fieldProvenance: mapFieldProvenance(row),
+    claims: mapClaims(row),
+    trustState:
+      row.source_url && row.source_sha256
+        ? "confirm_before_going"
+        : "source_unclear",
     status: mapStatus(enrichment),
     isHappeningNow:
       !timeDisplay.uncertain &&

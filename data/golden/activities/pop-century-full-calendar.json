@@ -1,0 +1,232 @@
+{
+  "calendar_group_key": "pop-century",
+  "source_pdf": "data/raw/pdfs/POP_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "ed41c527922e72a8a3ba92ee3d12f0104fd2d1305ab24af4b59d6f2bdac1d6f0",
+  "expected_records": [
+    {
+      "title": "Fast Forward Arcade",
+      "slug": "fast-forward-arcade",
+      "category": "arcade",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm",
+      "location": "Inside Classic Hall",
+      "description": "Take a step back in time with all your favorite classic video games!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 4, "text": "FAST FORWARD ARCADE ($)" }],
+        "location": [{ "page": 1, "line": 7, "text": "Inside Classic Hall" }],
+        "schedule": [{ "page": 1, "line": 8, "text": "Daily from 8:00am-11:00pm" }],
+        "description": [
+          { "page": 1, "line": 9, "text": "Take a step back in time with all your favorite classic" },
+          { "page": 1, "line": 10, "text": "video games!" }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily from 1:00pm-2:30pm",
+      "start_time": "1:00pm",
+      "end_time": "2:30pm",
+      "location": "Hippy Dippy Pool Deck",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 11, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 12, "text": "Hippy Dippy Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 14, "text": "Daily from 1:;00pm-2:30pm" }],
+        "description": [
+          { "page": 1, "line": 15, "text": "Join us for family-friendly activities, both in and out of the" },
+          { "page": 1, "line": 17, "text": "pool. See a Recreation Cast Member for more information." }
+        ]
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 8:00am-10:00pm",
+      "start_time": "8:00am",
+      "end_time": "10:00pm",
+      "location": "Inside Classic Hall",
+      "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 16, "text": "FIND A FRIEND" }],
+        "location": [{ "page": 1, "line": 18, "text": "Inside Classic Hall" }],
+        "schedule": [{ "page": 1, "line": 20, "text": "Daily from 8:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 22, "text": "Search the Resort for a hidden Goofy photo prop." },
+          { "page": 1, "line": 24, "text": "Once located, snap a photo and then head to the" },
+          { "page": 1, "line": 26, "text": "Front Desk to receive a surprise!" }
+        ]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "‘90s Sign near Classic Hall",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 19, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 21, "text": "‘90s Sign near Classic Hall" }],
+        "schedule": [
+          { "page": 1, "line": 23, "text": "Sunday, Tuesday, Thursday" },
+          { "page": 1, "line": 25, "text": "and Saturday from 3:00pm-4:00pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 27, "text": "Get creative with a Disney twist on this arts and crafts favorite!" }
+        ]
+      }
+    },
+    {
+      "title": "Marble Painting On Vinyl Records",
+      "slug": "marble-painting-on-vinyl-records",
+      "category": "arts_crafts",
+      "schedule_text": "Monday and Friday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "‘90s Sign near Classic Hall",
+      "description": "Create your own groovy paint designs on a vinyl record— complete with the Disney’s Pop Century Resort logo!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [
+          { "page": 1, "line": 28, "text": "MARBLE PAINTING" },
+          { "page": 1, "line": 29, "text": "ON VINYL RECORDS ($)" }
+        ],
+        "location": [{ "page": 1, "line": 31, "text": "‘90s Sign near Classic Hall" }],
+        "schedule": [{ "page": 1, "line": 32, "text": "Monday and Friday from 3:00pm-4:00pm" }],
+        "description": [
+          { "page": 1, "line": 34, "text": "Create your own groovy paint designs on a vinyl record—" },
+          { "page": 1, "line": 36, "text": "complete with the Disney’s Pop Century Resort logo!" }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Hippy Dippy Pool Deck | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Hippy Dippy Pool Deck",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 30, "text": "MOVIE UNDER THE STARS" }],
+        "location": [{ "page": 1, "line": 33, "text": "HIPPY DIPPY POOL DECK | 8:30PM" }],
+        "schedule": [{ "page": 1, "line": 33, "text": "HIPPY DIPPY POOL DECK | 8:30PM" }]
+      }
+    },
+    {
+      "title": "Groovy Campfire",
+      "slug": "groovy-campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "Located near Surfer Goofy",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 43, "text": "GROOVY CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 44, "text": "Located near Surfer Goofy" }],
+        "schedule": [{ "page": 1, "line": 45, "text": "Nightly from 6:30pm-7:30pm" }],
+        "description": [
+          { "page": 1, "line": 46, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 47, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Glow Party",
+      "slug": "glow-party",
+      "category": "other",
+      "schedule_text": "Sunday and Thursday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Hippy Dippy Pool Deck",
+      "description": "Groove out with some righteous dance moves at our Glow themed party.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 49, "text": "GLOW PARTY" }],
+        "location": [{ "page": 1, "line": 52, "text": "Hippy Dippy Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 54, "text": "Sunday and Thursday at 8:00pm" }],
+        "description": [
+          { "page": 1, "line": 56, "text": "Groove out with some righteous dance moves at our" },
+          { "page": 1, "line": 59, "text": "Glow themed party." }
+        ]
+      }
+    },
+    {
+      "title": "Nighttime Activities",
+      "slug": "nighttime-activities",
+      "category": "other",
+      "schedule_text": "Monday, Tuesday, Wednesday, Friday and Saturday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Hippy Dippy Pool Deck",
+      "description": "Enjoy family-friendly games before the Movie begins.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 60, "text": "NIGHTTIME ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 63, "text": "Hippy Dippy Pool Deck" }],
+        "schedule": [
+          { "page": 1, "line": 68, "text": "Monday, Tuesday, Wednesday, Friday" },
+          { "page": 1, "line": 70, "text": "and Saturday at 8:00pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 73, "text": "Enjoy family-friendly games before the Movie begins." }
+        ]
+      }
+    }
+  ],
+  "reviewed_manual_records": [
+    {
+      "title": "Paint Your Own Bowling Pin",
+      "slug": "paint-your-own-bowling-pin",
+      "category": "arts_crafts",
+      "schedule_text": "Wednesday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "‘90s Sign near Classic Hall",
+      "description": "Strike up your own design as you paint a miniature bowling pin!",
+      "is_fee_based": true,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-22T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR missed the visual title and location."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "bbox": [910, 1507, 1620, 1548],
+            "text": "PAINT YOUR OWN BOWLING PIN ($)",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "bbox": [910, 1558, 1245, 1588],
+            "text": "‘90s Sign near Classic Hall",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "schedule": [{ "page": 1, "line": 38, "text": "Wednesday from 3:00pm-4:00pm" }],
+        "description": [
+          { "page": 1, "line": 39, "text": "Strike up your own design as you paint a miniature" },
+          { "page": 1, "line": 40, "text": "bowling pin!" }
+        ]
+      }
+    }
+  ]
+}

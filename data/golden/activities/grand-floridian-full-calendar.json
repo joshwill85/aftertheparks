@@ -1,0 +1,235 @@
+{
+  "calendar_group_key": "grand-floridian",
+  "source_pdf": "data/raw/pdfs/GF_Aframe_Recreation-1125.pdf",
+  "source_pdf_sha256": "dfa4072efce3903da84b8079c3a778284a4806245ba5107a6403df7929cc4ea0",
+  "expected_records": [
+    {
+      "title": "Arcadia Games",
+      "slug": "arcadia-games",
+      "category": "other",
+      "schedule_text": "Daily from 8:00am–11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm",
+      "location": "Arcadia Games",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 3 }],
+        "location": [{ "page": 1, "line": 3 }],
+        "schedule": [{ "page": 1, "line": 6 }],
+        "description": [{ "page": 1, "line": 7 }]
+      }
+    },
+    {
+      "title": "Cabana Rentals",
+      "slug": "cabana-rentals",
+      "category": "other",
+      "schedule_text": "Daily from 10:00am–7:00pm",
+      "start_time": "10:00am",
+      "end_time": "7:00pm",
+      "location": "Cabana Rentals",
+      "description": "To book, call 407-WDW-PLAY or see a Recreation Cast Member.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 8 }],
+        "location": [{ "page": 1, "line": 8 }],
+        "schedule": [{ "page": 1, "line": 9 }],
+        "description": [{ "page": 1, "line": 10 }, { "page": 1, "line": 11 }]
+      }
+    },
+    {
+      "title": "Captain’s Shipyard Boat Rentals",
+      "slug": "captains-shipyard-boat-rentals",
+      "category": "other",
+      "schedule_text": "Daily from 11:00am–5:00pm",
+      "start_time": "11:00am",
+      "end_time": "5:00pm",
+      "location": "Captain’s Shipyard Boat Rentals",
+      "description": "",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 13 }, { "page": 1, "line": 14 }],
+        "location": [{ "page": 1, "line": 13 }, { "page": 1, "line": 14 }],
+        "schedule": [{ "page": 1, "line": 16 }]
+      }
+    },
+    {
+      "title": "Storytime Yoga Class",
+      "slug": "storytime-yoga-class",
+      "category": "fitness_wellness",
+      "schedule_text": "Monday at 10:30am",
+      "start_time": "10:30am",
+      "end_time": null,
+      "location": "Courtyard Lawn",
+      "description": "Guests of all ages can start their day with a relaxing but energizing yoga experience themed to various Disney stories.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 15 }],
+        "location": [{ "page": 1, "line": 17 }],
+        "schedule": [{ "page": 1, "line": 19 }],
+        "description": [{ "page": 1, "line": 21 }, { "page": 1, "line": 23 }, { "page": 1, "line": 25 }]
+      }
+    },
+    {
+      "title": "Cheshire Challenges",
+      "slug": "cheshire-challenges",
+      "category": "other",
+      "schedule_text": "Daily at 12:00pm",
+      "start_time": "12:00pm",
+      "end_time": null,
+      "location": "Beach Pool Deck",
+      "description": "Join us for a game by the Beach Pool.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 18 }],
+        "location": [{ "page": 1, "line": 20 }],
+        "schedule": [{ "page": 1, "line": 22 }],
+        "description": [{ "page": 1, "line": 24 }]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily at 12:30pm",
+      "start_time": "12:30pm",
+      "end_time": null,
+      "location": "Beach Pool Deck",
+      "description": "Join us for fun-filled games and dancing, both in and out of the pool! See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 26 }],
+        "location": [{ "page": 1, "line": 28 }],
+        "schedule": [{ "page": 1, "line": 30 }],
+        "description": [
+          { "page": 1, "line": 32 },
+          { "page": 1, "line": 34 },
+          { "page": 1, "line": 36 }
+        ]
+      }
+    },
+    {
+      "title": "Health Club",
+      "slug": "health-club",
+      "category": "other",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "start_time": "12:00am",
+      "end_time": "11:59pm",
+      "location": "The Grand Floridian Spa",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 27 }],
+        "location": [{ "page": 1, "line": 29 }],
+        "schedule": [{ "page": 1, "line": 31 }],
+        "description": [{ "page": 1, "line": 33 }, { "page": 1, "line": 35 }]
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "category": "arts_crafts",
+      "schedule_text": "From 3:00pm–4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Beach Pool Deck",
+      "description": "Sunday, Tuesday and Saturday.......Design Your Own Tumblers Monday, Wednesday and Friday.....................Mickey Tie-Dye",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 37 }],
+        "location": [{ "page": 1, "line": 38 }],
+        "schedule": [{ "page": 1, "line": 40 }],
+        "description": [{ "page": 1, "line": 41 }, { "page": 1, "line": 42 }]
+      }
+    },
+    {
+      "title": "Paint Your Own Animation Cel",
+      "slug": "paint-your-own-animation-cel",
+      "category": "other",
+      "schedule_text": "Thursday from 2:30pm–4:30pm",
+      "start_time": "2:30pm",
+      "end_time": "4:30pm",
+      "location": "The Villas at Disney’s Grand Floridian Resort & Spa Lobby",
+      "description": "Get in touch with your inner artist in this unique painting experience. No reservation required. Please arrive no later than 3:00pm to participate.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 43 }, { "page": 1, "line": 44 }],
+        "location": [{ "page": 1, "line": 46 }],
+        "schedule": [{ "page": 1, "line": 48 }],
+        "description": [{ "page": 1, "line": 50 }, { "page": 1, "line": 52 }, { "page": 1, "line": 54 }]
+      }
+    },
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 5:30pm–6:30pm",
+      "start_time": "5:30pm",
+      "end_time": "6:30pm",
+      "location": "Near Beach Pool",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 45 }],
+        "location": [{ "page": 1, "line": 47 }],
+        "schedule": [{ "page": 1, "line": 49 }],
+        "description": [{ "page": 1, "line": 51 }, { "page": 1, "line": 53 }]
+      }
+    },
+    {
+      "title": "Glow Party",
+      "slug": "glow-party",
+      "category": "other",
+      "schedule_text": "Monday, Wednesday and Friday at 7:00pm",
+      "start_time": "7:00pm",
+      "end_time": null,
+      "location": "Summerhouse",
+      "description": "Put your skills to the test with glow games and more!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 55 }],
+        "location": [{ "page": 1, "line": 56 }],
+        "schedule": [{ "page": 1, "line": 57 }],
+        "description": [{ "page": 1, "line": 58 }]
+      }
+    },
+    {
+      "title": "Video Game Dance Party",
+      "slug": "video-game-dance-party",
+      "category": "other",
+      "schedule_text": "Tuesday and Saturday at 7:30pm",
+      "start_time": "7:30pm",
+      "end_time": null,
+      "location": "Summerhouse",
+      "description": "Show off your best moves at this interactive dance party!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 59 }],
+        "location": [{ "page": 1, "line": 60 }],
+        "schedule": [{ "page": 1, "line": 61 }],
+        "description": [{ "page": 1, "line": 62 }]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Courtyard Lawn | 7:30PM",
+      "start_time": "7:30pm",
+      "end_time": null,
+      "location": "Courtyard Lawn",
+      "description": "",
+      "is_fee_based": false,
+      "movie_nights": [
+        { "day_of_week": "sunday", "movie_title": "Zootopia", "show_time": "7:30PM" },
+        { "day_of_week": "thursday", "movie_title": "The Santa Clause", "show_time": "7:30PM" }
+      ],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 63 }],
+        "location": [{ "page": 1, "line": 64 }],
+        "schedule": [{ "page": 1, "line": 64 }],
+        "movie_nights": [{ "page": 1, "line": 65 }, { "page": 1, "line": 66 }]
+      }
+    }
+  ]
+}

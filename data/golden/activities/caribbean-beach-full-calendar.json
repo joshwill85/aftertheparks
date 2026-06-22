@@ -1,0 +1,187 @@
+{
+  "calendar_group_key": "caribbean-beach",
+  "source_pdf": "data/raw/pdfs/CBR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "51e2d919497fd714aa8af1167b7e7daaa2561ab650e96101ee7878b0daea0a29",
+  "expected_records": [
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 8:00am-10:00pm",
+      "start_time": "8:00am",
+      "end_time": "10:00pm",
+      "location": "Throughout Old Port Royale",
+      "description": "Search the Resort for a hidden Sebastian photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 7, "text": "FIND A FRIEND" }],
+        "location": [{ "page": 1, "line": 8, "text": "Throughout Old Port Royale" }],
+        "schedule": [{ "page": 1, "line": 10, "text": "Daily from 8:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 11, "text": "Search the Resort for a hidden Sebastian photo prop." },
+          { "page": 1, "line": 12, "text": "Once located, snap a photo and then head" },
+          { "page": 1, "line": 14, "text": "to the Front Desk to receive a surprise!" }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily from 1:00pm-2:30pm",
+      "start_time": "1:00pm",
+      "end_time": "2:30pm",
+      "location": "Fuentes del Morro Pool Deck",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 13, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 15, "text": "Fuentes del Morro Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 16, "text": "Daily from 1:00pm-2:30pm" }],
+        "description": [
+          { "page": 1, "line": 18, "text": "Join us for family-friendly activities, both in and out of the" },
+          { "page": 1, "line": 20, "text": "pool. See a Recreation Cast Member for more information." }
+        ]
+      }
+    },
+    {
+      "title": "Nature Walk",
+      "slug": "nature-walk",
+      "category": "other",
+      "schedule_text": "Daily",
+      "start_time": null,
+      "end_time": null,
+      "location": "around Barefoot Bay",
+      "description": "Enjoy a self-led nature walk around Barefoot Bay. Pick up a Nature Guide at the front desk to get started.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 17, "text": "NATURE WALK" }],
+        "location": [{ "page": 1, "line": 19, "text": "Daily around Barefoot Bay" }],
+        "schedule": [{ "page": 1, "line": 19, "text": "Daily around Barefoot Bay" }],
+        "description": [
+          { "page": 1, "line": 21, "text": "Enjoy a self-led nature walk around Barefoot Bay." },
+          { "page": 1, "line": 22, "text": "Pick up a Nature Guide at the front desk to get started." }
+        ]
+      }
+    },
+    {
+      "title": "Under the Seashell Painting",
+      "slug": "under-the-seashell-painting",
+      "category": "other",
+      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Near the Pineapple Fountain at Old Port Royale",
+      "description": "Get in touch with your inner artist in this unique painting experience.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [
+          { "page": 1, "line": 23, "text": "UNDER THE" },
+          { "page": 1, "line": 24, "text": "SEASHELL PAINTING" }
+        ],
+        "location": [{ "page": 1, "line": 25, "text": "Near the Pineapple Fountain at Old Port Royale" }],
+        "schedule": [{ "page": 1, "line": 26, "text": "Sunday, Tuesday and Thursday from 3:00pm-4:00pm" }],
+        "description": [
+          { "page": 1, "line": 28, "text": "Get in touch with your inner artist in this unique" },
+          { "page": 1, "line": 29, "text": "painting experience." }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Caribbean Cay Movie Lawn | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Caribbean Cay Movie Lawn",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 27, "text": "M O V | E U N D E R T + E S TA R S" }],
+        "location": [{ "page": 1, "line": 30, "text": "CARIBBEAN CAY MOVIE LAWN | 8:30PM" }],
+        "schedule": [{ "page": 1, "line": 30, "text": "CARIBBEAN CAY MOVIE LAWN | 8:30PM" }]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm",
+      "location": "Near the Pineapple Fountain at Old Port Royale",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 31, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 33, "text": "Near the Pineapple Fountain at Old Port Royale" }],
+        "schedule": [
+          { "page": 1, "line": 34, "text": "Monday, Wednesday, Friday and Saturday" },
+          { "page": 1, "line": 36, "text": "from 3:00pm-4:00pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 39, "text": "Get creative with a Disney twist on this arts and" },
+          { "page": 1, "line": 40, "text": "crafts favorite." }
+        ]
+      }
+    },
+    {
+      "title": "Caribbean Campfire",
+      "slug": "caribbean-campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "Martinique Beach",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 42, "text": "CARIBBEAN CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 44, "text": "Martinique Beach" }],
+        "schedule": [{ "page": 1, "line": 46, "text": "Nightly from 6:30pm-7:30pm" }],
+        "description": [
+          { "page": 1, "line": 47, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 48, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Island Party",
+      "slug": "island-party",
+      "category": "other",
+      "schedule_text": "Sunday, Monday, Tuesday, Wednesday, Thursday and Friday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Caribbean Cay Movie Lawn",
+      "description": "Dance the night away at this island party!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 49, "text": "ISLAND PARTY" }],
+        "location": [{ "page": 1, "line": 50, "text": "Caribbean Cay Movie Lawn" }],
+        "schedule": [
+          { "page": 1, "line": 51, "text": "Sunday, Monday, Tuesday," },
+          { "page": 1, "line": 52, "text": "Wednesday, Thursday and Friday at 8:00pm" }
+        ],
+        "description": [{ "page": 1, "line": 53, "text": "Dance the night away at this island party!" }]
+      }
+    },
+    {
+      "title": "Caribbean Glow Festival",
+      "slug": "caribbean-glow-festival",
+      "category": "other",
+      "schedule_text": "Saturday from 8:00pm-10:00pm",
+      "start_time": "8:00pm",
+      "end_time": "10:00pm",
+      "location": "Fuentes del Morro Pool Deck",
+      "description": "Light the night with our evening poolside activities.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 54, "text": "CARIBBEAN GLOW FESTIVAL" }],
+        "location": [{ "page": 1, "line": 55, "text": "Fuentes del Morro Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 56, "text": "Saturday from 8:00pm-10:00pm" }],
+        "description": [{ "page": 1, "line": 57, "text": "Light the night with our evening poolside activities." }]
+      }
+    }
+  ]
+}

@@ -1,25 +1,35 @@
 {
-  "passed": true,
+  "passed": false,
   "issues": [
     {
-      "level": "warning",
-      "check": "ocr_garbage_movie",
-      "detail": "port-orleans-riverside: 'Frozen 2'"
+      "level": "error",
+      "check": "cross_activity_bleed",
+      "detail": "all-star-movies/reel-fun-arcade/description: 'Inside Cinema Hall Donald\u2019s Double Feature to start exploring. Once you\u2019ve finished the challenges, pick up a prize from'"
     },
     {
-      "level": "warning",
-      "check": "ocr_garbage_movie",
-      "detail": "contemporary: 'Frozen 2'"
+      "level": "error",
+      "check": "cross_activity_bleed",
+      "detail": "all-star-movies/resort-scavenger-hunt/description: 'Find hidden wellness challenges and partake in a scavenger hunt across all three Disney\u2019s All-Star Resorts. Pick up a ma'"
     },
     {
-      "level": "warning",
-      "check": "ocr_garbage_movie",
-      "detail": "contemporary: 'The Little Mermaid (1989)'"
+      "level": "error",
+      "check": "cross_activity_bleed",
+      "detail": "all-star-music/resort-scavenger-hunt/description: 'Play the latest and greatest family-friendly video games. Resorts. Pick up a map from Maestro Mickey\u2019s to start explorin'"
     },
     {
-      "level": "warning",
-      "check": "ocr_garbage_movie",
-      "detail": "old-key-west: 'Freaky Friday (2003)'"
+      "level": "error",
+      "check": "cross_activity_bleed",
+      "detail": "all-star-sports/game-point-arcade/description: 'Inside Stadium Hall challenges, pick up a prize from any merchandise location at Disney\u2019s All-Star Resorts. Play the lat'"
+    },
+    {
+      "level": "error",
+      "check": "cross_activity_bleed",
+      "detail": "all-star-sports/resort-scavenger-hunt/description: 'scavenger hunt across all three of Disney\u2019s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start'"
+    },
+    {
+      "level": "error",
+      "check": "cross_activity_bleed",
+      "detail": "grand-floridian/arcadia-games/description: 'Play the latest and greatest family-friendly video games'"
     }
   ]
 }

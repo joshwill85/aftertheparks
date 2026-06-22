@@ -1,0 +1,406 @@
+import {
+  daypartFromHour,
+  orlandoDateString,
+  addOrlandoDays,
+  parseTimeOnDate,
+  toIsoInOrlando,
+} from "@/lib/daypart";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { createServiceClient } from "@/lib/supabase/server";
+import type {
+  ActivityClaim,
+  ActivityFactualEnrichment,
+  ActivityOccurrence,
+  ActivityPriceOption,
+  DocumentKeyLegend,
+  ExternalActivityFact,
+  SourceSpan,
+} from "@/lib/types/occurrence";
+import { formatResortTier, slugToTitle } from "@/lib/utils";
+import { parseScheduleTime24h, toTimeSql } from "@/lib/text/time";
+
+export interface GoldActivityRow {
+  id?: string;
+  activity_catalog_id: string;
+  calendar_group_key: string;
+  resort_slugs?: string[] | null;
+  canonical_slug: string;
+  title: string;
+  category: string;
+  section?: string | null;
+  schedule: {
+    text?: string | null;
+    start_time?: string | null;
+    end_time?: string | null;
+  };
+  location: {
+    label?: string | null;
+    value?: string | null;
+  };
+  description?: string | null;
+  price?: {
+    state?: "free" | "fee" | "unknown";
+    notes?: string;
+    amountCents?: number;
+    minAmountCents?: number;
+    maxAmountCents?: number;
+    options?: Array<{
+      option_name?: string;
+      optionName?: string;
+      price_cents_min?: number;
+      priceCentsMin?: number;
+      price_cents_max?: number;
+      priceCentsMax?: number;
+      price_basis?: string;
+      priceBasis?: string;
+      day_of_week?: string;
+      dayOfWeek?: string;
+      notes?: string;
+    }>;
+  } | null;
+  enrichment?: Record<string, unknown> | null;
+  external_facts?: Array<Record<string, unknown>> | null;
+  claims?: Record<string, ActivityClaim> | ActivityClaim[] | null;
+  field_provenance?: Partial<Record<"title" | "schedule" | "location" | "description", SourceSpan[]>> | null;
+  source?: {
+    url?: string | null;
+    path?: string | null;
+    documentHash?: string | null;
+    documentId?: string | null;
+    edition?: string | null;
+    documentKeyLegends?: DocumentKeyLegend[] | null;
+  } | null;
+  source_url?: string | null;
+  source_sha256?: string | null;
+  source_document_id?: string | null;
+  source_pdf_edition?: string | null;
+  trust_state?: ActivityOccurrence["trustState"] | null;
+  valid_from?: string | null;
+  valid_until?: string | null;
+}
+
+type GoldPriceOption = NonNullable<
+  NonNullable<GoldActivityRow["price"]>["options"]
+>[number];
+
+interface ResortMeta {
+  slug: string;
+  name: string;
+  category: string;
+  area: string;
+}
+
+interface MapOptions {
+  dateRangeDays?: number;
+  referenceDate?: Date;
+  resortMeta?: Map<string, ResortMeta>;
+}
+
+function normalizeTime(value?: string | null): string | null {
+  if (!value) return null;
+  if (/^\d{2}:\d{2}:\d{2}$/.test(value)) return value;
+
+  const parsed = parseScheduleTime24h(value);
+  if (!parsed) return null;
+  return toTimeSql(parsed.hour, parsed.minute);
+}
+
+function scheduleTime(row: GoldActivityRow, field: "start_time" | "end_time"): string | null {
+  const explicit = normalizeTime(row.schedule?.[field]);
+  if (explicit) return explicit;
+
+  if (field === "start_time") {
+    const fromText = parseScheduleTime24h(row.schedule?.text);
+    return fromText ? toTimeSql(fromText.hour, fromText.minute) : null;
+  }
+
+  const matches = [
+    ...(row.schedule?.text ?? "").matchAll(
+      /(\d{1,2}\s*:\s*\d{2}\s*(?:a\.?m\.?|p\.?m\.?))/gi
+    ),
+  ];
+  if (matches.length < 2) return null;
+  return normalizeTime(matches[1][1]);
+}
+
+function normalizeClaims(
+  claims: GoldActivityRow["claims"]
+): Record<string, ActivityClaim> {
+  if (!claims) return {};
+  if (Array.isArray(claims)) {
+    return Object.fromEntries(
+      claims
+        .filter((claim) => typeof claim?.value === "string")
+        .map((claim) => [String((claim as { kind?: string }).kind ?? "claim"), claim])
+    );
+  }
+  return claims;
+}
+
+function priceFromRow(row: GoldActivityRow): ActivityOccurrence["price"] {
+  const explicit = row.price?.state;
+  if (explicit) {
+    return {
+      state: explicit,
+      notes: row.price?.notes,
+      amountCents: row.price?.amountCents,
+      minAmountCents: row.price?.minAmountCents,
+      maxAmountCents: row.price?.maxAmountCents,
+      options: normalizePriceOptions(row.price?.options),
+    };
+  }
+
+  const fee = normalizeClaims(row.claims).fee;
+  if (fee?.value === "free" || fee?.value === "fee") {
+    return { state: fee.value };
+  }
+  return { state: "unknown" };
+}
+
+function normalizePriceOptions(
+  options?: GoldPriceOption[] | null
+): ActivityPriceOption[] | undefined {
+  if (!Array.isArray(options) || options.length === 0) return undefined;
+  return options.map((option) => ({
+    optionName: option.optionName ?? option.option_name,
+    priceCentsMin: option.priceCentsMin ?? option.price_cents_min,
+    priceCentsMax: option.priceCentsMax ?? option.price_cents_max,
+    priceBasis: option.priceBasis ?? option.price_basis,
+    dayOfWeek: option.dayOfWeek ?? option.day_of_week,
+    notes: option.notes,
+  }));
+}
+
+function stringField(row: Record<string, unknown> | null | undefined, field: string) {
+  const value = row?.[field];
+  return typeof value === "string" && value.trim() ? value : undefined;
+}
+
+function numberField(row: Record<string, unknown> | null | undefined, field: string) {
+  const value = row?.[field];
+  return typeof value === "number" ? value : undefined;
+}
+
+function booleanField(row: Record<string, unknown> | null | undefined, field: string) {
+  const value = row?.[field];
+  return typeof value === "boolean" ? value : undefined;
+}
+
+function enrichmentFromRow(row: GoldActivityRow): ActivityFactualEnrichment | undefined {
+  const e = row.enrichment;
+  if (!e) return undefined;
+  const enrichment: ActivityFactualEnrichment = {
+    exactVenue: stringField(e, "exact_venue"),
+    hostAreaOrWing: stringField(e, "host_area_or_wing"),
+    ageMinimum: numberField(e, "age_minimum"),
+    adultRequired: booleanField(e, "adult_required"),
+    durationMinutes: numberField(e, "duration_minutes"),
+    checkInOffsetMinutes: numberField(e, "check_in_offset_minutes"),
+    reservationRequired: booleanField(e, "reservation_required"),
+    reservationRecommended: booleanField(e, "reservation_recommended"),
+    reservationMethod: stringField(e, "reservation_method"),
+    reservationPhone: stringField(e, "reservation_phone"),
+    walkUpsAllowed: booleanField(e, "walk_ups_allowed"),
+    sameDayAvailable: booleanField(e, "same_day_available"),
+    programFamily: stringField(e, "program_family"),
+    activityVariant: stringField(e, "activity_variant"),
+    weatherDependency: stringField(e, "weather_dependency"),
+    scheduleValidFrom: stringField(e, "schedule_valid_from"),
+    scheduleValidUntil: stringField(e, "schedule_valid_until"),
+    nextScheduleExpectedDate: stringField(e, "next_schedule_expected_date"),
+    hiddenCharacterName: stringField(e, "hidden_character_name"),
+    redemptionLocation: stringField(e, "redemption_location"),
+    prizeOrCompletionRule: stringField(e, "prize_or_completion_rule"),
+    resortGuestOnly: booleanField(e, "resort_guest_only"),
+    poolGated: booleanField(e, "pool_gated"),
+    openToNonResortGuests: booleanField(e, "open_to_non_resort_guests"),
+    sisterResortAccess: booleanField(e, "sister_resort_access"),
+  };
+  return Object.values(enrichment).some((value) => value !== undefined)
+    ? enrichment
+    : undefined;
+}
+
+function externalFactsFromRow(row: GoldActivityRow): ExternalActivityFact[] | undefined {
+  if (!Array.isArray(row.external_facts) || row.external_facts.length === 0) {
+    return undefined;
+  }
+  return row.external_facts.map((fact) => ({
+    source: stringField(fact, "source"),
+    sourceUrl: stringField(fact, "source_url"),
+    sourcePageKind: stringField(fact, "source_page_kind"),
+    facts: typeof fact.facts === "object" && fact.facts !== null
+      ? (fact.facts as Record<string, unknown>)
+      : undefined,
+    evidence: Array.isArray(fact.evidence)
+      ? (fact.evidence as Record<string, unknown>[])
+      : undefined,
+    match: typeof fact.match === "object" && fact.match !== null
+      ? (fact.match as Record<string, unknown>)
+      : undefined,
+  }));
+}
+
+function sourceUrl(row: GoldActivityRow): string {
+  return row.source_url ?? row.source?.url ?? row.source?.path ?? "";
+}
+
+function sourceHash(row: GoldActivityRow): string | undefined {
+  return row.source_sha256 ?? row.source?.documentHash ?? undefined;
+}
+
+function resortForSlug(
+  slug: string,
+  resortMeta: Map<string, ResortMeta> | undefined
+): ActivityOccurrence["resort"] {
+  const meta = resortMeta?.get(slug);
+  return {
+    slug,
+    name: meta?.name?.replace(/^Disney's\s+/i, "") ?? slugToTitle(slug),
+    tier: formatResortTier(meta?.category ?? "unknown"),
+    area: meta?.area ?? "unknown",
+  };
+}
+
+export function mapGoldActivityRowToOccurrences(
+  row: GoldActivityRow,
+  options: MapOptions = {}
+): ActivityOccurrence[] {
+  const startTime = scheduleTime(row, "start_time");
+  if (!startTime) return [];
+
+  const endTime = scheduleTime(row, "end_time");
+  const resortSlugs =
+    row.resort_slugs && row.resort_slugs.length > 0
+      ? row.resort_slugs
+      : [row.calendar_group_key];
+  const enrichment = enrichmentFromRow(row);
+  const externalFacts = externalFactsFromRow(row);
+  const dateRangeDays = options.dateRangeDays ?? 7;
+  const baseDateStr = orlandoDateString(options.referenceDate ?? new Date());
+  const occurrences: ActivityOccurrence[] = [];
+
+  for (let day = 0; day < dateRangeDays; day++) {
+    const dateStr = addOrlandoDays(baseDateStr, day);
+    const start = parseTimeOnDate(startTime, dateStr);
+    const end = endTime ? parseTimeOnDate(endTime, dateStr) : undefined;
+    const startIso = toIsoInOrlando(start);
+    const endIso = end ? toIsoInOrlando(end) : undefined;
+
+    for (const resortSlug of resortSlugs) {
+      occurrences.push({
+        id: `${row.id ?? row.activity_catalog_id}:${resortSlug}:${dateStr}`,
+        activitySlug: row.canonical_slug,
+        activityCatalogId: row.activity_catalog_id,
+        resort: resortForSlug(resortSlug, options.resortMeta),
+        title: row.title,
+        summary: row.description ?? "",
+        category: row.category,
+        section: row.section ?? "Resort Activities",
+        startDateTime: startIso,
+        endDateTime: endIso,
+        daypart: daypartFromHour(Number(startTime.slice(0, 2))),
+        price: priceFromRow(row),
+        location: {
+          label: row.location.label ?? row.location.value ?? "Location unavailable",
+        },
+        eligibility: {
+          ages: enrichment?.ageMinimum
+            ? [`${enrichment.ageMinimum}_plus`]
+            : ["all_ages"],
+          reservation:
+            enrichment?.reservationRequired != null
+              ? { required: enrichment.reservationRequired }
+              : undefined,
+        },
+        freshness: {
+          lastVerified: new Date().toISOString(),
+          sourceUrl: sourceUrl(row),
+          badge: "verified",
+        },
+        source: {
+          url: sourceUrl(row),
+          documentHash: sourceHash(row),
+          documentId: row.source_document_id ?? row.source?.documentId ?? undefined,
+          edition: row.source_pdf_edition ?? row.source?.edition ?? undefined,
+          documentKeyLegends: row.source?.documentKeyLegends ?? undefined,
+        },
+        fieldProvenance: row.field_provenance ?? undefined,
+        claims: normalizeClaims(row.claims),
+        enrichment,
+        externalFacts,
+        validFrom: row.valid_from ?? undefined,
+        validUntil: row.valid_until ?? undefined,
+        trustState: row.trust_state ?? "source_backed",
+        status: "active",
+        scheduleText: row.schedule.text ?? undefined,
+      });
+    }
+  }
+
+  return occurrences;
+}
+
+async function fetchResortMeta(): Promise<Map<string, ResortMeta>> {
+  const supabase = createServiceClient();
+  const map = new Map<string, ResortMeta>();
+  if (!supabase) return map;
+
+  const { data, error } = await supabase
+    .from("resorts")
+    .select("slug, name, category, resort_area");
+  if (error) {
+    console.error("fetchGoldResortMeta:", error.message);
+    return map;
+  }
+
+  for (const row of data ?? []) {
+    map.set(row.slug, {
+      slug: row.slug,
+      name: row.name,
+      category: row.category,
+      area: row.resort_area,
+    });
+  }
+  return map;
+}
+
+export async function fetchGoldActivityOccurrences(
+  dateRangeDays = 7
+): Promise<ActivityOccurrence[]> {
+  const supabase = createServiceClient();
+  if (!supabase) return [];
+
+  const [{ data, error }, resortMeta] = await Promise.all([
+    supabase.from("v_public_activity_gold").select("*"),
+    fetchResortMeta(),
+  ]);
+  if (error) {
+    if (!/does not exist|schema cache/i.test(error.message)) {
+      console.error("fetchGoldActivityOccurrences:", error.message);
+    }
+    return [];
+  }
+
+  return ((data ?? []) as GoldActivityRow[]).flatMap((row) =>
+    mapGoldActivityRowToOccurrences(row, { dateRangeDays, resortMeta })
+  );
+}
+
+export async function loadGoldPreviewOccurrences(
+  dateRangeDays = 7,
+  previewPath = path.join(process.cwd(), "data/processed/activity_gold_v2_preview.json")
+): Promise<ActivityOccurrence[]> {
+  try {
+    const rows = JSON.parse(await readFile(previewPath, "utf8")) as GoldActivityRow[];
+    return rows.flatMap((row) =>
+      mapGoldActivityRowToOccurrences(row, { dateRangeDays })
+    );
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      console.error("loadGoldPreviewOccurrences:", error);
+    }
+    return [];
+  }
+}

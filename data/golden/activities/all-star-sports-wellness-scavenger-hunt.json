@@ -1,0 +1,28 @@
+{
+  "calendar_group_key": "all-star-sports",
+  "source_pdf": "data/raw/pdfs/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf",
+  "source_pdf_sha256": "f6c6360fee9a12d84f02d55b2b33cf3b435048b963630c186b9b616981ea9263",
+  "expected": {
+    "title": "Wellness Scavenger Hunt",
+    "slug": "wellness-scavenger-hunt",
+    "schedule_text": "Daily from 7:00am–11:00pm",
+    "start_time": "7:00am",
+    "end_time": "11:00pm",
+    "location": "Throughout Disney’s All-Star Resorts",
+    "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+    "is_fee_based": false
+  },
+  "required_spans": {
+    "title": [{ "page": 1, "line": 8 }],
+    "location": [{ "page": 1, "line": 9 }],
+    "schedule": [{ "page": 1, "line": 10 }],
+    "description": [
+      { "page": 1, "line": 11 },
+      { "page": 1, "line": 13 },
+      { "page": 1, "line": 14 },
+      { "page": 1, "line": 16 },
+      { "page": 1, "line": 18 },
+      { "page": 1, "line": 20 }
+    ]
+  }
+}

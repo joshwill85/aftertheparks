@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "validate:contracts": "python3 scripts/test_layout_snapshot.py && python3 scripts/test_pipeline_contracts.py && python3 scripts/ingest/validate_v2.py && python3 scripts/ingest/magical_resort_guide.py && python3 scripts/ingest/promote_gold.py --fail-on-review && python3 scripts/ingest/audit_coverage.py && tsx scripts/test-title-fidelity.ts && tsx scripts/test-gold-v2-mapping.ts && tsx scripts/test-official-offerings.ts",
+    "validate:cutover": "ACTIVITY_DATA_PIPELINE=gold-v2 npm run validate:contracts && ACTIVITY_DATA_PIPELINE=gold-v2 python3 scripts/ingest/audit_coverage.py --require-production-ready",
+    "validate:ingest": "npm run validate:contracts && python3 scripts/ingest/validate.py --strict",
     "validate:trust": "node scripts/validate-trust.mjs",
+    "review:activities": "python3 scripts/ingest/review_queue.py list",
+    "publish:gold-v2": "python3 scripts/ingest/publish_gold_v2.py",
     "seed:enrichment": "tsx scripts/seed-enrichment.ts",
     "warm:posters": "tsx --env-file=.env.local scripts/warm-movie-posters.ts"
   },

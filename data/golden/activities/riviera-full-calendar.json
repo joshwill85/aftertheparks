@@ -1,0 +1,228 @@
+{
+  "calendar_group_key": "riviera",
+  "source_pdf": "data/raw/pdfs/DRR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842",
+  "expected_records": [
+    {
+      "title": "The Eventi Room",
+      "slug": "the-eventi-room",
+      "category": "other",
+      "schedule_text": "Sunday, Tuesday and Thursday from 1:00pm-10:00pm; Monday, Wednesday, Friday and Saturday from 10:00am-10:00pm",
+      "start_time": "1:00pm",
+      "end_time": "10:00pm",
+      "location": "The Eventi Room",
+      "description": "Gather in The Eventi Room to create arts & crafts!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 17, "text": "THE EVENTI ROOM ($)" }],
+        "location": [{ "page": 1, "line": 17, "text": "THE EVENTI ROOM ($)" }],
+        "schedule": [
+          { "page": 1, "line": 18, "text": "Sunday, Tuesday and Thursday from 1:00pm-10:00pm;" },
+          { "page": 1, "line": 20, "text": "Monday, Wednesday, Friday and Saturday" },
+          { "page": 1, "line": 22, "text": "from 10:00am-10:00pm" }
+        ],
+        "description": [{ "page": 1, "line": 24, "text": "Gather in The Eventi Room to create arts & crafts!" }]
+      }
+    },
+    {
+      "title": "Nature Walk",
+      "slug": "nature-walk",
+      "category": "other",
+      "schedule_text": "Daily",
+      "start_time": null,
+      "end_time": null,
+      "location": "around Barefoot Bay",
+      "description": "Enjoy a self-led nature walk around Barefoot Bay. Pick up a Nature Guide at The Eventi Room to get started.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 19, "text": "NATURE WALK" }],
+        "location": [{ "page": 1, "line": 21, "text": "Daily around Barefoot Bay" }],
+        "schedule": [{ "page": 1, "line": 21, "text": "Daily around Barefoot Bay" }],
+        "description": [
+          { "page": 1, "line": 23, "text": "Enjoy a self-led nature walk around Barefoot Bay. Pick" },
+          { "page": 1, "line": 25, "text": "up a Nature Guide at The Eventi Room to get started." }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily from 1:30pm-3:30pm",
+      "start_time": "1:30pm",
+      "end_time": "3:30pm",
+      "location": "Riviera Feature Pool Deck",
+      "description": "Join us for fun and games, both in and out of the pool.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 26, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 27, "text": "Riviera Feature Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 28, "text": "Daily from 1:30pm-3:30pm" }],
+        "description": [{ "page": 1, "line": 30, "text": "Join us for fun and games, both in and out of the pool." }]
+      }
+    },
+    {
+      "title": "Cote D’Azur Campfire",
+      "slug": "cote-dazur-campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "start_time": "6:00pm",
+      "end_time": "7:00pm",
+      "location": "Fire Pit near Riviera Feature Pool waterfront",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S'mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 32, "text": "COTE D’AZUR CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 34, "text": "Fire Pit near Riviera Feature Pool waterfront" }],
+        "schedule": [{ "page": 1, "line": 36, "text": "Nightly from 6:00pm-7:00pm" }],
+        "description": [
+          { "page": 1, "line": 38, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 40, "text": "marshmallows. S'mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Art De La Mosaique",
+      "slug": "art-de-la-mosaique",
+      "category": "other",
+      "schedule_text": "Sunday and Tuesday from 11:00am-1:00pm",
+      "start_time": "11:00am",
+      "end_time": "1:00pm",
+      "location": "The Eventi Room",
+      "description": "Experience the timeless and classic tradition of mosaic creation with an instructor-led crafting class. This experience is recommended for Guests ages 12 and up. To sign up, please see a Recreation Cast Member inside The Eventi Room.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 33, "text": "ART DE LA MOSAIQUE ($)" }],
+        "location": [{ "page": 1, "line": 35, "text": "The Eventi Room" }],
+        "schedule": [{ "page": 1, "line": 37, "text": "Sunday and Tuesday from 11:00am-1:00pm" }],
+        "description": [
+          { "page": 1, "line": 39, "text": "Experience the timeless and classic tradition of mosaic" },
+          { "page": 1, "line": 41, "text": "creation with an instructor-led crafting class. This experience" },
+          { "page": 1, "line": 42, "text": "is recommended for Guests ages 12 and up. To sign up, please" },
+          { "page": 1, "line": 44, "text": "see a Recreation Cast Member inside The Eventi Room." }
+        ]
+      }
+    },
+    {
+      "title": "Nighttime Trivia",
+      "slug": "nighttime-trivia",
+      "category": "other",
+      "schedule_text": "Sunday, Monday, Tuesday, Wednesday, Thursday and Friday at 7:30pm",
+      "start_time": "7:30pm",
+      "end_time": null,
+      "location": "Riviera Courtyard",
+      "description": "Put your knowledge to the test with this evening challenge!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 43, "text": "NIGHTTIME TRIVIA" }],
+        "location": [{ "page": 1, "line": 45, "text": "Riviera Courtyard" }],
+        "schedule": [
+          { "page": 1, "line": 46, "text": "Sunday, Monday, Tuesday, Wednesday, Thursday" },
+          { "page": 1, "line": 48, "text": "and Friday at 7:30pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 49, "text": "Put your knowledge to the test with this" },
+          { "page": 1, "line": 51, "text": "evening challenge!" }
+        ]
+      }
+    },
+    {
+      "title": "Starlight Soiree",
+      "slug": "starlight-soiree",
+      "category": "other",
+      "schedule_text": "Saturday from 8:00pm-9:30pm",
+      "start_time": "8:00pm",
+      "end_time": "9:30pm",
+      "location": "Riviera Pool Deck",
+      "description": "Sparkle and shine under the stars during this evening poolside party with fun and games, both in and out of the pool.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 54, "text": "STARLIGHT SOIREE" }],
+        "location": [{ "page": 1, "line": 56, "text": "Riviera Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 59, "text": "Saturday from 8:00pm-9:30pm" }],
+        "description": [
+          { "page": 1, "line": 61, "text": "Sparkle and shine under the stars during this evening" },
+          { "page": 1, "line": 62, "text": "poolside party with fun and games, both in and out of" },
+          { "page": 1, "line": 63, "text": "the pool." }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Movie Lawn | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Movie Lawn",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 66, "text": "MOVIE UNDER THE STARS" }],
+        "location": [{ "page": 1, "line": 67, "text": "MOVIE LAWN | 8:30PM" }],
+        "schedule": [{ "page": 1, "line": 67, "text": "MOVIE LAWN | 8:30PM" }]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Painting On The Riviera",
+      "slug": "painting-on-the-riviera",
+      "category": "other",
+      "schedule_text": "Thursday from 11:00am-1:00pm",
+      "start_time": "11:00am",
+      "end_time": "1:00pm",
+      "location": "The Eventi Room",
+      "description": "Get in touch with your inner artist in this unique instructor-led painting class! This experience is recommended for Guests ages and up. To reserve your spot, please call see a Recreation Cast Member inside The Eventi Room. ¢ a PY",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 47, "text": "PAINTING ON THE RIVIERA ($)" }],
+        "location": [{ "page": 1, "line": 50, "text": "The Eventi Room" }],
+        "schedule": [{ "page": 1, "line": 52, "text": "Thursday from 11:00am-1:00pm" }],
+        "description": [
+          { "page": 1, "line": 53, "text": "Get in touch with your inner artist in this unique instructor-led" },
+          { "page": 1, "line": 55, "text": "painting class! This experience is recommended for Guests ages" },
+          { "page": 1, "line": 57, "text": "and up. To reserve your spot, please call" },
+          { "page": 1, "line": 60, "text": "see a Recreation Cast Member inside The Eventi Room." },
+          { "page": 1, "line": 69, "text": "¢ a PY" }
+        ]
+      },
+      "warnings": ["description:text_quality_low"]
+    }
+  ],
+  "reviewed_manual_records": [
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "start_time": "10:00am",
+      "end_time": "10:00pm",
+      "location": "Throughout Disney’s Riviera Resort",
+      "description": "Search the Resort for a hidden Pascal photo prop. Once located, snap a photo and then head to The Eventi Room to receive a surprise!",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-22T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR missed the visual title."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "bbox": [155, 835, 505, 875],
+            "text": "FIND A FRIEND",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "location": [{ "page": 1, "line": 10, "text": "Throughout Disney’s Riviera Resort" }],
+        "schedule": [{ "page": 1, "line": 12, "text": "Daily from 10:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 14, "text": "Search the Resort for a hidden Pascal photo prop." },
+          { "page": 1, "line": 15, "text": "Once located, snap a photo and then head to" },
+          { "page": 1, "line": 16, "text": "The Eventi Room to receive a surprise!" }
+        ]
+      }
+    }
+  ]
+}

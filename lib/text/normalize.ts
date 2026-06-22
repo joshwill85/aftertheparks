@@ -1,14 +1,22 @@
+import { isOcrSpacedTitle, repairKnownActivityTitle } from "@/lib/text/titleRepairs";
+
 /** Fix OCR-spaced titles like "R E E L F U N A R C A D E" → "Reel Fun Arcade". */
 export function normalizeActivityTitle(raw: string): string {
   const title = raw.trim().replace(/\s+/g, " ");
   if (!title) return title;
+
+  const repaired = repairKnownActivityTitle(title);
+  if (repaired) return repaired;
 
   const tokens = title.split(/\s+/);
   const shortTokens = tokens.filter((t) => t.length <= 2).length;
   const looksSpaced =
     tokens.length >= 4 && shortTokens / tokens.length >= 0.65;
 
-  if (looksSpaced || /^(?:[A-Za-z]\s+){4,}[A-Za-z]$/.test(title)) {
+  if (
+    !isOcrSpacedTitle(title) &&
+    (looksSpaced || /^(?:[A-Za-z]\s+){4,}[A-Za-z]$/.test(title))
+  ) {
     return titleCaseWords(splitWords(title.replace(/\s+/g, "")));
   }
 
@@ -81,6 +89,15 @@ function looksLikeGarbage(text: string): boolean {
 }
 
 export function isUncertainSchedule(scheduleText?: string): boolean {
-  if (!scheduleText?.trim()) return true;
-  return looksLikeGarbage(scheduleText);
+  const text = scheduleText?.trim();
+  if (!text) return true;
+  const lower = text.toLowerCase();
+  if (
+    lower === "not specified in disney source." ||
+    lower === "not specified in disney source" ||
+    lower.includes("source does not specify")
+  ) {
+    return true;
+  }
+  return looksLikeGarbage(text);
 }

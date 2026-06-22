@@ -1,0 +1,240 @@
+{
+  "calendar_group_key": "coronado-springs",
+  "source_pdf": "data/raw/pdfs/CSR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+  "expected_records": [
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 9:00am-9:00pm",
+      "start_time": "9:00am",
+      "end_time": "9:00pm",
+      "location": "Throughout Disney’s Coronado Springs Resort",
+      "description": "Search the Resort for a hidden Bruno photo prop. Once located, snap a photo and then head to the Concierge Desk to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 11, "text": "FIND A FRIEND" }],
+        "location": [{ "page": 1, "line": 12, "text": "Throughout Disney’s Coronado Springs Resort" }],
+        "schedule": [{ "page": 1, "line": 14, "text": "Daily from 9:00am-9:00pm" }],
+        "description": [
+          { "page": 1, "line": 15, "text": "Search the Resort for a hidden Bruno photo prop." },
+          { "page": 1, "line": 17, "text": "Once located, snap a photo and then head to the" },
+          { "page": 1, "line": 18, "text": "Concierge Desk to receive a surprise!" }
+        ]
+      }
+    },
+    {
+      "title": "Nature Walk",
+      "slug": "nature-walk",
+      "category": "other",
+      "schedule_text": "Daily",
+      "start_time": null,
+      "end_time": null,
+      "location": "throughout Disney’s Coronado Springs Resort",
+      "description": "Self-led nature trail to view the wildlife and landscape of the Resort. Pick up a Nature Guide at Panchito’s Gifts & Sundries, Concierge Desk or from a Recreation Cast Member to get started.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 21, "text": "NATURE WALK" }],
+        "location": [{ "page": 1, "line": 24, "text": "Daily throughout Disney’s Coronado Springs Resort" }],
+        "schedule": [{ "page": 1, "line": 24, "text": "Daily throughout Disney’s Coronado Springs Resort" }],
+        "description": [
+          { "page": 1, "line": 28, "text": "Self-led nature trail to view the wildlife and landscape" },
+          { "page": 1, "line": 31, "text": "of the Resort. Pick up a Nature Guide at Panchito’s" },
+          { "page": 1, "line": 33, "text": "Gifts & Sundries, Concierge Desk or from a Recreation" },
+          { "page": 1, "line": 35, "text": "Cast Member to get started." }
+        ]
+      }
+    },
+    {
+      "title": "Fitness Centers",
+      "slug": "fitness-centers",
+      "category": "other",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "start_time": "12:00am",
+      "end_time": "11:59pm",
+      "location": "Gran Destino Tower and near Casitas 4",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 38, "text": "FITNE Ss S CENTERS" }],
+        "location": [{ "page": 1, "line": 40, "text": "Gran Destino Tower and near Casitas 4" }],
+        "schedule": [{ "page": 1, "line": 44, "text": "Open 24 hours a day, 7 days a week" }],
+        "description": [
+          { "page": 1, "line": 46, "text": "Continue pushing towards your wellness goals in" },
+          { "page": 1, "line": 47, "text": "our full-service fitness center." }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily",
+      "start_time": null,
+      "end_time": null,
+      "location": "The Dig Site",
+      "description": "Join us for family-friendly activities. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 54, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 56, "text": "Daily at The Dig Site" }],
+        "schedule": [{ "page": 1, "line": 56, "text": "Daily at The Dig Site" }],
+        "description": [
+          { "page": 1, "line": 58, "text": "Join us for family-friendly activities." },
+          { "page": 1, "line": 60, "text": "See a Recreation Cast Member for more information." }
+        ]
+      }
+    },
+    {
+      "title": "Disney Trivia",
+      "slug": "disney-trivia",
+      "category": "other",
+      "schedule_text": "Friday from 5:00pm-5:45pm",
+      "start_time": "5:00pm",
+      "end_time": "5:45pm",
+      "location": "Laguna Bar",
+      "description": "Join us for a trivia challenge near El Centro!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 77, "text": "DISNEY TRIVIA" }],
+        "location": [{ "page": 1, "line": 81, "text": "Laguna Bar" }],
+        "schedule": [{ "page": 1, "line": 83, "text": "Friday from 5:00pm-5:45pm" }],
+        "description": [{ "page": 1, "line": 84, "text": "Join us for a trivia challenge near El Centro!" }]
+      }
+    },
+    {
+      "title": "Explorer’s Campfire",
+      "slug": "explorers-campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "The Dig Site",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 89, "text": "EXPLORER’S CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 91, "text": "The Dig Site" }],
+        "schedule": [{ "page": 1, "line": 93, "text": "Nightly from 6:30pm-7:30pm" }],
+        "description": [
+          { "page": 1, "line": 94, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 95, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Gran Destino Lawn | 8:00PM",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Gran Destino Lawn",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 96, "text": "MOVIE UNDER THE STARS" }],
+        "location": [{ "page": 1, "line": 98, "text": "GRAN DESTINO LAWN | 8:00PM" }],
+        "schedule": [{ "page": 1, "line": 98, "text": "GRAN DESTINO LAWN | 8:00PM" }]
+      }
+    },
+    {
+      "title": "Coronado Nights Pool Party",
+      "slug": "coronado-nights-pool-party",
+      "category": "other",
+      "schedule_text": "Monday, Wednesday, and Saturday from 8:30pm-9:30pm",
+      "start_time": "8:30pm",
+      "end_time": "9:30pm",
+      "location": "The Dig Site Pool",
+      "description": "Join us for nighttime activities for all ages.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 97, "text": "CORONADO NIGHTS POOL PARTY" }],
+        "location": [{ "page": 1, "line": 99, "text": "The Dig Site Pool" }],
+        "schedule": [{ "page": 1, "line": 100, "text": "Monday, Wednesday, and Saturday from 8:30pm-9:30pm" }],
+        "description": [{ "page": 1, "line": 103, "text": "Join us for nighttime activities for all ages." }]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Spanish Mosaic Art",
+      "slug": "spanish-mosaic-art",
+      "category": "arts_crafts",
+      "schedule_text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm",
+      "start_time": "1:00pm",
+      "end_time": "3:00pm",
+      "location": "Dahlia Lounge",
+      "description": "a historic panis art as you y our own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Space is limited. To book, h Spanish Mosaic A h sca Pans",
+      "is_fee_based": true,
+      "warnings": ["description:text_quality_low"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 16, "text": "SPANISH MOSAIC ART ($)" }]
+      }
+    },
+    {
+      "title": "Colors Of Coronado Painting Experience",
+      "slug": "colors-of-coronado-painting-experience",
+      "category": "other",
+      "schedule_text": "Friday from 1:;00pm-3:00pm",
+      "start_time": "3:00pm",
+      "end_time": null,
+      "location": "",
+      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages I2 and up. Space is limited. To book, search Colors of Coronado Painting Experience on the My Disney Experience app.",
+      "is_fee_based": true,
+      "warnings": ["location:missing_source_span", "schedule:text_quality_low"],
+      "required_spans": {
+        "title": [
+          { "page": 1, "line": 48, "text": "COLORS OF CORONADO" },
+          { "page": 1, "line": 49, "text": "PAINTING EXPERIENCE ($)" }
+        ]
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "category": "arts_crafts",
+      "schedule_text": "The Dig Site from 3:30pm-4:30pm",
+      "start_time": "3:30pm",
+      "end_time": "4:30pm",
+      "location": "",
+      "description": "Sunday, Tuesday and Monday and",
+      "is_fee_based": true,
+      "warnings": ["description:text_quality_low", "location:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 61, "text": "ARTS AND CRAFTS ($)" }]
+      }
+    },
+    {
+      "title": "Sangria University",
+      "slug": "sangria-university",
+      "category": "other",
+      "schedule_text": "11:00am and 1:30pm",
+      "start_time": "11:00am",
+      "end_time": null,
+      "location": "",
+      "description": "Discuss the history of sangria and learn the recipes used to make the 4 in-house varieties served at Three Bridges Bar and Grill. Enjoy a tasting and you'll even get to make your own glass! Advanced booking required through the My Disney Experience app by searching Sangria University.",
+      "is_fee_based": true,
+      "warnings": ["location:missing_source_span", "schedule:text_quality_low"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 62, "text": "SANGRIA UNIVERSITY ($)" }]
+      }
+    },
+    {
+      "title": "Resort Scavenger Hunt",
+      "slug": "resort-scavenger-hunt",
+      "category": "scavenger_hunt",
+      "schedule_text": "",
+      "start_time": null,
+      "end_time": null,
+      "location": "",
+      "description": "Pick up a Clue Guide from the Concierge Desk, Panchito’s Gift & Sundries, or any Recreation Cast Member to participate.",
+      "is_fee_based": false,
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 106, "text": "RESORT SCAVENGER HUNT" }]
+      }
+    }
+  ]
+}

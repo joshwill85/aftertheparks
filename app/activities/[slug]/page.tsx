@@ -5,7 +5,8 @@ import {
   getResortBySlug,
   getSimilarActivities,
 } from "@/lib/data/activities";
-import { notFound } from "next/navigation";
+import { canonicalActivitySlug } from "@/lib/activities/legacySlugs";
+import { notFound, redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +19,16 @@ export default async function ActivityDetailPage({
 }) {
   const { slug } = await params;
   const { resort: homeResortSlug } = await searchParams;
-  const result = await getActivityBySlug(slug);
+  const canonicalSlug = canonicalActivitySlug(slug);
+
+  if (canonicalSlug !== slug) {
+    const suffix = homeResortSlug
+      ? `?resort=${encodeURIComponent(homeResortSlug)}`
+      : "";
+    redirect(`/activities/${canonicalSlug}${suffix}`);
+  }
+
+  const result = await getActivityBySlug(canonicalSlug);
 
   if (!result) notFound();
 

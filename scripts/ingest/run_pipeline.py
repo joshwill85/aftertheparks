@@ -9,13 +9,29 @@ import sys
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
+ROOT = SCRIPTS.parents[1]
 
 
 def run(script: str, *args: str) -> None:
     cmd = [sys.executable, str(SCRIPTS / script), *args]
     print(f"\n>>> {' '.join(cmd)}")
-    if subprocess.run(cmd, cwd=SCRIPTS, env=os.environ.copy()).returncode != 0:
+    if subprocess.run(cmd, cwd=ROOT, env=os.environ.copy()).returncode != 0:
         raise SystemExit(1)
+
+
+def validation_gate_steps(*, local_only: bool) -> list[tuple[str, ...]]:
+    coverage_gate = (
+        ("audit_coverage.py",)
+        if local_only
+        else ("audit_coverage.py", "--require-production-ready")
+    )
+    return [
+        ("validate.py", "--strict"),
+        ("validate_v2.py",),
+        ("magical_resort_guide.py",),
+        ("promote_gold.py", "--fail-on-review"),
+        coverage_gate,
+    ]
 
 
 def main() -> None:
@@ -38,7 +54,8 @@ def main() -> None:
 
     extract_args = [] if args.local_only else ["--persist-db"]
     run("extract.py", *extract_args)
-    run("validate.py")
+    for step in validation_gate_steps(local_only=args.local_only):
+        run(*step)
 
     if not args.local_only and os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
         run("publish.py")

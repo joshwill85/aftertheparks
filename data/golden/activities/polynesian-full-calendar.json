@@ -1,0 +1,222 @@
+{
+  "calendar_group_key": "polynesian",
+  "source_pdf": "data/raw/pdfs/Polynesian_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+  "expected_records": [
+    {
+      "title": "Disney Family Fitness Fun",
+      "slug": "disney-family-fitness-fun",
+      "category": "other",
+      "schedule_text": "Thursday at 9:00am",
+      "start_time": "9:00am",
+      "end_time": null,
+      "location": "Great Ceremonial House Lawn",
+      "description": "Partake in this family-friendly fitness class— featuring some of your favorite music from Moana!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 14, "text": "DISNEY FAMILY FITNESS FUN" }],
+        "location": [{ "page": 1, "line": 16, "text": "Great Ceremonial House Lawn" }],
+        "schedule": [{ "page": 1, "line": 18, "text": "Thursday at 9:00am" }],
+        "description": [
+          { "page": 1, "line": 20, "text": "Partake in this family-friendly fitness class—" },
+          { "page": 1, "line": 23, "text": "featuring some of your favorite music from Moana!" }
+        ]
+      }
+    },
+    {
+      "title": "Disney Fit Tai Chi",
+      "slug": "disney-fit-tai-chi",
+      "category": "other",
+      "schedule_text": "Monday at 6:00pm",
+      "start_time": "6:00pm",
+      "end_time": null,
+      "location": "Great Ceremonial House Lawn",
+      "description": "Experience this one-of-a-kind Tai Chi class designed for all levels.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 24, "text": "DISNEY FIT TAI CHI" }],
+        "location": [{ "page": 1, "line": 26, "text": "Great Ceremonial House Lawn" }],
+        "schedule": [{ "page": 1, "line": 27, "text": "Monday at 6:00pm" }],
+        "description": [
+          { "page": 1, "line": 28, "text": "Experience this one-of-a-kind Tai Chi class designed" },
+          { "page": 1, "line": 30, "text": "for all levels." }
+        ]
+      }
+    },
+    {
+      "title": "Lava Pool Party",
+      "slug": "lava-pool-party",
+      "category": "other",
+      "schedule_text": "Daily at 2:30pm",
+      "start_time": "2:30pm",
+      "end_time": null,
+      "location": "Lava Pool Deck",
+      "description": "Join us for a fun-filled hour of games and dancing, both in and out of the Lava Pool.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 29, "text": "LAVA POOL PARTY" }],
+        "location": [{ "page": 1, "line": 31, "text": "Lava Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 32, "text": "Daily at 2:30pm" }],
+        "description": [
+          { "page": 1, "line": 33, "text": "Join us for a fun-filled hour of games and dancing, both in" },
+          { "page": 1, "line": 34, "text": "and out of the Lava Pool." }
+        ]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 4:30pm-5:30pm",
+      "start_time": "4:30pm",
+      "end_time": "5:30pm",
+      "location": "Lava Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 36, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 38, "text": "Lava Pool Deck" }],
+        "schedule": [
+          { "page": 1, "line": 40, "text": "Sunday, Tuesday, Thursday and Saturday" },
+          { "page": 1, "line": 42, "text": "from 4:30pm-5:30pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 44, "text": "Get creative with a Disney twist on this arts and" },
+          { "page": 1, "line": 46, "text": "crafts favorite!" }
+        ]
+      }
+    },
+    {
+      "title": "Make Your Own Kukui Nut Leis",
+      "slug": "make-your-own-kukui-nut-leis",
+      "category": "other",
+      "schedule_text": "Monday, Wednesday and Friday from 4:00pm-5:00pm",
+      "start_time": "4:00pm",
+      "end_time": "5:00pm",
+      "location": "Great Ceremonial House Lobby",
+      "description": "Celebrate Polynesian culture by designing and creating your own Kukui Nut Lei.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [
+          { "page": 1, "line": 37, "text": "MAKE YOUR OWN" },
+          { "page": 1, "line": 39, "text": "KUKUI NUT LEIS ($)" }
+        ],
+        "location": [{ "page": 1, "line": 41, "text": "Great Ceremonial House Lobby" }],
+        "schedule": [{ "page": 1, "line": 43, "text": "Monday, Wednesday and Friday from 4:00pm-5:00pm" }],
+        "description": [
+          { "page": 1, "line": 45, "text": "Celebrate Polynesian culture by designing and creating" },
+          { "page": 1, "line": 47, "text": "your own Kukui Nut Lei." }
+        ]
+      }
+    },
+    {
+      "title": "The Big Kahuna Quiz",
+      "slug": "the-big-kahuna-quiz",
+      "category": "other",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday at 6:30pm",
+      "start_time": "6:30pm",
+      "end_time": null,
+      "location": "Lava Pool Deck",
+      "description": "Join us for some fun-filled trivia!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 48, "text": "THE BIG KAHUNA QUIZ" }],
+        "location": [{ "page": 1, "line": 49, "text": "Lava Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 51, "text": "Sunday, Tuesday, Thursday and Saturday at 6:30pm" }],
+        "description": [{ "page": 1, "line": 52, "text": "Join us for some fun-filled trivia!" }]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Great Ceremonial House Lawn | 8:00PM",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Great Ceremonial House Lawn",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 50, "text": "MOVIE UNDER THE STARS" }],
+        "location": [{ "page": 1, "line": 53, "text": "GREAT CEREMONIAL HOUSE LAWN | 8:00PM" }],
+        "schedule": [{ "page": 1, "line": 53, "text": "GREAT CEREMONIAL HOUSE LAWN | 8:00PM" }]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Monday, Wednesday and Friday from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 54, "text": "CAMPFIRE" }],
+        "schedule": [{ "page": 1, "line": 57, "text": "Monday, Wednesday and Friday from 6:30pm-7:30pm" }],
+        "description": [
+          { "page": 1, "line": 58, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 60, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      },
+      "warnings": ["location:missing_source_span"]
+    },
+    {
+      "title": "Aloha After Dark",
+      "slug": "aloha-after-dark",
+      "category": "other",
+      "schedule_text": "Monday, Wednesday and Friday at",
+      "start_time": null,
+      "end_time": null,
+      "location": "Lava Pool Deck",
+      "description": "Enjoy a nighttime party filled with glow-in-the-dark games and dancing!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 70, "text": "ALOHA AFTER DARK" }],
+        "location": [{ "page": 1, "line": 71, "text": "Lava Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 72, "text": "Monday, Wednesday and Friday at" }],
+        "description": [
+          { "page": 1, "line": 74, "text": "Enjoy a nighttime party filled with glow-in-the-dark games" },
+          { "page": 1, "line": 78, "text": "and dancing!" }
+        ]
+      },
+      "warnings": ["schedule:incomplete_time_phrase"]
+    }
+  ],
+  "reviewed_manual_records": [
+    {
+      "title": "Video Game Dance Party",
+      "slug": "video-game-dance-party",
+      "category": "nighttime_entertainment",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday at 7:30pm",
+      "start_time": "7:30pm",
+      "end_time": null,
+      "location": "Great Ceremonial House Lawn",
+      "description": "Show off your best moves at this interactive dance party!",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-22T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR missed the visual title."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "bbox": [910, 2028, 1605, 2070],
+            "text": "VIDEO GAME DANCE PARTY",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "location": [{ "page": 1, "line": 64, "text": "Great Ceremonial House Lawn" }],
+        "schedule": [{ "page": 1, "line": 66, "text": "Sunday, Tuesday, Thursday and Saturday at 7:30pm" }],
+        "description": [
+          { "page": 1, "line": 68, "text": "Show off your best moves at this interactive dance party!" }
+        ]
+      }
+    }
+  ]
+}

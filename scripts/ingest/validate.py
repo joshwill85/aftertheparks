@@ -9,6 +9,12 @@ from pathlib import Path
 
 from config import CONFIDENCE_PUBLISH_THRESHOLD, MOVIE_TITLE_GARBAGE_RATIO, PROCESSED_DIR
 from source_manifest import ACTIVITY_SOURCES, ALL_RESORT_SLUGS
+from title_quality import (
+    is_blocked_activity_title,
+    is_ocr_spaced_title,
+    looks_corrupt_activity_slug,
+    repair_known_activity_title,
+)
 
 
 @dataclass
@@ -34,8 +40,56 @@ class ValidationReport:
 def movie_title_garbage_ratio(title: str) -> float:
     if not title:
         return 1.0
-    non_alpha = len(title) - sum(c.isalpha() for c in title)
-    return non_alpha / len(title)
+    cleaned = re.sub(r"\(\d{4}\)", "", title).strip()
+    if not cleaned:
+        return 0.0
+    garbage = re.sub(r"[A-Za-z0-9\s'’\":,&.!?-]", "", cleaned)
+    return len(garbage) / len(cleaned)
+
+
+PDF_BOILERPLATE = re.compile(
+    r"ACTIVITIES SCHEDULE TO VIEW|THIS INFORMATION DIGITALLY|SCAN THIS QR|S\s*O\s*R\s*C",
+    re.I,
+)
+ARCADE_BLEED = re.compile(
+    r"Play the latest and greatest family-friendly video games|"
+    r"\bReel Fun Arcade\b|"
+    r"\bNote.?able Games Arcade\b|"
+    r"\bGame Point Arcade\b|"
+    r"\bArcadia Games\b|"
+    r"\bLafferty Place Arcade\b",
+    re.I,
+)
+WELLNESS_BLEED = re.compile(
+    r"Pick up a map|"
+    r"Donald.s Double Feature|"
+    r"Maestro Mickey|"
+    r"Sport Goofy Gifts|"
+    r"any merchandise location|"
+    r"finished the challenges",
+    re.I,
+)
+
+
+def _field_text(value: object) -> str:
+    return value.strip() if isinstance(value, str) else ""
+
+
+def cross_activity_bleed_detail(act: dict) -> str | None:
+    description = _field_text(act.get("description"))
+    if not description:
+        return None
+
+    category = _field_text(act.get("category"))
+    slug = _field_text(act.get("normalized_name"))
+
+    if ARCADE_BLEED.search(description) and category != "arcade":
+        return description[:120]
+
+    if WELLNESS_BLEED.search(description) and slug != "wellness-scavenger-hunt":
+        return description[:120]
+
+    return None
 
 
 def validate_payload(data: dict, *, prior_counts: dict[str, int] | None = None) -> ValidationReport:
@@ -79,8 +133,46 @@ def validate_payload(data: dict, *, prior_counts: dict[str, int] | None = None) 
 
         for act in acts:
             conf = act.get("confidence", 1.0)
+            title = _field_text(act.get("name"))
+            slug = _field_text(act.get("normalized_name"))
+            key = f"{group}/{slug or '<missing-slug>'}"
+
+            repaired_title = repair_known_activity_title(title)
+            if is_blocked_activity_title(title):
+                report.error("public_title_fidelity", f"{key}: blocklisted title '{title}'")
+            elif is_ocr_spaced_title(title) and not repaired_title:
+                report.error("public_title_fidelity", f"{key}: unrepaired OCR title '{title}'")
+
+            if looks_corrupt_activity_slug(slug) and not repaired_title:
+                report.error("public_slug_fidelity", f"{key}: corrupt slug")
+
             if conf < CONFIDENCE_PUBLISH_THRESHOLD:
                 report.warn("low_confidence", f"{group}/{act['normalized_name']}: confidence {conf}")
+
+            for field in ("location", "schedule_text", "description"):
+                value = _field_text(act.get(field))
+                if not value:
+                    continue
+                if PDF_BOILERPLATE.search(value):
+                    report.warn("pdf_boilerplate_field", f"{key}/{field}: '{value[:80]}'")
+                if is_ocr_spaced_title(value) and not repair_known_activity_title(value):
+                    report.warn("ocr_bleed_field", f"{key}/{field}: '{value[:80]}'")
+                if field == "description":
+                    bleed = cross_activity_bleed_detail(act)
+                    if bleed:
+                        report.error("cross_activity_bleed", f"{key}/{field}: '{bleed}'")
+
+            if slug == "wellness-scavenger-hunt":
+                description = _field_text(act.get("description"))
+                schedule = _field_text(act.get("schedule_text"))
+                if not description or "any merchandise location" not in description:
+                    report.error("wellness_description_fidelity", f"{key}: missing complete source description")
+                if "Find hidden wellness challenges" not in description:
+                    report.error("wellness_description_fidelity", f"{key}: description no longer starts from source text")
+                if "11:00pm" not in schedule and act.get("end_time") != "11:00pm":
+                    report.error("wellness_schedule_fidelity", f"{key}: missing 11:00pm end time")
+                if act.get("is_fee_based"):
+                    report.error("wellness_fee_fidelity", f"{key}: source PDF does not mark this activity as fee-based")
 
             for movie in act.get("movie_nights") or []:
                 title = movie.get("movie_title", "")

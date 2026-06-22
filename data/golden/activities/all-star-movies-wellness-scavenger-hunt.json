@@ -1,0 +1,28 @@
+{
+  "calendar_group_key": "all-star-movies",
+  "source_pdf": "data/raw/pdfs/All-Star-Movies_Aframe_Recreation_1125.pdf",
+  "source_pdf_sha256": "784923e9f8dec8207a1cdb91987b425f42c4ec7450e6f9eadb8f64075d0db276",
+  "expected": {
+    "title": "Wellness Scavenger Hunt",
+    "slug": "wellness-scavenger-hunt",
+    "schedule_text": "Daily from 7:00am–11:00pm",
+    "start_time": "7:00am",
+    "end_time": "11:00pm",
+    "location": "Throughout Disney’s All-Star Resorts",
+    "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+    "is_fee_based": false
+  },
+  "required_spans": {
+    "title": [{ "page": 1, "line": 5 }],
+    "location": [{ "page": 1, "line": 6 }],
+    "schedule": [{ "page": 1, "line": 7 }],
+    "description": [
+      { "page": 1, "line": 9 },
+      { "page": 1, "line": 10 },
+      { "page": 1, "line": 12 },
+      { "page": 1, "line": 14 },
+      { "page": 1, "line": 16 },
+      { "page": 1, "line": 18 }
+    ]
+  }
+}

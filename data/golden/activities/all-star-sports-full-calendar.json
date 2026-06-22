@@ -1,0 +1,232 @@
+{
+  "calendar_group_key": "all-star-sports",
+  "source_pdf": "data/raw/pdfs/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf",
+  "source_pdf_sha256": "f6c6360fee9a12d84f02d55b2b33cf3b435048b963630c186b9b616981ea9263",
+  "expected_records": [
+    {
+      "title": "Wellness Scavenger Hunt",
+      "slug": "wellness-scavenger-hunt",
+      "category": "fitness_wellness",
+      "schedule_text": "Daily from 7:00am–11:00pm",
+      "start_time": "7:00am",
+      "end_time": "11:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 8}],
+        "location": [{"page": 1, "line": 9}],
+        "schedule": [{"page": 1, "line": 10}],
+        "description": [
+          {"page": 1, "line": 11},
+          {"page": 1, "line": 13},
+          {"page": 1, "line": 14},
+          {"page": 1, "line": 16},
+          {"page": 1, "line": 18},
+          {"page": 1, "line": 20}
+        ]
+      }
+    },
+    {
+      "title": "Game Point Arcade",
+      "slug": "game-point-arcade",
+      "category": "arcade",
+      "schedule_text": "Daily from 8:00am–11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm",
+      "location": "Inside Stadium Hall",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{"page": 1, "line": 15}],
+        "location": [{"page": 1, "line": 17}],
+        "schedule": [{"page": 1, "line": 19}],
+        "description": [{"page": 1, "line": 21}]
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 8:00am–9:00pm",
+      "start_time": "8:00am",
+      "end_time": "9:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 22}],
+        "location": [{"page": 1, "line": 25}],
+        "schedule": [{"page": 1, "line": 27}],
+        "description": [
+          {"page": 1, "line": 29},
+          {"page": 1, "line": 31},
+          {"page": 1, "line": 32}
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily at 12:30pm",
+      "start_time": "12:30pm",
+      "end_time": null,
+      "location": "Grand Slam Pool Deck",
+      "description": "Join us for fun and games, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 23}],
+        "location": [{"page": 1, "line": 24}],
+        "schedule": [{"page": 1, "line": 26}],
+        "description": [
+          {"page": 1, "line": 28},
+          {"page": 1, "line": 30}
+        ]
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "category": "arts_crafts",
+      "schedule_text": "Daily from 2:30pm-3:30pm",
+      "start_time": "2:30pm",
+      "end_time": "3:30pm",
+      "location": "Grand Slam Pool Deck",
+      "description": "Create a take-home souvenir with a Disney twist!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{"page": 1, "line": 33}],
+        "location": [{"page": 1, "line": 34}],
+        "schedule": [{"page": 1, "line": 35}],
+        "description": [{"page": 1, "line": 37}]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Grand Slam Pool Deck | 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Grand Slam Pool Deck",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 36}],
+        "location": [{"page": 1, "line": 39}],
+        "schedule": [{"page": 1, "line": 39}],
+        "description": [],
+        "movie_nights": [
+          {"page": 1, "line": 42},
+          {"page": 1, "line": 45},
+          {"page": 1, "line": 46},
+          {"page": 1, "line": 49}
+        ]
+      },
+      "movie_nights": [
+        {"day_of_week": "sunday", "movie_title": "Lilo & Stitch (2002)", "show_time": "8:00pm"},
+        {"day_of_week": "monday", "movie_title": "Meet the Robinsons", "show_time": "8:00pm"},
+        {"day_of_week": "wednesday", "movie_title": "Toy Story", "show_time": "8:00pm"},
+        {"day_of_week": "friday", "movie_title": "Wish", "show_time": "8:00pm"}
+      ]
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Tuesday, Thursday and Saturday from 2:30pm–3:30pm",
+      "start_time": "2:30pm",
+      "end_time": "3:30pm",
+      "location": "Outside Stadium Hall near Touchdown! Buildings",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{"page": 1, "line": 38}],
+        "location": [{"page": 1, "line": 40}],
+        "schedule": [{"page": 1, "line": 41}],
+        "description": [
+          {"page": 1, "line": 43},
+          {"page": 1, "line": 44}
+        ]
+      }
+    },
+    {
+      "title": "Arcade Tournament",
+      "slug": "arcade-tournament",
+      "category": "arcade",
+      "schedule_text": "Daily from 4:00pm–5:00pm",
+      "start_time": "4:00pm",
+      "end_time": "5:00pm",
+      "location": "Game Point Arcade",
+      "description": "Come test your skills at our daily arcade tournament. You may find yourself going home with a prize of your own!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 47}],
+        "location": [{"page": 1, "line": 48}],
+        "schedule": [{"page": 1, "line": 50}],
+        "description": [
+          {"page": 1, "line": 52},
+          {"page": 1, "line": 53}
+        ]
+      }
+    },
+    {
+      "title": "Touchdown! Campfire",
+      "slug": "touchdown-campfire",
+      "category": "campfire",
+      "schedule_text": "Daily from 6:00pm–7:00pm",
+      "start_time": "6:00pm",
+      "end_time": "7:00pm",
+      "location": "Outside Stadium Hall near Touchdown! Buildings",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 55}],
+        "location": [{"page": 1, "line": 56}],
+        "schedule": [{"page": 1, "line": 57}],
+        "description": [
+          {"page": 1, "line": 58},
+          {"page": 1, "line": 59}
+        ]
+      }
+    },
+    {
+      "title": "All-Star Lobby Party",
+      "slug": "all-star-lobby-party",
+      "category": "resort_activity",
+      "schedule_text": "Tuesday and Saturday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Stadium Hall Lobby",
+      "description": "Wear your favorite pajamas for games, dancing and more surprise fun as we close out the evening.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 60}],
+        "location": [{"page": 1, "line": 61}],
+        "schedule": [{"page": 1, "line": 62}],
+        "description": [
+          {"page": 1, "line": 63},
+          {"page": 1, "line": 64}
+        ]
+      }
+    },
+    {
+      "title": "Winter-Themed Activities",
+      "slug": "winter-themed-activities",
+      "category": "resort_activity",
+      "schedule_text": "Thursday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Touchdown! Football Field",
+      "description": "Join us for some activities for all to enjoy!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{"page": 1, "line": 65}],
+        "location": [{"page": 1, "line": 66}],
+        "schedule": [{"page": 1, "line": 67}],
+        "description": [{"page": 1, "line": 68}]
+      }
+    }
+  ]
+}

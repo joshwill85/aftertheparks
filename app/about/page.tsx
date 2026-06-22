@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Hero } from "@/components/atlas/Hero";
 
 export default function AboutPage() {
@@ -17,11 +16,6 @@ export default function AboutPage() {
         <p>
           After the Parks is not affiliated with, authorized by, or sponsored by
           The Walt Disney Company or any of its affiliates.
-        </p>
-        <p>
-          <Link href="/data-sources" className="text-[var(--accent)] hover:underline">
-            Learn how we source and verify activity data →
-          </Link>
         </p>
       </div>
     </>

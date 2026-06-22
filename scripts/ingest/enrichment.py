@@ -6,9 +6,16 @@ import json
 import re
 import urllib.request
 from datetime import datetime, timezone
+from typing import Any
 
 from config import DISNEY_USER_AGENT, PARSER_VERSION
 from db import SupabaseClient
+from magical_resort_guide import (
+    MRG_FACTS_OUTPUT,
+    load_mrg_payload,
+    publish_mrg_facts,
+    publish_mrg_validity,
+)
 
 SUMMER_URL = "https://disneyworld.disney.go.com/events-tours/summer/"
 
@@ -132,6 +139,22 @@ def enrich_pools(db: SupabaseClient) -> None:
         }, on_conflict="resort_id,slug")
 
 
+def enrich_magical_resort_guide_facts(db: SupabaseClient) -> dict[str, Any] | None:
+    if not MRG_FACTS_OUTPUT.exists():
+        return None
+    payload = load_mrg_payload(MRG_FACTS_OUTPUT)
+    facts = payload.get("facts") if isinstance(payload.get("facts"), list) else []
+    fact_summary = publish_mrg_facts(db, facts)
+    validity_summary = publish_mrg_validity(
+        db,
+        payload.get("validity") if isinstance(payload, dict) else None,
+    )
+    return {
+        **fact_summary,
+        "validity": validity_summary,
+    }
+
+
 def main() -> None:
     db = SupabaseClient()
     runs = db.insert("ingest_runs", {
@@ -145,11 +168,16 @@ def main() -> None:
     enrich_seasonal_overlay(db)
     enrich_booking_metadata(db)
     enrich_pools(db)
+    mrg_summary = enrich_magical_resort_guide_facts(db)
 
     db.update("ingest_runs", {"id": f"eq.{run_id}"}, {
         "status": "success",
         "finished_at": datetime.now(timezone.utc).isoformat(),
-        "summary_json": {"phase": "enrichment", "completed": True},
+        "summary_json": {
+            "phase": "enrichment",
+            "completed": True,
+            "magical_resort_guide": mrg_summary,
+        },
     })
     print("Enrichment complete.")
 

@@ -13,9 +13,6 @@ export function SiteFooter() {
           <Link href="/about" className="hover:text-[var(--lagoon)]">
             About
           </Link>
-          <Link href="/data-sources" className="hover:text-[var(--lagoon)]">
-            Data Sources
-          </Link>
           <Link href="/corrections" className="hover:text-[var(--lagoon)]">
             Corrections
           </Link>

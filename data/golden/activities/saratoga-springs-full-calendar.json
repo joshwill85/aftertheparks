@@ -1,0 +1,292 @@
+{
+  "calendar_group_key": "saratoga-springs",
+  "source_pdf": "data/raw/pdfs/SSR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "2a084971eacc44d430d201d32ded314520dc47ffd7412507ebdcc80e6a5e3db5",
+  "expected_records": [
+    {
+      "title": "Purple Martin Nest Checks",
+      "slug": "purple-martin-nest-checks",
+      "category": "other",
+      "schedule_text": "Monday and Friday at 9:00am",
+      "start_time": "9:00am",
+      "end_time": null,
+      "location": "Turf Club Patio",
+      "description": "BEGINNING MARCH 23! Join a conservation expert from Disney’s Animals, Science and Environment team as they study these birds as part of their ongoing efforts to help protect the purple martins.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 9, "text": "PURPLE MARTIN NEST CHECKS" }],
+        "location": [{ "page": 1, "line": 11, "text": "Turf Club Patio" }],
+        "schedule": [{ "page": 1, "line": 13, "text": "Monday and Friday at 9:00am" }],
+        "description": [
+          { "page": 1, "line": 14, "text": "BEGINNING MARCH 23! Join a conservation expert from" },
+          { "page": 1, "line": 15, "text": "Disney’s Animals, Science and Environment team as they" },
+          { "page": 1, "line": 16, "text": "study these birds as part of their ongoing efforts to help" },
+          { "page": 1, "line": 17, "text": "protect the purple martins." }
+        ]
+      }
+    },
+    {
+      "title": "Community Hall",
+      "slug": "community-hall",
+      "category": "other",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "start_time": "10:00am",
+      "end_time": "10:00pm",
+      "location": "Community Hall",
+      "description": "Join us to create one-of-a-kind crafts, borrow your favorite sports equipment, and more! Fees may apply.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 19, "text": "COMMUNITY HALL" }],
+        "location": [{ "page": 1, "line": 19, "text": "COMMUNITY HALL" }],
+        "schedule": [{ "page": 1, "line": 20, "text": "Daily from 10:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 22, "text": "Join us to create one-of-a-kind crafts, borrow your favorite" },
+          { "page": 1, "line": 24, "text": "sports equipment, and more! Fees may apply." }
+        ]
+      }
+    },
+    {
+      "title": "Disney Fit Yoga",
+      "slug": "disney-fit-yoga",
+      "category": "fitness_wellness",
+      "schedule_text": "Tuesday at 9:00am",
+      "start_time": "9:00am",
+      "end_time": null,
+      "location": "Congress Park—Overlooking Disney Springs®",
+      "description": "Ground yourself with a gentle yoga session to start your day. Designed for all skill levels, this experience incorporates various poses set to your favorite Disney music!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 21, "text": "DISNEY FIT YOGA" }],
+        "location": [{ "page": 1, "line": 23, "text": "Congress Park—Overlooking Disney Springs®" }],
+        "schedule": [{ "page": 1, "line": 25, "text": "Tuesday at 9:00am" }],
+        "description": [
+          { "page": 1, "line": 26, "text": "Ground yourself with a gentle yoga session to" },
+          { "page": 1, "line": 28, "text": "start your day. Designed for all skill levels, this" },
+          { "page": 1, "line": 30, "text": "experience incorporates various poses set to your" },
+          { "page": 1, "line": 33, "text": "favorite Disney music!" }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily from 12:00pm-2:00pm",
+      "start_time": "12:00pm",
+      "end_time": "2:00pm",
+      "location": "High Rock Spring Pool Deck",
+      "description": "Soak in the sun with some family-friendly activities, both in and out of the water. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 27, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 29, "text": "High Rock Spring Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 31, "text": "Daily from 12:00pm-2:00pm" }],
+        "description": [
+          { "page": 1, "line": 32, "text": "Soak in the sun with some family-friendly activities, both" },
+          { "page": 1, "line": 34, "text": "in and out of the water. See a Recreation Cast Member" },
+          { "page": 1, "line": 36, "text": "for more information." }
+        ]
+      }
+    },
+    {
+      "title": "Storytime Yoga",
+      "slug": "storytime-yoga",
+      "category": "fitness_wellness",
+      "schedule_text": "Saturday at 9:00am",
+      "start_time": "9:00am",
+      "end_time": null,
+      "location": "Congress Park—Overlooking Disney Springs",
+      "description": "Get active with a session inspired by some of your Disney Friends! All ages and skill levels welcome.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 35, "text": "STORY TIME YOGA" }],
+        "location": [{ "page": 1, "line": 37, "text": "Congress Park—Overlooking Disney Springs" }],
+        "schedule": [{ "page": 1, "line": 39, "text": "Saturday at 9:00am" }],
+        "description": [
+          { "page": 1, "line": 41, "text": "Get active with a session inspired by some" },
+          { "page": 1, "line": 43, "text": "of your Disney Friends! All ages and skill" },
+          { "page": 1, "line": 45, "text": "levels welcome." }
+        ]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Sunday, Tuesday, Wednesday, Friday and Saturday from 2:30pm-3:30pm",
+      "start_time": "2:30pm",
+      "end_time": "3:30pm",
+      "location": "Outside of Community Hall",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 38, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 40, "text": "Outside of Community Hall" }],
+        "schedule": [
+          { "page": 1, "line": 42, "text": "Sunday, Tuesday, Wednesday," },
+          { "page": 1, "line": 44, "text": "Friday and Saturday from 2:30pm-3:30pm" }
+        ],
+        "description": [{ "page": 1, "line": 46, "text": "Get creative with a Disney twist on this arts and crafts favorite!" }]
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "start_time": "10:00am",
+      "end_time": "10:00pm",
+      "location": "Throughout Disney’s Saratoga Springs Resort",
+      "description": "Search the Resort for a hidden Maximus photo prop. Once located, snap a photo and then head to Community Hall to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 47, "text": "FIND A FRIEND" }],
+        "location": [{ "page": 1, "line": 49, "text": "Throughout Disney’s Saratoga Springs Resort" }],
+        "schedule": [{ "page": 1, "line": 51, "text": "Daily from 10:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 54, "text": "Search the Resort for a hidden Maximus photo" },
+          { "page": 1, "line": 56, "text": "prop. Once located, snap a photo and then head" },
+          { "page": 1, "line": 57, "text": "to Community Hall to receive a surprise!" }
+        ]
+      }
+    },
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "start_time": "6:00pm",
+      "end_time": "7:00pm",
+      "location": "Disney Vacation Club® Courtyard at Franklin Square",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 48, "text": "CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 50, "text": "Disney Vacation Club® Courtyard at Franklin Square" }],
+        "schedule": [{ "page": 1, "line": 52, "text": "Nightly from 6:00pm-7:00pm" }],
+        "description": [
+          { "page": 1, "line": 53, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 55, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Glow With The Flow",
+      "slug": "glow-with-the-flow",
+      "category": "other",
+      "schedule_text": "Sunday and Thursday from 7:30pm-8:30pm",
+      "start_time": "7:30pm",
+      "end_time": "8:30pm",
+      "location": "High Rock Spring Pool Deck",
+      "description": "Light the night with our evening poolside activities.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 58, "text": "GLOW WITH THE FLOW" }],
+        "location": [{ "page": 1, "line": 59, "text": "High Rock Spring Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 61, "text": "Sunday and Thursday from 7:30pm-8:30pm" }],
+        "description": [{ "page": 1, "line": 63, "text": "Light the night with our evening poolside activities." }]
+      }
+    },
+    {
+      "title": "Bicycle Rentals",
+      "slug": "bicycle-rentals",
+      "category": "other",
+      "schedule_text": "Daily from 10:00am-6:30pm",
+      "start_time": "10:00am",
+      "end_time": "6:30pm",
+      "location": "Horsing Around Rentals",
+      "description": "Choose from individual bikes to two- or four-person surrey bikes for a fun family outing!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 60, "text": "BICYCLE RENTALS ($)" }],
+        "location": [{ "page": 1, "line": 62, "text": "Horsing Around Rentals" }],
+        "schedule": [{ "page": 1, "line": 64, "text": "Daily from 10:00am-6:30pm" }],
+        "description": [
+          { "page": 1, "line": 66, "text": "Choose from individual bikes to two- or four-person" },
+          { "page": 1, "line": 67, "text": "surrey bikes for a fun family outing!" }
+        ]
+      }
+    },
+    {
+      "title": "Nighttime Bingo",
+      "slug": "nighttime-bingo",
+      "category": "other",
+      "schedule_text": "Tuesday from 7:30pm-8:30pm",
+      "start_time": "7:30pm",
+      "end_time": "8:30pm",
+      "location": "Turf Club Bar and Grill",
+      "description": "Bring the family together for an unforgettable night full of fun and prizes!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 65, "text": "NIGHTTIME BINGO" }],
+        "location": [{ "page": 1, "line": 68, "text": "Turf Club Bar and Grill" }],
+        "schedule": [{ "page": 1, "line": 69, "text": "Tuesday from 7:30pm-8:30pm" }],
+        "description": [
+          { "page": 1, "line": 70, "text": "Bring the family together for an unforgettable night full of" },
+          { "page": 1, "line": 71, "text": "fun and prizes!" }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Outside Of The Artist’S Palette | 8:30pm",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Outside Of The Artist’S Palette",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 72, "text": "MOVIE UNDER THE STARS" }],
+        "location": [{ "page": 1, "line": 74, "text": "OUTSIDE OF THE ARTIST’S PALETTE | 8:30pm" }],
+        "schedule": [{ "page": 1, "line": 74, "text": "OUTSIDE OF THE ARTIST’S PALETTE | 8:30pm" }]
+      }
+    },
+    {
+      "title": "Winner’s Circle Mosaics",
+      "slug": "winners-circle-mosaics",
+      "category": "arts_crafts",
+      "schedule_text": "Monday at 2:30pm",
+      "start_time": "2:30pm",
+      "end_time": null,
+      "location": "The Turf Club Bar and Grill",
+      "description": "Immerse yourself in a famous art tradition as you design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Space is limited. To book, visit or call the Community Hall at 407-827-4589.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 77, "text": "WINNER’S CIRCLE MOSAICS ($)" }],
+        "location": [{ "page": 1, "line": 78, "text": "The Turf Club Bar and Grill" }],
+        "schedule": [{ "page": 1, "line": 81, "text": "Monday at 2:30pm" }],
+        "description": [
+          { "page": 1, "line": 84, "text": "Immerse yourself in a famous art tradition as you design" },
+          { "page": 1, "line": 85, "text": "your own mosaic showpiece with a touch of Disney flair." },
+          { "page": 1, "line": 86, "text": "This experience is recommended for Guests ages 12 and up." },
+          { "page": 1, "line": 87, "text": "Space is limited. To book, visit or call the Community Hall" },
+          { "page": 1, "line": 88, "text": "at 407-827-4589." }
+        ]
+      }
+    },
+    {
+      "title": "Win, Paint, Show!",
+      "slug": "win-paint-show",
+      "category": "other",
+      "schedule_text": "Thursday at 2:30pm",
+      "start_time": "2:30pm",
+      "end_time": null,
+      "location": "Community Hall",
+      "description": "Get in touch with your inner artist in this unique 2-hour instructor-led painting class! This experience is recommended for Guests ages 12 and up. Space is limited. To book, visit or call the Community Hall at 407-827-4589.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 89, "text": "WIN, PAINT, SHOW! ($)" }],
+        "location": [{ "page": 1, "line": 93, "text": "Community Hall" }],
+        "schedule": [{ "page": 1, "line": 97, "text": "Thursday at 2:30pm" }],
+        "description": [
+          { "page": 1, "line": 99, "text": "Get in touch with your inner artist in this unique" },
+          { "page": 1, "line": 100, "text": "2-hour instructor-led painting class! This experience is" },
+          { "page": 1, "line": 102, "text": "recommended for Guests ages 12 and up. Space is limited." },
+          { "page": 1, "line": 104, "text": "To book, visit or call the Community Hall at 407-827-4589." }
+        ]
+      }
+    }
+  ]
+}

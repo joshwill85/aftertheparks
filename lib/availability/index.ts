@@ -61,6 +61,10 @@ export function getActivityAvailability(
     ? new Date(activity.endDateTime)
     : addHours(start, 2);
 
+  if (uncertainTime) {
+    return { state: "uncertain_time", uncertainTime: true };
+  }
+
   if (isBefore(end, now) && !isEqual(end, now)) {
     return { state: "expired", uncertainTime };
   }

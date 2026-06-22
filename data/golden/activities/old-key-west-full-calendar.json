@@ -1,0 +1,294 @@
+{
+  "calendar_group_key": "old-key-west",
+  "source_pdf": "data/raw/pdfs/OKWR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
+  "expected_records": [
+    {
+      "title": "Conch Flats Community Hall",
+      "slug": "conch-flats-community-hall",
+      "category": "other",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "start_time": "10:00am",
+      "end_time": "10:00pm",
+      "location": "Hospitality House",
+      "description": "Join us to create one-of-a-kind crafts, borrow your favorite sports equipment and more! Fees may apply.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 4, "text": "CONCH FLATS COMMUNITY HALL" }],
+        "location": [{ "page": 1, "line": 6, "text": "Hospitality House" }],
+        "schedule": [{ "page": 1, "line": 7, "text": "Daily from 10:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 8, "text": "Join us to create one-of-a-kind crafts, borrow your favorite" },
+          { "page": 1, "line": 9, "text": "sports equipment and more! Fees may apply." }
+        ]
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "slug": "poolside-activities",
+      "category": "poolside",
+      "schedule_text": "Daily from 12:00pm-2:00pm",
+      "start_time": "12:00pm",
+      "end_time": "2:00pm",
+      "location": "Sandcastle Pool Deck",
+      "description": "Soak in the sun with some family-friendly activities, both in and out of the water. See a Recreation Cast Member for more information.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 11, "text": "POOLSIDE ACTIVITIES" }],
+        "location": [{ "page": 1, "line": 13, "text": "Sandcastle Pool Deck" }],
+        "schedule": [{ "page": 1, "line": 14, "text": "Daily from 12:00pm-2:00pm" }],
+        "description": [
+          { "page": 1, "line": 15, "text": "Soak in the sun with some family-friendly activities, both" },
+          { "page": 1, "line": 17, "text": "in and out of the water. See a Recreation Cast Member" },
+          { "page": 1, "line": 19, "text": "for more information." }
+        ]
+      }
+    },
+    {
+      "title": "Disney Fit Yoga",
+      "slug": "disney-fit-yoga",
+      "category": "fitness_wellness",
+      "schedule_text": "Sunday at 9:00am",
+      "start_time": "9:00am",
+      "end_time": null,
+      "location": "Near the Sandcastle Pool area",
+      "description": "Ground yourself with a gentle yoga session to start your day. Designed for all skill levels, this experience incorporates various poses set to your favorite Disney music!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 16, "text": "DISNEY FIT YOGA" }],
+        "location": [{ "page": 1, "line": 18, "text": "Near the Sandcastle Pool area" }],
+        "schedule": [{ "page": 1, "line": 20, "text": "Sunday at 9:00am" }],
+        "description": [
+          { "page": 1, "line": 21, "text": "Ground yourself with a gentle yoga session to start" },
+          { "page": 1, "line": 22, "text": "your day. Designed for al levels, this experience" },
+          { "page": 1, "line": 25, "text": "incorporates various poses set to your favorite" },
+          { "page": 1, "line": 27, "text": "Disney music!" }
+        ]
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "slug": "mickey-tie-dye",
+      "category": "arts_crafts",
+      "schedule_text": "Sunday, Monday, Tuesday, Thursday, Friday and Saturday from 2:30pm-3:30pm",
+      "start_time": "2:30pm",
+      "end_time": "3:30pm",
+      "location": "Outside of Community Hall",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 23, "text": "MICKEY TIE-DYE ($)" }],
+        "location": [{ "page": 1, "line": 24, "text": "Outside of Community Hall" }],
+        "schedule": [
+          { "page": 1, "line": 26, "text": "Sunday, Monday, Tuesday, Thursday," },
+          { "page": 1, "line": 28, "text": "Friday and Saturday from 2:30pm-3:30pm" }
+        ],
+        "description": [
+          { "page": 1, "line": 30, "text": "Get creative with a Disney twist on this arts and" },
+          { "page": 1, "line": 32, "text": "crafts favorite!" }
+        ]
+      }
+    },
+    {
+      "title": "Disney Fit Aqua Fitness",
+      "slug": "disney-fit-aqua-fitness",
+      "category": "other",
+      "schedule_text": "Tuesday at 9:00am",
+      "start_time": "9:00am",
+      "end_time": null,
+      "location": "Sandcastle Pool",
+      "description": "Move to the music and the water’s natural resistance during this water aerobic exercise class that welcomes all skill levels.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 29, "text": "DISNEY FIT AQUA FITNESS" }],
+        "location": [{ "page": 1, "line": 31, "text": "Sandcastle Pool" }],
+        "schedule": [{ "page": 1, "line": 33, "text": "Tuesday at 9:00am" }],
+        "description": [
+          { "page": 1, "line": 35, "text": "Move to the music and the water’s natural resistance" },
+          { "page": 1, "line": 36, "text": "during this water aerobic exercise class that welcomes" },
+          { "page": 1, "line": 38, "text": "all skill levels." }
+        ]
+      }
+    },
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "start_time": "6:00pm",
+      "end_time": "7:00pm",
+      "location": "Near the Sandcastle Pool Area Tennis Courts",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 34, "text": "CAMPFIRE" }],
+        "location": [{ "page": 1, "line": 37, "text": "Near the Sandcastle Pool Area Tennis Courts" }],
+        "schedule": [{ "page": 1, "line": 39, "text": "Nightly from 6:00pm-7:00pm" }],
+        "description": [
+          { "page": 1, "line": 40, "text": "Enjoy the warm glow of the campfire with complimentary" },
+          { "page": 1, "line": 42, "text": "marshmallows. S’mores kits available for purchase." }
+        ]
+      }
+    },
+    {
+      "title": "Pickleball Clinic",
+      "slug": "pickleball-clinic",
+      "category": "other",
+      "schedule_text": "Thursday at 9:30am",
+      "start_time": "9:30am",
+      "end_time": null,
+      "location": "Tennis Courts near Hospitality House",
+      "description": "Join us for an introduction to Pickleball! Learn the basic rules and how to volley, serve and dink. Reservations required. Please stop by Community Hall or call 407-827-1183 to reserve your spot.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 41, "text": "PICKLEBALL CLINIC" }],
+        "location": [{ "page": 1, "line": 43, "text": "Tennis Courts near Hospitality House" }],
+        "schedule": [{ "page": 1, "line": 45, "text": "Thursday at 9:30am" }],
+        "description": [
+          { "page": 1, "line": 46, "text": "Join us for an introduction to Pickleball! Learn" },
+          { "page": 1, "line": 48, "text": "the basic rules and how to volley, serve and dink." },
+          { "page": 1, "line": 50, "text": "Reservations required. Please stop by Community Hall" },
+          { "page": 1, "line": 52, "text": "or call 407-827-1183 to reserve your spot." }
+        ]
+      }
+    },
+    {
+      "title": "Sunset Celebration",
+      "slug": "sunset-celebration",
+      "category": "other",
+      "schedule_text": "Friday at Sunset",
+      "start_time": null,
+      "end_time": null,
+      "location": "Hospitality House",
+      "description": "Inspired by the nightly, multicultural festival of watching the sun sink into the Gulf at Mallory Square in Key West, Florida. Come celebrate our interpretation of this tradition with family-friendly activities and more.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 44, "text": "SUNSET CELEBRATION" }],
+        "location": [{ "page": 1, "line": 47, "text": "Hospitality House" }],
+        "schedule": [{ "page": 1, "line": 49, "text": "Friday at Sunset" }],
+        "description": [
+          { "page": 1, "line": 51, "text": "Inspired by the nightly, multicultural festival of watching" },
+          { "page": 1, "line": 53, "text": "the sun sink into the Gulf at Mallory Square in Key West," },
+          { "page": 1, "line": 54, "text": "Florida. Come celebrate our interpretation of this tradition" },
+          { "page": 1, "line": 56, "text": "with family-friendly activities and more." }
+        ]
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "start_time": "10:00am",
+      "end_time": "10:00pm",
+      "location": "Throughout Disney’s Old Key West Resort",
+      "description": "Search the Resort for a hidden Orange Bird photo prop. Once located, snap a photo and then head to Community Hall to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 55, "text": "FIND A FRIEND" }],
+        "location": [{ "page": 1, "line": 57, "text": "Throughout Disney’s Old Key West Resort" }],
+        "schedule": [{ "page": 1, "line": 58, "text": "Daily from 10:00am-10:00pm" }],
+        "description": [
+          { "page": 1, "line": 60, "text": "Search the Resort for a hidden Orange Bird photo" },
+          { "page": 1, "line": 62, "text": "prop. Once located, snap a photo and then head to" },
+          { "page": 1, "line": 64, "text": "Community Hall to receive a surprise!" }
+        ]
+      }
+    },
+    {
+      "title": "Nighttime Trivia",
+      "slug": "nighttime-trivia",
+      "category": "other",
+      "schedule_text": "Monday from 8:00pm-9:00pm",
+      "start_time": "8:00pm",
+      "end_time": "9:00pm",
+      "location": "Papa’s Den near the lobby",
+      "description": "Put your knowledge to the test!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 59, "text": "NIGHTTIME TRIVIA" }],
+        "location": [{ "page": 1, "line": 61, "text": "Papa’s Den near the lobby" }],
+        "schedule": [{ "page": 1, "line": 63, "text": "Monday from 8:00pm-9:00pm" }],
+        "description": [{ "page": 1, "line": 65, "text": "Put your knowledge to the test!" }]
+      }
+    },
+    {
+      "title": "Conch Crazy Bingo",
+      "slug": "conch-crazy-bingo",
+      "category": "other",
+      "schedule_text": "Wednesday and Friday from 8:00pm-9:00pm",
+      "start_time": "8:00pm",
+      "end_time": "9:00pm",
+      "location": "Community Hall",
+      "description": "Bring the family together for an unforgettable bingo night full of fun, joy, and prizes!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 67, "text": "CONCH CRAZY BINGO" }],
+        "location": [{ "page": 1, "line": 69, "text": "Community Hall" }],
+        "schedule": [{ "page": 1, "line": 70, "text": "Wednesday and Friday from 8:00pm-9:00pm" }],
+        "description": [
+          { "page": 1, "line": 72, "text": "Bring the family toaether for an unforaettable binao night" },
+          { "page": 1, "line": 76, "text": "ull of fun, joy, and prizes!" }
+        ]
+      }
+    },
+    {
+      "title": "Conch Flats Mosaics",
+      "slug": "conch-flats-mosaics",
+      "category": "arts_crafts",
+      "schedule_text": "Wednesday at 3:00pm",
+      "start_time": "3:00pm",
+      "end_time": null,
+      "location": "Papa’s Den near the lobby",
+      "description": "Design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Class may take up to 2 hours. Reservations are required. Please visit Community Hall or call 407-827-1183 to reserve your spot. Space is limited. Weather permitting.",
+      "is_fee_based": true,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 79, "text": "CONCH FLATS MOSAICS ($)" }],
+        "location": [{ "page": 1, "line": 81, "text": "Papa’s Den near the lobby" }],
+        "schedule": [{ "page": 1, "line": 83, "text": "Wednesday at 3:00pm" }],
+        "description": [
+          { "page": 1, "line": 85, "text": "Design your own mosaic showpiece with a touch of Disney" },
+          { "page": 1, "line": 87, "text": "and up. Class may take up to 2 hours. Reservations are" },
+          { "page": 1, "line": 88, "text": "required. Please visit Community Hall or call 407-827-1183" },
+          { "page": 1, "line": 90, "text": "to reserve your spot. Space is limited. Weather permitting." }
+        ]
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Near The Volleyball Court | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Near The Volleyball Court",
+      "description": "",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 78, "text": "MOVIE UNDER THE STARS" }],
+        "location": [
+          { "page": 1, "line": 80, "text": "NEAR" },
+          { "page": 1, "line": 82, "text": "THE VOLLEYBALL COURT | 8:30PM" }
+        ],
+        "schedule": [
+          { "page": 1, "line": 80, "text": "NEAR" },
+          { "page": 1, "line": 82, "text": "THE VOLLEYBALL COURT | 8:30PM" }
+        ]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Bike Rentals",
+      "slug": "bike-rentals",
+      "warnings": ["schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 66, "text": "BIKE RENTALS ($)" }],
+        "description": [
+          { "page": 1, "line": 71, "text": "Choose from individual bikes to two-or four-person" },
+          { "page": 1, "line": 74, "text": "surrey bikes for a fun family outing!" }
+        ]
+      }
+    }
+  ]
+}
