@@ -22,7 +22,7 @@ from scripts.ingest.extract_v2 import (
     extract_candidates_for_pdf,
 )
 from scripts.ingest.promote_gold import promote_candidates, promote_fixtures
-from scripts.ingest.publish_gold_v2 import publish_gold_rows
+from scripts.ingest.publish_gold_v2 import publish_gold_rows, _stable_uuid
 from scripts.ingest.disney_recreation_offerings import (
     extract_official_recreation_offerings,
     resolve_official_resort_slugs,
@@ -2857,6 +2857,9 @@ class PipelineContractsTest(unittest.TestCase):
 
     def test_gold_v2_publisher_retires_current_rows_missing_from_snapshot(self) -> None:
         row = json.loads(GOLD_PREVIEW_PATH.read_text())[0]
+        expected_id = _stable_uuid(
+            f"gold:{row['calendar_group_key']}:{row['canonical_slug']}"
+        )
         db = FakeGoldV2Db()
         db.select_rows["public_activity_gold"] = [
             {
@@ -2866,7 +2869,13 @@ class PipelineContractsTest(unittest.TestCase):
                 "is_current": True,
             },
             {
-                "id": "kept-gold-row",
+                "id": "same-key-old-id",
+                "calendar_group_key": row["calendar_group_key"],
+                "canonical_slug": row["canonical_slug"],
+                "is_current": True,
+            },
+            {
+                "id": expected_id,
                 "calendar_group_key": row["calendar_group_key"],
                 "canonical_slug": row["canonical_slug"],
                 "is_current": True,
@@ -2875,7 +2884,7 @@ class PipelineContractsTest(unittest.TestCase):
 
         result = publish_gold_rows(db, [row])
 
-        self.assertEqual(1, result["retired_gold_rows"])
+        self.assertEqual(2, result["retired_gold_rows"])
         self.assertIn(
             (
                 "public_activity_gold",
@@ -2884,10 +2893,18 @@ class PipelineContractsTest(unittest.TestCase):
             ),
             db.updates,
         )
+        self.assertIn(
+            (
+                "public_activity_gold",
+                {"id": "eq.same-key-old-id"},
+                {"is_current": False},
+            ),
+            db.updates,
+        )
         self.assertNotIn(
             (
                 "public_activity_gold",
-                {"id": "eq.kept-gold-row"},
+                {"id": f"eq.{expected_id}"},
                 {"is_current": False},
             ),
             db.updates,

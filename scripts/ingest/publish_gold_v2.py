@@ -90,8 +90,11 @@ def _source_document_id(db: Any, row: dict[str, Any]) -> str:
 
 
 def _retire_missing_current_rows(db: Any, rows: list[dict[str, Any]]) -> int:
-    expected_keys = {
-        (row["calendar_group_key"], row["canonical_slug"])
+    expected_ids_by_key = {
+        (row["calendar_group_key"], row["canonical_slug"]): _public_gold_row(
+            row,
+            source_document_id="00000000-0000-0000-0000-000000000000",
+        )["id"]
         for row in rows
     }
     existing = db.select(
@@ -102,7 +105,7 @@ def _retire_missing_current_rows(db: Any, rows: list[dict[str, Any]]) -> int:
     retired = 0
     for row in existing:
         key = (row.get("calendar_group_key"), row.get("canonical_slug"))
-        if key in expected_keys:
+        if row.get("id") == expected_ids_by_key.get(key):
             continue
         row_id = row.get("id")
         if not row_id:

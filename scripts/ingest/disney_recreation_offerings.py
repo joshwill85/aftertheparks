@@ -9,6 +9,8 @@ to resorts without inventing dated occurrences.
 from __future__ import annotations
 
 import re
+import hashlib
+import json
 from typing import Any
 
 try:
@@ -207,12 +209,22 @@ def _line_mentions_slug(line: dict[str, Any], slug: str) -> bool:
 
 
 def _source_sha(payload: dict[str, Any]) -> str:
-    return str(
+    explicit = str(
         payload.get("source_web_sha256")
         or payload.get("source_sha256")
         or payload.get("content_sha256")
+        or payload.get("raw_html_sha256")
         or ""
     )
+    if explicit:
+        return explicit
+    source_basis = {
+        "source_url": payload.get("source_url"),
+        "lines": payload.get("lines", []),
+    }
+    return hashlib.sha256(
+        json.dumps(source_basis, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
 
 
 def _program_title(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
