@@ -71,7 +71,10 @@ def _public_gold_row(row: dict[str, Any], source_document_id: str) -> dict[str, 
         "valid_from": row.get("valid_from"),
         "valid_until": row.get("valid_until"),
         "is_current": True,
-        "promoted_from_candidate_id": row["candidate_id"],
+        # The preview file can be published independently of the extraction
+        # candidate audit table. Keep source URL/hash and field provenance as
+        # the durable lineage contract, and avoid a dangling optional FK.
+        "promoted_from_candidate_id": None,
         "promoted_at": datetime.now(timezone.utc).isoformat(),
         "enrichment": row.get("enrichment") or {},
         "external_facts": row.get("external_facts") or [],
