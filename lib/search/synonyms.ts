@@ -2,7 +2,6 @@
 export const SEARCH_SYNONYMS: Record<string, string[]> = {
   movie: ["movies", "cinema", "film", "stars", "outdoor movie"],
   campfire: ["campfires", "marshmallow", "smores", "s'mores", "fire", "bonfire"],
-  free: ["complimentary", "included", "no ticket", "no cost"],
   craft: ["crafts", "arts", "kids", "coloring", "painting"],
   pool: ["poolside", "swim", "swimming"],
   yoga: ["wellness", "fitness", "stretch", "meditation"],
@@ -62,11 +61,11 @@ export const PAGE_HITS = [
     keywords: ["today", "now", "happening", "this afternoon"],
   },
   {
-    id: "page-free",
-    title: "Free activities",
-    description: "No ticket needed — included with your stay",
-    href: "/activities?free=true",
-    keywords: ["free", "complimentary", "included", "no ticket"],
+    id: "page-calendar",
+    title: "Resort calendar",
+    description: "Browse source-backed resort activities",
+    href: "/activities",
+    keywords: ["calendar", "activities", "browse", "resort fun"],
   },
   {
     id: "page-resorts",
@@ -85,7 +84,7 @@ export const PAGE_HITS = [
   {
     id: "page-guides",
     title: "Planning guides",
-    description: "First night tips, rainy days, and free fun",
+    description: "First night tips, rainy days, and resort activities",
     href: "/guides",
     keywords: ["guides", "guide", "tips", "help", "planning"],
   },

@@ -16,7 +16,6 @@ const DATE_OPTIONS = [
 
 const VIBE_OPTIONS = [
   { value: "", label: "Any vibe" },
-  { value: "free", label: "Free" },
   { value: "poolside", label: "Pool break" },
   { value: "campfire", label: "Campfires" },
   { value: "movies_under_stars", label: "Movies" },
@@ -61,9 +60,7 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
       params.set("daypart", date as Daypart);
     }
 
-    if (vibe === "free") {
-      params.set("free", "true");
-    } else if (vibe) {
+    if (vibe) {
       params.set("category", vibe);
     }
 

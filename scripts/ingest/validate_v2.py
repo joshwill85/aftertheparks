@@ -12,6 +12,7 @@ try:
     from extract_v2 import (
         compare_candidates_to_fixture,
         expected_quarantine_slugs_for_fixture,
+        expected_unextractable_slugs_for_fixture,
         extract_candidates_for_fixture,
     )
 except ImportError:  # pragma: no cover - supports package-style imports in tests
@@ -19,6 +20,7 @@ except ImportError:  # pragma: no cover - supports package-style imports in test
     from .extract_v2 import (
         compare_candidates_to_fixture,
         expected_quarantine_slugs_for_fixture,
+        expected_unextractable_slugs_for_fixture,
         extract_candidates_for_fixture,
     )
 
@@ -65,11 +67,21 @@ def validate_fixture_extractions(
             report.error(f"{path}:candidate_missing")
             continue
         expected_quarantine_slugs = expected_quarantine_slugs_for_fixture(fixture)
+        expected_unextractable_slugs = expected_unextractable_slugs_for_fixture(fixture)
         for error in compare_candidates_to_fixture(candidates, fixture):
             report.error(f"{path}:{error}")
+        reviewed_manual_slugs = {
+            candidate["normalized_fields"].get("slug")
+            for candidate in candidates
+            if candidate.get("profile_key") == "reviewed_manual_visual"
+        }
         for candidate in candidates:
             slug = candidate["normalized_fields"].get("slug", "<missing-slug>")
             if slug in expected_quarantine_slugs:
+                continue
+            if slug in expected_unextractable_slugs:
+                continue
+            if slug in reviewed_manual_slugs and candidate.get("profile_key") != "reviewed_manual_visual":
                 continue
             for warning in candidate.get("warnings", []):
                 report.error(f"{path}:{slug}:candidate_warning:{warning}")

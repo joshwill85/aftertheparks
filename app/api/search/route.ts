@@ -21,6 +21,8 @@ export async function GET(request: Request) {
     tokens: result.tokens,
     total: result.total,
     topHits: result.topHits,
+    officialOfferings: result.officialOfferings,
+    offeringCount: result.officialOfferings.length,
     resorts: result.resorts,
     guides: result.guides,
     movies: result.movies,

@@ -25,15 +25,6 @@ export const GUIDES: GuideEntry[] = [
     ],
   },
   {
-    slug: "free-resort-fun",
-    title: "Free resort fun today",
-    description:
-      "Pool breaks, crafts, and campfires that don't need a park day or extra ticket.",
-    href: "/activities?free=true",
-    exploreHref: "/activities?free=true",
-    keywords: ["free", "no ticket", "included", "pool", "crafts"],
-  },
-  {
     slug: "rainy-day-resort",
     title: "Rainy day at the resort",
     description:
@@ -41,6 +32,15 @@ export const GUIDES: GuideEntry[] = [
     href: "/activities?category=arcade",
     exploreHref: "/activities?category=arcade",
     keywords: ["rain", "rainy", "indoor", "arcade", "weather"],
+  },
+  {
+    slug: "resort-calendar",
+    title: "Browse the resort calendar",
+    description:
+      "Pool breaks, crafts, campfires, and other current recreation-calendar activities.",
+    href: "/activities",
+    exploreHref: "/activities",
+    keywords: ["calendar", "activities", "pool", "crafts", "campfires"],
   },
 ];
 

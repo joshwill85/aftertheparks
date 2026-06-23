@@ -48,8 +48,7 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
-  const freeOnly = searchParams.get("free") === "true";
-  const activeCount = [activeResort, activeCategory, activeDaypart, freeOnly].filter(
+  const activeCount = [activeResort, activeCategory, activeDaypart].filter(
     Boolean
   ).length;
 
@@ -90,7 +89,6 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
             activeResort={activeResort}
             activeCategory={activeCategory}
             activeDaypart={activeDaypart}
-            freeOnly={freeOnly}
             update={update}
           />
         </div>
@@ -120,7 +118,6 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
               activeResort={activeResort}
               activeCategory={activeCategory}
               activeDaypart={activeDaypart}
-              freeOnly={freeOnly}
               update={update}
             />
           </div>
@@ -135,14 +132,12 @@ function FilterControls({
   activeResort,
   activeCategory,
   activeDaypart,
-  freeOnly,
   update,
 }: {
   resorts: { slug: string; name: string }[];
   activeResort: string | null;
   activeCategory: string | null;
   activeDaypart: string | null;
-  freeOnly: boolean;
   update: (key: string, value: string | null) => void;
 }) {
   return (
@@ -206,19 +201,6 @@ function FilterControls({
           </select>
         </label>
       </div>
-
-      <button
-        type="button"
-        onClick={() => update("free", freeOnly ? null : "true")}
-        className={cn(
-          "w-fit rounded-full px-4 py-1.5 text-sm",
-          freeOnly
-            ? "bg-[var(--accent)]/15 font-medium text-[var(--accent)]"
-            : "border border-[var(--color-card-border)]"
-        )}
-      >
-        Free only
-      </button>
     </div>
   );
 }

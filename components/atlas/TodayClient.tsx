@@ -32,12 +32,12 @@ export function TodayClient({
       <PalmRefresh onRefresh={refresh}>
         <EmptyState
           title="We don't see confirmed activities left today"
-          description="Schedules change often. Try tonight's movies and campfires, browse free activities, or check the official resort guide before heading out."
+          description="Schedules change often. Try tonight's movies and campfires, browse all activities, or check the official resort guide before heading out."
           actions={[
             { label: "Tonight's movies", href: "/tonight", variant: "primary" },
-            { label: "Free activities", href: "/activities?free=true" },
+            { label: "Explore activities", href: "/activities" },
             { label: "Browse by resort", href: "/resorts" },
-            { label: "Explore all", href: "/activities" },
+            { label: "Search", href: "/search" },
           ]}
         />
         {tomorrowPreview.length > 0 && (
@@ -75,9 +75,11 @@ export function TodayClient({
                 className="absolute -left-[1.85rem] top-6 flex h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--color-card)]"
                 aria-hidden
               />
-              <p className="mb-2 text-sm font-medium text-[var(--color-muted)]">
-                {formatOrlandoTime(activity.startDateTime)}
-              </p>
+              {activity.startDateTime && (
+                <p className="mb-2 text-sm font-medium text-[var(--color-muted)]">
+                  {formatOrlandoTime(activity.startDateTime)}
+                </p>
+              )}
               <ActivityCard activity={activity} showResort onSave={addActivity} />
             </li>
           ))}

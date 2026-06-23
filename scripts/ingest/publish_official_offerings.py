@@ -133,6 +133,52 @@ def _retire_missing_current_offerings(db: Any, offerings: list[dict[str, Any]]) 
     return retired
 
 
+def _retire_missing_current_programs(db: Any, programs: list[dict[str, Any]]) -> int:
+    expected_keys = {program["program_key"] for program in programs}
+    existing = db.select(
+        "official_activity_programs",
+        columns="id,program_key",
+        filters={"is_current": "eq.true"},
+    )
+    retired = 0
+    for row in existing:
+        if row.get("program_key") in expected_keys:
+            continue
+        row_id = row.get("id")
+        if not row_id:
+            continue
+        db.update("official_activity_programs", {"id": f"eq.{row_id}"}, {"is_current": False})
+        retired += 1
+    return retired
+
+
+def _quarantine_key(row: dict[str, Any]) -> tuple[str, str, str]:
+    return (
+        str(row.get("program_key") or ""),
+        str(row.get("source_sha256") or ""),
+        str(row.get("reason_code") or ""),
+    )
+
+
+def _resolve_missing_pending_quarantine(db: Any, quarantine: list[dict[str, Any]]) -> int:
+    expected_keys = {_quarantine_key(row) for row in quarantine}
+    existing = db.select(
+        "official_activity_ingest_quarantine",
+        columns="id,program_key,source_sha256,reason_code",
+        filters={"status": "eq.pending"},
+    )
+    resolved = 0
+    for row in existing:
+        if _quarantine_key(row) in expected_keys:
+            continue
+        row_id = row.get("id")
+        if not row_id:
+            continue
+        db.update("official_activity_ingest_quarantine", {"id": f"eq.{row_id}"}, {"status": "resolved"})
+        resolved += 1
+    return resolved
+
+
 def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str, Any]]]) -> dict[str, int]:
     programs = extraction.get("programs") or []
     offerings = extraction.get("offerings") or []
@@ -141,6 +187,8 @@ def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str,
         raise RuntimeError("official_offerings_empty")
 
     retired_count = _retire_missing_current_offerings(db, offerings)
+    retired_program_count = _retire_missing_current_programs(db, programs)
+    resolved_quarantine_count = _resolve_missing_pending_quarantine(db, quarantine)
     source_ids_by_hash: dict[str, str] = {}
     program_count = 0
     offering_count = 0
@@ -188,6 +236,8 @@ def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str,
         "offerings": offering_count,
         "quarantine": quarantine_count,
         "retired_offerings": retired_count,
+        "retired_programs": retired_program_count,
+        "resolved_quarantine": resolved_quarantine_count,
     }
 
 

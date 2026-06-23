@@ -11,7 +11,12 @@ from pathlib import Path
 
 from config import DISNEY_USER_AGENT, PROCESSED_DIR
 from fetch import head_metadata, latest_document_for_url, sha256_bytes
-from source_manifest import ACTIVITY_SOURCES, ActivitySource
+from source_manifest import (
+    ACTIVITY_SOURCES,
+    RESORT_RECREATION_SOURCES,
+    ActivitySource,
+    ResortRecreationSource,
+)
 
 try:
     from playwright.sync_api import sync_playwright
@@ -135,6 +140,51 @@ def discover_source(source: ActivitySource, *, use_playwright: bool = True) -> d
     }
 
 
+def discover_resort_source(
+    source: ResortRecreationSource,
+    *,
+    use_playwright: bool = True,
+) -> dict:
+    manifest_url = source.pdf_url
+    discovered_url = manifest_url
+    scrape_error = None
+
+    if use_playwright:
+        scraped, scrape_error = scrape_recreation_pdf(source.disney_recreation_slug)
+        if scraped:
+            discovered_url = scraped
+
+    head = head_metadata(discovered_url) if discovered_url else {}
+    status = "unchanged"
+    if not discovered_url:
+        status = "html_only"
+    elif discovered_url != manifest_url:
+        status = "url_changed"
+    elif manifest_url:
+        meta = head_metadata(manifest_url)
+        status = "unchanged" if meta.get("http_status") == 200 else "unreachable"
+
+    return {
+        "resort_slug": source.resort_slug,
+        "calendar_group_key": source.calendar_group_key,
+        "disney_recreation_slug": source.disney_recreation_slug,
+        "recreation_page_url": source.recreation_page_url,
+        "manifest_url": manifest_url,
+        "discovered_url": discovered_url,
+        "source_kind": source.source_kind,
+        "status": status,
+        "head": head if discovered_url else {},
+        "scrape_error": scrape_error,
+    }
+
+
+def discover_all_resort_sources(*, use_playwright: bool = True) -> list[dict]:
+    return [
+        discover_resort_source(source, use_playwright=use_playwright)
+        for source in RESORT_RECREATION_SOURCES
+    ]
+
+
 def main() -> None:
     import argparse
 
@@ -164,14 +214,19 @@ def main() -> None:
         entries.append(entry)
         print(f"  -> {entry['status']}: {entry.get('discovered_url', 'none')}")
 
+    resort_entries = discover_all_resort_sources(use_playwright=not args.no_playwright)
+
     report = {
         "discovered_at": datetime.now(timezone.utc).isoformat(),
         "entries": entries,
+        "resort_entries": resort_entries,
         "summary": {
             "unchanged": sum(1 for e in entries if e["status"] == "unchanged"),
             "url_changed": sum(1 for e in entries if e["status"] == "url_changed"),
             "content_changed": sum(1 for e in entries if e["status"] == "content_changed"),
             "missing": sum(1 for e in entries if e["status"] == "missing"),
+            "resort_sources": len(resort_entries),
+            "resort_html_only": sum(1 for e in resort_entries if e["status"] == "html_only"),
         },
     }
 

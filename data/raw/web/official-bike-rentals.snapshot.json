@@ -1,0 +1,93 @@
+{
+  "source_kind": "official_recreation_detail",
+  "source_url": "https://disneyworld.disney.go.com/recreation/bike-rentals/",
+  "captured_at": "2026-06-23T00:50:10.127209+00:00",
+  "raw_html_sha256": "49374b9b1d97d7f95505efc3e1d29b14386310ea7e6aa8af8b5c51ae8e661cf2",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Bike Rentals | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Bike Rentals"
+    },
+    {
+      "line": 3,
+      "text": "MultipleWalt Disney World® Resortlocations"
+    },
+    {
+      "line": 4,
+      "text": "Breeze along lakefront promenades and woodland trails at Walt Disney World Resort."
+    },
+    {
+      "line": 5,
+      "text": "All Ages"
+    },
+    {
+      "line": 6,
+      "text": "$9–$20 (tax not included)"
+    },
+    {
+      "line": 7,
+      "text": "Show Safety, Accessibility and Guest Policies"
+    },
+    {
+      "line": 8,
+      "text": "Five Rental Locations Available"
+    },
+    {
+      "line": 9,
+      "text": "Ride along tree-lined paths, through lush meadows, past tranquil canals and more. It’s bicycling bliss!"
+    },
+    {
+      "line": 10,
+      "text": "Both adult bikes and children’s bikes—some with training wheels—are available on a first-come, first-serve basis from the following Disney Resort hotel locations:"
+    },
+    {
+      "line": 11,
+      "text": "Disney's Old Key West Resort"
+    },
+    {
+      "line": 12,
+      "text": "Disney's Port Orleans Resort - Riverside"
+    },
+    {
+      "line": 13,
+      "text": "Disney's Saratoga Springs Resort & Spa"
+    },
+    {
+      "line": 14,
+      "text": "The Cabins at Disney's Fort Wilderness Resort"
+    },
+    {
+      "line": 15,
+      "text": "The Campsites at Disney's Fort Wilderness Resort"
+    },
+    {
+      "line": 16,
+      "text": "Please note that helmets and child seats are complimentary with all bike rentals."
+    },
+    {
+      "line": 17,
+      "text": "Florida law requires bicyclists under 16 years of age to wear helmets, and Guests must remain within the specific Resort area where the bike has been rented."
+    },
+    {
+      "line": 18,
+      "text": "Related Activities"
+    },
+    {
+      "line": 19,
+      "text": "Surrey Bikes"
+    },
+    {
+      "line": 20,
+      "text": "Rent a 2-person, 4-person or 6-person Surrey bike for an outing that’s fun for the whole family!"
+    },
+    {
+      "line": 21,
+      "text": "Safety, Accessibility and Guest Policies"
+    }
+  ],
+  "content_sha256": "7a175870eeba9d731f0003d6603a308c4e1865d95debe0bdafd0b8aa8bb63338"
+}

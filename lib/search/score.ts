@@ -11,6 +11,7 @@ import {
 import { CATEGORY_QUERY_ALIASES } from "@/lib/search/synonyms";
 import type { SearchHit } from "@/lib/search/types";
 import type {
+  ActivityOffering,
   ActivityOccurrence,
   MovieNightOccurrence,
   ResortSummary,
@@ -92,6 +93,61 @@ export function scoreActivity(
   return score;
 }
 
+export function scoreOffering(
+  offering: ActivityOffering,
+  query: string,
+  tokens: string[]
+): number {
+  const categoryMeta = getCategoryMeta(offering.category);
+  const haystacks = [
+    offering.title,
+    offering.summary,
+    offering.resort.name,
+    offering.resort.slug.replace(/-/g, " "),
+    offering.location.label,
+    offering.availability.label,
+    offering.category,
+    categoryMeta.label,
+    categoryMeta.stamp,
+    ...offering.tags,
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  let score =
+    phraseScore(offering.title.toLowerCase(), query, tokens, {
+      exact: 118,
+      prefix: 94,
+      contains: 74,
+      token: 54,
+    }) +
+    phraseScore(haystacks, query, tokens, {
+      exact: 0,
+      prefix: 0,
+      contains: 34,
+      token: 27,
+    });
+
+  if (offering.price.state === "free" && (query.includes("free") || tokens.includes("free"))) {
+    score += 22;
+  }
+
+  if (offering.freshness.badge === "verified") score += 8;
+
+  const categoryIntent = tokens
+    .map((token) => CATEGORY_QUERY_ALIASES[token])
+    .find(Boolean);
+  if (categoryIntent && offering.category === categoryIntent) {
+    score += 45;
+  }
+
+  if (tokens.some((token) => offering.resort.slug.includes(token))) {
+    score += 20;
+  }
+
+  return score;
+}
+
 export function scoreResort(
   resort: ResortSummary,
   query: string,
@@ -122,7 +178,7 @@ export function scoreResort(
     token: 24,
   });
 
-  score += Math.min(resort.activityCount, 20) * 0.5;
+  score += Math.min(resort.activityCount + resort.offeringCount, 30) * 0.5;
 
   return score;
 }
@@ -259,13 +315,37 @@ export function activityToHit(
   };
 }
 
+export function offeringToHit(
+  offering: ActivityOffering,
+  score: number
+): SearchHit {
+  const categoryMeta = getCategoryMeta(offering.category);
+  const badges = [categoryMeta.label, "Official"];
+  if (offering.price.state === "free") badges.push("Free");
+  if (offering.availability.kind === "reservation_based") {
+    badges.push("Reservations");
+  }
+
+  return {
+    id: `offering-${offering.offeringKey}`,
+    kind: "offering",
+    title: offering.title,
+    subtitle: offering.resort.name,
+    description: offering.summary || offering.availability.label,
+    href: `/resorts/${offering.resort.slug}#official-offerings`,
+    score,
+    badges,
+    offering,
+  };
+}
+
 export function resortToHit(resort: ResortSummary, score: number): SearchHit {
   return {
     id: `resort-${resort.slug}`,
     kind: "resort",
     title: resort.name,
     subtitle: `${formatResortTier(resort.category)} · ${formatResortArea(resort.area)}`,
-    description: `${resort.activityCount} activities listed`,
+    description: `${resort.activityCount} scheduled activities · ${resort.offeringCount} official offerings`,
     href: `/resorts/${resort.slug}`,
     score,
     badges: [formatResortTier(resort.category)],

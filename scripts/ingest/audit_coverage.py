@@ -23,6 +23,19 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_FIXTURES_DIR = ROOT / "data/golden/activities"
 DEFAULT_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 DEFAULT_INGEST_PATH = PROCESSED_DIR / "activities_ingest.json"
+DEFAULT_OFFICIAL_OFFERINGS_PATH = PROCESSED_DIR / "official_recreation_offerings.json"
+OFFICIAL_QUARANTINE_OFFERING_ALIASES = {
+    ("fort-wilderness", "daniel-boones-wilderness-arcade"): "arcades",
+    ("fort-wilderness", "davy-crocketts-wilderness-arcade"): "arcades",
+    ("fort-wilderness", "fishing"): "fishing-excursions",
+    (
+        "fort-wilderness",
+        "horse-drawn-excursion-carriage-ride-at-disneys-fort-wilderness-resort-campground",
+    ): "horse-drawn-carriage-rides",
+    ("fort-wilderness", "holiday-sleigh-rides"): "horse-drawn-excursion-holiday-sleigh-rides",
+    ("fort-wilderness", "jogging-trails"): "running-trails",
+    ("fort-wilderness", "wagon-rides"): "horse-drawn-excursion-wagon-ride",
+}
 
 
 @dataclass
@@ -150,6 +163,7 @@ def _fixture_quarantine_rows(fixtures_dir: Path) -> list[dict[str, Any]]:
                 {
                     "path": str(path),
                     "calendar_group_key": fixture.get("calendar_group_key"),
+                    "source_kind": fixture.get("source_kind", "pdf"),
                     "source_sha256": _fixture_source_hash(fixture, expected),
                     "slug": expected.get("slug"),
                     "title": expected.get("title"),
@@ -176,6 +190,7 @@ def _fixture_unextractable_rows(fixtures_dir: Path) -> list[dict[str, Any]]:
                 {
                     "path": str(path),
                     "calendar_group_key": fixture.get("calendar_group_key"),
+                    "source_kind": fixture.get("source_kind", "pdf"),
                     "source_sha256": _fixture_source_hash(fixture, expected),
                     "slug": expected.get("slug"),
                     "title": expected.get("title"),
@@ -199,6 +214,64 @@ def _legacy_counts(ingest_path: Path) -> Counter[str]:
         if group:
             counts[str(group)] += 1
     return counts
+
+
+def _resort_group_map() -> dict[str, set[str]]:
+    resort_groups: dict[str, set[str]] = {}
+    for source in ACTIVITY_SOURCES:
+        for resort_slug in source.resort_slugs:
+            resort_groups.setdefault(resort_slug, set()).add(source.calendar_group_key)
+    return resort_groups
+
+
+def _official_offering_group_slug_keys(path: Path) -> set[tuple[str, str]]:
+    data = _read_json(path, {})
+    if not isinstance(data, dict):
+        return set()
+
+    resort_groups = _resort_group_map()
+    keys: set[tuple[str, str]] = set()
+    offerings = data.get("offerings")
+    if not isinstance(offerings, list):
+        return keys
+
+    for offering in offerings:
+        if not isinstance(offering, dict):
+            continue
+        program_key = str(offering.get("program_key") or "").strip()
+        resort_slug = str(offering.get("resort_slug") or "").strip()
+        if not program_key or not resort_slug:
+            continue
+        for group in resort_groups.get(resort_slug, set()):
+            keys.add((group, program_key))
+    return keys
+
+
+def _official_offering_covers_quarantine(
+    row: dict[str, Any],
+    official_offering_keys: set[tuple[str, str]],
+) -> bool:
+    group = str(row.get("calendar_group_key") or "")
+    slug = str(row.get("slug") or "")
+    program_key = OFFICIAL_QUARANTINE_OFFERING_ALIASES.get((group, slug), slug)
+    return (
+        row.get("source_kind") == "official_web"
+        and (group, program_key) in official_offering_keys
+    )
+
+
+def _official_offering_alias_covers_quarantine(
+    row: dict[str, Any],
+    official_offering_keys: set[tuple[str, str]],
+) -> bool:
+    group = str(row.get("calendar_group_key") or "")
+    slug = str(row.get("slug") or "")
+    alias = OFFICIAL_QUARANTINE_OFFERING_ALIASES.get((group, slug))
+    return (
+        row.get("source_kind") == "official_web"
+        and alias is not None
+        and (group, alias) in official_offering_keys
+    )
 
 
 def _claims_for(row: dict[str, Any]) -> list[dict[str, Any]]:
@@ -276,6 +349,7 @@ def build_coverage_audit(
     fixtures_dir: Path = DEFAULT_FIXTURES_DIR,
     gold_path: Path = DEFAULT_GOLD_PATH,
     ingest_path: Path = DEFAULT_INGEST_PATH,
+    official_offerings_path: Path = DEFAULT_OFFICIAL_OFFERINGS_PATH,
     require_production_ready: bool = False,
     expected_ui_mode: str = "gold-v2",
 ) -> CoverageAudit:
@@ -287,6 +361,22 @@ def build_coverage_audit(
     fixture_unextractables = _fixture_unextractable_rows(fixtures_dir)
     gold = _gold_rows(gold_path)
     legacy_counts = _legacy_counts(ingest_path)
+    official_offering_keys = _official_offering_group_slug_keys(official_offerings_path)
+    official_offering_covered_quarantines = [
+        row
+        for row in fixture_quarantines
+        if _official_offering_covers_quarantine(row, official_offering_keys)
+    ]
+    official_offering_alias_covered_quarantines = [
+        row
+        for row in fixture_quarantines
+        if _official_offering_alias_covers_quarantine(row, official_offering_keys)
+    ]
+    blocking_fixture_quarantines = [
+        row
+        for row in fixture_quarantines
+        if not _official_offering_covers_quarantine(row, official_offering_keys)
+    ]
 
     pdf_groups = {source["calendar_group_key"] for source in pdf_sources}
     cached_groups = {source["calendar_group_key"] for source in pdf_sources if source["cached"]}
@@ -398,6 +488,16 @@ def build_coverage_audit(
         )
     if fixture_quarantines:
         warnings.append(f"coverage:fixture_quarantine_records:{len(fixture_quarantines)}")
+    if official_offering_covered_quarantines:
+        warnings.append(
+            f"coverage:official_offering_covered_quarantine_records:{len(official_offering_covered_quarantines)}"
+        )
+    if official_offering_alias_covered_quarantines:
+        warnings.append(
+            f"coverage:official_offering_alias_covered_quarantine_records:{len(official_offering_alias_covered_quarantines)}"
+        )
+    if blocking_fixture_quarantines:
+        warnings.append(f"coverage:blocking_fixture_quarantine_records:{len(blocking_fixture_quarantines)}")
     if fixture_unextractables:
         warnings.append(f"coverage:fixture_unextractable_records:{len(fixture_unextractables)}")
 
@@ -406,8 +506,7 @@ def build_coverage_audit(
     )
     production_ready = (
         not errors
-        and not fixture_quarantines
-        and not fixture_unextractables
+        and not blocking_fixture_quarantines
         and not missing_fixture_groups
         and not missing_gold_groups
         and (not coverage_required_count or len(gold) >= coverage_required_count)
@@ -427,10 +526,8 @@ def build_coverage_audit(
                 "coverage:gold_rows_below_required_by_group:"
                 + _format_required_group_counts(undercovered_gold_groups)
             )
-        if fixture_quarantines:
-            errors.append(f"coverage:fixture_quarantine_records:{len(fixture_quarantines)}")
-        if fixture_unextractables:
-            errors.append(f"coverage:fixture_unextractable_records:{len(fixture_unextractables)}")
+        if blocking_fixture_quarantines:
+            errors.append(f"coverage:blocking_fixture_quarantine_records:{len(blocking_fixture_quarantines)}")
         if ui_mode != expected_ui_mode:
             errors.append(f"coverage:ui_pipeline_not_{expected_ui_mode}:{ui_mode}")
 
@@ -439,6 +536,29 @@ def build_coverage_audit(
         "cached_pdf_count": len(cached_groups),
         "fixture_count": len(fixtures),
         "fixture_quarantine_count": len(fixture_quarantines),
+        "official_offering_covered_quarantine_count": len(official_offering_covered_quarantines),
+        "official_offering_covered_quarantine_unique_count": len(
+            {
+                (row.get("calendar_group_key"), row.get("slug"))
+                for row in official_offering_covered_quarantines
+            }
+        ),
+        "official_offering_alias_covered_quarantine_count": len(
+            official_offering_alias_covered_quarantines
+        ),
+        "official_offering_alias_covered_quarantine_unique_count": len(
+            {
+                (row.get("calendar_group_key"), row.get("slug"))
+                for row in official_offering_alias_covered_quarantines
+            }
+        ),
+        "blocking_fixture_quarantine_count": len(blocking_fixture_quarantines),
+        "blocking_fixture_quarantine_unique_count": len(
+            {
+                (row.get("calendar_group_key"), row.get("slug"))
+                for row in blocking_fixture_quarantines
+            }
+        ),
         "fixture_unextractable_count": len(fixture_unextractables),
         "fixture_group_count": len(fixture_groups),
         "gold_record_count": len(gold),

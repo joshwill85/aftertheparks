@@ -3,6 +3,10 @@ import { Hero } from "@/components/atlas/Hero";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { ExploreLayout } from "@/components/explore/ExploreLayout";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
+import {
+  filterOfficialOfferingsWithoutActivityCollisions,
+  getFilteredOfficialOfferings,
+} from "@/lib/data/officialOfferings";
 import type { Daypart } from "@/lib/types/occurrence";
 import type { ActivitySortKey } from "@/lib/activities/sort";
 
@@ -22,15 +26,23 @@ interface PageProps {
 export default async function ActivitiesPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const daypart = params.daypart as Daypart | undefined;
-  const activities = await getFilteredActivities({
+  const filters = {
     resort: params.resort,
     category: params.category,
     daypart,
     free: params.free === "true",
     sort: (params.sort as ActivitySortKey | undefined) ?? "time",
     q: params.q,
-  });
-  const resorts = await getResorts();
+  };
+  const [activities, officialOfferingsPool, resorts] = await Promise.all([
+    getFilteredActivities(filters),
+    getFilteredOfficialOfferings(filters),
+    getResorts(),
+  ]);
+  const officialOfferings = filterOfficialOfferingsWithoutActivityCollisions(
+    officialOfferingsPool,
+    activities
+  );
 
   return (
     <>
@@ -41,6 +53,7 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <ExploreLayout
           activities={activities}
+          officialOfferings={officialOfferings}
           resorts={resorts.map((r) => ({ slug: r.slug, name: r.name }))}
         />
       </Suspense>

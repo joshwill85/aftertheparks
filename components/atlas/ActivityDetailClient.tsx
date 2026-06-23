@@ -59,12 +59,20 @@ function formatCentsRange(min?: number, max?: number): string | undefined {
   return low === high ? money(low!) : `${money(low!)}-${money(high!)}`;
 }
 
-function formatOccurrenceWhen(occurrence: ActivityOccurrence): string {
+function formatOccurrenceWhen(
+  occurrence: ActivityOccurrence & { startDateTime: string }
+): string {
   const start = formatOrlandoTime(occurrence.startDateTime);
   const end = occurrence.endDateTime
     ? ` – ${formatOrlandoTime(occurrence.endDateTime)}`
     : "";
   return `${formatOrlandoDate(occurrence.startDateTime)} · ${start}${end}`;
+}
+
+function hasStartDateTime(
+  occurrence: ActivityOccurrence
+): occurrence is ActivityOccurrence & { startDateTime: string } {
+  return Boolean(occurrence.startDateTime);
 }
 
 export function ActivityDetailClient({
@@ -90,19 +98,29 @@ export function ActivityDetailClient({
     includeScheduleDate: true,
   });
   const scheduleRows = dedupeUpcoming(upcoming);
+  const timedScheduleRows = scheduleRows.filter(hasStartDateTime);
   const uncertainTime =
     display.timeUncertain ||
     isUncertainSchedule(activity.scheduleText);
+  const hasBackedTime = Boolean(
+    timedScheduleRows[0] || activity.startDateTime || display.timeLabel
+  );
+  const showUncertainTime = uncertainTime && hasBackedTime;
 
-  const whenLabel = scheduleRows[0]
-    ? uncertainTime
+  const whenLabel = timedScheduleRows[0]
+    ? showUncertainTime
       ? "Confirm with resort"
-      : formatOccurrenceWhen(scheduleRows[0])
-    : uncertainTime
+      : formatOccurrenceWhen(timedScheduleRows[0])
+    : showUncertainTime
       ? "Confirm with resort"
       : display.timeLabel;
 
-  const whenDateTime = scheduleRows[0]?.startDateTime ?? activity.startDateTime;
+  const whenDateTime = timedScheduleRows[0]?.startDateTime ?? activity.startDateTime;
+  const hasTimeField = Boolean(whenLabel);
+  const hasScheduleSection =
+    showUncertainTime ||
+    timedScheduleRows.length > 0 ||
+    Boolean(display.timeLabel);
 
   const goodToKnow: string[] = [];
   const addGoodToKnow = (note?: string | null) => {
@@ -142,7 +160,7 @@ export function ActivityDetailClient({
   if (activity.enrichment?.walkUpsAllowed) {
     addGoodToKnow("Walk-ups may be available.");
   }
-  if (activity.enrichment?.checkInOffsetMinutes) {
+  if (activity.startDateTime && activity.enrichment?.checkInOffsetMinutes) {
     addGoodToKnow(
       `Arrive ${activity.enrichment.checkInOffsetMinutes} minutes before the start time.`
     );
@@ -178,11 +196,17 @@ export function ActivityDetailClient({
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <section className="event-detail-facts">
-            <EventDetailFact label="When">
-              <time dateTime={whenDateTime} className="font-display font-semibold">
-                {whenLabel}
-              </time>
-            </EventDetailFact>
+            {hasTimeField && (
+              <EventDetailFact label="When">
+                {whenDateTime ? (
+                  <time dateTime={whenDateTime} className="font-display font-semibold">
+                    {whenLabel}
+                  </time>
+                ) : (
+                  <p className="font-display font-semibold">{whenLabel}</p>
+                )}
+              </EventDetailFact>
+            )}
             <EventDetailFact label="Cost">
               <p className="font-display font-semibold">{display.costLabel}</p>
             </EventDetailFact>
@@ -194,9 +218,11 @@ export function ActivityDetailClient({
             </EventDetailFact>
           </section>
 
-          <EventDetailSection title="What to expect" tone="warm">
-            <p className="event-detail-prose">{display.summary}</p>
-          </EventDetailSection>
+          {display.summary && (
+            <EventDetailSection title="What to expect" tone="warm">
+              <p className="event-detail-prose">{display.summary}</p>
+            </EventDetailSection>
+          )}
 
           <EventDetailSection title="Where to go" tone="lagoon">
             <p className="font-display text-lg font-semibold">
@@ -218,49 +244,49 @@ export function ActivityDetailClient({
             </EventDetailSection>
           )}
 
-          <EventDetailSection title="Schedule">
-            {uncertainTime && (
-              <p className="event-detail-note">
-                Times may need official confirmation — check the resort recreation guide
-                before heading out.
-              </p>
-            )}
-            <ul className="event-detail-schedule">
-              {uncertainTime ? (
-                <li className="event-detail-prose">
-                  {activity.scheduleText?.trim() ||
-                    "See the official resort recreation guide for the latest schedule."}
-                </li>
-              ) : scheduleRows.length > 0 ? (
-                scheduleRows.map((o) => (
-                  <li key={o.id} className="event-detail-schedule__row">
-                    <time dateTime={o.startDateTime}>
-                      {formatOrlandoDate(o.startDateTime)}
-                    </time>
-                    <span className="font-semibold">
-                      <time dateTime={o.startDateTime}>
-                        {formatOrlandoTime(o.startDateTime)}
-                      </time>
-                      {o.endDateTime && (
-                        <>
-                          {" – "}
-                          <time dateTime={o.endDateTime}>
-                            {formatOrlandoTime(o.endDateTime)}
-                          </time>
-                        </>
-                      )}
-                    </span>
-                  </li>
-                ))
-              ) : (
-                <li className="event-detail-prose">
-                  {activity.scheduleText && !isUncertainSchedule(activity.scheduleText)
-                    ? activity.scheduleText
-                    : "See the official resort recreation guide for the latest schedule."}
-                </li>
+          {hasScheduleSection && (
+            <EventDetailSection title="Schedule">
+              {showUncertainTime && (
+                <p className="event-detail-note">
+                  Times may need official confirmation — check the resort recreation guide
+                  before heading out.
+                </p>
               )}
-            </ul>
-          </EventDetailSection>
+              <ul className="event-detail-schedule">
+                {showUncertainTime ? (
+                  <li className="event-detail-prose">
+                    {activity.scheduleText?.trim() ||
+                      "See the official resort recreation guide for the latest schedule."}
+                  </li>
+                ) : timedScheduleRows.length > 0 ? (
+                  timedScheduleRows.map((o) => (
+                    <li key={o.id} className="event-detail-schedule__row">
+                      <time dateTime={o.startDateTime}>
+                        {formatOrlandoDate(o.startDateTime)}
+                      </time>
+                      <span className="font-semibold">
+                        <time dateTime={o.startDateTime}>
+                          {formatOrlandoTime(o.startDateTime)}
+                        </time>
+                        {o.endDateTime && (
+                          <>
+                            {" – "}
+                            <time dateTime={o.endDateTime}>
+                              {formatOrlandoTime(o.endDateTime)}
+                            </time>
+                          </>
+                        )}
+                      </span>
+                    </li>
+                  ))
+                ) : (
+                  <li className="event-detail-prose">
+                    {display.timeLabel}
+                  </li>
+                )}
+              </ul>
+            </EventDetailSection>
+          )}
 
           {similar.length > 0 && (
             <section>

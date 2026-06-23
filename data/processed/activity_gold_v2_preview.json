@@ -8339,7 +8339,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -8994,7 +8994,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -10429,7 +10429,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -10934,7 +10934,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -17730,7 +17730,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -19203,7 +19203,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -19499,6 +19499,466 @@
       "program_family": "movies_under_stars",
       "activity_variant": "Movie Under the Stars",
       "weather_dependency": "weather_dependent",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:poolside-activities:reviewed_manual",
+    "activity_catalog_id": "8e1583bc-6b25-58b2-1016-ff5d4efb9a25",
+    "calendar_group_key": "boardwalk",
+    "resort_slugs": [
+      "boardwalk-inn",
+      "boardwalk-villas"
+    ],
+    "canonical_slug": "poolside-activities",
+    "title": "Poolside Activities",
+    "category": "poolside",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Activities schedule available digitally; no posted time in PDF",
+      "start_time": null,
+      "end_time": null
+    },
+    "location": {
+      "label": "Luna Park Pool Deck"
+    },
+    "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 19,
+          "text": "POOLSIDE ACTIVITIES"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            380,
+            1275,
+            2560,
+            1455
+          ],
+          "text": "SCAN THIS QR CODE AND SELECT ACTIVITIES SCHEDULE TO VIEW THIS INFORMATION DIGITALLY!",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 21,
+          "text": "Luna Park Pool Deck"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 23,
+          "text": "Join us for family-friendly activities, both in and out of the"
+        },
+        {
+          "page": 1,
+          "line": 25,
+          "text": "pool. See a Recreation Cast Member for more information."
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 93,
+              "bbox": [
+                113.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "confirm_before_going",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "dc5973f4da3ae02ab81361ea85fade5377d23b215f1e8e9703fdcb0a5a19c006",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "boardwalk",
+        "resort_slugs": [
+          "boardwalk-inn",
+          "boardwalk-villas"
+        ],
+        "activity_title": "Poolside Activities",
+        "activity_slug": "poolside-activities",
+        "facts": {
+          "schedule_text": "Daily at 1:30 PM",
+          "exact_venue": "Luna Park Pool Deck",
+          "host_area_or_wing": null,
+          "price_state": "free",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": null,
+          "activity_variant": null,
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "outdoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Daily at 1:30 PM | Luna Park Pool Deck"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "8e1583bc-6b25-58b2-1016-ff5d4efb9a25"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Luna Park Pool Deck",
+      "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:crescent-lake-wellness-challenge:reviewed_manual",
+    "activity_catalog_id": "fa428e63-8fd2-68f0-ad51-cdd275a7f06a",
+    "calendar_group_key": "boardwalk",
+    "resort_slugs": [
+      "boardwalk-inn",
+      "boardwalk-villas"
+    ],
+    "canonical_slug": "crescent-lake-wellness-challenge",
+    "title": "Crescent Lake Wellness Challenge",
+    "category": "fitness_wellness",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Self-guided fitness challenge; no posted time in PDF",
+      "start_time": null,
+      "end_time": null
+    },
+    "location": {
+      "label": "Crescent Lake pathways"
+    },
+    "description": "Enjoy beautiful views of Crescent Lake as you explore nearly 1 mile of pathways on this self-guided fitness challenge. After completing the course, head to Community Hall for a prize! Register at Community Hall or the Screen Door General Store to participate.",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
+            "fields": [
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 58,
+          "text": "CRESCENT LAKE"
+        },
+        {
+          "page": 1,
+          "line": 59,
+          "text": "WELLNESS CHALLENGE"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 63,
+          "text": "nearly 1 mile of pathways on this self-guided fitness"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 61,
+          "text": "Enjoy beautiful views of Crescent Lake as you explore"
+        },
+        {
+          "page": 1,
+          "line": 63,
+          "text": "nearly 1 mile of pathways on this self-guided fitness"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 61,
+          "text": "Enjoy beautiful views of Crescent Lake as you explore"
+        },
+        {
+          "page": 1,
+          "line": 63,
+          "text": "nearly 1 mile of pathways on this self-guided fitness"
+        },
+        {
+          "page": 1,
+          "line": 65,
+          "text": "challenge. After completing the course, head to"
+        },
+        {
+          "page": 1,
+          "line": 67,
+          "text": "Community Hall for a prize! Register at Community"
+        },
+        {
+          "page": 1,
+          "line": 68,
+          "text": "Hall or the Screen Door General Store to participate."
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
+      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 93,
+              "bbox": [
+                113.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "confirm_before_going",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "dc5973f4da3ae02ab81361ea85fade5377d23b215f1e8e9703fdcb0a5a19c006",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "boardwalk",
+        "resort_slugs": [
+          "boardwalk-inn",
+          "boardwalk-villas"
+        ],
+        "activity_title": "Crescent Lake Wellness Challenge",
+        "activity_slug": "crescent-lake-wellness-challenge",
+        "facts": {
+          "schedule_text": null,
+          "exact_venue": null,
+          "host_area_or_wing": null,
+          "price_state": "free",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": "in_person",
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": null,
+          "activity_variant": null,
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "indoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "fa428e63-8fd2-68f0-ad51-cdd275a7f06a"
+      }
+    ],
+    "enrichment": {
+      "reservation_method": "in_person",
+      "weather_dependency": "indoor",
       "resort_guest_only": true,
       "pool_gated": true,
       "schedule_valid_from": "2026-05-26",
@@ -20009,7 +20469,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -24550,7 +25010,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -24950,7 +25410,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -25873,6 +26333,1285 @@
     "valid_until": "2026-09-08"
   },
   {
+    "candidate_id": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f:coronado-springs:arts-crafts:reviewed_manual",
+    "activity_catalog_id": "ac4e3f09-32d6-99b9-29dc-c16f77078a7b",
+    "calendar_group_key": "coronado-springs",
+    "resort_slugs": [
+      "coronado-springs-resort"
+    ],
+    "canonical_slug": "arts-crafts",
+    "title": "Arts & Crafts",
+    "category": "arts_crafts",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "The Dig Site from 3:30pm-4:30pm",
+      "start_time": "3:30pm",
+      "end_time": "4:30pm"
+    },
+    "location": {
+      "label": "The Dig Site"
+    },
+    "description": "Sunday, Tuesday and Thursday: Mickey Tie-Dye; Monday and Saturday: Sand Art; Wednesday: Seasonal Craft.",
+    "price": {
+      "state": "fee"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 61,
+            "text": "ARTS AND CRAFTS ($)"
+          },
+          {
+            "page": 1,
+            "line": 110,
+            "bbox": [
+              114.5,
+              2490.5,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 61,
+          "text": "ARTS AND CRAFTS ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            380,
+            2290,
+            1815,
+            2355
+          ],
+          "text": "The Dig Site from 3:30pm-4:30pm",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "bbox": [
+            380,
+            2290,
+            1815,
+            2355
+          ],
+          "text": "The Dig Site from 3:30pm-4:30pm",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "bbox": [
+            380,
+            2375,
+            2640,
+            2545
+          ],
+          "text": "Sunday, Tuesday and Thursday: Mickey Tie-Dye; Monday and Saturday: Sand Art; Wednesday: Seasonal Craft.",
+          "source": "manual_visual_bbox"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+    "source_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/CSR_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+      "documentHash": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 110,
+              "bbox": [
+                114.5,
+                2490.5,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08",
+    "enrichment": {
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    }
+  },
+  {
+    "candidate_id": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f:coronado-springs:sangria-university:reviewed_manual",
+    "activity_catalog_id": "061be691-48ed-1d68-b06f-1aa5aa452f7c",
+    "calendar_group_key": "coronado-springs",
+    "resort_slugs": [
+      "coronado-springs-resort"
+    ],
+    "canonical_slug": "sangria-university",
+    "title": "Sangria University",
+    "category": "other",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "11:00am and 1:30pm",
+      "start_time": "11:00am",
+      "end_time": null
+    },
+    "location": {
+      "label": "Toledo - Tapas, Steak & Seafood"
+    },
+    "description": "Discuss the history of sangria and learn the recipes used to make the 4 in-house varieties served at Three Bridges Bar and Grill. Enjoy a tasting and you'll even get to make your own glass! Advanced booking required through the My Disney Experience app by searching Sangria University.",
+    "price": {
+      "state": "fee",
+      "amountCents": 7346,
+      "minAmountCents": 7346,
+      "maxAmountCents": 7346,
+      "notes": "$73.46"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 62,
+            "text": "SANGRIA UNIVERSITY ($)"
+          },
+          {
+            "page": 1,
+            "line": 110,
+            "bbox": [
+              114.5,
+              2490.5,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "price",
+              "reservation",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 62,
+          "text": "SANGRIA UNIVERSITY ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            425,
+            2745,
+            1405,
+            2895
+          ],
+          "text": "Saturday and Sunday at 11:00am and 1:30pm",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "bbox": [
+            425,
+            2660,
+            1450,
+            2730
+          ],
+          "text": "Toledo - Tapas, Steak & Seafood",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "bbox": [
+            425,
+            2895,
+            2720,
+            3460
+          ],
+          "text": "Discuss the history of sangria and learn the recipes used to make the 4 in-house varieties served at Three Bridges Bar and Grill. Enjoy a tasting and you’ll even get to make your own glass! Advanced booking required through the My Disney Experience app by searching Sangria University.",
+          "source": "manual_visual_bbox"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+    "source_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/CSR_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+      "documentHash": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 110,
+              "bbox": [
+                114.5,
+                2490.5,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
+        "source_page_kind": "paid_recreation",
+        "source_content_sha256": "c850ec2cf7be96f9600ea954912f9cc3565d103c5b4b4491f11bd00fa099a80f",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "coronado-springs",
+        "resort_slugs": [
+          "coronado-springs-resort"
+        ],
+        "activity_title": "Sangria University",
+        "activity_slug": "sangria-university",
+        "facts": {
+          "schedule_text": "Saturday & Sunday at 11:00 AM & 1:30 PM",
+          "exact_venue": "Toledo - Tapas, Steak & Seafood",
+          "host_area_or_wing": null,
+          "price_state": "fee",
+          "price_cents_min": 7346,
+          "price_cents_max": 7346,
+          "price_options": [],
+          "price_notes": "$73.46",
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": true,
+          "reservation_recommended": null,
+          "reservation_method": "my_disney_experience",
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "sangria_class",
+          "activity_variant": "Sangria University",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": null,
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Saturday & Sunday at 11:00 AM & 1:30 PM | Toledo - Tapas, Steak & Seafood"
+          },
+          {
+            "field": "price",
+            "text": "COST: $73.46"
+          },
+          {
+            "field": "reservation",
+            "text": "Guests must be 21 years of age or older to participate in this experience. Advance reservations are required."
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "061be691-48ed-1d68-b06f-1aa5aa452f7c"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Toledo - Tapas, Steak & Seafood",
+      "reservation_required": true,
+      "reservation_method": "my_disney_experience",
+      "program_family": "sangria_class",
+      "activity_variant": "Sangria University",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f:coronado-springs:colors-of-coronado-painting-experience:reviewed_manual",
+    "activity_catalog_id": "141d7b1b-94f9-61e6-9b05-e424603633d6",
+    "calendar_group_key": "coronado-springs",
+    "resort_slugs": [
+      "coronado-springs-resort"
+    ],
+    "canonical_slug": "colors-of-coronado-painting-experience",
+    "title": "Colors Of Coronado Painting Experience",
+    "category": "other",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Friday from 1:00pm-3:00pm",
+      "start_time": "1:00pm",
+      "end_time": "3:00pm"
+    },
+    "location": {
+      "label": "Toledo - Tapas, Steak & Seafood"
+    },
+    "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages 12 and up. Space is limited. To book, search Colors of Coronado Painting Experience on the My Disney Experience app.",
+    "price": {
+      "state": "fee",
+      "amountCents": 4500,
+      "minAmountCents": 4500,
+      "maxAmountCents": 4500,
+      "notes": "$45"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 48,
+            "text": "COLORS OF CORONADO"
+          },
+          {
+            "page": 1,
+            "line": 49,
+            "text": "PAINTING EXPERIENCE ($)"
+          },
+          {
+            "page": 1,
+            "line": 110,
+            "bbox": [
+              114.5,
+              2490.5,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "price",
+              "reservation",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 48,
+          "text": "COLORS OF CORONADO"
+        },
+        {
+          "page": 1,
+          "line": 49,
+          "text": "PAINTING EXPERIENCE ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            910,
+            1425,
+            1445,
+            1470
+          ],
+          "text": "Friday from 1:00pm-3:00pm",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "bbox": [
+            910,
+            1378,
+            1410,
+            1420
+          ],
+          "text": "Toledo - Tapas, Steak & Seafood",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 51,
+          "text": "Get in touch with your inner artist during this master-led"
+        },
+        {
+          "page": 1,
+          "line": 53,
+          "text": "painting class. This experience is recommended for Guests ages"
+        },
+        {
+          "page": 1,
+          "bbox": [
+            910,
+            1515,
+            1605,
+            1565
+          ],
+          "text": "12 and up. Space is limited. To book, search Colors of Coronado",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": 56,
+          "text": "Painting Experience on the My Disney Experience app."
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+    "source_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/CSR_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+      "documentHash": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 110,
+              "bbox": [
+                114.5,
+                2490.5,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
+        "source_page_kind": "paid_recreation",
+        "source_content_sha256": "c850ec2cf7be96f9600ea954912f9cc3565d103c5b4b4491f11bd00fa099a80f",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "coronado-springs",
+        "resort_slugs": [
+          "coronado-springs-resort"
+        ],
+        "activity_title": "Colors of Coronado Painting Experience",
+        "activity_slug": "colors-of-coronado-painting-experience",
+        "facts": {
+          "schedule_text": "Friday from 1:00-3:00 PM",
+          "exact_venue": "Toledo - Tapas, Steak & Seafood",
+          "host_area_or_wing": null,
+          "price_state": "fee",
+          "price_cents_min": 4500,
+          "price_cents_max": 4500,
+          "price_options": [],
+          "price_notes": "$45",
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": false,
+          "reservation_recommended": null,
+          "reservation_method": "my_disney_experience",
+          "reservation_phone": null,
+          "walk_ups_allowed": true,
+          "same_day_available": null,
+          "program_family": "painting",
+          "activity_variant": "Colors of Coronado Painting Experience",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": null,
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Friday from 1:00-3:00 PM | Toledo - Tapas, Steak & Seafood"
+          },
+          {
+            "field": "price",
+            "text": "COST: $45"
+          },
+          {
+            "field": "reservation",
+            "text": "Please note that Guests must be at least 12 years of age to participate. Walk-ups are welcome, space permitting. Reservations are strongly recommended and can be made up to 60 days in advance through My Disney Experience."
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "141d7b1b-94f9-61e6-9b05-e424603633d6"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Toledo - Tapas, Steak & Seafood",
+      "reservation_required": false,
+      "reservation_method": "my_disney_experience",
+      "walk_ups_allowed": true,
+      "program_family": "painting",
+      "activity_variant": "Colors of Coronado Painting Experience",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f:coronado-springs:spanish-mosaic-art:reviewed_manual",
+    "activity_catalog_id": "264c2616-b8ec-ba74-dce2-ac8e6304b446",
+    "calendar_group_key": "coronado-springs",
+    "resort_slugs": [
+      "coronado-springs-resort"
+    ],
+    "canonical_slug": "spanish-mosaic-art",
+    "title": "Spanish Mosaic Art",
+    "category": "arts_crafts",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm",
+      "start_time": "1:00pm",
+      "end_time": "3:00pm"
+    },
+    "location": {
+      "label": "Dahlia Lounge"
+    },
+    "description": "Immerse yourself in a historic Spanish art tradition as you design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Space is limited. To book, search Spanish Mosaic Art on the My Disney Experience app.",
+    "price": {
+      "state": "fee",
+      "amountCents": 3000,
+      "minAmountCents": 3000,
+      "maxAmountCents": 3000,
+      "notes": "$30"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 16,
+            "bbox": [
+              908.5,
+              857.5,
+              1445.5,
+              889.0
+            ],
+            "text": "SPANISH MOSAIC ART ($)"
+          },
+          {
+            "page": 1,
+            "line": 110,
+            "bbox": [
+              114.5,
+              2490.5,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "price",
+              "reservation",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 16,
+          "bbox": [
+            908.5,
+            857.5,
+            1445.5,
+            889.0
+          ],
+          "text": "SPANISH MOSAIC ART ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 20,
+          "bbox": [
+            909.0,
+            938.5,
+            1603.0,
+            960.0
+          ],
+          "text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 19,
+          "bbox": [
+            909.0,
+            902.5,
+            1082.0,
+            924.0
+          ],
+          "text": "Dahlia Lounge"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            970.0,
+            1608.0,
+            998.0
+          ],
+          "text": "Immerse yourself in a historic",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1006.0,
+            1608.0,
+            1034.0
+          ],
+          "text": "Spanish art tradition as you",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1042.0,
+            1608.0,
+            1070.0
+          ],
+          "text": "design your own mosaic",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1078.0,
+            1608.0,
+            1106.0
+          ],
+          "text": "showpiece with a touch of",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1114.0,
+            1608.0,
+            1142.0
+          ],
+          "text": "Disney flair. This experience is",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1150.0,
+            1608.0,
+            1178.0
+          ],
+          "text": "recommended for Guests ages 12",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1186.0,
+            1608.0,
+            1214.0
+          ],
+          "text": "and up. Space is limited. To book,",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1222.0,
+            1608.0,
+            1250.0
+          ],
+          "text": "search Spanish Mosaic Art on the",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1225.0,
+            1258.0,
+            1608.0,
+            1286.0
+          ],
+          "text": "My Disney Experience app.",
+          "source": "manual_visual_bbox"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+    "source_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/CSR_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
+      "documentHash": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 110,
+              "bbox": [
+                114.5,
+                2490.5,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
+        "source_page_kind": "paid_recreation",
+        "source_content_sha256": "c850ec2cf7be96f9600ea954912f9cc3565d103c5b4b4491f11bd00fa099a80f",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "coronado-springs",
+        "resort_slugs": [
+          "coronado-springs-resort"
+        ],
+        "activity_title": "Spanish Mosaic Art",
+        "activity_slug": "spanish-mosaic-art",
+        "facts": {
+          "schedule_text": "Monday, Wednesday, Saturday from 1:00-3:00 PM",
+          "exact_venue": "Dahlia Lounge",
+          "host_area_or_wing": null,
+          "price_state": "fee",
+          "price_cents_min": 3000,
+          "price_cents_max": 3000,
+          "price_options": [],
+          "price_notes": "$30",
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": false,
+          "reservation_recommended": null,
+          "reservation_method": "my_disney_experience",
+          "reservation_phone": null,
+          "walk_ups_allowed": true,
+          "same_day_available": null,
+          "program_family": "mosaic",
+          "activity_variant": "Spanish Mosaic Art",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "indoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Monday, Wednesday, Saturday from 1:00-3:00 PM | Dahlia Lounge"
+          },
+          {
+            "field": "price",
+            "text": "COST: $30"
+          },
+          {
+            "field": "reservation",
+            "text": "This experience is recommended for Guests 12 years of age and older. Walk-ups are welcome, space permitting. Reservations are strongly recommended and can be made up to 60 days in advance through the My Disney Experience app."
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "264c2616-b8ec-ba74-dce2-ac8e6304b446"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Dahlia Lounge",
+      "reservation_required": false,
+      "reservation_method": "my_disney_experience",
+      "walk_ups_allowed": true,
+      "program_family": "mosaic",
+      "activity_variant": "Spanish Mosaic Art",
+      "weather_dependency": "indoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "9a88881e6e69726747f16a9320467e17fb24363cfdad14c0e4ed79241aafec49:fort-wilderness:movie-under-the-stars",
+    "activity_catalog_id": "21d90219-165f-a6ab-8528-a6b9059cceaf",
+    "calendar_group_key": "fort-wilderness",
+    "resort_slugs": [
+      "campsites-at-fort-wilderness-resort",
+      "cabins-at-fort-wilderness-resort"
+    ],
+    "canonical_slug": "movie-under-the-stars",
+    "title": "Movies Under the Stars",
+    "category": "movies_under_stars",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Nightly",
+      "start_time": null,
+      "end_time": null
+    },
+    "location": {
+      "label": "Campground Theater"
+    },
+    "description": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater.",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 222,
+          "text": "* ## Movies Under the Stars"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 224,
+          "text": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater."
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 224,
+          "text": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater."
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 224,
+          "text": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater."
+        }
+      ]
+    },
+    "source_url": "https://disneyworld.disney.go.com/resorts/dvc-cabins-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "9a88881e6e69726747f16a9320467e17fb24363cfdad14c0e4ed79241aafec49",
+    "source_pdf_edition": null,
+    "source": {
+      "path": "data/raw/web/fort-wilderness-cabins-recreation-page.snapshot.json",
+      "url": "https://disneyworld.disney.go.com/resorts/dvc-cabins-at-fort-wilderness-resort/recreation/",
+      "documentHash": "9a88881e6e69726747f16a9320467e17fb24363cfdad14c0e4ed79241aafec49",
+      "edition": null,
+      "documentKeyLegends": []
+    },
+    "trust_state": "confirm_before_going",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "a13f4b09b7af68cf70170ab5ac5df6b86b1310ecde5f7b9aa9cf767328abdc56",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "fort-wilderness",
+        "resort_slugs": [
+          "campsites-at-fort-wilderness-resort",
+          "cabins-at-fort-wilderness-resort"
+        ],
+        "activity_title": "Movie Under the Stars",
+        "activity_slug": "movie-under-the-stars",
+        "facts": {
+          "schedule_text": "Daily at 8:40 PM",
+          "exact_venue": "Meadow Campfire Theater",
+          "host_area_or_wing": null,
+          "price_state": "free",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "movies_under_stars",
+          "activity_variant": "Movie Under the Stars",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "outdoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Daily at 8:40 PM | Meadow Campfire Theater"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "21d90219-165f-a6ab-8528-a6b9059cceaf"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Meadow Campfire Theater",
+      "program_family": "movies_under_stars",
+      "activity_variant": "Movie Under the Stars",
+      "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
     "candidate_id": "18b324b36423c1b8cd34c07fb9e409e042e5d200fcf19bafe6c403a0b1c9e103:fort-wilderness:fort-wilderness-archery-experience",
     "activity_catalog_id": "b57433bb-88c4-4d4c-2126-c2aba6dc5546",
     "calendar_group_key": "fort-wilderness",
@@ -26123,7 +27862,7 @@
       "edition": null,
       "documentKeyLegends": []
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -31002,7 +32741,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -32196,6 +33935,281 @@
       "reservation_method": "phone",
       "reservation_phone": "407-827-1183",
       "weather_dependency": "indoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e:old-key-west:bike-rentals:reviewed_manual",
+    "activity_catalog_id": "a745763d-7a72-6437-8924-79b9a357330d",
+    "calendar_group_key": "old-key-west",
+    "resort_slugs": [
+      "old-key-west-resort"
+    ],
+    "canonical_slug": "bike-rentals",
+    "title": "Bike Rentals",
+    "category": "rental",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Daily from 10:00am–6:30pm",
+      "start_time": "10:00am",
+      "end_time": "6:30pm"
+    },
+    "location": {
+      "label": "Hank’s Rent ‘N Return at Community Hall"
+    },
+    "description": "Choose from individual bikes to two-or four-person surrey bikes for a fun family outing!",
+    "price": {
+      "state": "fee"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 66,
+            "text": "BIKE RENTALS ($)",
+            "bbox": [
+              160.0,
+              1815.0,
+              536.0,
+              1846.5
+            ]
+          },
+          {
+            "page": 1,
+            "line": 91,
+            "bbox": [
+              114.5,
+              2490.0,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "price",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 66,
+          "text": "BIKE RENTALS ($)",
+          "bbox": [
+            160.0,
+            1815.0,
+            536.0,
+            1846.5
+          ]
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": null,
+          "text": "Daily from 10:00am–6:30pm",
+          "bbox": [
+            159.0,
+            1890.0,
+            650.0,
+            1912.0
+          ],
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 68,
+          "text": "Hank’s Rent ‘N Return at Community Hall",
+          "bbox": [
+            159.0,
+            1857.5,
+            669.0,
+            1879.0
+          ]
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 71,
+          "text": "Choose from individual bikes to two-or four-person",
+          "bbox": [
+            158.0,
+            1923.0,
+            770.5,
+            1950.5
+          ]
+        },
+        {
+          "page": 1,
+          "line": 74,
+          "text": "surrey bikes for a fun family outing!",
+          "bbox": [
+            158.0,
+            1957.0,
+            581.5,
+            1984.5
+          ]
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/OKWR_Aframe_Recreation-0326.pdf",
+    "source_sha256": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/OKWR_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/OKWR_Aframe_Recreation-0326.pdf",
+      "documentHash": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 91,
+              "bbox": [
+                114.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
+        "source_page_kind": "paid_recreation",
+        "source_content_sha256": "6e65e47f4aff4e6d7d9dd7ac10f1dfc035bb67751fb643c12649c46e95dd53a4",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "old-key-west",
+        "resort_slugs": [
+          "old-key-west-resort"
+        ],
+        "activity_title": "Bike Rentals",
+        "activity_slug": "bike-rentals",
+        "facts": {
+          "schedule_text": "Daily from 10:00 AM-6:30 PM",
+          "exact_venue": "Hank’s Rent ‘N Return",
+          "host_area_or_wing": null,
+          "price_state": "fee",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": 60,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": null,
+          "activity_variant": null,
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "weather_dependent",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Daily from 10:00 AM-6:30 PM | Hank’s Rent ‘N Return"
+          },
+          {
+            "field": "price",
+            "text": "COST:"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "a745763d-7a72-6437-8924-79b9a357330d"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Hank’s Rent ‘N Return",
+      "duration_minutes": 60,
+      "weather_dependency": "weather_dependent",
       "resort_guest_only": true,
       "pool_gated": true,
       "schedule_valid_from": "2026-05-26",
@@ -34196,6 +36210,501 @@
     ],
     "enrichment": {
       "exact_venue": "Great Ceremonial House Lawn",
+      "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985:polynesian:campfire:reviewed_manual",
+    "activity_catalog_id": "a6ce8aa5-3b35-65a0-de7a-c1d80586920a",
+    "calendar_group_key": "polynesian",
+    "resort_slugs": [
+      "polynesian-village-resort",
+      "polynesian-villas-and-bungalows"
+    ],
+    "canonical_slug": "campfire",
+    "title": "Campfire",
+    "category": "campfire",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Monday, Wednesday and Friday from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm"
+    },
+    "location": {
+      "label": "Seven Seas Lagoon Beach"
+    },
+    "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 54,
+          "bbox": [
+            912.0,
+            1828.5,
+            1123.0,
+            1854.5
+          ],
+          "text": "CAMPFIRE"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 57,
+          "bbox": [
+            912.0,
+            1910.0,
+            1582.5,
+            1932.0
+          ],
+          "text": "Monday, Wednesday and Friday from 6:30pm-7:30pm"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "bbox": [
+            912,
+            1874,
+            1288,
+            1899
+          ],
+          "text": "Seven Seas Lagoon Beach",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 58,
+          "bbox": [
+            912.5,
+            1944.5,
+            1603.5,
+            1972.0
+          ],
+          "text": "Enjoy the warm glow of the campfire with complimentary"
+        },
+        {
+          "page": 1,
+          "line": 60,
+          "bbox": [
+            912.0,
+            1981.5,
+            1504.5,
+            2008.5
+          ],
+          "text": "marshmallows. S’mores kits available for purchase."
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+    "source_sha256": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/Polynesian_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+      "documentHash": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 79,
+              "bbox": [
+                114.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "93ca0dcd6c073a319dff390c6943af68aaadd0dafaed71a57853e034e685c722",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "polynesian",
+        "resort_slugs": [
+          "polynesian-village-resort",
+          "polynesian-villas-and-bungalows"
+        ],
+        "activity_title": "Campfire",
+        "activity_slug": "campfire",
+        "facts": {
+          "schedule_text": "Monday, Wednesday, and Friday from 7:00-8:00 PM",
+          "exact_venue": "Seven Seas Lagoon Beach",
+          "host_area_or_wing": null,
+          "price_state": "free",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "campfire",
+          "activity_variant": null,
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "outdoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Monday, Wednesday, and Friday from 7:00-8:00 PM | Seven Seas Lagoon Beach"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "a6ce8aa5-3b35-65a0-de7a-c1d80586920a"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Seven Seas Lagoon Beach",
+      "program_family": "campfire",
+      "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985:polynesian:aloha-after-dark:reviewed_manual",
+    "activity_catalog_id": "9c9d4c50-70f2-bd5a-ed3c-a8b6284a8862",
+    "calendar_group_key": "polynesian",
+    "resort_slugs": [
+      "polynesian-village-resort",
+      "polynesian-villas-and-bungalows"
+    ],
+    "canonical_slug": "aloha-after-dark",
+    "title": "Aloha After Dark",
+    "category": "other",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Monday, Wednesday and Friday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null
+    },
+    "location": {
+      "label": "Lava Pool Deck"
+    },
+    "description": "Enjoy a nighttime party filled with glow-in-the-dark games and dancing!",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 70,
+          "bbox": [
+            911.0,
+            2234.0,
+            1342.5,
+            2259.5
+          ],
+          "text": "ALOHA AFTER DARK"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            912,
+            2315,
+            1468,
+            2337
+          ],
+          "text": "Monday, Wednesday and Friday at 8:00pm",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 71,
+          "bbox": [
+            912.0,
+            2278.0,
+            1101.5,
+            2296.0
+          ],
+          "text": "Lava Pool Deck"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 74,
+          "bbox": [
+            912.5,
+            2349.0,
+            1614.5,
+            2376.5
+          ],
+          "text": "Enjoy a nighttime party filled with glow-in-the-dark games"
+        },
+        {
+          "page": 1,
+          "line": 78,
+          "bbox": [
+            911.0,
+            2386.5,
+            1061.5,
+            2414.0
+          ],
+          "text": "and dancing!"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+    "source_sha256": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/Polynesian_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
+      "documentHash": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 79,
+              "bbox": [
+                114.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "93ca0dcd6c073a319dff390c6943af68aaadd0dafaed71a57853e034e685c722",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "polynesian",
+        "resort_slugs": [
+          "polynesian-village-resort",
+          "polynesian-villas-and-bungalows"
+        ],
+        "activity_title": "Aloha After Dark",
+        "activity_slug": "aloha-after-dark",
+        "facts": {
+          "schedule_text": "Monday, Wednesday, Friday at 8:30 PM",
+          "exact_venue": "Lava Pool Deck",
+          "host_area_or_wing": null,
+          "price_state": "free",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": null,
+          "activity_variant": null,
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": "outdoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Monday, Wednesday, Friday at 8:30 PM | Lava Pool Deck"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "9c9d4c50-70f2-bd5a-ed3c-a8b6284a8862"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Lava Pool Deck",
       "weather_dependency": "outdoor",
       "resort_guest_only": true,
       "pool_gated": true,
@@ -38786,6 +41295,422 @@
     "valid_until": "2026-09-08"
   },
   {
+    "candidate_id": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c:port-orleans-french-quarter:movie-under-the-stars:reviewed_manual",
+    "activity_catalog_id": "4a1461da-7e7f-86c3-3d25-6ac8479a0a78",
+    "calendar_group_key": "port-orleans-french-quarter",
+    "resort_slugs": [
+      "port-orleans-resort-french-quarter"
+    ],
+    "canonical_slug": "movie-under-the-stars",
+    "title": "Movie Under the Stars",
+    "category": "movies_under_stars",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Lawn Between Buildings 5 and 6 | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null
+    },
+    "location": {
+      "label": "Lawn Between Buildings 5 and 6"
+    },
+    "description": "",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 73,
+          "text": "MOVIE UNDER THE STARS"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            380,
+            3130,
+            2440,
+            3230
+          ],
+          "text": "LAWN BETWEEN BUILDINGS 5 AND 6 | 8:30PM",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "bbox": [
+            380,
+            3130,
+            2440,
+            3230
+          ],
+          "text": "LAWN BETWEEN BUILDINGS 5 AND 6 | 8:30PM",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "description": []
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+    "source_sha256": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/POFQ_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+      "documentHash": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 89,
+              "bbox": [
+                114.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "002f7053b4a2fa60a8caea191cfa2b5ced735db052ceca711c267cf5710e49cc",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "port-orleans-french-quarter",
+        "resort_slugs": [
+          "port-orleans-resort-french-quarter"
+        ],
+        "activity_title": "Movie Under the Stars",
+        "activity_slug": "movie-under-the-stars",
+        "facts": {
+          "schedule_text": "Sunday, Tuesday, Thursday, Saturday at 8:30 PM",
+          "exact_venue": "Lawn Between Buildings 5 & 6",
+          "host_area_or_wing": null,
+          "price_state": "free",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "movies_under_stars",
+          "activity_variant": "Movie Under the Stars",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": true,
+            "adult_required": null
+          },
+          "weather_dependency": "outdoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Sunday, Tuesday, Thursday, Saturday at 8:30 PM | Lawn Between Buildings 5 & 6"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "4a1461da-7e7f-86c3-3d25-6ac8479a0a78"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Lawn Between Buildings 5 & 6",
+      "program_family": "movies_under_stars",
+      "activity_variant": "Movie Under the Stars",
+      "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "sister_resort_access": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c:port-orleans-french-quarter:arts-crafts:reviewed_manual",
+    "activity_catalog_id": "2ba622ff-3561-73d5-3d7b-fa0d8c171d91",
+    "calendar_group_key": "port-orleans-french-quarter",
+    "resort_slugs": [
+      "port-orleans-resort-french-quarter"
+    ],
+    "canonical_slug": "arts-crafts",
+    "title": "Arts & Crafts",
+    "category": "arts_crafts",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "From 3:00pm-4:00pm",
+      "start_time": "3:00pm",
+      "end_time": "4:00pm"
+    },
+    "location": {
+      "label": "Doubloon Lagoon Pool Deck"
+    },
+    "description": "Sunday and Friday: Seasonal Craft; Thursday: Make Your Own Slime",
+    "price": {
+      "state": "fee"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 45,
+            "bbox": [
+              911.0,
+              1439.5,
+              1319.5,
+              1471.5
+            ],
+            "text": "ARTS & CRAFTS ($)"
+          },
+          {
+            "page": 1,
+            "line": 89,
+            "bbox": [
+              114.5,
+              2490.0,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 45,
+          "bbox": [
+            911.0,
+            1439.5,
+            1319.5,
+            1471.5
+          ],
+          "text": "ARTS & CRAFTS ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 49,
+          "bbox": [
+            912.0,
+            1523.5,
+            1189.0,
+            1544.5
+          ],
+          "text": "From 3:00pm-4:00pm"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 47,
+          "bbox": [
+            912.0,
+            1485.5,
+            1262.0,
+            1507.5
+          ],
+          "text": "Doubloon Lagoon Pool Deck"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 50,
+          "bbox": [
+            911.5,
+            1557.0,
+            1119.5,
+            1584.5
+          ],
+          "text": "Sunday and Friday"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            1198.0,
+            1557.0,
+            1607.0,
+            1584.5
+          ],
+          "text": "Seasonal Craft",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            911.5,
+            1592.0,
+            1608.0,
+            1620.0
+          ],
+          "text": "Thursday Make Your Own Slime",
+          "source": "manual_visual_bbox"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+    "source_sha256": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/POFQ_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
+      "documentHash": "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 89,
+              "bbox": [
+                114.5,
+                2490.0,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08",
+    "enrichment": {
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    }
+  },
+  {
     "candidate_id": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978:port-orleans-riverside:fishin-hole",
     "activity_catalog_id": "9707dbc0-a881-5e70-31da-539595167de2",
     "calendar_group_key": "port-orleans-riverside",
@@ -40509,6 +43434,362 @@
     "valid_until": "2026-09-08"
   },
   {
+    "candidate_id": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978:port-orleans-riverside:medicine-show-arcade:reviewed_manual",
+    "activity_catalog_id": "f023f725-8960-d1f9-459a-497f24d4bedc",
+    "calendar_group_key": "port-orleans-riverside",
+    "resort_slugs": [
+      "port-orleans-resort-riverside"
+    ],
+    "canonical_slug": "medicine-show-arcade",
+    "title": "Medicine Show Arcade",
+    "category": "arcade",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Daily from 8:00am-11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm"
+    },
+    "location": {
+      "label": "Medicine Show Arcade"
+    },
+    "description": "Play the latest and greatest family-friendly video games.",
+    "price": {
+      "state": "fee"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "MEDICINE SHOW"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "ARCADE"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/por-paid-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "price",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 22,
+          "text": "MEDICINE SHOW"
+        },
+        {
+          "page": 1,
+          "line": 24,
+          "text": "ARCADE"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "bbox": [
+            910,
+            910,
+            1445,
+            955
+          ],
+          "text": "Daily from 8:00am-11:00pm",
+          "source": "manual_visual_bbox"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 22,
+          "text": "MEDICINE SHOW"
+        },
+        {
+          "page": 1,
+          "line": 24,
+          "text": "ARCADE"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 30,
+          "text": "Play the latest and greatest family-friendly video games."
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+    "source_sha256": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/PORS_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+      "documentHash": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": []
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/por-paid-recreation-activities",
+        "source_page_kind": "paid_recreation",
+        "source_content_sha256": "d17792cce138aea417f28715e820ea21b124cbca3fd9756312e0298943486ca6",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "port-orleans-riverside",
+        "resort_slugs": [
+          "port-orleans-resort-riverside"
+        ],
+        "activity_title": "Medicine Show Arcade",
+        "activity_slug": "medicine-show-arcade",
+        "facts": {
+          "schedule_text": "Daily from 8:00 AM-10:00 PM",
+          "exact_venue": "Lobby",
+          "host_area_or_wing": null,
+          "price_state": "fee",
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "arcade",
+          "activity_variant": "Medicine Show Arcade",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": true,
+            "adult_required": null
+          },
+          "weather_dependency": "indoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Daily from 8:00 AM-10:00 PM | Lobby"
+          },
+          {
+            "field": "price",
+            "text": "COST:"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "f023f725-8960-d1f9-459a-497f24d4bedc"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Lobby",
+      "program_family": "arcade",
+      "activity_variant": "Medicine Show Arcade",
+      "weather_dependency": "indoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "sister_resort_access": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978:port-orleans-riverside:arts-crafts:reviewed_manual",
+    "activity_catalog_id": "e7d8b396-a511-155d-843d-f936c62e2062",
+    "calendar_group_key": "port-orleans-riverside",
+    "resort_slugs": [
+      "port-orleans-resort-riverside"
+    ],
+    "canonical_slug": "arts-crafts",
+    "title": "Arts & Crafts",
+    "category": "arts_crafts",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "From 12:30pm-1:30pm",
+      "start_time": "12:30pm",
+      "end_time": "1:30pm"
+    },
+    "location": {
+      "label": "Ol’ Man Island Pool Deck"
+    },
+    "description": "Tuesday: Seasonal Craft; Wednesday and Saturday: Make Your Own Slime",
+    "price": {
+      "state": "fee"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 60,
+            "text": "ARTS & CRAFTS ($)"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 60,
+          "text": "ARTS & CRAFTS ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 64,
+          "text": "From 12:30pm-1:30pm"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 62,
+          "text": "Ol Man Island Pool Deck"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "bbox": [
+            910,
+            1670,
+            1615,
+            1710
+          ],
+          "text": "Tuesday: Seasonal Craft",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "bbox": [
+            910,
+            1720,
+            1615,
+            1760
+          ],
+          "text": "Wednesday and Saturday: Make Your Own Slime",
+          "source": "manual_visual_bbox"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+    "source_sha256": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/PORS_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
+      "documentHash": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": []
+    },
+    "trust_state": "source_backed",
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08",
+    "enrichment": {
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    }
+  },
+  {
     "candidate_id": "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978:port-orleans-riverside:nighttime-trivia-challenge:reviewed_manual",
     "activity_catalog_id": "997223ee-e3d1-7ee0-f6ac-d49750427615",
     "calendar_group_key": "port-orleans-riverside",
@@ -41296,7 +44577,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -42885,6 +46166,320 @@
       "program_family": "movies_under_stars",
       "activity_variant": "Movie Under the Stars",
       "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842:riviera:painting-on-the-riviera:reviewed_manual",
+    "activity_catalog_id": "e3c4d09c-f2e0-7a5d-778a-2fec763daf7b",
+    "calendar_group_key": "riviera",
+    "resort_slugs": [
+      "riviera-resort"
+    ],
+    "canonical_slug": "painting-on-the-riviera",
+    "title": "Painting On The Riviera",
+    "category": "other",
+    "section": "Resort Activities",
+    "schedule": {
+      "text": "Thursday from 11:00am-1:00pm",
+      "start_time": "11:00am",
+      "end_time": "1:00pm"
+    },
+    "location": {
+      "label": "The Eventi Room"
+    },
+    "description": "Get in touch with your inner artist in this unique instructor-led painting class! This experience is recommended for Guests ages 12 and up. To reserve your spot, please call 407-WDW-PLAY or see a Recreation Cast Member inside The Eventi Room.",
+    "price": {
+      "state": "fee",
+      "amountCents": 4500,
+      "minAmountCents": 4500,
+      "maxAmountCents": 4500,
+      "notes": "$45"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "fee",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 47,
+            "bbox": [
+              116.5,
+              1711.5,
+              757.0,
+              1742.0
+            ],
+            "text": "PAINTING ON THE RIVIERA ($)"
+          },
+          {
+            "page": 1,
+            "line": 80,
+            "bbox": [
+              114.5,
+              2490.5,
+              1615.5,
+              2509.0
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/riviera-paid-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "price",
+              "age_access",
+              "reservation",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "8dd96d26453b85064f49d2ec73ebccdcc7e9d6bbe6effcca99158c8b26a6135d",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 47,
+          "bbox": [
+            116.5,
+            1711.5,
+            757.0,
+            1742.0
+          ],
+          "text": "PAINTING ON THE RIVIERA ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 52,
+          "bbox": [
+            114.0,
+            1794.0,
+            508.0,
+            1815.5
+          ],
+          "text": "Thursday from 11:00am-1:00pm"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 50,
+          "bbox": [
+            114.0,
+            1757.0,
+            324.5,
+            1775.0
+          ],
+          "text": "The Eventi Room"
+        }
+      ],
+      "description": [
+        {
+          "page": 1,
+          "line": 53,
+          "bbox": [
+            114.5,
+            1828.5,
+            827.0,
+            1855.5
+          ],
+          "text": "Get in touch with your inner artist in this unique instructor-led"
+        },
+        {
+          "page": 1,
+          "line": 55,
+          "bbox": [
+            115.0,
+            1865.0,
+            824.5,
+            1892.5
+          ],
+          "text": "painting class! This experience is recommended for Guests ages"
+        },
+        {
+          "page": 1,
+          "line": null,
+          "bbox": [
+            114.0,
+            1902.5,
+            830.0,
+            1930.0
+          ],
+          "text": "12 and up. To reserve your spot, please call 407-WDW-PLAY or",
+          "source": "manual_visual_bbox"
+        },
+        {
+          "page": 1,
+          "line": 60,
+          "bbox": [
+            112.5,
+            1939.5,
+            745.5,
+            1960.0
+          ],
+          "text": "see a Recreation Cast Member inside The Eventi Room."
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/DRR_Aframe_Recreation-0326.pdf",
+    "source_sha256": "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842",
+    "source_pdf_edition": "fy26-q2-0326",
+    "source": {
+      "path": "data/raw/pdfs/DRR_Aframe_Recreation-0326.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/DRR_Aframe_Recreation-0326.pdf",
+      "documentHash": "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842",
+      "edition": "fy26-q2-0326",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 80,
+              "bbox": [
+                114.5,
+                2490.5,
+                1615.5,
+                2509.0
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/riviera-paid-recreation-activities",
+        "source_page_kind": "paid_recreation",
+        "source_content_sha256": "ed6c8c48243d00061fc0c39f7a83fd5b889496a9011cdb0fd2fcb6fc4f0fea2a",
+        "fetched_at": "2026-06-22T10:42:00.536412+00:00",
+        "calendar_group_key": "riviera",
+        "resort_slugs": [
+          "riviera-resort"
+        ],
+        "activity_title": "Painting on the Riviera",
+        "activity_slug": "painting-on-the-riviera",
+        "facts": {
+          "schedule_text": "Thursdays from 11:00 AM-1:00 PM",
+          "exact_venue": "Eventi Room",
+          "host_area_or_wing": null,
+          "price_state": "fee",
+          "price_cents_min": 4500,
+          "price_cents_max": 4500,
+          "price_options": [],
+          "price_notes": "$45",
+          "age_minimum": 12,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": "phone",
+          "reservation_phone": "407-WDW-PLAY",
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "painting",
+          "activity_variant": "Painting on the Riviera",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": null,
+            "adult_required": null
+          },
+          "weather_dependency": null,
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Thursdays from 11:00 AM-1:00 PM | Eventi Room"
+          },
+          {
+            "field": "price",
+            "text": "COST: $45"
+          },
+          {
+            "field": "age_access",
+            "text": "Get in touch with your inner artist in this unique instructor-led class! This experience is recommended for Guests ages 12 and up.To reserve your spot, please call (407) WDW-PLAY or see a Recreation Cast Member in the Eventi Room."
+          },
+          {
+            "field": "reservation",
+            "text": "Get in touch with your inner artist in this unique instructor-led class! This experience is recommended for Guests ages 12 and up.To reserve your spot, please call (407) WDW-PLAY or see a Recreation Cast Member in the Eventi Room."
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "e3c4d09c-f2e0-7a5d-778a-2fec763daf7b"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Eventi Room",
+      "age_minimum": 12,
+      "reservation_method": "phone",
+      "reservation_phone": "407-WDW-PLAY",
+      "program_family": "painting",
+      "activity_variant": "Painting on the Riviera",
       "resort_guest_only": true,
       "pool_gated": true,
       "schedule_valid_from": "2026-05-26",
@@ -47763,7 +51358,7 @@
         }
       ]
     },
-    "trust_state": "source_backed",
+    "trust_state": "confirm_before_going",
     "external_facts": [
       {
         "source": "magical_resort_guide",

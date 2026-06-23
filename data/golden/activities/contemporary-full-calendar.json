@@ -262,20 +262,22 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "expected_unextractable_records": [
     {
       "title": "Sports Courts",
       "slug": "sports-courts",
-      "category": "other",
-      "schedule_text": "",
-      "start_time": null,
-      "end_time": null,
-      "location": "",
-      "description": "Offerings include Basketball, Tennis and Pickleball.",
-      "is_fee_based": false,
-      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "reason": "The rendered PDF shows the title and description only. No source-visible location or schedule is printed for this activity, and the nearby Bay Lake Tower Sports Court text belongs to Pickleball Clinic.",
       "required_spans": {
-        "title": [{ "page": 1, "line": 34, "text": "SPORTS COURTS" }]
+        "title": [{ "page": 1, "line": 34, "text": "SPORTS COURTS" }],
+        "description": [
+          {
+            "page": 1,
+            "bbox": [520, 2095, 1890, 2175],
+            "text": "Offerings include Basketball, Tennis and Pickleball.",
+            "source": "manual_visual_bbox"
+          }
+        ]
       }
     }
   ]

@@ -19,18 +19,24 @@ import {
   activityToHit,
   guideToHit,
   movieToHit,
+  offeringToHit,
   resortToHit,
   scoreActivity,
   scoreCategory,
   scoreGuide,
   scoreMovie,
+  scoreOffering,
   scorePage,
   scoreResort,
 } from "@/lib/search/score";
 import { PAGE_HITS } from "@/lib/search/synonyms";
 import type { SearchHit, SearchResponse } from "@/lib/search/types";
-import type { ActivityOccurrence, Daypart } from "@/lib/types/occurrence";
+import type { ActivityOffering, ActivityOccurrence, Daypart } from "@/lib/types/occurrence";
 import { filterByDaypart } from "@/lib/occurrences/expand";
+import {
+  fetchOfficialActivityOfferings,
+  filterOfficialOfferingsWithoutActivityCollisions,
+} from "@/lib/data/officialOfferings";
 
 const MIN_SCORE = 18;
 
@@ -49,12 +55,46 @@ function emptyResponse(query: string): SearchResponse {
     total: 0,
     topHits: [],
     activities: [],
+    officialOfferings: [],
     resorts: [],
     guides: [],
     movies: [],
     categories: [],
     pages: [],
   };
+}
+
+async function loadSearchableOfferings(
+  options: RunSearchOptions
+): Promise<ActivityOffering[]> {
+  let offerings = await fetchOfficialActivityOfferings();
+
+  offerings = offerings.filter((offering) => offering.status !== "paused");
+
+  if (options.resort) {
+    offerings = offerings.filter((offering) => offering.resort.slug === options.resort);
+  }
+
+  if (options.category) {
+    offerings = offerings.filter((offering) => offering.category === options.category);
+  }
+
+  if (options.daypart) {
+    offerings = [];
+  }
+
+  if (options.free) {
+    offerings = offerings.filter((offering) => offering.price.state === "free");
+  }
+
+  const seen = new Map<string, ActivityOffering>();
+  for (const offering of offerings) {
+    if (!seen.has(offering.offeringKey)) {
+      seen.set(offering.offeringKey, offering);
+    }
+  }
+
+  return Array.from(seen.values());
 }
 
 function pickBestOccurrencePerCatalog(
@@ -72,6 +112,9 @@ function pickBestOccurrencePerCatalog(
     [...group].sort((a, b) => {
       if (a.isHappeningNow && !b.isHappeningNow) return -1;
       if (!a.isHappeningNow && b.isHappeningNow) return 1;
+      if (!a.startDateTime && !b.startDateTime) return 0;
+      if (!a.startDateTime) return 1;
+      if (!b.startDateTime) return -1;
       return (
         new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
       );
@@ -121,8 +164,9 @@ export async function runSearch(
   const tokens = expandTokens(tokenizeQuery(query));
   const limit = options.limit ?? 50;
 
-  const [activities, resorts, movies] = await Promise.all([
+  const [activities, officialOfferings, resorts, movies] = await Promise.all([
     loadSearchableActivities(options),
+    loadSearchableOfferings(options),
     getResorts(),
     getMovieNights(),
   ]);
@@ -140,6 +184,19 @@ export async function runSearch(
     const score = scoreResort(resort, query, tokens);
     if (score >= MIN_SCORE) {
       resortHits.push(resortToHit(resort, score));
+    }
+  }
+
+  const offeringHits: SearchHit[] = [];
+  const visibleOfficialOfferings = filterOfficialOfferingsWithoutActivityCollisions(
+    officialOfferings,
+    activities
+  );
+
+  for (const offering of visibleOfficialOfferings) {
+    const score = scoreOffering(offering, query, tokens);
+    if (score >= MIN_SCORE) {
+      offeringHits.push(offeringToHit(offering, score));
     }
   }
 
@@ -203,6 +260,7 @@ export async function runSearch(
     [...hits].sort((a, b) => b.score - a.score);
 
   const sortedActivities = sortHits(activityHits);
+  const sortedOfferings = sortHits(offeringHits);
   const sortedResorts = sortHits(resortHits);
   const sortedGuides = sortHits(guideHits);
   const sortedMovies = sortHits(movieHits);
@@ -211,6 +269,7 @@ export async function runSearch(
 
   const allHits = sortHits([
     ...sortedActivities,
+    ...sortedOfferings,
     ...sortedResorts,
     ...sortedGuides,
     ...sortedMovies,
@@ -228,6 +287,10 @@ export async function runSearch(
     activities: sortedActivities
       .slice(0, limit)
       .map((hit) => hit.activity!)
+      .filter(Boolean),
+    officialOfferings: sortedOfferings
+      .slice(0, limit)
+      .map((hit) => hit.offering!)
       .filter(Boolean),
     resorts: sortedResorts
       .slice(0, 12)

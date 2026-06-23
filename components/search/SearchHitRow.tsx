@@ -9,6 +9,7 @@ const KIND_LABELS: Record<SearchHit["kind"], string> = {
   category: "Category",
   page: "Page",
   movie: "Movie",
+  offering: "Official offering",
 };
 
 const KIND_ICONS: Record<SearchHit["kind"], string> = {
@@ -18,6 +19,7 @@ const KIND_ICONS: Record<SearchHit["kind"], string> = {
   category: "🏷️",
   page: "↗",
   movie: "🎬",
+  offering: "✓",
 };
 
 interface SearchHitRowProps {

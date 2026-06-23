@@ -10,7 +10,7 @@ import {
 } from "@/lib/daypart";
 
 export interface EventDayDisplay {
-  label: string;
+  label?: string;
   /** Calendar day for semantic `<time dateTime>` (yyyy-MM-dd). */
   dateTime?: string;
 }
@@ -32,9 +32,11 @@ function shortWeekdayFromName(day: string): string {
 
 /** Activity cards — anchored to a calendar occurrence. */
 export function formatActivityEventDay(
-  startDateTime: string,
+  startDateTime?: string,
   options: { includeDate?: boolean } = {}
 ): EventDayDisplay {
+  if (!startDateTime) return {};
+
   const { includeDate = false } = options;
   const today = orlandoDateString(nowInstant());
   const tomorrow = addOrlandoDays(today, 1);

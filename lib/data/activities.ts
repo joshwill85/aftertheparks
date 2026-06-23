@@ -48,6 +48,7 @@ const DEMO_RESORTS: ResortSummary[] = [
     area: "magic_kingdom",
     disneyUrl: "https://disneyworld.disney.go.com/resorts/polynesian-village-resort/",
     activityCount: 12,
+    offeringCount: 0,
   },
   {
     id: "demo-2",
@@ -57,6 +58,7 @@ const DEMO_RESORTS: ResortSummary[] = [
     area: "magic_kingdom",
     disneyUrl: "https://disneyworld.disney.go.com/resorts/contemporary-resort/",
     activityCount: 14,
+    offeringCount: 0,
   },
 ];
 
@@ -89,14 +91,13 @@ function demoOccurrences(): ActivityOccurrence[] {
         area: "magic_kingdom",
       },
       title: "Movies Under the Stars",
-      summary:
-        "Catch a classic film on the lawn as the lagoon breeze rolls in. Bring a blanket and settle in after your park day.",
+      summary: "",
       category: "movies_under_stars",
       section: "Evening Entertainment",
       startDateTime: evening.toISOString(),
       endDateTime: new Date(evening.getTime() + 2 * 60 * 60 * 1000).toISOString(),
       daypart: "evening",
-      price: { state: "free" },
+      price: { state: "unknown" },
       location: { label: "Great Ceremonial House Lawn" },
       eligibility: { ages: ["all_ages"] },
       freshness: {
@@ -118,13 +119,12 @@ function demoOccurrences(): ActivityOccurrence[] {
         area: "magic_kingdom",
       },
       title: "Evening Campfire",
-      summary:
-        "Gather around the fire pit for songs, stories, and s'mores kits available for purchase nearby.",
+      summary: "",
       category: "campfire",
       section: "Resort Activities",
       startDateTime: campfire.toISOString(),
       daypart: "evening",
-      price: { state: "free", notes: "S'mores kits sold separately" },
+      price: { state: "unknown" },
       location: { label: "Beach" },
       eligibility: { ages: ["all_ages"] },
       freshness: {
@@ -335,6 +335,9 @@ export async function getActivityBySlug(
   const now = nowInstant();
   const todayStr = orlandoDateString(now);
   const upcoming = matches
+    .filter((o): o is ActivityOccurrence & { startDateTime: string } =>
+      Boolean(o.startDateTime)
+    )
     .filter((o) => new Date(o.startDateTime) >= now)
     .sort(
       (a, b) =>
@@ -342,7 +345,7 @@ export async function getActivityBySlug(
     );
 
   const featured =
-    upcoming.find((o) => isSameOrlandoDay(o.startDateTime, todayStr)) ??
+    upcoming.find((o) => o.startDateTime && isSameOrlandoDay(o.startDateTime, todayStr)) ??
     upcoming[0] ??
     matches[0];
 
@@ -375,7 +378,7 @@ function filterTodayAvailability(
     })
     .sort(
       (a, b) =>
-        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
+        new Date(a.startDateTime ?? 0).getTime() - new Date(b.startDateTime ?? 0).getTime()
     );
 }
 
@@ -398,7 +401,7 @@ function filterTonightAvailability(
     })
     .sort(
       (a, b) =>
-        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
+        new Date(a.startDateTime ?? 0).getTime() - new Date(b.startDateTime ?? 0).getTime()
     );
 }
 
@@ -442,7 +445,7 @@ export async function getTomorrowPreview(
   const tomorrow = addOrlandoDays(orlandoDateString(nowInstant()), 1);
   const all = annotateHappeningNow(await getAllOccurrences(3));
   const tomorrowOnly = all.filter((o) =>
-    o.startDateTime.startsWith(tomorrow)
+    o.startDateTime?.startsWith(tomorrow)
   );
 
   return sanitizePublicActivities(
@@ -489,14 +492,27 @@ export async function getResorts(): Promise<ResortSummary[]> {
 
   if (error || !resorts?.length) return DEMO_RESORTS;
 
-  const { data: counts } = await supabase
-    .from("v_resort_activities_today")
-    .select("resort_slug")
-    .eq("needs_review", false);
+  const [{ data: counts }, { data: offeringCounts }] = await Promise.all([
+    supabase
+      .from("v_resort_activities_today")
+      .select("resort_slug")
+      .eq("needs_review", false),
+    supabase
+      .from("v_public_activity_offerings")
+      .select("resort_slug"),
+  ]);
 
   const countMap = new Map<string, number>();
   for (const c of counts ?? []) {
     countMap.set(c.resort_slug, (countMap.get(c.resort_slug) ?? 0) + 1);
+  }
+
+  const offeringCountMap = new Map<string, number>();
+  for (const c of offeringCounts ?? []) {
+    offeringCountMap.set(
+      c.resort_slug,
+      (offeringCountMap.get(c.resort_slug) ?? 0) + 1
+    );
   }
 
   return resorts.map((r) => ({
@@ -507,6 +523,7 @@ export async function getResorts(): Promise<ResortSummary[]> {
     area: r.resort_area,
     disneyUrl: r.disney_url,
     activityCount: countMap.get(r.slug) ?? 0,
+    offeringCount: offeringCountMap.get(r.slug) ?? 0,
   }));
 }
 

@@ -143,49 +143,7 @@
       }
     }
   ],
-  "expected_quarantine_records": [
-    {
-      "title": "Campfire",
-      "slug": "campfire",
-      "category": "campfire",
-      "schedule_text": "Monday, Wednesday and Friday from 6:30pm-7:30pm",
-      "start_time": "6:30pm",
-      "end_time": "7:30pm",
-      "location": "",
-      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 54, "text": "CAMPFIRE" }],
-        "schedule": [{ "page": 1, "line": 57, "text": "Monday, Wednesday and Friday from 6:30pm-7:30pm" }],
-        "description": [
-          { "page": 1, "line": 58, "text": "Enjoy the warm glow of the campfire with complimentary" },
-          { "page": 1, "line": 60, "text": "marshmallows. S’mores kits available for purchase." }
-        ]
-      },
-      "warnings": ["location:missing_source_span"]
-    },
-    {
-      "title": "Aloha After Dark",
-      "slug": "aloha-after-dark",
-      "category": "other",
-      "schedule_text": "Monday, Wednesday and Friday at",
-      "start_time": null,
-      "end_time": null,
-      "location": "Lava Pool Deck",
-      "description": "Enjoy a nighttime party filled with glow-in-the-dark games and dancing!",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 70, "text": "ALOHA AFTER DARK" }],
-        "location": [{ "page": 1, "line": 71, "text": "Lava Pool Deck" }],
-        "schedule": [{ "page": 1, "line": 72, "text": "Monday, Wednesday and Friday at" }],
-        "description": [
-          { "page": 1, "line": 74, "text": "Enjoy a nighttime party filled with glow-in-the-dark games" },
-          { "page": 1, "line": 78, "text": "and dancing!" }
-        ]
-      },
-      "warnings": ["schedule:incomplete_time_phrase"]
-    }
-  ],
+  "expected_quarantine_records": [],
   "reviewed_manual_records": [
     {
       "title": "Video Game Dance Party",
@@ -215,6 +173,97 @@
         "schedule": [{ "page": 1, "line": 66, "text": "Sunday, Tuesday, Thursday and Saturday at 7:30pm" }],
         "description": [
           { "page": 1, "line": 68, "text": "Show off your best moves at this interactive dance party!" }
+        ]
+      }
+    },
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Monday, Wednesday and Friday from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "Seven Seas Lagoon Beach",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR missed the visual Campfire location."
+      },
+      "required_spans": {
+        "title": [{ "page": 1, "line": 54, "bbox": [912.0, 1828.5, 1123.0, 1854.5], "text": "CAMPFIRE" }],
+        "location": [
+          {
+            "page": 1,
+            "bbox": [912, 1874, 1288, 1899],
+            "text": "Seven Seas Lagoon Beach",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 57,
+            "bbox": [912.0, 1910.0, 1582.5, 1932.0],
+            "text": "Monday, Wednesday and Friday from 6:30pm-7:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 58,
+            "bbox": [912.5, 1944.5, 1603.5, 1972.0],
+            "text": "Enjoy the warm glow of the campfire with complimentary"
+          },
+          {
+            "page": 1,
+            "line": 60,
+            "bbox": [912.0, 1981.5, 1504.5, 2008.5],
+            "text": "marshmallows. S’mores kits available for purchase."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Aloha After Dark",
+      "slug": "aloha-after-dark",
+      "category": "other",
+      "schedule_text": "Monday, Wednesday and Friday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
+      "location": "Lava Pool Deck",
+      "description": "Enjoy a nighttime party filled with glow-in-the-dark games and dancing!",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR truncated the visual Aloha After Dark time."
+      },
+      "required_spans": {
+        "title": [{ "page": 1, "line": 70, "bbox": [911.0, 2234.0, 1342.5, 2259.5], "text": "ALOHA AFTER DARK" }],
+        "location": [{ "page": 1, "line": 71, "bbox": [912.0, 2278.0, 1101.5, 2296.0], "text": "Lava Pool Deck" }],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [912, 2315, 1468, 2337],
+            "text": "Monday, Wednesday and Friday at 8:00pm",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 74,
+            "bbox": [912.5, 2349.0, 1614.5, 2376.5],
+            "text": "Enjoy a nighttime party filled with glow-in-the-dark games"
+          },
+          {
+            "page": 1,
+            "line": 78,
+            "bbox": [911.0, 2386.5, 1061.5, 2414.0],
+            "text": "and dancing!"
+          }
         ]
       }
     }

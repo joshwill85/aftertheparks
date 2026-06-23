@@ -198,7 +198,43 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "reviewed_manual_records": [
+    {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Lawn Between Buildings 5 and 6 | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Lawn Between Buildings 5 and 6",
+      "description": "",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF crop because OCR isolated the title but missed the large venue/time line under the heading."
+      },
+      "required_spans": {
+        "title": [{ "page": 1, "line": 73, "text": "MOVIE UNDER THE STARS" }],
+        "location": [
+          {
+            "page": 1,
+            "bbox": [380, 3130, 2440, 3230],
+            "text": "LAWN BETWEEN BUILDINGS 5 AND 6 | 8:30PM",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [380, 3130, 2440, 3230],
+            "text": "LAWN BETWEEN BUILDINGS 5 AND 6 | 8:30PM",
+            "source": "manual_visual_bbox"
+          }
+        ]
+      }
+    },
     {
       "title": "Arts & Crafts",
       "slug": "arts-crafts",
@@ -207,30 +243,61 @@
       "start_time": "3:00pm",
       "end_time": "4:00pm",
       "location": "Doubloon Lagoon Pool Deck",
-      "description": "Sunday and Friday",
+      "description": "Sunday and Friday: Seasonal Craft; Thursday: Make Your Own Slime",
       "is_fee_based": true,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 45, "text": "ARTS & CRAFTS ($)" }],
-        "location": [{ "page": 1, "line": 47, "text": "Doubloon Lagoon Pool Deck" }],
-        "schedule": [{ "page": 1, "line": 49, "text": "From 3:00pm-4:00pm" }],
-        "description": [{ "page": 1, "line": 50, "text": "Sunday and Friday" }]
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR only captured the first craft-table day text."
       },
-      "warnings": ["description:text_quality_low"]
-    },
-    {
-      "title": "Movie Under the Stars",
-      "slug": "movie-under-the-stars",
-      "category": "movies_under_stars",
-      "schedule_text": "",
-      "start_time": null,
-      "end_time": null,
-      "location": "",
-      "description": "",
-      "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 73, "text": "MOVIE UNDER THE STARS" }]
-      },
-      "warnings": ["schedule:missing_source_span", "location:missing_source_span"]
+        "title": [
+          {
+            "page": 1,
+            "line": 45,
+            "bbox": [911.0, 1439.5, 1319.5, 1471.5],
+            "text": "ARTS & CRAFTS ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 47,
+            "bbox": [912.0, 1485.5, 1262.0, 1507.5],
+            "text": "Doubloon Lagoon Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 49,
+            "bbox": [912.0, 1523.5, 1189.0, 1544.5],
+            "text": "From 3:00pm-4:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 50,
+            "bbox": [911.5, 1557.0, 1119.5, 1584.5],
+            "text": "Sunday and Friday"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1198.0, 1557.0, 1607.0, 1584.5],
+            "text": "Seasonal Craft",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [911.5, 1592.0, 1608.0, 1620.0],
+            "text": "Thursday Make Your Own Slime",
+            "source": "manual_visual_bbox"
+          }
+        ]
+      }
     }
   ]
 }

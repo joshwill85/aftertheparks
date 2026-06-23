@@ -48,6 +48,10 @@ export function getActivityAvailability(
   const dateStr = selectedDate ?? orlandoDateString(now);
   const uncertainTime = isUncertainTime(activity);
 
+  if (!activity.startDateTime) {
+    return { state: "upcoming_this_week", uncertainTime: false };
+  }
+
   if (!isSameOrlandoDay(activity.startDateTime, dateStr)) {
     const start = new Date(activity.startDateTime);
     if (isBefore(start, now)) {

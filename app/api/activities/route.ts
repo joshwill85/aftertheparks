@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { publicActivitiesResponse } from "@/lib/api/publicActivities";
 import { getFilteredActivities } from "@/lib/data/activities";
+import {
+  filterOfficialOfferingsWithoutActivityCollisions,
+  getFilteredOfficialOfferings,
+} from "@/lib/data/officialOfferings";
 import type { Daypart } from "@/lib/types/occurrence";
 
 export const dynamic = "force-dynamic";
@@ -16,14 +20,26 @@ export async function GET(request: Request) {
     ? Number(searchParams.get("limit"))
     : undefined;
 
-  const activities = await getFilteredActivities({
+  const filters = {
     resort,
     category,
     daypart,
     free,
     q,
     limit,
-  });
+  };
+  const [activities, officialOfferingsPool] = await Promise.all([
+    getFilteredActivities(filters),
+    getFilteredOfficialOfferings(filters),
+  ]);
+  const officialOfferings = filterOfficialOfferingsWithoutActivityCollisions(
+    officialOfferingsPool,
+    activities
+  );
 
-  return NextResponse.json(publicActivitiesResponse(activities));
+  return NextResponse.json({
+    ...publicActivitiesResponse(activities),
+    officialOfferings,
+    offeringCount: officialOfferings.length,
+  });
 }

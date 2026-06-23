@@ -93,8 +93,14 @@ export function ResortCard({
           <div className="resort-card__stats">
             <span className="resort-card__stat">
               {resort.activityCount}{" "}
-              {resort.activityCount === 1 ? "activity" : "activities"} listed
+              scheduled {resort.activityCount === 1 ? "activity" : "activities"}
             </span>
+            {resort.offeringCount > 0 && (
+              <span className="resort-card__stat">
+                {resort.offeringCount} official{" "}
+                {resort.offeringCount === 1 ? "offering" : "offerings"}
+              </span>
+            )}
             {todayCount != null && todayCount > 0 && (
               <span className="resort-card__stat resort-card__stat--today">
                 {todayCount} today

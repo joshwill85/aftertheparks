@@ -28,6 +28,7 @@ export function CalendarClient({
   const byDay = useMemo(() => {
     const map = new Map<string, ActivityOccurrence[]>();
     for (const o of occurrences) {
+      if (!o.startDateTime) continue;
       const key = format(parseISO(o.startDateTime), "yyyy-MM-dd");
       if (!map.has(key)) map.set(key, []);
       map.get(key)!.push(o);

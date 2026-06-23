@@ -164,7 +164,8 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "reviewed_manual_records": [
     {
       "title": "Painting On The Riviera",
       "slug": "painting-on-the-riviera",
@@ -173,24 +174,67 @@
       "start_time": "11:00am",
       "end_time": "1:00pm",
       "location": "The Eventi Room",
-      "description": "Get in touch with your inner artist in this unique instructor-led painting class! This experience is recommended for Guests ages and up. To reserve your spot, please call see a Recreation Cast Member inside The Eventi Room. ¢ a PY",
+      "description": "Get in touch with your inner artist in this unique instructor-led painting class! This experience is recommended for Guests ages 12 and up. To reserve your spot, please call 407-WDW-PLAY or see a Recreation Cast Member inside The Eventi Room.",
       "is_fee_based": true,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 47, "text": "PAINTING ON THE RIVIERA ($)" }],
-        "location": [{ "page": 1, "line": 50, "text": "The Eventi Room" }],
-        "schedule": [{ "page": 1, "line": 52, "text": "Thursday from 11:00am-1:00pm" }],
-        "description": [
-          { "page": 1, "line": 53, "text": "Get in touch with your inner artist in this unique instructor-led" },
-          { "page": 1, "line": 55, "text": "painting class! This experience is recommended for Guests ages" },
-          { "page": 1, "line": 57, "text": "and up. To reserve your spot, please call" },
-          { "page": 1, "line": 60, "text": "see a Recreation Cast Member inside The Eventi Room." },
-          { "page": 1, "line": 69, "text": "¢ a PY" }
-        ]
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR dropped the age and 407-WDW-PLAY text and included decorative bleed below the activity."
       },
-      "warnings": ["description:text_quality_low"]
-    }
-  ],
-  "reviewed_manual_records": [
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 47,
+            "bbox": [116.5, 1711.5, 757.0, 1742.0],
+            "text": "PAINTING ON THE RIVIERA ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 50,
+            "bbox": [114.0, 1757.0, 324.5, 1775.0],
+            "text": "The Eventi Room"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 52,
+            "bbox": [114.0, 1794.0, 508.0, 1815.5],
+            "text": "Thursday from 11:00am-1:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 53,
+            "bbox": [114.5, 1828.5, 827.0, 1855.5],
+            "text": "Get in touch with your inner artist in this unique instructor-led"
+          },
+          {
+            "page": 1,
+            "line": 55,
+            "bbox": [115.0, 1865.0, 824.5, 1892.5],
+            "text": "painting class! This experience is recommended for Guests ages"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [114.0, 1902.5, 830.0, 1930.0],
+            "text": "12 and up. To reserve your spot, please call 407-WDW-PLAY or",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": 60,
+            "bbox": [112.5, 1939.5, 745.5, 1960.0],
+            "text": "see a Recreation Cast Member inside The Eventi Room."
+          }
+        ]
+      }
+    },
     {
       "title": "Find A Friend",
       "slug": "find-a-friend",

@@ -15,6 +15,26 @@ class ActivitySource:
     notes: str | None = None
 
 
+@dataclass(frozen=True)
+class ResortRecreationSource:
+    resort_slug: str
+    calendar_group_key: str
+    disney_recreation_slug: str
+    recreation_page_url: str
+    pdf_url: str | None
+    pdf_edition: str | None
+    source_kind: str
+    notes: str | None = None
+
+
+@dataclass(frozen=True)
+class ActivityCalendarGroup:
+    calendar_group_key: str
+    resort_slugs: tuple[str, ...]
+    aggregation_rule: str = "shared_calendar"
+    notes: str | None = None
+
+
 # Prefer fy26-q2 collateral when available; fall back to newest verified official PDF.
 CDN_COLLATERAL = (
     "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/"
@@ -205,6 +225,46 @@ ACTIVITY_SOURCES: list[ActivitySource] = [
   ),
 ]
 
+
+ACTIVITY_CALENDAR_GROUPS: list[ActivityCalendarGroup] = [
+  ActivityCalendarGroup(
+    source.calendar_group_key,
+    source.resort_slugs,
+    notes=source.notes,
+  )
+  for source in ACTIVITY_SOURCES
+]
+
+
+_DISNEY_RECREATION_SLUG_OVERRIDES = {
+  "cabins-at-fort-wilderness-resort": "dvc-cabins-at-fort-wilderness-resort",
+}
+
+
+def _source_kind_for(source: ActivitySource) -> str:
+  return "pdf" if source.pdf_url else "official_web"
+
+
+RESORT_RECREATION_SOURCES: list[ResortRecreationSource] = [
+  ResortRecreationSource(
+    resort_slug=resort_slug,
+    calendar_group_key=source.calendar_group_key,
+    disney_recreation_slug=_DISNEY_RECREATION_SLUG_OVERRIDES.get(
+      resort_slug,
+      resort_slug,
+    ),
+    recreation_page_url=recreation_url(
+      _DISNEY_RECREATION_SLUG_OVERRIDES.get(resort_slug, resort_slug)
+    ),
+    pdf_url=source.pdf_url,
+    pdf_edition=source.pdf_edition,
+    source_kind=_source_kind_for(source),
+    notes=source.notes,
+  )
+  for source in ACTIVITY_SOURCES
+  for resort_slug in source.resort_slugs
+]
+
 # Verify coverage of all 31 resorts
 ALL_RESORT_SLUGS = {
   "pop-century-resort", "caribbean-beach-resort", "animal-kingdom-lodge",
@@ -226,4 +286,9 @@ ALL_RESORT_SLUGS = {
 _manifest_slugs = {slug for src in ACTIVITY_SOURCES for slug in src.resort_slugs}
 assert _manifest_slugs == ALL_RESORT_SLUGS, (
   f"Manifest slug mismatch. Missing: {_manifest_slugs ^ ALL_RESORT_SLUGS}"
+)
+
+_resort_source_slugs = {source.resort_slug for source in RESORT_RECREATION_SOURCES}
+assert _resort_source_slugs == ALL_RESORT_SLUGS, (
+  f"Resort recreation source mismatch. Missing: {_resort_source_slugs ^ ALL_RESORT_SLUGS}"
 )

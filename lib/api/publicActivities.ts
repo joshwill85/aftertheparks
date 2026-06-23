@@ -7,7 +7,11 @@ import {
   meetsMinimumQuality,
   type DisplayQualityTier,
 } from "@/lib/displayQuality";
-import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type {
+  ActivityClaim,
+  ActivityFactualEnrichment,
+  ActivityOccurrence,
+} from "@/lib/types/occurrence";
 
 const REQUIRED_PROVENANCE_FIELDS = ["title", "schedule", "location"] as const;
 
@@ -49,6 +53,127 @@ function hasVerifiedSourceContract(activity: ActivityOccurrence): boolean {
   );
 }
 
+function claimHasEvidence(claim?: ActivityClaim): boolean {
+  return Array.isArray(claim?.evidence) && claim.evidence.length > 0;
+}
+
+function evidenceFields(activity: ActivityOccurrence): Set<string> {
+  const fields = new Set<string>();
+
+  for (const fact of activity.externalFacts ?? []) {
+    for (const evidence of fact.evidence ?? []) {
+      const field = evidence.field;
+      if (typeof field === "string" && field.trim()) fields.add(field);
+    }
+  }
+
+  for (const [kind, claim] of Object.entries(activity.claims ?? {})) {
+    if (kind === "external_schedule_validity") {
+      fields.add("schedule_validity");
+    }
+    for (const evidence of claim.evidence ?? []) {
+      const nestedFields = evidence.fields;
+      if (Array.isArray(nestedFields)) {
+        for (const field of nestedFields) {
+          if (typeof field === "string" && field.trim()) fields.add(field);
+        }
+      }
+    }
+  }
+
+  return fields;
+}
+
+function hasAnyEvidenceField(
+  fields: Set<string>,
+  required: readonly string[]
+): boolean {
+  return required.some((field) => fields.has(field));
+}
+
+function sanitizeEnrichment(
+  activity: ActivityOccurrence
+): ActivityFactualEnrichment | undefined {
+  const enrichment = activity.enrichment;
+  if (!enrichment) return undefined;
+
+  const fields = evidenceFields(activity);
+  const keep = <K extends keyof ActivityFactualEnrichment>(
+    key: K,
+    required: readonly string[]
+  ): ActivityFactualEnrichment[K] | undefined =>
+    hasAnyEvidenceField(fields, required) ? enrichment[key] : undefined;
+
+  const sanitized: ActivityFactualEnrichment = {
+    exactVenue: keep("exactVenue", ["schedule_location"]),
+    hostAreaOrWing: keep("hostAreaOrWing", ["schedule_location"]),
+    ageMinimum: keep("ageMinimum", ["age_access", "age", "access_rules"]),
+    adultRequired: keep("adultRequired", ["age_access", "access_rules"]),
+    durationMinutes: keep("durationMinutes", ["duration", "check_in", "reservation"]),
+    checkInOffsetMinutes: keep("checkInOffsetMinutes", ["check_in", "reservation"]),
+    reservationRequired: keep("reservationRequired", ["reservation"]),
+    reservationRecommended: keep("reservationRecommended", ["reservation"]),
+    reservationMethod: keep("reservationMethod", ["reservation"]),
+    reservationPhone: keep("reservationPhone", ["reservation"]),
+    walkUpsAllowed: keep("walkUpsAllowed", ["reservation"]),
+    sameDayAvailable: keep("sameDayAvailable", ["reservation"]),
+    programFamily: keep("programFamily", ["schedule_location"]),
+    activityVariant: keep("activityVariant", ["schedule_location"]),
+    weatherDependency: keep("weatherDependency", ["schedule_location"]),
+    scheduleValidFrom: keep("scheduleValidFrom", [
+      "schedule_validity",
+      "valid_from",
+    ]),
+    scheduleValidUntil: keep("scheduleValidUntil", [
+      "schedule_validity",
+      "valid_until",
+    ]),
+    nextScheduleExpectedDate: keep("nextScheduleExpectedDate", [
+      "schedule_validity",
+      "next_expected_schedule_date",
+    ]),
+    hiddenCharacterName: keep("hiddenCharacterName", [
+      "schedule_location",
+      "description",
+    ]),
+    redemptionLocation: keep("redemptionLocation", [
+      "schedule_location",
+      "description",
+    ]),
+    prizeOrCompletionRule: keep("prizeOrCompletionRule", [
+      "description",
+      "access_rules",
+    ]),
+    resortGuestOnly: keep("resortGuestOnly", ["access_rules"]),
+    poolGated: keep("poolGated", ["pool_gated"]),
+    openToNonResortGuests: keep("openToNonResortGuests", [
+      "open_to_non_resort_guests",
+    ]),
+    sisterResortAccess: keep("sisterResortAccess", ["sister_resort_access"]),
+  };
+
+  return Object.values(sanitized).some((value) => value !== undefined)
+    ? sanitized
+    : undefined;
+}
+
+function sanitizePrice(activity: ActivityOccurrence): ActivityOccurrence["price"] {
+  const hasPriceEvidence =
+    claimHasEvidence(activity.claims?.fee) ||
+    hasAnyEvidenceField(evidenceFields(activity), ["price"]);
+  const state =
+    (activity.price.state === "fee" || activity.price.state === "free") &&
+    hasPriceEvidence
+      ? activity.price.state
+      : "unknown";
+
+  if (!hasPriceEvidence || state === "unknown") {
+    return { state };
+  }
+
+  return activity.price;
+}
+
 /** Ensure every public activity has honest freshness metadata. */
 export function ensurePublicActivity(
   activity: ActivityOccurrence
@@ -68,6 +193,8 @@ export function ensurePublicActivity(
 
   return {
     ...activity,
+    price: sanitizePrice(activity),
+    enrichment: sanitizeEnrichment(activity),
     trustState,
     freshness: {
       lastVerified: activity.freshness?.lastVerified ?? new Date().toISOString(),

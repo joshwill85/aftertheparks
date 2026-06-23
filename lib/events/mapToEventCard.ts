@@ -10,6 +10,7 @@ const DAYPART_LABELS: Record<string, string> = {
   afternoon: "Afternoon",
   evening: "Evening",
   late: "Starlight",
+  anytime: "Anytime",
   unclear: "Time unclear",
 };
 
@@ -53,10 +54,12 @@ export function activityToEventCard(
     badges.push({ label: "Now", tone: "now" });
   }
 
-  badges.push({
-    label: DAYPART_LABELS[display.daypart] ?? display.daypart,
-    tone: "muted",
-  });
+  if (display.daypart !== "anytime") {
+    badges.push({
+      label: DAYPART_LABELS[display.daypart] ?? display.daypart,
+      tone: "muted",
+    });
+  }
 
   if (display.timeUncertain) {
     badges.push({ label: "Confirm time", tone: "warning" });

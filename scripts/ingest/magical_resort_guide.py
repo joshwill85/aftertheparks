@@ -428,8 +428,6 @@ def _price_from_lines(
     cost_line = next((line for line in body if re.search(r"\bCOST\b|\$\d", line, re.I)), "")
     if "($)" in raw_title or cost_line:
         state = "fee"
-    elif page_kind == "free_recreation":
-        state = "free"
     else:
         state = None
 

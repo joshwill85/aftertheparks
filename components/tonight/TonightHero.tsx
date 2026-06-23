@@ -4,7 +4,6 @@ export const TONIGHT_START_CHIPS = [
   { id: "movies", label: "Movies", href: "#movies" },
   { id: "campfires", label: "Campfires", href: "#campfires" },
   { id: "low-energy", label: "Low-key evening", href: "#low-energy" },
-  { id: "free", label: "Free tonight", href: "/activities?free=true&daypart=evening" },
 ] as const;
 
 export function TonightHero() {

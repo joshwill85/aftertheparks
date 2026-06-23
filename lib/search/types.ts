@@ -1,5 +1,6 @@
 import type { GuideEntry } from "@/lib/guides";
 import type {
+  ActivityOffering,
   ActivityOccurrence,
   MovieNightOccurrence,
   ResortSummary,
@@ -11,7 +12,8 @@ export type SearchResultKind =
   | "guide"
   | "category"
   | "page"
-  | "movie";
+  | "movie"
+  | "offering";
 
 export interface SearchHit {
   id: string;
@@ -26,6 +28,7 @@ export interface SearchHit {
   resort?: ResortSummary;
   guide?: GuideEntry;
   movie?: MovieNightOccurrence;
+  offering?: ActivityOffering;
   category?: string;
 }
 
@@ -35,6 +38,7 @@ export interface SearchResponse {
   total: number;
   topHits: SearchHit[];
   activities: ActivityOccurrence[];
+  officialOfferings: ActivityOffering[];
   resorts: ResortSummary[];
   guides: GuideEntry[];
   movies: MovieNightOccurrence[];

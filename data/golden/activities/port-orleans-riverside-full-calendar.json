@@ -176,17 +176,23 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "reviewed_manual_records": [
     {
       "title": "Medicine Show Arcade",
       "slug": "medicine-show-arcade",
       "category": "arcade",
-      "schedule_text": "",
-      "start_time": null,
-      "end_time": null,
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "start_time": "8:00am",
+      "end_time": "11:00pm",
       "location": "Medicine Show Arcade",
-      "description": "Dally from Play the latest and greatest family-friendly video games.",
-      "is_fee_based": false,
+      "description": "Play the latest and greatest family-friendly video games.",
+      "is_fee_based": true,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF crop because OCR read the schedule as a partial 'Dally from' description fragment."
+      },
       "required_spans": {
         "title": [
           { "page": 1, "line": 22, "text": "MEDICINE SHOW" },
@@ -196,12 +202,18 @@
           { "page": 1, "line": 22, "text": "MEDICINE SHOW" },
           { "page": 1, "line": 24, "text": "ARCADE" }
         ],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [910, 910, 1445, 955],
+            "text": "Daily from 8:00am-11:00pm",
+            "source": "manual_visual_bbox"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 26, "text": "Dally from" },
           { "page": 1, "line": 30, "text": "Play the latest and greatest family-friendly video games." }
         ]
-      },
-      "warnings": ["schedule:missing_source_span", "description:text_quality_low"]
+      }
     },
     {
       "title": "Arts & Crafts",
@@ -211,18 +223,33 @@
       "start_time": "12:30pm",
       "end_time": "1:30pm",
       "location": "Ol’ Man Island Pool Deck",
-      "description": "Wednesday and",
+      "description": "Tuesday: Seasonal Craft; Wednesday and Saturday: Make Your Own Slime",
       "is_fee_based": true,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF crop because OCR truncated the visual day/activity table."
+      },
       "required_spans": {
         "title": [{ "page": 1, "line": 60, "text": "ARTS & CRAFTS ($)" }],
         "location": [{ "page": 1, "line": 62, "text": "Ol Man Island Pool Deck" }],
         "schedule": [{ "page": 1, "line": 64, "text": "From 12:30pm-1:30pm" }],
-        "description": [{ "page": 1, "line": 67, "text": "Wednesday and" }]
-      },
-      "warnings": ["description:text_quality_low"]
-    }
-  ],
-  "reviewed_manual_records": [
+        "description": [
+          {
+            "page": 1,
+            "bbox": [910, 1670, 1615, 1710],
+            "text": "Tuesday: Seasonal Craft",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "bbox": [910, 1720, 1615, 1760],
+            "text": "Wednesday and Saturday: Make Your Own Slime",
+            "source": "manual_visual_bbox"
+          }
+        ]
+      }
+    },
     {
       "title": "Nighttime Trivia Challenge",
       "slug": "nighttime-trivia-challenge",

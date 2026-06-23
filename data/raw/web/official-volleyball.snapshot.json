@@ -1,0 +1,77 @@
+{
+  "source_kind": "official_recreation_detail",
+  "source_url": "https://disneyworld.disney.go.com/recreation/volleyball/",
+  "captured_at": "2026-06-23T00:51:20.397477+00:00",
+  "raw_html_sha256": "347335ec7041524629229679d44d8bdede3207e4d85de5629d6e646c50a14c1b",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Volleyball | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Volleyball"
+    },
+    {
+      "line": 3,
+      "text": "MultipleWalt Disney World® Resortlocations"
+    },
+    {
+      "line": 4,
+      "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
+    },
+    {
+      "line": 5,
+      "text": "All Ages"
+    },
+    {
+      "line": 6,
+      "text": "The Ball's in Your Court!"
+    },
+    {
+      "line": 7,
+      "text": "Rally your crew for a no-holds-barred match or just bat a ball around and make the most of the beach. Well-groomed, white-sand courts can be found at 8 locations throughout Walt Disney World Resort, and a water volleyball court at Walt Disney World Dolphin Hotel allows you to hammer it down the line while playing it cool."
+    },
+    {
+      "line": 8,
+      "text": "Any Guest of a Walt Disney World Resort hotel may access the volleyball courts, and equipment can be obtained using a valid Resort ID. Disney Vacation Club members may check out equipment free of charge; for all other Guests, an associated fee applies."
+    },
+    {
+      "line": 9,
+      "text": "Courts are found at the following locations:"
+    },
+    {
+      "line": 10,
+      "text": "Disney's Caribbean Beach Resort — Sand court at Martinique Village; check out equipment at Barefoot Bay Bike Works"
+    },
+    {
+      "line": 11,
+      "text": "Disney's Contemporary Resort — Sand court on the beach; check out equipment at Boat Nook Marina"
+    },
+    {
+      "line": 12,
+      "text": "Disney's Coronado Springs Resort — Sand court near Dig Site pool; check out equipment at Siesta's pool bar"
+    },
+    {
+      "line": 13,
+      "text": "Disney's Old Key West Resort — Sand court near Hospitality House; check out equipment at Hank's Rent 'N Return"
+    },
+    {
+      "line": 14,
+      "text": "Disney's Polynesian Village Resort — Sand court on the beach; check out equipment at Seven Seas Marina"
+    },
+    {
+      "line": 15,
+      "text": "Disney's Yacht & Beach Club Resorts — Sand court near Tidal Pool; check out equipment at Ship Shape Massage Salon Fitness"
+    },
+    {
+      "line": 16,
+      "text": "The Campsites at Disney's Fort Wilderness Resort — Sand court in the Meadow Recreation Area; check out equipment at the Bike Barn"
+    },
+    {
+      "line": 17,
+      "text": "Walt Disney World Dolphin and Swan Hotels — Sand court on the beach, wet court in grotto pool; check out equipment at Dolphin Health Club or Swan Health Club"
+    }
+  ],
+  "content_sha256": "1d44624b6b35a4931eaa4527b2102decdd82248301d97b652e7539d1aa7c0c00"
+}

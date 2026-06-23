@@ -277,18 +277,57 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "reviewed_manual_records": [
     {
       "title": "Bike Rentals",
       "slug": "bike-rentals",
-      "warnings": ["schedule:missing_source_span"],
+      "category": "rental",
+      "schedule_text": "Daily from 10:00am–6:30pm",
+      "start_time": "10:00am",
+      "end_time": "6:30pm",
+      "location": "Hank’s Rent ‘N Return at Community Hall",
+      "description": "Choose from individual bikes to two-or four-person surrey bikes for a fun family outing!",
+      "is_fee_based": true,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR missed the visual Bike Rentals hours."
+      },
       "required_spans": {
-        "title": [{ "page": 1, "line": 66, "text": "BIKE RENTALS ($)" }],
+        "title": [{ "page": 1, "line": 66, "text": "BIKE RENTALS ($)", "bbox": [160.0, 1815.0, 536.0, 1846.5] }],
+        "location": [
+          {
+            "page": 1,
+            "line": 68,
+            "text": "Hank’s Rent ‘N Return at Community Hall",
+            "bbox": [159.0, 1857.5, 669.0, 1879.0]
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": null,
+            "text": "Daily from 10:00am–6:30pm",
+            "bbox": [159.0, 1890.0, 650.0, 1912.0],
+            "source": "manual_visual_bbox"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 71, "text": "Choose from individual bikes to two-or four-person" },
-          { "page": 1, "line": 74, "text": "surrey bikes for a fun family outing!" }
+          {
+            "page": 1,
+            "line": 71,
+            "text": "Choose from individual bikes to two-or four-person",
+            "bbox": [158.0, 1923.0, 770.5, 1950.5]
+          },
+          {
+            "page": 1,
+            "line": 74,
+            "text": "surrey bikes for a fun family outing!",
+            "bbox": [158.0, 1957.0, 581.5, 1984.5]
+          }
         ]
       }
     }
-  ]
+  ],
+  "expected_quarantine_records": []
 }

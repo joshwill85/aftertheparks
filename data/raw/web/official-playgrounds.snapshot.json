@@ -1,0 +1,113 @@
+{
+  "source_kind": "official_recreation_detail",
+  "source_url": "https://disneyworld.disney.go.com/recreation/playgrounds/",
+  "captured_at": "2026-06-23T00:50:32.700024+00:00",
+  "raw_html_sha256": "5ca9802ab1d1ca45d2662a0c9b305d3f5d397b13f66d39cee67577f18810d490",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Playgrounds at Disney World | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Playgrounds"
+    },
+    {
+      "line": 3,
+      "text": "MultipleWalt Disney World® Resortlocations"
+    },
+    {
+      "line": 4,
+      "text": "Let your little ones burn off their excess energy at fun playgrounds designed with them in mind."
+    },
+    {
+      "line": 5,
+      "text": "All Ages"
+    },
+    {
+      "line": 6,
+      "text": "The Play's the Thing"
+    },
+    {
+      "line": 7,
+      "text": "Kids 2 to 12 years of age will love Walt Disney World Resort playgrounds, adjacent to many Resort hotels."
+    },
+    {
+      "line": 8,
+      "text": "Watch them run free in immersive environments featuring soft and textured surfaces, swings, tunnels and slides designed for interaction."
+    },
+    {
+      "line": 9,
+      "text": "Walt Disney World Resort playgrounds can be found at the following locations (please note that adult supervision is required):"
+    },
+    {
+      "line": 10,
+      "text": "Disney's All-Star Movies Resort"
+    },
+    {
+      "line": 11,
+      "text": "Disney's All-Star Music Resort"
+    },
+    {
+      "line": 12,
+      "text": "Disney's All-Star Sports Resort"
+    },
+    {
+      "line": 13,
+      "text": "Disney's Animal Kingdom Lodge"
+    },
+    {
+      "line": 14,
+      "text": "Disney's Animal Kingdom Villas - Jambo House"
+    },
+    {
+      "line": 15,
+      "text": "Disney's Art of Animation Resort"
+    },
+    {
+      "line": 16,
+      "text": "Disney's BoardWalk Inn"
+    },
+    {
+      "line": 17,
+      "text": "Disney's BoardWalk Villas"
+    },
+    {
+      "line": 18,
+      "text": "Disney's Caribbean Beach Resort"
+    },
+    {
+      "line": 19,
+      "text": "Disney's Coronado Springs Resort"
+    },
+    {
+      "line": 20,
+      "text": "Disney's Fort Wilderness Resort & Campground"
+    },
+    {
+      "line": 21,
+      "text": "Disney's Old Key West Resort"
+    },
+    {
+      "line": 22,
+      "text": "Disney's Pop Century Resort"
+    },
+    {
+      "line": 23,
+      "text": "Disney's Port Orleans Resort – French Quarter"
+    },
+    {
+      "line": 24,
+      "text": "Disney's Port Orleans Resort – Riverside"
+    },
+    {
+      "line": 25,
+      "text": "Disney's Saratoga Springs Resort & Spa"
+    },
+    {
+      "line": 26,
+      "text": "Walt Disney World Dolphin Hotel"
+    }
+  ],
+  "content_sha256": "88649d69c90488dc88473490881efb568240fb348b78320395f014989929f23b"
+}

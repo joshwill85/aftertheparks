@@ -18,7 +18,7 @@ export function HomeHero({ resorts = [] }: HomeHeroProps) {
           <h1 className="display">Find the magic between park days.</h1>
           <p className="hero-copy">
             Discover resort activities, movies, campfires, crafts, poolside fun, and
-            free moments happening during your stay.
+            other current recreation-calendar moments during your stay.
           </p>
           <QuickFinder resorts={resorts} />
         </div>

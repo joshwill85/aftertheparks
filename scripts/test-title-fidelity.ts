@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import {
   getDisplayTitle,
@@ -61,6 +62,18 @@ assert.equal(
   canonicalActivitySlug("wellnessscav-engerhunt"),
   "wellness-scavenger-hunt",
   "redirects the broken historical Wellness URL to the canonical slug"
+);
+
+const middleware = readFileSync("middleware.ts", "utf8");
+assert.match(
+  middleware,
+  /canonicalActivitySlug/,
+  "middleware must redirect broken historical activity page slugs before page rendering"
+);
+assert.match(
+  middleware,
+  /\/activities\/\$\{canonicalSlug\}/,
+  "middleware must send legacy activity page slugs to the canonical activity URL"
 );
 
 assert.ok(

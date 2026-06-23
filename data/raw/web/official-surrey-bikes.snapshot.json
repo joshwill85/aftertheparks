@@ -1,0 +1,77 @@
+{
+  "source_kind": "official_recreation_detail",
+  "source_url": "https://disneyworld.disney.go.com/recreation/surrey-bikes/",
+  "captured_at": "2026-06-23T00:50:20.577532+00:00",
+  "raw_html_sha256": "60a650ecd658200ba8bf6e76fb52e78fbb735c040eac40eccbb7d879a6442841",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Surrey Bikes | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Surrey Bikes"
+    },
+    {
+      "line": 3,
+      "text": "MultipleWalt Disney World® Resortlocations"
+    },
+    {
+      "line": 4,
+      "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
+    },
+    {
+      "line": 5,
+      "text": "All Ages"
+    },
+    {
+      "line": 6,
+      "text": "Surrey Bikes"
+    },
+    {
+      "line": 7,
+      "text": "Choose a 2- or 4-person Surrey bike for an outing that's fun for the whole family!"
+    },
+    {
+      "line": 8,
+      "text": "Don’t miss your chance to cruise along the banks of the Sassagoula River, pedal down the promenade by Barefoot Bay, or wheel around a woodland trail. Rental locations include:"
+    },
+    {
+      "line": 9,
+      "text": "Disney’s BoardWalk Inn"
+    },
+    {
+      "line": 10,
+      "text": "Disney's BoardWalk Villas"
+    },
+    {
+      "line": 11,
+      "text": "Disney’s Old Key West Resort"
+    },
+    {
+      "line": 12,
+      "text": "Disney's Port Orleans Resort - French Quarter"
+    },
+    {
+      "line": 13,
+      "text": "Disney’s Port Orleans Resort - Riverside"
+    },
+    {
+      "line": 14,
+      "text": "Disney's Saratoga Springs Resort"
+    },
+    {
+      "line": 15,
+      "text": "Related Activities"
+    },
+    {
+      "line": 16,
+      "text": "Bicycles"
+    },
+    {
+      "line": 17,
+      "text": "Coast down tree-lined pathways and promenades. Both adult and children's bikes are available!"
+    }
+  ],
+  "content_sha256": "96a0be2ed166f87637a5514fae0164910fceaee3d00586a8965b51ff37f2b7d3"
+}

@@ -214,36 +214,10 @@ function stripPdfGarbage(text: string): string {
   return cleaned;
 }
 
-function buildFallbackSummary(activity: ActivityDisplayInput): string {
-  const title = getDisplayTitle(activity);
-  const location = resolveLocation(activity.location);
-  const resort = activity.resort?.name?.trim();
-  const where = location && location !== "Resort" ? ` at ${location}` : "";
-  const resortBit = resort ? ` near ${resort}` : "";
-
-  const categoryHints: Record<string, string> = {
-    campfire:
-      "A low-key evening stop with warm lights, fresh air, and an easy family pace.",
-    movies_under_stars:
-      "Spread out on the lawn for an outdoor movie as the resort quiets down.",
-    poolside:
-      "A relaxed poolside moment — grab a lounger, cool off, and let the afternoon drift by.",
-    arts_crafts:
-      "A creative session — perfect for kids and families looking for a low-key afternoon.",
-    arcade: "Games and arcade fun when you want something playful indoors.",
-    fitness_wellness:
-      "A wellness activity to stretch, move, or reset between park days.",
-  };
-
-  const hint =
-    categoryHints[activity.category] ??
-    `${title}${where} — check the resort schedule for the latest times.`;
-
-  return `${hint}${resortBit ? "" : ""}`.trim();
-}
-
 /** Human-readable summary with PDF garbage stripped. */
-export function getDisplaySummary(activity: ActivityDisplayInput): string {
+export function getDisplaySummary(
+  activity: ActivityDisplayInput
+): string | undefined {
   const enriched =
     activity.summary_original?.trim() ??
     activity.summary?.trim() ??
@@ -259,7 +233,7 @@ export function getDisplaySummary(activity: ActivityDisplayInput): string {
     if (cleaned) return cleaned;
   }
 
-  return buildFallbackSummary(activity);
+  return undefined;
 }
 
 function parseHourFromIso(iso?: string): number | null {
@@ -286,7 +260,7 @@ function isSuspiciousAllDayBlock(
 
 /** Display time label; marks suspicious all-day parser defaults as uncertain. */
 export function getDisplayTime(activity: ActivityDisplayInput): {
-  label: string;
+  label?: string;
   uncertain: boolean;
 } {
   const scheduleText = getScheduleText(activity);
@@ -323,10 +297,16 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
       scheduleText.length > 80
         ? `${scheduleText.slice(0, 77)}…`
         : scheduleText;
+    if (!activity.startDateTime) {
+      return { label: undefined, uncertain: false };
+    }
     return { label, uncertain: false };
   }
 
   if (scheduleText && isUncertainSchedule(scheduleText)) {
+    if (!activity.startDateTime) {
+      return { label: undefined, uncertain: false };
+    }
     return { label: "Time needs confirmation", uncertain: true };
   }
 
@@ -348,10 +328,10 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
   }
 
   if (scheduleText) {
-    return { label: "Time needs confirmation", uncertain: true };
+    return { label: undefined, uncertain: false };
   }
 
-  return { label: "Time needs confirmation", uncertain: true };
+  return { label: undefined, uncertain: false };
 }
 
 export function getTrustState(activity: ActivityDisplayInput): TrustState {

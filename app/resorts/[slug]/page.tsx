@@ -209,10 +209,10 @@ export default async function ResortDetailPage({
           {freeActivities.length > 0 && (
             <section className="mb-10">
               <ResortSectionHeader
-                title="Free activities"
-                description="Included with your resort stay — no extra ticket needed."
+                title="Source-confirmed no-cost activities"
+                description="Activities whose current source explicitly supports a no-cost label."
                 href={`/activities?resort=${resort.slug}&free=true`}
-                linkLabel="View all free"
+                linkLabel="View no-cost"
               />
               <ActivityGrid
                 activities={freeActivities.slice(0, 6)}
@@ -227,7 +227,7 @@ export default async function ResortDetailPage({
           />
 
           {uniqueOfferings.length > 0 && (
-            <section className="mb-10">
+            <section id="official-offerings" className="mb-10 scroll-mt-24">
               <ResortSectionHeader
                 title="Available at this resort"
                 description="Official Disney recreation offerings that are not tied to a dated calendar time."

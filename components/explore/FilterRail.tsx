@@ -49,7 +49,6 @@ export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProp
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
-  const freeOnly = searchParams.get("free") === "true";
 
   const clearAll = () => router.push(basePath);
 
@@ -84,11 +83,10 @@ export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProp
         activeResort={activeResort}
         activeCategory={activeCategory}
         activeDaypart={activeDaypart}
-        freeOnly={freeOnly}
         update={update}
       />
 
-      {(activeResort || activeCategory || activeDaypart || freeOnly) && (
+      {(activeResort || activeCategory || activeDaypart) && (
         <button
           type="button"
           onClick={clearAll}
@@ -106,7 +104,6 @@ export function FilterFields({
   activeResort,
   activeCategory,
   activeDaypart,
-  freeOnly,
   update,
   searchableResorts = false,
 }: {
@@ -114,7 +111,6 @@ export function FilterFields({
   activeResort: string | null;
   activeCategory: string | null;
   activeDaypart: string | null;
-  freeOnly: boolean;
   update: (key: string, value: string | null) => void;
   searchableResorts?: boolean;
 }) {
@@ -235,17 +231,6 @@ export function FilterFields({
           ))}
         </select>
       </label>
-
-      <button
-        type="button"
-        onClick={() => update("free", freeOnly ? null : "true")}
-        className={cn(
-          "filter-pill w-full",
-          freeOnly && "filter-pill--active"
-        )}
-      >
-        {freeOnly ? "✓ Free only" : "Free only"}
-      </button>
     </div>
   );
 }

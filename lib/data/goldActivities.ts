@@ -124,6 +124,13 @@ function scheduleTime(row: GoldActivityRow, field: "start_time" | "end_time"): s
   return normalizeTime(matches[1][1]);
 }
 
+function untimedEveningDisplayStart(row: GoldActivityRow): string | null {
+  if (row.trust_state !== "confirm_before_going") return null;
+  if (!["movies_under_stars", "campfire"].includes(row.category)) return null;
+  if (!/\bnightly\b|\bdaily\b/i.test(row.schedule?.text ?? "")) return null;
+  return "20:30:00";
+}
+
 function normalizeClaims(
   claims: GoldActivityRow["claims"]
 ): Record<string, ActivityClaim> {
@@ -138,21 +145,40 @@ function normalizeClaims(
   return claims;
 }
 
+function hasClaimEvidence(claim?: ActivityClaim): boolean {
+  return Array.isArray(claim?.evidence) && claim.evidence.length > 0;
+}
+
 function priceFromRow(row: GoldActivityRow): ActivityOccurrence["price"] {
   const explicit = row.price?.state;
+  const fee = normalizeClaims(row.claims).fee;
+  const hasFeeEvidence = hasClaimEvidence(fee);
+  const normalizedOptions = normalizePriceOptions(row.price?.options);
+  const priceDetails = {
+    notes: row.price?.notes,
+    amountCents: row.price?.amountCents,
+    minAmountCents: row.price?.minAmountCents,
+    maxAmountCents: row.price?.maxAmountCents,
+    options: normalizedOptions,
+  };
+
   if (explicit) {
+    if (explicit === "fee" && fee?.value === "fee" && hasFeeEvidence) {
+      return { state: "fee", ...priceDetails };
+    }
+    if (explicit === "free" && fee?.value === "free" && hasFeeEvidence) {
+      return { state: "free", ...priceDetails };
+    }
+    if (explicit === "unknown") {
+      return { state: "unknown", ...priceDetails };
+    }
     return {
-      state: explicit,
-      notes: row.price?.notes,
-      amountCents: row.price?.amountCents,
-      minAmountCents: row.price?.minAmountCents,
-      maxAmountCents: row.price?.maxAmountCents,
-      options: normalizePriceOptions(row.price?.options),
+      state: "unknown",
+      ...priceDetails,
     };
   }
 
-  const fee = normalizeClaims(row.claims).fee;
-  if (fee?.value === "free" || fee?.value === "fee") {
+  if ((fee?.value === "free" || fee?.value === "fee") && hasFeeEvidence) {
     return { state: fee.value };
   }
   return { state: "unknown" };
@@ -267,16 +293,67 @@ export function mapGoldActivityRowToOccurrences(
   row: GoldActivityRow,
   options: MapOptions = {}
 ): ActivityOccurrence[] {
-  const startTime = scheduleTime(row, "start_time");
-  if (!startTime) return [];
-
-  const endTime = scheduleTime(row, "end_time");
+  const startTime = scheduleTime(row, "start_time") ?? untimedEveningDisplayStart(row);
   const resortSlugs =
     row.resort_slugs && row.resort_slugs.length > 0
       ? row.resort_slugs
       : [row.calendar_group_key];
   const enrichment = enrichmentFromRow(row);
   const externalFacts = externalFactsFromRow(row);
+  const common = {
+    activitySlug: row.canonical_slug,
+    activityCatalogId: row.activity_catalog_id,
+    title: row.title,
+    summary: row.description ?? "",
+    category: row.category,
+    section: row.section ?? "Resort Activities",
+    price: priceFromRow(row),
+    location: {
+      label: row.location.label ?? row.location.value ?? "Location unavailable",
+    },
+    eligibility: {
+      ages: enrichment?.ageMinimum
+        ? [`${enrichment.ageMinimum}_plus`]
+        : ["all_ages"],
+      reservation:
+        enrichment?.reservationRequired != null
+          ? { required: enrichment.reservationRequired }
+          : undefined,
+    },
+    freshness: {
+      lastVerified: new Date().toISOString(),
+      sourceUrl: sourceUrl(row),
+      badge: "verified" as const,
+    },
+    source: {
+      url: sourceUrl(row),
+      documentHash: sourceHash(row),
+      documentId: row.source_document_id ?? row.source?.documentId ?? undefined,
+      edition: row.source_pdf_edition ?? row.source?.edition ?? undefined,
+      documentKeyLegends: row.source?.documentKeyLegends ?? undefined,
+    },
+    fieldProvenance: row.field_provenance ?? undefined,
+    claims: normalizeClaims(row.claims),
+    enrichment,
+    externalFacts,
+    validFrom: row.valid_from ?? undefined,
+    validUntil: row.valid_until ?? undefined,
+    trustState: row.trust_state ?? "source_backed",
+    status: "active" as const,
+    scheduleText: row.schedule.text ?? undefined,
+  };
+
+  if (!startTime) {
+    return resortSlugs.map((resortSlug) => ({
+      ...common,
+      id: `${row.id ?? row.activity_catalog_id}:${resortSlug}:untimed`,
+      resort: resortForSlug(resortSlug, options.resortMeta),
+      daypart: "anytime",
+      isHappeningNow: false,
+    }));
+  }
+
+  const endTime = scheduleTime(row, "end_time");
   const dateRangeDays = options.dateRangeDays ?? 7;
   const baseDateStr = orlandoDateString(options.referenceDate ?? new Date());
   const occurrences: ActivityOccurrence[] = [];
@@ -290,51 +367,12 @@ export function mapGoldActivityRowToOccurrences(
 
     for (const resortSlug of resortSlugs) {
       occurrences.push({
+        ...common,
         id: `${row.id ?? row.activity_catalog_id}:${resortSlug}:${dateStr}`,
-        activitySlug: row.canonical_slug,
-        activityCatalogId: row.activity_catalog_id,
         resort: resortForSlug(resortSlug, options.resortMeta),
-        title: row.title,
-        summary: row.description ?? "",
-        category: row.category,
-        section: row.section ?? "Resort Activities",
         startDateTime: startIso,
         endDateTime: endIso,
         daypart: daypartFromHour(Number(startTime.slice(0, 2))),
-        price: priceFromRow(row),
-        location: {
-          label: row.location.label ?? row.location.value ?? "Location unavailable",
-        },
-        eligibility: {
-          ages: enrichment?.ageMinimum
-            ? [`${enrichment.ageMinimum}_plus`]
-            : ["all_ages"],
-          reservation:
-            enrichment?.reservationRequired != null
-              ? { required: enrichment.reservationRequired }
-              : undefined,
-        },
-        freshness: {
-          lastVerified: new Date().toISOString(),
-          sourceUrl: sourceUrl(row),
-          badge: "verified",
-        },
-        source: {
-          url: sourceUrl(row),
-          documentHash: sourceHash(row),
-          documentId: row.source_document_id ?? row.source?.documentId ?? undefined,
-          edition: row.source_pdf_edition ?? row.source?.edition ?? undefined,
-          documentKeyLegends: row.source?.documentKeyLegends ?? undefined,
-        },
-        fieldProvenance: row.field_provenance ?? undefined,
-        claims: normalizeClaims(row.claims),
-        enrichment,
-        externalFacts,
-        validFrom: row.valid_from ?? undefined,
-        validUntil: row.valid_until ?? undefined,
-        trustState: row.trust_state ?? "source_backed",
-        status: "active",
-        scheduleText: row.schedule.text ?? undefined,
       });
     }
   }

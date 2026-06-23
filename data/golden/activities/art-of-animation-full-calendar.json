@@ -295,16 +295,21 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "expected_unextractable_records": [
     {
       "title": "Nighttime Pool Party",
       "slug": "nighttime-pool-party",
-      "warnings": [
-        "schedule:missing_source_span",
-        "location:missing_source_span"
-      ],
+      "reason": "The rendered PDF shows the activity title, but no source-visible location, schedule, or description is present before the Movie Under the Stars section. Do not publish without an authoritative source for the missing fields.",
       "required_spans": {
-        "title": [{ "page": 1, "line": 54, "text": "NIGHTTIME POOL PARTY" }]
+        "title": [
+          {
+            "page": 1,
+            "bbox": [435, 2550, 2060, 2645],
+            "text": "NIGHTTIME POOL PARTY",
+            "source": "manual_visual_bbox"
+          }
+        ]
       }
     }
   ]

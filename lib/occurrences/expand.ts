@@ -59,7 +59,7 @@ function displayInputFromRow(
     price: {
       state:
         (enrichment?.price_state as "free" | "fee" | "unknown") ??
-        (row.is_fee_based ? "fee" : row.fee_amount_cents ? "fee" : "free"),
+        (row.is_fee_based ? "fee" : row.fee_amount_cents ? "fee" : "unknown"),
     },
     freshness: {
       lastVerified:
@@ -90,7 +90,7 @@ function mapPrice(
 ): ActivityOccurrence["price"] {
   const state =
     enrichment?.price_state ??
-    (row.is_fee_based ? "fee" : row.fee_amount_cents ? "fee" : "free");
+    (row.is_fee_based ? "fee" : row.fee_amount_cents ? "fee" : "unknown");
   return {
     state: state as ActivityOccurrence["price"]["state"],
     notes: enrichment?.price_notes ?? undefined,
@@ -328,7 +328,7 @@ function buildOccurrence(
       area: resortMeta.area,
     },
     title: getDisplayTitle(displayInput),
-    summary: getDisplaySummary(displayInput),
+    summary: getDisplaySummary(displayInput) ?? "",
     category: row.category,
     section: row.section,
     startDateTime: startIso,
@@ -388,6 +388,7 @@ export function filterToday(
 
   return occurrences
     .filter((o) => {
+      if (!o.startDateTime) return false;
       if (!isSameOrlandoDay(o.startDateTime, todayStr)) return false;
       const start = new Date(o.startDateTime);
       const end = o.endDateTime
@@ -398,7 +399,7 @@ export function filterToday(
     })
     .sort(
       (a, b) =>
-        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
+        new Date(a.startDateTime ?? 0).getTime() - new Date(b.startDateTime ?? 0).getTime()
     );
 }
 
@@ -412,6 +413,7 @@ export function filterTonight(
 
   return occurrences
     .filter((o) => {
+      if (!o.startDateTime) return false;
       if (!isSameOrlandoDay(o.startDateTime, todayStr)) return false;
       const start = new Date(o.startDateTime);
       const isEvening =
@@ -424,7 +426,7 @@ export function filterTonight(
     })
     .sort(
       (a, b) =>
-        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
+        new Date(a.startDateTime ?? 0).getTime() - new Date(b.startDateTime ?? 0).getTime()
     );
 }
 
@@ -435,6 +437,7 @@ export function filterHappeningNow(
   const todayStr = orlandoDateString(now);
   return occurrences.filter((o) => {
     if (!o.isHappeningNow) return false;
+    if (!o.startDateTime) return false;
     if (!isSameOrlandoDay(o.startDateTime, todayStr)) return false;
     const time = getDisplayTime({
       category: o.category,

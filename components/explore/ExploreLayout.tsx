@@ -6,20 +6,26 @@ import { MOOD_CHIPS } from "@/lib/categories/meta";
 import { isMoodChipActive } from "@/lib/ui/moodChipActive";
 import { cn } from "@/lib/utils";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
+import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { FilterRail } from "@/components/explore/FilterRail";
 import { FilterSheet } from "@/components/explore/FilterSheet";
 import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
 import { ResultSummary } from "@/components/explore/ResultSummary";
-import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type { ActivityOffering, ActivityOccurrence } from "@/lib/types/occurrence";
 import { usePathname, useSearchParams } from "next/navigation";
 
 interface ExploreLayoutProps {
   activities: ActivityOccurrence[];
+  officialOfferings: ActivityOffering[];
   resorts: { slug: string; name: string }[];
 }
 
-export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
+export function ExploreLayout({
+  activities,
+  officialOfferings,
+  resorts,
+}: ExploreLayoutProps) {
   const { items, addActivity } = usePlan();
   const [sheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
@@ -29,7 +35,6 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
     searchParams.get("resort"),
     searchParams.get("category"),
     searchParams.get("daypart"),
-    searchParams.get("free") === "true",
     searchParams.get("q"),
   ].filter(Boolean).length;
 
@@ -48,9 +53,6 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
           {/* Mobile sticky controls */}
           <div className="explore-controls sticky top-[64px] z-40 -mx-4 border-b border-[var(--color-card-border)] bg-[var(--color-sun-cream)]/92 px-4 py-3 backdrop-blur-[18px] min-[900px]:static min-[900px]:mx-0 min-[900px]:border-0 min-[900px]:bg-transparent min-[900px]:p-0 min-[900px]:backdrop-blur-none">
             <ExploreSearchBar />
-            <Link href="/search" className="explore-search__global-link">
-              Search everything →
-            </Link>
             <Link href="/search" className="explore-search__global-link">
               Search everything →
             </Link>
@@ -92,9 +94,38 @@ export function ExploreLayout({ activities, resorts }: ExploreLayoutProps) {
             </div>
 
             <div className="mt-3 min-[900px]:mt-0">
-              <ResultSummary count={activities.length} compact />
+              <ResultSummary
+                count={activities.length + officialOfferings.length}
+                compact
+              />
             </div>
           </div>
+
+          {officialOfferings.length > 0 && (
+            <section
+              id="official-offerings"
+              className="space-y-4 scroll-mt-24"
+              aria-labelledby="official-offerings-heading"
+            >
+              <div>
+                <h2
+                  id="official-offerings-heading"
+                  className="font-display text-2xl font-semibold"
+                >
+                  Official recreation offerings
+                </h2>
+                <p className="mt-1 text-sm text-[var(--color-muted)]">
+                  Source-backed Disney recreation listings that are not tied to
+                  a dated calendar time.
+                </p>
+              </div>
+              <ActivityOfferingGrid
+                offerings={officialOfferings}
+                showResort
+                emptyMessage="No official recreation offerings match your filters."
+              />
+            </section>
+          )}
 
           <div id="activities" className="results-grid scroll-mt-24">
             <ActivityGrid

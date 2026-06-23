@@ -1,6 +1,5 @@
 export const HOME_MOOD_CHIPS = [
   { id: "tonight", label: "Tonight", href: "/tonight" },
-  { id: "free", label: "Free", href: "/activities?free=true" },
   { id: "little_kids", label: "Little kids", href: "/activities?category=arts_crafts" },
   { id: "rainy", label: "Rain-friendly", href: "/activities?category=arcade" },
   { id: "pool_break", label: "Pool break", href: "/activities?category=poolside" },

@@ -1,0 +1,53 @@
+{
+  "source_kind": "official_recreation_detail",
+  "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+  "captured_at": "2026-06-23T01:52:19.068534+00:00",
+  "raw_html_sha256": "8e98eb0aecb9a1602407b23ad161bff0ec2d92a5c5b0d7d20a0402e3a21e24c1",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Movies Under The Stars | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Movies Under the Stars"
+    },
+    {
+      "line": 3,
+      "text": "Presented by M&M’S®"
+    },
+    {
+      "line": 4,
+      "text": "MultipleWalt Disney World® Resortlocations"
+    },
+    {
+      "line": 5,
+      "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air."
+    },
+    {
+      "line": 6,
+      "text": "All Ages"
+    },
+    {
+      "line": 7,
+      "text": "See the Stars, Under the Stars!"
+    },
+    {
+      "line": 8,
+      "text": "Complimentary movie screenings are available to Guests of Walt Disney World Resort hotels."
+    },
+    {
+      "line": 9,
+      "text": "Whether you're sitting poolside or surrounded by Floridian woodlands, enjoy relaxing evening entertainment that’s fun for the whole family!"
+    },
+    {
+      "line": 10,
+      "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call"
+    },
+    {
+      "line": 11,
+      "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice."
+    }
+  ],
+  "content_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+}

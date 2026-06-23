@@ -9,9 +9,10 @@
 ## Tasks
 
 - [x] Add failing extraction contract tests for multi-resort detail pages, per-resort variants, resort-filtered page joins, and unresolved join quarantine.
+- [x] Prefer downstream official detail/resort-page rows over parent-index duplicates for the same program and resort, and audit downstream resort pairs separately from parent index pairs.
 - [x] Add failing mapping tests proving offerings do not require `startDateTime` and do not infer unsupported access claims.
 - [x] Add a Supabase migration for normalized official recreation programs, resort offerings, quarantine, RLS, grants, and a public view.
 - [x] Implement the official recreation offering extractor with source-backed resort alias resolution and quarantine gates.
 - [x] Implement a publisher that upserts programs, offerings, and quarantine records from deterministic web snapshots.
 - [x] Add a TypeScript data mapper for official offerings and wire resort/detail consumers to load them separately from timed occurrences.
-- [ ] Run focused tests, then the repository contract validation suite as far as feasible.
+- [x] Run focused tests, then the repository contract validation suite as far as feasible.

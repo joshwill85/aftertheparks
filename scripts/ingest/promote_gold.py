@@ -140,6 +140,11 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
         if source and source.pdf_url
         else candidate_source_url or (source.recreation_page_url if source else "")
     )
+    trust_state = (
+        "confirm_before_going"
+        if public_record["schedule"].get("start_time") is None
+        else "source_backed"
+    )
     return {
         "candidate_id": candidate["candidate_id"],
         "activity_catalog_id": _activity_catalog_id(
@@ -174,7 +179,7 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
             "edition": source.pdf_edition if source else None,
             "documentKeyLegends": normalized.get("document_key_legends", []),
         },
-        "trust_state": "source_backed",
+        "trust_state": trust_state,
     }
 
 

@@ -56,6 +56,18 @@ def _catalog_row(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _catalog_row_with_id(row: dict[str, Any], catalog_id: str) -> dict[str, Any]:
+    catalog_row = _catalog_row(row)
+    catalog_row["id"] = catalog_id
+    return catalog_row
+
+
+def _row_with_catalog_id(row: dict[str, Any], catalog_id: str) -> dict[str, Any]:
+    copy = dict(row)
+    copy["activity_catalog_id"] = catalog_id
+    return copy
+
+
 def _public_gold_row(row: dict[str, Any], source_document_id: str) -> dict[str, Any]:
     return {
         "id": _stable_uuid(f"gold:{row['calendar_group_key']}:{row['canonical_slug']}"),
@@ -100,6 +112,29 @@ def _source_document_id(db: Any, row: dict[str, Any]) -> str:
     return str(inserted[0]["id"])
 
 
+def _existing_catalog_id(db: Any, row: dict[str, Any]) -> str | None:
+    existing = db.select(
+        "activity_catalog",
+        columns="id",
+        filters={
+            "calendar_group_key": f"eq.{row['calendar_group_key']}",
+            "normalized_name": f"eq.{row['canonical_slug']}",
+        },
+        limit=1,
+    )
+    if existing and existing[0].get("id"):
+        return str(existing[0]["id"])
+    return None
+
+
+def _activity_catalog_id(db: Any, row: dict[str, Any], cache: dict[tuple[str, str], str]) -> str:
+    key = (row["calendar_group_key"], row["canonical_slug"])
+    if key in cache:
+        return cache[key]
+    cache[key] = _existing_catalog_id(db, row) or row["activity_catalog_id"]
+    return cache[key]
+
+
 def _retire_missing_current_rows(db: Any, rows: list[dict[str, Any]]) -> int:
     expected_ids_by_key = {
         (row["calendar_group_key"], row["canonical_slug"]): _public_gold_row(
@@ -132,6 +167,7 @@ def publish_gold_rows(db: Any, rows: list[dict[str, Any]]) -> dict[str, int]:
 
     retired_count = _retire_missing_current_rows(db, rows)
     source_ids_by_hash: dict[str, str] = {}
+    catalog_ids_by_key: dict[tuple[str, str], str] = {}
     catalog_count = 0
     gold_count = 0
 
@@ -139,10 +175,12 @@ def publish_gold_rows(db: Any, rows: list[dict[str, Any]]) -> dict[str, int]:
         source_hash = row["source_sha256"]
         if source_hash not in source_ids_by_hash:
             source_ids_by_hash[source_hash] = _source_document_id(db, row)
+        catalog_id = _activity_catalog_id(db, row, catalog_ids_by_key)
+        row = _row_with_catalog_id(row, catalog_id)
 
         db.upsert(
             "activity_catalog",
-            _catalog_row(row),
+            _catalog_row_with_id(row, catalog_id),
             on_conflict="id",
         )
         catalog_count += 1

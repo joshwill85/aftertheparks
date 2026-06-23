@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const ACTIONS = [
   { label: "Browse tonight", href: "/tonight", variant: "primary" as const },
-  { label: "Find free activities", href: "/activities?free=true", variant: "secondary" as const },
+  { label: "Explore activities", href: "/activities", variant: "secondary" as const },
   { label: "Choose my resort", href: "/resorts", variant: "secondary" as const },
 ];
 

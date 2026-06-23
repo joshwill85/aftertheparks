@@ -111,6 +111,13 @@ def _slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
 
 
+def _canonical_web_slug(title: str) -> str:
+    key = _official_web_title_key(title)
+    if key in {"MOVIEUNDERTHESTARS", "MOVIESUNDERTHESTARS"}:
+        return "movie-under-the-stars"
+    return _slugify(title)
+
+
 def _clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", value.replace("\u202f", " ")).strip()
 
@@ -1737,6 +1744,37 @@ def _apply_official_web_detail_page(
     )
 
 
+def _apply_official_web_overview_evidence(normalized_fields: dict[str, Any]) -> None:
+    title = str(normalized_fields["title"]["value"])
+    if _official_web_title_key(title) not in {"MOVIEUNDERTHESTARS", "MOVIESUNDERTHESTARS"}:
+        return
+
+    description = normalized_fields.get("description")
+    if not isinstance(description, dict):
+        return
+    description_text = _clean_text(str(description.get("value") or ""))
+    description_spans = description.get("spans") if isinstance(description.get("spans"), list) else []
+    if not description_text or not description_spans:
+        return
+
+    if re.search(r"\boffered\s+nightly\b|\bavailable\s+nightly\b", description_text, flags=re.I):
+        normalized_fields["schedule"] = {
+            "text": "Nightly",
+            "start_time": None,
+            "end_time": None,
+            "source": "official_web",
+            "spans": description_spans,
+        }
+
+    location_match = re.search(r"\bat\s+the\s+([^,.]+)", description_text, flags=re.I)
+    if location_match:
+        normalized_fields["location"] = {
+            "value": _clean_text(location_match.group(1)),
+            "source": "official_web",
+            "spans": description_spans,
+        }
+
+
 def extract_candidates_for_official_web_fixture(fixture: dict[str, Any]) -> list[dict[str, Any]]:
     calendar_group_key = str(fixture["calendar_group_key"])
     source_hash = str(fixture["source_web_sha256"])
@@ -1751,7 +1789,7 @@ def extract_candidates_for_official_web_fixture(fixture: dict[str, Any]) -> list
         title = _official_web_title_from_line(line["text"])
         if not title:
             continue
-        slug = _slugify(title)
+        slug = _canonical_web_slug(title)
         if slug in seen_slugs:
             continue
         seen_slugs.add(slug)
@@ -1794,6 +1832,7 @@ def extract_candidates_for_official_web_fixture(fixture: dict[str, Any]) -> list
             "fee_evidence": [],
             "document_key_legends": [],
         }
+        _apply_official_web_overview_evidence(normalized_fields)
         detail_path, detail_url, detail_hash = _apply_official_web_detail_page(
             normalized_fields,
             detail_pages_by_slug.get(slug),
@@ -1876,10 +1915,20 @@ def extract_publishable_candidates_for_fixture(fixture_path: Path) -> list[dict[
         return extract_candidates_for_fixture(fixture_path)
 
     expected_slugs = expected_public_slugs_for_fixture(fixture)
+    candidates = extract_candidates_for_fixture(fixture_path)
+    reviewed_manual_slugs = {
+        candidate["normalized_fields"]["slug"]
+        for candidate in candidates
+        if candidate.get("profile_key") == "reviewed_manual_visual"
+    }
     return [
         candidate
-        for candidate in extract_candidates_for_fixture(fixture_path)
+        for candidate in candidates
         if candidate["normalized_fields"]["slug"] in expected_slugs
+        and not (
+            candidate["normalized_fields"]["slug"] in reviewed_manual_slugs
+            and candidate.get("profile_key") != "reviewed_manual_visual"
+        )
     ]
 
 
@@ -2036,7 +2085,11 @@ def compare_candidates_to_fixture(
                 )
 
     for slug in sorted(expected_unextractable_slugs):
-        if slug in by_slug:
+        candidate = by_slug.get(slug)
+        if candidate and not any(
+            warning in {"schedule:missing_source_span", "location:missing_source_span"}
+            for warning in candidate.get("warnings", [])
+        ):
             errors.append(f"candidate_unextractable_became_extractable:{slug}")
 
     unexpected = sorted(

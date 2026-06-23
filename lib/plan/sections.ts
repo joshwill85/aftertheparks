@@ -34,7 +34,7 @@ export const PLAN_SECTION_META: Record<
   dinner: { title: "Dinner hour", icon: "🍽️" },
   evening: { title: "Evening", icon: "🏮" },
   starlight: { title: "Starlight", icon: "🌙" },
-  unscheduled: { title: "Anytime", icon: "📋" },
+  unscheduled: { title: "Unscheduled", icon: "📋" },
 };
 
 export function planSectionFromHour(hour: number): PlanSectionKey {

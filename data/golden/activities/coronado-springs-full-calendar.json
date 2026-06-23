@@ -157,40 +157,22 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "expected_unextractable_records": [
     {
-      "title": "Spanish Mosaic Art",
-      "slug": "spanish-mosaic-art",
-      "category": "arts_crafts",
-      "schedule_text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm",
-      "start_time": "1:00pm",
-      "end_time": "3:00pm",
-      "location": "Dahlia Lounge",
-      "description": "a historic panis art as you y our own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Space is limited. To book, h Spanish Mosaic A h sca Pans",
-      "is_fee_based": true,
-      "warnings": ["description:text_quality_low"],
+      "title": "Resort Scavenger Hunt",
+      "slug": "resort-scavenger-hunt",
+      "reason": "The rendered PDF shows the title and pickup instructions only. No source-visible activity schedule or exact activity location is printed.",
       "required_spans": {
-        "title": [{ "page": 1, "line": 16, "text": "SPANISH MOSAIC ART ($)" }]
-      }
-    },
-    {
-      "title": "Colors Of Coronado Painting Experience",
-      "slug": "colors-of-coronado-painting-experience",
-      "category": "other",
-      "schedule_text": "Friday from 1:;00pm-3:00pm",
-      "start_time": "3:00pm",
-      "end_time": null,
-      "location": "",
-      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages I2 and up. Space is limited. To book, search Colors of Coronado Painting Experience on the My Disney Experience app.",
-      "is_fee_based": true,
-      "warnings": ["location:missing_source_span", "schedule:text_quality_low"],
-      "required_spans": {
-        "title": [
-          { "page": 1, "line": 48, "text": "COLORS OF CORONADO" },
-          { "page": 1, "line": 49, "text": "PAINTING EXPERIENCE ($)" }
+        "title": [{ "page": 1, "line": 106, "text": "RESORT SCAVENGER HUNT" }],
+        "description": [
+          { "page": 1, "line": 107, "text": "Pick up a Clue Guide from the Concierge Desk, Panchito’s Gift" },
+          { "page": 1, "line": 108, "text": "& Sundries, or any Recreation Cast Member to participate." }
         ]
       }
-    },
+    }
+  ],
+  "reviewed_manual_records": [
     {
       "title": "Arts & Crafts",
       "slug": "arts-crafts",
@@ -198,12 +180,40 @@
       "schedule_text": "The Dig Site from 3:30pm-4:30pm",
       "start_time": "3:30pm",
       "end_time": "4:30pm",
-      "location": "",
-      "description": "Sunday, Tuesday and Monday and",
+      "location": "The Dig Site",
+      "description": "Sunday, Tuesday and Thursday: Mickey Tie-Dye; Monday and Saturday: Sand Art; Wednesday: Seasonal Craft.",
       "is_fee_based": true,
-      "warnings": ["description:text_quality_low", "location:missing_source_span"],
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF crop because OCR merged the craft table rows and missed the location split from the schedule line."
+      },
       "required_spans": {
-        "title": [{ "page": 1, "line": 61, "text": "ARTS AND CRAFTS ($)" }]
+        "title": [{ "page": 1, "line": 61, "text": "ARTS AND CRAFTS ($)" }],
+        "location": [
+          {
+            "page": 1,
+            "bbox": [380, 2290, 1815, 2355],
+            "text": "The Dig Site from 3:30pm-4:30pm",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [380, 2290, 1815, 2355],
+            "text": "The Dig Site from 3:30pm-4:30pm",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "bbox": [380, 2375, 2640, 2545],
+            "text": "Sunday, Tuesday and Thursday: Mickey Tie-Dye; Monday and Saturday: Sand Art; Wednesday: Seasonal Craft.",
+            "source": "manual_visual_bbox"
+          }
+        ]
       }
     },
     {
@@ -213,27 +223,196 @@
       "schedule_text": "11:00am and 1:30pm",
       "start_time": "11:00am",
       "end_time": null,
-      "location": "",
+      "location": "Toledo - Tapas, Steak & Seafood",
       "description": "Discuss the history of sangria and learn the recipes used to make the 4 in-house varieties served at Three Bridges Bar and Grill. Enjoy a tasting and you'll even get to make your own glass! Advanced booking required through the My Disney Experience app by searching Sangria University.",
       "is_fee_based": true,
-      "warnings": ["location:missing_source_span", "schedule:text_quality_low"],
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF crop because OCR split the schedule across multiple lines and blended it with nearby arts-and-crafts text."
+      },
       "required_spans": {
-        "title": [{ "page": 1, "line": 62, "text": "SANGRIA UNIVERSITY ($)" }]
+        "title": [{ "page": 1, "line": 62, "text": "SANGRIA UNIVERSITY ($)" }],
+        "location": [
+          {
+            "page": 1,
+            "bbox": [425, 2660, 1450, 2730],
+            "text": "Toledo - Tapas, Steak & Seafood",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [425, 2745, 1405, 2895],
+            "text": "Saturday and Sunday at 11:00am and 1:30pm",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "bbox": [425, 2895, 2720, 3460],
+            "text": "Discuss the history of sangria and learn the recipes used to make the 4 in-house varieties served at Three Bridges Bar and Grill. Enjoy a tasting and you’ll even get to make your own glass! Advanced booking required through the My Disney Experience app by searching Sangria University.",
+            "source": "manual_visual_bbox"
+          }
+        ]
       }
     },
     {
-      "title": "Resort Scavenger Hunt",
-      "slug": "resort-scavenger-hunt",
-      "category": "scavenger_hunt",
-      "schedule_text": "",
-      "start_time": null,
-      "end_time": null,
-      "location": "",
-      "description": "Pick up a Clue Guide from the Concierge Desk, Panchito’s Gift & Sundries, or any Recreation Cast Member to participate.",
-      "is_fee_based": false,
-      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "title": "Colors Of Coronado Painting Experience",
+      "slug": "colors-of-coronado-painting-experience",
+      "category": "other",
+      "schedule_text": "Friday from 1:00pm-3:00pm",
+      "start_time": "1:00pm",
+      "end_time": "3:00pm",
+      "location": "Toledo - Tapas, Steak & Seafood",
+      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages 12 and up. Space is limited. To book, search Colors of Coronado Painting Experience on the My Disney Experience app.",
+      "is_fee_based": true,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF crop because OCR dropped the location and read 1:00pm / 12 as corrupted text."
+      },
       "required_spans": {
-        "title": [{ "page": 1, "line": 106, "text": "RESORT SCAVENGER HUNT" }]
+        "title": [
+          { "page": 1, "line": 48, "text": "COLORS OF CORONADO" },
+          { "page": 1, "line": 49, "text": "PAINTING EXPERIENCE ($)" }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "bbox": [910, 1378, 1410, 1420],
+            "text": "Toledo - Tapas, Steak & Seafood",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [910, 1425, 1445, 1470],
+            "text": "Friday from 1:00pm-3:00pm",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "description": [
+          { "page": 1, "line": 51, "text": "Get in touch with your inner artist during this master-led" },
+          { "page": 1, "line": 53, "text": "painting class. This experience is recommended for Guests ages" },
+          {
+            "page": 1,
+            "bbox": [910, 1515, 1605, 1565],
+            "text": "12 and up. Space is limited. To book, search Colors of Coronado",
+            "source": "manual_visual_bbox"
+          },
+          { "page": 1, "line": 56, "text": "Painting Experience on the My Disney Experience app." }
+        ]
+      }
+    },
+    {
+      "title": "Spanish Mosaic Art",
+      "slug": "spanish-mosaic-art",
+      "category": "arts_crafts",
+      "schedule_text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm",
+      "start_time": "1:00pm",
+      "end_time": "3:00pm",
+      "location": "Dahlia Lounge",
+      "description": "Immerse yourself in a historic Spanish art tradition as you design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Space is limited. To book, search Spanish Mosaic Art on the My Disney Experience app.",
+      "is_fee_based": true,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against the rendered PDF because OCR fragmented the description through the photo and contaminated the booking text."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 16,
+            "bbox": [908.5, 857.5, 1445.5, 889.0],
+            "text": "SPANISH MOSAIC ART ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "bbox": [909.0, 902.5, 1082.0, 924.0],
+            "text": "Dahlia Lounge"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 20,
+            "bbox": [909.0, 938.5, 1603.0, 960.0],
+            "text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 970.0, 1608.0, 998.0],
+            "text": "Immerse yourself in a historic",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1006.0, 1608.0, 1034.0],
+            "text": "Spanish art tradition as you",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1042.0, 1608.0, 1070.0],
+            "text": "design your own mosaic",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1078.0, 1608.0, 1106.0],
+            "text": "showpiece with a touch of",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1114.0, 1608.0, 1142.0],
+            "text": "Disney flair. This experience is",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1150.0, 1608.0, 1178.0],
+            "text": "recommended for Guests ages 12",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1186.0, 1608.0, 1214.0],
+            "text": "and up. Space is limited. To book,",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1222.0, 1608.0, 1250.0],
+            "text": "search Spanish Mosaic Art on the",
+            "source": "manual_visual_bbox"
+          },
+          {
+            "page": 1,
+            "line": null,
+            "bbox": [1225.0, 1258.0, 1608.0, 1286.0],
+            "text": "My Disney Experience app.",
+            "source": "manual_visual_bbox"
+          }
+        ]
       }
     }
   ]

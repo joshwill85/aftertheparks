@@ -13,11 +13,11 @@ interface ResultSummaryProps {
 
 const SORT_OPTIONS: { value: ActivitySortKey; label: string }[] = [
   { value: "time", label: "Happening soon" },
-  { value: "free", label: "Free first" },
   { value: "quality", label: "Recently verified" },
   { value: "resort", label: "By resort" },
   { value: "category", label: "By category" },
 ];
+const SORT_VALUES = new Set<ActivitySortKey>(SORT_OPTIONS.map((option) => option.value));
 
 export function ResultSummary({
   count,
@@ -30,18 +30,19 @@ export function ResultSummary({
     searchParams.get("resort"),
     searchParams.get("category"),
     searchParams.get("daypart"),
-    searchParams.get("free") === "true" ? "free" : null,
     searchParams.get("q"),
   ].filter(Boolean).length;
 
-  const currentSort = (searchParams.get("sort") as ActivitySortKey) || "time";
+  const requestedSort = searchParams.get("sort") as ActivitySortKey | null;
+  const currentSort =
+    requestedSort && SORT_VALUES.has(requestedSort) ? requestedSort : "time";
 
   const label =
     count === 0
-      ? "No activities found"
+      ? "No results found"
       : count === 1
-        ? "1 activity"
-        : `${count} activities`;
+        ? "1 result"
+        : `${count} results`;
 
   const handleSort = (value: ActivitySortKey) => {
     const params = new URLSearchParams(searchParams.toString());

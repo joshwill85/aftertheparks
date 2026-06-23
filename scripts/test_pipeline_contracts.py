@@ -15,6 +15,9 @@ from scripts.ingest.contracts import (
 )
 from scripts.ingest.web_snapshot import web_snapshot_content_hash
 from scripts.ingest.audit_coverage import build_coverage_audit
+from scripts.ingest.audit_official_recreation_coverage import (
+    build_official_recreation_coverage_audit,
+)
 from scripts.ingest.extract_v2 import (
     compare_candidates_to_fixture,
     extract_candidates_for_fixture,
@@ -27,6 +30,9 @@ from scripts.ingest.disney_recreation_offerings import (
     extract_official_recreation_offerings,
     resolve_official_resort_slugs,
 )
+from scripts.ingest.generate_official_recreation_offerings import (
+    generate_official_recreation_offerings,
+)
 from scripts.ingest.publish_official_offerings import publish_official_offering_rows
 from scripts.ingest.review_queue import (
     list_pending_reviews,
@@ -34,6 +40,7 @@ from scripts.ingest.review_queue import (
     record_review_decision,
 )
 from scripts.ingest.run_pipeline import validation_gate_steps
+from scripts.ingest.trust_report import build_trust_report, render_markdown_report
 from scripts.ingest.validate_v2 import validate_fixture_extractions, validate_fixture_paths
 
 
@@ -57,6 +64,7 @@ SARATOGA_SPRINGS_FULL_FIXTURE = Path("data/golden/activities/saratoga-springs-fu
 CONTEMPORARY_FULL_FIXTURE = Path("data/golden/activities/contemporary-full-calendar.json")
 WILDERNESS_LODGE_FULL_FIXTURE = Path("data/golden/activities/wilderness-lodge-full-calendar.json")
 FORT_WILDERNESS_WEB_FIXTURE = Path("data/golden/activities/fort-wilderness-official-recreation-page.json")
+FORT_WILDERNESS_CABINS_WEB_FIXTURE = Path("data/golden/activities/fort-wilderness-cabins-official-recreation-page.json")
 GOLD_PREVIEW_PATH = Path("data/processed/activity_gold_v2_preview.json")
 ACTIVITY_PIPELINE_V2_MIGRATION = Path("supabase/migrations/20260621125139_activity_pipeline_v2.sql")
 MRG_FACTS_MIGRATION = Path("supabase/migrations/20260622003816_magical_resort_guide_facts.sql")
@@ -355,11 +363,68 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
 
+    def test_old_key_west_visual_review_promotes_bike_rentals_hours(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(OLD_KEY_WEST_FULL_FIXTURE)
+        bike_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "bike-rentals"
+        ]
+
+        self.assertEqual(1, len(bike_candidates))
+        bike = bike_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Bike Rentals", bike["title"]["value"])
+        self.assertEqual("Hank’s Rent ‘N Return at Community Hall", bike["location"]["value"])
+        self.assertEqual("Daily from 10:00am–6:30pm", bike["schedule"]["text"])
+        self.assertEqual("10:00am", bike["schedule"]["start_time"])
+        self.assertEqual("6:30pm", bike["schedule"]["end_time"])
+        self.assertTrue(bike["is_fee_based"])
+
+        promotion = promote_candidates(bike_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Bike Rentals", promotion.gold_records[0]["title"])
+        self.assertEqual(
+            "Daily from 10:00am–6:30pm",
+            promotion.gold_records[0]["schedule"]["text"],
+        )
+
     def test_validate_v2_accepts_riviera_fixture_with_quarantine_and_reviewed_manual_record(self) -> None:
         report = validate_fixture_extractions([RIVIERA_FULL_FIXTURE])
 
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
+
+    def test_riviera_visual_review_promotes_painting_on_the_riviera_description(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(RIVIERA_FULL_FIXTURE)
+        painting_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "painting-on-the-riviera"
+        ]
+
+        self.assertEqual(1, len(painting_candidates))
+        painting = painting_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Painting On The Riviera", painting["title"]["value"])
+        self.assertEqual("The Eventi Room", painting["location"]["value"])
+        self.assertEqual("Thursday from 11:00am-1:00pm", painting["schedule"]["text"])
+        self.assertEqual("11:00am", painting["schedule"]["start_time"])
+        self.assertEqual("1:00pm", painting["schedule"]["end_time"])
+        self.assertEqual(
+            "Get in touch with your inner artist in this unique instructor-led painting class! "
+            "This experience is recommended for Guests ages 12 and up. To reserve your spot, "
+            "please call 407-WDW-PLAY or see a Recreation Cast Member inside The Eventi Room.",
+            painting["description"]["value"],
+        )
+        self.assertTrue(painting["is_fee_based"])
+
+        promotion = promote_candidates(painting_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Painting On The Riviera", promotion.gold_records[0]["title"])
+        self.assertIn("407-WDW-PLAY", promotion.gold_records[0]["description"])
 
     def test_validate_v2_accepts_pop_century_fixture_with_reviewed_repairs_and_manual_record(self) -> None:
         report = validate_fixture_extractions([POP_CENTURY_FULL_FIXTURE])
@@ -373,17 +438,156 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
 
+    def test_polynesian_visual_review_promotes_campfire_and_aloha_after_dark(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(POLYNESIAN_FULL_FIXTURE)
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+        self.assertEqual(
+            1,
+            sum(
+                1
+                for candidate in candidates
+                if candidate["normalized_fields"]["slug"] == "campfire"
+            ),
+        )
+        self.assertEqual(
+            1,
+            sum(
+                1
+                for candidate in candidates
+                if candidate["normalized_fields"]["slug"] == "aloha-after-dark"
+            ),
+        )
+
+        self.assertIn("campfire", by_slug)
+        self.assertIn("aloha-after-dark", by_slug)
+        campfire = by_slug["campfire"]["normalized_fields"]
+        aloha = by_slug["aloha-after-dark"]["normalized_fields"]
+
+        self.assertEqual("Seven Seas Lagoon Beach", campfire["location"]["value"])
+        self.assertEqual(
+            "Monday, Wednesday and Friday from 6:30pm-7:30pm",
+            campfire["schedule"]["text"],
+        )
+        self.assertEqual("7:30pm", campfire["schedule"]["end_time"])
+        self.assertEqual(
+            "Monday, Wednesday and Friday at 8:00pm",
+            aloha["schedule"]["text"],
+        )
+        self.assertEqual("8:00pm", aloha["schedule"]["start_time"])
+        self.assertEqual("Lava Pool Deck", aloha["location"]["value"])
+
+        promotion = promote_candidates([by_slug["campfire"], by_slug["aloha-after-dark"]])
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual(
+            {
+                "campfire": "Seven Seas Lagoon Beach",
+                "aloha-after-dark": "Lava Pool Deck",
+            },
+            {
+                row["canonical_slug"]: row["location"]["label"]
+                for row in promotion.gold_records
+            },
+        )
+
     def test_validate_v2_accepts_port_orleans_riverside_fixture_with_quarantines_and_reviewed_manual_records(self) -> None:
         report = validate_fixture_extractions([PORT_ORLEANS_RIVERSIDE_FULL_FIXTURE])
 
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
 
+    def test_port_orleans_riverside_visual_review_promotes_arts_crafts_table(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(PORT_ORLEANS_RIVERSIDE_FULL_FIXTURE)
+        arts_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "arts-crafts"
+        ]
+
+        self.assertEqual(1, len(arts_candidates))
+        arts = arts_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Arts & Crafts", arts["title"]["value"])
+        self.assertEqual("Ol’ Man Island Pool Deck", arts["location"]["value"])
+        self.assertEqual("From 12:30pm-1:30pm", arts["schedule"]["text"])
+        self.assertEqual("12:30pm", arts["schedule"]["start_time"])
+        self.assertEqual("1:30pm", arts["schedule"]["end_time"])
+        self.assertEqual(
+            "Tuesday: Seasonal Craft; Wednesday and Saturday: Make Your Own Slime",
+            arts["description"]["value"],
+        )
+        self.assertTrue(arts["is_fee_based"])
+
+        promotion = promote_candidates(arts_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Arts & Crafts", promotion.gold_records[0]["title"])
+        self.assertIn("Make Your Own Slime", promotion.gold_records[0]["description"])
+
+    def test_port_orleans_riverside_visual_review_promotes_medicine_show_arcade(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(PORT_ORLEANS_RIVERSIDE_FULL_FIXTURE)
+        arcade_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "medicine-show-arcade"
+        ]
+
+        self.assertEqual(1, len(arcade_candidates))
+        arcade = arcade_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Medicine Show Arcade", arcade["title"]["value"])
+        self.assertEqual("Medicine Show Arcade", arcade["location"]["value"])
+        self.assertEqual("Daily from 8:00am-11:00pm", arcade["schedule"]["text"])
+        self.assertEqual("8:00am", arcade["schedule"]["start_time"])
+        self.assertEqual("11:00pm", arcade["schedule"]["end_time"])
+        self.assertEqual(
+            "Play the latest and greatest family-friendly video games.",
+            arcade["description"]["value"],
+        )
+        self.assertTrue(arcade["is_fee_based"])
+
+        promotion = promote_candidates(arcade_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Medicine Show Arcade", promotion.gold_records[0]["title"])
+        self.assertEqual("fee", promotion.gold_records[0]["price"]["state"])
+
     def test_validate_v2_accepts_port_orleans_french_quarter_fixture_with_quarantines(self) -> None:
         report = validate_fixture_extractions([PORT_ORLEANS_FRENCH_QUARTER_FULL_FIXTURE])
 
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
+
+    def test_port_orleans_french_quarter_visual_review_promotes_arts_crafts_table(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(PORT_ORLEANS_FRENCH_QUARTER_FULL_FIXTURE)
+        arts_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "arts-crafts"
+        ]
+
+        self.assertEqual(1, len(arts_candidates))
+        arts = arts_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Arts & Crafts", arts["title"]["value"])
+        self.assertEqual("Doubloon Lagoon Pool Deck", arts["location"]["value"])
+        self.assertEqual("From 3:00pm-4:00pm", arts["schedule"]["text"])
+        self.assertEqual("3:00pm", arts["schedule"]["start_time"])
+        self.assertEqual("4:00pm", arts["schedule"]["end_time"])
+        self.assertEqual(
+            "Sunday and Friday: Seasonal Craft; Thursday: Make Your Own Slime",
+            arts["description"]["value"],
+        )
+        self.assertTrue(arts["is_fee_based"])
+
+        promotion = promote_candidates(arts_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Arts & Crafts", promotion.gold_records[0]["title"])
+        self.assertIn("Make Your Own Slime", promotion.gold_records[0]["description"])
 
     def test_validate_v2_accepts_caribbean_beach_full_calendar_fixture(self) -> None:
         report = validate_fixture_extractions([CARIBBEAN_BEACH_FULL_FIXTURE])
@@ -396,6 +600,70 @@ class PipelineContractsTest(unittest.TestCase):
 
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
+
+    def test_coronado_visual_review_promotes_colors_of_coronado(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(CORONADO_SPRINGS_FULL_FIXTURE)
+        colors_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "colors-of-coronado-painting-experience"
+        ]
+
+        self.assertEqual(1, len(colors_candidates))
+        colors = colors_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Colors Of Coronado Painting Experience", colors["title"]["value"])
+        self.assertEqual("Toledo - Tapas, Steak & Seafood", colors["location"]["value"])
+        self.assertEqual("Friday from 1:00pm-3:00pm", colors["schedule"]["text"])
+        self.assertEqual("1:00pm", colors["schedule"]["start_time"])
+        self.assertEqual("3:00pm", colors["schedule"]["end_time"])
+        self.assertEqual(
+            "Get in touch with your inner artist during this master-led painting class. "
+            "This experience is recommended for Guests ages 12 and up. Space is limited. "
+            "To book, search Colors of Coronado Painting Experience on the My Disney Experience app.",
+            colors["description"]["value"],
+        )
+        self.assertTrue(colors["is_fee_based"])
+
+        promotion = promote_candidates(colors_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Colors Of Coronado Painting Experience", promotion.gold_records[0]["title"])
+        self.assertIn("Guests ages 12 and up", promotion.gold_records[0]["description"])
+
+    def test_coronado_visual_review_promotes_spanish_mosaic_art_description(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(CORONADO_SPRINGS_FULL_FIXTURE)
+        mosaic_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "spanish-mosaic-art"
+        ]
+
+        self.assertEqual(1, len(mosaic_candidates))
+        mosaic = mosaic_candidates[0]["normalized_fields"]
+
+        self.assertEqual("Spanish Mosaic Art", mosaic["title"]["value"])
+        self.assertEqual("Dahlia Lounge", mosaic["location"]["value"])
+        self.assertEqual(
+            "Monday, Wednesday and Saturday from 1:00pm-3:00pm",
+            mosaic["schedule"]["text"],
+        )
+        self.assertEqual("1:00pm", mosaic["schedule"]["start_time"])
+        self.assertEqual("3:00pm", mosaic["schedule"]["end_time"])
+        self.assertEqual(
+            "Immerse yourself in a historic Spanish art tradition as you design your own "
+            "mosaic showpiece with a touch of Disney flair. This experience is recommended "
+            "for Guests ages 12 and up. Space is limited. To book, search Spanish Mosaic "
+            "Art on the My Disney Experience app.",
+            mosaic["description"]["value"],
+        )
+        self.assertTrue(mosaic["is_fee_based"])
+
+        promotion = promote_candidates(mosaic_candidates)
+
+        self.assertEqual([], promotion.review_queue)
+        self.assertEqual("Spanish Mosaic Art", promotion.gold_records[0]["title"])
+        self.assertIn("My Disney Experience app", promotion.gold_records[0]["description"])
 
     def test_validate_v2_accepts_saratoga_springs_full_calendar_fixture(self) -> None:
         report = validate_fixture_extractions([SARATOGA_SPRINGS_FULL_FIXTURE])
@@ -685,7 +953,7 @@ class PipelineContractsTest(unittest.TestCase):
             if row["calendar_group_key"] == "fort-wilderness"
         ]
         self.assertEqual(
-            FORT_WILDERNESS_EXPECTED_WEB_PUBLIC_SLUGS,
+            FORT_WILDERNESS_EXPECTED_WEB_PUBLIC_SLUGS | {"movie-under-the-stars"},
             {row["canonical_slug"] for row in fort_rows},
         )
         source_url_by_slug = {
@@ -707,6 +975,38 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(
             "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/pony-rides/",
             source_url_by_slug["pony-rides"],
+        )
+        self.assertEqual(
+            "https://disneyworld.disney.go.com/resorts/dvc-cabins-at-fort-wilderness-resort/recreation/",
+            source_url_by_slug["movie-under-the-stars"],
+        )
+
+    def test_fort_wilderness_cabins_page_supplies_movie_under_the_stars(self) -> None:
+        candidates = extract_candidates_for_fixture(FORT_WILDERNESS_CABINS_WEB_FIXTURE)
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        self.assertIn("movie-under-the-stars", by_slug)
+        movie = by_slug["movie-under-the-stars"]
+        self.assertEqual([], movie["warnings"])
+        self.assertEqual(
+            "Movies Under the Stars",
+            movie["normalized_fields"]["title"]["value"],
+        )
+        self.assertEqual(
+            "Nightly",
+            movie["normalized_fields"]["schedule"]["text"],
+        )
+        self.assertIsNone(movie["normalized_fields"]["schedule"]["start_time"])
+        self.assertEqual(
+            "Campground Theater",
+            movie["normalized_fields"]["location"]["value"],
+        )
+        self.assertEqual(
+            "https://disneyworld.disney.go.com/resorts/dvc-cabins-at-fort-wilderness-resort/recreation/",
+            movie["source_url"],
         )
 
     def test_official_web_detail_snapshot_can_supply_required_public_fields(self) -> None:
@@ -1411,6 +1711,68 @@ class PipelineContractsTest(unittest.TestCase):
             "candidate_unextractable_became_extractable:source-visible-missing-candidate",
             errors,
         )
+
+    def test_unextractable_records_may_have_title_only_candidate_with_missing_required_fields(self) -> None:
+        public_candidate = {
+            "warnings": [],
+            "normalized_fields": {
+                "slug": "wake-up-shake-up-party",
+                "title": {
+                    "value": "Wake Up Shake Up Party",
+                    "spans": [{"page": 1, "line": 1, "text": "WAKE UP SHAKE UP PARTY"}],
+                },
+            },
+        }
+        title_only_candidate = {
+            "warnings": ["schedule:missing_source_span", "location:missing_source_span"],
+            "normalized_fields": {
+                "slug": "source-visible-title-only",
+                "title": {
+                    "value": "Source Visible Title Only",
+                    "spans": [
+                        {
+                            "page": 1,
+                            "line": 22,
+                            "text": "SOURCE VISIBLE TITLE ONLY",
+                        }
+                    ],
+                },
+            },
+        }
+        fixture = {
+            "expected_records": [
+                {
+                    "title": "Wake Up Shake Up Party",
+                    "slug": "wake-up-shake-up-party",
+                    "required_spans": {
+                        "title": [{"page": 1, "line": 1, "text": "WAKE UP SHAKE UP PARTY"}]
+                    },
+                }
+            ],
+            "expected_unextractable_records": [
+                {
+                    "title": "Source Visible Title Only",
+                    "slug": "source-visible-title-only",
+                    "reason": "PDF shows title only; required public fields are absent",
+                    "required_spans": {
+                        "title": [
+                            {
+                                "page": 1,
+                                "line": 22,
+                                "text": "SOURCE VISIBLE TITLE ONLY",
+                            }
+                        ]
+                    },
+                }
+            ],
+        }
+
+        errors = compare_candidates_to_fixture(
+            [public_candidate, title_only_candidate],
+            fixture,
+        )
+
+        self.assertEqual([], errors)
 
     def test_reviewed_manual_records_are_source_backed_public_records(self) -> None:
         fixture = json.loads(ALL_STAR_MOVIES_FULL_FIXTURE.read_text())
@@ -2600,7 +2962,8 @@ class PipelineContractsTest(unittest.TestCase):
                 self.assertEqual("bike-rentals", offering["program_key"])
                 self.assertEqual("source_backed", offering["trust_state"])
                 self.assertEqual("evergreen_all_day", offering["availability"]["kind"])
-                self.assertEqual("varies", offering["availability"]["hours_state"])
+                self.assertEqual("source_unspecified", offering["availability"]["hours_state"])
+                self.assertEqual("Hours not specified by Disney", offering["availability"]["label"])
                 self.assertEqual("unknown", offering["claims"]["walkability"]["value"])
                 self.assertEqual("unknown", offering["claims"]["transportation"]["value"])
                 self.assertTrue(offering["field_provenance"]["resort_join"])
@@ -2678,6 +3041,85 @@ class PipelineContractsTest(unittest.TestCase):
                 self.assertIn("mini-refrigerator", offering["amenities"])
                 self.assertTrue(offering["field_provenance"]["booking"])
 
+    def test_official_recreation_detail_rows_win_over_parent_index_duplicates(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "cabanas",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/cabanas/",
+                    "source_web_sha256": "c" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Cabana Rentals | Walt Disney World Resort"},
+                        {"line": 2, "text": "Cabanas"},
+                        {"line": 3, "text": "MultipleWalt Disney World® Resortlocations"},
+                        {
+                            "line": 4,
+                            "text": "Indulge in the comfort and privacy of premium poolside cabanas at select Disney Resort hotels.",
+                        },
+                        {
+                            "line": 10,
+                            "text": "Cabanas at Disney's Contemporary Resort and Disney's Grand Floridian Resort & Spa—as well as those shared by Disney’s Beach Club Resort and Disney’s Yacht Club Resort—are available to Guests of those Resorts only.",
+                        },
+                        {"line": 14, "text": "Disney's Contemporary Resort"},
+                        {"line": 23, "text": "Disney's Grand Floridian Resort & Spa"},
+                        {"line": 33, "text": "Disney’s Yacht Club Resort and Beach Club Resort"},
+                        {"line": 34, "text": "Dedicated Cast Member providing service to the cabanas"},
+                        {"line": 40, "text": "Mini refrigerator stocked with complimentary sodas and water"},
+                        {
+                            "line": 46,
+                            "text": "Advance reservations are highly recommended as cabanas book quickly.",
+                        },
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_index_api",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/",
+                    "source_web_sha256": "i" * 64,
+                    "results": [
+                        {
+                            "urlFriendlyId": "cabanas",
+                            "name": "Cabanas",
+                            "locationName": "Multiple Locations",
+                            "locationsList": {
+                                "80010385;entityType=resort": "Disney's Contemporary Resort",
+                                "80010384;entityType=resort": "Disney's Grand Floridian Resort & Spa",
+                                "80010390;entityType=resort": "Disney's Yacht Club Resort",
+                            },
+                            "parkLocations": {
+                                "80010390;entityType=resort": {
+                                    "name": "Cabana Rentals at Stormalong Bay",
+                                },
+                            },
+                        }
+                    ],
+                },
+            ]
+        )
+
+        self.assertEqual([], result["quarantine"])
+        by_pair = {(offering["program_key"], offering["resort_slug"]) for offering in result["offerings"]}
+        self.assertEqual(
+            {
+                ("cabanas", "contemporary-resort"),
+                ("cabanas", "grand-floridian-resort-and-spa"),
+                ("cabanas", "beach-club-resort"),
+                ("cabanas", "yacht-club-resort"),
+            },
+            by_pair,
+        )
+        yacht_rows = [
+            offering
+            for offering in result["offerings"]
+            if offering["program_key"] == "cabanas" and offering["resort_slug"] == "yacht-club-resort"
+        ]
+        self.assertEqual(1, len(yacht_rows))
+        self.assertEqual("shared-beach-yacht-club", yacht_rows[0]["variant_key"])
+        self.assertNotIn(
+            "cabanas:yacht-club-resort:yacht-club-resort",
+            {offering["offering_key"] for offering in result["offerings"]},
+        )
+
     def test_official_recreation_offerings_join_resort_filtered_page_cards(self) -> None:
         result = extract_official_recreation_offerings(
             {
@@ -2701,7 +3143,45 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(["contemporary-resort"], [offering["resort_slug"] for offering in result["offerings"]])
         offering = result["offerings"][0]
         self.assertEqual("evergreen_all_day", offering["availability"]["kind"])
-        self.assertEqual("varies", offering["availability"]["hours_state"])
+        self.assertEqual("source_unspecified", offering["availability"]["hours_state"])
+        self.assertEqual("Hours not specified by Disney", offering["availability"]["label"])
+        self.assertEqual("resort_page_context", offering["field_provenance"]["resort_join"][0]["source"])
+
+    def test_official_recreation_generator_includes_resort_page_snapshots_without_inventing_hours(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = Path(tmp)
+            (snapshot_dir / "fort-wilderness-recreation-page.snapshot.json").write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_resort_page",
+                        "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+                        "lines": [
+                            {"line": 211, "text": "## Recreation"},
+                            {"line": 258, "text": "* ## Bike Rentals"},
+                            {
+                                "line": 260,
+                                "text": "Grab a rental from the Bike Barn and cycle through pine forests and meadows teeming with wildlife.",
+                            },
+                            {"line": 272, "text": "* ## Basketball Courts"},
+                            {
+                                "line": 273,
+                                "text": "Shoot some hoops at one of several basketball courts located throughout Disney’s Fort Wilderness Resort & Campground.",
+                            },
+                        ],
+                    }
+                )
+            )
+
+            result = generate_official_recreation_offerings(snapshot_dir)
+
+        self.assertEqual([], result["quarantine"])
+        self.assertEqual(["basketball-courts"], [program["program_key"] for program in result["programs"]])
+        self.assertNotIn("bike-rentals", {program["program_key"] for program in result["programs"]})
+        offering = result["offerings"][0]
+        self.assertEqual("basketball-courts", offering["program_key"])
+        self.assertEqual("campsites-at-fort-wilderness-resort", offering["resort_slug"])
+        self.assertEqual("source_unspecified", offering["availability"]["hours_state"])
+        self.assertEqual("Hours not specified by Disney", offering["availability"]["label"])
         self.assertEqual("resort_page_context", offering["field_provenance"]["resort_join"][0]["source"])
 
     def test_official_recreation_offerings_quarantine_unresolved_multiple_locations(self) -> None:
@@ -2727,6 +3207,515 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(1, len(result["quarantine"]))
         self.assertEqual("unresolved_resort_join", result["quarantine"][0]["reason_code"])
         self.assertTrue(result["quarantine"][0]["source_spans"])
+
+    def test_official_recreation_index_extracts_multi_resort_item_without_detail_url(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_index_api",
+                "source_url": "https://disneyworld.disney.go.com/recreation/",
+                "api_url": "https://disneyworld.disney.go.com/finder/api/v1/explorer-service/list-ancestor-entities/wdw/80007798%3BentityType%3Ddestination/2026-06-23/recreation",
+                "source_web_sha256": "i" * 64,
+                "results": [
+                    {
+                        "id": "17031169;entityType=recreation-activity",
+                        "name": "Community Halls",
+                        "locationName": "Multiple Locations",
+                        "locationsList": {
+                            "273239;entityType=resort": "Disney's Animal Kingdom Villas - Kidani Village",
+                            "80010385;entityType=resort": "Disney's Contemporary Resort",
+                            "80010391;entityType=resort": "Disney's BoardWalk Villas",
+                        },
+                        "parkLocations": {
+                            "273239;entityType=resort": {
+                                "name": "Community Hall - Animal Kingdom Lodge - Kidani Village",
+                            },
+                            "80010385;entityType=resort": {
+                                "name": "Community Hall - Bay Lake Tower at Disney's Contemporary Resort",
+                            },
+                            "80010391;entityType=resort": {
+                                "name": "Ferris W. Eahlers Community Hall",
+                            },
+                        },
+                        "facets": {
+                            "activityType": ["resort-special"],
+                            "age": ["all-ages"],
+                        },
+                    }
+                ],
+            }
+        )
+
+        self.assertEqual([], result["quarantine"])
+        self.assertEqual(["community-halls"], [program["program_key"] for program in result["programs"]])
+        self.assertEqual(
+            {
+                "animal-kingdom-villas-kidani-village",
+                "boardwalk-villas",
+                "contemporary-resort",
+            },
+            {offering["resort_slug"] for offering in result["offerings"]},
+        )
+        contemporary = next(
+            offering for offering in result["offerings"] if offering["resort_slug"] == "contemporary-resort"
+        )
+        self.assertEqual(
+            "Community Hall - Bay Lake Tower at Disney's Contemporary Resort",
+            contemporary["location"]["label"],
+        )
+        self.assertEqual("official_recreation_index_api", contemporary["field_provenance"]["resort_join"][0]["source"])
+
+    def test_official_recreation_detail_canonicalizes_resort_pool_pages(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": "https://disneyworld.disney.go.com/recreation/contemporary-resort/pools-contemporary-resort/",
+                "source_web_sha256": "p" * 64,
+                "lines": [
+                    {"line": 1, "text": "Pools at Disney's Contemporary Resort | Walt Disney World Resort"},
+                    {"line": 2, "text": "Pools at Disney's Contemporary Resort"},
+                    {"line": 3, "text": "MultipleWalt Disney World® Resortlocations"},
+                    {
+                        "line": 4,
+                        "text": "Enjoy heated pools and much more on the shores of Bay Lake. Hours and lifeguard availability vary by pool and are subject to change.",
+                    },
+                    {
+                        "line": 7,
+                        "text": "From a waterslide to our relaxing spas, there’s something fun for everyone at Disney’s Contemporary Resort.",
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual([], result["quarantine"])
+        self.assertEqual(["pools"], [program["program_key"] for program in result["programs"]])
+        offering = result["offerings"][0]
+        self.assertEqual("pools:contemporary-resort:contemporary-resort", offering["offering_key"])
+        self.assertEqual("Pools at Disney's Contemporary Resort", offering["title"])
+        self.assertEqual("poolside", offering["category"])
+        self.assertEqual("evergreen_hours", offering["availability"]["kind"])
+        self.assertEqual("hours_vary_by_pool", offering["availability"]["hours_state"])
+
+    def test_official_recreation_detail_marks_currently_unavailable_offering(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+                "source_web_sha256": "u" * 64,
+                "lines": [
+                    {"line": 1, "text": "Holiday Sleigh Rides at Fort Wilderness Resort | Walt Disney World Resort"},
+                    {"line": 2, "text": "Horse Drawn Excursion - Holiday Sleigh Rides"},
+                    {"line": 3, "text": "LocatedinThe Campsites at Disney's Fort Wilderness Resort"},
+                    {
+                        "line": 4,
+                        "text": "The 2025 offering has concluded. Check back this summer for updates on the 2026 holiday season.",
+                    },
+                    {
+                        "line": 8,
+                        "text": "Horse Drawn Excursion - Holiday Sleigh Rides are currently unavailable.",
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual([], result["quarantine"])
+        offering = result["offerings"][0]
+        self.assertEqual("calendar_dependent", offering["availability"]["kind"])
+        self.assertEqual("currently_unavailable", offering["availability"]["hours_state"])
+        self.assertIn("Currently unavailable", offering["availability"]["label"])
+
+    def test_official_recreation_index_canonicalizes_resort_named_rentals(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_index_api",
+                "source_url": "https://disneyworld.disney.go.com/recreation/",
+                "source_web_sha256": "r" * 64,
+                "results": [
+                    {
+                        "urlFriendlyId": "canoes",
+                        "name": "Canoe Rentals at Disney's Fort Wilderness Resort and Campground",
+                        "locationsList": {
+                            "80010392;entityType=resort": "The Campsites at Disney's Fort Wilderness Resort",
+                        },
+                    }
+                ],
+            }
+        )
+
+        self.assertEqual(["canoe-rentals"], [program["program_key"] for program in result["programs"]])
+        self.assertEqual(
+            ["canoe-rentals:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort"],
+            [offering["offering_key"] for offering in result["offerings"]],
+        )
+
+    def test_official_recreation_detail_enriches_parent_index_resort_joins(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+                    "source_web_sha256": "m" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Movies Under the Stars | Walt Disney World Resort"},
+                        {"line": 2, "text": "Movies Under the Stars"},
+                        {"line": 3, "text": "MultipleWalt Disney World® Resortlocations"},
+                        {
+                            "line": 4,
+                            "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+                        },
+                        {
+                            "line": 5,
+                            "text": "For movie schedules, please check with the Front Desk. Movies and entertainment are subject to cancellation or change without notice.",
+                        },
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_index_api",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/",
+                    "source_web_sha256": "i" * 64,
+                    "results": [
+                        {
+                            "urlFriendlyId": "movies-under-the-stars",
+                            "name": "Movies Under the Stars",
+                            "url": "/recreation/movies-under-the-stars/",
+                            "locationsList": {
+                                "1;entityType=resort": "Bay Lake Tower at Disney's Contemporary Resort",
+                                "80010402;entityType=resort": "Disney's All-Star Movies Resort",
+                            },
+                        }
+                    ],
+                },
+            ]
+        )
+
+        self.assertEqual([], result["quarantine"])
+        self.assertEqual(["movies-under-the-stars"], [program["program_key"] for program in result["programs"]])
+        self.assertEqual(
+            {
+                "bay-lake-tower-at-contemporary-resort",
+                "all-star-movies-resort",
+            },
+            {offering["resort_slug"] for offering in result["offerings"]},
+        )
+        for offering in result["offerings"]:
+            with self.subTest(resort=offering["resort_slug"]):
+                self.assertEqual(
+                    "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+                    offering["description"],
+                )
+                self.assertEqual("calendar_dependent", offering["availability"]["kind"])
+                self.assertEqual("calendar_varies", offering["availability"]["hours_state"])
+                self.assertTrue(offering["field_provenance"]["description"])
+                self.assertEqual(
+                    "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+                    offering["field_provenance"]["description"][0]["source_url"],
+                )
+
+    def test_official_recreation_detail_prefers_specific_venue_over_generic_resort_location(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": "https://disneyworld.disney.go.com/recreation/fort-wilderness-resort/canoe-rentals/",
+                "source_web_sha256": "c" * 64,
+                "lines": [
+                    {"line": 1, "text": "Canoes | Walt Disney World Resort"},
+                    {"line": 2, "text": "Canoe Rentals at Disney's Fort Wilderness Resort and Campground"},
+                    {"line": 3, "text": "LocatedinWalt Disney World® Resort"},
+                    {"line": 4, "text": "Discover adventure around every bend as you explore nearby inlets and waterways."},
+                    {"line": 7, "text": "Canoe Rentals"},
+                    {"line": 8, "text": "Set off on your own excursion along the tranquil waters of Disney’s Fort Wilderness Resort."},
+                    {"line": 9, "text": "Rental location: The Bike Barn at the Meadow Recreation Area"},
+                    {"line": 10, "text": "Hours: 9:00 AM and 5:00 PM daily"},
+                ],
+            }
+        )
+
+        self.assertEqual([], result["quarantine"])
+        self.assertEqual(
+            "The Bike Barn at the Meadow Recreation Area",
+            result["offerings"][0]["location"]["label"],
+        )
+
+    def test_official_recreation_detail_extracts_specific_marina_locations(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": "https://disneyworld.disney.go.com/recreation/fireworks-cruises/",
+                "source_web_sha256": "f" * 64,
+                "lines": [
+                    {"line": 1, "text": "Firework Cruises | Walt Disney World Resort"},
+                    {"line": 2, "text": "Fireworks Cruises"},
+                    {
+                        "line": 3,
+                        "text": "Charter a private watercraft and set sail on a relaxing specialty cruise from one of the Walt Disney World marinas to enjoy a stunning fireworks show.",
+                    },
+                    {
+                        "line": 17,
+                        "text": "Sail from the Boat Nook Marina at Disney’s Contemporary Resort to view Happily Ever After.",
+                    },
+                    {
+                        "line": 39,
+                        "text": "Depart on your cruise from the Bayside Marina at Disney’s Yacht & Beach Club Resorts.",
+                    },
+                    {"line": 54, "text": "Check available cruise days."},
+                ],
+            }
+        )
+
+        by_resort = {offering["resort_slug"]: offering for offering in result["offerings"]}
+        self.assertEqual("Boat Nook Marina", by_resort["contemporary-resort"]["location"]["label"])
+        self.assertEqual("Bayside Marina", by_resort["beach-club-resort"]["location"]["label"])
+        self.assertEqual("Bayside Marina", by_resort["yacht-club-resort"]["location"]["label"])
+        self.assertEqual(
+            "Charter a private watercraft and set sail on a relaxing specialty cruise from one of the Walt Disney World marinas to enjoy a stunning fireworks show.",
+            by_resort["contemporary-resort"]["description"],
+        )
+
+    def test_official_recreation_detail_skips_sponsor_line_for_description(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+                "source_web_sha256": "m" * 64,
+                "lines": [
+                    {"line": 1, "text": "Movies Under the Stars | Walt Disney World Resort"},
+                    {"line": 2, "text": "Movies Under the Stars"},
+                    {"line": 3, "text": "MultipleWalt Disney World® Resortlocations"},
+                    {"line": 4, "text": "Presented by M&M’S®"},
+                    {
+                        "line": 5,
+                        "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual(
+            "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            result["programs"][0]["description"],
+        )
+
+    def test_official_recreation_detail_does_not_use_schedule_contact_text_as_location(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": "https://disneyworld.disney.go.com/recreation/chip-n-dale-campfire-sing-a-long/",
+                "source_web_sha256": "d" * 64,
+                "lines": [
+                    {"line": 1, "text": "Chip 'n' Dale's Campfire Sing-A-Long | Walt Disney World Resort"},
+                    {"line": 2, "text": "Chip 'n' Dale's Campfire Sing-A-Long"},
+                    {"line": 3, "text": "LocatedinWalt Disney World® Resort"},
+                    {
+                        "line": 4,
+                        "text": "Join nutty friends Chip 'n' Dale for a nightly campfire celebration, followed by a classic Disney movie under the stars.",
+                    },
+                    {
+                        "line": 13,
+                        "text": "For movie schedules, please check with the Front Desk at Disney’s Fort Wilderness Resort & Campground, or call (407) 939-7529.",
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual([], result["quarantine"])
+        self.assertEqual(
+            "Chip 'n' Dale's Campfire Sing-A-Long",
+            result["offerings"][0]["location"]["label"],
+        )
+
+    def test_official_recreation_parent_coverage_fails_missing_joinable_item(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            index_path = tmp_path / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "api_url": "https://disneyworld.disney.go.com/finder/api/v1/explorer-service/list-ancestor-entities/wdw/80007798%3BentityType%3Ddestination/2026-06-23/recreation",
+                        "content_sha256": "c" * 64,
+                        "results": [
+                            {
+                                "urlFriendlyId": "bike-rentals",
+                                "name": "Bike Rentals",
+                                "locationsList": {
+                                    "80010387;entityType=resort": "Disney's Old Key West Resort",
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(json.dumps({"programs": [], "offerings": [], "quarantine": []}))
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path)
+
+        self.assertFalse(audit.passed)
+        self.assertIn("official_recreation:missing_joinable:bike-rentals", audit.errors)
+
+    def test_official_recreation_parent_coverage_fails_missing_joinable_resort(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            index_path = tmp_path / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "api_url": "https://disneyworld.disney.go.com/finder/api/v1/explorer-service/list-ancestor-entities/wdw/80007798%3BentityType%3Ddestination/2026-06-23/recreation",
+                        "content_sha256": "c" * 64,
+                        "results": [
+                            {
+                                "urlFriendlyId": "bike-rentals",
+                                "name": "Bike Rentals",
+                                "locationsList": {
+                                    "80010387;entityType=resort": "Disney's Old Key West Resort",
+                                    "80010397;entityType=resort": "Disney's Port Orleans Resort - Riverside",
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "bike-rentals"}],
+                        "offerings": [
+                            {
+                                "program_key": "bike-rentals",
+                                "resort_slug": "old-key-west-resort",
+                            }
+                        ],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path)
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "official_recreation:missing_joinable:bike-rentals:port-orleans-resort-riverside",
+            audit.errors,
+        )
+
+    def test_official_recreation_parent_coverage_requires_multi_location_detail_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            snapshot_dir = tmp_path / "snapshots"
+            snapshot_dir.mkdir()
+            index_path = snapshot_dir / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "content_sha256": "i" * 64,
+                        "results": [
+                            {
+                                "urlFriendlyId": "surrey-bikes",
+                                "name": "Surrey Bikes",
+                                "locationName": "Multiple Locations",
+                                "url": "/recreation/surrey-bikes/",
+                                "locationsList": {
+                                    "80010387;entityType=resort": "Disney's Old Key West Resort",
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "surrey-bikes"}],
+                        "offerings": [
+                            {
+                                "program_key": "surrey-bikes",
+                                "resort_slug": "old-key-west-resort",
+                            }
+                        ],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path, snapshot_dir)
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "official_recreation:missing_detail_snapshot:surrey-bikes:https://disneyworld.disney.go.com/recreation/surrey-bikes/",
+            audit.errors,
+        )
+
+    def test_official_recreation_coverage_fails_missing_downstream_detail_resort(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            snapshot_dir = tmp_path / "snapshots"
+            snapshot_dir.mkdir()
+            index_path = snapshot_dir / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "content_sha256": "i" * 64,
+                        "results": [
+                            {
+                                "urlFriendlyId": "bike-rentals",
+                                "name": "Bike Rentals",
+                                "locationsList": {
+                                    "80010387;entityType=resort": "Disney's Old Key West Resort",
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+            (snapshot_dir / "official-bike-rentals.snapshot.json").write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_detail",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/bike-rentals/",
+                        "content_sha256": "b" * 64,
+                        "lines": [
+                            {"line": 1, "text": "Bike Rentals | Walt Disney World Resort"},
+                            {"line": 2, "text": "Bike Rentals"},
+                            {"line": 3, "text": "MultipleWalt Disney World® Resortlocations"},
+                            {"line": 8, "text": "Five Rental Locations Available"},
+                            {"line": 11, "text": "Disney's Old Key West Resort"},
+                            {"line": 14, "text": "The Cabins at Disney's Fort Wilderness Resort"},
+                            {"line": 15, "text": "The Campsites at Disney's Fort Wilderness Resort"},
+                        ],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "bike-rentals"}],
+                        "offerings": [
+                            {
+                                "program_key": "bike-rentals",
+                                "resort_slug": "old-key-west-resort",
+                            }
+                        ],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path, snapshot_dir)
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "official_recreation:missing_detail_joinable:bike-rentals:campsites-at-fort-wilderness-resort",
+            audit.errors,
+        )
 
     def test_official_recreation_offerings_migration_preserves_security_contract(self) -> None:
         migration = _official_offerings_migration_text()
@@ -2783,6 +3772,8 @@ class PipelineContractsTest(unittest.TestCase):
                 "offerings": 2,
                 "quarantine": 1,
                 "retired_offerings": 0,
+                "retired_programs": 0,
+                "resolved_quarantine": 0,
             },
             result,
         )
@@ -2801,6 +3792,55 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn(
             ("rpc:check_official_activity_offerings_health", {}, ""),
             db.upserts,
+        )
+
+    def test_official_recreation_publisher_retires_stale_programs_and_resolves_stale_quarantine(self) -> None:
+        extraction = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "slug": "bike-rentals",
+                "source_url": "https://disneyworld.disney.go.com/recreation/bike-rentals/",
+                "source_web_sha256": "f" * 64,
+                "lines": [
+                    {"line": 1, "text": "# Bike Rentals"},
+                    {"line": 2, "text": "Explore the great outdoors from the comfort of a bicycle."},
+                    {"line": 3, "text": "Disney's Old Key West Resort"},
+                ],
+            }
+        )
+        db = FakeGoldV2Db()
+        db.select_rows["official_activity_programs"] = [
+            {"id": "old-program-id", "program_key": "retired-program", "is_current": True},
+        ]
+        db.select_rows["official_activity_ingest_quarantine"] = [
+            {
+                "id": "old-quarantine-id",
+                "program_key": "retired-program",
+                "source_sha256": "0" * 64,
+                "reason_code": "unresolved_resort_join",
+                "status": "pending",
+            },
+        ]
+
+        result = publish_official_offering_rows(db, extraction)
+
+        self.assertEqual(1, result["retired_programs"])
+        self.assertEqual(1, result["resolved_quarantine"])
+        self.assertIn(
+            (
+                "official_activity_programs",
+                {"id": "eq.old-program-id"},
+                {"is_current": False},
+            ),
+            db.updates,
+        )
+        self.assertIn(
+            (
+                "official_activity_ingest_quarantine",
+                {"id": "eq.old-quarantine-id"},
+                {"status": "resolved"},
+            ),
+            db.updates,
         )
 
     def test_gold_v2_publisher_upserts_source_catalog_and_public_rows(self) -> None:
@@ -2846,6 +3886,31 @@ class PipelineContractsTest(unittest.TestCase):
             ("rpc:check_activity_pipeline_v2_health", {}, ""),
             db.upserts,
         )
+
+    def test_gold_v2_publisher_reuses_existing_catalog_id_for_natural_key(self) -> None:
+        row = next(
+            row
+            for row in json.loads(GOLD_PREVIEW_PATH.read_text())
+            if row["calendar_group_key"] == "port-orleans-riverside"
+            and row["canonical_slug"] == "medicine-show-arcade"
+        )
+        legacy_catalog_id = "133b00d7-53dd-500d-a827-d88aab7a98c4"
+        db = FakeGoldV2Db()
+        db.select_rows["activity_catalog"] = [
+            {
+                "id": legacy_catalog_id,
+                "calendar_group_key": row["calendar_group_key"],
+                "normalized_name": row["canonical_slug"],
+                "canonical_name": "Medicine Show Arcade",
+            }
+        ]
+
+        publish_gold_rows(db, [row])
+
+        catalog_row = db.upserted_by_table["activity_catalog"][0]
+        public_row = db.upserted_by_table["public_activity_gold"][0]
+        self.assertEqual(legacy_catalog_id, catalog_row["id"])
+        self.assertEqual(legacy_catalog_id, public_row["activity_catalog_id"])
 
     def test_gold_v2_publisher_fails_when_database_health_check_reports_issues(self) -> None:
         row = json.loads(GOLD_PREVIEW_PATH.read_text())[0]
@@ -3101,12 +4166,16 @@ class PipelineContractsTest(unittest.TestCase):
 
         self.assertTrue(audit.passed, audit.errors)
         self.assertEqual(20, audit.summary["pdf_source_count"])
-        self.assertEqual(225, audit.summary["fixture_count"])
-        self.assertEqual(33, audit.summary["fixture_quarantine_count"])
-        self.assertEqual(0, audit.summary["fixture_unextractable_count"])
-        self.assertEqual(222, audit.summary["gold_record_count"])
-        self.assertFalse(audit.summary["production_ready"])
-        self.assertEqual(222, audit.summary["coverage_required_count"])
+        self.assertEqual(240, audit.summary["fixture_count"])
+        self.assertEqual(34, audit.summary["fixture_quarantine_count"])
+        self.assertEqual(34, audit.summary["official_offering_covered_quarantine_count"])
+        self.assertEqual(13, audit.summary["official_offering_alias_covered_quarantine_count"])
+        self.assertEqual(0, audit.summary["blocking_fixture_quarantine_count"])
+        self.assertEqual(0, audit.summary["blocking_fixture_quarantine_unique_count"])
+        self.assertEqual(3, audit.summary["fixture_unextractable_count"])
+        self.assertEqual(237, audit.summary["gold_record_count"])
+        self.assertTrue(audit.summary["production_ready"])
+        self.assertEqual(237, audit.summary["coverage_required_count"])
         self.assertNotIn("all-star-music", audit.summary["undercovered_gold_groups"])
         self.assertNotIn("all-star-sports", audit.summary["undercovered_gold_groups"])
         self.assertNotIn("animal-kingdom-jambo", audit.summary["undercovered_gold_groups"])
@@ -3131,30 +4200,22 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertIn("all-star-sports", audit.summary["legacy_overcount_groups"])
         self.assertIn("boardwalk", audit.summary["legacy_overcount_groups"])
-        self.assertIn("coronado-springs", audit.summary["legacy_overcount_groups"])
+        self.assertNotIn("coronado-springs", audit.summary["legacy_overcount_groups"])
         self.assertIn("contemporary", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
             {"gold": 11, "fixture": 11, "legacy": 14},
             audit.summary["legacy_overcount_groups"]["contemporary"],
         )
         self.assertEqual(
-            {"gold": 8, "fixture": 8, "legacy": 12},
-            audit.summary["legacy_overcount_groups"]["coronado-springs"],
-        )
-        self.assertEqual(
-            {"gold": 10, "fixture": 10, "legacy": 13},
+            {"gold": 12, "fixture": 12, "legacy": 13},
             audit.summary["legacy_overcount_groups"]["boardwalk"],
         )
         self.assertIn("old-key-west", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
-            {"gold": 13, "fixture": 13, "legacy": 16},
+            {"gold": 14, "fixture": 14, "legacy": 16},
             audit.summary["legacy_overcount_groups"]["old-key-west"],
         )
-        self.assertIn("polynesian", audit.summary["legacy_overcount_groups"])
-        self.assertEqual(
-            {"gold": 8, "fixture": 8, "legacy": 10},
-            audit.summary["legacy_overcount_groups"]["polynesian"],
-        )
+        self.assertNotIn("polynesian", audit.summary["legacy_overcount_groups"])
         self.assertIn("pop-century", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
             {"gold": 10, "fixture": 10, "legacy": 11},
@@ -3162,12 +4223,12 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertIn("port-orleans-french-quarter", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
-            {"gold": 9, "fixture": 9, "legacy": 13},
+            {"gold": 11, "fixture": 11, "legacy": 13},
             audit.summary["legacy_overcount_groups"]["port-orleans-french-quarter"],
         )
         self.assertIn("port-orleans-riverside", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
-            {"gold": 10, "fixture": 10, "legacy": 13},
+            {"gold": 12, "fixture": 12, "legacy": 13},
             audit.summary["legacy_overcount_groups"]["port-orleans-riverside"],
         )
         self.assertNotIn("riviera", audit.summary["legacy_overcount_groups"])
@@ -3178,7 +4239,7 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertIn("fort-wilderness", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
-            {"gold": 4, "fixture": 4, "legacy": 14},
+            {"gold": 5, "fixture": 5, "legacy": 14},
             audit.summary["legacy_overcount_groups"]["fort-wilderness"],
         )
         self.assertIn("animal-kingdom-jambo", audit.summary["legacy_undercount_groups"])
@@ -3201,6 +4262,10 @@ class PipelineContractsTest(unittest.TestCase):
             {"gold": 13, "fixture": 13, "legacy": 10},
             audit.summary["legacy_undercount_groups"]["grand-floridian"],
         )
+        self.assertEqual(
+            {"gold": 10, "fixture": 10, "legacy": 9},
+            audit.summary["legacy_undercount_groups"]["riviera"],
+        )
         self.assertFalse(audit.summary["undercovered_gold_groups"])
         self.assertTrue(
             any(warning.startswith("coverage:legacy_overcount_groups:") for warning in audit.warnings),
@@ -3215,6 +4280,10 @@ class PipelineContractsTest(unittest.TestCase):
             audit.warnings,
         )
         self.assertFalse(
+            any(warning.startswith("coverage:blocking_fixture_quarantine_records:") for warning in audit.warnings),
+            audit.warnings,
+        )
+        self.assertTrue(
             any(warning.startswith("coverage:fixture_unextractable_records:") for warning in audit.warnings),
             audit.warnings,
         )
@@ -3230,7 +4299,7 @@ class PipelineContractsTest(unittest.TestCase):
             if prior_public is not None:
                 os.environ["NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE"] = prior_public
 
-        self.assertFalse(audit.passed)
+        self.assertTrue(audit.passed)
         self.assertNotIn("coverage:ui_pipeline_not_gold-v2:gold-v2-preview", audit.errors)
         self.assertFalse(
             any(error.startswith("coverage:gold_rows_below_required_count:") for error in audit.errors),
@@ -3240,7 +4309,8 @@ class PipelineContractsTest(unittest.TestCase):
             any(error.startswith("coverage:gold_rows_below_required_by_group:") for error in audit.errors),
             audit.errors,
         )
-        self.assertIn("coverage:fixture_quarantine_records:33", audit.errors)
+        self.assertNotIn("coverage:blocking_fixture_quarantine_records:8", audit.errors)
+        self.assertNotIn("coverage:fixture_quarantine_records:34", audit.errors)
         self.assertFalse(
             any(error.startswith("coverage:fixture_unextractable_records:") for error in audit.errors),
             audit.errors,
@@ -3249,6 +4319,35 @@ class PipelineContractsTest(unittest.TestCase):
             any(error.startswith("coverage:legacy_overcount_groups:") for error in audit.errors),
             audit.errors,
         )
+
+    def test_trust_report_summarizes_current_cutover_blockers_and_quarantine_workload(self) -> None:
+        report = build_trust_report()
+
+        self.assertEqual("ready", report["status"])
+        self.assertTrue(report["coverage"]["production_ready"])
+        self.assertEqual(34, report["fixture_quarantine"]["record_count"])
+        self.assertEqual(20, report["fixture_quarantine"]["unique_record_count"])
+        self.assertEqual(0, report["fixture_quarantine"]["blocking_record_count"])
+        self.assertEqual(0, report["fixture_quarantine"]["blocking_unique_record_count"])
+        self.assertEqual(34, report["fixture_quarantine"]["official_offering_covered_record_count"])
+        self.assertEqual(13, report["fixture_quarantine"]["official_offering_alias_covered_record_count"])
+        self.assertEqual(3, report["fixture_unextractable"]["record_count"])
+        self.assertEqual(
+            {"record_count": 34, "unique_record_count": 20},
+            report["fixture_quarantine"]["by_group"]["fort-wilderness"],
+        )
+        self.assertEqual([], report["blockers"])
+        self.assertEqual(0, report["official_recreation"]["quarantine_count"])
+        self.assertGreaterEqual(report["official_recreation"]["offering_count"], 224)
+
+        markdown = render_markdown_report(report)
+        self.assertIn("# Source-To-UI Trust Report", markdown)
+        self.assertIn("Production cutover: ready", markdown)
+        self.assertIn("Fort Wilderness", markdown)
+        self.assertIn("34 fixture quarantine records", markdown)
+        self.assertIn("34 covered by official offerings", markdown)
+        self.assertIn("13 alias-covered", markdown)
+        self.assertIn("Explicit non-publishable source-visible records: 3 records", markdown)
 
     def test_production_pipeline_requires_cutover_coverage_before_publish(self) -> None:
         steps = validation_gate_steps(local_only=False)

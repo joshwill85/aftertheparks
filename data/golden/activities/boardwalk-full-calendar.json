@@ -193,41 +193,78 @@
       }
     }
   ],
-  "expected_quarantine_records": [
+  "expected_quarantine_records": [],
+  "reviewed_manual_records": [
     {
       "title": "Poolside Activities",
       "slug": "poolside-activities",
       "category": "poolside",
-      "schedule_text": "",
+      "schedule_text": "Activities schedule available digitally; no posted time in PDF",
       "start_time": null,
       "end_time": null,
       "location": "Luna Park Pool Deck",
       "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
       "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF and OCR. The static PDF provides location/description but points guests to the QR/digital activity schedule instead of printing a time."
+      },
       "required_spans": {
         "title": [{ "page": 1, "line": 19, "text": "POOLSIDE ACTIVITIES" }],
         "location": [{ "page": 1, "line": 21, "text": "Luna Park Pool Deck" }],
+        "schedule": [
+          {
+            "page": 1,
+            "bbox": [380, 1275, 2560, 1455],
+            "text": "SCAN THIS QR CODE AND SELECT ACTIVITIES SCHEDULE TO VIEW THIS INFORMATION DIGITALLY!",
+            "source": "manual_visual_bbox"
+          }
+        ],
         "description": [
           { "page": 1, "line": 23, "text": "Join us for family-friendly activities, both in and out of the" },
           { "page": 1, "line": 25, "text": "pool. See a Recreation Cast Member for more information." }
         ]
-      },
-      "warnings": ["schedule:missing_source_span"]
+      }
     },
     {
       "title": "Crescent Lake Wellness Challenge",
       "slug": "crescent-lake-wellness-challenge",
       "category": "fitness_wellness",
-      "schedule_text": "",
+      "schedule_text": "Self-guided fitness challenge; no posted time in PDF",
       "start_time": null,
       "end_time": null,
-      "location": "",
+      "location": "Crescent Lake pathways",
       "description": "Enjoy beautiful views of Crescent Lake as you explore nearly 1 mile of pathways on this self-guided fitness challenge. After completing the course, head to Community Hall for a prize! Register at Community Hall or the Screen Door General Store to participate.",
       "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-23T00:00:00Z",
+        "notes": "Verified against rendered PDF. The challenge is source-described as self-guided on nearly 1 mile of Crescent Lake pathways; no static time is printed."
+      },
       "required_spans": {
         "title": [
           { "page": 1, "line": 58, "text": "CRESCENT LAKE" },
           { "page": 1, "line": 59, "text": "WELLNESS CHALLENGE" }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 61,
+            "text": "Enjoy beautiful views of Crescent Lake as you explore"
+          },
+          {
+            "page": 1,
+            "line": 63,
+            "text": "nearly 1 mile of pathways on this self-guided fitness"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 63,
+            "text": "nearly 1 mile of pathways on this self-guided fitness"
+          }
         ],
         "description": [
           { "page": 1, "line": 61, "text": "Enjoy beautiful views of Crescent Lake as you explore" },
@@ -236,8 +273,7 @@
           { "page": 1, "line": 67, "text": "Community Hall for a prize! Register at Community" },
           { "page": 1, "line": 68, "text": "Hall or the Screen Door General Store to participate." }
         ]
-      },
-      "warnings": ["schedule:missing_source_span", "location:missing_source_span"]
+      }
     }
   ]
 }

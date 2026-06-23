@@ -7,7 +7,7 @@ export interface MagicCollection {
   mood: string;
 }
 
-/** Curated no-ticket entry points — links to filtered Explore / Tonight. */
+/** Curated resort-calendar entry points — links to filtered Explore / Tonight. */
 export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
   {
     id: "tonight-movies",
@@ -18,12 +18,12 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
     mood: "evening",
   },
   {
-    id: "free-today",
-    title: "Free today",
-    description: "Resort fun included with your stay — no park ticket.",
-    href: "/activities?free=true",
+    id: "resort-calendar",
+    title: "Resort calendar",
+    description: "Browse source-backed activities from the current resort calendars.",
+    href: "/activities",
     icon: "🌴",
-    mood: "free",
+    mood: "calendar",
   },
   {
     id: "campfires",

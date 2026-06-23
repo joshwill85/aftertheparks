@@ -3,10 +3,16 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { ActivityOccurrence, MovieNightOccurrence, ResortSummary } from "@/lib/types/occurrence";
+import type {
+  ActivityOffering,
+  ActivityOccurrence,
+  MovieNightOccurrence,
+  ResortSummary,
+} from "@/lib/types/occurrence";
 import type { GuideEntry } from "@/lib/guides";
 import type { SearchHit } from "@/lib/search/types";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
+import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { ResortCard } from "@/components/resort/ResortCard";
 import { MovieListingCard } from "@/components/movies/MovieListingCard";
@@ -14,6 +20,7 @@ import { SearchHitRow } from "@/components/search/SearchHitRow";
 
 interface SearchPayload {
   activities: ActivityOccurrence[];
+  officialOfferings: ActivityOffering[];
   resorts: ResortSummary[];
   guides: GuideEntry[];
   movies: MovieNightOccurrence[];
@@ -32,7 +39,7 @@ interface SearchClientProps {
 
 const DEFAULT_SUGGESTIONS = [
   "campfire tonight",
-  "free pool",
+  "pool games",
   "polynesian",
   "movie",
   "crafts kids",
@@ -66,6 +73,7 @@ export function SearchClient({
     if (!trimmed) {
       return {
         activities: [],
+        officialOfferings: [],
         resorts: [],
         guides: [],
         movies: [],
@@ -83,6 +91,7 @@ export function SearchClient({
     const data = await response.json();
     return {
       activities: data.activities ?? [],
+      officialOfferings: data.officialOfferings ?? [],
       resorts: data.resorts ?? [],
       guides: data.guides ?? [],
       movies: data.movies ?? [],
@@ -164,6 +173,7 @@ export function SearchClient({
     payload &&
     (payload.total > 0 ||
       payload.activities.length > 0 ||
+      payload.officialOfferings.length > 0 ||
       payload.resorts.length > 0);
 
   const quickLinks = payload
@@ -186,14 +196,16 @@ export function SearchClient({
               ref={inputRef}
               id="global-search-input"
               type="search"
+              role="combobox"
               value={query}
               onChange={(e) => handleQueryChange(e.target.value)}
               onFocus={() => setPreviewOpen(true)}
               onBlur={() => window.setTimeout(() => setPreviewOpen(false), 160)}
-              placeholder='Try "campfire", "Polynesian", or "free pool"'
+              placeholder='Try "campfire", "Polynesian", or "pool games"'
               className="form-control search-form__input"
               autoComplete="off"
               aria-autocomplete="list"
+              aria-haspopup="listbox"
               aria-controls={previewOpen ? "search-preview-list" : undefined}
               aria-expanded={previewOpen && previewHits.length > 0}
             />
@@ -239,7 +251,7 @@ export function SearchClient({
 
       {!q && (
         <p className="search-empty-intro">
-          Ask like a concierge — campfires near your resort, free pool games,
+          Ask like a concierge — campfires near your resort, pool games,
           tonight&apos;s movies, or rainy-day arcade time.
         </p>
       )}
@@ -328,6 +340,19 @@ export function SearchClient({
                   />
                 ))}
               </div>
+            </section>
+          )}
+
+          {payload.officialOfferings.length > 0 && (
+            <section className="search-section" aria-labelledby="search-offerings-heading">
+              <h2 id="search-offerings-heading" className="search-section__title">
+                Official recreation offerings
+              </h2>
+              <ActivityOfferingGrid
+                offerings={payload.officialOfferings}
+                showResort
+                emptyMessage="No official recreation offerings matched."
+              />
             </section>
           )}
 

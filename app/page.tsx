@@ -74,14 +74,14 @@ export default async function HomePage() {
           <div className="home-section__header">
             <div>
               <h2 id="free-heading" className="home-section__title">
-                Free things happening today
+                Source-confirmed no-cost activities
               </h2>
               <p className="home-section__subtitle">
-                No ticket needed — resort fun included with your stay.
+                Activities whose current source explicitly supports a no-cost label.
               </p>
             </div>
             <Link href="/activities?free=true" className="home-section__link">
-              Browse free →
+              Browse no-cost →
             </Link>
           </div>
           <ActivityGrid activities={freeActivities} />

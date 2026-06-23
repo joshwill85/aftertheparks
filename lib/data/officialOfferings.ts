@@ -1,11 +1,21 @@
 import { createServiceClient } from "@/lib/supabase/server";
 import type {
   ActivityClaim,
+  ActivityFilters,
+  ActivityOccurrence,
   ActivityOffering,
   ActivityPriceOption,
   SourceSpan,
 } from "@/lib/types/occurrence";
+import {
+  expandTokens,
+  normalizeSearchQuery,
+  tokenizeQuery,
+} from "@/lib/search/normalize";
+import { scoreOffering } from "@/lib/search/score";
 import { formatResortTier, slugToTitle } from "@/lib/utils";
+
+const OFFERING_QUERY_MIN_SCORE = 18;
 
 export interface OfficialOfferingRow {
   id: string;
@@ -66,6 +76,7 @@ export interface OfficialOfferingRow {
   source_document_id?: string | null;
   field_provenance?: Record<string, SourceSpan[]> | null;
   trust_state?: ActivityOffering["trustState"] | null;
+  status?: ActivityOffering["status"] | null;
 }
 
 function stringValue(value: unknown): string | undefined {
@@ -109,7 +120,9 @@ function mapFieldProvenance(
     location: provenance.location,
     description: provenance.description,
     availability: provenance.availability,
+    price: provenance.price,
     booking: provenance.booking,
+    eligibility: provenance.eligibility,
     amenities: provenance.amenities,
   };
 }
@@ -117,17 +130,42 @@ function mapFieldProvenance(
 function mapAvailability(
   row: OfficialOfferingRow
 ): ActivityOffering["availability"] {
+  const availability = row.availability ?? {};
+  const hasAvailabilityProvenance = Boolean(row.field_provenance?.availability?.length);
+  const label = availability.label ?? "Hours not specified by Disney";
+  const publicLabel =
+    hasAvailabilityProvenance || label === "Hours not specified by Disney"
+      ? label
+      : "Check Disney source for current availability";
+
   return {
-    kind: row.availability?.kind ?? "evergreen_all_day",
-    hoursState: row.availability?.hours_state ?? undefined,
-    label: row.availability?.label ?? "Available daily; hours vary",
+    kind: availability.kind ?? "evergreen_all_day",
+    hoursState: availability.hours_state ?? "source_unspecified",
+    label: publicLabel,
   };
+}
+
+function mapStatus(row: OfficialOfferingRow): ActivityOffering["status"] {
+  if (row.status) return row.status;
+  if (row.availability?.hours_state === "currently_unavailable") {
+    return "paused";
+  }
+  return "active";
 }
 
 function mapPrice(row: OfficialOfferingRow): ActivityOffering["price"] {
   const price = row.price ?? {};
+  const state = price.state ?? "unknown";
+  const hasPriceProvenance = Boolean(row.field_provenance?.price?.length);
+  const publicState =
+    state === "fee" || state === "free"
+      ? hasPriceProvenance
+        ? state
+        : "unknown"
+      : "unknown";
+
   return {
-    state: price.state ?? "unknown",
+    state: publicState,
     notes: price.notes,
     amountCents: price.amountCents ?? price.amount_cents,
     minAmountCents: price.minAmountCents ?? price.min_amount_cents,
@@ -136,31 +174,68 @@ function mapPrice(row: OfficialOfferingRow): ActivityOffering["price"] {
   };
 }
 
-function mapBooking(
-  booking: OfficialOfferingRow["booking"]
-): ActivityOffering["booking"] {
+function mapBooking(row: OfficialOfferingRow): ActivityOffering["booking"] {
+  const booking = row.booking;
   if (!booking) return undefined;
+  const hasBookingProvenance = Boolean(row.field_provenance?.booking?.length);
   const mapped: ActivityOffering["booking"] = {
     reservationRequired:
-      booking.reservationRequired ?? booking.reservation_required,
+      hasBookingProvenance
+        ? booking.reservationRequired ?? booking.reservation_required
+        : undefined,
     reservationRecommended:
-      booking.reservationRecommended ?? booking.reservation_recommended,
+      hasBookingProvenance
+        ? booking.reservationRecommended ?? booking.reservation_recommended
+        : undefined,
     cancellationNoticeHours:
-      booking.cancellationNoticeHours ?? booking.cancellation_notice_hours,
-    method: booking.method,
-    phone: booking.phone,
-    url: booking.url,
+      hasBookingProvenance
+        ? booking.cancellationNoticeHours ?? booking.cancellation_notice_hours
+        : undefined,
+    method: hasBookingProvenance ? booking.method : undefined,
+    phone: hasBookingProvenance ? booking.phone : undefined,
+    url: hasBookingProvenance ? booking.url : undefined,
   };
   return Object.values(mapped).some((value) => value !== undefined)
     ? mapped
     : undefined;
 }
 
+function mapEligibility(row: OfficialOfferingRow): ActivityOffering["eligibility"] {
+  const eligibility = row.eligibility ?? {};
+  const hasEligibilityProvenance = Boolean(row.field_provenance?.eligibility?.length);
+  return {
+    ages: eligibility.ages ?? ["all_ages"],
+    resortGuestOnly: hasEligibilityProvenance
+      ? eligibility.resortGuestOnly ?? eligibility.resort_guest_only
+      : undefined,
+  };
+}
+
+function displayResortName(row: Pick<OfficialOfferingRow, "resort_name" | "resort_slug">): string {
+  return row.resort_name?.replace(/^Disney's\s+/i, "") ?? slugToTitle(row.resort_slug);
+}
+
+function mapLocation(row: OfficialOfferingRow): ActivityOffering["location"] {
+  const location = row.location ?? {};
+  const hasLocationProvenance = Boolean(row.field_provenance?.location?.length);
+
+  return {
+    label: hasLocationProvenance
+      ? location.label ?? location.value ?? displayResortName(row)
+      : displayResortName(row),
+    lat: hasLocationProvenance ? location.lat : undefined,
+    lng: hasLocationProvenance ? location.lng : undefined,
+  };
+}
+
+function mapAmenities(row: OfficialOfferingRow): string[] {
+  if (!row.field_provenance?.amenities?.length) return [];
+  return row.amenities ?? [];
+}
+
 export function mapOfficialOfferingRow(
   row: OfficialOfferingRow
 ): ActivityOffering {
-  const location = row.location ?? {};
-  const eligibility = row.eligibility ?? {};
   const verified = sourceBacked(row);
 
   return {
@@ -170,7 +245,7 @@ export function mapOfficialOfferingRow(
     offeringKey: row.offering_key,
     resort: {
       slug: row.resort_slug,
-      name: row.resort_name?.replace(/^Disney's\s+/i, "") ?? slugToTitle(row.resort_slug),
+      name: displayResortName(row),
       tier: formatResortTier(row.resort_category ?? "unknown"),
       area: row.resort_area ?? "unknown",
     },
@@ -180,18 +255,10 @@ export function mapOfficialOfferingRow(
     tags: row.tags ?? [],
     availability: mapAvailability(row),
     price: mapPrice(row),
-    location: {
-      label: location.label ?? location.value ?? row.resort_name ?? slugToTitle(row.resort_slug),
-      lat: location.lat,
-      lng: location.lng,
-    },
-    booking: mapBooking(row.booking),
-    eligibility: {
-      ages: eligibility.ages ?? ["all_ages"],
-      resortGuestOnly:
-        eligibility.resortGuestOnly ?? eligibility.resort_guest_only,
-    },
-    amenities: row.amenities ?? [],
+    location: mapLocation(row),
+    booking: mapBooking(row),
+    eligibility: mapEligibility(row),
+    amenities: mapAmenities(row),
     freshness: {
       lastVerified: new Date().toISOString(),
       sourceUrl: row.source_url,
@@ -205,7 +272,7 @@ export function mapOfficialOfferingRow(
     fieldProvenance: mapFieldProvenance(row.field_provenance),
     claims: row.claims ?? undefined,
     trustState: row.trust_state ?? "source_backed",
-    status: "active",
+    status: mapStatus(row),
   };
 }
 
@@ -213,6 +280,24 @@ export function mapOfficialOfferingRows(
   rows: OfficialOfferingRow[]
 ): ActivityOffering[] {
   return rows.map(mapOfficialOfferingRow);
+}
+
+export function filterOfficialOfferingsWithoutActivityCollisions(
+  offerings: ActivityOffering[],
+  activities: Pick<ActivityOccurrence, "activitySlug" | "resort">[]
+): ActivityOffering[] {
+  if (activities.length === 0 || offerings.length === 0) return offerings;
+
+  const coveredResortSlugs = new Set(
+    activities
+      .map((activity) => `${activity.resort.slug}:${activity.activitySlug}`)
+      .filter(Boolean)
+  );
+
+  return offerings.filter(
+    (offering) =>
+      !coveredResortSlugs.has(`${offering.resort.slug}:${offering.activitySlug}`)
+  );
 }
 
 export async function fetchOfficialActivityOfferings(): Promise<ActivityOffering[]> {
@@ -238,4 +323,51 @@ export async function getOfficialOfferingsForResort(
 ): Promise<ActivityOffering[]> {
   const offerings = await fetchOfficialActivityOfferings();
   return offerings.filter((offering) => offering.resort.slug === resortSlug);
+}
+
+export async function getFilteredOfficialOfferings(
+  filters: ActivityFilters = {}
+): Promise<ActivityOffering[]> {
+  if (filters.daypart) return [];
+
+  let offerings = await fetchOfficialActivityOfferings();
+
+  offerings = offerings.filter((offering) => offering.status !== "paused");
+
+  if (filters.resort) {
+    offerings = offerings.filter(
+      (offering) => offering.resort.slug === filters.resort
+    );
+  }
+
+  if (filters.category) {
+    offerings = offerings.filter(
+      (offering) => offering.category === filters.category
+    );
+  }
+
+  if (filters.free) {
+    offerings = offerings.filter((offering) => offering.price.state === "free");
+  }
+
+  const q = normalizeSearchQuery(filters.q ?? "");
+  if (q) {
+    const tokens = expandTokens(tokenizeQuery(q));
+    offerings = offerings
+      .map((offering) => ({
+        offering,
+        score: scoreOffering(offering, q, tokens),
+      }))
+      .filter((row) => row.score >= OFFERING_QUERY_MIN_SCORE)
+      .sort((a, b) => b.score - a.score)
+      .map((row) => row.offering);
+  } else {
+    offerings = [...offerings].sort((a, b) => {
+      const resort = a.resort.name.localeCompare(b.resort.name);
+      if (resort !== 0) return resort;
+      return a.title.localeCompare(b.title);
+    });
+  }
+
+  return offerings.slice(0, filters.limit ?? 100);
 }

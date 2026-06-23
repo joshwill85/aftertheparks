@@ -1,0 +1,172 @@
+{
+  "calendar_group_key": "fort-wilderness",
+  "source_kind": "official_web",
+  "source_url": "https://disneyworld.disney.go.com/resorts/dvc-cabins-at-fort-wilderness-resort/recreation/",
+  "source_web_snapshot": "data/raw/web/fort-wilderness-cabins-recreation-page.snapshot.json",
+  "source_web_sha256": "9a88881e6e69726747f16a9320467e17fb24363cfdad14c0e4ed79241aafec49",
+  "expected_records": [
+    {
+      "title": "Movies Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "schedule_text": "Nightly",
+      "start_time": null,
+      "end_time": null,
+      "location": "Campground Theater",
+      "description": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [{ "page": 1, "line": 222, "text": "* ## Movies Under the Stars" }],
+        "description": [{ "page": 1, "line": 224, "text": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater." }],
+        "location": [{ "page": 1, "line": 224, "text": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater." }],
+        "schedule": [{ "page": 1, "line": 224, "text": "Cozy up for complimentary screenings of popular Disney films, offered nightly at the Campground Theater." }]
+      }
+    }
+  ],
+  "expected_quarantine_records": [
+    {
+      "title": "Pools",
+      "slug": "pools",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 213, "text": "* ## Pools" }]
+      }
+    },
+    {
+      "title": "Chip ‘n’ Dale’s Campfire Sing-A-Long",
+      "slug": "chip-n-dales-campfire-sing-a-long",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 217, "text": "* ## Chip ‘n’ Dale’s Campfire Sing-A-Long" }]
+      }
+    },
+    {
+      "title": "Fort Wilderness Archery Experience",
+      "slug": "fort-wilderness-archery-experience",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 228, "text": "* ## Fort Wilderness Archery Experience" }]
+      }
+    },
+    {
+      "title": "Tri-Circle-D Ranch",
+      "slug": "tri-circle-d-ranch",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 232, "text": "* ## Tri-Circle-D Ranch" }]
+      }
+    },
+    {
+      "title": "Horse-Drawn Excursion – Carriage Ride at Disney’s Fort Wilderness Resort & Campground",
+      "slug": "horse-drawn-excursion-carriage-ride-at-disneys-fort-wilderness-resort-campground",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 235, "text": "* ## Horse-Drawn Excursion – Carriage Ride at Disney’s Fort Wilderness Resort & Campground" }]
+      }
+    },
+    {
+      "title": "Pony Rides",
+      "slug": "pony-rides",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 239, "text": "* ## Pony Rides" }]
+      }
+    },
+    {
+      "title": "Wagon Rides",
+      "slug": "wagon-rides",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 243, "text": "* ## Wagon Rides" }]
+      }
+    },
+    {
+      "title": "Fishing",
+      "slug": "fishing",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 249, "text": "* ## Fishing" }]
+      }
+    },
+    {
+      "title": "Canoe Rentals",
+      "slug": "canoe-rentals",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 254, "text": "* ## Canoe Rentals" }]
+      }
+    },
+    {
+      "title": "Kayak Rentals",
+      "slug": "kayak-rentals",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 258, "text": "* ## Kayak Rentals" }]
+      }
+    },
+    {
+      "title": "Bike Rentals",
+      "slug": "bike-rentals",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 262, "text": "* ## Bike Rentals" }]
+      }
+    },
+    {
+      "title": "Basketball Courts",
+      "slug": "basketball-courts",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 267, "text": "* ## Basketball Courts" }]
+      }
+    },
+    {
+      "title": "Volleyball",
+      "slug": "volleyball",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 270, "text": "* ## Volleyball" }]
+      }
+    },
+    {
+      "title": "Jogging Trails",
+      "slug": "jogging-trails",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 276, "text": "* ## Jogging Trails" }]
+      }
+    },
+    {
+      "title": "Playgrounds",
+      "slug": "playgrounds",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 282, "text": "* ## Playgrounds" }]
+      }
+    },
+    {
+      "title": "Daniel Boone’s Wilderness Arcade",
+      "slug": "daniel-boones-wilderness-arcade",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 287, "text": "* ## Daniel Boone’s Wilderness Arcade" }]
+      }
+    },
+    {
+      "title": "Davy Crockett’s Wilderness Arcade",
+      "slug": "davy-crocketts-wilderness-arcade",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 293, "text": "* ## Davy Crockett’s Wilderness Arcade" }]
+      }
+    },
+    {
+      "title": "Wilderness Back Trail Adventure",
+      "slug": "wilderness-back-trail-adventure",
+      "warnings": ["location:missing_source_span", "schedule:missing_source_span"],
+      "required_spans": {
+        "title": [{ "page": 1, "line": 298, "text": "* ## Wilderness Back Trail Adventure" }]
+      }
+    }
+  ]
+}

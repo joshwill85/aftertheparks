@@ -105,10 +105,9 @@ export function TonightClient({
         <TonightHero />
         <NightSectionEmpty
           title="Tonight's schedule is still settling in"
-          description="We haven't confirmed evening activities yet. Browse free resort fun, explore all activities, or check back after the next schedule update."
+          description="We haven't confirmed evening activities yet. Explore all activities, browse resorts, or check back after the next schedule update."
           actions={[
-            { label: "Free activities", href: "/activities?free=true", variant: "primary" },
-            { label: "Explore all", href: "/activities" },
+            { label: "Explore activities", href: "/activities", variant: "primary" },
             { label: "Browse resorts", href: "/resorts" },
             { label: "See today", href: "/today" },
           ]}
@@ -255,10 +254,10 @@ export function TonightClient({
         {lowEnergy.length === 0 ? (
           <NightSectionEmpty
             title="No low-key evening picks right now"
-            description="Try movies or campfires, or browse free activities happening across the resorts."
+            description="Try movies or campfires, or browse the full resort activity calendar."
             actions={[
               { label: "Movies tonight", href: "#movies", variant: "primary" },
-              { label: "Free activities", href: "/activities?free=true" },
+              { label: "Explore activities", href: "/activities" },
               { label: "Browse resorts", href: "/resorts" },
             ]}
           />

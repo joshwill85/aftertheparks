@@ -5,7 +5,7 @@ import { runSearch } from "@/lib/search/runSearch";
 
 const SUGGESTIONS = [
   "campfire tonight",
-  "free pool",
+  "pool games",
   "polynesian",
   "movie",
   "crafts kids",
@@ -39,6 +39,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           initialPayload
             ? {
                 activities: initialPayload.activities,
+                officialOfferings: initialPayload.officialOfferings,
                 resorts: initialPayload.resorts,
                 guides: initialPayload.guides,
                 movies: initialPayload.movies,

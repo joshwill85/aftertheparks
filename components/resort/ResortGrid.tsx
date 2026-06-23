@@ -87,7 +87,11 @@ export function ResortGrid({
     list = [...list].sort((a, b) => {
       switch (sort) {
         case "activities":
-          return b.activityCount - a.activityCount;
+          return (
+            b.activityCount + b.offeringCount -
+              (a.activityCount + a.offeringCount) ||
+            a.name.localeCompare(b.name)
+          );
         case "today":
           return (today[b.slug] ?? 0) - (today[a.slug] ?? 0);
         case "tonight":

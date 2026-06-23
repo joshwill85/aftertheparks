@@ -1,10 +1,9 @@
-export type Daypart = "morning" | "afternoon" | "evening" | "late";
+export type Daypart = "morning" | "afternoon" | "evening" | "late" | "anytime";
 
 export type ActivitySortKey =
   | "time"
   | "resort"
   | "category"
-  | "free"
   | "quality";
 
 export type ActivityStatus = "active" | "seasonal" | "paused";
@@ -99,7 +98,7 @@ export interface ActivityOccurrence {
   summary: string;
   category: string;
   section: string;
-  startDateTime: string;
+  startDateTime?: string;
   endDateTime?: string;
   daypart: Daypart;
   price: {
@@ -203,7 +202,9 @@ export interface ActivityOffering {
       | "location"
       | "description"
       | "availability"
+      | "price"
       | "booking"
+      | "eligibility"
       | "amenities",
       SourceSpan[]
     >
@@ -226,6 +227,7 @@ export interface ResortSummary {
   area: string;
   disneyUrl: string;
   activityCount: number;
+  offeringCount: number;
 }
 
 export interface MovieNightOccurrence {
