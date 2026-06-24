@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { resolveBrowseNavHref } from "@/lib/explore/browseParams";
+import { usePlan } from "@/components/atlas/PlanProvider";
 
 const TABS = [
   {
@@ -52,23 +54,39 @@ function isActive(pathname: string, href: string) {
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { itemCount } = usePlan();
 
   return (
     <nav
       className="mobile-bottom-nav flex items-stretch justify-around md:hidden"
       aria-label="Mobile"
     >
-      {TABS.map((tab) => (
-        <Link
-          key={tab.href}
-          href={tab.href}
-          className="mobile-bottom-nav__link"
-          aria-current={isActive(pathname, tab.href) ? "page" : undefined}
-        >
-          {tab.icon}
-          <span>{tab.label}</span>
-        </Link>
-      ))}
+      {TABS.map((tab) => {
+        const href = resolveBrowseNavHref(tab.href, pathname, searchParams);
+        const showCount = tab.href === "/plan" && itemCount > 0;
+        return (
+          <Link
+            key={tab.href}
+            href={href}
+            className="mobile-bottom-nav__link"
+            aria-current={isActive(pathname, tab.href) ? "page" : undefined}
+            aria-label={
+              showCount ? `My Plan, ${itemCount} saved` : tab.label
+            }
+          >
+            {tab.icon}
+            <span>
+              {tab.label}
+              {showCount && (
+                <span className="mobile-bottom-nav__badge" aria-hidden>
+                  {itemCount}
+                </span>
+              )}
+            </span>
+          </Link>
+        );
+      })}
     </nav>
   );
 }

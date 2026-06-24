@@ -7,33 +7,17 @@ import {
   filterOfficialOfferingsWithoutActivityCollisions,
   getFilteredOfficialOfferings,
 } from "@/lib/data/officialOfferings";
-import type { Daypart } from "@/lib/types/occurrence";
-import type { ActivitySortKey } from "@/lib/activities/sort";
+import { parseBrowseParams } from "@/lib/explore/browseParams";
 
 export const dynamic = "force-dynamic";
 
 interface PageProps {
-  searchParams: Promise<{
-    resort?: string;
-    category?: string;
-    daypart?: string;
-    free?: string;
-    sort?: string;
-    q?: string;
-  }>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }
 
 export default async function ActivitiesPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const daypart = params.daypart as Daypart | undefined;
-  const filters = {
-    resort: params.resort,
-    category: params.category,
-    daypart,
-    free: params.free === "true",
-    sort: (params.sort as ActivitySortKey | undefined) ?? "time",
-    q: params.q,
-  };
+  const filters = parseBrowseParams(params);
   const [activities, officialOfferingsPool, resorts] = await Promise.all([
     getFilteredActivities(filters),
     getFilteredOfficialOfferings(filters),

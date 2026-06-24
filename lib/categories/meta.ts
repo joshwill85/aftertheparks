@@ -28,7 +28,7 @@ export function getCategoryMeta(category: string): CategoryMeta {
 export const MOOD_CHIPS = [
   { id: "tonight", label: "Tonight", href: "/tonight" },
   { id: "little_kids", label: "Little kids", href: "/activities?category=arts_crafts" },
-  { id: "rainy", label: "Rainy day", href: "/activities?category=arts_crafts" },
+  { id: "rainy", label: "Rainy day", href: "/activities?category=arcade" },
   { id: "pool_break", label: "Pool break", href: "/activities?category=poolside" },
   { id: "evening", label: "After dinner", href: "/tonight" },
 ] as const;

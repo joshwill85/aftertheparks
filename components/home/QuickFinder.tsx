@@ -37,31 +37,24 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const params = new URLSearchParams();
+    if (where) params.set("resort", where);
+    if (vibe) params.set("category", vibe);
+
     if (date === "tonight") {
-      const params = new URLSearchParams();
-      if (where) params.set("resort", where);
       const qs = params.toString();
       router.push(qs ? `/tonight?${qs}` : "/tonight");
       return;
     }
 
     if (date === "today") {
-      const params = new URLSearchParams();
-      if (where) params.set("resort", where);
       const qs = params.toString();
       router.push(qs ? `/today?${qs}` : "/today");
       return;
     }
 
-    const params = new URLSearchParams();
-    if (where) params.set("resort", where);
-
     if (date && date !== "today" && date !== "tonight") {
       params.set("daypart", date as Daypart);
-    }
-
-    if (vibe) {
-      params.set("category", vibe);
     }
 
     const qs = params.toString();

@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -26,7 +27,9 @@ export function AppShell({ children }: { children: ReactNode }) {
       <a href={skip.href} className="skip-link">
         {skip.label}
       </a>
-      <SiteHeader />
+      <Suspense fallback={<header className="site-header" aria-hidden />}>
+        <SiteHeader />
+      </Suspense>
       <main
         id="main-content"
         tabIndex={-1}
@@ -34,7 +37,9 @@ export function AppShell({ children }: { children: ReactNode }) {
       >
         {children}
       </main>
-      <MobileBottomNav />
+      <Suspense fallback={null}>
+        <MobileBottomNav />
+      </Suspense>
       <SiteFooter />
     </div>
   );

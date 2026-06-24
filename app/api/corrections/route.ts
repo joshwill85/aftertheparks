@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import { submitCorrection } from "@/lib/data/activities";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export async function POST(request: Request) {
+  const limited = await guardRateLimit({
+    request,
+    scope: "corrections",
+  });
+  if (limited) return limited;
+
   try {
     const body = await request.json();
     const ok = await submitCorrection(

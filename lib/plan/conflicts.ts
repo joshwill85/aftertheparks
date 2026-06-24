@@ -33,10 +33,15 @@ export function findPlanConflicts(items: PlanItem[]): PlanConflict[] {
         windowA.start < windowB.end && windowB.start < windowA.end;
       if (!overlaps) continue;
 
+      const overlapMins = Math.round(
+        (Math.min(windowA.end, windowB.end) - Math.max(windowA.start, windowB.start)) /
+          60000
+      );
+
       conflicts.push({
         a,
         b,
-        message: `${a.title} overlaps with ${b.title}`,
+        message: `Two good options at the same time — these overlap by ${overlapMins} minutes. Keep both and decide later.`,
       });
     }
   }

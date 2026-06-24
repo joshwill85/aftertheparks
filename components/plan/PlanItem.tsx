@@ -9,6 +9,7 @@ import {
   getDisplayTitle,
   occurrenceToDisplayInput,
 } from "@/lib/activityDisplay";
+import { getLivingState, livingStateLabel } from "@/lib/plan/living";
 import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 
@@ -45,6 +46,8 @@ function PlanItemCard({
   const display = planItemToDisplayInput(item);
   const title = getDisplayTitle(display);
   const time = getDisplayTime(display);
+  const living = getLivingState(item);
+  const livingLabel = livingStateLabel(living);
 
   const saveNotes = () => {
     onUpdateNotes?.(item.id, draftNotes.trim());
@@ -66,6 +69,21 @@ function PlanItemCard({
         >
           {title}
         </Link>
+        {livingLabel && (
+          <span className="plan-living-badge mt-1 inline-flex rounded-full bg-[var(--lagoon)]/12 px-2 py-0.5 text-xs font-bold text-[var(--lagoon-deep)]">
+            {livingLabel}
+          </span>
+        )}
+        {item.sourceStatus === "changed" && (
+          <p className="mt-1 text-xs font-bold text-[var(--color-coral)]">
+            A little changed since you saved this.
+          </p>
+        )}
+        {item.sourceStatus === "unavailable" && (
+          <p className="mt-1 text-xs font-bold text-[var(--muted)]">
+            May no longer be available
+          </p>
+        )}
         <p className="mt-1 text-sm font-bold text-[var(--color-foreground)]/72">
           {item.resortName}
         </p>

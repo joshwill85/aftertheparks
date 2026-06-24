@@ -15,7 +15,11 @@
     "review:activities": "python3 scripts/ingest/review_queue.py list",
     "publish:gold-v2": "python3 scripts/ingest/publish_gold_v2.py",
     "seed:enrichment": "tsx scripts/seed-enrichment.ts",
-    "warm:posters": "tsx --env-file=.env.local scripts/warm-movie-posters.ts"
+    "warm:posters": "tsx --env-file=.env.local scripts/warm-movie-posters.ts",
+    "setup:plan-env": "./scripts/setup-plan-env.sh",
+    "setup:plan-env:push": "./scripts/setup-plan-env-push.sh",
+    "setup:site-gate-env:push": "./scripts/setup-site-gate-env-push.sh",
+    "bootstrap:turnstile": "./scripts/cloudflare/bootstrap-turnstile.sh"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -44,6 +48,7 @@
     "eslint-config-next": "^15.3.3",
     "tailwindcss": "^4.1.8",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "playwright": "^1.52.0"
   }
 }

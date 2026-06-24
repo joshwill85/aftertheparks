@@ -11,6 +11,7 @@ interface FilterSheetProps {
   onClose: () => void;
   resorts: { slug: string; name: string }[];
   basePath?: string;
+  hideDaypart?: boolean;
 }
 
 export function FilterSheet({
@@ -18,6 +19,7 @@ export function FilterSheet({
   onClose,
   resorts,
   basePath = "/activities",
+  hideDaypart = false,
 }: FilterSheetProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -84,6 +86,7 @@ export function FilterSheet({
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
+  const freeOnly = searchParams.get("free") === "true";
 
   return (
     <AnimatePresence>
@@ -137,6 +140,8 @@ export function FilterSheet({
               activeResort={activeResort}
               activeCategory={activeCategory}
               activeDaypart={activeDaypart}
+              freeOnly={freeOnly}
+              hideDaypart={hideDaypart}
               update={update}
               searchableResorts
             />

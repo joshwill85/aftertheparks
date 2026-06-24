@@ -5,15 +5,14 @@ import { TIMEZONE } from "@/lib/daypart";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import {
   expandOccurrences,
-  filterByDaypart,
   filterHappeningNow,
   filterToday,
   filterTonight,
 } from "@/lib/occurrences/expand";
 import { shouldHideActivity } from "@/lib/activityDisplay";
 import { canonicalActivitySlug } from "@/lib/activities/legacySlugs";
-import { rankActivitiesByQuery, runSearch } from "@/lib/search/runSearch";
-import { sortActivities, type ActivitySortKey } from "@/lib/activities/sort";
+import { runSearch } from "@/lib/search/runSearch";
+import { applyBrowseFilters } from "@/lib/explore/applyBrowseFilters";
 import {
   annotateHappeningNow,
   getActivityAvailability,
@@ -298,24 +297,7 @@ export async function getFilteredActivities(
   }
   occurrences = Array.from(deduped.values());
 
-  if (filters.resort) {
-    occurrences = occurrences.filter((o) => o.resort.slug === filters.resort);
-  }
-  if (filters.category) {
-    occurrences = occurrences.filter((o) => o.category === filters.category);
-  }
-  if (filters.daypart) {
-    occurrences = filterByDaypart(occurrences, filters.daypart);
-  }
-  if (filters.free) {
-    occurrences = occurrences.filter((o) => o.price.state === "free");
-  }
-  if (filters.q) {
-    occurrences = rankActivitiesByQuery(occurrences, filters.q);
-  }
-
-  const sortKey = (filters.sort ?? "time") as ActivitySortKey;
-  occurrences = sortActivities(occurrences, sortKey);
+  occurrences = applyBrowseFilters(occurrences, filters);
 
   const limit = filters.limit ?? 100;
   return sanitizePublicActivities(
@@ -355,17 +337,7 @@ export async function getActivityBySlug(
   };
 }
 
-export interface ActivityQueryOptions {
-  resort?: string;
-}
-
-function filterByResort(
-  activities: ActivityOccurrence[],
-  resort?: string
-): ActivityOccurrence[] {
-  if (!resort) return activities;
-  return activities.filter((o) => o.resort.slug === resort);
-}
+export type ActivityQueryOptions = ActivityFilters;
 
 function filterTodayAvailability(
   activities: ActivityOccurrence[],
@@ -405,41 +377,44 @@ function filterTonightAvailability(
     );
 }
 
+function filterBrowseActivities(
+  activities: ActivityOccurrence[],
+  filters: ActivityFilters = {}
+): ActivityOccurrence[] {
+  return sanitizePublicActivities(
+    dedupeOccurrences(applyBrowseFilters(activities, filters))
+  );
+}
+
 export async function getTodayActivities(
-  options: ActivityQueryOptions = {}
+  filters: ActivityFilters = {}
 ): Promise<ActivityOccurrence[]> {
   const all = annotateHappeningNow(await getAllOccurrences(1));
   const today = filterTodayAvailability(all);
-  return sanitizePublicActivities(
-    dedupeOccurrences(filterByResort(today, options.resort))
-  );
+  return filterBrowseActivities(today, filters);
 }
 
 export async function getTonightActivities(
-  options: ActivityQueryOptions = {}
+  filters: ActivityFilters = {}
 ): Promise<ActivityOccurrence[]> {
   const all = annotateHappeningNow(await getAllOccurrences(1));
   const tonight = filterTonightAvailability(all);
-  return sanitizePublicActivities(
-    dedupeOccurrences(filterByResort(tonight, options.resort))
-  );
+  return filterBrowseActivities(tonight, filters);
 }
 
 export async function getHappeningNow(
-  options: ActivityQueryOptions = {}
+  filters: ActivityFilters = {}
 ): Promise<ActivityOccurrence[]> {
   const all = annotateHappeningNow(await getAllOccurrences(1));
   const now = nowInstant();
   const happening = all.filter(
     (o) => getActivityAvailability(o, now).state === "happening_now"
   );
-  return sanitizePublicActivities(
-    dedupeOccurrences(filterByResort(happening, options.resort))
-  );
+  return filterBrowseActivities(happening, filters);
 }
 
 export async function getTomorrowPreview(
-  options: ActivityQueryOptions = {},
+  filters: ActivityFilters = {},
   limit = 4
 ): Promise<ActivityOccurrence[]> {
   const tomorrow = addOrlandoDays(orlandoDateString(nowInstant()), 1);
@@ -449,7 +424,7 @@ export async function getTomorrowPreview(
   );
 
   return sanitizePublicActivities(
-    dedupeOccurrences(filterByResort(tomorrowOnly, options.resort)).slice(
+    dedupeOccurrences(applyBrowseFilters(tomorrowOnly, filters)).slice(
       0,
       limit
     ),

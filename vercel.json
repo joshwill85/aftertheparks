@@ -19,5 +19,11 @@
       "destination": "https://aftertheparks.com/:path*",
       "permanent": true
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/plan-cleanup",
+      "schedule": "0 6 * * *"
+    }
   ]
 }

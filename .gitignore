@@ -3,6 +3,7 @@
 .env
 .env.local
 .env*.local
+.env.cloudflare.local
 
 # Dependencies & build
 node_modules/
@@ -25,6 +26,7 @@ data/raw/*.html
 supabase/.temp/
 supabase/.branches/
 tmp/
+tmp/cf-playwright-profile/
 
 # OS / editor
 .DS_Store

@@ -13,6 +13,7 @@ import { NightEmptyState } from "@/components/tonight/NightEmptyState";
 import { NightActivityCard } from "@/components/tonight/NightActivityCard";
 import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import { TonightHero } from "@/components/tonight/TonightHero";
+import { EmptyState } from "@/components/atlas/EmptyState";
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 
 const AFTER_DINNER_CATEGORIES = new Set([
@@ -63,9 +64,11 @@ function dedupeBySlot(activities: ActivityOccurrence[]): ActivityOccurrence[] {
 export function TonightClient({
   activities,
   movieNights,
+  filteredMode = false,
 }: {
   activities: ActivityOccurrence[];
   movieNights: MovieNightOccurrence[];
+  filteredMode?: boolean;
 }) {
   const { addActivity } = usePlan();
   const { setForceDaypart } = useDaypart();
@@ -92,6 +95,56 @@ export function TonightClient({
   const tonightMovies = movieNights.filter((m) => m.isTonight);
   const weekMovies = movieNights.filter((m) => !m.isTonight);
 
+  if (filteredMode) {
+    const showMovies = movieNights.length > 0;
+
+    if (visibleActivities.length === 0 && !showMovies) {
+      return (
+        <EmptyState
+          title="No tonight picks match your filters"
+          description="Try clearing a filter or browse all evening activities across the resorts."
+          actions={[
+            { label: "Clear filters", href: "/tonight", variant: "primary" },
+            { label: "Explore activities", href: "/activities?daypart=evening" },
+            { label: "Browse resorts", href: "/resorts" },
+          ]}
+        />
+      );
+    }
+
+    return (
+      <div className="space-y-8 pb-8">
+        <p className="tonight-callout">
+          Filtered evening picks — confirm showtimes with your resort before heading out.
+        </p>
+        {visibleActivities.length > 0 && (
+          <EventCardList columns={2}>
+            {visibleActivities.map((activity) => (
+              <EventCardListItem key={activity.id}>
+                <NightActivityCard activity={activity} onSave={addActivity} />
+              </EventCardListItem>
+            ))}
+          </EventCardList>
+        )}
+        {showMovies && (
+          <section className="space-y-4">
+            <h2 className="home-section__title text-xl md:text-2xl">
+              Movies under the stars
+            </h2>
+            <EventCardList>
+              {movieNights.map((movie) => (
+                <EventCardListItem key={movie.id}>
+                  <MovieCard movie={movie} />
+                </EventCardListItem>
+              ))}
+            </EventCardList>
+            <TmdbAttribution className="border-t border-[var(--border-soft)] pt-6 text-[var(--muted)]" />
+          </section>
+        )}
+      </div>
+    );
+  }
+
   const hasAnyContent =
     movieNights.length > 0 ||
     campfires.length > 0 ||
@@ -117,7 +170,7 @@ export function TonightClient({
   }
 
   return (
-    <div id="activities" className="space-y-14 scroll-mt-24 pb-8">
+    <div className="space-y-14 scroll-mt-24 pb-8">
       <TonightHero />
 
       <p className="tonight-callout">

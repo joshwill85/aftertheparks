@@ -9,6 +9,7 @@ interface ResultSummaryProps {
   count: number;
   className?: string;
   compact?: boolean;
+  basePath?: string;
 }
 
 const SORT_OPTIONS: { value: ActivitySortKey; label: string }[] = [
@@ -23,6 +24,7 @@ export function ResultSummary({
   count,
   className,
   compact = false,
+  basePath = "/activities",
 }: ResultSummaryProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -30,6 +32,7 @@ export function ResultSummary({
     searchParams.get("resort"),
     searchParams.get("category"),
     searchParams.get("daypart"),
+    searchParams.get("free") === "true" ? "free" : null,
     searchParams.get("q"),
   ].filter(Boolean).length;
 
@@ -50,7 +53,7 @@ export function ResultSummary({
     else params.set("sort", value);
     const qs = params.toString();
     startTransition(() => {
-      router.push(qs ? `/activities?${qs}` : "/activities");
+      router.push(qs ? `${basePath}?${qs}` : basePath);
     });
   };
 

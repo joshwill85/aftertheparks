@@ -2,9 +2,10 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { MOOD_CHIPS } from "@/lib/categories/meta";
+import { mergeMoodChipHref } from "@/lib/explore/browseParams";
 import { cn, formatCategory } from "@/lib/utils";
 import type { Daypart } from "@/lib/types/occurrence";
 
@@ -29,10 +30,16 @@ const CATEGORIES = [
 interface FilterRailProps {
   resorts: { slug: string; name: string }[];
   basePath?: string;
+  hideDaypart?: boolean;
 }
 
-export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProps) {
+export function FilterRail({
+  resorts,
+  basePath = "/activities",
+  hideDaypart = false,
+}: FilterRailProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const update = useCallback(
@@ -49,6 +56,7 @@ export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProp
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
+  const freeOnly = searchParams.get("free") === "true";
 
   const clearAll = () => router.push(basePath);
 
@@ -69,7 +77,7 @@ export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProp
           {MOOD_CHIPS.map((chip) => (
             <Link
               key={chip.id}
-              href={chip.href}
+              href={mergeMoodChipHref(chip.href, pathname, searchParams)}
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 text-xs font-bold transition-colors hover:border-[var(--accent)]"
             >
               {chip.label}
@@ -83,10 +91,12 @@ export function FilterRail({ resorts, basePath = "/activities" }: FilterRailProp
         activeResort={activeResort}
         activeCategory={activeCategory}
         activeDaypart={activeDaypart}
+        freeOnly={freeOnly}
+        hideDaypart={hideDaypart}
         update={update}
       />
 
-      {(activeResort || activeCategory || activeDaypart) && (
+      {(activeResort || activeCategory || activeDaypart || freeOnly) && (
         <button
           type="button"
           onClick={clearAll}
@@ -104,6 +114,8 @@ export function FilterFields({
   activeResort,
   activeCategory,
   activeDaypart,
+  freeOnly = false,
+  hideDaypart = false,
   update,
   searchableResorts = false,
 }: {
@@ -111,6 +123,8 @@ export function FilterFields({
   activeResort: string | null;
   activeCategory: string | null;
   activeDaypart: string | null;
+  freeOnly?: boolean;
+  hideDaypart?: boolean;
   update: (key: string, value: string | null) => void;
   searchableResorts?: boolean;
 }) {
@@ -124,27 +138,42 @@ export function FilterFields({
 
   return (
     <div className="flex flex-col gap-4">
+      {!hideDaypart && (
+        <div className="space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
+            Time of day
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {DAYPARTS.map((d) => (
+              <button
+                key={d.value}
+                type="button"
+                onClick={() =>
+                  update("daypart", activeDaypart === d.value ? null : d.value)
+                }
+                className={cn(
+                  "filter-pill",
+                  activeDaypart === d.value && "filter-pill--active"
+                )}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="space-y-2">
         <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-          Time of day
+          Price
         </p>
-        <div className="flex flex-wrap gap-2">
-          {DAYPARTS.map((d) => (
-            <button
-              key={d.value}
-              type="button"
-              onClick={() =>
-                update("daypart", activeDaypart === d.value ? null : d.value)
-              }
-              className={cn(
-                "filter-pill",
-                activeDaypart === d.value && "filter-pill--active"
-              )}
-            >
-              {d.label}
-            </button>
-          ))}
-        </div>
+        <button
+          type="button"
+          onClick={() => update("free", freeOnly ? null : "true")}
+          className={cn("filter-pill", freeOnly && "filter-pill--active")}
+        >
+          Free only
+        </button>
       </div>
 
       {resorts.length > 0 && (

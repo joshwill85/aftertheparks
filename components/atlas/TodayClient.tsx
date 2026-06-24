@@ -6,7 +6,9 @@ import { ActivityCard } from "@/components/activity/ActivityCard";
 import { EmptyState } from "@/components/atlas/EmptyState";
 import { PalmRefresh } from "@/components/magic/PalmRefresh";
 import { formatOrlandoTime } from "@/lib/daypart";
+import { buildBrowseHref } from "@/lib/explore/browseParams";
 import { usePlan } from "@/components/atlas/PlanProvider";
+import { useSearchParams } from "next/navigation";
 
 export function TodayClient({
   initialActivities,
@@ -17,15 +19,18 @@ export function TodayClient({
 }) {
   const [activities, setActivities] = useState(initialActivities);
   const { addActivity } = usePlan();
+  const searchParams = useSearchParams();
 
   const refresh = useCallback(async () => {
-    const params = new URLSearchParams(window.location.search);
-    const resort = params.get("resort");
-    const url = resort ? `/api/today?resort=${encodeURIComponent(resort)}` : "/api/today";
+    const qs = searchParams.toString();
+    const url = qs ? `/api/today?${qs}` : "/api/today";
     const res = await fetch(url);
     const data = await res.json();
     setActivities(data.activities ?? []);
-  }, []);
+  }, [searchParams]);
+
+  const tonightHref = buildBrowseHref("/tonight", searchParams);
+  const exploreHref = buildBrowseHref("/activities", searchParams);
 
   if (activities.length === 0) {
     return (
@@ -34,8 +39,8 @@ export function TodayClient({
           title="We don't see confirmed activities left today"
           description="Schedules change often. Try tonight's movies and campfires, browse all activities, or check the official resort guide before heading out."
           actions={[
-            { label: "Tonight's movies", href: "/tonight", variant: "primary" },
-            { label: "Explore activities", href: "/activities" },
+            { label: "Tonight's movies", href: tonightHref, variant: "primary" },
+            { label: "Explore activities", href: exploreHref },
             { label: "Browse by resort", href: "/resorts" },
             { label: "Search", href: "/search" },
           ]}
@@ -63,7 +68,7 @@ export function TodayClient({
 
   return (
     <PalmRefresh onRefresh={refresh}>
-      <div id="activities" className="relative scroll-mt-24">
+      <div className="relative scroll-mt-24">
         <div
           className="absolute bottom-0 left-4 top-0 w-0.5 bg-gradient-to-b from-[var(--color-citrus)] via-[var(--accent)] to-[var(--color-lantern)]"
           aria-hidden

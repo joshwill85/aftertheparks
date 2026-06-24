@@ -250,14 +250,22 @@ export interface PlanItem {
   id: string;
   activityCatalogId: string;
   activitySlug: string;
+  sourceOccurrenceId?: string;
   title: string;
   resortSlug: string;
   resortName: string;
   category?: string;
+  location?: string;
   startDateTime?: string;
   endDateTime?: string;
   notes?: string;
   addedAt: string;
+  priceLabel?: string;
+  sourceUrl?: string;
+  sourceVerifiedAt?: string;
+  savedSourceVersion?: string;
+  sourceStatus?: "current" | "changed" | "unavailable";
+  snapshotJson?: Record<string, unknown>;
 }
 
 export interface SharedPlan {

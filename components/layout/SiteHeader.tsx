@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { resolveBrowseNavHref } from "@/lib/explore/browseParams";
+import { PlanNavLink } from "@/components/plan/PlanNavLink";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -19,6 +21,7 @@ function isActive(pathname: string, href: string) {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   return (
     <header className="site-header">
@@ -36,10 +39,26 @@ export function SiteHeader() {
         </div>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
-          {NAV.map((item) => (
+          {NAV.map((item) => {
+            if (item.href === "/plan") {
+              return (
+                <PlanNavLink
+                  key={item.href}
+                  className={cn(
+                    "rounded-full px-3 py-2 text-sm font-semibold transition-colors",
+                    isActive(pathname, item.href)
+                      ? "bg-[var(--accent)]/15 text-[var(--accent)]"
+                      : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+                  )}
+                  aria-current={isActive(pathname, item.href) ? "page" : undefined}
+                />
+              );
+            }
+            const href = resolveBrowseNavHref(item.href, pathname, searchParams);
+            return (
             <Link
               key={item.href}
-              href={item.href}
+              href={href}
               aria-current={isActive(pathname, item.href) ? "page" : undefined}
               className={cn(
                 "rounded-full px-3 py-2 text-sm font-semibold transition-colors",
@@ -50,7 +69,8 @@ export function SiteHeader() {
             >
               {item.label}
             </Link>
-          ))}
+            );
+          })}
         </nav>
 
         <Link
