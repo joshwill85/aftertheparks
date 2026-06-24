@@ -51,7 +51,11 @@ vercel_set() {
     sensitive_flag=()
   fi
   vercel env rm "$name" "$env" --yes >/dev/null 2>&1 || true
-  vercel env add "$name" "$env" --value "$value" "${sensitive_flag[@]}" --yes --force >/dev/null
+  if [ "${#sensitive_flag[@]}" -gt 0 ]; then
+    vercel env add "$name" "$env" --value "$value" --sensitive --yes --force >/dev/null
+  else
+    vercel env add "$name" "$env" --value "$value" --yes --force >/dev/null
+  fi
   echo "  Vercel $env: $name"
 }
 
