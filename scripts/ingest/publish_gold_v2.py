@@ -10,6 +10,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from audit_coverage import build_coverage_audit
+    from promote_gold import generate_gold_records
+except ImportError:  # pragma: no cover - supports package-style imports in tests
+    from .audit_coverage import build_coverage_audit
+    from .promote_gold import generate_gold_records
+
 
 DEFAULT_GOLD_PATH = Path("data/processed/activity_gold_v2_preview.json")
 
@@ -69,6 +76,14 @@ def _row_with_catalog_id(row: dict[str, Any], catalog_id: str) -> dict[str, Any]
 
 
 def _public_gold_row(row: dict[str, Any], source_document_id: str) -> dict[str, Any]:
+    source = dict(row.get("source") or {})
+    source.setdefault("url", row["source_url"])
+    source.setdefault("documentHash", row["source_sha256"])
+    source.setdefault("documentId", source_document_id)
+    if row.get("source_pdf_edition"):
+        source.setdefault("edition", row.get("source_pdf_edition"))
+    source.setdefault("documentKeyLegends", [])
+
     return {
         "id": _stable_uuid(f"gold:{row['calendar_group_key']}:{row['canonical_slug']}"),
         "activity_catalog_id": row["activity_catalog_id"],
@@ -83,6 +98,7 @@ def _public_gold_row(row: dict[str, Any], source_document_id: str) -> dict[str, 
         "price": row.get("price") or {"state": "unknown"},
         "claims": row.get("claims") or {},
         "field_provenance": row["field_provenance"],
+        "source": source,
         "source_document_id": source_document_id,
         "source_url": row["source_url"],
         "source_sha256": row["source_sha256"],
@@ -210,14 +226,21 @@ def publish_gold_rows(db: Any, rows: list[dict[str, Any]]) -> dict[str, int]:
 
 
 def publish_gold_file(path: Path = DEFAULT_GOLD_PATH) -> dict[str, int]:
+    rows = json.loads(path.read_text())
+    if not isinstance(rows, list):
+        raise RuntimeError("gold_file_invalid")
+    if rows != generate_gold_records().gold_records:
+        raise RuntimeError("gold_publish_preflight_failed:gold:processed_artifact_stale")
+    audit = build_coverage_audit(gold_path=path, require_production_ready=True)
+    if not audit.passed:
+        details = ", ".join(audit.errors)
+        raise RuntimeError(f"gold_publish_preflight_failed:{details}")
+
     try:
         from db import SupabaseClient
     except ImportError:  # pragma: no cover - supports package-style imports in tests
         from .db import SupabaseClient
 
-    rows = json.loads(path.read_text())
-    if not isinstance(rows, list):
-        raise RuntimeError("gold_file_invalid")
     return publish_gold_rows(SupabaseClient(), rows)
 
 

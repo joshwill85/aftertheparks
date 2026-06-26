@@ -337,9 +337,6 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
 export function getTrustState(activity: ActivityDisplayInput): TrustState {
   const time = getDisplayTime(activity);
   const priceUnclear = activity.price?.state === "unknown";
-  const weatherDependent =
-    activity.weather_dependency === "weather_dependent" ||
-    activity.weather_dependency === "outdoor";
 
   const lastVerified = activity.freshness?.lastVerified;
   const ageMs = lastVerified
@@ -350,12 +347,6 @@ export function getTrustState(activity: ActivityDisplayInput): TrustState {
     activity.freshness?.badge === "stale" ||
     (activity.parse_confidence != null && activity.parse_confidence < 0.6);
 
-  if (weatherDependent && (time.uncertain || priceUnclear)) {
-    return trustStateFromQuality(activity, "confirm_before_going");
-  }
-  if (weatherDependent) {
-    return trustStateFromQuality(activity, "weather_dependent");
-  }
   if (time.uncertain && priceUnclear) {
     return trustStateFromQuality(activity, "confirm_before_going");
   }

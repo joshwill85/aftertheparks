@@ -1,12 +1,18 @@
 /**
- * Warm the movie_poster_cache from all movie_nights titles in Supabase.
- * Run: npm run warm:posters
+ * Legacy-only: warm the movie_poster_cache from movie_nights titles in Supabase.
+ * Run only with ALLOW_LEGACY_ACTIVITY_UI_PIPELINE=1.
  */
 import { createClient } from "@supabase/supabase-js";
 import { isUsableMovieTitle, sanitizeMovieTitle } from "../lib/movies/sanitize";
 import { resolveMoviePoster } from "../lib/movies/poster-cache";
 
 async function main() {
+  if (process.env.ALLOW_LEGACY_ACTIVITY_UI_PIPELINE !== "1") {
+    throw new Error(
+      "legacy_movie_poster_warm_disabled: film titles need a source-backed feed; set ALLOW_LEGACY_ACTIVITY_UI_PIPELINE=1 only for an intentional legacy movie_nights cache warm"
+    );
+  }
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {

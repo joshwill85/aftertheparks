@@ -37,6 +37,10 @@ function InterestCapture({
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    trackPlanEvent("plan_email_prompt_shown");
+  }, []);
+
   return (
     <div className="plan-preview-interest mt-4 rounded-2xl border border-[var(--border-soft)] bg-white/80 p-4">
       <p className="font-display text-sm font-semibold text-[var(--brand-ink)]">
@@ -66,7 +70,7 @@ function InterestCapture({
             });
             const data = await res.json();
             setStatus(data.message ?? "Thanks — we will be in touch.");
-            trackPlanEvent("plan_interest_submitted");
+            trackPlanEvent("plan_email_submitted");
           } finally {
             setLoading(false);
           }
@@ -137,7 +141,10 @@ function PreviewContent({ onClose }: { onClose: () => void }) {
     <>
       <div className="plan-preview__header flex items-start justify-between gap-3">
         <div>
-          <p className="font-display text-lg font-semibold text-[var(--brand-ink)]">
+          <p
+            id="plan-preview-title"
+            className="font-display text-lg font-semibold text-[var(--brand-ink)]"
+          >
             {copy.title}
           </p>
           <p className="mt-1 text-sm text-[var(--muted)]">{copy.subtitle}</p>
@@ -242,7 +249,7 @@ export function PlanPreview() {
               aria-labelledby="plan-preview-title"
               className={cn(
                 "plan-preview fixed z-[70] flex flex-col bg-[var(--color-sun-cream)] shadow-2xl",
-                "inset-x-0 bottom-0 max-h-[65vh] rounded-t-3xl border-t border-[var(--border-soft)] p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]",
+                "inset-x-0 bottom-0 max-h-[65vh] overflow-y-auto overscroll-contain rounded-t-3xl border-t border-[var(--border-soft)] p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]",
                 "min-[900px]:inset-y-0 min-[900px]:right-0 min-[900px]:left-auto min-[900px]:top-24 min-[900px]:max-h-[calc(100vh-7rem)] min-[900px]:w-[min(420px,calc(100vw-2rem))] min-[900px]:rounded-l-3xl min-[900px]:rounded-tr-none min-[900px]:border min-[900px]:border-r-0"
               )}
               initial={

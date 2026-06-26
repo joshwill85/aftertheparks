@@ -5,13 +5,12 @@ import {
   applyPrivateNoIndex,
   applySiteGate,
 } from "@/lib/site-gate/middleware";
-import { updateSupabaseSession } from "@/lib/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
   const gateResponse = await applySiteGate(request);
   if (gateResponse) return gateResponse;
 
-  let response = await updateSupabaseSession(request);
+  let response = NextResponse.next({ request });
   response = applyPrivateNoIndex(response);
 
   const slug = request.nextUrl.pathname.match(/^\/activities\/([^/]+)$/)?.[1];

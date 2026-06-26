@@ -1,4 +1,6 @@
 import { createServiceClient } from "@/lib/supabase/server";
+import { cache } from "react";
+import { cachePublicData } from "@/lib/cache/publicData";
 import type {
   ActivityClaim,
   ActivityFilters,
@@ -16,6 +18,7 @@ import { scoreOffering } from "@/lib/search/score";
 import { formatResortTier, slugToTitle } from "@/lib/utils";
 
 const OFFERING_QUERY_MIN_SCORE = 18;
+const SHA256_HEX = /^[a-f0-9]{64}$/i;
 
 export interface OfficialOfferingRow {
   id: string;
@@ -101,10 +104,11 @@ function normalizePriceOptions(
   }));
 }
 
-function sourceBacked(row: OfficialOfferingRow): boolean {
+export function isSourceBackedOfficialOfferingRow(row: OfficialOfferingRow): boolean {
   return Boolean(
     row.source_url &&
       row.source_sha256 &&
+      SHA256_HEX.test(row.source_sha256) &&
       row.field_provenance?.title?.length &&
       row.field_provenance?.resort_join?.length
   );
@@ -132,16 +136,11 @@ function mapAvailability(
 ): ActivityOffering["availability"] {
   const availability = row.availability ?? {};
   const hasAvailabilityProvenance = Boolean(row.field_provenance?.availability?.length);
-  const label = availability.label ?? "Hours not specified by Disney";
-  const publicLabel =
-    hasAvailabilityProvenance || label === "Hours not specified by Disney"
-      ? label
-      : "Check Disney source for current availability";
 
   return {
     kind: availability.kind ?? "evergreen_all_day",
     hoursState: availability.hours_state ?? "source_unspecified",
-    label: publicLabel,
+    label: hasAvailabilityProvenance ? availability.label ?? undefined : undefined,
   };
 }
 
@@ -236,7 +235,7 @@ function mapAmenities(row: OfficialOfferingRow): string[] {
 export function mapOfficialOfferingRow(
   row: OfficialOfferingRow
 ): ActivityOffering {
-  const verified = sourceBacked(row);
+  const verified = isSourceBackedOfficialOfferingRow(row);
 
   return {
     id: row.id,
@@ -271,7 +270,7 @@ export function mapOfficialOfferingRow(
     },
     fieldProvenance: mapFieldProvenance(row.field_provenance),
     claims: row.claims ?? undefined,
-    trustState: row.trust_state ?? "source_backed",
+    trustState: verified ? row.trust_state ?? "source_backed" : "source_unclear",
     status: mapStatus(row),
   };
 }
@@ -279,7 +278,9 @@ export function mapOfficialOfferingRow(
 export function mapOfficialOfferingRows(
   rows: OfficialOfferingRow[]
 ): ActivityOffering[] {
-  return rows.map(mapOfficialOfferingRow);
+  return rows
+    .filter(isSourceBackedOfficialOfferingRow)
+    .map(mapOfficialOfferingRow);
 }
 
 export function filterOfficialOfferingsWithoutActivityCollisions(
@@ -300,23 +301,32 @@ export function filterOfficialOfferingsWithoutActivityCollisions(
   );
 }
 
-export async function fetchOfficialActivityOfferings(): Promise<ActivityOffering[]> {
-  const supabase = createServiceClient();
-  if (!supabase) return [];
+const fetchOfficialActivityOfferingsFromSupabase = cachePublicData(
+  async function fetchOfficialActivityOfferingsFromSupabase(): Promise<
+    ActivityOffering[]
+  > {
+    const supabase = createServiceClient();
+    if (!supabase) return [];
 
-  const { data, error } = await supabase
-    .from("v_public_activity_offerings")
-    .select("*");
+    const { data, error } = await supabase
+      .from("v_public_activity_offerings")
+      .select("*");
 
-  if (error) {
-    if (!/does not exist|schema cache/i.test(error.message)) {
-      console.error("fetchOfficialActivityOfferings:", error.message);
+    if (error) {
+      if (!/does not exist|schema cache/i.test(error.message)) {
+        console.error("fetchOfficialActivityOfferings:", error.message);
+      }
+      return [];
     }
-    return [];
-  }
 
-  return mapOfficialOfferingRows((data ?? []) as OfficialOfferingRow[]);
-}
+    return mapOfficialOfferingRows((data ?? []) as OfficialOfferingRow[]);
+  },
+  ["official-activity-offerings"]
+);
+
+export const fetchOfficialActivityOfferings = cache(
+  fetchOfficialActivityOfferingsFromSupabase
+);
 
 export async function getOfficialOfferingsForResort(
   resortSlug: string
@@ -348,6 +358,14 @@ export async function getFilteredOfficialOfferings(
 
   if (filters.free) {
     offerings = offerings.filter((offering) => offering.price.state === "free");
+  }
+
+  if (filters.reservation) {
+    offerings = offerings.filter(
+      (offering) =>
+        offering.booking?.reservationRequired ||
+        offering.booking?.reservationRecommended
+    );
   }
 
   const q = normalizeSearchQuery(filters.q ?? "");

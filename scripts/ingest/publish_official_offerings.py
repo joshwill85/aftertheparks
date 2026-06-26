@@ -10,6 +10,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from audit_official_recreation_coverage import build_official_recreation_coverage_audit
+    from generate_official_recreation_offerings import generate_official_recreation_offerings
+except ImportError:  # pragma: no cover
+    from .audit_official_recreation_coverage import build_official_recreation_coverage_audit
+    from .generate_official_recreation_offerings import generate_official_recreation_offerings
+
 
 DEFAULT_INPUT_PATH = Path("data/processed/official_recreation_offerings.json")
 
@@ -242,14 +249,23 @@ def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str,
 
 
 def publish_official_offering_file(path: Path = DEFAULT_INPUT_PATH) -> dict[str, int]:
+    extraction = json.loads(path.read_text())
+    if not isinstance(extraction, dict):
+        raise RuntimeError("official_offerings_file_invalid")
+    if extraction != generate_official_recreation_offerings():
+        raise RuntimeError(
+            "official_offerings_publish_preflight_failed:official_recreation:processed_offerings_stale"
+        )
+    audit = build_official_recreation_coverage_audit(offerings_path=path)
+    if not audit.passed:
+        details = ", ".join(audit.errors)
+        raise RuntimeError(f"official_offerings_publish_preflight_failed:{details}")
+
     try:
         from db import SupabaseClient
     except ImportError:  # pragma: no cover
         from .db import SupabaseClient
 
-    extraction = json.loads(path.read_text())
-    if not isinstance(extraction, dict):
-        raise RuntimeError("official_offerings_file_invalid")
     return publish_official_offering_rows(SupabaseClient(), extraction)
 
 

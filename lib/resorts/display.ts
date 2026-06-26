@@ -10,11 +10,11 @@ export const RESORT_AREA_LABELS: Record<string, string> = {
 };
 
 export const TIER_TAGLINES: Record<string, string> = {
-  value: "Bright, playful stays with great pool time",
-  moderate: "Immersive themes close to the parks",
-  deluxe: "Signature dining and walkable park access",
+  value: "Value resort activity calendars and offerings",
+  moderate: "Moderate resort activity calendars and offerings",
+  deluxe: "Deluxe resort activity calendars and offerings",
   deluxe_villa: "Room to spread out on longer trips",
-  campground: "Cabins, campsites, and outdoor adventure",
+  campground: "Campground activity calendars and offerings",
 };
 
 export const TIER_ORDER = [

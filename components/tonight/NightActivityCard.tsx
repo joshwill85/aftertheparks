@@ -12,7 +12,7 @@ interface NightActivityCardProps {
 }
 
 export function NightActivityCard({ activity, onSave }: NightActivityCardProps) {
-  const { isInPlan } = usePlan();
+  const { isActivitySaved } = usePlan();
   const display = toDisplayActivity(activity);
   const card = activityToEventCard(activity, display, {
     showResort: true,
@@ -22,7 +22,7 @@ export function NightActivityCard({ activity, onSave }: NightActivityCardProps) 
   return (
     <EventCard
       {...card}
-      saved={isInPlan(activity.activityCatalogId)}
+      saved={isActivitySaved(activity)}
       onSave={onSave ? () => onSave(activity) : undefined}
     />
   );

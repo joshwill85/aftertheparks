@@ -1,0 +1,7591 @@
+{
+  "source_path": "data/raw/pdfs/CSR_Aframe_Recreation-0326.pdf",
+  "content_sha256": "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+  "page_count": 1,
+  "pages": [
+    {
+      "page_number": 1,
+      "width": 1728.0,
+      "height": 2592.0,
+      "text_source": "ocr",
+      "words": [
+        {
+          "text": ">",
+          "bbox": [
+            128.0,
+            190.5,
+            150.0,
+            218.5
+          ],
+          "block_no": 1,
+          "line_no": 1002,
+          "word_no": 1
+        },
+        {
+          "text": "SPRINGS",
+          "bbox": [
+            160.0,
+            185.5,
+            345.0,
+            220.5
+          ],
+          "block_no": 1,
+          "line_no": 1002,
+          "word_no": 2
+        },
+        {
+          "text": "RESORT",
+          "bbox": [
+            188.5,
+            228.5,
+            318.0,
+            241.5
+          ],
+          "block_no": 1,
+          "line_no": 1003,
+          "word_no": 1
+        },
+        {
+          "text": "SCAN",
+          "bbox": [
+            251.0,
+            408.5,
+            338.0,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "word_no": 3
+        },
+        {
+          "text": "THIS",
+          "bbox": [
+            356.0,
+            408.5,
+            426.0,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "word_no": 4
+        },
+        {
+          "text": "QR",
+          "bbox": [
+            443.0,
+            408.5,
+            487.5,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "word_no": 5
+        },
+        {
+          "text": "CODE",
+          "bbox": [
+            504.5,
+            408.5,
+            595.0,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "word_no": 6
+        },
+        {
+          "text": "AND",
+          "bbox": [
+            611.5,
+            408.5,
+            680.5,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "word_no": 7
+        },
+        {
+          "text": "SELECT",
+          "bbox": [
+            698.0,
+            408.5,
+            819.5,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "word_no": 8
+        },
+        {
+          "text": "ACTIVITIES",
+          "bbox": [
+            250.5,
+            444.5,
+            434.5,
+            465.5
+          ],
+          "block_no": 1,
+          "line_no": 1005,
+          "word_no": 2
+        },
+        {
+          "text": "SCHEDULE",
+          "bbox": [
+            450.5,
+            444.5,
+            625.0,
+            465.5
+          ],
+          "block_no": 1,
+          "line_no": 1005,
+          "word_no": 3
+        },
+        {
+          "text": "TO",
+          "bbox": [
+            641.0,
+            444.5,
+            682.0,
+            465.5
+          ],
+          "block_no": 1,
+          "line_no": 1005,
+          "word_no": 4
+        },
+        {
+          "text": "VIEW",
+          "bbox": [
+            698.5,
+            445.0,
+            783.5,
+            465.5
+          ],
+          "block_no": 1,
+          "line_no": 1005,
+          "word_no": 5
+        },
+        {
+          "text": "INFORMATION",
+          "bbox": [
+            339.5,
+            480.5,
+            568.0,
+            501.5
+          ],
+          "block_no": 1,
+          "line_no": 1006,
+          "word_no": 3
+        },
+        {
+          "text": "DIGITALLY!",
+          "bbox": [
+            587.5,
+            480.5,
+            760.5,
+            501.5
+          ],
+          "block_no": 1,
+          "line_no": 1006,
+          "word_no": 4
+        },
+        {
+          "text": "“as",
+          "bbox": [
+            1396.5,
+            469.0,
+            1410.0,
+            485.0
+          ],
+          "block_no": 1,
+          "line_no": 1006,
+          "word_no": 7
+        },
+        {
+          "text": "Be",
+          "bbox": [
+            190.5,
+            627.5,
+            276.0,
+            682.0
+          ],
+          "block_no": 1,
+          "line_no": 1007,
+          "word_no": 1
+        },
+        {
+          "text": "x",
+          "bbox": [
+            1259.0,
+            531.0,
+            1326.0,
+            668.5
+          ],
+          "block_no": 1,
+          "line_no": 1007,
+          "word_no": 3
+        },
+        {
+          "text": "FAMILY",
+          "bbox": [
+            371.5,
+            648.0,
+            525.5,
+            678.5
+          ],
+          "block_no": 1,
+          "line_no": 1008,
+          "word_no": 2
+        },
+        {
+          "text": "WELLNESS",
+          "bbox": [
+            536.0,
+            647.5,
+            754.0,
+            679.0
+          ],
+          "block_no": 1,
+          "line_no": 1008,
+          "word_no": 3
+        },
+        {
+          "text": "4",
+          "bbox": [
+            1168.0,
+            648.0,
+            1190.0,
+            700.5
+          ],
+          "block_no": 1,
+          "line_no": 1008,
+          "word_no": 5
+        },
+        {
+          "text": "FIND",
+          "bbox": [
+            160.0,
+            731.5,
+            255.5,
+            756.0
+          ],
+          "block_no": 1,
+          "line_no": 1009,
+          "word_no": 1
+        },
+        {
+          "text": "A",
+          "bbox": [
+            276.5,
+            731.0,
+            302.5,
+            756.0
+          ],
+          "block_no": 1,
+          "line_no": 1009,
+          "word_no": 2
+        },
+        {
+          "text": "FRIEND",
+          "bbox": [
+            324.5,
+            731.5,
+            475.5,
+            756.0
+          ],
+          "block_no": 1,
+          "line_no": 1009,
+          "word_no": 3
+        },
+        {
+          "text": "Throughout",
+          "bbox": [
+            157.5,
+            771.5,
+            301.5,
+            793.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 1
+        },
+        {
+          "text": "Disney’s",
+          "bbox": [
+            313.0,
+            771.5,
+            412.0,
+            793.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 2
+        },
+        {
+          "text": "Coronado",
+          "bbox": [
+            422.5,
+            771.5,
+            543.0,
+            789.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 3
+        },
+        {
+          "text": "Springs",
+          "bbox": [
+            553.5,
+            771.5,
+            644.5,
+            793.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 4
+        },
+        {
+          "text": "Resort",
+          "bbox": [
+            655.5,
+            772.5,
+            734.0,
+            789.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 5
+        },
+        {
+          "text": "S",
+          "bbox": [
+            908.5,
+            772.5,
+            930.5,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 6
+        },
+        {
+          "text": "|",
+          "bbox": [
+            943.0,
+            773.0,
+            949.0,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 7
+        },
+        {
+          "text": "G",
+          "bbox": [
+            961.5,
+            772.5,
+            987.5,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 8
+        },
+        {
+          "text": "N",
+          "bbox": [
+            1001.0,
+            773.0,
+            1025.5,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 9
+        },
+        {
+          "text": "AT",
+          "bbox": [
+            1036.5,
+            772.5,
+            1094.0,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 10
+        },
+        {
+          "text": "U",
+          "bbox": [
+            1105.0,
+            772.5,
+            1129.0,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 11
+        },
+        {
+          "text": "R",
+          "bbox": [
+            1143.0,
+            773.0,
+            1166.5,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 12
+        },
+        {
+          "text": "E",
+          "bbox": [
+            1178.5,
+            773.0,
+            1199.0,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 13
+        },
+        {
+          "text": "A",
+          "bbox": [
+            1230.0,
+            772.5,
+            1258.5,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 14
+        },
+        {
+          "text": "C",
+          "bbox": [
+            1267.0,
+            772.5,
+            1292.5,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 15
+        },
+        {
+          "text": "T",
+          "bbox": [
+            1302.5,
+            773.0,
+            1325.5,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 16
+        },
+        {
+          "text": "|",
+          "bbox": [
+            1337.0,
+            772.5,
+            1343.0,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 17
+        },
+        {
+          "text": "V",
+          "bbox": [
+            1354.5,
+            772.5,
+            1381.5,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 18
+        },
+        {
+          "text": "|",
+          "bbox": [
+            1393.0,
+            772.5,
+            1399.0,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 19
+        },
+        {
+          "text": "T",
+          "bbox": [
+            1410.0,
+            773.0,
+            1433.0,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 20
+        },
+        {
+          "text": "|",
+          "bbox": [
+            1444.5,
+            772.5,
+            1450.5,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 21
+        },
+        {
+          "text": "E",
+          "bbox": [
+            1464.5,
+            772.5,
+            1485.5,
+            800.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 22
+        },
+        {
+          "text": "S",
+          "bbox": [
+            1496.5,
+            772.5,
+            1518.0,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "word_no": 23
+        },
+        {
+          "text": "Daily",
+          "bbox": [
+            159.0,
+            804.5,
+            219.0,
+            826.0
+          ],
+          "block_no": 1,
+          "line_no": 1011,
+          "word_no": 1
+        },
+        {
+          "text": "from",
+          "bbox": [
+            228.5,
+            804.0,
+            285.0,
+            822.5
+          ],
+          "block_no": 1,
+          "line_no": 1011,
+          "word_no": 2
+        },
+        {
+          "text": "9:00am-9:00pm",
+          "bbox": [
+            296.0,
+            805.0,
+            502.5,
+            826.0
+          ],
+          "block_no": 1,
+          "line_no": 1011,
+          "word_no": 3
+        },
+        {
+          "text": "Search",
+          "bbox": [
+            158.5,
+            834.5,
+            235.0,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 1
+        },
+        {
+          "text": "the",
+          "bbox": [
+            245.5,
+            835.0,
+            283.0,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 2
+        },
+        {
+          "text": "Resort",
+          "bbox": [
+            295.0,
+            835.5,
+            370.5,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 3
+        },
+        {
+          "text": "for",
+          "bbox": [
+            380.0,
+            834.5,
+            413.0,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 4
+        },
+        {
+          "text": "a",
+          "bbox": [
+            423.0,
+            841.5,
+            435.5,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 5
+        },
+        {
+          "text": "hidden",
+          "bbox": [
+            446.5,
+            834.5,
+            524.0,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 6
+        },
+        {
+          "text": "Bruno",
+          "bbox": [
+            537.0,
+            835.5,
+            606.5,
+            855.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 7
+        },
+        {
+          "text": "photo",
+          "bbox": [
+            617.5,
+            835.0,
+            684.5,
+            861.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 8
+        },
+        {
+          "text": "prop.",
+          "bbox": [
+            696.0,
+            841.5,
+            755.0,
+            861.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "word_no": 9
+        },
+        {
+          "text": "Once",
+          "bbox": [
+            158.0,
+            868.0,
+            220.0,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 1
+        },
+        {
+          "text": "located,",
+          "bbox": [
+            231.5,
+            868.0,
+            323.5,
+            892.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 2
+        },
+        {
+          "text": "snap",
+          "bbox": [
+            334.0,
+            874.5,
+            387.0,
+            894.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 3
+        },
+        {
+          "text": "a",
+          "bbox": [
+            398.0,
+            874.5,
+            410.0,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 4
+        },
+        {
+          "text": "photo",
+          "bbox": [
+            421.0,
+            868.0,
+            488.0,
+            894.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 5
+        },
+        {
+          "text": "and",
+          "bbox": [
+            498.5,
+            868.0,
+            540.5,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 6
+        },
+        {
+          "text": "then",
+          "bbox": [
+            551.0,
+            868.0,
+            602.5,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 7
+        },
+        {
+          "text": "head",
+          "bbox": [
+            615.0,
+            868.0,
+            669.5,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 8
+        },
+        {
+          "text": "to",
+          "bbox": [
+            680.0,
+            871.5,
+            703.0,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 9
+        },
+        {
+          "text": "the",
+          "bbox": [
+            713.5,
+            868.0,
+            751.0,
+            888.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 10
+        },
+        {
+          "text": "SPANISH",
+          "bbox": [
+            908.5,
+            859.0,
+            1084.5,
+            884.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 11
+        },
+        {
+          "text": "MOSAIC",
+          "bbox": [
+            1109.0,
+            859.0,
+            1267.5,
+            884.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 12
+        },
+        {
+          "text": "ART",
+          "bbox": [
+            1288.5,
+            859.5,
+            1368.5,
+            884.0
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 13
+        },
+        {
+          "text": "($)",
+          "bbox": [
+            1390.5,
+            857.5,
+            1445.5,
+            889.0
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "word_no": 14
+        },
+        {
+          "text": "Concierge",
+          "bbox": [
+            158.0,
+            901.0,
+            276.0,
+            928.0
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 1
+        },
+        {
+          "text": "Desk",
+          "bbox": [
+            288.0,
+            901.0,
+            344.5,
+            921.5
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 2
+        },
+        {
+          "text": "to",
+          "bbox": [
+            353.5,
+            904.5,
+            377.0,
+            921.5
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 3
+        },
+        {
+          "text": "receive",
+          "bbox": [
+            388.5,
+            903.0,
+            470.0,
+            921.5
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 4
+        },
+        {
+          "text": "a",
+          "bbox": [
+            481.0,
+            907.5,
+            493.0,
+            921.5
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 5
+        },
+        {
+          "text": "surprise!",
+          "bbox": [
+            503.5,
+            901.5,
+            601.0,
+            928.0
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 6
+        },
+        {
+          "text": "Dahlia",
+          "bbox": [
+            909.0,
+            902.5,
+            982.0,
+            920.5
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 7
+        },
+        {
+          "text": "Lounge",
+          "bbox": [
+            993.5,
+            903.5,
+            1082.0,
+            924.0
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "word_no": 8
+        },
+        {
+          "text": "Monday,",
+          "bbox": [
+            909.0,
+            938.5,
+            1007.5,
+            960.0
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "word_no": 1
+        },
+        {
+          "text": "Wednesday",
+          "bbox": [
+            1017.5,
+            938.5,
+            1159.0,
+            960.0
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "word_no": 2
+        },
+        {
+          "text": "and",
+          "bbox": [
+            1168.5,
+            938.5,
+            1211.5,
+            956.5
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "word_no": 3
+        },
+        {
+          "text": "Saturday",
+          "bbox": [
+            1222.0,
+            938.5,
+            1329.0,
+            960.0
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "word_no": 4
+        },
+        {
+          "text": "from",
+          "bbox": [
+            1338.5,
+            938.5,
+            1394.0,
+            956.5
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "word_no": 5
+        },
+        {
+          "text": "1:00pm-3:00pm",
+          "bbox": [
+            1404.0,
+            939.0,
+            1603.0,
+            960.0
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "word_no": 6
+        },
+        {
+          "text": "NATURE",
+          "bbox": [
+            160.0,
+            951.0,
+            322.0,
+            976.0
+          ],
+          "block_no": 1,
+          "line_no": 1016,
+          "word_no": 1
+        },
+        {
+          "text": "WALK",
+          "bbox": [
+            343.5,
+            951.0,
+            463.0,
+            976.0
+          ],
+          "block_no": 1,
+          "line_no": 1016,
+          "word_no": 2
+        },
+        {
+          "text": "Daily",
+          "bbox": [
+            159.0,
+            991.0,
+            218.0,
+            1012.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 1
+        },
+        {
+          "text": "throughout",
+          "bbox": [
+            226.5,
+            991.0,
+            363.5,
+            1012.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 2
+        },
+        {
+          "text": "Disney’s",
+          "bbox": [
+            374.0,
+            991.0,
+            471.5,
+            1012.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 3
+        },
+        {
+          "text": "Coronado",
+          "bbox": [
+            481.5,
+            991.0,
+            600.0,
+            1009.0
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 4
+        },
+        {
+          "text": "Springs",
+          "bbox": [
+            610.0,
+            991.0,
+            700.0,
+            1012.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 5
+        },
+        {
+          "text": "Resort",
+          "bbox": [
+            710.5,
+            992.0,
+            787.5,
+            1009.0
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 6
+        },
+        {
+          "text": "4",
+          "bbox": [
+            927.5,
+            1011.0,
+            936.5,
+            1024.0
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 7
+        },
+        {
+          "text": "»",
+          "bbox": [
+            970.0,
+            982.0,
+            988.0,
+            1002.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 8
+        },
+        {
+          "text": "~»",
+          "bbox": [
+            1036.5,
+            978.5,
+            1075.0,
+            1015.0
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 10
+        },
+        {
+          "text": "a",
+          "bbox": [
+            1466.5,
+            978.5,
+            1479.0,
+            992.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 14
+        },
+        {
+          "text": "historic",
+          "bbox": [
+            1489.5,
+            972.0,
+            1570.5,
+            992.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "word_no": 15
+        },
+        {
+          "text": "Self-led",
+          "bbox": [
+            158.5,
+            1021.0,
+            243.5,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 1
+        },
+        {
+          "text": "nature",
+          "bbox": [
+            254.5,
+            1025.0,
+            325.5,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 2
+        },
+        {
+          "text": "trail",
+          "bbox": [
+            334.5,
+            1021.5,
+            379.5,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 3
+        },
+        {
+          "text": "to",
+          "bbox": [
+            387.5,
+            1025.0,
+            410.0,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 4
+        },
+        {
+          "text": "view",
+          "bbox": [
+            419.0,
+            1023.5,
+            470.0,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 5
+        },
+        {
+          "text": "the",
+          "bbox": [
+            478.5,
+            1021.5,
+            514.5,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 6
+        },
+        {
+          "text": "wildlife",
+          "bbox": [
+            523.5,
+            1021.0,
+            605.5,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 7
+        },
+        {
+          "text": "and",
+          "bbox": [
+            615.0,
+            1021.5,
+            655.5,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 8
+        },
+        {
+          "text": "landscape",
+          "bbox": [
+            666.5,
+            1021.5,
+            779.0,
+            1048.5
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 9
+        },
+        {
+          "text": ">",
+          "bbox": [
+            1037.5,
+            1021.0,
+            1098.0,
+            1050.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 11
+        },
+        {
+          "text": "|",
+          "bbox": [
+            1125.0,
+            1015.5,
+            1130.0,
+            1042.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 12
+        },
+        {
+          "text": "panis",
+          "bbox": [
+            1241.5,
+            1014.5,
+            1299.5,
+            1049.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 13
+        },
+        {
+          "text": "art",
+          "bbox": [
+            1324.5,
+            1011.5,
+            1356.0,
+            1028.5
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 14
+        },
+        {
+          "text": "as",
+          "bbox": [
+            1473.0,
+            1014.5,
+            1495.5,
+            1049.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 16
+        },
+        {
+          "text": "you",
+          "bbox": [
+            1504.0,
+            1014.5,
+            1545.0,
+            1035.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "word_no": 17
+        },
+        {
+          "text": "of",
+          "bbox": [
+            158.0,
+            1054.5,
+            180.5,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 1
+        },
+        {
+          "text": "the",
+          "bbox": [
+            189.5,
+            1054.5,
+            227.0,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 2
+        },
+        {
+          "text": "Resort.",
+          "bbox": [
+            239.0,
+            1055.0,
+            320.0,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 3
+        },
+        {
+          "text": "Pick",
+          "bbox": [
+            330.5,
+            1054.5,
+            377.0,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 4
+        },
+        {
+          "text": "up",
+          "bbox": [
+            386.0,
+            1061.0,
+            413.5,
+            1081.5
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 5
+        },
+        {
+          "text": "a",
+          "bbox": [
+            423.5,
+            1061.0,
+            437.0,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 6
+        },
+        {
+          "text": "Nature",
+          "bbox": [
+            447.0,
+            1055.0,
+            528.5,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 7
+        },
+        {
+          "text": "Guide",
+          "bbox": [
+            539.5,
+            1054.5,
+            605.5,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 8
+        },
+        {
+          "text": "at",
+          "bbox": [
+            615.0,
+            1058.5,
+            638.5,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 9
+        },
+        {
+          "text": "Panchito’s",
+          "bbox": [
+            647.5,
+            1054.5,
+            763.0,
+            1075.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 10
+        },
+        {
+          "text": "=>",
+          "bbox": [
+            1081.5,
+            1054.0,
+            1120.5,
+            1084.5
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 13
+        },
+        {
+          "text": "y",
+          "bbox": [
+            1311.0,
+            1051.0,
+            1322.5,
+            1085.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 15
+        },
+        {
+          "text": "our",
+          "bbox": [
+            1323.0,
+            1050.5,
+            1361.5,
+            1064.5
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 16
+        },
+        {
+          "text": "own",
+          "bbox": [
+            1371.0,
+            1050.5,
+            1417.5,
+            1085.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 17
+        },
+        {
+          "text": "mosaic",
+          "bbox": [
+            1429.0,
+            1050.5,
+            1507.0,
+            1064.5
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "word_no": 18
+        },
+        {
+          "text": "Gifts",
+          "bbox": [
+            158.0,
+            1087.0,
+            209.0,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 1
+        },
+        {
+          "text": "&",
+          "bbox": [
+            217.5,
+            1087.5,
+            233.0,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 2
+        },
+        {
+          "text": "Sundries,",
+          "bbox": [
+            242.0,
+            1087.5,
+            342.5,
+            1112.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 3
+        },
+        {
+          "text": "Concierge",
+          "bbox": [
+            354.0,
+            1087.5,
+            465.5,
+            1114.5
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 4
+        },
+        {
+          "text": "Desk",
+          "bbox": [
+            475.0,
+            1087.5,
+            530.5,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 5
+        },
+        {
+          "text": "or",
+          "bbox": [
+            538.5,
+            1094.0,
+            562.5,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 6
+        },
+        {
+          "text": "from",
+          "bbox": [
+            570.5,
+            1087.0,
+            622.0,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 7
+        },
+        {
+          "text": "a",
+          "bbox": [
+            632.0,
+            1094.0,
+            645.5,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 8
+        },
+        {
+          "text": "Recreation",
+          "bbox": [
+            654.5,
+            1088.0,
+            775.5,
+            1108.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 9
+        },
+        {
+          "text": "showpiece",
+          "bbox": [
+            1227.0,
+            1080.0,
+            1346.5,
+            1107.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 12
+        },
+        {
+          "text": "with",
+          "bbox": [
+            1355.5,
+            1080.0,
+            1404.0,
+            1100.5
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 13
+        },
+        {
+          "text": "a",
+          "bbox": [
+            1415.0,
+            1086.5,
+            1427.5,
+            1100.5
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 14
+        },
+        {
+          "text": "touch",
+          "bbox": [
+            1436.0,
+            1080.0,
+            1499.5,
+            1100.5
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 15
+        },
+        {
+          "text": "of",
+          "bbox": [
+            1510.5,
+            1079.5,
+            1533.0,
+            1100.5
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "word_no": 16
+        },
+        {
+          "text": "Cast",
+          "bbox": [
+            158.0,
+            1120.5,
+            208.0,
+            1141.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 1
+        },
+        {
+          "text": "Member",
+          "bbox": [
+            217.0,
+            1120.5,
+            315.0,
+            1141.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 2
+        },
+        {
+          "text": "to",
+          "bbox": [
+            324.0,
+            1124.0,
+            345.0,
+            1141.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 3
+        },
+        {
+          "text": "get",
+          "bbox": [
+            354.0,
+            1124.0,
+            392.0,
+            1147.5
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 4
+        },
+        {
+          "text": "started.",
+          "bbox": [
+            399.5,
+            1120.5,
+            486.0,
+            1141.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 5
+        },
+        {
+          "text": "=",
+          "bbox": [
+            1017.5,
+            1129.5,
+            1029.5,
+            1138.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 8
+        },
+        {
+          "text": "Disney",
+          "bbox": [
+            1228.0,
+            1116.5,
+            1303.5,
+            1143.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 10
+        },
+        {
+          "text": "flair.",
+          "bbox": [
+            1312.5,
+            1116.0,
+            1361.5,
+            1136.5
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 11
+        },
+        {
+          "text": "This",
+          "bbox": [
+            1372.5,
+            1116.0,
+            1415.0,
+            1136.5
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 12
+        },
+        {
+          "text": "experience",
+          "bbox": [
+            1423.5,
+            1118.0,
+            1544.5,
+            1143.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 13
+        },
+        {
+          "text": "is",
+          "bbox": [
+            1553.5,
+            1118.0,
+            1569.0,
+            1136.5
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "word_no": 14
+        },
+        {
+          "text": "recommended",
+          "bbox": [
+            1225.5,
+            1152.0,
+            1389.0,
+            1172.5
+          ],
+          "block_no": 1,
+          "line_no": 1022,
+          "word_no": 1
+        },
+        {
+          "text": "for",
+          "bbox": [
+            1397.5,
+            1151.5,
+            1429.0,
+            1172.5
+          ],
+          "block_no": 1,
+          "line_no": 1022,
+          "word_no": 2
+        },
+        {
+          "text": "Guests",
+          "bbox": [
+            1437.5,
+            1152.0,
+            1511.5,
+            1172.5
+          ],
+          "block_no": 1,
+          "line_no": 1022,
+          "word_no": 3
+        },
+        {
+          "text": "ages",
+          "bbox": [
+            1520.5,
+            1158.5,
+            1572.5,
+            1179.0
+          ],
+          "block_no": 1,
+          "line_no": 1022,
+          "word_no": 4
+        },
+        {
+          "text": "12",
+          "bbox": [
+            1583.0,
+            1152.0,
+            1602.5,
+            1172.0
+          ],
+          "block_no": 1,
+          "line_no": 1022,
+          "word_no": 5
+        },
+        {
+          "text": "FITNE",
+          "bbox": [
+            160.0,
+            1170.5,
+            276.0,
+            1195.0
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 1
+        },
+        {
+          "text": "Ss",
+          "bbox": [
+            282.0,
+            1170.5,
+            302.0,
+            1214.0
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 2
+        },
+        {
+          "text": "S",
+          "bbox": [
+            308.5,
+            1170.5,
+            328.0,
+            1195.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 3
+        },
+        {
+          "text": "CENTERS",
+          "bbox": [
+            350.0,
+            1170.5,
+            537.0,
+            1195.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 4
+        },
+        {
+          "text": "and",
+          "bbox": [
+            1226.0,
+            1188.0,
+            1270.0,
+            1208.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 8
+        },
+        {
+          "text": "up.",
+          "bbox": [
+            1278.0,
+            1194.5,
+            1310.5,
+            1215.0
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 9
+        },
+        {
+          "text": "Space",
+          "bbox": [
+            1320.5,
+            1188.0,
+            1387.5,
+            1215.0
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 10
+        },
+        {
+          "text": "is",
+          "bbox": [
+            1397.0,
+            1190.0,
+            1412.0,
+            1208.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 11
+        },
+        {
+          "text": "limited.",
+          "bbox": [
+            1421.5,
+            1188.0,
+            1502.5,
+            1208.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 12
+        },
+        {
+          "text": "To",
+          "bbox": [
+            1514.5,
+            1188.5,
+            1538.5,
+            1208.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 13
+        },
+        {
+          "text": "book,",
+          "bbox": [
+            1548.0,
+            1188.0,
+            1608.0,
+            1212.5
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "word_no": 14
+        },
+        {
+          "text": "Gran",
+          "bbox": [
+            158.0,
+            1211.0,
+            214.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 1
+        },
+        {
+          "text": "Destino",
+          "bbox": [
+            226.0,
+            1211.5,
+            318.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 2
+        },
+        {
+          "text": "Tower",
+          "bbox": [
+            328.0,
+            1211.5,
+            401.5,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 3
+        },
+        {
+          "text": "and",
+          "bbox": [
+            411.5,
+            1211.0,
+            455.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 4
+        },
+        {
+          "text": "near",
+          "bbox": [
+            466.5,
+            1215.5,
+            519.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 5
+        },
+        {
+          "text": "Casitas",
+          "bbox": [
+            529.0,
+            1211.0,
+            616.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 6
+        },
+        {
+          "text": "4",
+          "bbox": [
+            626.5,
+            1211.5,
+            641.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 7
+        },
+        {
+          "text": "h",
+          "bbox": [
+            1285.0,
+            1224.0,
+            1298.0,
+            1244.0
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 9
+        },
+        {
+          "text": "Spanish",
+          "bbox": [
+            1307.0,
+            1224.0,
+            1394.0,
+            1244.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 10
+        },
+        {
+          "text": "Mosaic",
+          "bbox": [
+            1404.5,
+            1224.5,
+            1473.0,
+            1244.0
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 11
+        },
+        {
+          "text": "A",
+          "bbox": [
+            1491.0,
+            1224.5,
+            1508.0,
+            1244.0
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 12
+        },
+        {
+          "text": "h",
+          "bbox": [
+            1582.5,
+            1224.0,
+            1595.5,
+            1244.0
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "word_no": 13
+        },
+        {
+          "text": "Open",
+          "bbox": [
+            158.0,
+            1244.0,
+            222.5,
+            1265.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 1
+        },
+        {
+          "text": "24",
+          "bbox": [
+            233.5,
+            1244.0,
+            263.0,
+            1261.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 2
+        },
+        {
+          "text": "hours",
+          "bbox": [
+            274.0,
+            1243.5,
+            340.5,
+            1261.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 3
+        },
+        {
+          "text": "a",
+          "bbox": [
+            350.5,
+            1248.0,
+            362.5,
+            1261.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 4
+        },
+        {
+          "text": "day,",
+          "bbox": [
+            373.0,
+            1243.5,
+            421.5,
+            1265.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 5
+        },
+        {
+          "text": "7",
+          "bbox": [
+            433.0,
+            1244.5,
+            445.0,
+            1261.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 6
+        },
+        {
+          "text": "days",
+          "bbox": [
+            455.5,
+            1243.5,
+            510.5,
+            1265.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 7
+        },
+        {
+          "text": "a",
+          "bbox": [
+            520.5,
+            1248.0,
+            532.5,
+            1261.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 8
+        },
+        {
+          "text": "week",
+          "bbox": [
+            543.0,
+            1243.5,
+            606.5,
+            1261.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 9
+        },
+        {
+          "text": "¢",
+          "bbox": [
+            1091.5,
+            1251.0,
+            1101.5,
+            1262.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 11
+        },
+        {
+          "text": "sca",
+          "bbox": [
+            1225.0,
+            1230.5,
+            1296.5,
+            1265.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 12
+        },
+        {
+          "text": "Pans",
+          "bbox": [
+            1319.0,
+            1230.5,
+            1380.0,
+            1251.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 13
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1575.0,
+            1227.5,
+            1609.5,
+            1244.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "word_no": 16
+        },
+        {
+          "text": "Continue",
+          "bbox": [
+            158.0,
+            1274.0,
+            263.5,
+            1295.0
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 1
+        },
+        {
+          "text": "pushing",
+          "bbox": [
+            275.0,
+            1274.0,
+            364.5,
+            1301.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 2
+        },
+        {
+          "text": "towards",
+          "bbox": [
+            375.5,
+            1274.0,
+            468.0,
+            1294.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 3
+        },
+        {
+          "text": "your",
+          "bbox": [
+            476.5,
+            1280.5,
+            529.5,
+            1301.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 4
+        },
+        {
+          "text": "wellness",
+          "bbox": [
+            539.0,
+            1274.0,
+            639.5,
+            1294.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 5
+        },
+        {
+          "text": "goals",
+          "bbox": [
+            650.5,
+            1274.0,
+            712.0,
+            1301.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 6
+        },
+        {
+          "text": "in",
+          "bbox": [
+            724.0,
+            1276.0,
+            742.0,
+            1294.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "word_no": 7
+        },
+        {
+          "text": "our",
+          "bbox": [
+            158.0,
+            1313.5,
+            196.5,
+            1327.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 1
+        },
+        {
+          "text": "full-service",
+          "bbox": [
+            206.0,
+            1306.5,
+            336.0,
+            1327.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 2
+        },
+        {
+          "text": "fitness",
+          "bbox": [
+            346.0,
+            1306.5,
+            421.0,
+            1327.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 3
+        },
+        {
+          "text": "center.",
+          "bbox": [
+            432.0,
+            1310.5,
+            509.5,
+            1327.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 4
+        },
+        {
+          "text": "COLORS",
+          "bbox": [
+            909.0,
+            1323.0,
+            1075.0,
+            1348.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 5
+        },
+        {
+          "text": "OF",
+          "bbox": [
+            1097.5,
+            1323.0,
+            1150.0,
+            1348.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 6
+        },
+        {
+          "text": "CORONADO",
+          "bbox": [
+            1172.0,
+            1323.0,
+            1413.0,
+            1348.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "word_no": 7
+        },
+        {
+          "text": "PAINTING",
+          "bbox": [
+            910.0,
+            1359.0,
+            1105.5,
+            1384.5
+          ],
+          "block_no": 1,
+          "line_no": 1028,
+          "word_no": 1
+        },
+        {
+          "text": "EXPERIENCE",
+          "bbox": [
+            1129.5,
+            1359.0,
+            1388.5,
+            1384.5
+          ],
+          "block_no": 1,
+          "line_no": 1028,
+          "word_no": 2
+        },
+        {
+          "text": "($)",
+          "bbox": [
+            1411.0,
+            1357.5,
+            1466.0,
+            1388.5
+          ],
+          "block_no": 1,
+          "line_no": 1028,
+          "word_no": 3
+        },
+        {
+          "text": "R",
+          "bbox": [
+            116.5,
+            1407.0,
+            140.0,
+            1434.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 1
+        },
+        {
+          "text": "ESO",
+          "bbox": [
+            152.5,
+            1406.5,
+            245.5,
+            1435.0
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 2
+        },
+        {
+          "text": "RT",
+          "bbox": [
+            258.0,
+            1407.0,
+            314.0,
+            1434.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 3
+        },
+        {
+          "text": "ACTIVITI",
+          "bbox": [
+            344.0,
+            1406.5,
+            565.0,
+            1435.0
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 4
+        },
+        {
+          "text": "ES",
+          "bbox": [
+            579.0,
+            1406.5,
+            632.0,
+            1435.0
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 5
+        },
+        {
+          "text": "Toledo",
+          "bbox": [
+            908.0,
+            1402.0,
+            1098.5,
+            1423.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 6
+        },
+        {
+          "text": "-",
+          "bbox": [
+            999.5,
+            1400.0,
+            1010.5,
+            1425.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 7
+        },
+        {
+          "text": "Tapas,",
+          "bbox": [
+            1022.5,
+            1402.0,
+            1098.5,
+            1423.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 8
+        },
+        {
+          "text": "Steak",
+          "bbox": [
+            1109.5,
+            1402.0,
+            1312.0,
+            1420.0
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 9
+        },
+        {
+          "text": "&",
+          "bbox": [
+            1190.5,
+            1400.0,
+            1203.5,
+            1425.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 10
+        },
+        {
+          "text": "Seafood",
+          "bbox": [
+            1218.0,
+            1402.0,
+            1312.0,
+            1420.0
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "word_no": 11
+        },
+        {
+          "text": "Friday",
+          "bbox": [
+            909.0,
+            1438.5,
+            984.5,
+            1459.5
+          ],
+          "block_no": 1,
+          "line_no": 1030,
+          "word_no": 2
+        },
+        {
+          "text": "from",
+          "bbox": [
+            994.0,
+            1438.0,
+            1050.5,
+            1456.0
+          ],
+          "block_no": 1,
+          "line_no": 1030,
+          "word_no": 3
+        },
+        {
+          "text": "1:;00pm-3:00pm",
+          "bbox": [
+            1061.0,
+            1438.5,
+            1262.5,
+            1459.5
+          ],
+          "block_no": 1,
+          "line_no": 1030,
+          "word_no": 4
+        },
+        {
+          "text": "POOLSIDE",
+          "bbox": [
+            116.0,
+            1482.0,
+            325.0,
+            1507.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 1
+        },
+        {
+          "text": "ACTIVITIES",
+          "bbox": [
+            346.5,
+            1482.0,
+            577.0,
+            1507.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 2
+        },
+        {
+          "text": "Get",
+          "bbox": [
+            908.5,
+            1471.5,
+            948.5,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 3
+        },
+        {
+          "text": "in",
+          "bbox": [
+            958.0,
+            1473.5,
+            975.5,
+            1492.0
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 4
+        },
+        {
+          "text": "touch",
+          "bbox": [
+            984.5,
+            1471.5,
+            1046.0,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 5
+        },
+        {
+          "text": "with",
+          "bbox": [
+            1055.0,
+            1471.5,
+            1101.5,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 6
+        },
+        {
+          "text": "your",
+          "bbox": [
+            1109.5,
+            1478.5,
+            1160.0,
+            1498.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 7
+        },
+        {
+          "text": "inner",
+          "bbox": [
+            1169.0,
+            1473.5,
+            1224.5,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 8
+        },
+        {
+          "text": "artist",
+          "bbox": [
+            1233.0,
+            1473.5,
+            1288.5,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 9
+        },
+        {
+          "text": "during",
+          "bbox": [
+            1297.5,
+            1471.5,
+            1367.5,
+            1498.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 10
+        },
+        {
+          "text": "this",
+          "bbox": [
+            1376.5,
+            1471.5,
+            1414.5,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 11
+        },
+        {
+          "text": "master-led",
+          "bbox": [
+            1424.0,
+            1471.5,
+            1541.0,
+            1492.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "word_no": 12
+        },
+        {
+          "text": "Daily",
+          "bbox": [
+            115.0,
+            1522.0,
+            175.0,
+            1543.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 1
+        },
+        {
+          "text": "at",
+          "bbox": [
+            185.0,
+            1523.5,
+            207.5,
+            1540.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 2
+        },
+        {
+          "text": "The",
+          "bbox": [
+            217.5,
+            1522.5,
+            261.5,
+            1540.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 3
+        },
+        {
+          "text": "Dig",
+          "bbox": [
+            272.5,
+            1522.0,
+            312.0,
+            1543.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 4
+        },
+        {
+          "text": "Site",
+          "bbox": [
+            323.0,
+            1522.0,
+            368.5,
+            1540.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 5
+        },
+        {
+          "text": "painting",
+          "bbox": [
+            908.5,
+            1509.5,
+            996.5,
+            1534.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 6
+        },
+        {
+          "text": "class.",
+          "bbox": [
+            1006.0,
+            1507.5,
+            1063.5,
+            1528.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 7
+        },
+        {
+          "text": "This",
+          "bbox": [
+            1073.5,
+            1507.5,
+            1114.5,
+            1528.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 8
+        },
+        {
+          "text": "experience",
+          "bbox": [
+            1122.5,
+            1509.5,
+            1238.0,
+            1534.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 9
+        },
+        {
+          "text": "is",
+          "bbox": [
+            1246.0,
+            1509.5,
+            1261.0,
+            1528.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 10
+        },
+        {
+          "text": "recommended",
+          "bbox": [
+            1268.5,
+            1507.5,
+            1426.5,
+            1528.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 11
+        },
+        {
+          "text": "for",
+          "bbox": [
+            1433.5,
+            1507.5,
+            1464.0,
+            1528.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 12
+        },
+        {
+          "text": "Guests",
+          "bbox": [
+            1471.5,
+            1507.5,
+            1543.0,
+            1528.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 13
+        },
+        {
+          "text": "ages",
+          "bbox": [
+            1550.5,
+            1514.5,
+            1601.0,
+            1534.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "word_no": 14
+        },
+        {
+          "text": "Join",
+          "bbox": [
+            113.5,
+            1553.0,
+            160.0,
+            1573.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 1
+        },
+        {
+          "text": "us",
+          "bbox": [
+            172.5,
+            1559.5,
+            195.5,
+            1573.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 2
+        },
+        {
+          "text": "for",
+          "bbox": [
+            206.0,
+            1552.5,
+            239.0,
+            1573.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 3
+        },
+        {
+          "text": "family-friendly",
+          "bbox": [
+            248.5,
+            1552.5,
+            418.5,
+            1580.0
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 4
+        },
+        {
+          "text": "activities.",
+          "bbox": [
+            428.0,
+            1554.5,
+            536.5,
+            1573.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 5
+        },
+        {
+          "text": "I2",
+          "bbox": [
+            909.0,
+            1543.5,
+            928.0,
+            1564.0
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 6
+        },
+        {
+          "text": "and",
+          "bbox": [
+            935.0,
+            1543.5,
+            978.5,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 7
+        },
+        {
+          "text": "up.",
+          "bbox": [
+            985.5,
+            1550.5,
+            1016.5,
+            1570.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 8
+        },
+        {
+          "text": "Space",
+          "bbox": [
+            1025.5,
+            1543.5,
+            1090.0,
+            1570.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 9
+        },
+        {
+          "text": "is",
+          "bbox": [
+            1098.0,
+            1545.5,
+            1113.0,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 10
+        },
+        {
+          "text": "limited.",
+          "bbox": [
+            1121.0,
+            1543.5,
+            1198.0,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 11
+        },
+        {
+          "text": "To",
+          "bbox": [
+            1209.0,
+            1544.0,
+            1232.5,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 12
+        },
+        {
+          "text": "book,",
+          "bbox": [
+            1241.0,
+            1543.5,
+            1299.0,
+            1568.0
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 13
+        },
+        {
+          "text": "search",
+          "bbox": [
+            1307.5,
+            1543.5,
+            1377.5,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 14
+        },
+        {
+          "text": "Colors",
+          "bbox": [
+            1387.0,
+            1543.5,
+            1454.5,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 15
+        },
+        {
+          "text": "of",
+          "bbox": [
+            1462.0,
+            1543.5,
+            1486.0,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 16
+        },
+        {
+          "text": "Coronado",
+          "bbox": [
+            1492.0,
+            1543.5,
+            1598.5,
+            1564.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "word_no": 17
+        },
+        {
+          "text": "See",
+          "bbox": [
+            112.5,
+            1585.5,
+            153.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 1
+        },
+        {
+          "text": "a",
+          "bbox": [
+            162.5,
+            1592.0,
+            176.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 2
+        },
+        {
+          "text": "Recreation",
+          "bbox": [
+            186.5,
+            1586.0,
+            309.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 3
+        },
+        {
+          "text": "Cast",
+          "bbox": [
+            320.5,
+            1585.5,
+            370.5,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 4
+        },
+        {
+          "text": "Member",
+          "bbox": [
+            379.5,
+            1585.5,
+            477.5,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 5
+        },
+        {
+          "text": "for",
+          "bbox": [
+            486.0,
+            1585.5,
+            518.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 6
+        },
+        {
+          "text": "more",
+          "bbox": [
+            526.5,
+            1592.0,
+            585.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 7
+        },
+        {
+          "text": "information.",
+          "bbox": [
+            594.5,
+            1585.5,
+            734.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 8
+        },
+        {
+          "text": "Painting",
+          "bbox": [
+            907.5,
+            1580.0,
+            997.0,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 9
+        },
+        {
+          "text": "Experience",
+          "bbox": [
+            1005.0,
+            1580.0,
+            1122.5,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 10
+        },
+        {
+          "text": "on",
+          "bbox": [
+            1130.5,
+            1586.5,
+            1157.0,
+            1600.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 11
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1166.5,
+            1579.5,
+            1200.0,
+            1600.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 12
+        },
+        {
+          "text": "My",
+          "bbox": [
+            1210.0,
+            1580.0,
+            1244.5,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 13
+        },
+        {
+          "text": "Disney",
+          "bbox": [
+            1254.5,
+            1580.0,
+            1327.0,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 14
+        },
+        {
+          "text": "Experience",
+          "bbox": [
+            1336.5,
+            1580.0,
+            1457.0,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 15
+        },
+        {
+          "text": "app.",
+          "bbox": [
+            1465.0,
+            1586.5,
+            1510.5,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "word_no": 16
+        },
+        {
+          "text": "ARTS",
+          "bbox": [
+            114.5,
+            1635.5,
+            219.5,
+            1661.0
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 1
+        },
+        {
+          "text": "AND",
+          "bbox": [
+            241.0,
+            1636.0,
+            327.5,
+            1660.5
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 2
+        },
+        {
+          "text": "CRAFTS",
+          "bbox": [
+            349.5,
+            1635.5,
+            510.0,
+            1661.0
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 3
+        },
+        {
+          "text": "($)",
+          "bbox": [
+            532.5,
+            1634.0,
+            588.0,
+            1665.5
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 4
+        },
+        {
+          "text": "SANGRIA",
+          "bbox": [
+            908.5,
+            1642.5,
+            1095.5,
+            1667.5
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 5
+        },
+        {
+          "text": "UNIVERSITY",
+          "bbox": [
+            1117.5,
+            1642.5,
+            1368.0,
+            1667.5
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 6
+        },
+        {
+          "text": "($)",
+          "bbox": [
+            1389.5,
+            1640.5,
+            1444.5,
+            1672.0
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "word_no": 7
+        },
+        {
+          "text": "The",
+          "bbox": [
+            114.0,
+            1676.0,
+            158.0,
+            1694.0
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 1
+        },
+        {
+          "text": "Dig",
+          "bbox": [
+            169.5,
+            1675.5,
+            208.5,
+            1697.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 2
+        },
+        {
+          "text": "Site",
+          "bbox": [
+            219.5,
+            1675.5,
+            265.5,
+            1694.0
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 3
+        },
+        {
+          "text": "from",
+          "bbox": [
+            275.0,
+            1675.5,
+            331.5,
+            1694.0
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 4
+        },
+        {
+          "text": "3:30pm-4:30pm",
+          "bbox": [
+            342.5,
+            1676.5,
+            545.5,
+            1697.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 5
+        },
+        {
+          "text": "Toledo",
+          "bbox": [
+            908.0,
+            1685.5,
+            991.0,
+            1703.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 6
+        },
+        {
+          "text": "-",
+          "bbox": [
+            1001.0,
+            1694.0,
+            1011.5,
+            1697.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 7
+        },
+        {
+          "text": "Tapas,",
+          "bbox": [
+            1022.0,
+            1686.5,
+            1098.5,
+            1707.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 8
+        },
+        {
+          "text": "Steak",
+          "bbox": [
+            1109.5,
+            1685.5,
+            1177.0,
+            1703.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 9
+        },
+        {
+          "text": "&",
+          "bbox": [
+            1186.5,
+            1686.0,
+            1202.0,
+            1703.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 10
+        },
+        {
+          "text": "Seafood",
+          "bbox": [
+            1212.0,
+            1685.5,
+            1312.0,
+            1703.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "word_no": 11
+        },
+        {
+          "text": "Sunday,",
+          "bbox": [
+            114.5,
+            1706.5,
+            203.0,
+            1733.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "word_no": 1
+        },
+        {
+          "text": "Tuesday",
+          "bbox": [
+            212.5,
+            1706.5,
+            307.0,
+            1733.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "word_no": 2
+        },
+        {
+          "text": "and",
+          "bbox": [
+            317.0,
+            1706.5,
+            358.5,
+            1727.0
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "word_no": 3
+        },
+        {
+          "text": "Mickey",
+          "bbox": [
+            640.0,
+            1706.5,
+            721.5,
+            1733.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "word_no": 5
+        },
+        {
+          "text": "Tie-Dye",
+          "bbox": [
+            730.5,
+            1707.0,
+            823.5,
+            1733.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "word_no": 6
+        },
+        {
+          "text": "endl",
+          "bbox": [
+            1026.5,
+            1721.5,
+            1071.0,
+            1739.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "word_no": 8
+        },
+        {
+          "text": "Monday",
+          "bbox": [
+            115.5,
+            1739.0,
+            209.5,
+            1766.5
+          ],
+          "block_no": 1,
+          "line_no": 1038,
+          "word_no": 1
+        },
+        {
+          "text": "and",
+          "bbox": [
+            219.5,
+            1739.0,
+            261.0,
+            1760.0
+          ],
+          "block_no": 1,
+          "line_no": 1038,
+          "word_no": 2
+        },
+        {
+          "text": "Art",
+          "bbox": [
+            785.5,
+            1739.5,
+            823.5,
+            1760.0
+          ],
+          "block_no": 1,
+          "line_no": 1038,
+          "word_no": 5
+        },
+        {
+          "text": "11:00am",
+          "bbox": [
+            907.5,
+            1758.0,
+            1006.5,
+            1775.5
+          ],
+          "block_no": 1,
+          "line_no": 1039,
+          "word_no": 1
+        },
+        {
+          "text": "and",
+          "bbox": [
+            1017.0,
+            1757.5,
+            1061.0,
+            1775.5
+          ],
+          "block_no": 1,
+          "line_no": 1039,
+          "word_no": 2
+        },
+        {
+          "text": "1:30pm",
+          "bbox": [
+            1072.0,
+            1758.0,
+            1159.5,
+            1779.0
+          ],
+          "block_no": 1,
+          "line_no": 1039,
+          "word_no": 3
+        },
+        {
+          "text": "a)",
+          "bbox": [
+            1472.5,
+            1763.5,
+            1520.0,
+            1783.0
+          ],
+          "block_no": 1,
+          "line_no": 1039,
+          "word_no": 4
+        },
+        {
+          "text": "Craft",
+          "bbox": [
+            766.0,
+            1772.0,
+            823.5,
+            1793.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "word_no": 3
+        },
+        {
+          "text": ".",
+          "bbox": [
+            929.0,
+            1792.0,
+            932.5,
+            1795.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "word_no": 4
+        },
+        {
+          "text": ".",
+          "bbox": [
+            1071.0,
+            1792.0,
+            1074.5,
+            1795.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "word_no": 5
+        },
+        {
+          "text": ".",
+          "bbox": [
+            1247.0,
+            1792.0,
+            1250.5,
+            1795.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "word_no": 6
+        },
+        {
+          "text": "Discuss",
+          "bbox": [
+            909.5,
+            1790.5,
+            995.0,
+            1810.5
+          ],
+          "block_no": 1,
+          "line_no": 1041,
+          "word_no": 1
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1006.0,
+            1790.0,
+            1044.0,
+            1810.5
+          ],
+          "block_no": 1,
+          "line_no": 1041,
+          "word_no": 2
+        },
+        {
+          "text": "history",
+          "bbox": [
+            1056.5,
+            1790.0,
+            1136.5,
+            1817.5
+          ],
+          "block_no": 1,
+          "line_no": 1041,
+          "word_no": 3
+        },
+        {
+          "text": "of",
+          "bbox": [
+            1146.5,
+            1790.0,
+            1170.0,
+            1810.5
+          ],
+          "block_no": 1,
+          "line_no": 1041,
+          "word_no": 4
+        },
+        {
+          "text": "sangria",
+          "bbox": [
+            1180.0,
+            1796.5,
+            1265.5,
+            1817.5
+          ],
+          "block_no": 1,
+          "line_no": 1041,
+          "word_no": 5
+        },
+        {
+          "text": "DISNEY",
+          "bbox": [
+            116.0,
+            1822.0,
+            268.0,
+            1847.5
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 1
+        },
+        {
+          "text": "TRIVIA",
+          "bbox": [
+            288.5,
+            1822.5,
+            427.0,
+            1847.5
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 2
+        },
+        {
+          "text": "and",
+          "bbox": [
+            908.0,
+            1825.0,
+            950.0,
+            1846.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 3
+        },
+        {
+          "text": "learn",
+          "bbox": [
+            963.0,
+            1825.0,
+            1021.0,
+            1846.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 4
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1032.5,
+            1825.0,
+            1071.0,
+            1846.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 5
+        },
+        {
+          "text": "recipes",
+          "bbox": [
+            1083.0,
+            1827.0,
+            1166.0,
+            1852.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 6
+        },
+        {
+          "text": "used",
+          "bbox": [
+            1178.0,
+            1825.0,
+            1231.0,
+            1846.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 7
+        },
+        {
+          "text": "to",
+          "bbox": [
+            1242.0,
+            1829.0,
+            1266.0,
+            1846.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "word_no": 8
+        },
+        {
+          "text": "Laguna",
+          "bbox": [
+            115.0,
+            1863.5,
+            203.0,
+            1884.0
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 1
+        },
+        {
+          "text": "Bar",
+          "bbox": [
+            214.5,
+            1863.5,
+            254.5,
+            1880.5
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 2
+        },
+        {
+          "text": "make",
+          "bbox": [
+            909.0,
+            1860.0,
+            970.5,
+            1880.5
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 3
+        },
+        {
+          "text": "the",
+          "bbox": [
+            981.0,
+            1860.0,
+            1019.0,
+            1880.5
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 4
+        },
+        {
+          "text": "4",
+          "bbox": [
+            1030.0,
+            1860.0,
+            1045.0,
+            1880.0
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 5
+        },
+        {
+          "text": "in-house",
+          "bbox": [
+            1056.5,
+            1860.0,
+            1158.0,
+            1880.5
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 6
+        },
+        {
+          "text": "varieties",
+          "bbox": [
+            1168.5,
+            1862.0,
+            1268.0,
+            1880.5
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 7
+        },
+        {
+          "text": "—",
+          "bbox": [
+            1519.5,
+            1853.0,
+            1530.0,
+            1895.0
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "word_no": 12
+        },
+        {
+          "text": "Friday",
+          "bbox": [
+            115.0,
+            1895.5,
+            190.5,
+            1917.0
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 1
+        },
+        {
+          "text": "from",
+          "bbox": [
+            200.0,
+            1895.5,
+            256.5,
+            1913.5
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 2
+        },
+        {
+          "text": "5:00pm-5:45pm",
+          "bbox": [
+            267.5,
+            1896.0,
+            470.0,
+            1917.0
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 3
+        },
+        {
+          "text": "served",
+          "bbox": [
+            908.5,
+            1895.0,
+            985.5,
+            1915.5
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 4
+        },
+        {
+          "text": "at",
+          "bbox": [
+            997.0,
+            1898.5,
+            1019.0,
+            1915.5
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 5
+        },
+        {
+          "text": "Three",
+          "bbox": [
+            1029.0,
+            1895.0,
+            1098.0,
+            1915.5
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 6
+        },
+        {
+          "text": "Bridges",
+          "bbox": [
+            1110.5,
+            1895.0,
+            1199.0,
+            1922.0
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 7
+        },
+        {
+          "text": "Bar",
+          "bbox": [
+            1211.5,
+            1895.5,
+            1250.5,
+            1915.5
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "word_no": 8
+        },
+        {
+          "text": "Join",
+          "bbox": [
+            113.5,
+            1926.5,
+            160.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 1
+        },
+        {
+          "text": "us",
+          "bbox": [
+            172.5,
+            1932.5,
+            195.5,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 2
+        },
+        {
+          "text": "for",
+          "bbox": [
+            206.0,
+            1925.5,
+            239.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 3
+        },
+        {
+          "text": "a",
+          "bbox": [
+            249.0,
+            1932.5,
+            261.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 4
+        },
+        {
+          "text": "trivia",
+          "bbox": [
+            270.5,
+            1927.5,
+            329.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 5
+        },
+        {
+          "text": "challenge",
+          "bbox": [
+            339.0,
+            1926.0,
+            453.0,
+            1953.0
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 6
+        },
+        {
+          "text": "near",
+          "bbox": [
+            464.5,
+            1932.5,
+            515.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 7
+        },
+        {
+          "text": "El",
+          "bbox": [
+            526.5,
+            1926.0,
+            547.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 8
+        },
+        {
+          "text": "Centro!",
+          "bbox": [
+            557.5,
+            1926.0,
+            643.0,
+            1946.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 9
+        },
+        {
+          "text": "and",
+          "bbox": [
+            908.0,
+            1930.0,
+            950.0,
+            1950.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 10
+        },
+        {
+          "text": "Grill.",
+          "bbox": [
+            962.0,
+            1930.0,
+            1020.0,
+            1951.0
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 11
+        },
+        {
+          "text": "Enjoy",
+          "bbox": [
+            1033.0,
+            1930.5,
+            1095.5,
+            1957.0
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 12
+        },
+        {
+          "text": "a",
+          "bbox": [
+            1106.0,
+            1936.5,
+            1118.5,
+            1950.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 13
+        },
+        {
+          "text": "tasting",
+          "bbox": [
+            1128.5,
+            1932.0,
+            1209.5,
+            1957.0
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 14
+        },
+        {
+          "text": "and",
+          "bbox": [
+            1221.5,
+            1930.0,
+            1263.5,
+            1950.5
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "word_no": 15
+        },
+        {
+          "text": "EXPLORER’S",
+          "bbox": [
+            116.0,
+            1975.5,
+            373.0,
+            2001.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 1
+        },
+        {
+          "text": "CAMPFIRE",
+          "bbox": [
+            395.0,
+            1975.5,
+            605.5,
+            2001.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 2
+        },
+        {
+          "text": "you'll",
+          "bbox": [
+            906.5,
+            1965.0,
+            971.0,
+            1992.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 3
+        },
+        {
+          "text": "even",
+          "bbox": [
+            987.0,
+            1972.0,
+            1034.5,
+            1986.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 4
+        },
+        {
+          "text": "get",
+          "bbox": [
+            1046.5,
+            1968.5,
+            1083.5,
+            1992.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 5
+        },
+        {
+          "text": "to",
+          "bbox": [
+            1098.0,
+            1969.0,
+            1116.5,
+            1986.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 6
+        },
+        {
+          "text": "make",
+          "bbox": [
+            1134.0,
+            1965.0,
+            1184.0,
+            1986.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 7
+        },
+        {
+          "text": "your",
+          "bbox": [
+            1197.5,
+            1972.0,
+            1250.5,
+            1992.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 8
+        },
+        {
+          "text": "——",
+          "bbox": [
+            1369.0,
+            1956.5,
+            1455.5,
+            1970.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 9
+        },
+        {
+          "text": "=",
+          "bbox": [
+            1580.5,
+            1960.5,
+            1609.0,
+            1970.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "word_no": 10
+        },
+        {
+          "text": "The",
+          "bbox": [
+            114.0,
+            2016.5,
+            158.0,
+            2034.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 1
+        },
+        {
+          "text": "Dig",
+          "bbox": [
+            169.5,
+            2016.0,
+            192.0,
+            2034.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 2
+        },
+        {
+          "text": "Site",
+          "bbox": [
+            219.5,
+            2016.0,
+            265.5,
+            2034.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 3
+        },
+        {
+          "text": "own",
+          "bbox": [
+            908.0,
+            2008.0,
+            955.0,
+            2022.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 4
+        },
+        {
+          "text": "glass!",
+          "bbox": [
+            967.0,
+            2001.0,
+            1031.5,
+            2028.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 5
+        },
+        {
+          "text": "Advanced",
+          "bbox": [
+            1039.5,
+            2001.0,
+            1156.5,
+            2022.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 6
+        },
+        {
+          "text": "booking",
+          "bbox": [
+            1165.0,
+            2001.0,
+            1257.0,
+            2028.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 7
+        },
+        {
+          "text": "required",
+          "bbox": [
+            1267.0,
+            2001.0,
+            1367.0,
+            2028.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 8
+        },
+        {
+          "text": "through",
+          "bbox": [
+            1376.5,
+            2001.0,
+            1468.0,
+            2028.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 9
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1480.0,
+            2001.0,
+            1515.5,
+            2022.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "word_no": 10
+        },
+        {
+          "text": "Nightly",
+          "bbox": [
+            115.0,
+            2049.0,
+            203.0,
+            2070.5
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 1
+        },
+        {
+          "text": "from",
+          "bbox": [
+            212.5,
+            2049.0,
+            269.0,
+            2067.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 2
+        },
+        {
+          "text": "6:30pm-7:30pm",
+          "bbox": [
+            280.0,
+            2049.5,
+            479.5,
+            2070.5
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 3
+        },
+        {
+          "text": "My",
+          "bbox": [
+            909.5,
+            2037.5,
+            945.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 4
+        },
+        {
+          "text": "Disney",
+          "bbox": [
+            956.0,
+            2037.5,
+            1033.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 5
+        },
+        {
+          "text": "Experience",
+          "bbox": [
+            1044.0,
+            2037.5,
+            1172.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 6
+        },
+        {
+          "text": "app",
+          "bbox": [
+            1181.5,
+            2044.0,
+            1225.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 7
+        },
+        {
+          "text": "by",
+          "bbox": [
+            1235.0,
+            2037.0,
+            1262.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 8
+        },
+        {
+          "text": "searching",
+          "bbox": [
+            1269.0,
+            2037.0,
+            1380.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 9
+        },
+        {
+          "text": "Sangria",
+          "bbox": [
+            1388.5,
+            2037.0,
+            1477.5,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 10
+        },
+        {
+          "text": "University.",
+          "bbox": [
+            1488.5,
+            2037.5,
+            1604.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "word_no": 11
+        },
+        {
+          "text": "Enjoy",
+          "bbox": [
+            115.5,
+            2080.0,
+            177.0,
+            2106.5
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 1
+        },
+        {
+          "text": "the",
+          "bbox": [
+            186.5,
+            2079.5,
+            224.0,
+            2100.0
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 2
+        },
+        {
+          "text": "warm",
+          "bbox": [
+            234.0,
+            2086.0,
+            298.0,
+            2100.0
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 3
+        },
+        {
+          "text": "glow",
+          "bbox": [
+            310.0,
+            2079.5,
+            366.5,
+            2106.5
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 4
+        },
+        {
+          "text": "of",
+          "bbox": [
+            376.5,
+            2079.5,
+            399.0,
+            2100.0
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 5
+        },
+        {
+          "text": "the",
+          "bbox": [
+            408.0,
+            2079.5,
+            445.5,
+            2100.0
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 6
+        },
+        {
+          "text": "campfire",
+          "bbox": [
+            456.0,
+            2079.5,
+            558.0,
+            2106.5
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 7
+        },
+        {
+          "text": "with",
+          "bbox": [
+            568.0,
+            2079.5,
+            617.0,
+            2100.0
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 8
+        },
+        {
+          "text": "complimentary",
+          "bbox": [
+            628.5,
+            2079.5,
+            807.0,
+            2106.5
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "word_no": 9
+        },
+        {
+          "text": "marshmallows.",
+          "bbox": [
+            115.0,
+            2112.5,
+            289.5,
+            2133.0
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 1
+        },
+        {
+          "text": "S’mores",
+          "bbox": [
+            298.5,
+            2112.5,
+            387.5,
+            2133.0
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 2
+        },
+        {
+          "text": "kits",
+          "bbox": [
+            396.5,
+            2112.5,
+            435.0,
+            2133.0
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 3
+        },
+        {
+          "text": "available",
+          "bbox": [
+            444.5,
+            2112.5,
+            549.0,
+            2133.0
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 4
+        },
+        {
+          "text": "for",
+          "bbox": [
+            559.0,
+            2112.5,
+            591.0,
+            2133.0
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 5
+        },
+        {
+          "text": "purchase.",
+          "bbox": [
+            597.5,
+            2112.5,
+            707.5,
+            2139.5
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 6
+        },
+        {
+          "text": "MOVIE",
+          "bbox": [
+            910.5,
+            2116.5,
+            1068.0,
+            2144.5
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 7
+        },
+        {
+          "text": "UNDER",
+          "bbox": [
+            1100.5,
+            2116.5,
+            1271.0,
+            2144.5
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 8
+        },
+        {
+          "text": "THE",
+          "bbox": [
+            1301.5,
+            2116.5,
+            1393.5,
+            2144.0
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 9
+        },
+        {
+          "text": "STARS",
+          "bbox": [
+            1424.5,
+            2116.5,
+            1580.5,
+            2144.5
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "word_no": 10
+        },
+        {
+          "text": "CORONADO",
+          "bbox": [
+            115.0,
+            2162.5,
+            356.5,
+            2188.0
+          ],
+          "block_no": 1,
+          "line_no": 1051,
+          "word_no": 1
+        },
+        {
+          "text": "NIGHTS",
+          "bbox": [
+            379.5,
+            2162.5,
+            530.0,
+            2188.0
+          ],
+          "block_no": 1,
+          "line_no": 1051,
+          "word_no": 2
+        },
+        {
+          "text": "POOL",
+          "bbox": [
+            553.5,
+            2162.5,
+            664.0,
+            2188.0
+          ],
+          "block_no": 1,
+          "line_no": 1051,
+          "word_no": 3
+        },
+        {
+          "text": "PARTY",
+          "bbox": [
+            686.5,
+            2162.5,
+            819.5,
+            2187.5
+          ],
+          "block_no": 1,
+          "line_no": 1051,
+          "word_no": 4
+        },
+        {
+          "text": "The",
+          "bbox": [
+            114.0,
+            2202.5,
+            158.0,
+            2220.5
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 1
+        },
+        {
+          "text": "Dig",
+          "bbox": [
+            169.5,
+            2202.5,
+            208.5,
+            2224.0
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 2
+        },
+        {
+          "text": "Site",
+          "bbox": [
+            219.5,
+            2202.5,
+            265.5,
+            2220.5
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 3
+        },
+        {
+          "text": "Pool",
+          "bbox": [
+            276.5,
+            2202.5,
+            328.5,
+            2220.5
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 4
+        },
+        {
+          "text": "GRAN",
+          "bbox": [
+            908.5,
+            2201.0,
+            998.5,
+            2221.0
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 5
+        },
+        {
+          "text": "DESTINO",
+          "bbox": [
+            1016.0,
+            2201.0,
+            1156.5,
+            2221.0
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 6
+        },
+        {
+          "text": "LAWN",
+          "bbox": [
+            1173.0,
+            2201.0,
+            1266.0,
+            2221.0
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 7
+        },
+        {
+          "text": "|",
+          "bbox": [
+            1284.5,
+            2198.0,
+            1288.0,
+            2224.5
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 8
+        },
+        {
+          "text": "8:00PM",
+          "bbox": [
+            1305.5,
+            2201.0,
+            1412.5,
+            2221.5
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "word_no": 9
+        },
+        {
+          "text": "Monday,",
+          "bbox": [
+            115.0,
+            2236.0,
+            215.0,
+            2257.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 1
+        },
+        {
+          "text": "Wednesday,",
+          "bbox": [
+            226.0,
+            2236.0,
+            374.0,
+            2257.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 2
+        },
+        {
+          "text": "and",
+          "bbox": [
+            384.5,
+            2236.0,
+            428.5,
+            2253.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 3
+        },
+        {
+          "text": "Saturday",
+          "bbox": [
+            439.0,
+            2236.0,
+            548.0,
+            2257.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 4
+        },
+        {
+          "text": "from",
+          "bbox": [
+            558.0,
+            2235.5,
+            614.5,
+            2253.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 5
+        },
+        {
+          "text": "8:30pm-9:30pm",
+          "bbox": [
+            625.0,
+            2236.5,
+            827.5,
+            2257.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 6
+        },
+        {
+          "text": "~",
+          "bbox": [
+            1589.0,
+            2258.0,
+            1606.0,
+            2263.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "word_no": 8
+        },
+        {
+          "text": "Join",
+          "bbox": [
+            113.5,
+            2266.5,
+            160.0,
+            2287.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 1
+        },
+        {
+          "text": "us",
+          "bbox": [
+            172.5,
+            2272.5,
+            195.5,
+            2286.5
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 2
+        },
+        {
+          "text": "for",
+          "bbox": [
+            206.0,
+            2266.0,
+            239.0,
+            2286.5
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 3
+        },
+        {
+          "text": "nighttime",
+          "bbox": [
+            249.5,
+            2266.0,
+            362.0,
+            2293.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 4
+        },
+        {
+          "text": "activities",
+          "bbox": [
+            372.5,
+            2268.0,
+            474.5,
+            2286.5
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 5
+        },
+        {
+          "text": "for",
+          "bbox": [
+            484.5,
+            2266.0,
+            517.5,
+            2286.5
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 6
+        },
+        {
+          "text": "all",
+          "bbox": [
+            527.0,
+            2266.0,
+            556.0,
+            2286.5
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 7
+        },
+        {
+          "text": "ages.",
+          "bbox": [
+            566.0,
+            2272.5,
+            624.5,
+            2293.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 8
+        },
+        {
+          "text": "Sunday...............",
+          "bbox": [
+            908.5,
+            2257.5,
+            1088.0,
+            2285.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 9
+        },
+        {
+          "text": "/he",
+          "bbox": [
+            1094.5,
+            2257.5,
+            1133.5,
+            2278.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 10
+        },
+        {
+          "text": "Many",
+          "bbox": [
+            1143.0,
+            2258.0,
+            1208.0,
+            2285.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 11
+        },
+        {
+          "text": "Adventures",
+          "bbox": [
+            1213.5,
+            2257.5,
+            1342.0,
+            2278.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 12
+        },
+        {
+          "text": "of",
+          "bbox": [
+            1351.0,
+            2257.5,
+            1375.5,
+            2278.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 13
+        },
+        {
+          "text": "Winnie",
+          "bbox": [
+            1383.5,
+            2258.0,
+            1460.5,
+            2278.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 14
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1470.5,
+            2257.5,
+            1505.0,
+            2278.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 15
+        },
+        {
+          "text": "Pooh",
+          "bbox": [
+            1514.5,
+            2257.5,
+            1571.5,
+            2278.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "word_no": 16
+        },
+        {
+          "text": "RESORT",
+          "bbox": [
+            116.0,
+            2316.0,
+            278.0,
+            2341.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 1
+        },
+        {
+          "text": "SCAVENGER",
+          "bbox": [
+            299.0,
+            2316.0,
+            550.5,
+            2341.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 2
+        },
+        {
+          "text": "HUNT",
+          "bbox": [
+            573.5,
+            2316.5,
+            683.0,
+            2341.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 3
+        },
+        {
+          "text": "uesday",
+          "bbox": [
+            922.0,
+            2307.5,
+            1001.5,
+            2327.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 4
+        },
+        {
+          "text": "e",
+          "bbox": [
+            1295.5,
+            2307.5,
+            1307.5,
+            2321.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 5
+        },
+        {
+          "text": "Little",
+          "bbox": [
+            1331.5,
+            2307.5,
+            1336.5,
+            2321.0
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 6
+        },
+        {
+          "text": "Mermaid",
+          "bbox": [
+            1363.0,
+            2307.5,
+            1474.5,
+            2348.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 7
+        },
+        {
+          "text": "(1989)",
+          "bbox": [
+            1501.0,
+            2298.5,
+            1571.0,
+            2348.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "word_no": 8
+        },
+        {
+          "text": "Pick",
+          "bbox": [
+            115.5,
+            2353.5,
+            160.0,
+            2374.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 1
+        },
+        {
+          "text": "up",
+          "bbox": [
+            170.0,
+            2360.0,
+            197.0,
+            2380.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 2
+        },
+        {
+          "text": "a",
+          "bbox": [
+            206.5,
+            2360.0,
+            218.5,
+            2374.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 3
+        },
+        {
+          "text": "Clue",
+          "bbox": [
+            227.5,
+            2353.5,
+            278.5,
+            2374.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 4
+        },
+        {
+          "text": "Guide",
+          "bbox": [
+            288.5,
+            2353.5,
+            354.5,
+            2374.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 5
+        },
+        {
+          "text": "from",
+          "bbox": [
+            364.0,
+            2353.5,
+            416.5,
+            2374.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 6
+        },
+        {
+          "text": "the",
+          "bbox": [
+            426.0,
+            2353.5,
+            462.5,
+            2374.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 7
+        },
+        {
+          "text": "Concierge",
+          "bbox": [
+            472.5,
+            2353.5,
+            586.0,
+            2381.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 8
+        },
+        {
+          "text": "Desk,",
+          "bbox": [
+            597.0,
+            2353.5,
+            657.0,
+            2378.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 9
+        },
+        {
+          "text": "Panchito’s",
+          "bbox": [
+            667.5,
+            2353.5,
+            777.5,
+            2374.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 10
+        },
+        {
+          "text": "Gift",
+          "bbox": [
+            787.5,
+            2353.5,
+            829.0,
+            2374.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 11
+        },
+        {
+          "text": "or",
+          "bbox": [
+            1416.0,
+            2350.0,
+            1440.5,
+            2364.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 14
+        },
+        {
+          "text": "Zootopia",
+          "bbox": [
+            1447.0,
+            2344.0,
+            1550.5,
+            2370.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 15
+        },
+        {
+          "text": "2",
+          "bbox": [
+            1558.5,
+            2343.5,
+            1573.0,
+            2364.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "word_no": 16
+        },
+        {
+          "text": "&",
+          "bbox": [
+            114.0,
+            2387.0,
+            131.0,
+            2407.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 1
+        },
+        {
+          "text": "Sundries,",
+          "bbox": [
+            141.0,
+            2386.5,
+            247.0,
+            2411.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 2
+        },
+        {
+          "text": "or",
+          "bbox": [
+            258.0,
+            2393.5,
+            281.5,
+            2407.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 3
+        },
+        {
+          "text": "any",
+          "bbox": [
+            292.0,
+            2393.5,
+            331.5,
+            2414.0
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 4
+        },
+        {
+          "text": "Recreation",
+          "bbox": [
+            343.0,
+            2387.0,
+            466.0,
+            2407.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 5
+        },
+        {
+          "text": "Cast",
+          "bbox": [
+            478.0,
+            2387.0,
+            529.0,
+            2407.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 6
+        },
+        {
+          "text": "Member",
+          "bbox": [
+            540.5,
+            2386.5,
+            640.0,
+            2407.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 7
+        },
+        {
+          "text": "to",
+          "bbox": [
+            649.5,
+            2390.5,
+            672.0,
+            2407.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 8
+        },
+        {
+          "text": "participate.",
+          "bbox": [
+            683.5,
+            2388.5,
+            814.0,
+            2413.5
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "word_no": 9
+        },
+        {
+          "text": "($)",
+          "bbox": [
+            114.5,
+            2490.5,
+            132.0,
+            2507.5
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 1
+        },
+        {
+          "text": "There",
+          "bbox": [
+            138.5,
+            2491.5,
+            181.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 2
+        },
+        {
+          "text": "is",
+          "bbox": [
+            187.5,
+            2493.0,
+            197.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 3
+        },
+        {
+          "text": "a",
+          "bbox": [
+            203.0,
+            2496.0,
+            211.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 4
+        },
+        {
+          "text": "fee",
+          "bbox": [
+            216.5,
+            2491.5,
+            239.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 5
+        },
+        {
+          "text": "associated",
+          "bbox": [
+            245.0,
+            2491.5,
+            319.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 6
+        },
+        {
+          "text": "with",
+          "bbox": [
+            326.0,
+            2491.5,
+            356.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 7
+        },
+        {
+          "text": "this",
+          "bbox": [
+            362.5,
+            2491.5,
+            388.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 8
+        },
+        {
+          "text": "activity.",
+          "bbox": [
+            394.0,
+            2493.0,
+            448.5,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 9
+        },
+        {
+          "text": "Hours",
+          "bbox": [
+            465.5,
+            2492.0,
+            508.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 10
+        },
+        {
+          "text": "of",
+          "bbox": [
+            514.5,
+            2491.5,
+            529.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 11
+        },
+        {
+          "text": "operation,",
+          "bbox": [
+            534.5,
+            2493.0,
+            608.0,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 12
+        },
+        {
+          "text": "lifeguard",
+          "bbox": [
+            614.5,
+            2491.5,
+            678.5,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 13
+        },
+        {
+          "text": "availability,",
+          "bbox": [
+            685.0,
+            2491.5,
+            765.5,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 14
+        },
+        {
+          "text": "and",
+          "bbox": [
+            771.5,
+            2491.5,
+            798.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 15
+        },
+        {
+          "text": "other",
+          "bbox": [
+            804.5,
+            2491.5,
+            843.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 16
+        },
+        {
+          "text": "offerings",
+          "bbox": [
+            849.0,
+            2491.5,
+            913.0,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 17
+        },
+        {
+          "text": "are",
+          "bbox": [
+            919.0,
+            2496.0,
+            941.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 18
+        },
+        {
+          "text": "subject",
+          "bbox": [
+            947.5,
+            2491.5,
+            999.5,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 19
+        },
+        {
+          "text": "to",
+          "bbox": [
+            1005.0,
+            2494.0,
+            1019.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 20
+        },
+        {
+          "text": "closures,",
+          "bbox": [
+            1025.5,
+            2491.5,
+            1088.5,
+            2507.5
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 21
+        },
+        {
+          "text": "weather",
+          "bbox": [
+            1094.0,
+            2491.5,
+            1153.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 22
+        },
+        {
+          "text": "conditions,",
+          "bbox": [
+            1159.0,
+            2491.5,
+            1237.0,
+            2507.5
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 23
+        },
+        {
+          "text": "and",
+          "bbox": [
+            1243.0,
+            2491.5,
+            1269.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 24
+        },
+        {
+          "text": "change",
+          "bbox": [
+            1276.0,
+            2491.5,
+            1328.0,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 25
+        },
+        {
+          "text": "or",
+          "bbox": [
+            1334.5,
+            2496.0,
+            1349.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 26
+        },
+        {
+          "text": "cancellation",
+          "bbox": [
+            1355.0,
+            2491.5,
+            1443.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 27
+        },
+        {
+          "text": "without",
+          "bbox": [
+            1448.5,
+            2491.5,
+            1505.0,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 28
+        },
+        {
+          "text": "notice.",
+          "bbox": [
+            1511.5,
+            2493.0,
+            1558.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 29
+        },
+        {
+          "text": "0326",
+          "bbox": [
+            1578.5,
+            2491.5,
+            1615.5,
+            2505.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "word_no": 30
+        }
+      ],
+      "lines": [
+        {
+          "text": "> SPRINGS",
+          "bbox": [
+            128.0,
+            185.5,
+            345.0,
+            220.5
+          ],
+          "block_no": 1,
+          "line_no": 1002,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "RESORT",
+          "bbox": [
+            188.5,
+            228.5,
+            318.0,
+            241.5
+          ],
+          "block_no": 1,
+          "line_no": 1003,
+          "segment_no": 1,
+          "word_count": 1
+        },
+        {
+          "text": "SCAN THIS QR CODE AND SELECT",
+          "bbox": [
+            251.0,
+            408.5,
+            819.5,
+            429.5
+          ],
+          "block_no": 1,
+          "line_no": 1004,
+          "segment_no": 1,
+          "word_count": 6
+        },
+        {
+          "text": "ACTIVITIES SCHEDULE TO VIEW",
+          "bbox": [
+            250.5,
+            444.5,
+            783.5,
+            465.5
+          ],
+          "block_no": 1,
+          "line_no": 1005,
+          "segment_no": 1,
+          "word_count": 4
+        },
+        {
+          "text": "“as",
+          "bbox": [
+            1396.5,
+            469.0,
+            1410.0,
+            485.0
+          ],
+          "block_no": 1,
+          "line_no": 1006,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "INFORMATION DIGITALLY!",
+          "bbox": [
+            339.5,
+            480.5,
+            760.5,
+            501.5
+          ],
+          "block_no": 1,
+          "line_no": 1006,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "x",
+          "bbox": [
+            1259.0,
+            531.0,
+            1326.0,
+            668.5
+          ],
+          "block_no": 1,
+          "line_no": 1007,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "Be",
+          "bbox": [
+            190.5,
+            627.5,
+            276.0,
+            682.0
+          ],
+          "block_no": 1,
+          "line_no": 1007,
+          "segment_no": 1,
+          "word_count": 1
+        },
+        {
+          "text": "FAMILY WELLNESS",
+          "bbox": [
+            371.5,
+            647.5,
+            754.0,
+            679.0
+          ],
+          "block_no": 1,
+          "line_no": 1008,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "4",
+          "bbox": [
+            1168.0,
+            648.0,
+            1190.0,
+            700.5
+          ],
+          "block_no": 1,
+          "line_no": 1008,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "FIND A FRIEND",
+          "bbox": [
+            160.0,
+            731.0,
+            475.5,
+            756.0
+          ],
+          "block_no": 1,
+          "line_no": 1009,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Throughout Disney’s Coronado Springs Resort",
+          "bbox": [
+            157.5,
+            771.5,
+            734.0,
+            793.0
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "S | G N AT U R E A C T | V | T | E S",
+          "bbox": [
+            908.5,
+            772.5,
+            1518.0,
+            800.5
+          ],
+          "block_no": 1,
+          "line_no": 1010,
+          "segment_no": 2,
+          "word_count": 18
+        },
+        {
+          "text": "Daily from 9:00am-9:00pm",
+          "bbox": [
+            159.0,
+            804.0,
+            502.5,
+            826.0
+          ],
+          "block_no": 1,
+          "line_no": 1011,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Search the Resort for a hidden Bruno photo prop.",
+          "bbox": [
+            158.5,
+            834.5,
+            755.0,
+            861.5
+          ],
+          "block_no": 1,
+          "line_no": 1012,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "SPANISH MOSAIC ART ($)",
+          "bbox": [
+            908.5,
+            857.5,
+            1445.5,
+            889.0
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "segment_no": 2,
+          "word_count": 4
+        },
+        {
+          "text": "Once located, snap a photo and then head to the",
+          "bbox": [
+            158.0,
+            868.0,
+            751.0,
+            894.5
+          ],
+          "block_no": 1,
+          "line_no": 1013,
+          "segment_no": 1,
+          "word_count": 10
+        },
+        {
+          "text": "Concierge Desk to receive a surprise!",
+          "bbox": [
+            158.0,
+            901.0,
+            601.0,
+            928.0
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "segment_no": 1,
+          "word_count": 6
+        },
+        {
+          "text": "Dahlia Lounge",
+          "bbox": [
+            909.0,
+            902.5,
+            1082.0,
+            924.0
+          ],
+          "block_no": 1,
+          "line_no": 1014,
+          "segment_no": 2,
+          "word_count": 2
+        },
+        {
+          "text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm",
+          "bbox": [
+            909.0,
+            938.5,
+            1603.0,
+            960.0
+          ],
+          "block_no": 1,
+          "line_no": 1015,
+          "segment_no": 1,
+          "word_count": 6
+        },
+        {
+          "text": "NATURE WALK",
+          "bbox": [
+            160.0,
+            951.0,
+            463.0,
+            976.0
+          ],
+          "block_no": 1,
+          "line_no": 1016,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "a historic",
+          "bbox": [
+            1466.5,
+            972.0,
+            1570.5,
+            992.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "segment_no": 3,
+          "word_count": 2
+        },
+        {
+          "text": "4 » ~»",
+          "bbox": [
+            927.5,
+            978.5,
+            1075.0,
+            1024.0
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "segment_no": 2,
+          "word_count": 3
+        },
+        {
+          "text": "Daily throughout Disney’s Coronado Springs Resort",
+          "bbox": [
+            159.0,
+            991.0,
+            787.5,
+            1012.5
+          ],
+          "block_no": 1,
+          "line_no": 1017,
+          "segment_no": 1,
+          "word_count": 6
+        },
+        {
+          "text": "panis art",
+          "bbox": [
+            1241.5,
+            1011.5,
+            1356.0,
+            1049.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "segment_no": 3,
+          "word_count": 2
+        },
+        {
+          "text": "as you",
+          "bbox": [
+            1473.0,
+            1014.5,
+            1545.0,
+            1049.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "segment_no": 4,
+          "word_count": 2
+        },
+        {
+          "text": "> |",
+          "bbox": [
+            1037.5,
+            1015.5,
+            1130.0,
+            1050.0
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "segment_no": 2,
+          "word_count": 2
+        },
+        {
+          "text": "Self-led nature trail to view the wildlife and landscape",
+          "bbox": [
+            158.5,
+            1021.0,
+            779.0,
+            1048.5
+          ],
+          "block_no": 1,
+          "line_no": 1018,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "y our own mosaic",
+          "bbox": [
+            1311.0,
+            1050.5,
+            1507.0,
+            1085.0
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "segment_no": 3,
+          "word_count": 4
+        },
+        {
+          "text": "=>",
+          "bbox": [
+            1081.5,
+            1054.0,
+            1120.5,
+            1084.5
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "of the Resort. Pick up a Nature Guide at Panchito’s",
+          "bbox": [
+            158.0,
+            1054.5,
+            763.0,
+            1081.5
+          ],
+          "block_no": 1,
+          "line_no": 1019,
+          "segment_no": 1,
+          "word_count": 10
+        },
+        {
+          "text": "showpiece with a touch of",
+          "bbox": [
+            1227.0,
+            1079.5,
+            1533.0,
+            1107.0
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "segment_no": 2,
+          "word_count": 5
+        },
+        {
+          "text": "Gifts & Sundries, Concierge Desk or from a Recreation",
+          "bbox": [
+            158.0,
+            1087.0,
+            775.5,
+            1114.5
+          ],
+          "block_no": 1,
+          "line_no": 1020,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "Disney flair. This experience is",
+          "bbox": [
+            1228.0,
+            1116.0,
+            1569.0,
+            1143.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "segment_no": 3,
+          "word_count": 5
+        },
+        {
+          "text": "Cast Member to get started.",
+          "bbox": [
+            158.0,
+            1120.5,
+            486.0,
+            1147.5
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "=",
+          "bbox": [
+            1017.5,
+            1129.5,
+            1029.5,
+            1138.0
+          ],
+          "block_no": 1,
+          "line_no": 1021,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "recommended for Guests ages 12",
+          "bbox": [
+            1225.5,
+            1151.5,
+            1602.5,
+            1179.0
+          ],
+          "block_no": 1,
+          "line_no": 1022,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "FITNE Ss S CENTERS",
+          "bbox": [
+            160.0,
+            1170.5,
+            537.0,
+            1214.0
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "segment_no": 1,
+          "word_count": 4
+        },
+        {
+          "text": "and up. Space is limited. To book,",
+          "bbox": [
+            1226.0,
+            1188.0,
+            1608.0,
+            1215.0
+          ],
+          "block_no": 1,
+          "line_no": 1023,
+          "segment_no": 2,
+          "word_count": 7
+        },
+        {
+          "text": "Gran Destino Tower and near Casitas 4",
+          "bbox": [
+            158.0,
+            1211.0,
+            641.0,
+            1228.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "segment_no": 1,
+          "word_count": 7
+        },
+        {
+          "text": "h Spanish Mosaic A h",
+          "bbox": [
+            1285.0,
+            1224.0,
+            1595.5,
+            1244.5
+          ],
+          "block_no": 1,
+          "line_no": 1024,
+          "segment_no": 2,
+          "word_count": 5
+        },
+        {
+          "text": "the",
+          "bbox": [
+            1575.0,
+            1227.5,
+            1609.5,
+            1244.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "segment_no": 4,
+          "word_count": 1
+        },
+        {
+          "text": "sca Pans",
+          "bbox": [
+            1225.0,
+            1230.5,
+            1380.0,
+            1265.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "segment_no": 3,
+          "word_count": 2
+        },
+        {
+          "text": "Open 24 hours a day, 7 days a week",
+          "bbox": [
+            158.0,
+            1243.5,
+            606.5,
+            1265.0
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "¢",
+          "bbox": [
+            1091.5,
+            1251.0,
+            1101.5,
+            1262.5
+          ],
+          "block_no": 1,
+          "line_no": 1025,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "Continue pushing towards your wellness goals in",
+          "bbox": [
+            158.0,
+            1274.0,
+            742.0,
+            1301.5
+          ],
+          "block_no": 1,
+          "line_no": 1026,
+          "segment_no": 1,
+          "word_count": 7
+        },
+        {
+          "text": "our full-service fitness center.",
+          "bbox": [
+            158.0,
+            1306.5,
+            509.5,
+            1327.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "segment_no": 1,
+          "word_count": 4
+        },
+        {
+          "text": "COLORS OF CORONADO",
+          "bbox": [
+            909.0,
+            1323.0,
+            1413.0,
+            1348.5
+          ],
+          "block_no": 1,
+          "line_no": 1027,
+          "segment_no": 2,
+          "word_count": 3
+        },
+        {
+          "text": "PAINTING EXPERIENCE ($)",
+          "bbox": [
+            910.0,
+            1357.5,
+            1466.0,
+            1388.5
+          ],
+          "block_no": 1,
+          "line_no": 1028,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Toledo - Tapas, Steak & Seafood",
+          "bbox": [
+            908.0,
+            1400.0,
+            1312.0,
+            1425.5
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "segment_no": 2,
+          "word_count": 6
+        },
+        {
+          "text": "R ESO RT ACTIVITI ES",
+          "bbox": [
+            116.5,
+            1406.5,
+            632.0,
+            1435.0
+          ],
+          "block_no": 1,
+          "line_no": 1029,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "Friday from 1:;00pm-3:00pm",
+          "bbox": [
+            909.0,
+            1438.0,
+            1262.5,
+            1459.5
+          ],
+          "block_no": 1,
+          "line_no": 1030,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Get in touch with your inner artist during this master-led",
+          "bbox": [
+            908.5,
+            1471.5,
+            1541.0,
+            1498.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "segment_no": 2,
+          "word_count": 10
+        },
+        {
+          "text": "POOLSIDE ACTIVITIES",
+          "bbox": [
+            116.0,
+            1482.0,
+            577.0,
+            1507.5
+          ],
+          "block_no": 1,
+          "line_no": 1031,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "painting class. This experience is recommended for Guests ages",
+          "bbox": [
+            908.5,
+            1507.5,
+            1601.0,
+            1534.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "segment_no": 2,
+          "word_count": 9
+        },
+        {
+          "text": "Daily at The Dig Site",
+          "bbox": [
+            115.0,
+            1522.0,
+            368.5,
+            1543.5
+          ],
+          "block_no": 1,
+          "line_no": 1032,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "I2 and up. Space is limited. To book, search Colors of Coronado",
+          "bbox": [
+            909.0,
+            1543.5,
+            1598.5,
+            1570.5
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "segment_no": 2,
+          "word_count": 12
+        },
+        {
+          "text": "Join us for family-friendly activities.",
+          "bbox": [
+            113.5,
+            1552.5,
+            536.5,
+            1580.0
+          ],
+          "block_no": 1,
+          "line_no": 1033,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "Painting Experience on the My Disney Experience app.",
+          "bbox": [
+            907.5,
+            1579.5,
+            1510.5,
+            1606.5
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "segment_no": 2,
+          "word_count": 8
+        },
+        {
+          "text": "See a Recreation Cast Member for more information.",
+          "bbox": [
+            112.5,
+            1585.5,
+            734.0,
+            1606.0
+          ],
+          "block_no": 1,
+          "line_no": 1034,
+          "segment_no": 1,
+          "word_count": 8
+        },
+        {
+          "text": "ARTS AND CRAFTS ($)",
+          "bbox": [
+            114.5,
+            1634.0,
+            588.0,
+            1665.5
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "segment_no": 1,
+          "word_count": 4
+        },
+        {
+          "text": "SANGRIA UNIVERSITY ($)",
+          "bbox": [
+            908.5,
+            1640.5,
+            1444.5,
+            1672.0
+          ],
+          "block_no": 1,
+          "line_no": 1035,
+          "segment_no": 2,
+          "word_count": 3
+        },
+        {
+          "text": "The Dig Site from 3:30pm-4:30pm",
+          "bbox": [
+            114.0,
+            1675.5,
+            545.5,
+            1697.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": "Toledo - Tapas, Steak & Seafood",
+          "bbox": [
+            908.0,
+            1685.5,
+            1312.0,
+            1707.5
+          ],
+          "block_no": 1,
+          "line_no": 1036,
+          "segment_no": 2,
+          "word_count": 6
+        },
+        {
+          "text": "Sunday, Tuesday and",
+          "bbox": [
+            114.5,
+            1706.5,
+            358.5,
+            1733.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Mickey Tie-Dye",
+          "bbox": [
+            640.0,
+            1706.5,
+            823.5,
+            1733.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "segment_no": 2,
+          "word_count": 2
+        },
+        {
+          "text": "endl",
+          "bbox": [
+            1026.5,
+            1721.5,
+            1071.0,
+            1739.5
+          ],
+          "block_no": 1,
+          "line_no": 1037,
+          "segment_no": 3,
+          "word_count": 1
+        },
+        {
+          "text": "Monday and",
+          "bbox": [
+            115.5,
+            1739.0,
+            261.0,
+            1766.5
+          ],
+          "block_no": 1,
+          "line_no": 1038,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "Art",
+          "bbox": [
+            785.5,
+            1739.5,
+            823.5,
+            1760.0
+          ],
+          "block_no": 1,
+          "line_no": 1038,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "11:00am and 1:30pm",
+          "bbox": [
+            907.5,
+            1757.5,
+            1159.5,
+            1779.0
+          ],
+          "block_no": 1,
+          "line_no": 1039,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "a)",
+          "bbox": [
+            1472.5,
+            1763.5,
+            1520.0,
+            1783.0
+          ],
+          "block_no": 1,
+          "line_no": 1039,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "Craft",
+          "bbox": [
+            766.0,
+            1772.0,
+            823.5,
+            1793.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "segment_no": 1,
+          "word_count": 1
+        },
+        {
+          "text": "Discuss the history of sangria",
+          "bbox": [
+            909.5,
+            1790.0,
+            1265.5,
+            1817.5
+          ],
+          "block_no": 1,
+          "line_no": 1041,
+          "segment_no": 1,
+          "word_count": 5
+        },
+        {
+          "text": ".",
+          "bbox": [
+            929.0,
+            1792.0,
+            932.5,
+            1795.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": ".",
+          "bbox": [
+            1071.0,
+            1792.0,
+            1074.5,
+            1795.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "segment_no": 3,
+          "word_count": 1
+        },
+        {
+          "text": ".",
+          "bbox": [
+            1247.0,
+            1792.0,
+            1250.5,
+            1795.0
+          ],
+          "block_no": 1,
+          "line_no": 1040,
+          "segment_no": 4,
+          "word_count": 1
+        },
+        {
+          "text": "DISNEY TRIVIA",
+          "bbox": [
+            116.0,
+            1822.0,
+            427.0,
+            1847.5
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "and learn the recipes used to",
+          "bbox": [
+            908.0,
+            1825.0,
+            1266.0,
+            1852.0
+          ],
+          "block_no": 1,
+          "line_no": 1042,
+          "segment_no": 2,
+          "word_count": 6
+        },
+        {
+          "text": "—",
+          "bbox": [
+            1519.5,
+            1853.0,
+            1530.0,
+            1895.0
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "segment_no": 3,
+          "word_count": 1
+        },
+        {
+          "text": "make the 4 in-house varieties",
+          "bbox": [
+            909.0,
+            1860.0,
+            1268.0,
+            1880.5
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "segment_no": 2,
+          "word_count": 5
+        },
+        {
+          "text": "Laguna Bar",
+          "bbox": [
+            115.0,
+            1863.5,
+            254.5,
+            1884.0
+          ],
+          "block_no": 1,
+          "line_no": 1043,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "served at Three Bridges Bar",
+          "bbox": [
+            908.5,
+            1895.0,
+            1250.5,
+            1922.0
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "segment_no": 2,
+          "word_count": 5
+        },
+        {
+          "text": "Friday from 5:00pm-5:45pm",
+          "bbox": [
+            115.0,
+            1895.5,
+            470.0,
+            1917.0
+          ],
+          "block_no": 1,
+          "line_no": 1044,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Join us for a trivia challenge near El Centro!",
+          "bbox": [
+            113.5,
+            1925.5,
+            643.0,
+            1953.0
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "and Grill. Enjoy a tasting and",
+          "bbox": [
+            908.0,
+            1930.0,
+            1263.5,
+            1957.0
+          ],
+          "block_no": 1,
+          "line_no": 1045,
+          "segment_no": 2,
+          "word_count": 6
+        },
+        {
+          "text": "——",
+          "bbox": [
+            1369.0,
+            1956.5,
+            1455.5,
+            1970.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "segment_no": 3,
+          "word_count": 1
+        },
+        {
+          "text": "=",
+          "bbox": [
+            1580.5,
+            1960.5,
+            1609.0,
+            1970.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "segment_no": 4,
+          "word_count": 1
+        },
+        {
+          "text": "you'll even get to make your",
+          "bbox": [
+            906.5,
+            1965.0,
+            1250.5,
+            1992.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "segment_no": 2,
+          "word_count": 6
+        },
+        {
+          "text": "EXPLORER’S CAMPFIRE",
+          "bbox": [
+            116.0,
+            1975.5,
+            605.5,
+            2001.0
+          ],
+          "block_no": 1,
+          "line_no": 1046,
+          "segment_no": 1,
+          "word_count": 2
+        },
+        {
+          "text": "own glass! Advanced booking required through the",
+          "bbox": [
+            908.0,
+            2001.0,
+            1515.5,
+            2028.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "segment_no": 2,
+          "word_count": 7
+        },
+        {
+          "text": "The Dig Site",
+          "bbox": [
+            114.0,
+            2016.0,
+            265.5,
+            2034.0
+          ],
+          "block_no": 1,
+          "line_no": 1047,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "My Disney Experience app by searching Sangria University.",
+          "bbox": [
+            909.5,
+            2037.0,
+            1604.0,
+            2064.0
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "segment_no": 2,
+          "word_count": 8
+        },
+        {
+          "text": "Nightly from 6:30pm-7:30pm",
+          "bbox": [
+            115.0,
+            2049.0,
+            479.5,
+            2070.5
+          ],
+          "block_no": 1,
+          "line_no": 1048,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "Enjoy the warm glow of the campfire with complimentary",
+          "bbox": [
+            115.5,
+            2079.5,
+            807.0,
+            2106.5
+          ],
+          "block_no": 1,
+          "line_no": 1049,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "marshmallows. S’mores kits available for purchase.",
+          "bbox": [
+            115.0,
+            2112.5,
+            707.5,
+            2139.5
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "segment_no": 1,
+          "word_count": 6
+        },
+        {
+          "text": "MOVIE UNDER THE STARS",
+          "bbox": [
+            910.5,
+            2116.5,
+            1580.5,
+            2144.5
+          ],
+          "block_no": 1,
+          "line_no": 1050,
+          "segment_no": 2,
+          "word_count": 4
+        },
+        {
+          "text": "CORONADO NIGHTS POOL PARTY",
+          "bbox": [
+            115.0,
+            2162.5,
+            819.5,
+            2188.0
+          ],
+          "block_no": 1,
+          "line_no": 1051,
+          "segment_no": 1,
+          "word_count": 4
+        },
+        {
+          "text": "GRAN DESTINO LAWN | 8:00PM",
+          "bbox": [
+            908.5,
+            2198.0,
+            1412.5,
+            2224.5
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "segment_no": 2,
+          "word_count": 5
+        },
+        {
+          "text": "The Dig Site Pool",
+          "bbox": [
+            114.0,
+            2202.5,
+            328.5,
+            2224.0
+          ],
+          "block_no": 1,
+          "line_no": 1052,
+          "segment_no": 1,
+          "word_count": 4
+        },
+        {
+          "text": "Monday, Wednesday, and Saturday from 8:30pm-9:30pm",
+          "bbox": [
+            115.0,
+            2235.5,
+            827.5,
+            2257.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "segment_no": 1,
+          "word_count": 6
+        },
+        {
+          "text": "Sunday............... /he Many Adventures of Winnie the Pooh",
+          "bbox": [
+            908.5,
+            2257.5,
+            1571.5,
+            2285.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "segment_no": 2,
+          "word_count": 8
+        },
+        {
+          "text": "~",
+          "bbox": [
+            1589.0,
+            2258.0,
+            1606.0,
+            2263.5
+          ],
+          "block_no": 1,
+          "line_no": 1053,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "Join us for nighttime activities for all ages.",
+          "bbox": [
+            113.5,
+            2266.0,
+            624.5,
+            2293.0
+          ],
+          "block_no": 1,
+          "line_no": 1054,
+          "segment_no": 1,
+          "word_count": 8
+        },
+        {
+          "text": "e Little Mermaid (1989)",
+          "bbox": [
+            1295.5,
+            2298.5,
+            1571.0,
+            2348.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "segment_no": 3,
+          "word_count": 4
+        },
+        {
+          "text": "uesday",
+          "bbox": [
+            922.0,
+            2307.5,
+            1001.5,
+            2327.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "segment_no": 2,
+          "word_count": 1
+        },
+        {
+          "text": "RESORT SCAVENGER HUNT",
+          "bbox": [
+            116.0,
+            2316.0,
+            683.0,
+            2341.5
+          ],
+          "block_no": 1,
+          "line_no": 1055,
+          "segment_no": 1,
+          "word_count": 3
+        },
+        {
+          "text": "or Zootopia 2",
+          "bbox": [
+            1416.0,
+            2343.5,
+            1573.0,
+            2370.5
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "segment_no": 2,
+          "word_count": 3
+        },
+        {
+          "text": "Pick up a Clue Guide from the Concierge Desk, Panchito’s Gift",
+          "bbox": [
+            115.5,
+            2353.5,
+            829.0,
+            2381.0
+          ],
+          "block_no": 1,
+          "line_no": 1056,
+          "segment_no": 1,
+          "word_count": 11
+        },
+        {
+          "text": "& Sundries, or any Recreation Cast Member to participate.",
+          "bbox": [
+            114.0,
+            2386.5,
+            814.0,
+            2414.0
+          ],
+          "block_no": 1,
+          "line_no": 1057,
+          "segment_no": 1,
+          "word_count": 9
+        },
+        {
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "bbox": [
+            114.5,
+            2490.5,
+            1615.5,
+            2509.0
+          ],
+          "block_no": 1,
+          "line_no": 1058,
+          "segment_no": 1,
+          "word_count": 30
+        }
+      ]
+    }
+  ]
+}

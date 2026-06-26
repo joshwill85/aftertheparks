@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import {
   getDisplayTime,
   getDisplayTitle,
   occurrenceToDisplayInput,
 } from "@/lib/activityDisplay";
 import { getLivingState, livingStateLabel } from "@/lib/plan/living";
+import { activityDetailHref } from "@/lib/activities/links";
+import { trackPlanEvent } from "@/lib/plan/analytics";
 import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 
@@ -28,18 +28,12 @@ interface PlanItemCardProps {
   item: PlanItemType;
   onRemove: (id: string) => void;
   onUpdateNotes?: (id: string, notes: string) => void;
-  dragHandle?: React.ReactNode;
-  style?: React.CSSProperties;
-  setNodeRef?: (node: HTMLElement | null) => void;
 }
 
 function PlanItemCard({
   item,
   onRemove,
   onUpdateNotes,
-  dragHandle,
-  style,
-  setNodeRef,
 }: PlanItemCardProps) {
   const [editingNotes, setEditingNotes] = useState(false);
   const [draftNotes, setDraftNotes] = useState(item.notes ?? "");
@@ -48,6 +42,15 @@ function PlanItemCard({
   const time = getDisplayTime(display);
   const living = getLivingState(item);
   const livingLabel = livingStateLabel(living);
+  const reservationRequired = item.snapshotJson?.reservationRequired === true;
+
+  useEffect(() => {
+    if (item.sourceStatus === "changed" || item.sourceStatus === "unavailable") {
+      trackPlanEvent("plan_schedule_change_displayed", {
+        status: item.sourceStatus,
+      });
+    }
+  }, [item.sourceStatus]);
 
   const saveNotes = () => {
     onUpdateNotes?.(item.id, draftNotes.trim());
@@ -56,15 +59,11 @@ function PlanItemCard({
 
   return (
     <li
-      ref={setNodeRef}
-      style={style}
       className="plan-item flex items-start gap-3 rounded-[22px] border border-[var(--color-card-border)] bg-[var(--color-card)] p-4 shadow-sm"
     >
-      {dragHandle}
-
       <div className="min-w-0 flex-1">
         <Link
-          href={`/activities/${item.activitySlug}`}
+          href={activityDetailHref(item.activitySlug, item.resortSlug)}
           className="font-display text-lg font-semibold leading-tight hover:text-[var(--accent)]"
         >
           {title}
@@ -87,6 +86,32 @@ function PlanItemCard({
         <p className="mt-1 text-sm font-bold text-[var(--color-foreground)]/72">
           {item.resortName}
         </p>
+        <dl className="mt-2 grid gap-1 text-xs text-[var(--color-muted)] sm:grid-cols-2">
+          {item.location && (
+            <div>
+              <dt className="sr-only">Location</dt>
+              <dd>{item.location}</dd>
+            </div>
+          )}
+          {item.category && (
+            <div>
+              <dt className="sr-only">Category</dt>
+              <dd>{item.category.replace(/_/g, " ")}</dd>
+            </div>
+          )}
+          {item.priceLabel && (
+            <div>
+              <dt className="sr-only">Price</dt>
+              <dd>{item.priceLabel}</dd>
+            </div>
+          )}
+          {reservationRequired && (
+            <div>
+              <dt className="sr-only">Reservation</dt>
+              <dd>Reservation required</dd>
+            </div>
+          )}
+        </dl>
         {item.startDateTime && (
           <time
             dateTime={item.startDateTime}
@@ -100,9 +125,37 @@ function PlanItemCard({
             {time.label}
           </time>
         )}
-        {!item.startDateTime && (
+        {!item.startDateTime && time.label && (
           <p className="mt-1.5 text-sm font-bold text-[var(--color-muted)]">
             {time.label}
+          </p>
+        )}
+
+        {(item.sourceVerifiedAt || item.sourceUrl) && (
+          <p className="mt-2 text-xs text-[var(--color-muted)]">
+            {item.sourceVerifiedAt && (
+              <>
+                Source checked{" "}
+                {new Date(item.sourceVerifiedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </>
+            )}
+            {item.sourceUrl && (
+              <>
+                {item.sourceVerifiedAt ? " · " : ""}
+                <a
+                  href={item.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[var(--accent)] hover:underline"
+                >
+                  Source
+                </a>
+              </>
+            )}
           </p>
         )}
 
@@ -173,73 +226,18 @@ interface PlanItemProps {
   item: PlanItemType;
   onRemove: (id: string) => void;
   onUpdateNotes?: (id: string, notes: string) => void;
-  sortable?: boolean;
 }
 
 export function PlanItem({
   item,
   onRemove,
   onUpdateNotes,
-  sortable = false,
 }: PlanItemProps) {
-  if (sortable) {
-    return (
-      <SortablePlanItem
-        item={item}
-        onRemove={onRemove}
-        onUpdateNotes={onUpdateNotes}
-      />
-    );
-  }
-
   return (
     <PlanItemCard
       item={item}
       onRemove={onRemove}
       onUpdateNotes={onUpdateNotes}
-    />
-  );
-}
-
-function SortablePlanItem({
-  item,
-  onRemove,
-  onUpdateNotes,
-}: {
-  item: PlanItemType;
-  onRemove: (id: string) => void;
-  onUpdateNotes?: (id: string, notes: string) => void;
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: item.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  const dragHandle = (
-    <button
-      type="button"
-      className="mt-0.5 cursor-grab touch-none text-[var(--color-muted)] active:cursor-grabbing"
-      {...attributes}
-      {...listeners}
-      aria-label="Drag to reorder"
-    >
-      <span className="text-lg leading-none" aria-hidden>
-        ⋮⋮
-      </span>
-    </button>
-  );
-
-  return (
-    <PlanItemCard
-      item={item}
-      onRemove={onRemove}
-      onUpdateNotes={onUpdateNotes}
-      dragHandle={dragHandle}
-      style={style}
-      setNodeRef={setNodeRef}
     />
   );
 }

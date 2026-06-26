@@ -19,7 +19,7 @@ export async function createAppServerClient() {
             cookieStore.set(name, value, options);
           });
         } catch {
-          /* set from Server Component — middleware handles refresh */
+          /* Cookie writes are only available from route handlers and server actions. */
         }
       },
     },

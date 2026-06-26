@@ -1,0 +1,17 @@
+[
+  "info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+  "info: [Web Vitals] TTFB: 579",
+  "info: [Web Vitals] LCP: 688",
+  "info: [Web Vitals] CLS: 0",
+  "info: [Web Vitals] CLS: 0",
+  "info: [Web Vitals] CLS: 0",
+  "error: Failed to load resource: the server responded with a status of 400 ()",
+  "warning: anonymous-auth-failed captcha protection: request disallowed (no captcha_token found)",
+  "info: [Web Vitals] CLS: 0",
+  "info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+  "info: [Web Vitals] TTFB: 228",
+  "info: [Web Vitals] LCP: 332",
+  "info: [Web Vitals] CLS: 0",
+  "info: [Web Vitals] CLS: 0",
+  "log: [Fast Refresh] rebuilding"
+]

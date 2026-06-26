@@ -35,6 +35,10 @@ def main() -> None:
 
     run_step("extract.py", *(["--persist-db"] if not args.local_only else []))
     run_step("validate.py")
+    run_step("validate_v2.py")
+    run_step("magical_resort_guide.py")
+    run_step("promote_gold.py", "--fail-on-review")
+    run_step("audit_coverage.py", *(["--require-production-ready"] if not args.local_only else []))
 
     if not args.skip_publish and not args.local_only:
         if not env.get("SUPABASE_URL") and not env.get("NEXT_PUBLIC_SUPABASE_URL"):
@@ -42,7 +46,8 @@ def main() -> None:
         elif not env.get("SUPABASE_SERVICE_ROLE_KEY"):
             print("Skipping publish: SUPABASE_SERVICE_ROLE_KEY not set")
         else:
-            run_step("publish.py")
+            run_step("publish_gold_v2.py")
+            run_step("publish_official_offerings.py")
 
     print("\nBackfill complete.")
 

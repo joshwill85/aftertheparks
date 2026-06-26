@@ -10,6 +10,9 @@ import {
   activityDataPipeline,
   getActivityBySlug,
   getAllOccurrences,
+  getFilteredActivities,
+  getMovieNights,
+  getResortTimeline,
 } from "@/lib/data/activities";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
@@ -118,6 +121,30 @@ assert.equal(occurrence.fieldProvenance?.title?.[0]?.line, 5);
 assert.equal(occurrence.claims?.walkability?.value, "unknown");
 assert.equal(occurrence.claims?.transportation?.value, "unknown");
 assert.equal(occurrence.freshness.badge, "verified");
+
+const weekdayRow: GoldActivityRow = {
+  ...row,
+  id: "gold-weekday-craft",
+  activity_catalog_id: "weekday-craft-catalog",
+  canonical_slug: "weekday-craft",
+  title: "Weekday Craft",
+  category: "arts_crafts",
+  schedule: {
+    text: "Monday, Wednesday and Friday from 4:00pm-5:00pm",
+    start_time: "4:00pm",
+    end_time: "5:00pm",
+  },
+};
+
+const weekdayOccurrences = mapGoldActivityRowToOccurrences(weekdayRow, {
+  dateRangeDays: 7,
+  referenceDate: new Date("2026-06-25T12:00:00-04:00"),
+});
+assert.deepEqual(
+  weekdayOccurrences.map((item) => item.startDateTime?.slice(0, 10)),
+  ["2026-06-26", "2026-06-29", "2026-07-01"],
+  "Gold timed rows must honor weekday recurrence in source schedule text"
+);
 
 const unsupportedEnrichment = ensurePublicActivity({
   ...occurrences[0],
@@ -306,6 +333,11 @@ const untimedPoolsideCard = activityToEventCard(
   untimedPoolsideDisplay
 );
 assert.equal(
+  untimedPoolsideCard.href,
+  "/activities/poolside-activities?resort=boardwalk-inn",
+  "Activity cards must preserve resort context for shared activity slugs"
+);
+assert.equal(
   untimedPoolsideCard.timeLabel,
   undefined,
   "Untimed activity cards must not show a time field"
@@ -440,6 +472,57 @@ async function assertDefaultPipelineUsesGoldV2(): Promise<void> {
   }
 }
 
+async function assertUnexpectedPipelineFailsClosedToGoldV2(): Promise<void> {
+  const envSnapshot = {
+    activityPipeline: process.env.ACTIVITY_DATA_PIPELINE,
+    publicActivityPipeline: process.env.NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE,
+    legacyUiPipeline: process.env.ALLOW_LEGACY_ACTIVITY_UI_PIPELINE,
+  };
+
+  try {
+    process.env.ACTIVITY_DATA_PIPELINE = "legacy-temporal";
+    delete process.env.NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE;
+    delete process.env.ALLOW_LEGACY_ACTIVITY_UI_PIPELINE;
+    assert.equal(
+      activityDataPipeline(),
+      "gold-v2",
+      "Legacy temporal UI reads must fail closed unless explicitly unlocked"
+    );
+
+    process.env.ALLOW_LEGACY_ACTIVITY_UI_PIPELINE = "1";
+    assert.equal(
+      activityDataPipeline(),
+      "legacy-temporal",
+      "Legacy temporal UI reads must require a named opt-in and unlock flag"
+    );
+
+    process.env.ACTIVITY_DATA_PIPELINE = "typo-or-unknown";
+    assert.equal(
+      activityDataPipeline(),
+      "gold-v2",
+      "Unknown UI pipeline values must not fall into legacy temporal reads"
+    );
+  } finally {
+    if (envSnapshot.activityPipeline === undefined) {
+      delete process.env.ACTIVITY_DATA_PIPELINE;
+    } else {
+      process.env.ACTIVITY_DATA_PIPELINE = envSnapshot.activityPipeline;
+    }
+    if (envSnapshot.publicActivityPipeline === undefined) {
+      delete process.env.NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE;
+    } else {
+      process.env.NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE =
+        envSnapshot.publicActivityPipeline;
+    }
+    if (envSnapshot.legacyUiPipeline === undefined) {
+      delete process.env.ALLOW_LEGACY_ACTIVITY_UI_PIPELINE;
+    } else {
+      process.env.ALLOW_LEGACY_ACTIVITY_UI_PIPELINE =
+        envSnapshot.legacyUiPipeline;
+    }
+  }
+}
+
 async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
   const envSnapshot = {
     activityPipeline: process.env.ACTIVITY_DATA_PIPELINE,
@@ -501,6 +584,47 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     );
     assert.equal(legacyWellness.activity.title, "Wellness Scavenger Hunt");
 
+    const resortScopedCampfire = await getActivityBySlug("campfire", {
+      resort: "polynesian-village-resort",
+    });
+    assert.ok(
+      resortScopedCampfire,
+      "Activity details must resolve shared slugs within the requested resort"
+    );
+    assert.equal(
+      resortScopedCampfire.activity.resort.slug,
+      "polynesian-village-resort"
+    );
+    assert.ok(
+      resortScopedCampfire.upcoming.every(
+        (item) => item.resort.slug === "polynesian-village-resort"
+      ),
+      "Resort-scoped activity details must not mix upcoming rows from other resorts"
+    );
+
+    const [polynesianTimeline, polynesianExplore] = await Promise.all([
+      getResortTimeline("polynesian-village-resort", 7),
+      getFilteredActivities({ resort: "polynesian-village-resort", limit: 200 }),
+    ]);
+    assert.ok(
+      polynesianTimeline.length > polynesianExplore.length,
+      "Resort timeline must expose dated occurrences instead of Explore's collapsed activity list"
+    );
+    assert.ok(
+      new Set(
+        polynesianTimeline
+          .map((item) => item.startDateTime?.slice(0, 10))
+          .filter(Boolean)
+      ).size > 1,
+      "Resort timeline must span multiple calendar dates"
+    );
+    assert.ok(
+      polynesianTimeline.every(
+        (item) => item.resort.slug === "polynesian-village-resort"
+      ),
+      "Resort timeline must remain scoped to the requested resort"
+    );
+
     const quarantinedFortActivity = await getActivityBySlug(
       "chip-n-dales-campfire-sing-a-long"
     );
@@ -508,6 +632,12 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
       quarantinedFortActivity,
       null,
       "Incomplete official Fort Wilderness web rows must fail closed until schedule and location are sourced"
+    );
+
+    assert.deepEqual(
+      await getMovieNights(),
+      [],
+      "Movie title listings must fail closed until film titles have a source-backed feed"
     );
   } finally {
     if (envSnapshot.activityPipeline === undefined) {
@@ -542,6 +672,7 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
 
 Promise.all([
   assertDefaultPipelineUsesGoldV2(),
+  assertUnexpectedPipelineFailsClosedToGoldV2(),
   assertPreviewPipelineUsesGoldPreview(),
 ]).catch((error) => {
   console.error(error);

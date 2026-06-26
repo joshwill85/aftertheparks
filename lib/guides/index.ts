@@ -25,13 +25,13 @@ export const GUIDES: GuideEntry[] = [
     ],
   },
   {
-    slug: "rainy-day-resort",
-    title: "Rainy day at the resort",
+    slug: "arcade-and-crafts",
+    title: "Arcade and crafts",
     description:
-      "Arcade time, indoor crafts, and cozy lobby moments when the skies open up.",
+      "Arcade listings, crafts, and other source-backed resort options.",
     href: "/activities?category=arcade",
     exploreHref: "/activities?category=arcade",
-    keywords: ["rain", "rainy", "indoor", "arcade", "weather"],
+    keywords: ["arcade", "games", "crafts"],
   },
   {
     slug: "resort-calendar",

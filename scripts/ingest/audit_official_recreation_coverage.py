@@ -93,6 +93,147 @@ def _quarantined_program_keys(extraction: dict[str, Any]) -> set[str]:
     return keys
 
 
+def _offering_rows_missing_resort_join(extraction: dict[str, Any]) -> list[dict[str, Any]]:
+    missing: list[dict[str, Any]] = []
+    offerings = extraction.get("offerings")
+    if not isinstance(offerings, list):
+        return missing
+
+    for row in offerings:
+        if not isinstance(row, dict):
+            continue
+        resort_slug = row.get("resort_slug")
+        provenance = row.get("field_provenance")
+        resort_join = provenance.get("resort_join") if isinstance(provenance, dict) else None
+        if (
+            not isinstance(resort_slug, str)
+            or not resort_slug.strip()
+            or not isinstance(resort_join, list)
+            or not resort_join
+        ):
+            missing.append(row)
+    return missing
+
+
+def _program_keys_without_joined_offerings(extraction: dict[str, Any]) -> set[str]:
+    programs = extraction.get("programs")
+    if not isinstance(programs, list):
+        return set()
+    offering_programs = _covered_program_keys({"offerings": extraction.get("offerings", [])})
+    missing: set[str] = set()
+    for row in programs:
+        if not isinstance(row, dict):
+            continue
+        program_key = row.get("program_key")
+        if (
+            isinstance(program_key, str)
+            and program_key.strip()
+            and program_key not in offering_programs
+        ):
+            missing.add(program_key)
+    return missing
+
+
+def _offering_rows_with_unsourced_availability_labels(extraction: dict[str, Any]) -> list[dict[str, Any]]:
+    missing: list[dict[str, Any]] = []
+    offerings = extraction.get("offerings")
+    if not isinstance(offerings, list):
+        return missing
+
+    for row in offerings:
+        if not isinstance(row, dict):
+            continue
+        availability = row.get("availability")
+        if not isinstance(availability, dict):
+            continue
+        label = str(availability.get("label") or "").strip()
+        if not label:
+            continue
+        if availability.get("hours_state") == "source_unspecified":
+            continue
+        provenance = row.get("field_provenance")
+        availability_spans = provenance.get("availability") if isinstance(provenance, dict) else None
+        if not isinstance(availability_spans, list) or not availability_spans:
+            missing.append(row)
+    return missing
+
+
+def _has_provenance(row: dict[str, Any], field: str) -> bool:
+    provenance = row.get("field_provenance")
+    spans = provenance.get(field) if isinstance(provenance, dict) else None
+    return isinstance(spans, list) and bool(spans)
+
+
+def _has_specific_price(row: dict[str, Any]) -> bool:
+    price = row.get("price")
+    if not isinstance(price, dict):
+        return False
+    if price.get("state") in {"fee", "free"}:
+        return True
+    for key in ("notes", "amountCents", "amount_cents", "options"):
+        value = price.get(key)
+        if isinstance(value, list):
+            if value:
+                return True
+            continue
+        if value not in {None, ""}:
+            return True
+    return False
+
+
+def _has_specific_booking(row: dict[str, Any]) -> bool:
+    booking = row.get("booking")
+    if not isinstance(booking, dict):
+        return False
+    return any(value not in {None, False, ""} for value in booking.values())
+
+
+def _has_specific_eligibility(row: dict[str, Any]) -> bool:
+    eligibility = row.get("eligibility")
+    if not isinstance(eligibility, dict):
+        return False
+    return any(
+      key != "ages" and value not in {None, False, ""}
+        for key, value in eligibility.items()
+    )
+
+
+def _has_specific_amenities(row: dict[str, Any]) -> bool:
+    amenities = row.get("amenities")
+    return isinstance(amenities, list) and bool(amenities)
+
+
+def _has_specific_location(row: dict[str, Any]) -> bool:
+    location = row.get("location")
+    if not isinstance(location, dict):
+        return False
+    label = str(location.get("label") or "").strip()
+    title = str(row.get("title") or "").strip()
+    return bool(label and label != title)
+
+
+def _offering_rows_with_unsourced_specific_fields(extraction: dict[str, Any]) -> list[tuple[dict[str, Any], str]]:
+    missing: list[tuple[dict[str, Any], str]] = []
+    offerings = extraction.get("offerings")
+    if not isinstance(offerings, list):
+        return missing
+
+    checks = [
+        ("price", _has_specific_price),
+        ("booking", _has_specific_booking),
+        ("eligibility", _has_specific_eligibility),
+        ("amenities", _has_specific_amenities),
+        ("location", _has_specific_location),
+    ]
+    for row in offerings:
+        if not isinstance(row, dict):
+            continue
+        for field, predicate in checks:
+            if predicate(row) and not _has_provenance(row, field):
+                missing.append((row, field))
+    return missing
+
+
 def _joinable_parent_items(index_snapshot: dict[str, Any]) -> list[dict[str, Any]]:
     results = index_snapshot.get("results")
     if not isinstance(results, list):
@@ -260,11 +401,32 @@ def build_official_recreation_coverage_audit(
     covered = _covered_program_keys(extraction_dict)
     covered_pairs = _covered_program_resort_pairs(extraction_dict)
     quarantined_programs = _quarantined_program_keys(extraction_dict)
+    missing_resort_join_rows = _offering_rows_missing_resort_join(extraction_dict)
+    unsourced_availability_rows = _offering_rows_with_unsourced_availability_labels(extraction_dict)
+    unsourced_specific_field_rows = _offering_rows_with_unsourced_specific_fields(extraction_dict)
+    programs_without_joined_offerings = _program_keys_without_joined_offerings(extraction_dict)
     captured_detail_urls = {
         str(payload.get("source_url") or "")
         for payload in load_snapshot_payloads(snapshot_dir)
         if payload.get("source_kind") == "official_recreation_detail"
     }
+
+    for row in missing_resort_join_rows:
+        key = row.get("offering_key") or row.get("program_key") or "<missing>"
+        errors.append(f"official_recreation:offering_missing_resort_join:{key}")
+
+    for row in unsourced_availability_rows:
+        key = row.get("offering_key") or row.get("program_key") or "<missing>"
+        errors.append(f"official_recreation:availability_label_missing_source_span:{key}")
+
+    for row, field in unsourced_specific_field_rows:
+        key = row.get("offering_key") or row.get("program_key") or "<missing>"
+        errors.append(f"official_recreation:{field}_missing_source_span:{key}")
+
+    for program_key in sorted(programs_without_joined_offerings):
+        if program_key in quarantined_programs:
+            continue
+        errors.append(f"official_recreation:program_without_joined_offering:{program_key}")
 
     for item in _required_parent_detail_snapshots(index_snapshot if isinstance(index_snapshot, dict) else {}):
         if item["detail_url"] in captured_detail_urls:
@@ -371,6 +533,10 @@ def build_official_recreation_coverage_audit(
             if item["program_key"] not in quarantined_programs
             and (item["program_key"], resort_slug) not in covered_pairs
         ),
+        "published_offerings_missing_resort_join": len(missing_resort_join_rows),
+        "published_offerings_unsourced_availability_labels": len(unsourced_availability_rows),
+        "published_offerings_unsourced_specific_fields": len(unsourced_specific_field_rows),
+        "programs_without_joined_offerings": len(programs_without_joined_offerings),
     }
     return OfficialRecreationCoverageAudit(
         passed=not errors,

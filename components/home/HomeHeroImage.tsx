@@ -13,15 +13,17 @@ export function HomeHeroImage() {
         priority
         fetchPriority="high"
         quality={82}
-        sizes="100vw"
+        sizes="(max-width: 767px) 100vw, 1px"
         className="home-hero__image home-hero__image--mobile"
       />
       <Image
         src={HERO_DESKTOP}
         alt=""
         fill
+        priority
+        fetchPriority="high"
         quality={85}
-        sizes="100vw"
+        sizes="(min-width: 768px) 100vw, 1px"
         className="home-hero__image home-hero__image--desktop"
       />
     </div>

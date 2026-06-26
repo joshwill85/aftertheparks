@@ -17,7 +17,7 @@ export function ActivityCard({
   showResort = true,
   onSave,
 }: ActivityCardProps) {
-  const { isInPlan } = usePlan();
+  const { isActivitySaved } = usePlan();
   const display = toDisplayActivity(activity);
   const card = activityToEventCard(activity, display, {
     showResort,
@@ -27,7 +27,7 @@ export function ActivityCard({
   return (
     <EventCard
       {...card}
-      saved={isInPlan(activity.activityCatalogId)}
+      saved={isActivitySaved(activity)}
       onSave={onSave ? () => onSave(activity) : undefined}
     />
   );

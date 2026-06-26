@@ -4,6 +4,7 @@ import { createLiveShare } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { planErrorResponse } from "@/lib/plan/api-response";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,12 @@ export async function POST(request: Request) {
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const rateLimited = await guardRateLimit({
+    request,
+    scope: "plan-share",
+    userId: user.id,
+  });
+  if (rateLimited) return rateLimited;
 
   const body = await request.json().catch(() => ({}));
   const limited = await requireTurnstile(body.turnstileToken, "plan_share_rotate");

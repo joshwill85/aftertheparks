@@ -87,6 +87,7 @@ export function FilterSheet({
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
   const freeOnly = searchParams.get("free") === "true";
+  const reservationOnly = searchParams.get("reservation") === "true";
 
   return (
     <AnimatePresence>
@@ -141,6 +142,7 @@ export function FilterSheet({
               activeCategory={activeCategory}
               activeDaypart={activeDaypart}
               freeOnly={freeOnly}
+              reservationOnly={reservationOnly}
               hideDaypart={hideDaypart}
               update={update}
               searchableResorts

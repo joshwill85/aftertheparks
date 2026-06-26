@@ -8,11 +8,9 @@ export interface PlanConflict {
 }
 
 function itemWindow(item: PlanItem): { start: number; end: number } | null {
-  if (!item.startDateTime) return null;
+  if (!item.startDateTime || !item.endDateTime) return null;
   const start = parseISO(item.startDateTime).getTime();
-  const end = item.endDateTime
-    ? parseISO(item.endDateTime).getTime()
-    : start + 60 * 60 * 1000;
+  const end = parseISO(item.endDateTime).getTime();
   return { start, end };
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { trackPlanEvent } from "@/lib/plan/analytics";
@@ -16,9 +16,41 @@ interface PublicPlanClientProps {
 
 export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
   const { openPreview, refreshFromServer } = usePlan();
-  const [plan] = useState(initial);
+  const [plan, setPlan] = useState(initial);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
   const [copying, setCopying] = useState(false);
+
+  const refreshPlan = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/shared-plan/${encodeURIComponent(token)}`, {
+        credentials: "include",
+        cache: "no-store",
+      });
+      if (!res.ok) return;
+      setPlan(await res.json());
+    } catch {
+      /* keep the last known live view */
+    }
+  }, [token]);
+
+  useEffect(() => {
+    trackPlanEvent("plan_share_opened");
+  }, []);
+
+  useEffect(() => {
+    const onFocus = () => void refreshPlan();
+    const onVisibilityChange = () => {
+      if (!document.hidden) void refreshPlan();
+    };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    const interval = window.setInterval(() => void refreshPlan(), 60000);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.clearInterval(interval);
+    };
+  }, [refreshPlan]);
 
   const handleCopy = async () => {
     setCopying(true);

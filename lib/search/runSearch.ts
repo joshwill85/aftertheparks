@@ -46,6 +46,7 @@ export interface RunSearchOptions {
   category?: string;
   daypart?: Daypart;
   free?: boolean;
+  reservation?: boolean;
 }
 
 function emptyResponse(query: string): SearchResponse {
@@ -85,6 +86,14 @@ async function loadSearchableOfferings(
 
   if (options.free) {
     offerings = offerings.filter((offering) => offering.price.state === "free");
+  }
+
+  if (options.reservation) {
+    offerings = offerings.filter(
+      (offering) =>
+        offering.booking?.reservationRequired ||
+        offering.booking?.reservationRecommended
+    );
   }
 
   const seen = new Map<string, ActivityOffering>();
@@ -149,6 +158,15 @@ async function loadSearchableActivities(
 
   if (options.free) {
     occurrences = occurrences.filter((o) => o.price.state === "free");
+  }
+
+  if (options.reservation) {
+    occurrences = occurrences.filter(
+      (o) =>
+        o.eligibility.reservation?.required ||
+        o.enrichment?.reservationRequired ||
+        o.enrichment?.reservationRecommended
+    );
   }
 
   return sanitizePublicActivities(occurrences, { minTier: "medium" });

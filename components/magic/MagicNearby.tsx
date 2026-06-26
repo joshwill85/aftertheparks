@@ -4,6 +4,7 @@ import {
   NEARBY_TIER_META,
   type NearbyTier,
 } from "@/lib/magic/nearby";
+import { activityDetailHref } from "@/lib/activities/links";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 
@@ -91,7 +92,10 @@ export function MagicNearbyCollections({
               {group.items.slice(0, 4).map((activity) => (
                 <li key={activity.id}>
                   <Link
-                    href={`/activities/${activity.activitySlug}`}
+                    href={activityDetailHref(
+                      activity.activitySlug,
+                      activity.resort.slug
+                    )}
                     className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 text-sm hover:bg-[var(--color-sun-cream)]"
                   >
                     <span className="font-bold">{activity.title}</span>

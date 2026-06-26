@@ -2,11 +2,20 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 import {
+  getPublicOfferingAvailabilityLabel,
+  shouldShowOfferingAvailability,
+} from "@/lib/activityAvailabilityDisplay";
+import {
   filterOfficialOfferingsWithoutActivityCollisions,
+  isSourceBackedOfficialOfferingRow,
   mapOfficialOfferingRow,
   mapOfficialOfferingRows,
   type OfficialOfferingRow,
 } from "@/lib/data/officialOfferings";
+import {
+  offeringToHit,
+  scoreOffering,
+} from "@/lib/search/score";
 
 const bikeRow: OfficialOfferingRow = {
   id: "offering-bike-old-key-west",
@@ -62,7 +71,7 @@ assert.equal(
 assert.equal(bikeOffering.availability.kind, "evergreen_all_day");
 assert.equal(
   bikeOffering.availability.label,
-  "Check Disney source for current availability",
+  undefined,
   "Specific availability labels require availability source spans"
 );
 assert.equal(bikeOffering.price.state, "unknown");
@@ -76,6 +85,80 @@ assert.equal(
   "startDateTime" in bikeOffering,
   false,
   "Official evergreen offerings must not be coerced into dated calendar occurrences"
+);
+
+const missingResortJoinRow: OfficialOfferingRow = {
+  ...bikeRow,
+  id: "offering-missing-resort-join",
+  field_provenance: {
+    title: bikeRow.field_provenance!.title,
+  },
+};
+const missingHashRow: OfficialOfferingRow = {
+  ...bikeRow,
+  id: "offering-missing-source-hash",
+  source_sha256: null,
+};
+const malformedHashRow: OfficialOfferingRow = {
+  ...bikeRow,
+  id: "offering-malformed-source-hash",
+  source_sha256: "broken",
+};
+const missingTitleProvenanceRow: OfficialOfferingRow = {
+  ...bikeRow,
+  id: "offering-missing-title-provenance",
+  field_provenance: {
+    resort_join: bikeRow.field_provenance!.resort_join,
+  },
+};
+assert.equal(isSourceBackedOfficialOfferingRow(bikeRow), true);
+assert.equal(isSourceBackedOfficialOfferingRow(missingResortJoinRow), false);
+assert.equal(isSourceBackedOfficialOfferingRow(missingHashRow), false);
+assert.equal(isSourceBackedOfficialOfferingRow(malformedHashRow), false);
+assert.equal(isSourceBackedOfficialOfferingRow(missingTitleProvenanceRow), false);
+assert.deepEqual(
+  mapOfficialOfferingRows([
+    bikeRow,
+    missingResortJoinRow,
+    missingHashRow,
+    malformedHashRow,
+    missingTitleProvenanceRow,
+  ]).map((offering) => offering.id),
+  [bikeRow.id],
+  "Public official offering lists must fail closed unless source URL/hash, title provenance, and resort-join provenance are present"
+);
+const unverifiedSingleOffering = mapOfficialOfferingRow(missingResortJoinRow);
+assert.equal(unverifiedSingleOffering.freshness.badge, "stale");
+assert.equal(
+  unverifiedSingleOffering.trustState,
+  "source_unclear",
+  "Direct official offering mapping must not mark rows source_backed when required provenance is missing"
+);
+assert.equal(
+  mapOfficialOfferingRow(malformedHashRow).freshness.badge,
+  "stale",
+  "Direct official offering mapping must not verify malformed source hashes"
+);
+
+assert.equal(
+  shouldShowOfferingAvailability(bikeOffering.availability),
+  false,
+  "Official offering cards must omit availability when Disney did not source hours"
+);
+assert.equal(
+  getPublicOfferingAvailabilityLabel(bikeOffering.availability),
+  undefined,
+  "Unsourced availability placeholders must not become public display text"
+);
+assert.equal(
+  offeringToHit(bikeOffering, 20).description,
+  bikeOffering.summary,
+  "Search snippets must prefer sourced summaries over placeholder availability labels"
+);
+assert.equal(
+  scoreOffering(bikeOffering, "hours not specified", ["hours", "not", "specified"]),
+  8,
+  "Search scoring must not match unsourced availability placeholder text"
 );
 
 const sourceBackedAvailabilityOffering = mapOfficialOfferingRow({
@@ -93,6 +176,15 @@ assert.equal(
 assert.equal(
   sourceBackedAvailabilityOffering.fieldProvenance?.availability?.[0]?.line,
   210
+);
+assert.equal(
+  shouldShowOfferingAvailability(sourceBackedAvailabilityOffering.availability),
+  true,
+  "Official offering cards may show source-backed availability labels"
+);
+assert.equal(
+  getPublicOfferingAvailabilityLabel(sourceBackedAvailabilityOffering.availability),
+  "Available daily; hours vary"
 );
 
 const paidOffering = mapOfficialOfferingRow({
@@ -239,7 +331,7 @@ const [cabana] = mapOfficialOfferingRows(cabanaRows);
 assert.equal(cabana.availability.kind, "reservation_based");
 assert.equal(
   cabana.availability.label,
-  "Check Disney source for current availability",
+  undefined,
   "Reservation-style availability labels require availability source spans"
 );
 assert.equal(cabana.booking?.reservationRecommended, true);
@@ -330,8 +422,32 @@ assert.match(
 const activitiesData = readFileSync("lib/data/activities.ts", "utf8");
 assert.match(
   activitiesData,
+  /v_public_activity_gold/,
+  "Resort summaries must count scheduled activities from the public Gold view"
+);
+assert.match(
+  activitiesData,
   /v_public_activity_offerings/,
   "Resort summaries must count official recreation offerings from the public offering view"
+);
+
+const categoryMeta = readFileSync("lib/categories/meta.ts", "utf8");
+assert.match(
+  categoryMeta,
+  /rental:/,
+  "Category metadata must include rental rows from Gold and official offerings"
+);
+assert.match(
+  categoryMeta,
+  /sports_games:/,
+  "Category metadata must include sports/games rows from Gold"
+);
+
+const filterRail = readFileSync("components/explore/FilterRail.tsx", "utf8");
+assert.match(
+  filterRail,
+  /CATEGORY_META/,
+  "Explore category filters must be driven by category metadata instead of a stale fixed subset"
 );
 
 const resortCard = readFileSync("components/resort/ResortCard.tsx", "utf8");
@@ -389,8 +505,62 @@ assert.match(
 const officialOfferingsData = readFileSync("lib/data/officialOfferings.ts", "utf8");
 assert.match(
   officialOfferingsData,
+  /filter\(isSourceBackedOfficialOfferingRow\)/,
+  "Public official offering lists must filter out rows missing source-backed title and resort-join evidence"
+);
+assert.match(
+  officialOfferingsData,
   /getFilteredOfficialOfferings/,
   "Official offerings must have a shared filter helper for browse and API surfaces"
+);
+assert.match(
+  officialOfferingsData,
+  /filters\.reservation/,
+  "Official offerings must support reservation-aware filtering"
+);
+
+const occurrenceTypesForFilters = readFileSync("lib/types/occurrence.ts", "utf8");
+assert.match(
+  occurrenceTypesForFilters,
+  /reservation\?:\s*boolean/,
+  "Browse filters must include reservation-aware filtering"
+);
+
+const browseParams = readFileSync("lib/explore/browseParams.ts", "utf8");
+assert.match(
+  browseParams,
+  /"reservation"/,
+  "Browse URL params must preserve reservation filters"
+);
+
+const browseFilterLogic = readFileSync("lib/explore/applyBrowseFilters.ts", "utf8");
+assert.match(
+  browseFilterLogic,
+  /filters\.reservation/,
+  "Dated activity browse filters must apply reservation filters"
+);
+
+assert.match(
+  filterRail,
+  /Reservations/,
+  "Explore filters must expose reservation filtering in the UI"
+);
+
+const calendarClient = readFileSync("components/atlas/CalendarClient.tsx", "utf8");
+assert.match(
+  calendarClient,
+  /selectedDate/,
+  "Calendar must expose a selected-day drilldown instead of only aggregate dots"
+);
+assert.match(
+  calendarClient,
+  /Filter by resort/,
+  "Calendar must let users filter visible events by resort"
+);
+assert.match(
+  calendarClient,
+  /Filter by category/,
+  "Calendar must let users filter visible events by category"
 );
 
 const activitiesApiRoute = readFileSync("app/api/activities/route.ts", "utf8");

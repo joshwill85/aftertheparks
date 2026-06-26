@@ -10,10 +10,12 @@ export const CATEGORY_META: Record<string, CategoryMeta> = {
   campfire: { label: "Campfire", icon: "🔥", stamp: "campfire", mood: ["tonight", "evening"] },
   movies_under_stars: { label: "Movies", icon: "🎬", stamp: "movie", mood: ["tonight", "evening"] },
   fitness_wellness: { label: "Wellness", icon: "🧘", stamp: "wellness" },
-  arts_crafts: { label: "Crafts", icon: "🎨", stamp: "craft", mood: ["little_kids", "rainy"] },
+  arts_crafts: { label: "Crafts", icon: "🎨", stamp: "craft", mood: ["little_kids", "quiet"] },
   signature: { label: "Signature", icon: "✨", stamp: "signature", mood: ["worth_travel"] },
   resort_activity: { label: "Resort fun", icon: "🌴", stamp: "resort" },
-  arcade: { label: "Games", icon: "🕹️", stamp: "games", mood: ["rainy", "pool_break"] },
+  arcade: { label: "Games", icon: "🕹️", stamp: "games", mood: ["easy_break", "pool_break"] },
+  rental: { label: "Rentals", icon: "🚲", stamp: "rental", mood: ["pool_break"] },
+  sports_games: { label: "Sports & games", icon: "🏀", stamp: "sports" },
   nighttime_entertainment: { label: "Evening", icon: "🌙", stamp: "evening", mood: ["tonight"] },
   scavenger_hunt: { label: "Scavenger hunt", icon: "🧭", stamp: "hunt", mood: ["little_kids"] },
   nature: { label: "Nature", icon: "🦋", stamp: "nature" },
@@ -28,7 +30,7 @@ export function getCategoryMeta(category: string): CategoryMeta {
 export const MOOD_CHIPS = [
   { id: "tonight", label: "Tonight", href: "/tonight" },
   { id: "little_kids", label: "Little kids", href: "/activities?category=arts_crafts" },
-  { id: "rainy", label: "Rainy day", href: "/activities?category=arcade" },
+  { id: "easy_break", label: "Easy break", href: "/activities?category=arcade" },
   { id: "pool_break", label: "Pool break", href: "/activities?category=poolside" },
   { id: "evening", label: "After dinner", href: "/tonight" },
 ] as const;
@@ -37,7 +39,7 @@ export const HOME_FINDER_CHIPS = [
   { label: "Tonight", href: "/tonight", description: "Movies & campfires" },
   { label: "Resort activities", href: "/activities", description: "Browse the calendar" },
   { label: "Little kids", href: "/activities?category=arts_crafts", description: "Crafts & games" },
-  { label: "Rain-friendly", href: "/activities?category=arcade", description: "Indoor options" },
+  { label: "Games", href: "/activities?category=arcade", description: "Arcades & easy breaks" },
   { label: "Explore resorts", href: "/resorts", description: "Pick your home base" },
   { label: "Rest day ideas", href: "/activities", description: "Low-stress planning" },
 ] as const;

@@ -29,12 +29,16 @@ function itemToPayload(item: PlanItem, operationId: string): AddItemPayload {
 
 /** Push legacy IndexedDB-only items to the server when a guest session first connects. */
 export async function migrateLocalItemsToServer(
-  cache: LocalPlanCache
+  cache: LocalPlanCache,
+  options: { skipItemIds?: Iterable<string> } = {}
 ): Promise<LocalPlanCache> {
-  if (cache.planId || cache.items.length === 0) return cache;
+  if (cache.items.length === 0) return cache;
 
   let next = { ...cache };
+  const skipItemIds = new Set(options.skipItemIds ?? []);
   for (const item of cache.items) {
+    if (skipItemIds.has(item.id)) continue;
+
     const operationId = crypto.randomUUID();
     const result = await syncAddItem(itemToPayload(item, operationId));
     if (result) {

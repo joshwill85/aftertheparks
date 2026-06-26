@@ -1,4 +1,7 @@
-import { getTurnstileSiteKey, isTurnstileConfigured } from "@/lib/turnstile/config";
+import {
+  getTurnstileSiteKey,
+  isTurnstileClientConfigured,
+} from "@/lib/turnstile/config";
 
 let scriptPromise: Promise<void> | null = null;
 
@@ -31,7 +34,7 @@ function loadTurnstileScript(): Promise<void> {
 }
 
 export async function executeTurnstile(action: string): Promise<string | null> {
-  if (!isTurnstileConfigured()) return null;
+  if (!isTurnstileClientConfigured()) return null;
   const siteKey = getTurnstileSiteKey();
   if (!siteKey) return null;
 

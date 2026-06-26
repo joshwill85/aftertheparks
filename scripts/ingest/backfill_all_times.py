@@ -12,6 +12,7 @@ SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
 from db import SupabaseClient  # noqa: E402
+from publish import require_legacy_temporal_publish_enabled  # noqa: E402
 from time_utils import parse_time_24h  # noqa: E402
 
 DAY_TO_INT = {
@@ -39,6 +40,8 @@ def needs_fix(start_time: str | None, notes: str | None) -> bool:
 
 
 def main() -> None:
+    require_legacy_temporal_publish_enabled("legacy_time_backfill_disabled")
+
     if not os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
         raise SystemExit("SUPABASE_SERVICE_ROLE_KEY required")
 

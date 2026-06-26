@@ -12,7 +12,7 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
   {
     id: "tonight-movies",
     title: "Movies under the stars",
-    description: "Blanket, popcorn, and a classic film on the lawn.",
+    description: "Source-backed evening movie listings from resort calendars.",
     href: "/tonight",
     icon: "🎬",
     mood: "evening",
@@ -28,7 +28,7 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
   {
     id: "campfires",
     title: "Campfires & s'mores",
-    description: "Evening fire pits with songs and stories.",
+    description: "Browse current campfire listings from resort calendars.",
     href: "/activities?category=campfire",
     icon: "🔥",
     mood: "tonight",
@@ -44,17 +44,17 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
   {
     id: "pool-break",
     title: "Pool break",
-    description: "Slides, splash zones, and lazy-afternoon floats.",
+    description: "Browse current poolside recreation listings.",
     href: "/activities?category=poolside",
     icon: "🏊",
     mood: "pool_break",
   },
   {
-    id: "rainy-day",
-    title: "Rainy day rescue",
-    description: "Arcade games and indoor crafts when skies open up.",
+    id: "games-and-crafts",
+    title: "Games and crafts",
+    description: "Arcade and craft listings from current source-backed data.",
     href: "/activities?category=arcade",
     icon: "🕹️",
-    mood: "rainy",
+    mood: "easy_break",
   },
 ];

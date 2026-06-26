@@ -17,6 +17,7 @@ except ImportError:  # pragma: no cover - supports package-style imports in test
 
 
 DEFAULT_OFFICIAL_OFFERINGS_PATH = PROCESSED_DIR / "official_recreation_offerings.json"
+DEFAULT_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 
 
 def _read_json(path: Path, default: Any) -> Any:
@@ -96,6 +97,11 @@ def _warning_counts(records: list[dict[str, Any]]) -> dict[str, int]:
     return dict(sorted(counts.items()))
 
 
+def _escape_table_cell(value: Any) -> str:
+    text = str(value or "").replace("\n", " ").strip()
+    return text.replace("|", "\\|")
+
+
 def _unique_count(records: list[dict[str, Any]]) -> int:
     return len(
         {
@@ -120,16 +126,47 @@ def _official_recreation_summary(path: Path) -> dict[str, Any]:
     }
 
 
+def _gold_source_summary(path: Path) -> dict[str, Any]:
+    rows = _read_json(path, [])
+    if not isinstance(rows, list):
+        rows = []
+
+    legend_rows = 0
+    legend_count = 0
+    kinds: Counter[str] = Counter()
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        source = row.get("source") if isinstance(row.get("source"), dict) else {}
+        legends = source.get("documentKeyLegends") if isinstance(source, dict) else None
+        if not isinstance(legends, list) or not legends:
+            continue
+        legend_rows += 1
+        legend_count += len(legends)
+        for legend in legends:
+            if isinstance(legend, dict):
+                kinds[str(legend.get("kind") or "unknown")] += 1
+
+    return {
+        "gold_record_count": len(rows),
+        "rows_with_document_key_legends": legend_rows,
+        "document_key_legend_count": legend_count,
+        "document_key_legend_kinds": dict(sorted(kinds.items())),
+    }
+
+
 def build_trust_report(
     *,
     fixtures_dir: Path = DEFAULT_FIXTURES_DIR,
     official_offerings_path: Path = DEFAULT_OFFICIAL_OFFERINGS_PATH,
+    gold_path: Path = DEFAULT_GOLD_PATH,
 ) -> dict[str, Any]:
     coverage_audit = build_coverage_audit(fixtures_dir=fixtures_dir)
     coverage = dict(coverage_audit.summary)
     fixture_quarantines = _fixture_records(fixtures_dir, "expected_quarantine_records")
     fixture_unextractables = _fixture_records(fixtures_dir, "expected_unextractable_records")
     official_recreation = _official_recreation_summary(official_offerings_path)
+    gold_source = _gold_source_summary(gold_path)
 
     blockers: list[dict[str, Any]] = []
     blocking_count = int(coverage.get("blocking_fixture_quarantine_count", len(fixture_quarantines)))
@@ -212,6 +249,7 @@ def build_trust_report(
             "records": fixture_unextractables,
         },
         "official_recreation": official_recreation,
+        "gold_source": gold_source,
     }
 
 
@@ -220,6 +258,7 @@ def render_markdown_report(report: dict[str, Any]) -> str:
     quarantine = report["fixture_quarantine"]
     unextractable = report["fixture_unextractable"]
     official = report["official_recreation"]
+    gold_source = report["gold_source"]
     lines = [
         "# Source-To-UI Trust Report",
         "",
@@ -228,6 +267,11 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         "## Current Counts",
         "",
         f"- Gold v2 records: {coverage['gold_record_count']}",
+        (
+            f"- Gold source evidence: {gold_source['rows_with_document_key_legends']} rows with "
+            f"document key legends ({gold_source['document_key_legend_count']} legends; "
+            f"kinds: {', '.join(gold_source['document_key_legend_kinds']) or 'none'})"
+        ),
         f"- Fixture records: {coverage['fixture_count']}",
         f"- Coverage-required records: {coverage['coverage_required_count']}",
         f"- UI pipeline mode: {coverage['ui_pipeline']}",
@@ -237,8 +281,8 @@ def render_markdown_report(report: dict[str, Any]) -> str:
             f"{official['quarantine_count']} quarantine records"
         ),
         (
-            f"- Fixture quarantine: {quarantine['record_count']} fixture quarantine records "
-            f"({quarantine['unique_record_count']} unique records; "
+            f"- Source-visible fixture records retained for audit: {quarantine['record_count']} records "
+            f"({quarantine['unique_record_count']} unique; "
             f"{quarantine['blocking_record_count']} blocking; "
             f"{quarantine['official_offering_covered_record_count']} covered by official offerings; "
             f"{quarantine['official_offering_alias_covered_record_count']} alias-covered)"
@@ -268,13 +312,27 @@ def render_markdown_report(report: dict[str, Any]) -> str:
     else:
         lines.append("- None")
 
-    lines.extend(["", "## Quarantine By Group", "", "| Group | Records | Unique |", "| --- | ---: | ---: |"])
+    if quarantine["blocking_record_count"]:
+        lines.extend(["", "## Blocking Quarantine By Group", "", "| Group | Records | Unique |", "| --- | ---: | ---: |"])
+    else:
+        lines.extend(
+            [
+                "",
+                "## Covered Source-Visible Records",
+                "",
+                "These records remain in fixtures as audit evidence, but they are represented in the normalized official-offering path and do not block cutover.",
+                "",
+                "| Group | Records | Unique |",
+                "| --- | ---: | ---: |",
+            ]
+        )
     for group, counts in quarantine["by_group"].items():
         lines.append(
             f"| {_title_case_group(group)} | {counts['record_count']} | {counts['unique_record_count']} |"
         )
 
-    lines.extend(["", "## Quarantine Reasons", "", "| Reason | Records |", "| --- | ---: |"])
+    reason_heading = "Blocking Quarantine Reasons" if quarantine["blocking_record_count"] else "Retained Record Reasons"
+    lines.extend(["", f"## {reason_heading}", "", "| Reason | Records |", "| --- | ---: |"])
     for warning, count in quarantine["by_warning"].items():
         lines.append(f"| `{warning}` | {count} |")
 
@@ -292,12 +350,41 @@ def render_markdown_report(report: dict[str, Any]) -> str:
             lines.append(
                 f"| {_title_case_group(group)} | {counts['record_count']} | {counts['unique_record_count']} |"
             )
+        lines.extend(
+            [
+                "",
+                "These source-visible records are withheld from publishing because the current sources do not provide enough public-facing fields to show them without inventing facts.",
+                "",
+                "| Group | Title | Slug | Fixture | Reason |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+        )
+        for record in sorted(
+            unextractable["records"],
+            key=lambda row: (
+                str(row.get("calendar_group_key") or ""),
+                str(row.get("slug") or ""),
+                str(row.get("fixture") or ""),
+            ),
+        ):
+            lines.append(
+                "| "
+                f"{_escape_table_cell(_title_case_group(str(record.get('calendar_group_key') or '<missing-group>')))} | "
+                f"{_escape_table_cell(record.get('title'))} | "
+                f"{_escape_table_cell(record.get('slug'))} | "
+                f"{_escape_table_cell(record.get('fixture'))} | "
+                f"{_escape_table_cell(record.get('reason'))} |"
+            )
 
     lines.extend(["", "## Next Actions", ""])
-    if quarantine["record_count"]:
+    if quarantine["blocking_record_count"]:
         lines.append(
-            "- Resolve fixture quarantine records with better extraction, reviewed manual spans, "
+            "- Resolve blocking fixture quarantine records with better extraction, reviewed manual spans, "
             "authoritative detail sources, or explicit non-public decisions."
+        )
+    elif quarantine["record_count"]:
+        lines.append(
+            "- No cutover action required for official-offering-covered fixture records; keep them as audit evidence unless a stronger source can promote them safely."
         )
     if official["quarantine_count"]:
         lines.append("- Resolve official recreation ingest quarantine before publishing official offerings.")

@@ -629,6 +629,67 @@ def _availability(program_key: str, all_text: str) -> dict[str, Any]:
     }
 
 
+def _availability_spans(
+    program_key: str,
+    availability: dict[str, Any],
+    program_lines: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Return source spans that justify a non-placeholder availability label."""
+
+    hours_state = availability.get("hours_state")
+    if hours_state == "source_unspecified":
+        return []
+
+    line_patterns: list[re.Pattern[str]] = []
+    if hours_state == "currently_unavailable":
+        line_patterns = [
+            re.compile(r"currently unavailable|offering has concluded|scheduled to return", re.I)
+        ]
+    elif availability.get("kind") == "reservation_based":
+        line_patterns = [
+            re.compile(r"make a reservation|check available|reservation|cabana", re.I)
+        ]
+    elif hours_state == "source_hours":
+        line_patterns = [
+            re.compile(r"open 24 hours|hours:|open from|accessible from", re.I)
+        ]
+    elif hours_state == "hours_vary_by_pool":
+        line_patterns = [
+            re.compile(r"hours and lifeguard availability vary by pool", re.I)
+        ]
+    elif hours_state == "calendar_varies":
+        line_patterns = [
+            re.compile(
+                r"depart friday|rides are only available|check the recreation calendar|"
+                r"select nights|for movie schedules|subject to cancellation or change without notice|"
+                r"check available",
+                re.I,
+            )
+        ]
+    elif hours_state == "generally_accessible":
+        line_patterns = [re.compile(r"generally accessible from", re.I)]
+
+    spans: list[dict[str, Any]] = []
+    for line in program_lines:
+        text = str(line.get("text", ""))
+        if any(pattern.search(text) for pattern in line_patterns):
+            spans.append(_span(line))
+
+    if spans:
+        return spans
+
+    if availability.get("kind") == "reservation_based" and (
+        "cabana" in program_key or availability.get("label") == "Reservations recommended"
+    ):
+        return [
+            _span(line)
+            for line in program_lines
+            if re.search(r"cabana|reservation", str(line.get("text", "")), re.I)
+        ]
+
+    return []
+
+
 def _booking(program_key: str, program_lines: list[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, list[dict[str, Any]]]]:
     text = " ".join(str(line.get("text", "")) for line in program_lines)
     lower = text.lower()
@@ -850,8 +911,12 @@ def _location_line_quality(line: dict[str, Any], resort_slug: str) -> int:
     return 10 + bonus
 
 
-def _location_for_slug(title: str, resort_slug: str, program_lines: list[dict[str, Any]]) -> dict[str, Any]:
-    best_extracted: tuple[int, str] | None = None
+def _location_for_slug(
+    title: str,
+    resort_slug: str,
+    program_lines: list[dict[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    best_extracted: tuple[int, str, dict[str, Any]] | None = None
     for line in program_lines:
         extracted = _location_from_line_text(str(line.get("text", "")))
         if not extracted or _is_generic_location_label(extracted, resort_slug):
@@ -861,9 +926,9 @@ def _location_for_slug(title: str, resort_slug: str, program_lines: list[dict[st
             continue
         quality = _specific_location_quality(extracted)
         if best_extracted is None or quality > best_extracted[0]:
-            best_extracted = (quality, extracted)
+            best_extracted = (quality, extracted, line)
     if best_extracted:
-        return {"label": best_extracted[1]}
+        return {"label": best_extracted[1]}, [_span(best_extracted[2])]
 
     best: tuple[int, dict[str, Any]] | None = None
     for line in program_lines:
@@ -874,8 +939,8 @@ def _location_for_slug(title: str, resort_slug: str, program_lines: list[dict[st
             if best is None or quality > best[0]:
                 best = (quality, line)
     if best:
-        return {"label": _clean_heading(str(best[1].get("text", "")))}
-    return {"label": title}
+        return {"label": _clean_heading(str(best[1].get("text", "")))}, [_span(best[1])]
+    return {"label": title}, []
 
 
 def _source_documentish(payload: dict[str, Any]) -> dict[str, str]:
@@ -1031,6 +1096,11 @@ def _extract_index_payload(payload: dict[str, Any]) -> dict[str, list[dict[str, 
         description = _index_description(item)
         category = _category(program_key, title, tags)
         availability = _availability(program_key, json.dumps(item, ensure_ascii=False))
+        availability_spans = (
+            [_index_span(item_index, "availability", availability.get("label"))]
+            if availability.get("hours_state") != "source_unspecified"
+            else []
+        )
         title_span = _index_span(item_index, "name", title)
         description_spans = [_index_span(item_index, "descriptions", description)] if description else []
         program = {
@@ -1043,6 +1113,7 @@ def _extract_index_payload(payload: dict[str, Any]) -> dict[str, list[dict[str, 
             "field_provenance": {
                 "title": [title_span],
                 **({"description": description_spans} if description_spans else {}),
+                **({"availability": availability_spans} if availability_spans else {}),
             },
             "trust_state": "source_backed",
             "source_url": detail_url,
@@ -1075,6 +1146,7 @@ def _extract_index_payload(payload: dict[str, Any]) -> dict[str, list[dict[str, 
                 "resort_join": resort_join_spans,
                 "location": resort_join_spans,
                 **({"description": description_spans} if description_spans else {}),
+                **({"availability": availability_spans} if availability_spans else {}),
             }
             result["offerings"].append(
                 {
@@ -1116,6 +1188,7 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
     all_text = " ".join(str(line.get("text", "")) for line in program_lines)
     category = _category(program_key, title, tags)
     availability = _availability(program_key, all_text)
+    availability_spans = _availability_spans(program_key, availability, program_lines)
 
     program = {
         "program_key": program_key,
@@ -1127,6 +1200,7 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
         "field_provenance": {
             "title": title_spans,
             **({"description": description_spans} if description_spans else {}),
+            **({"availability": availability_spans} if availability_spans else {}),
         },
         "trust_state": "source_backed",
         **source,
@@ -1205,10 +1279,13 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
     for resort_slug in resort_slugs:
         variant_key = _variant_key(program_key, resort_slug, program_lines)
         amenities, amenity_spans = _amenities_for_slug(program_key, program_lines, resort_slug)
+        location, location_spans = _location_for_slug(title, resort_slug, program_lines)
         field_provenance = {
             "title": title_spans,
             "resort_join": resort_join_spans,
             **({"description": description_spans} if description_spans else {}),
+            **({"availability": availability_spans} if availability_spans else {}),
+            **({"location": location_spans} if location_spans else {}),
             **({"price": price_spans} if price_spans else {}),
             **booking_provenance,
             **eligibility_provenance,
@@ -1225,7 +1302,7 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
                 "description": description,
                 "category": category,
                 "tags": tags,
-                "location": _location_for_slug(title, resort_slug, program_lines),
+                "location": location,
                 "availability": availability,
                 "price": price,
                 "booking": booking,
@@ -1302,6 +1379,7 @@ def _merge_program_metadata(target: dict[str, Any], source: dict[str, Any]) -> N
 
     if _availability_quality(source.get("availability")) > _availability_quality(target.get("availability")):
         target["availability"] = source["availability"]
+        _merge_field_provenance(target, source, "availability")
         target["source_url"] = source.get("source_url") or target.get("source_url")
         target["source_sha256"] = source.get("source_sha256") or target.get("source_sha256")
 
@@ -1322,6 +1400,7 @@ def _enrich_offering_from_program(offering: dict[str, Any], program: dict[str, A
         _merge_field_provenance(offering, program, "description")
     if _availability_quality(program.get("availability")) > _availability_quality(offering.get("availability")):
         offering["availability"] = program["availability"]
+        _merge_field_provenance(offering, program, "availability")
     if program.get("category") and not offering.get("category"):
         offering["category"] = program["category"]
     if not offering.get("tags") and program.get("tags"):

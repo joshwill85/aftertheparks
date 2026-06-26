@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 
 import {
   getDisplayTitle,
+  getTrustState,
   shouldHideActivity,
 } from "@/lib/activityDisplay";
 import { ensurePublicActivity } from "@/lib/api/publicActivities";
@@ -81,6 +82,34 @@ assert.ok(
   "does not claim walkability or transportation certainty without source evidence"
 );
 
+const userFacingCopyFiles = [
+  "components/resort/ResortCard.tsx",
+  "components/atlas/TonightClient.tsx",
+  "components/atlas/MovieNightGrid.tsx",
+  "components/atlas/ActivityDetailClient.tsx",
+  "components/atlas/SearchClient.tsx",
+  "components/home/MoodChips.data.ts",
+  "components/home/QuickFinder.tsx",
+  "components/tonight/TonightHero.tsx",
+  "app/search/page.tsx",
+  "lib/guides/index.ts",
+  "lib/magic/nearby.ts",
+  "lib/magic/collections.ts",
+  "lib/resorts/display.ts",
+  "lib/categories/meta.ts",
+  "lib/search/synonyms.ts",
+  "lib/movies/time.ts",
+];
+const unsupportedCopyClaims =
+  /(no transportation needed|walkable|outdoor schedules|outdoor cinema|outdoor movies?|indoor options|indoor crafts|indoor evening|inside or near|classic film on the lawn|transportation work|rainy|rain-friendly|rainy-day|rainy day|weather|outside|outdoor adventure|great pool time|close to the parks|resort-area convenience)/i;
+for (const file of userFacingCopyFiles) {
+  assert.doesNotMatch(
+    readFileSync(file, "utf8"),
+    unsupportedCopyClaims,
+    `${file} must not imply location, weather, or transportation facts without record-level evidence`
+  );
+}
+
 const sourceBackedActivity: ActivityOccurrence = {
   id: "sketching-2026-06-21",
   activitySlug: "sketching",
@@ -134,6 +163,24 @@ assert.equal(
 assert.equal(
   ensurePublicActivity({
     ...sourceBackedActivity,
+    startDateTime: undefined,
+    endDateTime: undefined,
+    daypart: "anytime",
+    scheduleText: "Activities schedule available digitally; no posted time in PDF",
+  }).scheduleText,
+  undefined,
+  "does not expose internal no-time schedule normalization text in public activity payloads"
+);
+
+assert.equal(
+  ensurePublicActivity(sourceBackedActivity).scheduleText,
+  "10:00am–11:00am",
+  "keeps source-backed timed schedule text in public activity payloads"
+);
+
+assert.equal(
+  ensurePublicActivity({
+    ...sourceBackedActivity,
     fieldProvenance: undefined,
   }).freshness.badge,
   "stale",
@@ -149,4 +196,53 @@ assert.equal(
   }).freshness.badge,
   "stale",
   "unsupported non-unknown claims prevent verified public status"
+);
+
+assert.equal(
+  ensurePublicActivity({
+    ...sourceBackedActivity,
+    enrichment: {
+      weatherDependency: "outdoor",
+    },
+    externalFacts: [
+      {
+        evidence: [{ field: "schedule_location" }],
+      },
+    ],
+  }).enrichment?.weatherDependency,
+  undefined,
+  "does not publish weather dependency from generic schedule/location evidence"
+);
+
+assert.equal(
+  ensurePublicActivity({
+    ...sourceBackedActivity,
+    enrichment: {
+      weatherDependency: "weather_dependent",
+    },
+    externalFacts: [
+      {
+        evidence: [{ field: "weather_dependency" }],
+      },
+    ],
+  }).enrichment?.weatherDependency,
+  "weather_dependent",
+  "keeps weather dependency only when weather-specific evidence is present"
+);
+
+assert.notEqual(
+  getTrustState({
+    title: "Poolside Trivia",
+    category: "poolside",
+    scheduleText: "Daily at 2:00pm",
+    startDateTime: "2026-06-21T14:00:00-04:00",
+    price: { state: "free" },
+    freshness: {
+      lastVerified: "2026-06-21T12:00:00.000Z",
+      badge: "verified",
+    },
+    weather_dependency: "outdoor",
+  }),
+  "weather_dependent",
+  "does not turn an inferred outdoor/weather hint into a public trust claim"
 );

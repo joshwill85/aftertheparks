@@ -42,21 +42,11 @@ upsert_env SITE_GATE_COOKIE_NAME "$SITE_GATE_COOKIE_NAME"
 
 vercel_set() {
   local name="$1" value="$2" env="$3"
-  if [ "$env" = "preview" ]; then
-    ./scripts/vercel-env-preview-all.sh "$name" "$value" true
-    return
-  fi
-  local sensitive_flag=(--sensitive)
+  local sensitive="true"
   if [ "$env" = "development" ]; then
-    sensitive_flag=()
+    sensitive="false"
   fi
-  vercel env rm "$name" "$env" --yes >/dev/null 2>&1 || true
-  if [ "${#sensitive_flag[@]}" -gt 0 ]; then
-    vercel env add "$name" "$env" --value "$value" --sensitive --yes --force >/dev/null
-  else
-    vercel env add "$name" "$env" --value "$value" --yes --force >/dev/null
-  fi
-  echo "  Vercel $env: $name"
+  ./scripts/vercel-env-target.sh "$name" "$value" "$env" "$sensitive"
 }
 
 echo "==> Vercel env"

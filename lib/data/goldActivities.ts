@@ -1,5 +1,6 @@
 import {
   daypartFromHour,
+  getDayOfWeekIndex,
   orlandoDateString,
   addOrlandoDays,
   parseTimeOnDate,
@@ -7,6 +8,8 @@ import {
 } from "@/lib/daypart";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { cache } from "react";
+import { cachePublicData } from "@/lib/cache/publicData";
 import { createServiceClient } from "@/lib/supabase/server";
 import type {
   ActivityClaim,
@@ -17,8 +20,8 @@ import type {
   ExternalActivityFact,
   SourceSpan,
 } from "@/lib/types/occurrence";
-import { formatResortTier, slugToTitle } from "@/lib/utils";
 import { parseScheduleTime24h, toTimeSql } from "@/lib/text/time";
+import { formatResortTier, slugToTitle } from "@/lib/utils";
 
 export interface GoldActivityRow {
   id?: string;
@@ -33,6 +36,13 @@ export interface GoldActivityRow {
     text?: string | null;
     start_time?: string | null;
     end_time?: string | null;
+    day_of_week?: string | number | null;
+    days_of_week?: Array<string | number> | null;
+    recurrence?: {
+      day_of_week?: string | number | null;
+      days_of_week?: Array<string | number> | null;
+      frequency?: string | null;
+    } | null;
   };
   location: {
     label?: string | null;
@@ -94,8 +104,21 @@ interface ResortMeta {
 interface MapOptions {
   dateRangeDays?: number;
   referenceDate?: Date;
-  resortMeta?: Map<string, ResortMeta>;
+  resortMeta?: Map<string, ResortMeta> | ResortMeta[] | Record<string, ResortMeta>;
 }
+
+const DAY_INDEX_BY_NAME: Record<string, number> = {
+  sunday: 0,
+  monday: 1,
+  tuesday: 2,
+  wednesday: 3,
+  thursday: 4,
+  friday: 5,
+  saturday: 6,
+};
+
+const DAY_NAME_PATTERN =
+  "sunday|monday|tuesday|wednesday|thursday|friday|saturday";
 
 function normalizeTime(value?: string | null): string | null {
   if (!value) return null;
@@ -129,6 +152,81 @@ function untimedEveningDisplayStart(row: GoldActivityRow): string | null {
   if (!["movies_under_stars", "campfire"].includes(row.category)) return null;
   if (!/\bnightly\b|\bdaily\b/i.test(row.schedule?.text ?? "")) return null;
   return "20:30:00";
+}
+
+function normalizeDayIndex(value: string | number | null | undefined): number | null {
+  if (typeof value === "number" && Number.isInteger(value) && value >= 0 && value <= 6) {
+    return value;
+  }
+  if (typeof value !== "string") return null;
+
+  const cleaned = value.trim().toLowerCase();
+  if (/^[0-6]$/.test(cleaned)) return Number(cleaned);
+  return DAY_INDEX_BY_NAME[cleaned] ?? null;
+}
+
+function addDayRange(days: Set<number>, start: number, end: number) {
+  let current = start;
+  days.add(current);
+  while (current !== end) {
+    current = (current + 1) % 7;
+    days.add(current);
+  }
+}
+
+function structuredScheduleDays(row: GoldActivityRow): Set<number> | null {
+  const rawDays = [
+    row.schedule?.day_of_week,
+    row.schedule?.recurrence?.day_of_week,
+    ...(row.schedule?.days_of_week ?? []),
+    ...(row.schedule?.recurrence?.days_of_week ?? []),
+  ];
+  const days = new Set<number>();
+
+  for (const raw of rawDays) {
+    const day = normalizeDayIndex(raw);
+    if (day != null) days.add(day);
+  }
+
+  return days.size > 0 ? days : null;
+}
+
+function scheduleTextDays(text?: string | null): Set<number> | null {
+  if (!text) return null;
+  const normalized = text.toLowerCase();
+  if (/\b(?:daily|nightly|every day)\b/.test(normalized)) return null;
+
+  const days = new Set<number>();
+  if (/\bweekdays?\b/.test(normalized)) {
+    [1, 2, 3, 4, 5].forEach((day) => days.add(day));
+  }
+  if (/\bweekends?\b/.test(normalized)) {
+    [0, 6].forEach((day) => days.add(day));
+  }
+
+  const rangePattern = new RegExp(
+    `\\b(${DAY_NAME_PATTERN})\\b\\s*(?:-|–|—|to|through|thru)\\s*\\b(${DAY_NAME_PATTERN})\\b`,
+    "gi"
+  );
+  for (const match of normalized.matchAll(rangePattern)) {
+    const start = normalizeDayIndex(match[1]);
+    const end = normalizeDayIndex(match[2]);
+    if (start != null && end != null) addDayRange(days, start, end);
+  }
+
+  const dayPattern = new RegExp(`\\b(${DAY_NAME_PATTERN})\\b`, "gi");
+  for (const match of normalized.matchAll(dayPattern)) {
+    const day = normalizeDayIndex(match[1]);
+    if (day != null) days.add(day);
+  }
+
+  return days.size > 0 ? days : null;
+}
+
+function recurrenceDays(row: GoldActivityRow): Set<number> | null {
+  const frequency = row.schedule?.recurrence?.frequency?.toLowerCase();
+  if (frequency === "daily" || frequency === "nightly") return null;
+  return structuredScheduleDays(row) ?? scheduleTextDays(row.schedule?.text);
 }
 
 function normalizeClaims(
@@ -278,9 +376,14 @@ function sourceHash(row: GoldActivityRow): string | undefined {
 
 function resortForSlug(
   slug: string,
-  resortMeta: Map<string, ResortMeta> | undefined
+  resortMeta: MapOptions["resortMeta"]
 ): ActivityOccurrence["resort"] {
-  const meta = resortMeta?.get(slug);
+  const meta =
+    resortMeta instanceof Map
+      ? resortMeta.get(slug)
+      : Array.isArray(resortMeta)
+        ? resortMeta.find((row) => row.slug === slug)
+        : resortMeta?.[slug];
   return {
     slug,
     name: meta?.name?.replace(/^Disney's\s+/i, "") ?? slugToTitle(slug),
@@ -357,9 +460,12 @@ export function mapGoldActivityRowToOccurrences(
   const dateRangeDays = options.dateRangeDays ?? 7;
   const baseDateStr = orlandoDateString(options.referenceDate ?? new Date());
   const occurrences: ActivityOccurrence[] = [];
+  const days = recurrenceDays(row);
 
   for (let day = 0; day < dateRangeDays; day++) {
     const dateStr = addOrlandoDays(baseDateStr, day);
+    if (days && !days.has(getDayOfWeekIndex(dateStr))) continue;
+
     const start = parseTimeOnDate(startTime, dateStr);
     const end = endTime ? parseTimeOnDate(endTime, dateStr) : undefined;
     const startIso = toIsoInOrlando(start);
@@ -380,48 +486,67 @@ export function mapGoldActivityRowToOccurrences(
   return occurrences;
 }
 
-async function fetchResortMeta(): Promise<Map<string, ResortMeta>> {
-  const supabase = createServiceClient();
-  const map = new Map<string, ResortMeta>();
-  if (!supabase) return map;
+const fetchResortMetaRowsFromSupabase = cachePublicData(
+  async function fetchResortMetaRowsFromSupabase(): Promise<ResortMeta[]> {
+    const supabase = createServiceClient();
+    if (!supabase) return [];
 
-  const { data, error } = await supabase
-    .from("resorts")
-    .select("slug, name, category, resort_area");
-  if (error) {
-    console.error("fetchGoldResortMeta:", error.message);
-    return map;
-  }
+    const { data, error } = await supabase
+      .from("resorts")
+      .select("slug, name, category, resort_area");
+    if (error) {
+      console.error("fetchGoldResortMeta:", error.message);
+      return [];
+    }
 
-  for (const row of data ?? []) {
-    map.set(row.slug, {
+    return (data ?? []).map((row) => ({
       slug: row.slug,
       name: row.name,
       category: row.category,
       area: row.resort_area,
-    });
-  }
-  return map;
-}
+    }));
+  },
+  ["gold-resort-meta-rows-v2"]
+);
+
+const fetchResortMeta = cache(async function fetchResortMeta(): Promise<
+  Map<string, ResortMeta>
+> {
+  const rows = await fetchResortMetaRowsFromSupabase();
+  return new Map(rows.map((row) => [row.slug, row]));
+});
+
+const fetchGoldActivityRowsFromSupabase = cachePublicData(
+  async function fetchGoldActivityRowsFromSupabase(): Promise<GoldActivityRow[]> {
+    const supabase = createServiceClient();
+    if (!supabase) return [];
+
+    const { data, error } = await supabase
+      .from("v_public_activity_gold")
+      .select("*");
+    if (error) {
+      if (!/does not exist|schema cache/i.test(error.message)) {
+        console.error("fetchGoldActivityOccurrences:", error.message);
+      }
+      return [];
+    }
+
+    return (data ?? []) as GoldActivityRow[];
+  },
+  ["gold-activity-rows"]
+);
+
+const fetchGoldActivityRows = cache(fetchGoldActivityRowsFromSupabase);
 
 export async function fetchGoldActivityOccurrences(
   dateRangeDays = 7
 ): Promise<ActivityOccurrence[]> {
-  const supabase = createServiceClient();
-  if (!supabase) return [];
-
-  const [{ data, error }, resortMeta] = await Promise.all([
-    supabase.from("v_public_activity_gold").select("*"),
+  const [rows, resortMeta] = await Promise.all([
+    fetchGoldActivityRows(),
     fetchResortMeta(),
   ]);
-  if (error) {
-    if (!/does not exist|schema cache/i.test(error.message)) {
-      console.error("fetchGoldActivityOccurrences:", error.message);
-    }
-    return [];
-  }
 
-  return ((data ?? []) as GoldActivityRow[]).flatMap((row) =>
+  return rows.flatMap((row) =>
     mapGoldActivityRowToOccurrences(row, { dateRangeDays, resortMeta })
   );
 }

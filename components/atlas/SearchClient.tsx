@@ -43,7 +43,7 @@ const DEFAULT_SUGGESTIONS = [
   "polynesian",
   "movie",
   "crafts kids",
-  "arcade rainy",
+  "arcade games",
   "contemporary",
   "yoga",
 ];
@@ -252,7 +252,7 @@ export function SearchClient({
       {!q && (
         <p className="search-empty-intro">
           Ask like a concierge — campfires near your resort, pool games,
-          tonight&apos;s movies, or rainy-day arcade time.
+          tonight&apos;s movies, or arcade games.
         </p>
       )}
 

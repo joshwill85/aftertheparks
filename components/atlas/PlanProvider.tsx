@@ -20,8 +20,11 @@ import {
   type LocalPlanCache,
   type PendingPlanOperation,
 } from "@/lib/plan/store";
-import { planItemDedupeKey } from "@/lib/plan/snapshot";
-import { activityToPlanSnapshot } from "@/lib/plan/snapshot";
+import {
+  activityToPlanSnapshot,
+  isActivityOccurrenceSaved,
+  planItemDedupeKey,
+} from "@/lib/plan/snapshot";
 import type { PlanSyncStatus } from "@/lib/plan/types";
 import {
   buildAddItemPayload,
@@ -32,6 +35,7 @@ import {
   replayPendingOperations,
   syncAddItem,
   syncRemoveItem,
+  syncUpdateItem,
 } from "@/lib/plan/sync-client";
 import { migrateLocalItemsToServer } from "@/lib/plan/migrate";
 import { trackPlanEvent } from "@/lib/plan/analytics";
@@ -47,15 +51,16 @@ interface PlanContextValue {
   lastSavedId: string | null;
   interestPromptDismissed: boolean;
   shareUrl: string | null;
-  undoItem: PlanItem | null;
+  hasExistingShare: boolean;
+  undoItem: UndoPlanItem | null;
   addActivity: (activity: ActivityOccurrence) => void;
   addActivities: (activities: ActivityOccurrence[]) => void;
   removeItem: (id: string) => void;
   undoRemove: () => void;
-  reorderItems: (items: PlanItem[]) => void;
   updateNotes: (id: string, notes: string) => void;
   renamePlan: (title: string) => void;
   isInPlan: (catalogId: string) => boolean;
+  isActivitySaved: (activity: ActivityOccurrence) => boolean;
   openPreview: () => void;
   closePreview: () => void;
   dismissInterestPrompt: () => void;
@@ -70,13 +75,60 @@ const PlanContext = createContext<PlanContextValue | null>(null);
 
 const UNDO_MS = 5000;
 
+type UndoPlanItem = PlanItem & { removeOperationId?: string };
+
+function restorePlanItemOrder(items: PlanItem[]): PlanItem[] {
+  return [...items].sort((a, b) => {
+    const time = (a.startDateTime ?? "").localeCompare(b.startDateTime ?? "");
+    if (time !== 0) return time;
+    return a.addedAt.localeCompare(b.addedAt);
+  });
+}
+
+function planItemToActivityOccurrence(item: PlanItem): ActivityOccurrence {
+  return {
+    id: item.sourceOccurrenceId ?? item.id,
+    activityCatalogId: item.activityCatalogId,
+    activitySlug: item.activitySlug,
+    title: item.title,
+    resort: {
+      slug: item.resortSlug,
+      name: item.resortName,
+      tier: "",
+      area: "",
+    },
+    summary: String(item.snapshotJson?.summary ?? ""),
+    category: item.category ?? "resort_activity",
+    section: "",
+    daypart: "anytime",
+    price: { state: "unknown" },
+    location: { label: item.location ?? "" },
+    eligibility: {
+      ages: [],
+      reservation: {
+        required: item.snapshotJson?.reservationRequired === true,
+      },
+    },
+    freshness: {
+      lastVerified: item.sourceVerifiedAt ?? new Date().toISOString(),
+      sourceUrl: item.sourceUrl ?? "",
+      badge: "verified",
+    },
+    status: "active",
+    startDateTime: item.startDateTime,
+    endDateTime: item.endDateTime,
+    scheduleText: String(item.snapshotJson?.scheduleText ?? ""),
+  };
+}
+
 export function PlanProvider({ children }: { children: ReactNode }) {
   const [cache, setCache] = useState<LocalPlanCache | null>(null);
   const [syncStatus, setSyncStatus] = useState<PlanSyncStatus>("idle");
   const [previewOpen, setPreviewOpen] = useState(false);
   const [lastSavedId, setLastSavedId] = useState<string | null>(null);
   const [shareUrl, setShareUrl] = useState<string | null>(null);
-  const [undoItem, setUndoItem] = useState<PlanItem | null>(null);
+  const [hasExistingShare, setHasExistingShare] = useState(false);
+  const [undoItem, setUndoItem] = useState<UndoPlanItem | null>(null);
   const [interestPromptDismissed, setInterestPromptDismissed] = useState(false);
   const undoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const syncingRef = useRef(false);
@@ -85,6 +137,27 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     setCache(next);
     void saveLocalPlanCache(next);
     broadcastPlanUpdate(next);
+  }, []);
+
+  const resolvePendingOperation = useCallback((operationId: string) => {
+    setCache((current) => {
+      if (
+        !current ||
+        !current.pendingOperations.some((op) => op.operationId === operationId)
+      ) {
+        return current;
+      }
+
+      const next: LocalPlanCache = {
+        ...current,
+        pendingOperations: current.pendingOperations.filter(
+          (op) => op.operationId !== operationId
+        ),
+      };
+      void saveLocalPlanCache(next);
+      broadcastPlanUpdate(next);
+      return next;
+    });
   }, []);
 
   const runSync = useCallback(
@@ -104,24 +177,29 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       syncingRef.current = true;
       setSyncStatus("syncing");
 
-      let replayed = await replayPendingOperations(base);
-      const server = await fetchServerPlan();
+      try {
+        let replayed = await replayPendingOperations(base);
+        const server = await fetchServerPlan();
 
-      if (server?.plan) {
-        replayed = mergeServerPlan(replayed, {
-          plan: server.plan,
-          items: server.items,
-        });
-      }
+        if (server?.plan) {
+          replayed = mergeServerPlan(replayed, {
+            plan: server.plan,
+            items: server.items,
+          });
+        }
 
-      if (replayed.pendingOperations.length > 0) {
+        if (replayed.pendingOperations.length > 0) {
+          setSyncStatus("offline");
+        } else {
+          setSyncStatus("synced");
+        }
+
+        persist(replayed);
+      } catch {
         setSyncStatus("offline");
-      } else {
-        setSyncStatus("synced");
+      } finally {
+        syncingRef.current = false;
       }
-
-      persist(replayed);
-      syncingRef.current = false;
     },
     [persist]
   );
@@ -161,10 +239,13 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         operationId,
         type: "add_item",
         planId: base.planId ?? undefined,
-        payload: buildAddItemPayload(activity, operationId) as unknown as Record<
-          string,
-          unknown
-        >,
+        payload: {
+          ...(buildAddItemPayload(activity, operationId) as unknown as Record<
+            string,
+            unknown
+          >),
+          localItemId: optimistic.id,
+        },
         createdAt: new Date().toISOString(),
       };
 
@@ -204,25 +285,64 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         await ensureAnonymousSession();
       }
 
-      const payload = buildAddItemPayload(activity, operationId, turnstileToken);
+      const latestBeforeAdd = await loadLocalPlanCache();
+      const latestLocalAddItem = latestBeforeAdd.items.find(
+        (i) => i.id === optimistic.id
+      );
+      const payload = {
+        ...buildAddItemPayload(activity, operationId, turnstileToken),
+        userNote: latestLocalAddItem?.notes?.trim() || undefined,
+      };
       const result = await syncAddItem(payload);
 
       if (result) {
+        const latestCache = await loadLocalPlanCache();
+        const latestLocalAddItemAfterSync =
+          latestCache.items.find((i) => i.id === optimistic.id) ?? optimistic;
+        const latestAddNote = latestLocalAddItemAfterSync.notes?.trim() ?? "";
+        let pendingOperations = latestCache.pendingOperations.filter(
+          (p) => p.operationId !== operationId
+        );
+
+        if (latestAddNote !== (result.item.notes ?? "")) {
+          const noteOperationId = crypto.randomUUID();
+          const noteSynced = await syncUpdateItem(
+            result.item.id,
+            latestAddNote,
+            noteOperationId
+          );
+          if (!noteSynced) {
+            pendingOperations = [
+              ...pendingOperations,
+              {
+                operationId: noteOperationId,
+                type: "update_note",
+                payload: { itemId: result.item.id, notes: latestAddNote },
+                createdAt: new Date().toISOString(),
+              },
+            ];
+          }
+        }
+
+        const serverItem = {
+          ...result.item,
+          notes: latestAddNote || undefined,
+        };
         let synced: LocalPlanCache = {
-          ...next,
+          ...latestCache,
           planId: result.plan.id,
           title: result.plan.title,
           version: result.plan.version,
-          items: next.items.map((i) =>
-            i.id === optimistic.id ? result.item : i
+          items: latestCache.items.map((i) =>
+            i.id === optimistic.id ? serverItem : i
           ),
-          pendingOperations: next.pendingOperations.filter(
-            (p) => p.operationId !== operationId
-          ),
+          pendingOperations,
         };
 
         if (isFirstServerSave && synced.items.length > 1) {
-          synced = await migrateLocalItemsToServer(synced);
+          synced = await migrateLocalItemsToServer(synced, {
+            skipItemIds: [result.item.id],
+          });
         }
 
         persist(synced);
@@ -239,7 +359,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   const addActivity = useCallback(
     (activity: ActivityOccurrence) => {
       trackPlanEvent("plan_save_clicked");
-      void queueAndSyncAdd(activity, true);
+      queueAndSyncAdd(activity, true).catch(() => setSyncStatus("offline"));
     },
     [queueAndSyncAdd]
   );
@@ -280,7 +400,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
 
       persist(next);
       trackPlanEvent("plan_item_removed");
-      setUndoItem(removed);
+      setUndoItem({ ...removed, removeOperationId: operationId });
       if (undoTimer.current) clearTimeout(undoTimer.current);
       undoTimer.current = setTimeout(() => setUndoItem(null), UNDO_MS);
 
@@ -290,76 +410,113 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         await ensureAnonymousSession();
         const ok = await syncRemoveItem(id, operationId);
         if (ok) {
-          persist({
-            ...next,
-            pendingOperations: next.pendingOperations.filter(
-              (p) => p.operationId !== operationId
-            ),
-          });
+          resolvePendingOperation(operationId);
           setSyncStatus("synced");
         } else {
           setSyncStatus("offline");
         }
       })();
     },
+    [cache, persist, resolvePendingOperation]
+  );
+
+  const cancelPendingRemove = useCallback(
+    (item: UndoPlanItem, operationId: string): boolean => {
+      const base = cache;
+      if (
+        !base ||
+        !base.pendingOperations.some((op) => op.operationId === operationId)
+      ) {
+        return false;
+      }
+
+      const next: LocalPlanCache = {
+        ...base,
+        items: base.items.some((existing) => existing.id === item.id)
+          ? base.items
+          : restorePlanItemOrder([...base.items, item]),
+        pendingOperations: base.pendingOperations.filter(
+          (op) => op.operationId !== operationId
+        ),
+      };
+      persist(next);
+      return true;
+    },
     [cache, persist]
+  );
+
+  const restoreRemovedItem = useCallback(
+    (item: PlanItem) => {
+      queueAndSyncAdd(planItemToActivityOccurrence(item), false).catch(() =>
+        setSyncStatus("offline")
+      );
+    },
+    [queueAndSyncAdd]
   );
 
   const undoRemove = useCallback(() => {
     if (!undoItem) return;
     trackPlanEvent("plan_item_undo");
-    void queueAndSyncAdd(
-      {
-        id: undoItem.sourceOccurrenceId ?? undoItem.id,
-        activityCatalogId: undoItem.activityCatalogId,
-        activitySlug: undoItem.activitySlug,
-        title: undoItem.title,
-        resort: {
-          slug: undoItem.resortSlug,
-          name: undoItem.resortName,
-          tier: "",
-          area: "",
-        },
-        summary: "",
-        category: undoItem.category ?? "",
-        section: "",
-        daypart: "anytime",
-        price: { state: "unknown" },
-        location: { label: undoItem.location ?? "" },
-        eligibility: { ages: [] },
-        freshness: {
-          lastVerified: undoItem.sourceVerifiedAt ?? new Date().toISOString(),
-          sourceUrl: undoItem.sourceUrl ?? "",
-          badge: "verified",
-        },
-        status: "active",
-        startDateTime: undoItem.startDateTime,
-        endDateTime: undoItem.endDateTime,
-      } as ActivityOccurrence,
-      false
-    );
+    if (
+      !undoItem.removeOperationId ||
+      !cancelPendingRemove(undoItem, undoItem.removeOperationId)
+    ) {
+      restoreRemovedItem(undoItem);
+    }
     setUndoItem(null);
-  }, [undoItem, queueAndSyncAdd]);
+  }, [cancelPendingRemove, restoreRemovedItem, undoItem]);
 
   const updateNotes = useCallback(
     (id: string, notes: string) => {
       if (!cache) return;
-      persist({
+      const operationId = crypto.randomUUID();
+      const hasPendingAdd = cache.pendingOperations.some(
+        (op) => op.type === "add_item" && op.payload.localItemId === id
+      );
+      const next: LocalPlanCache = {
         ...cache,
         items: cache.items.map((item) =>
           item.id === id ? { ...item, notes } : item
         ),
-      });
-    },
-    [cache, persist]
-  );
+        pendingOperations: hasPendingAdd
+          ? cache.pendingOperations.map((op) =>
+              op.type === "add_item" && op.payload.localItemId === id
+                ? { ...op, payload: { ...op.payload, userNote: notes } }
+                : op
+            )
+          : [
+              ...cache.pendingOperations.filter(
+                (op) =>
+                  !(
+                    op.type === "update_note" &&
+                    String(op.payload.itemId ?? "") === id
+                  )
+              ),
+              {
+                operationId,
+                type: "update_note",
+                payload: { itemId: id, notes },
+                createdAt: new Date().toISOString(),
+              },
+            ],
+      };
 
-  const reorderItems = useCallback(
-    (nextItems: PlanItem[]) => {
-      if (!cache) return;
-      persist({ ...cache, items: nextItems });
+      persist(next);
+
+      if (!cache.planId || hasPendingAdd) return;
+
+      void (async () => {
+        await ensureAnonymousSession();
+        const ok = await syncUpdateItem(id, notes, operationId);
+        if (ok) {
+          resolvePendingOperation(operationId);
+          setSyncStatus("synced");
+        } else {
+          setSyncStatus("offline");
+        }
+      })();
     },
-    [cache, persist]
+    [cache, persist, resolvePendingOperation]
   );
 
   const renamePlan = useCallback(
@@ -392,6 +549,11 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     [items]
   );
 
+  const isActivitySaved = useCallback(
+    (activity: ActivityOccurrence) => isActivityOccurrenceSaved(items, activity),
+    [items]
+  );
+
   const createShare = useCallback(async () => {
     try {
       const turnstileToken = await executeTurnstile("plan_share_create");
@@ -402,12 +564,14 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ turnstileToken }),
       });
       const data = await res.json();
-      if (data.reused && shareUrl) {
+      if (data.reused) {
+        setHasExistingShare(true);
         trackPlanEvent("plan_share_created");
         return shareUrl;
       }
       if (data.fullUrl) {
         setShareUrl(data.fullUrl);
+        setHasExistingShare(true);
         trackPlanEvent("plan_share_created");
         return data.fullUrl as string;
       }
@@ -423,6 +587,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       credentials: "include",
     });
     setShareUrl(null);
+    setHasExistingShare(false);
     trackPlanEvent("plan_share_revoked");
   }, []);
 
@@ -437,6 +602,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     const data = await res.json();
     if (data.fullUrl) {
       setShareUrl(data.fullUrl);
+      setHasExistingShare(true);
       trackPlanEvent("plan_share_rotated");
       return data.fullUrl as string;
     }
@@ -462,6 +628,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     };
     persist(empty);
     setShareUrl(null);
+    setHasExistingShare(false);
     trackPlanEvent("plan_deleted");
   }, [persist]);
 
@@ -489,15 +656,16 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       lastSavedId,
       interestPromptDismissed,
       shareUrl,
+      hasExistingShare,
       undoItem,
       addActivity,
       addActivities,
       removeItem,
       undoRemove,
-      reorderItems,
       updateNotes,
       renamePlan,
       isInPlan,
+      isActivitySaved,
       openPreview: () => setPreviewOpen(true),
       closePreview: () => {
         setPreviewOpen(false);
@@ -521,15 +689,16 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       lastSavedId,
       interestPromptDismissed,
       shareUrl,
+      hasExistingShare,
       undoItem,
       addActivity,
       addActivities,
       removeItem,
       undoRemove,
-      reorderItems,
       updateNotes,
       renamePlan,
       isInPlan,
+      isActivitySaved,
       createShare,
       revokeShare,
       rotateShare,

@@ -9,7 +9,7 @@ const SUGGESTIONS = [
   "polynesian",
   "movie",
   "crafts kids",
-  "arcade rainy",
+  "arcade games",
   "contemporary",
   "yoga",
 ];

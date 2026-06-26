@@ -6,7 +6,10 @@ import json
 from typing import Any
 from urllib.parse import quote
 
-from config import STORAGE_BUCKET, supabase_service_key, supabase_url
+try:
+    from config import STORAGE_BUCKET, supabase_service_key, supabase_url
+except ImportError:  # pragma: no cover - supports package-style imports in tests
+    from .config import STORAGE_BUCKET, supabase_service_key, supabase_url
 
 try:
     import httpx

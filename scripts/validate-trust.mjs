@@ -5,11 +5,53 @@
  * Default: http://localhost:3000
  */
 
+import { createHmac } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
 const BASE = process.argv[2] ?? "http://localhost:3000";
+
+function loadLocalEnvIfPresent() {
+  const envPath = resolve(process.cwd(), ".env.local");
+  if (!existsSync(envPath)) return;
+  const lines = readFileSync(envPath, "utf8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq <= 0) continue;
+    const key = trimmed.slice(0, eq).trim();
+    if (process.env[key] != null) continue;
+    let value = trimmed.slice(eq + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    process.env[key] = value;
+  }
+}
+
+loadLocalEnvIfPresent();
+
+const SITE_GATE_COOKIE_NAME =
+  process.env.SITE_GATE_COOKIE_NAME ?? "aftertheparks_site_gate";
+const SITE_GATE_PASSWORD = process.env.SITE_GATE_PASSWORD?.trim();
+const SITE_GATE_PAYLOAD = "aftertheparks-site-gate-v1";
+
+function gateHeaders() {
+  if (!SITE_GATE_PASSWORD) return {};
+  const token = createHmac("sha256", SITE_GATE_PASSWORD)
+    .update(SITE_GATE_PAYLOAD)
+    .digest("hex");
+  return { Cookie: `${SITE_GATE_COOKIE_NAME}=${token}` };
+}
 
 const LETTER_SPACED = /\b[A-Z](?:\s[A-Z]){3,}\b/;
 const KNOWN_TITLE_BREAKS = /Wellnessscav|Engerhunt/i;
 const SUSPICIOUS_BLOCK = /9:00\s*AM\s*[–-]\s*9:00\s*PM/i;
+const SHA256_HEX = /^[a-f0-9]{64}$/i;
 const REQUIRED_PROVENANCE_FIELDS = ["title", "schedule", "location"];
 const OFFICIAL_OFFERING_PROVENANCE_FIELDS = ["title", "resortJoin"];
 const OFFICIAL_OFFERING_SAMPLE_PATHS = [
@@ -19,15 +61,19 @@ const OFFICIAL_OFFERING_SAMPLE_PATHS = [
   "/api/search?q=fireworks%20cruises",
   "/api/resorts/contemporary-resort",
 ];
+const PLACEHOLDER_AVAILABILITY_TEXT =
+  /Hours not specified by Disney|Check Disney source for current availability/i;
+const INTERNAL_SCHEDULE_NORMALIZATION_TEXT =
+  /no posted time in PDF|Activities schedule available digitally/i;
 
 async function fetchJson(path) {
-  const res = await fetch(`${BASE}${path}`);
+  const res = await fetch(`${BASE}${path}`, { headers: gateHeaders() });
   if (!res.ok) throw new Error(`${path} → ${res.status}`);
   return res.json();
 }
 
 async function fetchText(path) {
-  const res = await fetch(`${BASE}${path}`);
+  const res = await fetch(`${BASE}${path}`, { headers: gateHeaders() });
   if (!res.ok) throw new Error(`${path} → ${res.status}`);
   return res.text();
 }
@@ -66,6 +112,39 @@ function hasEvidence(claim) {
   return Array.isArray(claim?.evidence) && claim.evidence.length > 0;
 }
 
+function hasUsableSourceHash(value) {
+  return typeof value === "string" && SHA256_HEX.test(value);
+}
+
+function hasUsableSpan(span) {
+  if (!span || typeof span !== "object") return false;
+  return Boolean(
+    String(span.text ?? "").trim() ||
+      String(span.source_url ?? "").trim() ||
+      String(span.source ?? "").trim() ||
+      Number.isFinite(span.page) ||
+      Number.isFinite(span.line) ||
+      Number.isFinite(span.line_no)
+  );
+}
+
+function hasUsableProvenance(provenance, field) {
+  const spans = provenance?.[field];
+  return Array.isArray(spans) && spans.some(hasUsableSpan);
+}
+
+function hasValidDocumentKeyLegends(source) {
+  const legends = source?.documentKeyLegends;
+  if (legends == null) return true;
+  if (!Array.isArray(legends)) return false;
+  return legends.every((legend) => {
+    if (!legend || typeof legend !== "object") return false;
+    if (!String(legend.kind ?? "").trim()) return false;
+    if (legend.spans == null) return true;
+    return Array.isArray(legend.spans) && legend.spans.every(hasUsableSpan);
+  });
+}
+
 function isUnknownClaim(claim) {
   const value = String(claim?.value ?? "").trim().toLowerCase();
   return !value || value === "unknown" || value === "not_applicable";
@@ -74,13 +153,11 @@ function isUnknownClaim(claim) {
 function missingProvenanceFields(activity) {
   const provenance = activity.fieldProvenance ?? {};
   const missing = REQUIRED_PROVENANCE_FIELDS.filter((field) => {
-    const spans = provenance[field];
-    return !Array.isArray(spans) || spans.length === 0;
+    return !hasUsableProvenance(provenance, field);
   });
 
   if ((activity.summary ?? "").trim()) {
-    const spans = provenance.description;
-    if (!Array.isArray(spans) || spans.length === 0) missing.push("description");
+    if (!hasUsableProvenance(provenance, "description")) missing.push("description");
   }
 
   return missing;
@@ -89,13 +166,11 @@ function missingProvenanceFields(activity) {
 function missingOfficialOfferingProvenanceFields(offering) {
   const provenance = offering.fieldProvenance ?? {};
   const missing = OFFICIAL_OFFERING_PROVENANCE_FIELDS.filter((field) => {
-    const spans = provenance[field];
-    return !Array.isArray(spans) || spans.length === 0;
+    return !hasUsableProvenance(provenance, field);
   });
 
   if ((offering.summary ?? "").trim()) {
-    const spans = provenance.description;
-    if (!Array.isArray(spans) || spans.length === 0) missing.push("description");
+    if (!hasUsableProvenance(provenance, "description")) missing.push("description");
   }
 
   return missing;
@@ -198,15 +273,12 @@ function unsupportedPriceDetails(activity) {
 function unsupportedOfferingAvailability(offering) {
   const label = String(offering.availability?.label ?? "").trim();
   if (!label) return false;
-  if (
-    label === "Hours not specified by Disney" ||
-    label === "Check Disney source for current availability"
-  ) {
-    return false;
-  }
-  return !(
-    Array.isArray(offering.fieldProvenance?.availability) &&
-    offering.fieldProvenance.availability.length > 0
+  return !hasUsableProvenance(offering.fieldProvenance, "availability");
+}
+
+function placeholderOfferingAvailability(offering) {
+  return PLACEHOLDER_AVAILABILITY_TEXT.test(
+    String(offering.availability?.label ?? "")
   );
 }
 
@@ -221,38 +293,26 @@ function unsupportedOfferingBooking(offering) {
       booking.url
   );
   if (!hasBooking) return false;
-  return !(
-    Array.isArray(offering.fieldProvenance?.booking) &&
-    offering.fieldProvenance.booking.length > 0
-  );
+  return !hasUsableProvenance(offering.fieldProvenance, "booking");
 }
 
 function unsupportedOfferingEligibility(offering) {
   if (!offering.eligibility?.resortGuestOnly) return false;
-  return !(
-    Array.isArray(offering.fieldProvenance?.eligibility) &&
-    offering.fieldProvenance.eligibility.length > 0
-  );
+  return !hasUsableProvenance(offering.fieldProvenance, "eligibility");
 }
 
 function unsupportedOfferingLocation(offering) {
   const label = String(offering.location?.label ?? "").trim();
   if (!label) return false;
   if (label === String(offering.resort?.name ?? "").trim()) return false;
-  return !(
-    Array.isArray(offering.fieldProvenance?.location) &&
-    offering.fieldProvenance.location.length > 0
-  );
+  return !hasUsableProvenance(offering.fieldProvenance, "location");
 }
 
 function unsupportedOfferingAmenities(offering) {
   if (!Array.isArray(offering.amenities) || offering.amenities.length === 0) {
     return false;
   }
-  return !(
-    Array.isArray(offering.fieldProvenance?.amenities) &&
-    offering.fieldProvenance.amenities.length > 0
-  );
+  return !hasUsableProvenance(offering.fieldProvenance, "amenities");
 }
 
 async function collectOfficialOfferingSamples() {
@@ -289,6 +349,7 @@ async function validateExplore() {
   let fakeVerified = 0;
   let suspiciousWithoutBadge = 0;
   let missingSource = 0;
+  let malformedKeyLegends = 0;
   let missingProvenance = 0;
   let unsupportedClaimCount = 0;
   let unsupportedPriceCount = 0;
@@ -305,8 +366,11 @@ async function validateExplore() {
     if (SUSPICIOUS_BLOCK.test(timeLabel) && !a.timeUncertain) {
       suspiciousWithoutBadge++;
     }
-    if (!a.source?.url || !a.source?.documentHash) {
+    if (!a.source?.url || !hasUsableSourceHash(a.source?.documentHash)) {
       missingSource++;
+    }
+    if (!hasValidDocumentKeyLegends(a.source)) {
+      malformedKeyLegends++;
     }
     if (missingProvenanceFields(a).length) {
       missingProvenance++;
@@ -327,6 +391,7 @@ async function validateExplore() {
     return fail("Suspicious 9-9 time blocks", `${suspiciousWithoutBadge} without uncertainty`);
   }
   if (missingSource) return fail("Source evidence", `${missingSource} missing source URL/hash`);
+  if (malformedKeyLegends) return fail("Document key legends", `${malformedKeyLegends} malformed source legends`);
   if (missingProvenance) {
     return fail("Field provenance", `${missingProvenance} missing source spans`);
   }
@@ -406,6 +471,7 @@ async function validateOfficialOfferings() {
   let unsupportedTransitClaims = 0;
   let unsupportedPriceCount = 0;
   let unsupportedAvailabilityCount = 0;
+  let placeholderAvailabilityCount = 0;
   let unsupportedBookingCount = 0;
   let unsupportedEligibilityCount = 0;
   let unsupportedLocationCount = 0;
@@ -439,13 +505,17 @@ async function validateOfficialOfferings() {
       coercedDates++;
       note(path, offering, "contains startDateTime/endDateTime/scheduleText");
     }
-    if (!offering.availability?.kind || !offering.availability?.label) {
+    if (!offering.availability?.kind) {
       missingAvailability++;
-      note(path, offering, "missing availability kind/label");
+      note(path, offering, "missing availability kind");
     }
     if (unsupportedOfferingAvailability(offering)) {
       unsupportedAvailabilityCount++;
       note(path, offering, `unsupported availability label ${offering.availability.label}`);
+    }
+    if (placeholderOfferingAvailability(offering)) {
+      placeholderAvailabilityCount++;
+      note(path, offering, `placeholder availability label ${offering.availability.label}`);
     }
     if (unsupportedOfferingBooking(offering)) {
       unsupportedBookingCount++;
@@ -463,7 +533,7 @@ async function validateOfficialOfferings() {
       unsupportedAmenityCount++;
       note(path, offering, "unsupported amenity list");
     }
-    if (!offering.source?.url || !offering.source?.documentHash) {
+    if (!offering.source?.url || !hasUsableSourceHash(offering.source?.documentHash)) {
       missingSource++;
       note(path, offering, "missing source URL/hash");
     }
@@ -480,10 +550,7 @@ async function validateOfficialOfferings() {
     const priceState = String(offering.price?.state ?? "unknown").trim().toLowerCase();
     if (
       (priceState === "free" || priceState === "fee") &&
-      !(
-        Array.isArray(offering.fieldProvenance?.price) &&
-        offering.fieldProvenance.price.length > 0
-      )
+      !hasUsableProvenance(offering.fieldProvenance, "price")
     ) {
       unsupportedPriceCount++;
       note(path, offering, `unsupported price state ${priceState}`);
@@ -502,12 +569,13 @@ async function validateOfficialOfferings() {
   if (brokenTitles) return fail("Official offering broken title fragments", `${brokenTitles} found; ${examples.join(" | ")}`);
   if (camelCaseTitles) return fail("Official offering camel-case smashed titles", `${camelCaseTitles} found; ${examples.join(" | ")}`);
   if (coercedDates) return fail("Official offering event coercion", `${coercedDates} dated/scheduled; ${examples.join(" | ")}`);
-  if (missingAvailability) return fail("Official offering availability", `${missingAvailability} missing kind/label; ${examples.join(" | ")}`);
+  if (missingAvailability) return fail("Official offering availability", `${missingAvailability} missing kind; ${examples.join(" | ")}`);
   if (missingSource) return fail("Official offering source evidence", `${missingSource} missing source URL/hash; ${examples.join(" | ")}`);
   if (missingProvenance) return fail("Official offering field provenance", `${missingProvenance} missing spans; ${examples.join(" | ")}`);
   if (unsupportedClaimCount) return fail("Official offering unsupported claims", `${unsupportedClaimCount} offerings; ${examples.join(" | ")}`);
   if (unsupportedPriceCount) return fail("Official offering unsupported price labels", `${unsupportedPriceCount} offerings; ${examples.join(" | ")}`);
   if (unsupportedAvailabilityCount) return fail("Official offering unsupported availability labels", `${unsupportedAvailabilityCount} offerings; ${examples.join(" | ")}`);
+  if (placeholderAvailabilityCount) return fail("Official offering placeholder availability labels", `${placeholderAvailabilityCount} offerings; ${examples.join(" | ")}`);
   if (unsupportedBookingCount) return fail("Official offering unsupported booking notes", `${unsupportedBookingCount} offerings; ${examples.join(" | ")}`);
   if (unsupportedEligibilityCount) return fail("Official offering unsupported eligibility notes", `${unsupportedEligibilityCount} offerings; ${examples.join(" | ")}`);
   if (unsupportedLocationCount) return fail("Official offering unsupported locations", `${unsupportedLocationCount} offerings; ${examples.join(" | ")}`);
@@ -557,7 +625,7 @@ async function validateWellnessDetail() {
   if (KNOWN_TITLE_BREAKS.test(`${activity.title} ${activity.activitySlug} ${summary}`)) {
     return fail("Wellness broken fragments", "legacy title fragments still present");
   }
-  if (!activity.source?.url || !activity.source?.documentHash) {
+  if (!activity.source?.url || !hasUsableSourceHash(activity.source?.documentHash)) {
     return fail("Wellness source evidence", "missing source URL/hash");
   }
   const missingProvenance = missingProvenanceFields(activity);
@@ -606,8 +674,31 @@ async function validateUntimedDetailNoTimeField() {
   );
 }
 
+async function validateUntimedResortNoTimeBucket() {
+  const data = await fetchJson("/api/activities/crescent-lake-wellness-challenge");
+  const activity = data.activity ?? {};
+  if (activity.startDateTime || activity.endDateTime) {
+    return fail("Untimed resort omits time bucket", "fixture is no longer untimed");
+  }
+
+  const resortSlug = activity.resort?.slug ?? "boardwalk-inn";
+  const html = await fetchText(`/resorts/${resortSlug}`);
+  if (/Times to confirm|Time needs confirmation|Confirm time/i.test(html)) {
+    return fail(
+      "Untimed resort omits time bucket",
+      "resort page rendered a time-confirmation bucket for untimed source-backed activity"
+    );
+  }
+
+  return pass(
+    "Untimed resort omits time bucket",
+    "untimed resort activities are not presented as time fields"
+  );
+}
+
 async function validateLegacyWellnessRedirect() {
   const res = await fetch(`${BASE}/activities/wellnessscav-engerhunt`, {
+    headers: gateHeaders(),
     redirect: "manual",
   });
   const location = res.headers.get("location") ?? "";
@@ -618,6 +709,86 @@ async function validateLegacyWellnessRedirect() {
     return fail("Legacy Wellness URL redirect", location || "<missing location>");
   }
   return pass("Legacy Wellness URL redirect", location);
+}
+
+async function validateSearchPlaceholderSuppression() {
+  const queries = [
+    "hours not specified",
+    "check disney source current availability",
+  ];
+  const examples = [];
+
+  for (const query of queries) {
+    const payload = await fetchJson(`/api/search?q=${encodeURIComponent(query)}`);
+    const publicSearchText = JSON.stringify({
+      topHits: payload.topHits ?? [],
+      officialOfferings: payload.officialOfferings ?? [],
+    });
+    if (PLACEHOLDER_AVAILABILITY_TEXT.test(publicSearchText)) {
+      examples.push(query);
+    }
+  }
+
+  if (examples.length) {
+    return fail(
+      "Search placeholder suppression",
+      `placeholder availability text leaked for ${examples.join(", ")}`
+    );
+  }
+
+  return pass(
+    "Search placeholder suppression",
+    "unsourced availability placeholders absent from search output"
+  );
+}
+
+async function validateInternalScheduleTextSuppression() {
+  const checks = [
+    {
+      label: "untimed detail",
+      path: "/api/activities/crescent-lake-wellness-challenge",
+    },
+    {
+      label: "no posted time search",
+      path: "/api/search?q=no%20posted%20time%20in%20PDF",
+    },
+    {
+      label: "digital schedule search",
+      path: "/api/search?q=activities%20schedule%20available%20digitally",
+    },
+  ];
+  const leaks = [];
+
+  for (const check of checks) {
+    const payload = await fetchJson(check.path);
+    const text = JSON.stringify({
+      activity: payload.activity,
+      upcoming: payload.upcoming,
+      activities: payload.activities,
+      topHits: payload.topHits,
+      officialOfferings: payload.officialOfferings,
+      resorts: payload.resorts,
+      guides: payload.guides,
+      movies: payload.movies,
+      categories: payload.categories,
+      pages: payload.pages,
+    });
+    if (INTERNAL_SCHEDULE_NORMALIZATION_TEXT.test(text)) {
+      leaks.push(check.label);
+    }
+  }
+
+  if (leaks.length) {
+    return fail(
+      "Internal schedule text suppression",
+      `internal schedule text leaked in ${leaks.join(", ")}`
+    );
+  }
+
+  return pass(
+    "Internal schedule text suppression",
+    "public payloads do not expose internal no-time normalization text"
+  );
 }
 
 async function main() {
@@ -632,7 +803,10 @@ async function main() {
     validateMovies,
     validateWellnessDetail,
     validateUntimedDetailNoTimeField,
+    validateUntimedResortNoTimeBucket,
     validateLegacyWellnessRedirect,
+    validateSearchPlaceholderSuppression,
+    validateInternalScheduleTextSuppression,
   ]) {
     try {
       checks.push(await fn());

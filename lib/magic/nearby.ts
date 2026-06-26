@@ -20,7 +20,7 @@ export const NEARBY_TIER_META: Record<
   },
   worth_travel: {
     label: "Worth checking travel for",
-    description: "A standout moment if timing and transportation work.",
+    description: "A standout moment if the timing works for your plans.",
     icon: "✨",
   },
 };

@@ -293,6 +293,28 @@ def _write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
 
 
+def generate_gold_records(
+    *,
+    fixtures_dir: Path = Path("data/golden/activities"),
+    review_decisions_path: Path = Path("data/processed/activity_review_decisions_v2.json"),
+    mrg_facts_path: Path = Path("data/processed/magical_resort_guide_facts.json"),
+    include_mrg_facts: bool = True,
+) -> PromotionResult:
+    result = promote_fixtures(
+        fixtures_dir,
+        review_decisions=load_review_decisions(review_decisions_path),
+    )
+    if include_mrg_facts and mrg_facts_path.exists():
+        mrg_payload = load_mrg_payload(mrg_facts_path)
+        mrg_facts = mrg_payload.get("facts") if isinstance(mrg_payload.get("facts"), list) else []
+        result.gold_records = merge_mrg_facts_into_gold(result.gold_records, mrg_facts)
+        result.gold_records = merge_mrg_validity_into_gold(
+            result.gold_records,
+            mrg_payload.get("validity") if isinstance(mrg_payload, dict) else None,
+        )
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Promote Silver v2 candidates into local Gold preview output")
     parser.add_argument(
@@ -338,20 +360,17 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    result = promote_fixtures(
-        args.fixtures_dir,
-        review_decisions=load_review_decisions(args.review_decisions),
+    result = generate_gold_records(
+        fixtures_dir=args.fixtures_dir,
+        review_decisions_path=args.review_decisions,
+        mrg_facts_path=args.mrg_facts,
+        include_mrg_facts=not args.no_mrg_facts,
     )
     mrg_facts_count = 0
     if not args.no_mrg_facts and args.mrg_facts.exists():
         mrg_payload = load_mrg_payload(args.mrg_facts)
         mrg_facts = mrg_payload.get("facts") if isinstance(mrg_payload.get("facts"), list) else []
         mrg_facts_count = len(mrg_facts)
-        result.gold_records = merge_mrg_facts_into_gold(result.gold_records, mrg_facts)
-        result.gold_records = merge_mrg_validity_into_gold(
-            result.gold_records,
-            mrg_payload.get("validity") if isinstance(mrg_payload, dict) else None,
-        )
 
     summary = {
         "gold_records": len(result.gold_records),

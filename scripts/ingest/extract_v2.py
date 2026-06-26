@@ -279,6 +279,8 @@ def _title_text(line_text: str) -> str | None:
         return None
     if re.fullmatch(r"\d{3}[-–—]?[A-Z]{3}[-–—]?[A-Z]{4}[.!]?", text):
         return None
+    if re.fullmatch(r"STORY\s+TIME\s+YOGA", text, flags=re.I):
+        return "Story Time Yoga"
 
     repaired = repair_known_activity_title(text)
     raw_without_fee = _clean_text(re.sub(r"\s*\(\$\)\s*$", "", line_text))

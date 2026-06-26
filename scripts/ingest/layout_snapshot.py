@@ -6,6 +6,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -19,6 +20,7 @@ from PIL import Image, ImageEnhance, ImageOps
 OCR_ZOOM = 2.0
 ENHANCED_OCR_ZOOM = 3.0
 OCR_MIN_CONFIDENCE = 45.0
+DEFAULT_LAYOUT_SNAPSHOT_DIR = Path("data/processed/layout_snapshots")
 LINE_COLUMN_GAP = 80.0
 NEAR_COLUMN_GAP = 70.0
 ENHANCED_OCR_MIN_HEADING_GAIN = 8
@@ -321,6 +323,10 @@ def build_layout_snapshot(pdf_path: Path) -> dict[str, Any]:
     """Return deterministic PDF text evidence with page, word, and line boxes."""
     data = pdf_path.read_bytes()
     digest = hashlib.sha256(data).hexdigest()
+    cached = _read_cached_layout_snapshot(digest)
+    if cached is not None:
+        return cached
+
     doc = fitz.open(stream=data, filetype="pdf")
 
     pages: list[dict[str, Any]] = []
@@ -341,12 +347,54 @@ def build_layout_snapshot(pdf_path: Path) -> dict[str, Any]:
             }
         )
 
-    return {
+    snapshot = {
         "source_path": str(pdf_path),
         "content_sha256": digest,
         "page_count": len(pages),
         "pages": pages,
     }
+    _write_cached_layout_snapshot(snapshot)
+    return snapshot
+
+
+def _layout_snapshot_cache_dir() -> Path | None:
+    value = os.environ.get("ACTIVITY_LAYOUT_SNAPSHOT_CACHE_DIR")
+    if value is not None:
+        value = value.strip()
+        if value.lower() in {"", "0", "false", "off", "none"}:
+            return None
+        return Path(value)
+    return DEFAULT_LAYOUT_SNAPSHOT_DIR
+
+
+def _read_cached_layout_snapshot(digest: str) -> dict[str, Any] | None:
+    cache_dir = _layout_snapshot_cache_dir()
+    if cache_dir is None:
+        return None
+    path = cache_dir / f"{digest}.layout.json"
+    try:
+        snapshot = json.loads(path.read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+    if snapshot.get("content_sha256") != digest:
+        return None
+    if not isinstance(snapshot.get("pages"), list):
+        return None
+    return snapshot
+
+
+def _write_cached_layout_snapshot(snapshot: dict[str, Any]) -> None:
+    cache_dir = _layout_snapshot_cache_dir()
+    digest = snapshot.get("content_sha256")
+    if cache_dir is None or not isinstance(digest, str) or not digest:
+        return
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    path = cache_dir / f"{digest}.layout.json"
+    if path.exists():
+        return
+    tmp_path = path.with_suffix(".layout.json.tmp")
+    tmp_path.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False))
+    tmp_path.replace(path)
 
 
 def write_layout_snapshot(pdf_path: Path, out_dir: Path) -> Path:

@@ -14,6 +14,8 @@ import type {
 } from "@/lib/types/occurrence";
 
 const REQUIRED_PROVENANCE_FIELDS = ["title", "schedule", "location"] as const;
+const INTERNAL_NO_TIME_SCHEDULE_TEXT =
+  /no posted time in PDF|Activities schedule available digitally/i;
 
 function toDisplayInput(activity: ActivityOccurrence) {
   return occurrenceToDisplayInput({
@@ -119,7 +121,10 @@ function sanitizeEnrichment(
     sameDayAvailable: keep("sameDayAvailable", ["reservation"]),
     programFamily: keep("programFamily", ["schedule_location"]),
     activityVariant: keep("activityVariant", ["schedule_location"]),
-    weatherDependency: keep("weatherDependency", ["schedule_location"]),
+    weatherDependency: keep("weatherDependency", [
+      "weather_dependency",
+      "weather",
+    ]),
     scheduleValidFrom: keep("scheduleValidFrom", [
       "schedule_validity",
       "valid_from",
@@ -174,11 +179,30 @@ function sanitizePrice(activity: ActivityOccurrence): ActivityOccurrence["price"
   return activity.price;
 }
 
+function sanitizeScheduleText(
+  activity: ActivityOccurrence
+): ActivityOccurrence["scheduleText"] {
+  const text = activity.scheduleText?.trim();
+  if (!text) return undefined;
+  if (
+    INTERNAL_NO_TIME_SCHEDULE_TEXT.test(text) &&
+    !activity.startDateTime &&
+    !activity.endDateTime
+  ) {
+    return undefined;
+  }
+  return text;
+}
+
 /** Ensure every public activity has honest freshness metadata. */
 export function ensurePublicActivity(
   activity: ActivityOccurrence
 ): ActivityOccurrence {
-  const quality = computeDisplayQuality(toDisplayInput(activity));
+  const publicActivity = {
+    ...activity,
+    scheduleText: sanitizeScheduleText(activity),
+  };
+  const quality = computeDisplayQuality(toDisplayInput(publicActivity));
   const sourceContractVerified = hasVerifiedSourceContract(activity);
   const displaySafe = quality.tier !== "hide" && quality.tier !== "low";
   const badge =
@@ -192,9 +216,9 @@ export function ensurePublicActivity(
     (sourceContractVerified ? "source_backed" : "source_unclear");
 
   return {
-    ...activity,
-    price: sanitizePrice(activity),
-    enrichment: sanitizeEnrichment(activity),
+    ...publicActivity,
+    price: sanitizePrice(publicActivity),
+    enrichment: sanitizeEnrichment(publicActivity),
     trustState,
     freshness: {
       lastVerified: activity.freshness?.lastVerified ?? new Date().toISOString(),

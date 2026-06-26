@@ -4,6 +4,7 @@ import type { ActivityOccurrence, MovieNightOccurrence } from "@/lib/types/occur
 import type { EventBadge, EventCardProps } from "@/components/events/EventCard";
 import { formatActivityEventDay, formatMovieEventDay } from "@/lib/events/formatEventDay";
 import { formatMovieShowTime } from "@/components/atlas/MoviePosterFallback";
+import { activityDetailHref } from "@/lib/activities/links";
 
 const DAYPART_LABELS: Record<string, string> = {
   morning: "Morning",
@@ -73,7 +74,7 @@ export function activityToEventCard(
 
   return {
     variant,
-    href: `/activities/${display.activitySlug}`,
+    href: activityDetailHref(display.activitySlug, display.resortSlug),
     title: display.title,
     resort: showResort ? display.resortName : "",
     location,

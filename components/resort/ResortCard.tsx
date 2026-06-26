@@ -124,7 +124,7 @@ export function ResortCard({
           ) : (
             <p className="resort-card__hint">
               {hasLiveCounts
-                ? "Schedules, movies, and campfires inside"
+                ? "Source-backed schedules and offerings"
                 : "Browse resort fun and official sources"}
             </p>
           )}

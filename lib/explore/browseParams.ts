@@ -6,6 +6,7 @@ export const BROWSE_PARAM_KEYS = [
   "category",
   "daypart",
   "free",
+  "reservation",
   "sort",
   "q",
 ] as const;
@@ -52,6 +53,7 @@ export function parseBrowseParams(
     category: get("category"),
     daypart,
     free: get("free") === "true",
+    reservation: get("reservation") === "true",
     sort: sort ?? "time",
     q: get("q"),
   };
@@ -86,6 +88,7 @@ export function hasActiveBrowseFilters(filters: ActivityFilters): boolean {
       filters.category ||
       filters.daypart ||
       filters.free ||
+      filters.reservation ||
       filters.q
   );
 }

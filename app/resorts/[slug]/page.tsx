@@ -5,9 +5,11 @@ import { getResortTierGradient } from "@/components/resort/ResortCard";
 import { ResortCategorySections } from "@/components/resort/ResortCategorySections";
 import { ResortEmptyState } from "@/components/resort/ResortEmptyState";
 import { ResortSourceBlock } from "@/components/resort/ResortSourceBlock";
+import { ResortTimeline } from "@/components/resort/ResortTimeline";
 import {
   getResortBySlug,
   getResortActivities,
+  getResortTimeline,
   getTodayActivities,
   getTonightActivities,
 } from "@/lib/data/activities";
@@ -56,10 +58,18 @@ export default async function ResortDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [resort, activities, todayActivities, tonightActivities, officialOfferings] =
+  const [
+    resort,
+    activities,
+    resortTimeline,
+    todayActivities,
+    tonightActivities,
+    officialOfferings,
+  ] =
     await Promise.all([
       getResortBySlug(slug),
       getResortActivities(slug),
+      getResortTimeline(slug, 31),
       getTodayActivities({ resort: slug }),
       getTonightActivities({ resort: slug }),
       getOfficialOfferingsForResort(slug),
@@ -239,17 +249,13 @@ export default async function ResortDetailPage({
             </section>
           )}
 
-          {uniqueActivities.length > 0 && (
+          {resortTimeline.length > 0 && (
             <section className="mb-10">
               <ResortSectionHeader
                 title="Full schedule"
-                description="Every timed activity in the current recreation calendar."
+                description="Every dated occurrence in the current recreation calendar."
               />
-              <ActivityGrid
-                activities={uniqueActivities}
-                showResort={false}
-                emptyMessage="No activities published for this resort yet."
-              />
+              <ResortTimeline activities={resortTimeline} />
             </section>
           )}
         </>

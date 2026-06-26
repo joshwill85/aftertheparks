@@ -1,5 +1,9 @@
 import type { ActivityOffering } from "@/lib/types/occurrence";
 import { getCategoryMeta } from "@/lib/categories/meta";
+import {
+  getPublicOfferingAvailabilityLabel,
+  shouldShowOfferingAvailability,
+} from "@/lib/activityAvailabilityDisplay";
 
 function priceLabel(state: ActivityOffering["price"]["state"]): string {
   if (state === "free") return "Free";
@@ -32,6 +36,10 @@ export function ActivityOfferingCard({
 }) {
   const meta = getCategoryMeta(offering.category);
   const notes = bookingNotes(offering);
+  const showAvailability = shouldShowOfferingAvailability(offering.availability);
+  const availabilityLabel = getPublicOfferingAvailabilityLabel(
+    offering.availability
+  );
 
   return (
     <article className="rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 shadow-sm">
@@ -68,12 +76,14 @@ export function ActivityOfferingCard({
       </div>
 
       <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
-        <div>
-          <dt className="font-bold text-[var(--brand-ink)]">Availability</dt>
-          <dd className="mt-1 text-[var(--color-muted)]">
-            {offering.availability.label}
-          </dd>
-        </div>
+        {showAvailability && (
+          <div>
+            <dt className="font-bold text-[var(--brand-ink)]">Availability</dt>
+            <dd className="mt-1 text-[var(--color-muted)]">
+              {availabilityLabel}
+            </dd>
+          </div>
+        )}
         <div>
           <dt className="font-bold text-[var(--brand-ink)]">Location</dt>
           <dd className="mt-1 text-[var(--color-muted)]">

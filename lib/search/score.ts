@@ -9,6 +9,8 @@ import {
   normalizeSearchQuery,
 } from "@/lib/search/normalize";
 import { CATEGORY_QUERY_ALIASES } from "@/lib/search/synonyms";
+import { activityDetailHref } from "@/lib/activities/links";
+import { getPublicOfferingAvailabilityLabel } from "@/lib/activityAvailabilityDisplay";
 import type { SearchHit } from "@/lib/search/types";
 import type {
   ActivityOffering,
@@ -99,13 +101,16 @@ export function scoreOffering(
   tokens: string[]
 ): number {
   const categoryMeta = getCategoryMeta(offering.category);
+  const availabilityLabel = getPublicOfferingAvailabilityLabel(
+    offering.availability
+  );
   const haystacks = [
     offering.title,
     offering.summary,
     offering.resort.name,
     offering.resort.slug.replace(/-/g, " "),
     offering.location.label,
-    offering.availability.label,
+    availabilityLabel,
     offering.category,
     categoryMeta.label,
     categoryMeta.stamp,
@@ -308,7 +313,7 @@ export function activityToHit(
     title: activity.title,
     subtitle: activity.resort.name,
     description: activity.summary,
-    href: `/activities/${activity.activitySlug}`,
+    href: activityDetailHref(activity.activitySlug, activity.resort.slug),
     score,
     badges,
     activity,
@@ -320,6 +325,9 @@ export function offeringToHit(
   score: number
 ): SearchHit {
   const categoryMeta = getCategoryMeta(offering.category);
+  const availabilityLabel = getPublicOfferingAvailabilityLabel(
+    offering.availability
+  );
   const badges = [categoryMeta.label, "Official"];
   if (offering.price.state === "free") badges.push("Free");
   if (offering.availability.kind === "reservation_based") {
@@ -331,7 +339,7 @@ export function offeringToHit(
     kind: "offering",
     title: offering.title,
     subtitle: offering.resort.name,
-    description: offering.summary || offering.availability.label,
+    description: offering.summary || availabilityLabel,
     href: `/resorts/${offering.resort.slug}#official-offerings`,
     score,
     badges,

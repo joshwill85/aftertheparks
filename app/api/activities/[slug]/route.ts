@@ -14,15 +14,15 @@ export async function GET(
 ) {
   const { slug } = await params;
   const canonicalSlug = canonicalActivitySlug(slug);
+  const url = new URL(request.url);
+  const resort = url.searchParams.get("resort") ?? undefined;
 
   if (canonicalSlug !== slug) {
-    return NextResponse.redirect(
-      new URL(`/api/activities/${canonicalSlug}`, request.url),
-      308
-    );
+    url.pathname = `/api/activities/${canonicalSlug}`;
+    return NextResponse.redirect(url, 308);
   }
 
-  const result = await getActivityBySlug(canonicalSlug);
+  const result = await getActivityBySlug(canonicalSlug, { resort });
 
   if (!result) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });

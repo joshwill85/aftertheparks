@@ -1,11 +1,11 @@
 /** Query expansions and intent aliases for concierge-style search. */
 export const SEARCH_SYNONYMS: Record<string, string[]> = {
-  movie: ["movies", "cinema", "film", "stars", "outdoor movie"],
+  movie: ["movies", "cinema", "film", "stars"],
   campfire: ["campfires", "marshmallow", "smores", "s'mores", "fire", "bonfire"],
   craft: ["crafts", "arts", "kids", "coloring", "painting"],
   pool: ["poolside", "swim", "swimming"],
   yoga: ["wellness", "fitness", "stretch", "meditation"],
-  arcade: ["games", "game", "indoor", "rain", "rainy"],
+  arcade: ["games", "game"],
   hunt: ["scavenger", "scavenger hunt"],
   music: ["band", "concert", "dj"],
   evening: ["tonight", "night", "after dinner", "starlight"],
@@ -35,8 +35,6 @@ export const CATEGORY_QUERY_ALIASES: Record<string, string> = {
   fitness: "fitness_wellness",
   arcade: "arcade",
   games: "arcade",
-  rainy: "arcade",
-  rain: "arcade",
   hunt: "scavenger_hunt",
   scavenger: "scavenger_hunt",
   music: "music",
@@ -84,7 +82,7 @@ export const PAGE_HITS = [
   {
     id: "page-guides",
     title: "Planning guides",
-    description: "First night tips, rainy days, and resort activities",
+    description: "First night tips, arcade listings, and resort activities",
     href: "/guides",
     keywords: ["guides", "guide", "tips", "help", "planning"],
   },

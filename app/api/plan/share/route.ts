@@ -4,6 +4,7 @@ import { createLiveShare, revokeLiveShare } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { planErrorResponse } from "@/lib/plan/api-response";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +37,12 @@ export async function POST(request: Request) {
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const rateLimited = await guardRateLimit({
+    request,
+    scope: "plan-share",
+    userId: user.id,
+  });
+  if (rateLimited) return rateLimited;
 
   const body = await request.json().catch(() => ({}));
   const client = await createAppServerClient();
@@ -43,8 +50,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unavailable" }, { status: 503 });
   }
 
-  const hasShare = await userHasActiveShare(client, user.id);
-  if (!hasShare) {
+  const hasExistingShare = await userHasActiveShare(client, user.id);
+  if (!hasExistingShare) {
     const limited = await requireTurnstile(
       body.turnstileToken,
       "plan_share_create"
@@ -58,7 +65,7 @@ export async function POST(request: Request) {
       process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
 
     if (result.reused) {
-      return NextResponse.json({ reused: true });
+      return NextResponse.json({ reused: true, hasExistingShare: true });
     }
 
     return NextResponse.json({
@@ -72,11 +79,17 @@ export async function POST(request: Request) {
   }
 }
 
-export async function DELETE() {
+export async function DELETE(request: Request) {
   const user = await requireApiUser();
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const rateLimited = await guardRateLimit({
+    request,
+    scope: "plan-share",
+    userId: user.id,
+  });
+  if (rateLimited) return rateLimited;
 
   const client = await createAppServerClient();
   if (!client) {

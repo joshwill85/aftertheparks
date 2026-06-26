@@ -1,9 +1,47 @@
 import type { ActivityOccurrence, PlanItem } from "@/lib/types/occurrence";
 
+const INTERNAL_NO_TIME_SCHEDULE_TEXT =
+  /no posted time in PDF|Activities schedule available digitally/i;
+
 export function priceLabelFromActivity(activity: ActivityOccurrence): string {
   if (activity.price.state === "free") return "Free";
   if (activity.price.state === "fee") return "Paid";
   return "Unclear";
+}
+
+function publicScheduleText(
+  scheduleText: unknown,
+  startDateTime?: string,
+  endDateTime?: string
+): string | undefined {
+  const text = typeof scheduleText === "string" ? scheduleText.trim() : "";
+  if (!text) return undefined;
+  if (
+    INTERNAL_NO_TIME_SCHEDULE_TEXT.test(text) &&
+    !startDateTime &&
+    !endDateTime
+  ) {
+    return undefined;
+  }
+  return text;
+}
+
+export function sanitizePlanSnapshotJson(
+  snapshot: Record<string, unknown> | undefined,
+  options: { startDateTime?: string; endDateTime?: string } = {}
+): Record<string, unknown> {
+  const sanitized = { ...(snapshot ?? {}) };
+  const scheduleText = publicScheduleText(
+    sanitized.scheduleText,
+    options.startDateTime,
+    options.endDateTime
+  );
+  if (scheduleText) {
+    sanitized.scheduleText = scheduleText;
+  } else {
+    delete sanitized.scheduleText;
+  }
+  return sanitized;
 }
 
 export function activityToPlanSnapshot(
@@ -26,14 +64,37 @@ export function activityToPlanSnapshot(
     savedSourceVersion: activity.freshness?.lastVerified,
     sourceStatus: "current",
     snapshotJson: {
-      summary: activity.summary,
-      daypart: activity.daypart,
-      scheduleText: activity.scheduleText,
-      reservationRequired: activity.eligibility?.reservation?.required ?? false,
+      ...sanitizePlanSnapshotJson(
+        {
+          summary: activity.summary,
+          daypart: activity.daypart,
+          scheduleText: activity.scheduleText,
+          reservationRequired: activity.eligibility?.reservation?.required ?? false,
+        },
+        {
+          startDateTime: activity.startDateTime,
+          endDateTime: activity.endDateTime,
+        }
+      ),
     },
   };
 }
 
 export function planItemDedupeKey(item: Pick<PlanItem, "sourceOccurrenceId" | "activityCatalogId">): string {
   return item.sourceOccurrenceId ?? item.activityCatalogId;
+}
+
+export function isActivityOccurrenceSaved(
+  items: Pick<PlanItem, "sourceOccurrenceId" | "activityCatalogId">[],
+  activity: Pick<ActivityOccurrence, "id" | "activityCatalogId">
+): boolean {
+  if (items.some((item) => item.sourceOccurrenceId === activity.id)) {
+    return true;
+  }
+
+  return items.some(
+    (item) =>
+      !item.sourceOccurrenceId &&
+      item.activityCatalogId === activity.activityCatalogId
+  );
 }

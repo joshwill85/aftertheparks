@@ -20,7 +20,7 @@ const VIBE_OPTIONS = [
   { value: "campfire", label: "Campfires" },
   { value: "movies_under_stars", label: "Movies" },
   { value: "arts_crafts", label: "Crafts & kids" },
-  { value: "arcade", label: "Rain-friendly" },
+  { value: "arcade", label: "Games" },
   { value: "fitness_wellness", label: "Wellness" },
 ] as const;
 

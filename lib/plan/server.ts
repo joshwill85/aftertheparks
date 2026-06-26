@@ -17,6 +17,7 @@ import {
   validateSnapshotSize,
 } from "@/lib/plan/quotas";
 import { logSecurityEvent } from "@/lib/plan/security-log";
+import { sanitizePlanSnapshotJson } from "@/lib/plan/snapshot";
 
 type DbClient = SupabaseClient;
 
@@ -52,8 +53,34 @@ interface ItemRow {
   created_at: string;
 }
 
+interface AddItemOperationRow extends ItemRow {
+  plan_id: string;
+  plan_title: string;
+  plan_timezone: string;
+  plan_version: number;
+  plan_updated_at: string;
+  item_created: boolean;
+}
+
+interface PlanOperationRow {
+  id: string;
+  title: string;
+  timezone: string;
+  version: number;
+  updated_at: string;
+  owner_user_id: string;
+}
+
+interface ShareOperationRow {
+  reused: boolean;
+  share_id: string;
+}
+
 function rowToPlanItem(row: ItemRow): PlanItem {
-  const snapshot = row.snapshot_json ?? {};
+  const snapshot = sanitizePlanSnapshotJson(row.snapshot_json ?? {}, {
+    startDateTime: row.starts_at ?? undefined,
+    endDateTime: row.ends_at ?? undefined,
+  });
   const sourceStatus =
     (snapshot.sourceStatus as SourceStatus | undefined) ?? "current";
   return {
@@ -77,6 +104,34 @@ function rowToPlanItem(row: ItemRow): PlanItem {
     sourceStatus,
     snapshotJson: snapshot,
   };
+}
+
+function rowToPlanMeta(row: PlanOperationRow): PlanMeta {
+  return {
+    id: row.id,
+    title: row.title,
+    timezone: row.timezone,
+    version: Number(row.version),
+    updatedAt: row.updated_at,
+  };
+}
+
+function firstRpcRow<T>(data: T[] | T | null): T | null {
+  if (Array.isArray(data)) return data[0] ?? null;
+  return data ?? null;
+}
+
+function quotaErrorFromMessage(message: string): PlanQuotaError | null {
+  if (message.includes("Active item quota")) {
+    return new PlanQuotaError("active_items", message);
+  }
+  if (message.includes("Lifetime item quota")) {
+    return new PlanQuotaError("lifetime_items", message);
+  }
+  if (message.includes("Share rotation quota")) {
+    return new PlanQuotaError("share_rotations", message);
+  }
+  return null;
 }
 
 export async function getActiveItinerary(
@@ -174,11 +229,15 @@ export async function getOrCreateItinerary(
   client: DbClient,
   userId: string
 ): Promise<ItineraryRow> {
-  const existing = await getActiveItinerary(client, userId);
-  if (existing) return existing;
-  const created = await createItinerary(client, userId);
-  logSecurityEvent("plan_create_success", { itineraryId: created.id });
-  return created;
+  const { data, error } = await client.rpc("get_or_create_active_itinerary", {
+    p_owner_user_id: userId,
+  });
+  const row = firstRpcRow<PlanOperationRow>(data as PlanOperationRow[] | null);
+  if (error || !row) {
+    throw new Error(error?.message ?? "Failed to create plan");
+  }
+  logSecurityEvent("plan_create_success", { itineraryId: row.id });
+  return row as ItineraryRow;
 }
 
 export async function fetchPlanItems(
@@ -251,100 +310,61 @@ export async function addPlanItem(
   userId: string,
   payload: AddItemPayload
 ): Promise<{ plan: PlanMeta; item: PlanItem; created: boolean }> {
-  if (await isOperationProcessed(client, payload.operationId)) {
-    const { plan, items } = await fetchOwnerPlan(client, userId);
-    if (!plan) throw new Error("Plan not found after idempotent replay");
-    const existing = items.find(
-      (i) =>
-        (payload.sourceOccurrenceId &&
-          i.sourceOccurrenceId === payload.sourceOccurrenceId) ||
-        i.activityCatalogId === payload.sourceActivityId
-    );
-    if (!existing) throw new Error("Idempotent item missing");
-    return { plan, item: existing, created: false };
-  }
+  const quotas = getPlanQuotas();
+  const snapshotJson = sanitizePlanSnapshotJson(payload.snapshotJson, {
+    startDateTime: payload.startsAt,
+    endDateTime: payload.endsAt,
+  });
+  validateSnapshotSize(snapshotJson);
 
-  const itinerary = await getOrCreateItinerary(client, userId);
-  await assertCanAddItem(client, itinerary.id);
-  validateSnapshotSize(payload.snapshotJson);
+  const { data, error } = await client.rpc("add_itinerary_item_operation", {
+    p_operation_id: payload.operationId,
+    p_owner_user_id: userId,
+    p_source_type: payload.sourceType ?? "scheduled_occurrence",
+    p_source_activity_id: payload.sourceActivityId,
+    p_source_occurrence_id: payload.sourceOccurrenceId ?? null,
+    p_title: payload.title,
+    p_resort_id: payload.resortId,
+    p_resort_name: payload.resortName,
+    p_location: payload.location ?? null,
+    p_starts_at: payload.startsAt ?? null,
+    p_ends_at: payload.endsAt ?? null,
+    p_category: payload.category ?? null,
+    p_price_label: payload.priceLabel ?? null,
+    p_source_url: payload.sourceUrl ?? null,
+    p_source_verified_at: payload.sourceVerifiedAt ?? null,
+    p_saved_source_version: payload.savedSourceVersion ?? null,
+    p_snapshot_json: {
+      ...snapshotJson,
+      activitySlug: snapshotJson.activitySlug,
+    },
+    p_user_note: payload.userNote ?? null,
+    p_max_active_items: quotas.maxActiveItems,
+    p_max_lifetime_items: quotas.maxLifetimeItems,
+  });
 
-  if (payload.sourceOccurrenceId) {
-    const { data: dup } = await client
-      .from("itinerary_items")
-      .select("*")
-      .eq("itinerary_id", itinerary.id)
-      .eq("source_occurrence_id", payload.sourceOccurrenceId)
-      .is("deleted_at", null)
-      .maybeSingle();
-    if (dup) {
-      await recordOperation(
-        client,
-        userId,
-        payload.operationId,
-        "add_item",
-        (dup as ItemRow).id
-      );
-      const { plan } = await fetchOwnerPlan(client, userId);
-      return {
-        plan: plan!,
-        item: rowToPlanItem(dup as ItemRow),
-        created: false,
-      };
-    }
-  }
+  const quotaError = error ? quotaErrorFromMessage(error.message) : null;
+  if (quotaError) throw quotaError;
 
-  const { data: inserted, error } = await client
-    .from("itinerary_items")
-    .insert({
-      itinerary_id: itinerary.id,
-      source_type: payload.sourceType ?? "scheduled_occurrence",
-      source_activity_id: payload.sourceActivityId,
-      source_occurrence_id: payload.sourceOccurrenceId ?? null,
-      title: payload.title.slice(0, 500),
-      resort_id: payload.resortId,
-      resort_name: payload.resortName.slice(0, 200),
-      location: payload.location?.slice(0, 300) ?? null,
-      starts_at: payload.startsAt ?? null,
-      ends_at: payload.endsAt ?? null,
-      category: payload.category ?? null,
-      price_label: payload.priceLabel ?? null,
-      source_url: payload.sourceUrl ?? null,
-      source_verified_at: payload.sourceVerifiedAt ?? null,
-      saved_source_version: payload.savedSourceVersion ?? null,
-      snapshot_json: {
-        ...(payload.snapshotJson ?? {}),
-        activitySlug: payload.snapshotJson?.activitySlug,
-        sourceStatus: "current",
-      },
-      user_note: payload.userNote ?? null,
-    })
-    .select("*")
-    .single();
-
-  if (error || !inserted) {
+  const row = firstRpcRow<AddItemOperationRow>(
+    data as AddItemOperationRow[] | null
+  );
+  if (error || !row) {
     throw new Error(error?.message ?? "Failed to add item");
   }
 
-  await client
-    .from("itineraries")
-    .update({ version: Number(itinerary.version) + 1 })
-    .eq("id", itinerary.id);
+  logSecurityEvent("plan_item_add_success", { itineraryId: row.plan_id });
 
-  await recordOperation(
-    client,
-    userId,
-    payload.operationId,
-    "add_item",
-    (inserted as ItemRow).id
-  );
-
-  logSecurityEvent("plan_item_add_success", { itineraryId: itinerary.id });
-
-  const { plan } = await fetchOwnerPlan(client, userId);
   return {
-    plan: plan!,
-    item: rowToPlanItem(inserted as ItemRow),
-    created: true,
+    plan: {
+      id: row.plan_id,
+      title: row.plan_title,
+      timezone: row.plan_timezone,
+      version: Number(row.plan_version),
+      updatedAt: row.plan_updated_at,
+    },
+    item: rowToPlanItem(row),
+    created: Boolean(row.item_created),
   };
 }
 
@@ -354,30 +374,35 @@ export async function removePlanItem(
   itemId: string,
   operationId: string
 ): Promise<PlanMeta> {
-  if (await isOperationProcessed(client, operationId)) {
-    const { plan } = await fetchOwnerPlan(client, userId);
-    if (!plan) throw new Error("Plan not found");
-    return plan;
-  }
+  const { data, error } = await client.rpc("remove_itinerary_item_operation", {
+    p_operation_id: operationId,
+    p_owner_user_id: userId,
+    p_item_id: itemId,
+  });
+  const row = firstRpcRow<PlanOperationRow>(data as PlanOperationRow[] | null);
+  if (error || !row) throw new Error(error?.message ?? "Plan missing after remove");
+  return rowToPlanMeta(row);
+}
 
-  const itinerary = await getActiveItinerary(client, userId);
-  if (!itinerary) throw new Error("No active plan");
-
-  await client
-    .from("itinerary_items")
-    .update({ deleted_at: new Date().toISOString() })
-    .eq("id", itemId)
-    .eq("itinerary_id", itinerary.id);
-
-  await client
-    .from("itineraries")
-    .update({ version: Number(itinerary.version) + 1 })
-    .eq("id", itinerary.id);
-
-  await recordOperation(client, userId, operationId, "remove_item", itemId);
-  const { plan } = await fetchOwnerPlan(client, userId);
-  if (!plan) throw new Error("Plan missing after remove");
-  return plan;
+export async function updatePlanItemNote(
+  client: DbClient,
+  userId: string,
+  itemId: string,
+  note: string,
+  operationId: string
+): Promise<PlanMeta> {
+  const { data, error } = await client.rpc(
+    "update_itinerary_item_note_operation",
+    {
+      p_operation_id: operationId,
+      p_owner_user_id: userId,
+      p_item_id: itemId,
+      p_user_note: note,
+    }
+  );
+  const row = firstRpcRow<PlanOperationRow>(data as PlanOperationRow[] | null);
+  if (error || !row) throw new Error(error?.message ?? "Failed to update note");
+  return rowToPlanMeta(row);
 }
 
 export async function renamePlan(
@@ -386,26 +411,15 @@ export async function renamePlan(
   title: string,
   operationId: string
 ): Promise<PlanMeta> {
-  if (await isOperationProcessed(client, operationId)) {
-    const { plan } = await fetchOwnerPlan(client, userId);
-    if (!plan) throw new Error("Plan not found");
-    return plan;
-  }
-
-  const itinerary = await getOrCreateItinerary(client, userId);
   const safeTitle = sanitizePlanTitle(title);
-
-  await client
-    .from("itineraries")
-    .update({
-      title: safeTitle,
-      version: Number(itinerary.version) + 1,
-    })
-    .eq("id", itinerary.id);
-
-  await recordOperation(client, userId, operationId, "rename_plan");
-  const { plan } = await fetchOwnerPlan(client, userId);
-  return plan!;
+  const { data, error } = await client.rpc("rename_itinerary_operation", {
+    p_operation_id: operationId,
+    p_owner_user_id: userId,
+    p_title: safeTitle,
+  });
+  const row = firstRpcRow<PlanOperationRow>(data as PlanOperationRow[] | null);
+  if (error || !row) throw new Error(error?.message ?? "Failed to rename plan");
+  return rowToPlanMeta(row);
 }
 
 export async function deletePlan(
@@ -413,31 +427,11 @@ export async function deletePlan(
   userId: string,
   operationId: string
 ): Promise<void> {
-  if (await isOperationProcessed(client, operationId)) return;
-
-  const itinerary = await getActiveItinerary(client, userId);
-  if (!itinerary) {
-    await recordOperation(client, userId, operationId, "delete_plan");
-    return;
-  }
-
-  const now = new Date().toISOString();
-  await client
-    .from("itinerary_shares")
-    .update({ status: "revoked", revoked_at: now })
-    .eq("itinerary_id", itinerary.id)
-    .eq("status", "active");
-
-  await client
-    .from("itineraries")
-    .update({
-      status: "deleted",
-      deleted_at: now,
-      version: Number(itinerary.version) + 1,
-    })
-    .eq("id", itinerary.id);
-
-  await recordOperation(client, userId, operationId, "delete_plan");
+  const { error } = await client.rpc("delete_itinerary_operation", {
+    p_operation_id: operationId,
+    p_owner_user_id: userId,
+  });
+  if (error) throw new Error(error.message);
 }
 
 function groupPublicItems(items: PlanItem[], timezone: string) {
@@ -486,52 +480,32 @@ export async function createLiveShare(
   userId: string,
   options: { rotate?: boolean } = {}
 ): Promise<{ token?: string; url?: string; reused: boolean }> {
-  const itinerary = await getActiveItinerary(client, userId);
-  if (!itinerary) throw new Error("No plan to share");
+  const token = generateShareToken();
+  const tokenHash = hashShareToken(token);
+  const quotas = getPlanQuotas();
 
-  const { data: existingShare } = await client
-    .from("itinerary_shares")
-    .select("id")
-    .eq("itinerary_id", itinerary.id)
-    .eq("status", "active")
-    .maybeSingle();
+  const { data, error } = await client.rpc("create_live_share_operation", {
+    p_owner_user_id: userId,
+    p_rotate: options.rotate === true,
+    p_token_hash: tokenHash,
+    p_max_rotations_per_day: quotas.maxShareRotationsPerDay,
+  });
 
-  if (existingShare && !options.rotate) {
+  const quotaError = error ? quotaErrorFromMessage(error.message) : null;
+  if (quotaError) throw quotaError;
+
+  const row = firstRpcRow<ShareOperationRow>(data as ShareOperationRow[] | null);
+  if (error || !row) throw new Error(error?.message ?? "Failed to create share");
+
+  if (row.reused) {
     logSecurityEvent("share_create_success", { reused: true });
     return { reused: true };
   }
 
   if (options.rotate) {
-    const rotationsToday = await countShareRotationsToday(client, itinerary.id);
-    const quotas = getPlanQuotas();
-    if (rotationsToday >= quotas.maxShareRotationsPerDay) {
-      logSecurityEvent("plan_quota_block", { type: "share_rotations", rotationsToday });
-      throw new PlanQuotaError("share_rotations", "Share rotation quota reached");
-    }
-  }
-
-  const now = new Date().toISOString();
-  await client
-    .from("itinerary_shares")
-    .update({ status: "revoked", revoked_at: now })
-    .eq("itinerary_id", itinerary.id)
-    .eq("status", "active");
-
-  const token = generateShareToken();
-  const tokenHash = hashShareToken(token);
-
-  const { error } = await client.from("itinerary_shares").insert({
-    itinerary_id: itinerary.id,
-    token_hash: tokenHash,
-    status: "active",
-  });
-
-  if (error) throw new Error(error.message);
-
-  if (options.rotate) {
-    logSecurityEvent("share_rotate_success", { itineraryId: itinerary.id });
+    logSecurityEvent("share_rotate_success", { shareId: row.share_id });
   } else {
-    logSecurityEvent("share_create_success", { itineraryId: itinerary.id });
+    logSecurityEvent("share_create_success", { shareId: row.share_id });
   }
 
   return { token, url: `/p/${token}`, reused: false };
@@ -541,17 +515,11 @@ export async function revokeLiveShare(
   client: DbClient,
   userId: string
 ): Promise<void> {
-  const itinerary = await getActiveItinerary(client, userId);
-  if (!itinerary) return;
-  await client
-    .from("itinerary_shares")
-    .update({
-      status: "revoked",
-      revoked_at: new Date().toISOString(),
-    })
-    .eq("itinerary_id", itinerary.id)
-    .eq("status", "active");
-  logSecurityEvent("share_revoke_success", { itineraryId: itinerary.id });
+  const { error } = await client.rpc("revoke_live_share_operation", {
+    p_owner_user_id: userId,
+  });
+  if (error) throw new Error(error.message);
+  logSecurityEvent("share_revoke_success", { userId });
 }
 
 export async function resolvePublicPlan(

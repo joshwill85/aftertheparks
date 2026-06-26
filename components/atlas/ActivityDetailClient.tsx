@@ -88,8 +88,8 @@ export function ActivityDetailClient({
   nearbyActivities?: ActivityOccurrence[];
   homeResort?: { slug: string; area: string };
 }) {
-  const { addActivity, isInPlan } = usePlan();
-  const inPlan = isInPlan(activity.activityCatalogId);
+  const { addActivity, isActivitySaved } = usePlan();
+  const inPlan = isActivitySaved(activity);
   const display = toDisplayActivity(activity);
   const meta = getCategoryMeta(activity.category);
   const hero = activityToEventCard(activity, display, {
@@ -172,7 +172,7 @@ export function ActivityDetailClient({
     addGoodToKnow("Sister-resort guest access may apply.");
   }
   if (activity.enrichment?.poolGated) {
-    addGoodToKnow("Held inside or near a gated pool area.");
+    addGoodToKnow("Associated with a gated pool area.");
   }
   const validFrom = formatDateOnly(activity.validFrom);
   const validUntil = formatDateOnly(activity.validUntil);

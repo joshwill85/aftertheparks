@@ -111,6 +111,24 @@ export async function syncRemoveItem(
   }
 }
 
+export async function syncUpdateItem(
+  itemId: string,
+  notes: string,
+  operationId: string
+): Promise<boolean> {
+  try {
+    const res = await fetch(`/api/plan/items/${encodeURIComponent(itemId)}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ notes, operationId }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 export async function replayPendingOperations(
   cache: LocalPlanCache
 ): Promise<LocalPlanCache> {
@@ -136,6 +154,11 @@ export async function replayPendingOperations(
     } else if (op.type === "remove_item") {
       const itemId = String(op.payload.itemId ?? "");
       const ok = await syncRemoveItem(itemId, op.operationId);
+      if (!ok) remaining.push(op);
+    } else if (op.type === "update_note") {
+      const itemId = String(op.payload.itemId ?? "");
+      const notes = String(op.payload.notes ?? "");
+      const ok = await syncUpdateItem(itemId, notes, op.operationId);
       if (!ok) remaining.push(op);
     }
   }

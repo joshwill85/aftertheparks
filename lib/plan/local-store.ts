@@ -5,7 +5,7 @@ export type PlanOperationType =
   | "add_item"
   | "remove_item"
   | "rename_plan"
-  | "reorder_items";
+  | "update_note";
 
 export interface PendingPlanOperation {
   operationId: string;

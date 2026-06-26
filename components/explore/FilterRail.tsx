@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { MOOD_CHIPS } from "@/lib/categories/meta";
+import { CATEGORY_META, MOOD_CHIPS } from "@/lib/categories/meta";
 import { mergeMoodChipHref } from "@/lib/explore/browseParams";
 import { cn, formatCategory } from "@/lib/utils";
 import type { Daypart } from "@/lib/types/occurrence";
@@ -16,16 +16,7 @@ const DAYPARTS: { value: Daypart; label: string }[] = [
   { value: "late", label: "Late" },
 ];
 
-const CATEGORIES = [
-  "poolside",
-  "campfire",
-  "movies_under_stars",
-  "fitness_wellness",
-  "arts_crafts",
-  "arcade",
-  "signature",
-  "resort_activity",
-];
+const CATEGORIES = Object.keys(CATEGORY_META);
 
 interface FilterRailProps {
   resorts: { slug: string; name: string }[];
@@ -57,6 +48,7 @@ export function FilterRail({
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
   const freeOnly = searchParams.get("free") === "true";
+  const reservationOnly = searchParams.get("reservation") === "true";
 
   const clearAll = () => router.push(basePath);
 
@@ -92,11 +84,12 @@ export function FilterRail({
         activeCategory={activeCategory}
         activeDaypart={activeDaypart}
         freeOnly={freeOnly}
+        reservationOnly={reservationOnly}
         hideDaypart={hideDaypart}
         update={update}
       />
 
-      {(activeResort || activeCategory || activeDaypart || freeOnly) && (
+      {(activeResort || activeCategory || activeDaypart || freeOnly || reservationOnly) && (
         <button
           type="button"
           onClick={clearAll}
@@ -115,6 +108,7 @@ export function FilterFields({
   activeCategory,
   activeDaypart,
   freeOnly = false,
+  reservationOnly = false,
   hideDaypart = false,
   update,
   searchableResorts = false,
@@ -124,6 +118,7 @@ export function FilterFields({
   activeCategory: string | null;
   activeDaypart: string | null;
   freeOnly?: boolean;
+  reservationOnly?: boolean;
   hideDaypart?: boolean;
   update: (key: string, value: string | null) => void;
   searchableResorts?: boolean;
@@ -165,15 +160,24 @@ export function FilterFields({
 
       <div className="space-y-2">
         <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-          Price
+          Practical
         </p>
-        <button
-          type="button"
-          onClick={() => update("free", freeOnly ? null : "true")}
-          className={cn("filter-pill", freeOnly && "filter-pill--active")}
-        >
-          Free only
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => update("free", freeOnly ? null : "true")}
+            className={cn("filter-pill", freeOnly && "filter-pill--active")}
+          >
+            Free only
+          </button>
+          <button
+            type="button"
+            onClick={() => update("reservation", reservationOnly ? null : "true")}
+            className={cn("filter-pill", reservationOnly && "filter-pill--active")}
+          >
+            Reservations
+          </button>
+        </div>
       </div>
 
       {resorts.length > 0 && (

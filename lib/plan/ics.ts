@@ -20,16 +20,11 @@ export function generateIcs(items: PlanItem[]): string {
   ];
 
   for (const item of items) {
+    if (!item.startDateTime) continue;
+
     const uid = `${item.id}@aftertheparks.com`;
     const start = formatIcsLocal(item.startDateTime);
-    const end = formatIcsLocal(
-      item.endDateTime ??
-        (item.startDateTime
-          ? new Date(
-              new Date(item.startDateTime).getTime() + 60 * 60 * 1000
-            ).toISOString()
-          : undefined)
-    );
+    const end = formatIcsLocal(item.endDateTime);
 
     lines.push("BEGIN:VEVENT");
     lines.push(`UID:${uid}`);
@@ -43,6 +38,10 @@ export function generateIcs(items: PlanItem[]): string {
 
   lines.push("END:VCALENDAR");
   return lines.join("\r\n");
+}
+
+export function hasCalendarExportableItems(items: PlanItem[]): boolean {
+  return items.some((item) => Boolean(item.startDateTime));
 }
 
 function escapeIcs(text: string): string {

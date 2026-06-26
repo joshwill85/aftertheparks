@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
 
+const serviceWorkerEnabled =
+  process.env.NODE_ENV === "production" &&
+  process.env.SITE_VISIBILITY_MODE?.trim().toLowerCase() === "public";
+
 const withSerwist = withSerwistInit({
   swSrc: "app/sw.ts",
   swDest: "public/sw.js",
-  disable: process.env.NODE_ENV === "development",
+  disable: !serviceWorkerEnabled,
 });
 
 const nextConfig: NextConfig = {
@@ -31,6 +35,12 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+  },
+  webpack(config, { dev, nextRuntime }) {
+    if (!dev && nextRuntime === "edge") {
+      config.devtool = false;
+    }
+    return config;
   },
 };
 

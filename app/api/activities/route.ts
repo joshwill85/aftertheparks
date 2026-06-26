@@ -15,6 +15,7 @@ export async function GET(request: Request) {
   const category = searchParams.get("category") ?? undefined;
   const daypart = (searchParams.get("daypart") as Daypart) ?? undefined;
   const free = searchParams.get("free") === "true";
+  const reservation = searchParams.get("reservation") === "true";
   const q = searchParams.get("q") ?? undefined;
   const limit = searchParams.get("limit")
     ? Number(searchParams.get("limit"))
@@ -25,6 +26,7 @@ export async function GET(request: Request) {
     category,
     daypart,
     free,
+    reservation,
     q,
     limit,
   };

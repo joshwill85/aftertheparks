@@ -34,6 +34,16 @@ def validation_gate_steps(*, local_only: bool) -> list[tuple[str, ...]]:
     ]
 
 
+def publish_steps(*, local_only: bool, has_service_role: bool) -> list[tuple[str, ...]]:
+    if local_only or not has_service_role:
+        return []
+    return [
+        ("publish_gold_v2.py",),
+        ("publish_official_offerings.py",),
+        ("enrichment.py",),
+    ]
+
+
 def main() -> None:
     import argparse
 
@@ -57,9 +67,13 @@ def main() -> None:
     for step in validation_gate_steps(local_only=args.local_only):
         run(*step)
 
-    if not args.local_only and os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
-        run("publish.py")
-        run("enrichment.py")
+    steps = publish_steps(
+        local_only=args.local_only,
+        has_service_role=bool(os.environ.get("SUPABASE_SERVICE_ROLE_KEY")),
+    )
+    if steps:
+        for step in steps:
+            run(*step)
     else:
         print("Skipping publish/enrichment (no service role key or local-only mode)")
 

@@ -28,7 +28,9 @@ export default async function ActivityDetailPage({
     redirect(`/activities/${canonicalSlug}${suffix}`);
   }
 
-  const result = await getActivityBySlug(canonicalSlug);
+  const result = await getActivityBySlug(canonicalSlug, {
+    resort: homeResortSlug,
+  });
 
   if (!result) notFound();
 

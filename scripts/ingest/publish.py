@@ -6,17 +6,26 @@ import hashlib
 import json
 import re
 import uuid
+import os
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from config import CONFIDENCE_PUBLISH_THRESHOLD, PROCESSED_DIR
-from db import SupabaseClient
-from pdf_parser import _clean_movie_title, _movie_title_quality
-from source_manifest import ACTIVITY_SOURCES
-from time_utils import parse_time_24h
+try:
+    from config import CONFIDENCE_PUBLISH_THRESHOLD, PROCESSED_DIR
+    from db import SupabaseClient
+    from pdf_parser import _clean_movie_title, _movie_title_quality
+    from source_manifest import ACTIVITY_SOURCES
+    from time_utils import parse_time_24h
+except ImportError:
+    from .config import CONFIDENCE_PUBLISH_THRESHOLD, PROCESSED_DIR
+    from .db import SupabaseClient
+    from .pdf_parser import _clean_movie_title, _movie_title_quality
+    from .source_manifest import ACTIVITY_SOURCES
+    from .time_utils import parse_time_24h
 
 INGEST_PATH = PROCESSED_DIR / "activities_ingest.json"
+ALLOW_LEGACY_PUBLISH_ENV = "ALLOW_LEGACY_ACTIVITY_TEMPORAL_PUBLISH"
 
 CROSS_RESORT_RULES: list[dict[str, Any]] = [
     {
@@ -339,6 +348,8 @@ def publish_cross_resort_rules(db: SupabaseClient, resort_map: dict[str, str]) -
 
 
 def publish_all(input_path: Path = INGEST_PATH) -> dict[str, Any]:
+    require_legacy_temporal_publish_enabled("legacy_activity_publish_disabled")
+
     data = json.loads(input_path.read_text())
     db = SupabaseClient()
 
@@ -392,6 +403,16 @@ def publish_all(input_path: Path = INGEST_PATH) -> dict[str, Any]:
             print(f"  {row.get('check_name')}: {row.get('detail')}")
 
     return summary
+
+
+def require_legacy_temporal_publish_enabled(reason: str = "legacy_temporal_mutation_disabled") -> None:
+    if os.environ.get(ALLOW_LEGACY_PUBLISH_ENV) == "1":
+        return
+    raise RuntimeError(
+        f"{reason}: use publish_gold_v2.py for source-backed activity publishing; "
+        f"set {ALLOW_LEGACY_PUBLISH_ENV}=1 only for an intentional historical "
+        "temporal-model backfill or repair"
+    )
 
 
 def main() -> None:

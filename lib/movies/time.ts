@@ -11,7 +11,7 @@ export function formatMovieShowTime(time: string | null | undefined): string {
 
   if (Number.isNaN(hour24) || Number.isNaN(minute)) return "Evening";
 
-  // Legacy ingest stored "8:30PM" as 08:30 — outdoor movies are evening.
+  // Legacy ingest stored "8:30PM" as 08:30; movie listings are evening events.
   if (hour24 >= 1 && hour24 < 12) {
     hour24 += 12;
   }

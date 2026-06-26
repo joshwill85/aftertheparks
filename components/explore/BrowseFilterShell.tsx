@@ -41,6 +41,7 @@ export function BrowseFilterShell({
     searchParams.get("category"),
     variant !== "tonight" ? searchParams.get("daypart") : null,
     searchParams.get("free") === "true" ? "free" : null,
+    searchParams.get("reservation") === "true" ? "reservation" : null,
     searchParams.get("q"),
   ].filter(Boolean).length;
 

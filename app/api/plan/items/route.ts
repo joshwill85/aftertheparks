@@ -5,6 +5,7 @@ import { createAppServerClient } from "@/lib/supabase/server-app";
 import type { AddItemPayload } from "@/lib/plan/types";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { planErrorResponse } from "@/lib/plan/api-response";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,12 @@ export async function POST(request: Request) {
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const limited = await guardRateLimit({
+    request,
+    scope: "plan-mutation",
+    userId: user.id,
+  });
+  if (limited) return limited;
 
   const body = (await request.json()) as AddItemPayload;
   if (!body.operationId || !body.sourceActivityId || !body.title) {

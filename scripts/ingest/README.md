@@ -20,9 +20,12 @@ playwright install chromium  # optional, for discovery
 | Third-party facts | `python magical_resort_guide.py` | MRG factual enrichment artifact: prices/options, booking details, age/access rules, exact venues, program families, and calendar validity |
 | Promote | `python promote_gold.py --fail-on-review` | Gold v2 preview plus review quarantine; widens matched Gold records with MRG facts without replacing official Disney source provenance |
 | Review | `python review_queue.py list` / `approve` / `reject` | Durable human decisions for quarantined candidates |
-| Trust report | `python trust_report.py` or `npm run trust:report` | Operator-facing source-to-UI report with coverage, official offering, quarantine, and cutover blocker counts |
+| Trust report | `python trust_report.py` or `npm run trust:report` | Operator-facing source-to-UI report with coverage, Gold source-key-legend, official offering, quarantine, and cutover blocker counts |
+| Live DB trust audit | `npm run validate:db-trust` | Read-only Supabase audit of public Gold and official-offering views after publish, including Gold source-key-legend parity against the processed artifact |
+| Live Disney recreation parent drift | `npm run audit:official-recreation-live` | Fetches Disney's current recreation parent API without overwriting snapshots and fails if joinable parent items were added, removed, or materially changed |
 | Publish Gold v2 | `python publish_gold_v2.py` | Publishes source-backed Gold preview to Supabase `public_activity_gold`, with source documents, stable catalog ids, and DB health check |
-| Publish | `python publish.py` | Legacy temporal editions in Supabase, blocked unless gates pass |
+| Publish official offerings | `python publish_official_offerings.py` | Publishes normalized Disney recreation offerings only when each public offering is joined to at least one resort |
+| Publish legacy temporal | `python publish.py` | Historical temporal-edition writer; disabled by default and only available with explicit operator opt-in |
 | Enrich | `python enrichment.py` | Seasonal overlays, booking metadata, pools, MRG fact tables, and MRG calendar validity on current editions |
 
 Full pipeline:
@@ -33,13 +36,25 @@ export SUPABASE_SERVICE_ROLE_KEY=...
 python run_pipeline.py
 ```
 
-`run_pipeline.py` now stops before publish unless strict legacy validation, v2 fixture validation, Gold v2 promotion, and the required coverage audit all pass. Production runs `audit_coverage.py --require-production-ready`; local-only runs the partial audit so gaps are visible without pretending the catalog is cut over.
+`run_pipeline.py` now stops before publish unless strict legacy validation, v2 fixture validation, Gold v2 promotion, and the required coverage audit all pass. Production runs `audit_coverage.py --require-production-ready`; local-only runs the partial audit so gaps are visible without pretending the catalog is cut over. When publish is enabled, the pipeline writes Gold v2, official recreation offerings, and enrichment tables. It does not call the legacy temporal publisher.
 
-Gold v2 publish is separate from the legacy temporal publisher. After applying `activity_pipeline_v2` and `magical_resort_guide_facts` migrations, run `python publish_gold_v2.py` or `npm run publish:gold-v2` from the repo root. The publisher upserts `source_documents`, stable `activity_catalog` UUIDs, and current `public_activity_gold` rows, then fails if `check_activity_pipeline_v2_health()` returns any issue.
+Gold v2 publish is the trusted scheduled-activity publisher. After applying `activity_pipeline_v2`, `magical_resort_guide_facts`, and `preserve_gold_source_evidence` migrations, run `python publish_gold_v2.py` or `npm run publish:gold-v2` from the repo root. The publisher verifies the processed Gold artifact matches regeneration from current fixtures, review decisions, and MRG facts, then runs the production coverage preflight, then upserts `source_documents`, stable `activity_catalog` UUIDs, and current `public_activity_gold` rows, including structured `source` JSON with PDF footer/key legends, then fails if `check_activity_pipeline_v2_health()` returns any issue.
+
+The public UI defaults to `ACTIVITY_DATA_PIPELINE=gold-v2`. Unknown pipeline values also fail closed to Gold v2. The legacy temporal UI reader is available only as `ACTIVITY_DATA_PIPELINE=legacy-temporal` with `ALLOW_LEGACY_ACTIVITY_UI_PIPELINE=1`, and it should be used only for historical diagnostics.
+
+`publish.py` is retained only for historical temporal-model recovery. It fails by default with `legacy_activity_publish_disabled`; an operator must set `ALLOW_LEGACY_ACTIVITY_TEMPORAL_PUBLISH=1` for an intentional backfill. Normal pipeline and backfill runs use Gold v2 plus official offerings instead.
+
+Legacy temporal repair scripts such as `backfill_all_times.py` and `backfill_movie_times.py` use the same opt-in guard. Public time fixes should be made by correcting source-backed fixtures/review decisions and republishing Gold v2, not by directly mutating legacy schedule tables.
 
 Coverage audits prefer reviewed full-calendar fixtures over legacy parser counts. If a fixture-backed group has fewer real source records than legacy output, the audit reports a `legacy_overcount_groups` warning instead of treating contaminated legacy rows as missing source data.
 
 Official recreation offerings are modeled separately from timed Gold records. Parent recreation index rows can seed resort joins, but downstream official detail pages and resort recreation pages are preferred when they provide richer resort evidence. The official recreation coverage audit checks both parent-index resort pairs and downstream detail/resort-page resort pairs; missing downstream pairs fail the audit. When an official-web fixture quarantine is an exact source-backed match, or a reviewed alias match, for an official offering joined to the same calendar group, the audit keeps the quarantine visible but excludes it from the blocking quarantine count. This prevents non-calendar evergreen recreation from blocking scheduled-Gold cutover after it has been represented by the normalized official-offering path. Official offerings that Disney marks as currently unavailable are mapped to paused UI status rather than shown as available daily.
+
+Official recreation publish is also fail-closed: `publish_official_offerings.py` verifies the processed offering artifact matches regeneration from the captured official snapshots, then runs the official recreation coverage preflight before opening the Supabase client or writing program/offering rows.
+
+Because Disney's recreation parent API can change independently of PDF calendars, run `npm run audit:official-recreation-live` before refreshing official recreation snapshots or after a suspected Disney recreation-page change. The audit ignores noisy request-date/hash changes and compares stable parent item fields, so it fails only when the saved parent snapshot no longer matches the current joinable source shape.
+
+After a production publish, run `npm run validate:db-trust`. It loads `.env.local` when present and performs a read-only audit against `v_public_activity_gold` and `v_public_activity_offerings`, including required source URL/hash fields, required provenance spans, known OCR/helper text contamination, resort joins, DB health RPCs, and parity between `data/processed/activity_gold_v2_preview.json` source-key legends and live Gold `source.documentKeyLegends`.
 
 Full-calendar fixtures must account for every extracted source candidate. Publishable records belong in `expected_records`; source-visible candidates that are intentionally withheld from Gold belong in `expected_quarantine_records` with source spans and exact expected warnings. If OCR misses visible text but the activity can be fully verified against the rendered PDF, use `reviewed_manual_records` with complete public fields, source locators, and manual review metadata; those records are promoted only after the same fixture drift and Gold validation gates pass. Use `expected_unextractable_records` only for source-visible records that are not yet safely extracted or manually reviewed.
 

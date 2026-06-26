@@ -6,13 +6,20 @@ import { resolvePublicPlan, copySharedPlanItems } from "@/lib/plan/server";
 import { redactTokenFromPath } from "@/lib/plan/token";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { planErrorResponse } from "@/lib/plan/api-response";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ token: string }> }
 ) {
+  const rateLimited = await guardRateLimit({
+    request,
+    scope: "public-share-read",
+  });
+  if (rateLimited) return rateLimited;
+
   const { token } = await params;
   const serviceClient = createServiceClient();
   if (!serviceClient) {
@@ -48,6 +55,12 @@ export async function POST(
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const rateLimited = await guardRateLimit({
+    request,
+    scope: "plan-copy",
+    userId: user.id,
+  });
+  if (rateLimited) return rateLimited;
 
   const { token } = await params;
   const body = await request.json().catch(() => ({}));

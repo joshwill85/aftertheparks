@@ -4,6 +4,7 @@ import { fetchOwnerPlan, renamePlan, deletePlan } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { planErrorResponse } from "@/lib/plan/api-response";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,12 @@ export async function PATCH(request: Request) {
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const limited = await guardRateLimit({
+    request,
+    scope: "plan-mutation",
+    userId: user.id,
+  });
+  if (limited) return limited;
 
   const body = await request.json();
   const client = await createAppServerClient();
@@ -56,6 +63,12 @@ export async function DELETE(request: Request) {
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const limited = await guardRateLimit({
+    request,
+    scope: "plan-mutation",
+    userId: user.id,
+  });
+  if (limited) return limited;
 
   const body = await request.json().catch(() => ({}));
   const client = await createAppServerClient();

@@ -13,12 +13,14 @@ sys.path.insert(0, str(SCRIPTS))
 
 from config import PROCESSED_DIR  # noqa: E402
 from db import SupabaseClient  # noqa: E402
-from publish import movie_id, parse_time  # noqa: E402
+from publish import movie_id, parse_time, require_legacy_temporal_publish_enabled  # noqa: E402
 
 INGEST_PATH = PROCESSED_DIR / "activities_ingest.json"
 
 
 def main() -> None:
+    require_legacy_temporal_publish_enabled("legacy_movie_time_backfill_disabled")
+
     if not os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
         raise SystemExit("SUPABASE_SERVICE_ROLE_KEY required")
 

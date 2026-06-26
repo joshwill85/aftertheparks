@@ -168,7 +168,7 @@ export interface ActivityOffering {
       | "reservation_based"
       | "calendar_dependent";
     hoursState?: string;
-    label: string;
+    label?: string;
   };
   price: ActivityOccurrence["price"];
   location: {
@@ -279,6 +279,7 @@ export interface ActivityFilters {
   category?: string;
   daypart?: Daypart;
   free?: boolean;
+  reservation?: boolean;
   q?: string;
   sort?: ActivitySortKey;
   limit?: number;

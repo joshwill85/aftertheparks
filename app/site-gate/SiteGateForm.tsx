@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export function SiteGateForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") ?? "/";
   const [password, setPassword] = useState("");
@@ -21,18 +20,21 @@ export function SiteGateForm() {
         try {
           const res = await fetch("/api/site-gate-login", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ password, next }),
           });
-          const data = await res.json();
+          const data = (await res.json()) as {
+            error?: string;
+            redirect?: string;
+          };
           if (!res.ok) {
             setError(
               data.error ?? "That password did not work. Please try again."
             );
             return;
           }
-          router.push(data.redirect ?? "/");
-          router.refresh();
+          window.location.assign(data.redirect ?? "/");
         } catch {
           setError("Something went wrong. Please try again.");
         } finally {

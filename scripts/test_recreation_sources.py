@@ -1,6 +1,7 @@
 import unittest
 from pathlib import Path
 import sys
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -52,7 +53,11 @@ class RecreationSourceManifestTests(unittest.TestCase):
         from scripts.ingest.discover import discover_all_resort_sources
         from scripts.ingest.source_manifest import RESORT_RECREATION_SOURCES
 
-        reports = discover_all_resort_sources(use_playwright=False)
+        with patch(
+            "scripts.ingest.discover.head_metadata",
+            return_value={"http_status": 200},
+        ):
+            reports = discover_all_resort_sources(use_playwright=False)
         report_slugs = {report["resort_slug"] for report in reports}
 
         self.assertEqual(

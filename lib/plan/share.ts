@@ -1,5 +1,5 @@
 import type { PlanItem } from "@/lib/types/occurrence";
-import { generateIcs } from "@/lib/plan/ics";
+import { generateIcs, hasCalendarExportableItems } from "@/lib/plan/ics";
 
 function planSummary(items: PlanItem[]): string {
   const lines = items.map((item) => `• ${item.title} (${item.resortName})`);
@@ -35,7 +35,9 @@ export async function sharePlanLink(
 
 export async function sharePlanCalendar(
   items: PlanItem[]
-): Promise<"shared" | "downloaded" | "failed"> {
+): Promise<"shared" | "downloaded" | "empty" | "failed"> {
+  if (!hasCalendarExportableItems(items)) return "empty";
+
   const filename = "after-the-parks-plan.ics";
   const ics = generateIcs(items);
   const file = new File([ics], filename, {

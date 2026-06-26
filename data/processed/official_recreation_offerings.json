@@ -77,6 +77,13 @@
             "line": 4,
             "text": "Discover adventure around every bend as you explore nearby inlets and waterways."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hours: 9:00 AM and 5:00 PM daily"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -117,6 +124,13 @@
             "page": 1,
             "line": 4,
             "text": "Chart your own course at your own pace on the serene waterways of the Resort."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours: 9:00 AM and 5:00 PM daily"
           }
         ]
       },
@@ -195,6 +209,18 @@
             "page": 1,
             "line": 1,
             "text": "Wagon Rides at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Wagon rides depart Friday, Saturday and Sunday evenings at 6:00 PM and 8:30 PM (weather permitting) from the front of Pioneer Hall. These 25-minute rides cost $15 for Guests ages 10 and up, and $10 for Guests 3 to 9 years of age. This is a group wagon ride and tickets are sold by the driver 20 minutes prior to the departure time. Cash and MagicBands are accepted as forms of payment."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Rides are only available on Friday, Saturday and Sunday evenings, and available on a first-come, first-served basis. Reservations are not accepted."
           }
         ]
       },
@@ -395,6 +421,18 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -430,6 +468,13 @@
             "page": 1,
             "line": 4,
             "text": "Join nutty friends Chip 'n' Dale for a nightly campfire celebration, followed by a classic Disney movie under the stars."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "For movie schedules, please check with the Front Desk at Disney’s Fort Wilderness Resort & Campground, or call (407) 939-7529."
           }
         ]
       },
@@ -469,6 +514,58 @@
             "page": 1,
             "line": 3,
             "text": "Charter a private watercraft and set sail on a relaxing specialty cruise from one of the Walt Disney World marinas to enjoy a stunning fireworks show."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Reservations"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Make a reservation up to 60 days prior to your visit for Happily Ever After or Luminous The Symphony of Us. You may also reserve via the My Disney Experience app or by calling (407) WDW-PLAY or (407) 939-7529. Guests younger than 18 years of age must have parent or guardian permission to call. No bookings are accepted after noon of the day prior to the cruise to be reserved. Inquiries regarding availability made within the booking cut-off window may only be done at the location."
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "Check available cruise days."
+          },
+          {
+            "page": 1,
+            "line": 45,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 49,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 54,
+            "text": "Check available cruise days."
           }
         ]
       },
@@ -693,6 +790,18 @@
             "page": 1,
             "line": 1,
             "text": "Holiday Sleigh Rides at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Take in the magic of the holidays with a cozy carriage or \"sleigh\" ride through the festive campground and woodland beauty. The 2025 offering has concluded. Check back this summer for updates on the 2026 holiday season."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Horse Drawn Excursion - Holiday Sleigh Rides are currently unavailable. This seasonal experience is scheduled to return in late 2026—just in time for the holidays."
           }
         ]
       },
@@ -972,6 +1081,18 @@
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -1055,6 +1176,13 @@
             "page": 1,
             "line": 4,
             "text": "A fitness facility at Disney’s Old Key West Resort, featuring state-of-the-art strength training equipment."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Old Key West Exercise Room is open 24 hours a day, 7 days a week. You will be required to use your MagicBand."
           }
         ]
       },
@@ -1237,6 +1365,13 @@
             "line": 4,
             "text": "Be immersed in Disney storytelling as you make a splash at the Fantasia Pool and the Duck Pond Pool."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -1404,6 +1539,13 @@
             "line": 1,
             "text": "Survival of the Fittest Center | Walt Disney World Resort"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Survival of the Fittest Fitness Center is open 24 hours a day, 7 days a week. To utilize the health club, you will be required to use your MagicBand."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -1451,6 +1593,13 @@
             "page": 1,
             "line": 4,
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
           }
         ]
       },
@@ -1809,6 +1958,13 @@
             "text": "Guests 7 years of age and older can test out their skills—and experience the thrill—of archery during this 75 minute session."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "At the Bike Barn at Disney's Fort Wilderness Resort, Archery Guides teach Guests 7 years of age and up how to use a compound bow; then it's time for target practice! Most of this 75-minute experience is dedicated to firing at range targets. With class sizes limited to 10 Guests, each marksman receives personalized advice from the Archery Guides to best help you hone your archery skills."
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -1916,6 +2072,20 @@
             "text": "Discover adventure around every bend as you explore nearby inlets and waterways."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hours: 9:00 AM and 5:00 PM daily"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Rental location: The Bike Barn at the Meadow Recreation Area"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -2009,6 +2179,20 @@
             "text": "Chart your own course at your own pace on the serene waterways of the Resort."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours: 9:00 AM and 5:00 PM daily"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Rental location: The Bike Barn at the Meadow Recreation Area"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -2096,6 +2280,13 @@
             "text": "Introduce your junior cowboy or cowgirl to our 4-legged equine friends with an old-fashioned pony ride."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Pony Rides are available at the stable near Pioneer Hall on a walk-in basis only."
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -2178,6 +2369,25 @@
             "page": 1,
             "line": 1,
             "text": "Wagon Rides at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Wagon rides depart Friday, Saturday and Sunday evenings at 6:00 PM and 8:30 PM (weather permitting) from the front of Pioneer Hall. These 25-minute rides cost $15 for Guests ages 10 and up, and $10 for Guests 3 to 9 years of age. This is a group wagon ride and tickets are sold by the driver 20 minutes prior to the departure time. Cash and MagicBands are accepted as forms of payment."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Rides are only available on Friday, Saturday and Sunday evenings, and available on a first-come, first-served basis. Reservations are not accepted."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "The ride departs across from Pioneer Hall at Disney's Fort Wilderness Resort & Campground."
           }
         ],
         "price": [
@@ -2360,6 +2570,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's All-Star Movies Resort – Reel Fun Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -2526,6 +2743,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Disney's All-Star Music Resort – Note'able Games"
           }
         ]
       },
@@ -2694,6 +2918,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Disney's All-Star Sports Resort – Game Point Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -2860,6 +3091,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's Animal Kingdom Lodge – Pumbaa’s Fun and Games Arcade"
           }
         ]
       },
@@ -3028,6 +3266,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's Animal Kingdom Villas - Kidani Village – Safari So Good"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -3194,6 +3439,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Art of Animation Resort – Pixel Play Arcade"
           }
         ]
       },
@@ -3362,6 +3614,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort – Lafferty Place Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -3528,6 +3787,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney's Boardwalk Inn – Side Show Games"
           }
         ]
       },
@@ -3696,6 +3962,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Disney's Coronado Springs Resort – Iguana Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -3862,6 +4135,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney’s Contemporary Resort – The Game Station"
           }
         ]
       },
@@ -4030,6 +4310,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Disney's Fort Wilderness Resort & Campground – Davey Crockett's Wilderness Arcade and Daniel Boone's Wilderness Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -4196,6 +4483,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney's Grand Floridian Resort & Spa – Arcadia Games"
           }
         ]
       },
@@ -4364,6 +4658,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Disney's Old Key West Resort – Electric Eel Gameroom"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -4530,6 +4831,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Disney's Pop Century Resort – Fast Forward Arcade"
           }
         ]
       },
@@ -4698,6 +5006,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Disney's Port Orleans Resort – French Quarter – South Quarter Games"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -4864,6 +5179,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Disney's Port Orleans Resort – Riverside – Medicine Show Arcade"
           }
         ]
       },
@@ -5032,6 +5354,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Disney's Saratoga Springs Resort & Spa – Win, Place or Show Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -5198,6 +5527,13 @@
             "page": 1,
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 30,
+            "text": "Disney's Wilderness Lodge – Buttons & Bells Arcade"
           }
         ]
       },
@@ -5366,6 +5702,13 @@
             "line": 4,
             "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "Disney's Yacht Club Resort – Lafferty Place Arcade"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -5464,6 +5807,13 @@
             "page": 1,
             "line": 4,
             "text": "Breeze along lakefront promenades and woodland trails at Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Disney's Old Key West Resort"
           }
         ],
         "price": [
@@ -5572,6 +5922,13 @@
             "text": "Breeze along lakefront promenades and woodland trails at Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Port Orleans Resort - Riverside"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -5676,6 +6033,13 @@
             "page": 1,
             "line": 4,
             "text": "Breeze along lakefront promenades and woodland trails at Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Saratoga Springs Resort & Spa"
           }
         ],
         "price": [
@@ -5784,6 +6148,13 @@
             "text": "Breeze along lakefront promenades and woodland trails at Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -5888,6 +6259,13 @@
             "page": 1,
             "line": 4,
             "text": "Breeze along lakefront promenades and woodland trails at Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
           }
         ],
         "price": [
@@ -6017,6 +6395,13 @@
             "page": 1,
             "line": 4,
             "text": "Indulge in the comfort and privacy of premium poolside cabanas at select Disney Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Disney's Contemporary Resort"
           }
         ],
         "booking": [
@@ -6241,6 +6626,13 @@
             "page": 1,
             "line": 4,
             "text": "Indulge in the comfort and privacy of premium poolside cabanas at select Disney Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Disney's Grand Floridian Resort & Spa"
           }
         ],
         "booking": [
@@ -6471,6 +6863,13 @@
             "page": 1,
             "line": 4,
             "text": "Indulge in the comfort and privacy of premium poolside cabanas at select Disney Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Disney’s Yacht Club Resort and Beach Club Resort"
           }
         ],
         "booking": [
@@ -6706,6 +7105,13 @@
             "page": 1,
             "line": 4,
             "text": "Indulge in the comfort and privacy of premium poolside cabanas at select Disney Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Disney’s Yacht Club Resort and Beach Club Resort"
           }
         ],
         "booking": [
@@ -7020,6 +7426,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Bay Lake Tower at Disney's Contemporary Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -7221,6 +7646,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney's Contemporary Resort"
           }
         ]
       },
@@ -7424,6 +7868,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Boulder Ridge Villas at Disney's Wilderness Lodge"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -7625,6 +8088,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 30,
+            "text": "Disney's Wilderness Lodge"
           }
         ]
       },
@@ -7828,6 +8310,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Copper Creek Villas & Cabins at Disney's Wilderness Lodge"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -8029,6 +8530,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Animal Kingdom Lodge"
           }
         ]
       },
@@ -8232,6 +8752,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Animal Kingdom Villas – Jambo House"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -8433,6 +8972,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Disney's Animal Kingdom Villas – Kidani Village"
           }
         ]
       },
@@ -8636,6 +9194,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Disney's Beach Club Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -8837,6 +9414,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's Beach Club Villas"
           }
         ]
       },
@@ -9040,6 +9636,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Inn"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -9241,6 +9856,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's BoardWalk Villas"
           }
         ]
       },
@@ -9444,6 +10078,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Caribbean Beach Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -9645,6 +10298,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Disney's Coronado Springs Resort"
           }
         ]
       },
@@ -9848,6 +10520,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Grand Floridian Resort & Spa"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -10049,6 +10740,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Disney's Old Key West Resort"
           }
         ]
       },
@@ -10252,6 +10962,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney's Polynesian Village Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -10453,6 +11182,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Disney's Polynesian Villas & Bungalows"
           }
         ]
       },
@@ -10656,6 +11404,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -10857,6 +11624,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Disney's Port Orleans Resort – Riverside"
           }
         ]
       },
@@ -11060,6 +11846,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Disney’s Riviera Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -11261,6 +12066,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Disney's Saratoga Springs Resort Spa"
           }
         ]
       },
@@ -11464,6 +12288,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "Disney's Yacht Club Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -11665,6 +12508,25 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
           }
         ]
       },
@@ -11868,6 +12730,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 34,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -12070,6 +12951,25 @@
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 33,
+            "text": "The Villas at Disney's Grand Floridian Resort & Spa"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -12134,6 +13034,13 @@
             "page": 1,
             "line": 4,
             "text": "Join nutty friends Chip 'n' Dale for a nightly campfire celebration, followed by a classic Disney movie under the stars."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "For movie schedules, please check with the Front Desk at Disney’s Fort Wilderness Resort & Campground, or call (407) 939-7529."
           }
         ]
       },
@@ -12210,6 +13117,65 @@
             "page": 1,
             "line": 3,
             "text": "Charter a private watercraft and set sail on a relaxing specialty cruise from one of the Walt Disney World marinas to enjoy a stunning fireworks show."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Reservations"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Make a reservation up to 60 days prior to your visit for Happily Ever After or Luminous The Symphony of Us. You may also reserve via the My Disney Experience app or by calling (407) WDW-PLAY or (407) 939-7529. Guests younger than 18 years of age must have parent or guardian permission to call. No bookings are accepted after noon of the day prior to the cruise to be reserved. Inquiries regarding availability made within the booking cut-off window may only be done at the location."
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "Check available cruise days."
+          },
+          {
+            "page": 1,
+            "line": 45,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 49,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 54,
+            "text": "Check available cruise days."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Sail from the Boat Nook Marina at Disney’s Contemporary Resort to view Happily Ever After. Additional pickup locations may be available within the Magic Kingdom area by visiting your Resort concierge or calling (407) WDW-PLAY or (407) 939-7529 after booking your cruise. Guests younger than 18 years of age must have parent or guardian permission to call."
           }
         ],
         "price": [
@@ -12337,6 +13303,65 @@
             "text": "Charter a private watercraft and set sail on a relaxing specialty cruise from one of the Walt Disney World marinas to enjoy a stunning fireworks show."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Reservations"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Make a reservation up to 60 days prior to your visit for Happily Ever After or Luminous The Symphony of Us. You may also reserve via the My Disney Experience app or by calling (407) WDW-PLAY or (407) 939-7529. Guests younger than 18 years of age must have parent or guardian permission to call. No bookings are accepted after noon of the day prior to the cruise to be reserved. Inquiries regarding availability made within the booking cut-off window may only be done at the location."
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "Check available cruise days."
+          },
+          {
+            "page": 1,
+            "line": 45,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 49,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 54,
+            "text": "Check available cruise days."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Depart on your cruise from the Bayside Marina at Disney’s Yacht & Beach Club Resorts."
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -12460,6 +13485,65 @@
             "page": 1,
             "line": 3,
             "text": "Charter a private watercraft and set sail on a relaxing specialty cruise from one of the Walt Disney World marinas to enjoy a stunning fireworks show."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Reservations"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Make a reservation up to 60 days prior to your visit for Happily Ever After or Luminous The Symphony of Us. You may also reserve via the My Disney Experience app or by calling (407) WDW-PLAY or (407) 939-7529. Guests younger than 18 years of age must have parent or guardian permission to call. No bookings are accepted after noon of the day prior to the cruise to be reserved. Inquiries regarding availability made within the booking cut-off window may only be done at the location."
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "Check available cruise days."
+          },
+          {
+            "page": 1,
+            "line": 45,
+            "text": "In rare instances, fireworks shows may be rescheduled or cancelled. Please refer to the entertainment schedule or My Disney Experience app to reconfirm the fireworks showtimes 2 weeks prior to your reservation and again on the day of your reservation. Fireworks are subject to change and not guaranteed."
+          },
+          {
+            "page": 1,
+            "line": 49,
+            "text": "Reservations are nontransferable and may not be sold or bartered."
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within 24 hours or fails to show up for the reservation."
+          },
+          {
+            "page": 1,
+            "line": 54,
+            "text": "Check available cruise days."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Depart on your cruise from the Bayside Marina at Disney’s Yacht & Beach Club Resorts."
           }
         ],
         "price": [
@@ -12652,6 +13736,13 @@
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Fort Wilderness Resort & Campground"
+          }
+        ],
         "booking": [
           {
             "page": 1,
@@ -12798,6 +13889,13 @@
             "page": 1,
             "line": 4,
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Caribbean Beach Resort"
           }
         ],
         "booking": [
@@ -12948,6 +14046,13 @@
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney's Contemporary Resort"
+          }
+        ],
         "booking": [
           {
             "page": 1,
@@ -13094,6 +14199,13 @@
             "page": 1,
             "line": 4,
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Disney's Grand Floridian Resort & Spa"
           }
         ],
         "booking": [
@@ -13244,6 +14356,13 @@
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Old Key West Resort"
+          }
+        ],
         "booking": [
           {
             "page": 1,
@@ -13390,6 +14509,13 @@
             "page": 1,
             "line": 4,
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Disney's Polynesian Village Resort"
           }
         ],
         "booking": [
@@ -13540,6 +14666,13 @@
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney's Port Orleans Resort - Riverside"
+          }
+        ],
         "booking": [
           {
             "page": 1,
@@ -13688,6 +14821,13 @@
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Disney's Wilderness Lodge"
+          }
+        ],
         "booking": [
           {
             "page": 1,
@@ -13834,6 +14974,13 @@
             "page": 1,
             "line": 4,
             "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Disney's Yacht Club Resort"
           }
         ],
         "booking": [
@@ -14021,6 +15168,13 @@
             "text": "Relax on a horse-drawn carriage ride along the scenic trails around The Cabins and Campsites of Disney’s Fort Wilderness Resort."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "You’ll board your horse-drawn carriage for a 25-minute ride near Crockett’s Tavern. If arriving by vehicle, please park in the main entrance of Disney's Fort Wilderness Resort & Campground and take a bus to the Settlement Depot. Carriages fit up to 4 adults, or 2 adults and 3 small children."
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -14112,6 +15266,13 @@
           }
         ],
         "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Explore Disney’s Fort Wilderness Resort & Campground on an electric golf cart, available from Reception Outpost."
+          }
+        ],
+        "location": [
           {
             "page": 1,
             "line": 4,
@@ -14213,6 +15374,25 @@
             "text": "Holiday Sleigh Rides at Fort Wilderness Resort | Walt Disney World Resort"
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Take in the magic of the holidays with a cozy carriage or \"sleigh\" ride through the festive campground and woodland beauty. The 2025 offering has concluded. Check back this summer for updates on the 2026 holiday season."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Horse Drawn Excursion - Holiday Sleigh Rides are currently unavailable. This seasonal experience is scheduled to return in late 2026—just in time for the holidays."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "In the meantime, you can book a horse-drawn carriage ride at Disney’s Fort Wilderness Resort & Campground."
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -14310,6 +15490,13 @@
             "page": 1,
             "line": 1,
             "text": "Horseback Trail Riding at Fort Wilderness Resort | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Please check in at the Tri-Circle-D Ranch building, located near the front parking lot of Disney’s Fort Wilderness Resort & Campground at your reserved time."
           }
         ],
         "price": [
@@ -14532,6 +15719,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -14718,6 +15912,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -14906,6 +16107,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -15092,6 +16300,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -15280,6 +16495,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -15466,6 +16688,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -15654,6 +16883,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -15840,6 +17076,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -16028,6 +17271,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -16214,6 +17464,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -16402,6 +17659,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -16588,6 +17852,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -16776,6 +18047,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -16962,6 +18240,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -17150,6 +18435,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -17336,6 +18628,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -17524,6 +18823,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -17710,6 +19016,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -17898,6 +19211,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -18084,6 +19404,13 @@
             "page": 1,
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
           }
         ]
       },
@@ -18272,6 +19599,13 @@
             "line": 1,
             "text": "Jogging & Running Trails | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -18347,6 +19681,13 @@
             "page": 1,
             "line": 1,
             "text": "Lake Buena Vista Golf Course | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Lake Buena Vista Golf Course is located near the Disney Springs Marketplace. Take Interstate 4 to exit #68, heading North on Route 535. Turn left onto Hotel Plaza Boulevard. Follow the signs to Disney's Lake Buena Vista Golf Course, located at Disney's Saratoga Springs Resort & Spa."
           }
         ],
         "booking": [
@@ -18569,6 +19910,13 @@
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Bay Lake Tower at Disney's Contemporary Resort"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -18692,6 +20040,13 @@
             "page": 1,
             "line": 4,
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Disney's Contemporary Resort"
           }
         ],
         "price": [
@@ -18819,6 +20174,13 @@
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -18942,6 +20304,13 @@
             "page": 1,
             "line": 4,
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney's Beach Club Villas"
           }
         ],
         "price": [
@@ -19069,6 +20438,13 @@
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Grand Floridian Resort & Spa"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -19194,6 +20570,13 @@
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Disney's Yacht Club Resort"
+          }
+        ],
         "price": [
           {
             "page": 1,
@@ -19317,6 +20700,13 @@
             "page": 1,
             "line": 4,
             "text": "Chart a course for fun with a choice of powerboats available for rent at Walt Disney World Resort marinas."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "The Villas at Disney's Grand Floridian Resort & Spa"
           }
         ],
         "price": [
@@ -19488,6 +20878,20 @@
           }
         ],
         "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "A fitness facility at Disney’s Old Key West Resort, featuring state-of-the-art strength training equipment."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Old Key West Exercise Room is open 24 hours a day, 7 days a week. You will be required to use your MagicBand."
+          }
+        ],
+        "location": [
           {
             "page": 1,
             "line": 4,
@@ -19844,6 +21248,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Movies Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -19995,6 +21406,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Disney's All-Star Music Resort"
           }
         ]
       },
@@ -20148,6 +21566,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's All-Star Sports Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -20299,6 +21724,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Animal Kingdom Lodge"
           }
         ]
       },
@@ -20452,6 +21884,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Disney's Animal Kingdom Villas - Jambo House"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -20603,6 +22042,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Disney's Art of Animation Resort"
           }
         ]
       },
@@ -20756,6 +22202,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -20907,6 +22360,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
           }
         ]
       },
@@ -21060,6 +22520,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Caribbean Beach Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -21211,6 +22678,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Coronado Springs Resort"
           }
         ]
       },
@@ -21364,6 +22838,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney's Fort Wilderness Resort & Campground"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -21515,6 +22996,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Disney's Old Key West Resort"
           }
         ]
       },
@@ -21668,6 +23156,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Pop Century Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -21819,6 +23314,13 @@
             "page": 1,
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Disney's Port Orleans Resort – French Quarter"
           }
         ]
       },
@@ -21972,6 +23474,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22124,6 +23633,13 @@
             "line": 1,
             "text": "Playgrounds at Disney World | Walt Disney World Resort"
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22199,6 +23715,20 @@
             "line": 4,
             "text": "Be immersed in Disney storytelling as you make a splash at the Fantasia Pool and the Duck Pond Pool."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's All-Star Movies Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22273,6 +23803,25 @@
             "page": 1,
             "line": 4,
             "text": "Rock out as you cool off inside the guitar-shaped Calypso Pool and the keyboard-shaped Piano Pool. Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Rock out as you cool off inside the guitar-shaped Calypso Pool and the keyboard-shaped Piano Pool. Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's All-Star Music Resort | Walt Disney World Resort"
           }
         ]
       },
@@ -22354,6 +23903,25 @@
             "line": 4,
             "text": "Hang 10 in the waters of the Surfboard Bay Pool or have yourself a \"goofy\" time at the Grand Slam Pool. Hours and lifeguard availability vary by pool and are subject to change."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Hang 10 in the waters of the Surfboard Bay Pool or have yourself a \"goofy\" time at the Grand Slam Pool. Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's All-Star Sports Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22423,6 +23991,20 @@
             "page": 1,
             "line": 4,
             "text": "Cool off amid African-inspired architecture and a wildlife preserve at the Uzima Springs Pool and the Samawati Springs Pool"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinDisney's Animal Kingdom LodgeatDisney's Animal Kingdom Resort Area"
           }
         ]
       },
@@ -22499,6 +24081,30 @@
             "line": 4,
             "text": "Take the plunge in 3 pools including The Big Blue Pool, the single largest hotel pool at Walt Disney World Resort."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Pool lifts and other access options are available for guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Pool lifts and other access options are available for guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Art of Animation Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22568,6 +24174,25 @@
             "page": 1,
             "line": 4,
             "text": "Whirl about in the beautiful Bay Cove Pool or make a splash in 2 pools at nearby Disney’s Contemporary Resort."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Adults can relax at the whirlpool spa or enjoy light bites and cold drinks and at the Cove Bar poolside bar, while kids splash about in the bubbling geysers of the water play area. This pool area is exclusive to Guests staying at Bay Lake Tower and Disney Vacation Club members! Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Bay Lake Tower at Disney's Contemporary Resort | Walt Disney World Resort"
           }
         ]
       },
@@ -22639,6 +24264,25 @@
             "line": 4,
             "text": "Whirl about in the beautiful Bay Cove Pool or make a splash in 2 pools at nearby Disney’s Contemporary Resort."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Adults can relax at the whirlpool spa or enjoy light bites and cold drinks and at the Cove Bar poolside bar, while kids splash about in the bubbling geysers of the water play area. This pool area is exclusive to Guests staying at Bay Lake Tower and Disney Vacation Club members! Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Bay Lake Tower at Disney's Contemporary Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22709,6 +24353,20 @@
             "line": 4,
             "text": "Make a splash at Stormalong Bay—a 3-acre water wonderland—or go for a dip in one of 3 leisure pools."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinDisney's Beach Club ResortatEPCOT Resort Area"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22778,6 +24436,20 @@
             "page": 1,
             "line": 4,
             "text": "Beat the heat at Stormalong Bay—a 3-acre water wonderland—or go for a swim in one of 3 leisure pools."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinDisney's Beach Club VillasatEPCOT Resort Area"
           }
         ]
       },
@@ -22854,6 +24526,20 @@
             "line": 3,
             "text": "Relax at the Luna Park Pool plus 2 leisure pools amid the elegance of turn-of-the-century Atlantic City."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's BoardWalk Inn"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -22928,6 +24614,20 @@
             "page": 1,
             "line": 3,
             "text": "Relax at the Luna Park Pool plus 2 leisure pools amid the elegance of turn-of-the-century Atlantic City."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 5,
+            "text": "From January 11, 2027, through April 2027, the Luna Park Pool, the Luna Park Crazy Play Area and Leaping Horse Libations at Disney’s BoardWalk Inn and Disney’s BoardWalk Villas will be closed for routine maintenance. Guests may see and hear work taking place during daytime hours. However, the Villas Pool and the Inn Pool will remain open for Guests to enjoy."
           }
         ]
       },
@@ -23004,6 +24704,20 @@
             "line": 4,
             "text": "Go wild amid a rustic American Frontier theme at the Meadow Swimmin’ Pool and the Wilderness Swimmin’ Pool."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change. Towels are not available at the pools, so please take your room towels with you when going for a swim."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Fort Wilderness Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -23078,6 +24792,20 @@
             "page": 1,
             "line": 4,
             "text": "Go wild amid a rustic American Frontier theme at the Meadow Swimmin’ Pool and the Wilderness Swimmin’ Pool."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change. Towels are not available at the pools, so please take your room towels with you when going for a swim."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Pools at The Cabins at Disney's Fort Wilderness Resort"
           }
         ]
       },
@@ -23154,6 +24882,20 @@
             "line": 4,
             "text": "Set out on a watery adventure at our feature pool—Fuentes del Morro Pool—or enjoy a serene swim at one of several unique leisure pools."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Caribbean Beach Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -23228,6 +24970,20 @@
             "page": 1,
             "line": 4,
             "text": "Unearth watery fun at the Dig Site—home to the Lost City of Cibola pool—or go for a serene swim in 3 leisure pools."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Coronado Springs Resort | Walt Disney World Resort"
           }
         ]
       },
@@ -23304,6 +25060,20 @@
             "line": 4,
             "text": "Soak, splash or slide in the crystal-clear Beach Pool or enjoy a more tranquil swim at the Courtyard Pool."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Grand Floridian Resort & Spa | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -23378,6 +25148,20 @@
             "page": 1,
             "line": 4,
             "text": "Swim in one of 4 unique pools amid swaying palms, shimmering waterways and ornate Victorian architecture."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Old Key West Resort | Walt Disney World Resort"
           }
         ]
       },
@@ -23465,6 +25249,20 @@
             "page": 1,
             "line": 4,
             "text": "Paddle around the Lava Pool with its volcano, water slide and expansive deck; dip into the peaceful waters of the Oasis Pool; or relax in the zero entry Cove Pool—while the kids play in the Moana’s Voyage splash area."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Polynesian Village Resort | Walt Disney World Resort"
           }
         ],
         "booking": [
@@ -23561,6 +25359,20 @@
             "text": "Paddle around the Lava Pool with its volcano, water slide and expansive deck; dip into the peaceful waters of the Oasis Pool; or relax in the zero entry Cove Pool—while the kids play in the Moana’s Voyage splash area."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Little ones can embrace their inner wayfinder at Island Tower at Disney’s Polynesian Villas & Bungalows with this whimsical, new splash area featuring life-size sculptures of Moana and her iconic canoe—inspired by Disney’s beloved movie Moana."
+          }
+        ],
         "booking": [
           {
             "page": 1,
@@ -23642,6 +25454,20 @@
             "line": 4,
             "text": "Enjoy a splash from the past with this trio of themed swimming pools celebrating 3 unforgettable decades."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Pop Century Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -23711,6 +25537,25 @@
             "page": 1,
             "line": 4,
             "text": "Dive into Mardi Gras at Doubloon Lagoon or swim in the pool at nearby Disney’s Port Orleans Resort – Riverside."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Pool lifts and other access options are available for Guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Port Orleans Resort – French Quarter | Walt Disney World Resort"
           }
         ]
       },
@@ -23786,6 +25631,25 @@
             "page": 1,
             "line": 4,
             "text": "Splash about on your way to Ol’ Man Island or relax with a far more tranquil dip in one of 5 leisure pools."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Pool lifts and other access options are available for Guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Port Orleans Resort – Riverside | Walt Disney World Resort"
           }
         ]
       },
@@ -23867,6 +25731,20 @@
             "line": 4,
             "text": "Bask in the fun at 2 uniquely themed pool areas at Disney’s Riviera Resort."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change. Complimentary towels are provided at both pools."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney’s Riviera Resort | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -23947,6 +25825,22 @@
             "line": 4,
             "text": "Delight your senses in 2 fantastic feature pools—plus 3 leisure pools, aqua-play areas, whirlpool spas and more."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Saratoga Springs Resort & Spa | Walt Disney World Resort"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/all-star-movies-resort/pools-all-star-movies-resort/",
+            "source_sha256": "cd6e766f7eddfa9ff3764e27b71cfa04317cd02fe0ca66d0b5fc835e2a62f888"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -24017,6 +25911,20 @@
             "line": 4,
             "text": "Surround yourself with the beauty of the American Northwest at the Copper Creek Springs Pool or Boulder Ridge Cove Pool areas."
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Pools at Disney's Wilderness Lodge | Walt Disney World Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -24086,6 +25994,20 @@
             "page": 1,
             "line": 4,
             "text": "Catch a wave at Stormalong Bay—a 3-acre water wonderland—or go for a swim in one of 3 leisure pools."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinDisney's Yacht Club ResortatEPCOT Resort Area"
           }
         ]
       },
@@ -24162,6 +26084,13 @@
             "page": 1,
             "line": 4,
             "text": "Relax on a horse-drawn carriage ride along the scenic banks of the Sassagoula River at Disney’s Port Orleans Resort – Riverside."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "You’ll board your carriage for a 25-minute ride at the Riverside Levee Marina at Disney’s Port Orleans Resort – Riverside. Carriages fit up to 4 adults (or 2 adults and 3 small children)."
           }
         ],
         "price": [
@@ -24292,6 +26221,13 @@
             "line": 4,
             "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney’s BoardWalk Inn"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -24391,6 +26327,13 @@
             "page": 1,
             "line": 4,
             "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's BoardWalk Villas"
           }
         ]
       },
@@ -24492,6 +26435,13 @@
             "line": 4,
             "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Disney’s Old Key West Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -24591,6 +26541,13 @@
             "page": 1,
             "line": 4,
             "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Port Orleans Resort - French Quarter"
           }
         ]
       },
@@ -24692,6 +26649,13 @@
             "line": 4,
             "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney’s Port Orleans Resort - Riverside"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -24792,6 +26756,13 @@
             "line": 4,
             "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways."
           }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Disney's Saratoga Springs Resort"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -24857,6 +26828,20 @@
             "page": 1,
             "line": 1,
             "text": "Survival of the Fittest Center | Walt Disney World Resort"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Survival of the Fittest Fitness Center is open 24 hours a day, 7 days a week. To utilize the health club, you will be required to use your MagicBand."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 3,
+            "text": "LocatedinDisney's Animal Kingdom Villas - Kidani VillageatDisney's Animal Kingdom Resort Area"
           }
         ]
       },
@@ -24971,6 +26956,20 @@
             "page": 1,
             "line": 4,
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's Saratoga Springs Resort & Spa — Two (2) clay courts located in the sports courts area; check out equipment at Community Hall or Horsing Around Rentals"
           }
         ],
         "eligibility": [
@@ -25094,6 +27093,20 @@
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Disney's Contemporary Resort and Bay Lake Tower at Disney's Contemporary Resort — One (1) court adjacent to Bay Lake Tower; check out tennis and pickleball equipment at Community Hall or Boat Nook Marina"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -25213,6 +27226,20 @@
             "page": 1,
             "line": 4,
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Disney's Contemporary Resort and Bay Lake Tower at Disney's Contemporary Resort — One (1) court adjacent to Bay Lake Tower; check out tennis and pickleball equipment at Community Hall or Boat Nook Marina"
           }
         ],
         "eligibility": [
@@ -25336,6 +27363,20 @@
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Animal Kingdom Villas - Kidani Village — Two (2) hard courts located near the shuffleboard and basketball courts; check out tennis and pickleball equipment at Community Hall"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -25455,6 +27496,20 @@
             "page": 1,
             "line": 4,
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Boardwalk Inn and Villas — Two (2) courts adjacent to Community Hall; check out tennis and pickleball equipment at Community Hall"
           }
         ],
         "eligibility": [
@@ -25578,6 +27633,20 @@
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Boardwalk Inn and Villas — Two (2) courts adjacent to Community Hall; check out tennis and pickleball equipment at Community Hall"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -25697,6 +27766,20 @@
             "page": 1,
             "line": 4,
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "The Campsites and Cabins at Disney’s Fort Wilderness Resort – Two (2) hard courts located at the Meadow Recreation Area; check out tennis and pickleball equipment at the Bike Barn"
           }
         ],
         "eligibility": [
@@ -25820,6 +27903,20 @@
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "The Campsites and Cabins at Disney’s Fort Wilderness Resort – Two (2) hard courts located at the Meadow Recreation Area; check out tennis and pickleball equipment at the Bike Barn"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -25939,6 +28036,20 @@
             "page": 1,
             "line": 4,
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Disney's Old Key West Resort — Two (2) courts near the main pool and one (1) on Old Turtle Pond Road; check out tennis and pickleball equipment at Conch Flats Community Hall or Hank’s Rent ‘N Return"
           }
         ],
         "eligibility": [
@@ -26062,6 +28173,20 @@
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's Yacht and Beach Club Resorts — One (1) court located near Admiral Pool; check out tennis and pickleball equipment at the Disney Yacht Club Front Desk."
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -26183,6 +28308,20 @@
             "text": "Slam your way through a game, set and match at tennis courts found at 7 Walt Disney World Resort hotels."
           }
         ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Courts are available on a first-come, first-served basis and are generally accessible from 9:00 AM to 10:00 PM—though hours may vary by location and courts may occasionally be booked for lessons or events. Appropriate tennis attire and shoes are required."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's Yacht and Beach Club Resorts — One (1) court located near Admiral Pool; check out tennis and pickleball equipment at the Disney Yacht Club Front Desk."
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -26265,6 +28404,13 @@
             "page": 1,
             "line": 4,
             "text": "Mosey on over for trail, pony, wagon, and carriage rides amid the rustic beauty of Disney’s Fort Wilderness Resort."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Carriage rides at Disney’s Fort Wilderness Resort & Campground"
           }
         ],
         "booking": [
@@ -26388,6 +28534,13 @@
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's Caribbean Beach Resort — Sand court at Martinique Village; check out equipment at Barefoot Bay Bike Works"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -26502,6 +28655,13 @@
             "page": 1,
             "line": 4,
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Disney's Contemporary Resort — Sand court on the beach; check out equipment at Boat Nook Marina"
           }
         ],
         "eligibility": [
@@ -26620,6 +28780,13 @@
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort — Sand court near Dig Site pool; check out equipment at Siesta's pool bar"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -26734,6 +28901,13 @@
             "page": 1,
             "line": 4,
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Old Key West Resort — Sand court near Hospitality House; check out equipment at Hank's Rent 'N Return"
           }
         ],
         "eligibility": [
@@ -26852,6 +29026,13 @@
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Disney's Polynesian Village Resort — Sand court on the beach; check out equipment at Seven Seas Marina"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -26966,6 +29147,13 @@
             "page": 1,
             "line": 4,
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Disney's Yacht & Beach Club Resorts — Sand court near Tidal Pool; check out equipment at Ship Shape Massage Salon Fitness"
           }
         ],
         "eligibility": [
@@ -27084,6 +29272,13 @@
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
           }
         ],
+        "location": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Disney's Yacht & Beach Club Resorts — Sand court near Tidal Pool; check out equipment at Ship Shape Massage Salon Fitness"
+          }
+        ],
         "eligibility": [
           {
             "page": 1,
@@ -27198,6 +29393,13 @@
             "page": 1,
             "line": 4,
             "text": "Bump, set and spike your way to fun at any of 8 sand courts found at Walt Disney World Resort hotels."
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 16,
+            "text": "The Campsites at Disney's Fort Wilderness Resort — Sand court in the Meadow Recreation Area; check out equipment at the Bike Barn"
           }
         ],
         "eligibility": [
@@ -27569,6 +29771,22 @@
             "page": 1,
             "line": 1,
             "text": "Holiday Sleigh Rides at Fort Wilderness Resort | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Take in the magic of the holidays with a cozy carriage or \"sleigh\" ride through the festive campground and woodland beauty. The 2025 offering has concluded. Check back this summer for updates on the 2026 holiday season.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Horse Drawn Excursion - Holiday Sleigh Rides are currently unavailable. This seasonal experience is scheduled to return in late 2026—just in time for the holidays.",
             "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
             "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
           }
@@ -28337,6 +30555,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -28426,6 +30660,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -28521,6 +30771,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -28610,6 +30876,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -28705,6 +30987,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -28794,6 +31092,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -28889,6 +31203,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -28978,6 +31308,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -29073,6 +31419,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -29162,6 +31524,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -29257,6 +31635,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -29346,6 +31740,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -29441,6 +31851,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -29530,6 +31956,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -29625,6 +32067,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -29714,6 +32172,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -29809,6 +32283,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -29901,6 +32391,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -29990,6 +32496,22 @@
             "page": 1,
             "line": 5,
             "text": "Cozy up for a favorite Disney film shown outside in the fresh evening air.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For movie schedules, please check with the Front Desk at your Walt Disney World Resort Hotel, or call",
+            "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+            "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "(407) 939-2273. Movies and entertainment are subject to cancellation or change without notice.",
             "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
             "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca"
           }
@@ -30539,6 +33061,22 @@
             "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
             "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
           }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
         ]
       },
       "trust_state": "source_backed",
@@ -30628,6 +33166,22 @@
             "page": 1,
             "line": 4,
             "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel.",
             "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
             "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
           }
@@ -30748,6 +33302,13 @@
           }
         ],
         "description": [
+          {
+            "page": 1,
+            "line": 273,
+            "text": "Shoot some hoops at one of several basketball courts located throughout Disney’s Fort Wilderness Resort & Campground. Basketballs are available in a designated box at each court. If the box is empty, simply call Housekeeping from a Comfort Station phone and a basketball will be delivered to the court."
+          }
+        ],
+        "location": [
           {
             "page": 1,
             "line": 273,

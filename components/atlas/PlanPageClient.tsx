@@ -17,13 +17,13 @@ export function PlanPageClient() {
     items,
     planTitle,
     removeItem,
-    reorderItems,
     updateNotes,
     renamePlan,
     createShare,
     rotateShare,
     revokeShare,
     shareUrl,
+    hasExistingShare,
     deletePlan,
     undoItem,
     undoRemove,
@@ -35,6 +35,10 @@ export function PlanPageClient() {
   const [showSettings, setShowSettings] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
+  const conflicts = findPlanConflicts(items);
+  const lowStress =
+    items.length >= 2 && items.length <= 4 && conflicts.length === 0;
+
   useEffect(() => {
     trackPlanEvent("plan_page_opened");
   }, []);
@@ -43,15 +47,21 @@ export function PlanPageClient() {
     setTitleDraft(planTitle);
   }, [planTitle]);
 
-  const conflicts = findPlanConflicts(items);
-  const lowStress =
-    items.length >= 2 && items.length <= 4 && conflicts.length === 0;
+  useEffect(() => {
+    if (conflicts.length > 0) {
+      trackPlanEvent("plan_overlap_displayed", { count: conflicts.length });
+    }
+  }, [conflicts.length]);
 
   const handleShare = async () => {
     setShareStatus(null);
     const url = await createShare();
     if (!url) {
-      setShareStatus("Could not create share link. Try again.");
+      setShareStatus(
+        hasExistingShare
+          ? "A share link already exists. Replace it to copy a new URL, or revoke it."
+          : "Could not create share link. Try again."
+      );
       return;
     }
     const result = await sharePlanLink(url, items);
@@ -70,6 +80,8 @@ export function PlanPageClient() {
     if (result === "shared") setExportStatus("Calendar file shared.");
     else if (result === "downloaded")
       setExportStatus("Calendar file downloaded.");
+    else if (result === "empty")
+      setExportStatus("No timed activities to add to calendar yet.");
   };
 
   if (items.length === 0) {
@@ -158,7 +170,6 @@ export function PlanPageClient() {
       <PlanTimeline
         items={items}
         onRemove={removeItem}
-        onReorder={reorderItems}
         onUpdateNotes={updateNotes}
       />
 
@@ -206,11 +217,19 @@ export function PlanPageClient() {
             </a>
           </p>
         )}
-        {shareUrl && (
+        {(shareUrl || hasExistingShare) && (
           <div className="mt-3 flex flex-wrap gap-2">
             <button
               type="button"
-              onClick={() => void rotateShare()}
+              onClick={() =>
+                void rotateShare().then((url) => {
+                  setShareStatus(
+                    url
+                      ? "Replacement link ready. Use Share plan to copy it."
+                      : "Could not replace share link. Try again."
+                  );
+                })
+              }
               className="text-xs font-bold text-[var(--lagoon-deep)]"
             >
               Replace link

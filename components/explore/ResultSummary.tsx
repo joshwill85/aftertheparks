@@ -33,6 +33,7 @@ export function ResultSummary({
     searchParams.get("category"),
     searchParams.get("daypart"),
     searchParams.get("free") === "true" ? "free" : null,
+    searchParams.get("reservation") === "true" ? "reservation" : null,
     searchParams.get("q"),
   ].filter(Boolean).length;
 

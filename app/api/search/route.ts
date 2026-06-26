@@ -19,8 +19,15 @@ export async function GET(request: Request) {
   const category = searchParams.get("category") ?? undefined;
   const daypart = (searchParams.get("daypart") as Daypart) ?? undefined;
   const free = searchParams.get("free") === "true";
+  const reservation = searchParams.get("reservation") === "true";
 
-  const result = await runSearch(q, { resort, category, daypart, free });
+  const result = await runSearch(q, {
+    resort,
+    category,
+    daypart,
+    free,
+    reservation,
+  });
 
   return NextResponse.json({
     ...publicActivitiesResponse(result.activities),

@@ -6,8 +6,10 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from collections import Counter
 from dataclasses import dataclass, field
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
@@ -313,6 +315,218 @@ def _format_legacy_undercount_groups(group_counts: dict[str, dict[str, int]]) ->
     )
 
 
+def _slugify_title(value: str) -> str:
+    value = value.replace("’", "").replace("'", "")
+    return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+def _title_slug_matches(title: str, slug: str) -> bool:
+    expected = _slugify_title(title)
+    if slug == expected:
+        return True
+    return title.lower() == "movies under the stars" and slug == "movie-under-the-stars"
+
+
+def _title_tokens(value: str) -> list[str]:
+    normalized = (
+        value.replace("($)", " ")
+        .replace("&", " and ")
+        .replace("+", "h")
+        .replace("|", "i")
+    )
+    return re.findall(r"[a-z0-9]+", normalized.lower())
+
+
+def _compact_title(value: str) -> str:
+    return "".join(_title_tokens(value))
+
+
+def _source_span_looks_ocr_fragmented(value: str) -> bool:
+    tokens = _title_tokens(value)
+    if not tokens:
+        return False
+    short_tokens = sum(1 for token in tokens if len(token) <= 2)
+    return short_tokens / len(tokens) >= 0.35 or bool(re.search(r"[|+]", value))
+
+
+def _title_span_supports_title(title: str, spans: list[dict[str, Any]]) -> bool:
+    span_text = " ".join(str(span.get("text") or "") for span in spans if isinstance(span, dict))
+    title_tokens = _title_tokens(title)
+    span_tokens = _title_tokens(span_text)
+    if not title_tokens or not span_tokens:
+        return False
+
+    span_token_set = set(span_tokens)
+    if all(token in span_token_set for token in title_tokens):
+        return True
+
+    if not _source_span_looks_ocr_fragmented(span_text):
+        return False
+
+    title_compact = _compact_title(title)
+    span_compact = _compact_title(span_text)
+    if not title_compact or not span_compact:
+        return False
+    if title_compact in span_compact or span_compact in title_compact:
+        return True
+    return SequenceMatcher(None, title_compact, span_compact).ratio() >= 0.92
+
+
+def _field_span_supports_text(value: str, spans: list[dict[str, Any]], *, min_ratio: float = 0.82) -> bool:
+    span_text = " ".join(str(span.get("text") or "") for span in spans if isinstance(span, dict))
+    value_compact = _compact_title(value)
+    span_compact = _compact_title(span_text)
+    if not value_compact or not span_compact:
+        return False
+    if value_compact in span_compact or span_compact in value_compact:
+        return True
+    return SequenceMatcher(None, value_compact, span_compact).ratio() >= min_ratio
+
+
+def _field_span_text(spans: list[dict[str, Any]]) -> str:
+    return " ".join(str(span.get("text") or "") for span in spans if isinstance(span, dict))
+
+
+def _normalize_schedule_time(value: Any) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip().lower().replace(" ", "")
+    match = re.match(r"^(\d{1,2})(?::(\d{2}))?(am|pm)$", text)
+    if not match:
+        return text or None
+    hour, minute, meridiem = match.groups()
+    return f"{int(hour)}:{minute or '00'}{meridiem}"
+
+
+def _explicit_schedule_range(schedule_text: str) -> tuple[str, str] | None:
+    text = schedule_text.replace("—", "-").replace("–", "-")
+    time_pattern = r"(\d{1,2})(?::(\d{2}))?\s*([ap]m)"
+    range_pattern = re.compile(
+        rf"\bfrom\s+{time_pattern}\s*(?:-|to)\s*{time_pattern}\b|"
+        rf"\b{time_pattern}\s*(?:-|to)\s*{time_pattern}\b",
+        flags=re.I,
+    )
+    match = range_pattern.search(text)
+    if not match:
+        return None
+    groups = [group for group in match.groups() if group is not None]
+    if len(groups) != 6:
+        return None
+    start = _normalize_schedule_time(f"{groups[0]}:{groups[1] or '00'}{groups[2]}")
+    end = _normalize_schedule_time(f"{groups[3]}:{groups[4] or '00'}{groups[5]}")
+    if not start or not end:
+        return None
+    return start, end
+
+
+def _schedule_span_supports_text(value: str, spans: list[dict[str, Any]]) -> bool:
+    if _field_span_supports_text(value, spans, min_ratio=0.74):
+        return True
+
+    span_text = _field_span_text(spans)
+    value_tokens = set(_title_tokens(value))
+    span_tokens = set(_title_tokens(span_text))
+    ignorable = {
+        "a",
+        "activities",
+        "activity",
+        "am",
+        "and",
+        "at",
+        "available",
+        "code",
+        "digitally",
+        "from",
+        "information",
+        "no",
+        "pdf",
+        "pm",
+        "posted",
+        "qr",
+        "schedule",
+        "scan",
+        "select",
+        "the",
+        "this",
+        "time",
+        "to",
+        "view",
+    }
+    meaningful_tokens = value_tokens - ignorable
+    if meaningful_tokens and meaningful_tokens.issubset(span_tokens):
+        return True
+
+    if "no posted time in pdf" in value.lower():
+        span_lower = span_text.lower()
+        if "activities schedule" in span_lower and "digitally" in span_lower:
+            return True
+        if "self-guided" in span_lower or "self guided" in span_lower:
+            return True
+
+    explicit_range = _explicit_schedule_range(value)
+    if explicit_range:
+        source_times = set(
+            _normalize_schedule_time(f"{match.group(1)}:{match.group(2) or '00'}{match.group(3)}")
+            for match in re.finditer(r"(\d{1,2})(?::(\d{2}))?\s*([ap]m)", span_text, flags=re.I)
+        )
+        return set(explicit_range).issubset(source_times) and bool(
+            {"daily", "hours"} & span_tokens
+        )
+
+    return False
+
+
+def _gold_title_fidelity_errors(row: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    title = str(row.get("title") or "").strip()
+    slug = str(row.get("canonical_slug") or "").strip()
+    provenance = row.get("field_provenance") or {}
+    title_spans = provenance.get("title")
+    if not title or not slug or not isinstance(title_spans, list) or not title_spans:
+        return errors
+
+    if not _title_slug_matches(title, slug):
+        errors.append("title_slug_mismatch")
+    if not _title_span_supports_title(title, title_spans):
+        errors.append("title_not_supported_by_source_span")
+    return errors
+
+
+def _gold_schedule_fidelity_errors(row: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    schedule = row.get("schedule") or {}
+    if not isinstance(schedule, dict):
+        return errors
+
+    schedule_text = str(schedule.get("text") or "").strip()
+    provenance = row.get("field_provenance") or {}
+    schedule_spans = provenance.get("schedule")
+    if (
+        schedule_text
+        and isinstance(schedule_spans, list)
+        and schedule_spans
+        and not _schedule_span_supports_text(schedule_text, schedule_spans)
+    ):
+        errors.append("schedule_not_supported_by_source_span")
+
+    explicit_range = _explicit_schedule_range(schedule_text)
+    if not explicit_range:
+        return errors
+
+    expected_start, expected_end = explicit_range
+    start_time = _normalize_schedule_time(schedule.get("start_time"))
+    end_time = _normalize_schedule_time(schedule.get("end_time"))
+    if not start_time:
+        errors.append("schedule_explicit_range_missing_start_time")
+    elif start_time != expected_start:
+        errors.append("schedule_explicit_range_start_time_mismatch")
+    if not end_time:
+        errors.append("schedule_explicit_range_missing_end_time")
+    elif end_time != expected_end:
+        errors.append("schedule_explicit_range_end_time_mismatch")
+    return errors
+
+
 def _gold_row_errors(row: dict[str, Any], index: int) -> list[str]:
     prefix = f"gold_row:{index}:{row.get('calendar_group_key', '<missing-group>')}/{row.get('canonical_slug', '<missing-slug>')}"
     errors: list[str] = []
@@ -335,6 +549,11 @@ def _gold_row_errors(row: dict[str, Any], index: int) -> list[str]:
         spans = provenance.get("description")
         if not isinstance(spans, list) or not spans:
             errors.append(f"{prefix}:missing_description_provenance")
+        elif not _field_span_supports_text(str(row.get("description") or ""), spans):
+            errors.append(f"{prefix}:description_not_supported_by_source_span")
+
+    errors.extend(f"{prefix}:{error}" for error in _gold_title_fidelity_errors(row))
+    errors.extend(f"{prefix}:{error}" for error in _gold_schedule_fidelity_errors(row))
 
     for claim in _claims_for(row):
         value = str(claim.get("value", "")).strip().lower()

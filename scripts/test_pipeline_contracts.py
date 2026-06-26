@@ -18,14 +18,17 @@ from scripts.ingest.audit_coverage import build_coverage_audit
 from scripts.ingest.audit_official_recreation_coverage import (
     build_official_recreation_coverage_audit,
 )
+from scripts.ingest.audit_official_recreation_source_drift import (
+    build_official_recreation_source_drift_audit,
+)
 from scripts.ingest.extract_v2 import (
     compare_candidates_to_fixture,
     extract_candidates_for_fixture,
     extract_publishable_candidates_for_fixture,
     extract_candidates_for_pdf,
 )
-from scripts.ingest.promote_gold import promote_candidates, promote_fixtures
-from scripts.ingest.publish_gold_v2 import publish_gold_rows, _stable_uuid
+from scripts.ingest.promote_gold import generate_gold_records, promote_candidates, promote_fixtures
+from scripts.ingest.publish_gold_v2 import publish_gold_file, publish_gold_rows, _stable_uuid
 from scripts.ingest.disney_recreation_offerings import (
     extract_official_recreation_offerings,
     resolve_official_resort_slugs,
@@ -33,15 +36,20 @@ from scripts.ingest.disney_recreation_offerings import (
 from scripts.ingest.generate_official_recreation_offerings import (
     generate_official_recreation_offerings,
 )
-from scripts.ingest.publish_official_offerings import publish_official_offering_rows
+from scripts.ingest.publish_official_offerings import (
+    publish_official_offering_file,
+    publish_official_offering_rows,
+)
 from scripts.ingest.review_queue import (
     list_pending_reviews,
     load_review_decisions,
     record_review_decision,
 )
-from scripts.ingest.run_pipeline import validation_gate_steps
+from scripts.ingest.publish import ALLOW_LEGACY_PUBLISH_ENV, publish_all as publish_legacy_temporal_all
+from scripts.ingest.run_pipeline import publish_steps, validation_gate_steps
 from scripts.ingest.trust_report import build_trust_report, render_markdown_report
 from scripts.ingest.validate_v2 import validate_fixture_extractions, validate_fixture_paths
+from scripts.ingest import backfill_all_times, backfill_movie_times
 
 
 WELLNESS_FIXTURES = [
@@ -69,6 +77,15 @@ GOLD_PREVIEW_PATH = Path("data/processed/activity_gold_v2_preview.json")
 ACTIVITY_PIPELINE_V2_MIGRATION = Path("supabase/migrations/20260621125139_activity_pipeline_v2.sql")
 MRG_FACTS_MIGRATION = Path("supabase/migrations/20260622003816_magical_resort_guide_facts.sql")
 OFFICIAL_OFFERINGS_MIGRATION_GLOB = "supabase/migrations/*official_recreation_offerings*.sql"
+
+
+def promote_fixture_paths(*fixture_paths: Path):
+    candidates_by_id: dict[str, dict] = {}
+    for fixture_path in fixture_paths:
+        for candidate in extract_publishable_candidates_for_fixture(fixture_path):
+            candidates_by_id[candidate["candidate_id"]] = candidate
+    return promote_candidates(list(candidates_by_id.values()))
+
 
 ALL_STAR_MOVIES_PDF = Path("data/raw/pdfs/All-Star-Movies_Aframe_Recreation_1125.pdf")
 ALL_STAR_MUSIC_PDF = Path("data/raw/pdfs/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf")
@@ -131,7 +148,7 @@ SARATOGA_SPRINGS_EXPECTED_SLUGS = {
     "community-hall",
     "disney-fit-yoga",
     "poolside-activities",
-    "storytime-yoga",
+    "story-time-yoga",
     "mickey-tie-dye",
     "find-a-friend",
     "campfire",
@@ -946,7 +963,10 @@ class PipelineContractsTest(unittest.TestCase):
                         candidate["normalized_fields"]["schedule"]["text"],
                     )
 
-        promotion = promote_fixtures(FORT_WILDERNESS_WEB_FIXTURE.parent)
+        promotion = promote_fixture_paths(
+            FORT_WILDERNESS_WEB_FIXTURE,
+            FORT_WILDERNESS_CABINS_WEB_FIXTURE,
+        )
         fort_rows = [
             row
             for row in promotion.gold_records
@@ -1945,10 +1965,10 @@ class PipelineContractsTest(unittest.TestCase):
             "source_sha256": "f" * 64,
             "source_url": "https://example.com/manual.pdf",
             "field_provenance": {
-                "title": [{"page": 1, "bbox": [100, 200, 500, 240]}],
-                "location": [{"page": 1, "bbox": [100, 250, 500, 280]}],
-                "schedule": [{"page": 1, "bbox": [100, 290, 500, 320]}],
-                "description": [{"page": 1, "bbox": [100, 330, 500, 360]}],
+                "title": [{"page": 1, "bbox": [100, 200, 500, 240], "text": "SOURCE VISIBLE MANUAL ACTIVITY"}],
+                "location": [{"page": 1, "bbox": [100, 250, 500, 280], "text": "Manual Review Lawn"}],
+                "schedule": [{"page": 1, "bbox": [100, 290, 500, 320], "text": "Daily from 9:00am-10:00am"}],
+                "description": [{"page": 1, "bbox": [100, 330, 500, 360], "text": "Reviewed source text that OCR missed."}],
             },
             "description": "Reviewed source text that OCR missed.",
             "claims": [{"kind": "fee", "value": "unknown", "evidence": []}],
@@ -2832,7 +2852,7 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual("Create an original craft!", signature["description"]["value"])
 
     def test_gold_promotion_promotes_all_star_movies_reviewed_full_calendar(self) -> None:
-        promotion = promote_fixtures(ALL_STAR_MOVIES_FULL_FIXTURE.parent)
+        promotion = promote_fixture_paths(ALL_STAR_MOVIES_FULL_FIXTURE)
         movies_rows = [
             row
             for row in promotion.gold_records
@@ -2889,6 +2909,12 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn("field_provenance ? 'title'", migration)
         self.assertIn("field_provenance ? 'schedule'", migration)
         self.assertIn("field_provenance ? 'location'", migration)
+        preserve_source_migration = Path(
+            "supabase/migrations/20260626001548_preserve_gold_source_evidence.sql"
+        ).read_text()
+        self.assertIn("add column if not exists source jsonb", preserve_source_migration)
+        self.assertIn("source->'documentKeyLegends'", preserve_source_migration)
+        self.assertIn("gold_missing_structured_source", preserve_source_migration)
         self.assertIn("alter table public.public_activity_gold enable row level security", migration)
         self.assertIn("with (security_invoker = true)", combined)
         self.assertIn("grant select on public.v_public_activity_gold to anon, authenticated", combined)
@@ -3601,6 +3627,189 @@ class PipelineContractsTest(unittest.TestCase):
             audit.errors,
         )
 
+    def test_official_recreation_coverage_fails_published_offering_without_resort_join(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            index_path = tmp_path / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "content_sha256": "c" * 64,
+                        "results": [],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "bike-rentals"}],
+                        "offerings": [
+                            {
+                                "offering_key": "bike-rentals:missing",
+                                "program_key": "bike-rentals",
+                                "resort_slug": "",
+                                "field_provenance": {},
+                            }
+                        ],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path)
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "official_recreation:offering_missing_resort_join:bike-rentals:missing",
+            audit.errors,
+        )
+
+    def test_official_recreation_coverage_fails_unsourced_availability_label(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            index_path = tmp_path / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "content_sha256": "c" * 64,
+                        "results": [],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "canoe-rentals"}],
+                        "offerings": [
+                            {
+                                "offering_key": "canoe-rentals:campsites",
+                                "program_key": "canoe-rentals",
+                                "resort_slug": "campsites-at-fort-wilderness-resort",
+                                "availability": {
+                                    "kind": "evergreen_hours",
+                                    "hours_state": "source_hours",
+                                    "label": "Daily 9:00 AM-5:00 PM",
+                                },
+                                "field_provenance": {
+                                    "title": [{"page": 1, "line": 1, "text": "Canoe Rentals"}],
+                                    "resort_join": [
+                                        {
+                                            "page": 1,
+                                            "line": 2,
+                                            "text": "Disney's Fort Wilderness Resort",
+                                        }
+                                    ],
+                                },
+                            }
+                        ],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path)
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "official_recreation:availability_label_missing_source_span:canoe-rentals:campsites",
+            audit.errors,
+        )
+
+    def test_official_recreation_coverage_fails_unsourced_specific_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            index_path = tmp_path / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "content_sha256": "c" * 64,
+                        "results": [],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "canoe-rentals"}],
+                        "offerings": [
+                            {
+                                "offering_key": "canoe-rentals:campsites",
+                                "program_key": "canoe-rentals",
+                                "title": "Canoe Rentals",
+                                "resort_slug": "campsites-at-fort-wilderness-resort",
+                                "location": {"label": "Bike Barn"},
+                                "price": {"state": "fee", "notes": "$15 per hour"},
+                                "booking": {"reservation_recommended": True},
+                                "eligibility": {"resort_guest_only": True},
+                                "amenities": ["Life jackets"],
+                                "field_provenance": {
+                                    "title": [{"page": 1, "line": 1, "text": "Canoe Rentals"}],
+                                    "resort_join": [
+                                        {
+                                            "page": 1,
+                                            "line": 2,
+                                            "text": "Disney's Fort Wilderness Resort",
+                                        }
+                                    ],
+                                },
+                            }
+                        ],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path)
+
+        self.assertFalse(audit.passed)
+        for field in ("price", "booking", "eligibility", "amenities", "location"):
+            self.assertIn(
+                f"official_recreation:{field}_missing_source_span:canoe-rentals:campsites",
+                audit.errors,
+            )
+
+    def test_official_recreation_coverage_fails_program_without_joined_offering(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            index_path = tmp_path / "official-recreation-index-api.snapshot.json"
+            index_path.write_text(
+                json.dumps(
+                    {
+                        "source_kind": "official_recreation_index_api",
+                        "source_url": "https://disneyworld.disney.go.com/recreation/",
+                        "content_sha256": "c" * 64,
+                        "results": [],
+                    }
+                )
+            )
+            offerings_path = tmp_path / "official_recreation_offerings.json"
+            offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "pool-tables"}],
+                        "offerings": [],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            audit = build_official_recreation_coverage_audit(index_path, offerings_path)
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "official_recreation:program_without_joined_offering:pool-tables",
+            audit.errors,
+        )
+
     def test_official_recreation_parent_coverage_requires_multi_location_detail_snapshot(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -3717,6 +3926,68 @@ class PipelineContractsTest(unittest.TestCase):
             audit.errors,
         )
 
+    def test_official_recreation_source_drift_ignores_request_date_noise(self) -> None:
+        captured = {
+            "captured_at": "2026-06-23T00:00:00Z",
+            "content_sha256": "old",
+            "api_url": "https://example.test/2026-06-23/recreation",
+            "results": [
+                {
+                    "name": "Bike Rentals",
+                    "urlFriendlyId": "bike-rentals",
+                    "locationName": "Multiple Locations",
+                    "locationsList": {"items": ["Disney's Old Key West Resort"]},
+                }
+            ],
+        }
+        comparison = {
+            **captured,
+            "captured_at": "2026-06-26T00:00:00Z",
+            "content_sha256": "new",
+            "api_url": "https://example.test/2026-06-26/recreation",
+        }
+
+        audit = build_official_recreation_source_drift_audit(captured, comparison)
+
+        self.assertTrue(audit.passed)
+        self.assertEqual([], audit.errors)
+        self.assertEqual(1, audit.summary["captured_parent_items"])
+
+    def test_official_recreation_source_drift_fails_added_or_changed_parent_items(self) -> None:
+        captured = {
+            "results": [
+                {
+                    "name": "Bike Rentals",
+                    "urlFriendlyId": "bike-rentals",
+                    "locationName": "Multiple Locations",
+                    "locationsList": {"items": ["Disney's Old Key West Resort"]},
+                }
+            ],
+        }
+        comparison = {
+            "results": [
+                {
+                    "name": "Bike Rentals",
+                    "urlFriendlyId": "bike-rentals",
+                    "locationName": "Disney's Saratoga Springs Resort & Spa",
+                    "locationsList": {"items": ["Disney's Saratoga Springs Resort & Spa"]},
+                },
+                {
+                    "name": "New Recreation",
+                    "urlFriendlyId": "new-recreation",
+                    "locationName": "Disney's Contemporary Resort",
+                },
+            ],
+        }
+
+        audit = build_official_recreation_source_drift_audit(captured, comparison)
+
+        self.assertFalse(audit.passed)
+        self.assertIn("official_recreation_source:added:1", audit.errors)
+        self.assertIn("official_recreation_source:changed:1", audit.errors)
+        self.assertEqual(["new-recreation"], audit.added)
+        self.assertEqual(["bike-rentals"], audit.changed)
+
     def test_official_recreation_offerings_migration_preserves_security_contract(self) -> None:
         migration = _official_offerings_migration_text()
 
@@ -3793,6 +4064,67 @@ class PipelineContractsTest(unittest.TestCase):
             ("rpc:check_official_activity_offerings_health", {}, ""),
             db.upserts,
         )
+
+    def test_official_recreation_extraction_preserves_availability_source_span(self) -> None:
+        extraction = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "slug": "canoe-rentals",
+                "source_url": "https://disneyworld.disney.go.com/recreation/fort-wilderness-resort/canoe-rentals/",
+                "source_web_sha256": "f" * 64,
+                "lines": [
+                    {"line": 1, "text": "# Canoe Rentals"},
+                    {"line": 2, "text": "Paddle around Fort Wilderness."},
+                    {"line": 3, "text": "Disney's Fort Wilderness Resort"},
+                    {"line": 4, "text": "Hours: 9:00 AM to 5:00 PM"},
+                ],
+            }
+        )
+
+        offering = extraction["offerings"][0]
+
+        self.assertEqual("source_hours", offering["availability"]["hours_state"])
+        self.assertEqual(
+            "Hours: 9:00 AM to 5:00 PM",
+            offering["field_provenance"]["availability"][0]["text"],
+        )
+
+    def test_official_recreation_file_publish_requires_coverage_preflight(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bad_offerings_path = Path(tmp) / "official_recreation_offerings.json"
+            bad_offerings_path.write_text(
+                json.dumps(
+                    {
+                        "programs": [{"program_key": "pool-tables"}],
+                        "offerings": [],
+                        "quarantine": [],
+                    }
+                )
+            )
+
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "official_offerings_publish_preflight_failed",
+            ):
+                publish_official_offering_file(bad_offerings_path)
+
+        readme = Path("scripts/ingest/README.md").read_text()
+        self.assertIn("publish_official_offerings.py", readme)
+        self.assertIn("matches regeneration from the captured official snapshots", readme)
+        self.assertIn("official recreation coverage preflight", readme)
+
+    def test_official_recreation_file_publish_rejects_stale_processed_artifact(self) -> None:
+        stale = generate_official_recreation_offerings()
+        stale["offerings"] = stale["offerings"][:-1]
+        with tempfile.TemporaryDirectory() as tmp:
+            stale_offerings_path = Path(tmp) / "official_recreation_offerings.json"
+            stale_offerings_path.write_text(json.dumps(stale))
+
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "official_recreation:processed_offerings_stale",
+            ):
+                publish_official_offering_file(stale_offerings_path)
 
     def test_official_recreation_publisher_retires_stale_programs_and_resolves_stale_quarantine(self) -> None:
         extraction = extract_official_recreation_offerings(
@@ -3881,6 +4213,8 @@ class PipelineContractsTest(unittest.TestCase):
                 self.assertTrue(row["field_provenance"]["title"])
                 self.assertTrue(row["field_provenance"]["schedule"])
                 self.assertTrue(row["field_provenance"]["location"])
+                self.assertEqual(row["source_sha256"], row["source"]["documentHash"])
+                self.assertIn("documentKeyLegends", row["source"])
                 self.assertTrue(row["is_current"])
         self.assertIn(
             ("rpc:check_activity_pipeline_v2_health", {}, ""),
@@ -3919,6 +4253,31 @@ class PipelineContractsTest(unittest.TestCase):
 
         with self.assertRaisesRegex(RuntimeError, "activity_pipeline_v2_health_failed"):
             publish_gold_rows(db, [row])
+
+    def test_gold_v2_file_publish_requires_production_coverage_preflight(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bad_gold_path = Path(tmp) / "activity_gold_v2_preview.json"
+            bad_gold_path.write_text("[]")
+
+            with self.assertRaisesRegex(RuntimeError, "gold_publish_preflight_failed"):
+                publish_gold_file(bad_gold_path)
+
+        readme = Path("scripts/ingest/README.md").read_text()
+        self.assertIn("processed Gold artifact matches regeneration", readme)
+        self.assertIn("production coverage preflight", readme)
+
+    def test_gold_v2_file_publish_rejects_stale_processed_artifact(self) -> None:
+        stale = generate_gold_records().gold_records
+        stale[0] = {**stale[0], "title": f"{stale[0]['title']} stale"}
+        with tempfile.TemporaryDirectory() as tmp:
+            stale_gold_path = Path(tmp) / "activity_gold_v2_preview.json"
+            stale_gold_path.write_text(json.dumps(stale))
+
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "gold:processed_artifact_stale",
+            ):
+                publish_gold_file(stale_gold_path)
 
     def test_gold_v2_publisher_retires_current_rows_missing_from_snapshot(self) -> None:
         row = json.loads(GOLD_PREVIEW_PATH.read_text())[0]
@@ -4320,6 +4679,81 @@ class PipelineContractsTest(unittest.TestCase):
             audit.errors,
         )
 
+    def test_coverage_audit_rejects_gold_description_not_supported_by_source_span(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        bad_rows = json.loads(json.dumps(rows))
+        bad_rows[0]["description"] = "This description came from a different activity block."
+
+        with tempfile.TemporaryDirectory() as tmp:
+            bad_gold_path = Path(tmp) / "activity_gold_v2_preview.json"
+            bad_gold_path.write_text(json.dumps(bad_rows))
+
+            audit = build_coverage_audit(gold_path=bad_gold_path)
+
+        self.assertFalse(audit.passed)
+        self.assertTrue(
+            any("description_not_supported_by_source_span" in error for error in audit.errors),
+            audit.errors,
+        )
+
+    def test_coverage_audit_rejects_explicit_schedule_range_missing_end_time(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        bad_rows = json.loads(json.dumps(rows))
+        wellness = next(
+            row
+            for row in bad_rows
+            if row["calendar_group_key"] == "all-star-movies"
+            and row["canonical_slug"] == "wellness-scavenger-hunt"
+        )
+        wellness["schedule"]["end_time"] = None
+
+        with tempfile.TemporaryDirectory() as tmp:
+            bad_gold_path = Path(tmp) / "activity_gold_v2_preview.json"
+            bad_gold_path.write_text(json.dumps(bad_rows))
+
+            audit = build_coverage_audit(gold_path=bad_gold_path)
+
+        self.assertFalse(audit.passed)
+        self.assertTrue(
+            any("schedule_explicit_range_missing_end_time" in error for error in audit.errors),
+            audit.errors,
+        )
+
+    def test_coverage_audit_rejects_gold_schedule_not_supported_by_source_span(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        bad_rows = json.loads(json.dumps(rows))
+        bad_rows[0]["schedule"]["text"] = "Daily from 1:00pm–2:00pm"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            bad_gold_path = Path(tmp) / "activity_gold_v2_preview.json"
+            bad_gold_path.write_text(json.dumps(bad_rows))
+
+            audit = build_coverage_audit(gold_path=bad_gold_path)
+
+        self.assertFalse(audit.passed)
+        self.assertTrue(
+            any("schedule_not_supported_by_source_span" in error for error in audit.errors),
+            audit.errors,
+        )
+
+    def test_coverage_audit_allows_multiple_showtimes_without_end_time(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        sample = next(
+            row
+            for row in rows
+            if row["canonical_slug"] == "sangria-university"
+            and row["schedule"]["text"] == "11:00am and 1:30pm"
+        )
+        self.assertIsNone(sample["schedule"]["end_time"])
+
+        audit = build_coverage_audit()
+
+        self.assertTrue(audit.passed, audit.errors)
+        self.assertFalse(
+            any("schedule_explicit_range_missing_end_time" in error for error in audit.errors),
+            audit.errors,
+        )
+
     def test_trust_report_summarizes_current_cutover_blockers_and_quarantine_workload(self) -> None:
         report = build_trust_report()
 
@@ -4339,20 +4773,76 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual([], report["blockers"])
         self.assertEqual(0, report["official_recreation"]["quarantine_count"])
         self.assertGreaterEqual(report["official_recreation"]["offering_count"], 224)
+        self.assertEqual(237, report["gold_source"]["gold_record_count"])
+        self.assertEqual(220, report["gold_source"]["rows_with_document_key_legends"])
+        self.assertEqual({"fee": 220}, report["gold_source"]["document_key_legend_kinds"])
 
         markdown = render_markdown_report(report)
         self.assertIn("# Source-To-UI Trust Report", markdown)
         self.assertIn("Production cutover: ready", markdown)
+        self.assertIn("Gold source evidence: 220 rows with document key legends", markdown)
+        self.assertIn("kinds: fee", markdown)
         self.assertIn("Fort Wilderness", markdown)
-        self.assertIn("34 fixture quarantine records", markdown)
+        self.assertIn("Source-visible fixture records retained for audit: 34 records", markdown)
         self.assertIn("34 covered by official offerings", markdown)
         self.assertIn("13 alias-covered", markdown)
+        self.assertIn("Covered Source-Visible Records", markdown)
+        self.assertIn("do not block cutover", markdown)
+        self.assertIn("No cutover action required for official-offering-covered fixture records", markdown)
+        self.assertNotIn("Resolve fixture quarantine records", markdown)
         self.assertIn("Explicit non-publishable source-visible records: 3 records", markdown)
+        self.assertIn(
+            "withheld from publishing because the current sources do not provide enough public-facing fields",
+            markdown,
+        )
+        self.assertIn("| Art of Animation | Nighttime Pool Party | nighttime-pool-party |", markdown)
+        self.assertIn("| Contemporary | Sports Courts | sports-courts |", markdown)
+        self.assertIn("| Coronado Springs | Resort Scavenger Hunt | resort-scavenger-hunt |", markdown)
+        self.assertIn("no source-visible location, schedule, or description", markdown)
+        self.assertIn("No source-visible location or schedule", markdown)
+        self.assertIn("No source-visible activity schedule or exact activity location", markdown)
 
     def test_production_pipeline_requires_cutover_coverage_before_publish(self) -> None:
         steps = validation_gate_steps(local_only=False)
 
         self.assertIn(("audit_coverage.py", "--require-production-ready"), steps)
+
+    def test_production_pipeline_publishes_gold_and_official_paths(self) -> None:
+        steps = publish_steps(local_only=False, has_service_role=True)
+
+        self.assertEqual(
+            [
+                ("publish_gold_v2.py",),
+                ("publish_official_offerings.py",),
+                ("enrichment.py",),
+            ],
+            steps,
+        )
+        self.assertNotIn(("publish.py",), steps)
+
+    def test_pipeline_skips_publish_without_service_role_or_local_only(self) -> None:
+        self.assertEqual([], publish_steps(local_only=True, has_service_role=True))
+        self.assertEqual([], publish_steps(local_only=False, has_service_role=False))
+
+    def test_legacy_temporal_publish_is_explicitly_opt_in(self) -> None:
+        prior = os.environ.pop(ALLOW_LEGACY_PUBLISH_ENV, None)
+        try:
+            with self.assertRaisesRegex(RuntimeError, "legacy_activity_publish_disabled"):
+                publish_legacy_temporal_all(Path("missing-legacy-ingest.json"))
+        finally:
+            if prior is not None:
+                os.environ[ALLOW_LEGACY_PUBLISH_ENV] = prior
+
+    def test_legacy_time_backfills_are_explicitly_opt_in(self) -> None:
+        prior = os.environ.pop(ALLOW_LEGACY_PUBLISH_ENV, None)
+        try:
+            with self.assertRaisesRegex(RuntimeError, "legacy_time_backfill_disabled"):
+                backfill_all_times.main()
+            with self.assertRaisesRegex(RuntimeError, "legacy_movie_time_backfill_disabled"):
+                backfill_movie_times.main()
+        finally:
+            if prior is not None:
+                os.environ[ALLOW_LEGACY_PUBLISH_ENV] = prior
 
     def test_local_pipeline_runs_partial_coverage_audit_without_cutover_gate(self) -> None:
         steps = validation_gate_steps(local_only=True)

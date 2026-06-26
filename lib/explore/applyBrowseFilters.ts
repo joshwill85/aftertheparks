@@ -22,6 +22,14 @@ export function applyBrowseFilters(
   if (filters.free) {
     result = result.filter((o) => o.price.state === "free");
   }
+  if (filters.reservation) {
+    result = result.filter(
+      (o) =>
+        o.eligibility.reservation?.required ||
+        o.enrichment?.reservationRequired ||
+        o.enrichment?.reservationRecommended
+    );
+  }
   if (filters.q) {
     result = rankActivitiesByQuery(result, filters.q);
   }

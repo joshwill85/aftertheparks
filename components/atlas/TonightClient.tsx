@@ -174,8 +174,8 @@ export function TonightClient({
       <TonightHero />
 
       <p className="tonight-callout">
-        Confirm showtimes with your resort before heading out — outdoor schedules
-        can shift with weather.
+        Confirm showtimes with your resort before heading out; schedules can
+        change without notice.
       </p>
 
       <section id="movies" className="scroll-mt-24">
@@ -184,14 +184,14 @@ export function TonightClient({
             Movies under the stars
           </h2>
           <p className="home-section__subtitle md:text-base">
-            Outdoor cinema schedules from resort recreation calendars.
+            Movie schedules from resort recreation calendars.
           </p>
         </div>
 
         {movieNights.length === 0 ? (
           <NightSectionEmpty
             title="No movie listings yet"
-            description="Outdoor cinema schedules are updating. Try campfires and low-key evening activities, or browse all resort fun."
+            description="Movie schedules are updating. Try campfires and low-key evening activities, or browse all resort fun."
             actions={[
               { label: "Campfires", href: "#campfires", variant: "primary" },
               { label: "Explore activities", href: "/activities" },
@@ -325,19 +325,19 @@ export function TonightClient({
         )}
       </section>
 
-      <section id="rain-friendly" className="scroll-mt-24">
+      <section id="games-and-crafts" className="scroll-mt-24">
         <div className="mb-5">
           <h2 className="home-section__title text-2xl md:text-3xl">
-            Rain-friendly evening ideas
+            Games and crafts
           </h2>
           <p className="home-section__subtitle md:text-base">
-            Indoor arcade and craft options when the Florida sky has other plans.
+            Arcade and craft listings from the current source-backed activity data.
           </p>
         </div>
 
         {rainFriendly.length === 0 ? (
           <NightSectionEmpty
-            title="No indoor evening picks listed"
+            title="No arcade or craft evening picks listed"
             description="Browse arcade and craft activities across all resorts."
             actions={[
               { label: "Arcade", href: "/activities?category=arcade", variant: "primary" },

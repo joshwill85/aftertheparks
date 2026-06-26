@@ -1,7 +1,5 @@
-import { formatInTimeZone } from "date-fns-tz";
-import { enrichMovieNightsWithPosters } from "@/lib/movies/posters";
-import { isUsableMovieTitle, sanitizeMovieTitle } from "@/lib/movies/sanitize";
-import { TIMEZONE } from "@/lib/daypart";
+import { cache } from "react";
+import { cachePublicData } from "@/lib/cache/publicData";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import {
   expandOccurrences,
@@ -21,7 +19,12 @@ import {
   fetchGoldActivityOccurrences,
   loadGoldPreviewOccurrences,
 } from "@/lib/data/goldActivities";
-import { sanitizePublicActivities, ensurePublicActivity, dedupeOccurrences } from "@/lib/api/publicActivities";
+import { sortActivities } from "@/lib/activities/sort";
+import {
+  dedupeOccurrences,
+  ensurePublicActivity,
+  sanitizePublicActivities,
+} from "@/lib/api/publicActivities";
 import {
   addOrlandoDays,
   isSameOrlandoDay,
@@ -62,13 +65,28 @@ const DEMO_RESORTS: ResortSummary[] = [
 ];
 
 export const DEFAULT_ACTIVITY_DATA_PIPELINE = "gold-v2";
+export const LEGACY_ACTIVITY_DATA_PIPELINE = "legacy-temporal";
+export const ALLOW_LEGACY_ACTIVITY_UI_PIPELINE_ENV =
+  "ALLOW_LEGACY_ACTIVITY_UI_PIPELINE";
 
 export function activityDataPipeline(): string {
-  return (
+  const requested =
     process.env.ACTIVITY_DATA_PIPELINE ??
     process.env.NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE ??
-    DEFAULT_ACTIVITY_DATA_PIPELINE
-  );
+    DEFAULT_ACTIVITY_DATA_PIPELINE;
+
+  if (requested === "gold-v2" || requested === "gold-v2-preview") {
+    return requested;
+  }
+
+  if (
+    requested === LEGACY_ACTIVITY_DATA_PIPELINE &&
+    process.env[ALLOW_LEGACY_ACTIVITY_UI_PIPELINE_ENV] === "1"
+  ) {
+    return requested;
+  }
+
+  return DEFAULT_ACTIVITY_DATA_PIPELINE;
 }
 
 function demoOccurrences(): ActivityOccurrence[] {
@@ -202,7 +220,7 @@ async function fetchResortMeta(): Promise<
   return map;
 }
 
-export async function getAllOccurrences(
+export const getAllOccurrences = cache(async function getAllOccurrences(
   dateRangeDays = 7
 ): Promise<ActivityOccurrence[]> {
   const pipeline = activityDataPipeline();
@@ -267,7 +285,7 @@ export async function getAllOccurrences(
   }
 
   return all;
-}
+});
 
 export async function getFilteredActivities(
   filters: ActivityFilters
@@ -307,11 +325,16 @@ export async function getFilteredActivities(
 }
 
 export async function getActivityBySlug(
-  slug: string
+  slug: string,
+  options: { resort?: string } = {}
 ): Promise<{ activity: ActivityOccurrence; upcoming: ActivityOccurrence[] } | null> {
   const all = await getAllOccurrences(14);
   const canonicalSlug = canonicalActivitySlug(slug);
-  const matches = all.filter((o) => o.activitySlug === canonicalSlug);
+  const matches = all.filter(
+    (o) =>
+      o.activitySlug === canonicalSlug &&
+      (!options.resort || o.resort.slug === options.resort)
+  );
   if (matches.length === 0) return null;
 
   const now = nowInstant();
@@ -456,51 +479,72 @@ export async function getCuratedHomeActivities(options: {
   return { freeToday, littleKids };
 }
 
-export async function getResorts(): Promise<ResortSummary[]> {
-  const supabase = createServiceClient();
-  if (!supabase) return DEMO_RESORTS;
+const getResortsFromSupabase = cachePublicData(
+  async function getResortsFromSupabase(): Promise<ResortSummary[]> {
+    const supabase = createServiceClient();
+    if (!supabase) return DEMO_RESORTS;
 
-  const { data: resorts, error } = await supabase
-    .from("resorts")
-    .select("id, slug, name, category, resort_area, disney_url, sort_order")
-    .order("sort_order");
+    const { data: resorts, error } = await supabase
+      .from("resorts")
+      .select("id, slug, name, category, resort_area, disney_url, sort_order")
+      .order("sort_order");
 
-  if (error || !resorts?.length) return DEMO_RESORTS;
+    if (error || !resorts?.length) return DEMO_RESORTS;
 
-  const [{ data: counts }, { data: offeringCounts }] = await Promise.all([
-    supabase
-      .from("v_resort_activities_today")
-      .select("resort_slug")
-      .eq("needs_review", false),
-    supabase
-      .from("v_public_activity_offerings")
-      .select("resort_slug"),
-  ]);
+    const [
+      { data: goldCounts, error: goldCountError },
+      { data: offeringCounts },
+    ] = await Promise.all([
+      supabase
+        .from("v_public_activity_gold")
+        .select("calendar_group_key, resort_slugs"),
+      supabase
+        .from("v_public_activity_offerings")
+        .select("resort_slug"),
+    ]);
 
-  const countMap = new Map<string, number>();
-  for (const c of counts ?? []) {
-    countMap.set(c.resort_slug, (countMap.get(c.resort_slug) ?? 0) + 1);
-  }
+    const countMap = new Map<string, number>();
+    const goldRows =
+      goldCountError || !goldCounts?.length
+        ? []
+        : (goldCounts as Array<{
+            calendar_group_key: string;
+            resort_slugs?: string[] | null;
+          }>);
 
-  const offeringCountMap = new Map<string, number>();
-  for (const c of offeringCounts ?? []) {
-    offeringCountMap.set(
-      c.resort_slug,
-      (offeringCountMap.get(c.resort_slug) ?? 0) + 1
-    );
-  }
+    for (const row of goldRows) {
+      const slugs =
+        row.resort_slugs && row.resort_slugs.length > 0
+          ? row.resort_slugs
+          : [row.calendar_group_key];
+      for (const resortSlug of slugs) {
+        countMap.set(resortSlug, (countMap.get(resortSlug) ?? 0) + 1);
+      }
+    }
 
-  return resorts.map((r) => ({
-    id: r.id,
-    slug: r.slug,
-    name: r.name.replace(/^Disney's\s+/i, ""),
-    category: r.category,
-    area: r.resort_area,
-    disneyUrl: r.disney_url,
-    activityCount: countMap.get(r.slug) ?? 0,
-    offeringCount: offeringCountMap.get(r.slug) ?? 0,
-  }));
-}
+    const offeringCountMap = new Map<string, number>();
+    for (const c of offeringCounts ?? []) {
+      offeringCountMap.set(
+        c.resort_slug,
+        (offeringCountMap.get(c.resort_slug) ?? 0) + 1
+      );
+    }
+
+    return resorts.map((r) => ({
+      id: r.id,
+      slug: r.slug,
+      name: r.name.replace(/^Disney's\s+/i, ""),
+      category: r.category,
+      area: r.resort_area,
+      disneyUrl: r.disney_url,
+      activityCount: countMap.get(r.slug) ?? 0,
+      offeringCount: offeringCountMap.get(r.slug) ?? 0,
+    }));
+  },
+  ["resort-summaries"]
+);
+
+export const getResorts = cache(getResortsFromSupabase);
 
 export async function getResortBySlug(slug: string): Promise<ResortSummary | null> {
   const resorts = await getResorts();
@@ -529,6 +573,7 @@ export async function searchActivities(
     category: filters.category,
     daypart: filters.daypart,
     free: filters.free,
+    reservation: filters.reservation,
     limit: filters.limit ?? 50,
   });
 
@@ -578,82 +623,28 @@ export async function getResortActivities(
   return getFilteredActivities({ resort: slug, limit: 200 });
 }
 
-export async function getMovieNights(): Promise<MovieNightOccurrence[]> {
-  const supabase = createServiceClient();
-  if (!supabase) return [];
+export async function getResortTimeline(
+  slug: string,
+  dateRangeDays = 31
+): Promise<ActivityOccurrence[]> {
+  const occurrences = (await getAllOccurrences(dateRangeDays)).filter(
+    (activity) => activity.resort.slug === slug
+  );
 
-  const [{ data, error }, { data: resortRows }] = await Promise.all([
-    supabase
-      .from("movie_nights")
-      .select(
-        "id, day_of_week, movie_title, show_time, location, parse_confidence, activity_catalog_id"
-      )
-      .gte("parse_confidence", 0.5),
-    supabase
-      .from("v_resort_activities_today")
-      .select("activity_catalog_id, resort_slug, resort_name")
-      .eq("needs_review", false),
-  ]);
-
-  if (error) {
-    console.error("getMovieNights:", error.message);
-    return [];
-  }
-
-  const resortByCatalog = new Map<
-    string,
-    { resort_slug: string; resort_name: string }
-  >();
-  for (const row of resortRows ?? []) {
-    if (row.activity_catalog_id && !resortByCatalog.has(row.activity_catalog_id)) {
-      resortByCatalog.set(row.activity_catalog_id, {
-        resort_slug: row.resort_slug,
-        resort_name: row.resort_name,
-      });
-    }
-  }
-
-  const tonightDay = formatInTimeZone(new Date(), TIMEZONE, "EEEE").toLowerCase();
-
-  const mapped: MovieNightOccurrence[] = [];
-
-  for (const mn of data ?? []) {
-    if (!isUsableMovieTitle(mn.movie_title)) continue;
-    const displayTitle = sanitizeMovieTitle(mn.movie_title);
-    const resort = mn.activity_catalog_id
-      ? resortByCatalog.get(mn.activity_catalog_id)
-      : undefined;
-    if (!resort) continue;
-
-    mapped.push({
-      id: mn.id,
-      resortSlug: resort.resort_slug,
-      resortName: resort.resort_name.replace(/^Disney's\s+/i, ""),
-      movieTitle: mn.movie_title,
-      displayTitle,
-      showTime: mn.show_time ?? "20:00:00",
-      location: mn.location ?? undefined,
-      dayOfWeek: mn.day_of_week,
-      isTonight: mn.day_of_week === tonightDay,
-    });
-  }
-
-  mapped.sort((a, b) => {
-      if (a.isTonight !== b.isTonight) return a.isTonight ? -1 : 1;
-      const dayOrder = [
-        "sunday",
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-      ];
-      return dayOrder.indexOf(a.dayOfWeek) - dayOrder.indexOf(b.dayOfWeek);
-    });
-
-  return enrichMovieNightsWithPosters(mapped);
+  return sanitizePublicActivities(
+    sortActivities(dedupeOccurrences(occurrences), "time"),
+    { minTier: "low" }
+  );
 }
+
+export const getMovieNights = cache(async function getMovieNights(): Promise<
+  MovieNightOccurrence[]
+> {
+  // Film titles need their own source-backed feed. Gold v2 still publishes the
+  // scheduled "Movie Under the Stars" activity, so the site does not need to
+  // fall back to legacy movie_nights rows to show the event itself.
+  return [];
+});
 
 export async function createPlanShare(
   payload: unknown

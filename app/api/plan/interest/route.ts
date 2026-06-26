@@ -3,6 +3,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { hashInterestEmail } from "@/lib/plan/interest";
 import { logSecurityEvent } from "@/lib/plan/security-log";
+import { guardRateLimit } from "@/lib/rate-limit/guard";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,13 @@ export async function POST(request: Request) {
   if (!email || !email.includes("@")) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
+
+  const rateLimited = await guardRateLimit({
+    request,
+    scope: "plan-email",
+    email,
+  });
+  if (rateLimited) return rateLimited;
 
   const limited = await requireTurnstile(body.turnstileToken, "plan_interest");
   if (limited) return limited;

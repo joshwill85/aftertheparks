@@ -47,8 +47,8 @@ export function MovieNightsSection({
   if (movieNights.length === 0) {
     return (
       <p className="rounded-3xl border border-dashed border-[var(--color-card-border)] p-10 text-center text-[var(--color-muted)]">
-        Movie schedules are updating — outdoor cinema listings will appear here as we
-        verify each resort&apos;s calendar.
+        Movie schedules are updating; listings will appear here as we verify
+        each resort&apos;s calendar.
       </p>
     );
   }
