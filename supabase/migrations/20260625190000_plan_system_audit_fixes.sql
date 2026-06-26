@@ -508,6 +508,7 @@ set search_path = public
 as $$
 declare
   v_itinerary public.itineraries%rowtype;
+  v_itinerary_id uuid;
 begin
   if p_owner_user_id is distinct from auth.uid() then
     raise exception 'Cannot mutate another user plan';
