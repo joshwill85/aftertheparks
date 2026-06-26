@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { cn } from "@/lib/utils";
 
 function skipTarget(pathname: string) {
   if (
@@ -21,6 +22,8 @@ function skipTarget(pathname: string) {
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const skip = skipTarget(pathname);
+  const isBrowseSurface =
+    pathname === "/activities" || pathname === "/tonight" || pathname === "/today";
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -33,7 +36,10 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main
         id="main-content"
         tabIndex={-1}
-        className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 pb-24 outline-none md:pb-8"
+        className={cn(
+          "mx-auto w-full flex-1 px-4 py-8 pb-24 outline-none md:pb-8",
+          isBrowseSurface ? "max-w-[1500px]" : "max-w-6xl"
+        )}
       >
         {children}
       </main>

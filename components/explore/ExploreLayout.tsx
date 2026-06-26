@@ -21,7 +21,7 @@ export function ExploreLayout({
   const { items, addActivity } = usePlan();
 
   return (
-    <div className="min-[1100px]:grid min-[1100px]:grid-cols-[minmax(0,1fr)_340px] min-[1100px]:gap-6">
+    <div className="min-[1280px]:grid min-[1280px]:grid-cols-[minmax(0,1fr)_300px] min-[1280px]:gap-6">
       <BrowseFilterShell
         variant="explore"
         resorts={resorts}
@@ -63,8 +63,8 @@ export function ExploreLayout({
         </div>
       </BrowseFilterShell>
 
-      <aside className="plan-rail-wrapper hidden min-[1100px]:block">
-        <div className="plan-rail sticky top-24 space-y-4 rounded-[28px] border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+      <aside className="plan-rail-wrapper hidden min-[1280px]:block">
+        <div className="plan-rail sticky top-24 space-y-4 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <div className="flex items-center justify-between gap-2">
             <h2 className="font-display text-lg font-semibold">My Plan</h2>
             <Link

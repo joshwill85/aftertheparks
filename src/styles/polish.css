@@ -269,13 +269,13 @@ textarea.form-control {
 @media (min-width: 768px) {
   .home-section .event-card-list--cols-3 {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     gap: 14px;
   }
 
   .event-card-list--cols-2 {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
     gap: 14px;
   }
 }
@@ -606,6 +606,12 @@ textarea.form-control {
 
 .event-card .card-actions {
   margin-top: 10px;
+}
+
+.activity-offering-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1rem;
 }
 
 /* Detail page — same bright language as listing cards */
