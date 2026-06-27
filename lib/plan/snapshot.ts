@@ -1,12 +1,11 @@
 import type { ActivityOccurrence, PlanItem } from "@/lib/types/occurrence";
+import { publicPriceLabel } from "@/lib/priceLabels";
 
 const INTERNAL_NO_TIME_SCHEDULE_TEXT =
   /no posted time in PDF|Activities schedule available digitally/i;
 
 export function priceLabelFromActivity(activity: ActivityOccurrence): string {
-  if (activity.price.state === "free") return "Free";
-  if (activity.price.state === "fee") return "Paid";
-  return "Unclear";
+  return publicPriceLabel(activity.price.state);
 }
 
 function publicScheduleText(

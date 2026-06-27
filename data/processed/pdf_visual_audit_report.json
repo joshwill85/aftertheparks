@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "summary": {
+    "pdfs_audited": 20,
+    "expected_current_pdf_hashes": 20,
+    "independent_pdfs_audited": 0,
+    "seed_pdfs_audited": 20,
+    "missing_independent_pdf_hashes": [
+      "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
+      "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+      "1ed3ccdaab67113c95890857eea995a065323f9c87f9015497b98505589d4bab",
+      "2a084971eacc44d430d201d32ded314520dc47ffd7412507ebdcc80e6a5e3db5",
+      "34b7e058fe4b74cf649756d2142b6b3083b4700bcdb923509cb7ba38a68ca842",
+      "48b3c502faebb907939e8cf7b4eaad984fbaf0174d4db94cef8454a6597166a5",
+      "51e2d919497fd714aa8af1167b7e7daaa2561ab650e96101ee7878b0daea0a29",
+      "5371e557f0861ae1e46df59a0074671b8d52791d71f5a827fa9ec8a52f134978",
+      "7e211f9972fb47a554a34ade40864a6304eea41c421cc67a4026f2a2519631a5",
+      "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+      "811537d269acf8ed449b6dd962f4a4e2e4abef7cc54c24905161e06195ff524c",
+      "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
+      "896a5736f6d89ebae3b607d1dc6f1bb011b06576a8d5a935209a092c1b723442",
+      "985fb7cba2e2ff099e2b4695f5123c08766fef69731d0df320649aef7bf69045",
+      "b9bfff9b8873262e421d291b2f3ef6e050e740645b6afd51c40fbe380051946f",
+      "e99b6c2322ab4d4c2c490ba6a183cf71b10b042a79bb0932e61b4bbb8c37edcf",
+      "ed41c527922e72a8a3ba92ee3d12f0104fd2d1305ab24af4b59d6f2bdac1d6f0",
+      "f6c6360fee9a12d84f02d55b2b33cf3b435048b963630c186b9b616981ea9263",
+      "f875e11660cef7b87cbdc4fdc9fbbdb9e7a9ada88109e06d8eee2b2c686aa38f",
+      "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0"
+    ],
+    "independent_visual_ocr_coverage": "low",
+    "activities_compared": 220,
+    "blocking_mismatches": 0,
+    "review_mismatches": 0
+  },
+  "blocking_mismatches": [],
+  "review_mismatches": [],
+  "warnings": [
+    "independent_gpt_visual_review_not_run"
+  ]
+}

@@ -12,6 +12,7 @@ import {
   type DisplayQualityResult,
 } from "@/lib/displayQuality";
 import { sanitizeLocationLabel } from "@/lib/location/sanitize";
+import { publicPriceLabel, type PublicPriceLabel } from "@/lib/priceLabels";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 export interface DisplayActivity {
@@ -25,7 +26,7 @@ export interface DisplayActivity {
   timeLabel?: string;
   timeUncertain: boolean;
   daypart: ActivityOccurrence["daypart"] | "unclear";
-  costLabel: "Free" | "Paid" | "Price unclear";
+  costLabel: PublicPriceLabel;
   summary?: string;
   trustState: TrustState;
   displayQuality: DisplayQualityResult;
@@ -35,14 +36,6 @@ export interface DisplayActivity {
   endDateTime?: string;
   isHappeningNow: boolean;
   scheduleText?: string;
-}
-
-function costLabel(
-  state: ActivityOccurrence["price"]["state"]
-): DisplayActivity["costLabel"] {
-  if (state === "free") return "Free";
-  if (state === "fee") return "Paid";
-  return "Price unclear";
 }
 
 /** UI-safe activity object — never render raw ingest fields. */
@@ -64,7 +57,7 @@ export function toDisplayActivity(
     timeLabel: time.label,
     timeUncertain: time.uncertain,
     daypart: time.uncertain ? "unclear" : activity.daypart,
-    costLabel: costLabel(activity.price.state),
+    costLabel: publicPriceLabel(activity.price.state),
     summary: getDisplaySummary(input),
     trustState: getTrustState(input),
     displayQuality: quality,

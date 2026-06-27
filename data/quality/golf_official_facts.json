@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "notes": "Structured official golf and miniature-golf facts used when Disney's SPA/API source is source-backed but too sparse for precise guest-facing price and location display.",
+  "facts": [
+    {
+      "program_key": "disneys-magnolia-golf-course",
+      "title": "Disney's Magnolia Golf Course",
+      "source_url": "https://disneyworld.disney.go.com/recreation/magnolia-golf-course/",
+      "price_source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "resort_slugs": ["polynesian-village-resort"],
+      "location_label": "Disney's Magnolia Golf Course, near Shades of Green Resort",
+      "description": "Disney's longest championship golf course, reimagined with elevated tees, redesigned bunkers, re-contoured Bermuda greens, water hazards, and Disney-themed hole names.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Tee-time based; rates and availability vary"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Green fees vary by season, day of week, and tee time; use the official Golf WDW rates and booking tools for exact pricing.",
+        "priceBasis": "dynamic_green_fee"
+      },
+      "booking": {
+        "reservation_required": true,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "18-hole championship course",
+        "Complimentary taxi transportation from select Walt Disney World Resort hotels",
+        "Free golf-course parking"
+      ],
+      "evidence_lines": [
+        "Disney's Magnolia Golf Course page: Adults / Book Tee Time.",
+        "Disney's Magnolia Golf Course page: designed in classic Tour style and the longest of the Walt Disney World Resort golf courses.",
+        "Golf WDW rates page: greens fees vary seasonally and also depend on the day of week and time you choose to play.",
+        "Golf WDW rates page: Public Day and Resort Guest rates vary seasonally and by day of week and tee time."
+      ]
+    },
+    {
+      "program_key": "disneys-palm-golf-course",
+      "title": "Disney's Palm Golf Course",
+      "source_url": "https://disneyworld.disney.go.com/recreation/palm-golf-course/",
+      "price_source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "resort_slugs": ["polynesian-village-resort"],
+      "location_label": "Disney's Palm Golf Course, near Shades of Green Resort",
+      "description": "An 18-hole championship course redesigned by Arnold Palmer Course Design, with lakes, palm trees, tropical sands, sloping greens, and 59 bunkers.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Tee-time based; rates and availability vary"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Green fees vary by season, day of week, and tee time; use the official Golf WDW rates and booking tools for exact pricing.",
+        "priceBasis": "dynamic_green_fee"
+      },
+      "booking": {
+        "reservation_required": true,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "18-hole championship course",
+        "Complimentary taxi transportation from select Walt Disney World Resort hotels",
+        "Free golf-course parking"
+      ],
+      "evidence_lines": [
+        "Disney's Palm Golf Course page: Adults / Book Tee Time.",
+        "Disney's Palm Golf Course page: 18-hole championship course operated by Arnold Palmer Golf Management.",
+        "Golf WDW rates page: greens fees vary seasonally and also depend on the day of week and time you choose to play.",
+        "Golf WDW rates page: Public Day and Resort Guest rates vary seasonally and by day of week and tee time."
+      ]
+    },
+    {
+      "program_key": "disneys-oak-trail-golf-course",
+      "title": "Disney's Oak Trail Golf Course",
+      "source_url": "https://disneyworld.disney.go.com/recreation/oak-trail-golf-course/",
+      "price_source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "resort_slugs": ["polynesian-village-resort"],
+      "location_label": "Disney's Oak Trail Golf Course, near Shades of Green Resort",
+      "description": "A family-friendly 9-hole, par-36 walking course with junior tees and holes ranging from 132 to 517 yards from the white tees.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Tee-time based; rates and availability vary"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Golf rates vary by season, day of week, and tee time; use the official Golf WDW rates and booking tools for exact pricing.",
+        "priceBasis": "dynamic_green_fee"
+      },
+      "booking": {
+        "reservation_required": true,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "9-hole walking course",
+        "Junior tees",
+        "Complimentary taxi transportation from select Walt Disney World Resort hotels",
+        "Free golf-course parking"
+      ],
+      "evidence_lines": [
+        "Disney's Oak Trail Golf Course page: Adults / Book Tee Time.",
+        "Disney's Oak Trail Golf Course page: golf carts are not allowed; this is a walking-only course.",
+        "Golf WDW rates page: Oak Trail rates vary seasonally and by day of week and tee time.",
+        "Golf WDW rates page: Junior rate under 18 is 25% off applicable adult rate."
+      ]
+    },
+    {
+      "program_key": "disneys-lake-buena-vista-golf-course",
+      "title": "Disney's Lake Buena Vista Golf Course",
+      "source_url": "https://disneyworld.disney.go.com/recreation/lake-buena-vista-golf-course/",
+      "price_source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "resort_slugs": ["saratoga-springs-resort-and-spa"],
+      "location_label": "Disney's Lake Buena Vista Golf Course at Disney's Saratoga Springs Resort & Spa",
+      "description": "A classic 18-hole country-club style course near Disney Springs with pine forests, palmettos, sparkling lakes, elevated bunkered greens, and a challenging island green.",
+      "availability": {
+        "kind": "calendar_dependent",
+        "hours_state": "currently_unavailable",
+        "label": "Currently closed for renovations expected to continue through fall 2026"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Green fees vary by season, day of week, and tee time when the course is available; use the official Golf WDW rates and booking tools for exact pricing.",
+        "priceBasis": "dynamic_green_fee"
+      },
+      "booking": {
+        "reservation_required": true,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "18-hole championship course",
+        "Golf Shop open during renovation",
+        "Complimentary taxi transportation from select Walt Disney World Resort hotels",
+        "Free golf-course parking"
+      ],
+      "evidence_lines": [
+        "Disney's Lake Buena Vista Golf Course page: Adults / Book Tee Time.",
+        "Disney's Lake Buena Vista Golf Course page: currently closed for renovations expected to continue through fall 2026.",
+        "Disney's Lake Buena Vista Golf Course page: Golf Shop remains open daily from 9:00 AM to 5:00 PM during renovations.",
+        "Golf WDW rates page: greens fees vary seasonally and also depend on the day of week and time you choose to play."
+      ]
+    },
+    {
+      "program_key": "walt-disney-world-golf",
+      "title": "Walt Disney World Golf",
+      "source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "price_source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "resort_slugs": ["saratoga-springs-resort-and-spa"],
+      "location_label": "Walt Disney World Golf",
+      "description": "Official Walt Disney World golf pricing and tee-time information for Disney's championship and 9-hole golf courses.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Tee-time based; rates and availability vary"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Rates vary by season, day of week, and tee time; use the official Golf WDW rates and booking tools for exact pricing.",
+        "priceBasis": "dynamic_green_fee"
+      },
+      "booking": {
+        "reservation_required": true,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "Official tee-time booking",
+        "Seasonal, twilight, junior, replay, and eligibility discounts"
+      ],
+      "evidence_lines": [
+        "Golf WDW rates page: Walt Disney World Golf promotes a Best Price Guarantee for booking tee times online or by phone.",
+        "Golf WDW rates page: greens fees vary seasonally and also depend on the day of week and time you choose to play.",
+        "Golf WDW rates page: Junior rate under 18 is 25% off applicable adult rate; same-day replay is 25% off."
+      ]
+    },
+    {
+      "program_key": "sunset-9-hole-golf-promotion",
+      "title": "Sunset 9-Hole Golf Promotion",
+      "source_url": "https://disneyworld.disney.go.com/recreation/sunrise-9-sunset-9/",
+      "price_source_url": "https://www.golfwdw.com/courses/golf-rates",
+      "resort_slugs": ["polynesian-village-resort", "saratoga-springs-resort-and-spa"],
+      "location_label": "Sunset 9 at participating Walt Disney World golf courses",
+      "description": "A 9-hole golf promotion at select Walt Disney World golf courses with special late-day pricing and 2 complimentary beverages.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Late-day tee times vary by season"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Sunset 9 seasonal rates currently range from $39 - $75 before tax, depending on date and course.",
+        "minAmountCents": 3900,
+        "maxAmountCents": 7500,
+        "priceBasis": "per_9_hole_round"
+      },
+      "booking": {
+        "reservation_required": true,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "9-hole round",
+        "2 complimentary beverages"
+      ],
+      "evidence_lines": [
+        "Disney Sunrise 9 / Sunset 9 page: special pricing along with 2 complimentary beverages on a 9-hole round of golf.",
+        "Golf WDW rates page: Sunset 9 seasonal table lists $55 - $65, $65 - $75, and $39 - $49 periods.",
+        "Golf WDW rates page: current Sunset 9 public range across listed seasons is $39 - $75."
+      ]
+    },
+    {
+      "program_key": "fantasia-gardens-and-fairways-miniature-golf",
+      "title": "Fantasia Gardens and Fairways Miniature Golf",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fantasia-gardens-fairways-miniature-golf/",
+      "resort_slugs": ["boardwalk-inn"],
+      "variant_key": "epcot-resort-area",
+      "location_label": "Walt Disney World Swan Hotel at EPCOT Resort Area",
+      "description": "Two 18-hole miniature golf adventures: the whimsical Fantasia Gardens course and the skill-focused Fantasia Fairways course.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Operating hours vary; same-day walk-ups welcome"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "$19 per Adult, $12 per Child (Ages 3-9) (tax not included)",
+        "minAmountCents": 1200,
+        "maxAmountCents": 1900,
+        "priceBasis": "per_person",
+        "options": [
+          {
+            "optionName": "Adult admission",
+            "amountCents": 1900,
+            "priceBasis": "per_adult",
+            "notes": "Tax not included"
+          },
+          {
+            "optionName": "Child admission ages 3-9",
+            "amountCents": 1200,
+            "priceBasis": "per_child",
+            "notes": "Tax not included"
+          }
+        ]
+      },
+      "booking": {
+        "reservation_required": false,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "Two 18-hole miniature golf courses",
+        "Walk-ups welcome",
+        "Next-day and later booking by phone"
+      ],
+      "evidence_lines": [
+        "Disney Fantasia Gardens and Fairways Miniature Golf page: Located in Walt Disney World Swan Hotel at EPCOT Resort Area.",
+        "Disney Fantasia Gardens and Fairways Miniature Golf page: $19 per Adult, $12 per Child (Ages 3-9) (tax not included).",
+        "Disney Fantasia Gardens and Fairways Miniature Golf page: Walk-ups are welcome; for next-day booking and beyond, call (407) WDW-PLAY."
+      ]
+    },
+    {
+      "program_key": "winter-summerland-miniature-golf",
+      "title": "Winter Summerland Miniature Golf",
+      "source_url": "https://disneyworld.disney.go.com/recreation/winter-summerland-miniature-golf/",
+      "resort_slugs": ["animal-kingdom-lodge"],
+      "variant_key": "animal-kingdom-resort-area",
+      "location_label": "Disney's Animal Kingdom Resort Area",
+      "description": "Two 18-hole miniature golf adventures themed to Santa's off-season retreat: the Summer Course and the Winter Course.",
+      "availability": {
+        "kind": "reservation_based",
+        "hours_state": "calendar_varies",
+        "label": "Operating hours vary; same-day walk-ups welcome"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "$19 per Adult, $12 per Child (Ages 3-9) (tax not included)",
+        "minAmountCents": 1200,
+        "maxAmountCents": 1900,
+        "priceBasis": "per_person",
+        "options": [
+          {
+            "optionName": "Adult admission",
+            "amountCents": 1900,
+            "priceBasis": "per_adult",
+            "notes": "Tax not included"
+          },
+          {
+            "optionName": "Child admission ages 3-9",
+            "amountCents": 1200,
+            "priceBasis": "per_child",
+            "notes": "Tax not included"
+          }
+        ]
+      },
+      "booking": {
+        "reservation_required": false,
+        "reservation_recommended": true
+      },
+      "amenities": [
+        "Two 18-hole miniature golf courses",
+        "Walk-ups welcome",
+        "Next-day and later booking by phone"
+      ],
+      "evidence_lines": [
+        "Disney Winter Summerland Miniature Golf page: Located at Disney's Animal Kingdom Resort Area.",
+        "Disney Winter Summerland Miniature Golf page: $19 per Adult, $12 per Child (Ages 3-9) (tax not included).",
+        "Disney Winter Summerland Miniature Golf page: Walk-ups are welcome; for next-day booking and beyond, call (407) WDW-PLAY."
+      ]
+    }
+  ]
+}

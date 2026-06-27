@@ -1,0 +1,73 @@
+{
+  "source_kind": "official_html",
+  "source_url": "https://disneyworld.disney.go.com/recreation/pool-tables/",
+  "captured_at": "2026-06-27T01:26:49.027602+00:00",
+  "raw_html_sha256": "0022cee27068564e06893d0d4dbbc73770a66e76016181395cd5d44a7ed1e9ff",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Pool Tables | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Pool Tables"
+    },
+    {
+      "line": 3,
+      "text": "LocatedinWalt Disney World® Resort"
+    },
+    {
+      "line": 4,
+      "text": "Rack ’em up and knock ’em down at complimentary pool tables found at 5 Walt Disney World Resort hotels."
+    },
+    {
+      "line": 5,
+      "text": "Tweens"
+    },
+    {
+      "line": 6,
+      "text": "Teens"
+    },
+    {
+      "line": 7,
+      "text": "Adults"
+    },
+    {
+      "line": 8,
+      "text": "Here’s Your Cue"
+    },
+    {
+      "line": 9,
+      "text": "Unleash your inner pool shark with a competitive game of 8-ball or just play for fun. Pool tables at 5 venues allow you to go head to head, practice with a partner or even hone your stick skills solo."
+    },
+    {
+      "line": 10,
+      "text": "Any Guest of a Walt Disney World Resort hotel may use these pool tables, and equipment can be obtained using a valid Resort ID. Disney Vacation Club members may check out equipment free of charge; for all other Guests, an associated fee applies."
+    },
+    {
+      "line": 11,
+      "text": "Pool tables are found at the following locations:"
+    },
+    {
+      "line": 12,
+      "text": "Disney’s Animal Kingdom Villas – Kidani Village: Kidani Village Community Hall"
+    },
+    {
+      "line": 13,
+      "text": "Disney’s Beach Club Resort: Stormalong Bay"
+    },
+    {
+      "line": 14,
+      "text": "Disney’s Caribbean Beach Resort: Barefoot Bay Bike Works"
+    },
+    {
+      "line": 15,
+      "text": "Disney’s Old Key West Resort: Conch Flats Community Hall"
+    },
+    {
+      "line": 16,
+      "text": "Disney’s Saratoga Springs Resort & Spa: Saratoga Springs Community Hall."
+    }
+  ],
+  "content_sha256": "2a205c071f7603e1e31bef2c4221b346184f542b8a4976ec3cc4f48f5eaf20cf"
+}

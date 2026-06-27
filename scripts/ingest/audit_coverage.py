@@ -26,6 +26,11 @@ DEFAULT_FIXTURES_DIR = ROOT / "data/golden/activities"
 DEFAULT_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 DEFAULT_INGEST_PATH = PROCESSED_DIR / "activities_ingest.json"
 DEFAULT_OFFICIAL_OFFERINGS_PATH = PROCESSED_DIR / "official_recreation_offerings.json"
+DEFAULT_SOURCE_FRESHNESS_REPORT_PATH = PROCESSED_DIR / "source_freshness_report.json"
+DEFAULT_VISUAL_AUDIT_REPORT_PATH = PROCESSED_DIR / "pdf_visual_audit_report.json"
+DEFAULT_FIELD_AUDIT_REPORT_PATH = PROCESSED_DIR / "field_audit_report.json"
+DEFAULT_MANUAL_REVIEW_REPORT_PATH = PROCESSED_DIR / "manual_review_report.json"
+SHA256_HEX = re.compile(r"^[a-f0-9]{64}$", re.I)
 OFFICIAL_QUARANTINE_OFFERING_ALIASES = {
     ("fort-wilderness", "daniel-boones-wilderness-arcade"): "arcades",
     ("fort-wilderness", "davy-crocketts-wilderness-arcade"): "arcades",
@@ -59,6 +64,10 @@ def _read_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
     return json.loads(path.read_text())
+
+
+def _is_historical_regression_fixture(fixture: dict[str, Any]) -> bool:
+    return str(fixture.get("publication_scope") or "").strip() == "historical_regression"
 
 
 def _pdf_sources() -> list[dict[str, Any]]:
@@ -105,6 +114,8 @@ def _fixture_rows(fixtures_dir: Path) -> list[dict[str, Any]]:
 
     for path in sorted(fixtures_dir.glob("*.json")):
         fixture = json.loads(path.read_text())
+        if _is_historical_regression_fixture(fixture):
+            continue
         expected_records = fixture.get("expected_records")
         if isinstance(expected_records, list):
             for expected in expected_records:
@@ -155,6 +166,8 @@ def _fixture_quarantine_rows(fixtures_dir: Path) -> list[dict[str, Any]]:
 
     for path in sorted(fixtures_dir.glob("*.json")):
         fixture = json.loads(path.read_text())
+        if _is_historical_regression_fixture(fixture):
+            continue
         expected_records = fixture.get("expected_quarantine_records")
         if not isinstance(expected_records, list):
             continue
@@ -182,6 +195,8 @@ def _fixture_unextractable_rows(fixtures_dir: Path) -> list[dict[str, Any]]:
 
     for path in sorted(fixtures_dir.glob("*.json")):
         fixture = json.loads(path.read_text())
+        if _is_historical_regression_fixture(fixture):
+            continue
         expected_records = fixture.get("expected_unextractable_records")
         if not isinstance(expected_records, list):
             continue
@@ -203,9 +218,182 @@ def _fixture_unextractable_rows(fixtures_dir: Path) -> list[dict[str, Any]]:
     return rows
 
 
+def _manual_review_records(fixtures_dir: Path) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    if not fixtures_dir.exists():
+        return records
+    for path in sorted(fixtures_dir.glob("*.json")):
+        fixture = _read_json(path, {})
+        if not isinstance(fixture, dict) or _is_historical_regression_fixture(fixture):
+            continue
+        reviewed_manual_records = fixture.get("reviewed_manual_records")
+        if not isinstance(reviewed_manual_records, list):
+            continue
+        for index, expected in enumerate(reviewed_manual_records):
+            if not isinstance(expected, dict):
+                continue
+            records.append(
+                {
+                    "fixture": str(path),
+                    "fixture_name": path.name,
+                    "record_index": index,
+                    "calendar_group_key": fixture.get("calendar_group_key"),
+                    "slug": expected.get("slug"),
+                    "title": expected.get("title"),
+                    "source_sha256": _fixture_source_hash(fixture, expected),
+                    "manual_review": expected.get("manual_review"),
+                    "required_spans": expected.get("required_spans"),
+                }
+            )
+    return records
+
+
+def _spans_have_source_text_or_bbox(spans_by_field: Any) -> bool:
+    if not isinstance(spans_by_field, dict):
+        return False
+    for spans in spans_by_field.values():
+        if not isinstance(spans, list):
+            continue
+        for span in spans:
+            if not isinstance(span, dict):
+                continue
+            if str(span.get("text") or "").strip() or span.get("bbox"):
+                return True
+    return False
+
+
+def manual_review_errors(
+    review: dict[str, Any] | None,
+    *,
+    fallback_source_sha256: str | None = None,
+    fallback_required_spans: dict[str, Any] | None = None,
+    fallback_decision: str | None = None,
+) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(review, dict):
+        return ["manual_review:missing"]
+
+    source_sha256 = str(review.get("source_sha256") or fallback_source_sha256 or "")
+    if not SHA256_HEX.match(source_sha256):
+        errors.append("manual_review:source_sha256")
+
+    has_source_text = bool(str(review.get("source_text") or "").strip())
+    has_bbox = isinstance(review.get("bbox"), dict) or bool(review.get("bbox"))
+    if not (has_source_text or has_bbox or _spans_have_source_text_or_bbox(fallback_required_spans)):
+        errors.append("manual_review:source_text_or_bbox")
+
+    if not str(review.get("decision") or fallback_decision or "").strip():
+        errors.append("manual_review:decision")
+    if not str(review.get("reason") or review.get("notes") or "").strip():
+        errors.append("manual_review:reason")
+    return errors
+
+
+def build_manual_review_report(fixtures_dir: Path = DEFAULT_FIXTURES_DIR) -> dict[str, Any]:
+    records = _manual_review_records(fixtures_dir)
+    audited_records: list[dict[str, Any]] = []
+    error_counts: Counter[str] = Counter()
+    for record in records:
+        errors = manual_review_errors(
+            record.get("manual_review"),
+            fallback_source_sha256=record.get("source_sha256"),
+            fallback_required_spans=record.get("required_spans"),
+            fallback_decision="publish",
+        )
+        for error in errors:
+            error_counts[error] += 1
+        audited_records.append(
+            {
+                "fixture": record["fixture_name"],
+                "calendar_group_key": record.get("calendar_group_key"),
+                "slug": record.get("slug"),
+                "title": record.get("title"),
+                "reviewer": (record.get("manual_review") or {}).get("reviewer")
+                if isinstance(record.get("manual_review"), dict)
+                else None,
+                "reviewed_at": (record.get("manual_review") or {}).get("reviewed_at")
+                if isinstance(record.get("manual_review"), dict)
+                else None,
+                "source_sha256": record.get("source_sha256"),
+                "decision": (record.get("manual_review") or {}).get("decision", "publish")
+                if isinstance(record.get("manual_review"), dict)
+                else None,
+                "reason": (record.get("manual_review") or {}).get("reason")
+                or (record.get("manual_review") or {}).get("notes")
+                if isinstance(record.get("manual_review"), dict)
+                else None,
+                "has_source_text_or_bbox": _spans_have_source_text_or_bbox(record.get("required_spans")),
+                "errors": errors,
+            }
+        )
+    return {
+        "passed": not error_counts,
+        "summary": {
+            "manual_review_record_count": len(records),
+            "manual_review_error_count": sum(error_counts.values()),
+            "manual_review_errors_by_code": dict(sorted(error_counts.items())),
+        },
+        "records": audited_records,
+    }
+
+
 def _gold_rows(gold_path: Path) -> list[dict[str, Any]]:
     data = _read_json(gold_path, [])
     return data if isinstance(data, list) else []
+
+
+def _source_freshness_errors(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+    report = _read_json(path, {})
+    if not isinstance(report, dict):
+        return [f"source_freshness:invalid_report:{path}"]
+    errors = report.get("errors")
+    if isinstance(errors, list):
+        return [str(error) for error in errors if str(error).strip()]
+    if report.get("passed") is False:
+        return [f"source_freshness:failed_without_errors:{path}"]
+    return []
+
+
+def _visual_audit_errors(path: Path) -> list[str]:
+    if not path.exists():
+        return [f"visual_audit:missing_report:{path}"]
+    report = _read_json(path, {})
+    if not isinstance(report, dict):
+        return [f"visual_audit:invalid_report:{path}"]
+    blocking = report.get("blocking_mismatches")
+    blocking_count = len(blocking) if isinstance(blocking, list) else int((report.get("summary") or {}).get("blocking_mismatches") or 0)
+    if blocking_count:
+        return [f"visual_audit:blocking_mismatches:{blocking_count}"]
+    if report.get("passed") is False:
+        return [f"visual_audit:failed_without_blocking_count:{path}"]
+    return []
+
+
+def _field_audit_errors(path: Path) -> list[str]:
+    if not path.exists():
+        return [f"field_audit:missing_report:{path}"]
+    report = _read_json(path, {})
+    if not isinstance(report, dict):
+        return [f"field_audit:invalid_report:{path}"]
+    errors = report.get("errors")
+    error_count = len(errors) if isinstance(errors, list) else int((report.get("summary") or {}).get("errors") or 0)
+    if error_count:
+        return [f"field_audit:errors:{error_count}"]
+    if report.get("passed") is False:
+        return [f"field_audit:failed_without_error_count:{path}"]
+    return []
+
+
+def _report_summary(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    report = _read_json(path, {})
+    if not isinstance(report, dict):
+        return {}
+    summary = report.get("summary")
+    return summary if isinstance(summary, dict) else {}
 
 
 def _legacy_counts(ingest_path: Path) -> Counter[str]:
@@ -346,7 +534,8 @@ def _source_span_looks_ocr_fragmented(value: str) -> bool:
     if not tokens:
         return False
     short_tokens = sum(1 for token in tokens if len(token) <= 2)
-    return short_tokens / len(tokens) >= 0.35 or bool(re.search(r"[|+]", value))
+    has_single_letter_shard = len(tokens) >= 3 and any(len(token) == 1 for token in tokens)
+    return short_tokens / len(tokens) >= (1 / 3) or has_single_letter_shard or bool(re.search(r"[|+]", value))
 
 
 def _title_span_supports_title(title: str, spans: list[dict[str, Any]]) -> bool:
@@ -569,6 +758,9 @@ def build_coverage_audit(
     gold_path: Path = DEFAULT_GOLD_PATH,
     ingest_path: Path = DEFAULT_INGEST_PATH,
     official_offerings_path: Path = DEFAULT_OFFICIAL_OFFERINGS_PATH,
+    source_freshness_report_path: Path = DEFAULT_SOURCE_FRESHNESS_REPORT_PATH,
+    visual_audit_report_path: Path = DEFAULT_VISUAL_AUDIT_REPORT_PATH,
+    field_audit_report_path: Path = DEFAULT_FIELD_AUDIT_REPORT_PATH,
     require_production_ready: bool = False,
     expected_ui_mode: str = "gold-v2",
 ) -> CoverageAudit:
@@ -579,6 +771,29 @@ def build_coverage_audit(
     fixture_quarantines = _fixture_quarantine_rows(fixtures_dir)
     fixture_unextractables = _fixture_unextractable_rows(fixtures_dir)
     gold = _gold_rows(gold_path)
+    source_freshness_errors = (
+        _source_freshness_errors(source_freshness_report_path)
+        if require_production_ready
+        else []
+    )
+    visual_audit_errors = (
+        _visual_audit_errors(visual_audit_report_path)
+        if require_production_ready
+        else []
+    )
+    field_audit_errors = (
+        _field_audit_errors(field_audit_report_path)
+        if require_production_ready
+        else []
+    )
+    visual_audit_summary = _report_summary(visual_audit_report_path)
+    field_audit_summary = _report_summary(field_audit_report_path)
+    manual_review_report = build_manual_review_report(fixtures_dir)
+    manual_review_errors_list = [
+        f"manual_review:{record['calendar_group_key']}/{record['slug']}:{error}"
+        for record in manual_review_report["records"]
+        for error in record["errors"]
+    ]
     legacy_counts = _legacy_counts(ingest_path)
     official_offering_keys = _official_offering_group_slug_keys(official_offerings_path)
     official_offering_covered_quarantines = [
@@ -614,6 +829,12 @@ def build_coverage_audit(
         for group, _, _ in fixture_keys
         if group
     )
+    fixture_hashes_by_group: dict[str, set[str]] = {}
+    for row in fixtures:
+        group = row.get("calendar_group_key")
+        source_hash = row.get("source_sha256")
+        if group and source_hash:
+            fixture_hashes_by_group.setdefault(str(group), set()).add(str(source_hash))
     gold_keys = {
         (
             row.get("calendar_group_key"),
@@ -624,6 +845,16 @@ def build_coverage_audit(
     }
     gold_groups = {row.get("calendar_group_key") for row in gold if row.get("calendar_group_key")}
     gold_counts = Counter(str(row.get("calendar_group_key")) for row in gold if row.get("calendar_group_key"))
+    gold_identity_counts = Counter(
+        (str(row.get("calendar_group_key") or ""), str(row.get("canonical_slug") or ""))
+        for row in gold
+        if row.get("calendar_group_key") and row.get("canonical_slug")
+    )
+    duplicate_gold_identities = {
+        f"{group}/{slug}": count
+        for (group, slug), count in sorted(gold_identity_counts.items())
+        if count > 1
+    }
     legacy_total = sum(legacy_counts.values())
     coverage_requirements: dict[str, dict[str, Any]] = {}
     legacy_overcount_groups: dict[str, dict[str, int]] = {}
@@ -671,6 +902,18 @@ def build_coverage_audit(
     missing_fixture_groups = sorted(pdf_groups - fixture_groups)
     missing_gold_groups = sorted(pdf_groups - gold_groups)
     missing_gold_fixture_keys = sorted(fixture_keys - gold_keys)
+    stale_fixture_groups = {
+        str(source["calendar_group_key"]): {
+            "current_pdf_sha256": str(source["content_sha256"]),
+            "fixture_sha256": sorted(fixture_hashes_by_group.get(str(source["calendar_group_key"]), set())),
+            "pdf_edition": source.get("pdf_edition"),
+        }
+        for source in pdf_sources
+        if source.get("cached")
+        and source.get("content_sha256")
+        and str(source["calendar_group_key"]) in full_fixture_groups
+        and str(source["content_sha256"]) not in fixture_hashes_by_group.get(str(source["calendar_group_key"]), set())
+    }
 
     if missing_cached_groups:
         errors.append(f"bronze:missing_cached_pdfs:{','.join(missing_cached_groups)}")
@@ -683,11 +926,21 @@ def build_coverage_audit(
 
     for index, row in enumerate(gold):
         errors.extend(_gold_row_errors(row, index))
+    if duplicate_gold_identities:
+        errors.append(
+            "gold:duplicate_current_identity:"
+            + ",".join(f"{key}={count}" for key, count in duplicate_gold_identities.items())
+        )
 
     if missing_fixture_groups:
         warnings.append(f"coverage:missing_fixture_groups:{len(missing_fixture_groups)}")
     if missing_gold_groups:
         warnings.append(f"coverage:missing_gold_groups:{len(missing_gold_groups)}")
+    if stale_fixture_groups:
+        warnings.append(
+            "coverage:stale_fixture_sources:"
+            + ",".join(sorted(stale_fixture_groups))
+        )
     if coverage_required_count and len(gold) < coverage_required_count:
         warnings.append(f"coverage:gold_rows_below_required_count:{len(gold)}<{coverage_required_count}")
     if undercovered_gold_groups:
@@ -728,6 +981,7 @@ def build_coverage_audit(
         and not blocking_fixture_quarantines
         and not missing_fixture_groups
         and not missing_gold_groups
+        and not stale_fixture_groups
         and (not coverage_required_count or len(gold) >= coverage_required_count)
         and not undercovered_gold_groups
         and ui_mode == expected_ui_mode
@@ -738,6 +992,8 @@ def build_coverage_audit(
             errors.append(f"coverage:missing_fixture_groups:{','.join(missing_fixture_groups)}")
         if missing_gold_groups:
             errors.append(f"coverage:missing_gold_groups:{','.join(missing_gold_groups)}")
+        if stale_fixture_groups:
+            errors.append(f"coverage:stale_fixture_sources:{','.join(sorted(stale_fixture_groups))}")
         if coverage_required_count and len(gold) < coverage_required_count:
             errors.append(f"coverage:gold_rows_below_required_count:{len(gold)}<{coverage_required_count}")
         if undercovered_gold_groups:
@@ -749,6 +1005,10 @@ def build_coverage_audit(
             errors.append(f"coverage:blocking_fixture_quarantine_records:{len(blocking_fixture_quarantines)}")
         if ui_mode != expected_ui_mode:
             errors.append(f"coverage:ui_pipeline_not_{expected_ui_mode}:{ui_mode}")
+        errors.extend(source_freshness_errors)
+        errors.extend(visual_audit_errors)
+        errors.extend(field_audit_errors)
+        errors.extend(manual_review_errors_list)
 
     summary = {
         "pdf_source_count": len(pdf_sources),
@@ -771,6 +1031,12 @@ def build_coverage_audit(
                 for row in official_offering_alias_covered_quarantines
             }
         ),
+        "source_freshness_error_count": len(source_freshness_errors),
+        "visual_audit_error_count": len(visual_audit_errors),
+        "visual_audit_summary": visual_audit_summary,
+        "field_audit_error_count": len(field_audit_errors),
+        "field_audit_summary": field_audit_summary,
+        "manual_review_summary": manual_review_report["summary"],
         "blocking_fixture_quarantine_count": len(blocking_fixture_quarantines),
         "blocking_fixture_quarantine_unique_count": len(
             {
@@ -789,9 +1055,11 @@ def build_coverage_audit(
         "missing_cached_groups": missing_cached_groups,
         "missing_fixture_groups": missing_fixture_groups,
         "missing_gold_groups": missing_gold_groups,
+        "stale_fixture_groups": stale_fixture_groups,
         "undercovered_gold_groups": undercovered_gold_groups,
         "legacy_overcount_groups": legacy_overcount_groups,
         "legacy_undercount_groups": legacy_undercount_groups,
+        "duplicate_gold_identities": duplicate_gold_identities,
         "coverage_requirements_by_group": coverage_requirements,
         "legacy_counts_by_group": dict(sorted(legacy_counts.items())),
         "gold_counts_by_group": dict(sorted(gold_counts.items())),
@@ -821,6 +1089,10 @@ def main() -> None:
         "warnings": audit.warnings,
         "errors": audit.errors,
     }
+    DEFAULT_MANUAL_REVIEW_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    DEFAULT_MANUAL_REVIEW_REPORT_PATH.write_text(
+        json.dumps(build_manual_review_report(args.fixtures_dir), indent=2, ensure_ascii=False) + "\n"
+    )
     if args.json:
         print(json.dumps(payload, indent=2))
     else:

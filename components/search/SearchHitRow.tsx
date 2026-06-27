@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { IconGlyph } from "@/components/icons/IconGlyph";
+import { SEARCH_KIND_ICON_KEYS } from "@/components/icons/iconRegistry";
 import type { SearchHit } from "@/lib/search/types";
 import { cn } from "@/lib/utils";
 
@@ -10,16 +12,6 @@ const KIND_LABELS: Record<SearchHit["kind"], string> = {
   page: "Page",
   movie: "Movie",
   offering: "Official offering",
-};
-
-const KIND_ICONS: Record<SearchHit["kind"], string> = {
-  activity: "✨",
-  resort: "🏨",
-  guide: "📖",
-  category: "🏷️",
-  page: "↗",
-  movie: "🎬",
-  offering: "✓",
 };
 
 interface SearchHitRowProps {
@@ -36,14 +28,15 @@ export function SearchHitRow({ hit, compact = false, onNavigate }: SearchHitRowP
       className={cn("search-hit", compact && "search-hit--compact")}
     >
       <span className="search-hit__icon" aria-hidden>
-        {hit.badges?.[0]?.length === 1 || hit.kind === "category"
-          ? hit.badges?.[0]
-          : KIND_ICONS[hit.kind]}
+        <IconGlyph
+          iconKey={hit.iconKey ?? SEARCH_KIND_ICON_KEYS[hit.kind]}
+          className="text-[1.1rem]"
+        />
       </span>
       <span className="search-hit__body">
         <span className="search-hit__topline">
           <span className="search-hit__kind">{KIND_LABELS[hit.kind]}</span>
-          {hit.badges?.slice(hit.kind === "category" ? 1 : 0).map((badge) => (
+          {hit.badges?.map((badge) => (
             <span key={badge} className="search-hit__badge">
               {badge}
             </span>

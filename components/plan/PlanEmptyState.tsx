@@ -17,7 +17,7 @@ export function PlanEmptyState() {
       </h2>
       <p className="mx-auto mt-4 max-w-md text-[var(--color-muted)]">
         Save a pool break, a craft, a campfire, or a movie under the stars and
-        we&apos;ll turn it into an easy day plan.
+        build an easy day plan.
       </p>
       <div className="empty-actions mt-8 flex flex-wrap justify-center gap-3">
         {ACTIONS.map((action) =>

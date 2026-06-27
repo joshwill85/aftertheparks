@@ -1,0 +1,135 @@
+{
+  "generated_from": "Official Disney resort recreation pages summarized from user-provided source research.",
+  "facts": [
+    {
+      "resort_slug": "contemporary-resort",
+      "source_url": "https://disneyworld.disney.go.com/resorts/bay-lake-tower-at-contemporary/recreation/",
+      "location_label": "Community Hall - Bay Lake Tower at Disney's Contemporary Resort",
+      "description": "Community Hall at Bay Lake Tower offers complimentary recreation including a pool table, ping-pong, video games, board games, DVDs and more.",
+      "availability": {
+        "kind": "evergreen_hours",
+        "hours_state": "source_hours",
+        "label": "Daily 10:00 AM-10:00 PM"
+      },
+      "amenities": [
+        "pool table",
+        "ping-pong",
+        "video games",
+        "board games",
+        "DVDs",
+        "basketball equipment checkout",
+        "tennis and pickleball equipment checkout"
+      ],
+      "evidence_lines": [
+        "Bay Lake Tower at Disney's Contemporary Resort — Community Hall",
+        "Complimentary pool table, ping-pong, video games, board games, DVDs and more.",
+        "Open 10 AM-10 PM.",
+        "Basketball rental and tennis/pickleball equipment can be checked out from Community Hall."
+      ]
+    },
+    {
+      "resort_slug": "boardwalk-villas",
+      "source_url": "https://disneyworld.disney.go.com/resorts/boardwalk-villas/recreation/",
+      "location_label": "Ferris W. Eahlers Community Hall",
+      "description": "Ferris W. Eahlers Community Hall offers complimentary games, arts and crafts, DVDs and more.",
+      "availability": {
+        "kind": "evergreen_hours",
+        "hours_state": "source_hours",
+        "label": "Daily 10:00 AM-10:00 PM"
+      },
+      "amenities": [
+        "games",
+        "arts and crafts",
+        "DVDs",
+        "tennis and pickleball equipment checkout"
+      ],
+      "evidence_lines": [
+        "Disney's BoardWalk Villas — Ferris W. Eahlers Community Hall",
+        "Complimentary games, arts and crafts, DVDs and more.",
+        "Open 10 AM-10 PM.",
+        "Tennis/pickleball racquets and balls are available from Community Hall."
+      ]
+    },
+    {
+      "resort_slug": "old-key-west-resort",
+      "source_url": "https://disneyworld.disney.go.com/resorts/old-key-west-resort/recreation/",
+      "location_label": "Conch Flats Community Hall",
+      "description": "Conch Flats Community Hall offers foosball, pool, video games, ping-pong, shuffleboard, crafts, DVDs and equipment checkout.",
+      "availability": {
+        "kind": "evergreen_hours",
+        "hours_state": "source_hours",
+        "label": "Daily 10:00 AM-10:00 PM"
+      },
+      "amenities": [
+        "foosball",
+        "pool",
+        "video games",
+        "ping-pong",
+        "shuffleboard",
+        "crafts",
+        "DVDs",
+        "tennis equipment checkout",
+        "basketball equipment checkout",
+        "volleyball equipment checkout"
+      ],
+      "evidence_lines": [
+        "Disney's Old Key West Resort — Conch Flats Community Hall",
+        "Foosball, pool, video games, ping-pong, shuffleboard, crafts, DVDs, plus checkout equipment for tennis, basketball and volleyball.",
+        "Open 10 AM-10 PM."
+      ]
+    },
+    {
+      "resort_slug": "saratoga-springs-resort-and-spa",
+      "source_url": "https://disneyworld.disney.go.com/resorts/saratoga-springs-resort-and-spa/recreation/",
+      "location_label": "Community Hall",
+      "description": "Community Hall offers ping-pong, foosball, arts and crafts, video games, DVDs, board games and equipment checkout.",
+      "availability": {
+        "kind": "evergreen_hours",
+        "hours_state": "source_hours",
+        "label": "Daily 10:00 AM-10:00 PM"
+      },
+      "amenities": [
+        "ping-pong",
+        "foosball",
+        "arts and crafts",
+        "video games",
+        "DVDs",
+        "board games",
+        "basketball equipment checkout",
+        "tennis and shuffleboard equipment checkout",
+        "grilling tools checkout"
+      ],
+      "evidence_lines": [
+        "Disney's Saratoga Springs Resort & Spa — Community Hall",
+        "Ping-pong, foosball, arts and crafts, video games, DVDs, board games; checkout basketballs, tennis/shuffleboard equipment and grilling tools.",
+        "Open 10 AM-10 PM."
+      ]
+    },
+    {
+      "resort_slug": "animal-kingdom-villas-kidani-village",
+      "source_url": "https://disneyworld.disney.go.com/resorts/animal-kingdom-villas-kidani/recreation/",
+      "location_label": "Community Hall - Animal Kingdom Lodge - Kidani Village",
+      "description": "Community Hall at Kidani Village offers video games, billiards, arts and crafts, plus sign-out grilling tools and sporting equipment.",
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "amenities": [
+        "video games",
+        "billiards",
+        "arts and crafts",
+        "grilling tools checkout",
+        "tennis racquets checkout",
+        "basketballs checkout",
+        "shuffleboard accessories checkout"
+      ],
+      "evidence_lines": [
+        "Disney's Animal Kingdom Villas - Kidani Village — Community Hall",
+        "Video games, billiards, arts and crafts.",
+        "Sign-out grilling tools and sporting equipment including tennis racquets, basketballs and shuffleboard accessories.",
+        "Community Hall equipment checkout for Kidani basketball, tennis and pickleball."
+      ]
+    }
+  ]
+}

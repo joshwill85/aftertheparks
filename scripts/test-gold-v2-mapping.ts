@@ -16,6 +16,8 @@ import {
 } from "@/lib/data/activities";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
+import { optionalPriceAddOnsLabel, publicPriceLabel } from "@/lib/priceLabels";
+import { priceLabelFromActivity } from "@/lib/plan/snapshot";
 
 const row: GoldActivityRow = {
   id: "gold-wellness",
@@ -121,6 +123,57 @@ assert.equal(occurrence.fieldProvenance?.title?.[0]?.line, 5);
 assert.equal(occurrence.claims?.walkability?.value, "unknown");
 assert.equal(occurrence.claims?.transportation?.value, "unknown");
 assert.equal(occurrence.freshness.badge, "verified");
+
+const campfireWithSecondaryKitRow: GoldActivityRow = {
+  ...row,
+  id: "gold-akl-campfire-kit",
+  activity_catalog_id: "akl-campfire-kit-catalog",
+  calendar_group_key: "animal-kingdom-jambo",
+  resort_slugs: ["animal-kingdom-lodge"],
+  canonical_slug: "campfire",
+  title: "Campfire",
+  category: "campfire",
+  description:
+    "Enjoy the warm glow of the campfire with complimentary marshmallows. S'mores kits available for purchase.",
+  price: {
+    state: "free",
+    options: [
+      {
+        optionName: "Mickey S'mores Kit",
+        priceBasis: "optional_add_on",
+        priceCentsMin: 700,
+        priceCentsMax: 700,
+        priceConfidence: "secondary_verified",
+        verificationStatus: "needs_disney_confirmation",
+        sourceUrl: "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+        sourceLabel: "Chip and Company Wilderness Lodge report",
+        notes: "Usually around $7 plus tax",
+      },
+    ],
+  },
+  claims: {
+    fee: {
+      value: "free",
+      evidence: [{ field: "source_pdf_fee_marker_absent", source: "pdf_layout" }],
+    },
+    walkability: { value: "unknown", evidence: [] },
+    transportation: { value: "unknown", evidence: [] },
+  },
+};
+
+const [campfireWithSecondaryKit] = mapGoldActivityRowToOccurrences(campfireWithSecondaryKitRow, {
+  dateRangeDays: 1,
+  referenceDate: new Date("2026-06-22T12:00:00-04:00"),
+});
+const publicCampfireWithSecondaryKit = ensurePublicActivity(campfireWithSecondaryKit);
+assert.equal(publicCampfireWithSecondaryKit.price.state, "free");
+assert.equal(publicCampfireWithSecondaryKit.price.options?.[0]?.priceBasis, "optional_add_on");
+assert.equal(publicCampfireWithSecondaryKit.price.options?.[0]?.priceConfidence, "secondary_verified");
+assert.equal(
+  publicCampfireWithSecondaryKit.price.options?.[0]?.verificationStatus,
+  "needs_disney_confirmation"
+);
+assert.match(publicCampfireWithSecondaryKit.price.options?.[0]?.sourceUrl ?? "", /^https:\/\/chipandco\.com\//);
 
 const weekdayRow: GoldActivityRow = {
   ...row,
@@ -371,6 +424,21 @@ assert.match(
   /const showUncertainTime = uncertainTime && hasBackedTime/,
   "Activity detail uncertainty labels must require an actual backed time"
 );
+assert.match(
+  activityDetailClient,
+  /function formatOptionalPrice/,
+  "Activity detail pages must format optional add-on prices separately from the primary cost label"
+);
+assert.match(
+  activityDetailClient,
+  /Usually around/,
+  "Secondary campfire kit prices must be labeled as approximate in public copy"
+);
+assert.match(
+  activityDetailClient,
+  /Optional purchases/,
+  "Activity detail pages must show paid add-ons separately from Free/Paid"
+);
 
 const unsupportedFreeOccurrences = mapGoldActivityRowToOccurrences(
   {
@@ -393,10 +461,41 @@ assert.equal(
   "unknown",
   "Free price labels require explicit source evidence and otherwise fail closed"
 );
+const unsupportedFreeDisplay = toDisplayActivity(unsupportedFreeOccurrences[0]);
 assert.equal(
-  toDisplayActivity(unsupportedFreeOccurrences[0]).costLabel,
+  unsupportedFreeDisplay.costLabel,
   "Price unclear",
   "Unsupported free price states must not render as Free"
+);
+assert.equal(
+  activityToEventCard(unsupportedFreeOccurrences[0], unsupportedFreeDisplay).showTrust,
+  false,
+  "Activity cards must not duplicate Price unclear as both cost and trust badges"
+);
+assert.equal(
+  publicPriceLabel("fee"),
+  "Paid",
+  "Disney fee markers must use Disney-facing Paid terminology"
+);
+assert.equal(
+  priceLabelFromActivity(unsupportedFreeOccurrences[0]),
+  "Price unclear",
+  "Plan snapshots must use the same unknown price language as cards"
+);
+assert.equal(
+  publicPriceLabel("free"),
+  "Free",
+  "Free events remain Free even when optional supplies are sold separately"
+);
+assert.equal(
+  optionalPriceAddOnsLabel([
+    {
+      optionName: "S'mores kit",
+      notes: "Available for purchase",
+    },
+  ]),
+  "Optional add-ons available",
+  "Optional paid supplies must render separately from the primary price label"
 );
 
 const noDescriptionDisplay = toDisplayActivity({
@@ -553,7 +652,7 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     assert.equal(defaultWellness.title, "Wellness Scavenger Hunt");
     assert.equal(
       defaultWellness.summary,
-      "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts."
+      "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you've finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts."
     );
     assert.match(defaultWellness.endDateTime ?? "", /T23:00:00-04:00$/);
     assert.equal(defaultWellness.claims?.walkability?.value, "unknown");

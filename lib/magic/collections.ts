@@ -1,28 +1,30 @@
+import type { IconKey } from "@/components/icons/iconRegistry";
+
 export interface MagicCollection {
   id: string;
   title: string;
   description: string;
   href: string;
-  icon: string;
+  iconKey: IconKey;
   mood: string;
 }
 
-/** Curated resort-calendar entry points — links to filtered Explore / Tonight. */
+/** Resort-calendar entry points — links to filtered Explore / Tonight. */
 export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
   {
     id: "tonight-movies",
     title: "Movies under the stars",
-    description: "Source-backed evening movie listings from resort calendars.",
+    description: "Evening movie listings from current resort calendars.",
     href: "/tonight",
-    icon: "🎬",
+    iconKey: "movies_under_stars",
     mood: "evening",
   },
   {
     id: "resort-calendar",
     title: "Resort calendar",
-    description: "Browse source-backed activities from the current resort calendars.",
+    description: "Browse activities from the current resort calendars.",
     href: "/activities",
-    icon: "🌴",
+    iconKey: "resort_activity",
     mood: "calendar",
   },
   {
@@ -30,7 +32,7 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
     title: "Campfires & s'mores",
     description: "Browse current campfire listings from resort calendars.",
     href: "/activities?category=campfire",
-    icon: "🔥",
+    iconKey: "campfire",
     mood: "tonight",
   },
   {
@@ -38,7 +40,7 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
     title: "Crafts for little travelers",
     description: "Hands-on resort activities for small hands.",
     href: "/activities?category=arts_crafts",
-    icon: "🎨",
+    iconKey: "arts_crafts",
     mood: "little_kids",
   },
   {
@@ -46,15 +48,15 @@ export const NO_TICKET_COLLECTIONS: MagicCollection[] = [
     title: "Pool break",
     description: "Browse current poolside recreation listings.",
     href: "/activities?category=poolside",
-    icon: "🏊",
+    iconKey: "poolside",
     mood: "pool_break",
   },
   {
     id: "games-and-crafts",
     title: "Games and crafts",
-    description: "Arcade and craft listings from current source-backed data.",
+    description: "Arcade and craft listings from current resort calendars.",
     href: "/activities?category=arcade",
-    icon: "🕹️",
+    iconKey: "arcade",
     mood: "easy_break",
   },
 ];

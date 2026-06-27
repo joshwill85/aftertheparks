@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import {
   classifyNearbyTier,
   NEARBY_TIER_META,
@@ -32,7 +33,7 @@ export function MagicNearbyBadge({
       )}
     >
       <p className="flex items-center gap-2 text-sm font-bold">
-        <span aria-hidden>{meta.icon}</span>
+        <IconGlyph iconKey={meta.iconKey} className="text-base" />
         {meta.label}
       </p>
       <p className="mt-1 text-sm text-[var(--color-muted)]">{meta.description}</p>
@@ -85,7 +86,7 @@ export function MagicNearbyCollections({
             className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-4"
           >
             <h3 className="flex items-center gap-2 font-display text-lg font-semibold">
-              <span aria-hidden>{group.meta.icon}</span>
+              <IconGlyph iconKey={group.meta.iconKey} className="text-lg" />
               {group.meta.label}
             </h3>
             <ul className="mt-3 space-y-2">
@@ -96,10 +97,10 @@ export function MagicNearbyCollections({
                       activity.activitySlug,
                       activity.resort.slug
                     )}
-                    className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 text-sm hover:bg-[var(--color-sun-cream)]"
+                    className="grid min-w-0 gap-1 rounded-xl px-2 py-2 text-sm hover:bg-[var(--color-sun-cream)] sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3"
                   >
-                    <span className="font-bold">{activity.title}</span>
-                    <span className="shrink-0 text-[var(--color-muted)]">
+                    <span className="min-w-0 font-bold">{activity.title}</span>
+                    <span className="min-w-0 text-xs font-semibold text-[var(--color-muted)] sm:text-right sm:text-sm">
                       {activity.resort.name}
                     </span>
                   </Link>

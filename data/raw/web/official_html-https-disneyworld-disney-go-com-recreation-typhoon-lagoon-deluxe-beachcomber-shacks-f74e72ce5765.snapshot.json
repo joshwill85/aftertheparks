@@ -1,0 +1,357 @@
+{
+  "source_kind": "official_html",
+  "source_url": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/deluxe-beachcomber-shacks/",
+  "captured_at": "2026-06-27T01:26:52.214629+00:00",
+  "raw_html_sha256": "f5aea9bfdea75bfc28b072ece91ce97b662ac4ebb8ff62100d5beba2ebfce129",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Beachcomber Shacks Deluxe | Typhoon Lagoon | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Beachcomber Shacks Deluxe"
+    },
+    {
+      "line": 3,
+      "text": "LocatedatDisney's Typhoon Lagoon Water Park"
+    },
+    {
+      "line": 4,
+      "text": "Unwind in your own private shaded area with comfortable seating, a cooler and more at Disney’s Typhoon Lagoon water park."
+    },
+    {
+      "line": 5,
+      "text": "$300–$500 (tax not included)"
+    },
+    {
+      "line": 6,
+      "text": "Show Safety, Accessibility and Guest Policies"
+    },
+    {
+      "line": 7,
+      "text": "Operating Hours –"
+    },
+    {
+      "line": 8,
+      "text": "10:00 AM"
+    },
+    {
+      "line": 9,
+      "text": "Check Available Days"
+    },
+    {
+      "line": 10,
+      "text": "An Outdoor Sanctuary"
+    },
+    {
+      "line": 11,
+      "text": "Renting a Beachcomber Shack is a great way for your group to relax together during your day of fun at Disney’s Typhoon Lagoon water park."
+    },
+    {
+      "line": 12,
+      "text": "Each Beachcomber Shack Deluxe can accommodate up to 12 Guests and includes the following amenities:"
+    },
+    {
+      "line": 13,
+      "text": "Cushioned seating for up to 6 Guests"
+    },
+    {
+      "line": 14,
+      "text": "Lounge chairs for up to 2 Guests"
+    },
+    {
+      "line": 15,
+      "text": "Beach chairs for up to 2 Guests"
+    },
+    {
+      "line": 16,
+      "text": "Towels"
+    },
+    {
+      "line": 17,
+      "text": "A locker"
+    },
+    {
+      "line": 18,
+      "text": "Cold water, available all day"
+    },
+    {
+      "line": 19,
+      "text": "Select soft drinks"
+    },
+    {
+      "line": 20,
+      "text": "Dedicated Service"
+    },
+    {
+      "line": 21,
+      "text": "Attendants are on hand to help you get the most out of the water park. And when you’re craving a meal or snack, they can take your order for food and beverages (separate dining charges apply)."
+    },
+    {
+      "line": 22,
+      "text": "Upgraded Option"
+    },
+    {
+      "line": 23,
+      "text": "For an enhanced experience, consider booking the Beachcomber Shacks Premium Plus instead—which features even more great amenities."
+    },
+    {
+      "line": 24,
+      "text": "Explore All Beachcomber Shack Options"
+    },
+    {
+      "line": 25,
+      "text": "Beachcomber Shacks Standard"
+    },
+    {
+      "line": 26,
+      "text": "Beachcomber Shacks Deluxe"
+    },
+    {
+      "line": 27,
+      "text": "Beachcomber Shacks Premium Plus"
+    },
+    {
+      "line": 28,
+      "text": "Price (Excludes Tax)"
+    },
+    {
+      "line": 29,
+      "text": "$225 to $425"
+    },
+    {
+      "line": 30,
+      "text": "$300 to $500"
+    },
+    {
+      "line": 31,
+      "text": "$375 to $550"
+    },
+    {
+      "line": 32,
+      "text": "Max Number of Guests"
+    },
+    {
+      "line": 33,
+      "text": "10"
+    },
+    {
+      "line": 34,
+      "text": "12"
+    },
+    {
+      "line": 35,
+      "text": "10"
+    },
+    {
+      "line": 36,
+      "text": "Includes"
+    },
+    {
+      "line": 37,
+      "text": "Attendant service"
+    },
+    {
+      "line": 38,
+      "text": "Cushioned furniture"
+    },
+    {
+      "line": 39,
+      "text": "Select soft drinks"
+    },
+    {
+      "line": 40,
+      "text": "Locker"
+    },
+    {
+      "line": 41,
+      "text": "Towels"
+    },
+    {
+      "line": 42,
+      "text": "Cold water available all day"
+    },
+    {
+      "line": 43,
+      "text": "Attendant service"
+    },
+    {
+      "line": 44,
+      "text": "Cushioned furniture"
+    },
+    {
+      "line": 45,
+      "text": "Select soft drinks"
+    },
+    {
+      "line": 46,
+      "text": "Locker"
+    },
+    {
+      "line": 47,
+      "text": "Towels"
+    },
+    {
+      "line": 48,
+      "text": "Cold water available all day"
+    },
+    {
+      "line": 49,
+      "text": "Attendant service"
+    },
+    {
+      "line": 50,
+      "text": "Select soft drinks"
+    },
+    {
+      "line": 51,
+      "text": "Locker"
+    },
+    {
+      "line": 52,
+      "text": "Towels"
+    },
+    {
+      "line": 53,
+      "text": "Cold water available all day"
+    },
+    {
+      "line": 54,
+      "text": "Cushioned seating"
+    },
+    {
+      "line": 55,
+      "text": "Dining table"
+    },
+    {
+      "line": 56,
+      "text": "Mini refrigerator"
+    },
+    {
+      "line": 57,
+      "text": "Flatscreen TV"
+    },
+    {
+      "line": 58,
+      "text": "Oscillating fan"
+    },
+    {
+      "line": 59,
+      "text": "4 electrical outlets"
+    },
+    {
+      "line": 60,
+      "text": "Know Before You Go"
+    },
+    {
+      "line": 61,
+      "text": "Reservations"
+    },
+    {
+      "line": 62,
+      "text": "Advance reservations are highly recommended as Beachcomber Shacks book quickly—and are available on a first-come, first-served basis."
+    },
+    {
+      "line": 63,
+      "text": "To inquire about same-day availability, please visit the podiums at the main entrance near Disney transportation drop off before 11:00 AM. All guests can check in at Singapore Sal’s after 11:00 AM."
+    },
+    {
+      "line": 64,
+      "text": "Pricing"
+    },
+    {
+      "line": 65,
+      "text": "Prices for Beachcomber Shacks Deluxe vary based on date—and range from $300 to $500 per day, plus tax."
+    },
+    {
+      "line": 66,
+      "text": "Admission Required"
+    },
+    {
+      "line": 67,
+      "text": "Valid water park admission is required."
+    },
+    {
+      "line": 68,
+      "text": "Age Requirements"
+    },
+    {
+      "line": 69,
+      "text": "One Guest in the party must be at least 18 years old."
+    },
+    {
+      "line": 70,
+      "text": "Cancellations and No-Shows"
+    },
+    {
+      "line": 71,
+      "text": "Guests who need to cancel Beachcomber Shack reservations must provide 24-hour advance notice. The full price of your reservation will be charged in the event of no-shows or same-day cancellations."
+    },
+    {
+      "line": 72,
+      "text": "Inclement Weather"
+    },
+    {
+      "line": 73,
+      "text": "Rentals may be cancelled by the water park due to inclement weather. If this occurs, Guests will not be charged."
+    },
+    {
+      "line": 74,
+      "text": "Hours of Operation"
+    },
+    {
+      "line": 75,
+      "text": "Rental spaces are available from park open until 5:00 PM. Extensions into the evening may be available on select nights."
+    },
+    {
+      "line": 76,
+      "text": "Subject to Change"
+    },
+    {
+      "line": 77,
+      "text": "Operating hours and the availability of amenities may change without notice. Please check at the time of booking to confirm what will be provided."
+    },
+    {
+      "line": 78,
+      "text": "Related Activities"
+    },
+    {
+      "line": 79,
+      "text": "Beachcomber Shacks Standard"
+    },
+    {
+      "line": 80,
+      "text": "Relax in your own private shaded area with cushioned seating, a cooler and more at Disney’s Typhoon Lagoon water park."
+    },
+    {
+      "line": 81,
+      "text": "Beachcomber Shacks Premium Plus"
+    },
+    {
+      "line": 82,
+      "text": "Unwind in your own private shaded area with a flat-screen TV, a mini fridge and more at Disney’s Typhoon Lagoon water park."
+    },
+    {
+      "line": 83,
+      "text": "Typhoon Lagoon Umbrellas"
+    },
+    {
+      "line": 84,
+      "text": "Create your own mini oasis with a beach umbrella, comfortable lounge chairs and more!"
+    },
+    {
+      "line": 85,
+      "text": "Safety, Accessibility and Guest Policies"
+    },
+    {
+      "line": 86,
+      "text": "Make a Reservation"
+    },
+    {
+      "line": 87,
+      "text": "Times for Beachcomber Shacks Deluxe"
+    }
+  ],
+  "content_sha256": "11e952cdbe111ca6d2456115e7ed10f57dca6349ad281af1d11d632947a326fc"
+}

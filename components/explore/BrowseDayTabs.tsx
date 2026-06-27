@@ -2,14 +2,10 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { IconGlyph } from "@/components/icons/IconGlyph";
+import { BROWSE_DAY_TABS } from "@/components/icons/iconRegistry";
 import { buildBrowseHref, isBrowsePath } from "@/lib/explore/browseParams";
 import { cn } from "@/lib/utils";
-
-const TABS = [
-  { href: "/today" as const, label: "Today", icon: "☀️" },
-  { href: "/tonight" as const, label: "Tonight", icon: "🌙" },
-  { href: "/activities" as const, label: "Explore", icon: "✨" },
-];
 
 export function BrowseDayTabs({ className }: { className?: string }) {
   const pathname = usePathname();
@@ -23,7 +19,7 @@ export function BrowseDayTabs({ className }: { className?: string }) {
       aria-label="Browse by day"
     >
       <div className="browse-day-tabs__track" role="tablist">
-        {TABS.map((tab) => {
+        {BROWSE_DAY_TABS.map((tab) => {
           const active = pathname === tab.href;
           const href = buildBrowseHref(tab.href, searchParams);
           return (
@@ -38,7 +34,7 @@ export function BrowseDayTabs({ className }: { className?: string }) {
               )}
             >
               <span className="browse-day-tabs__icon" aria-hidden>
-                {tab.icon}
+                <IconGlyph iconKey={tab.iconKey} />
               </span>
               {tab.label}
             </Link>

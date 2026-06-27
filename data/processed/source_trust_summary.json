@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-06-27T01:30:21.190388+00:00",
+  "overall_status": "blocked",
+  "confidence": {
+    "current_gold_price_labels": "medium",
+    "current_pdf_freshness": "high",
+    "official_recreation_joinable_coverage": "high",
+    "independent_visual_ocr_coverage": "low",
+    "all_parent_item_classification": "high"
+  },
+  "counts": {
+    "source_inventory": {
+      "source_count": 137,
+      "by_role": {
+        "main_recreation_index": 1,
+        "parent_activity_detail": 76,
+        "resort_pdf": 29,
+        "resort_recreation_page": 31
+      },
+      "by_kind": {
+        "official_api": 1,
+        "official_html": 107,
+        "official_pdf": 29
+      }
+    },
+    "source_freshness": {
+      "sources_checked": 137,
+      "current": 137,
+      "url_changed": 0,
+      "hash_changed": 0,
+      "missing_from_parent": 0,
+      "unreachable": 0,
+      "unchecked": 0,
+      "unknown": 0
+    },
+    "gold_source": {
+      "gold_record_count": 225,
+      "rows_with_document_key_legends": 208,
+      "document_key_legend_count": 208,
+      "document_key_legend_kinds": {
+        "fee": 208
+      },
+      "price_state_counts": {
+        "fee": 78,
+        "free": 139,
+        "unknown": 8
+      },
+      "field_confidence_counts": {
+        "high": 1091,
+        "unknown": 8
+      }
+    },
+    "manual_review": {
+      "manual_review_record_count": 21,
+      "manual_review_error_count": 0,
+      "manual_review_errors_by_code": {}
+    },
+    "official_recreation": {
+      "program_count": 40,
+      "offering_count": 224,
+      "quarantine_count": 0
+    },
+    "official_parent_classification": {
+      "source_url": "https://disneyworld.disney.go.com/recreation/",
+      "item_count": 82,
+      "classification_counts": {
+        "destination_wide_not_resort_specific": 8,
+        "joinable_resort_offering": 60,
+        "park_or_ticketed_experience": 11,
+        "third_party_or_unsupported_location": 3
+      }
+    },
+    "jogging_trails": {
+      "parent_trail_items": 1,
+      "resort_trail_offerings": 23,
+      "missing_resort_join_provenance": 0,
+      "missing_required_field_provenance": 0,
+      "missing_source_url": 0,
+      "missing_source_hash": 0,
+      "price_without_source": 0
+    },
+    "publication_parity": {
+      "passed": true,
+      "gold": {
+        "expected_gold_rows": 225,
+        "live_gold_rows": 225,
+        "matched_gold_rows": 225,
+        "errors": 0
+      },
+      "official_offerings": {
+        "expected_official_offerings": 224,
+        "live_official_offerings": 224,
+        "matched_official_offerings": 224,
+        "errors": 0
+      }
+    }
+  },
+  "blockers": [
+    {
+      "code": "independent_visual_ocr_coverage_not_high",
+      "severity": "blocker",
+      "current": "low"
+    }
+  ],
+  "warnings": [
+    "coverage:legacy_overcount_groups:all-star-movies=legacy:13>fixture:10,all-star-music=legacy:14>fixture:10,all-star-sports=legacy:12>fixture:11,animal-kingdom-kidani=legacy:11>fixture:10,art-of-animation=legacy:14>fixture:10,boardwalk=legacy:13>fixture:12,contemporary=legacy:14>fixture:11,fort-wilderness=legacy:14>fixture:5,grand-floridian=legacy:14>fixture:9,old-key-west=legacy:16>fixture:14,pop-century=legacy:11>fixture:10,port-orleans-french-quarter=legacy:13>fixture:11,port-orleans-riverside=legacy:13>fixture:12,wilderness-lodge=legacy:14>fixture:13",
+    "coverage:legacy_undercount_groups:animal-kingdom-jambo=legacy:10<fixture:11,caribbean-beach=legacy:8<fixture:9,riviera=legacy:9<fixture:10,saratoga-springs=legacy:13<fixture:14",
+    "coverage:fixture_quarantine_records:34",
+    "coverage:official_offering_covered_quarantine_records:34",
+    "coverage:official_offering_alias_covered_quarantine_records:13",
+    "coverage:fixture_unextractable_records:17"
+  ],
+  "next_actions": [
+    "Run the full independent GPT visual PDF audit before release-grade trust approval."
+  ]
+}

@@ -1,57 +1,98 @@
 {
   "calendar_group_key": "animal-kingdom-jambo",
-  "source_pdf": "data/raw/pdfs/DAKL_Aframe_Recreation_0126_Jambo.pdf",
-  "source_pdf_sha256": "dd505b20010522e87208de51ef8bbaca6894f5f398a436cb7df496218497a1fc",
+  "source_pdf": "data/raw/pdfs/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+  "source_pdf_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
   "expected_records": [
     {
       "title": "Pumbaa’s Fun And Games Arcade",
       "slug": "pumbaas-fun-and-games-arcade",
       "category": "arcade",
-      "schedule_text": "Daily from 8:00am–11:00pm",
+      "schedule_text": "Daily from 8:00am-11:00pm",
       "start_time": "8:00am",
       "end_time": "11:00pm",
       "location": "Pumbaa’s Fun And Games Arcade",
       "description": "Put your skills to the test at our daily arcade tournament beginning at 4:00pm.",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 13 }],
-        "location": [{ "page": 1, "line": 13 }],
-        "schedule": [{ "page": 1, "line": 16 }],
-        "description": [{ "page": 1, "line": 17 }, { "page": 1, "line": 18 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "PUMBAA’S FUN AND GAMES ARCADE ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "PUMBAA’S FUN AND GAMES ARCADE ($)"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Daily from 8:00am-11:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Put your skills to the test at our daily arcade tournament"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "beginning at 4:00pm."
+          }
+        ]
       }
     },
     {
       "title": "Simba’s Activity Center",
       "slug": "simbas-activity-center",
       "category": "other",
-      "schedule_text": "Daily from 11:00am–9:00pm",
+      "schedule_text": "Daily from 11:00am-9:00pm",
       "start_time": "11:00am",
       "end_time": "9:00pm",
       "location": "Simba’s Activity Center",
       "description": "Get creative by designing your own African jewelry and ceramics, plus other arts and crafts. Fees may apply.",
-      "is_fee_based": false,
+      "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 19 }],
-        "location": [{ "page": 1, "line": 19 }],
-        "schedule": [{ "page": 1, "line": 20 }],
-        "description": [{ "page": 1, "line": 22 }, { "page": 1, "line": 23 }]
-      }
-    },
-    {
-      "title": "Jambo House Lobby Art Tour",
-      "slug": "jambo-house-lobby-art-tour",
-      "category": "resort_activity",
-      "schedule_text": "Monday, Tuesday, Wednesday, Thursday and Friday at 11:00am",
-      "start_time": "11:00am",
-      "end_time": null,
-      "location": "Begins at Lobby Entrance",
-      "description": "Meet a guide at the Medallion and learn about the largest private collection of African art outside of Africa.",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 24 }],
-        "location": [{ "page": 1, "line": 26 }],
-        "schedule": [{ "page": 1, "line": 28 }, { "page": 1, "line": 30 }],
-        "description": [{ "page": 1, "line": 32 }, { "page": 1, "line": 34 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "SIMBA’S ACTIVITY CENTER"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "SIMBA’S ACTIVITY CENTER"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Daily from 11:00am-9:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Get creative by designing your own African jewelry and"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "ceramics, plus other arts and crafts. Fees may apply."
+          }
+        ]
       }
     },
     {
@@ -65,10 +106,95 @@
       "description": "Search the Resort for a hidden Pumbaa photo prop. Once located, snap a photo and then head to Simba’s Activity Center to receive a surprise!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 25 }],
-        "location": [{ "page": 1, "line": 27 }],
-        "schedule": [{ "page": 1, "line": 27 }],
-        "description": [{ "page": 1, "line": 29 }, { "page": 1, "line": 31 }, { "page": 1, "line": 33 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "FIND A FRIEND"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Daily throughout Jambo House"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Daily throughout Jambo House"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Search the Resort for a hidden Pumbaa photo prop."
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Once located, snap a photo and then head to"
+          },
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Simba’s Activity Center to receive a surprise!"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Jambo House Lobby Art Tour",
+      "slug": "jambo-house-lobby-art-tour",
+      "category": "resort_activity",
+      "schedule_text": "Monday, Tuesday, Wednesday, Thursday and Friday at 11:00am",
+      "start_time": "11:00am",
+      "end_time": null,
+      "location": "Begins at Lobby Entrance",
+      "description": "Meet a guide at the Medallion and learn about the largest private collection of African art outside of Africa.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "JAMBO HOUSE LOBBY ART TOUR"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Begins at Lobby Entrance"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Monday, Tuesday, Wednesday,"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Thursday and Friday at 11:00am"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Meet a guide at the Medallion and learn about the"
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "largest private collection of African art outside of Africa."
+          }
+        ]
       }
     },
     {
@@ -82,10 +208,44 @@
       "description": "Get active in a wildly fun way with the whole family! Enjoy singing and dancing as you move and groove to music inspired by The Lion King.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 35 }],
-        "location": [{ "page": 1, "line": 37 }],
-        "schedule": [{ "page": 1, "line": 39 }],
-        "description": [{ "page": 1, "line": 41 }, { "page": 1, "line": 43 }, { "page": 1, "line": 44 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "DISNEY FAMILY FITNESS FUN"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Uzima Springs Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "Tuesday at 10:30am"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Get active in a wildly fun way with the whole family!"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Enjoy singing and dancing as you move and groove"
+          },
+          {
+            "page": 1,
+            "line": 37,
+            "text": "to music inspired by The Lion King."
+          }
+        ]
       }
     },
     {
@@ -99,10 +259,34 @@
       "description": "Leave an “impression” and show off your artwork.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 36 }],
-        "location": [{ "page": 1, "line": 38 }],
-        "schedule": [{ "page": 1, "line": 40 }],
-        "description": [{ "page": 1, "line": 42 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 30,
+            "text": "MEDALLION RUBBING"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 32,
+            "text": "Lobby Entrance"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Daily at 1:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 36,
+            "text": "Leave an “impression” and show off your artwork."
+          }
+        ]
       }
     },
     {
@@ -113,116 +297,284 @@
       "start_time": null,
       "end_time": null,
       "location": "Uzima Springs Pool",
-      "description": "Join us for family-friendly activities, both in and out of the pool.",
+      "description": "Join us for family-friendly activities, both in and out of the pool",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 45 }],
-        "location": [{ "page": 1, "line": 46 }],
-        "schedule": [{ "page": 1, "line": 46 }],
-        "description": [{ "page": 1, "line": 48 }]
-      }
-    },
-    {
-      "title": "Arts & Crafts",
-      "slug": "arts-crafts",
-      "category": "arts_crafts",
-      "schedule_text": "3:00pm–4:00pm",
-      "start_time": "3:00pm",
-      "end_time": "4:00pm",
-      "location": "Uzima Springs Pool Deck",
-      "description": "Sunday and Wednesday.........Make Your Own African Bangles Monday........................................................................................Sand Art Friday..................................................................................Seasonal Craft Tuesday, Thursday and Saturday........................... Mickey Tie-Dye",
-      "is_fee_based": true,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 51 }],
-        "location": [{ "page": 1, "line": 53 }],
-        "schedule": [{ "page": 1, "line": 54 }],
+        "title": [
+          {
+            "page": 1,
+            "line": 38,
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Daily at Uzima Springs Pool"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Daily at Uzima Springs Pool"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 55 },
-          { "page": 1, "line": 56 },
-          { "page": 1, "line": 58 },
-          { "page": 1, "line": 60 }
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Join us for family-friendly activities, both in and out of the pool"
+          }
         ]
       }
     },
     {
-      "title": "Campfire",
-      "slug": "campfire",
-      "category": "campfire",
-      "schedule_text": "Sunday, Monday, Tuesday, Wednesday, Friday and Saturday from 6:00pm–7:00pm",
-      "start_time": "6:00pm",
-      "end_time": "7:00pm",
-      "location": "Arusha Savanna Overlook",
-      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "title": "Trivia Night",
+      "slug": "trivia-night",
+      "category": "other",
+      "schedule_text": "Sunday from 8:00pm-9:00pm",
+      "start_time": "8:00pm",
+      "end_time": "9:00pm",
+      "location": "Uzima Springs Pool Deck",
+      "description": "",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 61 }],
-        "location": [{ "page": 1, "line": 63 }],
-        "schedule": [{ "page": 1, "line": 65 }, { "page": 1, "line": 67 }],
-        "description": [{ "page": 1, "line": 68 }, { "page": 1, "line": 70 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 70,
+            "text": "TRIVIA NIGHT"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 74,
+            "text": "Uzima Springs Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 75,
+            "text": "Sunday from 8:00pm-9:00pm"
+          }
+        ]
       }
     },
     {
-      "title": "Video Game Dance Party",
-      "slug": "video-game-dance-party",
+      "title": "Jammin’ At Jambo House",
+      "slug": "jammin-at-jambo-house",
       "category": "other",
-      "schedule_text": "Tuesday and Saturday from 8:00pm–8:45pm",
+      "schedule_text": "Tuesday, Thursday and Saturday from 8:00pm-9:00pm",
       "start_time": "8:00pm",
-      "end_time": "8:45pm",
-      "location": "Hakuna Matata Playground",
-      "description": "Come show off your dance moves!",
+      "end_time": "9:00pm",
+      "location": "Uzima Springs Pool Deck",
+      "description": "Join us for our evening dance party.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 79 }],
-        "location": [{ "page": 1, "line": 81 }],
-        "schedule": [{ "page": 1, "line": 83 }],
-        "description": [{ "page": 1, "line": 84 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 79,
+            "text": "JAMMIN’ AT JAMBO HOUSE"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Uzima Springs Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 84,
+            "text": "Tuesday, Thursday and Saturday from 8:00pm-9:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 85,
+            "text": "Join us for our evening dance party."
+          }
+        ]
       }
     },
     {
       "title": "Movie Under the Stars",
       "slug": "movie-under-the-stars",
       "category": "movies_under_stars",
-      "schedule_text": "Hakuna Matata Playground | 8:00PM",
-      "start_time": "8:00pm",
+      "schedule_text": "Hakuna Matata Playground | 8:30PM",
+      "start_time": "8:30pm",
       "end_time": null,
       "location": "Hakuna Matata Playground",
       "description": "",
       "is_fee_based": false,
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 87,
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 90,
+            "text": "HAKUNA MATATA PLAYGROUND | 8:30PM"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 90,
+            "text": "HAKUNA MATATA PLAYGROUND | 8:30PM"
+          }
+        ],
+        "movie_nights": [
+          {
+            "page": 1,
+            "line": 93,
+            "text": "Monday"
+          },
+          {
+            "page": 1,
+            "line": 92,
+            "text": "Aladdin (1992)"
+          },
+          {
+            "page": 1,
+            "line": 96,
+            "text": "Wednesday"
+          },
+          {
+            "page": 1,
+            "line": 97,
+            "text": "High School Musical 2"
+          },
+          {
+            "page": 1,
+            "line": 101,
+            "text": "Friday"
+          },
+          {
+            "page": 1,
+            "line": 99,
+            "text": "Moana Ps"
+          }
+        ]
+      },
       "movie_nights": [
-        { "day_of_week": "monday", "movie_title": "A Goofy Movie", "show_time": "8:00PM" },
-        { "day_of_week": "wednesday", "movie_title": "Freaky Friday (2003)", "show_time": "8:00PM" },
-        { "day_of_week": "friday", "movie_title": "Zootopia", "show_time": "8:00PM" }
+        {
+          "day_of_week": "monday",
+          "movie_title": "Aladdin (1992)",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "wednesday",
+          "movie_title": "High School Musical 2",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "friday",
+          "movie_title": "Moana Ps",
+          "show_time": "8:30PM"
+        }
+      ]
+    }
+  ],
+  "expected_unextractable_records": [
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "reason": "parser_warning:description:text_quality_low",
+      "warnings": [
+        "description:text_quality_low"
       ],
       "required_spans": {
-        "title": [{ "page": 1, "line": 86 }],
-        "location": [{ "page": 1, "line": 89 }],
-        "schedule": [{ "page": 1, "line": 89 }],
-        "movie_nights": [
-          { "page": 1, "line": 91 },
-          { "page": 1, "line": 94 },
-          { "page": 1, "line": 97 }
+        "title": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "ARTS & CRAFTS ($)"
+          }
         ]
       }
     },
     {
       "title": "Wild About Painting",
       "slug": "wild-about-painting",
-      "category": "other",
-      "schedule_text": "Wednesday at 1:00pm",
-      "start_time": "1:00pm",
-      "end_time": null,
-      "location": "Jiko—The Cooking Place",
-      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages 12 and up. Space is limited. To reserve your spot, please call 407-WDW-PLAY.",
-      "is_fee_based": true,
+      "reason": "parser_warning:description:text_quality_low",
+      "warnings": [
+        "description:text_quality_low"
+      ],
       "required_spans": {
-        "title": [{ "page": 1, "line": 87 }],
-        "location": [{ "page": 1, "line": 88 }],
-        "schedule": [{ "page": 1, "line": 90 }],
+        "title": [
+          {
+            "page": 1,
+            "line": 88,
+            "text": "WILD ABOUT PAINTING ($)"
+          }
+        ]
+      }
+    }
+  ],
+  "reviewed_manual_records": [
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "Arusha Savanna Overlook",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-06-26T00:00:00Z",
+        "notes": "Verified against rendered DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf; OCR split the S’mores kit sentence away from the campfire description."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 57,
+            "text": "CAMPFIRE"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 60,
+            "text": "Arusha Savanna Overlook"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 62,
+            "text": "Nightly from 6:30pm-7:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 92 },
-          { "page": 1, "line": 93 },
-          { "page": 1, "line": 95 },
-          { "page": 1, "line": 96 }
+          {
+            "page": 1,
+            "bbox": [
+              910.0,
+              1724.0,
+              1600.0,
+              1792.0
+            ],
+            "text": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+            "source": "manual_visual_bbox"
+          }
         ]
       }
     }

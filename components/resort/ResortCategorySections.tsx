@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import type { CategoryGroup } from "@/lib/resorts/sections";
 
 export function ResortCategorySections({
@@ -29,7 +30,7 @@ export function ResortCategorySections({
           <div key={group.category}>
             <div className="mb-4 flex items-end justify-between gap-3">
               <h3 className="flex items-center gap-2 font-display text-xl font-semibold">
-                <span aria-hidden>{group.icon}</span>
+                <IconGlyph iconKey={group.iconKey} className="text-xl" />
                 {group.label}
                 <span className="text-sm font-normal text-[var(--color-muted)]">
                   ({group.activities.length})

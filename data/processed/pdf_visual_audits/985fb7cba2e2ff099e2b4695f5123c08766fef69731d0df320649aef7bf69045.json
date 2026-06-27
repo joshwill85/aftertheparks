@@ -1,0 +1,232 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "985fb7cba2e2ff099e2b4695f5123c08766fef69731d0df320649aef7bf69045",
+  "source_pdf_path": "data/raw/pdfs/All-Star-Movies_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.499197+00:00",
+  "activities": [
+    {
+      "title": "Wellness Scavenger Hunt",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 7:00am-11:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you've finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 155.333,
+        "y": 848.333,
+        "width": 628.3340000000001,
+        "height": 25.66700000000003
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:wellness-scavenger-hunt"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily at 12:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Join us for fun and games, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 906.333,
+        "y": 1180.333,
+        "width": 461.0000000000001,
+        "height": 25.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:poolside-activities"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 8:00am-9:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 157.333,
+        "y": 1199.667,
+        "width": 316.0,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:find-a-friend"
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Monday, Wednesday, Thursday and Friday from 3:30pm-4:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Create a take-home souvenir with a Disney twist!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 904.667,
+        "y": 1364.667,
+        "width": 407.9999999999999,
+        "height": 43.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:arts-crafts"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "The Reel Spot | 8:30PM",
+      "location": "The Reel Spot",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 114.0,
+        "y": 1498.333,
+        "width": 670.0,
+        "height": 28.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:movie-under-the-stars"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Tuesday and Saturday from 3:30pm-4:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [
+        {
+          "option_name": "T-Shirt",
+          "price_cents_min": 1700,
+          "price_cents_max": 1700,
+          "price_basis": "per_item"
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 906.333,
+        "y": 1550.333,
+        "width": 417.66700000000003,
+        "height": 31.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:mickey-tie-dye"
+    },
+    {
+      "title": "Arcade Tournament",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 4:00pm-5:00pm",
+      "location": "Reel Fun Arcade",
+      "description": "Come test your skills at our daily arcade tournament. You may find yourself going home with a prize of your own!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 904.667,
+        "y": 1707.333,
+        "width": 483.33299999999997,
+        "height": 25.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:arcade-tournament"
+    },
+    {
+      "title": "Sorcerer’s Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 6:30pm-7:30pm",
+      "location": "Located between Fantasia Buildings 5 and 8",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 904.667,
+        "y": 1893.333,
+        "width": 494.66600000000005,
+        "height": 25.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:sorcerers-campfire"
+    },
+    {
+      "title": "Silent Disco",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Tuesday at 8:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 905.0,
+        "y": 2079.0,
+        "width": 290.3330000000001,
+        "height": 25.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:silent-disco"
+    },
+    {
+      "title": "Shine Like A Star Glow Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Thursday and Saturday at 8:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "End your fun-filled day with a glow party where youre the star!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 905.0,
+        "y": 2265.0,
+        "width": 694.3330000000001,
+        "height": 25.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "all-star-movies:shine-like-a-star-glow-party"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

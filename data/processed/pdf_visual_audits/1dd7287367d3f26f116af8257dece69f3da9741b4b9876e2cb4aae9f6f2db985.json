@@ -1,0 +1,225 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "1dd7287367d3f26f116af8257dece69f3da9741b4b9876e2cb4aae9f6f2db985",
+  "source_pdf_path": "data/raw/pdfs/Polynesian_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.496218+00:00",
+  "activities": [
+    {
+      "title": "Disney Family Fitness Fun",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Thursday at 9:00am",
+      "location": "Great Ceremonial House Lawn",
+      "description": "Partake in this family-friendly fitness class— featuring some of your favorite music from Moana!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 833.0,
+        "width": 612.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:disney-family-fitness-fun"
+    },
+    {
+      "title": "Disney Fit Tai Chi",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday at 6:00pm",
+      "location": "Great Ceremonial House Lawn",
+      "description": "Experience this one-of-a-kind Tai Chi class designed for all levels.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1050.5,
+        "width": 404.0,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:disney-fit-tai-chi"
+    },
+    {
+      "title": "Lava Pool Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily at 2:30pm",
+      "location": "Lava Pool Deck",
+      "description": "Join us for a fun-filled hour of games and dancing, both in and out of the Lava Pool.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1166.0,
+        "width": 393.5,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:lava-pool-party"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 4:30pm-5:30pm",
+      "location": "Lava Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1385.0,
+        "width": 417.5,
+        "height": 32.0
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:mickey-tie-dye"
+    },
+    {
+      "title": "Make Your Own Kukui Nut Leis",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday, Wednesday and Friday from 4:00pm-5:00pm",
+      "location": "Great Ceremonial House Lobby",
+      "description": "Celebrate Polynesian culture by designing and creating your own Kukui Nut Lei.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.0,
+        "y": 1416.5,
+        "width": 365.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:make-your-own-kukui-nut-leis"
+    },
+    {
+      "title": "The Big Kahuna Quiz",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday at 6:30pm",
+      "location": "Lava Pool Deck",
+      "description": "Join us for some fun-filled trivia!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1645.0,
+        "width": 486.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:the-big-kahuna-quiz"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Great Ceremonial House Lawn | 8:00PM",
+      "location": "Great Ceremonial House Lawn",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 118.5,
+        "y": 1688.5,
+        "width": 669.5,
+        "height": 28.5
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:movie-under-the-stars"
+    },
+    {
+      "title": "Video Game Dance Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday at 7:30pm",
+      "location": "Great Ceremonial House Lawn",
+      "description": "Show off your best moves at this interactive dance party!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.0,
+        "y": 2028.0,
+        "width": 695.0,
+        "height": 42.0
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:video-game-dance-party"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday, Wednesday and Friday from 6:30pm-7:30pm",
+      "location": "Seven Seas Lagoon Beach",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1828.5,
+        "width": 211.0,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:campfire"
+    },
+    {
+      "title": "Aloha After Dark",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday, Wednesday and Friday at 8:00pm",
+      "location": "Lava Pool Deck",
+      "description": "Enjoy a nighttime party filled with glow-in-the-dark games and dancing!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 2234.0,
+        "width": 431.5,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "polynesian:aloha-after-dark"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

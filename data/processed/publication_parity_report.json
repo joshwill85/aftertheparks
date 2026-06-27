@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "gold": {
+    "passed": true,
+    "summary": {
+      "expected_gold_rows": 225,
+      "live_gold_rows": 225,
+      "matched_gold_rows": 225,
+      "errors": 0
+    },
+    "errors": []
+  },
+  "official_offerings": {
+    "passed": true,
+    "summary": {
+      "expected_official_offerings": 233,
+      "live_official_offerings": 233,
+      "matched_official_offerings": 233,
+      "errors": 0
+    },
+    "errors": []
+  },
+  "errors": []
+}

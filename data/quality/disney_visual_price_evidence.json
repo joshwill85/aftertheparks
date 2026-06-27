@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "source_id": "pors-cool-kid-summer-2026-activity-schedule",
+      "source_kind": "official_image",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "storage_path": "data/raw/web/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "content_sha256": "ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995",
+      "calendar_group_key": "port-orleans-riverside",
+      "resort_slug": "port-orleans-riverside-resort",
+      "captured_at": "2026-06-27T00:00:00+00:00",
+      "notes": "Official Disney Port Orleans Riverside Cool Kid Summer activity schedule image. The footer defines ($) as a fee marker; listed rows without ($) are treated as free for primary activity price."
+    },
+    {
+      "source_id": "all-star-sports-0526-recreation-pdf",
+      "source_kind": "official_pdf",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "storage_path": "data/raw/pdfs/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+      "calendar_group_key": "all-star-sports",
+      "resort_slug": "all-star-sports-resort",
+      "captured_at": "2026-06-27T00:00:00+00:00",
+      "notes": "Official Disney All-Star Sports 0526 recreation PDF. The footer defines ($) as a fee marker; Wellness Scavenger Hunt appears without ($), so the primary activity price is free."
+    }
+  ],
+  "evidence": [
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "canonical_slug": "poolside-activities",
+      "title": "Poolside Activities",
+      "price_state": "free",
+      "source_id": "pors-cool-kid-summer-2026-activity-schedule",
+      "field": "source_disney_image_fee_marker_absent",
+      "text": "POOLSIDE ACTIVITIES (no ($) marker)",
+      "legend_text": "($) There is a fee associated with this activity."
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "canonical_slug": "movie-under-the-stars",
+      "title": "Movie Under the Stars",
+      "price_state": "free",
+      "source_id": "pors-cool-kid-summer-2026-activity-schedule",
+      "field": "source_disney_image_fee_marker_absent",
+      "text": "MOVIE UNDER THE STARS (no ($) marker)",
+      "legend_text": "($) There is a fee associated with this activity."
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "canonical_slug": "campfire-on-de-bayou",
+      "title": "Campfire On De’ Bayou",
+      "price_state": "free",
+      "source_id": "pors-cool-kid-summer-2026-activity-schedule",
+      "field": "source_disney_image_fee_marker_absent",
+      "text": "CAMPFIRE ON DE’ BAYOU (no ($) marker)",
+      "legend_text": "($) There is a fee associated with this activity."
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "canonical_slug": "nighttime-trivia-challenge",
+      "title": "Nighttime Trivia Challenge",
+      "price_state": "free",
+      "source_id": "pors-cool-kid-summer-2026-activity-schedule",
+      "field": "source_disney_image_fee_marker_absent",
+      "text": "NIGHTTIME TRIVIA (no ($) marker)",
+      "legend_text": "($) There is a fee associated with this activity."
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "canonical_slug": "glow-with-the-flow",
+      "title": "Glow With The Flow",
+      "price_state": "free",
+      "source_id": "pors-cool-kid-summer-2026-activity-schedule",
+      "field": "source_disney_image_fee_marker_absent",
+      "text": "GLOW WITH THE FLOW (no ($) marker)",
+      "legend_text": "($) There is a fee associated with this activity."
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "canonical_slug": "wellness-scavenger-hunt",
+      "title": "Wellness Scavenger Hunt",
+      "price_state": "free",
+      "source_id": "all-star-sports-0526-recreation-pdf",
+      "field": "source_disney_pdf_fee_marker_absent",
+      "text": "WELLNESS SCAVENGER HUNT (no ($) marker)",
+      "legend_text": "($) There is a fee associated with this activity."
+    }
+  ]
+}

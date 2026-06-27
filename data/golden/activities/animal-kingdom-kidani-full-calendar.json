@@ -1,23 +1,52 @@
 {
   "calendar_group_key": "animal-kingdom-kidani",
-  "source_pdf": "data/raw/pdfs/DAKL_Aframe_Recreation_0126_Kidani.pdf",
-  "source_pdf_sha256": "e26d7aac066fa8aa6d11dfaea99371edddede768e73d0c4a41a1cf98aaab2214",
+  "source_pdf": "data/raw/pdfs/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+  "source_pdf_sha256": "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0",
   "expected_records": [
     {
       "title": "Safari So Good Arcade",
       "slug": "safari-so-good-arcade",
       "category": "arcade",
-      "schedule_text": "Daily from 8:00am–11:00pm",
+      "schedule_text": "Daily from 8:00am-11:00pm",
       "start_time": "8:00am",
       "end_time": "11:00pm",
       "location": "Safari So Good Arcade",
       "description": "Put your skills to the test at our daily arcade tournament beginning at 4:00pm.",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 16 }],
-        "location": [{ "page": 1, "line": 16 }],
-        "schedule": [{ "page": 1, "line": 18 }],
-        "description": [{ "page": 1, "line": 20 }, { "page": 1, "line": 22 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "SAFARI SO GOOD ARCADE ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "SAFARI SO GOOD ARCADE ($)"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Daily from 8:00am-11:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Put your skills to the test at our daily arcade tournament"
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "beginning at 4:00pm."
+          }
+        ]
       }
     },
     {
@@ -31,44 +60,146 @@
       "description": "Search the Resort for a hidden Timon photo prop. Once located, snap a photo and then head to Community Hall to receive a surprise!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 17 }],
-        "location": [{ "page": 1, "line": 19 }],
-        "schedule": [{ "page": 1, "line": 19 }],
-        "description": [{ "page": 1, "line": 21 }, { "page": 1, "line": 23 }, { "page": 1, "line": 25 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "FIND A FRIEND"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Daily throughout Kidani Village"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Daily throughout Kidani Village"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Search the Resort for a hidden Timon photo prop."
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Once located, snap a photo and then head to"
+          },
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Community Hall to receive a surprise!"
+          }
+        ]
       }
     },
     {
       "title": "Community Hall",
       "slug": "community-hall",
       "category": "other",
-      "schedule_text": "Daily from 10:00am–10:00pm",
+      "schedule_text": "Daily from 10:00am-10:00pm",
       "start_time": "10:00am",
       "end_time": "10:00pm",
       "location": "Community Hall",
       "description": "Play video games and billiards and enjoy arts and crafts. Check out grilling tools and sporting gear, including pickleball equipment. Fees may apply.",
-      "is_fee_based": false,
+      "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 24 }],
-        "location": [{ "page": 1, "line": 24 }],
-        "schedule": [{ "page": 1, "line": 26 }],
-        "description": [{ "page": 1, "line": 27 }, { "page": 1, "line": 29 }, { "page": 1, "line": 31 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "COMMUNITY HALL"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "COMMUNITY HALL"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Daily from 10:00am-10:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Play video games and billiards and enjoy arts and crafts."
+          },
+          {
+            "page": 1,
+            "line": 30,
+            "text": "Check out grilling tools and sporting gear, including"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "pickleball equipment. Fees may apply."
+          }
+        ]
       }
     },
     {
-      "title": "Survival Of The Fittest Fitness Center",
-      "slug": "survival-of-the-fittest-fitness-center",
+      "title": "Fitness Center",
+      "slug": "fitness-center",
       "category": "other",
       "schedule_text": "Open 24 hours a day, 7 days a week",
       "start_time": "12:00am",
       "end_time": "11:59pm",
-      "location": "Survival Of The Fittest Fitness Center",
-      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "location": "Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center. S T R | N G O E",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 28 }, { "page": 1, "line": 30 }],
-        "location": [{ "page": 1, "line": 28 }, { "page": 1, "line": 30 }],
-        "schedule": [{ "page": 1, "line": 32 }],
-        "description": [{ "page": 1, "line": 34 }, { "page": 1, "line": 36 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "FITNESS CENTER"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "FITNESS CENTER"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Open 24 hours a day, 7 days a week"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Continue pushing towards your wellness goals in"
+          },
+          {
+            "page": 1,
+            "line": 36,
+            "text": "our full-service fitness center."
+          },
+          {
+            "page": 1,
+            "line": 41,
+            "text": "S T R | N G O E"
+          }
+        ]
       }
     },
     {
@@ -82,60 +213,109 @@
       "description": "Join us for family-friendly activities, both in and out of the pool.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 33 }],
-        "location": [{ "page": 1, "line": 35 }],
-        "schedule": [{ "page": 1, "line": 35 }],
-        "description": [{ "page": 1, "line": 37 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "Daily at Samawati Springs Pool"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "Daily at Samawati Springs Pool"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 38,
+            "text": "Join us for family-friendly activities, both in and out of the pool."
+          }
+        ]
       }
     },
     {
-      "title": "Arts & Crafts",
-      "slug": "arts-crafts",
-      "category": "arts_crafts",
-      "schedule_text": "3:00pm–4:00pm",
-      "start_time": "3:00pm",
-      "end_time": "4:00pm",
+      "title": "Sunset Splash",
+      "slug": "sunset-splash",
+      "category": "other",
+      "schedule_text": "Monday and Friday at 8:00pm",
+      "start_time": "8:00pm",
+      "end_time": null,
       "location": "Samawati Springs Pool Deck",
-      "description": "Sunday, Wednesday and Friday.............................Mickey Tie-Dye Monday and Saturday.............Make Your Own African Bangles Thursday........................................................................... Seasonal Craft",
-      "is_fee_based": true,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 38 }],
-        "location": [{ "page": 1, "line": 39 }],
-        "schedule": [{ "page": 1, "line": 41 }],
-        "description": [{ "page": 1, "line": 42 }, { "page": 1, "line": 44 }, { "page": 1, "line": 45 }]
-      }
-    },
-    {
-      "title": "Campfire",
-      "slug": "campfire",
-      "category": "campfire",
-      "schedule_text": "Nightly from 6:00pm–7:00pm",
-      "start_time": "6:00pm",
-      "end_time": "7:00pm",
-      "location": "Pembe Savanna Overlook",
-      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "description": "Join us for our evening dance party.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 47 }],
-        "location": [{ "page": 1, "line": 49 }],
-        "schedule": [{ "page": 1, "line": 51 }],
-        "description": [{ "page": 1, "line": 52 }, { "page": 1, "line": 54 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 61,
+            "text": "SUNSET SPLASH"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 63,
+            "text": "Samawati Springs Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 65,
+            "text": "Monday and Friday at 8:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 68,
+            "text": "Join us for our evening dance party."
+          }
+        ]
       }
     },
     {
-      "title": "Bingo In The Library",
-      "slug": "bingo-in-the-library",
+      "title": "Bingo",
+      "slug": "bingo",
       "category": "other",
-      "schedule_text": "Monday and Friday from 8:00pm–9:00pm",
-      "start_time": "8:00pm",
-      "end_time": "9:00pm",
+      "schedule_text": "Wednesday from 8:30pm-9:15pm",
+      "start_time": "8:30pm",
+      "end_time": "9:15pm",
       "location": "Palace Library",
       "description": "",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 66 }],
-        "location": [{ "page": 1, "line": 68 }],
-        "schedule": [{ "page": 1, "line": 69 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 69,
+            "text": "BINGO"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 71,
+            "text": "palace Library"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 72,
+            "text": "Wednesday from 8:30pm-9:15pm"
+          }
+        ]
       }
     },
     {
@@ -149,16 +329,58 @@
       "description": "Unleash your wild artistic side as you create your very own mosaic. This experience is recommended for Guests ages 12 and up. Space is limited. To reserve your spot, please call 407-WDW-PLAY.",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 70 }],
-        "location": [{ "page": 1, "line": 71 }],
-        "schedule": [{ "page": 1, "line": 73 }],
+        "title": [
+          {
+            "page": 1,
+            "line": 73,
+            "text": "AFRICAN MOSAIC ART ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 74,
+            "text": "Palace Library"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "Tuesday at 1:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 74 },
-          { "page": 1, "line": 76 },
-          { "page": 1, "line": 77 },
-          { "page": 1, "line": 79 },
-          { "page": 1, "line": 82 },
-          { "page": 1, "line": 83 }
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Unleash your wild artistic side as"
+          },
+          {
+            "page": 1,
+            "line": 79,
+            "text": "you create your very own mosaic."
+          },
+          {
+            "page": 1,
+            "line": 80,
+            "text": "This experience is recommended for"
+          },
+          {
+            "page": 1,
+            "line": 82,
+            "text": "Guests ages 12 and up. Space is limited."
+          },
+          {
+            "page": 1,
+            "line": 85,
+            "text": "To reserve your spot, please call"
+          },
+          {
+            "page": 1,
+            "line": 86,
+            "text": "407-WDW-PLAY."
+          }
         ]
       }
     },
@@ -166,27 +388,147 @@
       "title": "Movie Under the Stars",
       "slug": "movie-under-the-stars",
       "category": "movies_under_stars",
-      "schedule_text": "Pembe Savanna Overlook | 8:00PM",
-      "start_time": "8:00pm",
+      "schedule_text": "Pembe Savanna Overlook | 8:30PM",
+      "start_time": "8:30pm",
       "end_time": null,
       "location": "Pembe Savanna Overlook",
       "description": "",
       "is_fee_based": false,
-      "movie_nights": [
-        { "day_of_week": "sunday", "movie_title": "Lilo & Stitch (2025)", "show_time": "8:00PM" },
-        { "day_of_week": "tuesday", "movie_title": "Encanto", "show_time": "8:00PM" },
-        { "day_of_week": "thursday", "movie_title": "101 Dalmatians (1961)", "show_time": "8:00PM" },
-        { "day_of_week": "saturday", "movie_title": "Toy Story 4", "show_time": "8:00PM" }
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 75,
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "PEMBE SAVANNA OVERLOOK | 8:30PM"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "PEMBE SAVANNA OVERLOOK | 8:30PM"
+          }
+        ]
+      }
+    }
+  ],
+  "expected_unextractable_records": [
+    {
+      "title": "V L L A G E",
+      "slug": "v-l-l-a-g-e",
+      "reason": "parser_warning:schedule:missing_source_span",
+      "warnings": [
+        "schedule:missing_source_span"
       ],
       "required_spans": {
-        "title": [{ "page": 1, "line": 72 }],
-        "location": [{ "page": 1, "line": 75 }],
-        "schedule": [{ "page": 1, "line": 75 }],
-        "movie_nights": [
-          { "page": 1, "line": 78 },
-          { "page": 1, "line": 80 },
-          { "page": 1, "line": 81 },
-          { "page": 1, "line": 84 }
+        "title": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "V L L A G E"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Survival of the Fittest",
+      "slug": "survival-of-the-fittest",
+      "reason": "parser_warning:schedule:missing_source_span,location:missing_source_span",
+      "warnings": [
+        "schedule:missing_source_span",
+        "location:missing_source_span"
+      ],
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "SURVIVAL OF THE FITTEST"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "slug": "arts-crafts",
+      "reason": "parser_warning:description:text_quality_low",
+      "warnings": [
+        "description:text_quality_low"
+      ],
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 39,
+            "text": "ARTS & CRAFTS ($)"
+          }
+        ]
+      }
+    }
+  ],
+  "reviewed_manual_records": [
+    {
+      "title": "Campfire",
+      "slug": "campfire",
+      "category": "campfire",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
+      "location": "Pembe Savanna Overlook",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "is_fee_based": false,
+      "manual_review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-06-26T00:00:00Z",
+        "notes": "Verified against rendered DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf; OCR captured location/schedule/body but dropped the Campfire title."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "bbox": [
+              910.0,
+              1604.0,
+              1135.0,
+              1640.0
+            ],
+            "text": "CAMPFIRE",
+            "source": "manual_visual_bbox"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 51,
+            "text": "Pembe Savanna Overlook"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 53,
+            "text": "Nightly from 6:30pm-7:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "bbox": [
+              910.0,
+              1710.0,
+              1605.0,
+              1782.0
+            ],
+            "text": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+            "source": "manual_visual_bbox"
+          }
         ]
       }
     }

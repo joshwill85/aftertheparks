@@ -3,9 +3,11 @@ import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
 import { getResortTierGradient } from "@/components/resort/ResortCard";
 import { ResortCategorySections } from "@/components/resort/ResortCategorySections";
+import { ResortActivityConstellation } from "@/components/resort/ResortActivityConstellation";
 import { ResortEmptyState } from "@/components/resort/ResortEmptyState";
 import { ResortSourceBlock } from "@/components/resort/ResortSourceBlock";
 import { ResortTimeline } from "@/components/resort/ResortTimeline";
+import { SourceConfidenceSummary } from "@/components/visualizations/SourceConfidenceLedger";
 import {
   getResortBySlug,
   getResortActivities,
@@ -186,6 +188,20 @@ export default async function ResortDetailPage({
         <ResortEmptyState resort={resort} />
       ) : (
         <>
+          {uniqueActivities.length > 0 && (
+            <ResortActivityConstellation
+              activities={uniqueActivities}
+              resortSlug={resort.slug}
+              resortName={resort.name}
+            />
+          )}
+
+          {(uniqueActivities.length > 0 || uniqueOfferings.length > 0) && (
+            <SourceConfidenceSummary
+              sources={[...uniqueActivities, ...uniqueOfferings]}
+            />
+          )}
+
           {todayActivities.length > 0 && (
             <section className="mb-10">
               <ResortSectionHeader

@@ -1,0 +1,305 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "8463b52dbbf45fbcce05a208a6467d18e1469f9b38c6207fa1e41781daf9675e",
+  "source_pdf_path": "data/raw/pdfs/OKWR_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.498744+00:00",
+  "activities": [
+    {
+      "title": "Conch Flats Community Hall",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "location": "Hospitality House",
+      "description": "Join us to create one-of-a-kind crafts, borrow your favorite sports equipment and more! Fees may apply.",
+      "price_state": "fee",
+      "price_evidence": "body_fee_language",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 512.5,
+        "width": 693.0,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:conch-flats-community-hall"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 12:00pm-2:00pm",
+      "location": "Sandcastle Pool Deck",
+      "description": "Soak in the sun with some family-friendly activities, both in and out of the water. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 715.0,
+        "width": 461.0,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:poolside-activities"
+    },
+    {
+      "title": "Disney Fit Yoga",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday at 9:00am",
+      "location": "Near the Sandcastle Pool area",
+      "description": "Ground yourself with a gentle yoga session to start your day. Designed for all skill levels, this experience incorporates various poses set to your favorite Disney music!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 824.5,
+        "width": 369.0,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:disney-fit-yoga"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Monday, Tuesday, Thursday, Friday and Saturday from 2:30pm-3:30pm",
+      "location": "Outside of Community Hall",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 950.0,
+        "width": 417.5,
+        "height": 31.5
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:mickey-tie-dye"
+    },
+    {
+      "title": "Disney Fit Aqua Fitness",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Tuesday at 9:00am",
+      "location": "Sandcastle Pool",
+      "description": "Move to the music and the water’s natural resistance during this water aerobic exercise class that welcomes all skill levels.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1089.5,
+        "width": 561.0,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:disney-fit-aqua-fitness"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "location": "Near the Sandcastle Pool Area Tennis Courts",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1189.0,
+        "width": 210.5,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:campfire"
+    },
+    {
+      "title": "Pickleball Clinic",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Thursday at 9:30am",
+      "location": "Tennis Courts near Hospitality House",
+      "description": "Join us for an introduction to Pickleball! Learn the basic rules and how to volley, serve and dink. Reservations required. Please stop by Community Hall or call 407-827-1183 to reserve your spot.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1320.5,
+        "width": 411.5,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:pickleball-clinic"
+    },
+    {
+      "title": "Sunset Celebration",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Friday at Sunset",
+      "location": "Hospitality House",
+      "description": "Inspired by the nightly, multicultural festival of watching the sun sink into the Gulf at Mallory Square in Key West, Florida. Come celebrate our interpretation of this tradition with family-friendly activities and more.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.5,
+        "y": 1391.0,
+        "width": 472.5,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:sunset-celebration"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "location": "Throughout Disney’s Old Key West Resort",
+      "description": "Search the Resort for a hidden Orange Bird photo prop. Once located, snap a photo and then head to Community Hall to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1585.5,
+        "width": 315.5,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:find-a-friend"
+    },
+    {
+      "title": "Nighttime Trivia",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday from 8:00pm-9:00pm",
+      "location": "Papa’s Den near the lobby",
+      "description": "Put your knowledge to the test!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1663.0,
+        "width": 387.5,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:nighttime-trivia"
+    },
+    {
+      "title": "Conch Crazy Bingo",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Wednesday and Friday from 8:00pm-9:00pm",
+      "location": "Community Hall",
+      "description": "Bring the family together for an unforgettable bingo night full of fun, joy, and prizes!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1830.0,
+        "width": 460.0,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:conch-crazy-bingo"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Near The Volleyball Court | 8:30PM",
+      "location": "Near The Volleyball Court",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 118.5,
+        "y": 2074.0,
+        "width": 669.5,
+        "height": 28.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:movie-under-the-stars"
+    },
+    {
+      "title": "Conch Flats Mosaics",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Wednesday at 3:00pm",
+      "location": "Papa’s Den near the lobby",
+      "description": "Design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Class may take up to 2 hours. Reservations are required. Please visit Community Hall or call 407-827-1183 to reserve your spot. Space is limited. Weather permitting.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 2135.5,
+        "width": 576.5,
+        "height": 31.0
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:conch-flats-mosaics"
+    },
+    {
+      "title": "Bike Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am–6:30pm",
+      "location": "Hank’s Rent ‘N Return at Community Hall",
+      "description": "Choose from individual bikes to two-or four-person surrey bikes for a fun family outing!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1815.0,
+        "width": 376.0,
+        "height": 31.5
+      },
+      "confidence": "medium",
+      "row_key": "old-key-west:bike-rentals"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

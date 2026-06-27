@@ -1,0 +1,49 @@
+{
+  "source_kind": "official_html",
+  "source_url": "https://disneyworld.disney.go.com/recreation/riviera-resort/pools-riviera-resort/",
+  "captured_at": "2026-06-27T01:26:37.004949+00:00",
+  "raw_html_sha256": "903deb358998494f3836b71a08d9c8a3fdc168322cb95a40634326f793a06566",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Pools at Disney’s Riviera Resort | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Pools at Disney's Riviera Resort"
+    },
+    {
+      "line": 3,
+      "text": "MultipleWalt Disney World® Resortlocations"
+    },
+    {
+      "line": 4,
+      "text": "Bask in the fun at 2 uniquely themed pool areas at Disney’s Riviera Resort."
+    },
+    {
+      "line": 5,
+      "text": "Mediterranean-Themed Pools"
+    },
+    {
+      "line": 6,
+      "text": "A family-friendly pool area invites you to play—while a more serene pool offers relaxation."
+    },
+    {
+      "line": 7,
+      "text": "At the Riviera Pool, sun umbrellas dot the grounds as the inviting waters cast a warm, golden glow upon the surrounding stucco façades. Pure vacation bliss awaits at this family-friendly pool, which features a pool slide that winds around a stately column tower. And little mademoiselles and messieurs can make a splash at S’il Vous Play, an interactive water play area for kids that’s inspired by the grand public fountains of Europe—featuring a ballet of friendly Fantasia characters."
+    },
+    {
+      "line": 8,
+      "text": "For a quieter afternoon, Beau Soleil Pool beckons you to unwind alongside shimmering waters in a soothing setting."
+    },
+    {
+      "line": 9,
+      "text": "Know Before You Go"
+    },
+    {
+      "line": 10,
+      "text": "Hours and lifeguard availability vary by pool and are subject to change. Complimentary towels are provided at both pools."
+    }
+  ],
+  "content_sha256": "f036f79d332c43eef44d98f29436cf7791a650051609838542c3504dd9cf30ff"
+}

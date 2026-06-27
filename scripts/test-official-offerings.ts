@@ -5,6 +5,7 @@ import {
   getPublicOfferingAvailabilityLabel,
   shouldShowOfferingAvailability,
 } from "@/lib/activityAvailabilityDisplay";
+import { publicPriceDetail } from "@/lib/priceLabels";
 import {
   filterOfficialOfferingsWithoutActivityCollisions,
   isSourceBackedOfficialOfferingRow,
@@ -16,6 +17,274 @@ import {
   offeringToHit,
   scoreOffering,
 } from "@/lib/search/score";
+
+type GeneratedOfficialOfferingRow = OfficialOfferingRow & {
+  availability: NonNullable<OfficialOfferingRow["availability"]> & { label: string };
+  amenities: NonNullable<OfficialOfferingRow["amenities"]>;
+  field_provenance: NonNullable<OfficialOfferingRow["field_provenance"]>;
+  location: NonNullable<OfficialOfferingRow["location"]> & { label: string };
+  price: NonNullable<OfficialOfferingRow["price"]> & {
+    notes?: string;
+    state: "free" | "fee" | "unknown";
+  };
+};
+
+const generatedOfficialOfferings = JSON.parse(
+  readFileSync("data/processed/official_recreation_offerings.json", "utf8")
+) as { offerings: GeneratedOfficialOfferingRow[] };
+
+const generatedRunningTrailOfferings = generatedOfficialOfferings.offerings.filter(
+  (offering) => offering.title === "Running Trails"
+);
+assert.equal(
+  generatedRunningTrailOfferings.length,
+  23,
+  "Official Running Trails should remain joined to every current Disney resort trail listing"
+);
+assert.deepEqual(
+  new Set(generatedRunningTrailOfferings.map((offering) => offering.price.state)),
+  new Set(["free"]),
+  "Official Running Trails should publish as Free, not Price unclear"
+);
+assert.ok(
+  generatedRunningTrailOfferings.every((offering) => offering.field_provenance?.price?.length),
+  "Official Running Trails free labels require source provenance"
+);
+
+const generatedElectricalWaterPageantOfferings = generatedOfficialOfferings.offerings.filter(
+  (offering) => offering.title === "Electrical Water Pageant"
+);
+assert.deepEqual(
+  generatedElectricalWaterPageantOfferings
+    .map((offering) => offering.resort_slug)
+    .sort(),
+  [
+    "campsites-at-fort-wilderness-resort",
+    "contemporary-resort",
+    "grand-floridian-resort-and-spa",
+    "polynesian-village-resort",
+    "wilderness-lodge",
+  ],
+  "Electrical Water Pageant should use Disney's official viewing-location list"
+);
+assert.deepEqual(
+  new Set(generatedElectricalWaterPageantOfferings.map((offering) => offering.price.state)),
+  new Set(["free"]),
+  "Electrical Water Pageant should publish as Free, not Price unclear"
+);
+assert.deepEqual(
+  new Set(generatedElectricalWaterPageantOfferings.map((offering) => offering.availability.label)),
+  new Set(["Viewing window 8:35 PM-10:05 PM; location showtimes vary"]),
+  "Electrical Water Pageant should not imply every viewing resort sees the full performance window"
+);
+
+function generatedOfferingByKey(offeringKey: string): GeneratedOfficialOfferingRow {
+  const offering = generatedOfficialOfferings.offerings.find(
+    (row) => row.offering_key === offeringKey
+  );
+  assert.ok(offering, `Missing generated official offering ${offeringKey}`);
+  return offering;
+}
+
+const generatedTriCircleDRanch = generatedOfferingByKey(
+  "tri-circle-d-ranch:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort"
+);
+assert.equal(
+  generatedTriCircleDRanch.price.state,
+  "free",
+  "Tri-Circle-D Ranch stable walkthrough should publish as Free, with paid ride experiences listed separately"
+);
+assert.equal(
+  generatedTriCircleDRanch.availability.label,
+  "Daily 10:00 AM-5:00 PM",
+  "Tri-Circle-D Ranch parent row should use stable open hours, not child-experience reservation wording"
+);
+assert.ok(
+  generatedTriCircleDRanch.field_provenance?.price?.some((span) =>
+    String(span.text).includes("Guests are welcome to walk through")
+  ),
+  "Tri-Circle-D Ranch free label requires source evidence from Disney's stable walkthrough language"
+);
+
+const expectedEquestrianPrices: Array<[string, string, number | undefined, number | undefined]> = [
+  [
+    "horseback-riding:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+    "fee",
+    6500,
+    6500,
+  ],
+  [
+    "horse-drawn-carriage-rides:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+    "fee",
+    undefined,
+    undefined,
+  ],
+  [
+    "horse-drawn-carriage-rides:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
+    "fee",
+    undefined,
+    undefined,
+  ],
+  [
+    "horse-drawn-carriage-rides:port-orleans-resort-riverside:port-orleans-resort-riverside",
+    "fee",
+    undefined,
+    undefined,
+  ],
+  [
+    "pony-rides:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+    "fee",
+    undefined,
+    undefined,
+  ],
+  [
+    "horse-drawn-excursion-wagon-ride:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+    "fee",
+    undefined,
+    undefined,
+  ],
+  [
+    "horse-drawn-excursion-holiday-sleigh-rides:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+    "fee",
+    undefined,
+    undefined,
+  ],
+];
+for (const [offeringKey, state, minAmountCents, maxAmountCents] of expectedEquestrianPrices) {
+  const offering = generatedOfferingByKey(offeringKey);
+  assert.equal(offering.price.state, state, `${offeringKey} should have a real Disney price state`);
+  assert.ok(
+    offering.field_provenance?.price?.length,
+    `${offeringKey} price requires source provenance`
+  );
+  if (minAmountCents != null) {
+    assert.equal(offering.price.minAmountCents, minAmountCents);
+  }
+  if (maxAmountCents != null) {
+    assert.equal(offering.price.maxAmountCents, maxAmountCents);
+  }
+}
+
+const expectedCommunityHallKeys = [
+  "community-halls:animal-kingdom-villas-kidani-village:animal-kingdom-villas-kidani-village",
+  "community-halls:boardwalk-villas:boardwalk-villas",
+  "community-halls:contemporary-resort:contemporary-resort",
+  "community-halls:old-key-west-resort:old-key-west-resort",
+  "community-halls:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa",
+];
+for (const offeringKey of expectedCommunityHallKeys) {
+  const offering = generatedOfferingByKey(offeringKey);
+  assert.equal(offering.price.state, "free", `${offeringKey} should publish as Free`);
+  assert.ok(offering.description, `${offeringKey} should include official Community Hall detail`);
+  assert.ok(
+    offering.amenities.length >= 3,
+    `${offeringKey} should include useful Community Hall amenities`
+  );
+  assert.ok(
+    offering.field_provenance?.price?.length,
+    `${offeringKey} free price label requires source provenance`
+  );
+  assert.ok(
+    offering.field_provenance?.amenities?.length,
+    `${offeringKey} amenities require source provenance`
+  );
+}
+assert.equal(
+  generatedOfferingByKey(
+    "community-halls:old-key-west-resort:old-key-west-resort"
+  ).availability.label,
+  "Daily 10:00 AM-10:00 PM"
+);
+
+const expectedGolfKeys = [
+  "disneys-magnolia-golf-course:polynesian-village-resort:polynesian-village-resort",
+  "disneys-palm-golf-course:polynesian-village-resort:polynesian-village-resort",
+  "disneys-oak-trail-golf-course:polynesian-village-resort:polynesian-village-resort",
+  "disneys-lake-buena-vista-golf-course:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa",
+  "walt-disney-world-golf:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa",
+];
+for (const offeringKey of expectedGolfKeys) {
+  const offering = generatedOfferingByKey(offeringKey);
+  assert.equal(offering.price.state, "fee", `${offeringKey} should publish as Paid`);
+  assert.match(
+    offering.price.notes ?? "",
+    /rates vary|green fees vary|tee time/i,
+    `${offeringKey} should explain that Disney golf pricing is dynamic`
+  );
+  assert.ok(
+    offering.field_provenance?.price?.some((span) =>
+      String((span as { source_url?: unknown }).source_url ?? "").includes(
+        "golfwdw.com/courses/golf-rates"
+      )
+    ),
+    `${offeringKey} price requires source provenance from the official Golf WDW rates page`
+  );
+}
+assert.match(
+  generatedOfferingByKey(
+    "disneys-lake-buena-vista-golf-course:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa"
+  ).availability.label,
+  /closed for renovations.*fall 2026/i,
+  "Lake Buena Vista Golf Course should retain Disney's current renovation status"
+);
+
+const sunset9 = generatedOfferingByKey(
+  "sunset-9-hole-golf-promotion:polynesian-village-resort:polynesian-village-resort"
+);
+assert.equal(sunset9.price.state, "fee");
+assert.equal(sunset9.price.minAmountCents, 3900);
+assert.equal(sunset9.price.maxAmountCents, 7500);
+assert.ok(
+  sunset9.field_provenance?.price?.some((span) =>
+    String(span.text).includes("$39 - $75") ||
+    String(span.text).includes("$39-$75")
+  ),
+  "Sunset 9 should use the official Golf WDW seasonal range evidence"
+);
+
+const fantasiaMiniGolf = generatedOfferingByKey(
+  "fantasia-gardens-and-fairways-miniature-golf:boardwalk-inn:epcot-resort-area"
+);
+assert.equal(fantasiaMiniGolf.price.state, "fee");
+assert.equal(fantasiaMiniGolf.price.minAmountCents, 1200);
+assert.equal(fantasiaMiniGolf.price.maxAmountCents, 1900);
+assert.match(
+  fantasiaMiniGolf.location.label,
+  /Swan Hotel.*EPCOT Resort Area/i,
+  "Fantasia mini-golf should preserve Disney's official location text while using a resort-area join"
+);
+
+const winterSummerlandMiniGolf = generatedOfferingByKey(
+  "winter-summerland-miniature-golf:animal-kingdom-lodge:animal-kingdom-resort-area"
+);
+assert.equal(winterSummerlandMiniGolf.price.state, "fee");
+assert.equal(winterSummerlandMiniGolf.price.minAmountCents, 1200);
+assert.equal(winterSummerlandMiniGolf.price.maxAmountCents, 1900);
+assert.match(
+  winterSummerlandMiniGolf.location.label,
+  /Animal Kingdom Resort Area/i,
+  "Winter Summerland mini-golf should preserve Disney's official resort-area location text"
+);
+
+const expectedComplimentaryFitnessKeys = [
+  "old-key-west-exercise-room:old-key-west-resort:old-key-west-resort",
+  "survival-of-the-fittest-fitness-center:animal-kingdom-villas-kidani-village:animal-kingdom-villas-kidani-village",
+];
+for (const offeringKey of expectedComplimentaryFitnessKeys) {
+  const offering = generatedOfferingByKey(offeringKey);
+  assert.equal(offering.price.state, "free", `${offeringKey} should publish as Free`);
+  assert.match(
+    offering.price.notes ?? "",
+    /complimentary for Guests staying/i,
+    `${offeringKey} should use Disney's complimentary fitness-room evidence`
+  );
+  assert.ok(
+    offering.field_provenance?.price?.some((span) =>
+      /complimentary for Guests staying/i.test(String(span.text))
+    ),
+    `${offeringKey} free price label requires source provenance`
+  );
+}
 
 const bikeRow: OfficialOfferingRow = {
   id: "offering-bike-old-key-west",
@@ -199,6 +468,73 @@ const paidOffering = mapOfficialOfferingRow({
 assert.equal(paidOffering.price.state, "fee");
 assert.equal(paidOffering.price.notes, "$9 per hour");
 assert.equal(paidOffering.fieldProvenance?.price?.[0]?.line, 220);
+
+const wildernessBackTrailOffering = mapOfficialOfferingRow({
+  ...bikeRow,
+  id: "offering-wilderness-back-trail",
+  program_key: "wilderness-back-trail-adventure",
+  offering_key: "wilderness-back-trail-adventure:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
+  resort_slug: "cabins-at-fort-wilderness-resort",
+  resort_name: "The Cabins at Disney's Fort Wilderness Resort",
+  title: "Wilderness Back Trail Adventure",
+  price: {
+    state: "fee",
+    notes: "$90–$99 per Person (tax not included)",
+    minAmountCents: 9000,
+    maxAmountCents: 9900,
+    priceBasis: "per_person",
+    taxNotes: "tax not included",
+  },
+  field_provenance: {
+    ...bikeRow.field_provenance,
+    price: [
+      {
+        page: 1,
+        line: 5,
+        text: "$90–$99 per Person (tax not included)",
+      },
+    ],
+  },
+});
+assert.equal(wildernessBackTrailOffering.price.state, "fee");
+assert.equal(wildernessBackTrailOffering.price.minAmountCents, 9000);
+assert.equal(wildernessBackTrailOffering.price.maxAmountCents, 9900);
+assert.equal(wildernessBackTrailOffering.price.priceBasis, "per_person");
+assert.equal(publicPriceDetail(wildernessBackTrailOffering.price), "$90-$99 per person");
+
+const fortCampfireOffering = mapOfficialOfferingRow({
+  ...bikeRow,
+  id: "offering-fort-campfire",
+  program_key: "chip-n-dales-campfire-sing-a-long",
+  offering_key: "chip-n-dales-campfire-sing-a-long:campsites-at-fort-wilderness-resort:default",
+  resort_slug: "campsites-at-fort-wilderness-resort",
+  resort_name: "Disney's Fort Wilderness Resort & Campground",
+  title: "Chip 'n' Dale's Campfire Sing-A-Long",
+  category: "campfire",
+  price: {
+    state: "free",
+    options: [
+      {
+        optionName: "Fort S'Mores Kit",
+        priceBasis: "optional_add_on",
+        priceCentsMin: 999,
+        priceCentsMax: 999,
+        priceConfidence: "disney_menu_verified",
+        verificationStatus: "verified",
+        sourceUrl: "https://disneyworld.disney.go.com/dining/cabins-at-fort-wilderness-resort/chuck-wagon-fresh-fixins-food-truck/menus/lunch-and-dinner/",
+        sourceLabel: "Disney Chuck Wagon menu",
+      },
+    ],
+  },
+  field_provenance: {
+    ...bikeRow.field_provenance,
+    price: [{ page: 1, line: 12, text: "complimentary" }],
+  },
+});
+assert.equal(fortCampfireOffering.price.state, "free");
+assert.equal(fortCampfireOffering.price.options?.[0]?.priceCentsMin, 999);
+assert.equal(fortCampfireOffering.price.options?.[0]?.priceConfidence, "disney_menu_verified");
+assert.equal(fortCampfireOffering.price.options?.[0]?.sourceLabel, "Disney Chuck Wagon menu");
 
 const unsupportedPaidOffering = mapOfficialOfferingRow({
   ...bikeRow,

@@ -1,10 +1,11 @@
 import { getCategoryMeta } from "@/lib/categories/meta";
+import type { IconKey } from "@/components/icons/iconRegistry";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 export interface CategoryGroup {
   category: string;
   label: string;
-  icon: string;
+  iconKey: IconKey;
   activities: ActivityOccurrence[];
 }
 
@@ -25,7 +26,7 @@ export function groupByCategory(
       return {
         category,
         label: meta.label,
-        icon: meta.icon,
+        iconKey: meta.iconKey,
         activities: items,
       };
     })

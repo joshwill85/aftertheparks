@@ -24,6 +24,40 @@ export function getResortTierGradient(category: string): string {
   return TIER_GRADIENTS[category] ?? TIER_GRADIENTS.moderate;
 }
 
+function buildResortPersonality({
+  resort,
+  tonightCount,
+  todayCount,
+}: {
+  resort: ResortSummary;
+  tonightCount?: number;
+  todayCount?: number;
+}): string[] {
+  const signals: string[] = [];
+
+  if ((tonightCount ?? 0) >= 3) {
+    signals.push("Evening-rich");
+  } else if ((todayCount ?? 0) >= 4) {
+    signals.push("Daytime-friendly");
+  }
+
+  if (resort.offeringCount >= 10) {
+    signals.push("Resort-day ready");
+  } else if (resort.activityCount >= 6) {
+    signals.push("Good schedule depth");
+  }
+
+  if (resort.category === "campground") {
+    signals.push("Campfire energy");
+  } else if (resort.category === "deluxe" || resort.category === "deluxe_villa") {
+    signals.push("Worth lingering");
+  } else if (resort.category === "value") {
+    signals.push("Easy wins");
+  }
+
+  return signals.slice(0, 3);
+}
+
 interface ResortCardProps {
   resort: ResortSummary;
   tonightCount?: number;
@@ -45,6 +79,7 @@ export function ResortCard({
   const hasLiveCounts =
     (todayCount != null && todayCount > 0) ||
     (tonightCount != null && tonightCount > 0);
+  const personality = buildResortPersonality({ resort, tonightCount, todayCount });
 
   return (
     <article
@@ -63,6 +98,11 @@ export function ResortCard({
           className="resort-card__banner"
           style={{ background: getResortTierGradient(resort.category) }}
         >
+          <span
+            className="hidden-resort-magic hrm-resort-tilework"
+            data-hidden-detail="resort_card_tilework"
+            aria-hidden
+          />
           <span
             className={cn(
               "resort-card__initial",
@@ -89,6 +129,14 @@ export function ResortCard({
 
           <h3 className="resort-card__title">{resort.name}</h3>
           <p className="resort-card__tagline">{tagline}</p>
+
+          {personality.length > 0 && (
+            <div className="resort-card__personality" aria-label="Resort personality">
+              {personality.map((signal) => (
+                <span key={signal}>{signal}</span>
+              ))}
+            </div>
+          )}
 
           <div className="resort-card__stats">
             <span className="resort-card__stat">
@@ -124,7 +172,7 @@ export function ResortCard({
           ) : (
             <p className="resort-card__hint">
               {hasLiveCounts
-                ? "Source-backed schedules and offerings"
+                ? "Schedules and offerings from current sources"
                 : "Browse resort fun and official sources"}
             </p>
           )}

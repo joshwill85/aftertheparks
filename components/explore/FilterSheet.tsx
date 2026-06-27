@@ -4,7 +4,9 @@ import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { FilterFields } from "@/components/explore/FilterRail";
+import type { FilterImpact } from "@/lib/explore/filterImpact";
 
 interface FilterSheetProps {
   open: boolean;
@@ -12,6 +14,9 @@ interface FilterSheetProps {
   resorts: { slug: string; name: string }[];
   basePath?: string;
   hideDaypart?: boolean;
+  activeCount: number;
+  filterImpact: FilterImpact;
+  onClearAll: () => void;
 }
 
 export function FilterSheet({
@@ -20,6 +25,9 @@ export function FilterSheet({
   resorts,
   basePath = "/activities",
   hideDaypart = false,
+  activeCount,
+  filterImpact,
+  onClearAll,
 }: FilterSheetProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -37,9 +45,9 @@ export function FilterSheet({
   );
 
   const clearAll = useCallback(() => {
-    router.push(basePath);
+    onClearAll();
     onClose();
-  }, [router, basePath, onClose]);
+  }, [onClearAll, onClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -123,15 +131,35 @@ export function FilterSheet({
           >
             <div className="filter-sheet__handle" aria-hidden />
             <div className="filter-sheet__header">
-              <h2 id="filter-sheet-title" className="font-display text-lg font-semibold">
-                Filters
-              </h2>
+              <div>
+                <h2 id="filter-sheet-title" className="font-display text-lg font-semibold">
+                  Filters
+                </h2>
+                <p className="text-xs font-bold text-[var(--color-muted)]">
+                  {activeCount === 0
+                    ? "No filters active"
+                    : `${activeCount} filter${activeCount === 1 ? "" : "s"} active`}
+                </p>
+              </div>
               <div className="filter-sheet__actions">
-                <button type="button" onClick={clearAll} className="btn-ghost">
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="btn-ghost"
+                  disabled={activeCount === 0}
+                >
                   Clear all
                 </button>
                 <button type="button" onClick={onClose} className="btn-primary px-5 text-sm">
                   Apply
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="filter-sheet__close"
+                  aria-label="Close filters"
+                >
+                  <IconGlyph iconKey="close" decorative />
                 </button>
               </div>
             </div>
@@ -144,6 +172,7 @@ export function FilterSheet({
               freeOnly={freeOnly}
               reservationOnly={reservationOnly}
               hideDaypart={hideDaypart}
+              filterImpact={filterImpact}
               update={update}
               searchableResorts
             />

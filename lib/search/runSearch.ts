@@ -251,7 +251,7 @@ export async function runSearch(
         description: `Explore ${meta.label.toLowerCase()} across the resorts`,
         href: `/activities?category=${category}`,
         score,
-        badges: [meta.icon],
+        iconKey: meta.iconKey,
         category,
       });
     }

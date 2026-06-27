@@ -1,0 +1,245 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "7e211f9972fb47a554a34ade40864a6304eea41c421cc67a4026f2a2519631a5",
+  "source_pdf_path": "data/raw/pdfs/CTR_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.498130+00:00",
+  "activities": [
+    {
+      "title": "Cabana Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am-7:00pm",
+      "location": "Contemporary Feature Pool",
+      "description": "To make a reservation, please call 407-WDW-PLAY.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.667,
+        "y": 517.0,
+        "width": 458.66600000000005,
+        "height": 31.66700000000003
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:cabana-rentals"
+    },
+    {
+      "title": "Motorized Boat Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 11:00am-5:00pm",
+      "location": "The Boat Nook Marina",
+      "description": "",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 709.0,
+        "width": 642.3330000000001,
+        "height": 31.66700000000003
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:motorized-boat-rentals"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday, Wednesday, Thursday and Saturday at 1:00pm; Monday and Friday at 2:30pm",
+      "location": "Contemporary Feature Pool",
+      "description": "Join us for fun-filled games and dancing, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 863.667,
+        "width": 461.0,
+        "height": 25.66599999999994
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:poolside-activities"
+    },
+    {
+      "title": "Olympiad Fitness Center",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "location": "Olympiad Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.667,
+        "y": 992.333,
+        "width": 588.333,
+        "height": 25.66700000000003
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:olympiad-fitness-center"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 3:00pm-4:00pm",
+      "location": "Outside of Community Hall at Bay Lake Tower",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1171.0,
+        "width": 417.6669999999999,
+        "height": 31.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:mickey-tie-dye"
+    },
+    {
+      "title": "Pickleball Clinic",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Wednesday from 9:00am-10:00am",
+      "location": "Bay Lake Tower Sports Court",
+      "description": "This complimentary introduction to pickleball will teach the basics of the game everyone is talking about. Learn skills and techniques, then compete in our Pickleball Challenge at the end of the clinic! Visit Community Hall or call 407-824-1347 to pre-register. Space is limited.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 1337.333,
+        "width": 412.0,
+        "height": 25.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:pickleball-clinic"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "location": "Courtyard Campfire Pit between Contemporary Tower and Bay Lake Tower",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 911.667,
+        "y": 1442.667,
+        "width": 210.9999999999999,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:campfire"
+    },
+    {
+      "title": "Silent Disco",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Monday, Wednesday and Friday from 8:00pm-9:00pm",
+      "location": "Contemporary Courtyard",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.333,
+        "y": 1712.667,
+        "width": 291.0000000000001,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:silent-disco"
+    },
+    {
+      "title": "Disney Fit Yoga",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Friday at 8:00am",
+      "location": "The Lawn between Contemporary Tower and Bay Lake Tower",
+      "description": "Ground yourself with a gentle yoga session. Designed for all levels, this experience incorporates various poses set to your favorite Disney music!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 1724.333,
+        "width": 370.0,
+        "height": 25.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:disney-fit-yoga"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "The Lawn Near Contemporary Courtyard | 8:30PM",
+      "location": "The Lawn Near Contemporary Courtyard",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.667,
+        "y": 2098.333,
+        "width": 670.0,
+        "height": 28.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:movie-under-the-stars"
+    },
+    {
+      "title": "The Magic Of Mosaics",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday and Friday from 1:00pm-3:00pm",
+      "location": "Lakeside Landing between the Boat Nook Marina and Contemporary Feature Pool",
+      "description": "Create your own one-of-a-kind mosaic inspired by the artwork of Mary Blair! Visit Community Hall or call 407-824-1347 to book this experience. Check-in begins at 12:45pm to participate.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 2101.0,
+        "width": 590.3330000000001,
+        "height": 32.0
+      },
+      "confidence": "medium",
+      "row_key": "contemporary:the-magic-of-mosaics"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

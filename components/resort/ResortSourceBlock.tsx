@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import type { ResortSummary } from "@/lib/types/occurrence";
 
 export function ResortSourceBlock({ resort }: { resort: ResortSummary }) {
@@ -24,7 +25,7 @@ export function ResortSourceBlock({ resort }: { resort: ResortSummary }) {
               rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center font-bold text-[var(--accent)] hover:underline"
             >
-              Official resort page →
+              Official resort page <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
             </a>
           </li>
         )}
@@ -33,7 +34,7 @@ export function ResortSourceBlock({ resort }: { resort: ResortSummary }) {
             href="/corrections"
             className="inline-flex min-h-11 items-center font-bold text-[var(--accent)] hover:underline"
           >
-            Report a correction →
+            Report a correction <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
           </Link>
         </li>
       </ul>

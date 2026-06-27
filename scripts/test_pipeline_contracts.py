@@ -4,6 +4,7 @@ import sys
 import json
 import tempfile
 import os
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -28,6 +29,9 @@ from scripts.ingest.extract_v2 import (
     extract_candidates_for_pdf,
 )
 from scripts.ingest.promote_gold import generate_gold_records, promote_candidates, promote_fixtures
+from scripts.ingest import promote_gold
+from scripts.ingest import discover
+from scripts.ingest.source_manifest import ActivitySource
 from scripts.ingest.publish_gold_v2 import publish_gold_file, publish_gold_rows, _stable_uuid
 from scripts.ingest.disney_recreation_offerings import (
     extract_official_recreation_offerings,
@@ -58,8 +62,12 @@ WELLNESS_FIXTURES = [
     Path("data/golden/activities/all-star-sports-wellness-scavenger-hunt.json"),
 ]
 ALL_STAR_MOVIES_FULL_FIXTURE = Path("data/golden/activities/all-star-movies-full-calendar.json")
+ALL_STAR_MUSIC_FULL_FIXTURE = Path("data/golden/activities/all-star-music-full-calendar.json")
 ART_OF_ANIMATION_FULL_FIXTURE = Path("data/golden/activities/art-of-animation-full-calendar.json")
+ANIMAL_KINGDOM_JAMBO_FULL_FIXTURE = Path("data/golden/activities/animal-kingdom-jambo-full-calendar.json")
+ANIMAL_KINGDOM_KIDANI_FULL_FIXTURE = Path("data/golden/activities/animal-kingdom-kidani-full-calendar.json")
 BOARDWALK_FULL_FIXTURE = Path("data/golden/activities/boardwalk-full-calendar.json")
+GRAND_FLORIDIAN_FULL_FIXTURE = Path("data/golden/activities/grand-floridian-full-calendar.json")
 OLD_KEY_WEST_FULL_FIXTURE = Path("data/golden/activities/old-key-west-full-calendar.json")
 RIVIERA_FULL_FIXTURE = Path("data/golden/activities/riviera-full-calendar.json")
 POP_CENTURY_FULL_FIXTURE = Path("data/golden/activities/pop-century-full-calendar.json")
@@ -77,6 +85,7 @@ GOLD_PREVIEW_PATH = Path("data/processed/activity_gold_v2_preview.json")
 ACTIVITY_PIPELINE_V2_MIGRATION = Path("supabase/migrations/20260621125139_activity_pipeline_v2.sql")
 MRG_FACTS_MIGRATION = Path("supabase/migrations/20260622003816_magical_resort_guide_facts.sql")
 OFFICIAL_OFFERINGS_MIGRATION_GLOB = "supabase/migrations/*official_recreation_offerings*.sql"
+SOURCE_TRUST_LEDGER_MIGRATION_GLOB = "supabase/migrations/*source_trust_audit_ledger.sql"
 
 
 def promote_fixture_paths(*fixture_paths: Path):
@@ -90,6 +99,10 @@ def promote_fixture_paths(*fixture_paths: Path):
 ALL_STAR_MOVIES_PDF = Path("data/raw/pdfs/All-Star-Movies_Aframe_Recreation_1125.pdf")
 ALL_STAR_MUSIC_PDF = Path("data/raw/pdfs/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf")
 ALL_STAR_SPORTS_PDF = Path("data/raw/pdfs/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf")
+CURRENT_ALL_STAR_MUSIC_PDF = Path("data/raw/pdfs/All-Star-Music_Aframe_Recreation-0326.pdf")
+CURRENT_ANIMAL_KINGDOM_JAMBO_PDF = Path("data/raw/pdfs/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf")
+CURRENT_ANIMAL_KINGDOM_KIDANI_PDF = Path("data/raw/pdfs/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf")
+CURRENT_GRAND_FLORIDIAN_PDF = Path("data/raw/pdfs/GF_Aframe_Recreation-0526.pdf")
 BEACH_YACHT_PDF = Path("data/raw/pdfs/YB_Aframe_Recreation-1125.pdf")
 BOARDWALK_PDF = Path("data/raw/pdfs/BW_Aframe_Recreation-0326.pdf")
 ART_OF_ANIMATION_PDF = Path("data/raw/pdfs/DAAR_Aframe_Recreation-0525_DIGITAL.pdf")
@@ -250,6 +263,9 @@ class FakeGoldV2Db:
             returned.append(stored)
         return returned
 
+    def insert(self, table: str, rows, on_conflict=None) -> list[dict]:
+        return self.upsert(table, rows, on_conflict or "")
+
     def rpc(self, fn: str, args=None) -> list[dict]:
         self.upserts.append((f"rpc:{fn}", args or {}, ""))
         return self.health
@@ -260,6 +276,13 @@ class FakeGoldV2Db:
 
 def _official_offerings_migration_text() -> str:
     migrations = sorted(Path().glob(OFFICIAL_OFFERINGS_MIGRATION_GLOB))
+    if not migrations:
+        return ""
+    return "\n".join(path.read_text() for path in migrations)
+
+
+def _source_trust_ledger_migration_text() -> str:
+    migrations = sorted(Path().glob(SOURCE_TRUST_LEDGER_MIGRATION_GLOB))
     if not migrations:
         return ""
     return "\n".join(path.read_text() for path in migrations)
@@ -355,6 +378,21 @@ class PipelineContractsTest(unittest.TestCase):
 
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
+
+    def test_historical_regression_fixture_does_not_publish_current_gold(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(WELLNESS_FIXTURES[0])
+
+        self.assertEqual([], candidates)
+
+    def test_historical_regression_fixture_does_not_create_review_blocker(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture_path = Path(tmp) / WELLNESS_FIXTURES[0].name
+            fixture_path.write_text(WELLNESS_FIXTURES[0].read_text())
+
+            promotion = promote_fixtures(Path(tmp))
+
+        self.assertEqual([], promotion.gold_records)
+        self.assertEqual([], promotion.review_queue)
 
     def test_validate_v2_accepts_all_star_movies_full_calendar_fixture(self) -> None:
         report = validate_fixture_extractions([ALL_STAR_MOVIES_FULL_FIXTURE])
@@ -999,6 +1037,13 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(
             "https://disneyworld.disney.go.com/resorts/dvc-cabins-at-fort-wilderness-resort/recreation/",
             source_url_by_slug["movie-under-the-stars"],
+        )
+        movie = next(row for row in fort_rows if row["canonical_slug"] == "movie-under-the-stars")
+        self.assertEqual("free", movie["price"]["state"])
+        self.assertIn("price", movie["field_provenance"])
+        self.assertIn(
+            "complimentary screenings",
+            movie["field_provenance"]["price"][0]["text"],
         )
 
     def test_fort_wilderness_cabins_page_supplies_movie_under_the_stars(self) -> None:
@@ -1994,6 +2039,24 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(1, audit.summary["fixture_count"])
         self.assertEqual(1, audit.summary["coverage_required_count"])
 
+    def test_manual_review_requires_source_hash_decision_reason_and_evidence(self) -> None:
+        from scripts.ingest.audit_coverage import manual_review_errors
+
+        review = {
+            "review_id": "akl-campfire",
+            "field": "price",
+        }
+
+        self.assertEqual(
+            [
+                "manual_review:source_sha256",
+                "manual_review:source_text_or_bbox",
+                "manual_review:decision",
+                "manual_review:reason",
+            ],
+            manual_review_errors(review),
+        )
+
     def test_reviewed_schedule_repair_corrects_malformed_ocr_time_range(self) -> None:
         candidates = extract_candidates_for_fixture(POP_CENTURY_FULL_FIXTURE)
         poolside = next(
@@ -2204,6 +2267,98 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertEqual("2:30pm", arts["schedule"]["start_time"])
         self.assertEqual("3:30pm", arts["schedule"]["end_time"])
+
+    def test_current_all_star_music_flags_malformed_poolside_schedule(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ALL_STAR_MUSIC_PDF,
+            calendar_group_key="all-star-music",
+        )
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        poolside = by_slug["poolside-activities"]
+
+        self.assertIn("schedule:text_quality_low", poolside["warnings"])
+
+    def test_current_jambo_body_fee_language_marks_fee_based_activity(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ANIMAL_KINGDOM_JAMBO_PDF,
+            calendar_group_key="animal-kingdom-jambo",
+        )
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        simba = by_slug["simbas-activity-center"]["normalized_fields"]
+
+        self.assertTrue(simba["is_fee_based"])
+        self.assertTrue(
+            any(evidence.get("field") == "source_pdf_body_fee_language" for evidence in simba["fee_evidence"]),
+            simba["fee_evidence"],
+        )
+
+    def test_current_extract_flags_day_fragment_descriptions(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ANIMAL_KINGDOM_JAMBO_PDF,
+            calendar_group_key="animal-kingdom-jambo",
+        )
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        arts = by_slug["arts-crafts"]
+
+        self.assertIn("description:text_quality_low", arts["warnings"])
+
+    def test_current_extract_flags_malformed_day_schedules(self) -> None:
+        art_candidates = extract_candidates_for_pdf(
+            pdf_path=Path("data/raw/pdfs/DAAR_Aframe_Recreation-0326.pdf"),
+            calendar_group_key="art-of-animation",
+        )
+        grand_candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_GRAND_FLORIDIAN_PDF,
+            calendar_group_key="grand-floridian",
+        )
+        art_by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in art_candidates
+        }
+        grand_by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in grand_candidates
+        }
+
+        self.assertIn("schedule:text_quality_low", art_by_slug["glow-party"]["warnings"])
+        self.assertIn("schedule:text_quality_low", grand_by_slug["nighttime-pool-party"]["warnings"])
+
+    def test_current_animal_kingdom_campfires_preserve_smores_purchase_language(self) -> None:
+        jambo_candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ANIMAL_KINGDOM_JAMBO_PDF,
+            calendar_group_key="animal-kingdom-jambo",
+        )
+        jambo_by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in jambo_candidates
+        }
+        jambo_campfire = jambo_by_slug["campfire"]["normalized_fields"]
+
+        self.assertIn("complimentary marshmallows", jambo_campfire["description"]["value"])
+        self.assertIn("S’mores kits available for purchase", jambo_campfire["description"]["value"])
+
+        kidani_candidates = extract_publishable_candidates_for_fixture(ANIMAL_KINGDOM_KIDANI_FULL_FIXTURE)
+        kidani_by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in kidani_candidates
+        }
+
+        self.assertIn("campfire", kidani_by_slug)
+        kidani_campfire = kidani_by_slug["campfire"]["normalized_fields"]
+        self.assertEqual("Campfire", kidani_campfire["title"]["value"])
+        self.assertIn("S’mores kits available for purchase", kidani_campfire["description"]["value"])
 
     def test_beach_yacht_v2_does_not_promote_schedule_as_location_or_footer_as_description(self) -> None:
         candidates = extract_candidates_for_pdf(
@@ -2704,6 +2859,38 @@ class PipelineContractsTest(unittest.TestCase):
                 )
                 self.assertNotIn("location:missing_source_span", candidate["warnings"])
 
+    def test_current_grand_floridian_reviewed_ocr_repairs_are_applied(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_GRAND_FLORIDIAN_PDF,
+            calendar_group_key="grand-floridian",
+        )
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        boat = by_slug["captains-shipyard-boat-rentals"]["normalized_fields"]
+        movie = by_slug["movie-under-the-stars"]["normalized_fields"]
+
+        self.assertEqual("Captain’s Shipyard Boat Rentals", boat["title"]["value"])
+        self.assertEqual("Captain’s Shipyard Boat Rentals", boat["location"]["value"])
+        self.assertEqual("Courtyard Lawn", movie["location"]["value"])
+        self.assertEqual("Courtyard Lawn | 8:00PM", movie["schedule"]["text"])
+
+    def test_current_kidani_reviewed_location_repairs_are_applied(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ANIMAL_KINGDOM_KIDANI_PDF,
+            calendar_group_key="animal-kingdom-kidani",
+        )
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        bingo = by_slug["bingo"]["normalized_fields"]
+
+        self.assertEqual("Palace Library", bingo["location"]["value"])
+
     def test_art_of_animation_stacked_titles_and_inline_location_schedule_are_source_backed(self) -> None:
         candidates = extract_candidates_for_pdf(
             pdf_path=ART_OF_ANIMATION_PDF,
@@ -2859,11 +3046,11 @@ class PipelineContractsTest(unittest.TestCase):
             if row["calendar_group_key"] == "all-star-movies"
         ]
 
-        self.assertEqual(11, len(movies_rows))
+        self.assertEqual(10, len(movies_rows))
         self.assertFalse(
             any(row["canonical_slug"] == "resort-scavenger-hunt" for row in movies_rows)
         )
-        self.assertTrue(
+        self.assertFalse(
             any(row["canonical_slug"] == "reel-fun-arcade" for row in movies_rows)
         )
 
@@ -2888,6 +3075,221 @@ class PipelineContractsTest(unittest.TestCase):
         fee_claim = next(claim for claim in gold["claims"] if claim["kind"] == "fee")
         self.assertEqual("unknown", fee_claim["value"])
         self.assertEqual([], fee_claim["evidence"])
+
+    def test_gold_promotion_uses_pdf_fee_marker_absence_as_free_price_evidence(self) -> None:
+        candidate = extract_candidates_for_fixture(WELLNESS_FIXTURES[0])[0]
+        normalized = candidate["normalized_fields"]
+        normalized["is_fee_based"] = False
+        normalized["fee_evidence"] = [
+            {
+                "field": "source_pdf_fee_marker_absent",
+                "source": "pdf_layout",
+                "text": "Fee marker absent from title while PDF legend defines ($) as fee.",
+            }
+        ]
+        normalized["document_key_legends"] = [
+            {
+                "kind": "fee",
+                "marker": "($)",
+                "label": "There is a fee associated with this activity.",
+                "spans": [{"page": 1, "line": 99, "text": "($) There is a fee associated with this activity."}],
+            }
+        ]
+
+        promotion = promote_candidates([candidate])
+
+        self.assertEqual([], promotion.review_queue)
+        gold = promotion.gold_records[0]
+        self.assertEqual("free", gold["price"]["state"])
+        fee_claim = next(claim for claim in gold["claims"] if claim["kind"] == "fee")
+        self.assertEqual("free", fee_claim["value"])
+        self.assertEqual("source_pdf_fee_marker_absent", fee_claim["evidence"][0]["field"])
+        self.assertIn("price", gold["field_provenance"])
+
+    def test_disney_visual_price_evidence_marks_riverside_unmarked_rows_free(self) -> None:
+        from scripts.ingest.promote_gold import apply_disney_visual_price_evidence
+
+        rows = [
+            {
+                "calendar_group_key": "port-orleans-riverside",
+                "canonical_slug": "campfire-on-de-bayou",
+                "price": {"state": "unknown"},
+                "claims": {"fee": {"value": "unknown", "evidence": []}},
+                "field_provenance": {},
+                "source": {},
+            },
+            {
+                "calendar_group_key": "port-orleans-riverside",
+                "canonical_slug": "find-a-friend",
+                "price": {"state": "unknown"},
+                "claims": {"fee": {"value": "unknown", "evidence": []}},
+                "field_provenance": {},
+                "source": {},
+            },
+        ]
+
+        enriched = apply_disney_visual_price_evidence(rows)
+        by_slug = {row["canonical_slug"]: row for row in enriched}
+
+        self.assertEqual("free", by_slug["campfire-on-de-bayou"]["price"]["state"])
+        self.assertEqual(
+            "source_disney_image_fee_marker_absent",
+            by_slug["campfire-on-de-bayou"]["field_provenance"]["price"][0]["field"],
+        )
+        self.assertEqual(
+            "unknown",
+            by_slug["find-a-friend"]["price"]["state"],
+            "Find A Friend is not on the Riverside Cool Kid Summer image and must remain unchanged",
+        )
+
+    def test_disney_visual_price_evidence_marks_all_star_sports_wellness_free(self) -> None:
+        from scripts.ingest.promote_gold import apply_disney_visual_price_evidence
+
+        rows = [
+            {
+                "calendar_group_key": "all-star-sports",
+                "canonical_slug": "wellness-scavenger-hunt",
+                "price": {"state": "unknown"},
+                "claims": {"fee": {"value": "unknown", "evidence": []}},
+                "field_provenance": {},
+                "source": {},
+            }
+        ]
+
+        [enriched] = apply_disney_visual_price_evidence(rows)
+
+        self.assertEqual("free", enriched["price"]["state"])
+        self.assertEqual(
+            "source_disney_pdf_fee_marker_absent",
+            enriched["field_provenance"]["price"][0]["field"],
+        )
+        self.assertEqual("disney_visual_pdf", enriched["field_provenance"]["price"][0]["source"])
+        self.assertIn("All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf", enriched["field_provenance"]["price"][0]["source_url"])
+
+    def test_pdf_missing_fee_marker_with_legend_extracts_free_price_evidence(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=ANIMAL_KINGDOM_JAMBO_PDF,
+            calendar_group_key="animal-kingdom-jambo",
+        )
+        by_slug = {candidate["normalized_fields"]["slug"]: candidate for candidate in candidates}
+
+        for slug in ("campfire", "movie-under-the-stars"):
+            with self.subTest(slug=slug):
+                normalized = by_slug[slug]["normalized_fields"]
+                self.assertFalse(normalized["is_fee_based"])
+                self.assertTrue(normalized["fee_evidence"])
+                self.assertEqual("source_pdf_fee_marker_absent", normalized["fee_evidence"][0]["field"])
+
+    def test_campfire_matrix_adds_secondary_optional_kit_without_changing_free_state(self) -> None:
+        record = {
+            "calendar_group_key": "animal-kingdom-jambo",
+            "resort_slugs": ["animal-kingdom-lodge"],
+            "canonical_slug": "campfire",
+            "title": "Campfire",
+            "category": "campfire",
+            "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+            "price": {"state": "free"},
+            "claims": {
+                "fee": {
+                    "value": "free",
+                    "evidence": [{"field": "source_pdf_fee_marker_absent", "source": "pdf_layout"}],
+                }
+            },
+            "field_provenance": {"description": [{"page": 1, "line": 32, "text": "S’mores kits available for purchase."}]},
+        }
+
+        [enriched] = promote_gold.apply_campfire_price_matrix([record])
+
+        self.assertEqual("free", enriched["price"]["state"])
+        [option] = enriched["price"]["options"]
+        self.assertEqual("Mickey S'mores Kit", option["optionName"])
+        self.assertEqual("optional_add_on", option["priceBasis"])
+        self.assertEqual(700, option["priceCentsMin"])
+        self.assertEqual("secondary_verified", option["priceConfidence"])
+        self.assertEqual("needs_disney_confirmation", option["verificationStatus"])
+
+    def test_campfire_matrix_uses_disney_menu_price_for_fort_wilderness_supplies(self) -> None:
+        record = {
+            "calendar_group_key": "fort-wilderness",
+            "resort_slugs": ["campsites-at-fort-wilderness-resort"],
+            "canonical_slug": "chip-n-dales-campfire-sing-a-long",
+            "title": "Chip 'n' Dale's Campfire Sing-A-Long",
+            "category": "campfire",
+            "description": "Join Chip 'n' Dale for a campfire sing-along.",
+            "price": {"state": "free"},
+            "claims": {
+                "fee": {
+                    "value": "free",
+                    "evidence": [{"field": "official_detail_complimentary", "source": "official_recreation_detail"}],
+                }
+            },
+            "field_provenance": {"description": [{"page": 1, "line": 4, "text": "campfire sing-along"}]},
+        }
+
+        [enriched] = promote_gold.apply_campfire_price_matrix([record])
+
+        self.assertEqual("free", enriched["price"]["state"])
+        [option] = enriched["price"]["options"]
+        self.assertEqual("Fort S'Mores Kit", option["optionName"])
+        self.assertEqual(999, option["priceCentsMin"])
+        self.assertEqual("disney_menu_verified", option["priceConfidence"])
+        self.assertEqual("Disney Chuck Wagon menu", option["sourceLabel"])
+
+    def test_campfire_matrix_does_not_infer_addons_without_disney_purchase_language(self) -> None:
+        record = {
+            "calendar_group_key": "animal-kingdom-jambo",
+            "resort_slugs": ["animal-kingdom-lodge"],
+            "canonical_slug": "campfire",
+            "title": "Campfire",
+            "category": "campfire",
+            "description": "Gather around the campfire.",
+            "price": {"state": "free"},
+            "claims": {
+                "fee": {
+                    "value": "free",
+                    "evidence": [{"field": "source_pdf_fee_marker_absent", "source": "pdf_layout"}],
+                }
+            },
+        }
+
+        [enriched] = promote_gold.apply_campfire_price_matrix([record])
+
+        self.assertEqual("free", enriched["price"]["state"])
+        self.assertNotIn("options", enriched["price"])
+
+    def test_discovery_probes_current_q3_animal_kingdom_jambo_pdf(self) -> None:
+        candidates = discover.probe_cdn_candidates("animal-kingdom-jambo", ["0526"])
+
+        self.assertIn(
+            "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+            candidates,
+        )
+
+    def test_discovery_prefers_newer_probe_even_when_manifest_url_is_reachable(self) -> None:
+        source = ActivitySource(
+            "animal-kingdom-jambo",
+            ("animal-kingdom-lodge",),
+            "https://disneyworld.disney.go.com/resorts/animal-kingdom-lodge/recreation/",
+            "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/DAKL_Aframe_Recreation_0126_Jambo.pdf",
+            "fy26-q1-0126-jambo",
+        )
+
+        def fake_head(url: str) -> dict:
+            return {"http_status": 200, "etag": "q3" if "0526" in url else "q1"}
+
+        def fake_exists(url: str) -> bool:
+            return "0526_Jambo_DIGITAL.pdf" in url
+
+        with patch.object(discover, "head_metadata", side_effect=fake_head), patch.object(
+            discover,
+            "check_url_exists",
+            side_effect=fake_exists,
+        ):
+            result = discover.discover_source(source, use_playwright=False)
+
+        self.assertEqual("url_changed", result["status"])
+        self.assertIn("fy26-q3", result["discovered_url"])
+        self.assertIn("0526_Jambo_DIGITAL.pdf", result["discovered_url"])
 
     def test_gold_preview_uses_stable_catalog_ids_not_source_candidate_ids(self) -> None:
         rows = json.loads(GOLD_PREVIEW_PATH.read_text())
@@ -2994,6 +3396,316 @@ class PipelineContractsTest(unittest.TestCase):
                 self.assertEqual("unknown", offering["claims"]["transportation"]["value"])
                 self.assertTrue(offering["field_provenance"]["resort_join"])
                 self.assertTrue(offering["field_provenance"]["title"])
+
+    def test_wilderness_back_trail_adventure_uses_dedicated_events_tours_page(self) -> None:
+        source_url = "https://disneyworld.disney.go.com/events-tours/cabins-at-fort-wilderness-resort/wilderness-back-trail-adventure/"
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "source_url": source_url,
+                "source_web_sha256": "7" * 64,
+                "source_path": "data/raw/web/official-html-wilderness-back-trail-adventure.snapshot.json",
+                "lines": [
+                    {"line": 1, "text": "Wilderness Back Trail Adventure | Walt Disney World Resort"},
+                    {"line": 2, "text": "Wilderness Back Trail Adventure"},
+                    {
+                        "line": 4,
+                        "text": "Experience nature the high-tech way as you explore Disney’s Fort Wilderness Resort and beyond on a Segway® X2. Guests must be 16 years of age or older and have a valid photo ID to participate.",
+                    },
+                    {"line": 5, "text": "$90–$99 per Person (tax not included)"},
+                    {"line": 7, "text": "Operating Hours –"},
+                    {"line": 8, "text": "8:30 AM"},
+                    {"line": 9, "text": "Check Available Days"},
+                    {"line": 21, "text": "Due to Segway design specifications, riders must weigh 100 to 250 pounds to participate. Riders should be in good general health and able to stand for the duration of the tour."},
+                    {"line": 22, "text": "Guests must be 16 years of age or older with a valid photo ID and will be asked to sign a waiver. Helmets are required."},
+                    {"line": 23, "text": "Wilderness Back Trail Adventure is a 2-hour outdoor tour, so be sure to check the weather forecast and dress appropriately."},
+                    {"line": 27, "text": "Please check in at the Bike Barn at Disney’s Fort Wilderness Resort 15 minutes prior to your tour."},
+                    {"line": 28, "text": "There is a 24-hour cancellation policy. Full price will be charged/forfeited if the Guest cancels within one day or fails to show up for the reservation."},
+                    {"line": 30, "text": "Make a Reservation"},
+                ],
+            }
+        )
+
+        offerings = {
+            offering["resort_slug"]: offering
+            for offering in result["offerings"]
+            if offering["program_key"] == "wilderness-back-trail-adventure"
+        }
+
+        self.assertIn("cabins-at-fort-wilderness-resort", offerings)
+        self.assertIn("campsites-at-fort-wilderness-resort", offerings)
+        cabins = offerings["cabins-at-fort-wilderness-resort"]
+        self.assertEqual(source_url, cabins["source_url"])
+        self.assertEqual("Bike Barn", cabins["location"]["label"])
+        self.assertEqual(
+            {
+                "state": "fee",
+                "notes": "$90–$99 per Person (tax not included)",
+                "minAmountCents": 9000,
+                "maxAmountCents": 9900,
+                "priceBasis": "per_person",
+                "taxNotes": "tax not included",
+            },
+            cabins["price"],
+        )
+        self.assertEqual("8:30 AM; available days vary", cabins["availability"]["label"])
+        self.assertTrue(cabins["booking"]["reservation_required"])
+        self.assertEqual(24, cabins["booking"]["cancellation_notice_hours"])
+        self.assertEqual(15, cabins["booking"]["check_in_offset_minutes"])
+        self.assertEqual(16, cabins["eligibility"]["age_minimum"])
+        self.assertEqual(100, cabins["eligibility"]["weight_pounds_min"])
+        self.assertEqual(250, cabins["eligibility"]["weight_pounds_max"])
+        self.assertTrue(cabins["eligibility"]["photo_id_required"])
+        self.assertTrue(cabins["eligibility"]["waiver_required"])
+        self.assertTrue(cabins["eligibility"]["helmet_required"])
+        self.assertEqual(5, cabins["field_provenance"]["price"][0]["line"])
+
+    def test_official_recreation_detail_extracts_free_and_paid_price_evidence(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "campfires",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+                    "source_web_sha256": "f" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Campfires | Walt Disney World Resort"},
+                        {"line": 2, "text": "Campfires"},
+                        {
+                            "line": 7,
+                            "text": "Celebrate the great outdoors with complimentary campfire activities all across Walt Disney World Resort.",
+                        },
+                        {"line": 8, "text": "Disney's Old Key West Resort"},
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "arcades",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
+                    "source_web_sha256": "a" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Arcades | Walt Disney World Resort"},
+                        {"line": 2, "text": "Arcades"},
+                        {"line": 8, "text": "Disney's All-Star Movies Resort"},
+                        {
+                            "line": 9,
+                            "text": "To play games, you must first purchase a Game Card and add game points using a credit card or cash at a kiosk inside the arcade.",
+                        },
+                    ],
+                },
+            ]
+        )
+
+        by_program = {offering["program_key"]: offering for offering in result["offerings"]}
+        self.assertEqual("free", by_program["campfires"]["price"]["state"])
+        self.assertEqual(
+            "Celebrate the great outdoors with complimentary campfire activities all across Walt Disney World Resort.",
+            by_program["campfires"]["price"]["notes"],
+        )
+        self.assertEqual(7, by_program["campfires"]["field_provenance"]["price"][0]["line"])
+        self.assertEqual("fee", by_program["arcades"]["price"]["state"])
+        self.assertEqual(9, by_program["arcades"]["field_provenance"]["price"][0]["line"])
+
+    def test_official_recreation_index_price_facets_do_not_override_detail_price_evidence(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "movies-under-the-stars",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+                    "source_web_sha256": "m" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Movies Under the Stars | Walt Disney World Resort"},
+                        {"line": 2, "text": "Movies Under the Stars"},
+                        {"line": 3, "text": "MultipleWalt Disney World® Resortlocations"},
+                        {
+                            "line": 8,
+                            "text": "Complimentary movie screenings are available to Guests of Walt Disney World Resort hotels.",
+                        },
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_index_api",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/",
+                    "source_web_sha256": "i" * 64,
+                    "results": [
+                        {
+                            "urlFriendlyId": "movies-under-the-stars",
+                            "name": "Movies Under the Stars",
+                            "url": "/recreation/movies-under-the-stars/",
+                            "locationsList": {
+                                "80010402;entityType=resort": "Disney's All-Star Movies Resort",
+                            },
+                            "facets": {
+                                "eec-price": [
+                                    "one-hundred-to-two-hundred-dollars",
+                                    "above-two-hundred-dollars",
+                                ],
+                            },
+                        }
+                    ],
+                },
+            ]
+        )
+
+        [offering] = result["offerings"]
+        self.assertEqual("free", offering["price"]["state"])
+        self.assertEqual(8, offering["field_provenance"]["price"][0]["line"])
+
+    def test_official_recreation_fort_wilderness_campfire_adds_disney_menu_optional_kit(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "chip-n-dales-campfire-sing-a-long",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/chip-n-dales-campfire-sing-a-long/",
+                    "source_web_sha256": "c" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Chip 'n' Dale's Campfire Sing-A-Long | Walt Disney World Resort"},
+                        {"line": 2, "text": "Chip 'n' Dale's Campfire Sing-A-Long"},
+                        {
+                            "line": 4,
+                            "text": "Join nutty friends Chip 'n' Dale for a nightly campfire celebration, followed by a classic Disney movie under the stars.",
+                        },
+                        {
+                            "line": 12,
+                            "text": "The campfire sing-along and outdoor movie are complimentary and held nightly as weather permits.",
+                        },
+                        {
+                            "line": 13,
+                            "text": "For movie schedules, please check with the Front Desk at Disney's Fort Wilderness Resort & Campground, or call (407) 939-7529.",
+                        },
+                    ],
+                }
+            ]
+        )
+
+        [offering] = result["offerings"]
+        self.assertEqual("free", offering["price"]["state"])
+        [option] = offering["price"]["options"]
+        self.assertEqual("Fort S'Mores Kit", option["optionName"])
+        self.assertEqual(999, option["priceCentsMin"])
+        self.assertEqual("disney_menu_verified", option["priceConfidence"])
+        self.assertEqual("Disney Chuck Wagon menu", option["sourceLabel"])
+
+    def test_official_recreation_resort_amenities_extract_as_free_without_fee_language(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "playgrounds",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/playgrounds/",
+                    "source_web_sha256": "p" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Playgrounds | Walt Disney World Resort"},
+                        {"line": 2, "text": "Playgrounds"},
+                        {
+                            "line": 4,
+                            "text": "Kids can climb, slide and play at outdoor playgrounds at select Disney Resort hotels.",
+                        },
+                        {"line": 8, "text": "Disney's Port Orleans Resort - Riverside"},
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_resort_page",
+                    "resort_slug": "campsites-at-fort-wilderness-resort",
+                    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+                    "source_web_sha256": "b" * 64,
+                    "lines": [
+                        {"line": 272, "text": "* ## Basketball Courts"},
+                        {
+                            "line": 273,
+                            "text": "Shoot some hoops at one of several basketball courts located throughout Disney’s Fort Wilderness Resort & Campground.",
+                        },
+                    ],
+                },
+            ]
+        )
+
+        by_program = {offering["program_key"]: offering for offering in result["offerings"]}
+        self.assertEqual("free", by_program["playgrounds"]["price"]["state"])
+        self.assertEqual("free", by_program["basketball-courts"]["price"]["state"])
+        self.assertEqual(
+            "source_disney_official_resort_amenity_no_fee_language",
+            by_program["playgrounds"]["field_provenance"]["price"][0]["field"],
+        )
+        self.assertEqual(
+            "source_disney_official_resort_amenity_no_fee_language",
+            by_program["basketball-courts"]["field_provenance"]["price"][0]["field"],
+        )
+
+    def test_official_recreation_detail_extracts_paid_booking_and_rate_language(self) -> None:
+        result = extract_official_recreation_offerings(
+            [
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "surrey-bikes",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/surrey-bikes/",
+                    "source_web_sha256": "s" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Surrey Bikes | Walt Disney World Resort"},
+                        {"line": 2, "text": "Surrey Bikes"},
+                        {
+                            "line": 4,
+                            "text": "Cover more ground when you rent a bicycle to explore waterfront boardwalks and woodsy pathways.",
+                        },
+                        {"line": 9, "text": "Disney’s BoardWalk Inn"},
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "fishing",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/fishing/",
+                    "source_web_sha256": "g" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Fishing | Walt Disney World Resort"},
+                        {"line": 2, "text": "Fishing Excursions"},
+                        {
+                            "line": 8,
+                            "text": "Both 2-hour and 4-hour excursions are offered. An extra hour may be added in person at the Marina—subject to availability. Solo anglers may book an afternoon excursion at a reduced rate.",
+                        },
+                        {"line": 18, "text": "Disney's Fort Wilderness Resort & Campground"},
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "oak-trail-golf-course",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/oak-trail-golf-course/",
+                    "source_web_sha256": "o" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Oak Trail Golf Course | Walt Disney World Resort"},
+                        {"line": 2, "text": "Disney's Oak Trail Golf Course"},
+                        {"line": 3, "text": "LocatedinDisney's Polynesian Village Resort"},
+                        {"line": 10, "text": "Book Tee Time"},
+                    ],
+                },
+                {
+                    "source_kind": "official_recreation_detail",
+                    "slug": "professional-golf-lessons",
+                    "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+                    "source_web_sha256": "l" * 64,
+                    "lines": [
+                        {"line": 1, "text": "Professional Golf Lessons | Walt Disney World Resort"},
+                        {"line": 2, "text": "Golf Lessons"},
+                        {
+                            "line": 14,
+                            "text": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate.",
+                        },
+                        {"line": 15, "text": "Disney's Polynesian Village Resort"},
+                    ],
+                },
+            ]
+        )
+
+        by_program = {offering["program_key"]: offering for offering in result["offerings"]}
+        self.assertEqual("fee", by_program["surrey-bikes"]["price"]["state"])
+        self.assertEqual(4, by_program["surrey-bikes"]["field_provenance"]["price"][0]["line"])
+        self.assertEqual("fee", by_program["fishing-excursions"]["price"]["state"])
+        self.assertEqual(8, by_program["fishing-excursions"]["field_provenance"]["price"][0]["line"])
+        self.assertEqual("fee", by_program["disneys-oak-trail-golf-course"]["price"]["state"])
+        self.assertEqual(10, by_program["disneys-oak-trail-golf-course"]["field_provenance"]["price"][0]["line"])
+        self.assertEqual("fee", by_program["golf-lessons"]["price"]["state"])
+        self.assertEqual(14, by_program["golf-lessons"]["field_provenance"]["price"][0]["line"])
 
     def test_official_recreation_offerings_keep_cabana_resort_variants(self) -> None:
         result = extract_official_recreation_offerings(
@@ -3206,6 +3918,11 @@ class PipelineContractsTest(unittest.TestCase):
         offering = result["offerings"][0]
         self.assertEqual("basketball-courts", offering["program_key"])
         self.assertEqual("campsites-at-fort-wilderness-resort", offering["resort_slug"])
+        self.assertEqual("free", offering["price"]["state"])
+        self.assertEqual(
+            "source_disney_official_resort_amenity_no_fee_language",
+            offering["field_provenance"]["price"][0]["field"],
+        )
         self.assertEqual("source_unspecified", offering["availability"]["hours_state"])
         self.assertEqual("Hours not specified by Disney", offering["availability"]["label"])
         self.assertEqual("resort_page_context", offering["field_provenance"]["resort_join"][0]["source"])
@@ -3318,6 +4035,11 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual("pools:contemporary-resort:contemporary-resort", offering["offering_key"])
         self.assertEqual("Pools at Disney's Contemporary Resort", offering["title"])
         self.assertEqual("poolside", offering["category"])
+        self.assertEqual("free", offering["price"]["state"])
+        self.assertEqual(
+            "source_disney_official_resort_amenity_no_fee_language",
+            offering["field_provenance"]["price"][0]["field"],
+        )
         self.assertEqual("evergreen_hours", offering["availability"]["kind"])
         self.assertEqual("hours_vary_by_pool", offering["availability"]["hours_state"])
 
@@ -4036,22 +4758,25 @@ class PipelineContractsTest(unittest.TestCase):
 
         result = publish_official_offering_rows(db, extraction)
 
-        self.assertEqual(
-            {
-                "source_documents": 2,
-                "programs": 1,
-                "offerings": 2,
-                "quarantine": 1,
-                "retired_offerings": 0,
-                "retired_programs": 0,
-                "resolved_quarantine": 0,
-            },
-            result,
-        )
+        self.assertEqual(2, result["source_documents"])
+        self.assertEqual(1, result["programs"])
+        self.assertEqual(2, result["offerings"])
+        self.assertEqual(1, result["quarantine"])
+        self.assertEqual(0, result["retired_offerings"])
+        self.assertEqual(0, result["retired_programs"])
+        self.assertEqual(0, result["resolved_quarantine"])
+        self.assertEqual(2, result["source_currentness_checks"])
+        self.assertGreater(result["field_audit_observations"], 0)
         self.assertEqual(2, len(db.upserted_by_table["source_documents"]))
         self.assertEqual(1, len(db.upserted_by_table["official_activity_programs"]))
         self.assertEqual(2, len(db.upserted_by_table["official_activity_offerings"]))
         self.assertEqual(1, len(db.upserted_by_table["official_activity_ingest_quarantine"]))
+        self.assertGreaterEqual(len(db.upserted_by_table["source_currentness_checks"]), 2)
+        field_observations = db.upserted_by_table["field_audit_observations"]
+        observed_fields = {
+            (row["row_kind"], row["row_key"], row["field_name"])
+            for row in field_observations
+        }
         for row in db.upserted_by_table["official_activity_offerings"]:
             with self.subTest(resort=row["resort_slug"]):
                 self.assertRegex(row["id"], r"^[0-9a-f-]{36}$")
@@ -4060,6 +4785,18 @@ class PipelineContractsTest(unittest.TestCase):
                 self.assertTrue(row["is_current"])
                 self.assertTrue(row["field_provenance"]["title"])
                 self.assertTrue(row["field_provenance"]["resort_join"])
+                self.assertIn(
+                    ("official_offering", row["offering_key"], "title"),
+                    observed_fields,
+                )
+                self.assertIn(
+                    ("official_offering", row["offering_key"], "resort_join"),
+                    observed_fields,
+                )
+                self.assertIn(
+                    ("official_offering", row["offering_key"], "description"),
+                    observed_fields,
+                )
         self.assertIn(
             ("rpc:check_official_activity_offerings_health", {}, ""),
             db.upserts,
@@ -4175,6 +4912,24 @@ class PipelineContractsTest(unittest.TestCase):
             db.updates,
         )
 
+    def test_official_recreation_rollback_requires_explicit_filter_and_retires_matches(self) -> None:
+        from scripts.ingest.publish_official_offerings import rollback_official_offerings
+
+        db = FakeGoldV2Db()
+        with self.assertRaisesRegex(RuntimeError, "rollback_requires"):
+            rollback_official_offerings(db)
+
+        db.select_rows["official_activity_offerings"] = [
+            {"id": "offering-a", "offering_key": "bike:a", "source_sha256": "a" * 64, "is_current": True}
+        ]
+        result = rollback_official_offerings(db, source_sha256="a" * 64)
+
+        self.assertEqual({"retired_offerings": 1}, result)
+        self.assertIn(
+            ("official_activity_offerings", {"id": "eq.offering-a"}, {"is_current": False}),
+            db.updates,
+        )
+
     def test_gold_v2_publisher_upserts_source_catalog_and_public_rows(self) -> None:
         rows = json.loads(GOLD_PREVIEW_PATH.read_text())
         sample_rows = [
@@ -4185,15 +4940,13 @@ class PipelineContractsTest(unittest.TestCase):
 
         result = publish_gold_rows(db, sample_rows)
 
-        self.assertEqual(
-            {
-                "gold_rows": 2,
-                "source_documents": 2,
-                "activity_catalog": 2,
-                "retired_gold_rows": 0,
-            },
-            result,
-        )
+        self.assertEqual(2, result["gold_rows"])
+        self.assertEqual(3, result["source_documents"])
+        self.assertEqual(2, result["activity_catalog"])
+        self.assertEqual(0, result["retired_gold_rows"])
+        self.assertEqual(3, result["source_currentness_checks"])
+        self.assertGreater(result["source_relationships"], 0)
+        self.assertGreater(result["field_audit_observations"], 0)
         source_rows = db.upserted_by_table["source_documents"]
         self.assertEqual({"pdf", "html"}, {row["source_type"] for row in source_rows})
         self.assertTrue(all(row["content_sha256"] for row in source_rows))
@@ -4203,6 +4956,17 @@ class PipelineContractsTest(unittest.TestCase):
             {row["id"] for row in catalog_rows},
         )
         public_rows = db.upserted_by_table["public_activity_gold"]
+        self.assertEqual(3, len(db.upserted_by_table["source_currentness_checks"]))
+        self.assertTrue(db.upserted_by_table["source_relationships"])
+        self.assertTrue(
+            all(row["parent_source_document_id"] for row in db.upserted_by_table["source_relationships"]),
+            "PDF source relationships must point to the resort recreation parent page document",
+        )
+        field_observations = db.upserted_by_table["field_audit_observations"]
+        observed_fields = {
+            (row["row_kind"], row["row_key"], row["field_name"])
+            for row in field_observations
+        }
         self.assertEqual(2, len(public_rows))
         for row in public_rows:
             with self.subTest(slug=row["canonical_slug"]):
@@ -4216,10 +4980,71 @@ class PipelineContractsTest(unittest.TestCase):
                 self.assertEqual(row["source_sha256"], row["source"]["documentHash"])
                 self.assertIn("documentKeyLegends", row["source"])
                 self.assertTrue(row["is_current"])
+                row_key = f"{row['calendar_group_key']}:{row['canonical_slug']}"
+                for field_name in ("title", "schedule", "location"):
+                    self.assertIn(("gold_activity", row_key, field_name), observed_fields)
+                if row["price"]["state"] in {"free", "fee"}:
+                    self.assertIn(("gold_activity", row_key, "price"), observed_fields)
         self.assertIn(
             ("rpc:check_activity_pipeline_v2_health", {}, ""),
             db.upserts,
         )
+
+    def test_gold_v2_publisher_persists_supporting_image_price_evidence(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        row = next(
+            row
+            for row in rows
+            if row["calendar_group_key"] == "port-orleans-riverside"
+            and row["canonical_slug"] == "campfire-on-de-bayou"
+        )
+        image_hash = row["field_provenance"]["price"][0]["source_sha256"]
+        db = FakeGoldV2Db()
+
+        result = publish_gold_rows(db, [row])
+
+        self.assertEqual(1, result["gold_rows"])
+        source_rows = db.upserted_by_table["source_documents"]
+        image_source = next(source for source in source_rows if source["content_sha256"] == image_hash)
+        self.assertEqual("image", image_source["source_type"])
+        self.assertEqual(
+            "data/raw/web/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+            image_source["storage_path"],
+        )
+        self.assertTrue(
+            any(
+                check["source_document_id"] == image_source["id"]
+                and check["currentness"] == "current"
+                for check in db.upserted_by_table["source_currentness_checks"]
+            )
+        )
+        price_observation = next(
+            observation
+            for observation in db.upserted_by_table["field_audit_observations"]
+            if observation["row_key"] == "port-orleans-riverside:campfire-on-de-bayou"
+            and observation["field_name"] == "price"
+        )
+        self.assertEqual(image_source["id"], price_observation["source_document_id"])
+
+    def test_source_trust_package_scripts_include_full_independent_audit(self) -> None:
+        package = json.loads(Path("package.json").read_text())
+        scripts = package["scripts"]
+
+        self.assertIn("audit:visual-pdfs:seed", scripts)
+        self.assertIn("audit:visual-pdfs:independent", scripts)
+        self.assertIn("validate:source-trust:full", scripts)
+        self.assertIn("--independent", scripts["audit:visual-pdfs:independent"])
+        self.assertIn("--live --refresh-web-snapshots", scripts["validate:source-trust:full"])
+        self.assertIn("--all-source-kinds", scripts["validate:source-trust:full"])
+
+    def test_source_trust_workflow_runs_daily_light_and_weekly_full(self) -> None:
+        workflow = Path(".github/workflows/source-trust-audit.yml").read_text()
+
+        self.assertIn("npm run validate:source-trust:full", workflow)
+        self.assertIn("OPENAI_API_KEY", workflow)
+        self.assertIn("OPENAI_ACTIVITY_AUDIT_MODEL", workflow)
+        self.assertIn("full_audit == 'false'", workflow)
+        self.assertIn("full_audit == 'true'", workflow)
 
     def test_gold_v2_publisher_reuses_existing_catalog_id_for_natural_key(self) -> None:
         row = next(
@@ -4331,6 +5156,30 @@ class PipelineContractsTest(unittest.TestCase):
                 {"id": f"eq.{expected_id}"},
                 {"is_current": False},
             ),
+            db.updates,
+        )
+
+    def test_gold_v2_rollback_requires_explicit_filter_and_retires_matches(self) -> None:
+        from scripts.ingest.publish_gold_v2 import rollback_gold_rows
+
+        db = FakeGoldV2Db()
+        with self.assertRaisesRegex(RuntimeError, "rollback_requires"):
+            rollback_gold_rows(db)
+
+        db.select_rows["public_activity_gold"] = [
+            {
+                "id": "gold-a",
+                "canonical_slug": "campfire",
+                "calendar_group_key": "animal-kingdom-jambo",
+                "source_sha256": "a" * 64,
+                "is_current": True,
+            }
+        ]
+        result = rollback_gold_rows(db, source_sha256="a" * 64)
+
+        self.assertEqual({"retired_gold_rows": 1}, result)
+        self.assertIn(
+            ("public_activity_gold", {"id": "eq.gold-a"}, {"is_current": False}),
             db.updates,
         )
 
@@ -4520,21 +5369,22 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual([], promotion.gold_records)
         self.assertEqual("description:missing_source_span", promotion.review_queue[0]["reason"])
 
-    def test_coverage_audit_allows_current_partial_mode_with_warnings(self) -> None:
+    def test_coverage_audit_reports_current_production_ready_mode_with_warnings(self) -> None:
         audit = build_coverage_audit()
 
         self.assertTrue(audit.passed, audit.errors)
         self.assertEqual(20, audit.summary["pdf_source_count"])
-        self.assertEqual(240, audit.summary["fixture_count"])
+        self.assertEqual(226, audit.summary["fixture_count"])
         self.assertEqual(34, audit.summary["fixture_quarantine_count"])
         self.assertEqual(34, audit.summary["official_offering_covered_quarantine_count"])
         self.assertEqual(13, audit.summary["official_offering_alias_covered_quarantine_count"])
         self.assertEqual(0, audit.summary["blocking_fixture_quarantine_count"])
         self.assertEqual(0, audit.summary["blocking_fixture_quarantine_unique_count"])
-        self.assertEqual(3, audit.summary["fixture_unextractable_count"])
-        self.assertEqual(237, audit.summary["gold_record_count"])
+        self.assertEqual(17, audit.summary["fixture_unextractable_count"])
+        self.assertEqual(225, audit.summary["gold_record_count"])
         self.assertTrue(audit.summary["production_ready"])
-        self.assertEqual(237, audit.summary["coverage_required_count"])
+        self.assertEqual({}, audit.summary["stale_fixture_groups"])
+        self.assertEqual(225, audit.summary["coverage_required_count"])
         self.assertNotIn("all-star-music", audit.summary["undercovered_gold_groups"])
         self.assertNotIn("all-star-sports", audit.summary["undercovered_gold_groups"])
         self.assertNotIn("animal-kingdom-jambo", audit.summary["undercovered_gold_groups"])
@@ -4554,7 +5404,7 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertNotIn("fort-wilderness", audit.summary["undercovered_gold_groups"])
         self.assertIn("all-star-music", audit.summary["legacy_overcount_groups"])
         self.assertEqual(
-            {"gold": 12, "fixture": 12, "legacy": 13},
+            {"gold": 10, "fixture": 10, "legacy": 14},
             audit.summary["legacy_overcount_groups"]["all-star-music"],
         )
         self.assertIn("all-star-sports", audit.summary["legacy_overcount_groups"])
@@ -4603,24 +5453,16 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertIn("animal-kingdom-jambo", audit.summary["legacy_undercount_groups"])
         self.assertEqual(
-            {"gold": 12, "fixture": 12, "legacy": 11},
+            {"gold": 11, "fixture": 11, "legacy": 10},
             audit.summary["legacy_undercount_groups"]["animal-kingdom-jambo"],
         )
-        self.assertIn("animal-kingdom-kidani", audit.summary["legacy_undercount_groups"])
-        self.assertIn("art-of-animation", audit.summary["legacy_undercount_groups"])
+        self.assertNotIn("animal-kingdom-kidani", audit.summary["legacy_undercount_groups"])
+        self.assertNotIn("art-of-animation", audit.summary["legacy_undercount_groups"])
         self.assertEqual(
             {"gold": 9, "fixture": 9, "legacy": 8},
             audit.summary["legacy_undercount_groups"]["caribbean-beach"],
         )
-        self.assertEqual(
-            {"gold": 14, "fixture": 14, "legacy": 8},
-            audit.summary["legacy_undercount_groups"]["art-of-animation"],
-        )
-        self.assertIn("grand-floridian", audit.summary["legacy_undercount_groups"])
-        self.assertEqual(
-            {"gold": 13, "fixture": 13, "legacy": 10},
-            audit.summary["legacy_undercount_groups"]["grand-floridian"],
-        )
+        self.assertNotIn("grand-floridian", audit.summary["legacy_undercount_groups"])
         self.assertEqual(
             {"gold": 10, "fixture": 10, "legacy": 9},
             audit.summary["legacy_undercount_groups"]["riviera"],
@@ -4628,6 +5470,10 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertFalse(audit.summary["undercovered_gold_groups"])
         self.assertTrue(
             any(warning.startswith("coverage:legacy_overcount_groups:") for warning in audit.warnings),
+            audit.warnings,
+        )
+        self.assertFalse(
+            any(warning.startswith("coverage:stale_fixture_sources:") for warning in audit.warnings),
             audit.warnings,
         )
         self.assertTrue(
@@ -4647,7 +5493,55 @@ class PipelineContractsTest(unittest.TestCase):
             audit.warnings,
         )
 
-    def test_coverage_audit_blocks_production_cutover_until_catalog_is_covered(self) -> None:
+    def test_expected_unextractable_records_account_for_warning_candidates(self) -> None:
+        public_candidate = {
+            "warnings": [],
+            "normalized_fields": {
+                "slug": "campfire",
+                "title": {
+                    "value": "Campfire",
+                    "spans": [{"page": 1, "line": 1, "text": "CAMPFIRE"}],
+                },
+            },
+        }
+        unsafe_candidate = {
+            "warnings": ["schedule:text_quality_low"],
+            "normalized_fields": {
+                "slug": "poolside-activities",
+                "title": {
+                    "value": "Poolside Activities",
+                    "spans": [{"page": 1, "line": 10, "text": "POOLSIDE ACTIVITIES"}],
+                },
+            },
+        }
+        fixture = {
+            "expected_records": [
+                {
+                    "title": "Campfire",
+                    "slug": "campfire",
+                    "required_spans": {
+                        "title": [{"page": 1, "line": 1, "text": "CAMPFIRE"}]
+                    },
+                }
+            ],
+            "expected_unextractable_records": [
+                {
+                    "title": "Poolside Activities",
+                    "slug": "poolside-activities",
+                    "reason": "schedule_text_quality_low",
+                    "warnings": ["schedule:text_quality_low"],
+                    "required_spans": {
+                        "title": [{"page": 1, "line": 10, "text": "POOLSIDE ACTIVITIES"}]
+                    },
+                }
+            ],
+        }
+
+        errors = compare_candidates_to_fixture([public_candidate, unsafe_candidate], fixture)
+
+        self.assertEqual([], errors)
+
+    def test_coverage_audit_allows_production_cutover_when_current_catalog_is_covered(self) -> None:
         prior = os.environ.pop("ACTIVITY_DATA_PIPELINE", None)
         prior_public = os.environ.pop("NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE", None)
         try:
@@ -4658,7 +5552,9 @@ class PipelineContractsTest(unittest.TestCase):
             if prior_public is not None:
                 os.environ["NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE"] = prior_public
 
-        self.assertTrue(audit.passed)
+        self.assertTrue(audit.passed, audit.errors)
+        self.assertTrue(audit.summary["production_ready"])
+        self.assertEqual([], audit.errors)
         self.assertNotIn("coverage:ui_pipeline_not_gold-v2:gold-v2-preview", audit.errors)
         self.assertFalse(
             any(error.startswith("coverage:gold_rows_below_required_count:") for error in audit.errors),
@@ -4719,6 +5615,28 @@ class PipelineContractsTest(unittest.TestCase):
             audit.errors,
         )
 
+    def test_coverage_audit_rejects_duplicate_current_gold_identity(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        bad_rows = json.loads(json.dumps(rows))
+        duplicate = dict(bad_rows[0])
+        duplicate["candidate_id"] = f"{duplicate['candidate_id']}:duplicate"
+        duplicate["source_sha256"] = "b" * 64
+        duplicate["source"] = dict(duplicate.get("source") or {})
+        duplicate["source"]["documentHash"] = "b" * 64
+        bad_rows.append(duplicate)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            bad_gold_path = Path(tmp) / "activity_gold_v2_preview.json"
+            bad_gold_path.write_text(json.dumps(bad_rows))
+
+            audit = build_coverage_audit(gold_path=bad_gold_path)
+
+        self.assertFalse(audit.passed)
+        self.assertTrue(
+            any("gold:duplicate_current_identity" in error for error in audit.errors),
+            audit.errors,
+        )
+
     def test_coverage_audit_rejects_gold_schedule_not_supported_by_source_span(self) -> None:
         rows = json.loads(GOLD_PREVIEW_PATH.read_text())
         bad_rows = json.loads(json.dumps(rows))
@@ -4754,10 +5672,10 @@ class PipelineContractsTest(unittest.TestCase):
             audit.errors,
         )
 
-    def test_trust_report_summarizes_current_cutover_blockers_and_quarantine_workload(self) -> None:
+    def test_trust_report_summarizes_current_blocked_state_until_independent_visual_audit(self) -> None:
         report = build_trust_report()
 
-        self.assertEqual("ready", report["status"])
+        self.assertEqual("blocked", report["status"])
         self.assertTrue(report["coverage"]["production_ready"])
         self.assertEqual(34, report["fixture_quarantine"]["record_count"])
         self.assertEqual(20, report["fixture_quarantine"]["unique_record_count"])
@@ -4765,23 +5683,34 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(0, report["fixture_quarantine"]["blocking_unique_record_count"])
         self.assertEqual(34, report["fixture_quarantine"]["official_offering_covered_record_count"])
         self.assertEqual(13, report["fixture_quarantine"]["official_offering_alias_covered_record_count"])
-        self.assertEqual(3, report["fixture_unextractable"]["record_count"])
+        self.assertEqual(17, report["fixture_unextractable"]["record_count"])
         self.assertEqual(
             {"record_count": 34, "unique_record_count": 20},
             report["fixture_quarantine"]["by_group"]["fort-wilderness"],
         )
-        self.assertEqual([], report["blockers"])
+        self.assertEqual(
+            ["independent_visual_ocr_coverage_not_high"],
+            [blocker["code"] for blocker in report["blockers"]],
+        )
         self.assertEqual(0, report["official_recreation"]["quarantine_count"])
         self.assertGreaterEqual(report["official_recreation"]["offering_count"], 224)
-        self.assertEqual(237, report["gold_source"]["gold_record_count"])
-        self.assertEqual(220, report["gold_source"]["rows_with_document_key_legends"])
-        self.assertEqual({"fee": 220}, report["gold_source"]["document_key_legend_kinds"])
+        self.assertEqual(225, report["gold_source"]["gold_record_count"])
+        self.assertEqual(208, report["gold_source"]["rows_with_document_key_legends"])
+        self.assertEqual({"fee": 208}, report["gold_source"]["document_key_legend_kinds"])
+        self.assertEqual(0, report["coverage"]["visual_audit_error_count"])
+        self.assertEqual(0, report["coverage"]["field_audit_error_count"])
+        self.assertGreaterEqual(report["coverage"]["visual_audit_summary"]["activities_compared"], 220)
+        self.assertGreaterEqual(report["coverage"]["field_audit_summary"]["fields_audited"], 1091)
 
         markdown = render_markdown_report(report)
         self.assertIn("# Source-To-UI Trust Report", markdown)
-        self.assertIn("Production cutover: ready", markdown)
-        self.assertIn("Gold source evidence: 220 rows with document key legends", markdown)
+        self.assertIn("Production cutover: blocked", markdown)
+        self.assertIn("independent_visual_ocr_coverage_not_high", markdown)
+        self.assertNotIn("stale_fixture_sources", markdown)
+        self.assertIn("Gold source evidence: 208 rows with document key legends", markdown)
         self.assertIn("kinds: fee", markdown)
+        self.assertIn("Visual PDF audit: 220 activities compared, 0 blocking mismatches", markdown)
+        self.assertIn("Field audit: 1098 fields checked, 0 errors", markdown)
         self.assertIn("Fort Wilderness", markdown)
         self.assertIn("Source-visible fixture records retained for audit: 34 records", markdown)
         self.assertIn("34 covered by official offerings", markdown)
@@ -4790,15 +5719,15 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn("do not block cutover", markdown)
         self.assertIn("No cutover action required for official-offering-covered fixture records", markdown)
         self.assertNotIn("Resolve fixture quarantine records", markdown)
-        self.assertIn("Explicit non-publishable source-visible records: 3 records", markdown)
+        self.assertIn("Explicit non-publishable source-visible records: 17 records", markdown)
         self.assertIn(
             "withheld from publishing because the current sources do not provide enough public-facing fields",
             markdown,
         )
-        self.assertIn("| Art of Animation | Nighttime Pool Party | nighttime-pool-party |", markdown)
+        self.assertIn("| Art of Animation | Glow Party | glow-party |", markdown)
         self.assertIn("| Contemporary | Sports Courts | sports-courts |", markdown)
         self.assertIn("| Coronado Springs | Resort Scavenger Hunt | resort-scavenger-hunt |", markdown)
-        self.assertIn("no source-visible location, schedule, or description", markdown)
+        self.assertIn("parser_warning:schedule:text_quality_low", markdown)
         self.assertIn("No source-visible location or schedule", markdown)
         self.assertIn("No source-visible activity schedule or exact activity location", markdown)
 
@@ -4858,6 +5787,706 @@ class PipelineContractsTest(unittest.TestCase):
             steps.index(("magical_resort_guide.py",)),
             steps.index(("promote_gold.py", "--fail-on-review")),
         )
+
+
+class SourceAuthorityPolicyTest(unittest.TestCase):
+    def test_finder_api_cannot_set_public_price(self) -> None:
+        from scripts.ingest.source_authority import can_source_set_public_price
+
+        self.assertFalse(can_source_set_public_price("disney_recreation_index_api"))
+
+    def test_mrg_cannot_override_disney_free(self) -> None:
+        from scripts.ingest.source_authority import third_party_can_override_disney_free
+
+        self.assertFalse(third_party_can_override_disney_free("magical_resort_guide"))
+
+    def test_disney_pdf_is_primary(self) -> None:
+        from scripts.ingest.source_authority import source_kind_authority
+
+        self.assertEqual("primary", source_kind_authority("disney_resort_recreation_pdf"))
+
+
+class SourceInventoryTest(unittest.TestCase):
+    def test_inventory_includes_all_resort_pages_and_pdf_sources(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+        from scripts.ingest.source_manifest import RESORT_RECREATION_SOURCES
+
+        inventory = build_source_inventory(live=False)
+        urls = {row["canonical_url"] for row in inventory}
+        for source in RESORT_RECREATION_SOURCES:
+            self.assertIn(source.recreation_page_url, urls)
+            if source.pdf_url:
+                self.assertIn(source.pdf_url, urls)
+
+    def test_inventory_includes_supporting_disney_price_image_sources(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+
+        inventory = build_source_inventory(live=False)
+        rows = [
+            row
+            for row in inventory
+            if row["source_role"] == "supporting_price_image"
+            and row["canonical_url"].endswith("PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg")
+        ]
+
+        self.assertEqual(1, len(rows))
+        self.assertEqual("official_image", rows[0]["source_kind"])
+        self.assertRegex(rows[0]["content_sha256"], r"^[a-f0-9]{64}$")
+        self.assertEqual("current", rows[0]["currentness"])
+
+        pdf_rows = [
+            row
+            for row in inventory
+            if row["source_role"] == "supporting_price_image"
+            and row["canonical_url"].endswith("All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf")
+        ]
+
+        self.assertEqual(1, len(pdf_rows))
+        self.assertEqual("official_pdf", pdf_rows[0]["source_kind"])
+        self.assertRegex(pdf_rows[0]["content_sha256"], r"^[a-f0-9]{64}$")
+        self.assertEqual("current", pdf_rows[0]["currentness"])
+
+    def test_inventory_records_have_traceability_fields(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+
+        for row in build_source_inventory(live=False):
+            self.assertRegex(row["source_id"], r"^[a-f0-9]{64}$")
+            self.assertTrue(row["source_role"])
+            self.assertTrue(row["source_kind"])
+            self.assertTrue(row["canonical_url"].startswith("https://"))
+            self.assertTrue(row["parser_version"])
+            self.assertIn(
+                row["currentness"],
+                {"current", "changed", "missing", "unreachable", "unknown"},
+            )
+
+    def test_inventory_links_pdf_sources_to_resort_page_parent(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+
+        inventory = build_source_inventory(live=False)
+        by_url = {row["canonical_url"]: row for row in inventory}
+        pdf_rows = [row for row in inventory if row["source_role"] == "resort_pdf"]
+        self.assertTrue(pdf_rows)
+        for row in pdf_rows:
+            self.assertTrue(row["parent_source_id"])
+            parent_url = row["discovered_from_url"]
+            self.assertIn(parent_url, by_url)
+            self.assertEqual(by_url[parent_url]["source_id"], row["parent_source_id"])
+
+    def test_refreshed_inventory_records_parent_page_hash_for_pdf_sources(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+
+        snapshot = {
+            "url": "https://example.test/resorts/example/recreation/",
+            "source_kind": "official_html",
+            "captured_at": "2026-06-26T00:00:00+00:00",
+            "http_status": 200,
+            "fetched_url": "https://example.test/resorts/example/recreation/",
+            "title": "Example Recreation",
+            "links": [{"text": "Calendar", "href": "https://example.test/calendar.pdf"}],
+            "text_lines": ["Calendar"],
+        }
+
+        with tempfile.TemporaryDirectory() as tmpdir, patch(
+            "scripts.ingest.build_source_inventory.RESORT_RECREATION_SOURCES",
+            [
+                type(
+                    "Source",
+                    (),
+                    {
+                        "resort_slug": "example-resort",
+                        "calendar_group_key": "example",
+                        "recreation_page_url": "https://example.test/resorts/example/recreation/",
+                        "pdf_url": "https://example.test/calendar.pdf",
+                        "pdf_edition": "test",
+                        "local_pdf_path": Path("data/raw/pdfs/missing.pdf"),
+                        "notes": "test",
+                    },
+                )()
+            ],
+        ), patch(
+            "scripts.ingest.build_source_inventory._load_index_snapshot",
+            return_value={"results": []},
+        ), patch(
+            "scripts.ingest.build_source_inventory._safe_snapshot_name",
+            side_effect=lambda source_role, url: Path(tmpdir) / f"{source_role}.snapshot.json",
+        ), patch("scripts.ingest.build_source_inventory.write_web_snapshot") as write_snapshot:
+            write_snapshot.return_value = snapshot
+            inventory = build_source_inventory(live=False, refresh_web_snapshots=True)
+
+        by_url = {row["canonical_url"]: row for row in inventory}
+        parent = by_url["https://example.test/resorts/example/recreation/"]
+        child = by_url["https://example.test/calendar.pdf"]
+        self.assertRegex(parent["content_sha256"], r"^[a-f0-9]{64}$")
+        self.assertEqual(parent["content_sha256"], child["parent_content_sha256"])
+        self.assertEqual(parent["storage_path"], child["discovered_from_storage_path"])
+
+
+class SourceFreshnessAuditTest(unittest.TestCase):
+    def test_hash_change_blocks_publish_required_source(self) -> None:
+        from scripts.ingest.audit_source_freshness import source_freshness_errors
+
+        report = {
+            "sources": [
+                {
+                    "canonical_url": "https://example.test/current.pdf",
+                    "source_role": "resort_pdf",
+                    "used_by_current_gold": True,
+                    "currentness": "hash_changed",
+                }
+            ]
+        }
+        self.assertEqual(
+            ["source_freshness:hash_changed:https://example.test/current.pdf"],
+            source_freshness_errors(report),
+        )
+
+    def test_unpublished_secondary_hash_change_warns_only(self) -> None:
+        from scripts.ingest.audit_source_freshness import source_freshness_errors
+
+        report = {
+            "sources": [
+                {
+                    "canonical_url": "https://example.test/secondary.html",
+                    "source_role": "secondary_enrichment",
+                    "used_by_current_gold": False,
+                    "currentness": "hash_changed",
+                }
+            ]
+        }
+        self.assertEqual([], source_freshness_errors(report))
+
+    def test_freshness_report_summary_counts_states(self) -> None:
+        from scripts.ingest.audit_source_freshness import build_source_freshness_report
+
+        report = build_source_freshness_report(
+            [
+                {"canonical_url": "https://example.test/a.pdf", "currentness": "current"},
+                {"canonical_url": "https://example.test/b.pdf", "currentness": "hash_changed"},
+            ],
+            used_source_urls={"https://example.test/b.pdf"},
+        )
+
+        self.assertFalse(report["passed"])
+        self.assertEqual(2, report["summary"]["sources_checked"])
+        self.assertEqual(1, report["summary"]["current"])
+        self.assertEqual(1, report["summary"]["hash_changed"])
+        self.assertEqual(
+            ["source_freshness:hash_changed:https://example.test/b.pdf"],
+            report["errors"],
+        )
+
+    def test_unknown_publish_required_source_fails_without_exemption(self) -> None:
+        from scripts.ingest.audit_source_freshness import source_freshness_errors
+
+        report = {
+            "sources": [
+                {
+                    "canonical_url": "https://example.test/current.html",
+                    "used_by_current_gold": True,
+                    "currentness": "unknown",
+                }
+            ]
+        }
+
+        self.assertEqual(
+            ["source_freshness:unknown:https://example.test/current.html"],
+            source_freshness_errors(report),
+        )
+
+    def test_unknown_source_with_documented_exemption_does_not_fail(self) -> None:
+        from scripts.ingest.audit_source_freshness import source_freshness_errors
+
+        report = {
+            "sources": [
+                {
+                    "canonical_url": "https://example.test/current.html",
+                    "used_by_current_gold": True,
+                    "currentness": "unknown",
+                    "freshness_exemption_reason": "historical source retained for audit comparison",
+                }
+            ]
+        }
+
+        self.assertEqual([], source_freshness_errors(report))
+
+    def test_live_html_freshness_uses_canonical_snapshot_hash(self) -> None:
+        from scripts.ingest.audit_source_freshness import _live_checked_source
+        from scripts.ingest.web_snapshot import web_snapshot_content_hash
+
+        snapshot = {
+            "url": "https://example.test/page/",
+            "source_kind": "official_html",
+            "captured_at": "2026-06-26T00:00:00+00:00",
+            "http_status": 200,
+            "fetched_url": "https://example.test/page/",
+            "title": "Example Page",
+            "links": [],
+            "text_lines": ["Example Page"],
+        }
+        source = {
+            "canonical_url": "https://example.test/page/",
+            "source_kind": "official_html",
+            "content_sha256": web_snapshot_content_hash(snapshot),
+        }
+
+        with patch("scripts.ingest.audit_source_freshness.build_web_snapshot", return_value=snapshot):
+            checked = _live_checked_source(source, all_source_kinds=True)
+
+        self.assertEqual("current", checked["currentness"])
+        self.assertEqual(source["content_sha256"], checked["live_content_sha256"])
+
+    def test_coverage_audit_fails_production_ready_on_blocking_source_freshness(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            report_path = Path(tmpdir) / "source_freshness_report.json"
+            report_path.write_text(
+                json.dumps(
+                    {
+                        "passed": False,
+                        "errors": [
+                            "source_freshness:hash_changed:https://example.test/current.pdf"
+                        ],
+                        "sources": [],
+                    }
+                )
+            )
+
+            audit = build_coverage_audit(
+                require_production_ready=True,
+                source_freshness_report_path=report_path,
+            )
+
+        self.assertFalse(audit.passed)
+        self.assertIn(
+            "source_freshness:hash_changed:https://example.test/current.pdf",
+            audit.errors,
+        )
+
+
+class OfficialParentClassificationTest(unittest.TestCase):
+    def test_every_parent_item_has_classification(self) -> None:
+        from scripts.ingest.disney_recreation_offerings import official_recreation_index_item_program_key
+
+        index = json.loads(Path("data/raw/web/official-recreation-index-api.snapshot.json").read_text())
+        classification = json.loads(
+            Path("data/quality/official_recreation_parent_classification.json").read_text()
+        )
+        classified = {item["program_key"] for item in classification["items"]}
+        index_keys = {
+            official_recreation_index_item_program_key(item)
+            for item in index.get("results", [])
+            if isinstance(item, dict)
+        }
+
+        self.assertEqual(index_keys, classified)
+
+    def test_official_coverage_summary_includes_parent_classification_counts(self) -> None:
+        audit = build_official_recreation_coverage_audit()
+
+        self.assertTrue(audit.passed, audit.errors)
+        self.assertEqual(82, audit.summary["classified_parent_items"])
+        self.assertEqual(0, audit.summary["missing_parent_classifications"])
+        self.assertEqual(0, audit.summary["manual_parent_classifications"])
+
+
+class JoggingTrailAuditTest(unittest.TestCase):
+    def test_running_trails_are_present_in_official_offerings(self) -> None:
+        offerings = json.loads(Path("data/processed/official_recreation_offerings.json").read_text())
+        trail_rows = [
+            row
+            for row in offerings.get("offerings", [])
+            if row.get("program_key") in {"running-trails", "jogging-trails"}
+        ]
+
+        self.assertTrue(trail_rows)
+        for row in trail_rows:
+            self.assertTrue(row.get("source_url"))
+            self.assertRegex(row.get("source_sha256", ""), r"^[a-f0-9]{64}$")
+            self.assertTrue(row.get("field_provenance", {}).get("resort_join"))
+
+    def test_jogging_trail_audit_passes_current_official_offerings(self) -> None:
+        from scripts.ingest.audit_jogging_trails import build_jogging_trail_audit
+
+        audit = build_jogging_trail_audit()
+
+        self.assertTrue(audit["passed"], audit["errors"])
+        self.assertGreater(audit["summary"]["resort_trail_offerings"], 0)
+        self.assertEqual(0, audit["summary"]["missing_source_hash"])
+        self.assertEqual(0, audit["summary"]["missing_resort_join_provenance"])
+
+
+class PdfVisualAuditTest(unittest.TestCase):
+    def test_rendered_page_path_is_stable_for_pdf_hash_and_page(self) -> None:
+        from scripts.ingest.render_pdf_pages import rendered_page_path
+
+        path = rendered_page_path(
+            Path("data/raw/pdfs/example.pdf"),
+            "a" * 64,
+            page_number=1,
+            output_dir=Path("data/processed/pdf_page_images"),
+        )
+
+        self.assertEqual(
+            Path("data/processed/pdf_page_images/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-page-001.png"),
+            path,
+        )
+
+    def test_visual_audit_seed_preserves_price_evidence_shape(self) -> None:
+        from scripts.ingest.gpt_visual_pdf_audit import build_visual_audit_from_gold_rows
+
+        row = {
+            "source_sha256": "a" * 64,
+            "source": {"path": "data/raw/pdfs/example.pdf"},
+            "title": "Movie Under the Stars",
+            "section": "Movie Under the Stars",
+            "schedule": {"text": "8:30pm"},
+            "location": {"label": "Pool Deck"},
+            "description": "Complimentary movie screening.",
+            "price": {"state": "free"},
+            "field_provenance": {
+                "title": [{"page": 1, "line": 1, "bbox": [1, 2, 3, 4], "text": "Movie Under the Stars"}],
+                "price": [{"page": 1, "line": 1, "text": "Movie Under the Stars (no ($) marker)", "field": "source_pdf_fee_marker_absent"}],
+            },
+        }
+
+        audit = build_visual_audit_from_gold_rows([row], "a" * 64)
+
+        self.assertEqual("a" * 64, audit["source_pdf_sha256"])
+        self.assertEqual("source_provenance_seed", audit["audit_mode"])
+        self.assertEqual("source_provenance_visual_seed_v1", audit["model"])
+        self.assertTrue(audit["prompt_version"])
+        self.assertEqual("Movie Under the Stars", audit["activities"][0]["title"])
+        self.assertEqual("free", audit["activities"][0]["price_state"])
+        self.assertEqual("marker_absent_under_legend", audit["activities"][0]["price_evidence"])
+        self.assertEqual({"page": 1, "x": 1, "y": 2, "width": 2, "height": 2}, audit["activities"][0]["bbox"])
+
+    def test_visual_audit_seed_removes_stale_seed_files(self) -> None:
+        from scripts.ingest.gpt_visual_pdf_audit import build_visual_audit_seed_files
+
+        with tempfile.TemporaryDirectory() as tmp:
+            gold_path = Path(tmp) / "gold.json"
+            output_dir = Path(tmp) / "audits"
+            output_dir.mkdir()
+            stale_path = output_dir / f"{'b' * 64}.json"
+            stale_path.write_text(json.dumps({"source_pdf_sha256": "b" * 64}))
+            gold_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "source_sha256": "a" * 64,
+                            "source_url": "https://example.test/current.pdf",
+                            "source": {"path": "data/raw/pdfs/current.pdf"},
+                            "calendar_group_key": "example",
+                            "canonical_slug": "movie-under-the-stars",
+                            "title": "Movie Under the Stars",
+                            "schedule": {"text": "8:30pm"},
+                            "location": {"label": "Pool Deck"},
+                            "price": {"state": "free"},
+                            "field_provenance": {"title": [{"text": "Movie Under the Stars"}]},
+                        }
+                    ]
+                )
+            )
+
+            report = build_visual_audit_seed_files(gold_path=gold_path, output_dir=output_dir)
+
+        self.assertFalse(stale_path.exists())
+        self.assertEqual(1, report["sources"])
+        self.assertEqual(1, report["stale_removed"])
+
+    def test_parse_independent_visual_audit_response_requires_strict_shape(self) -> None:
+        from scripts.ingest.gpt_visual_pdf_audit import parse_independent_visual_audit_response
+
+        payload = json.dumps(
+            {
+                "activities": [
+                    {
+                        "title": "Campfire",
+                        "schedule_text": "7:00pm",
+                        "location": "Fire pit",
+                        "description": "Complimentary marshmallows. S'mores kits available for purchase.",
+                        "price_state": "free",
+                        "price_evidence": "complimentary_language",
+                        "optional_price_options": ["S'mores kits available for purchase"],
+                        "confidence": "high",
+                        "page": 1,
+                    }
+                ]
+            }
+        )
+
+        activities = parse_independent_visual_audit_response(payload)
+
+        self.assertEqual("Campfire", activities[0]["title"])
+        self.assertEqual("free", activities[0]["price_state"])
+        self.assertEqual(["S'mores kits available for purchase"], activities[0]["optional_price_options"])
+
+    def test_parse_independent_visual_audit_response_rejects_malformed_json(self) -> None:
+        from scripts.ingest.gpt_visual_pdf_audit import parse_independent_visual_audit_response
+
+        with self.assertRaisesRegex(RuntimeError, "independent_visual_audit_invalid"):
+            parse_independent_visual_audit_response(
+                json.dumps(
+                    {
+                        "activities": [
+                            {
+                                "title": "Movie Under the Stars",
+                                "schedule_text": "8:30pm",
+                                "location": "Lawn",
+                                "description": "",
+                                "price_state": "hundreds",
+                                "price_evidence": "none",
+                                "optional_price_options": [],
+                                "confidence": "high",
+                                "page": 1,
+                            }
+                        ]
+                    }
+                )
+            )
+
+    def test_independent_visual_coverage_high_requires_non_seed_complete_set(self) -> None:
+        from scripts.ingest.compare_extraction_audits import compare_gold_rows_to_visual_audits
+
+        gold_rows = [
+            {
+                "source_sha256": "a" * 64,
+                "calendar_group_key": "example",
+                "canonical_slug": "movie-under-the-stars",
+                "title": "Movie Under the Stars",
+                "price": {"state": "free"},
+                "source_url": "https://example.test/example.pdf",
+                "field_provenance": {"title": [{"text": "Movie Under the Stars"}]},
+            }
+        ]
+        seed_report = compare_gold_rows_to_visual_audits(
+            gold_rows,
+            {
+                "a" * 64: {
+                    "audit_mode": "source_provenance_seed",
+                    "source_pdf_sha256": "a" * 64,
+                    "activities": [{"title": "Movie Under the Stars", "price_state": "free"}],
+                }
+            },
+        )
+        independent_report = compare_gold_rows_to_visual_audits(
+            gold_rows,
+            {
+                "a" * 64: {
+                    "audit_mode": "independent_gpt_visual",
+                    "source_pdf_sha256": "a" * 64,
+                    "activities": [{"title": "Movie Under the Stars", "price_state": "free"}],
+                }
+            },
+        )
+
+        self.assertEqual("low", seed_report["summary"]["independent_visual_ocr_coverage"])
+        self.assertEqual("high", independent_report["summary"]["independent_visual_ocr_coverage"])
+
+    def test_compare_extraction_audits_flags_price_state_mismatch(self) -> None:
+        from scripts.ingest.compare_extraction_audits import compare_gold_rows_to_visual_audits
+
+        gold_rows = [
+            {
+                "source_sha256": "a" * 64,
+                "calendar_group_key": "example",
+                "canonical_slug": "movie-under-the-stars",
+                "title": "Movie Under the Stars",
+                "price": {"state": "free"},
+                "field_provenance": {
+                    "title": [{"text": "Movie Under the Stars"}],
+                    "schedule": [{"text": "8:30pm"}],
+                    "location": [{"text": "Pool Deck"}],
+                    "price": [{"text": "no marker", "field": "source_pdf_fee_marker_absent"}],
+                },
+                "source_url": "https://example.test/example.pdf",
+                "source": {"path": "data/raw/pdfs/example.pdf"},
+            }
+        ]
+        visual_audits = {
+            "a" * 64: {
+                "source_pdf_sha256": "a" * 64,
+                "activities": [
+                    {
+                        "title": "Movie Under the Stars",
+                        "price_state": "fee",
+                        "price_evidence": "dollar_marker",
+                    }
+                ],
+            }
+        }
+
+        report = compare_gold_rows_to_visual_audits(gold_rows, visual_audits)
+
+        self.assertFalse(report["passed"])
+        self.assertEqual(1, report["summary"]["blocking_mismatches"])
+        self.assertEqual("price_state_disagrees", report["blocking_mismatches"][0]["kind"])
+
+    def test_field_audit_report_marks_required_source_backed_fields_high_confidence(self) -> None:
+        from scripts.ingest.compare_extraction_audits import build_field_audit_report
+
+        gold_rows = [
+            {
+                "source_sha256": "a" * 64,
+                "source_url": "https://example.test/example.pdf",
+                "calendar_group_key": "example",
+                "canonical_slug": "movie-under-the-stars",
+                "title": "Movie Under the Stars",
+                "price": {"state": "free"},
+                "schedule": {"text": "8:30pm"},
+                "location": {"label": "Pool Deck"},
+                "field_provenance": {
+                    "title": [{"text": "Movie Under the Stars"}],
+                    "schedule": [{"text": "8:30pm"}],
+                    "location": [{"text": "Pool Deck"}],
+                    "price": [{"text": "no marker", "field": "source_pdf_fee_marker_absent"}],
+                },
+            }
+        ]
+        visual_audits = {
+            "a" * 64: {
+                "source_pdf_sha256": "a" * 64,
+                "activities": [{"title": "Movie Under the Stars", "price_state": "free"}],
+            }
+        }
+
+        report = build_field_audit_report(gold_rows, visual_audits)
+
+        self.assertTrue(report["passed"], report["errors"])
+        fields = {(row["row_key"], row["field"]): row for row in report["fields"]}
+        self.assertEqual("high", fields[("example:movie-under-the-stars", "price")]["confidence"])
+        self.assertTrue(fields[("example:movie-under-the-stars", "title")]["deterministic_support"])
+
+    def test_coverage_audit_fails_production_ready_on_visual_audit_blocker(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            visual_path = Path(tmpdir) / "pdf_visual_audit_report.json"
+            field_path = Path(tmpdir) / "field_audit_report.json"
+            visual_path.write_text(
+                json.dumps(
+                    {
+                        "passed": False,
+                        "blocking_mismatches": [{"kind": "price_state_disagrees"}],
+                        "review_mismatches": [],
+                        "summary": {"blocking_mismatches": 1},
+                    }
+                )
+            )
+            field_path.write_text(json.dumps({"passed": True, "errors": [], "summary": {}}))
+
+            audit = build_coverage_audit(
+                require_production_ready=True,
+                visual_audit_report_path=visual_path,
+                field_audit_report_path=field_path,
+            )
+
+        self.assertFalse(audit.passed)
+        self.assertIn("visual_audit:blocking_mismatches:1", audit.errors)
+
+    def test_coverage_audit_fails_production_ready_on_field_audit_error(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            visual_path = Path(tmpdir) / "pdf_visual_audit_report.json"
+            field_path = Path(tmpdir) / "field_audit_report.json"
+            visual_path.write_text(
+                json.dumps(
+                    {
+                        "passed": True,
+                        "blocking_mismatches": [],
+                        "review_mismatches": [],
+                        "summary": {"blocking_mismatches": 0},
+                    }
+                )
+            )
+            field_path.write_text(
+                json.dumps(
+                    {
+                        "passed": False,
+                        "errors": ["example:price:field_missing_provenance"],
+                        "summary": {"errors": 1},
+                    }
+                )
+            )
+
+            audit = build_coverage_audit(
+                require_production_ready=True,
+                visual_audit_report_path=visual_path,
+                field_audit_report_path=field_path,
+            )
+
+        self.assertFalse(audit.passed)
+        self.assertIn("field_audit:errors:1", audit.errors)
+
+
+class SourceTrustLedgerMigrationTest(unittest.TestCase):
+    def test_source_trust_ledger_migration_defines_relationships_and_observations(self) -> None:
+        migration = _source_trust_ledger_migration_text()
+
+        self.assertIn("create table if not exists public.source_relationships", migration)
+        self.assertIn("create table if not exists public.source_currentness_checks", migration)
+        self.assertIn("create table if not exists public.field_audit_observations", migration)
+        self.assertIn("secondary_enriches_disney_row", migration)
+        self.assertIn("gpt_visual_audit", migration)
+        self.assertIn("manual_visual_review", migration)
+        self.assertIn("alter table public.source_relationships enable row level security", migration)
+        self.assertIn("grant all on public.field_audit_observations to service_role", migration)
+
+
+class PublicationParityAuditTest(unittest.TestCase):
+    def test_publication_parity_detects_missing_live_gold_row(self) -> None:
+        from scripts.ingest.audit_publication_parity import audit_gold_publication_parity
+
+        expected = [
+            {
+                "calendar_group_key": "all-star-movies",
+                "canonical_slug": "movie-under-the-stars",
+                "source_sha256": "a" * 64,
+            }
+        ]
+        live: list[dict[str, Any]] = []
+
+        report = audit_gold_publication_parity(expected, live)
+
+        self.assertFalse(report["passed"])
+        self.assertEqual(
+            ["gold:all-star-movies:movie-under-the-stars:missing_live_row"],
+            report["errors"],
+        )
+
+    def test_publication_parity_accepts_matching_gold_source_hash(self) -> None:
+        from scripts.ingest.audit_publication_parity import audit_gold_publication_parity
+
+        row = {
+            "calendar_group_key": "all-star-movies",
+            "canonical_slug": "movie-under-the-stars",
+            "source_sha256": "a" * 64,
+        }
+
+        report = audit_gold_publication_parity([row], [row])
+
+        self.assertTrue(report["passed"], report["errors"])
+        self.assertEqual(1, report["summary"]["matched_gold_rows"])
+
+    def test_publication_parity_uses_candidate_id_for_duplicate_resort_slug_rows(self) -> None:
+        from scripts.ingest.audit_publication_parity import audit_gold_publication_parity
+
+        rows = [
+            {
+                "candidate_id": "source-a:all-star-movies:wellness-scavenger-hunt",
+                "calendar_group_key": "all-star-movies",
+                "canonical_slug": "wellness-scavenger-hunt",
+                "source_sha256": "a" * 64,
+            },
+            {
+                "candidate_id": "source-b:all-star-movies:wellness-scavenger-hunt",
+                "calendar_group_key": "all-star-movies",
+                "canonical_slug": "wellness-scavenger-hunt",
+                "source_sha256": "b" * 64,
+            },
+        ]
+
+        report = audit_gold_publication_parity(rows, list(reversed(rows)))
+
+        self.assertTrue(report["passed"], report["errors"])
+        self.assertEqual(2, report["summary"]["matched_gold_rows"])
 
 
 if __name__ == "__main__":

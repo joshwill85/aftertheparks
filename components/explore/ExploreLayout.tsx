@@ -5,18 +5,21 @@ import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
+import type { FilterImpact } from "@/lib/explore/filterImpact";
 import type { ActivityOffering, ActivityOccurrence } from "@/lib/types/occurrence";
 
 interface ExploreLayoutProps {
   activities: ActivityOccurrence[];
   officialOfferings: ActivityOffering[];
   resorts: { slug: string; name: string }[];
+  filterImpact: FilterImpact;
 }
 
 export function ExploreLayout({
   activities,
   officialOfferings,
   resorts,
+  filterImpact,
 }: ExploreLayoutProps) {
   const { items, addActivity } = usePlan();
 
@@ -26,6 +29,7 @@ export function ExploreLayout({
         variant="explore"
         resorts={resorts}
         resultCount={activities.length + officialOfferings.length}
+        filterImpact={filterImpact}
       >
         {officialOfferings.length > 0 && (
           <section
@@ -41,8 +45,8 @@ export function ExploreLayout({
                 Official recreation offerings
               </h2>
               <p className="mt-1 text-sm text-[var(--color-muted)]">
-                Source-backed Disney recreation listings that are not tied to
-                a dated calendar time.
+                Disney recreation listings from official sources that are not
+                tied to a dated calendar time.
               </p>
             </div>
             <ActivityOfferingGrid

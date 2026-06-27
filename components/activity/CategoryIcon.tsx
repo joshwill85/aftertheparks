@@ -1,3 +1,4 @@
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { getCategoryMeta } from "@/lib/categories/meta";
 import { cn } from "@/lib/utils";
 
@@ -47,16 +48,22 @@ export function CategoryIcon({
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.75),transparent_36%)]"
         aria-hidden
       />
+      {showStamp && (
+        <span
+          className="hidden-resort-magic hrm-category-ink"
+          data-hidden-detail="category_stamp_imperfection"
+          aria-hidden
+        />
+      )}
       {showStamp && <span className="category-stamp__ring" aria-hidden />}
       <span
         className={cn(
-          "relative select-none drop-shadow-sm",
-          size === "sm" ? "text-2xl" : "text-3xl"
+          "relative grid place-items-center drop-shadow-sm",
+          size === "sm" ? "text-[1.7rem]" : "text-[2rem]"
         )}
-        role="img"
-        aria-label={meta.label}
+        aria-hidden
       >
-        {meta.icon}
+        <IconGlyph iconKey={meta.iconKey} className="text-white" />
       </span>
       {showStamp && size === "md" && (
         <span className="category-stamp__label" aria-hidden>

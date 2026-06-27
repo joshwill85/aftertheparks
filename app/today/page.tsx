@@ -5,6 +5,10 @@ import { Hero } from "@/components/atlas/Hero";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
 import { getTodayActivities, getTomorrowPreview, getResorts } from "@/lib/data/activities";
 import { parseBrowseParams } from "@/lib/explore/browseParams";
+import {
+  activityToFilterableItem,
+  buildFilterImpact,
+} from "@/lib/explore/filterImpact";
 
 export const dynamic = "force-dynamic";
 
@@ -15,11 +19,18 @@ export default async function TodayPage({
 }) {
   const params = await searchParams;
   const filters = parseBrowseParams(params);
-  const [activities, tomorrowPreview, resorts] = await Promise.all([
+  const [activities, tomorrowPreview, baseActivities, resorts] = await Promise.all([
     getTodayActivities(filters),
     getTomorrowPreview(filters),
+    getTodayActivities({}),
     getResorts(),
   ]);
+  const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
+  const filterImpact = buildFilterImpact(
+    baseActivities.map(activityToFilterableItem),
+    filters,
+    resortOptions
+  );
 
   return (
     <>
@@ -30,8 +41,9 @@ export default async function TodayPage({
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <BrowseFilterShell
           variant="today"
-          resorts={resorts.map((r) => ({ slug: r.slug, name: r.name }))}
+          resorts={resortOptions}
           resultCount={activities.length}
+          filterImpact={filterImpact}
         >
           <TodayClient
             initialActivities={activities}

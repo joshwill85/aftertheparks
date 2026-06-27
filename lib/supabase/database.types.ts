@@ -1523,7 +1523,7 @@ export type Database = {
         | "deluxe"
         | "deluxe_villa"
         | "campground"
-      source_type: "pdf" | "html" | "events_tours"
+      source_type: "pdf" | "html" | "events_tours" | "image"
       weather_dependency: "indoor" | "outdoor" | "mixed" | "weather_dependent"
     }
     CompositeTypes: {
@@ -1695,7 +1695,7 @@ export const Constants = {
         "deluxe_villa",
         "campground",
       ],
-      source_type: ["pdf", "html", "events_tours"],
+      source_type: ["pdf", "html", "events_tours", "image"],
       weather_dependency: ["indoor", "outdoor", "mixed", "weather_dependent"],
     },
   },

@@ -46,6 +46,8 @@ The ingest pipeline is fail-closed: strict legacy validation, source-backed v2 f
 
 Magical Resort Guide is used only as third-party factual enrichment for existing activities. It can widen matched Gold rows with exact venues, price details/options, reservation and age/access facts, program-family metadata, and the current schedule-validity window while preserving the official Disney source URL and hash as the source of record.
 
+For price source precedence and mixed free/paid activity handling, see [Price Source Trust](docs/price-source-trust.md).
+
 For controlled Gold v2 UI verification, run with `ACTIVITY_DATA_PIPELINE=gold-v2-preview` to read the local Gold preview artifact, or `ACTIVITY_DATA_PIPELINE=gold-v2` to read `v_public_activity_gold` from Supabase.
 
 After the Gold v2 migrations are applied, `npm run publish:gold-v2` publishes the generated Gold preview to Supabase. It upserts source documents, stable activity catalog identities, and `public_activity_gold` rows, then fails if `check_activity_pipeline_v2_health()` reports any issue.

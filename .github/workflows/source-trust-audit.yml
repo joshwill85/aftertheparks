@@ -1,0 +1,65 @@
+name: Source Trust Audit
+
+on:
+  schedule:
+    - cron: "17 11 * * *"
+    - cron: "43 12 * * 1"
+  workflow_dispatch:
+    inputs:
+      full_audit:
+        description: "Run the weekly full source-trust suite"
+        required: false
+        default: "false"
+
+jobs:
+  daily-source-trust:
+    runs-on: ubuntu-latest
+    env:
+      ACTIVITY_DATA_PIPELINE: gold-v2
+      NEXT_PUBLIC_ACTIVITY_DATA_PIPELINE: gold-v2
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_ACTIVITY_AUDIT_MODEL: ${{ secrets.OPENAI_ACTIVITY_AUDIT_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - name: Daily source freshness audit
+        if: github.event.schedule == '17 11 * * *' || github.event.inputs.full_audit == 'false' || github.event.inputs.full_audit == ''
+        run: |
+          npm run audit:sources:live
+          python3 scripts/ingest/audit_official_recreation_coverage.py --json
+          python3 scripts/ingest/audit_jogging_trails.py
+          python3 scripts/ingest/trust_report.py --json
+      - name: Weekly full source-trust audit
+        if: github.event.schedule == '43 12 * * 1' || github.event.inputs.full_audit == 'true'
+        run: |
+          if [ -z "$OPENAI_API_KEY" ] || [ -z "$OPENAI_ACTIVITY_AUDIT_MODEL" ]; then
+            echo "OPENAI_API_KEY and OPENAI_ACTIVITY_AUDIT_MODEL are required for full independent visual audits."
+            exit 1
+          fi
+          npm run validate:source-trust:full
+          python3 scripts/ingest/trust_report.py --json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-trust-reports
+          path: |
+            data/processed/source_inventory.json
+            data/processed/source_freshness_report.json
+            data/processed/pdf_visual_audit_report.json
+            data/processed/field_audit_report.json
+            data/processed/manual_review_report.json
+            data/processed/jogging_trail_audit_report.json
+            data/processed/publication_parity_report.json
+            data/processed/source_trust_summary.json
+            data/processed/source_trust_monitoring_report.json

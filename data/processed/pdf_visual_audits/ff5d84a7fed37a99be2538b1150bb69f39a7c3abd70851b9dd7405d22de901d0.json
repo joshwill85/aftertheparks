@@ -1,0 +1,225 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0",
+  "source_pdf_path": "data/raw/pdfs/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.500590+00:00",
+  "activities": [
+    {
+      "title": "Safari So Good Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Safari So Good Arcade",
+      "description": "Put your skills to the test at our daily arcade tournament beginning at 4:00pm.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.333,
+        "y": 886.667,
+        "width": 515.667,
+        "height": 27.0
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:safari-so-good-arcade"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Daily",
+      "location": "throughout Kidani Village",
+      "description": "Search the Resort for a hidden Timon photo prop. Once located, snap a photo and then head to Community Hall to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 900.333,
+        "width": 271.0,
+        "height": 21.33400000000006
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:find-a-friend"
+    },
+    {
+      "title": "Community Hall",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "location": "Community Hall",
+      "description": "Play video games and billiards and enjoy arts and crafts. Check out grilling tools and sporting gear, including pickleball equipment. Fees may apply.",
+      "price_state": "fee",
+      "price_evidence": "body_fee_language",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.667,
+        "y": 1051.333,
+        "width": 326.33299999999997,
+        "height": 21.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:community-hall"
+    },
+    {
+      "title": "Fitness Center",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "location": "Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center. S T R | N G O E",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 1167.333,
+        "width": 302.0,
+        "height": 21.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:fitness-center"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Daily",
+      "location": "Samawati Springs Pool",
+      "description": "Join us for family-friendly activities, both in and out of the pool.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.667,
+        "y": 1249.0,
+        "width": 395.66600000000005,
+        "height": 21.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:poolside-activities"
+    },
+    {
+      "title": "Sunset Splash",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Monday and Friday at 8:00pm",
+      "location": "Samawati Springs Pool Deck",
+      "description": "Join us for our evening dance party.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.333,
+        "y": 1807.667,
+        "width": 290.66700000000003,
+        "height": 21.666000000000167
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:sunset-splash"
+    },
+    {
+      "title": "Bingo",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Wednesday from 8:30pm-9:15pm",
+      "location": "Palace Library",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.667,
+        "y": 1970.667,
+        "width": 112.33299999999997,
+        "height": 21.666000000000167
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:bingo"
+    },
+    {
+      "title": "African Mosaic Art",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Tuesday at 1:30pm",
+      "location": "Palace Library",
+      "description": "Unleash your wild artistic side as you create your very own mosaic. This experience is recommended for Guests ages 12 and up. Space is limited. To reserve your spot, please call 407-WDW-PLAY.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 114.333,
+        "y": 2079.0,
+        "width": 468.33400000000006,
+        "height": 27.0
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:african-mosaic-art"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Pembe Savanna Overlook | 8:30PM",
+      "location": "Pembe Savanna Overlook",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.333,
+        "y": 2131.0,
+        "width": 670.0000000000001,
+        "height": 28.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:movie-under-the-stars"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-kidani",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "location": "Pembe Savanna Overlook",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 910.0,
+        "y": 1604.0,
+        "width": 225.0,
+        "height": 36.0
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-kidani:campfire"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

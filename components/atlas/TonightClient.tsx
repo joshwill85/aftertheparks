@@ -13,6 +13,7 @@ import { NightEmptyState } from "@/components/tonight/NightEmptyState";
 import { NightActivityCard } from "@/components/tonight/NightActivityCard";
 import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import { TonightHero } from "@/components/tonight/TonightHero";
+import { NightfallTimeline } from "@/components/tonight/NightfallTimeline";
 import { EmptyState } from "@/components/atlas/EmptyState";
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 
@@ -117,6 +118,7 @@ export function TonightClient({
         <p className="tonight-callout">
           Filtered evening picks — confirm showtimes with your resort before heading out.
         </p>
+        <NightfallTimeline activities={visibleActivities} movieNights={movieNights} />
         {visibleActivities.length > 0 && (
           <EventCardList columns={2}>
             {visibleActivities.map((activity) => (
@@ -177,6 +179,8 @@ export function TonightClient({
         Confirm showtimes with your resort before heading out; schedules can
         change without notice.
       </p>
+
+      <NightfallTimeline activities={visibleActivities} movieNights={movieNights} />
 
       <section id="movies" className="scroll-mt-24">
         <div className="mb-5">
@@ -270,7 +274,7 @@ export function TonightClient({
             After-dinner activities
           </h2>
           <p className="home-section__subtitle md:text-base">
-            Music, entertainment, and evening resort moments once the parks wind down.
+            Music, entertainment, and easy resort activities once the parks wind down.
           </p>
         </div>
 
@@ -300,7 +304,7 @@ export function TonightClient({
             Low-energy evening ideas
           </h2>
           <p className="home-section__subtitle md:text-base">
-            Cozy crafts, wellness, and easy resort moments when you want to wind down.
+            Cozy crafts, wellness, and easy resort activities when you want to wind down.
           </p>
         </div>
 
@@ -331,7 +335,7 @@ export function TonightClient({
             Games and crafts
           </h2>
           <p className="home-section__subtitle md:text-base">
-            Arcade and craft listings from the current source-backed activity data.
+            Arcade and craft listings from current resort calendars.
           </p>
         </div>
 

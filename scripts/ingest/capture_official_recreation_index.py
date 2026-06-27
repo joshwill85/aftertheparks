@@ -31,12 +31,37 @@ def official_recreation_index_api_url(snapshot_date: date) -> str:
 
 
 def _content_hash(snapshot: dict[str, Any]) -> str:
+    canonical_results: list[dict[str, Any]] = []
+    results = snapshot.get("results", [])
+    if isinstance(results, list):
+        for item in results:
+            if not isinstance(item, dict):
+                continue
+            canonical_results.append(
+                {
+                    "id": item.get("id"),
+                    "facilityId": item.get("facilityId"),
+                    "entityType": item.get("entityType"),
+                    "entityTypeName": item.get("entityTypeName"),
+                    "name": item.get("name"),
+                    "locationName": item.get("locationName"),
+                    "url": item.get("url"),
+                    "urlFriendlyId": item.get("urlFriendlyId"),
+                    "siteId": item.get("siteId"),
+                }
+            )
+    canonical_results.sort(
+        key=lambda item: (
+            str(item.get("urlFriendlyId") or ""),
+            str(item.get("id") or ""),
+            str(item.get("name") or ""),
+        )
+    )
     canonical = {
         "source_kind": snapshot.get("source_kind"),
         "source_url": snapshot.get("source_url"),
-        "api_url": snapshot.get("api_url"),
         "title": snapshot.get("title"),
-        "results": snapshot.get("results", []),
+        "results": canonical_results,
     }
     payload = json.dumps(canonical, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()

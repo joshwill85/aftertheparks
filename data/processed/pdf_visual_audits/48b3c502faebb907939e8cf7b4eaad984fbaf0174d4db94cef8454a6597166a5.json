@@ -1,0 +1,213 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "48b3c502faebb907939e8cf7b4eaad984fbaf0174d4db94cef8454a6597166a5",
+  "source_pdf_path": "data/raw/pdfs/DAAR_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.497545+00:00",
+  "activities": [
+    {
+      "title": "Pixel Play Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Inside Animation Hall",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 854.5,
+        "width": 507.5,
+        "height": 31.5
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:pixel-play-arcade"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 1:00pm-2:30pm",
+      "location": "The Big Blue Pool Deck",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1022.5,
+        "width": 461.0,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:poolside-activities"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 8:00am-10:00pm",
+      "location": "Throughout Disney’s Art of Animation Resort",
+      "description": "Search the Resort for a hidden Nala photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.5,
+        "y": 1143.0,
+        "width": 316.5,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:find-a-friend"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm-4:00pm",
+      "location": "Outside Animation Hall",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1221.5,
+        "width": 417.5,
+        "height": 32.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:mickey-tie-dye"
+    },
+    {
+      "title": "Story Time Yoga",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Wednesday from 9:00am-9:30am",
+      "location": "Movie Lawn near The Big Blue Pool",
+      "description": "Join us for stretches and stories inspired by our Disney friends that’s fun for Guests of all skill levels and ages.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.0,
+        "y": 1394.5,
+        "width": 387.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:story-time-yoga"
+    },
+    {
+      "title": "Family Wellness Dance Class",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Friday from 9:00am-9:30am",
+      "location": "Between The Lion King Buildings 6 and 10",
+      "description": "Get active in a wildly fun way with the whole family! Enjoy stretching, singing and dancing to music inspired by The Lion King.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.5,
+        "y": 1610.5,
+        "width": 631.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:family-wellness-dance-class"
+    },
+    {
+      "title": "Activities On The Lawn",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Monday, Tuesday, Thursday, and Saturday 8:00pm",
+      "location": "Movie Lawn near The Big Blue Pool",
+      "description": "Fun and games for all ages. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.0,
+        "y": 1624.5,
+        "width": 549.5,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:activities-on-the-lawn"
+    },
+    {
+      "title": "Mosaic Craft",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Wednesday, begins at 12:30pm",
+      "location": "Inside Animation Hall",
+      "description": "Create your own mosaic masterpiece!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.0,
+        "y": 2011.0,
+        "width": 393.5,
+        "height": 32.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:mosaic-craft"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Movie Lawn Near The Big Blue Pool | 8:30PM",
+      "location": "Movie Lawn Near The Big Blue Pool",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 2043.0,
+        "width": 670.0,
+        "height": 28.0
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:movie-under-the-stars"
+    },
+    {
+      "title": "Signature Craft",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm-4:00pm",
+      "location": "Inside Animation Hall",
+      "description": "Create an original craft!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 114.5,
+        "y": 2271.5,
+        "width": 471.0,
+        "height": 31.5
+      },
+      "confidence": "medium",
+      "row_key": "art-of-animation:signature-craft"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

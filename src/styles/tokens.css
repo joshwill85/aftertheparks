@@ -51,4 +51,86 @@
   --surface-2: var(--brand-white);
   --text-primary: var(--brand-ink);
   --text-secondary: var(--muted);
+
+  /* Daypart modes */
+  --daypart-sunshine-bg: linear-gradient(
+    165deg,
+    #fff9ef 0%,
+    var(--brand-cream) 40%,
+    var(--brand-paper) 100%
+  );
+  --daypart-sunshine-glow: rgba(22, 166, 182, 0.28);
+  --daypart-sunshine-accent: var(--lagoon);
+  --daypart-afternoon-bg: linear-gradient(
+    165deg,
+    #fff5e6 0%,
+    var(--brand-paper) 35%,
+    #fff9f0 100%
+  );
+  --daypart-afternoon-glow: rgba(253, 185, 78, 0.22);
+  --daypart-afternoon-accent: var(--sun-gold);
+  --daypart-golden-hour-bg: linear-gradient(
+    165deg,
+    #fff4e3 0%,
+    #ffe8c9 38%,
+    var(--brand-cream) 100%
+  );
+  --daypart-golden-hour-glow: rgba(255, 200, 87, 0.32);
+  --daypart-golden-hour-accent: var(--sun-coral);
+  --daypart-starlight-bg: linear-gradient(
+    165deg,
+    #fff0f8 0%,
+    #fff3df 42%,
+    var(--brand-paper) 100%
+  );
+  --daypart-starlight-glow: rgba(255, 143, 183, 0.24);
+  --daypart-starlight-accent: var(--sun-peach);
+
+  /* Density modes */
+  --density-compact-gap: clamp(0.5rem, 1.3vw, 0.75rem);
+  --density-comfortable-gap: clamp(0.75rem, 1.8vw, 1.25rem);
+  --density-editorial-gap: clamp(1.5rem, 4vw, 3rem);
+
+  /* Responsive spacing */
+  --space-page-x: clamp(1rem, 3vw, 2.5rem);
+  --space-section-y: clamp(2.5rem, 6vw, 5rem);
+  --space-panel: clamp(1rem, 2.4vw, 1.5rem);
+
+  /* Stable controls */
+  --control-height-sm: 36px;
+  --control-height-md: 44px;
+  --control-height-lg: 48px;
+  --control-icon-sm: 18px;
+  --control-icon-md: 22px;
+
+  /* Motion */
+  --motion-duration-fast: 150ms;
+  --motion-duration-standard: 180ms;
+  --motion-duration-story: 700ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-story: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Interactive states */
+  --state-focus-ring: 3px solid var(--lagoon);
+  --state-focus-offset: 2px;
+  --state-selected-bg: rgba(22, 166, 182, 0.12);
+  --state-selected-border: rgba(22, 166, 182, 0.45);
+  --state-disabled-opacity: 0.55;
+  --state-loading-sheen: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.68) 45%,
+    rgba(255, 255, 255, 0) 90%
+  );
+  --state-error-bg: rgba(184, 50, 50, 0.1);
+  --state-error-border: rgba(184, 50, 50, 0.34);
+  --state-error-text: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 1ms;
+    --motion-duration-standard: 1ms;
+    --motion-duration-story: 1ms;
+  }
 }

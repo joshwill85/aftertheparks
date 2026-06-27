@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PlanEmptyState } from "@/components/plan/PlanEmptyState";
 import { PlanTimeline } from "@/components/plan/PlanTimeline";
+import { PlanPaceMeter } from "@/components/plan/PlanPaceMeter";
+import { PlanStorySummary } from "@/components/plan/PlanStorySummary";
 import { ResortPassport } from "@/components/plan/ResortPassport";
 import { PlanSyncBadge } from "@/components/plan/PlanSyncBadge";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { findPlanConflicts } from "@/lib/plan/conflicts";
 import { sharePlanCalendar, sharePlanLink } from "@/lib/plan/share";
 import { trackPlanEvent } from "@/lib/plan/analytics";
-import { cn } from "@/lib/utils";
 
 export function PlanPageClient() {
   const {
@@ -36,8 +37,6 @@ export function PlanPageClient() {
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const conflicts = findPlanConflicts(items);
-  const lowStress =
-    items.length >= 2 && items.length <= 4 && conflicts.length === 0;
 
   useEffect(() => {
     trackPlanEvent("plan_page_opened");
@@ -138,16 +137,9 @@ export function PlanPageClient() {
         </div>
       )}
 
-      {lowStress && (
-        <div className="rounded-2xl border border-[var(--color-palm)]/30 bg-[var(--color-palm)]/8 px-5 py-4">
-          <p className="font-display text-lg font-semibold text-[var(--color-palm)]">
-            Low-stress rest day
-          </p>
-          <p className="mt-1 text-sm text-[var(--color-muted)]">
-            Your rest day is taking shape — room to breathe between activities.
-          </p>
-        </div>
-      )}
+      <PlanPaceMeter items={items} />
+
+      <PlanStorySummary items={items} />
 
       {conflicts.length > 0 && (
         <div

@@ -66,13 +66,21 @@ export interface GoldActivityRow {
       priceBasis?: string;
       day_of_week?: string;
       dayOfWeek?: string;
+      price_confidence?: ActivityPriceOption["priceConfidence"];
+      priceConfidence?: ActivityPriceOption["priceConfidence"];
+      verification_status?: ActivityPriceOption["verificationStatus"];
+      verificationStatus?: ActivityPriceOption["verificationStatus"];
+      source_url?: string;
+      sourceUrl?: string;
+      source_label?: string;
+      sourceLabel?: string;
       notes?: string;
     }>;
   } | null;
   enrichment?: Record<string, unknown> | null;
   external_facts?: Array<Record<string, unknown>> | null;
   claims?: Record<string, ActivityClaim> | ActivityClaim[] | null;
-  field_provenance?: Partial<Record<"title" | "schedule" | "location" | "description", SourceSpan[]>> | null;
+  field_provenance?: Partial<Record<"title" | "schedule" | "location" | "description" | "price", SourceSpan[]>> | null;
   source?: {
     url?: string | null;
     path?: string | null;
@@ -292,6 +300,10 @@ function normalizePriceOptions(
     priceCentsMax: option.priceCentsMax ?? option.price_cents_max,
     priceBasis: option.priceBasis ?? option.price_basis,
     dayOfWeek: option.dayOfWeek ?? option.day_of_week,
+    priceConfidence: option.priceConfidence ?? option.price_confidence,
+    verificationStatus: option.verificationStatus ?? option.verification_status,
+    sourceUrl: option.sourceUrl ?? option.source_url,
+    sourceLabel: option.sourceLabel ?? option.source_label,
     notes: option.notes,
   }));
 }

@@ -4,9 +4,12 @@ import {
   auditGoldSourceLegendParity,
   auditGoldRows,
   auditOfficialOfferingRows,
+  auditSourceTrustLedger,
   hasUsableProvenance,
   hasValidStructuredGoldSource,
   hasUsableSourceHash,
+  requiredGoldAuditFields,
+  requiredOfficialAuditFields,
 } from "./validate-db-trust.mjs";
 
 const hash = "a".repeat(64);
@@ -69,6 +72,12 @@ assert.equal(
   false
 );
 assert.deepEqual(auditGoldRows([goodGold]), []);
+assert.deepEqual(requiredGoldAuditFields(goodGold), [
+  "title",
+  "schedule",
+  "location",
+  "description",
+]);
 assert.deepEqual(auditGoldSourceLegendParity([goodGold], [goodGold]), []);
 assert.deepEqual(
   auditGoldSourceLegendParity(
@@ -80,11 +89,55 @@ assert.deepEqual(
     ],
     [goodGold]
   ),
-  ["gold:all-star-movies:wellness-scavenger-hunt:missing_document_key_legends"]
+  ["gold:gold-good:missing_document_key_legends"]
 );
 assert.deepEqual(
   auditGoldSourceLegendParity([], [goodGold]),
-  ["gold:all-star-movies:wellness-scavenger-hunt:missing_live_row_for_source_legend"]
+  ["gold:gold-good:missing_live_row_for_source_legend"]
+);
+assert.deepEqual(
+  auditGoldSourceLegendParity(
+    [
+      {
+        ...goodGold,
+        id: undefined,
+      },
+    ],
+    [
+      {
+        ...goodGold,
+        candidate_id: "candidate-good",
+      },
+    ]
+  ),
+  []
+);
+const duplicateGoldA = {
+  ...goodGold,
+  id: "gold-a",
+  candidate_id: "source-a:all-star-movies:wellness-scavenger-hunt",
+  source_sha256: "a".repeat(64),
+  source: { ...goodGold.source, documentHash: "a".repeat(64) },
+};
+const duplicateGoldB = {
+  ...goodGold,
+  id: "gold-b",
+  candidate_id: "source-b:all-star-movies:wellness-scavenger-hunt",
+  source_sha256: "b".repeat(64),
+  source: { ...goodGold.source, documentHash: "b".repeat(64) },
+};
+assert.deepEqual(
+  auditGoldSourceLegendParity(
+    [
+      duplicateGoldA,
+      {
+        ...duplicateGoldB,
+        source: { ...duplicateGoldB.source, documentKeyLegends: [] },
+      },
+    ],
+    [duplicateGoldA, duplicateGoldB]
+  ),
+  ["gold:source-b:all-star-movies:wellness-scavenger-hunt:missing_document_key_legends"]
 );
 assert.deepEqual(
   auditGoldRows([
@@ -140,6 +193,14 @@ const goodOffering = {
 };
 
 assert.deepEqual(auditOfficialOfferingRows([goodOffering]), []);
+assert.deepEqual(requiredOfficialAuditFields(goodOffering), [
+  "title",
+  "resort_join",
+  "description",
+  "price",
+  "booking",
+  "availability",
+]);
 assert.deepEqual(
   auditOfficialOfferingRows([
     {
@@ -223,4 +284,115 @@ assert.deepEqual(
     },
   ]),
   []
+);
+
+const sourceDocPdf = {
+  id: "source-doc-pdf",
+  source_type: "pdf",
+  canonical_url: goodGold.source_url,
+  content_sha256: hash,
+};
+const sourceDocPdfParent = {
+  id: "source-doc-pdf-parent",
+  source_type: "html",
+  canonical_url: "https://example.test/resorts/all-star-movies/recreation/",
+  content_sha256: "c".repeat(64),
+};
+const sourceDocHtml = {
+  id: "source-doc-html",
+  source_type: "html",
+  canonical_url: goodOffering.source_url,
+  content_sha256: hash,
+};
+const ledgerGold = {
+  ...goodGold,
+  source_document_id: sourceDocPdf.id,
+  price: { state: "fee" },
+};
+const ledgerOffering = {
+  ...goodOffering,
+  source_document_id: sourceDocHtml.id,
+};
+assert.deepEqual(
+  auditSourceTrustLedger({
+    goldRows: [ledgerGold],
+    officialRows: [ledgerOffering],
+    sourceDocuments: [sourceDocPdf, sourceDocPdfParent, sourceDocHtml],
+    currentnessChecks: [
+      { source_document_id: sourceDocPdf.id, currentness: "current" },
+      { source_document_id: sourceDocPdfParent.id, currentness: "current" },
+      { source_document_id: sourceDocHtml.id, currentness: "current" },
+    ],
+    sourceRelationships: [
+      {
+        parent_source_document_id: sourceDocPdfParent.id,
+        child_source_document_id: sourceDocPdf.id,
+        relationship_type: "resort_page_links_pdf",
+      },
+    ],
+    fieldAuditObservations: [
+      ...requiredGoldAuditFields(ledgerGold).map((field_name) => ({
+        row_kind: "gold_activity",
+        row_key: "all-star-movies:wellness-scavenger-hunt",
+        field_name,
+      })),
+      ...requiredOfficialAuditFields(ledgerOffering).map((field_name) => ({
+        row_kind: "official_offering",
+        row_key: "official-good",
+        field_name,
+      })),
+    ],
+  }),
+  []
+);
+assert.deepEqual(
+  auditSourceTrustLedger({
+    goldRows: [ledgerGold],
+    officialRows: [ledgerOffering],
+    sourceDocuments: [sourceDocPdf, sourceDocPdfParent, sourceDocHtml],
+    currentnessChecks: [{ source_document_id: sourceDocHtml.id, currentness: "current" }],
+    sourceRelationships: [],
+    fieldAuditObservations: [],
+  }),
+  [
+    "source_document_missing_currentness_check:source-doc-pdf",
+    "source_document_missing_relationship_for_pdf:source-doc-pdf",
+    "gold_row_missing_source_chain:gold-good",
+    "field_audit_observation_missing_for_required_field:gold_activity:all-star-movies:wellness-scavenger-hunt:title",
+    "field_audit_observation_missing_for_required_field:gold_activity:all-star-movies:wellness-scavenger-hunt:schedule",
+    "field_audit_observation_missing_for_required_field:gold_activity:all-star-movies:wellness-scavenger-hunt:location",
+    "field_audit_observation_missing_for_required_field:gold_activity:all-star-movies:wellness-scavenger-hunt:description",
+    "field_audit_observation_missing_for_required_field:gold_activity:all-star-movies:wellness-scavenger-hunt:price",
+    "field_audit_observation_missing_for_required_field:official_offering:official-good:title",
+    "field_audit_observation_missing_for_required_field:official_offering:official-good:resort_join",
+    "field_audit_observation_missing_for_required_field:official_offering:official-good:description",
+    "field_audit_observation_missing_for_required_field:official_offering:official-good:price",
+    "field_audit_observation_missing_for_required_field:official_offering:official-good:booking",
+    "field_audit_observation_missing_for_required_field:official_offering:official-good:availability",
+  ]
+);
+
+assert.deepEqual(
+  auditSourceTrustLedger({
+    goldRows: [ledgerGold],
+    officialRows: [],
+    sourceDocuments: [sourceDocPdf, sourceDocPdfParent],
+    currentnessChecks: [
+      { source_document_id: sourceDocPdf.id, currentness: "current" },
+      { source_document_id: sourceDocPdfParent.id, currentness: "current" },
+    ],
+    sourceRelationships: [
+      {
+        parent_source_document_id: null,
+        child_source_document_id: sourceDocPdf.id,
+        relationship_type: "resort_page_links_pdf",
+      },
+    ],
+    fieldAuditObservations: requiredGoldAuditFields(ledgerGold).map((field_name) => ({
+      row_kind: "gold_activity",
+      row_key: "all-star-movies:wellness-scavenger-hunt",
+      field_name,
+    })),
+  }),
+  ["source_document_pdf_relationship_missing_parent:source-doc-pdf"]
 );

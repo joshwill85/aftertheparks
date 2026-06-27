@@ -1,47 +1,72 @@
 {
   "calendar_group_key": "all-star-movies",
-  "source_pdf": "data/raw/pdfs/All-Star-Movies_Aframe_Recreation_1125.pdf",
-  "source_pdf_sha256": "784923e9f8dec8207a1cdb91987b425f42c4ec7450e6f9eadb8f64075d0db276",
+  "source_pdf": "data/raw/pdfs/All-Star-Movies_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "985fb7cba2e2ff099e2b4695f5123c08766fef69731d0df320649aef7bf69045",
   "expected_records": [
     {
       "title": "Wellness Scavenger Hunt",
       "slug": "wellness-scavenger-hunt",
       "category": "fitness_wellness",
-      "schedule_text": "Daily from 7:00am–11:00pm",
+      "schedule_text": "Daily from 7:00am-11:00pm",
       "start_time": "7:00am",
       "end_time": "11:00pm",
       "location": "Throughout Disney’s All-Star Resorts",
-      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you've finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 5 }],
-        "location": [{ "page": 1, "line": 6 }],
-        "schedule": [{ "page": 1, "line": 7 }],
+        "title": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "WELLNESS SCAVENGER HUNT"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Throughout Disney’s All-Star Resorts"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Daily from 7:00am-11:00pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 9 },
-          { "page": 1, "line": 10 },
-          { "page": 1, "line": 12 },
-          { "page": 1, "line": 14 },
-          { "page": 1, "line": 16 },
-          { "page": 1, "line": 18 }
+          {
+            "page": 1,
+            "line": 23,
+            "text": "Find hidden wellness challenges and partake"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "in a scavenger hunt across all three of"
+          },
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Disney’s All-Star Resorts. Pick up a map from"
+          },
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Donald’s Double Feature to start exploring. Once"
+          },
+          {
+            "page": 1,
+            "line": 30,
+            "text": "you've finished the challenges, pick up a prize from"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "any merchandise location at Disney’s All-Star Resorts."
+          }
         ]
-      }
-    },
-    {
-      "title": "Reel Fun Arcade",
-      "slug": "reel-fun-arcade",
-      "category": "arcade",
-      "schedule_text": "Daily from 8:00am–11:00pm",
-      "start_time": "8:00am",
-      "end_time": "11:00pm",
-      "location": "Inside Cinema Hall",
-      "description": "Play the latest and greatest family-friendly video games.",
-      "is_fee_based": true,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 11 }],
-        "location": [{ "page": 1, "line": 13 }],
-        "schedule": [{ "page": 1, "line": 15 }],
-        "description": [{ "page": 1, "line": 17 }]
       }
     },
     {
@@ -55,30 +80,89 @@
       "description": "Join us for fun and games, both in and out of the pool. See a Recreation Cast Member for more information.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 19 }],
-        "location": [{ "page": 1, "line": 21 }],
-        "schedule": [{ "page": 1, "line": 23 }],
-        "description": [{ "page": 1, "line": 25 }, { "page": 1, "line": 27 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 33,
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Fantasia Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "Daily at 12:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 38,
+            "text": "Join us for fun and games, both in and out of the pool."
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "See a Recreation Cast Member for more information."
+          }
+        ]
       }
     },
     {
       "title": "Find A Friend",
       "slug": "find-a-friend",
       "category": "scavenger_hunt",
-      "schedule_text": "Daily from 8:00am–9:00pm",
+      "schedule_text": "Daily from 8:00am-9:00pm",
       "start_time": "8:00am",
       "end_time": "9:00pm",
       "location": "Throughout Disney’s All-Star Resorts",
       "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 20 }],
-        "location": [{ "page": 1, "line": 22 }],
-        "schedule": [{ "page": 1, "line": 24 }],
+        "title": [
+          {
+            "page": 1,
+            "line": 34,
+            "text": "FIND A FRIEND"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 36,
+            "text": "Throughout Disney’s All-Star Resorts"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Daily from 8:00am-9:00pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 26 },
-          { "page": 1, "line": 28 },
-          { "page": 1, "line": 30 }
+          {
+            "page": 1,
+            "line": 41,
+            "text": "Search the Resort for a hidden Goofy photo prop."
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Once located, snap a photo and then head to the"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Front Desk to receive a surprise!"
+          }
         ]
       }
     },
@@ -86,50 +170,79 @@
       "title": "Arts & Crafts",
       "slug": "arts-crafts",
       "category": "arts_crafts",
-      "schedule_text": "Daily from 2:30pm–3:30pm",
-      "start_time": "2:30pm",
-      "end_time": "3:30pm",
+      "schedule_text": "Sunday, Monday, Wednesday, Thursday and Friday from 3:30pm-4:30pm",
+      "start_time": "3:30pm",
+      "end_time": "4:30pm",
       "location": "Fantasia Pool Deck",
       "description": "Create a take-home souvenir with a Disney twist!",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 29 }],
-        "location": [{ "page": 1, "line": 31 }],
-        "schedule": [{ "page": 1, "line": 32 }],
-        "description": [{ "page": 1, "line": 33 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 43,
+            "text": "A RTS & CRAFTS ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "Fantasia Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Sunday, Monday, Wednesday, Thursday and Friday"
+          },
+          {
+            "page": 1,
+            "line": 47,
+            "text": "from 3:30pm-4:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Create a take-home souvenir with a Disney twist!"
+          }
+        ]
       }
     },
     {
       "title": "Movie Under the Stars",
       "slug": "movie-under-the-stars",
       "category": "movies_under_stars",
-      "schedule_text": "The Reel Spot | 8:00PM",
-      "start_time": "8:00pm",
+      "schedule_text": "The Reel Spot | 8:30PM",
+      "start_time": "8:30pm",
       "end_time": null,
       "location": "The Reel Spot",
       "description": "",
       "is_fee_based": false,
-      "movie_nights": [
-        { "day_of_week": "sunday", "movie_title": "Beauty and the Beast (1991)", "show_time": "8:00PM" },
-        { "day_of_week": "monday", "movie_title": "Lilo & Stitch (2025)", "show_time": "8:00PM" },
-        { "day_of_week": "tuesday", "movie_title": "Frozen", "show_time": "8:00PM" },
-        { "day_of_week": "wednesday", "movie_title": "The Santa Clause 2", "show_time": "8:00PM" },
-        { "day_of_week": "thursday", "movie_title": "Toy Story", "show_time": "8:00PM" },
-        { "day_of_week": "friday", "movie_title": "101 Dalmatians (1961)", "show_time": "8:00PM" },
-        { "day_of_week": "saturday", "movie_title": "Elio", "show_time": "8:00PM" }
-      ],
       "required_spans": {
-        "title": [{ "page": 1, "line": 34 }],
-        "location": [{ "page": 1, "line": 37 }],
-        "schedule": [{ "page": 1, "line": 37 }],
-        "movie_nights": [
-          { "page": 1, "line": 40 },
-          { "page": 1, "line": 41 },
-          { "page": 1, "line": 43 },
-          { "page": 1, "line": 45 },
-          { "page": 1, "line": 48 },
-          { "page": 1, "line": 50 },
-          { "page": 1, "line": 52 }
+        "title": [
+          {
+            "page": 1,
+            "line": 49,
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 51,
+            "text": "THE REEL SPOT | 8:30PM"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 51,
+            "text": "THE REEL SPOT | 8:30PM"
+          }
         ]
       }
     },
@@ -137,85 +250,244 @@
       "title": "Mickey Tie-Dye",
       "slug": "mickey-tie-dye",
       "category": "arts_crafts",
-      "schedule_text": "Tuesday, Thursday and Saturday from 2:30pm–3:30pm",
-      "start_time": "2:30pm",
-      "end_time": "3:30pm",
+      "schedule_text": "Tuesday and Saturday from 3:30pm-4:30pm",
+      "start_time": "3:30pm",
+      "end_time": "4:30pm",
       "location": "Fantasia Pool Deck",
       "description": "Get creative with a Disney twist on this arts and crafts favorite!",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 35 }],
-        "location": [{ "page": 1, "line": 36 }],
-        "schedule": [{ "page": 1, "line": 38 }],
-        "description": [{ "page": 1, "line": 39 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 50,
+            "text": "MICKEY TIE-DYE ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 52,
+            "text": "Fantasia Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 53,
+            "text": "Tuesday and Saturday from 3:30pm-4:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 55,
+            "text": "Get creative with a Disney twist on this arts and crafts favorite!"
+          }
+        ]
       }
     },
     {
       "title": "Arcade Tournament",
       "slug": "arcade-tournament",
       "category": "arcade",
-      "schedule_text": "Daily from 4:00pm–5:00pm",
+      "schedule_text": "Daily from 4:00pm-5:00pm",
       "start_time": "4:00pm",
       "end_time": "5:00pm",
       "location": "Reel Fun Arcade",
       "description": "Come test your skills at our daily arcade tournament. You may find yourself going home with a prize of your own!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 42 }],
-        "location": [{ "page": 1, "line": 44 }],
-        "schedule": [{ "page": 1, "line": 46 }],
-        "description": [{ "page": 1, "line": 47 }, { "page": 1, "line": 49 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 56,
+            "text": "ARCADE TOURNAMENT"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 59,
+            "text": "Reel Fun Arcade"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 61,
+            "text": "Daily from 4:00pm-5:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 62,
+            "text": "Come test your skills at our daily arcade tournament."
+          },
+          {
+            "page": 1,
+            "line": 64,
+            "text": "You may find yourself going home with a prize of your own!"
+          }
+        ]
       }
     },
     {
       "title": "Sorcerer’s Campfire",
       "slug": "sorcerers-campfire",
       "category": "campfire",
-      "schedule_text": "Daily from 6:00pm-7:00pm",
-      "start_time": "6:00pm",
-      "end_time": "7:00pm",
+      "schedule_text": "Daily from 6:30pm-7:30pm",
+      "start_time": "6:30pm",
+      "end_time": "7:30pm",
       "location": "Located between Fantasia Buildings 5 and 8",
       "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 51 }],
-        "location": [{ "page": 1, "line": 53 }],
-        "schedule": [{ "page": 1, "line": 55 }],
-        "description": [{ "page": 1, "line": 57 }, { "page": 1, "line": 58 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 66,
+            "text": "SORCERER’S CAMPFIRE"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 68,
+            "text": "Located between Fantasia Buildings 5 and 8"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 70,
+            "text": "Daily from 6:30pm-7:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 72,
+            "text": "Enjoy the warm glow of the campfire with complimentary"
+          },
+          {
+            "page": 1,
+            "line": 73,
+            "text": "marshmallows. S’mores kits available for purchase."
+          }
+        ]
       }
     },
     {
-      "title": "Winter-Themed Activities",
-      "slug": "winter-themed-activities",
-      "category": "resort_activity",
-      "schedule_text": "Tuesday at 8:00pm",
-      "start_time": "8:00pm",
+      "title": "Silent Disco",
+      "slug": "silent-disco",
+      "category": "other",
+      "schedule_text": "Tuesday at 8:30pm",
+      "start_time": "8:30pm",
       "end_time": null,
-      "location": "Toy Story Buildings Courtyard",
-      "description": "Join us for some activities for all to enjoy!",
+      "location": "Fantasia Pool Deck",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 59 }],
-        "location": [{ "page": 1, "line": 60 }],
-        "schedule": [{ "page": 1, "line": 61 }],
-        "description": [{ "page": 1, "line": 62 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "SILENT DISCO"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Fantasia Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 83,
+            "text": "Tuesday at 8:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 84,
+            "text": "Choose your favorite music, don your own headphones,"
+          },
+          {
+            "page": 1,
+            "line": 85,
+            "text": "and “silently” dance the night away with us!"
+          }
+        ]
       }
     },
     {
-      "title": "All-Star Lobby Party",
-      "slug": "all-star-lobby-party",
-      "category": "resort_activity",
-      "schedule_text": "Thursday and Saturday at 8:00pm",
-      "start_time": "8:00pm",
+      "title": "Shine Like A Star Glow Party",
+      "slug": "shine-like-a-star-glow-party",
+      "category": "other",
+      "schedule_text": "Thursday and Saturday at 8:30pm",
+      "start_time": "8:30pm",
       "end_time": null,
-      "location": "Cinema Hall Lobby",
-      "description": "Wear your favorite pajamas for games, dancing and more surprise fun as we close out the evening.",
+      "location": "Fantasia Pool Deck",
+      "description": "End your fun-filled day with a glow party where youre the star!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 63 }],
-        "location": [{ "page": 1, "line": 64 }],
-        "schedule": [{ "page": 1, "line": 65 }],
-        "description": [{ "page": 1, "line": 66 }, { "page": 1, "line": 67 }]
+        "title": [
+          {
+            "page": 1,
+            "line": 87,
+            "text": "SHINE LIKE A STAR GLOW PARTY"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 90,
+            "text": "Fantasia Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 93,
+            "text": "Thursday and Saturday at 8:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 94,
+            "text": "End your fun-filled day with a glow party where"
+          },
+          {
+            "page": 1,
+            "line": 97,
+            "text": "youre the star!"
+          }
+        ]
+      }
+    }
+  ],
+  "expected_unextractable_records": [
+    {
+      "title": "Reel Fun Arcade",
+      "slug": "reel-fun-arcade",
+      "reason": "parser_warning:schedule:incomplete_time_phrase",
+      "warnings": [
+        "schedule:incomplete_time_phrase"
+      ],
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 25,
+            "text": "REEL FUN ARCADE ($)"
+          }
+        ]
       }
     }
   ]

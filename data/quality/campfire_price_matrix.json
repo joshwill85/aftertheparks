@@ -1,0 +1,94 @@
+{
+  "version": "2026-summer",
+  "sourcePolicy": {
+    "officialByResortPriceSheetExists": false,
+    "notes": "Disney does not publish one official by-resort campfire price sheet. This matrix records the reviewed Summer 2026 operating pattern and must not override Disney PDFs, official pages, or menus."
+  },
+  "defaultResortCampfire": {
+    "activityPriceState": "free",
+    "resortScope": [
+      "all-star-movies",
+      "all-star-music",
+      "all-star-sports",
+      "art-of-animation",
+      "pop-century",
+      "caribbean-beach",
+      "coronado-springs",
+      "port-orleans-french-quarter",
+      "port-orleans-riverside",
+      "contemporary",
+      "bay-lake-tower",
+      "grand-floridian",
+      "polynesian",
+      "wilderness-lodge",
+      "animal-kingdom-jambo",
+      "animal-kingdom-kidani",
+      "beach-yacht-club",
+      "boardwalk",
+      "old-key-west",
+      "riviera",
+      "saratoga-springs"
+    ],
+    "supplies": [
+      {
+        "optionName": "Roasting stick",
+        "priceBasis": "included",
+        "priceCentsMin": 0,
+        "priceCentsMax": 0,
+        "priceConfidence": "operating_pattern",
+        "notes": "Most Disney Resort campfires provide roasting sticks for the complimentary activity."
+      },
+      {
+        "optionName": "Marshmallows",
+        "priceBasis": "included",
+        "priceCentsMin": 0,
+        "priceCentsMax": 0,
+        "priceConfidence": "disney_pdf_language",
+        "notes": "Use only when the resort PDF/page says marshmallows are complimentary."
+      },
+      {
+        "optionName": "Mickey S'mores Kit",
+        "priceBasis": "optional_add_on",
+        "priceCentsMin": 700,
+        "priceCentsMax": 700,
+        "priceConfidence": "secondary_verified",
+        "verificationStatus": "needs_disney_confirmation",
+        "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+        "sourceLabel": "Chip and Company Wilderness Lodge report",
+        "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+      }
+    ]
+  },
+  "fort-wilderness": {
+    "activityPriceState": "free",
+    "resortScope": ["fort-wilderness"],
+    "supplies": [
+      {
+        "optionName": "Fort S'Mores Kit",
+        "priceBasis": "optional_add_on",
+        "priceCentsMin": 999,
+        "priceCentsMax": 999,
+        "priceConfidence": "disney_menu_verified",
+        "verificationStatus": "verified",
+        "sourceUrl": "https://disneyworld.disney.go.com/dining/cabins-at-fort-wilderness-resort/chuck-wagon-fresh-fixins-food-truck/menus/lunch-and-dinner/",
+        "sourceLabel": "Disney Chuck Wagon menu",
+        "notes": "Guests may bring their own supplies or purchase from The Chuck Wagon."
+      }
+    ],
+    "approximateSeparateSupplyNotes": [
+      {
+        "optionName": "Roasting stick",
+        "approximatePrice": "$0.59-$0.63 each",
+        "verificationStatus": "needs_disney_confirmation",
+        "publishAsExactPrice": false
+      },
+      {
+        "optionName": "Marshmallow bag",
+        "approximatePrice": "$4.99",
+        "verificationStatus": "needs_disney_confirmation",
+        "publishAsExactPrice": false
+      }
+    ],
+    "notes": "Guests may bring their own supplies or purchase from The Chuck Wagon. Individual supply prices should remain approximate unless confirmed from Disney."
+  }
+}

@@ -1,130 +1,46 @@
 {
   "calendar_group_key": "art-of-animation",
-  "source_pdf": "data/raw/pdfs/DAAR_Aframe_Recreation-0525_DIGITAL.pdf",
-  "source_pdf_sha256": "e5ab25356a30708fc43657ad90053d6f59a303d4e11046a880e68c3be7ce30df",
+  "source_pdf": "data/raw/pdfs/DAAR_Aframe_Recreation-0326.pdf",
+  "source_pdf_sha256": "48b3c502faebb907939e8cf7b4eaad984fbaf0174d4db94cef8454a6597166a5",
   "expected_records": [
     {
-      "title": "Wake Up Shake Up Party",
-      "slug": "wake-up-shake-up-party",
-      "category": "other",
-      "schedule_text": "Monday, Tuesday, Wednesday, and Thursday from 8:30am–9:00am",
-      "start_time": "8:30am",
-      "end_time": "9:00am",
-      "location": "Generation Gap Bridge",
-      "description": "Join us for family-friendly activities while you prepare for a fun-filled day at the parks.",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 1, "text": "WAKE UP SHAKE UP PARTY" }],
-        "location": [{ "page": 1, "line": 3, "text": "Generation Gap Bridge" }],
-        "schedule": [
-          { "page": 1, "line": 4, "text": "Monday, Tuesday, Wednesday," },
-          { "page": 1, "line": 6, "text": "and Thursday from 8:30am–9:00am" }
-        ],
-        "description": [
-          { "page": 1, "line": 8, "text": "Join us for family-friendly activities while you" },
-          { "page": 1, "line": 10, "text": "prepare for a fun-filled day at the parks." }
-        ]
-      }
-    },
-    {
-      "title": "Find A Friend",
-      "slug": "find-a-friend",
-      "category": "scavenger_hunt",
-      "schedule_text": "Daily from 8:00am–10:00pm",
+      "title": "Pixel Play Arcade",
+      "slug": "pixel-play-arcade",
+      "category": "arcade",
+      "schedule_text": "Daily from 8:00am-11:00pm",
       "start_time": "8:00am",
-      "end_time": "10:00pm",
-      "location": "Throughout Disney’s Art of Animation Resort",
-      "description": "Search the Resort for a hidden Nala photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 5, "text": "FIND A FRIEND" }],
-        "location": [{ "page": 1, "line": 7, "text": "Throughout Disney’s Art of Animation Resort" }],
-        "schedule": [{ "page": 1, "line": 9, "text": "Daily from 8:00am–10:00pm" }],
-        "description": [
-          { "page": 1, "line": 11, "text": "Search the Resort for a hidden Nala photo prop." },
-          { "page": 1, "line": 12, "text": "Once located, snap a photo and then head to the" },
-          { "page": 1, "line": 14, "text": "Front Desk to receive a surprise!" }
-        ]
-      }
-    },
-    {
-      "title": "Disney Character Experience",
-      "slug": "disney-character-experience",
-      "category": "other",
-      "schedule_text": "Daily from 8:50am–9:20am and 3:35pm–3:55pm",
-      "start_time": "8:50am",
-      "end_time": "9:20am",
-      "location": "Inside and Outside the Lobby Area",
-      "description": "Enjoy seeing favorite Disney Pals!",
-      "is_fee_based": false,
+      "end_time": "11:00pm",
+      "location": "Inside Animation Hall",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "is_fee_based": true,
       "required_spans": {
         "title": [
-          { "page": 1, "line": 13, "text": "DISNEY CHARACTER" },
-          { "page": 1, "line": 15, "text": "EXPERIENCE" }
+          {
+            "page": 1,
+            "line": 12,
+            "text": "PIXEL PLAY ARCADE ($)"
+          }
         ],
-        "location": [{ "page": 1, "line": 17, "text": "Inside and Outside the Lobby Area" }],
-        "schedule": [{ "page": 1, "line": 19, "text": "Daily from 8:50am–9:20am and 3:35pm–3:55pm" }],
-        "description": [{ "page": 1, "line": 22, "text": "Enjoy seeing favorite Disney Pals!" }]
-      }
-    },
-    {
-      "title": "Story Time Yoga",
-      "slug": "story-time-yoga",
-      "category": "fitness_wellness",
-      "schedule_text": "Wednesday from 9:00am–9:30am",
-      "start_time": "9:00am",
-      "end_time": "9:30am",
-      "location": "Movie Lawn near The Big Blue Pool",
-      "description": "Join us for stretches and stories inspired by our Disney friends.",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 16, "text": "STORY TIME YOGA" }],
-        "location": [{ "page": 1, "line": 18, "text": "Movie Lawn near The Big Blue Pool" }],
-        "schedule": [{ "page": 1, "line": 20, "text": "Wednesday from 9:00am–9:30am" }],
-        "description": [{ "page": 1, "line": 21, "text": "Join us for stretches and stories inspired by our Disney friends." }]
-      }
-    },
-    {
-      "title": "Family Wellness Dance Class",
-      "slug": "family-wellness-dance-class",
-      "category": "fitness_wellness",
-      "schedule_text": "Friday from 9:00am–9:30am",
-      "start_time": "9:00am",
-      "end_time": "9:30am",
-      "location": "Between The Lion King Buildings 6 and 10",
-      "description": "Enjoy stretching, singing and dancing to music inspired by “The Lion King.”",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 23, "text": "FAMILY WELLNESS DANCE CLASS" }],
-        "location": [{ "page": 1, "line": 25, "text": "Between The Lion King Buildings 6 and 10" }],
-        "schedule": [{ "page": 1, "line": 27, "text": "Friday from 9:00am–9:30am" }],
-        "description": [
-          { "page": 1, "line": 29, "text": "Enjoy stretching, singing and dancing to music inspired" },
-          { "page": 1, "line": 31, "text": "by “The Lion King.”" }
-        ]
-      }
-    },
-    {
-      "title": "Disney Fan Family Fun",
-      "slug": "disney-fan-family-fun",
-      "category": "other",
-      "schedule_text": "Sunday, Thursday and Saturday at 3:25pm and 5:05pm; Tuesday and Friday at 1:35pm and 6:55pm",
-      "start_time": "3:25pm",
-      "end_time": null,
-      "location": "Inside Animation Hall",
-      "description": "Play along with this FUNatical Disney Fan Family in zany rounds of fast-paced interactive games and vacation hijinks that will put your Disney fandom on full display.",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 24, "text": "DISNEY FAN FAMILY FUN" }],
-        "location": [{ "page": 1, "line": 26, "text": "Inside Animation Hall" }],
+        "location": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Inside Animation Hall"
+          }
+        ],
         "schedule": [
-          { "page": 1, "line": 28, "text": "Sunday, Thursday and Saturday at 3:25pm and" },
-          { "page": 1, "line": 30, "text": "5:05pm; Tuesday and Friday at 1:35pm and 6:55pm" }
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Daily from 8:00am-11:00pm"
+          }
         ],
         "description": [
-          { "page": 1, "line": 32, "text": "Play along with this FUNatical Disney Fan Family in zany" },
-          { "page": 1, "line": 34, "text": "rounds of fast-paced interactive games and vacation" },
-          { "page": 1, "line": 36, "text": "hijinks that will put your Disney fandom on full display." }
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Play the latest and greatest family-friendly video games."
+          }
         ]
       }
     },
@@ -132,107 +48,327 @@
       "title": "Poolside Activities",
       "slug": "poolside-activities",
       "category": "poolside",
-      "schedule_text": "Daily from 1:00pm–2:30pm",
+      "schedule_text": "Daily from 1:00pm-2:30pm",
       "start_time": "1:00pm",
       "end_time": "2:30pm",
       "location": "The Big Blue Pool Deck",
-      "description": "",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 33, "text": "POOLSIDE ACTIVITIES" }],
-        "location": [{ "page": 1, "line": 35, "text": "The Big Blue Pool Deck | Daily from 1:00pm–2:30pm" }],
-        "schedule": [{ "page": 1, "line": 35, "text": "The Big Blue Pool Deck | Daily from 1:00pm–2:30pm" }]
+        "title": [
+          {
+            "page": 1,
+            "line": 17,
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "The Big Blue Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Daily from 1:00pm-2:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Join us for family-friendly activities, both in and out of the"
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "pool. See a Recreation Cast Member for more information."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "slug": "find-a-friend",
+      "category": "scavenger_hunt",
+      "schedule_text": "Daily from 8:00am-10:00pm",
+      "start_time": "8:00am",
+      "end_time": "10:00pm",
+      "location": "Throughout Disney’s Art of Animation Resort",
+      "description": "Search the Resort for a hidden Nala photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "FIND A FRIEND"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Throughout Disney’s Art of Animation Resort"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Daily from 8:00am-10:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 27,
+            "text": "Search the Resort for a hidden Nala photo prop."
+          },
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Once located, snap a photo and then head to the"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "Front Desk to receive a surprise!"
+          }
+        ]
       }
     },
     {
       "title": "Mickey Tie-Dye",
       "slug": "mickey-tie-dye",
       "category": "arts_crafts",
-      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm–4:00pm",
+      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm-4:00pm",
       "start_time": "3:00pm",
       "end_time": "4:00pm",
       "location": "Outside Animation Hall",
-      "description": "",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 37, "text": "MICKEY TIE-DYE ($)" }],
-        "location": [{ "page": 1, "line": 39, "text": "Outside Animation Hall" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 25,
+            "text": "MICKEY TIE-DYE ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Outside Animation Hall"
+          }
+        ],
         "schedule": [
-          { "page": 1, "line": 40, "text": "Monday, Wednesday, Friday" },
-          { "page": 1, "line": 42, "text": "and Saturday from 3:00pm–4:00pm" }
-        ]
-      }
-    },
-    {
-      "title": "Pajama Party",
-      "slug": "pajama-party",
-      "category": "other",
-      "schedule_text": "Sunday, Monday, Tuesday, Wednesday and Thursday at 8:00pm",
-      "start_time": "8:00pm",
-      "end_time": null,
-      "location": "Movie Lawn near The Big Blue Pool",
-      "description": "Join us for some fun for the little ones to end the day in style.",
-      "is_fee_based": false,
-      "required_spans": {
-        "title": [{ "page": 1, "line": 38, "text": "PAJAMA PARTY" }],
-        "location": [{ "page": 1, "line": 41, "text": "Movie Lawn near The Big Blue Pool" }],
-        "schedule": [
-          { "page": 1, "line": 43, "text": "Sunday, Monday, Tuesday, Wednesday and" },
-          { "page": 1, "line": 45, "text": "Thursday at 8:00pm" }
+          {
+            "page": 1,
+            "line": 30,
+            "text": "Monday, Wednesday, Friday"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "and Saturday from 3:00pm-4:00pm"
+          }
         ],
         "description": [
-          { "page": 1, "line": 46, "text": "Join us for some fun for the little ones to end the" },
-          { "page": 1, "line": 48, "text": "day in style." }
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Get creative with a Disney twist on this arts and crafts favorite!"
+          }
         ]
       }
     },
     {
-      "title": "Campfire At Pride Rock",
-      "slug": "campfire-at-pride-rock",
-      "category": "campfire",
-      "schedule_text": "Nightly from 6:30pm–7:30pm",
-      "start_time": "6:30pm",
-      "end_time": "7:30pm",
-      "location": "Between The Lion King Buildings 6 and 10",
-      "description": "",
+      "title": "Story Time Yoga",
+      "slug": "story-time-yoga",
+      "category": "fitness_wellness",
+      "schedule_text": "Wednesday from 9:00am-9:30am",
+      "start_time": "9:00am",
+      "end_time": "9:30am",
+      "location": "Movie Lawn near The Big Blue Pool",
+      "description": "Join us for stretches and stories inspired by our Disney friends that’s fun for Guests of all skill levels and ages.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 44, "text": "CAMPFIRE AT PRIDE ROCK" }],
-        "location": [{ "page": 1, "line": 47, "text": "Between The Lion King Buildings 6 and 10" }],
-        "schedule": [{ "page": 1, "line": 49, "text": "Nightly from 6:30pm–7:30pm" }]
+        "title": [
+          {
+            "page": 1,
+            "line": 34,
+            "text": "STORY TIME YOGA"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 36,
+            "text": "Movie Lawn near The Big Blue Pool"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 38,
+            "text": "Wednesday from 9:00am-9:30am"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Join us for stretches and stories inspired by our Disney"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "friends that’s fun for Guests of all skill levels and ages."
+          }
+        ]
       }
     },
     {
-      "title": "Nighttime Trivia",
-      "slug": "nighttime-trivia",
+      "title": "Family Wellness Dance Class",
+      "slug": "family-wellness-dance-class",
+      "category": "fitness_wellness",
+      "schedule_text": "Friday from 9:00am-9:30am",
+      "start_time": "9:00am",
+      "end_time": "9:30am",
+      "location": "Between The Lion King Buildings 6 and 10",
+      "description": "Get active in a wildly fun way with the whole family! Enjoy stretching, singing and dancing to music inspired by The Lion King.",
+      "is_fee_based": false,
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 44,
+            "text": "FAMILY WELLNESS DANCE CLASS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Between The Lion King Buildings 6 and 10"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Friday from 9:00am-9:30am"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 50,
+            "text": "Get active in a wildly fun way with the whole family!"
+          },
+          {
+            "page": 1,
+            "line": 52,
+            "text": "Enjoy stretching, singing and dancing to music"
+          },
+          {
+            "page": 1,
+            "line": 54,
+            "text": "inspired by The Lion King."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Activities On The Lawn",
+      "slug": "activities-on-the-lawn",
       "category": "other",
-      "schedule_text": "Friday and Saturday at 8:00pm",
+      "schedule_text": "Sunday, Monday, Tuesday, Thursday, and Saturday 8:00pm",
       "start_time": "8:00pm",
       "end_time": null,
       "location": "Movie Lawn near The Big Blue Pool",
-      "description": "",
+      "description": "Fun and games for all ages. See a Recreation Cast Member for more information.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 50, "text": "NIGHTTIME TRIVIA" }],
-        "location": [{ "page": 1, "line": 51, "text": "Movie Lawn near The Big Blue Pool" }],
-        "schedule": [{ "page": 1, "line": 52, "text": "Friday and Saturday at 8:00pm" }]
+        "title": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "ACTIVITIES ON THE LAWN"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 47,
+            "text": "Movie Lawn near The Big Blue Pool"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 49,
+            "text": "Sunday, Monday, Tuesday, Thursday, and Saturday 8:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 51,
+            "text": "Fun and games for all ages. See a Recreation Cast Member"
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "for more information."
+          }
+        ]
       }
     },
     {
       "title": "Mosaic Craft",
       "slug": "mosaic-craft",
       "category": "arts_crafts",
-      "schedule_text": "Wednesday at 12:30pm",
+      "schedule_text": "Wednesday, begins at 12:30pm",
       "start_time": "12:30pm",
       "end_time": null,
       "location": "Inside Animation Hall",
       "description": "Create your own mosaic masterpiece!",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 55, "text": "MOSAIC CRAFT ($)" }],
-        "location": [{ "page": 1, "line": 57, "text": "Inside Animation Hall" }],
-        "schedule": [{ "page": 1, "line": 58, "text": "Wednesday at 12:30pm" }],
-        "description": [{ "page": 1, "line": 60, "text": "Create your own mosaic masterpiece!" }]
+        "title": [
+          {
+            "page": 1,
+            "line": 61,
+            "text": "MOSAIC CRAFT ($)"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 63,
+            "text": "Inside Animation Hall"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 64,
+            "text": "Wednesday, begins at 12:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 66,
+            "text": "Create your own mosaic masterpiece!"
+          }
+        ]
       }
     },
     {
@@ -246,38 +382,58 @@
       "description": "",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 56, "text": "M OV I E U N D E R T H E S TA R S" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 62,
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
         "location": [
-          { "page": 1, "line": 59, "text": "MOVIE LAWN NEAR" },
-          { "page": 1, "line": 61, "text": "THE BIG BLUE POOL | 8:30PM" }
+          {
+            "page": 1,
+            "line": 65,
+            "text": "MOVIE LAWN NEAR"
+          },
+          {
+            "page": 1,
+            "line": 67,
+            "text": "THE BIG BLUE POOL | 8:30PM"
+          }
         ],
         "schedule": [
-          { "page": 1, "line": 59, "text": "MOVIE LAWN NEAR" },
-          { "page": 1, "line": 61, "text": "THE BIG BLUE POOL | 8:30PM" }
+          {
+            "page": 1,
+            "line": 65,
+            "text": "MOVIE LAWN NEAR"
+          },
+          {
+            "page": 1,
+            "line": 67,
+            "text": "THE BIG BLUE POOL | 8:30PM"
+          }
         ],
         "movie_nights": [
-          { "page": 1, "line": 63, "text": "Sunday.................................................“Lilo & Stitch” (2002)" },
-          { "page": 1, "line": 65, "text": "Monday....................................................................“Toy Story”" },
-          { "page": 1, "line": 67, "text": "Tuesday........................................................... “Finding Nemo”" },
-          { "page": 1, "line": 68, "text": "Wednesday...............................................................“Moana 2”" },
-          { "page": 1, "line": 70, "text": "Thursday................................................. “Teen Beach Movie”" },
-          { "page": 1, "line": 73, "text": "Friday................................................................................. “Cars”" }
+          {
+            "page": 1,
+            "line": 71,
+            "text": "Monday........... The Many Adventures of Winnie the Pooh"
+          }
         ]
       },
       "movie_nights": [
-        { "day_of_week": "sunday", "movie_title": "Lilo & Stitch (2002)", "show_time": "8:30PM" },
-        { "day_of_week": "monday", "movie_title": "Toy Story", "show_time": "8:30PM" },
-        { "day_of_week": "tuesday", "movie_title": "Finding Nemo", "show_time": "8:30PM" },
-        { "day_of_week": "wednesday", "movie_title": "Moana 2", "show_time": "8:30PM" },
-        { "day_of_week": "thursday", "movie_title": "Teen Beach Movie", "show_time": "8:30PM" },
-        { "day_of_week": "friday", "movie_title": "Cars", "show_time": "8:30PM" }
+        {
+          "day_of_week": "monday",
+          "movie_title": "The Many Adventures of Winnie the Pooh",
+          "show_time": "8:30PM"
+        }
       ]
     },
     {
-      "title": "Fish Are Friends Aquariums: Art of Animation Signature Craft",
-      "slug": "fish-are-friends-aquariums-art-of-animation-signature-craft",
+      "title": "Signature Craft",
+      "slug": "signature-craft",
       "category": "other",
-      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm–4:00pm",
+      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm-4:00pm",
       "start_time": "3:00pm",
       "end_time": "4:00pm",
       "location": "Inside Animation Hall",
@@ -285,29 +441,90 @@
       "is_fee_based": true,
       "required_spans": {
         "title": [
-          { "page": 1, "line": 62, "text": "FISH ARE FRIENDS AQUARIUMS:" },
-          { "page": 1, "line": 64, "text": "ART OF ANIMATION" },
-          { "page": 1, "line": 66, "text": "SIGNATURE CRAFT ($)" }
+          {
+            "page": 1,
+            "line": 72,
+            "text": "SIGNATURE CRAFT ($)"
+          }
         ],
-        "location": [{ "page": 1, "line": 69, "text": "Inside Animation Hall" }],
-        "schedule": [{ "page": 1, "line": 71, "text": "Sunday, Tuesday and Thursday from 3:00pm–4:00pm" }],
-        "description": [{ "page": 1, "line": 72, "text": "Create an original craft!" }]
+        "location": [
+          {
+            "page": 1,
+            "line": 74,
+            "text": "Inside Animation Hall"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "Sunday, Tuesday and Thursday from 3:00pm-4:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Create an original craft!"
+          }
+        ]
       }
     }
   ],
-  "expected_quarantine_records": [],
   "expected_unextractable_records": [
     {
-      "title": "Nighttime Pool Party",
-      "slug": "nighttime-pool-party",
-      "reason": "The rendered PDF shows the activity title, but no source-visible location, schedule, or description is present before the Movie Under the Stars section. Do not publish without an authoritative source for the missing fields.",
+      "title": "Campfire At Pride Rock",
+      "slug": "campfire-at-pride-rock",
+      "reason": "parser_warning:schedule:incomplete_time_phrase",
+      "warnings": [
+        "schedule:incomplete_time_phrase"
+      ],
       "required_spans": {
         "title": [
           {
             "page": 1,
-            "bbox": [435, 2550, 2060, 2645],
-            "text": "NIGHTTIME POOL PARTY",
-            "source": "manual_visual_bbox"
+            "line": 35,
+            "text": "CAMPFIRE AT PRIDE ROCK"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Glow Party",
+      "slug": "glow-party",
+      "reason": "parser_warning:schedule:text_quality_low",
+      "warnings": [
+        "schedule:text_quality_low"
+      ],
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 55,
+            "text": "GLOW PARTY"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Fish Are Friends Aquariums: Art Of Animation",
+      "slug": "fish-are-friends-aquariums-art-of-animation",
+      "reason": "parser_warning:schedule:missing_source_span,location:missing_source_span",
+      "warnings": [
+        "schedule:missing_source_span",
+        "location:missing_source_span"
+      ],
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 68,
+            "text": "FISH ARE FRIENDS AQUARIUMS:"
+          },
+          {
+            "page": 1,
+            "line": 70,
+            "text": "ART OF ANIMATION"
           }
         ]
       }

@@ -123,19 +123,198 @@ function sourceLegends(row) {
 }
 
 function rowKey(row) {
+  for (const field of ["candidate_id", "promoted_from_candidate_id", "id"]) {
+    const value = String(row?.[field] ?? "").trim();
+    if (value) return value;
+  }
   return `${row.calendar_group_key ?? ""}:${row.canonical_slug ?? ""}`;
+}
+
+function rowKeys(row) {
+  const keys = [];
+  for (const field of ["candidate_id", "promoted_from_candidate_id", "id"]) {
+    const value = String(row?.[field] ?? "").trim();
+    if (value) keys.push(value);
+  }
+  const fallback = `${row?.calendar_group_key ?? ""}:${row?.canonical_slug ?? ""}`;
+  if (fallback !== ":") keys.push(fallback);
+  return [...new Set(keys)];
+}
+
+function sourceDocumentId(row) {
+  return String(row?.source_document_id ?? row?.source?.documentId ?? "").trim();
+}
+
+function goldAuditRowKey(row) {
+  return `${row?.calendar_group_key ?? ""}:${row?.canonical_slug ?? ""}`;
+}
+
+function officialAuditRowKey(row) {
+  return String(row?.offering_key ?? row?.id ?? "").trim();
+}
+
+export function requiredGoldAuditFields(row) {
+  const fields = ["title", "schedule", "location"];
+  if (String(row?.description ?? "").trim()) fields.push("description");
+  if (row?.price?.state === "free" || row?.price?.state === "fee") {
+    fields.push("price");
+  }
+  return fields;
+}
+
+export function requiredOfficialAuditFields(row) {
+  const fields = ["title", "resort_join"];
+  if (String(row?.description ?? "").trim()) fields.push("description");
+  if (hasSpecificPrice(row)) fields.push("price");
+  if (hasSpecificBooking(row)) fields.push("booking");
+  const availability = row?.availability;
+  const availabilityLabel =
+    availability && typeof availability === "object"
+      ? String(availability.label ?? "").trim()
+      : "";
+  const availabilityHoursState =
+    availability && typeof availability === "object"
+      ? String(availability.hours_state ?? availability.hoursState ?? "")
+      : "";
+  if (availabilityLabel && availabilityHoursState !== "source_unspecified") {
+    fields.push("availability");
+  }
+  return fields;
+}
+
+export function auditSourceTrustLedger({
+  goldRows = [],
+  officialRows = [],
+  sourceDocuments = [],
+  currentnessChecks = [],
+  sourceRelationships = [],
+  fieldAuditObservations = [],
+} = {}) {
+  const errors = [];
+  const docsById = new Map(
+    sourceDocuments
+      .filter((row) => row?.id)
+      .map((row) => [String(row.id), row])
+  );
+  const currentnessByDocId = new Set(
+    currentnessChecks
+      .map((row) => String(row?.source_document_id ?? "").trim())
+      .filter(Boolean)
+  );
+  const pdfRelationshipsByChildId = new Map();
+  for (const row of sourceRelationships) {
+    if (row?.relationship_type !== "resort_page_links_pdf") continue;
+    const childId = String(row?.child_source_document_id ?? "").trim();
+    if (!childId) continue;
+    if (!pdfRelationshipsByChildId.has(childId)) pdfRelationshipsByChildId.set(childId, []);
+    pdfRelationshipsByChildId.get(childId).push(row);
+  }
+  const observedFields = new Set(
+    fieldAuditObservations
+      .map((row) => {
+        const kind = String(row?.row_kind ?? "").trim();
+        const key = String(row?.row_key ?? "").trim();
+        const field = String(row?.field_name ?? "").trim();
+        return kind && key && field ? `${kind}:${key}:${field}` : "";
+      })
+      .filter(Boolean)
+  );
+
+  const referencedDocIds = new Set();
+  for (const row of [...goldRows, ...officialRows]) {
+    const docId = sourceDocumentId(row);
+    if (docId) referencedDocIds.add(docId);
+  }
+
+  for (const docId of referencedDocIds) {
+    if (!currentnessByDocId.has(docId)) {
+      errors.push(`source_document_missing_currentness_check:${docId}`);
+    }
+    const doc = docsById.get(docId);
+    if (doc?.source_type === "pdf") {
+      const relationships = pdfRelationshipsByChildId.get(docId) ?? [];
+      if (relationships.length === 0) {
+        errors.push(`source_document_missing_relationship_for_pdf:${docId}`);
+      }
+      let hasValidParentRelationship = false;
+      let hasMissingParentRelationship = false;
+      for (const relationship of relationships) {
+        const parentId = String(relationship?.parent_source_document_id ?? "").trim();
+        if (!parentId) {
+          hasMissingParentRelationship = true;
+          continue;
+        }
+        if (!docsById.has(parentId)) {
+          errors.push(`source_document_pdf_relationship_parent_missing_document:${docId}:${parentId}`);
+          continue;
+        }
+        if (!currentnessByDocId.has(parentId)) {
+          errors.push(`source_document_pdf_relationship_parent_missing_currentness_check:${docId}:${parentId}`);
+          continue;
+        }
+        hasValidParentRelationship = true;
+      }
+      if (hasMissingParentRelationship && !hasValidParentRelationship) {
+        errors.push(`source_document_pdf_relationship_missing_parent:${docId}`);
+      }
+    }
+  }
+
+  for (const row of goldRows) {
+    const id = row.id ?? goldAuditRowKey(row);
+    const docId = sourceDocumentId(row);
+    const doc = docsById.get(docId);
+    if (!docId || !doc || !currentnessByDocId.has(docId)) {
+      errors.push(`gold_row_missing_source_chain:${id}`);
+    } else if (doc.source_type === "pdf" && !pdfRelationshipsByChildId.has(docId)) {
+      errors.push(`gold_row_missing_source_chain:${id}`);
+    }
+    const rowKeyValue = goldAuditRowKey(row);
+    for (const field of requiredGoldAuditFields(row)) {
+      if (!observedFields.has(`gold_activity:${rowKeyValue}:${field}`)) {
+        errors.push(
+          `field_audit_observation_missing_for_required_field:gold_activity:${rowKeyValue}:${field}`
+        );
+      }
+    }
+  }
+
+  for (const row of officialRows) {
+    const id = row.id ?? officialAuditRowKey(row);
+    const docId = sourceDocumentId(row);
+    if (!docId || !docsById.has(docId) || !currentnessByDocId.has(docId)) {
+      errors.push(`official_offering_missing_source_chain:${id}`);
+    }
+    const rowKeyValue = officialAuditRowKey(row);
+    for (const field of requiredOfficialAuditFields(row)) {
+      if (!observedFields.has(`official_offering:${rowKeyValue}:${field}`)) {
+        errors.push(
+          `field_audit_observation_missing_for_required_field:official_offering:${rowKeyValue}:${field}`
+        );
+      }
+    }
+  }
+
+  return errors;
 }
 
 export function auditGoldSourceLegendParity(liveRows, expectedRows) {
   const errors = [];
-  const liveByKey = new Map(liveRows.map((row) => [rowKey(row), row]));
+  const liveByKey = new Map();
+  for (const row of liveRows) {
+    for (const key of rowKeys(row)) {
+      if (!liveByKey.has(key)) liveByKey.set(key, row);
+    }
+  }
 
   for (const expected of expectedRows) {
     const expectedLegends = sourceLegends(expected);
     if (expectedLegends.length === 0) continue;
 
     const key = rowKey(expected);
-    const live = liveByKey.get(key);
+    const live = rowKeys(expected)
+      .map((candidateKey) => liveByKey.get(candidateKey))
+      .find(Boolean);
     if (!live) {
       errors.push(`gold:${key}:missing_live_row_for_source_legend`);
       continue;
@@ -234,7 +413,15 @@ async function rest(path, init = {}) {
 }
 
 async function selectRows(table, columns = "*") {
-  return rest(`${table}?select=${encodeURIComponent(columns)}&limit=2000`);
+  const pageSize = 1000;
+  const rows = [];
+  for (let offset = 0; ; offset += pageSize) {
+    const page = await rest(
+      `${table}?select=${encodeURIComponent(columns)}&limit=${pageSize}&offset=${offset}`
+    );
+    rows.push(...page);
+    if (page.length < pageSize) return rows;
+  }
 }
 
 async function rpc(fn) {
@@ -370,6 +557,38 @@ async function main() {
       ? ok(`${officialRows.length} official offering rows`)
       : fail(officialErrors)
   );
+
+  try {
+    const [sourceDocuments, currentnessChecks, sourceRelationships, fieldAuditObservations] =
+      await Promise.all([
+        selectRows("source_documents", "id,source_type,canonical_url,content_sha256"),
+        selectRows("source_currentness_checks", "source_document_id,canonical_url,currentness,checked_at"),
+        selectRows("source_relationships", "parent_source_document_id,child_source_document_id,relationship_type"),
+        selectRows("field_audit_observations", "row_kind,row_key,field_name,source_document_id,created_at"),
+      ]);
+    const ledgerErrors = auditSourceTrustLedger({
+      goldRows,
+      officialRows,
+      sourceDocuments,
+      currentnessChecks,
+      sourceRelationships,
+      fieldAuditObservations,
+    });
+    checks.push(
+      ledgerErrors.length === 0
+        ? ok(
+            `${sourceDocuments.length} source docs, ${currentnessChecks.length} currentness checks, ${sourceRelationships.length} source relationships, ${fieldAuditObservations.length} field observations`
+          )
+        : fail(ledgerErrors)
+    );
+  } catch (error) {
+    checks.push(
+      fail({
+        code: "source_trust_ledger_tables_unavailable",
+        error: String(error),
+      })
+    );
+  }
 
   for (const fn of [
     "check_activity_pipeline_v2_health",

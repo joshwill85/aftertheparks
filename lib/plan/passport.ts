@@ -1,10 +1,11 @@
 import { getCategoryMeta } from "@/lib/categories/meta";
+import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem } from "@/lib/types/occurrence";
 
 export interface PassportStamp {
   id: string;
   label: string;
-  icon: string;
+  iconKey: IconKey;
   count: number;
 }
 
@@ -23,7 +24,7 @@ export function collectPassportStamps(items: PlanItem[]): PassportStamp[] {
       counts.set(id, {
         id,
         label: meta.label,
-        icon: meta.icon,
+        iconKey: meta.iconKey,
         count: 1,
       });
     }

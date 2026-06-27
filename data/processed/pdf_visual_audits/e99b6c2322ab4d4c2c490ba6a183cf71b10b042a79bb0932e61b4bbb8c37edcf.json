@@ -1,0 +1,232 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "e99b6c2322ab4d4c2c490ba6a183cf71b10b042a79bb0932e61b4bbb8c37edcf",
+  "source_pdf_path": "data/raw/pdfs/All-Star-Music_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.499738+00:00",
+  "activities": [
+    {
+      "title": "Wellness Scavenger Hunt",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 7:00am-11:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Maestro Mickey’s to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at isney’s All-Star Resorts.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.0,
+        "y": 833.5,
+        "width": 628.0,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:wellness-scavenger-hunt"
+    },
+    {
+      "title": "Note’Able Games Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Inside Melody Hall",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 914.5,
+        "y": 909.5,
+        "width": 663.0,
+        "height": 31.5
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:noteable-games-arcade"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 8:00am-9:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1194.0,
+        "width": 316.0,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:find-a-friend"
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Monday, Tuesday, Wednesday, Thursday and Friday from 3:30pm-4:30pm",
+      "location": "Calypso Pool Deck",
+      "description": "Create a take-home souvenir with a Disney twist!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.5,
+        "y": 1300.0,
+        "width": 408.5,
+        "height": 31.5
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:arts-crafts"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday, Wednesday and Friday from 3:30pm-4:30pm",
+      "location": "Calypso Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [
+        {
+          "option_name": "T-Shirt",
+          "price_cents_min": 1700,
+          "price_cents_max": 1700,
+          "price_basis": "per_item"
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 914.5,
+        "y": 1495.0,
+        "width": 417.5,
+        "height": 32.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:mickey-tie-dye"
+    },
+    {
+      "title": "Arcade Tournament",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 4:00pm-5:00pm",
+      "location": "Note’able Games Arcade",
+      "description": "Come test your skills at our daily arcade tournament. You may find yourself going home with a prize of your own!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.5,
+        "y": 1658.0,
+        "width": 483.5,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:arcade-tournament"
+    },
+    {
+      "title": "Calypso Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 6:30pm-7:30pm",
+      "location": "Near the Calypso Pool Deck",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 913.5,
+        "y": 1853.0,
+        "width": 420.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:calypso-campfire"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Calypso Pool Deck | 8:30PM",
+      "location": "Calypso Pool Deck",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.5,
+        "y": 2010.0,
+        "width": 670.0,
+        "height": 28.5
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:movie-under-the-stars"
+    },
+    {
+      "title": "Shine Like A Star Glow Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday and Wednesday at 8:30pm",
+      "location": "Calypso Pool Deck",
+      "description": "End your fun-filled day with a glow party where the star!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 2048.5,
+        "width": 694.5,
+        "height": 25.5
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:shine-like-a-star-glow-party"
+    },
+    {
+      "title": "Silent Disco",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Friday at 8:30pm",
+      "location": "Pool Deck",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 2243.5,
+        "width": 286.5,
+        "height": 26.0
+      },
+      "confidence": "medium",
+      "row_key": "all-star-music:silent-disco"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

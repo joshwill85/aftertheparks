@@ -28,7 +28,7 @@ export const GUIDES: GuideEntry[] = [
     slug: "arcade-and-crafts",
     title: "Arcade and crafts",
     description:
-      "Arcade listings, crafts, and other source-backed resort options.",
+      "Arcade listings, crafts, and other resort options from current calendars.",
     href: "/activities?category=arcade",
     exploreHref: "/activities?category=arcade",
     keywords: ["arcade", "games", "crafts"],

@@ -61,7 +61,7 @@ export const PAGE_HITS = [
   {
     id: "page-calendar",
     title: "Resort calendar",
-    description: "Browse source-backed resort activities",
+    description: "Browse current resort activities",
     href: "/activities",
     keywords: ["calendar", "activities", "browse", "resort fun"],
   },

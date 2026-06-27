@@ -19,6 +19,9 @@ except ImportError:  # pragma: no cover
 
 
 DEFAULT_INPUT_PATH = Path("data/processed/official_recreation_offerings.json")
+DEFAULT_SOURCE_INVENTORY_PATH = Path("data/processed/source_inventory.json")
+DEFAULT_SOURCE_FRESHNESS_REPORT_PATH = Path("data/processed/source_freshness_report.json")
+DEFAULT_PUBLICATION_PARITY_REPORT_PATH = Path("data/processed/publication_parity_report.json")
 
 
 def _stable_uuid(key: str) -> str:
@@ -33,9 +36,51 @@ def _source_document_row(row: dict[str, Any]) -> dict[str, Any]:
         "fetched_url": source_url,
         "content_sha256": row["source_sha256"],
         "storage_path": row.get("source_path"),
+        "http_status": row.get("http_status") or 200,
         "calendar_group_key": None,
         "fetched_at": datetime.now(timezone.utc).isoformat(),
     }
+
+
+def _batch_insert(db: Any, table: str, rows: list[dict[str, Any]], *, chunk_size: int = 500) -> None:
+    for index in range(0, len(rows), chunk_size):
+        db.insert(table, rows[index : index + chunk_size])
+
+
+def _batch_upsert(
+    db: Any,
+    table: str,
+    rows: list[dict[str, Any]],
+    *,
+    on_conflict: str,
+    chunk_size: int = 500,
+) -> list[dict[str, Any]]:
+    returned: list[dict[str, Any]] = []
+    for index in range(0, len(rows), chunk_size):
+        result = db.upsert(table, rows[index : index + chunk_size], on_conflict=on_conflict)
+        if isinstance(result, list):
+            returned.extend(result)
+    return returned
+
+
+def _read_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    return json.loads(path.read_text())
+
+
+def _source_trust_publish_preflight() -> None:
+    inventory = _read_json(DEFAULT_SOURCE_INVENTORY_PATH, None)
+    if not isinstance(inventory, list) or not inventory:
+        raise RuntimeError("official_offerings_publish_preflight_failed:source_inventory_stale")
+
+    freshness = _read_json(DEFAULT_SOURCE_FRESHNESS_REPORT_PATH, {})
+    if not isinstance(freshness, dict) or freshness.get("passed") is not True:
+        raise RuntimeError("official_offerings_publish_preflight_failed:source_freshness_failed")
+
+    parity = _read_json(DEFAULT_PUBLICATION_PARITY_REPORT_PATH, {})
+    if isinstance(parity, dict) and parity.get("passed") is False:
+        raise RuntimeError("official_offerings_publish_preflight_failed:publication_parity_failed")
 
 
 def _source_document_id(db: Any, row: dict[str, Any], cache: dict[str, str]) -> str:
@@ -103,6 +148,93 @@ def _offering_row(offering: dict[str, Any], source_document_id: str) -> dict[str
         "is_current": True,
         "promoted_at": datetime.now(timezone.utc).isoformat(),
     }
+
+
+def _source_currentness_check_row(row: dict[str, Any], source_document_id: str) -> dict[str, Any]:
+    source_url = str(row.get("source_url") or "")
+    return {
+        "source_document_id": source_document_id,
+        "canonical_url": source_url,
+        "fetched_url": row.get("fetched_url") or source_url,
+        "live_content_sha256": row.get("live_content_sha256") or row.get("source_sha256"),
+        "stored_content_sha256": row.get("source_sha256"),
+        "http_status": row.get("http_status") or 200,
+        "currentness": row.get("currentness") or "current",
+        "detail": {
+            "program_key": row.get("program_key"),
+            "offering_key": row.get("offering_key"),
+            "method": "publish_preflight_source_freshness",
+        },
+    }
+
+
+def _specific_price(row: dict[str, Any]) -> bool:
+    price = row.get("price")
+    if not isinstance(price, dict):
+        return False
+    if price.get("state") in {"free", "fee"}:
+        return True
+    return any(price.get(key) not in (None, "", [], {}) for key in ("notes", "amountCents", "amount_cents", "options"))
+
+
+def _specific_booking(row: dict[str, Any]) -> bool:
+    booking = row.get("booking")
+    return isinstance(booking, dict) and any(value not in (None, "", False, [], {}) for value in booking.values())
+
+
+def _specific_availability(row: dict[str, Any]) -> bool:
+    availability = row.get("availability")
+    if not isinstance(availability, dict):
+        return False
+    if availability.get("hours_state") == "source_unspecified":
+        return False
+    return bool(str(availability.get("label") or "").strip())
+
+
+def _required_offering_fields(row: dict[str, Any]) -> list[str]:
+    fields = ["title", "resort_join"]
+    if str(row.get("description") or "").strip():
+        fields.append("description")
+    if _specific_price(row):
+        fields.append("price")
+    if _specific_booking(row):
+        fields.append("booking")
+    if _specific_availability(row):
+        fields.append("availability")
+    return fields
+
+
+def _observed_value(row: dict[str, Any], field_name: str) -> str:
+    value = row.get(field_name)
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, sort_keys=True, ensure_ascii=False)
+    return str(value or "")
+
+
+def _field_audit_observation_rows(
+    row: dict[str, Any],
+    published_row: dict[str, Any],
+    source_document_id: str,
+) -> list[dict[str, Any]]:
+    provenance = row.get("field_provenance") if isinstance(row.get("field_provenance"), dict) else {}
+    observations: list[dict[str, Any]] = []
+    for field_name in _required_offering_fields(row):
+        evidence = provenance.get(field_name)
+        spans = evidence if isinstance(evidence, list) else []
+        observations.append(
+            {
+                "published_row_id": published_row["id"],
+                "source_document_id": source_document_id,
+                "row_kind": "official_offering",
+                "row_key": row["offering_key"],
+                "field_name": field_name,
+                "observed_value": _observed_value(row, field_name),
+                "method": "deterministic_parser",
+                "confidence": "high" if spans else "unknown",
+                "evidence": {"spans": spans},
+            }
+        )
+    return observations
 
 
 def _quarantine_row(row: dict[str, Any], source_document_id: str | None) -> dict[str, Any]:
@@ -197,12 +329,39 @@ def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str,
     retired_program_count = _retire_missing_current_programs(db, programs)
     resolved_quarantine_count = _resolve_missing_pending_quarantine(db, quarantine)
     source_ids_by_hash: dict[str, str] = {}
+    source_rows_by_hash: dict[str, dict[str, Any]] = {}
+    for row in [*programs, *offerings, *quarantine]:
+        if isinstance(row, dict) and row.get("source_sha256"):
+            source_rows_by_hash.setdefault(str(row["source_sha256"]), row)
+    source_documents = _batch_upsert(
+        db,
+        "source_documents",
+        [_source_document_row(row) for row in source_rows_by_hash.values()],
+        on_conflict="content_sha256",
+    )
+    for source_document in source_documents:
+        source_hash = str(source_document.get("content_sha256") or "")
+        source_id = source_document.get("id")
+        if source_hash and source_id:
+            source_ids_by_hash[source_hash] = str(source_id)
+    missing_source_ids = sorted(set(source_rows_by_hash) - set(source_ids_by_hash))
+    if missing_source_ids:
+        raise RuntimeError(f"source_document_upsert_missing_id:{','.join(missing_source_ids)}")
+
+    currentness_rows = [
+        _source_currentness_check_row(row, source_ids_by_hash[source_hash])
+        for source_hash, row in sorted(source_rows_by_hash.items())
+    ]
+    _batch_insert(db, "source_currentness_checks", currentness_rows)
+
     program_count = 0
     offering_count = 0
     quarantine_count = 0
+    field_observation_count = 0
+    field_observation_rows: list[dict[str, Any]] = []
 
     for program in programs:
-        source_document_id = _source_document_id(db, program, source_ids_by_hash)
+        source_document_id = source_ids_by_hash[program["source_sha256"]]
         db.upsert(
             "official_activity_programs",
             _program_row(program, source_document_id),
@@ -211,22 +370,25 @@ def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str,
         program_count += 1
 
     for offering in offerings:
-        source_document_id = _source_document_id(db, offering, source_ids_by_hash)
-        db.upsert(
-            "official_activity_offerings",
-            _offering_row(offering, source_document_id),
-            on_conflict="id",
-        )
+        source_document_id = source_ids_by_hash[offering["source_sha256"]]
+        offering_row = _offering_row(offering, source_document_id)
+        db.upsert("official_activity_offerings", offering_row, on_conflict="id")
+        observations = _field_audit_observation_rows(offering, offering_row, source_document_id)
+        if observations:
+            field_observation_rows.extend(observations)
+            field_observation_count += len(observations)
         offering_count += 1
 
     for row in quarantine:
-        source_document_id = _source_document_id(db, row, source_ids_by_hash)
+        source_document_id = source_ids_by_hash[row["source_sha256"]]
         db.upsert(
             "official_activity_ingest_quarantine",
             _quarantine_row(row, source_document_id),
             on_conflict="id",
         )
         quarantine_count += 1
+
+    _batch_insert(db, "field_audit_observations", field_observation_rows)
 
     health = db.rpc("check_official_activity_offerings_health")
     if health:
@@ -245,6 +407,8 @@ def publish_official_offering_rows(db: Any, extraction: dict[str, list[dict[str,
         "retired_offerings": retired_count,
         "retired_programs": retired_program_count,
         "resolved_quarantine": resolved_quarantine_count,
+        "source_currentness_checks": len(currentness_rows),
+        "field_audit_observations": field_observation_count,
     }
 
 
@@ -260,6 +424,7 @@ def publish_official_offering_file(path: Path = DEFAULT_INPUT_PATH) -> dict[str,
     if not audit.passed:
         details = ", ".join(audit.errors)
         raise RuntimeError(f"official_offerings_publish_preflight_failed:{details}")
+    _source_trust_publish_preflight()
 
     try:
         from db import SupabaseClient
@@ -269,10 +434,51 @@ def publish_official_offering_file(path: Path = DEFAULT_INPUT_PATH) -> dict[str,
     return publish_official_offering_rows(SupabaseClient(), extraction)
 
 
+def rollback_official_offerings(
+    db: Any,
+    *,
+    source_sha256: str | None = None,
+    offering_key: str | None = None,
+) -> dict[str, int]:
+    filters = {"is_current": "eq.true"}
+    if source_sha256:
+        filters["source_sha256"] = f"eq.{source_sha256}"
+    if offering_key:
+        filters["offering_key"] = f"eq.{offering_key}"
+    if len(filters) == 1:
+        raise RuntimeError("official_offerings_rollback_requires_source_hash_or_offering_key")
+
+    rows = db.select("official_activity_offerings", columns="id", filters=filters)
+    for row in rows:
+        row_id = row.get("id")
+        if row_id:
+            db.update("official_activity_offerings", {"id": f"eq.{row_id}"}, {"is_current": False})
+    return {"retired_offerings": len(rows)}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Publish official Disney recreation offerings")
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT_PATH)
+    parser.add_argument("--rollback-source-sha256")
+    parser.add_argument("--rollback-offering-key")
     args = parser.parse_args()
+
+    if args.rollback_source_sha256 or args.rollback_offering_key:
+        try:
+            from db import SupabaseClient
+        except ImportError:  # pragma: no cover
+            from .db import SupabaseClient
+        print(
+            json.dumps(
+                rollback_official_offerings(
+                    SupabaseClient(),
+                    source_sha256=args.rollback_source_sha256,
+                    offering_key=args.rollback_offering_key,
+                ),
+                indent=2,
+            )
+        )
+        return
 
     print(json.dumps(publish_official_offering_file(args.input), indent=2))
 

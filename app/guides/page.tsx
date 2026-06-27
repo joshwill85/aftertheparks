@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Hero } from "@/components/atlas/Hero";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { GUIDES } from "@/lib/guides";
 
 export default function GuidesPage() {
@@ -7,7 +8,7 @@ export default function GuidesPage() {
     <>
       <Hero
         title="Planning guides"
-        subtitle="Practical tips for resort days — curated entry points into Explore and Tonight."
+        subtitle="Practical tips for resort days, with quick links into Explore and Tonight."
       />
       <ul className="grid gap-5 sm:grid-cols-2">
         {GUIDES.map((guide) => (
@@ -22,8 +23,11 @@ export default function GuidesPage() {
                 {guide.description}
               </p>
               <div className="mt-4 flex flex-wrap gap-3 text-sm font-bold">
-                <Link href={guide.href} className="text-[var(--accent)] hover:underline">
-                  Read guide →
+                <Link
+                  href={guide.href}
+                  className="inline-flex items-center text-[var(--accent)] hover:underline"
+                >
+                  Read guide <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
                 </Link>
                 <Link
                   href={guide.exploreHref}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { MOOD_CHIPS } from "@/lib/categories/meta";
 import { cn, formatCategory } from "@/lib/utils";
 import type { Daypart } from "@/lib/types/occurrence";
@@ -80,7 +81,7 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
               </span>
             )}
           </span>
-          <span aria-hidden>▾</span>
+          <IconGlyph iconKey="chevron_down" className="text-sm" />
         </button>
 
         <div className="hidden flex-1 flex-wrap items-center gap-3 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)]/80 p-4 backdrop-blur-sm md:flex">

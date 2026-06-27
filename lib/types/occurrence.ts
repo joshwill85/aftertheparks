@@ -44,6 +44,16 @@ export interface ActivityPriceOption {
   priceCentsMax?: number;
   priceBasis?: string;
   dayOfWeek?: string;
+  priceConfidence?:
+    | "disney_verified"
+    | "disney_menu_verified"
+    | "disney_pdf_language"
+    | "secondary_verified"
+    | "operating_pattern"
+    | "unknown";
+  verificationStatus?: "verified" | "needs_disney_confirmation";
+  sourceUrl?: string;
+  sourceLabel?: string;
   notes?: string;
 }
 
@@ -107,6 +117,8 @@ export interface ActivityOccurrence {
     amountCents?: number;
     minAmountCents?: number;
     maxAmountCents?: number;
+    priceBasis?: string;
+    taxNotes?: string;
     options?: ActivityPriceOption[];
   };
   location: {
@@ -128,7 +140,7 @@ export interface ActivityOccurrence {
   };
   source?: ActivitySourceEvidence;
   fieldProvenance?: Partial<
-    Record<"title" | "schedule" | "location" | "description", SourceSpan[]>
+    Record<"title" | "schedule" | "location" | "description" | "price", SourceSpan[]>
   >;
   claims?: Record<string, ActivityClaim>;
   enrichment?: ActivityFactualEnrichment;

@@ -1,6 +1,7 @@
 import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import Link from "next/link";
 import { HomeHero } from "@/components/home/HomeHero";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { RestDayBuilder } from "@/components/home/RestDayBuilder";
 import { NoTicketMagic } from "@/components/magic/NoTicketMagic";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
@@ -56,7 +57,7 @@ export default async function HomePage() {
               </p>
             </div>
             <Link href="/tonight" className="home-section__link">
-              See all →
+              See all <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
             </Link>
           </div>
           <EventCardList columns={3}>
@@ -81,7 +82,7 @@ export default async function HomePage() {
               </p>
             </div>
             <Link href="/activities?free=true" className="home-section__link">
-              Browse no-cost →
+              Browse no-cost <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
             </Link>
           </div>
           <ActivityGrid activities={freeActivities} />
@@ -103,7 +104,7 @@ export default async function HomePage() {
               href="/activities?category=arts_crafts"
               className="home-section__link"
             >
-              See more →
+              See more <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
             </Link>
           </div>
           <ActivityGrid activities={littleKidActivities} />
@@ -148,7 +149,7 @@ export default async function HomePage() {
             your first hours at the resort.
           </p>
           <Link href="/guides" className="home-section__link mt-4 inline-flex">
-            Browse all guides →
+            Browse all guides <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
           </Link>
         </div>
       </section>

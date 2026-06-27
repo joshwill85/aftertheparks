@@ -1,0 +1,67 @@
+{
+  "version": "2026-06-26",
+  "defaultUnknownBehavior": "withhold_or_label_unknown",
+  "sourcePrecedence": [
+    {
+      "sourceKind": "disney_resort_recreation_pdf",
+      "authority": "primary",
+      "appliesTo": ["dated_resort_calendar_activity"]
+    },
+    {
+      "sourceKind": "disney_official_recreation_detail_page",
+      "authority": "primary",
+      "appliesTo": ["evergreen_official_offering"]
+    },
+    {
+      "sourceKind": "disney_resort_recreation_page",
+      "authority": "primary",
+      "appliesTo": ["resort_join", "source_discovery", "linked_pdf"]
+    },
+    {
+      "sourceKind": "disney_menu_page",
+      "authority": "primary",
+      "appliesTo": ["menu_priced_optional_add_on"]
+    },
+    {
+      "sourceKind": "disney_recreation_index_api",
+      "authority": "discovery_only",
+      "appliesTo": ["parent_activity_discovery", "resort_join"],
+      "forbiddenFields": ["public_price_state", "public_price_amount"]
+    },
+    {
+      "sourceKind": "magical_resort_guide",
+      "authority": "secondary_enrichment",
+      "appliesTo": ["amount_enrichment", "schedule_validity_hint"],
+      "cannotOverride": ["disney_free_price_state", "disney_activity_existence"]
+    },
+    {
+      "sourceKind": "editorial_third_party",
+      "authority": "secondary_context",
+      "appliesTo": ["approximate_optional_add_on_note"],
+      "cannotOverride": ["disney_price_state", "disney_activity_existence", "disney_schedule"]
+    }
+  ],
+  "priceRules": {
+    "pdfDollarMarker": {
+      "evidence": "($) next to Disney PDF activity title",
+      "state": "fee",
+      "publicLabel": "Paid"
+    },
+    "pdfDollarMarkerAbsentUnderLegend": {
+      "evidence": "Disney PDF includes ($) fee legend and title lacks marker",
+      "state": "free",
+      "publicLabel": "Free"
+    },
+    "pdfBodyFeeLanguage": {
+      "evidencePhrases": ["fees may apply", "available for purchase", "for an additional fee"],
+      "state": "fee_or_optional_add_on_by_context"
+    },
+    "freeActivityWithOptionalPurchase": {
+      "activityState": "free",
+      "optionPriceBasis": "optional_add_on"
+    },
+    "finderPriceFacet": {
+      "state": "ignored_for_public_price"
+    }
+  }
+}

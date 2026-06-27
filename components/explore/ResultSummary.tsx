@@ -12,11 +12,11 @@ interface ResultSummaryProps {
   basePath?: string;
 }
 
-const SORT_OPTIONS: { value: ActivitySortKey; label: string }[] = [
-  { value: "time", label: "Happening soon" },
-  { value: "quality", label: "Recently verified" },
-  { value: "resort", label: "By resort" },
-  { value: "category", label: "By category" },
+const SORT_OPTIONS: { value: ActivitySortKey; label: string; help: string }[] = [
+  { value: "time", label: "Happening soon", help: "Soonest useful activities first." },
+  { value: "quality", label: "Recently verified", help: "Newest verified listings first." },
+  { value: "resort", label: "By resort", help: "Grouped for comparing places." },
+  { value: "category", label: "By category", help: "Grouped by kind of activity." },
 ];
 const SORT_VALUES = new Set<ActivitySortKey>(SORT_OPTIONS.map((option) => option.value));
 
@@ -46,7 +46,10 @@ export function ResultSummary({
       ? "No results found"
       : count === 1
         ? "1 result"
-        : `${count} results`;
+      : `${count} results`;
+  const sortHelp =
+    SORT_OPTIONS.find((option) => option.value === currentSort)?.help ??
+    SORT_OPTIONS[0].help;
 
   const handleSort = (value: ActivitySortKey) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -93,6 +96,7 @@ export function ResultSummary({
             </option>
           ))}
         </select>
+        <span className="result-summary__sort-help">{sortHelp}</span>
       </label>
     </div>
   );

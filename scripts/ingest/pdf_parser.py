@@ -651,6 +651,34 @@ def _recover_wellness_scavenger_description(lines: list[str]) -> str | None:
     return description
 
 
+def _repair_all_star_wellness_arcade_bleed(activities: list[ParsedActivity]) -> list[ParsedActivity]:
+    repaired: list[ParsedActivity] = []
+    for act in activities:
+        description = act.description or ""
+        location = act.location or ""
+        if (
+            act.normalized_name == "resort-scavenger-hunt"
+            and "find hidden wellness challenges" in location.lower()
+            and "sport goofy" in description.lower()
+        ):
+            continue
+        if (
+            act.normalized_name == "game-point-arcade"
+            and "play the latest and greatest family-friendly video games" in description.lower()
+            and "any merchandise location" in description.lower()
+        ):
+            act.location = "Inside Stadium Hall"
+            match = re.search(
+                r"(Play the latest and greatest family-friendly video games\.?)",
+                description,
+                flags=re.I,
+            )
+            if match:
+                act.description = match.group(1)
+        repaired.append(act)
+    return repaired
+
+
 def parse_ocr_text(
     text: str,
     *,
@@ -763,6 +791,8 @@ def parse_ocr_text(
             if not has_complete_description:
                 act.description = wellness_description
             act.is_fee_based = False
+
+    activities = _repair_all_star_wellness_arcade_bleed(activities)
 
     merged: dict[str, ParsedActivity] = {}
     for act in activities:

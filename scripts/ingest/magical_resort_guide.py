@@ -757,24 +757,28 @@ def merge_mrg_validity_into_gold(
 
 def _merge_price(record: dict[str, Any], fields: dict[str, Any]) -> None:
     price = dict(record.get("price") or {})
+    disney_state = str(price.get("state") or "unknown").lower()
     state = fields.get("price_state")
-    if state:
+    if state == "fee" and disney_state != "fee":
+        record["price"] = price
+        return
+    if state and disney_state == "fee":
         price["state"] = state
 
     price_min = fields.get("price_cents_min")
     price_max = fields.get("price_cents_max")
-    if isinstance(price_min, int):
+    if isinstance(price_min, int) and price.get("state") == "fee":
         price["amountCents"] = price_min
         price["minAmountCents"] = price_min
-    if isinstance(price_max, int):
+    if isinstance(price_max, int) and price.get("state") == "fee":
         price["maxAmountCents"] = price_max
 
     notes = fields.get("price_notes")
-    if notes:
+    if notes and price.get("state") == "fee":
         price["notes"] = notes
 
     options = fields.get("price_options")
-    if isinstance(options, list) and options:
+    if isinstance(options, list) and options and price.get("state") == "fee":
         price["options"] = options
         if not price.get("notes") and len(options) == 1:
             option = options[0]

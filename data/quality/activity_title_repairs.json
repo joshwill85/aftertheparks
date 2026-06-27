@@ -54,6 +54,12 @@
       "raw_value": "Parry",
       "value": "Island Party",
       "reason": "Reviewed visual source: low-contrast OCR captured the Island Party heading art as Parry while the adjacent location, schedule, and description lines identify the activity block."
+    },
+    {
+      "calendar_group_key": "grand-floridian",
+      "raw_value": "Captain'S Shipyard Boat Rentals",
+      "value": "Captain’s Shipyard Boat Rentals",
+      "reason": "Reviewed visual source: OCR/title casing converted the possessive apostrophe-s in Captain’s to Captain'S while preserving the activity text."
     }
   ],
   "blockedTitleKeys": [

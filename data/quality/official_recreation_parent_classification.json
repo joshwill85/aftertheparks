@@ -1,0 +1,1236 @@
+{
+  "source_url": "https://disneyworld.disney.go.com/recreation/",
+  "classification_version": "2026-06-26",
+  "items": [
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Yacht Club Resort",
+      "url_friendly_id": "pools-yacht-club-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/yacht-club-resort/pools-yacht-club-resort/",
+      "resolved_resort_slugs": [
+        "yacht-club-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "disneys-oak-trail-golf-course",
+      "title": "Disney's Oak Trail Golf Course",
+      "url_friendly_id": "oak-trail-golf-course",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/oak-trail-golf-course/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Beach Club Resort",
+      "url_friendly_id": "pools-beach-club-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/beach-club-resort/pools-beach-club-resort/",
+      "resolved_resort_slugs": [
+        "beach-club-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's BoardWalk Villas",
+      "url_friendly_id": "pools-boardwalk-villas",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/boardwalk-villas/pools-boardwalk-villas/",
+      "resolved_resort_slugs": [
+        "boardwalk-villas"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Contemporary Resort",
+      "url_friendly_id": "pools-contemporary-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/contemporary-resort/pools-contemporary-resort/",
+      "resolved_resort_slugs": [
+        "contemporary-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Port Orleans Resort – Riverside",
+      "url_friendly_id": "pools-port-orleans-resort-riverside",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/port-orleans-resort-riverside/pools-port-orleans-resort-riverside/",
+      "resolved_resort_slugs": [
+        "port-orleans-resort-riverside"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Riviera Resort",
+      "url_friendly_id": "pools-riviera-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/riviera-resort/pools-riviera-resort/",
+      "resolved_resort_slugs": [
+        "riviera-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Coronado Springs Resort",
+      "url_friendly_id": "pools-coronado-springs-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/coronado-springs-resort/pools-coronado-springs-resort/",
+      "resolved_resort_slugs": [
+        "coronado-springs-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Beach Club Villas",
+      "url_friendly_id": "pools-beach-club-villas",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/beach-club-villas/pools-beach-club-villas/",
+      "resolved_resort_slugs": [
+        "beach-club-villas"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "disneys-magnolia-golf-course",
+      "title": "Disney's Magnolia Golf Course",
+      "url_friendly_id": "magnolia-golf-course",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/magnolia-golf-course/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Bay Lake Tower at Disney's Contemporary Resort",
+      "url_friendly_id": "pools-bay-lake-tower-at-contemporary",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/bay-lake-tower-at-contemporary/pools-bay-lake-tower-at-contemporary/",
+      "resolved_resort_slugs": [
+        "bay-lake-tower-at-contemporary-resort",
+        "contemporary-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Pop Century Resort",
+      "url_friendly_id": "pools-pop-century-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/pop-century-resort/pools-pop-century-resort/",
+      "resolved_resort_slugs": [
+        "pop-century-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Saratoga Springs Resort & Spa",
+      "url_friendly_id": "pools-saratoga-springs-resort-and-spa",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/saratoga-springs-resort-and-spa/pools-saratoga-springs-resort-and-spa/",
+      "resolved_resort_slugs": [
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Animal Kingdom Lodge",
+      "url_friendly_id": "pools-animal-kingdom-lodge",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/animal-kingdom-lodge/pools-animal-kingdom-lodge/",
+      "resolved_resort_slugs": [
+        "animal-kingdom-lodge"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "tri-circle-d-ranch",
+      "title": "Tri-Circle-D Ranch",
+      "url_friendly_id": "tri-circle-d-ranch",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/tri-circle-d-ranch/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Grand Floridian Resort & Spa",
+      "url_friendly_id": "pools-grand-floridian-resort-and-spa",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/grand-floridian-resort-and-spa/pools-grand-floridian-resort-and-spa/",
+      "resolved_resort_slugs": [
+        "grand-floridian-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's All-Star Movies Resort",
+      "url_friendly_id": "pools-all-star-movies-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/all-star-movies-resort/pools-all-star-movies-resort/",
+      "resolved_resort_slugs": [
+        "all-star-movies-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "disneys-lake-buena-vista-golf-course",
+      "title": "Disney's Lake Buena Vista Golf Course",
+      "url_friendly_id": "lake-buena-vista-golf-course",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/lake-buena-vista-golf-course/",
+      "resolved_resort_slugs": [
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at The Cabins at Disney's Fort Wilderness Resort",
+      "url_friendly_id": "pools-cabins-at-fort-wilderness-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/cabins-at-fort-wilderness-resort/pools-cabins-at-fort-wilderness-resort/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort",
+        "cabins-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's All-Star Sports Resort",
+      "url_friendly_id": "pools-all-star-sports-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/all-star-sports-resort/pools-all-star-sports-resort/",
+      "resolved_resort_slugs": [
+        "all-star-sports-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "old-key-west-exercise-room",
+      "title": "Old Key West Exercise Room",
+      "url_friendly_id": "old-key-west-exercise-room",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/old-key-west-resort/old-key-west-exercise-room/",
+      "resolved_resort_slugs": [
+        "old-key-west-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Polynesian Village Resort and Disney's Polynesian Villas & Bungalows",
+      "url_friendly_id": "pools-polynesian-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/polynesian-resort/pools-polynesian-resort/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort",
+        "polynesian-villas-and-bungalows"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Walt Disney World Dolphin Hotel",
+      "url_friendly_id": "pools-dolphin-hotel",
+      "classification": "third_party_or_unsupported_location",
+      "expected_resort_join": "unsupported_location",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item points to a non-supported or third-party hotel location.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/dolphin-hotel/pools-dolphin-hotel/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": [
+        "walt-disney-world-dolphin-hotel"
+      ]
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Wilderness Lodge",
+      "url_friendly_id": "pools-wilderness-lodge-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/wilderness-lodge-resort/pools-wilderness-lodge-resort/",
+      "resolved_resort_slugs": [
+        "wilderness-lodge"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Port Orleans Resort – French Quarter",
+      "url_friendly_id": "pools-port-orleans-resort-french-quarter",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/port-orleans-resort-french-quarter/pools-port-orleans-resort-french-quarter/",
+      "resolved_resort_slugs": [
+        "port-orleans-resort-french-quarter"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Old Key West Resort",
+      "url_friendly_id": "pools-old-key-west-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/old-key-west-resort/pools-old-key-west-resort/",
+      "resolved_resort_slugs": [
+        "old-key-west-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's BoardWalk Inn",
+      "url_friendly_id": "pools-board-walk-inn",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/boardwalk-inn/pools-board-walk-inn/",
+      "resolved_resort_slugs": [
+        "boardwalk-inn"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Art of Animation Resort",
+      "url_friendly_id": "pools-art-of-animation",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/art-of-animation-resort/pools-art-of-animation/",
+      "resolved_resort_slugs": [
+        "art-of-animation-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "disneys-palm-golf-course",
+      "title": "Disney's Palm Golf Course",
+      "url_friendly_id": "palm-golf-course",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/palm-golf-course/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Walt Disney World Swan Hotel",
+      "url_friendly_id": "pools-swan-hotel",
+      "classification": "third_party_or_unsupported_location",
+      "expected_resort_join": "unsupported_location",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item points to a non-supported or third-party hotel location.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/swan-hotel/pools-swan-hotel/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": [
+        "walt-disney-world-swan-hotel"
+      ]
+    },
+    {
+      "program_key": "survival-of-the-fittest-fitness-center",
+      "title": "Survival of the Fittest Fitness Center",
+      "url_friendly_id": "survival-of-the-fittest",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/animal-kingdom-villas-kidani/survival-of-the-fittest/",
+      "resolved_resort_slugs": [
+        "animal-kingdom-villas-kidani-village"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's All-Star Music Resort",
+      "url_friendly_id": "pools-all-star-music-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/all-star-music-resort/pools-all-star-music-resort/",
+      "resolved_resort_slugs": [
+        "all-star-music-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "walt-disney-world-golf",
+      "title": "Walt Disney World Golf",
+      "url_friendly_id": "wdw-golf",
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "downstream_detail_or_general_destination",
+      "publish_behavior": "publish_only_when_detail_page_resolves_resorts",
+      "reason": "Disney index item is destination-wide or requires downstream detail-page joins before resort publication.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pools",
+      "title": "Pools at Disney's Caribbean Beach Resort",
+      "url_friendly_id": "pools-caribbean-beach-resort",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/caribbean-beach-resort/pools-caribbean-beach-resort/",
+      "resolved_resort_slugs": [
+        "caribbean-beach-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "fishing-excursions",
+      "title": "Fishing Excursions",
+      "url_friendly_id": "fishing",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/fishing/",
+      "resolved_resort_slugs": [
+        "caribbean-beach-resort",
+        "contemporary-resort",
+        "old-key-west-resort",
+        "polynesian-village-resort",
+        "port-orleans-resort-riverside",
+        "wilderness-lodge",
+        "yacht-club-resort",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "motorized-boat-rentals",
+      "title": "Motorized Boat Rentals",
+      "url_friendly_id": "motorized-boats",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/motorized-boats/",
+      "resolved_resort_slugs": [
+        "contemporary-resort",
+        "grand-floridian-resort-and-spa",
+        "polynesian-village-resort",
+        "wilderness-lodge",
+        "yacht-club-resort",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "footgolf-at-disneys-oak-trail",
+      "title": "FootGolf at Disney's Oak Trail",
+      "url_friendly_id": "footgolf",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/footgolf/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "lodge-umbrellas",
+      "title": "Lodge Umbrellas",
+      "url_friendly_id": "lodge-umbrellas",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/blizzard-beach/lodge-umbrellas/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "cabanas",
+      "title": "Cabanas",
+      "url_friendly_id": "cabanas",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/cabanas/",
+      "resolved_resort_slugs": [
+        "contemporary-resort",
+        "grand-floridian-resort-and-spa",
+        "yacht-club-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "polar-patios-standard",
+      "title": "Polar Patios Standard",
+      "url_friendly_id": "polar-patios-standard",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/blizzard-beach/polar-patios-standard/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "volleyball",
+      "title": "Volleyball",
+      "url_friendly_id": "volleyball",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/volleyball/",
+      "resolved_resort_slugs": [
+        "beach-club-resort",
+        "caribbean-beach-resort",
+        "contemporary-resort",
+        "coronado-springs-resort",
+        "old-key-west-resort",
+        "polynesian-village-resort",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "golf-cart-rental",
+      "title": "Golf Cart Rental",
+      "url_friendly_id": "golf-cart-rental",
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "downstream_detail_or_general_destination",
+      "publish_behavior": "publish_only_when_detail_page_resolves_resorts",
+      "reason": "Disney index item is destination-wide or requires downstream detail-page joins before resort publication.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/cabins-at-fort-wilderness-resort/golf-cart-rental/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "beachcomber-shacks-standard-after-hours-event",
+      "title": "Beachcomber Shacks Standard - After Hours Event",
+      "url_friendly_id": "standard-beachcomber-shacks-after-hours-rentals",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/standard-beachcomber-shacks-after-hours-rentals/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "canoe-rentals",
+      "title": "Canoe Rentals at Disney's Fort Wilderness Resort and Campground",
+      "url_friendly_id": "canoes",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/canoes/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "horse-drawn-excursion-holiday-sleigh-rides",
+      "title": "Horse Drawn Excursion - Holiday Sleigh Rides",
+      "url_friendly_id": "holiday-sleigh-rides",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+      "resolved_resort_slugs": [
+        "cabins-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "horseback-riding",
+      "title": "Horseback Riding",
+      "url_friendly_id": "horse-trail-rides",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/horse-trail-rides/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "cabanas-at-disney-resort-hotels",
+      "title": "Cabanas at Disney Resort Hotels",
+      "url_friendly_id": null,
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "downstream_detail_or_general_destination",
+      "publish_behavior": "publish_only_when_detail_page_resolves_resorts",
+      "reason": "Disney index item is destination-wide or requires downstream detail-page joins before resort publication.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "sunset-9-hole-golf-promotion",
+      "title": "Sunset 9-Hole Golf Promotion",
+      "url_friendly_id": "sunrise-9-sunset-9",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/sunrise-9-sunset-9/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort",
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "winter-summerland-miniature-golf",
+      "title": "Winter Summerland Miniature Golf",
+      "url_friendly_id": "winter-summerland-miniature-golf",
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "downstream_detail_or_general_destination",
+      "publish_behavior": "publish_only_when_detail_page_resolves_resorts",
+      "reason": "Disney index item is destination-wide or requires downstream detail-page joins before resort publication.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/winter-summerland-miniature-golf/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "poolside-patios",
+      "title": "Poolside Patios",
+      "url_friendly_id": "patios",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/patios/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "fantasia-gardens-and-fairways-miniature-golf",
+      "title": "Fantasia Gardens and Fairways Miniature Golf",
+      "url_friendly_id": "fantasia-gardens-fairways-miniature-golf",
+      "classification": "third_party_or_unsupported_location",
+      "expected_resort_join": "unsupported_location",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item points to a non-supported or third-party hotel location.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/fantasia-gardens-fairways-miniature-golf/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": [
+        "walt-disney-world-swan-hotel"
+      ]
+    },
+    {
+      "program_key": "pony-rides",
+      "title": "Pony Rides",
+      "url_friendly_id": "pony-rides",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/pony-rides/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "indulged-spa-wellness-retreat",
+      "title": "Indulged Spa + Wellness Retreat",
+      "url_friendly_id": null,
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item does not resolve to supported resort joins from the parent index.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "fort-wilderness-archery-experience",
+      "title": "Fort Wilderness Archery Experience",
+      "url_friendly_id": "fort-wilderness-archery-experience",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/fort-wilderness-archery-experience/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "horse-drawn-carriage-rides",
+      "title": "Horse-Drawn Carriage Rides at Disney's Fort Wilderness Resort & Campground",
+      "url_friendly_id": "fort-wilderness-carriage-rides",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/fort-wilderness-carriage-rides/",
+      "resolved_resort_slugs": [
+        "cabins-at-fort-wilderness-resort",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "walt-disney-world-golf",
+      "title": "Walt Disney World Golf",
+      "url_friendly_id": null,
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/",
+      "resolved_resort_slugs": [
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "surrey-bikes",
+      "title": "Surrey Bikes",
+      "url_friendly_id": "surrey-bikes",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/surrey-bikes/",
+      "resolved_resort_slugs": [
+        "old-key-west-resort",
+        "port-orleans-resort-riverside",
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "seven-seas-lagoon",
+      "title": "Seven Seas Lagoon",
+      "url_friendly_id": "seven-seas-lagoon",
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "downstream_detail_or_general_destination",
+      "publish_behavior": "publish_only_when_detail_page_resolves_resorts",
+      "reason": "Disney index item is destination-wide or requires downstream detail-page joins before resort publication.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/seven-seas-lagoon/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "bike-rentals",
+      "title": "Bike Rentals",
+      "url_friendly_id": "bike-rentals",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/bike-rentals/",
+      "resolved_resort_slugs": [
+        "old-key-west-resort",
+        "port-orleans-resort-riverside",
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "polar-patios-premium-plus",
+      "title": "Polar Patios Premium Plus",
+      "url_friendly_id": "polar-patios-premium",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/blizzard-beach/polar-patios-premium/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "beachcomber-shacks-deluxe-after-hours-event",
+      "title": "Beachcomber Shacks Deluxe - After Hours Event",
+      "url_friendly_id": "deluxe-beachcomber-shacks-after-hours-rentals",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/deluxe-beachcomber-shacks-after-hours-rentals/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "community-halls",
+      "title": "Community Halls",
+      "url_friendly_id": null,
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/",
+      "resolved_resort_slugs": [
+        "animal-kingdom-villas-kidani-village",
+        "boardwalk-villas",
+        "contemporary-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "chip-n-dales-campfire-sing-a-long",
+      "title": "Chip 'n' Dale's Campfire Sing-A-Long",
+      "url_friendly_id": "chip-n-dale-campfire-sing-a-long",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/chip-n-dale-campfire-sing-a-long/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "surfing-programs-at-disneys-typhoon-lagoon-water-park",
+      "title": "Surfing Programs at Disney's Typhoon Lagoon Water Park",
+      "url_friendly_id": "surfing-programs",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/surfing-programs/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "best-friends-pet-hotel",
+      "title": "Best Friends Pet Hotel",
+      "url_friendly_id": null,
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item does not resolve to supported resort joins from the parent index.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "typhoon-lagoon-umbrellas",
+      "title": "Typhoon Lagoon Umbrellas",
+      "url_friendly_id": "typhoon-lagoon-umbrellas",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/typhoon-lagoon-umbrellas/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "horse-drawn-excursion-wagon-ride",
+      "title": "Horse Drawn Excursion - Wagon Ride",
+      "url_friendly_id": "wagon-rides",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/campsites-at-fort-wilderness-resort/wagon-rides/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "movies-under-the-stars",
+      "title": "Movies Under the Stars",
+      "url_friendly_id": "movies-under-the-stars",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
+      "resolved_resort_slugs": [
+        "bay-lake-tower-at-contemporary-resort",
+        "all-star-movies-resort",
+        "all-star-music-resort",
+        "all-star-sports-resort",
+        "animal-kingdom-villas-jambo-house",
+        "animal-kingdom-villas-kidani-village",
+        "art-of-animation-resort",
+        "beach-club-resort",
+        "boardwalk-villas",
+        "caribbean-beach-resort",
+        "coronado-springs-resort",
+        "grand-floridian-resort-and-spa",
+        "old-key-west-resort",
+        "polynesian-village-resort",
+        "pop-century-resort",
+        "port-orleans-resort-french-quarter",
+        "port-orleans-resort-riverside",
+        "saratoga-springs-resort-and-spa",
+        "wilderness-lodge"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "fireworks-cruises",
+      "title": "Fireworks Cruises",
+      "url_friendly_id": "fireworks-cruises",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/fireworks-cruises/",
+      "resolved_resort_slugs": [
+        "contemporary-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "beachcomber-shacks-premium-plus",
+      "title": "Beachcomber Shacks Premium Plus",
+      "url_friendly_id": "premium-plus-beachcomber-shacks",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/premium-plus-beachcomber-shacks/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "beachcomber-shacks-deluxe",
+      "title": "Beachcomber Shacks Deluxe",
+      "url_friendly_id": "deluxe-beachcomber-shacks",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/deluxe-beachcomber-shacks/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "pool-tables",
+      "title": "Pool Tables",
+      "url_friendly_id": "pool-tables",
+      "classification": "destination_wide_not_resort_specific",
+      "expected_resort_join": "downstream_detail_or_general_destination",
+      "publish_behavior": "publish_only_when_detail_page_resolves_resorts",
+      "reason": "Disney index item is destination-wide or requires downstream detail-page joins before resort publication.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/pool-tables/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "tennis",
+      "title": "Tennis",
+      "url_friendly_id": "tennis",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/tennis/",
+      "resolved_resort_slugs": [
+        "animal-kingdom-villas-kidani-village",
+        "boardwalk-villas",
+        "contemporary-resort",
+        "old-key-west-resort",
+        "saratoga-springs-resort-and-spa",
+        "yacht-club-resort",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "horse-drawn-carriage-rides",
+      "title": "Horse-Drawn Carriage Rides at Disney's Port Orleans Resort - Riverside",
+      "url_friendly_id": "port-orleans-carriage-rides",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/port-orleans-carriage-rides/",
+      "resolved_resort_slugs": [
+        "port-orleans-resort-riverside"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "playgrounds",
+      "title": "Playgrounds",
+      "url_friendly_id": "playgrounds",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/playgrounds/",
+      "resolved_resort_slugs": [
+        "all-star-movies-resort",
+        "all-star-music-resort",
+        "all-star-sports-resort",
+        "animal-kingdom-lodge",
+        "art-of-animation-resort",
+        "caribbean-beach-resort",
+        "coronado-springs-resort",
+        "old-key-west-resort",
+        "pop-century-resort",
+        "port-orleans-resort-french-quarter",
+        "port-orleans-resort-riverside",
+        "saratoga-springs-resort-and-spa",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "arcades",
+      "title": "Arcades",
+      "url_friendly_id": "arcades",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/arcades/",
+      "resolved_resort_slugs": [
+        "all-star-movies-resort",
+        "all-star-music-resort",
+        "all-star-sports-resort",
+        "animal-kingdom-lodge",
+        "animal-kingdom-villas-kidani-village",
+        "art-of-animation-resort",
+        "boardwalk-inn",
+        "contemporary-resort",
+        "coronado-springs-resort",
+        "grand-floridian-resort-and-spa",
+        "old-key-west-resort",
+        "pop-century-resort",
+        "port-orleans-resort-french-quarter",
+        "port-orleans-resort-riverside",
+        "saratoga-springs-resort-and-spa",
+        "wilderness-lodge",
+        "yacht-club-resort",
+        "cabins-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "running-trails",
+      "title": "Running Trails",
+      "url_friendly_id": "jogging",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "resolved_resort_slugs": [
+        "all-star-movies-resort",
+        "all-star-music-resort",
+        "all-star-sports-resort",
+        "art-of-animation-resort",
+        "beach-club-resort",
+        "boardwalk-inn",
+        "caribbean-beach-resort",
+        "contemporary-resort",
+        "coronado-springs-resort",
+        "grand-floridian-resort-and-spa",
+        "old-key-west-resort",
+        "polynesian-village-resort",
+        "pop-century-resort",
+        "port-orleans-resort-french-quarter",
+        "port-orleans-resort-riverside",
+        "riviera-resort",
+        "saratoga-springs-resort-and-spa",
+        "wilderness-lodge",
+        "cabins-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "golf-lessons",
+      "title": "Golf Lessons",
+      "url_friendly_id": "professional-golf-lessons",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+      "resolved_resort_slugs": [
+        "polynesian-village-resort",
+        "saratoga-springs-resort-and-spa"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "beachcomber-shacks-premium-plus-after-hours-event",
+      "title": "Beachcomber Shacks Premium Plus - After Hours Event",
+      "url_friendly_id": "premium-plus-beachcomber-shacks-after-hours-rentals",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/premium-plus-beachcomber-shacks-after-hours-rentals/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "kayak-rentals",
+      "title": "Kayak Rentals at Disney's Fort Wilderness Resort and Campground",
+      "url_friendly_id": "kayaks",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/kayaks/",
+      "resolved_resort_slugs": [
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "campfires",
+      "title": "Campfires",
+      "url_friendly_id": "campfires",
+      "classification": "joinable_resort_offering",
+      "expected_resort_join": "explicit_resort_locations",
+      "publish_behavior": "publish_official_offerings",
+      "reason": "Disney index item resolves to supported Disney resort locations.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/campfires/",
+      "resolved_resort_slugs": [
+        "all-star-sports-resort",
+        "animal-kingdom-lodge",
+        "animal-kingdom-villas-kidani-village",
+        "beach-club-resort",
+        "boardwalk-inn",
+        "caribbean-beach-resort",
+        "contemporary-resort",
+        "coronado-springs-resort",
+        "grand-floridian-resort-and-spa",
+        "old-key-west-resort",
+        "polynesian-village-resort",
+        "pop-century-resort",
+        "port-orleans-resort-french-quarter",
+        "port-orleans-resort-riverside",
+        "riviera-resort",
+        "saratoga-springs-resort-and-spa",
+        "wilderness-lodge",
+        "campsites-at-fort-wilderness-resort"
+      ],
+      "unresolved_locations": []
+    },
+    {
+      "program_key": "beachcomber-shacks-standard",
+      "title": "Beachcomber Shacks Standard",
+      "url_friendly_id": "standard-beachcomber-shacks",
+      "classification": "park_or_ticketed_experience",
+      "expected_resort_join": "not_resort_joinable",
+      "publish_behavior": "withhold_from_resort_offerings",
+      "reason": "Disney index item is tied to a water park or ticketed water-park experience, not a resort recreation offering.",
+      "required_detail_source": "https://disneyworld.disney.go.com/recreation/typhoon-lagoon/standard-beachcomber-shacks/",
+      "resolved_resort_slugs": [],
+      "unresolved_locations": []
+    }
+  ]
+}

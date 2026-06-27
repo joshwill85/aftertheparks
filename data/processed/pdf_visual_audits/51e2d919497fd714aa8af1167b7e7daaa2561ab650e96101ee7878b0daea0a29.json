@@ -1,0 +1,205 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "51e2d919497fd714aa8af1167b7e7daaa2561ab650e96101ee7878b0daea0a29",
+  "source_pdf_path": "data/raw/pdfs/CBR_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.497741+00:00",
+  "activities": [
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 8:00am-10:00pm",
+      "location": "Throughout Old Port Royale",
+      "description": "Search the Resort for a hidden Sebastian photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 922.0,
+        "width": 315.667,
+        "height": 24.66700000000003
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:find-a-friend"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 1:00pm-2:30pm",
+      "location": "Fuentes del Morro Pool Deck",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 908.0,
+        "y": 1092.0,
+        "width": 460.6669999999999,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:poolside-activities"
+    },
+    {
+      "title": "Nature Walk",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily",
+      "location": "around Barefoot Bay",
+      "description": "Enjoy a self-led nature walk around Barefoot Bay. Pick up a Nature Guide at the front desk to get started.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1180.0,
+        "width": 303.0,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:nature-walk"
+    },
+    {
+      "title": "Under the Seashell Painting",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm-4:00pm",
+      "location": "Near the Pineapple Fountain at Old Port Royale",
+      "description": "Get in touch with your inner artist in this unique painting experience.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 907.667,
+        "y": 1313.333,
+        "width": 237.9999999999999,
+        "height": 25.0
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:under-the-seashell-painting"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Caribbean Cay Movie Lawn | 8:30PM",
+      "location": "Caribbean Cay Movie Lawn",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.667,
+        "y": 1432.667,
+        "width": 669.6659999999999,
+        "height": 28.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:movie-under-the-stars"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm-4:00pm",
+      "location": "Near the Pineapple Fountain at Old Port Royale",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 908.0,
+        "y": 1569.333,
+        "width": 417.3330000000001,
+        "height": 31.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:mickey-tie-dye"
+    },
+    {
+      "title": "Caribbean Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "location": "Martinique Beach",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 907.0,
+        "y": 1829.0,
+        "width": 476.3330000000001,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:caribbean-campfire"
+    },
+    {
+      "title": "Island Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Monday, Tuesday, Wednesday, Thursday and Friday at 8:00pm",
+      "location": "Caribbean Cay Movie Lawn",
+      "description": "Dance the night away at this island party!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 908.333,
+        "y": 2050.0,
+        "width": 307.0000000000001,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:island-party"
+    },
+    {
+      "title": "Caribbean Glow Festival",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Saturday from 8:00pm-10:00pm",
+      "location": "Fuentes del Morro Pool Deck",
+      "description": "Light the night with our evening poolside activities.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 907.0,
+        "y": 2271.0,
+        "width": 606.6669999999999,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "caribbean-beach:caribbean-glow-festival"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

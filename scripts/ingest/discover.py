@@ -9,14 +9,24 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-from config import DISNEY_USER_AGENT, PROCESSED_DIR
-from fetch import head_metadata, latest_document_for_url, sha256_bytes
-from source_manifest import (
-    ACTIVITY_SOURCES,
-    RESORT_RECREATION_SOURCES,
-    ActivitySource,
-    ResortRecreationSource,
-)
+try:
+    from config import DISNEY_USER_AGENT, PROCESSED_DIR
+    from fetch import head_metadata, latest_document_for_url, sha256_bytes
+    from source_manifest import (
+        ACTIVITY_SOURCES,
+        RESORT_RECREATION_SOURCES,
+        ActivitySource,
+        ResortRecreationSource,
+    )
+except ImportError:  # pragma: no cover - supports package-style imports in tests
+    from .config import DISNEY_USER_AGENT, PROCESSED_DIR
+    from .fetch import head_metadata, latest_document_for_url, sha256_bytes
+    from .source_manifest import (
+        ACTIVITY_SOURCES,
+        RESORT_RECREATION_SOURCES,
+        ActivitySource,
+        ResortRecreationSource,
+    )
 
 try:
     from playwright.sync_api import sync_playwright
@@ -35,13 +45,22 @@ CDN_COLLATERAL = (
 
 # Resort code → calendar group for CDN probing
 RESORT_CODES: dict[str, str] = {
+    "All-Star-Movies": "all-star-movies",
+    "All-Star-Music": "all-star-music",
+    "All-Star-Sports": "all-star-sports",
+    "DAAR": "art-of-animation",
     "POP": "pop-century",
     "CBR": "caribbean-beach",
     "CSR": "coronado-springs",
     "POFQ": "port-orleans-french-quarter",
     "PORS": "port-orleans-riverside",
+    "DAKL_JAMBO": "animal-kingdom-jambo",
+    "DAKL_KIDANI": "animal-kingdom-kidani",
+    "YB": "beach-yacht-club",
     "BW": "boardwalk",
     "CTR": "contemporary",
+    "GF": "grand-floridian",
+    "Polynesian": "polynesian",
     "WL": "wilderness-lodge",
     "OKWR": "old-key-west",
     "DRR": "riviera",
@@ -54,9 +73,36 @@ def probe_cdn_candidates(group_key: str, months: list[str]) -> list[str]:
     if not code:
         return []
     urls: list[str] = []
-    for mmyy in months:
-        for folder in ("fy26-q2", "fy26-q3", "fy26-q1"):
-            urls.append(f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation-{mmyy}.pdf")
+    for folder in ("fy26-q3", "fy26-q2", "fy26-q1"):
+        for mmyy in months:
+            if code == "DAKL_JAMBO":
+                urls.extend(
+                    [
+                        f"{CDN_COLLATERAL}/{folder}/DAKL_Aframe_Recreation-{mmyy}_Jambo_DIGITAL.pdf",
+                        f"{CDN_COLLATERAL}/{folder}/DAKL_Aframe_Recreation_{mmyy}_Jambo.pdf",
+                    ]
+                )
+            elif code == "DAKL_KIDANI":
+                urls.extend(
+                    [
+                        f"{CDN_COLLATERAL}/{folder}/DAKL_Aframe_Recreation-{mmyy}_Kidani_DIGITAL.pdf",
+                        f"{CDN_COLLATERAL}/{folder}/DAKL_Aframe_Recreation_{mmyy}_Kidani.pdf",
+                    ]
+                )
+            elif code.startswith("All-Star"):
+                urls.extend(
+                    [
+                        f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation-{mmyy}.pdf",
+                        f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation_{mmyy}.pdf",
+                    ]
+                )
+            else:
+                urls.extend(
+                    [
+                        f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation-{mmyy}.pdf",
+                        f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation_{mmyy}.pdf",
+                    ]
+                )
     return urls
 
 
@@ -108,14 +154,15 @@ def discover_source(source: ActivitySource, *, use_playwright: bool = True) -> d
         if scraped:
             discovered_url = scraped
 
-    # Probe CDN if manifest URL missing or HEAD fails
+    # Probe CDN for the newest known collateral even when the manifest URL is still reachable.
     head = head_metadata(discovered_url) if discovered_url else {}
-    if discovered_url and head.get("http_status") not in (200, None):
-        for candidate in probe_cdn_candidates(source.calendar_group_key, ["0326", "0426", "0526"]):
-            if check_url_exists(candidate):
-                discovered_url = candidate
-                head = head_metadata(candidate)
-                break
+    for candidate in probe_cdn_candidates(source.calendar_group_key, ["0526", "0426", "0326", "0126", "1125"]):
+        if candidate == discovered_url:
+            break
+        if check_url_exists(candidate):
+            discovered_url = candidate
+            head = head_metadata(candidate)
+            break
 
     status = "unchanged"
     if not discovered_url:

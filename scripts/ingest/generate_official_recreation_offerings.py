@@ -57,6 +57,18 @@ def _snapshot_payload(path: Path) -> dict[str, Any]:
     }
 
 
+def _has_snapshot_lines(path: Path) -> bool:
+    try:
+        snapshot = json.loads(path.read_text())
+    except json.JSONDecodeError:
+        return False
+    lines = snapshot.get("lines")
+    return isinstance(lines, list) and any(
+        isinstance(line, dict) and str(line.get("text", "")).strip()
+        for line in lines
+    )
+
+
 def _index_snapshot_payload(path: Path) -> dict[str, Any]:
     snapshot = json.loads(path.read_text())
     return {
@@ -92,6 +104,8 @@ def load_snapshot_payloads(snapshot_dir: Path = DEFAULT_SNAPSHOT_DIR) -> list[di
                 continue
             if path.name in {INDEX_SNAPSHOT, "official-recreation-index.snapshot.json"}:
                 continue
+            if not _has_snapshot_lines(path):
+                continue
             if path in seen:
                 continue
             seen.add(path)
@@ -110,7 +124,10 @@ def load_snapshot_payloads(snapshot_dir: Path = DEFAULT_SNAPSHOT_DIR) -> list[di
 def generate_official_recreation_offerings(
     snapshot_dir: Path = DEFAULT_SNAPSHOT_DIR,
 ) -> dict[str, list[dict[str, Any]]]:
-    return extract_official_recreation_offerings(load_snapshot_payloads(snapshot_dir))
+    return extract_official_recreation_offerings(
+        load_snapshot_payloads(snapshot_dir),
+        apply_quality_facts=snapshot_dir == DEFAULT_SNAPSHOT_DIR,
+    )
 
 
 def write_official_recreation_offerings(

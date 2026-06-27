@@ -1,0 +1,49 @@
+{
+  "source_kind": "official_html",
+  "source_url": "https://disneyworld.disney.go.com/recreation/dolphin-hotel/pools-dolphin-hotel/",
+  "captured_at": "2026-06-27T01:26:45.669390+00:00",
+  "raw_html_sha256": "3c23f81b2f050ba52961d6fc2084ddba1f2964ea086c6b2fa5dc90b6cd5dd67e",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Pools at Walt Disney World Dolphin Hotel | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Pools at Walt Disney World Dolphin Hotel"
+    },
+    {
+      "line": 3,
+      "text": "LocatedinWalt Disney World Dolphin HotelatEPCOT Resort Area"
+    },
+    {
+      "line": 4,
+      "text": "Dip your toes into 5 spectacular pools, each one giving Guests an abundance of fun and unique aquatic options. Hours and lifeguard availability vary by pool and are subject to change."
+    },
+    {
+      "line": 5,
+      "text": "All Ages"
+    },
+    {
+      "line": 6,
+      "text": "Fun in the Sun for the Entire Family"
+    },
+    {
+      "line": 7,
+      "text": "Splash around in the 3-acre grotto pool, 2 lap pools, a spring pool, 4 whirlpools and a kiddie pool."
+    },
+    {
+      "line": 8,
+      "text": "Immerse yourself in the grotto pool, a stunning 3-acre tropical oasis featuring lush greenery, waterfalls, rock caves, and a twisting waterslide. Enjoy a quiet conversation among family and friends in the nearby spring pool, a haven for casual swimmers. Or indulge in a more competitive workout in one of the 2 lap pools."
+    },
+    {
+      "line": 9,
+      "text": "A total of 4 whirlpool spas promise a relaxing respite for adults looking to unwind. Topping it off, a white-sand beach completes the illusion of an island getaway."
+    },
+    {
+      "line": 10,
+      "text": "For Guests looking for a cool beverage or a delicious snack, 2 poolside restaurants are located in the expansive pool complex. Nearby at the Cabana Beach Hut, pool essentials—including tube and rafts—are available for rent."
+    }
+  ],
+  "content_sha256": "8813558fef5b20c12344d5ee768e68bfc06e572083f5e307bffc216138b9c49a"
+}

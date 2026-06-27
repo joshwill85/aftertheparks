@@ -1,27 +1,28 @@
 import { computeDisplayQuality } from "@/lib/displayQuality";
 import { occurrenceToDisplayInput } from "@/lib/activityDisplay";
+import type { IconKey } from "@/components/icons/iconRegistry";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 export type NearbyTier = "at_resort" | "one_ride" | "worth_travel" | "skip";
 
 export const NEARBY_TIER_META: Record<
   Exclude<NearbyTier, "skip">,
-  { label: string; description: string; icon: string }
+  { label: string; description: string; iconKey: IconKey }
 > = {
   at_resort: {
     label: "At this resort",
     description: "Listed for this resort; confirm the exact meeting spot.",
-    icon: "🏨",
+    iconKey: "nearby_resort",
   },
   one_ride: {
     label: "Nearby resort area",
     description: "Same resort area; check the best route before heading over.",
-    icon: "🚐",
+    iconKey: "nearby_area",
   },
   worth_travel: {
     label: "Worth checking travel for",
-    description: "A standout moment if the timing works for your plans.",
-    icon: "✨",
+    description: "A standout activity if the timing works for your plans.",
+    iconKey: "worth_travel",
   },
 };
 

@@ -124,6 +124,7 @@ def _clean_text(value: str) -> str:
 
 def _repair_location_text(value: str) -> tuple[str, bool]:
     repaired = value
+    repaired = re.sub(r"^[\s\-–—]+", "", repaired)
     repaired = re.sub(r"^OP Man Island\b", "Ol’ Man Island", repaired)
     repaired = re.sub(r"^Ol Man Island\b", "Ol’ Man Island", repaired)
     return repaired, repaired != value
@@ -197,6 +198,45 @@ def _fee_legend_spans(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
         for span in legend.get("spans", [])
         if isinstance(span, dict)
     ]
+
+
+def _fee_claim_evidence(
+    title_spans: list[dict[str, Any]],
+    *,
+    is_fee_based: bool,
+    fee_legend_spans: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if is_fee_based:
+        return [*title_spans, *fee_legend_spans]
+    if not title_spans or not fee_legend_spans:
+        return []
+    title_evidence = dict(title_spans[0])
+    title_evidence["field"] = "source_pdf_fee_marker_absent"
+    title_evidence["source"] = "pdf_layout"
+    title_evidence["text"] = (
+        f"{title_evidence.get('text', '').strip()} (no ($) marker)"
+        if title_evidence.get("text")
+        else "Title has no ($) marker"
+    )
+    legend_evidence = []
+    for span in fee_legend_spans:
+        evidence = dict(span)
+        evidence["field"] = "source_pdf_fee_legend"
+        evidence["source"] = "pdf_layout"
+        legend_evidence.append(evidence)
+    return [title_evidence, *legend_evidence]
+
+
+def _body_fee_claim_evidence(description: str, description_spans: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if not re.search(r"\bfees?\s+may\s+apply\b", description, flags=re.I):
+        return []
+    evidence: list[dict[str, Any]] = []
+    for span in description_spans:
+        item = dict(span)
+        item["field"] = "source_pdf_body_fee_language"
+        item["source"] = "pdf_layout"
+        evidence.append(item)
+    return evidence
 
 
 def _parse_time_range(schedule_text: str) -> tuple[str | None, str | None]:
@@ -511,6 +551,11 @@ def _field_quality_warnings(field_name: str, text: str) -> list[str]:
     if (
         field_name == "description"
         and re.fullmatch(day_fragment, cleaned, flags=re.I)
+    ):
+        return [f"{field_name}:text_quality_low"]
+    if (
+        field_name == "description"
+        and re.fullmatch(day_fragment, cleaned, flags=re.I)
         and re.search(r"\b(and|or)\s*$", cleaned, flags=re.I)
     ):
         return [f"{field_name}:text_quality_low"]
@@ -529,6 +574,15 @@ def _schedule_quality_warnings(schedule_text: str) -> list[str]:
     ):
         return ["schedule:text_quality_low"]
     if re.search(r":\s*;|;\s*\d{2}\s*(?:am|pm)|\d{1,2}:\s*[-–—]|f\s+\d{1,2}:\s*[-–—]\s*\d", text, flags=re.I):
+        return ["schedule:text_quality_low"]
+    if re.search(r"\bat\s+(?:sunday|monday|tuesday|wednesday|thursday|friday|saturday)\s+at\b", text, flags=re.I):
+        return ["schedule:text_quality_low"]
+    if re.search(r"^(?:and|or)\s+(?:sunday|monday|tuesday|wednesday|thursday|friday|saturday)\b", text, flags=re.I):
+        return ["schedule:text_quality_low"]
+    if (
+        re.fullmatch(r"(?:sunday|monday|tuesday|wednesday|thursday|friday|saturday|and|or|,|\s)+", text, flags=re.I)
+        and not re.search(r"\d{1,2}:\d{2}|\b(?:daily|nightly|open)\b", text, flags=re.I)
+    ):
         return ["schedule:text_quality_low"]
     if re.search(r"\b(?:daily|nightly|sunday|monday|tuesday|wednesday|thursday|friday|saturday)\s+(?:at|from)\s*$", text, flags=re.I):
         return ["schedule:incomplete_time_phrase"]
@@ -564,6 +618,7 @@ def _normalize_movie_schedule_text(text: str) -> str:
     if "|" not in text:
         return text
     location, time = [part.strip() for part in text.split("|", 1)]
+    location, _ = _repair_location_text(location)
     return f"{location.title()} | {time}"
 
 
@@ -1004,6 +1059,7 @@ def _candidate_from_title(
     if reviewed_description_repair:
         description = reviewed_description_repair
         description_source = "reviewed_field_repair"
+    description_spans = [_line_span(line, index) for index, line in description_lines]
     warnings.extend(_field_quality_warnings("location", location_text))
     warnings.extend(_field_quality_warnings("description", description))
     start_time, end_time = _parse_time_range(schedule_text)
@@ -1014,7 +1070,12 @@ def _candidate_from_title(
         field="is_fee_based",
         raw_value=title_raw,
     )
-    is_fee_based = _title_is_fee_based(title_raw) or (reviewed_fee_repair or "").lower() == "true"
+    body_fee_evidence = _body_fee_claim_evidence(description, description_spans)
+    is_fee_based = (
+        _title_is_fee_based(title_raw)
+        or (reviewed_fee_repair or "").lower() == "true"
+        or bool(body_fee_evidence)
+    )
     fee_legend_spans = [
         span
         for legend in document_key_legends
@@ -1022,7 +1083,11 @@ def _candidate_from_title(
         for span in legend.get("spans", [])
         if isinstance(span, dict)
     ]
-    fee_evidence = [title_span, *fee_legend_spans] if is_fee_based else []
+    fee_evidence = body_fee_evidence or _fee_claim_evidence(
+        title_spans,
+        is_fee_based=is_fee_based,
+        fee_legend_spans=fee_legend_spans,
+    )
     schedule_spans = (
         [_line_span(line, index) for index, line in schedule_lines]
         if schedule_item
@@ -1051,7 +1116,7 @@ def _candidate_from_title(
             "description": {
                 "value": raw_description,
                 "source": "pdf_layout",
-                "spans": [_line_span(line, index) for index, line in description_lines],
+                "spans": description_spans,
             },
         },
         "normalized_fields": {
@@ -1074,7 +1139,7 @@ def _candidate_from_title(
             "description": {
                 "value": description,
                 "source": description_source,
-                "spans": [_line_span(line, index) for index, line in description_lines],
+                "spans": description_spans,
             },
             "is_fee_based": is_fee_based,
             "fee_evidence": fee_evidence,
@@ -1231,7 +1296,11 @@ def _movie_candidate(
             "movie_night_spans": movie_spans,
             "movie_context_spans": movie_context_spans,
             "is_fee_based": False,
-            "fee_evidence": [],
+            "fee_evidence": _fee_claim_evidence(
+                [title_span],
+                is_fee_based=False,
+                fee_legend_spans=_fee_legend_spans(snapshot),
+            ),
             "document_key_legends": document_key_legends,
         },
         "confidence": 1.0 if not warnings else 0.6,
@@ -1349,6 +1418,24 @@ def _span_list(record: dict[str, Any], field_name: str) -> list[dict[str, Any]]:
     return [dict(span) for span in spans if isinstance(span, dict)]
 
 
+def _reviewed_price_evidence(record: dict[str, Any]) -> list[dict[str, Any]]:
+    evidence = _span_list(record, "price")
+    allowed_fields = {
+        "source_pdf_fee_marker",
+        "source_pdf_fee_marker_absent",
+        "source_pdf_body_fee_language",
+        "source_pdf_complimentary_language",
+        "source_disney_image_fee_marker",
+        "source_disney_image_fee_marker_absent",
+    }
+    return [
+        span
+        for span in evidence
+        if span.get("field") in allowed_fields
+        and span.get("source") in {"pdf_layout", "disney_visual_image"}
+    ]
+
+
 def _manual_field(record: dict[str, Any], field_name: str, value: str) -> dict[str, Any]:
     return {
         "value": value,
@@ -1377,7 +1464,14 @@ def _reviewed_manual_candidate(
     title_spans = _span_list(record, "title")
     fee_legend_spans = _fee_legend_spans(snapshot)
     is_fee_based = bool(record.get("is_fee_based"))
-    fee_evidence = [*title_spans, *fee_legend_spans] if is_fee_based else []
+    fee_evidence = _fee_claim_evidence(
+        title_spans,
+        is_fee_based=is_fee_based,
+        fee_legend_spans=fee_legend_spans,
+    )
+    reviewed_price_evidence = _reviewed_price_evidence(record)
+    if reviewed_price_evidence:
+        fee_evidence = reviewed_price_evidence
     document_key_legends = extract_document_key_legends(snapshot)
     normalized_fields = {
         "title": _manual_field(record, "title", str(record["title"])),
@@ -1913,6 +2007,8 @@ def expected_unextractable_slugs_for_fixture(fixture: dict[str, Any]) -> set[str
 
 def extract_publishable_candidates_for_fixture(fixture_path: Path) -> list[dict[str, Any]]:
     fixture = json.loads(fixture_path.read_text())
+    if str(fixture.get("publication_scope") or "").strip() == "historical_regression":
+        return []
     if not isinstance(fixture.get("expected_records"), list):
         return extract_candidates_for_fixture(fixture_path)
 
@@ -2044,6 +2140,10 @@ def compare_candidates_to_fixture(
     expected_quarantine_records = (
         expected_quarantine_records if isinstance(expected_quarantine_records, list) else []
     )
+    expected_unextractable_records = fixture.get("expected_unextractable_records")
+    expected_unextractable_records = (
+        expected_unextractable_records if isinstance(expected_unextractable_records, list) else []
+    )
     reviewed_manual_records = _reviewed_manual_records_for_fixture(fixture)
     expected_quarantine_slugs = expected_quarantine_slugs_for_fixture(fixture)
     expected_unextractable_slugs = expected_unextractable_slugs_for_fixture(fixture)
@@ -2086,12 +2186,25 @@ def compare_candidates_to_fixture(
                     f"expected {sorted(expected_warnings)!r}, got {sorted(actual_warnings)!r}"
                 )
 
+    expected_unextractable_by_slug = {
+        str(expected.get("slug")): expected
+        for expected in expected_unextractable_records
+        if isinstance(expected, dict) and expected.get("slug")
+    }
     for slug in sorted(expected_unextractable_slugs):
         candidate = by_slug.get(slug)
-        if candidate and not any(
-            warning in {"schedule:missing_source_span", "location:missing_source_span"}
-            for warning in candidate.get("warnings", [])
-        ):
+        if not candidate:
+            continue
+        expected = expected_unextractable_by_slug.get(slug, {})
+        errors.extend(_compare_required_spans(candidate.get("normalized_fields", {}), expected))
+        expected_warnings = expected.get("warnings")
+        actual_warnings = candidate.get("warnings") or []
+        if isinstance(expected_warnings, list) and sorted(actual_warnings) != sorted(expected_warnings):
+            errors.append(
+                f"fixture_drift:warnings:{slug}: "
+                f"expected {sorted(expected_warnings)!r}, got {sorted(actual_warnings)!r}"
+            )
+        if not actual_warnings:
             errors.append(f"candidate_unextractable_became_extractable:{slug}")
 
     unexpected = sorted(

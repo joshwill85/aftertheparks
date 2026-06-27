@@ -1,5 +1,6 @@
 {
   "calendar_group_key": "all-star-music",
+  "publication_scope": "historical_regression",
   "source_pdf": "data/raw/pdfs/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf",
   "source_pdf_sha256": "4dccc4ee28b84bff4401205429601aa202ed67f2609933da089d032ec5e118c2",
   "expected": {

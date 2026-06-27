@@ -1,4 +1,5 @@
 import type { GuideEntry } from "@/lib/guides";
+import type { IconKey } from "@/components/icons/iconRegistry";
 import type {
   ActivityOffering,
   ActivityOccurrence,
@@ -24,6 +25,7 @@ export interface SearchHit {
   href: string;
   score: number;
   badges?: string[];
+  iconKey?: IconKey;
   activity?: ActivityOccurrence;
   resort?: ResortSummary;
   guide?: GuideEntry;

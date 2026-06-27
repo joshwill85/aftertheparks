@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const EASTER_EGGS = process.env.NEXT_PUBLIC_EASTER_EGGS === "true";
+const SPARKLE_TERMS = ["campfire", "movie", "magic", "starlight"];
 
 export function StarlightSearchEffect() {
   const searchParams = useSearchParams();
@@ -11,24 +11,18 @@ export function StarlightSearchEffect() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    setActive(EASTER_EGGS && q.includes("starlight"));
+    setActive(SPARKLE_TERMS.some((term) => q.includes(term)));
   }, [q]);
 
   if (!active) return null;
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      {Array.from({ length: 20 }).map((_, i) => (
-        <span
-          key={i}
-          className="absolute h-0.5 w-0.5 rounded-full bg-[var(--color-porch-light)]"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            opacity: 0.3 + Math.random() * 0.5,
-          }}
-        />
-      ))}
+    <div className="pointer-events-none absolute inset-x-0 top-20 overflow-hidden" aria-hidden>
+      <span
+        className="hidden-resort-magic hrm-search-echo"
+        data-hidden-detail="search_suggestion_echo"
+        aria-hidden
+      />
     </div>
   );
 }

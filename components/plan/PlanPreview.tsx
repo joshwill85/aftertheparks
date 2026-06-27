@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 function previewCopy(count: number): { title: string; subtitle: string } {
   if (count <= 1) {
     return {
-      title: "Saved to My Plan ✨",
+      title: "Saved to My Plan",
       subtitle: "Your rest day has its first little spark.",
     };
   }

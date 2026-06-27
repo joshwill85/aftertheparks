@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { cn } from "@/lib/utils";
 
 type SaveButtonVariant = "day" | "night";
@@ -55,14 +56,25 @@ export function SaveButton({
           !reducedMotion && !saved && "active:scale-[0.97]"
         )}
       >
-        {saved ? "Saved ✓" : "Save"}
+        {saved ? (
+          <span className="inline-flex items-center gap-1">
+            Saved <IconGlyph iconKey="check_mark" className="text-sm" />
+          </span>
+        ) : (
+          "Save"
+        )}
       </button>
       {stamping && !reducedMotion && (
         <span
-          className={cn("postcard-stamp", variant === "night" && "postcard-stamp--night")}
+          className={cn(
+            "postcard-stamp wow-folded-map-daybook-transition",
+            variant === "night" && "postcard-stamp--night"
+          )}
+          data-wow-moment="folded_map_daybook_transition"
           aria-hidden
         >
-          Saved
+          <span className="wow-folded-map__crease" />
+          <span className="wow-folded-map__label">Saved</span>
         </span>
       )}
     </span>

@@ -54,6 +54,10 @@ export interface OfficialOfferingRow {
     min_amount_cents?: number;
     maxAmountCents?: number;
     max_amount_cents?: number;
+    priceBasis?: string;
+    price_basis?: string;
+    taxNotes?: string;
+    tax_notes?: string;
     options?: Array<Record<string, unknown>>;
   } | null;
   booking?: {
@@ -90,6 +94,18 @@ function numberValue(value: unknown): number | undefined {
   return typeof value === "number" ? value : undefined;
 }
 
+function priceConfidenceValue(value: unknown): ActivityPriceOption["priceConfidence"] | undefined {
+  return typeof value === "string"
+    ? (value as ActivityPriceOption["priceConfidence"])
+    : undefined;
+}
+
+function verificationStatusValue(value: unknown): ActivityPriceOption["verificationStatus"] | undefined {
+  return typeof value === "string"
+    ? (value as ActivityPriceOption["verificationStatus"])
+    : undefined;
+}
+
 function normalizePriceOptions(
   options?: Array<Record<string, unknown>> | null
 ): ActivityPriceOption[] | undefined {
@@ -100,6 +116,10 @@ function normalizePriceOptions(
     priceCentsMax: numberValue(option.priceCentsMax ?? option.price_cents_max),
     priceBasis: stringValue(option.priceBasis ?? option.price_basis),
     dayOfWeek: stringValue(option.dayOfWeek ?? option.day_of_week),
+    priceConfidence: priceConfidenceValue(option.priceConfidence ?? option.price_confidence),
+    verificationStatus: verificationStatusValue(option.verificationStatus ?? option.verification_status),
+    sourceUrl: stringValue(option.sourceUrl ?? option.source_url),
+    sourceLabel: stringValue(option.sourceLabel ?? option.source_label),
     notes: stringValue(option.notes),
   }));
 }
@@ -169,6 +189,8 @@ function mapPrice(row: OfficialOfferingRow): ActivityOffering["price"] {
     amountCents: price.amountCents ?? price.amount_cents,
     minAmountCents: price.minAmountCents ?? price.min_amount_cents,
     maxAmountCents: price.maxAmountCents ?? price.max_amount_cents,
+    priceBasis: price.priceBasis ?? price.price_basis,
+    taxNotes: price.taxNotes ?? price.tax_notes,
     options: normalizePriceOptions(price.options),
   };
 }

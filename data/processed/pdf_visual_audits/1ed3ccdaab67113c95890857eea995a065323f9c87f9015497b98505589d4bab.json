@@ -1,0 +1,245 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "1ed3ccdaab67113c95890857eea995a065323f9c87f9015497b98505589d4bab",
+  "source_pdf_path": "data/raw/pdfs/YB_Aframe_Recreation-0126.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.496639+00:00",
+  "activities": [
+    {
+      "title": "Lafferty Place Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Daily from 8:00am–11:00pm",
+      "location": "Lafferty Place Arcade",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 513.176,
+        "width": 636.524,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:lafferty-place-arcade"
+    },
+    {
+      "title": "Boat Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Daily from 11:00am–5:00pm",
+      "location": "Bayside Marina",
+      "description": "",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 661.076,
+        "width": 395.38800000000003,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:boat-rentals"
+    },
+    {
+      "title": "Featured Craft",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Daily from 11:30am–12:30pm",
+      "location": "Beach Club Solarium",
+      "description": "Join us to create a seasonal craft to take home!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 808.976,
+        "width": 453.71500000000003,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:featured-craft"
+    },
+    {
+      "title": "Ship Shape Fitness Center",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "location": "Ship Shape Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.178,
+        "y": 910.033,
+        "width": 624.498,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:ship-shape-fitness-center"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Daily at 1:00pm",
+      "location": "Stormalong Bay Pool",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 995.376,
+        "width": 464.457,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:poolside-activities"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Shipwreck Beach | 7:30PM",
+      "location": "Shipwreck Beach",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 115.18,
+        "y": 1173.916,
+        "width": 674.953,
+        "height": 51.246000000000095
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:movie-under-the-stars"
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Sunday, Tuesday and Thursday from 3:00pm–4:00pm",
+      "location": "Beach Club Beach",
+      "description": "Join us for arts and crafts that are fun for the whole family!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 1220.276,
+        "width": 408.264,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:arts-crafts"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Monday, Wednesday, Friday and Saturday from 3:00pm–4:00pm",
+      "location": "Beach Club Beach",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite! In the event of inclement weather, an alternative activity will be offered in the Solarium at Disney’s Beach Club Resort.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 1406.676,
+        "width": 420.3950000000001,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:mickey-tie-dye"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Nightly from 5:30pm–7:00pm",
+      "location": "Shipwreck Beach",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 1747.076,
+        "width": 214.322,
+        "height": 45.99000000000001
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:campfire"
+    },
+    {
+      "title": "Silent Disco",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Monday and Friday from 7:30pm–8:30pm",
+      "location": "Shipwreck Beach",
+      "description": "Choose your favorite music, don your own headphones, and “silently” dance the night away with us!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 1971.976,
+        "width": 292.81000000000006,
+        "height": 45.98999999999978
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:silent-disco"
+    },
+    {
+      "title": "Ultimate Trivia Challenge",
+      "section": "Resort Activities",
+      "date_text": "fy26-q1-0126",
+      "schedule_text": "Wednesday at 7:30pm",
+      "location": "Beach Club Villas Drawing Room",
+      "description": "Bring the family and put your Disney knowledge to the test with the ultimate trivia challenge.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.16,
+        "y": 2196.876,
+        "width": 630.7210000000001,
+        "height": 45.98999999999978
+      },
+      "confidence": "medium",
+      "row_key": "beach-yacht-club:ultimate-trivia-challenge"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

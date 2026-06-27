@@ -5,20 +5,24 @@ import { formatOrlandoDate, formatOrlandoTime } from "@/lib/daypart";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
 import { isUncertainSchedule } from "@/lib/text/normalize";
-import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type { ActivityOccurrence, ActivityPriceOption } from "@/lib/types/occurrence";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { FreshnessMeta } from "@/components/activity/FreshnessMeta";
+import { DecisionSignals } from "@/components/activity/DecisionSignals";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { SaveButton } from "@/components/activity/SaveButton";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import {
   MagicNearbyBadge,
   MagicNearbyCollections,
 } from "@/components/magic/MagicNearby";
+import { SourceConfidenceLedger } from "@/components/visualizations/SourceConfidenceLedger";
 import { EventDetailHero } from "@/components/events/EventDetailHero";
 import {
   EventDetailFact,
   EventDetailSection,
 } from "@/components/events/EventDetailSection";
+import { activityDecisionProfile } from "@/lib/activityDecision";
 import { TRUST_STATE_LABELS } from "@/lib/activityDisplay";
 import { getCategoryMeta } from "@/lib/categories/meta";
 
@@ -59,6 +63,18 @@ function formatCentsRange(min?: number, max?: number): string | undefined {
   return low === high ? money(low!) : `${money(low!)}-${money(high!)}`;
 }
 
+function formatOptionalPrice(option: ActivityPriceOption): string | undefined {
+  const amount = formatCentsRange(option.priceCentsMin, option.priceCentsMax);
+  if (!amount) return option.notes;
+  if (
+    option.priceConfidence === "secondary_verified" ||
+    option.verificationStatus === "needs_disney_confirmation"
+  ) {
+    return `Usually around ${amount} plus tax`;
+  }
+  return amount;
+}
+
 function formatOccurrenceWhen(
   occurrence: ActivityOccurrence & { startDateTime: string }
 ): string {
@@ -92,6 +108,7 @@ export function ActivityDetailClient({
   const inPlan = isActivitySaved(activity);
   const display = toDisplayActivity(activity);
   const meta = getCategoryMeta(activity.category);
+  const decisionProfile = activityDecisionProfile(activity, display);
   const hero = activityToEventCard(activity, display, {
     showResort: true,
     variant: "day",
@@ -121,6 +138,8 @@ export function ActivityDetailClient({
     showUncertainTime ||
     timedScheduleRows.length > 0 ||
     Boolean(display.timeLabel);
+  const optionalPriceOptions =
+    activity.price.options?.filter((option) => option.priceBasis === "optional_add_on") ?? [];
 
   const goodToKnow: string[] = [];
   const addGoodToKnow = (note?: string | null) => {
@@ -137,14 +156,6 @@ export function ActivityDetailClient({
   }
   if (activity.price.notes) {
     addGoodToKnow(activity.price.notes);
-  }
-  for (const option of activity.price.options ?? []) {
-    const price = formatCentsRange(option.priceCentsMin, option.priceCentsMax);
-    if (price) {
-      addGoodToKnow(
-        option.optionName ? `${option.optionName}: ${price}` : `Price option: ${price}`
-      );
-    }
   }
   if (activity.enrichment?.ageMinimum) {
     addGoodToKnow(`Ages ${activity.enrichment.ageMinimum} and up.`);
@@ -234,6 +245,22 @@ export function ActivityDetailClient({
             <p className="event-detail-prose mt-1">{display.resortName}</p>
           </EventDetailSection>
 
+          {optionalPriceOptions.length > 0 && (
+            <EventDetailSection title="Optional purchases">
+              <ul className="event-detail-list">
+                {optionalPriceOptions.map((option) => {
+                  const price = formatOptionalPrice(option);
+                  const label = option.optionName ?? "Optional item";
+                  return (
+                    <li key={`${label}-${price ?? option.notes ?? ""}`}>
+                      {price ? `${label}: ${price}` : label}
+                    </li>
+                  );
+                })}
+              </ul>
+            </EventDetailSection>
+          )}
+
           {goodToKnow.length > 0 && (
             <EventDetailSection title="Good to know">
               <ul className="event-detail-list">
@@ -292,7 +319,7 @@ export function ActivityDetailClient({
             <section>
               <h2 className="font-display text-xl font-semibold">More like this</h2>
               <p className="mt-1 text-sm text-[var(--color-muted)]">
-                Other {display.categoryLabel.toLowerCase()} moments at {display.resortName}.
+                Other {display.categoryLabel.toLowerCase()} activities at {display.resortName}.
               </p>
               <div className="mt-4">
                 <ActivityGrid activities={similar} showResort={false} columns={2} />
@@ -313,12 +340,13 @@ export function ActivityDetailClient({
 
           <EventDetailSection title="Plan this one">
             <span className="event-detail-trust">
-              <span aria-hidden>{meta.icon}</span>
+              <IconGlyph iconKey={meta.iconKey} className="text-base" />
               {TRUST_STATE_LABELS[display.trustState]}
             </span>
             <p className="mt-3 text-sm font-bold text-[var(--color-muted)]">
               {display.categoryLabel}
             </p>
+            <DecisionSignals profile={decisionProfile} />
             <FreshnessMeta freshness={activity.freshness} className="mt-4" />
             <SaveButton
               saved={inPlan}
@@ -342,6 +370,8 @@ export function ActivityDetailClient({
               </a>
             )}
           </EventDetailSection>
+
+          <SourceConfidenceLedger source={activity} compact />
         </aside>
       </div>
     </div>

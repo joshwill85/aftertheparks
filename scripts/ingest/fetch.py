@@ -10,9 +10,14 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-from config import DISNEY_USER_AGENT, PARSER_VERSION, RAW_DIR, PROCESSED_DIR
-from db import SupabaseClient
-from source_manifest import ACTIVITY_SOURCES, ActivitySource
+try:
+    from config import DISNEY_USER_AGENT, PARSER_VERSION, RAW_DIR, PROCESSED_DIR
+    from db import SupabaseClient
+    from source_manifest import ACTIVITY_SOURCES, ActivitySource
+except ImportError:  # pragma: no cover - supports package-style imports in tests
+    from .config import DISNEY_USER_AGENT, PARSER_VERSION, RAW_DIR, PROCESSED_DIR
+    from .db import SupabaseClient
+    from .source_manifest import ACTIVITY_SOURCES, ActivitySource
 
 
 @dataclass

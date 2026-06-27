@@ -27,6 +27,7 @@ except ImportError:  # pragma: no cover
 DEFAULT_INDEX = Path("data/raw/web/official-recreation-index-api.snapshot.json")
 DEFAULT_OFFERINGS = Path("data/processed/official_recreation_offerings.json")
 DEFAULT_SNAPSHOT_DIR = Path("data/raw/web")
+DEFAULT_CLASSIFICATION = Path("data/quality/official_recreation_parent_classification.json")
 
 
 @dataclass
@@ -40,6 +41,16 @@ class OfficialRecreationCoverageAudit:
 
 def _load_json(path: Path) -> Any:
     return json.loads(path.read_text())
+
+
+def _parent_classification_rows(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    payload = _load_json(path)
+    if not isinstance(payload, dict):
+        return []
+    items = payload.get("items")
+    return [item for item in items if isinstance(item, dict)] if isinstance(items, list) else []
 
 
 def _covered_program_keys(extraction: dict[str, Any]) -> set[str]:
@@ -355,6 +366,7 @@ def build_official_recreation_coverage_audit(
     index_snapshot_path: Path = DEFAULT_INDEX,
     offerings_path: Path = DEFAULT_OFFERINGS,
     snapshot_dir: Path = DEFAULT_SNAPSHOT_DIR,
+    classification_path: Path = DEFAULT_CLASSIFICATION,
 ) -> OfficialRecreationCoverageAudit:
     errors: list[str] = []
     warnings: list[str] = []
@@ -390,6 +402,17 @@ def build_official_recreation_coverage_audit(
 
     index_snapshot = _load_json(index_snapshot_path)
     extraction = _load_json(offerings_path)
+    classification_rows = _parent_classification_rows(classification_path)
+    classified_program_keys = {
+        str(row.get("program_key") or "").strip()
+        for row in classification_rows
+        if str(row.get("program_key") or "").strip()
+    }
+    manual_classifications = [
+        row
+        for row in classification_rows
+        if row.get("classification") == "requires_manual_classification"
+    ]
     results = index_snapshot.get("results") if isinstance(index_snapshot, dict) else None
     if not isinstance(results, list) or not results:
         errors.append("official_recreation:index_results_missing")
@@ -410,6 +433,21 @@ def build_official_recreation_coverage_audit(
         for payload in load_snapshot_payloads(snapshot_dir)
         if payload.get("source_kind") == "official_recreation_detail"
     }
+
+    parent_program_keys = {
+        official_recreation_index_item_program_key(item)
+        for item in results
+        if isinstance(item, dict)
+    }
+    missing_classifications = sorted(parent_program_keys - classified_program_keys)
+    extra_classifications = sorted(classified_program_keys - parent_program_keys)
+    for program_key in missing_classifications:
+        errors.append(f"official_recreation:parent_item_missing_classification:{program_key}")
+    for row in manual_classifications:
+        errors.append(
+            "official_recreation:classification_requires_manual_review:"
+            + str(row.get("program_key") or "<missing>")
+        )
 
     for row in missing_resort_join_rows:
         key = row.get("offering_key") or row.get("program_key") or "<missing>"
@@ -537,6 +575,11 @@ def build_official_recreation_coverage_audit(
         "published_offerings_unsourced_availability_labels": len(unsourced_availability_rows),
         "published_offerings_unsourced_specific_fields": len(unsourced_specific_field_rows),
         "programs_without_joined_offerings": len(programs_without_joined_offerings),
+        "classified_parent_items": len(classification_rows),
+        "classified_parent_program_keys": len(classified_program_keys),
+        "missing_parent_classifications": len(missing_classifications),
+        "extra_parent_classifications": len(extra_classifications),
+        "manual_parent_classifications": len(manual_classifications),
     }
     return OfficialRecreationCoverageAudit(
         passed=not errors,
@@ -551,9 +594,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Audit official recreation parent-list coverage")
     parser.add_argument("--index", type=Path, default=DEFAULT_INDEX)
     parser.add_argument("--offerings", type=Path, default=DEFAULT_OFFERINGS)
+    parser.add_argument("--classification", type=Path, default=DEFAULT_CLASSIFICATION)
+    parser.add_argument("--json", action="store_true", help="Print machine-readable audit JSON")
     args = parser.parse_args()
 
-    audit = build_official_recreation_coverage_audit(args.index, args.offerings)
+    audit = build_official_recreation_coverage_audit(
+        args.index,
+        args.offerings,
+        classification_path=args.classification,
+    )
     print(
         json.dumps(
             {

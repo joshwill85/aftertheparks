@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
+import re
 import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -44,9 +46,37 @@ class PromotionResult:
     review_queue: list[dict[str, Any]] = field(default_factory=list)
 
 
+CAMPFIRE_PRICE_MATRIX_PATH = Path("data/quality/campfire_price_matrix.json")
+DISNEY_VISUAL_PRICE_EVIDENCE_PATH = Path("data/quality/disney_visual_price_evidence.json")
+
+
 def _spans(field: dict[str, Any]) -> list[dict[str, Any]]:
     spans = field.get("spans") if isinstance(field, dict) else None
     return spans if isinstance(spans, list) else []
+
+
+def _complimentary_activity_price_evidence(normalized: dict[str, Any]) -> list[dict[str, Any]]:
+    evidence: list[dict[str, Any]] = []
+    seen: set[tuple[Any, Any, str]] = set()
+    for field_name in ("description", "schedule", "location", "title"):
+        field = normalized.get(field_name)
+        for span in _spans(field if isinstance(field, dict) else {}):
+            text = str(span.get("text") or "")
+            lower = text.lower()
+            if "complimentary" not in lower:
+                continue
+            if re.search(r"\b(towels?|life\s*jacket|sodas?|water|helmets?|child seats?|beverages?)\b", lower):
+                continue
+            if not re.search(r"\b(activity|activities|movie|movies|screening|screenings|entertainment)\b", lower):
+                continue
+            key = (span.get("page"), span.get("line"), text)
+            if key in seen:
+                continue
+            seen.add(key)
+            price_span = dict(span)
+            price_span["field"] = "source_official_web_complimentary_language"
+            evidence.append(price_span)
+    return evidence
 
 
 def _public_record_from_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
@@ -82,8 +112,23 @@ def _public_record_from_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
 def _claims_from_candidate(candidate: dict[str, Any]) -> list[dict[str, Any]]:
     normalized = candidate["normalized_fields"]
     is_fee_based = bool(normalized.get("is_fee_based"))
-    fee_value = "fee" if is_fee_based else "unknown"
-    fee_evidence = normalized.get("fee_evidence") if is_fee_based else []
+    raw_fee_evidence = normalized.get("fee_evidence")
+    fee_evidence = raw_fee_evidence if isinstance(raw_fee_evidence, list) else []
+    has_fee_marker_absence = any(
+        evidence.get("field") in {"source_pdf_fee_marker_absent", "source_disney_image_fee_marker_absent"}
+        for evidence in fee_evidence
+        if isinstance(evidence, dict)
+    )
+    if is_fee_based:
+        fee_value = "fee"
+    elif has_fee_marker_absence:
+        fee_value = "free"
+    elif not is_fee_based:
+        fee_evidence = _complimentary_activity_price_evidence(normalized)
+        fee_value = "free" if fee_evidence else "unknown"
+    else:
+        fee_value = "unknown"
+        fee_evidence = []
     return [
         {
             "kind": "fee",
@@ -104,11 +149,22 @@ def _claims_from_candidate(candidate: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _field_provenance(public_record: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    fee_claim = next(
+        (
+            claim
+            for claim in public_record.get("claims", [])
+            if isinstance(claim, dict) and claim.get("kind") == "fee"
+        ),
+        {},
+    )
+    fee_evidence = fee_claim.get("evidence") if isinstance(fee_claim, dict) else []
+    price_spans = fee_evidence if isinstance(fee_evidence, list) else []
     return {
         "title": public_record["title"]["spans"],
         "schedule": public_record["schedule"]["spans"],
         "location": public_record["location"]["spans"],
         "description": public_record["description"]["spans"],
+        **({"price": price_spans} if price_spans else {}),
     }
 
 
@@ -145,6 +201,16 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
         if public_record["schedule"].get("start_time") is None
         else "source_backed"
     )
+    fee_claim = next(
+        (
+            claim
+            for claim in public_record.get("claims", [])
+            if isinstance(claim, dict) and claim.get("kind") == "fee"
+        ),
+        {},
+    )
+    fee_value = fee_claim.get("value") if isinstance(fee_claim, dict) else None
+    price_state = fee_value if fee_value in {"free", "fee"} else "unknown"
     return {
         "candidate_id": candidate["candidate_id"],
         "activity_catalog_id": _activity_catalog_id(
@@ -166,7 +232,7 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
             "label": public_record["location"]["value"],
         },
         "description": public_record["description"]["value"],
-        "price": {"state": "fee" if normalized.get("is_fee_based") else "unknown"},
+        "price": {"state": price_state},
         "claims": public_record["claims"],
         "field_provenance": _field_provenance(public_record),
         "source_url": source_url,
@@ -260,9 +326,11 @@ def promote_fixtures(
         )
 
     for fixture_path in paths:
+        fixture = json.loads(fixture_path.read_text())
+        if str(fixture.get("publication_scope") or "").strip() == "historical_regression":
+            continue
         extracted = extract_publishable_candidates_for_fixture(fixture_path)
         if not extracted:
-            fixture = json.loads(fixture_path.read_text())
             if isinstance(fixture.get("expected_records"), list) and not expected_public_slugs_for_fixture(fixture):
                 continue
             review_queue.append(
@@ -286,6 +354,242 @@ def promote_fixtures(
     )
     promoted.review_queue.extend(review_queue)
     return promoted
+
+
+def load_campfire_price_matrix(path: Path = CAMPFIRE_PRICE_MATRIX_PATH) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text())
+    return payload if isinstance(payload, dict) else {}
+
+
+def _claim_value(record: dict[str, Any], kind: str) -> str:
+    claims = record.get("claims")
+    if isinstance(claims, dict):
+        claim = claims.get(kind)
+        return str((claim or {}).get("value") or "").lower() if isinstance(claim, dict) else ""
+    if isinstance(claims, list):
+        for claim in claims:
+            if isinstance(claim, dict) and claim.get("kind") == kind:
+                return str(claim.get("value") or "").lower()
+    return ""
+
+
+def _claim_has_evidence(record: dict[str, Any], kind: str) -> bool:
+    claims = record.get("claims")
+    if isinstance(claims, dict):
+        claim = claims.get(kind)
+        evidence = claim.get("evidence") if isinstance(claim, dict) else None
+        return isinstance(evidence, list) and bool(evidence)
+    if isinstance(claims, list):
+        for claim in claims:
+            if isinstance(claim, dict) and claim.get("kind") == kind:
+                evidence = claim.get("evidence")
+                return isinstance(evidence, list) and bool(evidence)
+    return False
+
+
+def _is_campfire_record(record: dict[str, Any]) -> bool:
+    haystack = " ".join(
+        str(record.get(key) or "")
+        for key in ("canonical_slug", "title", "category")
+    ).lower()
+    return "campfire" in haystack
+
+
+def _has_standard_campfire_purchase_language(record: dict[str, Any]) -> bool:
+    text = str(record.get("description") or "").lower().replace("’", "'")
+    return (
+        "complimentary" in text
+        and re.search(r"\bs'?mores?\b", text) is not None
+        and "purchase" in text
+    )
+
+
+def _is_fort_wilderness_campfire(record: dict[str, Any]) -> bool:
+    if str(record.get("calendar_group_key") or "") == "fort-wilderness":
+        return True
+    resort_slugs = record.get("resort_slugs") or []
+    if isinstance(resort_slugs, list) and any("fort-wilderness" in str(slug) for slug in resort_slugs):
+        return True
+    return "chip" in str(record.get("title") or "").lower() and "campfire" in str(record.get("title") or "").lower()
+
+
+def _matrix_optional_options(matrix_section: dict[str, Any]) -> list[dict[str, Any]]:
+    supplies = matrix_section.get("supplies") if isinstance(matrix_section, dict) else []
+    if not isinstance(supplies, list):
+        return []
+    return [
+        copy.deepcopy(option)
+        for option in supplies
+        if isinstance(option, dict) and option.get("priceBasis") == "optional_add_on"
+    ]
+
+
+def _option_key(option: dict[str, Any]) -> tuple[str, str]:
+    return (str(option.get("optionName") or option.get("option_name") or ""), str(option.get("priceBasis") or option.get("price_basis") or ""))
+
+
+def _append_price_option_provenance(record: dict[str, Any], option: dict[str, Any]) -> None:
+    source_url = option.get("sourceUrl") or option.get("source_url")
+    source_label = option.get("sourceLabel") or option.get("source_label")
+    if not source_url and not source_label:
+        return
+    provenance = dict(record.get("field_provenance") or {})
+    price_spans = list(provenance.get("price") or [])
+    price_spans.append(
+        {
+            "source_url": source_url,
+            "source": source_label,
+            "text": option.get("notes") or option.get("optionName") or "Campfire optional purchase price",
+        }
+    )
+    provenance["price"] = price_spans
+    record["field_provenance"] = provenance
+
+
+def apply_campfire_price_matrix(
+    records: list[dict[str, Any]],
+    matrix: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    price_matrix = matrix if isinstance(matrix, dict) else load_campfire_price_matrix()
+    enriched_records = [copy.deepcopy(record) for record in records]
+    if not price_matrix:
+        return enriched_records
+
+    default_options = _matrix_optional_options(price_matrix.get("defaultResortCampfire") or {})
+    fort_options = _matrix_optional_options(price_matrix.get("fort-wilderness") or {})
+
+    for record in enriched_records:
+        price = dict(record.get("price") or {})
+        if price.get("state") != "free":
+            continue
+        if _claim_value(record, "fee") != "free" or not _claim_has_evidence(record, "fee"):
+            continue
+        if not _is_campfire_record(record):
+            continue
+
+        options_to_add: list[dict[str, Any]] = []
+        if _is_fort_wilderness_campfire(record):
+            options_to_add = fort_options
+        elif _has_standard_campfire_purchase_language(record):
+            options_to_add = default_options
+        if not options_to_add:
+            continue
+
+        existing_options = list(price.get("options") or [])
+        existing_keys = {_option_key(option) for option in existing_options if isinstance(option, dict)}
+        for option in options_to_add:
+            if _option_key(option) in existing_keys:
+                continue
+            existing_options.append(copy.deepcopy(option))
+            _append_price_option_provenance(record, option)
+        if existing_options:
+            price["options"] = existing_options
+        price["state"] = "free"
+        record["price"] = price
+
+    return enriched_records
+
+
+def load_disney_visual_price_evidence(
+    path: Path = DISNEY_VISUAL_PRICE_EVIDENCE_PATH,
+) -> dict[str, Any]:
+    if not path.exists():
+        return {"sources": [], "evidence": []}
+    payload = json.loads(path.read_text())
+    return payload if isinstance(payload, dict) else {"sources": [], "evidence": []}
+
+
+def _visual_price_span(
+    evidence: dict[str, Any],
+    source: dict[str, Any],
+) -> dict[str, Any]:
+    source_label = "disney_visual_pdf" if source.get("source_kind") == "official_pdf" else "disney_visual_image"
+    return {
+        "page": 1,
+        "text": evidence["text"],
+        "field": evidence["field"],
+        "source": source_label,
+        "source_url": source["canonical_url"],
+        "source_sha256": source["content_sha256"],
+        "source_path": source.get("storage_path"),
+        "legend_text": evidence.get("legend_text"),
+    }
+
+
+def apply_disney_visual_price_evidence(
+    records: list[dict[str, Any]],
+    *,
+    evidence_payload: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    payload = evidence_payload if isinstance(evidence_payload, dict) else load_disney_visual_price_evidence()
+    sources = {
+        str(source.get("source_id") or ""): source
+        for source in payload.get("sources", [])
+        if isinstance(source, dict)
+    }
+    evidence_by_key: dict[tuple[str, str], dict[str, Any]] = {}
+    for evidence in payload.get("evidence", []):
+        if not isinstance(evidence, dict):
+            continue
+        key = (str(evidence.get("calendar_group_key") or ""), str(evidence.get("canonical_slug") or ""))
+        source = sources.get(str(evidence.get("source_id") or ""))
+        if not key[0] or not key[1] or not source:
+            continue
+        evidence_by_key[key] = evidence
+
+    enriched: list[dict[str, Any]] = []
+    for record in records:
+        row = copy.deepcopy(record)
+        key = (str(row.get("calendar_group_key") or ""), str(row.get("canonical_slug") or ""))
+        evidence = evidence_by_key.get(key)
+        if not evidence:
+            enriched.append(row)
+            continue
+        state = str(evidence.get("price_state") or "")
+        if state not in {"free", "fee"}:
+            enriched.append(row)
+            continue
+        source = sources[str(evidence["source_id"])]
+        span = _visual_price_span(evidence, source)
+        row["price"] = {**(row.get("price") if isinstance(row.get("price"), dict) else {}), "state": state}
+        claims = row.get("claims")
+        if isinstance(claims, list):
+            updated_claims: list[dict[str, Any]] = []
+            found_fee = False
+            for claim in claims:
+                if isinstance(claim, dict) and claim.get("kind") == "fee":
+                    updated_claims.append({**claim, "value": state, "evidence": [span]})
+                    found_fee = True
+                elif isinstance(claim, dict):
+                    updated_claims.append(claim)
+            if not found_fee:
+                updated_claims.append({"kind": "fee", "value": state, "evidence": [span]})
+            row["claims"] = updated_claims
+        else:
+            claims_dict = claims if isinstance(claims, dict) else {}
+            fee_claim = claims_dict.get("fee") if isinstance(claims_dict.get("fee"), dict) else {}
+            claims_dict["fee"] = {**fee_claim, "value": state, "evidence": [span]}
+            row["claims"] = claims_dict
+        provenance = row.get("field_provenance") if isinstance(row.get("field_provenance"), dict) else {}
+        provenance["price"] = [span]
+        row["field_provenance"] = provenance
+        source_payload = row.get("source") if isinstance(row.get("source"), dict) else {}
+        supporting = list(source_payload.get("supportingDocuments") or [])
+        supporting.append(
+            {
+                "kind": "price_evidence",
+                "url": source["canonical_url"],
+                "documentHash": source["content_sha256"],
+                "path": source.get("storage_path"),
+                "field": evidence["field"],
+            }
+        )
+        source_payload["supportingDocuments"] = supporting
+        row["source"] = source_payload
+        enriched.append(row)
+    return enriched
 
 
 def _write_json(path: Path, payload: Any) -> None:
@@ -312,6 +616,8 @@ def generate_gold_records(
             result.gold_records,
             mrg_payload.get("validity") if isinstance(mrg_payload, dict) else None,
         )
+    result.gold_records = apply_disney_visual_price_evidence(result.gold_records)
+    result.gold_records = apply_campfire_price_matrix(result.gold_records)
     return result
 
 

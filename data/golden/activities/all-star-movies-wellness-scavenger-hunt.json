@@ -1,5 +1,6 @@
 {
   "calendar_group_key": "all-star-movies",
+  "publication_scope": "historical_regression",
   "source_pdf": "data/raw/pdfs/All-Star-Movies_Aframe_Recreation_1125.pdf",
   "source_pdf_sha256": "784923e9f8dec8207a1cdb91987b425f42c4ec7450e6f9eadb8f64075d0db276",
   "expected": {

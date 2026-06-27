@@ -2,7 +2,12 @@ import Link from "next/link";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-[var(--border-soft)] px-4 py-8 pb-24 md:pb-8">
+    <footer className="site-footer mt-auto border-t border-[var(--border-soft)] px-4 py-8 pb-24 md:pb-8">
+      <span
+        className="hidden-resort-magic hrm-footer-grain"
+        data-hidden-detail="footer_paper_grain_secret"
+        aria-hidden
+      />
       <div className="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-[var(--muted)] md:flex-row md:justify-between">
         <p className="max-w-xl">
           After the Parks is an independent planning guide and is not affiliated

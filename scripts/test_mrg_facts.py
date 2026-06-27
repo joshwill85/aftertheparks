@@ -167,6 +167,45 @@ class MagicalResortGuideFactsTest(unittest.TestCase):
             any(claim["kind"] == "external_factual_enrichment" for claim in record["claims"])
         )
 
+    def test_gold_merge_does_not_turn_disney_free_campfire_into_paid_event(self) -> None:
+        gold = {
+            "activity_catalog_id": "catalog-campfire",
+            "calendar_group_key": "animal-kingdom-jambo",
+            "canonical_slug": "campfire",
+            "title": "Campfire",
+            "price": {"state": "free"},
+            "claims": [
+                {
+                    "kind": "fee",
+                    "value": "free",
+                    "evidence": [{"field": "source_pdf_fee_marker_absent"}],
+                }
+            ],
+            "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/source.pdf",
+            "source_sha256": "official-hash",
+        }
+        fact = {
+            "calendar_group_key": "animal-kingdom-jambo",
+            "activity_slug": "campfire",
+            "activity_title": "Campfire",
+            "source_url": "https://www.magicalresortguide.com/animal-kingdom-lodge-paid-recreation-activities",
+            "source_page_kind": "paid_recreation",
+            "facts": {
+                "price_state": "fee",
+                "price_cents_min": 700,
+                "price_cents_max": 700,
+                "price_notes": "$7 s'mores kit",
+            },
+            "evidence": [{"field": "price", "text": "COST: $7 s'mores kit"}],
+        }
+
+        [record] = merge_mrg_facts_into_gold([gold], [fact])
+
+        self.assertEqual("free", record["price"]["state"])
+        self.assertNotIn("amountCents", record["price"])
+        self.assertNotIn("minAmountCents", record["price"])
+        self.assertNotEqual("$7 s'mores kit", record["price"].get("notes"))
+
     def test_validity_window_parser_extracts_schedule_good_for_dates(self) -> None:
         html = """
         <p>Current activity calendars are valid from May 26 - September 8, 2026.</p>

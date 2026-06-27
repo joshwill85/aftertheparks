@@ -1,0 +1,13 @@
+{
+  "program_keys": ["running-trails", "jogging-trails"],
+  "source_urls": [
+    "https://disneyworld.disney.go.com/recreation/running-trails/",
+    "https://disneyworld.disney.go.com/recreation/jogging/"
+  ],
+  "required_fields": ["title", "resort_join", "location", "description"],
+  "price_policy": {
+    "default_state": "unknown",
+    "requires_source_text": true,
+    "fallback_state": "unknown"
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
+  "source_pdf_path": "data/raw/pdfs/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.495742+00:00",
+  "activities": [
+    {
+      "title": "Pumbaa’s Fun And Games Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Pumbaa’s Fun And Games Arcade",
+      "description": "Put your skills to the test at our daily arcade tournament beginning at 4:00pm.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.667,
+        "y": 508.333,
+        "width": 695.333,
+        "height": 26.999999999999943
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:pumbaas-fun-and-games-arcade"
+    },
+    {
+      "title": "Simba’s Activity Center",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Daily from 11:00am-9:00pm",
+      "location": "Simba’s Activity Center",
+      "description": "Get creative by designing your own African jewelry and ceramics, plus other arts and crafts. Fees may apply.",
+      "price_state": "fee",
+      "price_evidence": "body_fee_language",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.333,
+        "y": 676.667,
+        "width": 483.0000000000001,
+        "height": 21.66599999999994
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:simbas-activity-center"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Daily",
+      "location": "throughout Jambo House",
+      "description": "Search the Resort for a hidden Pumbaa photo prop. Once located, snap a photo and then head to Simba’s Activity Center to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 835.0,
+        "width": 271.0,
+        "height": 21.33299999999997
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:find-a-friend"
+    },
+    {
+      "title": "Jambo House Lobby Art Tour",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Monday, Tuesday, Wednesday, Thursday and Friday at 11:00am",
+      "location": "Begins at Lobby Entrance",
+      "description": "Meet a guide at the Medallion and learn about the largest private collection of African art outside of Africa.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.333,
+        "y": 844.0,
+        "width": 596.334,
+        "height": 21.66700000000003
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:jambo-house-lobby-art-tour"
+    },
+    {
+      "title": "Disney Family Fitness Fun",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Tuesday at 10:30am",
+      "location": "Uzima Springs Pool Deck",
+      "description": "Get active in a wildly fun way with the whole family! Enjoy singing and dancing as you move and groove to music inspired by The Lion King.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 1031.667,
+        "width": 525.333,
+        "height": 21.666000000000167
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:disney-family-fitness-fun"
+    },
+    {
+      "title": "Medallion Rubbing",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Daily at 1:30pm",
+      "location": "Lobby Entrance",
+      "description": "Leave an “impression” and show off your artwork.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.667,
+        "y": 1082.333,
+        "width": 386.33299999999997,
+        "height": 21.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:medallion-rubbing"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Daily",
+      "location": "Uzima Springs Pool",
+      "description": "Join us for family-friendly activities, both in and out of the pool",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.667,
+        "y": 1249.333,
+        "width": 395.66600000000005,
+        "height": 21.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:poolside-activities"
+    },
+    {
+      "title": "Trivia Night",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Sunday from 8:00pm-9:00pm",
+      "location": "Uzima Springs Pool Deck",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1822.0,
+        "width": 246.33300000000008,
+        "height": 21.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:trivia-night"
+    },
+    {
+      "title": "Jammin’ At Jambo House",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Tuesday, Thursday and Saturday from 8:00pm-9:00pm",
+      "location": "Uzima Springs Pool Deck",
+      "description": "Join us for our evening dance party.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.333,
+        "y": 1953.667,
+        "width": 488.66700000000003,
+        "height": 21.666000000000167
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:jammin-at-jambo-house"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Hakuna Matata Playground | 8:30PM",
+      "location": "Hakuna Matata Playground",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.333,
+        "y": 2143.0,
+        "width": 670.0000000000001,
+        "height": 28.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:movie-under-the-stars"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526-jambo",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "location": "Arusha Savanna Overlook",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "confidence": "medium",
+      "row_key": "animal-kingdom-jambo:campfire"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

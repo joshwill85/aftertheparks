@@ -63,6 +63,30 @@
       "raw_value": "Design your own mosaic showpiece with a touch of Disney and up. Class may take up to 2 hours. Reservations are required. Please visit Community Hall or call 407-827-1183 to reserve your spot. Space is limited. Weather permitting.",
       "value": "Design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Class may take up to 2 hours. Reservations are required. Please visit Community Hall or call 407-827-1183 to reserve your spot. Space is limited. Weather permitting.",
       "reason": "Reviewed visual source: OCR skipped the line containing flair and the recommended age phrase in the mosaics description."
+    },
+    {
+      "calendar_group_key": "animal-kingdom-kidani",
+      "slug": "bingo",
+      "field": "location",
+      "raw_value": "palace Library",
+      "value": "Palace Library",
+      "reason": "Reviewed visual source: OCR lowercased the first letter of Palace Library while preserving the location text."
+    },
+    {
+      "calendar_group_key": "animal-kingdom-jambo",
+      "slug": "campfire",
+      "field": "description",
+      "raw_value": "Enjoy the warm glow of the campfire with complimentary marshmallows.",
+      "value": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "reason": "Reviewed visual source: the current Jambo House PDF shows the S’mores kits sentence on the same campfire block, but OCR split the continuation line and dropped the S’mores word."
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "slug": "wellness-scavenger-hunt",
+      "field": "description",
+      "raw_value": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and pene to the you’ve cha enges, pic a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "value": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "reason": "Reviewed visual source: OCR damaged the Sport Goofy Gifts and Sundries pickup sentence on the current 0526 Sports PDF."
     }
   ]
 }

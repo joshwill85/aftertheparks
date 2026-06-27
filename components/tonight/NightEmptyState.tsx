@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 
 interface NightEmptyStateProps {
   title: string;
@@ -13,9 +14,7 @@ export function NightEmptyState({
 }: NightEmptyStateProps) {
   return (
     <div className="tonight-empty rounded-[22px] border border-[var(--border-soft)] bg-[rgba(255,255,255,0.94)] p-8 text-center shadow-[var(--shadow-card)] md:p-10">
-      <p className="text-3xl" aria-hidden>
-        ✨
-      </p>
+      <IconGlyph iconKey="nighttime_entertainment" className="mx-auto text-3xl" />
       <h3 className="font-display mt-4 text-xl font-semibold text-[var(--brand-ink)] md:text-2xl">
         {title}
       </h3>

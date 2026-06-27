@@ -1,0 +1,305 @@
+{
+  "audit_mode": "source_provenance_seed",
+  "source_pdf_sha256": "2a084971eacc44d430d201d32ded314520dc47ffd7412507ebdcc80e6a5e3db5",
+  "source_pdf_path": "data/raw/pdfs/SSR_Aframe_Recreation-0326.pdf",
+  "model": "source_provenance_visual_seed_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-27T03:48:39.496881+00:00",
+  "activities": [
+    {
+      "title": "Purple Martin Nest Checks",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday and Friday at 9:00am",
+      "location": "Turf Club Patio",
+      "description": "BEGINNING MARCH 23! Join a conservation expert from Disney’s Animals, Science and Environment team as they study these birds as part of their ongoing efforts to help protect the purple martins.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 513.333,
+        "width": 645.6669999999999,
+        "height": 25.33400000000006
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:purple-martin-nest-checks"
+    },
+    {
+      "title": "Community Hall",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "location": "Community Hall",
+      "description": "Join us to create one-of-a-kind crafts, borrow your favorite sports equipment, and more! Fees may apply.",
+      "price_state": "fee",
+      "price_evidence": "body_fee_language",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 760.0,
+        "width": 380.0,
+        "height": 25.33299999999997
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:community-hall"
+    },
+    {
+      "title": "Disney Fit Yoga",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Tuesday at 9:00am",
+      "location": "Congress Park—Overlooking Disney Springs®",
+      "description": "Ground yourself with a gentle yoga session to start your day. Designed for all skill levels, this experience incorporates various poses set to your favorite Disney music!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.667,
+        "y": 803.667,
+        "width": 369.66599999999994,
+        "height": 25.66599999999994
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:disney-fit-yoga"
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 12:00pm-2:00pm",
+      "location": "High Rock Spring Pool Deck",
+      "description": "Soak in the sun with some family-friendly activities, both in and out of the water. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 910.667,
+        "width": 461.0,
+        "height": 25.33299999999997
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:poolside-activities"
+    },
+    {
+      "title": "Story Time Yoga",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Saturday at 9:00am",
+      "location": "Congress Park—Overlooking Disney Springs",
+      "description": "Get active with a session inspired by some of your Disney Friends! All ages and skill levels welcome.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.333,
+        "y": 1070.667,
+        "width": 387.0,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:story-time-yoga"
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday, Tuesday, Wednesday, Friday and Saturday from 2:30pm-3:30pm",
+      "location": "Outside of Community Hall",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1123.333,
+        "width": 417.6669999999999,
+        "height": 31.333999999999833
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:mickey-tie-dye"
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "location": "Throughout Disney’s Saratoga Springs Resort",
+      "description": "Search the Resort for a hidden Maximus photo prop. Once located, snap a photo and then head to Community Hall to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1303.667,
+        "width": 315.667,
+        "height": 24.666000000000167
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:find-a-friend"
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "location": "Disney Vacation Club® Courtyard at Franklin Square",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1307.667,
+        "width": 210.66699999999992,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:campfire"
+    },
+    {
+      "title": "Glow With The Flow",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Sunday and Thursday from 7:30pm-8:30pm",
+      "location": "High Rock Spring Pool Deck",
+      "description": "Light the night with our evening poolside activities.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1490.0,
+        "width": 489.3330000000001,
+        "height": 25.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:glow-with-the-flow"
+    },
+    {
+      "title": "Bicycle Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Daily from 10:00am-6:30pm",
+      "location": "Horsing Around Rentals",
+      "description": "Choose from individual bikes to two- or four-person surrey bikes for a fun family outing!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1534.667,
+        "width": 456.0,
+        "height": 31.666000000000167
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:bicycle-rentals"
+    },
+    {
+      "title": "Nighttime Bingo",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Tuesday from 7:30pm-8:30pm",
+      "location": "Turf Club Bar and Grill",
+      "description": "Bring the family together for an unforgettable night full of fun and prizes!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1640.333,
+        "width": 381.0,
+        "height": 25.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:nighttime-bingo"
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Outside Of The Artist’S Palette | 8:30pm",
+      "location": "Outside Of The Artist’S Palette",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.667,
+        "y": 1781.667,
+        "width": 670.0,
+        "height": 28.333000000000084
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:movie-under-the-stars"
+    },
+    {
+      "title": "Winner’s Circle Mosaics",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Monday at 2:30pm",
+      "location": "The Turf Club Bar and Grill",
+      "description": "Immerse yourself in a famous art tradition as you design your own mosaic showpiece with a touch of Disney flair. This experience is recommended for Guests ages 12 and up. Space is limited. To book, visit or call the Community Hall at 407-827-4589.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.333,
+        "y": 1919.333,
+        "width": 663.0000000000001,
+        "height": 31.666999999999916
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:winners-circle-mosaics"
+    },
+    {
+      "title": "Win, Paint, Show!",
+      "section": "Resort Activities",
+      "date_text": "fy26-q2-0326",
+      "schedule_text": "Thursday at 2:30pm",
+      "location": "Community Hall",
+      "description": "Get in touch with your inner artist in this unique 2-hour instructor-led painting class! This experience is recommended for Guests ages 12 and up. Space is limited. To book, visit or call the Community Hall at 407-827-4589.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.333,
+        "y": 2194.333,
+        "width": 487.0000000000001,
+        "height": 32.0
+      },
+      "confidence": "medium",
+      "row_key": "saratoga-springs:win-paint-show"
+    }
+  ],
+  "warnings": [
+    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  ]
+}

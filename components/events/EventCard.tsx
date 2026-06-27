@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { DecisionSignals } from "@/components/activity/DecisionSignals";
 import { SaveButton } from "@/components/activity/SaveButton";
+import type { DecisionProfile } from "@/lib/activityDecision";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 import {
@@ -50,6 +52,7 @@ export interface EventCardProps {
   saved?: boolean;
   showTrust?: boolean;
   trustActivity?: ActivityOccurrence;
+  decisionProfile?: DecisionProfile;
   className?: string;
 }
 
@@ -74,6 +77,7 @@ export function EventCard({
   saved,
   showTrust,
   trustActivity,
+  decisionProfile,
   className,
 }: EventCardProps) {
   const isNight = variant === "night";
@@ -103,6 +107,9 @@ export function EventCard({
           summary={summary}
           footnote={footnote}
         />
+        {decisionProfile && (
+          <DecisionSignals profile={decisionProfile} compact maxSignals={2} />
+        )}
       </div>
     </>
   );

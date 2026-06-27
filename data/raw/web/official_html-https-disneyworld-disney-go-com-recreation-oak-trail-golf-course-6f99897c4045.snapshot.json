@@ -1,0 +1,353 @@
+{
+  "source_kind": "official_html",
+  "source_url": "https://disneyworld.disney.go.com/recreation/oak-trail-golf-course/",
+  "captured_at": "2026-06-27T01:26:37.488869+00:00",
+  "raw_html_sha256": "d53ef39aebc5a1471206148204ab6ca50ae7ef78e3fe240361515a66b0af5aac",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Oak Trail Golf Course | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Disney's Oak Trail Golf Course"
+    },
+    {
+      "line": 3,
+      "text": "LocatedinDisney's Polynesian Village Resort"
+    },
+    {
+      "line": 4,
+      "text": "Delight in this family-friendly retreat that's home to an enjoyable 9-hole, par-36 walking course."
+    },
+    {
+      "line": 5,
+      "text": "Preschoolers"
+    },
+    {
+      "line": 6,
+      "text": "Kids"
+    },
+    {
+      "line": 7,
+      "text": "Tweens"
+    },
+    {
+      "line": 8,
+      "text": "Teens"
+    },
+    {
+      "line": 9,
+      "text": "Adults"
+    },
+    {
+      "line": 10,
+      "text": "Book Tee Time"
+    },
+    {
+      "line": 11,
+      "text": "Woodland Walking Course"
+    },
+    {
+      "line": 12,
+      "text": "Disney's Oak Trail Golf Course is a beautiful 9-hole course with rolling greens and exciting challenges. Certified by Audubon International as a Cooperative Wildlife Sanctuary, Disney's Oak Trail Golf Course lets you test your skills with holes ranging from 132 to 517 yards from the white tees—holes 5, 6 and 7 are routed around a deep canal and a picturesque pond. Operated by Arnold Palmer Golf Management, this walking course features junior tees for young golfers and promises fun for the whole family."
+    },
+    {
+      "line": 13,
+      "text": "Golf carts are not allowed on Disney's Oak Trail Golf Course—this is a walking-only course."
+    },
+    {
+      "line": 14,
+      "text": "Learn more about golf carts, proper golf attire and more."
+    },
+    {
+      "line": 15,
+      "text": "Hole #"
+    },
+    {
+      "line": 16,
+      "text": "White Tees"
+    },
+    {
+      "line": 17,
+      "text": "Red Tees"
+    },
+    {
+      "line": 18,
+      "text": "Junior Tees"
+    },
+    {
+      "line": 19,
+      "text": "Par"
+    },
+    {
+      "line": 20,
+      "text": "1"
+    },
+    {
+      "line": 21,
+      "text": "260"
+    },
+    {
+      "line": 22,
+      "text": "234"
+    },
+    {
+      "line": 23,
+      "text": "155"
+    },
+    {
+      "line": 24,
+      "text": "4"
+    },
+    {
+      "line": 25,
+      "text": "2"
+    },
+    {
+      "line": 26,
+      "text": "160"
+    },
+    {
+      "line": 27,
+      "text": "132"
+    },
+    {
+      "line": 28,
+      "text": "101"
+    },
+    {
+      "line": 29,
+      "text": "3"
+    },
+    {
+      "line": 30,
+      "text": "3"
+    },
+    {
+      "line": 31,
+      "text": "352"
+    },
+    {
+      "line": 32,
+      "text": "318"
+    },
+    {
+      "line": 33,
+      "text": "231"
+    },
+    {
+      "line": 34,
+      "text": "4"
+    },
+    {
+      "line": 35,
+      "text": "4"
+    },
+    {
+      "line": 36,
+      "text": "324"
+    },
+    {
+      "line": 37,
+      "text": "296"
+    },
+    {
+      "line": 38,
+      "text": "222"
+    },
+    {
+      "line": 39,
+      "text": "4"
+    },
+    {
+      "line": 40,
+      "text": "5"
+    },
+    {
+      "line": 41,
+      "text": "517"
+    },
+    {
+      "line": 42,
+      "text": "438"
+    },
+    {
+      "line": 43,
+      "text": "270"
+    },
+    {
+      "line": 44,
+      "text": "5"
+    },
+    {
+      "line": 45,
+      "text": "6"
+    },
+    {
+      "line": 46,
+      "text": "378"
+    },
+    {
+      "line": 47,
+      "text": "329"
+    },
+    {
+      "line": 48,
+      "text": "205"
+    },
+    {
+      "line": 49,
+      "text": "4"
+    },
+    {
+      "line": 50,
+      "text": "7"
+    },
+    {
+      "line": 51,
+      "text": "489"
+    },
+    {
+      "line": 52,
+      "text": "425"
+    },
+    {
+      "line": 53,
+      "text": "281"
+    },
+    {
+      "line": 54,
+      "text": "5"
+    },
+    {
+      "line": 55,
+      "text": "8"
+    },
+    {
+      "line": 56,
+      "text": "297"
+    },
+    {
+      "line": 57,
+      "text": "268"
+    },
+    {
+      "line": 58,
+      "text": "163"
+    },
+    {
+      "line": 59,
+      "text": "4"
+    },
+    {
+      "line": 60,
+      "text": "9"
+    },
+    {
+      "line": 61,
+      "text": "136"
+    },
+    {
+      "line": 62,
+      "text": "112"
+    },
+    {
+      "line": 63,
+      "text": "85"
+    },
+    {
+      "line": 64,
+      "text": "3"
+    },
+    {
+      "line": 65,
+      "text": "2,913"
+    },
+    {
+      "line": 66,
+      "text": "2,552"
+    },
+    {
+      "line": 67,
+      "text": "1,713"
+    },
+    {
+      "line": 68,
+      "text": "36"
+    },
+    {
+      "line": 69,
+      "text": "Reservations and Cancellations"
+    },
+    {
+      "line": 70,
+      "text": "Reserve your tee time online or call the Golf Master Starter at (407) WDW-GOLF or (407) 939-4653, even if it is just a few hours before you plan to play. Though reservations are highly recommended, we try to accommodate walk-up golfers as well. Single or twosome walk-up golfers will have the best chance to play."
+    },
+    {
+      "line": 71,
+      "text": "Please plan to arrive at least 30 minutes prior to your tee time to allow for check-in and a healthy warm-up. If you are unavoidably detained and arrive late, we will do the best to accommodate you whenever possible."
+    },
+    {
+      "line": 72,
+      "text": "Cancellations"
+    },
+    {
+      "line": 73,
+      "text": "Tee times must be cancelled and party sizes must be reduced at least 24 hours in advance to avoid a possible payment penalty. Tee times that are cancelled or left unreduced inside of 24 hours are subject to be charged to the credit card provided when reservations were made. Golfers are encouraged to call the Golf Master Starter at (407) WDW-GOLF or (407) 939-4653 to cancel or modify party size, even if you are inside the 24-hour window. Those who made tee time reservations online may also cancel online."
+    },
+    {
+      "line": 74,
+      "text": "Guests under 18 years of age must have parent or guardian permission to call."
+    },
+    {
+      "line": 75,
+      "text": "Transportation & Directions"
+    },
+    {
+      "line": 76,
+      "text": "Complimentary transportation via taxi is available to Guests of select Walt Disney World Resort hotels. You may request a ride at the Valet Desk or from Bell Services at select resort hotels, and in the Pro Shop or from any golf operations staff members at the golf courses. Guests are advised to check with Guest Services or Concierges for any transportation options offered by their hotel."
+    },
+    {
+      "line": 77,
+      "text": "Golf Day Guests who wish to arrange their own transportation to the golf courses will find that there is no charge for parking at the golf course itself or when going through a Toll Plaza on the way to the golf courses."
+    },
+    {
+      "line": 78,
+      "text": "Directions"
+    },
+    {
+      "line": 79,
+      "text": "To get to Disney's Palm, Disney's Magnolia and Disney's Oak Trail Golf Courses, stay in the far left-hand lane as you approach the Magic Kingdom toll plaza and continue to follow the signs leading to Disney's Palm, Disney's Magnolia and Disney's Oak Trail Golf Courses, located at the Shades of Green Resort."
+    },
+    {
+      "line": 80,
+      "text": "To retrieve directions on a GPS or mapping device, we recommend you input the following address:"
+    },
+    {
+      "line": 81,
+      "text": "Disney’s Oak Trail Golf Course"
+    },
+    {
+      "line": 82,
+      "text": "1950 W. Magnolia Palm Dr."
+    },
+    {
+      "line": 83,
+      "text": "Lake Buena Vista, FL 32830"
+    },
+    {
+      "line": 84,
+      "text": "Related Activities"
+    },
+    {
+      "line": 85,
+      "text": "Sunrise 9-Hole and Sunset 9-Hole Golf Promotions"
+    },
+    {
+      "line": 86,
+      "text": "Take advantage of special pricing on a 9-hole round of golf at select Walt Disney World golf courses."
+    }
+  ],
+  "content_sha256": "977118f19ac9ac7bfdef1f99bf26a4c35e576f5874a47befb6620bef68a2055e"
+}

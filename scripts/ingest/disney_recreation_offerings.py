@@ -11,6 +11,8 @@ from __future__ import annotations
 import re
 import hashlib
 import json
+from pathlib import Path
+from urllib.parse import urlparse
 from typing import Any
 
 try:
@@ -36,6 +38,17 @@ KNOWN_PROGRAM_TITLES = {
     "Surrey Bike Rentals",
     "Tennis",
     "Volleyball",
+}
+
+CAMPFIRE_PRICE_MATRIX_PATH = Path("data/quality/campfire_price_matrix.json")
+COMMUNITY_HALL_FACTS_PATH = Path("data/quality/community_hall_official_facts.json")
+GOLF_OFFICIAL_FACTS_PATH = Path("data/quality/golf_official_facts.json")
+FREE_RESORT_AMENITY_PROGRAM_KEYS = {
+    "basketball-courts",
+    "electrical-water-pageant",
+    "playgrounds",
+    "pools",
+    "running-trails",
 }
 
 TITLE_REPAIRS = {
@@ -358,6 +371,16 @@ def _line_mentions_slug(line: dict[str, Any], slug: str) -> bool:
     return slug in slugs
 
 
+def _compatible_resort_reference(resort_slug: str, slugs: list[str]) -> bool:
+    if resort_slug in slugs:
+        return True
+    fort_wilderness_pair = {
+        "cabins-at-fort-wilderness-resort",
+        "campsites-at-fort-wilderness-resort",
+    }
+    return resort_slug in fort_wilderness_pair and bool(fort_wilderness_pair.intersection(slugs))
+
+
 def _primary_program_lines(program_key: str, lines: list[dict[str, Any]]) -> list[dict[str, Any]]:
     result: list[dict[str, Any]] = []
     for line in lines:
@@ -392,6 +415,21 @@ def _source_sha(payload: dict[str, Any]) -> str:
     return hashlib.sha256(
         json.dumps(source_basis, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()
+
+
+def _context_resort_slug(payload: dict[str, Any]) -> str:
+    explicit = str(payload.get("resort_slug") or "").strip()
+    if explicit in ALL_RESORT_SLUGS:
+        return explicit
+    source_url = str(payload.get("source_url") or "")
+    try:
+        path_parts = [part for part in urlparse(source_url).path.split("/") if part]
+    except ValueError:
+        path_parts = []
+    for part in path_parts:
+        if part in ALL_RESORT_SLUGS:
+            return part
+    return ""
 
 
 def _program_title(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
@@ -549,6 +587,11 @@ def _category(program_key: str, title: str, tags: list[str]) -> str:
 
 def _availability(program_key: str, all_text: str) -> dict[str, Any]:
     text = all_text.lower()
+    compact_time_range_match = re.search(
+        r"\b(\d{1,2}:\d{2}\s*(?:am|pm|AM|PM))\s*to\s*(\d{1,2}:\d{2}\s*(?:am|pm|AM|PM))\b",
+        all_text,
+        flags=re.I,
+    )
     hours_match = re.search(
         r"(?:Hours:|open from|accessible from)[^.]*?(\d{1,2}:\d{2}\s*(?:am|pm|AM|PM))\s+(?:and|to|-|–)\s+(\d{1,2}:\d{2}\s*(?:am|pm|AM|PM))",
         all_text,
@@ -559,6 +602,12 @@ def _availability(program_key: str, all_text: str) -> dict[str, Any]:
         all_text,
         flags=re.I,
     )
+    if program_key == "tri-circle-d-ranch" and hours_match:
+        return {
+            "kind": "evergreen_hours",
+            "hours_state": "source_hours",
+            "label": f"Daily {hours_match.group(1)}-{hours_match.group(2)}",
+        }
     if (
         "currently unavailable" in text
         or "offering has concluded" in text
@@ -611,6 +660,15 @@ def _availability(program_key: str, all_text: str) -> dict[str, Any]:
             "hours_state": "source_hours",
             "label": f"Daily {hours_match.group(1)}-{hours_match.group(2)}",
         }
+    if program_key == "electrical-water-pageant" and compact_time_range_match:
+        return {
+            "kind": "calendar_dependent",
+            "hours_state": "source_hours",
+            "label": (
+                f"Viewing window {compact_time_range_match.group(1)}-"
+                f"{compact_time_range_match.group(2)}; location showtimes vary"
+            ),
+        }
     if (
         "check the recreation calendar" in text
         or "select nights" in text
@@ -626,6 +684,53 @@ def _availability(program_key: str, all_text: str) -> dict[str, Any]:
         "kind": "evergreen_all_day",
         "hours_state": "source_unspecified",
         "label": "Hours not specified by Disney",
+    }
+
+
+def _operating_hour_lines(program_lines: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    lines: list[dict[str, Any]] = []
+    active = False
+    for line in program_lines:
+        text = _clean_text(str(line.get("text", "")))
+        normalized = _normalize(text)
+        if normalized.startswith("operating hours"):
+            active = True
+            lines.append(line)
+            continue
+        if not active:
+            continue
+        if re.fullmatch(r"\d{1,2}:\d{2}\s*(?:AM|PM|am|pm)", text):
+            lines.append(line)
+            continue
+        if text in {",", "-"}:
+            continue
+        break
+    return lines
+
+
+def _availability_with_operating_hours(
+    program_key: str,
+    program_lines: list[dict[str, Any]],
+    all_text: str,
+) -> dict[str, Any]:
+    availability = _availability(program_key, all_text)
+    operating_lines = _operating_hour_lines(program_lines)
+    times = [
+        _clean_text(str(line.get("text", "")))
+        for line in operating_lines
+        if re.fullmatch(r"\d{1,2}:\d{2}\s*(?:AM|PM|am|pm)", _clean_text(str(line.get("text", ""))))
+    ]
+    if not times:
+        return availability
+    has_variable_days = re.search(r"\bcheck available days\b|\bmake a reservation\b", all_text, flags=re.I)
+    return {
+        "kind": "reservation_based" if has_variable_days else "evergreen_hours",
+        "hours_state": "calendar_varies" if has_variable_days else "source_hours",
+        "label": (
+            f"{', '.join(times)}; available days vary"
+            if has_variable_days
+            else f"Operating Hours: {', '.join(times)}"
+        ),
     }
 
 
@@ -647,11 +752,16 @@ def _availability_spans(
         ]
     elif availability.get("kind") == "reservation_based":
         line_patterns = [
-            re.compile(r"make a reservation|check available|reservation|cabana", re.I)
+            re.compile(r"make a reservation|check available|reservation|cabana|operating hours|^\d{1,2}:\d{2}\s*(?:AM|PM)$", re.I)
         ]
     elif hours_state == "source_hours":
         line_patterns = [
-            re.compile(r"open 24 hours|hours:|open from|accessible from", re.I)
+            re.compile(
+                r"open 24 hours|hours:|open from|accessible from|"
+                r"\b\d{1,2}:\d{2}\s*(?:AM|PM)\s*to\s*\d{1,2}:\d{2}\s*(?:AM|PM)\b|"
+                r"showtimes on the day of your visit",
+                re.I,
+            )
         ]
     elif hours_state == "hours_vary_by_pool":
         line_patterns = [
@@ -662,7 +772,7 @@ def _availability_spans(
             re.compile(
                 r"depart friday|rides are only available|check the recreation calendar|"
                 r"select nights|for movie schedules|subject to cancellation or change without notice|"
-                r"check available",
+                r"check available|operating hours|^\d{1,2}:\d{2}\s*(?:AM|PM)$",
                 re.I,
             )
         ]
@@ -696,24 +806,36 @@ def _booking(program_key: str, program_lines: list[dict[str, Any]]) -> tuple[dic
     booking: dict[str, Any] = {}
     provenance: dict[str, list[dict[str, Any]]] = {}
 
-    if "reservation" in lower or "cabana" in program_key:
+    if "reservation" in lower or "make a reservation" in lower or "cabana" in program_key:
         booking["reservation_recommended"] = "advance reservations are highly recommended" in lower or (
             "recommended" in lower and "not required" not in lower
         )
         if "reservations are not required" in lower or "reservations are not accepted" in lower:
             booking["reservation_required"] = False
+        elif "make a reservation" in lower or "check available days" in lower:
+            booking["reservation_required"] = True
         elif re.search(r"\breservations?\s+(?:are|is)\s+required\b|\breservation required\b", lower):
             booking["reservation_required"] = True
         for line in program_lines:
             line_lower = str(line.get("text", "")).lower()
-            if "reservation" in line_lower and "dining or recreation reservations" not in line_lower:
+            if (
+                ("reservation" in line_lower or "check available days" in line_lower or "make a reservation" in line_lower)
+                and "dining or recreation reservations" not in line_lower
+            ):
                 provenance.setdefault("booking", []).append(_span(line))
 
-    match = re.search(r"(\d+)\s*-?\s*hours?\s+notice", lower)
+    match = re.search(r"(\d+)\s*-?\s*hours?\s+(?:notice|cancellation policy)", lower)
     if match:
         booking["cancellation_notice_hours"] = int(match.group(1))
         for line in program_lines:
             if "notice" in str(line.get("text", "")).lower():
+                provenance.setdefault("booking", []).append(_span(line))
+
+    check_in_match = re.search(r"check in .*?(\d+)\s+minutes?\s+prior", lower)
+    if check_in_match:
+        booking["check_in_offset_minutes"] = int(check_in_match.group(1))
+        for line in program_lines:
+            if re.search(r"check in .*?\d+\s+minutes?\s+prior", str(line.get("text", "")), flags=re.I):
                 provenance.setdefault("booking", []).append(_span(line))
 
     return booking, provenance
@@ -735,6 +857,25 @@ def _eligibility(program_lines: list[dict[str, Any]]) -> tuple[dict[str, Any], d
             provenance.setdefault("eligibility", []).append(_span(line))
         if "any guest of a walt disney world resort hotel may access" in lower:
             eligibility["resort_guest_only"] = True
+            provenance.setdefault("eligibility", []).append(_span(line))
+        age_match = re.search(r"(\d+)\s+years? of age or older", lower)
+        if age_match:
+            eligibility["age_minimum"] = int(age_match.group(1))
+            eligibility["ages"] = [f"{age_match.group(1)}_and_up"]
+            provenance.setdefault("eligibility", []).append(_span(line))
+        weight_match = re.search(r"weigh\s+(\d+)\s+to\s+(\d+)\s+pounds", lower)
+        if weight_match:
+            eligibility["weight_pounds_min"] = int(weight_match.group(1))
+            eligibility["weight_pounds_max"] = int(weight_match.group(2))
+            provenance.setdefault("eligibility", []).append(_span(line))
+        if "valid photo id" in lower:
+            eligibility["photo_id_required"] = True
+            provenance.setdefault("eligibility", []).append(_span(line))
+        if "sign a waiver" in lower:
+            eligibility["waiver_required"] = True
+            provenance.setdefault("eligibility", []).append(_span(line))
+        if "helmets are required" in lower:
+            eligibility["helmet_required"] = True
             provenance.setdefault("eligibility", []).append(_span(line))
     return eligibility, provenance
 
@@ -776,15 +917,379 @@ def _amenities_for_slug(
     return amenities, spans
 
 
-def _price(program_lines: list[dict[str, Any]]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+def _free_price_line(text: str) -> bool:
+    lower = text.lower()
+    if "complimentary" not in lower:
+        return False
+    if "complimentary for guests staying" in lower and re.search(
+        r"\b(fitness center|exercise room|health club)\b",
+        lower,
+    ):
+        return True
+    if re.search(r"\b(towels?|life\s*jacket|sodas?|water|helmets?|child seats?|beverages?)\b", lower):
+        return False
+    return bool(
+        re.search(
+            r"\b(activity|activities|movie|movies|screening|screenings|entertainment)\b",
+            lower,
+        )
+    )
+
+
+def _fee_price_line(text: str) -> bool:
+    lower = text.lower()
+    if "$" in text:
+        return not (
+            "no-shows" in lower
+            or "same-day cancellations" in lower
+            or "will not be charged" in lower
+        )
+    return bool(
+        "associated fee applies" in lower
+        or "must first purchase a game card" in lower
+        or "purchase a game card" in lower
+        or "rent a bicycle" in lower
+        or "reduced rate" in lower
+        or "lower rate" in lower
+        or "book tee time" in lower
+        or re.search(r"\bfull price (?:of|being charged|will be charged)", lower)
+        or "regular price" in lower
+        or "special pricing" in lower
+    )
+
+
+def _cents_from_dollars(value: str) -> int:
+    return int(value.replace(",", "")) * 100
+
+
+def _structured_price_from_line(text: str) -> dict[str, Any] | None:
+    match = re.search(
+        r"\$([\d,]+)(?:\s*[–-]\s*\$?([\d,]+))?\s+per\s+([A-Za-z ]+?)(?:\s*\(([^)]*)\))?$",
+        text,
+        flags=re.I,
+    )
+    if not match:
+        return None
+    low = _cents_from_dollars(match.group(1))
+    high = _cents_from_dollars(match.group(2)) if match.group(2) else low
+    price: dict[str, Any] = {
+        "state": "fee",
+        "notes": text,
+        "minAmountCents": min(low, high),
+        "maxAmountCents": max(low, high),
+        "priceBasis": _slugify(f"per {match.group(3).strip()}").replace("-", "_"),
+    }
+    if match.group(4):
+        price["taxNotes"] = match.group(4).strip()
+    return price
+
+
+def _free_resort_amenity_price(
+    program_key: str,
+    program_lines: list[dict[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]]] | None:
+    if program_key not in FREE_RESORT_AMENITY_PROGRAM_KEYS:
+        return None
+
+    spans: list[dict[str, Any]] = []
+    for line in program_lines:
+        text = _clean_heading(str(line.get("text", "")))
+        if not text or _is_boilerplate_line(text):
+            continue
+        span = _span(line)
+        span["field"] = "source_disney_official_resort_amenity_no_fee_language"
+        spans.append(span)
+        if len(spans) >= 2:
+            break
+
+    if not spans:
+        return None
+    return {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language.",
+    }, spans
+
+
+def _tri_circle_d_ranch_price(program_lines: list[dict[str, Any]]) -> tuple[dict[str, Any], list[dict[str, Any]]] | None:
     for line in program_lines:
         text = _clean_text(str(line.get("text", "")))
-        if "$" not in text:
+        lower = text.lower()
+        if "guests are welcome to walk through" not in lower or "visit the horses" not in lower:
             continue
-        if "no-shows" in text.lower() or "same-day cancellations" in text.lower():
-            continue
-        return {"state": "fee", "notes": text}, [_span(line)]
+        return {
+            "state": "free",
+            "notes": "Disney says guests are welcome to walk through the stable and visit the horses. Paid riding experiences are listed separately.",
+        }, [_span(line)]
+    return None
+
+
+def _price(program_key: str, program_lines: list[dict[str, Any]]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    if program_key == "tri-circle-d-ranch":
+        tri_circle_result = _tri_circle_d_ranch_price(program_lines)
+        if tri_circle_result:
+            return tri_circle_result
+
+    free_result: tuple[dict[str, Any], list[dict[str, Any]]] | None = None
+    for line in program_lines:
+        text = _clean_text(str(line.get("text", "")))
+        if _free_price_line(text):
+            free_result = ({"state": "free", "notes": text}, [_span(line)])
+        if _fee_price_line(text):
+            return _structured_price_from_line(text) or {"state": "fee", "notes": text}, [_span(line)]
+    if free_result:
+        return free_result
+    amenity_result = _free_resort_amenity_price(program_key, program_lines)
+    if amenity_result:
+        return amenity_result
     return {"state": "unknown"}, []
+
+
+def _load_campfire_price_matrix() -> dict[str, Any]:
+    if not CAMPFIRE_PRICE_MATRIX_PATH.exists():
+        return {}
+    payload = json.loads(CAMPFIRE_PRICE_MATRIX_PATH.read_text())
+    return payload if isinstance(payload, dict) else {}
+
+
+def _load_community_hall_facts() -> list[dict[str, Any]]:
+    if not COMMUNITY_HALL_FACTS_PATH.exists():
+        return []
+    payload = json.loads(COMMUNITY_HALL_FACTS_PATH.read_text())
+    facts = payload.get("facts") if isinstance(payload, dict) else None
+    return [fact for fact in facts or [] if isinstance(fact, dict)]
+
+
+def _load_golf_official_facts() -> list[dict[str, Any]]:
+    if not GOLF_OFFICIAL_FACTS_PATH.exists():
+        return []
+    payload = json.loads(GOLF_OFFICIAL_FACTS_PATH.read_text())
+    facts = payload.get("facts") if isinstance(payload, dict) else None
+    return [fact for fact in facts or [] if isinstance(fact, dict)]
+
+
+def _community_hall_fact_hash(fact: dict[str, Any]) -> str:
+    payload = {
+        "source_url": fact.get("source_url"),
+        "resort_slug": fact.get("resort_slug"),
+        "description": fact.get("description"),
+        "availability": fact.get("availability"),
+        "amenities": fact.get("amenities"),
+        "evidence_lines": fact.get("evidence_lines"),
+    }
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def _golf_fact_hash(fact: dict[str, Any]) -> str:
+    payload = {
+        "program_key": fact.get("program_key"),
+        "title": fact.get("title"),
+        "source_url": fact.get("source_url"),
+        "price_source_url": fact.get("price_source_url"),
+        "resort_slugs": fact.get("resort_slugs"),
+        "variant_key": fact.get("variant_key"),
+        "location_label": fact.get("location_label"),
+        "description": fact.get("description"),
+        "availability": fact.get("availability"),
+        "price": fact.get("price"),
+        "booking": fact.get("booking"),
+        "amenities": fact.get("amenities"),
+        "evidence_lines": fact.get("evidence_lines"),
+    }
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def _community_hall_fact_spans(fact: dict[str, Any], field_name: str) -> list[dict[str, Any]]:
+    evidence_lines = fact.get("evidence_lines")
+    if not isinstance(evidence_lines, list):
+        evidence_lines = []
+    return [
+        {
+            "page": 1,
+            "line": index,
+            "text": str(text),
+            "source": "official_community_hall_fact",
+            "source_url": fact.get("source_url"),
+            "field": field_name,
+        }
+        for index, text in enumerate(evidence_lines, start=1)
+        if str(text).strip()
+    ]
+
+
+def _golf_fact_spans(fact: dict[str, Any], field_name: str) -> list[dict[str, Any]]:
+    evidence_lines = fact.get("evidence_lines")
+    if not isinstance(evidence_lines, list):
+        evidence_lines = []
+    price_source_url = str(fact.get("price_source_url") or fact.get("source_url") or "")
+    source_url = str(fact.get("source_url") or "")
+    spans: list[dict[str, Any]] = []
+    for index, text in enumerate(evidence_lines, start=1):
+        clean = str(text).strip()
+        if not clean:
+            continue
+        is_price = field_name == "price" or any(
+            marker in clean.lower()
+            for marker in ("rate", "$", "pricing", "price", "fee", "tee time")
+        )
+        spans.append(
+            {
+                "page": 1,
+                "line": index,
+                "text": clean,
+                "source": "official_golf_fact",
+                "source_url": price_source_url if is_price else source_url,
+                "field": field_name,
+            }
+        )
+    return spans
+
+
+def _community_hall_offering_from_fact(fact: dict[str, Any]) -> dict[str, Any] | None:
+    resort_slug = str(fact.get("resort_slug") or "").strip()
+    source_url = str(fact.get("source_url") or "").strip()
+    if resort_slug not in ALL_RESORT_SLUGS or not source_url:
+        return None
+    source_sha256 = _community_hall_fact_hash(fact)
+    availability = fact.get("availability") if isinstance(fact.get("availability"), dict) else {}
+    amenities = [str(item) for item in fact.get("amenities") or [] if str(item).strip()]
+    spans = _community_hall_fact_spans(fact, "community_hall")
+    field_provenance = {
+        "title": spans[:1] or _community_hall_fact_spans({"evidence_lines": ["Community Halls"], "source_url": source_url}, "title"),
+        "resort_join": spans[:1],
+        "location": spans[:1],
+        "description": spans,
+        "price": spans,
+        **({"availability": spans} if availability.get("hours_state") != "source_unspecified" else {}),
+        **({"amenities": spans} if amenities else {}),
+    }
+    return {
+        "program_key": "community-halls",
+        "offering_key": f"community-halls:{resort_slug}:{resort_slug}",
+        "resort_slug": resort_slug,
+        "variant_key": resort_slug,
+        "title": "Community Halls",
+        "description": fact.get("description"),
+        "category": "resort_activity",
+        "tags": ["rest_and_recreation", "resort_special"],
+        "location": {"label": fact.get("location_label") or "Community Hall"},
+        "availability": availability or {
+            "kind": "evergreen_all_day",
+            "hours_state": "source_unspecified",
+            "label": "Hours not specified by Disney",
+        },
+        "price": {
+            "state": "free",
+            "notes": "Community Hall access is free; paid crafts or rentals are modeled separately when Disney sources them.",
+        },
+        "booking": {},
+        "eligibility": {},
+        "amenities": amenities,
+        "claims": {
+            "walkability": {"value": "unknown", "evidence": []},
+            "transportation": {"value": "unknown", "evidence": []},
+        },
+        "field_provenance": field_provenance,
+        "trust_state": "source_backed",
+        "source_url": source_url,
+        "source_sha256": source_sha256,
+        "source_path": str(COMMUNITY_HALL_FACTS_PATH),
+    }
+
+
+def _golf_offering_from_fact(fact: dict[str, Any], resort_slug: str) -> dict[str, Any] | None:
+    program_key = str(fact.get("program_key") or "").strip()
+    title = str(fact.get("title") or "").strip()
+    source_url = str(fact.get("source_url") or "").strip()
+    if not program_key or not title or resort_slug not in ALL_RESORT_SLUGS or not source_url:
+        return None
+
+    variant_key = str(fact.get("variant_key") or resort_slug).strip()
+    source_sha256 = _golf_fact_hash(fact)
+    availability = fact.get("availability") if isinstance(fact.get("availability"), dict) else {}
+    price = fact.get("price") if isinstance(fact.get("price"), dict) else {"state": "unknown"}
+    booking = fact.get("booking") if isinstance(fact.get("booking"), dict) else {}
+    amenities = [str(item) for item in fact.get("amenities") or [] if str(item).strip()]
+    all_spans = _golf_fact_spans(fact, "golf_official_fact")
+    price_spans = _golf_fact_spans(fact, "price")
+    availability_spans = _golf_fact_spans(fact, "availability")
+    field_provenance = {
+        "title": all_spans[:1],
+        "resort_join": all_spans[:1],
+        "location": all_spans[:1],
+        "description": all_spans,
+        "price": price_spans or all_spans,
+        **({"availability": availability_spans} if availability.get("hours_state") != "source_unspecified" else {}),
+        **({"booking": all_spans} if booking else {}),
+        **({"amenities": all_spans} if amenities else {}),
+    }
+    return {
+        "program_key": program_key,
+        "offering_key": f"{program_key}:{resort_slug}:{variant_key}",
+        "resort_slug": resort_slug,
+        "variant_key": variant_key,
+        "title": title,
+        "description": fact.get("description"),
+        "category": "fitness_wellness",
+        "tags": ["golf", "sports_and_fitness", "rest_and_recreation"],
+        "location": {"label": fact.get("location_label") or title},
+        "availability": availability or {
+            "kind": "evergreen_all_day",
+            "hours_state": "source_unspecified",
+            "label": "Hours not specified by Disney",
+        },
+        "price": price,
+        "booking": booking,
+        "eligibility": {},
+        "amenities": amenities,
+        "claims": {
+            "walkability": {"value": "unknown", "evidence": []},
+            "transportation": {"value": "unknown", "evidence": []},
+        },
+        "field_provenance": field_provenance,
+        "trust_state": "source_backed",
+        "source_url": source_url,
+        "source_sha256": source_sha256,
+        "source_path": str(GOLF_OFFICIAL_FACTS_PATH),
+    }
+
+
+def _fort_wilderness_campfire_options(program_key: str, title: str) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    title_key = _slugify(title)
+    if program_key != "chip-n-dales-campfire-sing-a-long" and title_key != "chip-n-dales-campfire-sing-a-long":
+        return [], []
+    matrix = _load_campfire_price_matrix()
+    fort = matrix.get("fort-wilderness") if isinstance(matrix, dict) else None
+    supplies = fort.get("supplies") if isinstance(fort, dict) else None
+    if not isinstance(supplies, list):
+        return [], []
+    options = [
+        dict(option)
+        for option in supplies
+        if isinstance(option, dict) and option.get("priceBasis") == "optional_add_on"
+    ]
+    spans = [
+        {
+            "page": 1,
+            "line": None,
+            "text": option.get("notes") or option.get("optionName") or "Fort Wilderness campfire optional purchase",
+            "source_url": option.get("sourceUrl"),
+            "source": option.get("sourceLabel"),
+        }
+        for option in options
+    ]
+    return options, spans
+
+
+def _price_quality(price: dict[str, Any] | None) -> int:
+    state = price.get("state") if isinstance(price, dict) else None
+    if state not in {"free", "fee"}:
+        return 0
+    if any(
+        price.get(key) not in (None, "", [], {})
+        for key in ("amountCents", "amount_cents", "minAmountCents", "min_amount_cents", "options")
+    ):
+        return 2
+    return 1
 
 
 def _variant_key(program_key: str, resort_slug: str, program_lines: list[dict[str, Any]]) -> str:
@@ -922,7 +1427,7 @@ def _location_for_slug(
         if not extracted or _is_generic_location_label(extracted, resort_slug):
             continue
         slugs, _ = resolve_official_resort_slugs(str(line.get("text", "")))
-        if slugs and resort_slug not in slugs:
+        if slugs and not _compatible_resort_reference(resort_slug, slugs):
             continue
         quality = _specific_location_quality(extracted)
         if best_extracted is None or quality > best_extracted[0]:
@@ -944,10 +1449,14 @@ def _location_for_slug(
 
 
 def _source_documentish(payload: dict[str, Any]) -> dict[str, str]:
-    return {
+    source = {
         "source_url": str(payload.get("source_url") or ""),
         "source_sha256": _source_sha(payload),
     }
+    source_path = str(payload.get("source_path") or "").strip()
+    if source_path:
+        source["source_path"] = source_path
+    return source
 
 
 def _index_detail_url(item: dict[str, Any], fallback_url: str) -> str:
@@ -1187,8 +1696,13 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
     description, description_spans = _description(program_lines, title)
     all_text = " ".join(str(line.get("text", "")) for line in program_lines)
     category = _category(program_key, title, tags)
-    availability = _availability(program_key, all_text)
+    availability = _availability_with_operating_hours(program_key, program_lines, all_text)
     availability_spans = _availability_spans(program_key, availability, program_lines)
+    price, price_spans = _price(program_key, program_lines)
+    optional_price_options, optional_price_spans = _fort_wilderness_campfire_options(program_key, program_title)
+    if price.get("state") == "free" and optional_price_options:
+        price = {**price, "options": optional_price_options}
+        price_spans = [*price_spans, *optional_price_spans]
 
     program = {
         "program_key": program_key,
@@ -1197,19 +1711,19 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
         "category": category,
         "tags": tags,
         "availability": availability,
+        "price": price,
         "field_provenance": {
             "title": title_spans,
             **({"description": description_spans} if description_spans else {}),
             **({"availability": availability_spans} if availability_spans else {}),
+            **({"price": price_spans} if price_spans else {}),
         },
         "trust_state": "source_backed",
         **source,
     }
 
-    context_resort_slug = str(payload.get("resort_slug") or "").strip()
+    context_resort_slug = _context_resort_slug(payload)
     if context_resort_slug:
-        resort_slugs = [context_resort_slug]
-        unresolved: list[str] = []
         resort_join_spans = [
             {
                 "page": 1,
@@ -1218,6 +1732,16 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
                 "source": "resort_page_context",
             }
         ]
+        resolved_slugs, unresolved = resolve_official_resort_slugs(all_text)
+        resort_slugs = []
+        for slug in [context_resort_slug, *resolved_slugs]:
+            if slug not in resort_slugs:
+                resort_slugs.append(slug)
+        resort_join_spans.extend(
+            _span(line)
+            for line in program_lines
+            if resolve_official_resort_slugs(str(line.get("text", "")))[0]
+        )
     else:
         located_lines = [
             line
@@ -1269,7 +1793,6 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
 
     booking, booking_provenance = _booking(program_key, program_lines)
     eligibility, eligibility_provenance = _eligibility(program_lines)
-    price, price_spans = _price(program_lines)
     base_claims = {
         "walkability": {"value": "unknown", "evidence": []},
         "transportation": {"value": "unknown", "evidence": []},
@@ -1383,6 +1906,12 @@ def _merge_program_metadata(target: dict[str, Any], source: dict[str, Any]) -> N
         target["source_url"] = source.get("source_url") or target.get("source_url")
         target["source_sha256"] = source.get("source_sha256") or target.get("source_sha256")
 
+    if _price_quality(source.get("price")) > _price_quality(target.get("price")):
+        target["price"] = source["price"]
+        _merge_field_provenance(target, source, "price")
+        target["source_url"] = source.get("source_url") or target.get("source_url")
+        target["source_sha256"] = source.get("source_sha256") or target.get("source_sha256")
+
     if source.get("category") and not target.get("category"):
         target["category"] = source["category"]
 
@@ -1395,16 +1924,27 @@ def _merge_program_metadata(target: dict[str, Any], source: dict[str, Any]) -> N
 
 
 def _enrich_offering_from_program(offering: dict[str, Any], program: dict[str, Any]) -> None:
+    source_updated = False
     if not offering.get("description") and program.get("description"):
         offering["description"] = program["description"]
         _merge_field_provenance(offering, program, "description")
+        source_updated = True
     if _availability_quality(program.get("availability")) > _availability_quality(offering.get("availability")):
         offering["availability"] = program["availability"]
         _merge_field_provenance(offering, program, "availability")
+        source_updated = True
+    if _price_quality(program.get("price")) > _price_quality(offering.get("price")):
+        offering["price"] = program["price"]
+        _merge_field_provenance(offering, program, "price")
+        source_updated = True
     if program.get("category") and not offering.get("category"):
         offering["category"] = program["category"]
     if not offering.get("tags") and program.get("tags"):
         offering["tags"] = program["tags"]
+    if source_updated:
+        offering["source_url"] = program.get("source_url") or offering.get("source_url")
+        offering["source_sha256"] = program.get("source_sha256") or offering.get("source_sha256")
+        offering["source_path"] = program.get("source_path") or offering.get("source_path")
 
 
 def _offering_source_priority(offering: dict[str, Any]) -> int:
@@ -1439,7 +1979,128 @@ def _prefer_best_source_offerings(offerings: list[dict[str, Any]]) -> list[dict[
     ]
 
 
-def extract_official_recreation_offerings(payload: dict[str, Any] | list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+def _apply_community_hall_official_facts(
+    result: dict[str, list[dict[str, Any]]],
+    programs_by_key: dict[str, dict[str, Any]],
+) -> None:
+    facts = _load_community_hall_facts()
+    if not facts:
+        return
+
+    if "community-halls" not in programs_by_key:
+        first_fact = facts[0]
+        source_sha256 = _community_hall_fact_hash(first_fact)
+        program = {
+            "program_key": "community-halls",
+            "title": "Community Halls",
+            "description": "Community Halls offer casual recreation, games, equipment checkout, DVDs, and crafts at select Disney Resort hotels.",
+            "category": "resort_activity",
+            "tags": ["rest_and_recreation", "resort_special"],
+            "availability": {
+                "kind": "evergreen_all_day",
+                "hours_state": "source_unspecified",
+                "label": "Hours vary by Community Hall",
+            },
+            "price": {"state": "free"},
+            "field_provenance": {
+                "title": _community_hall_fact_spans(first_fact, "title")[:1],
+                "description": _community_hall_fact_spans(first_fact, "description"),
+            },
+            "trust_state": "source_backed",
+            "source_url": first_fact.get("source_url"),
+            "source_sha256": source_sha256,
+            "source_path": str(COMMUNITY_HALL_FACTS_PATH),
+        }
+        programs_by_key["community-halls"] = program
+        result["programs"].append(program)
+
+    replacements = {
+        offering["offering_key"]: offering
+        for fact in facts
+        for offering in [_community_hall_offering_from_fact(fact)]
+        if offering is not None
+    }
+    if not replacements:
+        return
+
+    retained = [
+        offering
+        for offering in result["offerings"]
+        if offering.get("offering_key") not in replacements
+    ]
+    result["offerings"] = [*retained, *replacements.values()]
+
+
+def _apply_golf_official_facts(
+    result: dict[str, list[dict[str, Any]]],
+    programs_by_key: dict[str, dict[str, Any]],
+) -> None:
+    facts = _load_golf_official_facts()
+    if not facts:
+        return
+
+    replacements: dict[str, dict[str, Any]] = {}
+    for fact in facts:
+        program_key = str(fact.get("program_key") or "").strip()
+        title = str(fact.get("title") or "").strip()
+        source_url = str(fact.get("source_url") or "").strip()
+        if not program_key or not title or not source_url:
+            continue
+
+        source_sha256 = _golf_fact_hash(fact)
+        availability = fact.get("availability") if isinstance(fact.get("availability"), dict) else {}
+        price = fact.get("price") if isinstance(fact.get("price"), dict) else {"state": "unknown"}
+        spans = _golf_fact_spans(fact, "program")
+        program = {
+            "program_key": program_key,
+            "title": title,
+            "description": fact.get("description"),
+            "category": "fitness_wellness",
+            "tags": ["golf", "sports_and_fitness", "rest_and_recreation"],
+            "availability": availability or {
+                "kind": "evergreen_all_day",
+                "hours_state": "source_unspecified",
+                "label": "Hours not specified by Disney",
+            },
+            "price": price,
+            "field_provenance": {
+                "title": spans[:1],
+                "description": spans,
+                **({"availability": _golf_fact_spans(fact, "availability")} if availability else {}),
+                **({"price": _golf_fact_spans(fact, "price")} if price else {}),
+            },
+            "trust_state": "source_backed",
+            "source_url": source_url,
+            "source_sha256": source_sha256,
+            "source_path": str(GOLF_OFFICIAL_FACTS_PATH),
+        }
+        if program_key in programs_by_key:
+            programs_by_key[program_key].update(program)
+        else:
+            programs_by_key[program_key] = program
+            result["programs"].append(program)
+
+        for resort_slug in fact.get("resort_slugs") or []:
+            offering = _golf_offering_from_fact(fact, str(resort_slug))
+            if offering:
+                replacements[offering["offering_key"]] = offering
+
+    if not replacements:
+        return
+
+    retained = [
+        offering
+        for offering in result["offerings"]
+        if offering.get("offering_key") not in replacements
+    ]
+    result["offerings"] = [*retained, *replacements.values()]
+
+
+def extract_official_recreation_offerings(
+    payload: dict[str, Any] | list[dict[str, Any]],
+    *,
+    apply_quality_facts: bool = False,
+) -> dict[str, list[dict[str, Any]]]:
     """Extract normalized official recreation programs and resort offerings."""
 
     payloads = payload if isinstance(payload, list) else [payload]
@@ -1488,6 +2149,10 @@ def extract_official_recreation_offerings(payload: dict[str, Any] | list[dict[st
         program = programs_by_key.get(offering["program_key"])
         if program:
             _enrich_offering_from_program(offering, program)
+
+    if apply_quality_facts:
+        _apply_community_hall_official_facts(result, programs_by_key)
+        _apply_golf_official_facts(result, programs_by_key)
 
     joined_programs = {offering["program_key"] for offering in result["offerings"]}
     result["quarantine"] = [

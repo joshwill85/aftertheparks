@@ -114,6 +114,11 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
 
         <button type="submit" className="quick-finder__cta btn-primary">
           Find activities
+          <span
+            className="hidden-resort-magic hrm-quick-bubbles"
+            data-hidden-detail="quick_finder_bubble_trail"
+            aria-hidden
+          />
         </button>
       </form>
 

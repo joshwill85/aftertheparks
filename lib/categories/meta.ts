@@ -1,26 +1,28 @@
+import type { IconKey } from "@/components/icons/iconRegistry";
+
 export interface CategoryMeta {
   label: string;
-  icon: string;
+  iconKey: IconKey;
   stamp: string;
   mood?: string[];
 }
 
 export const CATEGORY_META: Record<string, CategoryMeta> = {
-  poolside: { label: "Poolside", icon: "🏊", stamp: "pool", mood: ["pool_break", "little_kids"] },
-  campfire: { label: "Campfire", icon: "🔥", stamp: "campfire", mood: ["tonight", "evening"] },
-  movies_under_stars: { label: "Movies", icon: "🎬", stamp: "movie", mood: ["tonight", "evening"] },
-  fitness_wellness: { label: "Wellness", icon: "🧘", stamp: "wellness" },
-  arts_crafts: { label: "Crafts", icon: "🎨", stamp: "craft", mood: ["little_kids", "quiet"] },
-  signature: { label: "Signature", icon: "✨", stamp: "signature", mood: ["worth_travel"] },
-  resort_activity: { label: "Resort fun", icon: "🌴", stamp: "resort" },
-  arcade: { label: "Games", icon: "🕹️", stamp: "games", mood: ["easy_break", "pool_break"] },
-  rental: { label: "Rentals", icon: "🚲", stamp: "rental", mood: ["pool_break"] },
-  sports_games: { label: "Sports & games", icon: "🏀", stamp: "sports" },
-  nighttime_entertainment: { label: "Evening", icon: "🌙", stamp: "evening", mood: ["tonight"] },
-  scavenger_hunt: { label: "Scavenger hunt", icon: "🧭", stamp: "hunt", mood: ["little_kids"] },
-  nature: { label: "Nature", icon: "🦋", stamp: "nature" },
-  music: { label: "Music", icon: "🎵", stamp: "music", mood: ["evening"] },
-  other: { label: "Activity", icon: "📋", stamp: "activity" },
+  poolside: { label: "Poolside", iconKey: "poolside", stamp: "pool", mood: ["pool_break", "little_kids"] },
+  campfire: { label: "Campfire", iconKey: "campfire", stamp: "campfire", mood: ["tonight", "evening"] },
+  movies_under_stars: { label: "Movies", iconKey: "movies_under_stars", stamp: "movie", mood: ["tonight", "evening"] },
+  fitness_wellness: { label: "Wellness", iconKey: "fitness_wellness", stamp: "wellness" },
+  arts_crafts: { label: "Crafts", iconKey: "arts_crafts", stamp: "craft", mood: ["little_kids", "quiet"] },
+  signature: { label: "Signature", iconKey: "signature", stamp: "signature", mood: ["worth_travel"] },
+  resort_activity: { label: "Resort fun", iconKey: "resort_activity", stamp: "resort" },
+  arcade: { label: "Games", iconKey: "arcade", stamp: "games", mood: ["easy_break", "pool_break"] },
+  rental: { label: "Rentals", iconKey: "rental", stamp: "rental", mood: ["pool_break"] },
+  sports_games: { label: "Sports & games", iconKey: "sports_games", stamp: "sports" },
+  nighttime_entertainment: { label: "Evening", iconKey: "nighttime_entertainment", stamp: "evening", mood: ["tonight"] },
+  scavenger_hunt: { label: "Scavenger hunt", iconKey: "scavenger_hunt", stamp: "hunt", mood: ["little_kids"] },
+  nature: { label: "Nature", iconKey: "nature", stamp: "nature" },
+  music: { label: "Music", iconKey: "music", stamp: "music", mood: ["evening"] },
+  other: { label: "Activity", iconKey: "other", stamp: "activity" },
 };
 
 export function getCategoryMeta(category: string): CategoryMeta {

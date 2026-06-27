@@ -1,0 +1,4650 @@
+{
+  "passed": true,
+  "summary": {
+    "parent_trail_items": 1,
+    "resort_trail_offerings": 23,
+    "missing_resort_join_provenance": 0,
+    "missing_required_field_provenance": 0,
+    "missing_source_url": 0,
+    "missing_source_hash": 0,
+    "price_without_source": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "offerings": [
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:all-star-movies-resort:all-star-movies-resort",
+      "resort_slug": "all-star-movies-resort",
+      "variant_key": "all-star-movies-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:all-star-music-resort:all-star-music-resort",
+      "resort_slug": "all-star-music-resort",
+      "variant_key": "all-star-music-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:all-star-sports-resort:all-star-sports-resort",
+      "resort_slug": "all-star-sports-resort",
+      "variant_key": "all-star-sports-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:coronado-springs-resort:coronado-springs-resort",
+      "resort_slug": "coronado-springs-resort",
+      "variant_key": "coronado-springs-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:boardwalk-inn:boardwalk-inn",
+      "resort_slug": "boardwalk-inn",
+      "variant_key": "boardwalk-inn",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:boardwalk-villas:boardwalk-villas",
+      "resort_slug": "boardwalk-villas",
+      "variant_key": "boardwalk-villas",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:yacht-club-resort:yacht-club-resort",
+      "resort_slug": "yacht-club-resort",
+      "variant_key": "yacht-club-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:beach-club-resort:beach-club-resort",
+      "resort_slug": "beach-club-resort",
+      "variant_key": "beach-club-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:beach-club-villas:beach-club-villas",
+      "resort_slug": "beach-club-villas",
+      "variant_key": "beach-club-villas",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:caribbean-beach-resort:caribbean-beach-resort",
+      "resort_slug": "caribbean-beach-resort",
+      "variant_key": "caribbean-beach-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:riviera-resort:riviera-resort",
+      "resort_slug": "riviera-resort",
+      "variant_key": "riviera-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
+      "resort_slug": "cabins-at-fort-wilderness-resort",
+      "variant_key": "cabins-at-fort-wilderness-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "campsites-at-fort-wilderness-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:grand-floridian-resort-and-spa:grand-floridian-resort-and-spa",
+      "resort_slug": "grand-floridian-resort-and-spa",
+      "variant_key": "grand-floridian-resort-and-spa",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:polynesian-village-resort:polynesian-village-resort",
+      "resort_slug": "polynesian-village-resort",
+      "variant_key": "polynesian-village-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:port-orleans-resort-riverside:port-orleans-resort-riverside",
+      "resort_slug": "port-orleans-resort-riverside",
+      "variant_key": "port-orleans-resort-riverside",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:port-orleans-resort-french-quarter:port-orleans-resort-french-quarter",
+      "resort_slug": "port-orleans-resort-french-quarter",
+      "variant_key": "port-orleans-resort-french-quarter",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa",
+      "resort_slug": "saratoga-springs-resort-and-spa",
+      "variant_key": "saratoga-springs-resort-and-spa",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:old-key-west-resort:old-key-west-resort",
+      "resort_slug": "old-key-west-resort",
+      "variant_key": "old-key-west-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:pop-century-resort:pop-century-resort",
+      "resort_slug": "pop-century-resort",
+      "variant_key": "pop-century-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:art-of-animation-resort:art-of-animation-resort",
+      "resort_slug": "art-of-animation-resort",
+      "variant_key": "art-of-animation-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "the Front Desk"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Disney's All-Star Movies Resort"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Disney's All-Star Music Resort"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Disney's All-Star Sports Resort"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Disney's Coronado Springs Resort"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Disney's BoardWalk Inn"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Disney's BoardWalk Villas"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Disney's Yacht Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Disney's Beach Club Resort"
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Disney’s Beach Club Villas"
+          },
+          {
+            "page": 1,
+            "line": 21,
+            "text": "These Resort hotels feature several jogging paths, including loops around Crescent Lake and Disney’s Yacht and Beach Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Disney's Caribbean Beach Resort"
+          },
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Disney’s Riviera Resort"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "The Cabins at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 32,
+            "text": "The Campsites at Disney's Fort Wilderness Resort"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Enjoy this 3.1-mile-long pathway that winds through the shaded, scenic back country surrounding Disney’s Fort Wilderness Resort & Campground."
+          },
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Disney’s Grand Floridian Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney’s Polynesian Village Resort"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Disney's Port Orleans Resort – Riverside"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney's Port Orleans Resort – French Quarter"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "Disney's Saratoga Springs Resort & Spa"
+          },
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Disney's Old Key West Resort"
+          },
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Disney's Pop Century Resort"
+          },
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Disney's Art of Animation Resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Jog on pathways throughout Walt Disney World Resort. Distances are approximate, and maps are available from the Front Desk."
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:contemporary-resort:contemporary-resort",
+      "resort_slug": "contemporary-resort",
+      "variant_key": "contemporary-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Running Trail at Disney's Contemporary Resort"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Running Trails",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[34].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney's Contemporary Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[34].locationsList.80010385;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney's Contemporary Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[34].locationsList.80010385;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:wilderness-lodge:wilderness-lodge",
+      "resort_slug": "wilderness-lodge",
+      "variant_key": "wilderness-lodge",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Running Trail at Disney's Wilderness Lodge"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Running Trails",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[34].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney's Wilderness Lodge",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[34].locationsList.80010394;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Disney's Wilderness Lodge",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[34].locationsList.80010394;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    }
+  ]
+}

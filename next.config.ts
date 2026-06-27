@@ -12,6 +12,7 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   images: {
     qualities: [75, 82, 85],
     remotePatterns: [

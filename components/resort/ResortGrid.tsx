@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { ResortCard } from "@/components/resort/ResortCard";
 import {
   formatResortArea,
@@ -274,8 +275,11 @@ export function ResortGrid({
       )}
 
       {showViewAllLink && (
-        <Link href="/resorts" className="home-section__link resort-grid__view-all">
-          View all 31 resorts →
+        <Link
+          href="/resorts"
+          className="home-section__link resort-grid__view-all inline-flex items-center"
+        >
+          View all 31 resorts <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
         </Link>
       )}
     </div>

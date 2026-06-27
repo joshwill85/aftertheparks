@@ -1,15 +1,17 @@
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import type { ActivityOffering } from "@/lib/types/occurrence";
+import { DecisionSignals } from "@/components/activity/DecisionSignals";
 import { getCategoryMeta } from "@/lib/categories/meta";
+import { offeringDecisionProfile } from "@/lib/activityDecision";
 import {
   getPublicOfferingAvailabilityLabel,
   shouldShowOfferingAvailability,
 } from "@/lib/activityAvailabilityDisplay";
-
-function priceLabel(state: ActivityOffering["price"]["state"]): string {
-  if (state === "free") return "Free";
-  if (state === "fee") return "Paid";
-  return "Price unclear";
-}
+import {
+  optionalPriceAddOnsLabel,
+  publicPriceDetail,
+  publicPriceLabel,
+} from "@/lib/priceLabels";
 
 function bookingNotes(offering: ActivityOffering): string[] {
   const notes: string[] = [];
@@ -40,15 +42,18 @@ export function ActivityOfferingCard({
   const availabilityLabel = getPublicOfferingAvailabilityLabel(
     offering.availability
   );
+  const decisionProfile = offeringDecisionProfile(offering);
+  const addOnsLabel = optionalPriceAddOnsLabel(offering.price.options);
+  const priceDetail = publicPriceDetail(offering.price);
 
   return (
-    <article className="rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 shadow-sm">
+    <article className="activity-offering-card rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 shadow-sm">
       <div className="flex items-start gap-4">
         <div
           className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[var(--color-surface)] text-xl"
           aria-hidden
         >
-          {meta.icon}
+          <IconGlyph iconKey={meta.iconKey} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
@@ -56,8 +61,18 @@ export function ActivityOfferingCard({
               {meta.label}
             </p>
             <span className="rounded-full bg-[var(--color-surface)] px-2 py-1 text-xs font-semibold text-[var(--color-muted)]">
-              {priceLabel(offering.price.state)}
+              {publicPriceLabel(offering.price.state)}
             </span>
+            {priceDetail && (
+              <span className="rounded-full bg-[var(--color-surface)] px-2 py-1 text-xs font-semibold text-[var(--color-muted)]">
+                {priceDetail}
+              </span>
+            )}
+            {addOnsLabel && (
+              <span className="rounded-full bg-[var(--color-surface)] px-2 py-1 text-xs font-semibold text-[var(--color-muted)]">
+                {addOnsLabel}
+              </span>
+            )}
           </div>
           <h3 className="mt-1 font-display text-xl font-semibold leading-tight">
             {offering.title}
@@ -74,6 +89,8 @@ export function ActivityOfferingCard({
           )}
         </div>
       </div>
+
+      <DecisionSignals profile={decisionProfile} compact />
 
       <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
         {showAvailability && (

@@ -15,12 +15,38 @@
       "is_fee_based": true,
       "required_spans": {
         "title": [
-          { "page": 1, "line": 7, "text": "BUTTONS AND BELLS" },
-          { "page": 1, "line": 10, "text": "GAME ARCADE ($)" }
+          {
+            "page": 1,
+            "line": 7,
+            "text": "BUTTONS AND BELLS"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "GAME ARCADE ($)"
+          }
         ],
-        "location": [{ "page": 1, "line": 12, "text": "Near Wilderness Lodge Mercantile" }],
-        "schedule": [{ "page": 1, "line": 13, "text": "Daily from 8:00am-11:00pm" }],
-        "description": [{ "page": 1, "line": 14, "text": "Play the latest and greatest family-friendly video games." }]
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Near Wilderness Lodge Mercantile"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Daily from 8:00am-11:00pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Play the latest and greatest family-friendly video games."
+          }
+        ]
       }
     },
     {
@@ -35,16 +61,52 @@
       "is_fee_based": false,
       "required_spans": {
         "title": [
-          { "page": 1, "line": 15, "text": "WONDERS OF THE LODGE" },
-          { "page": 1, "line": 17, "text": "ART & ARCHITECTURE TOUR" }
+          {
+            "page": 1,
+            "line": 15,
+            "text": "WONDERS OF THE LODGE"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "ART & ARCHITECTURE TOUR"
+          }
         ],
-        "location": [{ "page": 1, "line": 18, "text": "Meet near Resort Lobby Fireplace" }],
-        "schedule": [{ "page": 1, "line": 19, "text": "Daily at 9:00am" }],
+        "location": [
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Meet near Resort Lobby Fireplace"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Daily at 9:00am"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 21, "text": "Join us for a fascinating, one-hour walking tour that" },
-          { "page": 1, "line": 23, "text": "highlights the architecture and theme of the Resort." },
-          { "page": 1, "line": 25, "text": "Learn about the art, artifacts and classic craftsmanship" },
-          { "page": 1, "line": 27, "text": "that celebrate the majesty of the wilderness." }
+          {
+            "page": 1,
+            "line": 21,
+            "text": "Join us for a fascinating, one-hour walking tour that"
+          },
+          {
+            "page": 1,
+            "line": 23,
+            "text": "highlights the architecture and theme of the Resort."
+          },
+          {
+            "page": 1,
+            "line": 25,
+            "text": "Learn about the art, artifacts and classic craftsmanship"
+          },
+          {
+            "page": 1,
+            "line": 27,
+            "text": "that celebrate the majesty of the wilderness."
+          }
         ]
       }
     },
@@ -59,13 +121,43 @@
       "description": "Search the main building for a hidden Chip ‘n’ Dale photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 20, "text": "FIND A FRIEND" }],
-        "location": [{ "page": 1, "line": 22, "text": "Throughout the Main Building" }],
-        "schedule": [{ "page": 1, "line": 24, "text": "Daily from 9:00am-9:00pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 20,
+            "text": "FIND A FRIEND"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Throughout the Main Building"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Daily from 9:00am-9:00pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 26, "text": "Search the main building for a hidden Chip ‘n’ Dale" },
-          { "page": 1, "line": 28, "text": "photo prop. Once located, snap a photo and then" },
-          { "page": 1, "line": 29, "text": "head to the Front Desk to receive a surprise!" }
+          {
+            "page": 1,
+            "line": 26,
+            "text": "Search the main building for a hidden Chip ‘n’ Dale"
+          },
+          {
+            "page": 1,
+            "line": 28,
+            "text": "photo prop. Once located, snap a photo and then"
+          },
+          {
+            "page": 1,
+            "line": 29,
+            "text": "head to the Front Desk to receive a surprise!"
+          }
         ]
       }
     },
@@ -81,17 +173,45 @@
       "is_fee_based": true,
       "required_spans": {
         "title": [
-          { "page": 1, "line": 30, "text": "FAMILY ACTIVITIES" },
-          { "page": 1, "line": 31, "text": "AND CRAFTS ($)" }
+          {
+            "page": 1,
+            "line": 30,
+            "text": "FAMILY ACTIVITIES"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "AND CRAFTS ($)"
+          }
         ],
         "location": [
-          { "page": 1, "line": 33, "text": "Humphrey’s Hideout at Disney’s Wilderness Lodge" },
-          { "page": 1, "line": 35, "text": "(Near Copper Creek Springs Pool)" }
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Humphrey’s Hideout at Disney’s Wilderness Lodge"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "(Near Copper Creek Springs Pool)"
+          }
         ],
         "schedule": [
-          { "page": 1, "line": 37, "text": "Daily from 12:00pm-1:30pm;" },
-          { "page": 1, "line": 39, "text": "Additional activities and crafts on Monday, Tuesday," },
-          { "page": 1, "line": 41, "text": "Thursday and Saturday from 3:30pm-4:30pm" }
+          {
+            "page": 1,
+            "line": 37,
+            "text": "Daily from 12:00pm-1:30pm;"
+          },
+          {
+            "page": 1,
+            "line": 39,
+            "text": "Additional activities and crafts on Monday, Tuesday,"
+          },
+          {
+            "page": 1,
+            "line": 41,
+            "text": "Thursday and Saturday from 3:30pm-4:30pm"
+          }
         ]
       }
     },
@@ -106,13 +226,43 @@
       "description": "Join us for stretches and stories inspired by our Disney friends. Please arrive by 8:45am to fill out a waiver and claim your spot in the class.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 32, "text": "STORYTIME YOGA" }],
-        "location": [{ "page": 1, "line": 34, "text": "Across from Buttons and Bells Game Arcade" }],
-        "schedule": [{ "page": 1, "line": 36, "text": "Friday at 9:00am" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 32,
+            "text": "STORYTIME YOGA"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 34,
+            "text": "Across from Buttons and Bells Game Arcade"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 36,
+            "text": "Friday at 9:00am"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 38, "text": "Join us for stretches and stories inspired by our" },
-          { "page": 1, "line": 40, "text": "Disney friends. Please arrive by 8:45am to fill out" },
-          { "page": 1, "line": 42, "text": "a waiver and claim your spot in the class." }
+          {
+            "page": 1,
+            "line": 38,
+            "text": "Join us for stretches and stories inspired by our"
+          },
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Disney friends. Please arrive by 8:45am to fill out"
+          },
+          {
+            "page": 1,
+            "line": 42,
+            "text": "a waiver and claim your spot in the class."
+          }
         ]
       }
     },
@@ -127,13 +277,43 @@
       "description": "Join us for fun and games, both in and out of the pool. In the event of inclement weather, activities will be held at Humphrey’s Hideout at Disney’s Wilderness Lodge.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 43, "text": "POOLSIDE ACTIVITIES" }],
-        "location": [{ "page": 1, "line": 45, "text": "Copper Creek Springs Pool" }],
-        "schedule": [{ "page": 1, "line": 47, "text": "Daily at 2:00pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 43,
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "Copper Creek Springs Pool"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 47,
+            "text": "Daily at 2:00pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 49, "text": "Join us for fun and games, both in and out of the pool." },
-          { "page": 1, "line": 51, "text": "In the event of inclement weather, activities will be held" },
-          { "page": 1, "line": 53, "text": "at Humphrey’s Hideout at Disney’s Wilderness Lodge." }
+          {
+            "page": 1,
+            "line": 49,
+            "text": "Join us for fun and games, both in and out of the pool."
+          },
+          {
+            "page": 1,
+            "line": 51,
+            "text": "In the event of inclement weather, activities will be held"
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "at Humphrey’s Hideout at Disney’s Wilderness Lodge."
+          }
         ]
       }
     },
@@ -148,15 +328,53 @@
       "description": "Embark on your own self-led adventure and explore the timeless beauty of Disney’s Wilderness Lodge. Pick up a Nature Guide at the Front Desk throughout the day or at Humphrey’s Hideout during scheduled activities to get started.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 44, "text": "NATURE WALK" }],
-        "location": [{ "page": 1, "line": 46, "text": "Daily throughout Disney’s Wilderness Lodge" }],
-        "schedule": [{ "page": 1, "line": 46, "text": "Daily throughout Disney’s Wilderness Lodge" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 44,
+            "text": "NATURE WALK"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Daily throughout Disney’s Wilderness Lodge"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Daily throughout Disney’s Wilderness Lodge"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 48, "text": "Embark on your own self-led adventure and explore" },
-          { "page": 1, "line": 50, "text": "the timeless beauty of Disney’s Wilderness Lodge." },
-          { "page": 1, "line": 52, "text": "Pick up a Nature Guide at the Front Desk throughout" },
-          { "page": 1, "line": 54, "text": "the day or at Humphrey’s Hideout during scheduled" },
-          { "page": 1, "line": 55, "text": "activities to get started." }
+          {
+            "page": 1,
+            "line": 48,
+            "text": "Embark on your own self-led adventure and explore"
+          },
+          {
+            "page": 1,
+            "line": 50,
+            "text": "the timeless beauty of Disney’s Wilderness Lodge."
+          },
+          {
+            "page": 1,
+            "line": 52,
+            "text": "Pick up a Nature Guide at the Front Desk throughout"
+          },
+          {
+            "page": 1,
+            "line": 54,
+            "text": "the day or at Humphrey’s Hideout during scheduled"
+          },
+          {
+            "page": 1,
+            "line": 55,
+            "text": "activities to get started."
+          }
         ]
       }
     },
@@ -171,15 +389,43 @@
       "description": "Get creative with a Disney twist on this arts and crafts favorite!",
       "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 56, "text": "MICKEY TIE-DYE ($)" }],
-        "location": [
-          { "page": 1, "line": 57, "text": "Humphrey’s Hideout at Disney’s Wilderness Lodge" },
-          { "page": 1, "line": 58, "text": "(Near Copper Creek Springs Pool)" }
+        "title": [
+          {
+            "page": 1,
+            "line": 56,
+            "text": "MICKEY TIE-DYE ($)"
+          }
         ],
-        "schedule": [{ "page": 1, "line": 60, "text": "Sunday, Wednesday and Friday from 3:30pm-4:30pm" }],
+        "location": [
+          {
+            "page": 1,
+            "line": 57,
+            "text": "Humphrey’s Hideout at Disney’s Wilderness Lodge"
+          },
+          {
+            "page": 1,
+            "line": 58,
+            "text": "(Near Copper Creek Springs Pool)"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 60,
+            "text": "Sunday, Wednesday and Friday from 3:30pm-4:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 61, "text": "Get creative with a Disney twist on this arts and" },
-          { "page": 1, "line": 62, "text": "crafts favorite!" }
+          {
+            "page": 1,
+            "line": 61,
+            "text": "Get creative with a Disney twist on this arts and"
+          },
+          {
+            "page": 1,
+            "line": 62,
+            "text": "crafts favorite!"
+          }
         ]
       }
     },
@@ -195,15 +441,47 @@
       "is_fee_based": true,
       "required_spans": {
         "title": [
-          { "page": 1, "line": 63, "text": "TASTEFUL ARTISTRY AT" },
-          { "page": 1, "line": 64, "text": "DISNEY’S WILDERNESS LODGE ($)" }
+          {
+            "page": 1,
+            "line": 63,
+            "text": "TASTEFUL ARTISTRY AT"
+          },
+          {
+            "page": 1,
+            "line": 64,
+            "text": "DISNEY’S WILDERNESS LODGE ($)"
+          }
         ],
-        "location": [{ "page": 1, "line": 66, "text": "Artist Point" }],
-        "schedule": [{ "page": 1, "line": 68, "text": "Thursday at 12:00pm" }],
+        "location": [
+          {
+            "page": 1,
+            "line": 66,
+            "text": "Artist Point"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 68,
+            "text": "Thursday at 12:00pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 70, "text": "Create your own specialty wooden artwork!" },
-          { "page": 1, "line": 72, "text": "Reservations are available on a first-come, first-served basis." },
-          { "page": 1, "line": 74, "text": "To book, please call 689-282-8375." }
+          {
+            "page": 1,
+            "line": 70,
+            "text": "Create your own specialty wooden artwork!"
+          },
+          {
+            "page": 1,
+            "line": 72,
+            "text": "Reservations are available on a first-come, first-served basis."
+          },
+          {
+            "page": 1,
+            "line": 74,
+            "text": "To book, please call 689-282-8375."
+          }
         ]
       }
     },
@@ -218,12 +496,38 @@
       "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 65, "text": "CAMPFIRE" }],
-        "location": [{ "page": 1, "line": 67, "text": "Near Geyser Point Bar & Grill" }],
-        "schedule": [{ "page": 1, "line": 69, "text": "Nightly from 6:30pm-7:30pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 65,
+            "text": "CAMPFIRE"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 67,
+            "text": "Near Geyser Point Bar & Grill"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 69,
+            "text": "Nightly from 6:30pm-7:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 71, "text": "Enjoy the warm glow of the campfire with complimentary" },
-          { "page": 1, "line": 73, "text": "marshmallows. S’mores kits available for purchase." }
+          {
+            "page": 1,
+            "line": 71,
+            "text": "Enjoy the warm glow of the campfire with complimentary"
+          },
+          {
+            "page": 1,
+            "line": 73,
+            "text": "marshmallows. S’mores kits available for purchase."
+          }
         ]
       }
     },
@@ -236,15 +540,45 @@
       "end_time": null,
       "location": "Copper Creek Springs Pool Deck",
       "description": "Join us for family-friendly seasonal activities. See a Recreational Cast Member for more information. Fees may apply.",
-      "is_fee_based": false,
+      "is_fee_based": true,
       "required_spans": {
-        "title": [{ "page": 1, "line": 75, "text": "NIGHTTIME POOL PARTY" }],
-        "location": [{ "page": 1, "line": 77, "text": "Copper Creek Springs Pool Deck" }],
-        "schedule": [{ "page": 1, "line": 78, "text": "Monday and Wednesday at 8:30pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 75,
+            "text": "NIGHTTIME POOL PARTY"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Copper Creek Springs Pool Deck"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Monday and Wednesday at 8:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 79, "text": "Join us for family-friendly seasonal activities." },
-          { "page": 1, "line": 81, "text": "See a Recreational Cast Member for more information." },
-          { "page": 1, "line": 84, "text": "Fees may apply." }
+          {
+            "page": 1,
+            "line": 79,
+            "text": "Join us for family-friendly seasonal activities."
+          },
+          {
+            "page": 1,
+            "line": 81,
+            "text": "See a Recreational Cast Member for more information."
+          },
+          {
+            "page": 1,
+            "line": 84,
+            "text": "Fees may apply."
+          }
         ]
       }
     },
@@ -259,24 +593,90 @@
       "description": "",
       "is_fee_based": false,
       "movie_nights": [
-        { "day_of_week": "sunday", "movie_title": "The Many Adventures of Winnie the Pooh", "show_time": "8:30PM" },
-        { "day_of_week": "tuesday", "movie_title": "The Little Mermaid (1989)", "show_time": "8:30PM" },
-        { "day_of_week": "thursday", "movie_title": "Frozen 2", "show_time": "8:30PM" },
-        { "day_of_week": "saturday", "movie_title": "Big Hero 6", "show_time": "8:30PM" }
+        {
+          "day_of_week": "sunday",
+          "movie_title": "The Many Adventures of Winnie the Pooh",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "tuesday",
+          "movie_title": "The Little Mermaid (1989)",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "thursday",
+          "movie_title": "Frozen 2",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "saturday",
+          "movie_title": "Big Hero 6",
+          "show_time": "8:30PM"
+        }
       ],
       "required_spans": {
-        "title": [{ "page": 1, "line": 76, "text": "MOVIE UNDER THE STARS" }],
-        "location": [{ "page": 1, "line": 80, "text": "LAWN OUTSIDE REUNION STATION | 8:30PM" }],
-        "schedule": [{ "page": 1, "line": 80, "text": "LAWN OUTSIDE REUNION STATION | 8:30PM" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 80,
+            "text": "LAWN OUTSIDE REUNION STATION | 8:30PM"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 80,
+            "text": "LAWN OUTSIDE REUNION STATION | 8:30PM"
+          }
+        ],
         "movie_nights": [
-          { "page": 1, "line": 83, "text": "Sunday" },
-          { "page": 1, "line": 82, "text": "The Many Adventures of Winnie the Pooh" },
-          { "page": 1, "line": 86, "text": "Tuesday" },
-          { "page": 1, "line": 85, "text": "The Little Mermaid (1989)" },
-          { "page": 1, "line": 88, "text": "Thursday" },
-          { "page": 1, "line": 89, "text": "Frozen 2" },
-          { "page": 1, "line": 92, "text": "Saturday" },
-          { "page": 1, "line": 91, "text": "Big Hero 6 PS" }
+          {
+            "page": 1,
+            "line": 83,
+            "text": "Sunday"
+          },
+          {
+            "page": 1,
+            "line": 82,
+            "text": "The Many Adventures of Winnie the Pooh"
+          },
+          {
+            "page": 1,
+            "line": 86,
+            "text": "Tuesday"
+          },
+          {
+            "page": 1,
+            "line": 85,
+            "text": "The Little Mermaid (1989)"
+          },
+          {
+            "page": 1,
+            "line": 88,
+            "text": "Thursday"
+          },
+          {
+            "page": 1,
+            "line": 89,
+            "text": "Frozen 2"
+          },
+          {
+            "page": 1,
+            "line": 92,
+            "text": "Saturday"
+          },
+          {
+            "page": 1,
+            "line": 91,
+            "text": "Big Hero 6 PS"
+          }
         ]
       }
     },
@@ -291,12 +691,38 @@
       "description": "Bring the family together for an unforgettable bingo night full of fun and prizes!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 87, "text": "WILD WILDERNESS BINGO" }],
-        "location": [{ "page": 1, "line": 90, "text": "Reunion Station Lawn" }],
-        "schedule": [{ "page": 1, "line": 93, "text": "Friday at 8:30pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 87,
+            "text": "WILD WILDERNESS BINGO"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 90,
+            "text": "Reunion Station Lawn"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 93,
+            "text": "Friday at 8:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 94, "text": "Bring the family together for an unforgettable bingo night" },
-          { "page": 1, "line": 96, "text": "full of fun and prizes!" }
+          {
+            "page": 1,
+            "line": 94,
+            "text": "Bring the family together for an unforgettable bingo night"
+          },
+          {
+            "page": 1,
+            "line": 96,
+            "text": "full of fun and prizes!"
+          }
         ]
       }
     }

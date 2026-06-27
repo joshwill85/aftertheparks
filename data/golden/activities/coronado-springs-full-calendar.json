@@ -14,13 +14,43 @@
       "description": "Search the Resort for a hidden Bruno photo prop. Once located, snap a photo and then head to the Concierge Desk to receive a surprise!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 11, "text": "FIND A FRIEND" }],
-        "location": [{ "page": 1, "line": 12, "text": "Throughout Disney’s Coronado Springs Resort" }],
-        "schedule": [{ "page": 1, "line": 14, "text": "Daily from 9:00am-9:00pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "FIND A FRIEND"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Throughout Disney’s Coronado Springs Resort"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Daily from 9:00am-9:00pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 15, "text": "Search the Resort for a hidden Bruno photo prop." },
-          { "page": 1, "line": 17, "text": "Once located, snap a photo and then head to the" },
-          { "page": 1, "line": 18, "text": "Concierge Desk to receive a surprise!" }
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Search the Resort for a hidden Bruno photo prop."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Once located, snap a photo and then head to the"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Concierge Desk to receive a surprise!"
+          }
         ]
       }
     },
@@ -35,14 +65,48 @@
       "description": "Self-led nature trail to view the wildlife and landscape of the Resort. Pick up a Nature Guide at Panchito’s Gifts & Sundries, Concierge Desk or from a Recreation Cast Member to get started.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 21, "text": "NATURE WALK" }],
-        "location": [{ "page": 1, "line": 24, "text": "Daily throughout Disney’s Coronado Springs Resort" }],
-        "schedule": [{ "page": 1, "line": 24, "text": "Daily throughout Disney’s Coronado Springs Resort" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 21,
+            "text": "NATURE WALK"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Daily throughout Disney’s Coronado Springs Resort"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 24,
+            "text": "Daily throughout Disney’s Coronado Springs Resort"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 28, "text": "Self-led nature trail to view the wildlife and landscape" },
-          { "page": 1, "line": 31, "text": "of the Resort. Pick up a Nature Guide at Panchito’s" },
-          { "page": 1, "line": 33, "text": "Gifts & Sundries, Concierge Desk or from a Recreation" },
-          { "page": 1, "line": 35, "text": "Cast Member to get started." }
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Self-led nature trail to view the wildlife and landscape"
+          },
+          {
+            "page": 1,
+            "line": 31,
+            "text": "of the Resort. Pick up a Nature Guide at Panchito’s"
+          },
+          {
+            "page": 1,
+            "line": 33,
+            "text": "Gifts & Sundries, Concierge Desk or from a Recreation"
+          },
+          {
+            "page": 1,
+            "line": 35,
+            "text": "Cast Member to get started."
+          }
         ]
       }
     },
@@ -57,12 +121,38 @@
       "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 38, "text": "FITNE Ss S CENTERS" }],
-        "location": [{ "page": 1, "line": 40, "text": "Gran Destino Tower and near Casitas 4" }],
-        "schedule": [{ "page": 1, "line": 44, "text": "Open 24 hours a day, 7 days a week" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 38,
+            "text": "FITNE Ss S CENTERS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 40,
+            "text": "Gran Destino Tower and near Casitas 4"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 44,
+            "text": "Open 24 hours a day, 7 days a week"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 46, "text": "Continue pushing towards your wellness goals in" },
-          { "page": 1, "line": 47, "text": "our full-service fitness center." }
+          {
+            "page": 1,
+            "line": 46,
+            "text": "Continue pushing towards your wellness goals in"
+          },
+          {
+            "page": 1,
+            "line": 47,
+            "text": "our full-service fitness center."
+          }
         ]
       }
     },
@@ -77,12 +167,38 @@
       "description": "Join us for family-friendly activities. See a Recreation Cast Member for more information.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 54, "text": "POOLSIDE ACTIVITIES" }],
-        "location": [{ "page": 1, "line": 56, "text": "Daily at The Dig Site" }],
-        "schedule": [{ "page": 1, "line": 56, "text": "Daily at The Dig Site" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 54,
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 56,
+            "text": "Daily at The Dig Site"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 56,
+            "text": "Daily at The Dig Site"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 58, "text": "Join us for family-friendly activities." },
-          { "page": 1, "line": 60, "text": "See a Recreation Cast Member for more information." }
+          {
+            "page": 1,
+            "line": 58,
+            "text": "Join us for family-friendly activities."
+          },
+          {
+            "page": 1,
+            "line": 60,
+            "text": "See a Recreation Cast Member for more information."
+          }
         ]
       }
     },
@@ -97,10 +213,34 @@
       "description": "Join us for a trivia challenge near El Centro!",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 77, "text": "DISNEY TRIVIA" }],
-        "location": [{ "page": 1, "line": 81, "text": "Laguna Bar" }],
-        "schedule": [{ "page": 1, "line": 83, "text": "Friday from 5:00pm-5:45pm" }],
-        "description": [{ "page": 1, "line": 84, "text": "Join us for a trivia challenge near El Centro!" }]
+        "title": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "DISNEY TRIVIA"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Laguna Bar"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 83,
+            "text": "Friday from 5:00pm-5:45pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 84,
+            "text": "Join us for a trivia challenge near El Centro!"
+          }
+        ]
       }
     },
     {
@@ -114,12 +254,38 @@
       "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 89, "text": "EXPLORER’S CAMPFIRE" }],
-        "location": [{ "page": 1, "line": 91, "text": "The Dig Site" }],
-        "schedule": [{ "page": 1, "line": 93, "text": "Nightly from 6:30pm-7:30pm" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 89,
+            "text": "EXPLORER’S CAMPFIRE"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 91,
+            "text": "The Dig Site"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 93,
+            "text": "Nightly from 6:30pm-7:30pm"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 94, "text": "Enjoy the warm glow of the campfire with complimentary" },
-          { "page": 1, "line": 95, "text": "marshmallows. S’mores kits available for purchase." }
+          {
+            "page": 1,
+            "line": 94,
+            "text": "Enjoy the warm glow of the campfire with complimentary"
+          },
+          {
+            "page": 1,
+            "line": 95,
+            "text": "marshmallows. S’mores kits available for purchase."
+          }
         ]
       }
     },
@@ -134,9 +300,27 @@
       "description": "",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 96, "text": "MOVIE UNDER THE STARS" }],
-        "location": [{ "page": 1, "line": 98, "text": "GRAN DESTINO LAWN | 8:00PM" }],
-        "schedule": [{ "page": 1, "line": 98, "text": "GRAN DESTINO LAWN | 8:00PM" }]
+        "title": [
+          {
+            "page": 1,
+            "line": 96,
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 98,
+            "text": "GRAN DESTINO LAWN | 8:00PM"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 98,
+            "text": "GRAN DESTINO LAWN | 8:00PM"
+          }
+        ]
       }
     },
     {
@@ -150,10 +334,34 @@
       "description": "Join us for nighttime activities for all ages.",
       "is_fee_based": false,
       "required_spans": {
-        "title": [{ "page": 1, "line": 97, "text": "CORONADO NIGHTS POOL PARTY" }],
-        "location": [{ "page": 1, "line": 99, "text": "The Dig Site Pool" }],
-        "schedule": [{ "page": 1, "line": 100, "text": "Monday, Wednesday, and Saturday from 8:30pm-9:30pm" }],
-        "description": [{ "page": 1, "line": 103, "text": "Join us for nighttime activities for all ages." }]
+        "title": [
+          {
+            "page": 1,
+            "line": 97,
+            "text": "CORONADO NIGHTS POOL PARTY"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 99,
+            "text": "The Dig Site Pool"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 100,
+            "text": "Monday, Wednesday, and Saturday from 8:30pm-9:30pm"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 103,
+            "text": "Join us for nighttime activities for all ages."
+          }
+        ]
       }
     }
   ],
@@ -164,10 +372,24 @@
       "slug": "resort-scavenger-hunt",
       "reason": "The rendered PDF shows the title and pickup instructions only. No source-visible activity schedule or exact activity location is printed.",
       "required_spans": {
-        "title": [{ "page": 1, "line": 106, "text": "RESORT SCAVENGER HUNT" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 106,
+            "text": "RESORT SCAVENGER HUNT"
+          }
+        ],
         "description": [
-          { "page": 1, "line": 107, "text": "Pick up a Clue Guide from the Concierge Desk, Panchito’s Gift" },
-          { "page": 1, "line": 108, "text": "& Sundries, or any Recreation Cast Member to participate." }
+          {
+            "page": 1,
+            "line": 108,
+            "text": "Pick up a Clue Guide from the Concierge Desk, Panchito’s Gift"
+          },
+          {
+            "page": 1,
+            "line": 109,
+            "text": "& Sundries, or any Recreation Cast Member to participate."
+          }
         ]
       }
     }
@@ -189,11 +411,22 @@
         "notes": "Verified against rendered PDF crop because OCR merged the craft table rows and missed the location split from the schedule line."
       },
       "required_spans": {
-        "title": [{ "page": 1, "line": 61, "text": "ARTS AND CRAFTS ($)" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 61,
+            "text": "ARTS AND CRAFTS ($)"
+          }
+        ],
         "location": [
           {
             "page": 1,
-            "bbox": [380, 2290, 1815, 2355],
+            "bbox": [
+              380,
+              2290,
+              1815,
+              2355
+            ],
             "text": "The Dig Site from 3:30pm-4:30pm",
             "source": "manual_visual_bbox"
           }
@@ -201,7 +434,12 @@
         "schedule": [
           {
             "page": 1,
-            "bbox": [380, 2290, 1815, 2355],
+            "bbox": [
+              380,
+              2290,
+              1815,
+              2355
+            ],
             "text": "The Dig Site from 3:30pm-4:30pm",
             "source": "manual_visual_bbox"
           }
@@ -209,7 +447,12 @@
         "description": [
           {
             "page": 1,
-            "bbox": [380, 2375, 2640, 2545],
+            "bbox": [
+              380,
+              2375,
+              2640,
+              2545
+            ],
             "text": "Sunday, Tuesday and Thursday: Mickey Tie-Dye; Monday and Saturday: Sand Art; Wednesday: Seasonal Craft.",
             "source": "manual_visual_bbox"
           }
@@ -232,11 +475,22 @@
         "notes": "Verified against rendered PDF crop because OCR split the schedule across multiple lines and blended it with nearby arts-and-crafts text."
       },
       "required_spans": {
-        "title": [{ "page": 1, "line": 62, "text": "SANGRIA UNIVERSITY ($)" }],
+        "title": [
+          {
+            "page": 1,
+            "line": 62,
+            "text": "SANGRIA UNIVERSITY ($)"
+          }
+        ],
         "location": [
           {
             "page": 1,
-            "bbox": [425, 2660, 1450, 2730],
+            "bbox": [
+              425,
+              2660,
+              1450,
+              2730
+            ],
             "text": "Toledo - Tapas, Steak & Seafood",
             "source": "manual_visual_bbox"
           }
@@ -244,7 +498,12 @@
         "schedule": [
           {
             "page": 1,
-            "bbox": [425, 2745, 1405, 2895],
+            "bbox": [
+              425,
+              2745,
+              1405,
+              2895
+            ],
             "text": "Saturday and Sunday at 11:00am and 1:30pm",
             "source": "manual_visual_bbox"
           }
@@ -252,7 +511,12 @@
         "description": [
           {
             "page": 1,
-            "bbox": [425, 2895, 2720, 3460],
+            "bbox": [
+              425,
+              2895,
+              2720,
+              3460
+            ],
             "text": "Discuss the history of sangria and learn the recipes used to make the 4 in-house varieties served at Three Bridges Bar and Grill. Enjoy a tasting and you’ll even get to make your own glass! Advanced booking required through the My Disney Experience app by searching Sangria University.",
             "source": "manual_visual_bbox"
           }
@@ -276,13 +540,26 @@
       },
       "required_spans": {
         "title": [
-          { "page": 1, "line": 48, "text": "COLORS OF CORONADO" },
-          { "page": 1, "line": 49, "text": "PAINTING EXPERIENCE ($)" }
+          {
+            "page": 1,
+            "line": 48,
+            "text": "COLORS OF CORONADO"
+          },
+          {
+            "page": 1,
+            "line": 49,
+            "text": "PAINTING EXPERIENCE ($)"
+          }
         ],
         "location": [
           {
             "page": 1,
-            "bbox": [910, 1378, 1410, 1420],
+            "bbox": [
+              910,
+              1378,
+              1410,
+              1420
+            ],
             "text": "Toledo - Tapas, Steak & Seafood",
             "source": "manual_visual_bbox"
           }
@@ -290,21 +567,43 @@
         "schedule": [
           {
             "page": 1,
-            "bbox": [910, 1425, 1445, 1470],
+            "bbox": [
+              910,
+              1425,
+              1445,
+              1470
+            ],
             "text": "Friday from 1:00pm-3:00pm",
             "source": "manual_visual_bbox"
           }
         ],
         "description": [
-          { "page": 1, "line": 51, "text": "Get in touch with your inner artist during this master-led" },
-          { "page": 1, "line": 53, "text": "painting class. This experience is recommended for Guests ages" },
           {
             "page": 1,
-            "bbox": [910, 1515, 1605, 1565],
+            "line": 51,
+            "text": "Get in touch with your inner artist during this master-led"
+          },
+          {
+            "page": 1,
+            "line": 53,
+            "text": "painting class. This experience is recommended for Guests ages"
+          },
+          {
+            "page": 1,
+            "bbox": [
+              910,
+              1515,
+              1605,
+              1565
+            ],
             "text": "12 and up. Space is limited. To book, search Colors of Coronado",
             "source": "manual_visual_bbox"
           },
-          { "page": 1, "line": 56, "text": "Painting Experience on the My Disney Experience app." }
+          {
+            "page": 1,
+            "line": 56,
+            "text": "Painting Experience on the My Disney Experience app."
+          }
         ]
       }
     },
@@ -328,7 +627,12 @@
           {
             "page": 1,
             "line": 16,
-            "bbox": [908.5, 857.5, 1445.5, 889.0],
+            "bbox": [
+              908.5,
+              857.5,
+              1445.5,
+              889.0
+            ],
             "text": "SPANISH MOSAIC ART ($)"
           }
         ],
@@ -336,7 +640,12 @@
           {
             "page": 1,
             "line": 19,
-            "bbox": [909.0, 902.5, 1082.0, 924.0],
+            "bbox": [
+              909.0,
+              902.5,
+              1082.0,
+              924.0
+            ],
             "text": "Dahlia Lounge"
           }
         ],
@@ -344,7 +653,12 @@
           {
             "page": 1,
             "line": 20,
-            "bbox": [909.0, 938.5, 1603.0, 960.0],
+            "bbox": [
+              909.0,
+              938.5,
+              1603.0,
+              960.0
+            ],
             "text": "Monday, Wednesday and Saturday from 1:00pm-3:00pm"
           }
         ],
@@ -352,63 +666,108 @@
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 970.0, 1608.0, 998.0],
+            "bbox": [
+              1225.0,
+              970.0,
+              1608.0,
+              998.0
+            ],
             "text": "Immerse yourself in a historic",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1006.0, 1608.0, 1034.0],
+            "bbox": [
+              1225.0,
+              1006.0,
+              1608.0,
+              1034.0
+            ],
             "text": "Spanish art tradition as you",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1042.0, 1608.0, 1070.0],
+            "bbox": [
+              1225.0,
+              1042.0,
+              1608.0,
+              1070.0
+            ],
             "text": "design your own mosaic",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1078.0, 1608.0, 1106.0],
+            "bbox": [
+              1225.0,
+              1078.0,
+              1608.0,
+              1106.0
+            ],
             "text": "showpiece with a touch of",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1114.0, 1608.0, 1142.0],
+            "bbox": [
+              1225.0,
+              1114.0,
+              1608.0,
+              1142.0
+            ],
             "text": "Disney flair. This experience is",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1150.0, 1608.0, 1178.0],
+            "bbox": [
+              1225.0,
+              1150.0,
+              1608.0,
+              1178.0
+            ],
             "text": "recommended for Guests ages 12",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1186.0, 1608.0, 1214.0],
+            "bbox": [
+              1225.0,
+              1186.0,
+              1608.0,
+              1214.0
+            ],
             "text": "and up. Space is limited. To book,",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1222.0, 1608.0, 1250.0],
+            "bbox": [
+              1225.0,
+              1222.0,
+              1608.0,
+              1250.0
+            ],
             "text": "search Spanish Mosaic Art on the",
             "source": "manual_visual_bbox"
           },
           {
             "page": 1,
             "line": null,
-            "bbox": [1225.0, 1258.0, 1608.0, 1286.0],
+            "bbox": [
+              1225.0,
+              1258.0,
+              1608.0,
+              1286.0
+            ],
             "text": "My Disney Experience app.",
             "source": "manual_visual_bbox"
           }

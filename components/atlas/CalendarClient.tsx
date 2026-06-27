@@ -11,9 +11,87 @@ import {
   parseISO,
 } from "date-fns";
 import { EventCard } from "@/components/events/EventCard";
+import { IconGlyph } from "@/components/icons/IconGlyph";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
+import {
+  CALENDAR_DAYPARTS,
+  buildCalendarDaySummaries,
+  getCalendarDaySummary,
+  type CalendarDaySummary,
+} from "@/lib/visualizations/calendarDensity";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+
+function CalendarDensityBands({ summary }: { summary: CalendarDaySummary }) {
+  const max = Math.max(...CALENDAR_DAYPARTS.map((band) => summary.dayparts[band.key]), 1);
+  const showTripleDot = summary.dayparts.late === 3;
+
+  if (summary.total === 0) {
+    return <div className="calendar-density calendar-density--empty" aria-hidden />;
+  }
+
+  return (
+    <div
+      className="calendar-density wow-calendar-time-weather-aurora"
+      data-wow-moment="calendar_time_weather_aurora"
+      aria-hidden
+    >
+      {CALENDAR_DAYPARTS.map((band) => {
+        const count = summary.dayparts[band.key];
+        const scale = count === 0 ? 0 : Math.max(0.22, count / max);
+        return (
+          <span
+            key={band.key}
+            className={`calendar-density__band calendar-density__band--${band.key}`}
+            style={{ transform: `scaleY(${scale})` }}
+            title={`${band.label}: ${count}`}
+          />
+        );
+      })}
+      {showTripleDot && (
+        <span
+          className="hidden-resort-magic hrm-calendar-triple"
+          data-hidden-detail="calendar_triple_dot_upgrade"
+          aria-hidden
+        />
+      )}
+    </div>
+  );
+}
+
+function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
+  if (summary.total === 0) {
+    return (
+      <div className="calendar-story calendar-story--empty">
+        <p className="calendar-story__eyebrow">Quiet resort day</p>
+        <p className="calendar-story__title">No activities from current resort calendars match this day yet.</p>
+        <p className="calendar-story__copy">
+          Try another date, clear a filter, or use the empty space as breathing room.
+        </p>
+      </div>
+    );
+  }
+
+  const strongestBand = CALENDAR_DAYPARTS.reduce((best, band) =>
+    summary.dayparts[band.key] > summary.dayparts[best.key] ? band : best
+  );
+
+  return (
+    <div className="calendar-story">
+      <p className="calendar-story__eyebrow">Day summary</p>
+      <p className="calendar-story__title">
+        {summary.total} current-calendar {summary.total === 1 ? "activity" : "activities"}
+        {summary.topResort ? `, led by ${summary.topResort.name}` : ""}
+      </p>
+      <div className="calendar-story__stats" aria-label={summary.ariaLabel}>
+        <span>{strongestBand.label} is busiest</span>
+        {summary.topCategory && <span>{summary.topCategory.label} leads</span>}
+        <span>{summary.costMix.free} free</span>
+        {summary.costMix.unknown > 0 && <span>{summary.costMix.unknown} price unclear</span>}
+      </div>
+    </div>
+  );
+}
 
 export function CalendarClient({
   occurrences,
@@ -75,9 +153,14 @@ export function CalendarClient({
   }, [visibleOccurrences]);
 
   const selectedActivities = byDay.get(selectedDate) ?? [];
+  const daySummaries = useMemo(
+    () => buildCalendarDaySummaries(visibleOccurrences),
+    [visibleOccurrences]
+  );
+  const selectedSummary = getCalendarDaySummary(daySummaries, selectedDate);
 
   return (
-    <div className="space-y-6">
+    <div className="calendar-shell space-y-6">
       <div className="grid gap-3 md:grid-cols-2">
         <label className="space-y-1 text-sm font-medium">
           <span>Filter by resort</span>
@@ -118,8 +201,9 @@ export function CalendarClient({
             setMonth(new Date(month.getFullYear(), month.getMonth() - 1))
           }
           className="rounded-lg border border-[var(--color-card-border)] px-3 py-1"
+          aria-label="Previous month"
         >
-          ←
+          <IconGlyph iconKey="arrow_left" className="text-base" />
         </button>
         <h2 className="font-display text-xl font-semibold">
           {format(month, "MMMM yyyy")}
@@ -130,8 +214,9 @@ export function CalendarClient({
             setMonth(new Date(month.getFullYear(), month.getMonth() + 1))
           }
           className="rounded-lg border border-[var(--color-card-border)] px-3 py-1"
+          aria-label="Next month"
         >
-          →
+          <IconGlyph iconKey="arrow_right" className="text-base" />
         </button>
       </div>
 
@@ -143,10 +228,19 @@ export function CalendarClient({
         ))}
       </div>
 
+      <div className="calendar-legend" aria-label="Calendar density band legend">
+        {CALENDAR_DAYPARTS.map((band) => (
+          <span key={band.key}>
+            <i className={`calendar-legend__swatch calendar-density__band--${band.key}`} />
+            {band.label}
+          </span>
+        ))}
+      </div>
+
       <div className="grid grid-cols-7 gap-1">
         {days.map((day) => {
           const key = format(day, "yyyy-MM-dd");
-          const count = byDay.get(key)?.length ?? 0;
+          const summary = getCalendarDaySummary(daySummaries, key);
           const today = isSameDay(day, new Date());
           const selected = key === selectedDate;
           return (
@@ -154,30 +248,27 @@ export function CalendarClient({
               type="button"
               key={key}
               onClick={() => setSelectedDate(key)}
-              className={`min-h-16 rounded-lg border p-1 text-left text-sm ${
+              className={`calendar-day min-h-16 rounded-lg border p-1 text-left text-sm ${
                 isSameMonth(day, month)
                   ? "border-[var(--color-card-border)] bg-[var(--color-card)]"
                   : "opacity-40"
-              } ${today ? "ring-2 ring-[var(--accent)]" : ""} ${
-                selected ? "outline outline-2 outline-offset-2 outline-[var(--accent)]" : ""
+              } ${today ? "calendar-day--today" : ""} ${
+                selected ? "calendar-day--selected" : ""
               }`}
               aria-pressed={selected}
+              aria-label={summary.ariaLabel}
             >
-              <span className="font-medium">{format(day, "d")}</span>
-              {count > 0 && (
-                <div className="mt-1 flex justify-center gap-0.5">
-                  {Array.from({ length: Math.min(count, 3) }).map((_, i) => (
-                    <span
-                      key={i}
-                      className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
-                    />
-                  ))}
-                </div>
+              <span className="calendar-day__date font-medium">{format(day, "d")}</span>
+              <CalendarDensityBands summary={summary} />
+              {summary.total > 0 && (
+                <span className="calendar-day__count">{summary.total}</span>
               )}
             </button>
           );
         })}
       </div>
+
+      <CalendarStorySummary summary={selectedSummary} />
 
       <section className="space-y-3">
         <div>
@@ -196,7 +287,7 @@ export function CalendarClient({
           })}
           {selectedActivities.length === 0 && (
             <p className="rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] p-4 text-sm text-[var(--color-muted)]">
-              No source-backed activities match this day and filter set.
+              No activities match this day and filter set.
             </p>
           )}
         </div>

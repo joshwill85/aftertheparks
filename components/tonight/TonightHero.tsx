@@ -16,7 +16,7 @@ export function TonightHero() {
         Tonight feels different.
       </h1>
       <p className="mt-5 max-w-2xl text-lg text-[var(--muted)] md:text-xl">
-        Find movies, campfires, cozy activities, and low-stress resort moments
+        Find movies, campfires, cozy activities, and low-stress resort ideas
         after the park day winds down.
       </p>
 

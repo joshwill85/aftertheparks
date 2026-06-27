@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 import { CATEGORY_META, MOOD_CHIPS } from "@/lib/categories/meta";
 import { mergeMoodChipHref } from "@/lib/explore/browseParams";
+import type { FilterImpact } from "@/lib/explore/filterImpact";
 import { cn, formatCategory } from "@/lib/utils";
 import type { Daypart } from "@/lib/types/occurrence";
 
@@ -22,12 +22,16 @@ interface FilterRailProps {
   resorts: { slug: string; name: string }[];
   basePath?: string;
   hideDaypart?: boolean;
+  filterImpact: FilterImpact;
+  onClearAll: () => void;
 }
 
 export function FilterRail({
   resorts,
   basePath = "/activities",
   hideDaypart = false,
+  filterImpact,
+  onClearAll,
 }: FilterRailProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -49,8 +53,6 @@ export function FilterRail({
   const activeDaypart = searchParams.get("daypart");
   const freeOnly = searchParams.get("free") === "true";
   const reservationOnly = searchParams.get("reservation") === "true";
-
-  const clearAll = () => router.push(basePath);
 
   return (
     <aside className="filter-rail space-y-5">
@@ -86,13 +88,14 @@ export function FilterRail({
         freeOnly={freeOnly}
         reservationOnly={reservationOnly}
         hideDaypart={hideDaypart}
+        filterImpact={filterImpact}
         update={update}
       />
 
       {(activeResort || activeCategory || activeDaypart || freeOnly || reservationOnly) && (
         <button
           type="button"
-          onClick={clearAll}
+          onClick={onClearAll}
           className="text-sm font-medium text-[var(--accent)] hover:underline"
         >
           Clear all filters
@@ -110,6 +113,7 @@ export function FilterFields({
   freeOnly = false,
   reservationOnly = false,
   hideDaypart = false,
+  filterImpact,
   update,
   searchableResorts = false,
 }: {
@@ -120,6 +124,7 @@ export function FilterFields({
   freeOnly?: boolean;
   reservationOnly?: boolean;
   hideDaypart?: boolean;
+  filterImpact: FilterImpact;
   update: (key: string, value: string | null) => void;
   searchableResorts?: boolean;
 }) {
@@ -130,6 +135,12 @@ export function FilterFields({
     if (!q) return resorts;
     return resorts.filter((r) => r.name.toLowerCase().includes(q));
   }, [resorts, resortQuery]);
+  const daypartCount = (value: Daypart) =>
+    filterImpact.dayparts.find((option) => option.value === value)?.count ?? 0;
+  const categoryCount = (value: string) =>
+    filterImpact.categories.find((option) => option.value === value)?.count ?? 0;
+  const resortCount = (value: string) =>
+    filterImpact.resorts.find((option) => option.value === value)?.count ?? 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -152,6 +163,7 @@ export function FilterFields({
                 )}
               >
                 {d.label}
+                <span className="filter-pill__count">{daypartCount(d.value)}</span>
               </button>
             ))}
           </div>
@@ -169,6 +181,7 @@ export function FilterFields({
             className={cn("filter-pill", freeOnly && "filter-pill--active")}
           >
             Free only
+            <span className="filter-pill__count">{filterImpact.practical.free}</span>
           </button>
           <button
             type="button"
@@ -176,6 +189,7 @@ export function FilterFields({
             className={cn("filter-pill", reservationOnly && "filter-pill--active")}
           >
             Reservations
+            <span className="filter-pill__count">{filterImpact.practical.reservation}</span>
           </button>
         </div>
       </div>
@@ -221,7 +235,10 @@ export function FilterFields({
                       : "hover:bg-[var(--color-sun-cream)]"
                   )}
                 >
-                  {r.name}
+                  <span>{r.name}</span>
+                  <span className="ml-auto text-xs text-[var(--color-muted)]">
+                    {resortCount(r.slug)}
+                  </span>
                 </button>
               ))}
               {filteredResorts.length === 0 && (
@@ -239,7 +256,7 @@ export function FilterFields({
               <option value="">All resorts</option>
               {filteredResorts.map((r) => (
                 <option key={r.slug} value={r.slug}>
-                  {r.name}
+                  {r.name} ({resortCount(r.slug)})
                 </option>
               ))}
             </select>
@@ -259,7 +276,7 @@ export function FilterFields({
           <option value="">All categories</option>
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
-              {formatCategory(c)}
+              {formatCategory(c)} ({categoryCount(c)})
             </option>
           ))}
         </select>

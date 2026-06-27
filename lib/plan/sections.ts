@@ -6,6 +6,7 @@ import {
   orlandoDateString,
   TIMEZONE,
 } from "@/lib/daypart";
+import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem } from "@/lib/types/occurrence";
 
 export type PlanSectionKey =
@@ -27,14 +28,14 @@ export const PLAN_SECTION_ORDER: PlanSectionKey[] = [
 
 export const PLAN_SECTION_META: Record<
   PlanSectionKey,
-  { title: string; icon: string }
+  { title: string; iconKey: IconKey }
 > = {
-  morning: { title: "Morning", icon: "☀️" },
-  afternoon: { title: "Afternoon", icon: "🌴" },
-  dinner: { title: "Dinner hour", icon: "🍽️" },
-  evening: { title: "Evening", icon: "🏮" },
-  starlight: { title: "Starlight", icon: "🌙" },
-  unscheduled: { title: "Unscheduled", icon: "📋" },
+  morning: { title: "Morning Reset", iconKey: "today_nav" },
+  afternoon: { title: "Afternoon Adventure", iconKey: "resort_activity" },
+  dinner: { title: "Dinner Glow", iconKey: "search_offering" },
+  evening: { title: "Golden Hour", iconKey: "nighttime_entertainment" },
+  starlight: { title: "Starlight", iconKey: "tonight_nav" },
+  unscheduled: { title: "Folded Notes", iconKey: "plan_nav" },
 };
 
 export function planSectionFromHour(hour: number): PlanSectionKey {
@@ -97,6 +98,15 @@ export function groupPlanByDate(
 
     for (const item of dateItems) {
       sections.get(itemPlanSection(item))!.push(item);
+    }
+
+    for (const sectionItems of sections.values()) {
+      sectionItems.sort((a, b) => {
+        if (!a.startDateTime && !b.startDateTime) return a.title.localeCompare(b.title);
+        if (!a.startDateTime) return 1;
+        if (!b.startDateTime) return -1;
+        return a.startDateTime.localeCompare(b.startDateTime) || a.title.localeCompare(b.title);
+      });
     }
 
     return {

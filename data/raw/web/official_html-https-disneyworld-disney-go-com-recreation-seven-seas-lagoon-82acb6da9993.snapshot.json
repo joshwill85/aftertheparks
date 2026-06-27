@@ -1,0 +1,45 @@
+{
+  "source_kind": "official_html",
+  "source_url": "https://disneyworld.disney.go.com/recreation/seven-seas-lagoon/",
+  "captured_at": "2026-06-27T01:27:04.194072+00:00",
+  "raw_html_sha256": "57601d3f7267441aec9c19b00bc97cd86cbde43aad8af1ec8cec5a14da6c562b",
+  "lines": [
+    {
+      "line": 1,
+      "text": "Seven Seas Lagoon Recreation & Activities | Walt Disney World Resort"
+    },
+    {
+      "line": 2,
+      "text": "Seven Seas Lagoon"
+    },
+    {
+      "line": 3,
+      "text": "LocatedinDisney's Polynesian Villas & Bungalows"
+    },
+    {
+      "line": 4,
+      "text": "This majestic gateway to Magic Kingdom park offers Guests a variety of fun-filled activities like boating, fishing and more."
+    },
+    {
+      "line": 5,
+      "text": "All Ages"
+    },
+    {
+      "line": 6,
+      "text": "A Piece of Disney History"
+    },
+    {
+      "line": 7,
+      "text": "Behold the beauty of Seven Seas Lagoon, a man-made body of water serving as an aquatic red carpet to Magic Kingdom park."
+    },
+    {
+      "line": 8,
+      "text": "The planning for Seven Seas Lagoon began back in October 1965; soon more than 7 million cubic yards of earth was moved to create this amazing body of water. It is home to three small islands—Blackbeard Island, Castaway Cay and Beachcomber Island, all of which have played a part in the Disney legacy. Fun Fact—historically, Castaway Cay has been the launching point for perimeter fireworks at Magic Kingdom park!"
+    },
+    {
+      "line": 9,
+      "text": "Today, Seven Seas Lagoon remains a staple of the Walt Disney World Resort, offering fishing excursions, boat rides, fireworks viewing and so much more."
+    }
+  ],
+  "content_sha256": "84cf652e6598f98b01da316e59d1e662d01d0ab8b2768a52d9c331b8ac25350b"
+}

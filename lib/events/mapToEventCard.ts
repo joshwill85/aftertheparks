@@ -5,6 +5,7 @@ import type { EventBadge, EventCardProps } from "@/components/events/EventCard";
 import { formatActivityEventDay, formatMovieEventDay } from "@/lib/events/formatEventDay";
 import { formatMovieShowTime } from "@/components/atlas/MoviePosterFallback";
 import { activityDetailHref } from "@/lib/activities/links";
+import { activityDecisionProfile } from "@/lib/activityDecision";
 
 const DAYPART_LABELS: Record<string, string> = {
   morning: "Morning",
@@ -87,9 +88,11 @@ export function activityToEventCard(
     badges,
     media: { kind: "category", category: display.category },
     isHappeningNow: display.isHappeningNow,
+    decisionProfile: activityDecisionProfile(activity, display),
     showTrust:
       display.trustState !== "verified" &&
       display.trustState !== "recently_updated" &&
+      display.trustState !== "price_unclear" &&
       !display.timeUncertain,
     trustActivity: activity,
   };
