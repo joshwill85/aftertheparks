@@ -4,7 +4,7 @@ import type { ActivityOccurrence, ActivityOffering } from "@/lib/types/occurrenc
 export type DecisionTone = "positive" | "notice" | "neutral" | "warm";
 
 export interface DecisionSignal {
-  id: "confidence" | "time" | "cost" | "effort";
+  id: "time" | "cost" | "effort";
   label: string;
   value: string;
   helper: string;
@@ -41,47 +41,6 @@ function costSignal(state: ActivityOccurrence["price"]["state"]): DecisionSignal
     value: "Ask first",
     helper: "Pricing is not clear enough to promise.",
     tone: "notice",
-  };
-}
-
-function confidenceSignal({
-  freshness,
-  trustState,
-}: {
-  freshness?: { badge: "verified" | "stale"; sourceUrl?: string };
-  trustState?: ActivityOccurrence["trustState"] | ActivityOffering["trustState"];
-}): DecisionSignal {
-  const hasSource = Boolean(freshness?.sourceUrl);
-  if (
-    freshness?.badge === "verified" &&
-    hasSource &&
-    trustState !== "confirm_before_going" &&
-    trustState !== "needs_review" &&
-    trustState !== "source_unclear"
-  ) {
-    return {
-      id: "confidence",
-      label: "Source",
-      value: "Strong",
-      helper: "A current source link is available.",
-      tone: "positive",
-    };
-  }
-  if (trustState === "confirm_before_going" || freshness?.badge === "stale") {
-    return {
-      id: "confidence",
-      label: "Source",
-      value: "Confirm",
-      helper: "Good candidate, but check the latest guide.",
-      tone: "notice",
-    };
-  }
-  return {
-    id: "confidence",
-    label: "Source",
-    value: hasSource ? "Check details" : "Ask first",
-    helper: hasSource ? "A source link is available, but a few details need a check." : "Use the resort guide before you go.",
-    tone: hasSource ? "neutral" : "notice",
   };
 }
 
@@ -245,10 +204,6 @@ export function offeringDecisionProfile(offering: ActivityOffering): DecisionPro
   return {
     whyFits: `${offering.title} works well at ${offering.resort.name} when you want ${effortPhrase(effort.value)} planning and ${timingPhrase(time.value)} timing.`,
     signals: [
-      confidenceSignal({
-        freshness: offering.freshness,
-        trustState: offering.trustState,
-      }),
       time,
       costSignal(offering.price.state),
       effort,
@@ -265,10 +220,6 @@ export function activityDecisionProfile(
   return {
     whyFits: `${display.title} works well for ${display.categoryLabel.toLowerCase()} at ${display.resortName} with ${effortPhrase(effort.value)} planning.`,
     signals: [
-      confidenceSignal({
-        freshness: activity.freshness,
-        trustState: activity.trustState,
-      }),
       time,
       costSignal(activity.price.state),
       effort,

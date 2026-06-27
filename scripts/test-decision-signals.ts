@@ -25,11 +25,16 @@ const offering = {
 } as ActivityOffering;
 
 const offeringProfile = offeringDecisionProfile(offering);
-assert.equal(offeringProfile.signals.length, 4, "Offering should expose four decision signals");
+assert.equal(offeringProfile.signals.length, 3, "Offering should expose three guest-facing decision signals");
 assert.equal(
-  offeringProfile.signals.find((signal) => signal.id === "confidence")?.value,
-  "Strong",
-  "Verified source-backed offerings should show strong confidence"
+  offeringProfile.signals[0]?.id,
+  "time",
+  "Decision blocks should lead with guest-facing timing, not source confidence"
+);
+assert.equal(
+  offeringProfile.signals.some((signal) => signal.label === "Source"),
+  false,
+  "Decision blocks should not show internal source-strength language"
 );
 assert.equal(
   offeringProfile.signals.find((signal) => signal.id === "effort")?.value,
