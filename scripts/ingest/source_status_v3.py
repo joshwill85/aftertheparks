@@ -26,6 +26,16 @@ def _source_hash(row: dict[str, Any]) -> str:
     return str(row.get("content_sha256") or row.get("source_sha256") or row.get("documentHash") or "").strip()
 
 
+def _config_hash(row: dict[str, Any]) -> str:
+    runtime = row.get("runtime_lineage") if isinstance(row.get("runtime_lineage"), dict) else {}
+    return str(row.get("config_hash") or runtime.get("config_hash") or "").strip()
+
+
+def _pipeline_version(row: dict[str, Any]) -> str:
+    runtime = row.get("runtime_lineage") if isinstance(row.get("runtime_lineage"), dict) else {}
+    return str(row.get("pipeline_version") or runtime.get("pipeline_version") or "").strip()
+
+
 def _json_objects(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -49,18 +59,70 @@ def build_v3_source_statuses(
     expected_sources: list[dict[str, Any]],
     snapshots: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    snapshots_by_hash = {_source_hash(snapshot): snapshot for snapshot in snapshots if _source_hash(snapshot)}
+    snapshots_by_hash: dict[str, list[dict[str, Any]]] = {}
+    for snapshot in snapshots:
+        snapshot_hash = _source_hash(snapshot)
+        if snapshot_hash:
+            snapshots_by_hash.setdefault(snapshot_hash, []).append(snapshot)
     statuses: list[dict[str, Any]] = []
     for source in expected_sources:
         source_id = _source_id(source)
         source_hash = _source_hash(source)
-        snapshot = snapshots_by_hash.get(source_hash)
+        expected_config_hash = _config_hash(source)
+        expected_pipeline_version = _pipeline_version(source)
+        source_snapshots = snapshots_by_hash.get(source_hash, [])
+        snapshot = (
+            next(
+                (
+                    candidate_snapshot
+                    for candidate_snapshot in source_snapshots
+                    if _config_hash(candidate_snapshot) == expected_config_hash
+                    and (
+                        not expected_pipeline_version
+                        or _pipeline_version(candidate_snapshot) == expected_pipeline_version
+                    )
+                ),
+                None,
+            )
+            if expected_config_hash or expected_pipeline_version
+            else None
+        ) or (source_snapshots[0] if source_snapshots else None)
         base = {
             "source_document_id": source_id,
             "content_sha256": source_hash,
+            "config_hash": expected_config_hash or None,
+            "pipeline_version": expected_pipeline_version or None,
             "calendar_group_key": source.get("calendar_group_key"),
         }
         if snapshot:
+            snapshot_config_hash = _config_hash(snapshot)
+            snapshot_pipeline_version = _pipeline_version(snapshot)
+            if expected_config_hash and snapshot_config_hash != expected_config_hash:
+                statuses.append(
+                    {
+                        **base,
+                        "status": "unprocessed",
+                        "snapshot_status": snapshot.get("status"),
+                        "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
+                        "snapshot_config_hash": snapshot_config_hash or None,
+                        "snapshot_pipeline_version": snapshot_pipeline_version or None,
+                        "message": "stale_v3_snapshot_config_hash",
+                    }
+                )
+                continue
+            if expected_pipeline_version and snapshot_pipeline_version != expected_pipeline_version:
+                statuses.append(
+                    {
+                        **base,
+                        "status": "unprocessed",
+                        "snapshot_status": snapshot.get("status"),
+                        "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
+                        "snapshot_config_hash": snapshot_config_hash or None,
+                        "snapshot_pipeline_version": snapshot_pipeline_version or None,
+                        "message": "stale_v3_snapshot_pipeline_version",
+                    }
+                )
+                continue
             snapshot_status = str(snapshot.get("status") or "")
             if snapshot_status == "parser_error":
                 errors = snapshot.get("errors") if isinstance(snapshot.get("errors"), list) else []
@@ -70,6 +132,8 @@ def build_v3_source_statuses(
                         "status": "parser_error",
                         "snapshot_status": snapshot_status,
                         "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
+                        "snapshot_config_hash": snapshot_config_hash or None,
+                        "snapshot_pipeline_version": snapshot_pipeline_version or None,
                         "message": str(errors[0]) if errors else "parser_error",
                     }
                 )
@@ -80,6 +144,8 @@ def build_v3_source_statuses(
                     "status": "processed",
                     "snapshot_status": snapshot.get("status"),
                     "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
+                    "snapshot_config_hash": snapshot_config_hash or None,
+                    "snapshot_pipeline_version": snapshot_pipeline_version or None,
                     "ocr_success": (snapshot.get("quality") or {}).get("ocr_success")
                     if isinstance(snapshot.get("quality"), dict)
                     else None,

@@ -31,6 +31,8 @@ def _task_type(findings: list[str]) -> str:
         return "unparsed_schedule"
     if first.startswith("engine_disagreement:"):
         return "ocr_disagreement"
+    if first.startswith("manual_review_required:"):
+        return "manual_review_required"
     if first == "unknown_document_family":
         return "unknown_document_family"
     return first
@@ -41,6 +43,7 @@ def _field_from_findings(findings: list[str]) -> str | None:
         if ":" in finding and (
             finding.startswith("missing_required_field:")
             or finding.startswith("engine_disagreement:")
+            or finding.startswith("manual_review_required:")
         ):
             return finding.split(":", 1)[1]
     if "unknown_location" in findings:
@@ -84,6 +87,14 @@ def _source_id(row: dict[str, Any]) -> str:
 
 def _source_hash(row: dict[str, Any]) -> str:
     return str(row.get("content_sha256") or row.get("source_sha256") or row.get("documentHash") or "").strip()
+
+
+def _has_review_artifacts(source: dict[str, Any]) -> bool:
+    return bool(
+        source.get("page_image_sha256")
+        and (source.get("crop_storage_path") or source.get("crop_path"))
+        and source.get("crop_sha256")
+    )
 
 
 def _source_status_review_tasks(source_statuses: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -135,6 +146,8 @@ def build_review_tasks(
         field_name = _field_from_findings(findings)
         evidence = _field_evidence(candidate, field_name)
         source = _region_source(candidate, field_name)
+        if not _has_review_artifacts(source):
+            continue
         tasks.append(
             {
                 "task_id": str(candidate.get("candidate_id") or f"vision-v3-review-{index:04d}"),

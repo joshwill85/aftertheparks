@@ -61,11 +61,86 @@ def _field_page_hashes(row: dict[str, Any]) -> set[str]:
     return page_hashes
 
 
+def _field_crop_hashes(row: dict[str, Any], *, field_names: set[str] | None = None) -> set[str]:
+    evidence = row.get("field_evidence")
+    if not isinstance(evidence, dict):
+        return set()
+    crop_hashes: set[str] = set()
+    items = (
+        ((field_name, evidence.get(field_name)) for field_name in field_names)
+        if field_names is not None
+        else evidence.items()
+    )
+    for _field_name, field_evidence in items:
+        if not isinstance(field_evidence, dict):
+            continue
+        source = field_evidence.get("source")
+        crop_hash = source.get("crop_sha256") if isinstance(source, dict) else None
+        if crop_hash:
+            crop_hashes.add(str(crop_hash))
+    return crop_hashes
+
+
 def _critical_field_names(row: dict[str, Any]) -> tuple[str, ...]:
     fields = list(CRITICAL_FIELD_EVIDENCE)
     if row.get("candidate_type") == "movie" or row.get("movie_title"):
         fields.extend(MOVIE_CRITICAL_FIELD_EVIDENCE)
     return tuple(fields)
+
+
+def _has_source_span(row: dict[str, Any], field_name: str) -> bool:
+    source_spans = row.get("source_spans")
+    if not isinstance(source_spans, dict):
+        return False
+    spans = source_spans.get(field_name)
+    if not isinstance(spans, list) or not spans:
+        return False
+    for span in spans:
+        if not isinstance(span, dict):
+            continue
+        if str(span.get("text") or "").strip() and span.get("page") not in {None, ""}:
+            return True
+    return False
+
+
+def _schedule_normalized_ok(schedule: Any) -> bool:
+    if not isinstance(schedule, dict):
+        return False
+    if schedule.get("schedule_type") == "phrase":
+        return bool(schedule.get("raw_text"))
+    return bool(schedule.get("days_of_week") and (schedule.get("start_time") or schedule.get("raw_text")))
+
+
+def _row_normalized_value(row: dict[str, Any], field_name: str) -> Any:
+    if field_name == "title":
+        return row.get("title")
+    if field_name == "schedule":
+        schedule = row.get("schedule") if isinstance(row.get("schedule"), dict) else {}
+        return schedule.get("normalized")
+    if field_name == "location":
+        location = row.get("location") if isinstance(row.get("location"), dict) else {}
+        return location.get("id")
+    if field_name == "fee":
+        price = row.get("price") if isinstance(row.get("price"), dict) else {}
+        if price.get("state") == "fee":
+            return True
+        if price.get("state") == "free":
+            return False
+        return None
+    if field_name == "movie_title":
+        return row.get("movie_title")
+    return row.get(field_name)
+
+
+def _manual_review_field_mismatches(row: dict[str, Any], approved_fields: dict[str, Any]) -> list[str]:
+    mismatches: list[str] = []
+    for field_name, approved_field in approved_fields.items():
+        if not isinstance(approved_field, dict) or "normalized_value" not in approved_field:
+            mismatches.append(str(field_name))
+            continue
+        if approved_field.get("normalized_value") != _row_normalized_value(row, str(field_name)):
+            mismatches.append(str(field_name))
+    return mismatches
 
 
 def load_publish_flags(path: Path = DEFAULT_FLAGS_PATH) -> dict[str, Any]:
@@ -134,9 +209,35 @@ def evaluate_publish_readiness(
             elif str(review_decision.get("content_sha256") or "") != str(source_hash or ""):
                 errors.append(f"row_stale_manual_review_source_hash:{index}")
             else:
+                if not str(review_decision.get("reviewer") or "").strip():
+                    errors.append(f"row_missing_manual_review_reviewer:{index}")
+                if not str(review_decision.get("decided_at") or "").strip():
+                    errors.append(f"row_missing_manual_review_decided_at:{index}")
+                if not str(review_decision.get("reason") or "").strip():
+                    errors.append(f"row_missing_manual_review_reason:{index}")
+                if not isinstance(review_decision.get("approved_fields"), dict) or not review_decision.get("approved_fields"):
+                    errors.append(f"row_missing_manual_review_approved_fields:{index}")
+                elif isinstance(review_decision.get("approved_fields"), dict):
+                    for field_name in _manual_review_field_mismatches(row, review_decision["approved_fields"]):
+                        errors.append(f"row_manual_review_approved_field_mismatch:{index}:{field_name}")
                 reviewed_page_hash = str(review_decision.get("page_image_sha256") or "")
-                if reviewed_page_hash and reviewed_page_hash not in _field_page_hashes(row):
+                reviewed_crop_hash = str(review_decision.get("field_crop_sha256") or "")
+                if not reviewed_page_hash:
+                    errors.append(f"row_missing_manual_review_page_image:{index}")
+                elif reviewed_page_hash not in _field_page_hashes(row):
                     errors.append(f"row_stale_manual_review_page_image:{index}")
+                if not reviewed_crop_hash:
+                    errors.append(f"row_missing_manual_review_field_crop:{index}")
+                elif reviewed_crop_hash not in _field_crop_hashes(row):
+                    errors.append(f"row_stale_manual_review_field_crop:{index}")
+                elif (
+                    isinstance(review_decision.get("approved_fields"), dict)
+                    and reviewed_crop_hash not in _field_crop_hashes(
+                        row,
+                        field_names=set(review_decision["approved_fields"]),
+                    )
+                ):
+                    errors.append(f"row_manual_review_approved_field_crop_mismatch:{index}")
         if allowed_groups and row.get("calendar_group_key") not in allowed_groups:
             errors.append(f"row_calendar_group_not_enabled_for_v3:{index}")
         if allowed_families and row.get("document_family") not in allowed_families:
@@ -149,7 +250,7 @@ def evaluate_publish_readiness(
         elif not _is_public_source_url(source_url):
             errors.append(f"row_non_public_source_url:{index}")
         schedule = row.get("schedule") if isinstance(row.get("schedule"), dict) else {}
-        if not isinstance(schedule.get("normalized"), dict) or not schedule.get("normalized"):
+        if not _schedule_normalized_ok(schedule.get("normalized")):
             errors.append(f"row_unparsed_schedule:{index}")
         location = row.get("location") if isinstance(row.get("location"), dict) else {}
         location_id = str(location.get("id") or "").strip().lower()
@@ -163,6 +264,8 @@ def evaluate_publish_readiness(
             errors.append(f"row_missing_field_evidence:{index}")
             continue
         for field_name in _critical_field_names(row):
+            if not _has_source_span(row, field_name):
+                errors.append(f"row_missing_critical_field_source_span:{index}:{field_name}")
             field_evidence = evidence.get(field_name)
             if not isinstance(field_evidence, dict):
                 errors.append(f"row_missing_critical_field_evidence:{index}:{field_name}")
@@ -178,6 +281,8 @@ def evaluate_publish_readiness(
                 errors.append(f"row_field_source_hash_mismatch:{index}:{field_name}")
             if not field_source.get("page_image_sha256"):
                 errors.append(f"row_missing_critical_field_page_image_sha256:{index}:{field_name}")
+            if field_source.get("page_number") in {None, ""}:
+                errors.append(f"row_missing_critical_field_page_number:{index}:{field_name}")
             if not field_source.get("bbox_px"):
                 errors.append(f"row_missing_critical_field_bbox_px:{index}:{field_name}")
             if not field_source.get("crop_sha256"):

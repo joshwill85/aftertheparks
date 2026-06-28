@@ -124,6 +124,18 @@ assert.match(
 );
 
 assert.match(
+  polish,
+  /\.event-card__inline-weather\s*\{[\s\S]*margin-top:\s*auto/,
+  "Fetched event weather should snap to the bottom-left of the card body above the badges."
+);
+
+assert.match(
+  polish,
+  /\.event-card__inline-weather\s*\+\s*\.event-card__footer\s*\{[\s\S]*margin-top:\s*0/,
+  "Badge footers should sit directly below bottom-snapped inline weather."
+);
+
+assert.match(
   eventUi,
   /<CategoryIcon[\s\S]*size=\{isDetail \? "md" : "md"\}/,
   "Card category icons should be large enough to recognize in browsing grids."

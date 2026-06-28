@@ -15,6 +15,7 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 
 VALID_DECISIONS = {"approve", "edit", "reject"}
+APPROVABLE_FIELDS = {"title", "schedule", "location", "fee", "movie_title"}
 DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 DEFAULT_FIXTURE_CANDIDATES_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_fixture_candidates.json"
 
@@ -30,6 +31,48 @@ def _require_text(value: object, field_name: str) -> str:
     return text
 
 
+def _has_normalized_value(value: object) -> bool:
+    if isinstance(value, bool):
+        return True
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, (dict, list, tuple, set)):
+        return bool(value)
+    return True
+
+
+def _validate_approved_fields(approved_fields: dict[str, Any]) -> None:
+    for field_name, field in approved_fields.items():
+        if field_name not in APPROVABLE_FIELDS:
+            raise ValueError(f"unknown_approved_field:{field_name}")
+        if not isinstance(field, dict) or not _has_normalized_value(field.get("normalized_value")):
+            raise ValueError(f"missing_approved_field_normalized_value:{field_name}")
+
+
+def validate_review_decision(decision: dict[str, Any]) -> None:
+    if not isinstance(decision, dict):
+        raise ValueError("invalid_review_decision_shape")
+    decision_value = decision.get("decision")
+    if decision_value not in VALID_DECISIONS:
+        raise ValueError(f"invalid_review_decision:{decision_value}")
+    _require_text(decision.get("task_id"), "task_id")
+    _require_text(decision.get("candidate_id"), "candidate_id")
+    _require_text(decision.get("content_sha256"), "content_sha256")
+    _require_text(decision.get("reviewer"), "reviewer")
+    _require_text(decision.get("reason"), "reason")
+    _require_text(decision.get("decided_at"), "decided_at")
+    if decision_value in {"approve", "edit"}:
+        approved_fields = decision.get("approved_fields")
+        if not isinstance(approved_fields, dict) or not approved_fields:
+            raise ValueError("missing_approved_fields")
+        _require_text(decision.get("page_image_sha256"), "page_image_sha256")
+        _require_text(decision.get("field_crop"), "field_crop")
+        _require_text(decision.get("field_crop_sha256"), "field_crop_sha256")
+        _validate_approved_fields(approved_fields)
+
+
 def build_review_decision(
     task: dict[str, Any],
     *,
@@ -41,11 +84,16 @@ def build_review_decision(
 ) -> dict[str, Any]:
     if decision not in VALID_DECISIONS:
         raise ValueError(f"invalid_review_decision:{decision}")
-    if decision in {"approve", "edit"} and not approved_fields:
-        raise ValueError("missing_approved_fields")
+    if decision in {"approve", "edit"}:
+        if not approved_fields:
+            raise ValueError("missing_approved_fields")
+        _require_text(task.get("page_image"), "page_image_sha256")
+        _require_text(task.get("field_crop"), "field_crop")
+        _require_text(task.get("field_crop_sha256"), "field_crop_sha256")
+        _validate_approved_fields(approved_fields)
 
     candidate = task.get("candidate") if isinstance(task.get("candidate"), dict) else {}
-    return {
+    review_decision = {
         "schema_version": "review_decision_v3_001",
         "task_id": _require_text(task.get("task_id"), "task_id"),
         "task_type": task.get("task_type"),
@@ -64,6 +112,8 @@ def build_review_decision(
         "decided_at": decided_at or _now_iso(),
         "original_task": task,
     }
+    validate_review_decision(review_decision)
+    return review_decision
 
 
 def review_decision_creates_fixture_candidate(decision: dict[str, Any]) -> dict[str, Any]:
@@ -103,10 +153,19 @@ def export_review_fixture_candidates(
     output_path: Path = DEFAULT_FIXTURE_CANDIDATES_PATH,
 ) -> dict[str, Any]:
     decisions = _load_json_list(decisions_path)
-    approved = [
-        decision for decision in decisions
-        if decision.get("decision") in {"approve", "edit"}
-    ]
+    approved: list[dict[str, Any]] = []
+    skipped_non_approval = 0
+    skipped_invalid_review = 0
+    for decision in decisions:
+        if decision.get("decision") not in {"approve", "edit"}:
+            skipped_non_approval += 1
+            continue
+        try:
+            validate_review_decision(decision)
+        except ValueError:
+            skipped_invalid_review += 1
+            continue
+        approved.append(decision)
     candidates = [review_decision_creates_fixture_candidate(decision) for decision in approved]
     payload = {
         "fixture_kind": "review_fixture_candidates_v3",
@@ -123,7 +182,8 @@ def export_review_fixture_candidates(
         "summary": {
             "decision_count": len(decisions),
             "fixture_candidate_count": len(candidates),
-            "skipped_non_approval_count": len(decisions) - len(candidates),
+            "skipped_non_approval_count": skipped_non_approval,
+            "skipped_invalid_review_decision_count": skipped_invalid_review,
         },
     }
 

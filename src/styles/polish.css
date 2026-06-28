@@ -2030,11 +2030,12 @@ textarea.form-control {
 
 .event-card__resort-story-icon {
   position: absolute;
-  right: -8px;
-  bottom: -8px;
+  right: -10px;
+  bottom: -10px;
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
+  padding: 3px;
   place-items: center;
   border-radius: 999px;
   border: 2px solid rgba(255, 255, 255, 0.92);
@@ -2044,14 +2045,23 @@ textarea.form-control {
 }
 
 .event-card__resort-story-icon .resort-card__story-icon {
-  width: 34px;
-  height: 34px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  backdrop-filter: none;
   box-shadow: none;
+  overflow: hidden;
 }
 
 .event-card__resort-story-icon .resort-card__story-svg {
-  width: 34px;
-  height: 34px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: none;
+  transform: scale(1.16);
+  transform-origin: center;
 }
 
 .event-card__media--poster {
@@ -2251,6 +2261,14 @@ textarea.form-control {
   color: var(--brand-ink);
   font-size: 0.78rem;
   line-height: 1.28;
+}
+
+.event-card__inline-weather {
+  margin-top: auto;
+}
+
+.event-card__inline-weather + .event-card__footer {
+  margin-top: 0;
 }
 
 .event-weather-signal__icon {
@@ -3634,8 +3652,8 @@ textarea.form-control {
     flex-direction: column;
     gap: 16px;
     align-items: start;
-    flex: 0 1 auto;
-    height: auto;
+    flex: 1 1 auto;
+    height: 100%;
     padding: 18px;
   }
 
@@ -3677,7 +3695,7 @@ textarea.form-control {
 
   .explore-activity-grid .event-card__footer {
     min-height: 0;
-    padding-right: 0;
+    padding-right: 152px;
   }
 
   .explore-activity-grid .event-card__weather {
@@ -3689,9 +3707,10 @@ textarea.form-control {
   }
 
   .explore-activity-grid .event-card__save {
-    position: static;
-    align-self: flex-end;
-    margin: 0 18px 18px;
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    margin: 0;
   }
 }
 

@@ -154,6 +154,18 @@ assert.equal(
     .map((row) => `${row.calendar_group_key}/${row.canonical_slug}:${row.source_url || row.source?.url}`)
     .join("; ")}`
 );
+const nonPublicSourceRows = rows.filter((row) => {
+  const url = String(row.source_url || row.source?.url || "");
+  return !/^https?:\/\//.test(url);
+});
+assert.equal(
+  nonPublicSourceRows.length,
+  0,
+  `Gold preview rows must expose a public source URL. Non-public rows: ${nonPublicSourceRows
+    .slice(0, 10)
+    .map((row) => `${row.calendar_group_key}/${row.canonical_slug}:${row.source_url || row.source?.url}`)
+    .join("; ")}`
+);
 const occurrences = rows.flatMap((row) =>
   mapGoldActivityRowToOccurrences(row, {
     dateRangeDays: 14,

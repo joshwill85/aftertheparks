@@ -95,6 +95,10 @@ def _source_id(row: dict[str, Any]) -> str:
     return str(row.get("source_document_id") or row.get("id") or row.get("document_id") or "").strip()
 
 
+def _source_hash(row: dict[str, Any]) -> str:
+    return str(row.get("content_sha256") or row.get("source_sha256") or row.get("documentHash") or "").strip()
+
+
 def _source_coverage(
     expected_sources: list[dict[str, Any]] | None,
     v3_source_statuses: list[dict[str, Any]] | None,
@@ -102,18 +106,75 @@ def _source_coverage(
 ) -> dict[str, Any]:
     expected_ids = sorted({_source_id(source) for source in expected_sources or [] if _source_id(source)})
     statuses_by_id = {
-        _source_id(status): str(status.get("status") or "")
+        _source_id(status): status
         for status in v3_source_statuses or []
         if _source_id(status)
     }
-    processed_ids = sorted(source_id for source_id, status in statuses_by_id.items() if status == "processed")
-    source_error_ids = sorted(source_id for source_id, status in statuses_by_id.items() if status == "source_error")
-    parser_error_ids = sorted(source_id for source_id, status in statuses_by_id.items() if status == "parser_error")
+    expected_by_id = {
+        _source_id(source): source
+        for source in expected_sources or []
+        if _source_id(source)
+    }
+    stale_source_status_ids = sorted(
+        source_id
+        for source_id in expected_ids
+        if (
+            (expected_source := expected_by_id.get(source_id, {}))
+            and _source_hash(expected_source)
+            and source_id in statuses_by_id
+            and _source_hash(statuses_by_id[source_id]) != _source_hash(expected_source)
+        )
+    )
+    stale_source_status_config_ids = sorted(
+        source_id
+        for source_id in expected_ids
+        if (
+            source_id in statuses_by_id
+            and str(statuses_by_id[source_id].get("message") or "") == "stale_v3_snapshot_config_hash"
+        )
+    )
+    stale_source_status_pipeline_ids = sorted(
+        source_id
+        for source_id in expected_ids
+        if (
+            source_id in statuses_by_id
+            and str(statuses_by_id[source_id].get("message") or "") == "stale_v3_snapshot_pipeline_version"
+        )
+    )
+    stale_id_set = set(stale_source_status_ids)
+    processed_ids = sorted(
+        source_id
+        for source_id, status in statuses_by_id.items()
+        if source_id not in stale_id_set and str(status.get("status") or "") == "processed"
+    )
+    source_error_ids = sorted(
+        source_id
+        for source_id, status in statuses_by_id.items()
+        if source_id not in stale_id_set and str(status.get("status") or "") == "source_error"
+    )
+    parser_error_ids = sorted(
+        source_id
+        for source_id, status in statuses_by_id.items()
+        if source_id not in stale_id_set and str(status.get("status") or "") == "parser_error"
+    )
     handled = set(processed_ids) | set(source_error_ids) | set(parser_error_ids)
     unprocessed_ids = sorted(source_id for source_id in expected_ids if source_id not in handled)
-    review_task_source_ids = {_source_id(task) for task in review_tasks or [] if _source_id(task)}
     expected_id_set = set(expected_ids)
     expected_parser_error_ids = [source_id for source_id in parser_error_ids if source_id in expected_id_set]
+    parser_error_without_review_task_ids: list[str] = []
+    for source_id in expected_parser_error_ids:
+        status_hash = _source_hash(statuses_by_id.get(source_id, {}))
+        matching_review_task = False
+        for task in review_tasks or []:
+            if _source_id(task) != source_id:
+                continue
+            task_hash = _source_hash(task)
+            if status_hash and task_hash != status_hash:
+                continue
+            matching_review_task = True
+            break
+        if not matching_review_task:
+            parser_error_without_review_task_ids.append(source_id)
     return {
         "expected_source_count": len(expected_ids),
         "processed_source_count": len([source_id for source_id in expected_ids if source_id in set(processed_ids)]),
@@ -121,9 +182,10 @@ def _source_coverage(
         "unprocessed_source_ids": unprocessed_ids,
         "source_error_ids": [source_id for source_id in source_error_ids if source_id in set(expected_ids)],
         "parser_error_ids": expected_parser_error_ids,
-        "parser_error_without_review_task_ids": [
-            source_id for source_id in expected_parser_error_ids if source_id not in review_task_source_ids
-        ],
+        "stale_source_status_ids": stale_source_status_ids,
+        "stale_source_status_config_ids": stale_source_status_config_ids,
+        "stale_source_status_pipeline_ids": stale_source_status_pipeline_ids,
+        "parser_error_without_review_task_ids": parser_error_without_review_task_ids,
     }
 
 
@@ -190,6 +252,12 @@ def build_dual_run_report(
     source_coverage = _source_coverage(expected_sources, v3_source_statuses, review_tasks=review_tasks)
     if source_coverage["unprocessed_source_ids"]:
         publish_blockers.append("v3_unprocessed_sources")
+    if source_coverage["stale_source_status_ids"]:
+        publish_blockers.append("v3_stale_source_status_hash")
+    if source_coverage["stale_source_status_config_ids"]:
+        publish_blockers.append("v3_stale_source_status_config_hash")
+    if source_coverage["stale_source_status_pipeline_ids"]:
+        publish_blockers.append("v3_stale_source_status_pipeline_version")
     if source_coverage["parser_error_without_review_task_ids"]:
         publish_blockers.append("parser_error_without_review_task")
 

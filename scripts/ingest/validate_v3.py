@@ -50,8 +50,14 @@ def _agreement_ok(candidate: dict[str, Any], field_name: str) -> bool:
     return str(field.get("agreement") or "") in {
         "exact_after_normalization",
         "not_required",
-        "manual_reviewed",
     }
+
+
+def _requires_manual_review(candidate: dict[str, Any], field_name: str) -> bool:
+    field = _evidence_for(candidate, field_name)
+    if not isinstance(field, dict):
+        return False
+    return str(field.get("agreement") or "") == "manual_reviewed"
 
 
 def _schedule_ok(schedule: Any) -> bool:
@@ -80,10 +86,9 @@ def _has_any_reviewable_evidence(candidate: dict[str, Any]) -> bool:
             continue
         source = field.get("source")
         if isinstance(source, dict) and (
-            source.get("crop_sha256")
-            or source.get("crop_storage_path")
-            or source.get("crop_path")
-            or source.get("bbox_px")
+            source.get("page_image_sha256")
+            and source.get("crop_sha256")
+            and (source.get("crop_storage_path") or source.get("crop_path"))
         ):
             return True
     return False
@@ -117,6 +122,9 @@ def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     for field_name in required_fields:
         if not _has_source_crop(candidate, field_name):
             findings.append(f"missing_required_field:{field_name}")
+            continue
+        if _requires_manual_review(candidate, field_name):
+            findings.append(f"manual_review_required:{field_name}")
             continue
         if not _agreement_ok(candidate, field_name):
             findings.append(f"engine_disagreement:{field_name}")

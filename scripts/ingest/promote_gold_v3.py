@@ -11,9 +11,11 @@ from typing import Any
 try:
     from config import PROCESSED_DIR
     from scripts.ingest.build_review_queue_v3 import review_approval_is_current
+    from scripts.ingest.review_schema_v3 import validate_review_decision
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .build_review_queue_v3 import review_approval_is_current
+    from .review_schema_v3 import validate_review_decision
 
 
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
@@ -38,6 +40,28 @@ def _candidate_page_image_sha256(candidate: dict[str, Any]) -> str | None:
         if page_hash:
             return str(page_hash)
     return None
+
+
+def _candidate_field_crop_sha256s(
+    candidate: dict[str, Any],
+    *,
+    field_names: set[str] | None = None,
+) -> set[str]:
+    hashes: set[str] = set()
+    field_evidence = candidate.get("field_evidence")
+    if not isinstance(field_evidence, dict):
+        return hashes
+    items = (
+        ((field_name, field_evidence.get(field_name)) for field_name in field_names)
+        if field_names is not None
+        else field_evidence.items()
+    )
+    for _field_name, evidence in items:
+        source = evidence.get("source") if isinstance(evidence, dict) else {}
+        crop_hash = source.get("crop_sha256") if isinstance(source, dict) else None
+        if crop_hash:
+            hashes.add(str(crop_hash))
+    return hashes
 
 
 def _review_decision_map(review_decisions: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -91,6 +115,7 @@ def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) 
         "decided_at": decision.get("decided_at"),
         "content_sha256": decision.get("content_sha256"),
         "page_image_sha256": decision.get("page_image_sha256"),
+        "field_crop": decision.get("field_crop"),
         "field_crop_sha256": decision.get("field_crop_sha256"),
         "original_validation_findings": original_findings,
         "approved_fields": approved_fields,
@@ -139,6 +164,7 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
             "fetchedUrl": fetched_url,
         },
         "field_evidence": candidate.get("field_evidence", {}),
+        "source_spans": candidate.get("source_spans", {}),
         "validation_status": candidate.get("validation_status"),
         "validation_findings": candidate.get("validation_findings") or [],
         "review_status": candidate.get("review_status"),
@@ -154,6 +180,7 @@ def build_gold_v3_preview(
     rows: list[dict[str, Any]] = []
     skipped = 0
     skipped_stale_review = 0
+    skipped_invalid_review = 0
     skipped_validation_findings = 0
     manually_approved_by_review = 0
     decisions_by_candidate = _review_decision_map(review_decisions or [])
@@ -167,10 +194,20 @@ def build_gold_v3_preview(
         if candidate.get("validation_status") not in PROMOTABLE_STATUSES:
             candidate_id = str(candidate.get("candidate_id") or "").strip()
             decision = decisions_by_candidate.get(candidate_id)
+            if decision:
+                try:
+                    validate_review_decision(decision)
+                except ValueError:
+                    skipped_invalid_review += 1
+                    skipped += 1
+                    continue
             if decision and review_approval_is_current(
                 decision,
                 current_content_sha256=str(candidate.get("content_sha256") or ""),
                 current_page_image_sha256=_candidate_page_image_sha256(candidate),
+            ) and str(decision.get("field_crop_sha256") or "") in _candidate_field_crop_sha256s(
+                candidate,
+                field_names=set(decision.get("approved_fields") or {}),
             ):
                 promotable_candidate = _candidate_with_review(candidate, decision)
                 manually_approved_by_review += 1
@@ -191,6 +228,7 @@ def build_gold_v3_preview(
             "gold_rows": len(rows),
             "skipped_not_publishable": skipped,
             "skipped_validation_findings": skipped_validation_findings,
+            "skipped_invalid_review_decision": skipped_invalid_review,
             "manually_approved_by_review": manually_approved_by_review,
             "skipped_stale_review_decision": skipped_stale_review,
         },

@@ -17,6 +17,16 @@ assert.equal(
 assert.equal(
   chooseWeatherProviderForTimeSpan({
     now,
+    startsAt: "2026-06-27T11:30:00-04:00",
+    endsAt: "2026-06-27T12:30:00-04:00",
+    weatherApiAvailable: true,
+  }).provider,
+  "weatherapi",
+  "ongoing events should still fetch weather instead of being treated as past"
+);
+assert.equal(
+  chooseWeatherProviderForTimeSpan({
+    now,
     startsAt: "2026-07-01T18:00:00-04:00",
   }).provider,
   "nws_forecast"

@@ -767,8 +767,8 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     assert.equal(fortMovie.trustState, "source_backed");
     assert.equal(
       fortMovie.source?.url,
-      undefined,
-      "Reviewed visual schedules keep source evidence without exposing internal manual IDs as links"
+      "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "Reviewed visual schedules should expose a public Disney source URL, not an internal manual ID"
     );
 
     const legacyWellness = await getActivityBySlug("wellnessscav-engerhunt");
@@ -829,8 +829,8 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     );
     assert.equal(
       reviewedFortActivity.activity.source?.url,
-      undefined,
-      "Reviewed visual rows must not expose manual source identifiers as public links"
+      "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "Reviewed visual rows must expose a public Disney source URL rather than an internal manual identifier"
     );
 
     const movieNights = await getMovieNights();

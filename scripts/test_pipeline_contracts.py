@@ -631,8 +631,12 @@ class PipelineContractsTest(unittest.TestCase):
         payload = build_visual_source_payload()
         self.assertEqual("reviewed_visual_schedule_image", payload["source_kind"])
         self.assertEqual(
-            "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+            "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
             payload["canonical_url"],
+        )
+        self.assertEqual(
+            "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+            payload["internal_source_id"],
         )
         self.assertEqual("2026-05-26", payload["valid_from"])
         self.assertEqual("2026-09-08", payload["valid_to"])
@@ -5967,7 +5971,7 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn("Gold source evidence: 166 rows with document key legends", markdown)
         self.assertIn("kinds: fee", markdown)
         self.assertIn("Visual PDF audit: 165 activities compared, 0 blocking mismatches", markdown)
-        self.assertIn("Field audit: 982 fields checked, 0 errors", markdown)
+        self.assertIn("Field audit: 986 fields checked, 0 errors", markdown)
         self.assertIn("Fort Wilderness", markdown)
         self.assertIn("Source-visible fixture records retained for audit: 34 records", markdown)
         self.assertIn("34 covered by official offerings", markdown)
@@ -6110,10 +6114,7 @@ class SourceInventoryTest(unittest.TestCase):
             self.assertRegex(row["source_id"], r"^[a-f0-9]{64}$")
             self.assertTrue(row["source_role"])
             self.assertTrue(row["source_kind"])
-            self.assertTrue(
-                row["canonical_url"].startswith("https://")
-                or row["canonical_url"].startswith("manual://")
-            )
+            self.assertTrue(row["canonical_url"].startswith("https://"))
             self.assertTrue(row["parser_version"])
             self.assertIn(
                 row["currentness"],

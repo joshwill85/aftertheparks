@@ -61,14 +61,14 @@ assert.match(
 
 assert.match(
   polish,
-  /\.explore-activity-grid \.event-card__save\s*\{[\s\S]*position:\s*static/,
-  "Explore cards should keep Add to My Plan in normal flow instead of floating over the card."
+  /\.explore-activity-grid \.event-card__save\s*\{[\s\S]*position:\s*absolute/,
+  "Explore cards should anchor Add to My Plan to the bottom-right so weather and tags have stable positions."
 );
 
 assert.match(
   polish,
-  /\.explore-activity-grid \.event-card__footer\s*\{[\s\S]*padding-right:\s*0/,
-  "Explore card footers should not reserve overlap space once the save button is in normal flow."
+  /\.explore-activity-grid \.event-card__footer\s*\{[\s\S]*padding-right:\s*152px/,
+  "Explore card footers should reserve the bottom-right save button lane."
 );
 
 assert.match(

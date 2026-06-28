@@ -50708,7 +50708,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:morning-crafts:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:morning-crafts:reviewed_visual",
     "activity_catalog_id": "764048c5-1a5d-a56e-5472-74ad0de586a3",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -50817,13 +50817,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -50837,7 +50837,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:poolside-activities:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:poolside-activities:reviewed_visual",
     "activity_catalog_id": "36c30d68-d86b-f3e9-8b9f-6758fbd26a77",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -50945,13 +50945,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -51033,7 +51033,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:afternoon-crafts:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:afternoon-crafts:reviewed_visual",
     "activity_catalog_id": "3e3fc2b6-cb50-d17e-95c8-da9df8a4d2bf",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -51142,13 +51142,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -51162,7 +51162,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:crocketts-craft-corner-wine-woodshop:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:crocketts-craft-corner-wine-woodshop:reviewed_visual",
     "activity_catalog_id": "da9d7539-cdc0-0c6e-d4e0-1290b70e3932",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -51271,13 +51271,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -51291,7 +51291,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:campfire-games:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:campfire-games:reviewed_visual",
     "activity_catalog_id": "a9272861-1182-324a-e8f4-f4ba1704d6a1",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -51399,13 +51399,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -51490,7 +51490,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:campfire-bingo:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:campfire-bingo:reviewed_visual",
     "activity_catalog_id": "b068728e-aba4-5697-65a5-df0d2c30d5da",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -51598,13 +51598,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -51689,7 +51689,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:country-campfire:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:country-campfire:reviewed_visual",
     "activity_catalog_id": "6c768bb4-f869-ef05-e448-4966790fb9df",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -51797,13 +51797,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -51888,7 +51888,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:chip-n-dales-campfire-sing-a-long:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:chip-n-dales-campfire-sing-a-long:reviewed_visual",
     "activity_catalog_id": "87e48aa7-6397-98aa-509c-fbd15ce497c1",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -51996,13 +51996,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -52087,7 +52087,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:movie-under-the-stars:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:movie-under-the-stars:reviewed_visual",
     "activity_catalog_id": "21d90219-165f-a6ab-8528-a6b9059cceaf",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -52195,13 +52195,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -52323,7 +52323,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:bike-barn:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:bike-barn:reviewed_visual",
     "activity_catalog_id": "5482cfbb-8ed8-8fd7-6f24-7b48655c11af",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -52432,13 +52432,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -52452,7 +52452,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:wilderness-back-trail-adventure:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:wilderness-back-trail-adventure:reviewed_visual",
     "activity_catalog_id": "7af2ad18-8c98-2498-8309-242ea53524e7",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -52583,13 +52583,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -52682,7 +52682,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:storytime-yoga:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:storytime-yoga:reviewed_visual",
     "activity_catalog_id": "49cff84a-ae26-ec63-4536-c80afd496d90",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -52774,13 +52774,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -52794,7 +52794,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:guided-fishing-excursions:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:guided-fishing-excursions:reviewed_visual",
     "activity_catalog_id": "09d0db94-cbaf-6d9f-fe57-9c1825c3e6b8",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -52921,13 +52921,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -53020,7 +53020,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:find-a-friend-scavenger-hunt:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:find-a-friend-scavenger-hunt:reviewed_visual",
     "activity_catalog_id": "ce6dccd8-2b83-8e13-7f2c-e3c56fd2f09d",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -53112,13 +53112,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -53132,7 +53132,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:visit-chip-and-dale:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:visit-chip-and-dale:reviewed_visual",
     "activity_catalog_id": "3ca27656-59a7-eea0-5955-52cd6af4feb4",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -53224,13 +53224,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -53244,7 +53244,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:ready-aim-archery:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:ready-aim-archery:reviewed_visual",
     "activity_catalog_id": "5ce5faa8-ca79-55ec-8bfb-dea933d72b48",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -53375,13 +53375,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -53476,7 +53476,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:visit-tri-circle-d-ranch:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:visit-tri-circle-d-ranch:reviewed_visual",
     "activity_catalog_id": "b84492f8-c56b-5171-a81d-22f59c5ebada",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -53568,13 +53568,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },
@@ -53588,7 +53588,7 @@
     }
   },
   {
-    "candidate_id": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9:fort-wilderness:carriage-rides:reviewed_visual",
+    "candidate_id": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36:fort-wilderness:carriage-rides:reviewed_visual",
     "activity_catalog_id": "b809374d-062f-8c6f-6d18-10e5ebc7a19b",
     "calendar_group_key": "fort-wilderness",
     "resort_slugs": [
@@ -53697,13 +53697,13 @@
         }
       ]
     },
-    "source_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-    "source_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+    "source_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+    "source_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
     "source_pdf_edition": null,
     "source": {
       "path": "data/processed/fort_wilderness_visual_sources.json",
-      "url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
-      "documentHash": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+      "url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+      "documentHash": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
       "edition": null,
       "documentKeyLegends": []
     },

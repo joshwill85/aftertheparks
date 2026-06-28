@@ -341,6 +341,24 @@ assert.match(
   "Resort story icons need dedicated card styling instead of reusing monogram styling"
 );
 
+assert.match(
+  polishCss,
+  /\.event-card__resort-story-icon\s*\{[\s\S]*padding:\s*3px[\s\S]*overflow:\s*hidden/,
+  "Event-card resort badges should provide an even white inset around the icon artwork."
+);
+
+assert.match(
+  polishCss,
+  /\.event-card__resort-story-icon \.resort-card__story-icon\s*\{[\s\S]*width:\s*100%[\s\S]*height:\s*100%[\s\S]*border-radius:\s*999px/,
+  "Event-card resort icon containers should fill the badge frame and stay centered."
+);
+
+assert.match(
+  polishCss,
+  /\.event-card__resort-story-icon \.resort-card__story-svg\s*\{[\s\S]*display:\s*block[\s\S]*width:\s*100%[\s\S]*height:\s*100%[\s\S]*transform:\s*scale\(1\.16\)/,
+  "Event-card resort SVGs should compensate for built-in viewBox padding so the artwork fills the badge."
+);
+
 const bayLakeMarkup = renderToStaticMarkup(
   createElement(ResortStoryIcon, {
     slug: "bay-lake-tower-at-contemporary-resort",

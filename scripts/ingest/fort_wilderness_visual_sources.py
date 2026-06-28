@@ -14,7 +14,9 @@ DEFAULT_MANIFEST = Path(
     "data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/manifest.json"
 )
 DEFAULT_OUTPUT = Path("data/processed/fort_wilderness_visual_sources.json")
-DEFAULT_CANONICAL_URL = "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities"
+DEFAULT_CANONICAL_URL = (
+    "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/"
+)
 
 
 def _slugify(value: str) -> str:
@@ -268,6 +270,7 @@ def visual_source_is_current(payload: dict[str, Any], *, current_date: date | No
 def visual_source_content_hash(payload: dict[str, Any]) -> str:
     source_payload = {
         "canonical_url": payload.get("canonical_url"),
+        "internal_source_id": payload.get("internal_source_id"),
         "valid_from": payload.get("valid_from"),
         "valid_to": payload.get("valid_to"),
         "image_hashes": [
@@ -296,7 +299,8 @@ def build_visual_source_payload(manifest_path: Path = DEFAULT_MANIFEST) -> dict[
     payload = {
         "source_kind": "reviewed_visual_schedule_image",
         "calendar_group_key": manifest["calendar_group_key"],
-        "canonical_url": manifest.get("canonical_url") or DEFAULT_CANONICAL_URL,
+        "canonical_url": manifest.get("public_url") or DEFAULT_CANONICAL_URL,
+        "internal_source_id": manifest.get("canonical_url"),
         "resort_slugs": manifest.get("resort_slugs", []),
         "valid_from": manifest["valid_from"],
         "valid_to": manifest["valid_to"],

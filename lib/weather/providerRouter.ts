@@ -34,16 +34,22 @@ export function chooseWeatherProviderForTimeSpan(input: {
   allowEventTimeDecisions: boolean;
   reason: string;
 } {
-  void input.endsAt;
+  const effectiveStartsAt =
+    input.startsAt &&
+    input.endsAt &&
+    new Date(input.startsAt).getTime() < input.now.getTime() &&
+    new Date(input.endsAt).getTime() >= input.now.getTime()
+      ? input.now.toISOString()
+      : input.startsAt;
   const selection = chooseForecastHorizon({
     now: input.now,
-    startsAt: input.startsAt,
+    startsAt: effectiveStartsAt,
     weatherApiAvailable: input.weatherApiAvailable ?? isWeatherApiAvailable(),
     visualCrossingAvailable:
       input.visualCrossingAvailable ?? isVisualCrossingAvailable(),
   });
-  const hoursOut = input.startsAt
-    ? (new Date(input.startsAt).getTime() - input.now.getTime()) / (1000 * 60 * 60)
+  const hoursOut = effectiveStartsAt
+    ? (new Date(effectiveStartsAt).getTime() - input.now.getTime()) / (1000 * 60 * 60)
     : undefined;
   trackWeatherEvent("weather_provider_route_selected", {
     provider: selection.provider,

@@ -1,7 +1,8 @@
 {
   "source_kind": "reviewed_visual_schedule_image",
   "calendar_group_key": "fort-wilderness",
-  "canonical_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+  "canonical_url": "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+  "internal_source_id": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
   "resort_slugs": [
     "campsites-at-fort-wilderness-resort",
     "cabins-at-fort-wilderness-resort"
@@ -883,6 +884,6 @@
       }
     }
   ],
-  "content_sha256": "585d19448142eb22bce624e80929755d7ea5f99097eed4cd59755fbf80baccc9",
+  "content_sha256": "0f89ce3d48bcabb2408d1fad536cfd161c8af6aa290dff1db6234aad02412a36",
   "currentness": "current"
 }
