@@ -1,0 +1,248 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+  "source_pdf_path": "data/raw/pdfs/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:56:02.366523+00:00",
+  "activities": [
+    {
+      "title": "Reel Fun Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "inside",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 906.5,
+        "y": 519.0,
+        "width": 472.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:reel-fun-arcade",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Wellness Scavenger Hunt",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 7:00am-11:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 155.5,
+        "y": 840.5,
+        "width": 628.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:wellness-scavenger-hunt",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Monday, Wednesday, Thursday and Friday from 3:30pm-4:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Create a take-home souvenir with a Disney twist!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 904.5,
+        "y": 912.5,
+        "width": 408.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:arts-crafts",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-9:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 157.0,
+        "y": 1182.5,
+        "width": 316.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:find-a-friend",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arcade Tournament",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 4:00pm-5:00pm",
+      "location": "Reel Fun Arcade",
+      "description": "Come test your skills at our daily arcade tournament. You may find yourself going home with a prize of your own!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 904.5,
+        "y": 1343.0,
+        "width": 483.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:arcade-tournament",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "The Reel Spot | 8:30PM",
+      "location": "The Reel Spot",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 114.0,
+        "y": 1476.5,
+        "width": 670.0,
+        "height": 28.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Sorcerer’s Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "from 6:30pm-7:30pm",
+      "location": "Located between Fantasia Buildings 5 and 8",
+      "description": "Enjoy the warm glow of the campfire with complimentary kits available for purchase. marshmallows.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 905.0,
+        "y": 1557.5,
+        "width": 494.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:sorcerers-campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Complimentary Craft",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday and Thursday from 6:30pm-7:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Enjoy a complimentary craft to create while you relax poolside",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 905.5,
+        "y": 1808.5,
+        "width": 514.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:complimentary-craft",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Silent Disco",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday at 8:30pm",
+      "location": "Fantasia Pool Deck",
+      "description": "Choose your favorite music, don your own headphones and “silently” dance the night away with us!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 905.0,
+        "y": 2023.0,
+        "width": 290.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-movies:silent-disco",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

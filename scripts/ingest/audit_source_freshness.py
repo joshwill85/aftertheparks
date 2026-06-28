@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -34,6 +35,7 @@ BLOCKING_CURRENTNESS_STATES = {
     "hash_changed",
     "missing_from_parent",
     "unreachable",
+    "expired",
 }
 
 FRESHNESS_STATES = {
@@ -43,8 +45,14 @@ FRESHNESS_STATES = {
     "missing_from_parent": "Expected source is no longer discoverable from parent page.",
     "unreachable": "Live request failed or returned non-200.",
     "unchecked": "Source has not been checked in this run.",
+    "expired": "Reviewed source is outside its visible validity window.",
     "unknown": "Source inventory does not yet have enough evidence to judge freshness.",
 }
+
+STALE_RESORT_SOURCE_RE = (
+    r"(?:/fy26-q[12]/|_DRAFT|Recreation[-_](?:0126|0326)|"
+    r"(?:0126|0326)(?:_DIGITAL)?\.(?:pdf|jpe?g|png)\b)"
+)
 
 
 def _now() -> str:
@@ -102,6 +110,11 @@ def load_used_source_urls(
 
 def source_freshness_errors(report: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    missing_used_urls = report.get("missing_used_source_urls")
+    if isinstance(missing_used_urls, list):
+        for url in sorted(str(value) for value in missing_used_urls if str(value).strip()):
+            errors.append(f"source_freshness:used_source_missing_from_inventory:{url}")
+
     sources = report.get("sources")
     if not isinstance(sources, list):
         return errors
@@ -119,6 +132,8 @@ def source_freshness_errors(report: dict[str, Any]) -> list[str]:
             errors.append(f"source_freshness:{state}:{source.get('canonical_url')}")
         if used and state == "unknown" and not str(source.get("freshness_exemption_reason") or "").strip():
             errors.append(f"source_freshness:unknown:{source.get('canonical_url')}")
+        if used and re.search(STALE_RESORT_SOURCE_RE, str(source.get("canonical_url") or ""), flags=re.I):
+            errors.append(f"source_freshness:stale_resort_schedule_url:{source.get('canonical_url')}")
     return errors
 
 
@@ -131,6 +146,7 @@ def _summary_for_sources(sources: list[dict[str, Any]]) -> dict[str, int]:
         "missing_from_parent": 0,
         "unreachable": 0,
         "unchecked": 0,
+        "expired": 0,
         "unknown": 0,
     }
     for source in sources:
@@ -147,6 +163,12 @@ def build_source_freshness_report(
     used_source_urls: set[str] | None = None,
 ) -> dict[str, Any]:
     used_source_urls = used_source_urls or set()
+    inventory_urls = {
+        str(source.get("canonical_url") or "").strip()
+        for source in sources
+        if isinstance(source, dict) and str(source.get("canonical_url") or "").strip()
+    }
+    missing_used_source_urls = sorted(used_source_urls - inventory_urls)
     enriched_sources: list[dict[str, Any]] = []
     for source in sources:
         row = dict(source)
@@ -164,6 +186,7 @@ def build_source_freshness_report(
         "summary": _summary_for_sources(enriched_sources),
         "errors": [],
         "warnings": [],
+        "missing_used_source_urls": missing_used_source_urls,
         "sources": enriched_sources,
     }
     report["errors"] = source_freshness_errors(report)

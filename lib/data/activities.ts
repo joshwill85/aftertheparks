@@ -70,6 +70,7 @@ interface IngestActivityRow {
   schedule?: {
     text?: string | null;
   } | null;
+  field_provenance?: Record<string, unknown> | null;
   movie_nights?: IngestMovieNight[];
 }
 
@@ -111,6 +112,11 @@ function movieScheduleTextForRow(activity: IngestActivityRow): string | null | u
 function movieLocationForRow(activity: IngestActivityRow): string | null | undefined {
   if (typeof activity.location === "string") return activity.location;
   return activity.location?.label;
+}
+
+function hasSourceBackedMovieNightFeed(activity: IngestActivityRow): boolean {
+  const provenance = activity.field_provenance?.movie_nights;
+  return Array.isArray(provenance) && provenance.length > 0;
 }
 
 export const DEFAULT_ACTIVITY_DATA_PIPELINE = "gold-v2";
@@ -849,6 +855,7 @@ export const getMovieNights = cache(async function getMovieNights(): Promise<
     ) {
       continue;
     }
+    if (!hasSourceBackedMovieNightFeed(activity)) continue;
 
     const resortSlug = activity.resort_slugs?.[0];
     if (!resortSlug) continue;

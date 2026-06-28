@@ -3,13 +3,23 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 from typing import Any
+from pathlib import Path
 from urllib.parse import quote
 
 try:
-    from config import STORAGE_BUCKET, supabase_service_key, supabase_url
-except ImportError:  # pragma: no cover - supports package-style imports in tests
     from .config import STORAGE_BUCKET, supabase_service_key, supabase_url
+except ImportError:  # pragma: no cover - supports direct script imports
+    config_path = Path(__file__).with_name("config.py")
+    spec = importlib.util.spec_from_file_location("ingest_config", config_path)
+    if spec is None or spec.loader is None:
+        raise
+    ingest_config = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ingest_config)
+    STORAGE_BUCKET = ingest_config.STORAGE_BUCKET
+    supabase_service_key = ingest_config.supabase_service_key
+    supabase_url = ingest_config.supabase_url
 
 try:
     import httpx

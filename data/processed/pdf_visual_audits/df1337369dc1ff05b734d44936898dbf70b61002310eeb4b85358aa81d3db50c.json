@@ -1,0 +1,222 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+  "source_pdf_path": "data/raw/pdfs/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:56:09.489107+00:00",
+  "activities": [
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 9:00am-9:00pm",
+      "location": "Throughout Disney’s Coronado Springs Resort",
+      "description": "Search the Resort for a hidden Bruno photo prop. Once located, snap a photo and then head to the Concierge Desk to receive a surprise!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 731.333,
+        "width": 315.667,
+        "height": 24.66700000000003
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:find-a-friend",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Nature Walk",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily",
+      "location": "throughout Disney’s Coronado Springs Resort",
+      "description": "Self-led nature trail to view the wildlife and landscape of the Resort. Pick up a Nature Guide at Panchito’s Gifts & Sundries, Concierge Desk or from a Recreation Cast Member to get started.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 951.0,
+        "width": 303.333,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:nature-walk",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Fitness Centers",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "location": "Gran Destino Tower and near Casitas 4",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1170.333,
+        "width": 377.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:fitness-centers",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily",
+      "location": "The Dig Site",
+      "description": "Join us for family-friendly activities. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.333,
+        "y": 1482.0,
+        "width": 460.66700000000003,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:poolside-activities",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Disney Trivia",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Friday from 5:00pm-5:45pm",
+      "location": "Laguna Bar",
+      "description": "Join us for a trivia challenge near El Centro!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.333,
+        "y": 1822.333,
+        "width": 310.66700000000003,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:disney-trivia",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Explorer’s Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "location": "The Dig Site",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.333,
+        "y": 1976.0,
+        "width": 489.66700000000003,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:explorers-campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Gran Destino Lawn | 8:30PM",
+      "location": "Gran Destino Lawn",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.333,
+        "y": 2116.333,
+        "width": 670.0000000000001,
+        "height": 28.333999999999833
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Coronado Nights Pool Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday, Wednesday and Saturday from 8:30pm-9:30pm",
+      "location": "The Dig Site Pool",
+      "description": "Join us for nighttime activities for all ages.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 115.333,
+        "y": 2162.667,
+        "width": 704.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "coronado-springs:coronado-nights-pool-party",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "source_kind": "official_html",
   "source_url": "https://disneyworld.disney.go.com/recreation/surfing-programs/",
-  "captured_at": "2026-06-27T01:26:50.233096+00:00",
-  "raw_html_sha256": "235413380ae77fa17e4497351435fc450835195d66314722f407f60f5356c3d1",
+  "captured_at": "2026-06-28T16:53:44.120844+00:00",
+  "raw_html_sha256": "c808d075f618259e55ba38e8666669b56f9fa44d7504913badec51df84aecc34",
   "lines": [
     {
       "line": 1,
@@ -186,7 +186,7 @@
     },
     {
       "line": 46,
-      "text": "Thursday, June 25, 2026"
+      "text": "Sunday, June 28, 2026"
     },
     {
       "line": 47,
@@ -765,5 +765,5 @@
       "text": "Answer<p>You must arrive at the Main Entrance of Disney’s Typhoon Lagoon water park 30 minutes prior to your event time. Your Surf Event Coordinator will meet you there.</p><p>All participants and spectators must arrive together to complete consent forms. The Surf Event Coordinator must be notified if any Guests will be arriving late or leaving early. Guests may not enter the park unattended outside of park hours.</p><p>Please be aware that Guests over the age of 18 are required to present a government-issued photo ID to attend this program.</p><p>Please be aware there is no parking fee at Typhoon Lagoon water park.</p>"
     }
   ],
-  "content_sha256": "5ab5777eeb02fb5a02899cce10f0d347820abf4d217718186fc92da39edfb980"
+  "content_sha256": "47fd7d4d589d406c437a3f270100b1e059a1a505d24d5258ef2ebc93788366f3"
 }

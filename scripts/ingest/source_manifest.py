@@ -35,7 +35,8 @@ class ActivityCalendarGroup:
     notes: str | None = None
 
 
-# Prefer fy26-q2 collateral when available; fall back to newest verified official PDF.
+# Resort recreation pages are the source-of-truth entry points for PDF calendars.
+# Do not treat old reachable CDN URLs as current without page-backed evidence.
 CDN_COLLATERAL = (
     "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/"
     "parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation"
@@ -226,6 +227,29 @@ ACTIVITY_SOURCES: list[ActivitySource] = [
 ]
 
 
+def apply_pdf_source_overrides(
+  sources: list[ActivitySource],
+  overrides: dict[str, dict[str, str]],
+) -> list[ActivitySource]:
+  replaced: list[ActivitySource] = []
+  for source in sources:
+    override = overrides.get(source.calendar_group_key)
+    if not override:
+      replaced.append(source)
+      continue
+    replaced.append(
+      ActivitySource(
+        source.calendar_group_key,
+        source.resort_slugs,
+        source.recreation_page_url,
+        override["pdf_url"],
+        override["pdf_edition"],
+        source.notes,
+      )
+    )
+  return replaced
+
+
 ACTIVITY_CALENDAR_GROUPS: list[ActivityCalendarGroup] = [
   ActivityCalendarGroup(
     source.calendar_group_key,
@@ -245,25 +269,33 @@ def _source_kind_for(source: ActivitySource) -> str:
   return "pdf" if source.pdf_url else "official_web"
 
 
-RESORT_RECREATION_SOURCES: list[ResortRecreationSource] = [
-  ResortRecreationSource(
-    resort_slug=resort_slug,
-    calendar_group_key=source.calendar_group_key,
-    disney_recreation_slug=_DISNEY_RECREATION_SLUG_OVERRIDES.get(
-      resort_slug,
-      resort_slug,
-    ),
-    recreation_page_url=recreation_url(
-      _DISNEY_RECREATION_SLUG_OVERRIDES.get(resort_slug, resort_slug)
-    ),
-    pdf_url=source.pdf_url,
-    pdf_edition=source.pdf_edition,
-    source_kind=_source_kind_for(source),
-    notes=source.notes,
-  )
-  for source in ACTIVITY_SOURCES
-  for resort_slug in source.resort_slugs
-]
+def resort_recreation_sources_for(
+  activity_sources: list[ActivitySource],
+) -> list[ResortRecreationSource]:
+  return [
+    ResortRecreationSource(
+      resort_slug=resort_slug,
+      calendar_group_key=source.calendar_group_key,
+      disney_recreation_slug=_DISNEY_RECREATION_SLUG_OVERRIDES.get(
+        resort_slug,
+        resort_slug,
+      ),
+      recreation_page_url=recreation_url(
+        _DISNEY_RECREATION_SLUG_OVERRIDES.get(resort_slug, resort_slug)
+      ),
+      pdf_url=source.pdf_url,
+      pdf_edition=source.pdf_edition,
+      source_kind=_source_kind_for(source),
+      notes=source.notes,
+    )
+    for source in activity_sources
+    for resort_slug in source.resort_slugs
+  ]
+
+
+RESORT_RECREATION_SOURCES: list[ResortRecreationSource] = resort_recreation_sources_for(
+  ACTIVITY_SOURCES
+)
 
 # Verify coverage of all 31 resorts
 ALL_RESORT_SLUGS = {

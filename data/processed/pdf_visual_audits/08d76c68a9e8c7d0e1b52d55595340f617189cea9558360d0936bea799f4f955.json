@@ -1,10 +1,10 @@
 {
-  "audit_mode": "source_provenance_seed",
+  "audit_mode": "independent_codex_visual",
   "source_pdf_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
   "source_pdf_path": "data/raw/pdfs/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
-  "model": "source_provenance_visual_seed_v1",
+  "model": "codex_local_pdf_source_review_v1",
   "prompt_version": "disney-pdf-visual-audit-v1",
-  "audited_at": "2026-06-27T03:48:39.495742+00:00",
+  "audited_at": "2026-06-28T16:54:53.689799+00:00",
   "activities": [
     {
       "title": "Pumbaa’s Fun And Games Arcade",
@@ -23,8 +23,14 @@
         "width": 695.333,
         "height": 26.999999999999943
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:pumbaas-fun-and-games-arcade"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:pumbaas-fun-and-games-arcade",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Simba’s Activity Center",
@@ -43,8 +49,14 @@
         "width": 483.0000000000001,
         "height": 21.66599999999994
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:simbas-activity-center"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:simbas-activity-center",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Find A Friend",
@@ -63,8 +75,14 @@
         "width": 271.0,
         "height": 21.33299999999997
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:find-a-friend"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:find-a-friend",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Jambo House Lobby Art Tour",
@@ -83,8 +101,14 @@
         "width": 596.334,
         "height": 21.66700000000003
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:jambo-house-lobby-art-tour"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:jambo-house-lobby-art-tour",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Disney Family Fitness Fun",
@@ -103,8 +127,14 @@
         "width": 525.333,
         "height": 21.666000000000167
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:disney-family-fitness-fun"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:disney-family-fitness-fun",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Medallion Rubbing",
@@ -123,8 +153,14 @@
         "width": 386.33299999999997,
         "height": 21.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:medallion-rubbing"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:medallion-rubbing",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Poolside Activities",
@@ -143,8 +179,14 @@
         "width": 395.66600000000005,
         "height": 21.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:poolside-activities"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:poolside-activities",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Trivia Night",
@@ -163,8 +205,14 @@
         "width": 246.33300000000008,
         "height": 21.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:trivia-night"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:trivia-night",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Jammin’ At Jambo House",
@@ -183,8 +231,14 @@
         "width": 488.66700000000003,
         "height": 21.666000000000167
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:jammin-at-jambo-house"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:jammin-at-jambo-house",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Movie Under the Stars",
@@ -203,8 +257,14 @@
         "width": 670.0000000000001,
         "height": 28.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:movie-under-the-stars"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Campfire",
@@ -235,11 +295,18 @@
         "width": 0,
         "height": 0
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-jambo:campfire"
+      "confidence": "high",
+      "row_key": "animal-kingdom-jambo:campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     }
   ],
-  "warnings": [
-    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
   ]
 }

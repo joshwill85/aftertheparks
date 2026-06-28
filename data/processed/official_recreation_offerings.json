@@ -2854,49 +2854,6 @@
       "source_path": "data/raw/web/official-volleyball.snapshot.json"
     },
     {
-      "program_key": "community-halls",
-      "title": "Community Halls",
-      "description": null,
-      "category": "resort_activity",
-      "tags": [
-        "above_two_hundred_dollars",
-        "all_ages",
-        "beach_and_water_activities",
-        "eec_adults",
-        "eec_all_ages",
-        "eec_kids",
-        "eec_may_remain_in_wheelchair_ecv",
-        "eec_preschoolers",
-        "eec_teens",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "one_hundred_to_two_hundred_dollars",
-        "resort_special",
-        "rest_and_recreation",
-        "umbrella_and_product_recreation_wdw",
-        "umbrella_recreation_wdw"
-      ],
-      "availability": {
-        "kind": "evergreen_all_day",
-        "hours_state": "source_unspecified",
-        "label": "Hours not specified by Disney"
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 45,
-            "text": "Community Halls",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[44].name"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/",
-      "source_sha256": "7c4324a53f913ad05cf7c29b8e9af6cf7fda29f9fca5fb378087a4c99fc415d9"
-    },
-    {
       "program_key": "walt-disney-world-golf",
       "title": "Walt Disney World Golf",
       "description": "Official Walt Disney World golf pricing and tee-time information for Disney's championship and 9-hole golf courses.",
@@ -3010,6 +2967,49 @@
         "priceBasis": "dynamic_green_fee"
       },
       "source_path": "data/quality/golf_official_facts.json"
+    },
+    {
+      "program_key": "community-halls",
+      "title": "Community Halls",
+      "description": null,
+      "category": "resort_activity",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 62,
+            "text": "Community Halls",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[61].name"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/",
+      "source_sha256": "7c4324a53f913ad05cf7c29b8e9af6cf7fda29f9fca5fb378087a4c99fc415d9"
     },
     {
       "program_key": "basketball-courts",
@@ -35907,888 +35907,6 @@
       "source_path": "data/raw/web/official-volleyball.snapshot.json"
     },
     {
-      "program_key": "running-trails",
-      "offering_key": "running-trails:contemporary-resort:contemporary-resort",
-      "resort_slug": "contemporary-resort",
-      "variant_key": "contemporary-resort",
-      "title": "Running Trails",
-      "description": "Jogging & Running Trails",
-      "category": "fitness_wellness",
-      "tags": [
-        "above_two_hundred_dollars",
-        "all_ages",
-        "beach_and_water_activities",
-        "eec_adults",
-        "eec_all_ages",
-        "eec_kids",
-        "eec_may_remain_in_wheelchair_ecv",
-        "eec_preschoolers",
-        "eec_teens",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "one_hundred_to_two_hundred_dollars",
-        "resort_special",
-        "rest_and_recreation",
-        "umbrella_and_product_recreation_wdw",
-        "umbrella_recreation_wdw"
-      ],
-      "location": {
-        "label": "Running Trail at Disney's Contemporary Resort"
-      },
-      "availability": {
-        "kind": "evergreen_all_day",
-        "hours_state": "source_unspecified",
-        "label": "Hours not specified by Disney"
-      },
-      "price": {
-        "state": "free",
-        "notes": "Disney lists this official offering with no posted fee language."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 35,
-            "text": "Running Trails",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[34].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 35,
-            "text": "Disney's Contemporary Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010385;entityType=resort"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 35,
-            "text": "Disney's Contemporary Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010385;entityType=resort"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Jogging & Running Trails | Walt Disney World Resort",
-            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Jogging & Running Trails | Walt Disney World Resort",
-            "field": "source_disney_official_resort_amenity_no_fee_language",
-            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
-          },
-          {
-            "page": 1,
-            "line": 2,
-            "text": "Running Trails",
-            "field": "source_disney_official_resort_amenity_no_fee_language",
-            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
-      "source_path": "data/raw/web/official-jogging.snapshot.json"
-    },
-    {
-      "program_key": "running-trails",
-      "offering_key": "running-trails:wilderness-lodge:wilderness-lodge",
-      "resort_slug": "wilderness-lodge",
-      "variant_key": "wilderness-lodge",
-      "title": "Running Trails",
-      "description": "Jogging & Running Trails",
-      "category": "fitness_wellness",
-      "tags": [
-        "above_two_hundred_dollars",
-        "all_ages",
-        "beach_and_water_activities",
-        "eec_adults",
-        "eec_all_ages",
-        "eec_kids",
-        "eec_may_remain_in_wheelchair_ecv",
-        "eec_preschoolers",
-        "eec_teens",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "one_hundred_to_two_hundred_dollars",
-        "resort_special",
-        "rest_and_recreation",
-        "umbrella_and_product_recreation_wdw",
-        "umbrella_recreation_wdw"
-      ],
-      "location": {
-        "label": "Running Trail at Disney's Wilderness Lodge"
-      },
-      "availability": {
-        "kind": "evergreen_all_day",
-        "hours_state": "source_unspecified",
-        "label": "Hours not specified by Disney"
-      },
-      "price": {
-        "state": "free",
-        "notes": "Disney lists this official offering with no posted fee language."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 35,
-            "text": "Running Trails",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[34].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 35,
-            "text": "Disney's Wilderness Lodge",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010394;entityType=resort"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 35,
-            "text": "Disney's Wilderness Lodge",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010394;entityType=resort"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Jogging & Running Trails | Walt Disney World Resort",
-            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Jogging & Running Trails | Walt Disney World Resort",
-            "field": "source_disney_official_resort_amenity_no_fee_language",
-            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
-          },
-          {
-            "page": 1,
-            "line": 2,
-            "text": "Running Trails",
-            "field": "source_disney_official_resort_amenity_no_fee_language",
-            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
-      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
-      "source_path": "data/raw/web/official-jogging.snapshot.json"
-    },
-    {
-      "program_key": "golf-lessons",
-      "offering_key": "golf-lessons:polynesian-village-resort:polynesian-village-resort",
-      "resort_slug": "polynesian-village-resort",
-      "variant_key": "polynesian-village-resort",
-      "title": "Golf Lessons",
-      "description": "Professional Golf Lessons",
-      "category": "resort_activity",
-      "tags": [
-        "adults",
-        "eec_adults",
-        "eec_may_remain_in_wheelchair_ecv",
-        "fifty_to_one_hundred_dollars",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "golf",
-        "kids",
-        "rest_and_recreation",
-        "sports_and_fitness",
-        "teens",
-        "tweens",
-        "under_fifty_dollars"
-      ],
-      "location": {
-        "label": "Golf Lessons at Disney's Magnolia Golf Course"
-      },
-      "availability": {
-        "kind": "evergreen_all_day",
-        "hours_state": "source_unspecified",
-        "label": "Hours not specified by Disney"
-      },
-      "price": {
-        "state": "fee",
-        "notes": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 36,
-            "text": "Golf Lessons",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[35].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 36,
-            "text": "Disney's Polynesian Village Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[35].locationsList.80010388;entityType=resort"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 36,
-            "text": "Disney's Polynesian Village Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[35].locationsList.80010388;entityType=resort"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Professional Golf Lessons | Walt Disney World Resort",
-            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
-            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 14,
-            "text": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
-            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
-      "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d",
-      "source_path": "data/raw/web/official-professional-golf-lessons.snapshot.json"
-    },
-    {
-      "program_key": "golf-lessons",
-      "offering_key": "golf-lessons:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa",
-      "resort_slug": "saratoga-springs-resort-and-spa",
-      "variant_key": "saratoga-springs-resort-and-spa",
-      "title": "Golf Lessons",
-      "description": "Professional Golf Lessons",
-      "category": "resort_activity",
-      "tags": [
-        "adults",
-        "eec_adults",
-        "eec_may_remain_in_wheelchair_ecv",
-        "fifty_to_one_hundred_dollars",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "golf",
-        "kids",
-        "rest_and_recreation",
-        "sports_and_fitness",
-        "teens",
-        "tweens",
-        "under_fifty_dollars"
-      ],
-      "location": {
-        "label": "Golf Lessons at Disney's Lake Buena Vista Golf Course"
-      },
-      "availability": {
-        "kind": "evergreen_all_day",
-        "hours_state": "source_unspecified",
-        "label": "Hours not specified by Disney"
-      },
-      "price": {
-        "state": "fee",
-        "notes": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 36,
-            "text": "Golf Lessons",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[35].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 36,
-            "text": "Disney's Saratoga Springs Resort & Spa",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[35].locationsList.80010383;entityType=resort"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 36,
-            "text": "Disney's Saratoga Springs Resort & Spa",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[35].locationsList.80010383;entityType=resort"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Professional Golf Lessons | Walt Disney World Resort",
-            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
-            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 14,
-            "text": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
-            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
-      "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d",
-      "source_path": "data/raw/web/official-professional-golf-lessons.snapshot.json"
-    },
-    {
-      "program_key": "arcades",
-      "offering_key": "arcades:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
-      "resort_slug": "cabins-at-fort-wilderness-resort",
-      "variant_key": "cabins-at-fort-wilderness-resort",
-      "title": "Arcades",
-      "description": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort.",
-      "category": "arcade",
-      "tags": [
-        "above_two_hundred_dollars",
-        "all_ages",
-        "beach_and_water_activities",
-        "eec_adults",
-        "eec_all_ages",
-        "eec_kids",
-        "eec_may_remain_in_wheelchair_ecv",
-        "eec_preschoolers",
-        "eec_teens",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "one_hundred_to_two_hundred_dollars",
-        "resort_special",
-        "rest_and_recreation",
-        "umbrella_and_product_recreation_wdw",
-        "umbrella_recreation_wdw"
-      ],
-      "location": {
-        "label": "Daniel Boone's Wilderness Arcade"
-      },
-      "availability": {
-        "kind": "evergreen_all_day",
-        "hours_state": "source_unspecified",
-        "label": "Hours not specified by Disney"
-      },
-      "price": {
-        "state": "fee",
-        "notes": "To play games, you must first purchase a Game Card and add game points using a credit card or cash at a kiosk inside the arcade. Game Cards are rechargeable and can be used at other Walt Disney World Resort arcades."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 38,
-            "text": "Arcades",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[37].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 38,
-            "text": "80010408;entityType=resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[37].parkIds"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 38,
-            "text": "80010408;entityType=resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[37].parkIds"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 4,
-            "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
-            "source_sha256": "0f99f03d2e35fc090a7a55e6bdaa97274e35a85c3f57c5ca3cabd4b4099d3162"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 9,
-            "text": "To play games, you must first purchase a Game Card and add game points using a credit card or cash at a kiosk inside the arcade. Game Cards are rechargeable and can be used at other Walt Disney World Resort arcades.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
-            "source_sha256": "0f99f03d2e35fc090a7a55e6bdaa97274e35a85c3f57c5ca3cabd4b4099d3162"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
-      "source_sha256": "0f99f03d2e35fc090a7a55e6bdaa97274e35a85c3f57c5ca3cabd4b4099d3162",
-      "source_path": "data/raw/web/official-arcades.snapshot.json"
-    },
-    {
-      "program_key": "campfires",
-      "offering_key": "campfires:all-star-sports-resort:all-star-sports-resort",
-      "resort_slug": "all-star-sports-resort",
-      "variant_key": "all-star-sports-resort",
-      "title": "Campfires",
-      "description": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
-      "category": "campfire",
-      "tags": [
-        "above_two_hundred_dollars",
-        "all_ages",
-        "beach_and_water_activities",
-        "eec_adults",
-        "eec_all_ages",
-        "eec_kids",
-        "eec_may_remain_in_wheelchair_ecv",
-        "eec_preschoolers",
-        "eec_teens",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "one_hundred_to_two_hundred_dollars",
-        "resort_special",
-        "rest_and_recreation",
-        "umbrella_and_product_recreation_wdw",
-        "umbrella_recreation_wdw"
-      ],
-      "location": {
-        "label": "Campfire at Disney's All-Star Sports Resort"
-      },
-      "availability": {
-        "kind": "calendar_dependent",
-        "hours_state": "calendar_varies",
-        "label": "Schedule varies by resort calendar"
-      },
-      "price": {
-        "state": "free",
-        "notes": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 46,
-            "text": "Campfires",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[45].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 46,
-            "text": "Disney's All-Star Sports Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[45].locationsList.80010401;entityType=resort"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 46,
-            "text": "Disney's All-Star Sports Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[45].locationsList.80010401;entityType=resort"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 4,
-            "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          }
-        ],
-        "availability": [
-          {
-            "page": 1,
-            "line": 37,
-            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          },
-          {
-            "page": 1,
-            "line": 38,
-            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 37,
-            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-      "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b",
-      "source_path": "data/raw/web/official-campfires.snapshot.json"
-    },
-    {
-      "program_key": "campfires",
-      "offering_key": "campfires:pop-century-resort:pop-century-resort",
-      "resort_slug": "pop-century-resort",
-      "variant_key": "pop-century-resort",
-      "title": "Campfires",
-      "description": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
-      "category": "campfire",
-      "tags": [
-        "above_two_hundred_dollars",
-        "all_ages",
-        "beach_and_water_activities",
-        "eec_adults",
-        "eec_all_ages",
-        "eec_kids",
-        "eec_may_remain_in_wheelchair_ecv",
-        "eec_preschoolers",
-        "eec_teens",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "one_hundred_to_two_hundred_dollars",
-        "resort_special",
-        "rest_and_recreation",
-        "umbrella_and_product_recreation_wdw",
-        "umbrella_recreation_wdw"
-      ],
-      "location": {
-        "label": "Campfire at Disney's Pop Century Resort"
-      },
-      "availability": {
-        "kind": "calendar_dependent",
-        "hours_state": "calendar_varies",
-        "label": "Schedule varies by resort calendar"
-      },
-      "price": {
-        "state": "free",
-        "notes": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 46,
-            "text": "Campfires",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[45].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 46,
-            "text": "Disney's Pop Century Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[45].locationsList.80010403;entityType=resort"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 46,
-            "text": "Disney's Pop Century Resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[45].locationsList.80010403;entityType=resort"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 4,
-            "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          }
-        ],
-        "availability": [
-          {
-            "page": 1,
-            "line": 37,
-            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          },
-          {
-            "page": 1,
-            "line": 38,
-            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 37,
-            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
-      "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b",
-      "source_path": "data/raw/web/official-campfires.snapshot.json"
-    },
-    {
-      "program_key": "horse-drawn-excursion-holiday-sleigh-rides",
-      "offering_key": "horse-drawn-excursion-holiday-sleigh-rides:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
-      "resort_slug": "cabins-at-fort-wilderness-resort",
-      "variant_key": "cabins-at-fort-wilderness-resort",
-      "title": "Horse Drawn Excursion - Holiday Sleigh Rides",
-      "description": "Holiday Sleigh Rides at Fort Wilderness Resort",
-      "category": "resort_activity",
-      "tags": [
-        "all_ages",
-        "animal_encounters_events",
-        "animal_encounters_recreations",
-        "cancelable",
-        "eec_all_ages",
-        "eec_must_transfer_from_wheelchair_ecv",
-        "fifty_to_one_hundred_dollars",
-        "findermobilerecreation",
-        "finderpcrecreation",
-        "resort_special",
-        "rest_and_recreation",
-        "seasonal_events",
-        "umbrella_and_product_recreation_wdw",
-        "viewable"
-      ],
-      "location": {
-        "label": "Holiday Sleigh Rides"
-      },
-      "availability": {
-        "kind": "calendar_dependent",
-        "hours_state": "currently_unavailable",
-        "label": "Currently unavailable; check source for return window"
-      },
-      "price": {
-        "state": "fee",
-        "notes": "$80 (tax not included)"
-      },
-      "booking": {},
-      "eligibility": {},
-      "amenities": [],
-      "claims": {
-        "walkability": {
-          "value": "unknown",
-          "evidence": []
-        },
-        "transportation": {
-          "value": "unknown",
-          "evidence": []
-        }
-      },
-      "field_provenance": {
-        "title": [
-          {
-            "page": 1,
-            "line": 58,
-            "text": "Horse Drawn Excursion - Holiday Sleigh Rides",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[57].name"
-          }
-        ],
-        "resort_join": [
-          {
-            "page": 1,
-            "line": 58,
-            "text": "80010408;entityType=resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[57].parkIds"
-          }
-        ],
-        "location": [
-          {
-            "page": 1,
-            "line": 58,
-            "text": "80010408;entityType=resort",
-            "source": "official_recreation_index_api",
-            "json_path": "$.results[57].parkIds"
-          }
-        ],
-        "description": [
-          {
-            "page": 1,
-            "line": 1,
-            "text": "Holiday Sleigh Rides at Fort Wilderness Resort | Walt Disney World Resort",
-            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
-            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
-          }
-        ],
-        "availability": [
-          {
-            "page": 1,
-            "line": 4,
-            "text": "Take in the magic of the holidays with a cozy carriage or \"sleigh\" ride through the festive campground and woodland beauty. The 2025 offering has concluded. Check back this summer for updates on the 2026 holiday season.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
-            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
-          },
-          {
-            "page": 1,
-            "line": 8,
-            "text": "Horse Drawn Excursion - Holiday Sleigh Rides are currently unavailable. This seasonal experience is scheduled to return in late 2026—just in time for the holidays.",
-            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
-            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
-          }
-        ],
-        "price": [
-          {
-            "page": 1,
-            "line": 6,
-            "text": "$80 (tax not included)",
-            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
-            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
-          }
-        ]
-      },
-      "trust_state": "source_backed",
-      "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
-      "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05",
-      "source_path": "data/raw/web/official-holiday-sleigh-rides.snapshot.json"
-    },
-    {
       "program_key": "motorized-boat-rentals",
       "offering_key": "motorized-boat-rentals:polynesian-village-resort:polynesian-village-resort",
       "resort_slug": "polynesian-village-resort",
@@ -36843,28 +35961,28 @@
         "title": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Motorized Boat Rentals",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].name"
+            "json_path": "$.results[35].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Disney's Polynesian Village Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].locationsList.80010388;entityType=resort"
+            "json_path": "$.results[35].locationsList.80010388;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Disney's Polynesian Village Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].locationsList.80010388;entityType=resort"
+            "json_path": "$.results[35].locationsList.80010388;entityType=resort"
           }
         ],
         "description": [
@@ -36946,28 +36064,28 @@
         "title": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Motorized Boat Rentals",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].name"
+            "json_path": "$.results[35].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Disney's Wilderness Lodge",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].locationsList.80010394;entityType=resort"
+            "json_path": "$.results[35].locationsList.80010394;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Disney's Wilderness Lodge",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].locationsList.80010394;entityType=resort"
+            "json_path": "$.results[35].locationsList.80010394;entityType=resort"
           }
         ],
         "description": [
@@ -37049,28 +36167,28 @@
         "title": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "Motorized Boat Rentals",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].name"
+            "json_path": "$.results[35].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "The Campsites at Disney's Fort Wilderness Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].locationsList.80010392;entityType=resort"
+            "json_path": "$.results[35].locationsList.80010392;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 63,
+            "line": 36,
             "text": "The Campsites at Disney's Fort Wilderness Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[62].locationsList.80010392;entityType=resort"
+            "json_path": "$.results[35].locationsList.80010392;entityType=resort"
           }
         ],
         "description": [
@@ -37096,6 +36214,123 @@
       "source_url": "https://disneyworld.disney.go.com/recreation/motorized-boats/",
       "source_sha256": "cdbc856e7c911b8f5681ee9bb3019ac946e0f7d350040afe532a6f06aed6693e",
       "source_path": "data/raw/web/official-motorized-boats.snapshot.json"
+    },
+    {
+      "program_key": "horse-drawn-excursion-holiday-sleigh-rides",
+      "offering_key": "horse-drawn-excursion-holiday-sleigh-rides:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
+      "resort_slug": "cabins-at-fort-wilderness-resort",
+      "variant_key": "cabins-at-fort-wilderness-resort",
+      "title": "Horse Drawn Excursion - Holiday Sleigh Rides",
+      "description": "Holiday Sleigh Rides at Fort Wilderness Resort",
+      "category": "resort_activity",
+      "tags": [
+        "all_ages",
+        "animal_encounters_events",
+        "animal_encounters_recreations",
+        "cancelable",
+        "eec_all_ages",
+        "eec_must_transfer_from_wheelchair_ecv",
+        "fifty_to_one_hundred_dollars",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "resort_special",
+        "rest_and_recreation",
+        "seasonal_events",
+        "umbrella_and_product_recreation_wdw",
+        "viewable"
+      ],
+      "location": {
+        "label": "Holiday Sleigh Rides"
+      },
+      "availability": {
+        "kind": "calendar_dependent",
+        "hours_state": "currently_unavailable",
+        "label": "Currently unavailable; check source for return window"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "$80 (tax not included)"
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "Horse Drawn Excursion - Holiday Sleigh Rides",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[44].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "80010408;entityType=resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[44].parkIds"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 45,
+            "text": "80010408;entityType=resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[44].parkIds"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Holiday Sleigh Rides at Fort Wilderness Resort | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Take in the magic of the holidays with a cozy carriage or \"sleigh\" ride through the festive campground and woodland beauty. The 2025 offering has concluded. Check back this summer for updates on the 2026 holiday season.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Horse Drawn Excursion - Holiday Sleigh Rides are currently unavailable. This seasonal experience is scheduled to return in late 2026—just in time for the holidays.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "$80 (tax not included)",
+            "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+            "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/holiday-sleigh-rides/",
+      "source_sha256": "045d6f0b879d84baed9f1427883134920694e113c176f860597c346361690c05",
+      "source_path": "data/raw/web/official-holiday-sleigh-rides.snapshot.json"
     },
     {
       "program_key": "poolside-patios",
@@ -37151,28 +36386,28 @@
         "title": [
           {
             "page": 1,
-            "line": 68,
+            "line": 50,
             "text": "Poolside Patios",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[67].name"
+            "json_path": "$.results[49].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 68,
+            "line": 50,
             "text": "80010388;entityType=resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[67].parkIds"
+            "json_path": "$.results[49].parkIds"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 68,
+            "line": 50,
             "text": "80010388;entityType=resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[67].parkIds"
+            "json_path": "$.results[49].parkIds"
           }
         ],
         "description": [
@@ -37250,28 +36485,28 @@
         "title": [
           {
             "page": 1,
-            "line": 70,
+            "line": 55,
             "text": "Horse-Drawn Carriage Rides at Disney's Fort Wilderness Resort & Campground",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[69].name"
+            "json_path": "$.results[54].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 70,
+            "line": 55,
             "text": "80010408;entityType=resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[69].parkIds"
+            "json_path": "$.results[54].parkIds"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 70,
+            "line": 55,
             "text": "80010408;entityType=resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[69].parkIds"
+            "json_path": "$.results[54].parkIds"
           }
         ],
         "description": [
@@ -37418,28 +36653,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Bay Lake Tower at Disney's Contemporary Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.1;entityType=resort"
+            "json_path": "$.results[67].locationsList.1;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Bay Lake Tower at Disney's Contemporary Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.1;entityType=resort"
+            "json_path": "$.results[67].locationsList.1;entityType=resort"
           }
         ],
         "description": [
@@ -37537,28 +36772,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's All-Star Movies Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010402;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010402;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's All-Star Movies Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010402;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010402;entityType=resort"
           }
         ],
         "description": [
@@ -37656,28 +36891,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's All-Star Music Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010400;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010400;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's All-Star Music Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010400;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010400;entityType=resort"
           }
         ],
         "description": [
@@ -37775,28 +37010,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's All-Star Sports Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010401;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010401;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's All-Star Sports Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010401;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010401;entityType=resort"
           }
         ],
         "description": [
@@ -37894,28 +37129,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Animal Kingdom Villas - Jambo House",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.5;entityType=resort"
+            "json_path": "$.results[67].locationsList.5;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Animal Kingdom Villas - Jambo House",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.5;entityType=resort"
+            "json_path": "$.results[67].locationsList.5;entityType=resort"
           }
         ],
         "description": [
@@ -38013,28 +37248,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Animal Kingdom Villas - Kidani Village",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.273239;entityType=resort"
+            "json_path": "$.results[67].locationsList.273239;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Animal Kingdom Villas - Kidani Village",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.273239;entityType=resort"
+            "json_path": "$.results[67].locationsList.273239;entityType=resort"
           }
         ],
         "description": [
@@ -38132,28 +37367,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Art of Animation Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010404;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010404;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Art of Animation Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010404;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010404;entityType=resort"
           }
         ],
         "description": [
@@ -38251,28 +37486,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Beach Club Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010389;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010389;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Beach Club Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010389;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010389;entityType=resort"
           }
         ],
         "description": [
@@ -38370,28 +37605,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's BoardWalk Villas",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010391;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010391;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's BoardWalk Villas",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010391;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010391;entityType=resort"
           }
         ],
         "description": [
@@ -38489,28 +37724,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Caribbean Beach Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010399;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010399;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Caribbean Beach Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010399;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010399;entityType=resort"
           }
         ],
         "description": [
@@ -38608,28 +37843,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Coronado Springs Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010396;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010396;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Coronado Springs Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010396;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010396;entityType=resort"
           }
         ],
         "description": [
@@ -38727,28 +37962,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Grand Floridian Resort & Spa",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010384;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010384;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Grand Floridian Resort & Spa",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010384;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010384;entityType=resort"
           }
         ],
         "description": [
@@ -38846,28 +38081,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Old Key West Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010387;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010387;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Old Key West Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010387;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010387;entityType=resort"
           }
         ],
         "description": [
@@ -38965,28 +38200,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Polynesian Village Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010388;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010388;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Polynesian Village Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010388;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010388;entityType=resort"
           }
         ],
         "description": [
@@ -39084,28 +38319,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Pop Century Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010403;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010403;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Pop Century Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010403;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010403;entityType=resort"
           }
         ],
         "description": [
@@ -39203,28 +38438,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Port Orleans Resort - French Quarter",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010398;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010398;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Port Orleans Resort - French Quarter",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010398;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010398;entityType=resort"
           }
         ],
         "description": [
@@ -39322,28 +38557,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Port Orleans Resort - Riverside",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010397;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010397;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Port Orleans Resort - Riverside",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010397;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010397;entityType=resort"
           }
         ],
         "description": [
@@ -39441,28 +38676,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Saratoga Springs Resort & Spa",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010383;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010383;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Saratoga Springs Resort & Spa",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010383;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010383;entityType=resort"
           }
         ],
         "description": [
@@ -39560,28 +38795,28 @@
         "title": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Movies Under the Stars",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].name"
+            "json_path": "$.results[67].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Wilderness Lodge",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010394;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010394;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 79,
+            "line": 68,
             "text": "Disney's Wilderness Lodge",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[78].locationsList.80010394;entityType=resort"
+            "json_path": "$.results[67].locationsList.80010394;entityType=resort"
           }
         ],
         "description": [
@@ -39623,6 +38858,771 @@
       "source_url": "https://disneyworld.disney.go.com/recreation/movies-under-the-stars/",
       "source_sha256": "a71b8a24aa4bf2761866504669e7d5d3629fa052ce1bb1433655f42b1c9776ca",
       "source_path": "data/raw/web/official-movies-under-the-stars.snapshot.json"
+    },
+    {
+      "program_key": "arcades",
+      "offering_key": "arcades:cabins-at-fort-wilderness-resort:cabins-at-fort-wilderness-resort",
+      "resort_slug": "cabins-at-fort-wilderness-resort",
+      "variant_key": "cabins-at-fort-wilderness-resort",
+      "title": "Arcades",
+      "description": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort.",
+      "category": "arcade",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Daniel Boone's Wilderness Arcade"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "To play games, you must first purchase a Game Card and add game points using a credit card or cash at a kiosk inside the arcade. Game Cards are rechargeable and can be used at other Walt Disney World Resort arcades."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "Arcades",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[75].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "80010408;entityType=resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[75].parkIds"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 76,
+            "text": "80010408;entityType=resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[75].parkIds"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Play the latest and greatest family-friendly video games at locations throughout Walt Disney World Resort.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
+            "source_sha256": "0f99f03d2e35fc090a7a55e6bdaa97274e35a85c3f57c5ca3cabd4b4099d3162"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 9,
+            "text": "To play games, you must first purchase a Game Card and add game points using a credit card or cash at a kiosk inside the arcade. Game Cards are rechargeable and can be used at other Walt Disney World Resort arcades.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
+            "source_sha256": "0f99f03d2e35fc090a7a55e6bdaa97274e35a85c3f57c5ca3cabd4b4099d3162"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/arcades/",
+      "source_sha256": "0f99f03d2e35fc090a7a55e6bdaa97274e35a85c3f57c5ca3cabd4b4099d3162",
+      "source_path": "data/raw/web/official-arcades.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:contemporary-resort:contemporary-resort",
+      "resort_slug": "contemporary-resort",
+      "variant_key": "contemporary-resort",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Running Trail at Disney's Contemporary Resort"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Running Trails",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[76].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Disney's Contemporary Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[76].locationsList.80010385;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Disney's Contemporary Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[76].locationsList.80010385;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "running-trails",
+      "offering_key": "running-trails:wilderness-lodge:wilderness-lodge",
+      "resort_slug": "wilderness-lodge",
+      "variant_key": "wilderness-lodge",
+      "title": "Running Trails",
+      "description": "Jogging & Running Trails",
+      "category": "fitness_wellness",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Running Trail at Disney's Wilderness Lodge"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "free",
+        "notes": "Disney lists this official offering with no posted fee language."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Running Trails",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[76].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Disney's Wilderness Lodge",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[76].locationsList.80010394;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 77,
+            "text": "Disney's Wilderness Lodge",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[76].locationsList.80010394;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Jogging & Running Trails | Walt Disney World Resort",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          },
+          {
+            "page": 1,
+            "line": 2,
+            "text": "Running Trails",
+            "field": "source_disney_official_resort_amenity_no_fee_language",
+            "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+            "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/jogging/",
+      "source_sha256": "7bc20b155bbdfb73dbcddacfaf0dc0c83c74fdc5742f06a14ef04fbb3353514d",
+      "source_path": "data/raw/web/official-jogging.snapshot.json"
+    },
+    {
+      "program_key": "golf-lessons",
+      "offering_key": "golf-lessons:polynesian-village-resort:polynesian-village-resort",
+      "resort_slug": "polynesian-village-resort",
+      "variant_key": "polynesian-village-resort",
+      "title": "Golf Lessons",
+      "description": "Professional Golf Lessons",
+      "category": "resort_activity",
+      "tags": [
+        "adults",
+        "eec_adults",
+        "eec_may_remain_in_wheelchair_ecv",
+        "fifty_to_one_hundred_dollars",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "golf",
+        "kids",
+        "rest_and_recreation",
+        "sports_and_fitness",
+        "teens",
+        "tweens",
+        "under_fifty_dollars"
+      ],
+      "location": {
+        "label": "Golf Lessons at Disney's Magnolia Golf Course"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Golf Lessons",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[77].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Disney's Polynesian Village Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[77].locationsList.80010388;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Disney's Polynesian Village Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[77].locationsList.80010388;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Professional Golf Lessons | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+      "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d",
+      "source_path": "data/raw/web/official-professional-golf-lessons.snapshot.json"
+    },
+    {
+      "program_key": "golf-lessons",
+      "offering_key": "golf-lessons:saratoga-springs-resort-and-spa:saratoga-springs-resort-and-spa",
+      "resort_slug": "saratoga-springs-resort-and-spa",
+      "variant_key": "saratoga-springs-resort-and-spa",
+      "title": "Golf Lessons",
+      "description": "Professional Golf Lessons",
+      "category": "resort_activity",
+      "tags": [
+        "adults",
+        "eec_adults",
+        "eec_may_remain_in_wheelchair_ecv",
+        "fifty_to_one_hundred_dollars",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "golf",
+        "kids",
+        "rest_and_recreation",
+        "sports_and_fitness",
+        "teens",
+        "tweens",
+        "under_fifty_dollars"
+      ],
+      "location": {
+        "label": "Golf Lessons at Disney's Lake Buena Vista Golf Course"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Golf Lessons",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[77].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Disney's Saratoga Springs Resort & Spa",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[77].locationsList.80010383;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 78,
+            "text": "Disney's Saratoga Springs Resort & Spa",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[77].locationsList.80010383;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 1,
+            "text": "Professional Golf Lessons | Walt Disney World Resort",
+            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Lessons include 45 minutes of private instruction, including video analysis where appropriate, plus golf club rental and shoe rental. Guests of all ages are welcome, and junior golfers 17 years of age and under enjoy a lower rate. You may book as many lessons as you wish. Appropriate golf attire is required.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+            "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/professional-golf-lessons/",
+      "source_sha256": "60da52d01359f04dd1e75f5e5317627ba65744afa930208d47f2cbeb7929302d",
+      "source_path": "data/raw/web/official-professional-golf-lessons.snapshot.json"
+    },
+    {
+      "program_key": "campfires",
+      "offering_key": "campfires:all-star-sports-resort:all-star-sports-resort",
+      "resort_slug": "all-star-sports-resort",
+      "variant_key": "all-star-sports-resort",
+      "title": "Campfires",
+      "description": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
+      "category": "campfire",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Campfire at Disney's All-Star Sports Resort"
+      },
+      "availability": {
+        "kind": "calendar_dependent",
+        "hours_state": "calendar_varies",
+        "label": "Schedule varies by resort calendar"
+      },
+      "price": {
+        "state": "free",
+        "notes": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Campfires",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[80].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Disney's All-Star Sports Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[80].locationsList.80010401;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Disney's All-Star Sports Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[80].locationsList.80010401;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+      "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b",
+      "source_path": "data/raw/web/official-campfires.snapshot.json"
+    },
+    {
+      "program_key": "campfires",
+      "offering_key": "campfires:pop-century-resort:pop-century-resort",
+      "resort_slug": "pop-century-resort",
+      "variant_key": "pop-century-resort",
+      "title": "Campfires",
+      "description": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
+      "category": "campfire",
+      "tags": [
+        "above_two_hundred_dollars",
+        "all_ages",
+        "beach_and_water_activities",
+        "eec_adults",
+        "eec_all_ages",
+        "eec_kids",
+        "eec_may_remain_in_wheelchair_ecv",
+        "eec_preschoolers",
+        "eec_teens",
+        "findermobilerecreation",
+        "finderpcrecreation",
+        "one_hundred_to_two_hundred_dollars",
+        "resort_special",
+        "rest_and_recreation",
+        "umbrella_and_product_recreation_wdw",
+        "umbrella_recreation_wdw"
+      ],
+      "location": {
+        "label": "Campfire at Disney's Pop Century Resort"
+      },
+      "availability": {
+        "kind": "calendar_dependent",
+        "hours_state": "calendar_varies",
+        "label": "Schedule varies by resort calendar"
+      },
+      "price": {
+        "state": "free",
+        "notes": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Campfires",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[80].name"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Disney's Pop Century Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[80].locationsList.80010403;entityType=resort"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 81,
+            "text": "Disney's Pop Century Resort",
+            "source": "official_recreation_index_api",
+            "json_path": "$.results[80].locationsList.80010403;entityType=resort"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 4,
+            "text": "Gather ‘round as the sun goes down for a little old-fashioned family fun as you roast marshmallows next to a crackling fire.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ],
+        "availability": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          },
+          {
+            "page": 1,
+            "line": 38,
+            "text": "For more information, please check the Recreation Calendar of the particular location you plan to visit or consult Guest Services at your Resort hotel.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 37,
+            "text": "All Guests are welcome, and all activities are complimentary and held on select nights as weather permits. Entertainment is subject to cancellation or change at any time without notice. Activity and entertainment offerings vary by location.",
+            "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+            "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/campfires/",
+      "source_sha256": "aa72cc6bba22fac39b2d525f7bfad5df0f72c9b4245df1cf283e50909b6b635b",
+      "source_path": "data/raw/web/official-campfires.snapshot.json"
     },
     {
       "program_key": "basketball-courts",

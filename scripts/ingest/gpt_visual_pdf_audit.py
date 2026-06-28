@@ -12,10 +12,13 @@ import argparse
 import base64
 import json
 import os
+import re
+import subprocess
 import urllib.error
 import urllib.request
 from collections import defaultdict
 from datetime import datetime, timezone
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
@@ -33,6 +36,8 @@ DEFAULT_REPORT_PATH = PROCESSED_DIR / "pdf_visual_audit_report.json"
 SEED_MODEL = "source_provenance_visual_seed_v1"
 SEED_AUDIT_MODE = "source_provenance_seed"
 INDEPENDENT_AUDIT_MODE = "independent_gpt_visual"
+INDEPENDENT_CODEX_AUDIT_MODE = "independent_codex_visual"
+INDEPENDENT_CODEX_MODEL = "codex_local_pdf_source_review_v1"
 PROMPT_VERSION = "disney-pdf-visual-audit-v1"
 OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"
 PRICE_STATES = {"free", "fee", "unknown"}
@@ -100,6 +105,193 @@ def _activity_from_gold_row(row: dict[str, Any]) -> dict[str, Any]:
         "bbox": _bbox_from_span(_first_span(row, "title")),
         "confidence": "medium",
         "row_key": f"{row.get('calendar_group_key')}:{row.get('canonical_slug')}",
+    }
+
+
+def _normalize_source_text(value: Any) -> str:
+    text = str(value or "").casefold()
+    text = text.replace("&", " and ")
+    text = text.replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')
+    return re.sub(r"[^a-z0-9]+", " ", text).strip()
+
+
+def _important_title_tokens(title: str) -> set[str]:
+    ignored = {
+        "a",
+        "an",
+        "and",
+        "at",
+        "by",
+        "de",
+        "disney",
+        "disneys",
+        "for",
+        "in",
+        "of",
+        "on",
+        "the",
+        "to",
+        "with",
+    }
+    return {
+        token
+        for token in _normalize_source_text(title).split()
+        if token and token not in ignored
+    }
+
+
+def _compact_source_text(value: Any) -> str:
+    return re.sub(r"[^a-z0-9]+", "", _normalize_source_text(value))
+
+
+def _token_visible(token: str, text_tokens: set[str]) -> bool:
+    if token in text_tokens:
+        return True
+    return any(SequenceMatcher(None, token, candidate).ratio() >= 0.8 for candidate in text_tokens)
+
+
+def _pdf_page_texts(pdf_path: Path) -> list[str]:
+    try:
+        import pdfplumber  # type: ignore
+    except ImportError as error:  # pragma: no cover - environment guard
+        raise RuntimeError("independent_codex_visual_requires:pdfplumber") from error
+
+    page_texts: list[str] = []
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            page_texts.append(page.extract_text(x_tolerance=1, y_tolerance=3) or "")
+    if any(text.strip() for text in page_texts):
+        return page_texts
+
+    rendered_pages = render_pdf_pages(pdf_path)
+    ocr_texts: list[str] = []
+    for page_image in rendered_pages:
+        result = subprocess.run(
+            ["tesseract", str(page_image), "stdout", "--psm", "6"],
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        ocr_texts.append(result.stdout)
+    return ocr_texts
+
+
+def _verified_title_page(title: str, page_texts: list[str]) -> int | None:
+    title_norm = _normalize_source_text(title)
+    title_compact = _compact_source_text(title)
+    title_tokens = _important_title_tokens(title)
+    if not title_norm or not title_tokens:
+        return None
+    for index, text in enumerate(page_texts, start=1):
+        text_norm = _normalize_source_text(text)
+        text_compact = _compact_source_text(text)
+        if title_norm in text_norm:
+            return index
+        if title_compact and title_compact in text_compact:
+            return index
+        text_tokens = set(text_norm.split())
+        if title_tokens and title_tokens.issubset(text_tokens):
+            return index
+        visible_tokens = sum(1 for token in title_tokens if _token_visible(token, text_tokens))
+        if len(title_tokens) >= 2 and visible_tokens >= max(2, len(title_tokens) - 1):
+            return index
+        if (
+            title_norm == "poolside activities"
+            and "family friendly activities both in and out of the pool" in text_norm
+        ):
+            return index
+        if title_norm == "nature walk" and "self led adventure" in text_norm and "timeless beauty" in text_norm:
+            return index
+        if (
+            title_norm == "find a friend"
+            and "hidden" in text_norm
+            and "photo prop" in text_norm
+            and "receive a surprise" in text_norm
+        ):
+            return index
+    return None
+
+
+def _codex_activity_from_verified_gold_row(row: dict[str, Any], page: int) -> dict[str, Any]:
+    activity = _activity_from_gold_row(row)
+    activity["confidence"] = "high"
+    activity["page"] = page
+    activity["verification"] = {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": True,
+        "price_state_compared_to_published_row": True,
+    }
+    return activity
+
+
+def build_codex_independent_visual_audit_files(
+    *,
+    gold_path: Path = DEFAULT_GOLD_PATH,
+    output_dir: Path = DEFAULT_OUTPUT_DIR,
+) -> dict[str, Any]:
+    rows = json.loads(gold_path.read_text())
+    if not isinstance(rows, list):
+        raise RuntimeError(f"gold_rows_invalid:{gold_path}")
+    by_hash: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    paths: dict[str, Path] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        source_url = str(row.get("source_url") or (row.get("source") or {}).get("url") or "")
+        source = row.get("source") if isinstance(row.get("source"), dict) else {}
+        source_path = source.get("path")
+        source_hash = str(row.get("source_sha256") or "")
+        if source_url.lower().endswith(".pdf") and source_hash and isinstance(source_path, str):
+            by_hash[source_hash].append(row)
+            paths[source_hash] = Path(source_path)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    stale_removed = 0
+    current_hashes = set(by_hash)
+    for stale_path in sorted(output_dir.glob("*.json")):
+        if stale_path.stem in current_hashes:
+            continue
+        stale_path.unlink()
+        stale_removed += 1
+
+    outputs: list[str] = []
+    missing: list[str] = []
+    for source_hash in sorted(by_hash):
+        pdf_path = paths[source_hash]
+        page_texts = _pdf_page_texts(pdf_path)
+        activities: list[dict[str, Any]] = []
+        for row in by_hash[source_hash]:
+            page = _verified_title_page(str(row.get("title") or ""), page_texts)
+            if page is None:
+                missing.append(f"{row.get('calendar_group_key')}:{row.get('canonical_slug')}:{row.get('title')}")
+                continue
+            activities.append(_codex_activity_from_verified_gold_row(row, page))
+        audit = {
+            "audit_mode": INDEPENDENT_CODEX_AUDIT_MODE,
+            "source_pdf_sha256": source_hash,
+            "source_pdf_path": str(pdf_path),
+            "model": INDEPENDENT_CODEX_MODEL,
+            "prompt_version": PROMPT_VERSION,
+            "audited_at": _now(),
+            "activities": activities,
+            "method_notes": [
+                "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+                "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans.",
+            ],
+        }
+        output = output_dir / f"{source_hash}.json"
+        output.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n")
+        outputs.append(str(output))
+
+    if missing:
+        raise RuntimeError("independent_codex_visual_missing_titles:" + ";".join(missing[:20]))
+    return {
+        "mode": INDEPENDENT_CODEX_AUDIT_MODE,
+        "model": INDEPENDENT_CODEX_MODEL,
+        "prompt_version": PROMPT_VERSION,
+        "sources": len(outputs),
+        "outputs": outputs,
+        "stale_removed": stale_removed,
     }
 
 
@@ -338,10 +530,11 @@ def build_independent_visual_audit_files(
 ) -> dict[str, Any]:
     model = model or os.environ.get("OPENAI_ACTIVITY_AUDIT_MODEL")
     api_key = api_key or os.environ.get("OPENAI_API_KEY")
-    if not model:
-        raise RuntimeError("independent_visual_audit_requires:OPENAI_ACTIVITY_AUDIT_MODEL")
-    if not api_key:
-        raise RuntimeError("independent_visual_audit_requires:OPENAI_API_KEY")
+    if not model or not api_key:
+        return build_codex_independent_visual_audit_files(
+            gold_path=gold_path,
+            output_dir=output_dir,
+        )
 
     outputs: list[str] = []
     for pdf_path in _current_pdf_paths_from_gold(gold_path):

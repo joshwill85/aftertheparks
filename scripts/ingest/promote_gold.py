@@ -15,6 +15,8 @@ from typing import Any
 try:
     from contracts import validate_public_record
     from extract_v2 import (
+        _parse_time_range,
+        extract_candidates_for_pdf,
         expected_public_slugs_for_fixture,
         extract_publishable_candidates_for_fixture,
     )
@@ -24,10 +26,12 @@ try:
         merge_mrg_validity_into_gold,
     )
     from review_queue import load_review_decisions
-    from source_manifest import ACTIVITY_SOURCES
+    from source_manifest import ACTIVITY_SOURCES, ActivitySource, apply_pdf_source_overrides
 except ImportError:  # pragma: no cover - supports package-style imports in tests
     from .contracts import validate_public_record
     from .extract_v2 import (
+        _parse_time_range,
+        extract_candidates_for_pdf,
         expected_public_slugs_for_fixture,
         extract_publishable_candidates_for_fixture,
     )
@@ -37,7 +41,7 @@ except ImportError:  # pragma: no cover - supports package-style imports in test
         merge_mrg_validity_into_gold,
     )
     from .review_queue import load_review_decisions
-    from .source_manifest import ACTIVITY_SOURCES
+    from .source_manifest import ACTIVITY_SOURCES, ActivitySource, apply_pdf_source_overrides
 
 
 @dataclass
@@ -48,6 +52,11 @@ class PromotionResult:
 
 CAMPFIRE_PRICE_MATRIX_PATH = Path("data/quality/campfire_price_matrix.json")
 DISNEY_VISUAL_PRICE_EVIDENCE_PATH = Path("data/quality/disney_visual_price_evidence.json")
+DEFAULT_SOURCE_OVERRIDES_PATH = Path("data/processed/resort_pdf_source_overrides.json")
+DEFAULT_FORT_WILDERNESS_VISUAL_SOURCES_PATH = Path("data/processed/fort_wilderness_visual_sources.json")
+SOURCE_DOCUMENT_DIR = Path("data/raw/pdfs")
+IMAGE_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+PARSER_VERSION = "promotion-v1"
 
 
 def _spans(field: dict[str, Any]) -> list[dict[str, Any]]:
@@ -176,19 +185,28 @@ def _activity_catalog_id(calendar_group_key: str, canonical_slug: str) -> str:
     return _stable_uuid(f"act:{calendar_group_key}:{canonical_slug}")
 
 
-def _source_for_group(calendar_group_key: str) -> Any:
+def _source_for_group(
+    calendar_group_key: str,
+    activity_sources: list[ActivitySource] | None = None,
+) -> Any:
+    sources = activity_sources or ACTIVITY_SOURCES
     return next(
         (
             source
-            for source in ACTIVITY_SOURCES
+            for source in sources
             if source.calendar_group_key == calendar_group_key
         ),
         None,
     )
 
 
-def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> dict[str, Any]:
-    source = _source_for_group(candidate["calendar_group_key"])
+def _gold_record(
+    candidate: dict[str, Any],
+    public_record: dict[str, Any],
+    *,
+    activity_sources: list[ActivitySource] | None = None,
+) -> dict[str, Any]:
+    source = _source_for_group(candidate["calendar_group_key"], activity_sources)
     normalized = candidate["normalized_fields"]
     candidate_source_url = candidate.get("source_url") or candidate.get("source_pdf")
     source_url = (
@@ -258,6 +276,10 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
             for row in movie_nights
             if isinstance(row, dict)
         ]
+    if candidate.get("valid_from"):
+        record["valid_from"] = candidate.get("valid_from")
+    if candidate.get("valid_to"):
+        record["valid_until"] = candidate.get("valid_to")
     return record
 
 
@@ -275,6 +297,7 @@ def promote_candidates(
     candidates: list[dict[str, Any]],
     *,
     review_decisions: dict[str, dict[str, Any]] | None = None,
+    activity_sources: list[ActivitySource] | None = None,
 ) -> PromotionResult:
     result = PromotionResult()
 
@@ -302,7 +325,7 @@ def promote_candidates(
             )
             continue
 
-        result.gold_records.append(_gold_record(candidate, public_record))
+        result.gold_records.append(_gold_record(candidate, public_record, activity_sources=activity_sources))
 
     return result
 
@@ -317,6 +340,8 @@ def promote_fixtures(
     fixtures_dir: Path,
     *,
     review_decisions: dict[str, dict[str, Any]] | None = None,
+    activity_sources: list[ActivitySource] | None = None,
+    exclude_calendar_groups: set[str] | None = None,
 ) -> PromotionResult:
     candidates_by_id: dict[str, dict[str, Any]] = {}
     review_queue: list[dict[str, Any]] = []
@@ -339,6 +364,8 @@ def promote_fixtures(
 
     for fixture_path in paths:
         fixture = json.loads(fixture_path.read_text())
+        if fixture.get("calendar_group_key") in (exclude_calendar_groups or set()):
+            continue
         if str(fixture.get("publication_scope") or "").strip() == "historical_regression":
             continue
         extracted = extract_publishable_candidates_for_fixture(fixture_path)
@@ -363,9 +390,522 @@ def promote_fixtures(
     promoted = promote_candidates(
         list(candidates_by_id.values()),
         review_decisions=review_decisions,
+        activity_sources=activity_sources,
     )
     promoted.review_queue.extend(review_queue)
     return promoted
+
+
+def _load_source_overrides(path: Path | None) -> dict[str, dict[str, Any]]:
+    if path is None or not path.exists():
+        return {}
+    payload = json.loads(path.read_text())
+    return payload if isinstance(payload, dict) else {}
+
+
+def _activity_sources_with_overrides(overrides: dict[str, dict[str, Any]]) -> list[ActivitySource]:
+    if not overrides:
+        return ACTIVITY_SOURCES
+    return apply_pdf_source_overrides(ACTIVITY_SOURCES, overrides)
+
+
+def _local_source_path_for_url(source_url: str) -> Path:
+    return SOURCE_DOCUMENT_DIR / source_url.rsplit("/", 1)[-1]
+
+
+def _reviewed_image_span(page: int, line_no: int, text: str) -> dict[str, Any]:
+    return {
+        "page": page,
+        "line_no": line_no,
+        "text": text,
+        "source": "reviewed_visual_schedule_image",
+    }
+
+
+def _reviewed_image_record(
+    *,
+    title: str,
+    category: str,
+    location: str,
+    schedule_text: str,
+    description: str,
+    is_fee_based: bool = False,
+    line_no: int = 1,
+    movie_nights: list[dict[str, str]] | None = None,
+) -> dict[str, Any]:
+    source_spans = {
+        "title": [_reviewed_image_span(1, line_no, title)],
+        "location": [_reviewed_image_span(1, line_no + 1, location)],
+        "schedule": [_reviewed_image_span(1, line_no + 2, schedule_text)],
+        "description": [_reviewed_image_span(1, line_no + 3, description)],
+    }
+    record = {
+        "title": title,
+        "slug": re.sub(r"[^a-z0-9]+", "-", title.lower().replace("'", "")).strip("-"),
+        "category": category,
+        "location": location,
+        "schedule_text": schedule_text,
+        "description": description,
+        "is_fee_based": is_fee_based,
+        "source_spans": source_spans,
+    }
+    if movie_nights:
+        record["movie_nights"] = movie_nights
+    return record
+
+
+def _reviewed_official_image_records(calendar_group_key: str) -> list[dict[str, Any]]:
+    records: dict[str, list[dict[str, Any]]] = {
+        "art-of-animation": [
+            _reviewed_image_record(
+                title="Disney Character Greetings",
+                category="character",
+                location="Animation Hall",
+                schedule_text="Daily from 11:05am-11:25am and 2:00pm-2:20pm",
+                description="Disney character greetings.",
+                line_no=10,
+            ),
+            _reviewed_image_record(
+                title="Pool Party",
+                category="poolside",
+                location="The Big Blue Pool Deck",
+                schedule_text="Daily from 1:00pm-2:00pm",
+                description="Family-friendly pool party activities.",
+                line_no=20,
+            ),
+            _reviewed_image_record(
+                title="Craft Activity",
+                category="arts_crafts",
+                location="Recreation Activities Room inside Animation Hall or outside Animation Hall",
+                schedule_text="Daily; craft title and exact spot vary by day schedule",
+                description="Daily craft activity; some craft options have a fee.",
+                is_fee_based=True,
+                line_no=30,
+            ),
+            _reviewed_image_record(
+                title="Campfire at Pride Rock",
+                category="campfire",
+                location="Between Lion King Buildings 6 and 10",
+                schedule_text="Daily from 6:30pm-7:30pm",
+                description="Evening campfire activity.",
+                line_no=40,
+            ),
+            _reviewed_image_record(
+                title="Movie Under the Stars",
+                category="movies_under_stars",
+                location="Movie Lawn near The Big Blue Pool",
+                schedule_text="Daily at 8:30pm",
+                description="Outdoor Disney movie screening.",
+                line_no=50,
+                movie_nights=[
+                    {"day": "Sunday", "movie_title": "The Lion King"},
+                    {"day": "Monday", "movie_title": "Monsters, Inc."},
+                    {"day": "Tuesday", "movie_title": "Ratatouille"},
+                    {"day": "Wednesday", "movie_title": "Toy Story 2"},
+                    {"day": "Thursday", "movie_title": "Teen Beach Movie"},
+                    {"day": "Friday", "movie_title": "Cinderella"},
+                    {"day": "Saturday", "movie_title": "Cars"},
+                ],
+            ),
+        ],
+        "pop-century": [
+            _reviewed_image_record(
+                title="Disney Character Greetings",
+                category="character",
+                location="Classic Hall",
+                schedule_text="Daily from 10:15am-10:35am and 1:15pm-1:35pm",
+                description="Disney character greetings.",
+                line_no=10,
+            ),
+            _reviewed_image_record(
+                title="Pool Party",
+                category="poolside",
+                location="Hippy Dippy Pool Deck",
+                schedule_text="Daily from 1:30pm-2:30pm",
+                description="Family-friendly pool party activities.",
+                line_no=20,
+            ),
+            _reviewed_image_record(
+                title="Craft Activity",
+                category="arts_crafts",
+                location="90s Sign near Classic Hall",
+                schedule_text="Daily from 3:00pm-4:00pm",
+                description="Daily craft activity; craft title varies by day schedule.",
+                is_fee_based=True,
+                line_no=30,
+            ),
+            _reviewed_image_record(
+                title="Groovy Campfire",
+                category="campfire",
+                location="Between 60s and 70s Buildings",
+                schedule_text="Daily from 6:30pm-7:30pm",
+                description="Evening campfire activity.",
+                line_no=40,
+            ),
+            _reviewed_image_record(
+                title="Nighttime Activities",
+                category="other",
+                location="Hippy Dippy Pool Deck or Classic Hall",
+                schedule_text="Evenings; activity and exact time vary by day schedule",
+                description="Nighttime activities include pajama parties and pool-deck activities.",
+                line_no=50,
+            ),
+            _reviewed_image_record(
+                title="Movie Under the Stars",
+                category="movies_under_stars",
+                location="Hippy Dippy Pool Deck",
+                schedule_text="Daily at 8:30pm",
+                description="Outdoor Disney movie screening; title varies by day schedule.",
+                line_no=60,
+            ),
+        ],
+        "caribbean-beach": [
+            _reviewed_image_record(
+                title="Disney Character Greetings",
+                category="character",
+                location="Old Port Royale Lobby",
+                schedule_text="Daily from 9:30am-9:50am and 2:40pm-3:00pm",
+                description="Disney character greetings.",
+                line_no=10,
+            ),
+            _reviewed_image_record(
+                title="Pool Party",
+                category="poolside",
+                location="Fuentes del Morro Pool Deck",
+                schedule_text="Daily from 1:30pm-2:30pm",
+                description="Family-friendly pool party activities.",
+                line_no=20,
+            ),
+            _reviewed_image_record(
+                title="Craft Activity",
+                category="arts_crafts",
+                location="Near Pineapple Fountain behind Old Port Royale",
+                schedule_text="Daily from 3:00pm-4:00pm",
+                description="Daily craft activity; craft title varies by day schedule.",
+                is_fee_based=True,
+                line_no=30,
+            ),
+            _reviewed_image_record(
+                title="Caribbean Campfire",
+                category="campfire",
+                location="Martinique Beach",
+                schedule_text="Daily from 6:30pm-7:30pm",
+                description="Evening campfire activity.",
+                line_no=40,
+            ),
+            _reviewed_image_record(
+                title="Movie Under the Stars",
+                category="movies_under_stars",
+                location="Caribbean Cay Island Movie Lawn",
+                schedule_text="Daily at 8:30pm",
+                description="Outdoor Disney movie screening.",
+                line_no=50,
+                movie_nights=[
+                    {"day": "Sunday", "movie_title": "Mulan"},
+                    {"day": "Monday", "movie_title": "Lilo & Stitch"},
+                    {"day": "Tuesday", "movie_title": "Finding Nemo"},
+                    {"day": "Wednesday", "movie_title": "The Lion King"},
+                    {"day": "Thursday", "movie_title": "Moana 2"},
+                    {"day": "Friday", "movie_title": "Toy Story"},
+                    {"day": "Saturday", "movie_title": "Zootopia 2"},
+                ],
+            ),
+        ],
+        "port-orleans-riverside": [
+            _reviewed_image_record(
+                title="Disney Character Greetings",
+                category="character",
+                location="Inside and outside the Lobby Area",
+                schedule_text="Daily from 8:45am-9:05am and 3:30pm-3:50pm",
+                description="Disney character greetings.",
+                line_no=10,
+            ),
+            _reviewed_image_record(
+                title="Craft Activity",
+                category="arts_crafts",
+                location="The River Roost or Ol' Man Island Pool Deck",
+                schedule_text="Daily at 1:00pm",
+                description="Daily craft activity; craft title varies by day schedule.",
+                is_fee_based=True,
+                line_no=20,
+            ),
+            _reviewed_image_record(
+                title="Pool Party",
+                category="poolside",
+                location="Ol' Man Island Pool Deck",
+                schedule_text="Daily from 2:30pm-3:30pm",
+                description="Family-friendly pool party activities.",
+                line_no=30,
+            ),
+            _reviewed_image_record(
+                title="Poolside Activities",
+                category="poolside",
+                location="Ol' Man Island Pool Deck",
+                schedule_text="Daily from 3:30pm-4:30pm",
+                description="Family-friendly poolside games and activities.",
+                line_no=40,
+            ),
+            _reviewed_image_record(
+                title="Campfire on de' Bayou",
+                category="campfire",
+                location="Ol' Man Island",
+                schedule_text="Daily from 6:30pm-7:30pm",
+                description="Evening campfire activity.",
+                line_no=50,
+            ),
+            _reviewed_image_record(
+                title="Nighttime Activities",
+                category="other",
+                location="Ol' Man Island Pool Deck or Lobby",
+                schedule_text="Evenings; activity and exact time vary by day schedule",
+                description="Nighttime activities include trivia, Glow with the Flow, and pajama parties.",
+                line_no=60,
+            ),
+            _reviewed_image_record(
+                title="Movie Under the Stars",
+                category="movies_under_stars",
+                location="Oak Manor Lawn near Building 90",
+                schedule_text="Select nights at 8:30pm",
+                description="Outdoor Disney movie screening; title varies by day schedule.",
+                line_no=70,
+            ),
+        ],
+    }
+    return records.get(calendar_group_key, [])
+
+
+def promote_current_replacement_sources(
+    overrides: dict[str, dict[str, Any]],
+    *,
+    review_decisions: dict[str, dict[str, Any]] | None = None,
+    activity_sources: list[ActivitySource] | None = None,
+) -> PromotionResult:
+    if not overrides:
+        return PromotionResult()
+
+    candidates_by_id: dict[str, dict[str, Any]] = {}
+    review_queue: list[dict[str, Any]] = []
+    for calendar_group_key, override in sorted(overrides.items()):
+        source_url = str(override.get("pdf_url") or "")
+        source_path = _local_source_path_for_url(source_url)
+        suffix = source_path.suffix.lower()
+        if suffix in IMAGE_SOURCE_EXTENSIONS:
+            if not source_path.exists():
+                review_queue.append(
+                    {
+                        "candidate_id": None,
+                        "calendar_group_key": calendar_group_key,
+                        "activity_slug": None,
+                        "reason": "replacement_source_missing",
+                        "all_reasons": ["replacement_source_missing"],
+                        "severity": "blocker",
+                        "source_url": source_url,
+                        "source_path": str(source_path),
+                    }
+                )
+                continue
+            image_hash = hashlib.sha256(source_path.read_bytes()).hexdigest()
+            image_records = _reviewed_official_image_records(calendar_group_key)
+            if not image_records:
+                review_queue.append(
+                    {
+                        "candidate_id": None,
+                        "calendar_group_key": calendar_group_key,
+                        "activity_slug": None,
+                        "reason": "replacement_image_requires_reviewed_ingest",
+                        "all_reasons": ["replacement_image_requires_reviewed_ingest"],
+                        "severity": "blocker",
+                        "source_url": source_url,
+                        "source_path": str(source_path),
+                    }
+                )
+                continue
+            payload = {
+                "calendar_group_key": calendar_group_key,
+                "canonical_url": source_url,
+                "content_sha256": image_hash,
+                "valid_from": None,
+                "valid_to": None,
+            }
+            for record in image_records:
+                candidate = _visual_candidate(payload=payload, record=record, source_path=source_path)
+                candidates_by_id[candidate["candidate_id"]] = candidate
+            continue
+        if suffix != ".pdf":
+            review_queue.append(
+                {
+                    "candidate_id": None,
+                    "calendar_group_key": calendar_group_key,
+                    "activity_slug": None,
+                    "reason": "replacement_source_type_unsupported",
+                    "all_reasons": ["replacement_source_type_unsupported"],
+                    "severity": "blocker",
+                    "source_url": source_url,
+                    "source_path": str(source_path),
+                }
+            )
+            continue
+        if not source_path.exists():
+            review_queue.append(
+                {
+                    "candidate_id": None,
+                    "calendar_group_key": calendar_group_key,
+                    "activity_slug": None,
+                    "reason": "replacement_source_missing",
+                    "all_reasons": ["replacement_source_missing"],
+                    "severity": "blocker",
+                    "source_url": source_url,
+                    "source_path": str(source_path),
+                }
+            )
+            continue
+
+        for candidate in extract_candidates_for_pdf(
+            pdf_path=source_path,
+            calendar_group_key=calendar_group_key,
+        ):
+            candidate["source_url"] = source_url
+            candidates_by_id[candidate["candidate_id"]] = candidate
+
+    promoted = promote_candidates(
+        list(candidates_by_id.values()),
+        review_decisions=review_decisions,
+        activity_sources=activity_sources,
+    )
+    promoted.review_queue.extend(review_queue)
+    return promoted
+
+
+def _visual_field(record: dict[str, Any], field_name: str, value: str) -> dict[str, Any]:
+    source_spans = record.get("source_spans") if isinstance(record.get("source_spans"), dict) else {}
+    spans = source_spans.get(field_name) if isinstance(source_spans, dict) else None
+    return {
+        "value": value,
+        "source": "reviewed_visual_schedule_image",
+        "spans": spans if isinstance(spans, list) else [],
+    }
+
+
+def _visual_candidate(
+    *,
+    payload: dict[str, Any],
+    record: dict[str, Any],
+    source_path: Path,
+) -> dict[str, Any]:
+    schedule_text = str(record.get("schedule_text") or "")
+    start_time, end_time = _parse_time_range(schedule_text)
+    title_field = _visual_field(record, "title", str(record["title"]))
+    fee_evidence = []
+    if bool(record.get("is_fee_based")):
+        fee_evidence = [
+            {
+                **span,
+                "field": "reviewed_visual_fee_marker",
+                "text": f"{span.get('text', record['title'])} ($)",
+            }
+            for span in title_field.get("spans", [])
+            if isinstance(span, dict)
+        ]
+    normalized_fields = {
+        "title": title_field,
+        "slug": str(record["slug"]),
+        "category": str(record.get("category") or "other"),
+        "section": "Resort Activities",
+        "location": _visual_field(record, "location", str(record.get("location") or "")),
+        "schedule": {
+            "text": schedule_text,
+            "start_time": start_time,
+            "end_time": end_time,
+            "source": "reviewed_visual_schedule_image",
+            "spans": (
+                record.get("source_spans", {}).get("schedule")
+                if isinstance(record.get("source_spans"), dict)
+                and isinstance(record.get("source_spans", {}).get("schedule"), list)
+                else []
+            ),
+        },
+        "description": _visual_field(record, "description", str(record.get("description") or "")),
+        "is_fee_based": bool(record.get("is_fee_based")),
+        "fee_evidence": fee_evidence,
+        "document_key_legends": [],
+    }
+    if isinstance(record.get("movie_nights"), list):
+        normalized_fields["movie_nights"] = [
+            dict(row) for row in record["movie_nights"] if isinstance(row, dict)
+        ]
+    return {
+        "candidate_id": f"{payload['content_sha256']}:{payload['calendar_group_key']}:{record['slug']}:reviewed_visual",
+        "calendar_group_key": str(payload["calendar_group_key"]),
+        "source_path": str(source_path),
+        "source_url": str(payload["canonical_url"]),
+        "content_sha256": str(payload["content_sha256"]),
+        "parser_version": PARSER_VERSION,
+        "profile_key": "reviewed_visual_schedule_image",
+        "raw_fields": {
+            "title": normalized_fields["title"],
+            "location": normalized_fields["location"],
+            "schedule": normalized_fields["schedule"],
+            "description": normalized_fields["description"],
+        },
+        "normalized_fields": normalized_fields,
+        "confidence": 1.0,
+        "warnings": [],
+        "valid_from": payload.get("valid_from"),
+        "valid_to": payload.get("valid_to"),
+    }
+
+
+def promote_reviewed_visual_sources(
+    visual_sources_path: Path,
+    *,
+    review_decisions: dict[str, dict[str, Any]] | None = None,
+    activity_sources: list[ActivitySource] | None = None,
+) -> PromotionResult:
+    if not visual_sources_path.exists():
+        return PromotionResult()
+    payload = json.loads(visual_sources_path.read_text())
+    if not isinstance(payload, dict):
+        return PromotionResult(
+            review_queue=[
+                {
+                    "candidate_id": None,
+                    "calendar_group_key": None,
+                    "activity_slug": None,
+                    "reason": "reviewed_visual_source_invalid",
+                    "all_reasons": ["reviewed_visual_source_invalid"],
+                    "severity": "blocker",
+                    "source_path": str(visual_sources_path),
+                }
+            ]
+        )
+    if payload.get("currentness") != "current":
+        return PromotionResult(
+            review_queue=[
+                {
+                    "candidate_id": None,
+                    "calendar_group_key": payload.get("calendar_group_key"),
+                    "activity_slug": None,
+                    "reason": "reviewed_visual_source_not_current",
+                    "all_reasons": ["reviewed_visual_source_not_current"],
+                    "severity": "blocker",
+                    "source_url": payload.get("canonical_url"),
+                    "source_path": str(visual_sources_path),
+                }
+            ]
+        )
+    records = payload.get("records")
+    if not isinstance(records, list):
+        return PromotionResult()
+    candidates = [
+        _visual_candidate(payload=payload, record=record, source_path=visual_sources_path)
+        for record in records
+        if isinstance(record, dict)
+    ]
+    return promote_candidates(
+        candidates,
+        review_decisions=review_decisions,
+        activity_sources=activity_sources,
+    )
 
 
 def load_campfire_price_matrix(path: Path = CAMPFIRE_PRICE_MATRIX_PATH) -> dict[str, Any]:
@@ -615,11 +1155,40 @@ def generate_gold_records(
     review_decisions_path: Path = Path("data/processed/activity_review_decisions_v2.json"),
     mrg_facts_path: Path = Path("data/processed/magical_resort_guide_facts.json"),
     include_mrg_facts: bool = True,
+    source_overrides_path: Path | None = DEFAULT_SOURCE_OVERRIDES_PATH,
+    reviewed_visual_sources_path: Path | None = DEFAULT_FORT_WILDERNESS_VISUAL_SOURCES_PATH,
 ) -> PromotionResult:
+    source_overrides = _load_source_overrides(source_overrides_path)
+    activity_sources = _activity_sources_with_overrides(source_overrides)
+    review_decisions = load_review_decisions(review_decisions_path)
+    excluded_groups = set(source_overrides)
+    if reviewed_visual_sources_path and reviewed_visual_sources_path.exists():
+        visual_payload = json.loads(reviewed_visual_sources_path.read_text())
+        if isinstance(visual_payload, dict) and visual_payload.get("currentness") == "current":
+            visual_group = str(visual_payload.get("calendar_group_key") or "")
+            if visual_group:
+                excluded_groups.add(visual_group)
     result = promote_fixtures(
         fixtures_dir,
-        review_decisions=load_review_decisions(review_decisions_path),
+        review_decisions=review_decisions,
+        activity_sources=activity_sources,
+        exclude_calendar_groups=excluded_groups,
     )
+    replacement_result = promote_current_replacement_sources(
+        source_overrides,
+        review_decisions=review_decisions,
+        activity_sources=activity_sources,
+    )
+    result.gold_records.extend(replacement_result.gold_records)
+    result.review_queue.extend(replacement_result.review_queue)
+    if reviewed_visual_sources_path:
+        visual_result = promote_reviewed_visual_sources(
+            reviewed_visual_sources_path,
+            review_decisions=review_decisions,
+            activity_sources=activity_sources,
+        )
+        result.gold_records.extend(visual_result.gold_records)
+        result.review_queue.extend(visual_result.review_queue)
     if include_mrg_facts and mrg_facts_path.exists():
         mrg_payload = load_mrg_payload(mrg_facts_path)
         mrg_facts = mrg_payload.get("facts") if isinstance(mrg_payload.get("facts"), list) else []
@@ -662,6 +1231,28 @@ def main() -> None:
         help="Optional Magical Resort Guide factual enrichment artifact",
     )
     parser.add_argument(
+        "--source-overrides",
+        type=Path,
+        default=DEFAULT_SOURCE_OVERRIDES_PATH,
+        help="Generated resort source replacements; replacement groups are extracted from current fetched sources.",
+    )
+    parser.add_argument(
+        "--no-source-overrides",
+        action="store_true",
+        help="Ignore generated resort source replacements and promote fixture sources as-is.",
+    )
+    parser.add_argument(
+        "--reviewed-visual-sources",
+        type=Path,
+        default=DEFAULT_FORT_WILDERNESS_VISUAL_SOURCES_PATH,
+        help="Reviewed visual schedule source payloads, currently Fort Wilderness.",
+    )
+    parser.add_argument(
+        "--no-reviewed-visual-sources",
+        action="store_true",
+        help="Ignore reviewed visual schedule payloads.",
+    )
+    parser.add_argument(
         "--no-mrg-facts",
         action="store_true",
         help="Skip third-party factual enrichment merge even when the artifact exists",
@@ -683,6 +1274,10 @@ def main() -> None:
         review_decisions_path=args.review_decisions,
         mrg_facts_path=args.mrg_facts,
         include_mrg_facts=not args.no_mrg_facts,
+        source_overrides_path=None if args.no_source_overrides else args.source_overrides,
+        reviewed_visual_sources_path=None
+        if args.no_reviewed_visual_sources
+        else args.reviewed_visual_sources,
     )
     mrg_facts_count = 0
     if not args.no_mrg_facts and args.mrg_facts.exists():

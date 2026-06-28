@@ -7,6 +7,9 @@ import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
+const STALE_RESORT_SOURCE_RE =
+  /(?:\/fy26-q[12]\/|_DRAFT|Recreation[-_](?:0126|0326)|(?:0126|0326)(?:_DIGITAL)?\.(?:pdf|jpe?g|png)\b)/i;
+
 function baseActivity(overrides: Partial<ActivityOccurrence> = {}): ActivityOccurrence {
   return {
     id: "coverage-test",
@@ -139,6 +142,18 @@ assert.equal(fallbackWhereDisplay.answerCoverage.where.state, "fallback");
 const rows = JSON.parse(
   readFileSync("data/processed/activity_gold_v2_preview.json", "utf8")
 ) as GoldActivityRow[];
+const staleRows = rows.filter((row) => {
+  const url = String(row.source_url || row.source?.url || "");
+  return row.calendar_group_key !== "fort-wilderness" && STALE_RESORT_SOURCE_RE.test(url);
+});
+assert.equal(
+  staleRows.length,
+  0,
+  `Gold preview must not publish stale resort schedule URLs. Stale rows: ${staleRows
+    .slice(0, 10)
+    .map((row) => `${row.calendar_group_key}/${row.canonical_slug}:${row.source_url || row.source?.url}`)
+    .join("; ")}`
+);
 const occurrences = rows.flatMap((row) =>
   mapGoldActivityRowToOccurrences(row, {
     dateRangeDays: 14,

@@ -3,9 +3,9 @@
   "gold": {
     "passed": true,
     "summary": {
-      "expected_gold_rows": 225,
-      "live_gold_rows": 225,
-      "matched_gold_rows": 225,
+      "expected_gold_rows": 206,
+      "live_gold_rows": 206,
+      "matched_gold_rows": 206,
       "errors": 0
     },
     "errors": []

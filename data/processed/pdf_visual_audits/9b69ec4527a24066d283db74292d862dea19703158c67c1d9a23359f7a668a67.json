@@ -1,0 +1,293 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+  "source_pdf_path": "data/raw/pdfs/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:55:33.185433+00:00",
+  "activities": [
+    {
+      "title": "Game Point Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Inside Stadium Hall",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 910.0,
+        "y": 514.0,
+        "width": 531.5,
+        "height": 31.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:game-point-arcade",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Wellness Scavenger Hunt",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 7:00am-11:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+      "price_state": "free",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.0,
+        "y": 833.5,
+        "width": 628.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:wellness-scavenger-hunt",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Monday, Wednesday and Friday from 3:30pm-4:30pm",
+      "location": "Surfboard Bay Pool Deck",
+      "description": "Create a take-home souvenir with a Disney twist!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 909.0,
+        "y": 873.0,
+        "width": 408.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:arts-crafts",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm",
+      "location": "Surfboard Bay Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [
+        {
+          "option_name": "T-Shirt",
+          "price_cents_min": 1700,
+          "price_cents_max": 1700,
+          "price_basis": "per_item"
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1069.0,
+        "width": 417.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:mickey-tie-dye",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Find A Friend",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-9:00pm",
+      "location": "Throughout Disney’s All-Star Resorts",
+      "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise! M O Vv E U N D E R T H E S TA R S SURFBOARD BAY POOL DECK | 8:30pm In the event of inclement weather, the movie will be shown in End Zone Food Court.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1189.0,
+        "width": 315.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:find-a-friend",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arcade Tournament",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 4:00pm-5:00pm",
+      "location": "Game Point Arcade",
+      "description": "Come test your skills at our daily arcade tournament. You may find yourself going home with a prize of your own!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 909.0,
+        "y": 1233.5,
+        "width": 483.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:arcade-tournament",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Touchdown! Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Monday, Wednesday, Friday and Saturday from 6:30pm-7:30pm",
+      "location": "Outside Stadium Hall near Touchdown! Buildings",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 909.0,
+        "y": 1430.0,
+        "width": 525.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:touchdown-campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Bingo Challenge",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday and Thursday from 6:30pm-7:30pm",
+      "location": "Surfboard Bay Pool Deck",
+      "description": "of fun and prizes!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1659.0,
+        "width": 401.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:bingo-challenge",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Field Day",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday at 8:30pm",
+      "location": "Touchdown! Football Field",
+      "description": "Join the Recreation team out on the Touchdown Football Field for some field day f",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1855.0,
+        "width": 217.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:field-day",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Silent Disco",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Thursday at 8:30pm",
+      "location": "Surfboard Bay Pool Deck",
+      "description": "Choose your favorite music, don your own headphones and “silently” dance the night away with us!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 909.5,
+        "y": 2051.0,
+        "width": 290.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "all-star-sports:silent-disco",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

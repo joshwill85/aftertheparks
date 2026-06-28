@@ -51,6 +51,8 @@ def render_pdf_pages(
 
     source_hash = pdf_sha256(pdf_path)
     output_dir.mkdir(parents=True, exist_ok=True)
+    for existing in output_dir.glob(f"{source_hash}-*.png"):
+        existing.unlink()
     prefix = output_dir / source_hash
     command = [_pdftoppm_executable(), "-png", "-r", str(dpi)]
     if first_page is not None:

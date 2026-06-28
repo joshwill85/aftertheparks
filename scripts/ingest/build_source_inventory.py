@@ -22,7 +22,12 @@ try:
         _index_detail_url,
         official_recreation_index_item_program_key,
     )
-    from source_manifest import RESORT_RECREATION_SOURCES
+    from source_manifest import (
+        ACTIVITY_SOURCES,
+        RESORT_RECREATION_SOURCES,
+        apply_pdf_source_overrides,
+        resort_recreation_sources_for,
+    )
     from web_snapshot import web_snapshot_content_hash
 except ImportError:  # pragma: no cover - supports package-style imports in tests
     from .capture_web_snapshot import write_web_snapshot
@@ -36,16 +41,23 @@ except ImportError:  # pragma: no cover - supports package-style imports in test
         _index_detail_url,
         official_recreation_index_item_program_key,
     )
-    from .source_manifest import RESORT_RECREATION_SOURCES
+    from .source_manifest import (
+        ACTIVITY_SOURCES,
+        RESORT_RECREATION_SOURCES,
+        apply_pdf_source_overrides,
+        resort_recreation_sources_for,
+    )
     from .web_snapshot import web_snapshot_content_hash
 
 
 DEFAULT_OUTPUT = PROCESSED_DIR / "source_inventory.json"
+DEFAULT_RESORT_PDF_AUDIT = PROCESSED_DIR / "resort_pdf_date_audit.json"
 MAIN_RECREATION_URL = "https://disneyworld.disney.go.com/recreation/"
 PARSER_VERSION = "source-inventory-v1"
 DISNEY_VISUAL_PRICE_EVIDENCE_PATH = Path("data/quality/disney_visual_price_evidence.json")
 COMMUNITY_HALL_FACTS_PATH = Path("data/quality/community_hall_official_facts.json")
 GOLF_OFFICIAL_FACTS_PATH = Path("data/quality/golf_official_facts.json")
+FORT_WILDERNESS_VISUAL_SOURCES_PATH = PROCESSED_DIR / "fort_wilderness_visual_sources.json"
 EXTRA_OFFICIAL_DETAIL_SOURCES = [
     {
         "canonical_url": "https://disneyworld.disney.go.com/entertainment/magic-kingdom/electrical-water-pageant/",
@@ -295,6 +307,34 @@ def _golf_official_fact_records() -> list[dict[str, Any]]:
     return rows
 
 
+def _reviewed_visual_schedule_records() -> list[dict[str, Any]]:
+    if not FORT_WILDERNESS_VISUAL_SOURCES_PATH.exists():
+        return []
+    payload = json.loads(FORT_WILDERNESS_VISUAL_SOURCES_PATH.read_text())
+    if not isinstance(payload, dict):
+        return []
+    canonical_url = str(payload.get("canonical_url") or "")
+    content_sha256 = str(payload.get("content_sha256") or "")
+    if not canonical_url or not content_sha256:
+        return []
+    return [
+        _record(
+            source_role="reviewed_visual_schedule",
+            source_kind=str(payload.get("source_kind") or "reviewed_visual_schedule_image"),
+            canonical_url=canonical_url,
+            http_status=200,
+            content_sha256=content_sha256,
+            calendar_group_key=str(payload.get("calendar_group_key") or ""),
+            storage_path=str(FORT_WILDERNESS_VISUAL_SOURCES_PATH),
+            currentness=str(payload.get("currentness") or "unknown"),
+            notes=(
+                f"Reviewed visual schedule valid {payload.get('valid_from')} to {payload.get('valid_to')}; "
+                "not evergreen official web content."
+            ),
+        )
+    ]
+
+
 def _safe_snapshot_name(source_role: str, url: str) -> Path:
     slug = re.sub(r"[^a-z0-9]+", "-", url.lower()).strip("-")[:96]
     digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:12]
@@ -400,7 +440,58 @@ def _extra_official_detail_records(parent_source_id: str, *, refresh_web_snapsho
     return rows
 
 
-def build_source_inventory(*, live: bool = False, refresh_web_snapshots: bool = False) -> list[dict[str, Any]]:
+def _load_json_if_exists(path: Path | None) -> dict[str, Any]:
+    if not path or not path.exists():
+        return {}
+    payload = json.loads(path.read_text())
+    return payload if isinstance(payload, dict) else {}
+
+
+def _pdf_evidence_by_group(audit_path: Path | None) -> dict[str, dict[str, Any]]:
+    audit = _load_json_if_exists(audit_path)
+    rows = audit.get("sources")
+    if not isinstance(rows, list):
+        return {}
+    evidence: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        group = row.get("calendar_group_key")
+        source_evidence = row.get("discovery_evidence")
+        if not isinstance(group, str) or not isinstance(source_evidence, dict):
+            continue
+        if source_evidence.get("evidence_kind") != "official_resort_recreation_page":
+            continue
+        live_url = row.get("live_url")
+        if live_url and source_evidence.get("url") == live_url:
+            evidence[group] = {
+                "parent_url": source_evidence.get("parent_url"),
+                "pdf_url": live_url,
+                "anchor_text": source_evidence.get("anchor_text"),
+                "source_api_url": source_evidence.get("source_api_url"),
+                "evidence_detail": source_evidence.get("evidence_detail"),
+                "edition_folder": source_evidence.get("edition_folder"),
+                "filename_date": source_evidence.get("filename_date"),
+            }
+    return evidence
+
+
+def _activity_sources_with_overrides(source_overrides: Path | None):
+    if not source_overrides:
+        return ACTIVITY_SOURCES
+    return apply_pdf_source_overrides(
+        ACTIVITY_SOURCES,
+        _load_json_if_exists(source_overrides),
+    )
+
+
+def build_source_inventory(
+    *,
+    live: bool = False,
+    refresh_web_snapshots: bool = False,
+    source_overrides: Path | None = None,
+    resort_pdf_date_audit: Path | None = DEFAULT_RESORT_PDF_AUDIT,
+) -> list[dict[str, Any]]:
     index_snapshot = _load_index_snapshot(live=live)
     index_row = _record(
         source_role="main_recreation_index",
@@ -417,6 +508,7 @@ def build_source_inventory(*, live: bool = False, refresh_web_snapshots: bool = 
     rows.extend(_supporting_price_image_records())
     rows.extend(_community_hall_fact_records())
     rows.extend(_golf_official_fact_records())
+    rows.extend(_reviewed_visual_schedule_records())
     rows.extend(
         _parent_detail_records(
             index_snapshot,
@@ -431,9 +523,16 @@ def build_source_inventory(*, live: bool = False, refresh_web_snapshots: bool = 
         )
     )
 
+    resort_sources = (
+        resort_recreation_sources_for(_activity_sources_with_overrides(source_overrides))
+        if source_overrides
+        else RESORT_RECREATION_SOURCES
+    )
+    pdf_evidence_by_group = _pdf_evidence_by_group(resort_pdf_date_audit)
+
     resort_page_ids_by_url: dict[str, str] = {}
     resort_page_rows_by_url: dict[str, dict[str, Any]] = {}
-    for source in RESORT_RECREATION_SOURCES:
+    for source in resort_sources:
         snapshot_path, snapshot = _refresh_or_find_web_snapshot(
             source.recreation_page_url,
             source_kind="official_html",
@@ -462,10 +561,24 @@ def build_source_inventory(*, live: bool = False, refresh_web_snapshots: bool = 
         if source.pdf_url:
             local_path = _pdf_local_path(source.pdf_url)
             parent_row = resort_page_rows_by_url.get(source.recreation_page_url, {})
+            document_source_kind = (
+                "official_image"
+                if source.pdf_url.lower().split("?", 1)[0].endswith((".jpg", ".jpeg", ".png"))
+                else "official_pdf"
+            )
+            pdf_evidence = pdf_evidence_by_group.get(source.calendar_group_key)
+            pdf_has_official_evidence = bool(
+                pdf_evidence and pdf_evidence.get("pdf_url") == source.pdf_url
+            )
+            pdf_currentness = (
+                "current"
+                if local_path.exists() and pdf_has_official_evidence
+                else "unknown"
+            )
             rows.append(
                 _record(
                     source_role="resort_pdf",
-                    source_kind="official_pdf",
+                    source_kind=document_source_kind,
                     canonical_url=source.pdf_url,
                     http_status=200 if local_path.exists() else None,
                     content_sha256=_sha256(local_path),
@@ -476,12 +589,8 @@ def build_source_inventory(*, live: bool = False, refresh_web_snapshots: bool = 
                     storage_path=str(local_path) if local_path.exists() else None,
                     parent_content_sha256=parent_row.get("content_sha256"),
                     discovered_from_storage_path=parent_row.get("storage_path"),
-                    discovered_pdf_url_evidence={
-                        "parent_url": source.recreation_page_url,
-                        "pdf_url": source.pdf_url,
-                        "source_note": source.notes,
-                    },
-                    currentness="current" if local_path.exists() else "unknown",
+                    discovered_pdf_url_evidence=pdf_evidence if pdf_has_official_evidence else None,
+                    currentness=pdf_currentness,
                     notes=source.pdf_edition,
                 )
             )
@@ -493,8 +602,20 @@ def build_source_inventory(*, live: bool = False, refresh_web_snapshots: bool = 
     return list(deduped.values())
 
 
-def write_source_inventory(output: Path = DEFAULT_OUTPUT, *, live: bool = False, refresh_web_snapshots: bool = False) -> Path:
-    rows = build_source_inventory(live=live, refresh_web_snapshots=refresh_web_snapshots)
+def write_source_inventory(
+    output: Path = DEFAULT_OUTPUT,
+    *,
+    live: bool = False,
+    refresh_web_snapshots: bool = False,
+    source_overrides: Path | None = None,
+    resort_pdf_date_audit: Path | None = DEFAULT_RESORT_PDF_AUDIT,
+) -> Path:
+    rows = build_source_inventory(
+        live=live,
+        refresh_web_snapshots=refresh_web_snapshots,
+        source_overrides=source_overrides,
+        resort_pdf_date_audit=resort_pdf_date_audit,
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n")
     return output
@@ -509,9 +630,17 @@ def main() -> None:
         action="store_true",
         help="fetch and save current official HTML parent/detail page snapshots",
     )
+    parser.add_argument("--source-overrides", type=Path, help="Generated PDF source overrides")
+    parser.add_argument("--resort-pdf-date-audit", type=Path, default=DEFAULT_RESORT_PDF_AUDIT)
     args = parser.parse_args()
 
-    output = write_source_inventory(args.output, live=args.live, refresh_web_snapshots=args.refresh_web_snapshots)
+    output = write_source_inventory(
+        args.output,
+        live=args.live,
+        refresh_web_snapshots=args.refresh_web_snapshots,
+        source_overrides=args.source_overrides,
+        resort_pdf_date_audit=args.resort_pdf_date_audit,
+    )
     rows = json.loads(output.read_text())
     roles: dict[str, int] = {}
     for row in rows:

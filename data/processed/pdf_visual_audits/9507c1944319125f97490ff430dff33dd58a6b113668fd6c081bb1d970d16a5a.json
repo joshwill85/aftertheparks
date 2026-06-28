@@ -1,0 +1,248 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a",
+  "source_pdf_path": "data/raw/pdfs/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:55:27.501644+00:00",
+  "activities": [
+    {
+      "title": "Disney Family Fitness Fun",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Thursday at 9:00am",
+      "location": "Great Ceremonial House Lawn",
+      "description": "Partake in this family-friendly fitness class— featuring some of your favorite music from Moana!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.5,
+        "y": 833.5,
+        "width": 613.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "polynesian:disney-family-fitness-fun",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Disney Fit Tai Chi",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday at 6:00pm",
+      "location": "Great Ceremonial House Lawn",
+      "description": "Experience this one-of-a-kind Tai Chi class designed for all levels.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.5,
+        "y": 1051.0,
+        "width": 405.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "polynesian:disney-fit-tai-chi",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Lava Pool Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily at 3:00pm",
+      "location": "Lava Pool Deck",
+      "description": "Join us for a fun-filled hour of games and dancing, both in and out of the Lava Pool.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1166.0,
+        "width": 393.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "polynesian:lava-pool-party",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 5:00pm-6:00pm",
+      "location": "Lava Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1385.0,
+        "width": 417.5,
+        "height": 32.0
+      },
+      "confidence": "high",
+      "row_key": "polynesian:mickey-tie-dye",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Make Your Own Kukui Nut Leis",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday, Wednesday and Friday from 4:30pm-5:30pm",
+      "location": "Great Ceremonial House Lobby",
+      "description": "Celebrate Polynesian culture by designing and creating your own Kukui Nut Lei.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.0,
+        "y": 1417.0,
+        "width": 365.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "polynesian:make-your-own-kukui-nut-leis",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "The Big Kahuna Quiz",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday at 7:00pm",
+      "location": "Lava Pool Deck",
+      "description": "fun-fi ivia! Join us for some trivia",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1645.0,
+        "width": 486.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "polynesian:the-big-kahuna-quiz",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Great Ceremonial House Lawn | 8:30PM",
+      "location": "Great Ceremonial House Lawn",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 118.5,
+        "y": 1688.5,
+        "width": 670.0,
+        "height": 28.5
+      },
+      "confidence": "high",
+      "row_key": "polynesian:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Video Game Dance Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday at 8:00pm",
+      "location": "Great Ceremonial House Lawn",
+      "description": "ow off your best moves at this interactive dance party! is i",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 877.0,
+        "y": 2027.5,
+        "width": 618.0,
+        "height": 57.0
+      },
+      "confidence": "high",
+      "row_key": "polynesian:video-game-dance-party",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Aloha After Dark",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday, Wednesday and Friday at 8:30pm",
+      "location": "Lava Pool Deck",
+      "description": "Enjoy a nighttime party filled with glow-in-the-dark games and dancing!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 2234.0,
+        "width": 432.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "polynesian:aloha-after-dark",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

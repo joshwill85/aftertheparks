@@ -1,0 +1,338 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+  "source_pdf_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:55:44.470355+00:00",
+  "activities": [
+    {
+      "title": "Side Show Games Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Side Show Games Arcade",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.5,
+        "y": 509.0,
+        "width": 669.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:side-show-games-arcade",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Community Hall",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 10:00am-10:00pm",
+      "location": "Community Hall",
+      "description": "Play video games and billiards, check out sporting equipment and grilling tools, and enjoy arts and crafts. Fees may apply. Please allow a minimum of 48 hours before checkout for ceramics and mosaics.",
+      "price_state": "fee",
+      "price_evidence": "body_fee_language",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.5,
+        "y": 656.5,
+        "width": 380.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:community-hall",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Boardwalk Croquet",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from Dawn to Dusk",
+      "location": "Croquet Lawn",
+      "description": "Enjoy a friendly game of croquet on our lush lawn.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 813.5,
+        "width": 488.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:boardwalk-croquet",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Mickey Tie-Dye",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm",
+      "location": "Luna Park Pool Deck",
+      "description": "Get creative with a Disney twist on this arts and crafts favorite!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.5,
+        "y": 1128.5,
+        "width": 417.5,
+        "height": 31.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:mickey-tie-dye",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Family Wellness Yoga",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Wednesday at 9:00am",
+      "location": "Village Green Lawn",
+      "description": "Get active and enjoy a story time yoga session inspired by our Disney friends.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1211.0,
+        "width": 526.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:family-wellness-yoga",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday, Wednesday and Friday from 4:00pm-5:00pm",
+      "location": "Village Green Lawn",
+      "description": "Join us for family-friendly arts and crafts.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.5,
+        "y": 1346.5,
+        "width": 408.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:arts-crafts",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Pickleball Clinic",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Friday from 9:00am-10:00am",
+      "location": "BoardWalk Tennis and Pickleball Court",
+      "description": "This complimentary introduction to pickleball will teach the basics of the game everyone is talking about. Learn skills and techniques, then compete in our Pickleball Challenge at the end of the clinic! Pre-register at Community Hall. Space is limited.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1410.0,
+        "width": 411.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:pickleball-clinic",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Nightly from 6:00pm-7:30pm",
+      "location": "Village Green Lawn",
+      "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 912.5,
+        "y": 1530.5,
+        "width": 210.5,
+        "height": 47.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Nighttime Trivia",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Nightly at 8:00pm",
+      "location": "Village Green Lawn",
+      "description": "Join us for a trivia challenge.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.5,
+        "y": 1749.0,
+        "width": 387.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:nighttime-trivia",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Village Green Lawn | 8:30PM",
+      "location": "Village Green Lawn",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.5,
+        "y": 1955.0,
+        "width": 669.5,
+        "height": 28.5
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily at 1:30pm",
+      "location": "Luna Park Pool Deck",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:poolside-activities",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Crescent Lake Wellness Challenge",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Self-guided fitness challenge; no posted time in PDF",
+      "location": "Crescent Lake pathways",
+      "description": "Enjoy beautiful views of Crescent Lake as you explore nearly 1 mile of pathways on this self-guided fitness challenge. After completing the course, head to Community Hall for a prize! Register at Community Hall or the Screen Door General Store to participate.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "confidence": "high",
+      "row_key": "boardwalk:crescent-lake-wellness-challenge",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

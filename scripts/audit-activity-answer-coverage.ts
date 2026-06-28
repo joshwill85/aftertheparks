@@ -6,14 +6,17 @@ import { activityToEventCard } from "@/lib/events/mapToEventCard";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 interface CoverageIssue {
-  field: "what" | "when" | "where" | "cardLocation";
-  state: ActivityAnswerState | "missing";
+  field: "what" | "when" | "where" | "cardLocation" | "source";
+  state: ActivityAnswerState | "missing" | "stale";
   title: string;
   resort: string;
   category: string;
   sourceUrl: string;
   detail: string;
 }
+
+const STALE_RESORT_SOURCE_RE =
+  /(?:\/fy26-q[12]\/|_DRAFT|Recreation[-_](?:0126|0326)|(?:0126|0326)(?:_DIGITAL)?\.(?:pdf|jpe?g|png)\b)/i;
 
 function increment(map: Record<string, number>, key: string) {
   map[key] = (map[key] ?? 0) + 1;
@@ -60,6 +63,10 @@ function issueFor(
   };
 }
 
+export function isStaleResortSourceUrl(sourceUrl: string): boolean {
+  return STALE_RESORT_SOURCE_RE.test(sourceUrl);
+}
+
 function coverageIssues(occurrence: ActivityOccurrence): CoverageIssue[] {
   const display = toDisplayActivity(occurrence);
   const card = activityToEventCard(occurrence, display);
@@ -87,6 +94,17 @@ function coverageIssues(occurrence: ActivityOccurrence): CoverageIssue[] {
     issues.push(issueFor(occurrence, "cardLocation", "missing", "Card location not rendered"));
   }
 
+  if (isStaleResortSourceUrl(occurrence.freshness.sourceUrl || "")) {
+    issues.push(
+      issueFor(
+        occurrence,
+        "source",
+        "stale",
+        "Published activity still references a stale resort schedule source"
+      )
+    );
+  }
+
   return issues;
 }
 
@@ -110,7 +128,7 @@ function main() {
   }
 
   const report = {
-    passed: issues.every((issue) => issue.state !== "missing"),
+    passed: issues.every((issue) => issue.state !== "missing" && issue.state !== "stale"),
     representatives: representatives.length,
     issueCount: issues.length,
     byField,

@@ -1,0 +1,338 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38",
+  "source_pdf_path": "data/raw/pdfs/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:55:04.237129+00:00",
+  "activities": [
+    {
+      "title": "Arcadia Games",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Arcadia Games",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 519.0,
+        "width": 430.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:arcadia-games",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Cabana Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 10:00am-7:00pm",
+      "location": "Cabana Rentals",
+      "description": "To book, call 407-WWDW-PLAY or see a Recreation Coa:",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 680.0,
+        "width": 458.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:cabana-rentals",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Storytime Yoga Class",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday at 10:30am",
+      "location": "Courtyard Lawn",
+      "description": "Guests of all ages can start their day with a relaxing but energizing yoga experience themed to various Disney stories.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 158.5,
+        "y": 902.5,
+        "width": 524.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:storytime-yoga-class",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Boat Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 11:00am-5:00pm",
+      "location": "Boat Rentals",
+      "description": "",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 922.5,
+        "width": 390.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:boat-rentals",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Cheshire Challenges",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily at 1:00pm",
+      "location": "Beach Pool Deck",
+      "description": "Join us for a game by the Beach Pool.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1044.5,
+        "width": 502.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:cheshire-challenges",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Health Club",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "location": "The Grand Floridian Spa",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 160.0,
+        "y": 1176.0,
+        "width": 285.0,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:health-club",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily at 1:30pm",
+      "location": "Beach Pool Deck",
+      "description": "Join us for fun-filled games and dancing, both in and out of the pool! See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1246.0,
+        "width": 461.0,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:poolside-activities",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Courtyard Lawn | 8:30PM",
+      "location": "Courtyard Lawn",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 116.5,
+        "y": 1471.0,
+        "width": 670.0,
+        "height": 28.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "From 3:30pm-4:30pm",
+      "location": "Beach Pool Deck",
+      "description": "Sunday, Monday, Wednesday, Friday and Saturda Tuesday and",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1527.0,
+        "width": 408.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:arts-crafts",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Campfire",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Nightly from 6:30pm-7:30pm",
+      "location": "Near Beach Pool",
+      "description": "joy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [
+        {
+          "optionName": "Mickey S'mores Kit",
+          "priceBasis": "optional_add_on",
+          "priceCentsMin": 700,
+          "priceCentsMax": 700,
+          "priceConfidence": "secondary_verified",
+          "verificationStatus": "needs_disney_confirmation",
+          "sourceUrl": "https://chipandco.com/cute-tour-humphreys-hideout-wilderness-lodge-631738/",
+          "sourceLabel": "Chip and Company Wilderness Lodge report",
+          "notes": "Usually around $7 plus tax; do not present as a guaranteed Disney-published price unless Disney confirms it for the resort and period."
+        }
+      ],
+      "bbox": {
+        "page": 1,
+        "x": 912.0,
+        "y": 1811.5,
+        "width": 211.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Nighttime Pool Party",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Monday, Wednesday, and Friday at 8:00pm",
+      "location": "Beach Pool Deck",
+      "description": "Put your skills to the test with games, dances and more!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 2053.5,
+        "width": 516.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:nighttime-pool-party",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Nighttime Trivia",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday and Saturday at 8:00pm",
+      "location": "Beach Pool Deck",
+      "description": "Join us for a fun-filled trivia challenge!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 2255.5,
+        "width": 387.5,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "grand-floridian:nighttime-trivia",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

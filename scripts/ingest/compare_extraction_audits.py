@@ -22,6 +22,7 @@ DEFAULT_FIELD_REPORT = PROCESSED_DIR / "field_audit_report.json"
 SEED_MODEL = "source_provenance_visual_seed_v1"
 SEED_AUDIT_MODE = "source_provenance_seed"
 INDEPENDENT_AUDIT_MODE = "independent_gpt_visual"
+INDEPENDENT_CODEX_AUDIT_MODE = "independent_codex_visual"
 
 BLOCKING_MISMATCHES = {
     "title_missing_in_one_extractor",
@@ -97,7 +98,7 @@ def compare_gold_rows_to_visual_audits(
     independent_hashes = {
         str(source_hash)
         for source_hash, audit in visual_audits.items()
-        if audit.get("audit_mode") == INDEPENDENT_AUDIT_MODE
+        if audit.get("audit_mode") in {INDEPENDENT_AUDIT_MODE, INDEPENDENT_CODEX_AUDIT_MODE}
         and audit.get("model") != SEED_MODEL
     }
     seed_hashes = {

@@ -4477,28 +4477,28 @@
         "title": [
           {
             "page": 1,
-            "line": 35,
+            "line": 77,
             "text": "Running Trails",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[34].name"
+            "json_path": "$.results[76].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 35,
+            "line": 77,
             "text": "Disney's Contemporary Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010385;entityType=resort"
+            "json_path": "$.results[76].locationsList.80010385;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 35,
+            "line": 77,
             "text": "Disney's Contemporary Resort",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010385;entityType=resort"
+            "json_path": "$.results[76].locationsList.80010385;entityType=resort"
           }
         ],
         "description": [
@@ -4589,28 +4589,28 @@
         "title": [
           {
             "page": 1,
-            "line": 35,
+            "line": 77,
             "text": "Running Trails",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[34].name"
+            "json_path": "$.results[76].name"
           }
         ],
         "resort_join": [
           {
             "page": 1,
-            "line": 35,
+            "line": 77,
             "text": "Disney's Wilderness Lodge",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010394;entityType=resort"
+            "json_path": "$.results[76].locationsList.80010394;entityType=resort"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 35,
+            "line": 77,
             "text": "Disney's Wilderness Lodge",
             "source": "official_recreation_index_api",
-            "json_path": "$.results[34].locationsList.80010394;entityType=resort"
+            "json_path": "$.results[76].locationsList.80010394;entityType=resort"
           }
         ],
         "description": [

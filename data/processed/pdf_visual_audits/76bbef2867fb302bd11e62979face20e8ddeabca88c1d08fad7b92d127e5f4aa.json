@@ -1,0 +1,222 @@
+{
+  "audit_mode": "independent_codex_visual",
+  "source_pdf_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+  "source_pdf_path": "data/raw/pdfs/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+  "model": "codex_local_pdf_source_review_v1",
+  "prompt_version": "disney-pdf-visual-audit-v1",
+  "audited_at": "2026-06-28T16:55:09.172474+00:00",
+  "activities": [
+    {
+      "title": "Lafferty Place Arcade",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 8:00am-11:00pm",
+      "location": "Lafferty Place Arcade",
+      "description": "Play the latest and greatest family-friendly video games.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 522.0,
+        "width": 631.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:lafferty-place-arcade",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Boat Rentals",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily from 11:00am-5:00pm",
+      "location": "Bayside Marina",
+      "description": "",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 651.0,
+        "width": 390.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:boat-rentals",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Painting In The Vineyard",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Tuesday at 1:00pm",
+      "location": "Lounde",
+      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages I2 and up. Space is limited. Available first-come, first-served. Arrive early to secure your spot.",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 780.0,
+        "width": 662.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:painting-in-the-vineyard",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Ship Shape Fitness Center",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Open 24 hours a day, 7 days a week",
+      "location": "Ship Shape Fitness Center",
+      "description": "Continue pushing towards your wellness goals in our full-service fitness center.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 159.5,
+        "y": 920.5,
+        "width": 622.0,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:ship-shape-fitness-center",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Poolside Activities",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Daily at 1:30pm",
+      "location": "Stormalong Bay Pool",
+      "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1047.0,
+        "width": 460.0,
+        "height": 25.0
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:poolside-activities",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Movie Under the Stars",
+      "section": "Movie Under the Stars",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Shipwreck Beach | 8:30PM",
+      "location": "Shipwreck Beach",
+      "description": "",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 118.5,
+        "y": 1185.5,
+        "width": 670.0,
+        "height": 28.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Arts & Crafts",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Sunday, Tuesday and Thursday from 4:00pm-5:00pm",
+      "location": "Beach Club Beach",
+      "description": "Join us for arts and crafts that are fun for the whole family!",
+      "price_state": "fee",
+      "price_evidence": "none",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 911.0,
+        "y": 1242.0,
+        "width": 405.5,
+        "height": 31.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:arts-crafts",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    },
+    {
+      "title": "Nighttime Trivia",
+      "section": "Resort Activities",
+      "date_text": "fy26-q3-0526",
+      "schedule_text": "Nightly at 8:00pm",
+      "location": "Stormalong Bay",
+      "description": "Join us for a trivia challenge!",
+      "price_state": "free",
+      "price_evidence": "marker_absent_under_legend",
+      "optional_price_options": [],
+      "bbox": {
+        "page": 1,
+        "x": 913.0,
+        "y": 1903.0,
+        "width": 386.5,
+        "height": 25.5
+      },
+      "confidence": "high",
+      "row_key": "beach-yacht-club:nighttime-trivia",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
+    }
+  ],
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
+  ]
+}

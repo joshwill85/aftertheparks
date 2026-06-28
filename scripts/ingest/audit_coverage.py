@@ -30,6 +30,8 @@ DEFAULT_SOURCE_FRESHNESS_REPORT_PATH = PROCESSED_DIR / "source_freshness_report.
 DEFAULT_VISUAL_AUDIT_REPORT_PATH = PROCESSED_DIR / "pdf_visual_audit_report.json"
 DEFAULT_FIELD_AUDIT_REPORT_PATH = PROCESSED_DIR / "field_audit_report.json"
 DEFAULT_MANUAL_REVIEW_REPORT_PATH = PROCESSED_DIR / "manual_review_report.json"
+DEFAULT_SOURCE_OVERRIDES_PATH = PROCESSED_DIR / "resort_pdf_source_overrides.json"
+DEFAULT_FORT_WILDERNESS_VISUAL_SOURCES_PATH = PROCESSED_DIR / "fort_wilderness_visual_sources.json"
 SHA256_HEX = re.compile(r"^[a-f0-9]{64}$", re.I)
 OFFICIAL_QUARANTINE_OFFERING_ALIASES = {
     ("fort-wilderness", "daniel-boones-wilderness-arcade"): "arcades",
@@ -64,6 +66,20 @@ def _read_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
     return json.loads(path.read_text())
+
+
+def _source_replacement_groups(path: Path = DEFAULT_SOURCE_OVERRIDES_PATH) -> set[str]:
+    payload = _read_json(path, {})
+    groups: set[str] = set()
+    if not isinstance(payload, dict):
+        payload = {}
+    groups.update(str(group) for group in payload if str(group).strip())
+    visual_payload = _read_json(DEFAULT_FORT_WILDERNESS_VISUAL_SOURCES_PATH, {})
+    if isinstance(visual_payload, dict) and visual_payload.get("currentness") == "current":
+        visual_group = str(visual_payload.get("calendar_group_key") or "")
+        if visual_group:
+            groups.add(visual_group)
+    return groups
 
 
 def _is_historical_regression_fixture(fixture: dict[str, Any]) -> bool:
@@ -770,6 +786,12 @@ def build_coverage_audit(
     fixtures = _fixture_rows(fixtures_dir)
     fixture_quarantines = _fixture_quarantine_rows(fixtures_dir)
     fixture_unextractables = _fixture_unextractable_rows(fixtures_dir)
+    source_replacement_groups = _source_replacement_groups()
+    fixture_coverage_rows = [
+        row
+        for row in fixtures
+        if str(row.get("calendar_group_key") or "") not in source_replacement_groups
+    ]
     gold = _gold_rows(gold_path)
     source_freshness_errors = (
         _source_freshness_errors(source_freshness_report_path)
@@ -816,12 +838,12 @@ def build_coverage_audit(
     cached_groups = {source["calendar_group_key"] for source in pdf_sources if source["cached"]}
     fixture_keys = {
         (row["calendar_group_key"], row["slug"], row["source_sha256"])
-        for row in fixtures
+        for row in fixture_coverage_rows
     }
-    fixture_groups = {row["calendar_group_key"] for row in fixtures}
+    fixture_groups = {row["calendar_group_key"] for row in fixture_coverage_rows}
     full_fixture_groups = {
         row["calendar_group_key"]
-        for row in fixtures
+        for row in fixture_coverage_rows
         if row.get("fixture_kind") == "full_calendar"
     }
     fixture_counts_by_group = Counter(
@@ -830,7 +852,7 @@ def build_coverage_audit(
         if group
     )
     fixture_hashes_by_group: dict[str, set[str]] = {}
-    for row in fixtures:
+    for row in fixture_coverage_rows:
         group = row.get("calendar_group_key")
         source_hash = row.get("source_sha256")
         if group and source_hash:
@@ -859,7 +881,7 @@ def build_coverage_audit(
     coverage_requirements: dict[str, dict[str, Any]] = {}
     legacy_overcount_groups: dict[str, dict[str, int]] = {}
     legacy_undercount_groups: dict[str, dict[str, int]] = {}
-    for group in sorted(set(legacy_counts) | fixture_groups):
+    for group in sorted((set(legacy_counts) | fixture_groups) - source_replacement_groups):
         legacy_count = legacy_counts.get(group, 0)
         fixture_count = fixture_counts_by_group.get(group, 0)
         if group in full_fixture_groups and fixture_count:
@@ -899,7 +921,8 @@ def build_coverage_audit(
     }
 
     missing_cached_groups = sorted(pdf_groups - cached_groups)
-    missing_fixture_groups = sorted(pdf_groups - fixture_groups)
+    fixture_required_pdf_groups = pdf_groups - source_replacement_groups
+    missing_fixture_groups = sorted(fixture_required_pdf_groups - fixture_groups)
     missing_gold_groups = sorted(pdf_groups - gold_groups)
     missing_gold_fixture_keys = sorted(fixture_keys - gold_keys)
     stale_fixture_groups = {
@@ -1014,6 +1037,8 @@ def build_coverage_audit(
         "pdf_source_count": len(pdf_sources),
         "cached_pdf_count": len(cached_groups),
         "fixture_count": len(fixtures),
+        "fixture_coverage_count": len(fixture_coverage_rows),
+        "source_replacement_groups": sorted(source_replacement_groups),
         "fixture_quarantine_count": len(fixture_quarantines),
         "official_offering_covered_quarantine_count": len(official_offering_covered_quarantines),
         "official_offering_covered_quarantine_unique_count": len(

@@ -8,6 +8,7 @@ from pathlib import Path
 PARSER_VERSION = "2.0.0"
 ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = ROOT / "data" / "raw" / "pdfs"
+SOURCE_DOCUMENTS_RAW_DIR = ROOT / "data" / "raw" / "source_documents"
 PROCESSED_DIR = ROOT / "data" / "processed"
 STORAGE_BUCKET = "source-documents"
 

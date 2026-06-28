@@ -17,7 +17,7 @@
 - This is replacement, not incremental load. For each stale calendar group, old public rows, old Gold preview rows, old source inventory entries, and old production source URLs must be replaced.
 - Do not publish any PDF calendar group whose current source URL was inferred only from a filename pattern. Pattern probing can suggest review candidates, but production input must be backed by the official resort page link or captured page evidence.
 - Do not silently publish OCR-mangled movie titles, dates, locations, or times. Visual/PDF layout evidence must support fields that appear in the UI.
-- Fort Wilderness remains official-web sourced unless its resort page exposes a current official PDF.
+- Fort Wilderness remains official-web sourced unless its resort page exposes a current official PDF, but dated Fort Wilderness visual schedule images supplied by the project owner may be used as reviewed visual source inputs when they carry a visible validity window and are stored with provenance. They must not be treated as evergreen official web content.
 
 ## Files And Responsibilities
 
@@ -30,6 +30,8 @@
 - Modify `scripts/ingest/promote_gold.py`: ensure replacement output carries `movie_nights` and current source metadata into `activity_gold_v2_preview.json`.
 - Modify `scripts/ingest/audit_source_freshness.py`: fail if a production Gold row uses a stale PDF date or a source URL not matching live parent-page evidence.
 - Modify `scripts/ingest/audit_coverage.py`: include stale-source counts in production-ready mode.
+- Create: `data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/manifest.json`: provenance manifest for the two supplied Fort Wilderness visual schedule images.
+- Create or modify: `scripts/ingest/fort_wilderness_visual_sources.py`: parse/review the supplied Fort Wilderness images into source-backed activity candidates with a validity window.
 - Modify `scripts/test_pipeline_contracts.py`: add date/source replacement contracts and fixture expectations for current PDFs.
 - Modify `scripts/test-gold-v2-mapping.ts`, `scripts/test-activity-answer-coverage.ts`, `scripts/test-event-card-layout.ts`: assert cards/details expose current source-backed what/when/where.
 - Update `data/golden/activities/*.json`: replace stale fixtures with current official PDF hashes/fields after validation.
@@ -1077,7 +1079,423 @@ git commit -m "data: publish current recreation PDF replacement set"
 
 ---
 
-### Task 9: Add CI Guardrails So This Cannot Recur
+### Task 9: Add Fort Wilderness Dated Visual Schedule Sources
+
+**Files:**
+- Create: `data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/manifest.json`
+- Copy source files into: `data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/`
+- Create: `scripts/ingest/fort_wilderness_visual_sources.py`
+- Modify: `data/golden/activities/fort-wilderness-official-recreation-page.json`
+- Modify: `scripts/test_pipeline_contracts.py`
+
+- [ ] **Step 1: Store the supplied images as dated manual visual sources**
+
+Copy these project-owner supplied files into the repo:
+
+```bash
+mkdir -p data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08
+cp /var/folders/j1/45zj0xt11_d_vqgl42nlk1vw0000gn/T/codex-clipboard-e6a9143f-869b-4520-92a1-58a844142f4d.png data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities-board.png
+cp /var/folders/j1/45zj0xt11_d_vqgl42nlk1vw0000gn/T/codex-clipboard-00574276-7f79-4e57-9828-22a7c1e97cdd.png data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/additional-activities-board.png
+```
+
+Create `data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/manifest.json`:
+
+```json
+{
+  "calendar_group_key": "fort-wilderness",
+  "resort_slugs": [
+    "campsites-at-fort-wilderness-resort",
+    "cabins-at-fort-wilderness-resort"
+  ],
+  "source_kind": "reviewed_visual_schedule_image",
+  "valid_from": "2026-05-26",
+  "valid_to": "2026-09-08",
+  "provided_by": "project_owner",
+  "officiality_note": "Dated Fort Wilderness Resort & Campground recreation activity board images supplied by the project owner. Use as reviewed visual schedule evidence for Fort Wilderness only. Do not generalize to other resorts and do not keep public after 2026-09-08 without refreshed evidence.",
+  "images": [
+    {
+      "path": "data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities-board.png",
+      "visible_date_range": "MAY 26-SEPT. 8, 2026",
+      "visible_branding": "Fort Wilderness Resort & Campground",
+      "watermark": "MagicalResortGuide.com",
+      "use": "primary Fort Wilderness activity board evidence"
+    },
+    {
+      "path": "data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/additional-activities-board.png",
+      "visible_date_range": "MAY 26-SEPT. 8, 2026",
+      "visible_branding": "Fort Wilderness activity board",
+      "watermark": "MagicalResortGuide.com",
+      "use": "supplemental Fort Wilderness recreation evidence"
+    }
+  ]
+}
+```
+
+- [ ] **Step 2: Write failing contract for Fort Wilderness image validity**
+
+Add to `scripts/test_pipeline_contracts.py`:
+
+```python
+def test_fort_wilderness_visual_source_manifest_has_expiring_validity_window(self) -> None:
+    manifest_path = Path("data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/manifest.json")
+    manifest = json.loads(manifest_path.read_text())
+
+    self.assertEqual("fort-wilderness", manifest["calendar_group_key"])
+    self.assertEqual("reviewed_visual_schedule_image", manifest["source_kind"])
+    self.assertEqual("2026-05-26", manifest["valid_from"])
+    self.assertEqual("2026-09-08", manifest["valid_to"])
+    self.assertEqual(2, len(manifest["images"]))
+    for image in manifest["images"]:
+        self.assertTrue(Path(image["path"]).exists(), image["path"])
+        self.assertIn("MAY 26-SEPT. 8, 2026", image["visible_date_range"])
+```
+
+- [ ] **Step 3: Add reviewed extraction data for Fort Wilderness visual boards**
+
+Create `scripts/ingest/fort_wilderness_visual_sources.py` with a deterministic reviewed extract. Do not rely on blind OCR for these images; OCR can assist, but the values below must be reviewed against the visible images.
+
+```python
+"""Reviewed Fort Wilderness visual schedule image extraction."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+MANIFEST_PATH = Path("data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/manifest.json")
+
+
+def reviewed_fort_wilderness_visual_activities() -> list[dict]:
+    manifest = json.loads(MANIFEST_PATH.read_text())
+    validity = {
+        "valid_from": manifest["valid_from"],
+        "valid_to": manifest["valid_to"],
+        "source_kind": manifest["source_kind"],
+        "source_manifest": str(MANIFEST_PATH),
+    }
+    return [
+        {
+            **validity,
+            "title": "Morning Crafts",
+            "slug": "morning-crafts",
+            "category": "arts_crafts",
+            "schedule_text": "Daily from 10:00am-11:00am",
+            "start_time": "10:00am",
+            "end_time": "11:00am",
+            "location": "Bike Barn",
+            "description": "Daily paid morning craft activity. Sunday, Tuesday and Thursday: Build-A-Button. Monday and Saturday: Make Your Own Nature Jar. Wednesday and Friday: Color Your Own Pillowcase.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Poolside Activities",
+            "slug": "poolside-activities",
+            "category": "poolside",
+            "schedule_text": "Daily from 11:45am-1:15pm and 3:00pm-4:00pm",
+            "start_time": "11:45am",
+            "end_time": "4:00pm",
+            "location": "Meadow Swimmin' Pool",
+            "description": "Family-friendly poolside activities at Meadow Swimmin' Pool.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Afternoon Crafts",
+            "slug": "afternoon-crafts",
+            "category": "arts_crafts",
+            "schedule_text": "Daily from 4:00pm-5:00pm",
+            "start_time": "4:00pm",
+            "end_time": "5:00pm",
+            "location": "Bike Barn",
+            "description": "Daily paid afternoon craft activity. Please arrive 10 minutes prior to the end of the craft if you wish to participate.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Crockett's Craft Corner: Wine & Woodshop",
+            "slug": "crocketts-craft-corner-wine-woodshop",
+            "category": "arts_crafts",
+            "schedule_text": "Every Tuesday at 11:30am",
+            "start_time": "11:30am",
+            "end_time": None,
+            "location": "Pioneer Hall",
+            "description": "Paid craft reservation activity. To book a reservation, call 407-WDW-PLAY. For more information, visit the Bike Barn.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Campfire Games",
+            "slug": "campfire-games",
+            "category": "campfire",
+            "schedule_text": "Sunday, Monday, Wednesday, Thursday and Saturday at 7:00pm",
+            "start_time": "7:00pm",
+            "end_time": None,
+            "location": "Campfire Area Presented by OFF! Repellents",
+            "description": "Participate in a fun activity prior to the campfire lighting.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Campfire Bingo",
+            "slug": "campfire-bingo",
+            "category": "campfire",
+            "schedule_text": "Tuesdays and Fridays at 7:00pm",
+            "start_time": "7:00pm",
+            "end_time": None,
+            "location": "Campfire Area Presented by OFF! Repellents",
+            "description": "Bring the family together for bingo night full of fun, joy, and prizes.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Country Campfire",
+            "slug": "country-campfire",
+            "category": "campfire",
+            "schedule_text": "Nightly from 7:30pm-9:30pm",
+            "start_time": "7:30pm",
+            "end_time": "9:30pm",
+            "location": "Campfire Area Presented by OFF! Repellents",
+            "description": "Enjoy the warm glow of the campfire.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Chip 'n Dale's Campfire Sing-A-Long",
+            "slug": "chip-n-dales-campfire-sing-a-long",
+            "category": "campfire",
+            "schedule_text": "Nightly at 8:00pm",
+            "start_time": "8:00pm",
+            "end_time": None,
+            "location": "Campfire Area Presented by OFF! Repellents",
+            "description": "Cro online to old-time favorites led by a guitar-playing cowpoke, with a visit from Chip 'n Dale.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Movie Under the Stars",
+            "slug": "movie-under-the-stars",
+            "category": "movies_under_stars",
+            "schedule_text": "Nightly at 8:40pm",
+            "start_time": "8:40pm",
+            "end_time": None,
+            "location": "Campfire Area Presented by OFF! Repellents",
+            "description": "Cozy up for a classic Disney movie.",
+            "is_fee_based": False,
+            "movie_nights": [
+                {"day_of_week": "sunday", "movie_title": "Odd days: Tangled; even days: Teen Beach Movie", "show_time": "8:40pm"},
+                {"day_of_week": "monday", "movie_title": "Odd days: Finding Nemo; even days: Monsters, Inc.", "show_time": "8:40pm"},
+                {"day_of_week": "tuesday", "movie_title": "Odd days: Turning Red; even days: Cinderella", "show_time": "8:40pm"},
+                {"day_of_week": "wednesday", "movie_title": "Odd days: Cars 2; even days: The Lion King", "show_time": "8:40pm"},
+                {"day_of_week": "thursday", "movie_title": "Odd days: The Parent Trap; even days: Heavyweights", "show_time": "8:40pm"},
+                {"day_of_week": "friday", "movie_title": "Odd days: Toy Story 2; even days: Mulan", "show_time": "8:40pm"},
+                {"day_of_week": "saturday", "movie_title": "Odd days: High School Musical 2; even days: Lilo & Stitch", "show_time": "8:40pm"}
+            ],
+            "source_image": manifest["images"][0]["path"],
+        },
+        {
+            **validity,
+            "title": "Bike Barn",
+            "slug": "bike-barn",
+            "category": "recreation",
+            "schedule_text": "Daily from 9:00am-7:00pm",
+            "start_time": "9:00am",
+            "end_time": "7:00pm",
+            "location": "Bike Barn",
+            "description": "Bike, canoe, kayak, sports equipment, tennis equipment and shuffleboard equipment are available to check out.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][1]["path"],
+        },
+        {
+            **validity,
+            "title": "Wilderness Back Trail Adventure",
+            "slug": "wilderness-back-trail-adventure",
+            "category": "recreation",
+            "schedule_text": "Friday-Tuesday at 8:30am",
+            "start_time": "8:30am",
+            "end_time": None,
+            "location": "Fort Wilderness Resort & Campground",
+            "description": "Segway journey experience. Call 407-WDW-PLAY for reservations and information.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][1]["path"],
+        },
+        {
+            **validity,
+            "title": "Storytime Yoga",
+            "slug": "storytime-yoga",
+            "category": "fitness_wellness",
+            "schedule_text": "Each Friday morning at 10:30am",
+            "start_time": "10:30am",
+            "end_time": None,
+            "location": "Behind the Movie Screen",
+            "description": "Complimentary beginner yoga class with an AdventHealth professional. Please arrive by 10:15am to fill out a waiver and claim your spot.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][1]["path"],
+        },
+        {
+            **validity,
+            "title": "Visit Chip and Dale",
+            "slug": "visit-chip-and-dale",
+            "category": "characters",
+            "schedule_text": "Daily from 5:00pm-5:20pm and 6:00pm-6:20pm, weather permitting",
+            "start_time": "5:00pm",
+            "end_time": "6:20pm",
+            "location": "Campfire Theater and surrounding areas",
+            "description": "Visit Chip and Dale for smiles and fun. Subject to change with little to no notice.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][1]["path"],
+        },
+        {
+            **validity,
+            "title": "Ready, Aim, Archery",
+            "slug": "ready-aim-archery",
+            "category": "recreation",
+            "schedule_text": "Friday-Tuesday at 11:30am and 2:45pm",
+            "start_time": "11:30am",
+            "end_time": None,
+            "location": "Behind the Bike Barn",
+            "description": "Fort Wilderness Archery Experience. For reservations, call 407-WDW-PLAY.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][1]["path"],
+        },
+        {
+            **validity,
+            "title": "Visit Tri-Circle-D Ranch",
+            "slug": "visit-tri-circle-d-ranch",
+            "category": "recreation",
+            "schedule_text": "Daily from 10:00am-5:00pm",
+            "start_time": "10:00am",
+            "end_time": "5:00pm",
+            "location": "Tri-Circle-D Ranch",
+            "description": "Explore the Ranch and see breeds including Belgians, Clydesdales, Percherons and Shetland ponies.",
+            "is_fee_based": False,
+            "source_image": manifest["images"][1]["path"],
+        },
+        {
+            **validity,
+            "title": "Carriage Rides",
+            "slug": "carriage-rides",
+            "category": "recreation",
+            "schedule_text": "Daily from 5:30pm-9:30pm",
+            "start_time": "5:30pm",
+            "end_time": "9:30pm",
+            "location": "Across from Crockett's Tavern near Pioneer Hall",
+            "description": "Relaxing carriage ride through Fort Wilderness Resort & Campground.",
+            "is_fee_based": True,
+            "source_image": manifest["images"][1]["path"],
+        }
+    ]
+```
+
+- [ ] **Step 4: Correct the one OCR-looking description before publish**
+
+In the reviewed extract above, verify the Chip 'n Dale line visually and correct:
+
+```python
+"description": "Cro online to old-time favorites..."
+```
+
+to the exact visible intended copy:
+
+```python
+"description": "Croon along to old-time favorites led by a guitar-playing cowpoke, with a visit from Chip 'n Dale."
+```
+
+Expected: no obvious OCR artifacts such as `Cro online` remain.
+
+- [ ] **Step 5: Add contract for reviewed Fort Wilderness activities**
+
+Add:
+
+```python
+def test_fort_wilderness_visual_sources_include_current_campfire_and_movie_schedule(self) -> None:
+    from scripts.ingest.fort_wilderness_visual_sources import reviewed_fort_wilderness_visual_activities
+
+    rows = reviewed_fort_wilderness_visual_activities()
+    by_slug = {row["slug"]: row for row in rows}
+
+    self.assertEqual("Nightly from 7:30pm-9:30pm", by_slug["country-campfire"]["schedule_text"])
+    self.assertEqual("Nightly at 8:40pm", by_slug["movie-under-the-stars"]["schedule_text"])
+    self.assertEqual(7, len(by_slug["movie-under-the-stars"]["movie_nights"]))
+    self.assertEqual("Daily from 11:45am-1:15pm and 3:00pm-4:00pm", by_slug["poolside-activities"]["schedule_text"])
+    self.assertEqual("2026-09-08", by_slug["movie-under-the-stars"]["valid_to"])
+```
+
+- [ ] **Step 6: Merge Fort Wilderness visual candidates into the fixture**
+
+Update `data/golden/activities/fort-wilderness-official-recreation-page.json` so current Fort Wilderness activities include the reviewed visual schedule image records. Each record must include:
+
+```json
+"manual_review": {
+  "reviewer": "project-owner-visual-source",
+  "reviewed_at": "2026-06-28T00:00:00Z",
+  "notes": "Verified against supplied Fort Wilderness dated recreation board image for May 26-Sept. 8, 2026."
+}
+```
+
+Each record must also carry:
+
+```json
+"source_valid_from": "2026-05-26",
+"source_valid_to": "2026-09-08",
+"source_kind": "reviewed_visual_schedule_image"
+```
+
+- [ ] **Step 7: Add expiry guard**
+
+Add to the Fort Wilderness extraction/promotion path:
+
+```python
+def visual_source_is_current(valid_to: str, *, today: str) -> bool:
+    return today <= valid_to
+```
+
+Add a test:
+
+```python
+def test_fort_wilderness_visual_source_expires_after_validity_window(self) -> None:
+    from scripts.ingest.fort_wilderness_visual_sources import visual_source_is_current
+
+    self.assertTrue(visual_source_is_current("2026-09-08", today="2026-09-08"))
+    self.assertFalse(visual_source_is_current("2026-09-08", today="2026-09-09"))
+```
+
+- [ ] **Step 8: Run Fort Wilderness validation**
+
+Run:
+
+```bash
+python3 -m unittest scripts.test_pipeline_contracts.PipelineContractsTest.test_fort_wilderness_visual_source_manifest_has_expiring_validity_window scripts.test_pipeline_contracts.PipelineContractsTest.test_fort_wilderness_visual_sources_include_current_campfire_and_movie_schedule scripts.test_pipeline_contracts.PipelineContractsTest.test_fort_wilderness_visual_source_expires_after_validity_window
+python3 scripts/ingest/validate_v2.py
+python3 scripts/ingest/promote_gold.py --fail-on-review
+npm run audit:activity-answers
+```
+
+Expected:
+
+- Fort Wilderness image source tests pass.
+- V2 validation passes.
+- Gold promotion has `review_queue: 0`.
+- Activity answer audit has no stale or missing what/when/where issues for Fort Wilderness public rows.
+
+- [ ] **Step 9: Commit**
+
+```bash
+git add data/manual_sources/fort-wilderness data/golden/activities/fort-wilderness-official-recreation-page.json scripts/ingest/fort_wilderness_visual_sources.py scripts/test_pipeline_contracts.py data/processed/activity_gold_v2_preview.json
+git commit -m "data: add dated Fort Wilderness visual schedule sources"
+```
+
+---
+
+### Task 10: Add CI Guardrails So This Cannot Recur
 
 **Files:**
 - Modify: `package.json`
@@ -1144,6 +1562,7 @@ git commit -m "chore: enforce live resort PDF source freshness"
 - [ ] Date-aware audit created and failing on stale sources.
 - [ ] Replacement overrides generated only from official page evidence.
 - [ ] Current PDFs fetched for every stale group.
+- [ ] Fort Wilderness supplied visual schedule images stored, reviewed, expiry-guarded, and validated.
 - [ ] Stale PDF fixtures replaced, not incrementally merged.
 - [ ] OCR/manual visual validation completed for all movie/time/location fields.
 - [ ] Gold preview regenerated from current sources only.
@@ -1182,4 +1601,3 @@ The following groups still need official-page confirmation because the broad CDN
 - Spec coverage: The plan covers direct resort-page sourcing, full re-ingest, stale replacement, OCR validation, UI validation, production publish, and future guardrails.
 - Placeholder scan: No task uses TBD or vague "add tests" without concrete commands/examples.
 - Type consistency: New audit/override functions use `calendar_group_key`, `manifest_url`, `live_url`, `pdf_url`, and `pdf_edition` consistently across tasks.
-

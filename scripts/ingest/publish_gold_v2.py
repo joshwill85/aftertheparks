@@ -44,6 +44,7 @@ def _source_type(row: dict[str, Any]) -> str:
 def _db_category(row: dict[str, Any]) -> str:
     category = str(row.get("category") or "other")
     return {
+        "character": "character_experience",
         "scavenger_hunt": "resort_activity",
         "sports_games": "resort_activity",
     }.get(category, category)
@@ -202,6 +203,13 @@ def _source_inventory_indexes(path: Path = DEFAULT_SOURCE_INVENTORY_PATH) -> tup
         inventory = []
     by_hash: dict[str, dict[str, Any]] = {}
     by_source_id: dict[str, dict[str, Any]] = {}
+    role_priority = {
+        "resort_pdf": 4,
+        "reviewed_visual_schedule": 4,
+        "resort_recreation_page": 3,
+        "parent_activity_detail": 2,
+        "supporting_price_image": 1,
+    }
     for row in inventory:
         if not isinstance(row, dict):
             continue
@@ -210,7 +218,9 @@ def _source_inventory_indexes(path: Path = DEFAULT_SOURCE_INVENTORY_PATH) -> tup
         if source_id:
             by_source_id[source_id] = row
         if source_hash:
-            by_hash.setdefault(source_hash, row)
+            existing = by_hash.get(source_hash)
+            if existing is None or role_priority.get(str(row.get("source_role") or ""), 0) > role_priority.get(str(existing.get("source_role") or ""), 0):
+                by_hash[source_hash] = row
     return by_hash, by_source_id
 
 

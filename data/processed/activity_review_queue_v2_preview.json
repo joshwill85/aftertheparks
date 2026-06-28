@@ -1,1 +1,270 @@
-[]
+[
+  {
+    "candidate_id": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59:all-star-movies:poolside-activities",
+    "calendar_group_key": "all-star-movies",
+    "activity_slug": "poolside-activities",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59:all-star-movies:mickey-tie-dye",
+    "calendar_group_key": "all-star-movies",
+    "activity_slug": "mickey-tie-dye",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59:all-star-movies:a-star-glow-party",
+    "calendar_group_key": "all-star-movies",
+    "activity_slug": "a-star-glow-party",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21:all-star-music:complimentary-craft",
+    "calendar_group_key": "all-star-music",
+    "activity_slug": "complimentary-craft",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67:all-star-sports:poolside-activities",
+    "calendar_group_key": "all-star-sports",
+    "activity_slug": "poolside-activities",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa:beach-yacht-club:yacht-beach",
+    "calendar_group_key": "beach-yacht-club",
+    "activity_slug": "yacht-beach",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa:beach-yacht-club:mickey-tie-dye",
+    "calendar_group_key": "beach-yacht-club",
+    "activity_slug": "mickey-tie-dye",
+    "reason": "candidate_warning:schedule:text_quality_low",
+    "all_reasons": [
+      "candidate_warning:schedule:text_quality_low"
+    ],
+    "severity": "error"
+  },
+  {
+    "candidate_id": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa:beach-yacht-club:tucscay",
+    "calendar_group_key": "beach-yacht-club",
+    "activity_slug": "tucscay",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1:contemporary:cabana-rentals",
+    "calendar_group_key": "contemporary",
+    "activity_slug": "cabana-rentals",
+    "reason": "candidate_warning:schedule:incomplete_time_phrase",
+    "all_reasons": [
+      "candidate_warning:schedule:incomplete_time_phrase"
+    ],
+    "severity": "error"
+  },
+  {
+    "candidate_id": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1:contemporary:motorized-boat-rentals",
+    "calendar_group_key": "contemporary",
+    "activity_slug": "motorized-boat-rentals",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1:contemporary:sports-courts",
+    "calendar_group_key": "contemporary",
+    "activity_slug": "sports-courts",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1:contemporary:activities",
+    "calendar_group_key": "contemporary",
+    "activity_slug": "activities",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c:coronado-springs:spanish-mosaic-art",
+    "calendar_group_key": "coronado-springs",
+    "activity_slug": "spanish-mosaic-art",
+    "reason": "candidate_warning:description:text_quality_low",
+    "all_reasons": [
+      "candidate_warning:description:text_quality_low"
+    ],
+    "severity": "error"
+  },
+  {
+    "candidate_id": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c:coronado-springs:colors-of-coronado-painting-experience",
+    "calendar_group_key": "coronado-springs",
+    "activity_slug": "colors-of-coronado-painting-experience",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c:coronado-springs:arts-crafts",
+    "calendar_group_key": "coronado-springs",
+    "activity_slug": "arts-crafts",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c:coronado-springs:sangria-university",
+    "calendar_group_key": "coronado-springs",
+    "activity_slug": "sangria-university",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c:coronado-springs:resort-scavenger-hunt",
+    "calendar_group_key": "coronado-springs",
+    "activity_slug": "resort-scavenger-hunt",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38:grand-floridian:grand-floridian",
+    "calendar_group_key": "grand-floridian",
+    "activity_slug": "grand-floridian",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38:grand-floridian:captains-shipyard",
+    "calendar_group_key": "grand-floridian",
+    "activity_slug": "captains-shipyard",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e:old-key-west:old-key-west-resort",
+    "calendar_group_key": "old-key-west",
+    "activity_slug": "old-key-west-resort",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e:old-key-west:tucsaay",
+    "calendar_group_key": "old-key-west",
+    "activity_slug": "tucsaay",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a:polynesian:campfire",
+    "calendar_group_key": "polynesian",
+    "activity_slug": "campfire",
+    "reason": "location:missing",
+    "all_reasons": [
+      "location:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf:port-orleans-french-quarter:arts-crafts",
+    "calendar_group_key": "port-orleans-french-quarter",
+    "activity_slug": "arts-crafts",
+    "reason": "candidate_warning:description:text_quality_low",
+    "all_reasons": [
+      "candidate_warning:description:text_quality_low"
+    ],
+    "severity": "error"
+  },
+  {
+    "candidate_id": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf:port-orleans-french-quarter:glow-with-the-flow",
+    "calendar_group_key": "port-orleans-french-quarter",
+    "activity_slug": "glow-with-the-flow",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing"
+    ],
+    "severity": "blocker"
+  },
+  {
+    "candidate_id": "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4:riviera:painting-on-the-riviera",
+    "calendar_group_key": "riviera",
+    "activity_slug": "painting-on-the-riviera",
+    "reason": "candidate_warning:description:text_quality_low",
+    "all_reasons": [
+      "candidate_warning:description:text_quality_low"
+    ],
+    "severity": "error"
+  },
+  {
+    "candidate_id": "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62:wilderness-lodge:wonders-of-the-lodge",
+    "calendar_group_key": "wilderness-lodge",
+    "activity_slug": "wonders-of-the-lodge",
+    "reason": "schedule:missing",
+    "all_reasons": [
+      "schedule:missing",
+      "location:missing"
+    ],
+    "severity": "blocker"
+  }
+]

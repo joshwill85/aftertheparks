@@ -719,7 +719,7 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     assert.equal(defaultWellness.title, "Wellness Scavenger Hunt");
     assert.equal(
       defaultWellness.summary,
-      "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you've finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts."
+      "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts."
     );
     assert.match(defaultWellness.endDateTime ?? "", /T23:00:00-04:00$/);
     assert.equal(defaultWellness.claims?.walkability?.value, "unknown");
@@ -732,14 +732,14 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     );
     assert.ok(
       fortMovie,
-      "Fort Wilderness movie must be sourced from the official Cabins recreation page"
+      "Fort Wilderness movie must be sourced from the reviewed visual schedule"
     );
-    assert.equal(fortMovie.title, "Movies Under the Stars");
-    assert.equal(fortMovie.location.label, "Campground Theater");
-    assert.equal(fortMovie.trustState, "confirm_before_going");
+    assert.equal(fortMovie.title, "Movie Under the Stars");
+    assert.equal(fortMovie.location.label, "Campfire Area Presented by OFF! Repellents");
+    assert.equal(fortMovie.trustState, "source_backed");
     assert.match(
       fortMovie.source?.url ?? "",
-      /dvc-cabins-at-fort-wilderness-resort\/recreation/
+      /^manual:\/\/fort-wilderness\/2026-05-26-to-2026-09-08\/recreation-activities$/
     );
 
     const legacyWellness = await getActivityBySlug("wellnessscav-engerhunt");
@@ -750,7 +750,7 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     );
     assert.equal(legacyWellness.activity.title, "Wellness Scavenger Hunt");
 
-    const resortScopedCampfire = await getActivityBySlug("campfire", {
+    const resortScopedCampfire = await getActivityBySlug("movie-under-the-stars", {
       resort: "polynesian-village-resort",
     });
     assert.ok(
@@ -791,13 +791,16 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
       "Resort timeline must remain scoped to the requested resort"
     );
 
-    const quarantinedFortActivity = await getActivityBySlug(
+    const reviewedFortActivity = await getActivityBySlug(
       "chip-n-dales-campfire-sing-a-long"
     );
-    assert.equal(
-      quarantinedFortActivity,
-      null,
-      "Incomplete official Fort Wilderness web rows must fail closed until schedule and location are sourced"
+    assert.ok(
+      reviewedFortActivity,
+      "Reviewed Fort Wilderness visual rows should resolve once schedule and location are sourced"
+    );
+    assert.match(
+      reviewedFortActivity.activity.source?.url ?? "",
+      /^manual:\/\/fort-wilderness\/2026-05-26-to-2026-09-08\/recreation-activities$/
     );
 
     assert.deepEqual(

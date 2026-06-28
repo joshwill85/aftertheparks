@@ -1,0 +1,28 @@
+{
+  "source_kind": "reviewed_visual_schedule_image",
+  "calendar_group_key": "fort-wilderness",
+  "canonical_url": "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+  "resort_slugs": [
+    "campsites-at-fort-wilderness-resort",
+    "cabins-at-fort-wilderness-resort"
+  ],
+  "valid_from": "2026-05-26",
+  "valid_to": "2026-09-08",
+  "source_note": "Project-owner supplied Fort Wilderness Recreation Activities schedule images with visible Disney copyright and visible May 26-Sept. 8, 2026 validity window. Magical Resort Guide watermark is present on the supplied photos; use as reviewed visual evidence, not evergreen official web content.",
+  "images": [
+    {
+      "page": 1,
+      "path": "data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities-page-1.png",
+      "sha256": "689695e27154bc940af90689f0f978c31929026c5c4e327ee4471529d41b7843",
+      "visible_title": "Recreation Activities",
+      "visible_validity": "May 26-Sept. 8, 2026"
+    },
+    {
+      "page": 2,
+      "path": "data/manual_sources/fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities-page-2.png",
+      "sha256": "c45e22e64502270e0693ea4e89d2c04c22ff77756e26dc50f93d5dff85614ce8",
+      "visible_title": "Fort Wilderness Recreation Activities continuation",
+      "visible_validity": "May 26-Sept. 8, 2026"
+    }
+  ]
+}

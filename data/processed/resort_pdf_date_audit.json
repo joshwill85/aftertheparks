@@ -1,0 +1,537 @@
+{
+  "passed": true,
+  "generated_at": "2026-06-28T16:53:22.077568+00:00",
+  "summary": {
+    "sources_checked": 21,
+    "stale_groups": [],
+    "missing_live_evidence": []
+  },
+  "sources": [
+    {
+      "calendar_group_key": "all-star-movies",
+      "resort_slugs": [
+        "all-star-movies-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:19 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:19 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/all-star-movies-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010402/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "all-star-music",
+      "resort_slugs": [
+        "all-star-music-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:18 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:18 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/all-star-music-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010400/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "resort_slugs": [
+        "all-star-sports-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:24 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:24 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/all-star-sports-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010401/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "art-of-animation",
+      "resort_slugs": [
+        "art-of-animation-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Sat, 13 Jun 2026 13:42:49 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Sat, 13 Jun 2026 13:42:49 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/art-of-animation-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010404/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "pop-century",
+      "resort_slugs": [
+        "pop-century-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+      "manifest_edition": "? / 0526",
+      "manifest_last_modified": "Mon, 25 May 2026 08:30:15 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+      "live_edition": "? / 0526",
+      "live_last_modified": "Mon, 25 May 2026 08:30:15 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/pop-century-resort/recreation/",
+        "edition_folder": null,
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010403/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "resort_slugs": [
+        "caribbean-beach-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 15:18:13 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 15:18:13 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/caribbean-beach-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010399/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "resort_slugs": [
+        "coronado-springs-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:24 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:24 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/coronado-springs-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010396/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "resort_slugs": [
+        "port-orleans-resort-french-quarter"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/port-orleans-resort-french-quarter/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010398/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "resort_slugs": [
+        "port-orleans-resort-riverside"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "manifest_edition": "? / 0526",
+      "manifest_last_modified": "Wed, 29 Apr 2026 19:15:29 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "live_edition": "? / 0526",
+      "live_last_modified": "Wed, 29 Apr 2026 19:15:29 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/port-orleans-resort-riverside/recreation/",
+        "edition_folder": null,
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010397/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "animal-kingdom-jambo",
+      "resort_slugs": [
+        "animal-kingdom-lodge",
+        "animal-kingdom-villas-jambo-house"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:23 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:23 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/animal-kingdom-lodge/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010395/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "unchanged"
+    },
+    {
+      "calendar_group_key": "animal-kingdom-kidani",
+      "resort_slugs": [
+        "animal-kingdom-villas-kidani-village"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:23 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:23 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/animal-kingdom-villas-kidani-village/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/273239/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "unchanged"
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "resort_slugs": [
+        "beach-club-resort",
+        "yacht-club-resort",
+        "beach-club-villas"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/beach-club-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010389/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "boardwalk",
+      "resort_slugs": [
+        "boardwalk-inn",
+        "boardwalk-villas"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:23 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:23 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010386/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "unchanged"
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "resort_slugs": [
+        "contemporary-resort",
+        "bay-lake-tower-at-contemporary-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Wed, 20 May 2026 13:55:21 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Wed, 20 May 2026 13:55:21 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/contemporary-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010385/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "grand-floridian",
+      "resort_slugs": [
+        "grand-floridian-resort-and-spa",
+        "villas-at-grand-floridian-resort-and-spa"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:14 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:14 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010384/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "polynesian",
+      "resort_slugs": [
+        "polynesian-village-resort",
+        "polynesian-villas-and-bungalows"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:13 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:13 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/polynesian-village-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010388/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "wilderness-lodge",
+      "resort_slugs": [
+        "wilderness-lodge",
+        "boulder-ridge-villas-at-wilderness-lodge",
+        "copper-creek-villas-and-cabins-at-wilderness-lodge"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/wilderness-lodge/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010394/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "resort_slugs": [
+        "old-key-west-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/old-key-west-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010387/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "riviera",
+      "resort_slugs": [
+        "riviera-resort"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/riviera-resort/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/18995875/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "saratoga-springs",
+      "resort_slugs": [
+        "saratoga-springs-resort-and-spa"
+      ],
+      "manifest_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "manifest_edition": "fy26-q3 / 0526",
+      "manifest_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "live_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "live_edition": "fy26-q3 / 0526",
+      "live_last_modified": "Thu, 21 May 2026 12:59:11 GMT",
+      "stale": false,
+      "source_kind": "pdf",
+      "discovery_evidence": {
+        "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+        "anchor_text": "View the full schedule of recreation and entertainment",
+        "parent_url": "https://disneyworld.disney.go.com/resorts/saratoga-springs-resort-and-spa/recreation/",
+        "edition_folder": "fy26-q3",
+        "filename_date": "0526",
+        "evidence_kind": "official_resort_recreation_page",
+        "source_api_url": "https://disneyworld.disney.go.com/wdw-resorts-details-api/api/v1/resort/80010383/marketing-info/?storeId=wdw",
+        "evidence_detail": "resort_marketing_info.tabs.recreation"
+      },
+      "status": "url_changed"
+    },
+    {
+      "calendar_group_key": "fort-wilderness",
+      "resort_slugs": [
+        "campsites-at-fort-wilderness-resort",
+        "cabins-at-fort-wilderness-resort"
+      ],
+      "manifest_url": null,
+      "manifest_edition": null,
+      "manifest_last_modified": null,
+      "live_url": null,
+      "live_edition": null,
+      "live_last_modified": null,
+      "stale": false,
+      "source_kind": "official_web",
+      "discovery_evidence": null,
+      "status": "missing"
+    }
+  ]
+}

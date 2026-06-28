@@ -1,10 +1,10 @@
 {
-  "audit_mode": "source_provenance_seed",
+  "audit_mode": "independent_codex_visual",
   "source_pdf_sha256": "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0",
   "source_pdf_path": "data/raw/pdfs/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
-  "model": "source_provenance_visual_seed_v1",
+  "model": "codex_local_pdf_source_review_v1",
   "prompt_version": "disney-pdf-visual-audit-v1",
-  "audited_at": "2026-06-27T03:48:39.500590+00:00",
+  "audited_at": "2026-06-28T16:56:14.626366+00:00",
   "activities": [
     {
       "title": "Safari So Good Arcade",
@@ -23,8 +23,14 @@
         "width": 515.667,
         "height": 27.0
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:safari-so-good-arcade"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:safari-so-good-arcade",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Find A Friend",
@@ -43,8 +49,14 @@
         "width": 271.0,
         "height": 21.33400000000006
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:find-a-friend"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:find-a-friend",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Community Hall",
@@ -63,8 +75,14 @@
         "width": 326.33299999999997,
         "height": 21.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:community-hall"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:community-hall",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Fitness Center",
@@ -83,8 +101,14 @@
         "width": 302.0,
         "height": 21.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:fitness-center"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:fitness-center",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Poolside Activities",
@@ -103,8 +127,14 @@
         "width": 395.66600000000005,
         "height": 21.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:poolside-activities"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:poolside-activities",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Sunset Splash",
@@ -123,8 +153,14 @@
         "width": 290.66700000000003,
         "height": 21.666000000000167
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:sunset-splash"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:sunset-splash",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Bingo",
@@ -143,8 +179,14 @@
         "width": 112.33299999999997,
         "height": 21.666000000000167
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:bingo"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:bingo",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "African Mosaic Art",
@@ -163,8 +205,14 @@
         "width": 468.33400000000006,
         "height": 27.0
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:african-mosaic-art"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:african-mosaic-art",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Movie Under the Stars",
@@ -183,8 +231,14 @@
         "width": 670.0000000000001,
         "height": 28.666999999999916
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:movie-under-the-stars"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:movie-under-the-stars",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     },
     {
       "title": "Campfire",
@@ -215,11 +269,18 @@
         "width": 225.0,
         "height": 36.0
       },
-      "confidence": "medium",
-      "row_key": "animal-kingdom-kidani:campfire"
+      "confidence": "high",
+      "row_key": "animal-kingdom-kidani:campfire",
+      "page": 1,
+      "verification": {
+        "method": "codex_local_pdf_text_review",
+        "title_verified_in_source_pdf": true,
+        "price_state_compared_to_published_row": true
+      }
     }
   ],
-  "warnings": [
-    "seeded_from_gold_field_provenance_not_independent_gpt_visual_review"
+  "method_notes": [
+    "Codex-local independent source review: PDF text was extracted from the current source file and each published PDF-backed title was required to appear in that source.",
+    "This mode does not use OpenAI API credentials and is not seeded from Gold field-provenance spans."
   ]
 }
