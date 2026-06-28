@@ -183,6 +183,11 @@ def _source_hash(row: dict[str, Any]) -> str:
     return str(row.get("content_sha256") or row.get("source_sha256") or row.get("documentHash") or "").strip()
 
 
+def _slug_fragment(value: Any) -> str:
+    fragment = "".join(char.lower() if char.isalnum() else "-" for char in str(value or "").strip())
+    return "-".join(part for part in fragment.split("-") if part) or "unknown"
+
+
 def _has_review_artifacts(source: dict[str, Any]) -> bool:
     return bool(
         source.get("page_image_sha256")
@@ -272,12 +277,154 @@ def _gold_conflict_review_tasks(
     return tasks
 
 
+def _source_drift_source_reports(source_drift_report: dict[str, Any]) -> list[dict[str, Any]]:
+    source_reports = source_drift_report.get("source_reports")
+    if isinstance(source_reports, list):
+        return [report for report in source_reports if isinstance(report, dict)]
+    return [source_drift_report]
+
+
+def _source_drift_task(
+    *,
+    source_report: dict[str, Any],
+    task_suffix: str,
+    field: str | None,
+    finding: str,
+    candidate_value: Any = None,
+    normalized_value: Any = None,
+    source_drift: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    calendar_group_key = str(source_report.get("calendar_group_key") or "unknown").strip()
+    new_hash = str(source_report.get("new_hash") or "").strip()
+    return {
+        "task_id": f"source-drift-{_slug_fragment(calendar_group_key)}-{task_suffix}",
+        "task_type": "source_changed",
+        "field": field,
+        "source_document_id": None,
+        "content_sha256": new_hash or None,
+        "calendar_group_key": calendar_group_key or None,
+        "candidate_type": "source_drift",
+        "page_number": source_drift.get("page_number") if isinstance(source_drift, dict) else None,
+        "page_image": None,
+        "field_crop": None,
+        "field_crop_sha256": None,
+        "field_bbox": source_drift.get("bbox_px") if isinstance(source_drift, dict) else None,
+        "primary_text": source_drift.get("text") if isinstance(source_drift, dict) else None,
+        "secondary_text": None,
+        "candidate_value": candidate_value,
+        "normalized_value": normalized_value,
+        "validation_findings": [finding],
+        "source_drift": source_drift,
+        "source_drift_report": source_report,
+    }
+
+
+def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if not source_drift_report or source_drift_report.get("status") in {None, "clean"}:
+        return []
+    tasks: list[dict[str, Any]] = []
+    for source_report in _source_drift_source_reports(source_drift_report):
+        if source_report.get("status") in {None, "clean"} and not source_report.get("publish_blockers"):
+            continue
+        for field_name, report_key in (
+            ("schedule", "changed_schedules"),
+            ("location", "changed_locations"),
+            ("price", "changed_fees"),
+        ):
+            changes = source_report.get(report_key)
+            if not isinstance(changes, list):
+                continue
+            for index, change in enumerate(changes, start=1):
+                if not isinstance(change, dict):
+                    continue
+                canonical_slug = str(change.get("canonical_slug") or f"{field_name}-{index}").strip()
+                tasks.append(
+                    _source_drift_task(
+                        source_report=source_report,
+                        task_suffix=f"{field_name}-{_slug_fragment(canonical_slug)}",
+                        field=field_name,
+                        finding=f"source_changed:{field_name}",
+                        candidate_value=change.get("new"),
+                        normalized_value=change.get("new"),
+                        source_drift=change,
+                    )
+                )
+        for title in source_report.get("new_titles") or []:
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"new-title-{_slug_fragment(title)}",
+                    field="title",
+                    finding="source_changed:new_title",
+                    candidate_value=title,
+                    normalized_value=title,
+                    source_drift={"title": title},
+                )
+            )
+        for title in source_report.get("removed_titles") or []:
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"removed-title-{_slug_fragment(title)}",
+                    field="title",
+                    finding="source_changed:removed_title",
+                    candidate_value=None,
+                    normalized_value=None,
+                    source_drift={"title": title},
+                )
+            )
+        for region in source_report.get("new_unknown_regions") or []:
+            if not isinstance(region, dict):
+                continue
+            region_id = region.get("region_id") or len(tasks) + 1
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"unknown-region-{_slug_fragment(region_id)}",
+                    field=None,
+                    finding="source_changed:new_unknown_region",
+                    candidate_value=region.get("text"),
+                    source_drift=region,
+                )
+            )
+        for failure in source_report.get("validation_failures") or []:
+            if not isinstance(failure, dict):
+                continue
+            candidate_id = failure.get("candidate_id") or failure.get("canonical_slug") or len(tasks) + 1
+            findings = [str(finding) for finding in failure.get("validation_findings") or []]
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"validation-failure-{_slug_fragment(candidate_id)}",
+                    field=None,
+                    finding="source_changed:validation_failure",
+                    candidate_value=failure.get("title"),
+                    normalized_value=findings,
+                    source_drift=failure,
+                )
+            )
+        for blocker in source_report.get("publish_blockers") or []:
+            blocker_name = str(blocker)
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"blocker-{_slug_fragment(blocker_name)}",
+                    field=None,
+                    finding=f"source_changed:{blocker_name}",
+                    candidate_value=blocker_name,
+                    source_drift={"publish_blocker": blocker_name},
+                )
+            )
+    return tasks
+
+
 def build_review_tasks(
     candidates: list[dict[str, Any]],
     *,
     source_statuses: list[dict[str, Any]] | None = None,
     existing_gold_rows: list[dict[str, Any]] | None = None,
     gold_conflicts: list[dict[str, Any]] | None = None,
+    source_drift_report: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     tasks: list[dict[str, Any]] = []
     existing_gold_by_key = _existing_gold_by_key(existing_gold_rows or [])
@@ -322,6 +469,7 @@ def build_review_tasks(
         )
     tasks.extend(_source_status_review_tasks(source_statuses or []))
     tasks.extend(_gold_conflict_review_tasks(gold_conflicts or [], existing_gold_by_key=existing_gold_by_key))
+    tasks.extend(_source_drift_review_tasks(source_drift_report))
     return tasks
 
 
