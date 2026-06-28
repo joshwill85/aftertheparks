@@ -814,6 +814,16 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("needs_review", validate_candidate(missing_schedule)["validation_status"])
         self.assertIn("missing_required_field:schedule", validate_candidate(missing_schedule)["validation_findings"])
 
+        missing_source_identity = json.loads(json.dumps(valid_candidate))
+        del missing_source_identity["source_document_id"]
+        self.assertEqual("rejected", validate_candidate(missing_source_identity)["validation_status"])
+        self.assertIn("missing_source_document_id", validate_candidate(missing_source_identity)["validation_findings"])
+
+        missing_all_evidence = json.loads(json.dumps(valid_candidate))
+        missing_all_evidence["field_evidence"] = {}
+        self.assertEqual("rejected", validate_candidate(missing_all_evidence)["validation_status"])
+        self.assertIn("missing_reviewable_evidence", validate_candidate(missing_all_evidence)["validation_findings"])
+
         missing_schedule_crop_path = json.loads(json.dumps(valid_candidate))
         del missing_schedule_crop_path["field_evidence"]["schedule"]["source"]["crop_storage_path"]
         self.assertIn(

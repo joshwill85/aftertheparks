@@ -66,6 +66,34 @@ def _fee_marker_conflicts(candidate: dict[str, Any]) -> bool:
     return "($)" in raw_value and candidate.get("fee_required") is False
 
 
+def _has_any_reviewable_evidence(candidate: dict[str, Any]) -> bool:
+    evidence = candidate.get("field_evidence")
+    if not isinstance(evidence, dict):
+        return False
+    for field in evidence.values():
+        if not isinstance(field, dict):
+            continue
+        source = field.get("source")
+        if isinstance(source, dict) and (
+            source.get("crop_sha256")
+            or source.get("crop_storage_path")
+            or source.get("crop_path")
+            or source.get("bbox_px")
+        ):
+            return True
+    return False
+
+
+def _validation_status(candidate: dict[str, Any], findings: list[str]) -> str:
+    if not findings:
+        return "auto_publishable"
+    if "missing_source_document_id" in findings or "missing_content_sha256" in findings:
+        return "rejected"
+    if not _has_any_reviewable_evidence(candidate):
+        return "rejected"
+    return "needs_review"
+
+
 def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     findings = list(candidate.get("validation_findings") or [])
 
@@ -98,9 +126,12 @@ def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
         findings.append("fee_marker_conflict")
 
     deduped_findings = list(dict.fromkeys(str(finding) for finding in findings if str(finding)))
+    if deduped_findings and not _has_any_reviewable_evidence(candidate):
+        deduped_findings.append("missing_reviewable_evidence")
+        deduped_findings = list(dict.fromkeys(deduped_findings))
     validated = dict(candidate)
     validated["validation_findings"] = deduped_findings
-    validated["validation_status"] = "auto_publishable" if not deduped_findings else "needs_review"
+    validated["validation_status"] = _validation_status(candidate, deduped_findings)
     return validated
 
 
