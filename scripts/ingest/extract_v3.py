@@ -109,6 +109,31 @@ def _raw_text(token: dict[str, Any] | None) -> str:
     return str((token or {}).get("text") or "")
 
 
+def _source_span(
+    field: str,
+    token: dict[str, Any] | None,
+    *,
+    text: str | None = None,
+    region: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    if not isinstance(token, dict):
+        return []
+    span_text = str(text if text is not None else token.get("text") or token.get("token_text") or "").strip()
+    if not span_text:
+        return []
+    return [
+        {
+            "field": field,
+            "page": token.get("page_number"),
+            "text": span_text,
+            "bbox_px": token.get("bbox_px"),
+            "page_image_sha256": token.get("page_image_sha256"),
+            "engine": token.get("engine"),
+            "region_id": (region or {}).get("region_id"),
+        }
+    ]
+
+
 def _compose_schedule_text(schedule_token: dict[str, Any] | None, day_token: dict[str, Any] | None) -> str:
     schedule_text = _raw_text(schedule_token)
     day_text = _raw_text(day_token)
@@ -256,6 +281,15 @@ def _extracted_candidate(
             review_status="not_required" if movie_title_agreement["agreement"] == "exact_after_normalization" else "required",
         )
 
+    source_spans = {
+        "title": _source_span("title", primary_title, region=region),
+        "schedule": _source_span("schedule", primary_schedule, text=primary_schedule_text, region=region),
+        "location": _source_span("location", primary_location, region=region),
+        "fee": _source_span("fee", primary_legend or primary_title, region=region),
+    }
+    if candidate_type == "movie":
+        source_spans["movie_title"] = _source_span("movie_title", primary_movie_title, region=region)
+
     return {
         "source_title": _raw_text(primary_title),
         "normalized_title": title_agreement["normalized_value"],
@@ -268,6 +302,7 @@ def _extracted_candidate(
         "fee_required": fee["fee_required"],
         "validation_findings": findings,
         "field_evidence": field_evidence,
+        "source_spans": source_spans,
     }
 
 
@@ -311,6 +346,7 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
             "field_evidence": {
                 "region": _region_evidence(snapshot, region),
             },
+            "source_spans": {},
         }
 
         candidates.append(
@@ -340,6 +376,7 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
                 "validation_status": "needs_review",
                 "validation_findings": extracted_fields["validation_findings"],
                 "field_evidence": extracted_fields["field_evidence"],
+                "source_spans": extracted_fields["source_spans"],
             }
         )
 
