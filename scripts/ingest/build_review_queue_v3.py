@@ -18,6 +18,7 @@ DEFAULT_VALIDATED_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_SOURCE_STATUSES_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json"
 DEFAULT_EXISTING_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 DEFAULT_GOLD_CONFLICTS_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
+DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
 SOURCE_STATUS_REVIEW_TASK_TYPES = {"parser_error", "source_error"}
 
 
@@ -504,12 +505,20 @@ def _load_json_list(path: Path) -> list[dict[str, Any]]:
     return [item for item in payload if isinstance(item, dict)]
 
 
+def _load_json_dict(path: Path) -> dict[str, Any] | None:
+    if not path.exists() or path.is_dir():
+        return None
+    payload = json.loads(path.read_text())
+    return payload if isinstance(payload, dict) else None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build v3 review queue tasks")
     parser.add_argument("validated_candidates", type=Path, nargs="?", default=DEFAULT_VALIDATED_CANDIDATES_PATH)
     parser.add_argument("--source-statuses", type=Path, default=DEFAULT_SOURCE_STATUSES_PATH)
     parser.add_argument("--existing-gold", type=Path, default=DEFAULT_EXISTING_GOLD_PATH)
     parser.add_argument("--gold-conflicts", type=Path, default=DEFAULT_GOLD_CONFLICTS_PATH)
+    parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -520,6 +529,7 @@ def main() -> None:
         source_statuses=_load_json_list(args.source_statuses),
         existing_gold_rows=_load_json_list(args.existing_gold),
         gold_conflicts=_load_json_list(args.gold_conflicts),
+        source_drift_report=_load_json_dict(args.source_drift_report),
     )
     if args.json:
         print(json.dumps(tasks, indent=2, sort_keys=True))

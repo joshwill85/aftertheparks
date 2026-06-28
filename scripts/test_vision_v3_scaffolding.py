@@ -1860,6 +1860,54 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("parser_error", tasks[0]["task_type"])
         self.assertEqual("source-doc-parser", tasks[0]["source_document_id"])
 
+    def test_review_queue_v3_cli_accepts_source_drift_report(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            validated_dir = root / "validated"
+            drift_path = root / "source_drift_report.json"
+            output_path = root / "review_queue.json"
+            validated_dir.mkdir()
+            drift_path.write_text(
+                json.dumps(
+                    {
+                        "status": "review_required",
+                        "calendar_group_key": "boardwalk",
+                        "old_hash": "oldhash",
+                        "new_hash": "newhash",
+                        "changed_locations": [
+                            {
+                                "canonical_slug": "campfire",
+                                "title": "Campfire",
+                                "old": "Beach",
+                                "new": "Village Green Lawn",
+                            }
+                        ],
+                        "publish_blockers": [],
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "build_review_queue_v3.py",
+                    str(validated_dir),
+                    "--source-drift-report",
+                    str(drift_path),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                build_review_queue_v3.main()
+
+            tasks = json.loads(output_path.read_text())
+
+        self.assertEqual(1, len(tasks))
+        self.assertEqual("source-drift-boardwalk-location-campfire", tasks[0]["task_id"])
+        self.assertEqual("source_changed", tasks[0]["task_type"])
+        self.assertEqual(["source_changed:location"], tasks[0]["validation_findings"])
+
     def test_review_queue_v3_uses_field_specific_evidence_for_disagreement_tasks(self) -> None:
         candidate = {
             "candidate_id": "cand-2",
