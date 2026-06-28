@@ -2003,6 +2003,248 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             task["source_metadata"],
         )
 
+    def test_review_queue_v3_includes_existing_gold_comparison_when_available(self) -> None:
+        candidate = {
+            "candidate_id": "cand-gold-compare",
+            "validation_status": "needs_review",
+            "validation_findings": ["engine_disagreement:schedule"],
+            "source_document_id": "source-doc-1",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "canonical_slug": "poolside-activities",
+            "candidate_type": "activity",
+            "source_title": "Poolside Activities",
+            "normalized_title": "Poolside Activities",
+            "location_text": "Village Green Lawn",
+            "normalized_location_id": "village_green_lawn",
+            "schedule_raw": "Daily at 1:30pm",
+            "schedule_normalized": {
+                "schedule_type": "recurring",
+                "days_of_week": ALL_DAYS,
+                "start_time": "13:30",
+                "timezone": "America/New_York",
+            },
+            "fee_required": False,
+            "field_evidence": {
+                "region": {
+                    "source": {
+                        "content_sha256": "sourcehash",
+                        "page_number": 1,
+                        "page_image_sha256": "pagehash",
+                        "bbox_px": [0, 0, 400, 300],
+                        "crop_storage_path": "regions/region.png",
+                        "crop_sha256": "regioncrop",
+                    }
+                },
+                "schedule": {
+                    "field": "schedule",
+                    "raw_value": "Daily at 1:30pm",
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "13:30",
+                        "timezone": "America/New_York",
+                    },
+                    "source": {
+                        "content_sha256": "sourcehash",
+                        "page_number": 1,
+                        "page_image_sha256": "pagehash",
+                        "bbox_px": [10, 20, 200, 44],
+                        "crop_storage_path": "fields/schedule.png",
+                        "crop_sha256": "schedulecrop",
+                    },
+                    "engines": [
+                        {"engine": "paddleocr_ppstructurev3", "text": "Daily at 1:30pm", "confidence": 0.97},
+                        {"engine": "rapidocr", "text": "Daily at 7:30pm", "confidence": 0.94},
+                    ],
+                    "agreement": "disagreement",
+                    "review_status": "required",
+                },
+            },
+        }
+        existing_gold = [
+            {
+                "calendar_group_key": "boardwalk",
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+                "schedule": {"text": "Daily at 7:30pm"},
+                "location": {"id": "luna_park_pool_deck", "label": "Luna Park Pool Deck"},
+                "price": {"state": "free"},
+            }
+        ]
+
+        [task] = build_review_tasks([candidate], existing_gold_rows=existing_gold)
+
+        self.assertEqual(
+            {
+                "matched": True,
+                "match_key": "boardwalk:poolside-activities",
+                "fields": {
+                    "title": {"candidate": "Poolside Activities", "existing": "Poolside Activities", "changed": False},
+                    "schedule": {"candidate": "Daily at 1:30pm", "existing": "Daily at 7:30pm", "changed": True},
+                    "location": {"candidate": "Village Green Lawn", "existing": "Luna Park Pool Deck", "changed": True},
+                    "price": {"candidate": "free", "existing": "free", "changed": False},
+                },
+            },
+            task["existing_gold_comparison"],
+        )
+
+    def test_review_queue_v3_normalizes_prd_review_task_types(self) -> None:
+        base_candidate = {
+            "validation_status": "needs_review",
+            "source_document_id": "source-doc-1",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "activity",
+            "field_evidence": {
+                "region": {
+                    "source": {
+                        "content_sha256": "sourcehash",
+                        "page_number": 1,
+                        "page_image_sha256": "pagehash",
+                        "bbox_px": [0, 0, 400, 300],
+                        "crop_storage_path": "regions/region.png",
+                        "crop_sha256": "regioncrop",
+                    }
+                }
+            },
+        }
+        candidates = [
+            {
+                **base_candidate,
+                "candidate_id": "cand-low-quality",
+                "validation_findings": ["low_quality_image:page_1"],
+            },
+            {
+                **base_candidate,
+                "candidate_id": "cand-source-changed",
+                "validation_findings": ["source_changed:content_sha256"],
+            },
+            {
+                **base_candidate,
+                "candidate_id": "cand-gold-conflict",
+                "validation_findings": ["gold_conflict:schedule"],
+            },
+        ]
+
+        tasks = build_review_tasks(candidates)
+
+        self.assertEqual(
+            ["low_quality_image", "source_changed", "gold_conflict"],
+            [task["task_type"] for task in tasks],
+        )
+        self.assertEqual(
+            [["low_quality_image:page_1"], ["source_changed:content_sha256"], ["gold_conflict:schedule"]],
+            [task["validation_findings"] for task in tasks],
+        )
+
+    def test_review_queue_v3_builds_gold_conflict_tasks_from_promotion_report(self) -> None:
+        gold_conflicts = [
+            {
+                "conflict_type": "existing_gold_field_mismatch",
+                "calendar_group_key": "boardwalk",
+                "canonical_slug": "poolside-activities",
+                "source_sha256": "sourcehash",
+                "edition": "fy26-q3-0526",
+                "fields": ["schedule", "location"],
+            }
+        ]
+        existing_gold = [
+            {
+                "calendar_group_key": "boardwalk",
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+                "schedule": {"text": "Daily at 7:30pm"},
+                "location": {"label": "Luna Park Pool Deck"},
+                "price": {"state": "free"},
+            }
+        ]
+
+        tasks = build_review_tasks([], gold_conflicts=gold_conflicts, existing_gold_rows=existing_gold)
+
+        self.assertEqual(1, len(tasks))
+        task = tasks[0]
+        self.assertEqual("gold-conflict-boardwalk-poolside-activities-sourcehash", task["task_id"])
+        self.assertEqual("gold_conflict", task["task_type"])
+        self.assertEqual("boardwalk", task["calendar_group_key"])
+        self.assertEqual("sourcehash", task["content_sha256"])
+        self.assertEqual(["gold_conflict:schedule", "gold_conflict:location"], task["validation_findings"])
+        self.assertEqual(gold_conflicts[0], task["gold_conflict"])
+        self.assertEqual(
+            {
+                "matched": True,
+                "match_key": "boardwalk:poolside-activities",
+                "fields": {
+                    "title": {"candidate": "", "existing": "Poolside Activities", "changed": True},
+                    "schedule": {"candidate": "", "existing": "Daily at 7:30pm", "changed": True},
+                    "location": {"candidate": "", "existing": "Luna Park Pool Deck", "changed": True},
+                    "price": {"candidate": "", "existing": "free", "changed": True},
+                },
+            },
+            task["existing_gold_comparison"],
+        )
+
+    def test_review_queue_v3_builds_source_changed_tasks_from_drift_report(self) -> None:
+        source_drift_report = {
+            "report_kind": "v3_quarter_source_drift",
+            "quarter": "fy26-q4",
+            "status": "review_required",
+            "publish_blockers": ["source_hash_changed", "activity_count_drift"],
+            "source_reports": [
+                {
+                    "calendar_group_key": "boardwalk",
+                    "status": "review_required",
+                    "old_hash": "oldhash",
+                    "new_hash": "newhash",
+                    "old_document_family": "aframe_recreation",
+                    "new_document_family": "aframe_recreation",
+                    "old_activity_count": 1,
+                    "new_activity_count": 2,
+                    "old_movie_count": 0,
+                    "new_movie_count": 0,
+                    "new_titles": ["Campfire"],
+                    "removed_titles": ["Arcade Tournament"],
+                    "changed_schedules": [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "title": "Poolside Activities",
+                            "old": "Daily at 1:30pm",
+                            "new": "Daily at 2:30pm",
+                        }
+                    ],
+                    "changed_locations": [],
+                    "changed_fees": [],
+                    "new_unknown_regions": [],
+                    "validation_failures": [],
+                    "publish_blockers": ["activity_count_drift"],
+                    "manual_review_required": True,
+                }
+            ],
+        }
+
+        tasks = build_review_tasks([], source_drift_report=source_drift_report)
+
+        self.assertEqual(
+            [
+                "source-drift-boardwalk-schedule-poolside-activities",
+                "source-drift-boardwalk-new-title-campfire",
+                "source-drift-boardwalk-removed-title-arcade-tournament",
+                "source-drift-boardwalk-blocker-activity-count-drift",
+            ],
+            [task["task_id"] for task in tasks],
+        )
+        self.assertEqual(["source_changed"] * 4, [task["task_type"] for task in tasks])
+        self.assertEqual(["schedule", "title", "title", None], [task["field"] for task in tasks])
+        self.assertEqual(["newhash"] * 4, [task["content_sha256"] for task in tasks])
+        self.assertEqual(["boardwalk"] * 4, [task["calendar_group_key"] for task in tasks])
+        self.assertEqual("Daily at 1:30pm", tasks[0]["source_drift"]["old"])
+        self.assertEqual("Daily at 2:30pm", tasks[0]["candidate_value"])
+        self.assertEqual(["source_changed:schedule"], tasks[0]["validation_findings"])
+        self.assertEqual(["source_changed:new_title"], tasks[1]["validation_findings"])
+        self.assertEqual(["source_changed:removed_title"], tasks[2]["validation_findings"])
+        self.assertEqual(["source_changed:activity_count_drift"], tasks[3]["validation_findings"])
+        self.assertEqual(source_drift_report["source_reports"][0], tasks[0]["source_drift_report"])
+
     def test_promote_gold_v3_preview_only_includes_gated_rows_with_field_evidence(self) -> None:
         auto_candidate = {
             "validation_status": "auto_publishable",
@@ -4756,6 +4998,95 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("review_fixture_candidates_v3", payload["fixture_kind"])
         self.assertEqual("cand-1", payload["candidates"][0]["candidate_id"])
         self.assertEqual("sourcehash", payload["candidates"][0]["content_sha256"])
+
+    def test_review_schema_exports_parser_rule_update_requests_from_review_decisions(self) -> None:
+        task = {
+            "task_id": "cand-parser-rule",
+            "task_type": "ocr_disagreement",
+            "field": "schedule",
+            "source_document_id": "source-doc-1",
+            "content_sha256": "sourcehash",
+            "page_image": "pagehash",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "schedulecrop",
+            "validation_findings": ["engine_disagreement:schedule"],
+            "existing_gold_comparison": {
+                "matched": True,
+                "match_key": "boardwalk:poolside-activities",
+                "fields": {
+                    "schedule": {
+                        "candidate": "Daily at 1:30pm",
+                        "existing": "Daily at 7:30pm",
+                        "changed": True,
+                    }
+                },
+            },
+            "candidate": {
+                "candidate_id": "cand-parser-rule",
+                "calendar_group_key": "boardwalk",
+                "candidate_type": "activity",
+                "normalized_title": "Poolside Activities",
+            },
+        }
+        edited = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="edit",
+            approved_fields={
+                "schedule": {
+                    "raw_value": "Daily at 7:30pm",
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "19:30",
+                        "timezone": "America/New_York",
+                    },
+                }
+            },
+            reason="RapidOCR matched the visible crop; primary OCR read 1:30pm.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        rejected = build_review_decision(
+            {
+                **task,
+                "task_id": "cand-reject-rule",
+                "field_crop": "",
+                "field_crop_sha256": "",
+                "candidate": {"candidate_id": "cand-reject-rule", "calendar_group_key": "boardwalk"},
+            },
+            reviewer="josh",
+            decision="reject",
+            reason="The field crop does not contain enough evidence for an auto-publish rule.",
+            decided_at="2026-06-28T12:01:00Z",
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "parser_rule_update_requests.json"
+            decisions_path.write_text(json.dumps([edited, rejected, {"decision": "edit"}]))
+
+            report = review_schema_v3.export_parser_rule_update_requests(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(3, report["summary"]["decision_count"])
+        self.assertEqual(2, report["summary"]["parser_rule_update_request_count"])
+        self.assertEqual(1, report["summary"]["skipped_invalid_review_decision_count"])
+        self.assertEqual("parser_rule_update_requests_v3", payload["request_kind"])
+        self.assertEqual("cand-parser-rule", payload["requests"][0]["candidate_id"])
+        self.assertEqual("ocr_disagreement", payload["requests"][0]["task_type"])
+        self.assertEqual("schedule", payload["requests"][0]["field"])
+        self.assertEqual(["engine_disagreement:schedule"], payload["requests"][0]["validation_findings"])
+        self.assertEqual("schedulecrop", payload["requests"][0]["field_crop_sha256"])
+        self.assertEqual("Daily at 7:30pm", payload["requests"][0]["approved_fields"]["schedule"]["raw_value"])
+        self.assertEqual(
+            "boardwalk:poolside-activities",
+            payload["requests"][0]["existing_gold_comparison"]["match_key"],
+        )
+        self.assertEqual("reject", payload["requests"][1]["decision"])
 
     def test_dual_run_report_surfaces_field_diffs_and_unreviewed_publish_blockers(self) -> None:
         v2_rows = [

@@ -1635,6 +1635,8 @@ textarea.form-control {
   align-items: center;
   min-height: 44px;
   padding-inline: 12px;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 /* Chip filter pills in filter rail */

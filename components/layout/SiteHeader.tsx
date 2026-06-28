@@ -30,7 +30,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-4">
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="site-brand-cluster">
           <Link
             href="/"
             className="site-brand"
@@ -45,7 +45,7 @@ export function SiteHeader() {
               After the Parks
             </span>
           </Link>
-          <span className="stamp-badge hidden shrink-0 sm:inline-flex">
+          <span className="stamp-badge site-brand__badge hidden shrink-0 sm:inline-flex">
             Independent Guide
           </span>
         </div>
@@ -78,7 +78,7 @@ export function SiteHeader() {
                 <PlanNavLink
                   key={item.href}
                   className={cn(
-                    "rounded-full px-3 py-2 text-sm font-semibold transition-colors",
+                    "whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-colors",
                     isActive(pathname, item.href)
                       ? "bg-[var(--accent)]/15 text-[var(--accent)]"
                       : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
@@ -94,7 +94,7 @@ export function SiteHeader() {
               href={href}
               aria-current={isActive(pathname, item.href) ? "page" : undefined}
               className={cn(
-                "rounded-full px-3 py-2 text-sm font-semibold transition-colors",
+                "whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-colors",
                 isActive(pathname, item.href)
                   ? "bg-[var(--accent)]/15 text-[var(--accent)]"
                   : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"

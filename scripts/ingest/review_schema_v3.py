@@ -18,6 +18,7 @@ VALID_DECISIONS = {"approve", "edit", "reject"}
 APPROVABLE_FIELDS = {"title", "schedule", "location", "fee", "movie_title"}
 DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 DEFAULT_FIXTURE_CANDIDATES_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_fixture_candidates.json"
+DEFAULT_PARSER_RULE_REQUESTS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_parser_rule_update_requests.json"
 
 
 def _now_iso() -> str:
@@ -136,6 +137,33 @@ def review_decision_creates_fixture_candidate(decision: dict[str, Any]) -> dict[
     }
 
 
+def review_decision_creates_parser_rule_update_request(decision: dict[str, Any]) -> dict[str, Any]:
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    return {
+        "request_kind": "parser_rule_update_request_v3",
+        "schema_version": "parser_rule_update_request_v3_001",
+        "candidate_id": decision.get("candidate_id"),
+        "task_id": decision.get("task_id"),
+        "task_type": decision.get("task_type"),
+        "field": original_task.get("field"),
+        "calendar_group_key": decision.get("calendar_group_key"),
+        "candidate_type": decision.get("candidate_type"),
+        "source_document_id": decision.get("source_document_id"),
+        "content_sha256": decision.get("content_sha256"),
+        "page_image_sha256": decision.get("page_image_sha256"),
+        "field_crop": decision.get("field_crop"),
+        "field_crop_sha256": decision.get("field_crop_sha256"),
+        "validation_findings": original_task.get("validation_findings") or [],
+        "existing_gold_comparison": original_task.get("existing_gold_comparison"),
+        "decision": decision.get("decision"),
+        "approved_fields": decision.get("approved_fields") or {},
+        "reviewer": decision.get("reviewer"),
+        "review_reason": decision.get("reason"),
+        "review_decided_at": decision.get("decided_at"),
+        "suggested_action": "update_parser_rule_or_fixture",
+    }
+
+
 def _load_json_list(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -183,6 +211,41 @@ def export_review_fixture_candidates(
             "decision_count": len(decisions),
             "fixture_candidate_count": len(candidates),
             "skipped_non_approval_count": skipped_non_approval,
+            "skipped_invalid_review_decision_count": skipped_invalid_review,
+        },
+    }
+
+
+def export_parser_rule_update_requests(
+    *,
+    decisions_path: Path = DEFAULT_REVIEW_DECISIONS_PATH,
+    output_path: Path = DEFAULT_PARSER_RULE_REQUESTS_PATH,
+) -> dict[str, Any]:
+    decisions = _load_json_list(decisions_path)
+    requests: list[dict[str, Any]] = []
+    skipped_invalid_review = 0
+    for decision in decisions:
+        try:
+            validate_review_decision(decision)
+        except ValueError:
+            skipped_invalid_review += 1
+            continue
+        requests.append(review_decision_creates_parser_rule_update_request(decision))
+    payload = {
+        "request_kind": "parser_rule_update_requests_v3",
+        "schema_version": "parser_rule_update_requests_v3_001",
+        "generated_at": _now_iso(),
+        "source_decisions_path": str(decisions_path),
+        "requests": requests,
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    return {
+        "report_kind": "parser_rule_update_requests_v3_export",
+        "output_path": str(output_path),
+        "summary": {
+            "decision_count": len(decisions),
+            "parser_rule_update_request_count": len(requests),
             "skipped_invalid_review_decision_count": skipped_invalid_review,
         },
     }
