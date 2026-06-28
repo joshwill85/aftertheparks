@@ -88,6 +88,9 @@ def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) 
         "reviewer": decision.get("reviewer"),
         "reason": decision.get("reason"),
         "decided_at": decision.get("decided_at"),
+        "content_sha256": decision.get("content_sha256"),
+        "page_image_sha256": decision.get("page_image_sha256"),
+        "field_crop_sha256": decision.get("field_crop_sha256"),
         "approved_fields": approved_fields,
     }
     return reviewed

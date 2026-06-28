@@ -1646,6 +1646,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("13:30", row["schedule"]["normalized"]["start_time"])
         self.assertEqual("edit", row["review_decision"]["decision"])
         self.assertEqual("josh", row["review_decision"]["reviewer"])
+        self.assertEqual("sourcehash", row["review_decision"]["content_sha256"])
+        self.assertEqual("pagehash", row["review_decision"]["page_image_sha256"])
+        self.assertEqual("schedulecrop", row["review_decision"]["field_crop_sha256"])
         self.assertEqual(1, current_preview["summary"]["manually_approved_by_review"])
 
     def test_promote_gold_v3_cli_can_include_approved_review_decisions(self) -> None:
@@ -2037,6 +2040,22 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     }
                 ],
             }
+            manual_with_stale_review_preview = {
+                "publication_mode": "vision_v3_preview",
+                "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                "rows": [
+                    {
+                        **clean_preview["rows"][0],
+                        "validation_status": "manually_approved",
+                        "review_status": "manual_review_approved",
+                        "review_decision": {
+                            "decision": "approve",
+                            "content_sha256": "oldhash",
+                            "page_image_sha256": "pagehash",
+                        },
+                    }
+                ],
+            }
             blocked_source_drift_report = {
                 "status": "review_required",
                 "publish_blockers": [
@@ -2139,6 +2158,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 flags=load_publish_flags(enabled_flags),
                 dual_run_report=clean_dual_run_report,
             )
+            manual_with_stale_review = evaluate_publish_readiness(
+                manual_with_stale_review_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+            )
             source_drift_blocked = evaluate_publish_readiness(
                 clean_preview,
                 flags=load_publish_flags(enabled_flags),
@@ -2194,6 +2218,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("row_unpromotable_validation_status:0", unpromotable_status["errors"])
         self.assertFalse(manual_without_review["ready"])
         self.assertIn("row_missing_manual_review_approval:0", manual_without_review["errors"])
+        self.assertFalse(manual_with_stale_review["ready"])
+        self.assertIn("row_stale_manual_review_source_hash:0", manual_with_stale_review["errors"])
         self.assertFalse(source_drift_blocked["ready"])
         self.assertIn("source_drift_report_blocked", source_drift_blocked["errors"])
         self.assertIn("recognized_family_changed", source_drift_blocked["errors"])
