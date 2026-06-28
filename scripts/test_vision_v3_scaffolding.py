@@ -890,6 +890,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("missing_required_field", tasks[0]["task_type"])
         self.assertEqual("sourcehash", tasks[0]["content_sha256"])
         self.assertEqual("region.png", tasks[0]["field_crop"])
+        rejected = {**candidate, "candidate_id": "cand-rejected", "validation_status": "rejected"}
+        self.assertEqual([], build_review_tasks([rejected]))
         self.assertFalse(
             review_approval_is_current(
                 {"content_sha256": "oldhash", "page_image_sha256": "pagehash"},
