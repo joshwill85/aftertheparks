@@ -5,8 +5,7 @@ import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { TmdbAttribution } from "@/components/atlas/TmdbAttribution";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { useDaypart } from "@/components/atlas/DaypartProvider";
-import { shouldHideActivity, occurrenceToDisplayInput } from "@/lib/activityDisplay";
-import { dedupeOccurrences } from "@/lib/api/publicActivities";
+import { getVisibleTonightActivities } from "@/lib/tonight/visibleResults";
 import { MovieCard } from "@/components/tonight/MovieCard";
 import { NightEmptyState } from "@/components/tonight/NightEmptyState";
 import { NightActivityCard } from "@/components/tonight/NightActivityCard";
@@ -30,22 +29,6 @@ function NightSectionEmpty({
   actions: { label: string; href: string; variant?: "primary" | "secondary" }[];
 }) {
   return <NightEmptyState title={title} description={description} actions={actions} />;
-}
-
-function filterVisible(activities: ActivityOccurrence[]): ActivityOccurrence[] {
-  return dedupeOccurrences(
-    activities.filter((a) => !shouldHideActivity(occurrenceToDisplayInput(a)))
-  );
-}
-
-function dedupeBySlot(activities: ActivityOccurrence[]): ActivityOccurrence[] {
-  const seen = new Set<string>();
-  return activities.filter((a) => {
-    const key = `${a.activityCatalogId}:${a.resort.slug}:${a.startDateTime}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
 }
 
 export function TonightClient({
@@ -76,22 +59,12 @@ export function TonightClient({
     return () => setForceDaypart(null);
   }, [setForceDaypart]);
 
-  const visibleActivities = useMemo(
-    () => dedupeBySlot(filterVisible(activities)),
+  const visibleEveningActivities = useMemo(
+    () => getVisibleTonightActivities(activities),
     [activities]
   );
-  const visibleEveningActivities = useMemo(
-    () =>
-      visibleActivities.filter(
-        (activity) => activity.category !== "movies_under_stars"
-      ),
-    [visibleActivities]
-  );
   const visibleWeekEveningActivities = useMemo(
-    () =>
-      dedupeBySlot(filterVisible(weekEveningActivities)).filter(
-        (activity) => activity.category !== "movies_under_stars"
-      ),
+    () => getVisibleTonightActivities(weekEveningActivities),
     [weekEveningActivities]
   );
   const tonightMovies = useMemo(
@@ -176,7 +149,7 @@ export function TonightClient({
   if (filteredMode) {
     const showMovies = movieNights.length > 0;
 
-    if (visibleActivities.length === 0 && !showMovies) {
+    if (visibleEveningActivities.length === 0 && !showMovies) {
       return (
         <EmptyState
           title="No tonight picks match your filters"

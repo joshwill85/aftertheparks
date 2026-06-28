@@ -3,15 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MoodChips } from "@/components/home/MoodChips";
-import type { Daypart } from "@/lib/types/occurrence";
+import { addOrlandoDays, getDayOfWeekIndex, orlandoDateString } from "@/lib/daypart";
 
 const DATE_OPTIONS = [
   { value: "today", label: "Today" },
-  { value: "", label: "Any time" },
   { value: "tonight", label: "Tonight" },
-  { value: "morning", label: "Morning" },
-  { value: "afternoon", label: "Afternoon" },
-  { value: "evening", label: "Evening" },
+  { value: "plan_ahead", label: "Plan ahead" },
+  { value: "this_weekend", label: "This weekend" },
+  { value: "choose_dates", label: "Choose dates" },
 ] as const;
 
 const VIBE_OPTIONS = [
@@ -28,11 +27,23 @@ interface QuickFinderProps {
   resorts?: { slug: string; name: string }[];
 }
 
+function nextWeekendRange(today = orlandoDateString()) {
+  const day = getDayOfWeekIndex(today);
+  const daysUntilFriday = (5 - day + 7) % 7;
+  const start = addOrlandoDays(today, daysUntilFriday);
+  return {
+    start,
+    end: addOrlandoDays(start, 2),
+  };
+}
+
 export function QuickFinder({ resorts = [] }: QuickFinderProps) {
   const router = useRouter();
   const [date, setDate] = useState("today");
   const [where, setWhere] = useState("");
   const [vibe, setVibe] = useState("");
+  const [customStart, setCustomStart] = useState("");
+  const [customEnd, setCustomEnd] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,8 +64,29 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
       return;
     }
 
-    if (date && date !== "today" && date !== "tonight") {
-      params.set("daypart", date as Daypart);
+    if (date === "this_weekend") {
+      const range = nextWeekendRange();
+      params.set("start", range.start);
+      params.set("end", range.end);
+      params.set("selected", range.start);
+      const qs = params.toString();
+      router.push(qs ? `/calendar?${qs}` : "/calendar");
+      return;
+    }
+
+    if (date === "choose_dates") {
+      if (customStart) params.set("start", customStart);
+      if (customEnd) params.set("end", customEnd);
+      if (customStart) params.set("selected", customStart);
+      const qs = params.toString();
+      router.push(qs ? `/calendar?${qs}` : "/calendar");
+      return;
+    }
+
+    if (date === "plan_ahead") {
+      const qs = params.toString();
+      router.push(qs ? `/calendar?${qs}` : "/calendar");
+      return;
     }
 
     const qs = params.toString();
@@ -63,11 +95,17 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
 
   return (
     <div className="quick-finder">
-      <form onSubmit={handleSubmit} className="quick-finder__form">
+      <form
+        action="/calendar"
+        method="get"
+        onSubmit={handleSubmit}
+        className="quick-finder__form"
+      >
         <div className="quick-finder__fields">
           <label className="quick-finder__field">
             <span className="quick-finder__label">Date</span>
             <select
+              name="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="quick-finder__select form-control"
@@ -80,9 +118,35 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
             </select>
           </label>
 
+          {date === "choose_dates" && (
+            <>
+              <label className="quick-finder__field">
+                <span className="quick-finder__label">Start</span>
+                <input
+                  name="start"
+                  type="date"
+                  value={customStart}
+                  onChange={(e) => setCustomStart(e.target.value)}
+                  className="quick-finder__select form-control"
+                />
+              </label>
+              <label className="quick-finder__field">
+                <span className="quick-finder__label">End</span>
+                <input
+                  name="end"
+                  type="date"
+                  value={customEnd}
+                  onChange={(e) => setCustomEnd(e.target.value)}
+                  className="quick-finder__select form-control"
+                />
+              </label>
+            </>
+          )}
+
           <label className="quick-finder__field">
             <span className="quick-finder__label">Where</span>
             <select
+              name="resort"
               value={where}
               onChange={(e) => setWhere(e.target.value)}
               className="quick-finder__select form-control"
@@ -99,6 +163,7 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
           <label className="quick-finder__field">
             <span className="quick-finder__label">Vibe</span>
             <select
+              name="category"
               value={vibe}
               onChange={(e) => setVibe(e.target.value)}
               className="quick-finder__select form-control"

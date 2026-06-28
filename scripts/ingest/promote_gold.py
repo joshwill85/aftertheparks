@@ -185,6 +185,16 @@ def _activity_catalog_id(calendar_group_key: str, canonical_slug: str) -> str:
     return _stable_uuid(f"act:{calendar_group_key}:{canonical_slug}")
 
 
+def _movie_night_day(row: dict[str, Any]) -> str:
+    return str(row.get("day_of_week") or row.get("day") or "").strip().lower()
+
+
+def _movie_night_show_time(row: dict[str, Any], normalized: dict[str, Any]) -> str:
+    schedule = normalized.get("schedule")
+    schedule_start = schedule.get("start_time") if isinstance(schedule, dict) else None
+    return str(row.get("show_time") or schedule_start or "").strip()
+
+
 def _source_for_group(
     calendar_group_key: str,
     activity_sources: list[ActivitySource] | None = None,
@@ -269,9 +279,9 @@ def _gold_record(
     if isinstance(movie_nights, list):
         record["movie_nights"] = [
             {
-                "day_of_week": str(row.get("day_of_week") or ""),
+                "day_of_week": _movie_night_day(row),
                 "movie_title": str(row.get("movie_title") or ""),
-                "show_time": str(row.get("show_time") or ""),
+                "show_time": _movie_night_show_time(row, normalized),
             }
             for row in movie_nights
             if isinstance(row, dict)
@@ -831,7 +841,13 @@ def _visual_candidate(
     }
     if isinstance(record.get("movie_nights"), list):
         normalized_fields["movie_nights"] = [
-            dict(row) for row in record["movie_nights"] if isinstance(row, dict)
+            {
+                "day_of_week": _movie_night_day(row),
+                "movie_title": str(row.get("movie_title") or ""),
+                "show_time": _movie_night_show_time(row, normalized_fields),
+            }
+            for row in record["movie_nights"]
+            if isinstance(row, dict)
         ]
     return {
         "candidate_id": f"{payload['content_sha256']}:{payload['calendar_group_key']}:{record['slug']}:reviewed_visual",

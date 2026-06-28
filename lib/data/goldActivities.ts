@@ -401,7 +401,14 @@ function externalFactsFromRow(row: GoldActivityRow): ExternalActivityFact[] | un
 }
 
 function sourceUrl(row: GoldActivityRow): string {
-  return row.source_url ?? row.source?.url ?? row.source?.path ?? "";
+  const candidate = row.source_url ?? row.source?.url ?? row.source?.path ?? "";
+  if (!candidate.trim()) return "";
+  try {
+    const url = new URL(candidate);
+    return url.protocol === "http:" || url.protocol === "https:" ? candidate : "";
+  } catch {
+    return "";
+  }
 }
 
 function sourceHash(row: GoldActivityRow): string | undefined {
@@ -437,6 +444,7 @@ export function mapGoldActivityRowToOccurrences(
       : [row.calendar_group_key];
   const enrichment = enrichmentFromRow(row);
   const externalFacts = externalFactsFromRow(row);
+  const publicSourceUrl = sourceUrl(row);
   const common = {
     activitySlug: row.canonical_slug,
     activityCatalogId: row.activity_catalog_id,
@@ -459,11 +467,11 @@ export function mapGoldActivityRowToOccurrences(
     },
     freshness: {
       lastVerified: new Date().toISOString(),
-      sourceUrl: sourceUrl(row),
+      sourceUrl: publicSourceUrl,
       badge: "verified" as const,
     },
     source: {
-      url: sourceUrl(row),
+      url: publicSourceUrl || undefined,
       documentHash: sourceHash(row),
       documentId: row.source_document_id ?? row.source?.documentId ?? undefined,
       edition: row.source_pdf_edition ?? row.source?.edition ?? undefined,

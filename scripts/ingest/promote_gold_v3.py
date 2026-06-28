@@ -102,6 +102,9 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
         "publication_mode": "vision_v3_preview",
         "pipeline_version": candidate.get("pipeline_version", "vision_v3_001"),
         "calendar_group_key": candidate.get("calendar_group_key"),
+        "document_family": candidate.get("document_family"),
+        "edition": candidate.get("edition"),
+        "source_type": candidate.get("source_type"),
         "resort_slug": candidate.get("resort_slug"),
         "canonical_slug": candidate.get("canonical_slug") or _slugify(title),
         "title": title,
@@ -132,6 +135,7 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
         },
         "field_evidence": candidate.get("field_evidence", {}),
         "validation_status": candidate.get("validation_status"),
+        "validation_findings": candidate.get("validation_findings") or [],
         "review_status": candidate.get("review_status"),
         "review_decision": candidate.get("review_decision"),
     }
@@ -145,10 +149,16 @@ def build_gold_v3_preview(
     rows: list[dict[str, Any]] = []
     skipped = 0
     skipped_stale_review = 0
+    skipped_validation_findings = 0
     manually_approved_by_review = 0
     decisions_by_candidate = _review_decision_map(review_decisions or [])
     for candidate in candidates:
         promotable_candidate = candidate
+        has_findings = bool(candidate.get("validation_findings"))
+        if candidate.get("validation_status") == "auto_publishable" and has_findings:
+            skipped_validation_findings += 1
+            skipped += 1
+            continue
         if candidate.get("validation_status") not in PROMOTABLE_STATUSES:
             candidate_id = str(candidate.get("candidate_id") or "").strip()
             decision = decisions_by_candidate.get(candidate_id)
@@ -175,6 +185,7 @@ def build_gold_v3_preview(
             "input_candidates": len(candidates),
             "gold_rows": len(rows),
             "skipped_not_publishable": skipped,
+            "skipped_validation_findings": skipped_validation_findings,
             "manually_approved_by_review": manually_approved_by_review,
             "skipped_stale_review_decision": skipped_stale_review,
         },

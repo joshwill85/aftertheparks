@@ -12,6 +12,18 @@ function dedupeRepeatedTitle(title: string): string {
   return trimmed;
 }
 
+const MOVIE_TITLE_REPAIRS: Array<[RegExp, string]> = [
+  [/^PINGING Dory$/i, "Finding Dory"],
+  [/^and the Beast \(1991\)$/i, "Beauty and the Beast (1991)"],
+];
+
+function repairKnownMovieTitle(title: string): string {
+  for (const [pattern, replacement] of MOVIE_TITLE_REPAIRS) {
+    if (pattern.test(title)) return replacement;
+  }
+  return title;
+}
+
 /** Strip OCR border noise and trailing parse artifacts from movie titles. */
 export function sanitizeMovieTitle(raw: string): string {
   let title = raw.trim().replace(/\s+/g, " ");
@@ -20,8 +32,13 @@ export function sanitizeMovieTitle(raw: string): string {
   title = title.replace(/\s*\([¢$Pe]{0,4}$/, "");
   title = title.replace(/\s+PG\)?\s*$/i, "");
 
+  const directRepair = repairKnownMovieTitle(title);
+  if (directRepair !== title) return directRepair;
+
   const quoted = title.match(/"([^"]+)"/);
-  if (quoted) return dedupeRepeatedTitle(cleanTitleTail(quoted[1]));
+  if (quoted) {
+    return repairKnownMovieTitle(dedupeRepeatedTitle(cleanTitleTail(quoted[1])));
+  }
 
   const orTitle = title.match(/\bor\s+([A-Z][\w\s'':,-]+(?:\s+PG)?)\s*$/i);
   if (orTitle) {
@@ -29,14 +46,16 @@ export function sanitizeMovieTitle(raw: string): string {
     const leftClean = extractTitleSegment(left);
     const rightClean = cleanTitleTail(orTitle[1]);
     if (leftClean && rightClean && leftClean !== rightClean) {
-      return dedupeRepeatedTitle(`${leftClean} or ${rightClean}`);
+      return repairKnownMovieTitle(
+        dedupeRepeatedTitle(`${leftClean} or ${rightClean}`)
+      );
     }
-    return dedupeRepeatedTitle(rightClean || leftClean || title);
+    return repairKnownMovieTitle(dedupeRepeatedTitle(rightClean || leftClean || title));
   }
 
   const extracted = extractTitleSegment(title);
   const result = extracted || cleanTitleTail(title);
-  return dedupeRepeatedTitle(result);
+  return repairKnownMovieTitle(dedupeRepeatedTitle(result));
 }
 
 function extractTitleSegment(title: string): string | null {
@@ -64,9 +83,11 @@ function cleanTitleTail(title: string): string {
 export function isUsableMovieTitle(title: string): boolean {
   const cleaned = sanitizeMovieTitle(title);
   if (cleaned.length < 2 || cleaned.length > 90) return false;
-  const letters = [...cleaned].filter((c) => /[a-zA-Z]/.test(c)).length;
-  if (letters / cleaned.length < 0.45) return false;
-  if (/^[a-z.\s]+$/.test(cleaned)) return false;
+  if (/\d{1,2}:\d{2}|\b(?:am|pm)\b/i.test(cleaned)) return false;
+  const titleForRatio = cleaned.replace(/\(\d{4}\)/g, "").trim();
+  const letters = [...titleForRatio].filter((c) => /[a-zA-Z]/.test(c)).length;
+  if (letters / titleForRatio.length < 0.45) return false;
+  if (/^[a-z.\s]+$/.test(titleForRatio)) return false;
   return true;
 }
 

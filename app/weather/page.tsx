@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NearTermRainLine } from "@/components/weather/NearTermRainLine";
@@ -21,6 +22,7 @@ import type {
   WeatherHour,
   WeatherLocation,
   WeatherLocationKey,
+  WeatherRiskLevel,
   WeatherSnapshot,
 } from "@/lib/weather/types";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
@@ -36,6 +38,8 @@ const DISNEY_WEATHER_LOCATION_KEYS: WeatherLocationKey[] = [
   "all_wdw",
 ];
 
+type WeatherChapterSlot = "thisHour" | "soon" | "dayTurn";
+
 type WeatherAreaView = {
   location: WeatherLocation;
   snapshot: WeatherSnapshot | null;
@@ -49,7 +53,7 @@ type WeatherAreaView = {
 
 const title = "Disney World Weather";
 const description =
-  "Now, next, hourly, daily, and weekly weather guidance for Walt Disney World resort areas, with official alerts and near-term rain context.";
+  "Live Disney World weather guidance by resort area, with hourly conditions, official alerts, rain context, and weekly planning by day.";
 
 export const metadata: Metadata = {
   title,
@@ -101,10 +105,25 @@ function formatDay(value: string): string {
   }).format(new Date(`${value}T12:00:00Z`));
 }
 
+function formatRange(startIso: string, endIso?: string): string {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    timeZone: "America/New_York",
+  });
+  if (!endIso) return formatter.format(new Date(startIso));
+  return `${formatter.format(new Date(startIso))} to ${formatter.format(new Date(endIso))}`;
+}
+
 function tempLabel(tempF?: number, tempC?: number): string {
   if (tempF == null && tempC == null) return "Temp pending";
   if (tempF != null && tempC != null) return formatTempDual(tempF, tempC);
   return tempF != null ? `${Math.round(tempF)}°F` : `${Math.round(tempC ?? 0)}°C`;
+}
+
+function primaryTempLabel(tempF?: number, tempC?: number): string {
+  if (tempF != null) return `${Math.round(tempF)}°`;
+  if (tempC != null) return `${Math.round(tempC)}°C`;
+  return "--";
 }
 
 function rainLabel(value?: number): string {
@@ -118,12 +137,67 @@ function dayTempLabel(day: WeatherDay): string {
   return tempLabel(day.avgTempF ?? day.maxTempF, day.avgTempC ?? day.maxTempC);
 }
 
-function forecastClass(weather: WeatherForTimeSpan): string {
-  if (weather.nwsAlerts.length > 0) return "weather-page-signal--alert";
-  if (weather.risk.stormRisk === "high") return "weather-page-signal--storm";
-  if (weather.risk.rainRisk === "high") return "weather-page-signal--rain";
-  if (weather.risk.heatRisk === "high") return "weather-page-signal--heat";
-  return "weather-page-signal--good";
+function strongestRisk(weather: WeatherForTimeSpan): "alert" | "storm" | "rain" | "heat" | "good" {
+  if (weather.nwsAlerts.length > 0) return "alert";
+  if (weather.risk.stormRisk === "high") return "storm";
+  if (weather.risk.rainRisk === "high") return "rain";
+  if (weather.risk.heatRisk === "high") return "heat";
+  return "good";
+}
+
+function riskClass(weather: WeatherForTimeSpan): string {
+  return `weather-tone-${strongestRisk(weather)}`;
+}
+
+function riskLabel(weather: WeatherForTimeSpan): string {
+  const risk = strongestRisk(weather);
+  if (risk === "alert") return "Official alert";
+  if (risk === "storm") return "Stay covered";
+  if (risk === "rain") return "Rain window";
+  if (risk === "heat") return "Heat buildup";
+  return "Outdoor window";
+}
+
+function chapterLabel(slot: WeatherChapterSlot, weather: WeatherForTimeSpan): string {
+  const risk = strongestRisk(weather);
+  if (risk === "alert") return "Follow official guidance";
+  if (risk === "storm") return "Stay under cover";
+  if (risk === "rain") return slot === "dayTurn" ? "Showers may linger" : "Watch the sky";
+  if (risk === "heat") return slot === "dayTurn" ? "Let the heat fade" : "Pace the sunny stretch";
+  if (slot === "thisHour") return "Step out with confidence";
+  if (slot === "soon") return "Keep outdoor plans moving";
+  return "Evening can open up";
+}
+
+function rainStrength(value?: number): string {
+  if (value == null) return "unknown";
+  if (value >= 60) return "strong";
+  if (value >= 30) return "building";
+  if (value > 0) return "trace";
+  return "quiet";
+}
+
+function riskScore(risk: WeatherRiskLevel): number {
+  if (risk === "high") return 3;
+  if (risk === "medium") return 2;
+  return 1;
+}
+
+function hourOutdoorScore(hour: WeatherHour): number {
+  const rain = hour.chanceOfRainPct ?? 0;
+  const thunder = hour.chanceOfThunderPct ?? 0;
+  const heat = hour.tempF >= 95 ? 2 : hour.tempF >= 90 ? 1 : 0;
+  return Math.min(4, Math.round(rain / 25) + Math.round(thunder / 35) + heat);
+}
+
+function pointStyle(hour: WeatherHour, minTemp: number, maxTemp: number): CSSProperties {
+  const tempRange = Math.max(1, maxTemp - minTemp);
+  const tempPosition = 14 + ((hour.tempF - minTemp) / tempRange) * 62;
+  const rainHeight = Math.max(4, Math.min(76, hour.chanceOfRainPct ?? 0));
+  return {
+    "--temp-y": `${Math.round(86 - tempPosition)}%`,
+    "--rain-h": `${rainHeight}%`,
+  } as CSSProperties;
 }
 
 async function loadAreaWeather(key: WeatherLocationKey, now: Date): Promise<WeatherAreaView> {
@@ -191,20 +265,138 @@ async function loadAreaWeather(key: WeatherLocationKey, now: Date): Promise<Weat
   };
 }
 
-function WeatherSignalCard({
-  label,
+function WeatherDayArc({ area }: { area: WeatherAreaView }) {
+  const hours = area.hourly.slice(0, 10);
+  const temps = hours.map((hour) => hour.tempF);
+  const minTemp = temps.length > 0 ? Math.min(...temps) : area.now.tempF ?? 75;
+  const maxTemp = temps.length > 0 ? Math.max(...temps) : area.now.tempF ?? 95;
+
+  return (
+    <section className="weather-day-arc" aria-labelledby="weather-day-arc-heading">
+      <div className="weather-day-arc__header">
+        <div>
+          <span className="weather-kicker">Shape of the day</span>
+          <h2 id="weather-day-arc-heading">{chapterLabel("thisHour", area.now)}</h2>
+        </div>
+        <p>{area.now.plainLanguageSummary}</p>
+      </div>
+      {hours.length > 0 ? (
+        <div className="weather-day-arc__graph" role="list" aria-label="Hourly temperature and rain pattern">
+          {hours.map((hour) => (
+            <div
+              className={`weather-day-arc__point weather-rain-${rainStrength(hour.chanceOfRainPct)}`}
+              style={pointStyle(hour, minTemp, maxTemp)}
+              role="listitem"
+              key={`arc-${hour.time}`}
+            >
+              <span className="weather-day-arc__rain" />
+              <span className="weather-day-arc__temp-dot" />
+              <time dateTime={hour.time}>{formatHour(hour.time)}</time>
+              <strong>{primaryTempLabel(hour.tempF, hour.tempC)}</strong>
+              <small>{rainLabel(hour.chanceOfRainPct)}</small>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="weather-empty-line">Hourly forecast unavailable.</p>
+      )}
+      <div className="weather-day-arc__legend">
+        <span>Temperature path</span>
+        <span>Rain intensity</span>
+        <span>{riskLabel(area.now)}</span>
+      </div>
+    </section>
+  );
+}
+
+function HeroWeatherPanel({ area }: { area: WeatherAreaView }) {
+  return (
+    <section className={`weather-atmosphere ${riskClass(area.now)}`}>
+      <div className="weather-atmosphere__copy">
+        <span className="weather-kicker">Walt Disney World</span>
+        <h1>Weather that helps you choose your window.</h1>
+        <p>
+          A live read on heat, rain, and official alerts across the resort areas,
+          shaped around when it is worth stepping out, slowing down, or staying covered.
+        </p>
+        <div className="weather-atmosphere__actions">
+          <Link href="/today?weather=indoor">Indoor backups</Link>
+          <Link href="/tonight?weather=covered">Covered tonight</Link>
+        </div>
+      </div>
+      <article className="weather-current-orb" aria-label="Current Walt Disney World weather">
+        <div className="weather-current-orb__sky">
+          <WeatherIcon iconKey={area.now.iconKey} className="weather-current-orb__icon" decorative />
+        </div>
+        <div className="weather-current-orb__reading">
+          <span>{riskLabel(area.now)}</span>
+          <strong>{primaryTempLabel(area.now.tempF, area.now.tempC)}</strong>
+          <p>{area.now.headline}</p>
+        </div>
+        <NearTermRainLine signal={area.now.nearTermRain} />
+        <WeatherFreshnessLine weather={area.now} />
+        <WeatherPrecipMapPreview precipMap={area.now.precipMap} />
+      </article>
+    </section>
+  );
+}
+
+function MicroclimateRail({ areas }: { areas: WeatherAreaView[] }) {
+  return (
+    <section className="weather-page-section weather-microclimate-rail" aria-labelledby="weather-area-heading">
+      <div className="weather-page-section__heading">
+        <span className="weather-kicker">Microclimates</span>
+        <h2 id="weather-area-heading">The property is not always one forecast.</h2>
+        <p>Tap an area to jump into the local read before you cross property.</p>
+      </div>
+      <div className="weather-microclimate-rail__track" role="list">
+        {areas.map((area) => (
+          <article
+            className={`weather-area-card ${riskClass(area.now)}`}
+            id={weatherAreaAnchorId(area.location.key)}
+            role="listitem"
+            key={area.location.key}
+          >
+            <Link
+              href={weatherPageHref(area.location.key)}
+              className="weather-area-card__icon-link"
+              aria-label={`Open detailed weather for ${area.location.name}`}
+            >
+              <WeatherIcon iconKey={area.now.iconKey} className="weather-area-card__icon" decorative />
+            </Link>
+            <div>
+              <h2>{area.location.name}</h2>
+              <p className="weather-area-card__headline">{chapterLabel("thisHour", area.now)}</p>
+            </div>
+            <div className="weather-area-card__metrics" aria-label={`${area.location.name} weather details`}>
+              <span>{primaryTempLabel(area.now.tempF, area.now.tempC)}</span>
+              <span>{rainLabel(area.now.rainChancePct)}</span>
+              <span>{area.now.nwsAlerts.length > 0 ? `${area.now.nwsAlerts.length} alert` : riskLabel(area.now)}</span>
+            </div>
+            <WeatherFreshnessLine weather={area.now} />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function WeatherChapterCard({
+  area,
+  slot,
   weather,
 }: {
-  label: "Now" | "Next" | "Later";
+  area: WeatherAreaView;
+  slot: WeatherChapterSlot;
   weather: WeatherForTimeSpan;
 }) {
   return (
-    <article className={`weather-page-signal ${forecastClass(weather)}`}>
-      <div className="weather-page-signal__topline">
-        <span>{label}</span>
-        <WeatherIcon iconKey={weather.iconKey} className="weather-page-signal__icon" />
+    <article className={`weather-chapter-card ${riskClass(weather)}`}>
+      <div className="weather-chapter-card__topline">
+        <span>{formatRange(weather.startsAt, weather.endsAt)}</span>
+        <WeatherIcon iconKey={weather.iconKey} className="weather-chapter-card__icon" decorative />
       </div>
-      <h3>{weather.headline}</h3>
+      <h3>{chapterLabel(slot, weather)}</h3>
       <p>{weather.plainLanguageSummary}</p>
       <dl>
         <div>
@@ -215,36 +407,30 @@ function WeatherSignalCard({
           <dt>Rain</dt>
           <dd>{rainLabel(weather.rainChancePct)}</dd>
         </div>
+        <div>
+          <dt>Fit</dt>
+          <dd>{riskLabel(weather)}</dd>
+        </div>
       </dl>
-      {label === "Now" && <NearTermRainLine signal={weather.nearTermRain} compact />}
+      {slot === "thisHour" && <NearTermRainLine signal={weather.nearTermRain} compact />}
+      <Link href={weatherPageHref(area.location.key)}>Read {area.location.name}</Link>
     </article>
   );
 }
 
-function AreaOverviewCard({ area }: { area: WeatherAreaView }) {
+function WeatherChapterArea({ area }: { area: WeatherAreaView }) {
   return (
-    <article className="weather-area-card" id={weatherAreaAnchorId(area.location.key)}>
-      <div className="weather-area-card__header">
-        <div>
-          <h2>{area.location.name}</h2>
-          <WeatherFreshnessLine weather={area.now} />
-        </div>
-        <Link
-          href={weatherPageHref(area.location.key)}
-          className="weather-area-card__icon-link"
-          aria-label={`Open detailed weather for ${area.location.name}`}
-        >
-          <WeatherIcon iconKey={area.now.iconKey} className="weather-area-card__icon" decorative />
-        </Link>
+    <section className="weather-chapter-area">
+      <div className="weather-chapter-area__heading">
+        <h3>{area.location.name}</h3>
+        <p>{area.now.headline}</p>
       </div>
-      <p className="weather-area-card__headline">{area.now.headline}</p>
-      <NearTermRainLine signal={area.now.nearTermRain} compact />
-      <div className="weather-area-card__metrics" aria-label={`${area.location.name} weather details`}>
-        <span>{tempLabel(area.now.tempF, area.now.tempC)}</span>
-        <span>{rainLabel(area.now.rainChancePct)}</span>
-        <span>{area.now.nwsAlerts.length > 0 ? `${area.now.nwsAlerts.length} alert` : "No active alert"}</span>
+      <div className="weather-chapter-area__cards">
+        <WeatherChapterCard area={area} slot="thisHour" weather={area.now} />
+        <WeatherChapterCard area={area} slot="soon" weather={area.next} />
+        <WeatherChapterCard area={area} slot="dayTurn" weather={area.later} />
       </div>
-    </article>
+    </section>
   );
 }
 
@@ -255,10 +441,14 @@ function HourlyArea({ area }: { area: WeatherAreaView }) {
       <div className="weather-hour-row" role="list" aria-label={`${area.location.name} hourly forecast`}>
         {area.hourly.length > 0 ? (
           area.hourly.slice(0, 8).map((hour) => (
-            <div className="weather-hour-chip" role="listitem" key={`${area.location.key}-${hour.time}`}>
+            <div
+              className={`weather-hour-chip weather-hour-chip--score-${hourOutdoorScore(hour)}`}
+              role="listitem"
+              key={`${area.location.key}-${hour.time}`}
+            >
               <time dateTime={hour.time}>{formatHour(hour.time)}</time>
               <WeatherIcon iconKey={hour.iconKey} className="weather-hour-chip__icon" />
-              <strong>{tempLabel(hour.tempF, hour.tempC).split(" / ")[0]}</strong>
+              <strong>{primaryTempLabel(hour.tempF, hour.tempC)}</strong>
               <span>{rainLabel(hour.chanceOfRainPct)}</span>
             </div>
           ))
@@ -314,6 +504,26 @@ function WeeklyArea({ area }: { area: WeatherAreaView }) {
   );
 }
 
+function WeatherRiskConstellation({ area }: { area: WeatherAreaView }) {
+  const risks = [
+    ["Rain", area.now.risk.rainRisk],
+    ["Storm", area.now.risk.stormRisk],
+    ["Heat", area.now.risk.heatRisk],
+    ["Wind", area.now.risk.windRisk],
+  ] as const;
+
+  return (
+    <aside className="weather-risk-constellation" aria-label="Current weather risk levels">
+      {risks.map(([label, risk]) => (
+        <div className={`weather-risk-constellation__item weather-risk-constellation__item--${risk}`} key={label}>
+          <span>{label}</span>
+          <strong>{riskScore(risk)}</strong>
+        </div>
+      ))}
+    </aside>
+  );
+}
+
 export default async function WeatherPage() {
   const now = new Date();
   const areas = await Promise.all(
@@ -324,78 +534,33 @@ export default async function WeatherPage() {
 
   return (
     <main className="weather-page">
-      <section className="weather-page-hero">
-        <div className="weather-page-hero__copy">
-          <h1>Disney World Weather</h1>
-          <p>
-            Now, next, and later across Walt Disney World resort areas, with
-            hourly forecast guidance, official alerts, and weekly planning by day.
-          </p>
-          <div className="weather-page-hero__actions">
-            <Link href="/today?weather=indoor" className="btn-primary rounded-full px-5 py-3 text-sm font-bold">
-              Indoor backups
-            </Link>
-            <Link href="/tonight?weather=covered" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-              Covered tonight
-            </Link>
-          </div>
-        </div>
-        <article className="weather-page-current" aria-label="Current Walt Disney World weather">
-          <div className="weather-page-current__main">
-            <Link
-              href={weatherPageHref(allWdw.location.key)}
-              className="weather-page-current__icon-link"
-              aria-label={`Open detailed weather for ${allWdw.location.name}`}
-            >
-              <WeatherIcon iconKey={allWdw.now.iconKey} className="weather-page-current__icon" decorative />
-            </Link>
-            <div>
-              <span>Forecasted now</span>
-              <h2>{allWdw.now.headline}</h2>
-              <p>{tempLabel(allWdw.now.tempF, allWdw.now.tempC)} · {rainLabel(allWdw.now.rainChancePct)}</p>
-            </div>
-          </div>
-          <NearTermRainLine signal={allWdw.now.nearTermRain} />
-          <WeatherFreshnessLine weather={allWdw.now} />
-          <WeatherPrecipMapPreview precipMap={allWdw.now.precipMap} />
-        </article>
+      <HeroWeatherPanel area={allWdw} />
+
+      <section className="weather-story-stage">
+        <WeatherDayArc area={allWdw} />
+        <WeatherRiskConstellation area={allWdw} />
       </section>
 
-      <section className="weather-page-section" aria-labelledby="weather-area-heading">
-        <div className="weather-page-section__heading">
-          <h2 id="weather-area-heading">Disney Area Weather</h2>
-          <p>Five resort-area forecasts plus the all-property Walt Disney World view.</p>
-        </div>
-        <div className="weather-area-grid">
-          {areas.map((area) => (
-            <AreaOverviewCard area={area} key={area.location.key} />
-          ))}
-        </div>
-      </section>
+      <MicroclimateRail areas={areas} />
 
       <section className="weather-page-section" aria-labelledby="weather-flow-heading">
         <div className="weather-page-section__heading">
-          <h2 id="weather-flow-heading">Now, Next, Later</h2>
-          <p>A quick story of how the day should flow before you cross property.</p>
+          <span className="weather-kicker">Forecast chapters</span>
+          <h2 id="weather-flow-heading">A better rhythm for moving around property.</h2>
+          <p>Each resort area gets a short sequence: what to trust, what to watch, and when to pivot.</p>
         </div>
-        <div className="weather-flow-grid">
+        <div className="weather-chapter-grid">
           {disneyAreas.map((area) => (
-            <section className="weather-flow-area" key={`flow-${area.location.key}`}>
-              <h3>{area.location.name}</h3>
-              <div className="weather-flow-area__signals">
-                <WeatherSignalCard label="Now" weather={area.now} />
-                <WeatherSignalCard label="Next" weather={area.next} />
-                <WeatherSignalCard label="Later" weather={area.later} />
-              </div>
-            </section>
+            <WeatherChapterArea area={area} key={`flow-${area.location.key}`} />
           ))}
         </div>
       </section>
 
       <section className="weather-page-section" aria-labelledby="weather-hourly-heading">
         <div className="weather-page-section__heading">
-          <h2 id="weather-hourly-heading">Hourly Forecast</h2>
-          <p>Short-horizon hourly forecast by Disney resort area.</p>
+          <span className="weather-kicker">Hour by hour</span>
+          <h2 id="weather-hourly-heading">The detailed read.</h2>
+          <p>Short-horizon temperature and rain context by Disney resort area.</p>
         </div>
         <div className="weather-hourly-grid">
           {areas.map((area) => (
@@ -406,8 +571,9 @@ export default async function WeatherPage() {
 
       <section className="weather-page-section" aria-labelledby="weather-daily-heading">
         <div className="weather-page-section__heading">
-          <h2 id="weather-daily-heading">Daily Forecast</h2>
-          <p>Today through the next few days for each Disney weather area.</p>
+          <span className="weather-kicker">Three-day view</span>
+          <h2 id="weather-daily-heading">Plan the near horizon.</h2>
+          <p>Quick daily context for matching activities to better windows.</p>
         </div>
         <div className="weather-daily-grid">
           {areas.map((area) => (
@@ -418,8 +584,9 @@ export default async function WeatherPage() {
 
       <section className="weather-page-section" aria-labelledby="weather-weekly-heading">
         <div className="weather-page-section__heading">
-          <h2 id="weather-weekly-heading">Weekly By Day</h2>
-          <p>NWS-backed weekly planning context where available.</p>
+          <span className="weather-kicker">Week shape</span>
+          <h2 id="weather-weekly-heading">The longer planning layer.</h2>
+          <p>NWS-backed weekly context where available.</p>
         </div>
         <div className="weather-weekly-grid">
           {areas.map((area) => (

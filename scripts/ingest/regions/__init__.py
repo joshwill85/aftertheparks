@@ -4,9 +4,14 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from PIL import Image
+
+try:
+    from qr_decoder import decode_qr_targets
+except ImportError:  # pragma: no cover - supports package-style imports
+    from ..qr_decoder import decode_qr_targets
 
 
 def _sha256_file(path: Path) -> str:
@@ -56,6 +61,7 @@ def segment_major_regions(
     snapshot: dict[str, Any],
     classification: dict[str, Any],
     output_dir: Path,
+    qr_decoder: Callable[[Path], list[dict[str, Any]]] | None = None,
 ) -> dict[str, Any]:
     page = _first_page(snapshot)
     page_path = Path(str(page.get("page_image_path") or ""))
@@ -74,6 +80,17 @@ def segment_major_regions(
             crop = image.crop(tuple(bbox_px))
             crop_path = output_dir / f"page_001-region_{index:02d}-{region_type}.png"
             crop.save(crop_path, "PNG")
+            crop_sha256 = _sha256_file(crop_path)
+            qr_targets: list[dict[str, Any]] = []
+            qr_decode_status = None
+            if region_type == "qr_callout":
+                decoder = qr_decoder or decode_qr_targets
+                qr_targets = [
+                    {**target, "source_crop_sha256": crop_sha256}
+                    for target in decoder(crop_path)
+                    if isinstance(target, dict) and target.get("target_url")
+                ]
+                qr_decode_status = "decoded" if qr_targets else "not_found"
             regions.append(
                 {
                     "region_id": f"page-001-region-{index:02d}",
@@ -83,12 +100,20 @@ def segment_major_regions(
                     "page_image_sha256": page.get("page_image_sha256"),
                     "bbox_px": bbox_px,
                     "crop_path": str(crop_path),
-                    "crop_sha256": _sha256_file(crop_path),
+                    "crop_sha256": crop_sha256,
                     "reading_order": index,
                     "detection_method": "vision_v3_static_family_region_scaffold",
                     "detection_confidence": 0.5 if document_family == "unknown_visual_schedule" else 0.8,
                     "allow_auto_publish": bool(classification.get("allow_auto_publish"))
                     and document_family != "unknown_visual_schedule",
+                    **(
+                        {
+                            "qr_decode_status": qr_decode_status,
+                            "qr_targets": qr_targets,
+                        }
+                        if region_type == "qr_callout"
+                        else {}
+                    ),
                 }
             )
 

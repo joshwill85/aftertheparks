@@ -6,6 +6,7 @@ import {
   orlandoDateString,
   TIMEZONE,
 } from "@/lib/daypart";
+import { buildPlanAheadHref } from "@/lib/calendar/params";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem } from "@/lib/types/occurrence";
 import type { PlanStaySettings } from "@/lib/plan/types";
@@ -123,6 +124,8 @@ export interface PlanStayShellDay {
   label: string;
   items: PlanItem[];
   sections: Map<PlanSectionKey, PlanItem[]>;
+  findHomeResortHref?: string;
+  findNearbyHref?: string;
 }
 
 export interface PlanStayShell {
@@ -217,6 +220,22 @@ export function buildPlanStayShell(
       label: planDateLabel(dateKey),
       items: dayItems,
       sections: sectionMapForItems(dayItems),
+      findHomeResortHref: homeResortSlug
+        ? buildPlanAheadHref({
+            resort: homeResortSlug,
+            start: dateKey,
+            end: dateKey,
+            selected: dateKey,
+          })
+        : undefined,
+      findNearbyHref: homeResortSlug
+        ? buildPlanAheadHref({
+            resort: homeResortSlug,
+            start: dateKey,
+            end: dateKey,
+            selected: dateKey,
+          })
+        : undefined,
     };
   });
 
@@ -225,9 +244,21 @@ export function buildPlanStayShell(
     stayDays,
     outsideStayItems,
     flexibleItems,
-    findHomeResortHref: homeResortSlug ? `/activities?resort=${homeResortSlug}` : undefined,
+    findHomeResortHref: homeResortSlug
+      ? buildPlanAheadHref({
+          resort: homeResortSlug,
+          start: tripStartDate,
+          end: tripEndDate,
+          selected: tripStartDate,
+        })
+      : undefined,
     findNearbyHref: homeResortSlug
-      ? `/activities?near=my-resort&resort=${homeResortSlug}`
+      ? buildPlanAheadHref({
+          resort: homeResortSlug,
+          start: tripStartDate,
+          end: tripEndDate,
+          selected: tripStartDate,
+        })
       : undefined,
   };
 }

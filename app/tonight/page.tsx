@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 import { Hero } from "@/components/atlas/Hero";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 import { TonightClient } from "@/components/atlas/TonightClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
-import { DecisionSummaryBar } from "@/components/planning/DecisionSummaryBar";
-import { TrustInline } from "@/components/planning/TrustInline";
 import {
   getEveningActivitiesThisWeek,
   getTonightActivities,
@@ -27,12 +24,10 @@ import {
 import {
   activityEventJsonLd,
   activityListJsonLd,
-  activitySourceSummary,
-  formatSeoDate,
 } from "@/lib/seo/activityPage";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
-import { buildDecisionSummary } from "@/lib/planning/decisionSummary";
+import { getVisibleTonightResultCount } from "@/lib/tonight/visibleResults";
 import {
   loadWeatherByOccurrence,
   loadWeatherGuidanceForLocation,
@@ -156,7 +151,10 @@ export default async function TonightPage({
     now: weatherNow,
   });
   const filteredMode = hasActiveBrowseFilters(filters);
-  const resultCount = activities.length + filteredMovies.length;
+  const resultCount = getVisibleTonightResultCount({
+    activities,
+    movieNights: filteredMovies,
+  });
   const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
   const filterImpact = buildFilterImpact(
     [
@@ -167,11 +165,6 @@ export default async function TonightPage({
     resortOptions
   );
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
-  const sourceSummary = activitySourceSummary(baseActivities);
-  const decisionSummary = buildDecisionSummary({
-    activities,
-    scope: "tonight",
-  });
   const jsonLd = stringifyJsonLd([
     activityListJsonLd(baseUrl, "Walt Disney World resort activities tonight", activities),
     ...activityEventJsonLd(baseUrl, activities),
@@ -188,31 +181,6 @@ export default async function TonightPage({
         subtitle="Evening resort activities, outdoor movies, campfires, and low-pressure after-park ideas."
         compactBrowse
       />
-      <section className="mx-auto mb-8 max-w-6xl rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          Tonight&apos;s Walt Disney World resort activities can include movies,
-          campfires, poolside games, trivia, crafts, lounges nearby, and other
-          resort-specific evening options. Confirm outdoor and weather-sensitive
-          plans before leaving your resort.
-        </p>
-        <TrustInline
-          lastVerified={formatSeoDate(sourceSummary.latestVerified)}
-          sourceCount={sourceSummary.sourceCount}
-          rowCount={sourceSummary.activityCount}
-        />
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link href="/today" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-            See today
-          </Link>
-          <Link href="/activities?daypart=evening" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-            Evening activities
-          </Link>
-          <Link href="/source-and-accuracy-policy" className="text-sm font-bold text-[var(--accent)] hover:underline">
-            Source and accuracy policy
-          </Link>
-        </div>
-      </section>
       <section className="mx-auto mb-8 grid max-w-6xl gap-5 rounded-2xl border border-[rgba(255,200,87,0.28)] bg-[var(--night)] p-5 text-white md:grid-cols-[minmax(0,1fr)_360px] md:items-center">
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-[var(--lantern)]">
@@ -232,7 +200,6 @@ export default async function TonightPage({
           className="brand-asset--night-feature justify-self-center"
         />
       </section>
-      <DecisionSummaryBar summary={decisionSummary} />
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <BrowseFilterShell
           variant="tonight"

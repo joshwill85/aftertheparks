@@ -485,6 +485,18 @@ def _activity_sources_with_overrides(source_overrides: Path | None):
     )
 
 
+def _document_source_kind(source: Any) -> str:
+    source_type = str(getattr(source, "source_type", "") or "").strip().lower()
+    if source_type == "image":
+        return "official_image"
+    if source_type == "pdf":
+        return "official_pdf"
+    source_url = str(getattr(source, "pdf_url", "") or "").lower().split("?", 1)[0]
+    if source_url.endswith((".jpg", ".jpeg", ".png")):
+        return "official_image"
+    return "official_pdf"
+
+
 def build_source_inventory(
     *,
     live: bool = False,
@@ -561,11 +573,7 @@ def build_source_inventory(
         if source.pdf_url:
             local_path = _pdf_local_path(source.pdf_url)
             parent_row = resort_page_rows_by_url.get(source.recreation_page_url, {})
-            document_source_kind = (
-                "official_image"
-                if source.pdf_url.lower().split("?", 1)[0].endswith((".jpg", ".jpeg", ".png"))
-                else "official_pdf"
-            )
+            document_source_kind = _document_source_kind(source)
             pdf_evidence = pdf_evidence_by_group.get(source.calendar_group_key)
             pdf_has_official_evidence = bool(
                 pdf_evidence and pdf_evidence.get("pdf_url") == source.pdf_url

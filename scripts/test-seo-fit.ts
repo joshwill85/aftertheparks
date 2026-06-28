@@ -74,13 +74,38 @@ const rainyDayFiltered = applyBrowseFilters(
       category: "movies_under_stars",
       location: { label: "Lawn" },
     },
+    {
+      ...baseOccurrence,
+      id: "poolside",
+      activitySlug: "poolside-activities",
+      title: "Poolside Activities",
+      category: "poolside",
+      location: { label: "Feature Pool Deck" },
+    },
+    {
+      ...baseOccurrence,
+      id: "outdoor-registration",
+      activitySlug: "pickleball-clinic",
+      title: "Pickleball Clinic",
+      summary: "Pre-register at Community Hall before meeting at the court.",
+      category: "other",
+      location: { label: "Bay Lake Tower Sports Court" },
+    },
+    {
+      ...baseOccurrence,
+      id: "outside-community-hall",
+      activitySlug: "mickey-tie-dye",
+      title: "Mickey Tie-Dye",
+      category: "arts_crafts",
+      location: { label: "Outside of Community Hall" },
+    },
   ] as ActivityOccurrence[],
   rainyDayParams
 );
 assert.deepEqual(
   rainyDayFiltered.map((activity) => activity.activitySlug),
   ["arcades"],
-  "rainy-day indoor filter should exclude outdoor weather-dependent activities"
+  "rainy-day indoor filter should exclude outdoor, poolside, and registration-only community hall matches"
 );
 
 const legacyTicketParams = parseBrowseParams(new URLSearchParams("ticket_required=false"));

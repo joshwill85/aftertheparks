@@ -8,10 +8,9 @@ import { PlanNavLink } from "@/components/plan/PlanNavLink";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/today", label: "Today" },
-  { href: "/tonight", label: "Tonight" },
   { href: "/weather", label: "Weather" },
   { href: "/activities", label: "Explore" },
+  { href: "/calendar", label: "Plan Ahead" },
   { href: "/resorts", label: "Resorts" },
   { href: "/plan", label: "My Plan" },
 ];
@@ -24,6 +23,9 @@ function isActive(pathname: string, href: string) {
 export function SiteHeader() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const todayHref = resolveBrowseNavHref("/today", pathname, searchParams);
+  const tonightHref = resolveBrowseNavHref("/tonight", pathname, searchParams);
+  const nowActive = isActive(pathname, "/today") || isActive(pathname, "/tonight");
 
   return (
     <header className="site-header">
@@ -51,6 +53,27 @@ export function SiteHeader() {
         </div>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          <div
+            className={cn("now-split-nav", nowActive && "now-split-nav--active")}
+            aria-label="Now"
+          >
+            <Link
+              href={todayHref}
+              className="now-split-nav__link now-split-nav__link--today"
+              aria-current={isActive(pathname, "/today") ? "page" : undefined}
+            >
+              <span className="now-split-nav__sun" aria-hidden />
+              <span>Today</span>
+            </Link>
+            <Link
+              href={tonightHref}
+              className="now-split-nav__link now-split-nav__link--tonight"
+              aria-current={isActive(pathname, "/tonight") ? "page" : undefined}
+            >
+              <span className="now-split-nav__moon" aria-hidden />
+              <span>Tonight</span>
+            </Link>
+          </div>
           {NAV.map((item) => {
             if (item.href === "/plan") {
               return (

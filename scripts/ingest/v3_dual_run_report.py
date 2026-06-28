@@ -25,6 +25,32 @@ def _rows_from_preview(value: Any) -> list[dict[str, Any]]:
     return []
 
 
+def _json_list_from_file(path: Path | None) -> list[dict[str, Any]]:
+    if path is None or not path.exists():
+        return []
+    payload = json.loads(path.read_text())
+    if isinstance(payload, dict) and isinstance(payload.get("rows"), list):
+        return [row for row in payload["rows"] if isinstance(row, dict)]
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    return []
+
+
+def _reviewed_diff_keys_from_file(path: Path | None) -> list[str]:
+    if path is None or not path.exists():
+        return []
+    payload = json.loads(path.read_text())
+    if isinstance(payload, dict):
+        values = payload.get("reviewed_diff_keys")
+        if values is None:
+            values = payload.get("diff_keys")
+    else:
+        values = payload
+    if not isinstance(values, list):
+        return []
+    return [str(value) for value in values if str(value).strip()]
+
+
 def _slug(row: dict[str, Any]) -> str:
     return str(row.get("canonical_slug") or row.get("activity_slug") or row.get("slug") or "")
 
@@ -65,11 +91,50 @@ def _not_publishable(row: dict[str, Any]) -> bool:
     return False
 
 
+def _source_id(row: dict[str, Any]) -> str:
+    return str(row.get("source_document_id") or row.get("id") or row.get("document_id") or "").strip()
+
+
+def _source_coverage(
+    expected_sources: list[dict[str, Any]] | None,
+    v3_source_statuses: list[dict[str, Any]] | None,
+    review_tasks: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    expected_ids = sorted({_source_id(source) for source in expected_sources or [] if _source_id(source)})
+    statuses_by_id = {
+        _source_id(status): str(status.get("status") or "")
+        for status in v3_source_statuses or []
+        if _source_id(status)
+    }
+    processed_ids = sorted(source_id for source_id, status in statuses_by_id.items() if status == "processed")
+    source_error_ids = sorted(source_id for source_id, status in statuses_by_id.items() if status == "source_error")
+    parser_error_ids = sorted(source_id for source_id, status in statuses_by_id.items() if status == "parser_error")
+    handled = set(processed_ids) | set(source_error_ids) | set(parser_error_ids)
+    unprocessed_ids = sorted(source_id for source_id in expected_ids if source_id not in handled)
+    review_task_source_ids = {_source_id(task) for task in review_tasks or [] if _source_id(task)}
+    expected_id_set = set(expected_ids)
+    expected_parser_error_ids = [source_id for source_id in parser_error_ids if source_id in expected_id_set]
+    return {
+        "expected_source_count": len(expected_ids),
+        "processed_source_count": len([source_id for source_id in expected_ids if source_id in set(processed_ids)]),
+        "source_error_count": len([source_id for source_id in expected_ids if source_id in set(source_error_ids)]),
+        "unprocessed_source_ids": unprocessed_ids,
+        "source_error_ids": [source_id for source_id in source_error_ids if source_id in set(expected_ids)],
+        "parser_error_ids": expected_parser_error_ids,
+        "parser_error_without_review_task_ids": [
+            source_id for source_id in expected_parser_error_ids if source_id not in review_task_source_ids
+        ],
+    }
+
+
 def build_dual_run_report(
     *,
     v2_rows: list[dict[str, Any]],
     v3_preview: dict[str, Any] | list[dict[str, Any]],
     reviewed_diff_keys: list[str] | None = None,
+    expected_sources: list[dict[str, Any]] | None = None,
+    v3_source_statuses: list[dict[str, Any]] | None = None,
+    review_tasks: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     v3_rows = _rows_from_preview(v3_preview)
     reviewed = set(reviewed_diff_keys or [])
@@ -122,6 +187,11 @@ def build_dual_run_report(
         publish_blockers.append("unreviewed_new_v3_rows")
     if missing_keys:
         publish_blockers.append("v3_missing_v2_rows")
+    source_coverage = _source_coverage(expected_sources, v3_source_statuses, review_tasks=review_tasks)
+    if source_coverage["unprocessed_source_ids"]:
+        publish_blockers.append("v3_unprocessed_sources")
+    if source_coverage["parser_error_without_review_task_ids"]:
+        publish_blockers.append("parser_error_without_review_task")
 
     return {
         "report_version": "v3_dual_run_report_001",
@@ -133,6 +203,7 @@ def build_dual_run_report(
         "unreviewed_new_keys": unreviewed_new_keys,
         "missing_in_v3": [_slug(v2_by_key[key]) for key in missing_keys],
         "field_diffs": field_diffs,
+        "source_coverage": source_coverage,
         "reviewed_diff_keys": sorted(reviewed),
         "unreviewed_diff_keys": unreviewed_diff_keys,
         "publish_blockers": list(dict.fromkeys(publish_blockers)),
@@ -147,6 +218,10 @@ def main() -> None:
     parser.add_argument("--v2", type=Path, required=True)
     parser.add_argument("--v3", type=Path, required=True)
     parser.add_argument("--reviewed-diff-keys", nargs="*", default=[])
+    parser.add_argument("--reviewed-diff-keys-file", type=Path)
+    parser.add_argument("--expected-sources", type=Path)
+    parser.add_argument("--source-statuses", type=Path)
+    parser.add_argument("--review-tasks", type=Path)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -157,7 +232,13 @@ def main() -> None:
     report = build_dual_run_report(
         v2_rows=v2_rows,
         v3_preview=v3_payload,
-        reviewed_diff_keys=args.reviewed_diff_keys,
+        reviewed_diff_keys=[
+            *args.reviewed_diff_keys,
+            *_reviewed_diff_keys_from_file(args.reviewed_diff_keys_file),
+        ],
+        expected_sources=_json_list_from_file(args.expected_sources),
+        v3_source_statuses=_json_list_from_file(args.source_statuses),
+        review_tasks=_json_list_from_file(args.review_tasks),
     )
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))

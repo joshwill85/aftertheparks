@@ -5087,7 +5087,28 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Mulan (1998)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Teen Beach Movie",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Toy Story 3",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Zootopia 2",
+        "show_time": "8:30PM"
+      }
+    ],
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -10282,7 +10303,43 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Up",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "monday",
+        "movie_title": "Lilo & Stitch (2002)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Luca",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "Tangled",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Toy Story 3",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "High School Musical 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Moana",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -14380,7 +14437,28 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Toy Story",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Beauty and the Beast (1991)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Teen Beach Movie",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Mulan (1998)",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -15923,7 +16001,7 @@
     "location": {
       "label": "Throughout Disney’s All-Star Resorts"
     },
-    "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise! M O Vv E U N D E R T H E S TA R S SURFBOARD BAY POOL DECK | 8:30pm In the event of inclement weather, the movie will be shown in End Zone Food Court.",
+    "description": "Search the Resort for a hidden Goofy photo prop. Once located, snap a photo and then head to the Front Desk to receive a surprise!",
     "price": {
       "state": "free"
     },
@@ -16062,50 +16140,6 @@
             1403.0
           ],
           "text": "Front Desk to receive a surprise!"
-        },
-        {
-          "page": 1,
-          "line": 51,
-          "bbox": [
-            116.5,
-            1481.0,
-            786.0,
-            1526.5
-          ],
-          "text": "M O Vv E U N D E R T H E S TA R S"
-        },
-        {
-          "page": 1,
-          "line": 54,
-          "bbox": [
-            114.5,
-            1566.0,
-            733.0,
-            1593.5
-          ],
-          "text": "SURFBOARD BAY POOL DECK | 8:30pm"
-        },
-        {
-          "page": 1,
-          "line": 64,
-          "bbox": [
-            114.0,
-            1828.0,
-            818.5,
-            1852.5
-          ],
-          "text": "In the event of inclement weather, the movie will be shown"
-        },
-        {
-          "page": 1,
-          "line": 66,
-          "bbox": [
-            113.5,
-            1865.0,
-            404.0,
-            1886.0
-          ],
-          "text": "in End Zone Food Court."
         }
       ],
       "price": [
@@ -16799,6 +16833,308 @@
       "exact_venue": "Touchdown! Section",
       "program_family": "campfire",
       "activity_variant": "Touchdown! Campfire",
+      "weather_dependency": "outdoor",
+      "resort_guest_only": true,
+      "pool_gated": true,
+      "sister_resort_access": true,
+      "schedule_valid_from": "2026-05-26",
+      "schedule_valid_until": "2026-09-08",
+      "next_schedule_expected_date": "2026-09-09"
+    },
+    "valid_from": "2026-05-26",
+    "valid_until": "2026-09-08"
+  },
+  {
+    "candidate_id": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67:all-star-sports:movie-under-the-stars",
+    "activity_catalog_id": "65e5f09f-e639-0fdd-b5b7-a24ef014daab",
+    "calendar_group_key": "all-star-sports",
+    "resort_slugs": [
+      "all-star-sports-resort"
+    ],
+    "canonical_slug": "movie-under-the-stars",
+    "title": "Movie Under the Stars",
+    "category": "movies_under_stars",
+    "section": "Movie Under the Stars",
+    "schedule": {
+      "text": "Surfboard Bay Pool Deck | 8:30pm",
+      "start_time": "8:30pm",
+      "end_time": null
+    },
+    "location": {
+      "label": "Surfboard Bay Pool Deck"
+    },
+    "description": "",
+    "price": {
+      "state": "free"
+    },
+    "claims": [
+      {
+        "kind": "fee",
+        "value": "free",
+        "evidence": [
+          {
+            "page": 1,
+            "line": 51,
+            "bbox": [
+              116.5,
+              1481.0,
+              786.0,
+              1526.5
+            ],
+            "text": "M O Vv E U N D E R T H E S TA R S (no ($) marker)",
+            "field": "source_pdf_fee_marker_absent",
+            "source": "pdf_layout"
+          },
+          {
+            "page": 1,
+            "line": 88,
+            "bbox": [
+              114.5,
+              2490.5,
+              1615.5,
+              2509.5
+            ],
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
+            "field": "source_pdf_fee_legend",
+            "source": "pdf_layout"
+          }
+        ]
+      },
+      {
+        "kind": "walkability",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "transportation",
+        "value": "unknown",
+        "evidence": []
+      },
+      {
+        "kind": "external_factual_enrichment",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
+            "fields": [
+              "schedule_location",
+              "access_rules"
+            ]
+          }
+        ],
+        "confidence": 1.0,
+        "status": "active"
+      },
+      {
+        "kind": "external_schedule_validity",
+        "value": "available",
+        "evidence": [
+          {
+            "source": "magical_resort_guide",
+            "url": "https://www.magicalresortguide.com/resort-activities-main",
+            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "fields": [
+              "valid_from",
+              "valid_until",
+              "next_expected_schedule_date"
+            ]
+          }
+        ],
+        "confidence": 0.9,
+        "status": "active"
+      }
+    ],
+    "field_provenance": {
+      "title": [
+        {
+          "page": 1,
+          "line": 51,
+          "bbox": [
+            116.5,
+            1481.0,
+            786.0,
+            1526.5
+          ],
+          "text": "M O Vv E U N D E R T H E S TA R S"
+        }
+      ],
+      "schedule": [
+        {
+          "page": 1,
+          "line": 54,
+          "bbox": [
+            114.5,
+            1566.0,
+            733.0,
+            1593.5
+          ],
+          "text": "SURFBOARD BAY POOL DECK | 8:30pm"
+        }
+      ],
+      "location": [
+        {
+          "page": 1,
+          "line": 54,
+          "bbox": [
+            114.5,
+            1566.0,
+            733.0,
+            1593.5
+          ],
+          "text": "SURFBOARD BAY POOL DECK | 8:30pm"
+        }
+      ],
+      "description": [],
+      "price": [
+        {
+          "page": 1,
+          "line": 51,
+          "bbox": [
+            116.5,
+            1481.0,
+            786.0,
+            1526.5
+          ],
+          "text": "M O Vv E U N D E R T H E S TA R S (no ($) marker)",
+          "field": "source_pdf_fee_marker_absent",
+          "source": "pdf_layout"
+        },
+        {
+          "page": 1,
+          "line": 88,
+          "bbox": [
+            114.5,
+            2490.5,
+            1615.5,
+            2509.5
+          ],
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
+          "field": "source_pdf_fee_legend",
+          "source": "pdf_layout"
+        }
+      ]
+    },
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "source_pdf_edition": "fy26-q3-0526",
+    "source": {
+      "path": "data/raw/pdfs/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+      "edition": "fy26-q3-0526",
+      "documentKeyLegends": [
+        {
+          "kind": "fee",
+          "marker": "($)",
+          "label": "There is a fee associated with this activity.",
+          "spans": [
+            {
+              "page": 1,
+              "line": 88,
+              "bbox": [
+                114.5,
+                2490.5,
+                1615.5,
+                2509.5
+              ],
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
+            }
+          ]
+        }
+      ]
+    },
+    "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Toy Story 2",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "monday",
+        "movie_title": "Turning Red",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "Ratatouille",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "The Parent Trap (1998)",
+        "show_time": "8:30pm"
+      }
+    ],
+    "external_facts": [
+      {
+        "source": "magical_resort_guide",
+        "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
+        "source_page_kind": "free_recreation",
+        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
+        "fetched_at": "2026-06-28T16:56:32.059683+00:00",
+        "calendar_group_key": "all-star-sports",
+        "resort_slugs": [
+          "all-star-sports-resort"
+        ],
+        "activity_title": "Movie Under the Stars",
+        "activity_slug": "movie-under-the-stars",
+        "facts": {
+          "schedule_text": "Sunday, Monday, Wednesday, Friday at 8:30 PM",
+          "exact_venue": "Surfboard Bay Pool Deck",
+          "host_area_or_wing": null,
+          "price_state": null,
+          "price_cents_min": null,
+          "price_cents_max": null,
+          "price_options": [],
+          "price_notes": null,
+          "age_minimum": null,
+          "adult_required": null,
+          "duration_minutes": null,
+          "check_in_offset_minutes": null,
+          "reservation_required": null,
+          "reservation_recommended": null,
+          "reservation_method": null,
+          "reservation_phone": null,
+          "walk_ups_allowed": null,
+          "same_day_available": null,
+          "program_family": "movies_under_stars",
+          "activity_variant": "Movie Under the Stars",
+          "access_rules": {
+            "resort_guest_only": true,
+            "pool_gated": true,
+            "open_to_non_resort_guests": null,
+            "sister_resort_access": true,
+            "adult_required": null
+          },
+          "weather_dependency": "outdoor",
+          "hidden_character_name": null,
+          "redemption_location": null,
+          "prize_or_completion_rule": null
+        },
+        "evidence": [
+          {
+            "field": "schedule_location",
+            "text": "Sunday, Monday, Wednesday, Friday at 8:30 PM | Surfboard Bay Pool Deck"
+          },
+          {
+            "field": "access_rules",
+            "text": "Activities shown with this symbol in the top right corner are exclusively for guests staying at this resort, and visitors will not be permitted to participate. Pools are for resort guests only, and these designated activities are held inside the gated pool area."
+          }
+        ],
+        "match": {
+          "status": "matched",
+          "match_type": "calendar_group_slug",
+          "confidence": 1.0
+        },
+        "activity_catalog_id": "65e5f09f-e639-0fdd-b5b7-a24ef014daab"
+      }
+    ],
+    "enrichment": {
+      "exact_venue": "Surfboard Bay Pool Deck",
+      "program_family": "movies_under_stars",
+      "activity_variant": "Movie Under the Stars",
       "weather_dependency": "outdoor",
       "resort_guest_only": true,
       "pool_gated": true,
@@ -18369,39 +18705,39 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
-        "day_of_week": "",
+        "day_of_week": "sunday",
         "movie_title": "The Lion King",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "monday",
         "movie_title": "Monsters, Inc.",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "tuesday",
         "movie_title": "Ratatouille",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "wednesday",
         "movie_title": "Toy Story 2",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "thursday",
         "movie_title": "Teen Beach Movie",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "friday",
         "movie_title": "Cinderella",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "saturday",
         "movie_title": "Cars",
-        "show_time": ""
+        "show_time": "8:30pm"
       }
     ],
     "external_facts": [
@@ -20022,8 +20358,23 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
+        "day_of_week": "sunday",
+        "movie_title": "The Little Mermaid (1989)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Toy Story",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Frozen",
+        "show_time": "8:30PM"
+      },
+      {
         "day_of_week": "saturday",
-        "movie_title": "Lilo and Stitch (2002)",
+        "movie_title": "Lilo & Stitch (2002)",
         "show_time": "8:30PM"
       }
     ],
@@ -21266,39 +21617,39 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
-        "day_of_week": "",
+        "day_of_week": "sunday",
         "movie_title": "Mulan",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "monday",
         "movie_title": "Lilo & Stitch",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "tuesday",
         "movie_title": "Finding Nemo",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "wednesday",
         "movie_title": "The Lion King",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "thursday",
         "movie_title": "Moana 2",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "friday",
         "movie_title": "Toy Story",
-        "show_time": ""
+        "show_time": "8:30pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "saturday",
         "movie_title": "Zootopia 2",
-        "show_time": ""
+        "show_time": "8:30pm"
       }
     ],
     "external_facts": [
@@ -22457,8 +22808,18 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
-        "day_of_week": "sunday",
-        "movie_title": ", Monday and Friday from 1:00pm-3:00pm",
+        "day_of_week": "tuesday",
+        "movie_title": "Mulan (1998)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Toy Story 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "The Parent Trap (1998)",
         "show_time": "8:30PM"
       }
     ],
@@ -25594,8 +25955,23 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
+        "day_of_week": "sunday",
+        "movie_title": "Toy Story 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Big Hero 6",
+        "show_time": "8:30PM"
+      },
+      {
         "day_of_week": "thursday",
-        "movie_title": "and the Beast (1991)",
+        "movie_title": "Beauty and the Beast (1991)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "Cars",
         "show_time": "8:30PM"
       }
     ],
@@ -27809,7 +28185,18 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Moana 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Lilo & Stitch",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -32760,8 +33147,23 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
+        "day_of_week": "sunday",
+        "movie_title": "Moana 2",
+        "show_time": "8:00PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "High School Musical 2",
+        "show_time": "8:00PM"
+      },
+      {
         "day_of_week": "thursday",
-        "movie_title": "PINGING Dory",
+        "movie_title": "Finding Dory",
+        "show_time": "8:00PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Lilo & Stitch (2002)",
         "show_time": "8:00PM"
       }
     ],
@@ -34914,7 +35316,18 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Finding Dory",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Moana",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -38865,7 +39278,28 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Big Hero 6",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "The Parent Trap (1998)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "The Princess and the Frog",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Up",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -42980,8 +43414,28 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
+        "day_of_week": "sunday",
+        "movie_title": "Toy Story 4",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "monday",
+        "movie_title": "Mulan (1998)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Ratatouille",
+        "show_time": "8:30PM"
+      },
+      {
         "day_of_week": "thursday",
         "movie_title": "Mufasa: The Lion King",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "The Parent Trap (1998)",
         "show_time": "8:30PM"
       }
     ],
@@ -46073,7 +46527,23 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "monday",
+        "movie_title": "Up",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "Finding Nemo",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "Toy Story",
+        "show_time": "8:30pm"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -49825,7 +50295,23 @@
       ]
     },
     "trust_state": "source_backed",
-    "movie_nights": [],
+    "movie_nights": [
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Lilo & Stitch (2002)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Toy Story 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Mulan (1998)",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
@@ -51722,39 +52208,39 @@
     "trust_state": "source_backed",
     "movie_nights": [
       {
-        "day_of_week": "",
+        "day_of_week": "sunday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "monday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "tuesday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "wednesday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "thursday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "friday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       },
       {
-        "day_of_week": "",
+        "day_of_week": "saturday",
         "movie_title": "",
-        "show_time": ""
+        "show_time": "8:40pm"
       }
     ],
     "valid_from": "2026-05-26",

@@ -10,6 +10,10 @@ const eventUi = read("components/events/event-ui.tsx");
 const mapper = read("lib/events/mapToEventCard.ts");
 const polish = read("src/styles/polish.css");
 const todayClient = read("components/atlas/TodayClient.tsx");
+const tonightClient = read("components/atlas/TonightClient.tsx");
+const activityCard = read("components/activity/ActivityCard.tsx");
+const nightActivityCard = read("components/tonight/NightActivityCard.tsx");
+const activityDecision = read("lib/activityDecision.ts");
 
 assert.match(
   eventCard,
@@ -45,6 +49,30 @@ assert.match(
   mapper,
   /resortSlug:\s*display\.resortSlug/,
   "Activity cards should receive the resort slug from display activity mapping."
+);
+
+assert.match(
+  mapper,
+  /decisionProfile:\s*activityDecisionProfile\(activity,\s*display\)/,
+  "Shared activity event cards should use the central decision profile."
+);
+
+assert.doesNotMatch(
+  activityDecision,
+  /id:\s*"time"[\s\S]*label:\s*"Timing"/,
+  "Activity card decision blocks should not duplicate the visible card timing."
+);
+
+assert.doesNotMatch(
+  activityDecision,
+  /id:\s*"cost"[\s\S]*label:\s*"Cost"/,
+  "Activity card decision blocks should not duplicate cost badges."
+);
+
+assert.match(
+  activityDecision,
+  /if \(booking\.status !== "required"\) return undefined/,
+  "Activity card booking blocks should only appear for confirmed required bookings."
 );
 
 assert.doesNotMatch(
@@ -147,6 +175,24 @@ assert.match(
   todayClient,
   /<EventCardListItem key=\{activity\.id\}/,
   "Today timeline items should use EventCardListItem so row heights are shared."
+);
+
+assert.match(
+  activityCard,
+  /const card = activityToEventCard\(activity,\s*display/,
+  "ActivityCard should inherit the shared non-redundant event-card decision profile."
+);
+
+assert.match(
+  tonightClient,
+  /<NightActivityCard[\s\S]*activity=\{activity\}/,
+  "Tonight activity sections should render through the shared night activity card."
+);
+
+assert.match(
+  nightActivityCard,
+  /const card = activityToEventCard\(activity,\s*display/,
+  "NightActivityCard should inherit the shared non-redundant event-card decision profile."
 );
 
 assert.doesNotMatch(

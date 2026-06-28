@@ -3,17 +3,22 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
 
 try:
     from config import PROCESSED_DIR
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "validated_candidates_v3"
+DEFAULT_CANDIDATES_DIR = PROCESSED_DIR / "activity_candidates_v3"
+DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_validate_report.json"
 REQUIRED_CRITICAL_FIELDS = ("title", "schedule", "location", "fee")
 MOVIE_CRITICAL_FIELDS = ("movie_title",)
 AUTO_PUBLISH_FAMILIES = {"aframe_recreation", "vertical_digital_rec_sign"}
@@ -139,23 +144,149 @@ def validate_candidates(candidates: list[dict[str, Any]]) -> list[dict[str, Any]
     return [validate_candidate(candidate) for candidate in candidates]
 
 
+def _candidate_paths(candidates_dir: Path) -> list[Path]:
+    if not candidates_dir.exists():
+        return []
+    return sorted(candidates_dir.glob("*.candidates.json"))
+
+
+def _candidate_matches_filters(
+    candidate: dict[str, Any],
+    *,
+    group: str | None,
+    quarter: str | None,
+) -> bool:
+    if group and candidate.get("calendar_group_key") != group:
+        return False
+    edition = str(candidate.get("edition") or candidate.get("source_edition") or "")
+    if not edition_matches_quarter(edition, quarter):
+        return False
+    return True
+
+
+def _status_counts(candidates: list[dict[str, Any]]) -> dict[str, int]:
+    counts = {
+        "auto_publishable": 0,
+        "needs_review": 0,
+        "rejected": 0,
+    }
+    for candidate in candidates:
+        status = str(candidate.get("validation_status") or "")
+        if status in counts:
+            counts[status] += 1
+    return counts
+
+
+def validated_output_path(candidates_path: Path, *, output_dir: Path = DEFAULT_OUTPUT_DIR) -> Path:
+    return output_dir / candidates_path.name
+
+
+def validate_candidates_from_directory(
+    *,
+    candidates_dir: Path = DEFAULT_CANDIDATES_DIR,
+    output_dir: Path = DEFAULT_OUTPUT_DIR,
+    report_path: Path | None = DEFAULT_REPORT_PATH,
+    group: str | None = None,
+    quarter: str | None = None,
+) -> dict[str, Any]:
+    results: list[dict[str, Any]] = []
+    for candidates_path in _candidate_paths(candidates_dir):
+        try:
+            payload = json.loads(candidates_path.read_text())
+            candidates = payload if isinstance(payload, list) else []
+            candidates = [
+                candidate for candidate in candidates
+                if isinstance(candidate, dict)
+                and _candidate_matches_filters(candidate, group=group, quarter=quarter)
+            ]
+            validated = validate_candidates(candidates)
+            output_path = validated_output_path(candidates_path, output_dir=output_dir)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(json.dumps(validated, indent=2, sort_keys=True) + "\n")
+            counts = _status_counts(validated)
+            results.append(
+                {
+                    "status": "validated",
+                    "candidates_path": str(candidates_path),
+                    "validated_path": str(output_path),
+                    "candidate_count": len(validated),
+                    "auto_publishable_count": counts["auto_publishable"],
+                    "needs_review_count": counts["needs_review"],
+                    "rejected_count": counts["rejected"],
+                    "error": None,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "status": "parser_error",
+                    "candidates_path": str(candidates_path),
+                    "validated_path": None,
+                    "candidate_count": 0,
+                    "auto_publishable_count": 0,
+                    "needs_review_count": 0,
+                    "rejected_count": 0,
+                    "error": str(exc),
+                }
+            )
+
+    report = {
+        "report_kind": "v3_validate",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "candidates_dir": str(candidates_dir),
+        "output_dir": str(output_dir),
+        "quarter": quarter,
+        "group": group,
+        "summary": {
+            "candidate_count": sum(int(result["candidate_count"]) for result in results),
+            "auto_publishable_count": sum(int(result["auto_publishable_count"]) for result in results),
+            "needs_review_count": sum(int(result["needs_review_count"]) for result in results),
+            "rejected_count": sum(int(result["rejected_count"]) for result in results),
+            "parser_error_count": sum(1 for result in results if result["status"] == "parser_error"),
+        },
+        "results": results,
+    }
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate v3 candidates and assign publish gate status")
-    parser.add_argument("candidates", type=Path)
+    parser.add_argument("candidates", type=Path, nargs="?")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--candidates-dir", type=Path, default=DEFAULT_CANDIDATES_DIR)
+    parser.add_argument("--report-path", type=Path, default=DEFAULT_REPORT_PATH)
+    parser.add_argument("--group")
+    parser.add_argument("--quarter")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    payload = json.loads(args.candidates.read_text())
-    candidates = payload if isinstance(payload, list) else []
-    validated = validate_candidates(candidates)
-    if args.json:
-        print(json.dumps(validated, indent=2, sort_keys=True))
+    if args.candidates:
+        payload = json.loads(args.candidates.read_text())
+        candidates = payload if isinstance(payload, list) else []
+        validated = validate_candidates(candidates)
+        if args.json:
+            print(json.dumps(validated, indent=2, sort_keys=True))
+            return
+        output_path = validated_output_path(args.candidates, output_dir=args.output_dir)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(validated, indent=2, sort_keys=True) + "\n")
+        print(output_path)
         return
-    output_path = args.output_dir / args.candidates.name
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(validated, indent=2, sort_keys=True) + "\n")
-    print(output_path)
+
+    report = validate_candidates_from_directory(
+        candidates_dir=args.candidates_dir,
+        output_dir=args.output_dir,
+        report_path=args.report_path,
+        group=args.group,
+        quarter=args.quarter,
+    )
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(args.report_path)
 
 
 if __name__ == "__main__":

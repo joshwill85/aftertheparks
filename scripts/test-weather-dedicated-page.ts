@@ -17,11 +17,14 @@ for (const key of [
   assert.match(page, new RegExp(key), `/weather should include ${key}.`);
 }
 
-assert.match(page, /"Now" \| "Next" \| "Later"/, "/weather should model Now, Next, Later states.");
-assert.match(page, /Now, Next, Later/, "/weather should render Now, Next, Later copy.");
+for (const className of ["weather-day-arc", "weather-microclimate-rail", "weather-chapter-card"]) {
+  assert.match(page, new RegExp(className), `/weather should render the ${className} story surface.`);
+}
 
-for (const label of ["Hourly", "Daily", "Weekly"]) {
-  assert.match(page, new RegExp(`${label} Forecast|${label} By Day`), `/weather should render ${label}.`);
+assert.doesNotMatch(page, /Now, Next, Later/, "/weather should not render literal Now, Next, Later copy.");
+
+for (const className of ["weather-hourly-grid", "weather-daily-grid", "weather-weekly-grid"]) {
+  assert.match(page, new RegExp(className), `/weather should render the ${className} detail layer.`);
 }
 
 assert.match(page, /getCachedWeatherSnapshot/, "/weather should use cached forecast snapshots.");

@@ -99,6 +99,7 @@ def promote_fixture_paths(*fixture_paths: Path):
 ALL_STAR_MOVIES_PDF = Path("data/raw/pdfs/All-Star-Movies_Aframe_Recreation_1125.pdf")
 ALL_STAR_MUSIC_PDF = Path("data/raw/pdfs/All-Star-Music_Aframe_Recreation_0126-V3_DRAFT.pdf")
 ALL_STAR_SPORTS_PDF = Path("data/raw/pdfs/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf")
+CURRENT_ALL_STAR_MOVIES_PDF = Path("data/raw/pdfs/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf")
 CURRENT_ALL_STAR_MUSIC_PDF = Path("data/raw/pdfs/All-Star-Music_Aframe_Recreation-0326.pdf")
 CURRENT_ANIMAL_KINGDOM_JAMBO_PDF = Path("data/raw/pdfs/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf")
 CURRENT_ANIMAL_KINGDOM_KIDANI_PDF = Path("data/raw/pdfs/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf")
@@ -2449,6 +2450,38 @@ class PipelineContractsTest(unittest.TestCase):
             movies["movie_nights"][0]["movie_title"],
         )
 
+    def test_current_all_star_movies_extracts_source_movie_titles(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ALL_STAR_MOVIES_PDF,
+            calendar_group_key="all-star-movies",
+        )
+        movie = next(
+            candidate["normalized_fields"]
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "movie-under-the-stars"
+        )
+
+        self.assertEqual("The Reel Spot | 8:30PM", movie["schedule"]["text"])
+        self.assertEqual(
+            [
+                ("sunday", "Up", "8:30PM"),
+                ("monday", "Lilo & Stitch (2002)", "8:30PM"),
+                ("tuesday", "Luca", "8:30PM"),
+                ("wednesday", "Tangled", "8:30PM"),
+                ("thursday", "Toy Story 3", "8:30PM"),
+                ("friday", "High School Musical 2", "8:30PM"),
+                ("saturday", "Moana", "8:30PM"),
+            ],
+            [
+                (
+                    night["day_of_week"],
+                    night["movie_title"],
+                    night["show_time"],
+                )
+                for night in movie["movie_nights"]
+            ],
+        )
+
     def test_all_star_sports_v2_ignores_qr_helper_text_as_activity(self) -> None:
         candidates = extract_candidates_for_pdf(
             pdf_path=ALL_STAR_SPORTS_PDF,
@@ -3293,6 +3326,42 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertFalse(
             any(row["canonical_slug"] == "reel-fun-arcade" for row in movies_rows)
+        )
+
+    def test_gold_promotion_preserves_reviewed_visual_movie_days(self) -> None:
+        promotion = promote_gold.promote_current_replacement_sources(
+            {
+                "art-of-animation": {
+                    "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+                    "pdf_edition": "fy26-q3-0526",
+                }
+            }
+        )
+        movie = next(
+            row
+            for row in promotion.gold_records
+            if row["calendar_group_key"] == "art-of-animation"
+            and row["canonical_slug"] == "movie-under-the-stars"
+        )
+
+        self.assertEqual(
+            [
+                ("sunday", "The Lion King", "8:30pm"),
+                ("monday", "Monsters, Inc.", "8:30pm"),
+                ("tuesday", "Ratatouille", "8:30pm"),
+                ("wednesday", "Toy Story 2", "8:30pm"),
+                ("thursday", "Teen Beach Movie", "8:30pm"),
+                ("friday", "Cinderella", "8:30pm"),
+                ("saturday", "Cars", "8:30pm"),
+            ],
+            [
+                (
+                    night["day_of_week"],
+                    night["movie_title"],
+                    night["show_time"],
+                )
+                for night in movie["movie_nights"]
+            ],
         )
 
     def test_gold_promotion_accepts_source_spanned_candidate(self) -> None:
@@ -5622,7 +5691,7 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(0, audit.summary["blocking_fixture_quarantine_count"])
         self.assertEqual(0, audit.summary["blocking_fixture_quarantine_unique_count"])
         self.assertEqual(17, audit.summary["fixture_unextractable_count"])
-        self.assertEqual(206, audit.summary["gold_record_count"])
+        self.assertEqual(207, audit.summary["gold_record_count"])
         self.assertTrue(audit.summary["production_ready"])
         self.assertEqual({}, audit.summary["stale_fixture_groups"])
         self.assertEqual(33, audit.summary["coverage_required_count"])
@@ -5881,9 +5950,9 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual([], report["blockers"])
         self.assertEqual(0, report["official_recreation"]["quarantine_count"])
         self.assertGreaterEqual(report["official_recreation"]["offering_count"], 224)
-        self.assertEqual(206, report["gold_source"]["gold_record_count"])
-        self.assertEqual(165, report["gold_source"]["rows_with_document_key_legends"])
-        self.assertEqual({"fee": 165}, report["gold_source"]["document_key_legend_kinds"])
+        self.assertEqual(207, report["gold_source"]["gold_record_count"])
+        self.assertEqual(166, report["gold_source"]["rows_with_document_key_legends"])
+        self.assertEqual({"fee": 166}, report["gold_source"]["document_key_legend_kinds"])
         self.assertEqual(0, report["coverage"]["visual_audit_error_count"])
         self.assertEqual(0, report["coverage"]["field_audit_error_count"])
         self.assertGreaterEqual(report["coverage"]["visual_audit_summary"]["activities_compared"], 165)
@@ -5895,7 +5964,7 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn("- None", markdown)
         self.assertNotIn("independent_visual_ocr_coverage_not_high", markdown)
         self.assertNotIn("stale_fixture_sources", markdown)
-        self.assertIn("Gold source evidence: 165 rows with document key legends", markdown)
+        self.assertIn("Gold source evidence: 166 rows with document key legends", markdown)
         self.assertIn("kinds: fee", markdown)
         self.assertIn("Visual PDF audit: 165 activities compared, 0 blocking mismatches", markdown)
         self.assertIn("Field audit: 982 fields checked, 0 errors", markdown)
@@ -6063,6 +6132,71 @@ class SourceInventoryTest(unittest.TestCase):
             parent_url = row["discovered_from_url"]
             self.assertIn(parent_url, by_url)
             self.assertEqual(by_url[parent_url]["source_id"], row["parent_source_id"])
+
+    def test_inventory_uses_manifest_source_type_for_extensionless_visual_sources(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            local_source = tmp_path / "source-document"
+            local_source.write_bytes(b"\xff\xd8\xff\xe0\x00\x10JFIF")
+            parent_snapshot_path = tmp_path / "parent.snapshot.json"
+            parent_snapshot_path.write_text(json.dumps({"source_url": "https://example.test/recreation"}))
+            parent_snapshot = {
+                "source_url": "https://example.test/recreation",
+                "source_kind": "official_html",
+                "content_sha256": "a" * 64,
+            }
+            visual_source = type(
+                "Source",
+                (),
+                {
+                    "resort_slug": "example-resort",
+                    "calendar_group_key": "example",
+                    "recreation_page_url": "https://example.test/recreation",
+                    "pdf_url": "https://cdn.example.test/source-document?id=123",
+                    "pdf_edition": "fy26-q3-0526",
+                    "source_type": "image",
+                    "notes": "extensionless image URL",
+                },
+            )()
+
+            with patch(
+                "scripts.ingest.build_source_inventory.RESORT_RECREATION_SOURCES",
+                [visual_source],
+            ), patch(
+                "scripts.ingest.build_source_inventory._load_index_snapshot",
+                return_value={"results": [], "content_sha256": "b" * 64},
+            ), patch(
+                "scripts.ingest.build_source_inventory._refresh_or_find_web_snapshot",
+                return_value=(parent_snapshot_path, parent_snapshot),
+            ), patch(
+                "scripts.ingest.build_source_inventory._pdf_local_path",
+                return_value=local_source,
+            ), patch(
+                "scripts.ingest.build_source_inventory._supporting_price_image_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._community_hall_fact_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._golf_official_fact_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._reviewed_visual_schedule_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._parent_detail_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._extra_official_detail_records",
+                return_value=[],
+            ):
+                inventory = build_source_inventory(live=False)
+
+        row = next(row for row in inventory if row["canonical_url"] == visual_source.pdf_url)
+        self.assertEqual("official_image", row["source_kind"])
+        self.assertEqual("example", row["calendar_group_key"])
 
     def test_refreshed_inventory_records_parent_page_hash_for_pdf_sources(self) -> None:
         from scripts.ingest.build_source_inventory import build_source_inventory

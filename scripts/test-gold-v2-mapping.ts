@@ -129,6 +129,34 @@ assert.equal(occurrence.claims?.walkability?.value, "unknown");
 assert.equal(occurrence.claims?.transportation?.value, "unknown");
 assert.equal(occurrence.freshness.badge, "verified");
 
+const [manualSourceOccurrence] = mapGoldActivityRowToOccurrences(
+  {
+    ...row,
+    id: "gold-manual-source",
+    source_url: "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+    source: {
+      url: "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+      documentHash: "b".repeat(64),
+    },
+    source_sha256: "b".repeat(64),
+  },
+  {
+    dateRangeDays: 1,
+    referenceDate: new Date("2026-06-21T12:00:00Z"),
+  }
+);
+assert.equal(
+  manualSourceOccurrence.freshness.sourceUrl,
+  "",
+  "Internal manual source identifiers must not become public UI links"
+);
+assert.equal(
+  manualSourceOccurrence.source?.url,
+  undefined,
+  "Internal manual source identifiers must not become public source evidence URLs"
+);
+assert.equal(manualSourceOccurrence.source?.documentHash, "b".repeat(64));
+
 const openWindowDisplay = toDisplayActivity(occurrence);
 const openWindowCard = activityToEventCard(occurrence, openWindowDisplay);
 assert.ok(
@@ -737,9 +765,10 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
     assert.equal(fortMovie.title, "Movie Under the Stars");
     assert.equal(fortMovie.location.label, "Campfire Area Presented by OFF! Repellents");
     assert.equal(fortMovie.trustState, "source_backed");
-    assert.match(
-      fortMovie.source?.url ?? "",
-      /^manual:\/\/fort-wilderness\/2026-05-26-to-2026-09-08\/recreation-activities$/
+    assert.equal(
+      fortMovie.source?.url,
+      undefined,
+      "Reviewed visual schedules keep source evidence without exposing internal manual IDs as links"
     );
 
     const legacyWellness = await getActivityBySlug("wellnessscav-engerhunt");
@@ -798,15 +827,36 @@ async function assertPreviewPipelineUsesGoldPreview(): Promise<void> {
       reviewedFortActivity,
       "Reviewed Fort Wilderness visual rows should resolve once schedule and location are sourced"
     );
-    assert.match(
-      reviewedFortActivity.activity.source?.url ?? "",
-      /^manual:\/\/fort-wilderness\/2026-05-26-to-2026-09-08\/recreation-activities$/
+    assert.equal(
+      reviewedFortActivity.activity.source?.url,
+      undefined,
+      "Reviewed visual rows must not expose manual source identifiers as public links"
     );
 
-    assert.deepEqual(
-      await getMovieNights(),
-      [],
-      "Movie title listings must fail closed until film titles have a source-backed feed"
+    const movieNights = await getMovieNights();
+    assert.ok(
+      movieNights.length > 0,
+      "Movie title listings should publish once film titles have a source-backed feed"
+    );
+    assert.ok(
+      movieNights.every(
+        (movie) =>
+          movie.movieTitle &&
+          movie.displayTitle &&
+          movie.dayOfWeek &&
+          movie.showTime &&
+          movie.location
+      ),
+      "Movie title listings should retain source-backed title, day, time, and location fields"
+    );
+    assert.ok(
+      movieNights.some(
+        (movie) =>
+          movie.resortSlug === "all-star-movies-resort" &&
+          movie.dayOfWeek === "sunday" &&
+          movie.displayTitle === "Up"
+      ),
+      "Movie title listings should include current source-backed All Star Movies titles"
     );
   } finally {
     if (envSnapshot.activityPipeline === undefined) {

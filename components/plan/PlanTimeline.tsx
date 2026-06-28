@@ -211,8 +211,8 @@ export function PlanTimeline({
               <EmptyStayDay
                 key={day.dateKey}
                 day={day}
-                findHomeResortHref={stayShell.findHomeResortHref}
-                findNearbyHref={stayShell.findNearbyHref}
+                findHomeResortHref={day.findHomeResortHref ?? stayShell.findHomeResortHref}
+                findNearbyHref={day.findNearbyHref ?? stayShell.findNearbyHref}
               />
             )
           )}

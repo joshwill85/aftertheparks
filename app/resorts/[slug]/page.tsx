@@ -739,7 +739,7 @@ export default async function ResortDetailPage({
               All activities at {resort.name}
             </Link>
             <Link href={`/calendar?resort=${resort.slug}`} className="text-[var(--accent)] hover:underline">
-              Full activity calendar for {resort.name}
+              Plan ahead at this resort
             </Link>
             <Link href={`/activities?area=${resort.area}`} className="text-[var(--accent)] hover:underline">
               Activities near this resort area
@@ -827,7 +827,7 @@ export default async function ResortDetailPage({
                   href={`/calendar?resort=${resort.slug}`}
                   className="text-sm font-bold text-[var(--accent)] hover:underline"
                 >
-                  Calendar view
+                  Plan ahead at this resort
                 </Link>
               </div>
               <ActivityCollectionView

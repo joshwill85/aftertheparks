@@ -66,29 +66,10 @@ export default async function HomePage() {
     <>
       <HomeHero resorts={resortOptions} />
 
-      <section className="home-section" aria-labelledby="home-answer-heading">
-        <div className="grid gap-4 md:grid-cols-[1.4fr_1fr]">
-          <div className="postcard-texture rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:p-6">
-            <h2 id="home-answer-heading" className="font-display text-2xl font-semibold">
-              Quick answer
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-              After the Parks is a current guide to Walt Disney
-              World resort activities, including today&apos;s schedules,
-              tonight&apos;s movies and campfires, resort recreation calendars,
-              and no-park-day planning ideas.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <Link href="/today" className="home-section__link">
-                See today <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
-              </Link>
-              <Link href="/tonight" className="home-section__link">
-                See tonight <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
-              </Link>
-            </div>
-          </div>
+      <section className="home-section" aria-labelledby="home-source-heading">
+        <div className="grid gap-4">
           <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:p-6">
-            <h2 className="font-display text-2xl font-semibold">
+            <h2 id="home-source-heading" className="font-display text-2xl font-semibold">
               Source and freshness
             </h2>
             <dl className="mt-4 grid gap-3 text-sm">

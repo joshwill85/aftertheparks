@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { buildPlanAheadHref } from "@/lib/calendar/params";
 import type { PlanStaySettings } from "@/lib/plan/types";
 
 interface PlanStayDetailsProps {
@@ -34,6 +36,15 @@ export function PlanStayDetails({
     [homeResortSlug, resorts]
   );
   const hasStayDetails = Boolean(homeResortSlug || (tripStartDate && tripEndDate));
+  const hasSavedStayRange = Boolean(homeResortSlug && tripStartDate && tripEndDate);
+  const planAheadHref = hasSavedStayRange
+    ? buildPlanAheadHref({
+        resort: homeResortSlug,
+        start: tripStartDate,
+        end: tripEndDate,
+        selected: tripStartDate,
+      })
+    : undefined;
   const dateError =
     (startDate && !endDate) || (!startDate && endDate)
       ? "Add both check-in and check-out dates, or leave both blank."
@@ -147,6 +158,14 @@ export function PlanStayDetails({
           >
             Clear stay details
           </button>
+        )}
+        {planAheadHref && (
+          <Link
+            href={planAheadHref}
+            className="btn-secondary inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
+          >
+            Find activities for these dates
+          </Link>
         )}
       </div>
     </section>

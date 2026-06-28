@@ -6,7 +6,7 @@ import {
   movieEndsAt,
   movieStartsAt,
 } from "@/lib/movies/time";
-import { sanitizeMovieTitle } from "@/lib/movies/sanitize";
+import { isUsableMovieTitle, sanitizeMovieTitle } from "@/lib/movies/sanitize";
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 
 const movie: MovieNightOccurrence = {
@@ -159,21 +159,43 @@ assert.match(
   /fetchTmdbMovieRuntime/,
   "TMDB metadata loader should support refreshing runtime for cached movie hits"
 );
+assert.match(
+  tmdb,
+  /futureReleasePenalty/,
+  "TMDB metadata matching should avoid future-remake drift for ambiguous resort movie titles"
+);
 
 const posterCache = readFileSync("lib/movies/poster-cache.ts", "utf8");
 assert.match(
   posterCache,
-  /refreshRuntimeIfMissing/,
-  "Movie poster cache should refresh runtime for existing cached hits"
+  /refreshMetadataIfIncomplete/,
+  "Movie poster cache should refresh missing metadata for existing cached hits"
+);
+assert.match(
+  posterCache,
+  /shouldRevalidateCachedMatch/,
+  "Movie poster cache should revalidate stale future/remake matches for ambiguous cached titles"
 );
 assert.match(
   posterCache,
   /runtime_minutes/,
   "Movie poster cache should persist runtime minutes"
 );
+assert.match(
+  posterCache,
+  /overview/,
+  "Movie poster cache should persist overview text"
+);
 
 assert.equal(sanitizeMovieTitle("Tangled Ps"), "Tangled");
 assert.equal(sanitizeMovieTitle("Moana 'P"), "Moana");
+assert.equal(sanitizeMovieTitle("PINGING Dory"), "Finding Dory");
+assert.equal(
+  sanitizeMovieTitle("and the Beast (1991)"),
+  "Beauty and the Beast (1991)"
+);
+assert.equal(isUsableMovieTitle("Mulan (1998)"), true);
+assert.equal(isUsableMovieTitle(", Monday and Friday from 1:00pm-3:00pm"), false);
 
 const activitiesData = readFileSync("lib/data/activities.ts", "utf8");
 assert.match(
@@ -191,10 +213,20 @@ assert.match(
   /enrichMovieNightsWithPosters/,
   "Movie night loader should enrich every published movie card with TMDB artwork"
 );
-assert.match(
+assert.doesNotMatch(
+  activitiesData,
+  /const provenance = activity\.field_provenance\?\.movie_nights/,
+  "Movie night loader should not require legacy movie_nights field provenance when rows are source-backed"
+);
+assert.doesNotMatch(
   activitiesData,
   /filter\(\(movie\) => Boolean\(movie\.posterUrl\)\)/,
-  "Movie night loader should only publish cards that have TMDB poster artwork"
+  "Movie night loader should publish source-backed listings even when poster enrichment is unavailable"
+);
+assert.match(
+  activitiesData,
+  /trust_state|source_sha256|source_url/,
+  "Movie night loader should keep a source-backed guard for Gold movie rows"
 );
 assert.doesNotMatch(
   activitiesData,

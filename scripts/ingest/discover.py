@@ -21,6 +21,8 @@ try:
         RESORT_RECREATION_SOURCES,
         ActivitySource,
         ResortRecreationSource,
+        filter_activity_sources_for_quarter,
+        resort_recreation_sources_for,
     )
 except ImportError:  # pragma: no cover - supports package-style imports in tests
     from .config import DISNEY_USER_AGENT, PROCESSED_DIR
@@ -31,6 +33,8 @@ except ImportError:  # pragma: no cover - supports package-style imports in test
         RESORT_RECREATION_SOURCES,
         ActivitySource,
         ResortRecreationSource,
+        filter_activity_sources_for_quarter,
+        resort_recreation_sources_for,
     )
 
 try:
@@ -442,19 +446,47 @@ def discover_resort_source(
     }
 
 
-def discover_all_resort_sources(*, use_playwright: bool = True) -> list[dict]:
+def select_sources_for_discovery(
+    sources: list[ActivitySource],
+    *,
+    quarter: str | None = None,
+) -> list[ActivitySource]:
+    return filter_activity_sources_for_quarter(sources, quarter)
+
+
+def select_resort_sources_for_discovery(
+    sources: list[ActivitySource],
+    *,
+    quarter: str | None = None,
+) -> list[ResortRecreationSource]:
+    selected = select_sources_for_discovery(sources, quarter=quarter)
+    return resort_recreation_sources_for(selected)
+
+
+def discover_all_resort_sources(
+    *,
+    use_playwright: bool = True,
+    activity_sources: list[ActivitySource] | None = None,
+    quarter: str | None = None,
+) -> list[dict]:
+    resort_sources = (
+        RESORT_RECREATION_SOURCES
+        if activity_sources is None and not quarter
+        else select_resort_sources_for_discovery(activity_sources or ACTIVITY_SOURCES, quarter=quarter)
+    )
     return [
         discover_resort_source(source, use_playwright=use_playwright)
-        for source in RESORT_RECREATION_SOURCES
+        for source in resort_sources
     ]
 
 
 def main() -> None:
     import argparse
 
-    parser = argparse.ArgumentParser(description="Discover recreation PDF URLs")
+    parser = argparse.ArgumentParser(description="Discover recreation source document URLs")
     parser.add_argument("--no-playwright", action="store_true", help="HEAD/manifest only")
     parser.add_argument("--compare-db", action="store_true", help="Compare against source_documents")
+    parser.add_argument("--quarter", help="Discover only source editions in this quarter, e.g. fy26-q4")
     args = parser.parse_args()
 
     db = None
@@ -466,7 +498,8 @@ def main() -> None:
             print("Warning: Supabase not configured, skipping DB compare")
 
     entries: list[dict] = []
-    for source in ACTIVITY_SOURCES:
+    sources = select_sources_for_discovery(ACTIVITY_SOURCES, quarter=args.quarter)
+    for source in sources:
         print(f"Discovering {source.calendar_group_key}...")
         entry = discover_source(source, use_playwright=not args.no_playwright)
         if db and entry.get("discovered_url"):
@@ -478,10 +511,14 @@ def main() -> None:
         entries.append(entry)
         print(f"  -> {entry['status']}: {entry.get('discovered_url', 'none')}")
 
-    resort_entries = discover_all_resort_sources(use_playwright=not args.no_playwright)
+    resort_entries = discover_all_resort_sources(
+        use_playwright=not args.no_playwright,
+        activity_sources=sources,
+    )
 
     report = {
         "discovered_at": datetime.now(timezone.utc).isoformat(),
+        "quarter": args.quarter,
         "entries": entries,
         "resort_entries": resort_entries,
         "summary": {

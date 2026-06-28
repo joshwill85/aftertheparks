@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarClient } from "@/components/atlas/CalendarClient";
 import { Hero } from "@/components/atlas/Hero";
-import { BrandAsset } from "@/components/brand/BrandAsset";
 import { sanitizePublicActivities, dedupeOccurrences } from "@/lib/api/publicActivities";
 import { getAllOccurrences } from "@/lib/data/activities";
 import {
@@ -13,18 +12,19 @@ import {
 } from "@/lib/seo/activityPage";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
+import { parsePlanAheadParams } from "@/lib/calendar/params";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Disney World Resort Activity Calendar | After the Parks",
+  title: "Plan Ahead | Disney World Resort Activity Calendar",
   description:
-    "Month-at-a-glance Walt Disney World resort activity calendar with current movies, campfires, crafts, poolside recreation, and source freshness notes.",
+    "Plan future Walt Disney World resort days by date, resort, activity type, area, and time of day before or after you know where you are staying.",
   alternates: { canonical: "/calendar" },
   ...buildSocialMetadata({
-    title: "Disney World Resort Activity Calendar",
+    title: "Plan Ahead",
     description:
-      "Month-at-a-glance Walt Disney World resort activity calendar with current movies, campfires, crafts, poolside recreation, and source freshness notes.",
+      "Pick dates for a known stay, or compare resorts before you book using current resort activity calendars.",
     path: "/calendar",
   }),
 };
@@ -32,9 +32,10 @@ export const metadata: Metadata = {
 export default async function CalendarPage({
   searchParams,
 }: {
-  searchParams: Promise<{ resort?: string; category?: string }>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
+  const planAhead = parsePlanAheadParams(params);
   const occurrences = sanitizePublicActivities(
     dedupeOccurrences(await getAllOccurrences(31)),
     { minTier: "low" }
@@ -66,27 +67,9 @@ export default async function CalendarPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <Hero
-        title="Disney World Resort Activity Calendar"
-        subtitle="A month-at-a-glance view of current resort activities across your stay."
+        title="Plan Ahead"
+        subtitle="Pick dates for a known stay, or compare resorts before you book."
       />
-      <section className="mb-6 grid gap-5 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:grid-cols-[minmax(0,1fr)_280px] md:items-center">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-            Quick answer
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            This calendar shows currently tracked Walt Disney World resort
-            activities for the next 31 days, including movies, campfires, crafts,
-            poolside recreation, and other resort-calendar events. Use it to spot
-            busy activity days, compare resorts, and confirm what is worth checking
-            before you walk or travel.
-          </p>
-        </div>
-        <BrandAsset
-          asset="pocket-map-only"
-          className="brand-asset--map-panel justify-self-center"
-        />
-      </section>
       <section className="mb-6 grid gap-3 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm md:grid-cols-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
@@ -135,8 +118,7 @@ export default async function CalendarPage({
       </section>
       <CalendarClient
         occurrences={occurrences}
-        initialResort={params.resort}
-        initialCategory={params.category}
+        initialPlanAhead={planAhead}
       />
     </>
   );

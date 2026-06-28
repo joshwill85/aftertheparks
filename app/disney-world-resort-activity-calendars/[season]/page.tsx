@@ -137,27 +137,6 @@ export default async function SeasonalCalendarPage({
 
       <article className="space-y-8">
         <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            {page.userPromise}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href={page.primaryAction.href}
-              className="btn-primary rounded-full px-5 py-3 text-sm font-bold"
-            >
-              {page.primaryAction.label}
-            </Link>
-            <Link
-              href="/disney-world-resort-activity-calendars"
-              className="btn-secondary rounded-full px-5 py-3 text-sm font-bold"
-            >
-              All resort calendars
-            </Link>
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <h2 className="font-display text-2xl font-semibold">
             Current seasonal snapshot
           </h2>

@@ -14,6 +14,9 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_queue.json"
+DEFAULT_VALIDATED_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
+DEFAULT_SOURCE_STATUSES_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json"
+SOURCE_STATUS_REVIEW_TASK_TYPES = {"parser_error", "source_error"}
 
 
 def _task_type(findings: list[str]) -> str:
@@ -75,7 +78,55 @@ def _engine_text(evidence: dict[str, Any], index: int) -> str | None:
     return engines[index].get("text")
 
 
-def build_review_tasks(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _source_id(row: dict[str, Any]) -> str:
+    return str(row.get("source_document_id") or row.get("id") or row.get("document_id") or "").strip()
+
+
+def _source_hash(row: dict[str, Any]) -> str:
+    return str(row.get("content_sha256") or row.get("source_sha256") or row.get("documentHash") or "").strip()
+
+
+def _source_status_review_tasks(source_statuses: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    tasks: list[dict[str, Any]] = []
+    for index, status in enumerate(source_statuses, start=1):
+        task_type = str(status.get("status") or "")
+        if task_type not in SOURCE_STATUS_REVIEW_TASK_TYPES:
+            continue
+        source_id = _source_id(status)
+        source_hash = _source_hash(status)
+        identifier = source_id or source_hash or f"{index:04d}"
+        message = str(status.get("message") or task_type)
+        tasks.append(
+            {
+                "task_id": f"source-{task_type.replace('_', '-')}-{identifier}",
+                "task_type": task_type,
+                "field": None,
+                "source_document_id": source_id or None,
+                "content_sha256": source_hash or None,
+                "calendar_group_key": status.get("calendar_group_key"),
+                "candidate_type": "source",
+                "page_number": None,
+                "page_image": None,
+                "field_crop": None,
+                "field_crop_sha256": None,
+                "field_bbox": None,
+                "primary_text": None,
+                "secondary_text": None,
+                "candidate_value": None,
+                "normalized_value": None,
+                "validation_findings": [message],
+                "snapshot_path": status.get("snapshot_path"),
+                "source_status": status,
+            }
+        )
+    return tasks
+
+
+def build_review_tasks(
+    candidates: list[dict[str, Any]],
+    *,
+    source_statuses: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     tasks: list[dict[str, Any]] = []
     for index, candidate in enumerate(candidates, start=1):
         if candidate.get("validation_status") not in {"needs_review", "parser_error", "source_error"}:
@@ -106,6 +157,7 @@ def build_review_tasks(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]
                 "candidate": candidate,
             }
         )
+    tasks.extend(_source_status_review_tasks(source_statuses or []))
     return tasks
 
 
@@ -122,16 +174,32 @@ def review_approval_is_current(
     return True
 
 
+def _load_json_list(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    if path.is_dir():
+        rows: list[dict[str, Any]] = []
+        for child in sorted(path.glob("*.json")):
+            rows.extend(_load_json_list(child))
+        return rows
+    payload = json.loads(path.read_text())
+    if isinstance(payload, dict) and isinstance(payload.get("rows"), list):
+        return [item for item in payload["rows"] if isinstance(item, dict)]
+    if not isinstance(payload, list):
+        return []
+    return [item for item in payload if isinstance(item, dict)]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build v3 review queue tasks")
-    parser.add_argument("validated_candidates", type=Path)
+    parser.add_argument("validated_candidates", type=Path, nargs="?", default=DEFAULT_VALIDATED_CANDIDATES_PATH)
+    parser.add_argument("--source-statuses", type=Path, default=DEFAULT_SOURCE_STATUSES_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    payload = json.loads(args.validated_candidates.read_text())
-    candidates = payload if isinstance(payload, list) else []
-    tasks = build_review_tasks(candidates)
+    candidates = _load_json_list(args.validated_candidates)
+    tasks = build_review_tasks(candidates, source_statuses=_load_json_list(args.source_statuses))
     if args.json:
         print(json.dumps(tasks, indent=2, sort_keys=True))
         return

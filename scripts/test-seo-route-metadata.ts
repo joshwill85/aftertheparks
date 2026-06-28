@@ -462,7 +462,7 @@ async function main() {
     [/<h3[^>]*>\s*Cost and reservations\s*<\/h3>/, "cost and reservations answer"],
     [/<h3[^>]*>\s*Best resorts for this activity\s*<\/h3>/, "best resorts answer"],
     [/<h3[^>]*>\s*Tips\s*<\/h3>/, "tips answer"],
-    [/<h3[^>]*>\s*Weather\/cancellation caveats\s*<\/h3>/, "weather and cancellation answer"],
+    [/<h3[^>]*>\s*Cancellation caveats\s*<\/h3>/, "cancellation answer"],
     [/<h3[^>]*>\s*Similar activities\s*<\/h3>/, "similar activities answer"],
     [/<h3[^>]*>\s*Official-source notes\s*<\/h3>/, "official-source notes answer"],
     [/<h3[^>]*>\s*Confirm before going\s*<\/h3>/, "confirm before going answer"],
@@ -569,11 +569,10 @@ async function main() {
     ["app/tonight/page.tsx", "tonight page"],
   ] as const) {
     const source = readFileSync(file, "utf8");
-    assert.match(source, /Quick answer/, `${label} should include a first-screen answer block`);
-    assert.match(source, /Source and freshness/, `${label} should visibly expose source and freshness context`);
+    assert.doesNotMatch(source, /Quick answer/, `${label} should not restore the removed first-screen answer block`);
+    assert.doesNotMatch(source, /DecisionSummaryBar/, `${label} should not restore the removed decision summary block`);
     assert.match(source, /activityListJsonLd/, `${label} should emit ItemList JSON-LD`);
     assert.match(source, /activityEventJsonLd/, `${label} should emit Event JSON-LD for dated occurrences`);
-    assert.match(source, /source-and-accuracy-policy/, `${label} should link to the source policy`);
   }
 
   for (const [file, canonicalPath] of [
@@ -594,10 +593,10 @@ async function main() {
   }
 
   const calendarPage = readFileSync("app/calendar/page.tsx", "utf8");
-  assert.match(
+  assert.doesNotMatch(
     calendarPage,
     /Quick answer/,
-    "calendar page should include a first-screen answer block"
+    "calendar page should not restore the removed first-screen answer block"
   );
   assert.match(
     calendarPage,

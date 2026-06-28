@@ -71,6 +71,13 @@ interface IngestActivityRow {
     text?: string | null;
   } | null;
   field_provenance?: Record<string, unknown> | null;
+  source?: {
+    url?: string | null;
+    documentHash?: string | null;
+  } | null;
+  source_sha256?: string | null;
+  source_url?: string | null;
+  trust_state?: string | null;
   movie_nights?: IngestMovieNight[];
 }
 
@@ -115,8 +122,24 @@ function movieLocationForRow(activity: IngestActivityRow): string | null | undef
 }
 
 function hasSourceBackedMovieNightFeed(activity: IngestActivityRow): boolean {
-  const provenance = activity.field_provenance?.movie_nights;
-  return Array.isArray(provenance) && provenance.length > 0;
+  if (!activity.movie_nights?.length) return false;
+
+  const legacyMovieProvenance = activity.field_provenance?.movie_nights;
+  if (Array.isArray(legacyMovieProvenance) && legacyMovieProvenance.length > 0) {
+    return true;
+  }
+
+  const sourceUrl = activity.source_url ?? activity.source?.url;
+  const sourceHash = activity.source_sha256 ?? activity.source?.documentHash;
+  const sourceBacked =
+    activity.trust_state === "source_backed" || activity.trust_state === "reviewed";
+  const fieldProvenance = activity.field_provenance ?? {};
+  const hasScheduleEvidence = ["title", "schedule", "location"].some((field) => {
+    const spans = fieldProvenance[field];
+    return Array.isArray(spans) && spans.length > 0;
+  });
+
+  return sourceBacked && Boolean(sourceUrl || sourceHash) && hasScheduleEvidence;
 }
 
 export const DEFAULT_ACTIVITY_DATA_PIPELINE = "gold-v2";
@@ -913,7 +936,7 @@ export const getMovieNights = cache(async function getMovieNights(): Promise<
     })
   );
 
-  return enriched.filter((movie) => Boolean(movie.posterUrl));
+  return enriched;
 });
 
 export async function createPlanShare(

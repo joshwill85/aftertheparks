@@ -5,14 +5,17 @@ const eventCard = readFileSync("components/events/EventCard.tsx", "utf8");
 const activityDecision = readFileSync("lib/activityDecision.ts", "utf8");
 
 assert.ok(activityDecision.includes('"booking"'), "Decision signals should include booking.");
-assert.ok(activityDecision.includes('"weather"'), "Decision signals should include weather.");
+assert.ok(
+  !activityDecision.includes('"weather"'),
+  "Decision signals should not include generic weather prompts."
+);
 assert.ok(
   activityDecision.includes("bookingStatusForActivity"),
   "Activity decision profile should use planning facts."
 );
 assert.ok(
-  activityDecision.includes("weatherFitForActivity"),
-  "Activity decision profile should use weather fit facts."
+  !activityDecision.includes("weatherFitForActivity"),
+  "Activity decision profile should not build generic weather decision cards."
 );
 
 assert.ok(

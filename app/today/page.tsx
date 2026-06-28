@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 import { TodayClient } from "@/components/atlas/TodayClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { Hero } from "@/components/atlas/Hero";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
-import { DecisionSummaryBar } from "@/components/planning/DecisionSummaryBar";
-import { TrustInline } from "@/components/planning/TrustInline";
 import { getTodayActivities, getTomorrowPreview, getResorts } from "@/lib/data/activities";
 import { parseBrowseParams } from "@/lib/explore/browseParams";
 import {
@@ -16,12 +13,9 @@ import {
 import {
   activityEventJsonLd,
   activityListJsonLd,
-  activitySourceSummary,
-  formatSeoDate,
 } from "@/lib/seo/activityPage";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
-import { buildDecisionSummary } from "@/lib/planning/decisionSummary";
 import {
   loadWeatherByOccurrence,
   loadWeatherGuidanceForLocation,
@@ -115,11 +109,6 @@ export default async function TodayPage({
     resortOptions
   );
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
-  const sourceSummary = activitySourceSummary(baseActivities);
-  const decisionSummary = buildDecisionSummary({
-    activities,
-    scope: "today",
-  });
   const jsonLd = stringifyJsonLd([
     activityListJsonLd(baseUrl, "Walt Disney World resort activities today", activities),
     ...activityEventJsonLd(baseUrl, activities),
@@ -136,31 +125,6 @@ export default async function TodayPage({
         subtitle="What's still ahead for the rest of your resort day — sorted by time."
         compactBrowse
       />
-      <section className="mb-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          Today at Walt Disney World resorts, use this page to find currently
-          tracked recreation, crafts, poolside activities, games, movies,
-          campfires, and source-backed resort options that still fit your day.
-        </p>
-        <TrustInline
-          lastVerified={formatSeoDate(sourceSummary.latestVerified)}
-          sourceCount={sourceSummary.sourceCount}
-          rowCount={sourceSummary.activityCount}
-        />
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link href="/tonight" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-            See tonight
-          </Link>
-          <Link href="/activities" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-            Browse all activities
-          </Link>
-          <Link href="/source-and-accuracy-policy" className="text-sm font-bold text-[var(--accent)] hover:underline">
-            Source and accuracy policy
-          </Link>
-        </div>
-      </section>
-      <DecisionSummaryBar summary={decisionSummary} />
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <BrowseFilterShell
           variant="today"

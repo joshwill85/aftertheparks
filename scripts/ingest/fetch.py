@@ -23,7 +23,12 @@ try:
     )
     from content_type import detect_source_content
     from db import SupabaseClient
-    from source_manifest import ACTIVITY_SOURCES, ActivitySource, apply_pdf_source_overrides
+    from source_manifest import (
+        ACTIVITY_SOURCES,
+        ActivitySource,
+        apply_pdf_source_overrides,
+        filter_activity_sources_for_quarter,
+    )
 except ImportError:  # pragma: no cover - supports package-style imports in tests
     from .config import (
         DISNEY_USER_AGENT,
@@ -34,7 +39,12 @@ except ImportError:  # pragma: no cover - supports package-style imports in test
     )
     from .content_type import detect_source_content
     from .db import SupabaseClient
-    from .source_manifest import ACTIVITY_SOURCES, ActivitySource, apply_pdf_source_overrides
+    from .source_manifest import (
+        ACTIVITY_SOURCES,
+        ActivitySource,
+        apply_pdf_source_overrides,
+        filter_activity_sources_for_quarter,
+    )
 
 
 @dataclass
@@ -171,6 +181,7 @@ def fetch_report_row(
     replaced_stale_url: str | None = None,
     last_modified: str | None = None,
     discovery_parent_url: str | None = None,
+    source_type: str | None = None,
 ) -> dict:
     return {
         "calendar_group_key": calendar_group_key,
@@ -178,11 +189,45 @@ def fetch_report_row(
         "source_document_id": source_document_id,
         "content_sha256": content_sha256,
         "message": message,
+        "source_type": source_type,
         "canonical_url": canonical_url,
         "replaced_stale_url": replaced_stale_url,
         "last_modified": last_modified,
         "discovery_parent_url": discovery_parent_url,
     }
+
+
+def build_fetch_report(
+    results: list[dict[str, Any]],
+    *,
+    ingest_run_id: str | None,
+    quarter: str | None = None,
+    fetched_at: str | None = None,
+) -> dict[str, Any]:
+    source_type_counts: dict[str, int] = {}
+    for row in results:
+        source_type = str(row.get("source_type") or "unknown")
+        source_type_counts[source_type] = source_type_counts.get(source_type, 0) + 1
+    return {
+        "fetched_at": fetched_at or datetime.now(timezone.utc).isoformat(),
+        "ingest_run_id": ingest_run_id,
+        "quarter": quarter,
+        "source_type_counts": source_type_counts,
+        "document_source_count": sum(source_type_counts.get(kind, 0) for kind in ("pdf", "image")),
+        "results": results,
+    }
+
+
+def select_sources_for_fetch(
+    sources: list[ActivitySource],
+    *,
+    group: str | None = None,
+    quarter: str | None = None,
+) -> list[ActivitySource]:
+    selected = filter_activity_sources_for_quarter(sources, quarter)
+    if group:
+        selected = [source for source in selected if source.calendar_group_key == group]
+    return selected
 
 
 def fetch_source(
@@ -279,10 +324,11 @@ def fetch_source(
 def main() -> None:
     import argparse
 
-    parser = argparse.ArgumentParser(description="Fetch official recreation PDFs (bronze layer)")
+    parser = argparse.ArgumentParser(description="Fetch official recreation source documents (bronze layer)")
     parser.add_argument("--force", action="store_true", help="Re-download even if hash matches")
     parser.add_argument("--local-only", action="store_true", help="Skip Supabase upload/insert")
     parser.add_argument("--group", help="Fetch single calendar_group_key")
+    parser.add_argument("--quarter", help="Fetch only source editions in this quarter, e.g. fy26-q4")
     parser.add_argument("--source-overrides", type=Path, help="JSON overrides from replace_resort_pdf_sources.py")
     args = parser.parse_args()
 
@@ -301,8 +347,7 @@ def main() -> None:
     if args.source_overrides:
         overrides = json.loads(args.source_overrides.read_text())
         sources = apply_pdf_source_overrides(ACTIVITY_SOURCES, overrides)
-    if args.group:
-        sources = [s for s in sources if s.calendar_group_key == args.group]
+    sources = select_sources_for_fetch(sources, group=args.group, quarter=args.quarter)
 
     results: list[dict] = []
     for source in sources:
@@ -322,14 +367,11 @@ def main() -> None:
                 replaced_stale_url=override.get("replaced_stale_url"),
                 last_modified=meta.get("last_modified"),
                 discovery_parent_url=override.get("discovery_parent_url"),
+                source_type=source.source_type,
             )
         )
 
-    report = {
-        "fetched_at": datetime.now(timezone.utc).isoformat(),
-        "ingest_run_id": run_id,
-        "results": results,
-    }
+    report = build_fetch_report(results, ingest_run_id=run_id, quarter=args.quarter)
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     (PROCESSED_DIR / "fetch_report.json").write_text(json.dumps(report, indent=2))
 

@@ -3,8 +3,6 @@ import { Suspense } from "react";
 import { Hero } from "@/components/atlas/Hero";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { ExploreLayout } from "@/components/explore/ExploreLayout";
-import { DecisionSummaryBar } from "@/components/planning/DecisionSummaryBar";
-import { TrustInline } from "@/components/planning/TrustInline";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
 import {
   filterOfficialOfferingsWithoutActivityCollisions,
@@ -19,8 +17,6 @@ import {
 import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
-import { activitySourceSummary, formatSeoDate } from "@/lib/seo/activityPage";
-import { buildDecisionSummary } from "@/lib/planning/decisionSummary";
 
 export const dynamic = "force-dynamic";
 
@@ -145,11 +141,6 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     resortOptions
   );
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
-  const sourceSummary = activitySourceSummary(baseActivities);
-  const decisionSummary = buildDecisionSummary({
-    activities,
-    scope: "activities",
-  });
   const jsonLd = stringifyJsonLd(
     buildItemListJsonLd(
       baseUrl,
@@ -177,22 +168,6 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
         subtitle={pageMetadata.description}
         compactBrowse
       />
-      <section className="mb-6">
-        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            Browse current Walt Disney World resort activities by time, resort,
-            cost, weather fit, and no-park-day intent. Start here when you want
-            the broad activity list, then narrow to today, tonight, indoor, free,
-            or transportation-area views.
-          </p>
-          <TrustInline
-            lastVerified={formatSeoDate(sourceSummary.latestVerified)}
-            sourceCount={sourceSummary.sourceCount}
-            rowCount={sourceSummary.activityCount}
-          />
-        </div>
-      </section>
       {strategicKey === "area=disney-springs" && (
         <section className="mb-6 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <h2 className="font-display text-2xl font-semibold">
@@ -203,7 +178,6 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
           </p>
         </section>
       )}
-      <DecisionSummaryBar summary={decisionSummary} />
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <ExploreLayout
           activities={activities}

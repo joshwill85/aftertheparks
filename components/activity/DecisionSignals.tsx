@@ -13,6 +13,8 @@ export function DecisionSignals({
   const signals =
     maxSignals == null ? profile.signals : profile.signals.slice(0, maxSignals);
 
+  if (!profile.whyFits && signals.length === 0) return null;
+
   return (
     <div className={cn("decision-signals", compact && "decision-signals--compact")}>
       {profile.whyFits && (

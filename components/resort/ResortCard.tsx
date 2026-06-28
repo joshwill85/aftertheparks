@@ -132,6 +132,11 @@ export function ResortCard({
         </div>
 
         <div className="resort-card__body">
+          {hasStoryIcon && (
+            <span className="resort-card__story-watermark" aria-hidden>
+              <ResortStoryIcon slug={resort.slug} isDarkBanner={isDarkBanner} />
+            </span>
+          )}
           <div className="resort-card__topline">
             <span className="resort-card__area">{areaLabel}</span>
           </div>

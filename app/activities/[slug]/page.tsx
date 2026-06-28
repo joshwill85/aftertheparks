@@ -184,29 +184,6 @@ function ActivitySeoFallback({
       </header>
 
       <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          {activity.title} can be a useful resort-day option when it matches your
-          timing, weather, transportation, and access situation. Use the live
-          activity views to confirm whether it is currently scheduled.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link
-            href={activity.currentCheckHref}
-            className="btn-primary rounded-full px-5 py-3 text-sm font-bold"
-          >
-            Check current listings
-          </Link>
-          <Link
-            href="/activities"
-            className="btn-secondary rounded-full px-5 py-3 text-sm font-bold"
-          >
-            Browse all activities
-          </Link>
-        </div>
-      </section>
-
-      <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Activity planning snapshot</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <article className="rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card-subtle)] p-4">

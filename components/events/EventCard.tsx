@@ -7,6 +7,10 @@ import { SaveButton } from "@/components/activity/SaveButton";
 import { EventWeatherSignal } from "@/components/weather/EventWeatherSignal";
 import { WeatherIconButton } from "@/components/weather/WeatherIconButton";
 import { WeatherTimeSpanPopover } from "@/components/weather/WeatherTimeSpanPopover";
+import {
+  hasResortStoryIcon,
+  ResortStoryIcon,
+} from "@/components/resort/ResortStoryIcon";
 import type { DecisionProfile } from "@/lib/activityDecision";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
@@ -133,11 +137,17 @@ export function EventCard({
   const saveVariant = isNight ? "night" : "day";
   const isClickable = Boolean(href || onOpen);
   const shouldShowWeatherSummary = hasDisplayableWeatherIcon(weatherSummary);
+  const showStoryWatermark = Boolean(resortSlug && hasResortStoryIcon(resortSlug));
 
   const body = (
     <>
       <EventMediaDisplay media={media} size="card" resortSlug={resortSlug} />
       <div className="event-card__body">
+        {showStoryWatermark && resortSlug && (
+          <span className="event-card__story-watermark" aria-hidden>
+            <ResortStoryIcon slug={resortSlug} />
+          </span>
+        )}
         <EventTitleBlock
           title={title}
           resort={resort}

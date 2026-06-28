@@ -15,10 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { FilterRail } from "@/components/explore/FilterRail";
 import { FilterSheet } from "@/components/explore/FilterSheet";
-import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
-import { ResultSummary } from "@/components/explore/ResultSummary";
 import { BrowseDayTabs } from "@/components/explore/BrowseDayTabs";
-import { PresetChips } from "@/components/explore/PresetChips";
 import { usePlan } from "@/components/atlas/PlanProvider";
 
 export type BrowseFilterVariant = "today" | "tonight" | "explore";
@@ -29,8 +26,6 @@ interface BrowseFilterShellProps {
   resultCount: number;
   filterImpact: FilterImpact;
   children: ReactNode;
-  /** Extra content in the results column below filters (explore plan rail handled separately). */
-  showGlobalSearchLink?: boolean;
 }
 
 export function BrowseFilterShell({
@@ -39,7 +34,6 @@ export function BrowseFilterShell({
   resultCount,
   filterImpact,
   children,
-  showGlobalSearchLink = true,
 }: BrowseFilterShellProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [undoHref, setUndoHref] = useState<string | null>(null);
@@ -103,22 +97,8 @@ export function BrowseFilterShell({
         </div>
 
         <div className="results-column min-w-0 space-y-4">
-          <div className="browse-controls explore-controls sticky top-[64px] z-40 -mx-4 border-b border-[var(--color-card-border)] bg-[var(--color-sun-cream)]/92 px-4 py-3 backdrop-blur-[18px] min-[900px]:static min-[900px]:mx-0 min-[900px]:border-0 min-[900px]:bg-transparent min-[900px]:p-0 min-[900px]:backdrop-blur-none">
-            <ExploreSearchBar basePath={basePath} />
-            <div className="browse-controls__utility">
-              {showGlobalSearchLink ? (
-                <Link
-                  href="/search"
-                  className="explore-search__global-link"
-                >
-                  Search everything <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
-                </Link>
-              ) : (
-                <span aria-hidden />
-              )}
-            </div>
-
-            <div className="mt-3 flex items-center gap-3 min-[900px]:hidden">
+          <div className="browse-controls min-[900px]:hidden">
+            <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => setSheetOpen(true)}
@@ -136,10 +116,6 @@ export function BrowseFilterShell({
               </button>
             </div>
 
-            <div className="preset-chips-scroll mt-3">
-              <PresetChips homeResortSlug={homeResortSlug} />
-            </div>
-
             {(activeChips.length > 0 || undoHref) && (
               <FilterStateBar
                 chips={activeChips}
@@ -151,13 +127,6 @@ export function BrowseFilterShell({
             {filters.near === "my-resort" && filters.resort && (
               <NearMyResortNote selectedResortName={resortName(resorts, filters.resort)} />
             )}
-            <div className="mt-3 min-[900px]:mt-0">
-              <ResultSummary
-                count={resultCount}
-                compact
-                basePath={basePath}
-              />
-            </div>
           </div>
 
           <div id="activities" className="scroll-mt-24">

@@ -416,15 +416,25 @@
         "movie_nights": [
           {
             "page": 1,
-            "line": 71,
-            "text": "Monday........... The Many Adventures of Winnie the Pooh"
+            "line": 62,
+            "text": "TUCSaY ....ssesssssseessesessssesssseeseesee De Little Mermaid (1989) [G |"
+          },
+          {
+            "page": 1,
+            "line": 62,
+            "text": "Saturday ........cseessssssseeeseeeeeeeeeteeeeeeeee ZOOCOPiA Or Zootopia 2"
           }
         ]
       },
       "movie_nights": [
         {
-          "day_of_week": "monday",
-          "movie_title": "The Many Adventures of Winnie the Pooh",
+          "day_of_week": "tuesday",
+          "movie_title": "The Little Mermaid (1989)",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "saturday",
+          "movie_title": "Zootopia 2",
           "show_time": "8:30PM"
         }
       ]

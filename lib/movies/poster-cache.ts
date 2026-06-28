@@ -1,6 +1,7 @@
 import { createServiceClient } from "@/lib/supabase/server";
 import { normalizeMovieTitleKey, sanitizeMovieTitle } from "@/lib/movies/sanitize";
 import {
+  fetchTmdbMovieDetails,
   fetchTmdbMovieRuntime,
   searchTmdbMovie,
   tmdbImageUrl,
@@ -105,13 +106,66 @@ function hitToMeta(titleKey: string, displayTitle: string, hit: TmdbMovieResult)
   };
 }
 
-async function refreshRuntimeIfMissing(meta: MoviePosterMeta): Promise<MoviePosterMeta> {
-  if (meta.runtimeMinutes || !meta.tmdbId || !meta.found) return meta;
+function shouldRevalidateCachedMatch(
+  displayTitle: string,
+  meta: MoviePosterMeta
+): boolean {
+  if (!meta.found || !meta.tmdbId || !meta.releaseYear) return false;
+  if (/\(\d{4}\)|\b\d+\b/.test(displayTitle)) return false;
 
-  const runtimeMinutes = await fetchTmdbMovieRuntime(meta.tmdbId);
-  if (!runtimeMinutes) return meta;
+  const currentYear = new Date().getUTCFullYear();
+  return meta.releaseYear >= currentYear - 1;
+}
 
-  const refreshed = { ...meta, runtimeMinutes };
+async function revalidateCachedMatch(
+  titleKey: string,
+  displayTitle: string,
+  meta: MoviePosterMeta
+): Promise<MoviePosterMeta> {
+  if (!shouldRevalidateCachedMatch(displayTitle, meta)) return meta;
+
+  const refreshedHit = await searchTmdbMovie(displayTitle);
+  if (!refreshedHit || refreshedHit.id === meta.tmdbId) return meta;
+
+  const refreshed = hitToMeta(titleKey, displayTitle, refreshedHit);
+  memoryCache.set(titleKey, refreshed);
+  await persistFromHit(titleKey, displayTitle, refreshedHit);
+  return refreshed;
+}
+
+async function refreshMetadataIfIncomplete(
+  meta: MoviePosterMeta
+): Promise<MoviePosterMeta> {
+  if (
+    !meta.tmdbId ||
+    !meta.found ||
+    (meta.runtimeMinutes && meta.overview && typeof meta.voteAverage === "number")
+  ) {
+    return meta;
+  }
+
+  const details = await fetchTmdbMovieDetails(meta.tmdbId);
+  if (!details) {
+    const runtimeMinutes = await fetchTmdbMovieRuntime(meta.tmdbId);
+    return runtimeMinutes ? { ...meta, runtimeMinutes } : meta;
+  }
+
+  const runtimeMinutes =
+    typeof details.runtime === "number" && Number.isFinite(details.runtime)
+      ? details.runtime
+      : meta.runtimeMinutes;
+  const voteAverage =
+    typeof details.vote_average === "number" && Number.isFinite(details.vote_average)
+      ? details.vote_average
+      : meta.voteAverage;
+  const overview = details.overview?.trim() || meta.overview;
+
+  const refreshed = {
+    ...meta,
+    overview,
+    voteAverage,
+    runtimeMinutes,
+  };
   memoryCache.set(meta.titleKey, refreshed);
 
   if (await ensurePosterCacheDb()) {
@@ -119,12 +173,17 @@ async function refreshRuntimeIfMissing(meta: MoviePosterMeta): Promise<MoviePost
     if (supabase) {
       const { error } = await supabase
         .from("movie_poster_cache")
-        .update({ runtime_minutes: runtimeMinutes })
+        .update({
+          overview,
+          vote_average: voteAverage,
+          runtime_minutes: runtimeMinutes,
+          resolved_at: new Date().toISOString(),
+        })
         .eq("title_key", meta.titleKey);
       if (isMissingPosterCacheTable(error)) {
         posterCacheDbAvailable = false;
       } else if (error) {
-        console.error("movie_poster_cache runtime update:", error.message);
+        console.error("movie_poster_cache metadata update:", error.message);
       }
     }
   }
@@ -153,7 +212,7 @@ async function getCachedPoster(titleKey: string): Promise<MoviePosterMeta | null
 
   if (error || !data) return null;
 
-  const meta = await refreshRuntimeIfMissing(rowToMeta(data as CacheRow));
+  const meta = await refreshMetadataIfIncomplete(rowToMeta(data as CacheRow));
   memoryCache.set(titleKey, meta);
   return meta;
 }
@@ -163,7 +222,9 @@ export async function resolveMoviePoster(rawTitle: string): Promise<MoviePosterM
   const titleKey = normalizeMovieTitleKey(displayTitle);
 
   const cached = await getCachedPoster(titleKey);
-  if (cached) return cached;
+  if (cached) {
+    return revalidateCachedMatch(titleKey, displayTitle, cached);
+  }
 
   const hit = await searchTmdbMovie(displayTitle);
   const meta: MoviePosterMeta = hit
@@ -271,11 +332,14 @@ export async function loadPostersForTitles(
       const dbKeys = new Set<string>();
 
       for (const row of data ?? []) {
-        const meta = await refreshRuntimeIfMissing(rowToMeta(row as CacheRow));
+        let meta = await refreshMetadataIfIncomplete(rowToMeta(row as CacheRow));
         memoryCache.set(meta.titleKey, meta);
         dbKeys.add(meta.titleKey);
         const item = toResolve.find((m) => m.key === meta.titleKey);
-        if (item) result.set(item.raw, meta);
+        if (item) {
+          meta = await revalidateCachedMatch(item.key, item.displayTitle, meta);
+          result.set(item.raw, meta);
+        }
       }
 
       for (const item of toResolve) {

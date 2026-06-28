@@ -128,7 +128,11 @@ assert.match(tonightHeroSource, /<h2\b/, "TonightHero should keep a visible sect
 
 for (const file of ["app/page.tsx", "app/activities/page.tsx", "app/resorts/page.tsx"]) {
   const source = readFileSync(file, "utf8");
-  assert.match(source, /Quick answer/i, `${file} should expose a visible quick-answer section`);
+  assert.doesNotMatch(source, /Quick answer/i, `${file} should not restore the removed quick-answer section`);
+}
+
+for (const file of ["app/page.tsx", "app/resorts/page.tsx"]) {
+  const source = readFileSync(file, "utf8");
   assert.match(
     source,
     /Source and freshness/i,

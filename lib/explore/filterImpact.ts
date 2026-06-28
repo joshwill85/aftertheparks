@@ -22,6 +22,7 @@ import {
   INTENT_PRESETS,
   presetLabel,
 } from "@/lib/planning/presetDefinitions";
+import { inferWeatherFitFromText } from "@/lib/explore/weatherFit";
 import { DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG, type WeatherFit } from "@/lib/seo/fit";
 import type {
   ActivityFilters,
@@ -110,39 +111,6 @@ function timeWindowFromStart(startDateTime?: string): "after_7_pm" | "dinner_win
   return undefined;
 }
 
-function weatherFitFromText(item: {
-  title?: string;
-  category?: string;
-  summary?: string;
-  location?: string;
-  tags?: string[];
-  amenities?: string[];
-  weatherDependency?: string;
-}): WeatherFit | undefined {
-  const text = [
-    item.title,
-    item.category,
-    item.summary,
-    item.location,
-    item.weatherDependency,
-    ...(item.tags ?? []),
-    ...(item.amenities ?? []),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  if (/\bindoor\b|arcade|community hall|lobby|animation|learn to draw/.test(text)) {
-    return "indoor";
-  }
-  if (/\bcovered\b|porch|pavilion|under cover|covered walkway/.test(text)) {
-    return "covered";
-  }
-  if (/weather|outdoor|movie|campfire|pool|trail|surrey/.test(text)) {
-    return "outdoor_weather_dependent";
-  }
-  return undefined;
-}
-
 function weatherMatches(
   item: FilterableItem,
   weather: NonNullable<ActivityFilters["weather"]>
@@ -211,9 +179,11 @@ export function activityToFilterableItem(activity: ActivityOccurrence): Filterab
     }),
     weatherFit:
       DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[activity.activitySlug]?.weatherFit ??
-      weatherFitFromText({
+      inferWeatherFitFromText({
         title: activity.title,
         category: activity.category,
+        summary: activity.summary,
+        location: activity.location.label,
         weatherDependency: activity.enrichment?.weatherDependency,
       }),
     reservation: Boolean(
@@ -245,7 +215,7 @@ export function offeringToFilterableItem(offering: ActivityOffering): Filterable
     }),
     weatherFit:
       DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[offering.activitySlug]?.weatherFit ??
-      weatherFitFromText({
+      inferWeatherFitFromText({
         title: offering.title,
         category: offering.category,
         summary: offering.summary,

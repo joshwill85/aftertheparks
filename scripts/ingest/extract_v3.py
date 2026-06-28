@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 from pathlib import Path
 from typing import Any
@@ -12,14 +13,18 @@ try:
     from fee_validator import reconcile_fee_evidence
     from field_evidence import build_field_evidence
     from normalization_v3 import evaluate_field_agreement, normalize_location_text, normalize_schedule_text
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .fee_validator import reconcile_fee_evidence
     from .field_evidence import build_field_evidence
     from .normalization_v3 import evaluate_field_agreement, normalize_location_text, normalize_schedule_text
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "activity_candidates_v3"
+DEFAULT_SNAPSHOTS_DIR = PROCESSED_DIR / "vision_snapshots"
+DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_extract_report.json"
 PUBLISHABLE_REGION_TYPES = {
     "resort_activities_section": "activity",
     "wellness_section": "activity",
@@ -315,6 +320,8 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
                 "source_document_id": snapshot.get("source_document_id"),
                 "content_sha256": snapshot.get("source_sha256"),
                 "calendar_group_key": snapshot.get("calendar_group_key"),
+                "edition": snapshot.get("edition"),
+                "source_type": snapshot.get("source_type"),
                 "candidate_type": candidate_type,
                 "region_id": region.get("region_id"),
                 "region_type": region_type,
@@ -339,23 +346,129 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
     return candidates
 
 
+def _snapshot_paths(snapshots_dir: Path) -> list[Path]:
+    if not snapshots_dir.exists():
+        return []
+    return sorted(snapshots_dir.glob("*.vision.json"))
+
+
+def _snapshot_matches_filters(
+    snapshot: dict[str, Any],
+    *,
+    group: str | None,
+    quarter: str | None,
+) -> bool:
+    if group and snapshot.get("calendar_group_key") != group:
+        return False
+    edition = str(snapshot.get("edition") or "")
+    if not edition_matches_quarter(edition, quarter):
+        return False
+    return True
+
+
+def candidates_output_path(snapshot: dict[str, Any], *, output_dir: Path = DEFAULT_OUTPUT_DIR) -> Path:
+    source_hash = str(snapshot.get("source_sha256") or "unknown")
+    return output_dir / f"{source_hash}.candidates.json"
+
+
+def extract_candidates_from_directory(
+    *,
+    snapshots_dir: Path = DEFAULT_SNAPSHOTS_DIR,
+    output_dir: Path = DEFAULT_OUTPUT_DIR,
+    report_path: Path | None = DEFAULT_REPORT_PATH,
+    group: str | None = None,
+    quarter: str | None = None,
+) -> dict[str, Any]:
+    results: list[dict[str, Any]] = []
+    for snapshot_path in _snapshot_paths(snapshots_dir):
+        try:
+            snapshot = json.loads(snapshot_path.read_text())
+            if not _snapshot_matches_filters(snapshot, group=group, quarter=quarter):
+                continue
+            candidates = extract_candidates_from_snapshot(snapshot)
+            output_path = candidates_output_path(snapshot, output_dir=output_dir)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(json.dumps(candidates, indent=2, sort_keys=True) + "\n")
+            results.append(
+                {
+                    "status": "extracted",
+                    "snapshot_path": str(snapshot_path),
+                    "candidates_path": str(output_path),
+                    "source_sha256": snapshot.get("source_sha256"),
+                    "calendar_group_key": snapshot.get("calendar_group_key"),
+                    "edition": snapshot.get("edition"),
+                    "candidate_count": len(candidates),
+                    "error": None,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "status": "parser_error",
+                    "snapshot_path": str(snapshot_path),
+                    "candidates_path": None,
+                    "source_sha256": None,
+                    "calendar_group_key": None,
+                    "edition": None,
+                    "candidate_count": 0,
+                    "error": str(exc),
+                }
+            )
+
+    report = {
+        "report_kind": "v3_extract",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "snapshots_dir": str(snapshots_dir),
+        "output_dir": str(output_dir),
+        "quarter": quarter,
+        "group": group,
+        "summary": {
+            "snapshot_count": len(results),
+            "candidate_count": sum(int(result["candidate_count"]) for result in results),
+            "parser_error_count": sum(1 for result in results if result["status"] == "parser_error"),
+        },
+        "results": results,
+    }
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Extract v3 candidates from a vision snapshot")
-    parser.add_argument("snapshot", type=Path)
+    parser.add_argument("snapshot", type=Path, nargs="?")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--snapshots-dir", type=Path, default=DEFAULT_SNAPSHOTS_DIR)
+    parser.add_argument("--report-path", type=Path, default=DEFAULT_REPORT_PATH)
+    parser.add_argument("--group")
+    parser.add_argument("--quarter")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    snapshot = json.loads(args.snapshot.read_text())
-    candidates = extract_candidates_from_snapshot(snapshot)
-    if args.json:
-        print(json.dumps(candidates, indent=2, sort_keys=True))
+    if args.snapshot:
+        snapshot = json.loads(args.snapshot.read_text())
+        candidates = extract_candidates_from_snapshot(snapshot)
+        if args.json:
+            print(json.dumps(candidates, indent=2, sort_keys=True))
+            return
+        output_path = candidates_output_path(snapshot, output_dir=args.output_dir)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(candidates, indent=2, sort_keys=True) + "\n")
+        print(output_path)
         return
-    source_hash = str(snapshot.get("source_sha256") or "unknown")
-    output_path = args.output_dir / f"{source_hash}.candidates.json"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(candidates, indent=2, sort_keys=True) + "\n")
-    print(output_path)
+
+    report = extract_candidates_from_directory(
+        snapshots_dir=args.snapshots_dir,
+        output_dir=args.output_dir,
+        report_path=args.report_path,
+        group=args.group,
+        quarter=args.quarter,
+    )
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(args.report_path)
 
 
 if __name__ == "__main__":

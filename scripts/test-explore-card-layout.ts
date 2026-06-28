@@ -25,8 +25,14 @@ assert.match(
 
 assert.match(
   polish,
+  /\.explore-activity-grid \.event-card__hit-area\s*\{[\s\S]*display:\s*flex[\s\S]*flex-direction:\s*column/,
+  "Explore cards should use a single-column layout so the right side of the card is not left empty."
+);
+
+assert.doesNotMatch(
+  polish,
   /\.explore-activity-grid \.event-card__hit-area\s*\{[\s\S]*grid-template-columns:\s*112px minmax\(0,\s*1fr\)/,
-  "Explore cards should use a media-and-copy grid on desktop so the right side of the card is not wasted."
+  "Explore cards should not reserve a two-column media-and-copy grid."
 );
 
 assert.match(
@@ -39,6 +45,18 @@ assert.match(
   polish,
   /\.explore-activity-grid\s*\{[\s\S]*grid-auto-rows:\s*auto/,
   "Explore cards should size rows to their own content instead of inheriting extra equal-height whitespace."
+);
+
+assert.match(
+  polish,
+  /\.explore-activity-grid \.decision-signals\.decision-signals--compact \.decision-signals__grid\s*\{[\s\S]*grid-template-columns:\s*1fr/,
+  "Explore card decision facts should stack in one column instead of leaving unused card width."
+);
+
+assert.match(
+  polish,
+  /@media \(max-width:\s*420px\)[\s\S]*\.explore-activity-grid \.decision-signals\.decision-signals--compact \.decision-signals__grid\s*\{[\s\S]*grid-template-columns:\s*1fr/,
+  "Explore card decision facts should stay one column on narrow screens."
 );
 
 assert.match(

@@ -9,6 +9,7 @@ import {
 } from "@/lib/explore/routeTaxonomy";
 import { selectedResortSlugs } from "@/lib/explore/resortFilters";
 import { itemMatchesPreset } from "@/lib/planning/presetDefinitions";
+import { inferWeatherFitFromText } from "@/lib/explore/weatherFit";
 import type { ActivityFilters, ActivityOccurrence } from "@/lib/types/occurrence";
 
 function weatherMatches(
@@ -18,20 +19,18 @@ function weatherMatches(
   const fit = DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[occurrence.activitySlug]?.weatherFit;
   if (fit === weather) return true;
 
-  const text = [
-    occurrence.title,
-    occurrence.category,
-    occurrence.location.label,
-    occurrence.enrichment?.weatherDependency,
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
+  const inferred = inferWeatherFitFromText({
+    title: occurrence.title,
+    category: occurrence.category,
+    summary: occurrence.summary,
+    location: occurrence.location.label,
+    weatherDependency: occurrence.enrichment?.weatherDependency,
+  });
 
   if (weather === "indoor") {
-    return /\bindoor\b|arcade|community hall|lobby|animation|learn to draw/.test(text);
+    return inferred === "indoor";
   }
-  return /\bcovered\b|porch|pavilion|under cover|covered walkway/.test(text);
+  return inferred === "covered";
 }
 
 /** Apply URL browse filters to an already day-scoped activity list. */

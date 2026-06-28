@@ -5,8 +5,13 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
+
+import fitz
 
 try:
     from layout_snapshot import build_layout_snapshot
@@ -142,6 +147,7 @@ def _repair_ocr_spaced_title(text: str) -> str | None:
         "MOVEUNDERTESTARS",
         "MOVEUNDERTHESSTAR",
         "MOVEUNDERTHESTARS",
+        "MOVVEUNDERTHESTARS",
         "MOVIEUNDERTESTARS",
         "MOVIEUNDERTHESSTAR",
         "MOVIEUNDERTHESTARS",
@@ -604,6 +610,10 @@ def _movie_title_from_line(text: str) -> tuple[str, str] | None:
         return None
     day = match.group(1).lower()
     title = match.group(2).replace("“", "").replace("”", "").strip(" .\"")
+    if re.match(r"^(?:,|and)\b", title, flags=re.I):
+        return None
+    if re.search(r"\b(?:at|from)\s+\d{1,2}:\d{2}\s*(?:am|pm)", title, flags=re.I):
+        return None
     if title:
         return day, title
     return None
@@ -621,6 +631,191 @@ def _normalize_movie_schedule_text(text: str) -> str:
     location, time = [part.strip() for part in text.split("|", 1)]
     location, _ = _repair_location_text(location)
     return f"{location.title()} | {time}"
+
+
+def _ocr_movie_day(text: str) -> str | None:
+    compact = re.sub(r"[^A-Za-z]", "", text).upper()
+    if compact.startswith(("SUNDAY", "SUNCAY", "SUNAY", "SUINCAY", "SUNGAY", "SUN")):
+        return "sunday"
+    if compact.startswith(("MONDAY", "MONAY", "MONCAY", "MON")):
+        return "monday"
+    if compact.startswith(("TUESDAY", "TUCSCAY", "TUCSAY", "TUCSCA", "TUCSA", "TUC", "TUE")):
+        return "tuesday"
+    if compact.startswith(("WEDNESDAY", "WENESDAY", "WENESAAY", "WENESCAY", "WEN")):
+        return "wednesday"
+    if compact.startswith(("THURSDAY", "THURSCAY", "THURSDA", "THUR", "THU")):
+        return "thursday"
+    if compact.startswith(("FRIDAY", "FRICLAY", "FICLAY", "FIICLAY", "FICAY", "FIICAY", "FRI")):
+        return "friday"
+    if compact.startswith(("SATURDAY", "SATURAY", "SATUPAY", "SATULCAY", "SATUAY", "SAT")):
+        return "saturday"
+    return None
+
+
+def _repair_ocr_movie_title(text: str) -> str | None:
+    compact = re.sub(r"[^A-Za-z0-9]", "", text).upper()
+    raw = _clean_text(text)
+    if re.search(r"M(?:OANA|OCNG|OGNG|OGNA)2\b", compact):
+        return "Moana 2"
+    if re.search(r"L(?:ILO|HLO).*STITCH.*2002|STITCH2002", compact):
+        return "Lilo & Stitch (2002)"
+    if re.search(r"L(?:ILO|HLO).*STITCH", compact):
+        return "Lilo & Stitch"
+    if "HIGHSCHOOLMUSICAL2" in compact:
+        return "High School Musical 2"
+    if re.search(r"B(?:EAU|EGU|ECU|ECUL)T?YANDTHEBEAST1991", compact):
+        return "Beauty and the Beast (1991)"
+    if "TEENBEACHMOVIE" in compact or "LEONBEACHMOVIE" in compact:
+        return "Teen Beach Movie"
+    if "TURNINGRED" in compact or "LUMINGREDD" in compact:
+        return "Turning Red"
+    toy_match = re.search(r"(?:TOY|LOY|JOY)ST(?:OR|OL)Y([234])?", compact)
+    if toy_match:
+        suffix = toy_match.group(1)
+        return f"Toy Story {suffix}" if suffix else "Toy Story"
+    if "PARENTTRAP1998" in compact:
+        return "The Parent Trap (1998)"
+    if "PARENTTRAP" in compact:
+        return "The Parent Trap"
+    if "PRINCESSANDTHEFROG" in compact:
+        return "The Princess and the Frog"
+    if "LITTLEMERMAID1989" in compact:
+        return "The Little Mermaid (1989)"
+    if "LITTLEMERMAID" in compact:
+        return "The Little Mermaid"
+    if "BIGHERO6" in compact:
+        return "Big Hero 6"
+    if "MUFASATHELIONKING" in compact:
+        return "Mufasa: The Lion King"
+    if re.search(r"(?:THE|DHE)?LIONKING1994", compact):
+        return "The Lion King (1994)"
+    if re.search(r"(?:THE|DHE)?LIONKING", compact):
+        return "The Lion King"
+    if re.search(r"F(?:IND|ING|NG)INGNEMO|FINGINGNEMO", compact):
+        return "Finding Nemo"
+    if re.search(r"F(?:IND|ING|NG)INGDORY|(?:DING|INING)DORY", compact):
+        return "Finding Dory"
+    if re.search(r"R(?:ATATOUILLE|ATATOUILE|ACATOUIILE|ACATOUII)", compact):
+        return "Ratatouille"
+    if "CINDERELLA1950" in compact:
+        return "Cinderella (1950)"
+    if "CINDERELLA" in compact:
+        return "Cinderella"
+    if "ZOOTOPIA2" in compact or "LOOCOPIC2" in compact:
+        return "Zootopia 2"
+    if "FROZEN" in compact or "FFOZEN" in compact:
+        return "Frozen"
+    if "ALADDIN1992" in compact:
+        return "Aladdin (1992)"
+    if "ALADDIN" in compact:
+        return "Aladdin"
+    if re.search(r"\bCIS\b|\bCARS\b", raw, flags=re.I):
+        return "Cars"
+    if re.search(r"\b(?:UD|UP)\b", raw, flags=re.I):
+        return "Up"
+    if re.search(r"\bLUC[AD]?\b", raw, flags=re.I) or "LUCA" in compact or "LUCD" in compact:
+        return "Luca"
+    if "TANGLED" in compact or "FNGLED" in compact or "FNGLE" in compact or "JNGLEM" in compact:
+        return "Tangled"
+    if "MULAN1998" in compact:
+        return "Mulan (1998)"
+    if "MULAN" in compact:
+        return "Mulan"
+    if re.search(r"M(?:OANA|OGNG|OGNA|ONA)\b", compact):
+        return "Moana"
+    return None
+
+
+def _movie_show_time_from_schedule(schedule_text: str) -> str:
+    if "|" in schedule_text:
+        return schedule_text.split("|", 1)[1].strip()
+    start_time, _ = _parse_time_range(schedule_text)
+    return start_time or ""
+
+
+def _ocr_movie_table_rows(
+    *,
+    pdf_path: Path,
+    title_span: dict[str, Any],
+    schedule_text: str,
+) -> list[dict[str, Any]]:
+    if not shutil.which("tesseract"):
+        return []
+
+    try:
+        doc = fitz.open(pdf_path)
+        page_index = max(0, int(title_span.get("page", 1)) - 1)
+        page = doc[page_index]
+        bbox = title_span.get("bbox") if isinstance(title_span.get("bbox"), list) else []
+        if len(bbox) != 4:
+            return []
+        clip = fitz.Rect(
+            max(0, float(bbox[0]) - 50),
+            max(0, float(bbox[1]) - 20),
+            min(page.rect.width, float(bbox[2]) + 80),
+            min(page.rect.height, float(bbox[1]) + 560),
+        )
+        tmp_root = Path.home() / "tmp"
+        tmp_root.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=str(tmp_root)) as tmp_dir:
+            image_path = Path(tmp_dir) / "movie-table.png"
+            page.get_pixmap(
+                matrix=fitz.Matrix(2.5, 2.5),
+                clip=clip,
+                alpha=False,
+            ).save(image_path)
+            result = subprocess.run(
+                ["tesseract", str(image_path), "stdout", "--psm", "6"],
+                check=False,
+                capture_output=True,
+                text=True,
+                timeout=45,
+            )
+    except Exception:
+        return []
+
+    if result.returncode != 0:
+        return []
+
+    rows: list[dict[str, Any]] = []
+    seen_days: set[str] = set()
+    show_time = _movie_show_time_from_schedule(schedule_text)
+    for raw_line in result.stdout.splitlines():
+        text = _clean_text(raw_line)
+        if not text:
+            continue
+        day = _ocr_movie_day(text)
+        if not day or day in seen_days:
+            continue
+        movie_title = _repair_ocr_movie_title(text)
+        if not movie_title:
+            continue
+        seen_days.add(day)
+        rows.append(
+            {
+                "day_of_week": day,
+                "movie_title": movie_title,
+                "show_time": show_time,
+                "source_span": {
+                    "page": title_span.get("page", 1),
+                    "line": title_span.get("line", 1),
+                    "bbox": [round(clip.x0, 3), round(clip.y0, 3), round(clip.x1, 3), round(clip.y1, 3)],
+                    "text": text,
+                    "source": "ocr_movie_table",
+                },
+            }
+        )
+    return rows
+
+
+def _movie_nights_look_incomplete(movie_nights: list[dict[str, Any]]) -> bool:
+    if len(movie_nights) < 2:
+        return True
+    for row in movie_nights:
+        title = _clean_text(str(row.get("movie_title") or ""))
+        if not title or re.search(r"\b(?:at|from)\s+\d{1,2}:\d{2}\s*(?:am|pm)", title, flags=re.I):
+            return True
+    return False
 
 
 def _can_prefix_movie_schedule_location(text: str) -> bool:
@@ -1257,6 +1452,21 @@ def _movie_candidate(
                     _line_span(movie_line, movie_index),
                 ]
             )
+    ocr_movie_nights = _ocr_movie_table_rows(
+        pdf_path=pdf_path,
+        title_span=title_span,
+        schedule_text=schedule_text,
+    )
+    if ocr_movie_nights and (
+        len(ocr_movie_nights) > len(movie_nights)
+        or _movie_nights_look_incomplete(movie_nights)
+    ):
+        movie_nights = ocr_movie_nights
+        movie_spans = [
+            dict(row["source_span"])
+            for row in ocr_movie_nights
+            if isinstance(row.get("source_span"), dict)
+        ]
     for index, line in field_lines:
         if schedule_index != -1 and index <= schedule_index:
             continue

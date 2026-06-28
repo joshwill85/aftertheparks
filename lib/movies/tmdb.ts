@@ -69,16 +69,27 @@ function buildMovieDetailsUrl(tmdbId: number): string {
 export async function fetchTmdbMovieRuntime(
   tmdbId: number
 ): Promise<number | null> {
+  const detail = await fetchTmdbMovieDetails(tmdbId);
+  return detail?.runtime ?? null;
+}
+
+export async function fetchTmdbMovieDetails(
+  tmdbId: number
+): Promise<TmdbMovieResult | null> {
   if (!tmdbConfigured()) return null;
   try {
     const detailRes = await fetch(buildMovieDetailsUrl(tmdbId), tmdbRequestInit());
     if (!detailRes.ok) return null;
-    const detail = (await detailRes.json()) as Pick<TmdbMovieResult, "runtime">;
-    return typeof detail.runtime === "number" && Number.isFinite(detail.runtime)
-      ? detail.runtime
-      : null;
+    const detail = (await detailRes.json()) as TmdbMovieResult;
+    return {
+      ...detail,
+      runtime:
+        typeof detail.runtime === "number" && Number.isFinite(detail.runtime)
+          ? detail.runtime
+          : null,
+    };
   } catch (err) {
-    console.error("TMDB runtime lookup error:", err);
+    console.error("TMDB details lookup error:", err);
     return null;
   }
 }
@@ -100,6 +111,8 @@ function pickBestMatch(
 
   const queryNorm = normalizeForMatch(queryTitle);
   const queryTokens = new Set(queryNorm.split(" "));
+  const now = new Date();
+  const currentYear = now.getUTCFullYear();
 
   let best: TmdbMovieResult | null = null;
   let bestScore = -1;
@@ -108,6 +121,9 @@ function pickBestMatch(
     if (!movie.poster_path) continue;
 
     const titleNorm = normalizeForMatch(movie.title);
+    const releaseYear = movie.release_date
+      ? Number.parseInt(movie.release_date.slice(0, 4), 10)
+      : null;
     let score = 0;
 
     if (titleNorm === queryNorm) score += 100;
@@ -119,6 +135,18 @@ function pickBestMatch(
     score += overlap * 8;
 
     if (year && movie.release_date?.startsWith(year)) score += 25;
+    if (!year && titleNorm === queryNorm) {
+      const releaseTime = movie.release_date ? Date.parse(movie.release_date) : Number.NaN;
+      const futureReleasePenalty =
+        Number.isFinite(releaseTime) && releaseTime > now.getTime() ? 80 : 0;
+      score -= futureReleasePenalty;
+
+      if (releaseYear && releaseYear >= 1980 && releaseYear <= currentYear - 2) {
+        score += 20;
+      } else if (releaseYear && releaseYear >= currentYear - 1) {
+        score -= 20;
+      }
+    }
 
     score += Math.min((movie.popularity ?? 0) / 10, 15);
 

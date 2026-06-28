@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 from typing import Any
 
 try:
     from config import PROCESSED_DIR
+    from debug_overlays import build_debug_overlays
     from family_classifier import classify_document_family
     from normalization_v3 import build_runtime_lineage
     from ocr.base import package_version
@@ -20,8 +24,10 @@ try:
     from quality_metrics import compute_snapshot_quality
     from regions import segment_major_regions
     from render_source_pages import stable_config_hash
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
+    from .debug_overlays import build_debug_overlays
     from .family_classifier import classify_document_family
     from .normalization_v3 import build_runtime_lineage
     from .ocr.base import package_version
@@ -31,9 +37,12 @@ except ImportError:  # pragma: no cover - supports package-style imports
     from .quality_metrics import compute_snapshot_quality
     from .regions import segment_major_regions
     from .render_source_pages import stable_config_hash
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "vision_snapshots"
+DEFAULT_PAGE_IMAGES_DIR = PROCESSED_DIR / "page_images"
+DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_vision_snapshot_report.json"
 PIPELINE_VERSION = "vision_v3_001"
 PRIMARY_ENGINE = "paddleocr_ppstructurev3"
 SECONDARY_ENGINE = "rapidocr"
@@ -128,11 +137,53 @@ def _canonical_tokens(engine_runs: list[dict[str, Any]]) -> list[dict[str, Any]]
     return tokens
 
 
+def _first_overlay_for_engine(
+    overlays: dict[str, Any],
+    engine: str,
+) -> dict[str, Any] | None:
+    engine_overlays = overlays.get("engines", {}).get(engine)
+    if isinstance(engine_overlays, list) and engine_overlays:
+        first = engine_overlays[0]
+        return first if isinstance(first, dict) else None
+    return None
+
+
+def _write_debug_overlay_artifacts(
+    snapshot: dict[str, Any],
+    *,
+    output_dir: Path,
+) -> dict[str, Any]:
+    source_sha256 = str(snapshot.get("source_sha256") or "unknown")
+    debug_dir = output_dir / source_sha256
+    overlays = build_debug_overlays(snapshot, output_dir=debug_dir)
+    aliases: dict[str, Any] = {"all": overlays}
+    for label, engine, filename in (
+        ("primary", PRIMARY_ENGINE, "overlay_primary.png"),
+        ("secondary", SECONDARY_ENGINE, "overlay_secondary.png"),
+    ):
+        overlay = _first_overlay_for_engine(overlays, engine)
+        if not overlay:
+            continue
+        source_path = Path(str(overlay.get("overlay_path")))
+        alias_path = debug_dir / filename
+        if source_path.exists():
+            shutil.copyfile(source_path, alias_path)
+            aliases[label] = {
+                **overlay,
+                "engine": engine,
+                "overlay_path": str(alias_path),
+                "overlay_sha256": hashlib.sha256(alias_path.read_bytes()).hexdigest(),
+            }
+    return aliases
+
+
 def build_vision_snapshot(
     *,
     page_manifest: dict[str, Any],
     attach_regions: bool = False,
     region_output_dir: Path | None = None,
+    write_debug_overlays: bool = False,
+    debug_output_dir: Path | None = None,
 ) -> dict[str, Any]:
     config = {
         "pipeline_version": PIPELINE_VERSION,
@@ -208,6 +259,11 @@ def build_vision_snapshot(
         }
     )
     snapshot["quality"] = snapshot_quality
+    if write_debug_overlays:
+        snapshot["debug_overlays"] = _write_debug_overlay_artifacts(
+            snapshot,
+            output_dir=debug_output_dir or (PROCESSED_DIR / "vision_debug"),
+        )
     return snapshot
 
 
@@ -216,22 +272,147 @@ def snapshot_output_path(snapshot: dict[str, Any], *, output_dir: Path = DEFAULT
     return output_dir / f"{source_sha256}.vision.json"
 
 
+def _page_manifest_paths(page_images_dir: Path) -> list[Path]:
+    if not page_images_dir.exists():
+        return []
+    return sorted(page_images_dir.rglob("page_manifest.json"))
+
+
+def _manifest_matches_filters(
+    page_manifest: dict[str, Any],
+    *,
+    group: str | None,
+    quarter: str | None,
+) -> bool:
+    if group and page_manifest.get("calendar_group_key") != group:
+        return False
+    edition = str(page_manifest.get("edition") or "")
+    if not edition_matches_quarter(edition, quarter):
+        return False
+    return True
+
+
+def build_vision_snapshots_from_directory(
+    *,
+    page_images_dir: Path = DEFAULT_PAGE_IMAGES_DIR,
+    output_dir: Path = DEFAULT_OUTPUT_DIR,
+    report_path: Path | None = DEFAULT_REPORT_PATH,
+    group: str | None = None,
+    quarter: str | None = None,
+    attach_regions: bool = False,
+    write_debug_overlays: bool = True,
+    debug_output_dir: Path | None = None,
+) -> dict[str, Any]:
+    results: list[dict[str, Any]] = []
+    for manifest_path in _page_manifest_paths(page_images_dir):
+        try:
+            page_manifest = json.loads(manifest_path.read_text())
+            if not _manifest_matches_filters(page_manifest, group=group, quarter=quarter):
+                continue
+            snapshot = build_vision_snapshot(
+                page_manifest=page_manifest,
+                attach_regions=attach_regions,
+                write_debug_overlays=write_debug_overlays,
+                debug_output_dir=debug_output_dir,
+            )
+            output_path = snapshot_output_path(snapshot, output_dir=output_dir)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n")
+            results.append(
+                {
+                    "status": snapshot["status"],
+                    "page_manifest_path": str(manifest_path),
+                    "snapshot_path": str(output_path),
+                    "source_sha256": snapshot.get("source_sha256"),
+                    "calendar_group_key": snapshot.get("calendar_group_key"),
+                    "edition": snapshot.get("edition"),
+                    "document_family": snapshot.get("document_family"),
+                    "ocr_success": snapshot.get("quality", {}).get("ocr_success"),
+                    "debug_overlay_path": snapshot.get("debug_overlays", {}).get("primary", {}).get("overlay_path"),
+                    "error": None,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "status": "parser_error",
+                    "page_manifest_path": str(manifest_path),
+                    "snapshot_path": None,
+                    "source_sha256": None,
+                    "calendar_group_key": None,
+                    "edition": None,
+                    "document_family": None,
+                    "ocr_success": False,
+                    "debug_overlay_path": None,
+                    "error": str(exc),
+                }
+            )
+
+    report = {
+        "report_kind": "v3_vision_snapshot",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "page_images_dir": str(page_images_dir),
+        "output_dir": str(output_dir),
+        "quarter": quarter,
+        "group": group,
+        "summary": {
+            "page_manifest_count": len(results),
+            "snapshot_count": sum(1 for result in results if result["snapshot_path"]),
+            "parser_error_count": sum(1 for result in results if result["status"] == "parser_error"),
+        },
+        "results": results,
+    }
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build v3 vision snapshot envelope")
-    parser.add_argument("page_manifest", type=Path)
+    parser.add_argument("page_manifest", type=Path, nargs="?")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--page-images-dir", type=Path, default=DEFAULT_PAGE_IMAGES_DIR)
+    parser.add_argument("--report-path", type=Path, default=DEFAULT_REPORT_PATH)
+    parser.add_argument("--group")
+    parser.add_argument("--quarter")
+    parser.add_argument("--attach-regions", action="store_true")
+    parser.add_argument("--debug-output-dir", type=Path, default=PROCESSED_DIR / "vision_debug")
+    parser.add_argument("--no-debug-overlays", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    page_manifest = json.loads(args.page_manifest.read_text())
-    snapshot = build_vision_snapshot(page_manifest=page_manifest)
-    if args.json:
-        print(json.dumps(snapshot, indent=2, sort_keys=True))
+    if args.page_manifest:
+        page_manifest = json.loads(args.page_manifest.read_text())
+        snapshot = build_vision_snapshot(
+            page_manifest=page_manifest,
+            attach_regions=args.attach_regions,
+            write_debug_overlays=not args.no_debug_overlays,
+            debug_output_dir=args.debug_output_dir,
+        )
+        if args.json:
+            print(json.dumps(snapshot, indent=2, sort_keys=True))
+            return
+        output_path = snapshot_output_path(snapshot, output_dir=args.output_dir)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n")
+        print(output_path)
         return
-    output_path = snapshot_output_path(snapshot, output_dir=args.output_dir)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n")
-    print(output_path)
+
+    report = build_vision_snapshots_from_directory(
+        page_images_dir=args.page_images_dir,
+        output_dir=args.output_dir,
+        report_path=args.report_path,
+        group=args.group,
+        quarter=args.quarter,
+        attach_regions=args.attach_regions,
+        write_debug_overlays=not args.no_debug_overlays,
+        debug_output_dir=args.debug_output_dir,
+    )
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(args.report_path)
 
 
 if __name__ == "__main__":

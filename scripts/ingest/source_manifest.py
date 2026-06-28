@@ -13,6 +13,16 @@ class ActivitySource:
     pdf_url: str | None
     pdf_edition: str | None
     notes: str | None = None
+    source_type: str | None = None
+
+    def __post_init__(self) -> None:
+        inferred = "pdf" if self.pdf_url else "html"
+        normalized = str(self.source_type or inferred).strip().lower()
+        object.__setattr__(self, "source_type", normalized)
+
+    @property
+    def source_url(self) -> str | None:
+        return self.pdf_url
 
 
 @dataclass(frozen=True)
@@ -23,6 +33,7 @@ class ResortRecreationSource:
     recreation_page_url: str
     pdf_url: str | None
     pdf_edition: str | None
+    source_type: str
     source_kind: str
     notes: str | None = None
 
@@ -245,9 +256,32 @@ def apply_pdf_source_overrides(
         override["pdf_url"],
         override["pdf_edition"],
         source.notes,
+        override.get("source_type") or _source_type_from_url(override["pdf_url"], fallback=source.source_type),
       )
     )
   return replaced
+
+
+def source_matches_quarter(source: ActivitySource, quarter: str | None) -> bool:
+  return edition_matches_quarter(source.pdf_edition, quarter)
+
+
+def edition_matches_quarter(edition: str | None, quarter: str | None) -> bool:
+  if not quarter:
+    return True
+  normalized = quarter.strip().lower()
+  normalized_edition = str(edition or "").strip().lower()
+  return bool(normalized_edition) and (
+    normalized_edition == normalized
+    or normalized_edition.startswith(f"{normalized}-")
+  )
+
+
+def filter_activity_sources_for_quarter(
+  sources: list[ActivitySource],
+  quarter: str | None,
+) -> list[ActivitySource]:
+  return [source for source in sources if source_matches_quarter(source, quarter)]
 
 
 ACTIVITY_CALENDAR_GROUPS: list[ActivityCalendarGroup] = [
@@ -265,8 +299,21 @@ _DISNEY_RECREATION_SLUG_OVERRIDES = {
 }
 
 
+def _source_type_from_url(url: str | None, *, fallback: str | None = None) -> str:
+  path = str(url or "").lower().split("?", 1)[0]
+  if path.endswith((".jpg", ".jpeg", ".png")):
+    return "image"
+  if path.endswith(".pdf"):
+    return "pdf"
+  return str(fallback or "html")
+
+
 def _source_kind_for(source: ActivitySource) -> str:
-  return "pdf" if source.pdf_url else "official_web"
+  if source.source_type == "image":
+    return "official_image"
+  if source.source_type == "pdf":
+    return "pdf"
+  return "official_web"
 
 
 def resort_recreation_sources_for(
@@ -285,6 +332,7 @@ def resort_recreation_sources_for(
       ),
       pdf_url=source.pdf_url,
       pdf_edition=source.pdf_edition,
+      source_type=source.source_type,
       source_kind=_source_kind_for(source),
       notes=source.notes,
     )

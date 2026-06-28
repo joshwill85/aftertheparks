@@ -114,16 +114,7 @@ export default async function ResortsPage({
         title="Resorts"
         subtitle="All 31 Disney-owned and operated Walt Disney World resort hotels — filter by tier, area, or what's happening today."
       />
-      <section className="mb-6 grid gap-4 md:grid-cols-[1.4fr_1fr]">
-        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            Use the resort directory to compare Disney-owned Walt Disney World
-            resort hotels by current activity coverage, today and tonight
-            highlights, movies, campfires, standing recreation, and no-park-day
-            planning fit.
-          </p>
-        </div>
+      <section className="mb-6 grid gap-4">
         <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <h2 className="font-display text-2xl font-semibold">Source and freshness</h2>
           <dl className="mt-4 grid gap-3 text-sm">

@@ -575,27 +575,6 @@ export default async function SeoGuidePage({
             ]}
           />
           <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-            <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-              {comparisonPage.userPromise}
-            </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <Link
-                href={comparisonPage.primaryAction.href}
-                className="btn-primary rounded-full px-5 py-3 text-sm font-bold"
-              >
-                {comparisonPage.primaryAction.label}
-              </Link>
-              <Link
-                href="/disney-world-resort-activity-calendars"
-                className="btn-secondary rounded-full px-5 py-3 text-sm font-bold"
-              >
-                Calendar hub
-              </Link>
-            </div>
-          </section>
-
-          <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
             <h2 className="font-display text-2xl font-semibold">Live data snapshot</h2>
             <dl className="mt-4 grid gap-4 sm:grid-cols-4">
               <div>
@@ -776,25 +755,6 @@ export default async function SeoGuidePage({
         <EditorialReviewBlock
           showDisneySpringsCaveat={showDisneySpringsCaveat}
         />
-
-        <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
-          <p className="mt-2 text-[var(--color-muted)]">{guide.userPromise}</p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href={guide.primaryAction.href}
-              className="btn-primary rounded-full px-5 py-3 text-sm font-bold"
-            >
-              {guide.primaryAction.label}
-            </Link>
-            <Link
-              href="/disney-world-resort-activity-calendars"
-              className="btn-secondary rounded-full px-5 py-3 text-sm font-bold"
-            >
-              View calendar hub
-            </Link>
-          </div>
-        </section>
 
         <section>
           <h2 className="font-display text-2xl font-semibold">Use this page to decide</h2>
