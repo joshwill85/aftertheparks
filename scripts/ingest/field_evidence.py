@@ -47,6 +47,7 @@ def build_field_evidence(
             "crop_sha256": region.get("crop_sha256"),
             "crop_storage_path": region.get("crop_path") or region.get("crop_storage_path"),
             "page_image_sha256": region.get("page_image_sha256"),
+            "page_image_path": region.get("page_image_path"),
         },
         "engines": engines,
         "agreement": agreement,

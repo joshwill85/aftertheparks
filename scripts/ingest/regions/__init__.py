@@ -128,6 +128,7 @@ def segment_major_regions(
                     "region_family": document_family,
                     "page_number": page.get("page_number", 1),
                     "page_image_sha256": page.get("page_image_sha256"),
+                    "page_image_path": str(page_path),
                     "bbox_px": bbox_px,
                     "crop_path": str(crop_path),
                     "crop_sha256": crop_sha256,

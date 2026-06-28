@@ -1918,6 +1918,91 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(candidate["schedule_normalized"], task["normalized_value"])
         self.assertEqual([10, 20, 200, 44], task["field_bbox"])
 
+    def test_review_queue_v3_includes_page_region_and_source_context_for_review(self) -> None:
+        candidate = {
+            "candidate_id": "cand-context",
+            "validation_status": "needs_review",
+            "validation_findings": ["engine_disagreement:schedule"],
+            "source_document_id": "source-doc-1",
+            "content_sha256": "sourcehash",
+            "source_kind": "official_pdf",
+            "source_role": "resort_pdf",
+            "canonical_url": "https://example.com/official-calendar.pdf",
+            "fetched_url": "https://cdn.example.com/official-calendar.pdf",
+            "http_status": 200,
+            "currentness": "current",
+            "captured_at": "2026-06-28T12:00:00+00:00",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "activity",
+            "schedule_raw": "Daily at 1:30pm",
+            "schedule_normalized": {
+                "schedule_type": "recurring",
+                "days_of_week": ALL_DAYS,
+                "start_time": "13:30",
+                "timezone": "America/New_York",
+            },
+            "field_evidence": {
+                "region": {
+                    "source": {
+                        "content_sha256": "sourcehash",
+                        "page_number": 1,
+                        "page_image_sha256": "pagehash",
+                        "page_image_path": "pages/page_001.png",
+                        "bbox_px": [0, 0, 400, 300],
+                        "crop_storage_path": "regions/region.png",
+                        "crop_sha256": "regioncrop",
+                    }
+                },
+                "schedule": {
+                    "field": "schedule",
+                    "raw_value": "Daily at 1:30pm",
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "13:30",
+                        "timezone": "America/New_York",
+                    },
+                    "source": {
+                        "content_sha256": "sourcehash",
+                        "page_number": 1,
+                        "page_image_sha256": "pagehash",
+                        "page_image_path": "pages/page_001.png",
+                        "bbox_px": [10, 20, 200, 44],
+                        "crop_storage_path": "fields/schedule.png",
+                        "crop_sha256": "schedulecrop",
+                    },
+                    "engines": [
+                        {"engine": "paddleocr_ppstructurev3", "text": "Daily at 1:30pm", "confidence": 0.97},
+                        {"engine": "rapidocr", "text": "Daily at 7:30pm", "confidence": 0.94},
+                    ],
+                    "agreement": "disagreement",
+                    "review_status": "required",
+                },
+            },
+        }
+
+        [task] = build_review_tasks([candidate])
+
+        self.assertEqual("pagehash", task["page_image"])
+        self.assertEqual("pagehash", task["page_image_sha256"])
+        self.assertEqual("pages/page_001.png", task["page_image_path"])
+        self.assertEqual("regions/region.png", task["region_crop"])
+        self.assertEqual("regioncrop", task["region_crop_sha256"])
+        self.assertEqual("fields/schedule.png", task["field_crop"])
+        self.assertEqual("schedulecrop", task["field_crop_sha256"])
+        self.assertEqual(
+            {
+                "source_kind": "official_pdf",
+                "source_role": "resort_pdf",
+                "canonical_url": "https://example.com/official-calendar.pdf",
+                "fetched_url": "https://cdn.example.com/official-calendar.pdf",
+                "http_status": 200,
+                "currentness": "current",
+                "captured_at": "2026-06-28T12:00:00+00:00",
+            },
+            task["source_metadata"],
+        )
+
     def test_promote_gold_v3_preview_only_includes_gated_rows_with_field_evidence(self) -> None:
         auto_candidate = {
             "validation_status": "auto_publishable",

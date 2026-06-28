@@ -74,6 +74,19 @@ def _region_source(candidate: dict[str, Any], field_name: str | None = None) -> 
     return source
 
 
+def _source_metadata(candidate: dict[str, Any]) -> dict[str, Any]:
+    keys = (
+        "source_kind",
+        "source_role",
+        "canonical_url",
+        "fetched_url",
+        "http_status",
+        "currentness",
+        "captured_at",
+    )
+    return {key: candidate.get(key) for key in keys if candidate.get(key) not in {None, ""}}
+
+
 def _engine_text(evidence: dict[str, Any], index: int) -> str | None:
     engines = evidence.get("engines")
     if not isinstance(engines, list) or len(engines) <= index or not isinstance(engines[index], dict):
@@ -146,8 +159,10 @@ def build_review_tasks(
         field_name = _field_from_findings(findings)
         evidence = _field_evidence(candidate, field_name)
         source = _region_source(candidate, field_name)
+        region_source = _region_source(candidate, "region")
         if not _has_review_artifacts(source):
             continue
+        page_image_sha256 = source.get("page_image_sha256") or region_source.get("page_image_sha256")
         tasks.append(
             {
                 "task_id": str(candidate.get("candidate_id") or f"vision-v3-review-{index:04d}"),
@@ -158,8 +173,12 @@ def build_review_tasks(
                 "calendar_group_key": candidate.get("calendar_group_key"),
                 "candidate_type": candidate.get("candidate_type"),
                 "page_number": source.get("page_number"),
-                "page_image": source.get("page_image_sha256"),
-                "field_crop": source.get("crop_storage_path"),
+                "page_image": page_image_sha256,
+                "page_image_sha256": page_image_sha256,
+                "page_image_path": source.get("page_image_path") or region_source.get("page_image_path"),
+                "region_crop": region_source.get("crop_storage_path") or region_source.get("crop_path"),
+                "region_crop_sha256": region_source.get("crop_sha256"),
+                "field_crop": source.get("crop_storage_path") or source.get("crop_path"),
                 "field_crop_sha256": source.get("crop_sha256"),
                 "field_bbox": source.get("bbox_px"),
                 "primary_text": _engine_text(evidence, 0),
@@ -167,6 +186,7 @@ def build_review_tasks(
                 "candidate_value": evidence.get("raw_value") or candidate.get("source_title") or candidate.get("schedule_raw"),
                 "normalized_value": evidence.get("normalized_value"),
                 "validation_findings": findings,
+                "source_metadata": _source_metadata(candidate),
                 "candidate": candidate,
             }
         )
