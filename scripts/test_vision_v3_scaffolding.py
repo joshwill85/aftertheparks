@@ -1926,6 +1926,17 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     }
                 ],
             }
+            movie_missing_title_evidence_preview = {
+                "publication_mode": "vision_v3_preview",
+                "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                "rows": [
+                    {
+                        **clean_preview["rows"][0],
+                        "candidate_type": "movie",
+                        "movie_title": "Moana",
+                    }
+                ],
+            }
             clean_dual_run_report = {
                 "status": "clean",
                 "publish_blockers": [],
@@ -2134,6 +2145,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 flags=load_publish_flags(enabled_flags),
                 dual_run_report=clean_dual_run_report,
             )
+            movie_missing_title_evidence = evaluate_publish_readiness(
+                movie_missing_title_evidence_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+            )
             unparsed_schedule = evaluate_publish_readiness(
                 unparsed_schedule_preview,
                 flags=load_publish_flags(enabled_flags),
@@ -2222,6 +2238,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("row_non_public_source_url:0", non_public_nested_source_url["errors"])
         self.assertFalse(missing_critical_evidence["ready"])
         self.assertIn("row_missing_critical_field_evidence:0:schedule", missing_critical_evidence["errors"])
+        self.assertFalse(movie_missing_title_evidence["ready"])
+        self.assertIn("row_missing_critical_field_evidence:0:movie_title", movie_missing_title_evidence["errors"])
         self.assertFalse(unparsed_schedule["ready"])
         self.assertIn("row_unparsed_schedule:0", unparsed_schedule["errors"])
         self.assertFalse(unknown_location["ready"])

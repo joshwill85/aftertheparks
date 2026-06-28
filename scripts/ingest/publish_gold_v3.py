@@ -23,6 +23,7 @@ DEFAULT_FLAGS_PATH = ROOT / "config" / "publish_flags.yaml"
 DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
 CRITICAL_FIELD_EVIDENCE = ("title", "schedule", "location", "fee")
+MOVIE_CRITICAL_FIELD_EVIDENCE = ("movie_title",)
 PROMOTABLE_ROW_STATUSES = {"auto_publishable", "manually_approved"}
 
 
@@ -57,6 +58,13 @@ def _field_page_hashes(row: dict[str, Any]) -> set[str]:
         if page_hash:
             page_hashes.add(str(page_hash))
     return page_hashes
+
+
+def _critical_field_names(row: dict[str, Any]) -> tuple[str, ...]:
+    fields = list(CRITICAL_FIELD_EVIDENCE)
+    if row.get("candidate_type") == "movie" or row.get("movie_title"):
+        fields.extend(MOVIE_CRITICAL_FIELD_EVIDENCE)
+    return tuple(fields)
 
 
 def load_publish_flags(path: Path = DEFAULT_FLAGS_PATH) -> dict[str, Any]:
@@ -153,7 +161,7 @@ def evaluate_publish_readiness(
         if not isinstance(evidence, dict) or not evidence:
             errors.append(f"row_missing_field_evidence:{index}")
             continue
-        for field_name in CRITICAL_FIELD_EVIDENCE:
+        for field_name in _critical_field_names(row):
             field_evidence = evidence.get(field_name)
             if not isinstance(field_evidence, dict):
                 errors.append(f"row_missing_critical_field_evidence:{index}:{field_name}")
