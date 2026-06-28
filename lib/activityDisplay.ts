@@ -86,6 +86,33 @@ const SOURCE_FRAGMENT = /\bS\s*O\s*R\s*C\b/i;
 const SCHEDULE_FRAGMENT =
   /^(?:daily|nightly|weekly|throughout|available|check|scan|view|see|find|in a|partake|from \d)/i;
 
+function broadScheduleLabel(text: string): string | undefined {
+  const normalized = text.trim().replace(/\s+/g, " ");
+  const lower = normalized.toLowerCase();
+
+  if (/\bopen\s+24\s*hours\b|\b24\s*hours\s+a\s+day\b/.test(lower)) {
+    return "Open 24 hours";
+  }
+
+  if (/\bdawn\s+to\s+dusk\b/.test(lower)) {
+    return "Dawn to dusk";
+  }
+
+  if (/^(?:available\s+)?daily;?\s*hours\s+vary$/i.test(normalized)) {
+    return "Daily; hours vary";
+  }
+
+  if (/^daily$/i.test(normalized)) {
+    return "Daily; time not posted";
+  }
+
+  if (/^nightly$/i.test(normalized)) {
+    return "Nightly; time not posted";
+  }
+
+  return undefined;
+}
+
 function resolveLocation(
   location?: string | { label?: string | null } | null
 ): string | undefined {
@@ -270,6 +297,11 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
     activity.category === "nighttime_entertainment";
 
   if (scheduleText && !isUncertainSchedule(scheduleText)) {
+    const broadLabel = broadScheduleLabel(scheduleText);
+    if (broadLabel) {
+      return { label: broadLabel, uncertain: false };
+    }
+
     const parsedRange = parseScheduleTimeRange24h(scheduleText, {
       eveningDefault,
     });

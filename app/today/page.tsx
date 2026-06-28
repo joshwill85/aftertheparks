@@ -5,6 +5,8 @@ import { TodayClient } from "@/components/atlas/TodayClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { Hero } from "@/components/atlas/Hero";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
+import { DecisionSummaryBar } from "@/components/planning/DecisionSummaryBar";
+import { TrustInline } from "@/components/planning/TrustInline";
 import { getTodayActivities, getTomorrowPreview, getResorts } from "@/lib/data/activities";
 import { parseBrowseParams } from "@/lib/explore/browseParams";
 import {
@@ -19,6 +21,12 @@ import {
 } from "@/lib/seo/activityPage";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
+import { buildDecisionSummary } from "@/lib/planning/decisionSummary";
+import {
+  loadWeatherByOccurrence,
+  loadWeatherGuidanceForLocation,
+  weatherQueryForActivity,
+} from "@/lib/weather/serverGuidance";
 
 export const dynamic = "force-dynamic";
 
@@ -30,12 +38,6 @@ const DEFAULT_TODAY_METADATA = {
 };
 
 const STRATEGIC_TODAY_FILTER_METADATA: Record<string, typeof DEFAULT_TODAY_METADATA> = {
-  "ticket_required=false": {
-    title: "Disney Resort Activities Today Without a Park Ticket",
-    description:
-      "Find current Walt Disney World resort activities today that do not require park admission, with access, transportation, and source caveats.",
-    canonical: "/today?ticket_required=false",
-  },
   "weather=indoor": {
     title: "Indoor Disney Resort Activities Today",
     description:
@@ -85,12 +87,27 @@ export default async function TodayPage({
 }) {
   const params = await searchParams;
   const filters = parseBrowseParams(params);
+  const weatherNow = new Date();
   const [activities, tomorrowPreview, baseActivities, resorts] = await Promise.all([
     getTodayActivities(filters),
     getTomorrowPreview(filters),
     getTodayActivities({}),
     getResorts(),
   ]);
+  const initialPageWeather = await loadWeatherGuidanceForLocation({
+    locationKey: "all_wdw",
+    startsAt: weatherNow,
+    endsAt: new Date(weatherNow.getTime() + 12 * 60 * 60 * 1000),
+    now: weatherNow,
+    timeBasis: "page_area_window",
+    timeBasisLabel: "Today across Walt Disney World",
+  });
+  const initialWeatherById = await loadWeatherByOccurrence({
+    occurrences: [...activities, ...tomorrowPreview]
+      .map((activity) => weatherQueryForActivity(activity, weatherNow))
+      .filter((query): query is NonNullable<typeof query> => Boolean(query)),
+    now: weatherNow,
+  });
   const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
   const filterImpact = buildFilterImpact(
     baseActivities.map(activityToFilterableItem),
@@ -99,6 +116,10 @@ export default async function TodayPage({
   );
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const sourceSummary = activitySourceSummary(baseActivities);
+  const decisionSummary = buildDecisionSummary({
+    activities,
+    scope: "today",
+  });
   const jsonLd = stringifyJsonLd([
     activityListJsonLd(baseUrl, "Walt Disney World resort activities today", activities),
     ...activityEventJsonLd(baseUrl, activities),
@@ -113,6 +134,7 @@ export default async function TodayPage({
       <Hero
         title="Today"
         subtitle="What's still ahead for the rest of your resort day — sorted by time."
+        compactBrowse
       />
       <section className="mb-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
@@ -121,6 +143,11 @@ export default async function TodayPage({
           tracked recreation, crafts, poolside activities, games, movies,
           campfires, and source-backed resort options that still fit your day.
         </p>
+        <TrustInline
+          lastVerified={formatSeoDate(sourceSummary.latestVerified)}
+          sourceCount={sourceSummary.sourceCount}
+          rowCount={sourceSummary.activityCount}
+        />
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href="/tonight" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
             See tonight
@@ -133,32 +160,7 @@ export default async function TodayPage({
           </Link>
         </div>
       </section>
-
-      <section className="mb-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <h2 className="font-display text-2xl font-semibold">Source and freshness</h2>
-        <dl className="mt-4 grid gap-3 sm:grid-cols-3">
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Last verified
-            </dt>
-            <dd className="font-semibold">
-              {formatSeoDate(sourceSummary.latestVerified) ?? "Check current source"}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Source-backed rows
-            </dt>
-            <dd className="font-semibold">{sourceSummary.activityCount}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Official sources
-            </dt>
-            <dd className="font-semibold">{sourceSummary.sourceCount}</dd>
-          </div>
-        </dl>
-      </section>
+      <DecisionSummaryBar summary={decisionSummary} />
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <BrowseFilterShell
           variant="today"
@@ -169,6 +171,8 @@ export default async function TodayPage({
           <TodayClient
             initialActivities={activities}
             tomorrowPreview={tomorrowPreview}
+            initialPageWeather={initialPageWeather}
+            initialWeatherById={initialWeatherById}
           />
         </BrowseFilterShell>
       </Suspense>

@@ -34,7 +34,7 @@ export const MOOD_CHIPS = [
   { id: "little_kids", label: "Little kids", href: "/activities?category=arts_crafts" },
   { id: "easy_break", label: "Easy break", href: "/activities?category=arcade" },
   { id: "pool_break", label: "Pool break", href: "/activities?category=poolside" },
-  { id: "evening", label: "After dinner", href: "/tonight" },
+  { id: "after_7_pm", label: "After 7 PM", href: "/tonight?preset=after_7_pm" },
 ] as const;
 
 export const HOME_FINDER_CHIPS = [

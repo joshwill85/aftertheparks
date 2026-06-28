@@ -63,26 +63,22 @@ export function PlanStayDetails({
   };
 
   return (
-    <section className="rounded-2xl border border-[var(--border-soft)] bg-white/90 p-5">
+    <section className="plan-stay-details rounded-2xl border border-[var(--border-soft)] bg-white/90 p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--muted)]">
-            Optional stay shell
-          </p>
-          <h2 className="font-display mt-1 text-xl font-semibold">Stay details</h2>
+          <h2 className="font-display text-xl font-semibold">Stay details</h2>
           <p className="mt-1 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
             Staying somewhere? Add resort and dates to shape your itinerary.
-            You can still use the full site without this.
           </p>
         </div>
         {hasStayDetails && (
           <p className="rounded-full bg-[var(--color-sun-cream)] px-3 py-1 text-xs font-bold text-[var(--lagoon-deep)]">
-            {selectedResortName ?? "Stay shell active"}
+            {selectedResortName ?? "Stay details active"}
           </p>
         )}
       </div>
 
-      <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1.4fr)_1fr_1fr]">
+      <div className="plan-stay-details__fields">
         <label className="block text-sm">
           <span className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--muted)]">
             Resort
@@ -90,7 +86,7 @@ export function PlanStayDetails({
           <select
             value={resortSlug}
             onChange={(event) => setResortSlug(event.target.value)}
-            className="form-control"
+            className="form-control plan-stay-details__control"
           >
             <option value="">No resort selected</option>
             {resorts.map((resort) => (
@@ -109,7 +105,7 @@ export function PlanStayDetails({
             type="date"
             value={startDate}
             onChange={(event) => setStartDate(event.target.value)}
-            className="form-control"
+            className="form-control plan-stay-details__control"
           />
         </label>
 
@@ -121,7 +117,7 @@ export function PlanStayDetails({
             type="date"
             value={endDate}
             onChange={(event) => setEndDate(event.target.value)}
-            className="form-control"
+            className="form-control plan-stay-details__control"
           />
         </label>
       </div>

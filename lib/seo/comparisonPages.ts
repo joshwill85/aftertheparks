@@ -76,8 +76,8 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
       "Rank Walt Disney World resorts for no-park-day planning with current recreation, free options, evening activities, access caveats, and realistic transportation.",
     userPromise:
       "A strong no-park-day resort has enough current recreation, easy downtime, food nearby, and simple evening options that you do not need a park ticket to feel like the day worked.",
-    primaryAction: { label: "Find no-ticket-friendly activities", href: "/activities?ticket_required=false" },
-    deepLinks: ["/today", "/tonight", "/activities?ticket_required=false", "/guides/things-to-do-without-park-ticket"],
+    primaryAction: { label: "Browse resort activities", href: "/activities" },
+    deepLinks: ["/today", "/tonight", "/activities", "/guides/things-to-do-without-park-ticket"],
     decisionFilter:
       "Rank resorts by current activity depth, free activity mix, evening payoff, and low-friction no-park-day usefulness.",
     exclusionRules: [
@@ -321,7 +321,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best check-in-day resort plan is flexible enough for room timing, tired travelers, weather, and one easy tonight option.",
     primaryAction: { label: "See tonight's activities", href: "/tonight" },
-    deepLinks: ["/tonight", "/today", "/guides/first-night-at-disney-resort", "/activities?duration=short&time=evening"],
+    deepLinks: ["/tonight", "/today", "/guides/first-night-at-disney-resort", "/activities?time=evening"],
     decisionFilter:
       "Rank resorts by flexible same-resort activity depth, short evening options, free backups, and low route complexity.",
     exclusionRules: [
@@ -347,8 +347,8 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
       "Compare Disney resorts for no-ticket planning with current recreation, access-sensitive caveats, parking limits, and transportation-safe next steps.",
     userPromise:
       "The best no-ticket resort plan separates straightforward resort-stay options from access-sensitive visits, parking rules, and transportation limits.",
-    primaryAction: { label: "Find no-ticket-friendly activities", href: "/activities?ticket_required=false" },
-    deepLinks: ["/activities?ticket_required=false", "/activities?free=true", "/today?ticket_required=false", "/guides/things-to-do-without-park-ticket"],
+    primaryAction: { label: "Browse resort activities", href: "/activities" },
+    deepLinks: ["/activities", "/activities?free=true", "/today", "/guides/things-to-do-without-park-ticket"],
     decisionFilter:
       "Rank resorts by no-admission activity depth, access clarity, free/low-cost options, and transportation plans that do not depend on restricted workarounds.",
     exclusionRules: [
@@ -455,8 +455,8 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
       "Compare Fort Wilderness no-ticket activities with current recreation, access caveats, evening plans, and realistic transportation.",
     userPromise:
       "Fort Wilderness can be a strong no-ticket resort plan when the activity is current, access is allowed, and the route is realistic for your group.",
-    primaryAction: { label: "Find no-ticket-friendly activities", href: "/activities?ticket_required=false" },
-    deepLinks: ["/activities?ticket_required=false", "/today", "/tonight", "/guides/things-to-do-without-park-ticket"],
+    primaryAction: { label: "Browse resort activities", href: "/activities" },
+    deepLinks: ["/activities", "/today", "/tonight", "/guides/things-to-do-without-park-ticket"],
     decisionFilter:
       "Rank Fort Wilderness activities by no-admission value, current schedule proof, evening payoff, access clarity, and transportation simplicity.",
     exclusionRules: [

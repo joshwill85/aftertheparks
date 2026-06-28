@@ -104,7 +104,7 @@ CURRENT_ANIMAL_KINGDOM_JAMBO_PDF = Path("data/raw/pdfs/DAKL_Aframe_Recreation-05
 CURRENT_ANIMAL_KINGDOM_KIDANI_PDF = Path("data/raw/pdfs/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf")
 CURRENT_GRAND_FLORIDIAN_PDF = Path("data/raw/pdfs/GF_Aframe_Recreation-0526.pdf")
 BEACH_YACHT_PDF = Path("data/raw/pdfs/YB_Aframe_Recreation-1125.pdf")
-BOARDWALK_PDF = Path("data/raw/pdfs/BW_Aframe_Recreation-0326.pdf")
+BOARDWALK_PDF = Path("data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf")
 ART_OF_ANIMATION_PDF = Path("data/raw/pdfs/DAAR_Aframe_Recreation-0525_DIGITAL.pdf")
 PORT_ORLEANS_FRENCH_QUARTER_PDF = Path("data/raw/pdfs/POFQ_Aframe_Recreation-0326.pdf")
 PORT_ORLEANS_RIVERSIDE_PDF = Path("data/raw/pdfs/PORS_Aframe_Recreation-0326.pdf")
@@ -411,6 +411,28 @@ class PipelineContractsTest(unittest.TestCase):
 
         self.assertTrue(report.publishable)
         self.assertEqual([], report.errors)
+
+    def test_boardwalk_fixture_uses_current_q3_movie_nights(self) -> None:
+        candidates = extract_publishable_candidates_for_fixture(BOARDWALK_FULL_FIXTURE)
+        by_slug = {
+            candidate["normalized_fields"]["slug"]: candidate
+            for candidate in candidates
+        }
+
+        movie = by_slug["movie-under-the-stars"]["normalized_fields"]
+        self.assertEqual("Village Green Lawn | 8:30PM", movie["schedule"]["text"])
+        self.assertEqual(
+            [
+                "Beauty and the Beast (1991)",
+                "Moana",
+                "The Lion King (1994)",
+                "Toy Story 2",
+                "Mulan (1998)",
+                "Monsters, Inc.",
+                "Finding Nemo",
+            ],
+            [night["movie_title"] for night in movie["movie_nights"]],
+        )
 
     def test_validate_v2_accepts_old_key_west_fixture_with_expected_quarantines(self) -> None:
         report = validate_fixture_extractions([OLD_KEY_WEST_FULL_FIXTURE])
@@ -5374,7 +5396,7 @@ class PipelineContractsTest(unittest.TestCase):
 
         self.assertTrue(audit.passed, audit.errors)
         self.assertEqual(20, audit.summary["pdf_source_count"])
-        self.assertEqual(226, audit.summary["fixture_count"])
+        self.assertEqual(227, audit.summary["fixture_count"])
         self.assertEqual(34, audit.summary["fixture_quarantine_count"])
         self.assertEqual(34, audit.summary["official_offering_covered_quarantine_count"])
         self.assertEqual(13, audit.summary["official_offering_alias_covered_quarantine_count"])

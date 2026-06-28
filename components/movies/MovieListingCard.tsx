@@ -1,7 +1,8 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import Link from "next/link";
+import { usePlan } from "@/components/atlas/PlanProvider";
 import { EventCard } from "@/components/events/EventCard";
 import {
   EventBadgeRow,
@@ -10,7 +11,8 @@ import {
 } from "@/components/events/event-ui";
 import { TmdbAttribution } from "@/components/atlas/TmdbAttribution";
 import { getMovieDisplayTitle, movieToEventCard } from "@/lib/events/mapToEventCard";
-import type { MovieNightOccurrence } from "@/lib/types/occurrence";
+import { formatMovieDuration } from "@/lib/movies/time";
+import type { ActivityOccurrence, MovieNightOccurrence } from "@/lib/types/occurrence";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
 export { getMovieDisplayTitle };
@@ -21,10 +23,49 @@ interface MovieListingCardProps {
   linkToTonight?: boolean;
   className?: string;
   weatherSummary?: WeatherForTimeSpan | null;
+  showWeatherSignal?: boolean;
 }
 
 function tmdbMovieHref(tmdbId?: number): string | undefined {
   return tmdbId ? `https://www.themoviedb.org/movie/${tmdbId}` : undefined;
+}
+
+function movieToPlanActivity(movie: MovieNightOccurrence): ActivityOccurrence {
+  const title = getMovieDisplayTitle(movie);
+
+  return {
+    id: movie.id,
+    activityCatalogId: `movie:${movie.id}`,
+    activitySlug: "movies-under-the-stars",
+    title,
+    resort: {
+      slug: movie.resortSlug,
+      name: movie.resortName,
+      tier: "",
+      area: "",
+    },
+    summary:
+      movie.overview?.trim() ||
+      "Outdoor movie night from the current resort recreation calendar.",
+    category: "movies_under_stars",
+    section: "Movies Under the Stars",
+    daypart: "evening",
+    price: { state: "free" },
+    location: { label: movie.location ?? "Confirm with the resort" },
+    eligibility: {
+      ages: ["all_ages"],
+      reservation: { required: false },
+    },
+    freshness: {
+      lastVerified: movie.startDateTime ?? "1970-01-01T00:00:00.000Z",
+      sourceUrl: "/activities/movies-under-the-stars",
+      badge: "verified",
+    },
+    status: "active",
+    startDateTime: movie.startDateTime,
+    endDateTime: movie.endDateTime,
+    scheduleText: [movie.dayOfWeek, movie.showTime].filter(Boolean).join(" at "),
+  };
 }
 
 function MovieDetailsDialog({
@@ -40,6 +81,7 @@ function MovieDetailsDialog({
   const card = movieToEventCard(movie, variant, { linkToTonight: false });
   const tmdbHref = tmdbMovieHref(movie.tmdbId);
   const isNight = variant === "night";
+  const runtime = formatMovieDuration(movie.runtimeMinutes);
 
   return (
     <div className="movie-details" role="presentation">
@@ -89,6 +131,7 @@ function MovieDetailsDialog({
             />
             <div className="movie-details__facts">
               {movie.releaseYear && <span>Released {movie.releaseYear}</span>}
+              {runtime && <span>{runtime}</span>}
               {typeof movie.voteAverage === "number" && (
                 <span>TMDB {movie.voteAverage.toFixed(1)}</span>
               )}
@@ -118,16 +161,22 @@ export function MovieListingCard({
   linkToTonight = false,
   className,
   weatherSummary,
+  showWeatherSignal,
 }: MovieListingCardProps) {
+  const { addActivity, isActivitySaved } = usePlan();
   const [open, setOpen] = useState(false);
   const card = movieToEventCard(movie, variant, { linkToTonight });
   const title = getMovieDisplayTitle(movie);
+  const planActivity = useMemo(() => movieToPlanActivity(movie), [movie]);
 
   return (
     <>
       <EventCard
         {...card}
         weatherSummary={weatherSummary}
+        showWeatherSignal={showWeatherSignal}
+        saved={isActivitySaved(planActivity)}
+        onSave={() => addActivity(planActivity)}
         href={undefined}
         onOpen={() => setOpen(true)}
         openLabel={`View movie details for ${title}`}

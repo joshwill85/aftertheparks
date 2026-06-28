@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { movieToEventCard } from "@/lib/events/mapToEventCard";
+import {
+  formatMovieDuration,
+  movieEndsAt,
+  movieStartsAt,
+} from "@/lib/movies/time";
 import { sanitizeMovieTitle } from "@/lib/movies/sanitize";
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 
@@ -20,6 +25,9 @@ const movie: MovieNightOccurrence = {
   overview:
     "A lonely Hawaiian girl and a runaway alien learn what family can mean.",
   voteAverage: 7.5,
+  runtimeMinutes: 85,
+  startDateTime: "2026-06-27T20:30:00-04:00",
+  endDateTime: "2026-06-27T21:55:00-04:00",
   isTonight: true,
 };
 
@@ -38,6 +46,50 @@ assert.match(
   /TMDB 7\.5/,
   "movie cards should include the TMDB audience score when available"
 );
+assert.match(
+  card.extra ?? "",
+  /1 hr 25 min/,
+  "movie cards should include runtime when TMDB provides duration"
+);
+assert.equal(
+  card.timeDateTime,
+  movie.startDateTime,
+  "movie cards should expose the movie start datetime for weather and semantic time"
+);
+assert.match(
+  card.scheduleDayLabel ?? "",
+  /Sat, Jun 27/,
+  "movie cards should list the Disney-local day and date from the exact start datetime"
+);
+assert.equal(
+  card.scheduleDayDateTime,
+  "2026-06-27",
+  "movie cards should expose the semantic local calendar date"
+);
+assert.equal(
+  card.timeLabel,
+  "Starts 8:30 PM",
+  "movie cards should label the exact movie start time"
+);
+assert.match(
+  card.extra ?? "",
+  /Duration 1 hr 25 min/,
+  "movie cards should label movie duration explicitly"
+);
+assert.equal(
+  card.endDateTime,
+  movie.endDateTime,
+  "movie cards should expose the movie end datetime for weather expiry"
+);
+assert.deepEqual(
+  card.weatherQuery,
+  {
+    resortSlug: movie.resortSlug,
+    startsAt: movie.startDateTime,
+    endsAt: movie.endDateTime,
+  },
+  "movie cards should request weather for the movie window"
+);
 assert.deepEqual(
   card.media,
   {
@@ -47,6 +99,24 @@ assert.deepEqual(
     alt: "Lilo & Stitch poster",
   },
   "movie cards must use movie database artwork, not initial-letter placeholders"
+);
+
+assert.equal(formatMovieDuration(45), "45 min");
+assert.equal(formatMovieDuration(85), "1 hr 25 min");
+assert.equal(formatMovieDuration(120), "2 hr");
+assert.equal(
+  movieStartsAt({
+    dayOfWeek: "saturday",
+    showTime: "8:30PM",
+    now: new Date("2026-06-26T12:00:00-04:00"),
+  })?.toISOString(),
+  "2026-06-28T00:30:00.000Z",
+  "movie start time should resolve to the next matching Orlando calendar day"
+);
+assert.equal(
+  movieEndsAt("2026-06-28T00:30:00.000Z", 85)?.toISOString(),
+  "2026-06-28T01:55:00.000Z",
+  "movie end time should use TMDB runtime when available"
 );
 
 const listingCard = readFileSync("components/movies/MovieListingCard.tsx", "utf8");
@@ -79,6 +149,28 @@ assert.match(
   /vote_average/,
   "TMDB metadata loader should retain audience score"
 );
+assert.match(
+  tmdb,
+  /runtime/,
+  "TMDB metadata loader should retain movie runtime"
+);
+assert.match(
+  tmdb,
+  /fetchTmdbMovieRuntime/,
+  "TMDB metadata loader should support refreshing runtime for cached movie hits"
+);
+
+const posterCache = readFileSync("lib/movies/poster-cache.ts", "utf8");
+assert.match(
+  posterCache,
+  /refreshRuntimeIfMissing/,
+  "Movie poster cache should refresh runtime for existing cached hits"
+);
+assert.match(
+  posterCache,
+  /runtime_minutes/,
+  "Movie poster cache should persist runtime minutes"
+);
 
 assert.equal(sanitizeMovieTitle("Tangled Ps"), "Tangled");
 assert.equal(sanitizeMovieTitle("Moana 'P"), "Moana");
@@ -86,8 +178,8 @@ assert.equal(sanitizeMovieTitle("Moana 'P"), "Moana");
 const activitiesData = readFileSync("lib/data/activities.ts", "utf8");
 assert.match(
   activitiesData,
-  /activities_ingest\.json/,
-  "Movie nights should come from source-backed ingest data instead of legacy database rows"
+  /activity_gold_v2_preview\.json/,
+  "Movie nights should come from source-backed Gold data instead of legacy database rows"
 );
 assert.match(
   activitiesData,
@@ -124,6 +216,12 @@ assert.match(
   listingCard,
   /aria-labelledby=\{titleId\}[\s\S]+headingId=\{titleId\}/,
   "Movie details dialog should connect aria-labelledby to the rendered movie heading"
+);
+
+assert.match(
+  listingCard,
+  /runtimeMinutes/,
+  "Movie details dialog should include runtime facts when available"
 );
 
 console.log("Movie card detail coverage passed.");

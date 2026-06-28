@@ -203,18 +203,14 @@ for (const expectedRoute of [
 }
 
 for (const filteredRoute of [
-  "/activities?ticket_required=false",
   "/activities?free=true",
   "/activities?weather=indoor",
   "/activities?weather=covered",
   "/activities?transport=monorail",
   "/activities?transport=skyliner",
   "/activities?area=disney-springs",
-  "/activities?duration=short&time=evening",
   "/resorts?no_ticket_friendly=true",
-  "/today?ticket_required=false",
   "/today?weather=indoor",
-  "/tonight?ticket_required=false",
   "/tonight?weather=indoor",
 ]) {
   assert.match(

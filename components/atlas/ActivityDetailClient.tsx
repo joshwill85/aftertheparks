@@ -258,7 +258,7 @@ function ActivityPlanningSnapshot({
         </article>
 
         <article className="rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-4">
-          <h3 className="font-display text-lg font-semibold">Weather/cancellation caveats</h3>
+          <h3 className="font-display text-lg font-semibold">Cancellation caveats</h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             Operations can affect movies, campfires, pools, boats, sports, and
             longer walks. Confirm the final time, location, and cancellation
@@ -335,18 +335,14 @@ export function ActivityDetailClient({
   const uncertainTime =
     display.timeUncertain ||
     isUncertainSchedule(activity.scheduleText);
-  const hasBackedTime = Boolean(
-    timedScheduleRows[0] || activity.startDateTime || display.timeLabel
-  );
+  const hasBackedTime = Boolean(timedScheduleRows[0] || activity.startDateTime);
   const showUncertainTime = uncertainTime && hasBackedTime;
 
   const whenLabel = timedScheduleRows[0]
     ? showUncertainTime
       ? "Confirm with resort"
       : formatOccurrenceWhen(timedScheduleRows[0])
-    : showUncertainTime
-      ? "Confirm with resort"
-      : display.timeLabel;
+    : display.whenLabel;
 
   const whenDateTime = timedScheduleRows[0]?.startDateTime ?? activity.startDateTime;
   const hasTimeField = Boolean(whenLabel);

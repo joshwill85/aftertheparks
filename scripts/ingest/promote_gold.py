@@ -211,7 +211,7 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
     )
     fee_value = fee_claim.get("value") if isinstance(fee_claim, dict) else None
     price_state = fee_value if fee_value in {"free", "fee"} else "unknown"
-    return {
+    record = {
         "candidate_id": candidate["candidate_id"],
         "activity_catalog_id": _activity_catalog_id(
             candidate["calendar_group_key"],
@@ -247,6 +247,18 @@ def _gold_record(candidate: dict[str, Any], public_record: dict[str, Any]) -> di
         },
         "trust_state": trust_state,
     }
+    movie_nights = normalized.get("movie_nights")
+    if isinstance(movie_nights, list):
+        record["movie_nights"] = [
+            {
+                "day_of_week": str(row.get("day_of_week") or ""),
+                "movie_title": str(row.get("movie_title") or ""),
+                "show_time": str(row.get("show_time") or ""),
+            }
+            for row in movie_nights
+            if isinstance(row, dict)
+        ]
+    return record
 
 
 def _review_decision_for(

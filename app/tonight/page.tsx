@@ -2,10 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Hero } from "@/components/atlas/Hero";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { TonightClient } from "@/components/atlas/TonightClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
-import { getTonightActivities, getMovieNights, getResorts } from "@/lib/data/activities";
+import { DecisionSummaryBar } from "@/components/planning/DecisionSummaryBar";
+import { TrustInline } from "@/components/planning/TrustInline";
+import {
+  getEveningActivitiesThisWeek,
+  getTonightActivities,
+  getMovieNights,
+  getResorts,
+} from "@/lib/data/activities";
 import {
   filterMovieNights,
   hasActiveBrowseFilters,
@@ -24,6 +32,15 @@ import {
 } from "@/lib/seo/activityPage";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
+import { buildDecisionSummary } from "@/lib/planning/decisionSummary";
+import {
+  loadWeatherByOccurrence,
+  loadWeatherGuidanceForLocation,
+  weatherQueryForActivity,
+  weatherQueryForMovie,
+} from "@/lib/weather/serverGuidance";
+import { WEATHER_TIMEZONE } from "@/lib/weather/time";
+import { fromZonedTime } from "date-fns-tz";
 
 export const dynamic = "force-dynamic";
 
@@ -35,12 +52,6 @@ const DEFAULT_TONIGHT_METADATA = {
 };
 
 const STRATEGIC_TONIGHT_FILTER_METADATA: Record<string, typeof DEFAULT_TONIGHT_METADATA> = {
-  "ticket_required=false": {
-    title: "Disney Resort Activities Tonight Without a Park Ticket",
-    description:
-      "Find tonight's Walt Disney World resort activities that do not require park admission, with access, transportation, weather, and source caveats.",
-    canonical: "/tonight?ticket_required=false",
-  },
   "weather=indoor": {
     title: "Indoor Disney Resort Activities Tonight",
     description:
@@ -54,6 +65,25 @@ function strategicTonightFilterKey(params: Record<string, string | undefined>): 
   if (keys.length !== 1) return undefined;
   const key = keys[0];
   return `${key}=${params[key]}`;
+}
+
+function orlandoDateKey(date: Date): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: WEATHER_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
+function tonightWeatherWindow(now: Date): { startsAt: Date; endsAt: Date } {
+  const dateKey = orlandoDateKey(now);
+  const fivePm = fromZonedTime(`${dateKey}T17:00:00`, WEATHER_TIMEZONE);
+  const midnight = fromZonedTime(`${dateKey}T23:59:00`, WEATHER_TIMEZONE);
+  return {
+    startsAt: now.getTime() < fivePm.getTime() ? fivePm : now,
+    endsAt: midnight,
+  };
 }
 
 export async function generateMetadata({
@@ -90,14 +120,41 @@ export default async function TonightPage({
 }) {
   const params = await searchParams;
   const filters = parseBrowseParams(params);
-  const [activities, baseActivities, movieNights, resorts] = await Promise.all([
+  const weatherNow = new Date();
+  const [
+    activities,
+    weekEveningActivities,
+    baseActivities,
+    movieNights,
+    resorts,
+  ] = await Promise.all([
     getTonightActivities(filters),
+    getEveningActivitiesThisWeek(filters),
     getTonightActivities({}),
     getMovieNights(),
     getResorts(),
   ]);
 
   const filteredMovies = filterMovieNights(movieNights, filters);
+  const weatherWindow = tonightWeatherWindow(weatherNow);
+  const initialPageWeather = await loadWeatherGuidanceForLocation({
+    locationKey: "all_wdw",
+    startsAt: weatherWindow.startsAt,
+    endsAt: weatherWindow.endsAt,
+    now: weatherNow,
+    timeBasis: "page_area_window",
+    timeBasisLabel: "Tonight across Walt Disney World",
+  });
+  const initialWeatherById = await loadWeatherByOccurrence({
+    occurrences: [
+      ...activities.map((activity) => weatherQueryForActivity(activity, weatherNow)),
+      ...weekEveningActivities.map((activity) =>
+        weatherQueryForActivity(activity, weatherNow)
+      ),
+      ...filteredMovies.map(weatherQueryForMovie),
+    ].filter((query): query is NonNullable<typeof query> => Boolean(query)),
+    now: weatherNow,
+  });
   const filteredMode = hasActiveBrowseFilters(filters);
   const resultCount = activities.length + filteredMovies.length;
   const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
@@ -111,6 +168,10 @@ export default async function TonightPage({
   );
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const sourceSummary = activitySourceSummary(baseActivities);
+  const decisionSummary = buildDecisionSummary({
+    activities,
+    scope: "tonight",
+  });
   const jsonLd = stringifyJsonLd([
     activityListJsonLd(baseUrl, "Walt Disney World resort activities tonight", activities),
     ...activityEventJsonLd(baseUrl, activities),
@@ -125,6 +186,7 @@ export default async function TonightPage({
       <Hero
         title="Tonight"
         subtitle="Evening resort activities, outdoor movies, campfires, and low-pressure after-park ideas."
+        compactBrowse
       />
       <section className="mx-auto mb-8 max-w-6xl rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
@@ -134,6 +196,11 @@ export default async function TonightPage({
           resort-specific evening options. Confirm outdoor and weather-sensitive
           plans before leaving your resort.
         </p>
+        <TrustInline
+          lastVerified={formatSeoDate(sourceSummary.latestVerified)}
+          sourceCount={sourceSummary.sourceCount}
+          rowCount={sourceSummary.activityCount}
+        />
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href="/today" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
             See today
@@ -146,32 +213,26 @@ export default async function TonightPage({
           </Link>
         </div>
       </section>
-
-      <section className="mx-auto mb-8 max-w-6xl rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <h2 className="font-display text-2xl font-semibold">Source and freshness</h2>
-        <dl className="mt-4 grid gap-3 sm:grid-cols-3">
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Last verified
-            </dt>
-            <dd className="font-semibold">
-              {formatSeoDate(sourceSummary.latestVerified) ?? "Check current source"}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Source-backed rows
-            </dt>
-            <dd className="font-semibold">{sourceSummary.activityCount}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Official sources
-            </dt>
-            <dd className="font-semibold">{sourceSummary.sourceCount}</dd>
-          </div>
-        </dl>
+      <section className="mx-auto mb-8 grid max-w-6xl gap-5 rounded-2xl border border-[rgba(255,200,87,0.28)] bg-[var(--night)] p-5 text-white md:grid-cols-[minmax(0,1fr)_360px] md:items-center">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--lantern)]">
+            Starlight mode
+          </p>
+          <h2 className="font-display mt-2 text-2xl font-semibold">
+            A calmer map for after-dark resort wins.
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-white/78">
+            Tonight is where the pocket-map idea gets cozy: movies, campfires,
+            low-energy detours, and weather-aware backups before anyone crosses
+            the resort.
+          </p>
+        </div>
+        <BrandAsset
+          asset="dark-lockup"
+          className="brand-asset--night-feature justify-self-center"
+        />
       </section>
+      <DecisionSummaryBar summary={decisionSummary} />
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <BrowseFilterShell
           variant="tonight"
@@ -181,8 +242,12 @@ export default async function TonightPage({
         >
           <TonightClient
             activities={activities}
+            weekEveningActivities={weekEveningActivities}
             movieNights={filteredMovies}
             filteredMode={filteredMode}
+            initialPageWeather={initialPageWeather}
+            initialWeatherById={initialWeatherById}
+            initialTimelineNowIso={weatherNow.toISOString()}
           />
         </BrowseFilterShell>
       </Suspense>

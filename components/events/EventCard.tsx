@@ -86,6 +86,16 @@ export interface EventCardProps {
   className?: string;
 }
 
+function hasDisplayableWeatherIcon(
+  weather: WeatherForTimeSpan | null | undefined
+): weather is WeatherForTimeSpan {
+  return Boolean(
+    weather?.shouldDisplayWeather &&
+      weather.forecastStatus !== "not_available_yet" &&
+      weather.iconKey !== "unknown"
+  );
+}
+
 export function EventCard({
   variant = "day",
   href,
@@ -122,20 +132,12 @@ export function EventCard({
   const isNight = variant === "night";
   const saveVariant = isNight ? "night" : "day";
   const isClickable = Boolean(href || onOpen);
-  const shouldShowWeatherSummary = Boolean(
-    weatherSummary?.shouldDisplayWeather
-  );
+  const shouldShowWeatherSummary = hasDisplayableWeatherIcon(weatherSummary);
 
   const body = (
     <>
       <EventMediaDisplay media={media} size="card" resortSlug={resortSlug} />
       <div className="event-card__body">
-        <EventBadgeRow
-          badges={badges}
-          isNight={isNight}
-          showTrust={showTrust}
-          trustActivity={trustActivity}
-        />
         <EventTitleBlock
           title={title}
           resort={resort}
@@ -150,7 +152,7 @@ export function EventCard({
           footnote={footnote}
         />
         {decisionProfile && (
-          <DecisionSignals profile={decisionProfile} compact maxSignals={2} />
+          <DecisionSignals profile={decisionProfile} compact maxSignals={4} />
         )}
         {!shouldShowWeatherSummary && showWeatherSignal && (weatherQuery?.startsAt ?? timeDateTime) ? (
           <EventWeatherSignal
@@ -158,8 +160,17 @@ export function EventCard({
             locationKey={weatherQuery?.locationKey}
             startsAt={weatherQuery?.startsAt ?? timeDateTime}
             endsAt={weatherQuery?.endsAt ?? endDateTime}
+            className="event-card__inline-weather"
           />
         ) : null}
+        <div className="event-card__footer">
+          <EventBadgeRow
+            badges={badges}
+            isNight={isNight}
+            showTrust={showTrust}
+            trustActivity={trustActivity}
+          />
+        </div>
       </div>
     </>
   );

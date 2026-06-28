@@ -19,7 +19,6 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
       "Source and accuracy policy",
     ],
   },
-  { path: "/today?ticket_required=false", kind: "html" },
   { path: "/today?weather=indoor", kind: "html" },
   {
     path: "/tonight",
@@ -30,10 +29,8 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
       "Source and accuracy policy",
     ],
   },
-  { path: "/tonight?ticket_required=false", kind: "html" },
   { path: "/tonight?weather=indoor", kind: "html" },
   { path: "/activities", kind: "html" },
-  { path: "/activities?ticket_required=false", kind: "html" },
   { path: "/activities?free=true", kind: "html" },
   { path: "/activities?weather=indoor", kind: "html" },
   { path: "/activities?weather=covered", kind: "html" },
@@ -48,7 +45,6 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
       "dining/experience reservation",
     ],
   },
-  { path: "/activities?duration=short&time=evening", kind: "html" },
   { path: "/resorts", kind: "html" },
   {
     path: "/resorts?no_ticket_friendly=true",

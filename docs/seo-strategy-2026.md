@@ -277,7 +277,7 @@ The audience and use-case guides should exist only when they apply a unique deci
 | Rainy day | Indoor/covered only, low transfer risk, no weather-dependent transport unless clearly caveated. |
 | First night | Low stakes, flexible, close to resort, not reservation-fragile unless pre-booked. |
 | Resort hopping | Direct route preferred, one transportation mode where possible, no bus-to-park-to-bus chains unless labeled as advanced/multi-hop. |
-| No park ticket | No admission required, access allowed, parking/transport caveats, resort-guest-only restrictions where relevant. |
+| Access-sensitive planning | Access allowed, parking/transport caveats, resort-guest-only restrictions where relevant. |
 
 This is how the site avoids thin content. The page exists because it filters the world in a way the homepage cannot.
 
@@ -403,7 +403,6 @@ Route model:
 | `route_type` | `direct`, `one_transfer`, `multi_transfer` |
 | `transport_mode` | `monorail`, `skyliner`, `boat`, `walk`, `bus`, `rideshare` |
 | `transfer_count` | `0`, `1`, `2_plus` |
-| `park_ticket_required` | `yes`, `no` |
 | `weather_exposure` | `low`, `medium`, `high` |
 | `mobility_difficulty` | `low`, `medium`, `high` |
 | `recommended_for_page` | `yes`, `no` |
@@ -430,16 +429,16 @@ No-ticket guide structure:
 3. Not no-ticket: anything inside Magic Kingdom, EPCOT, Hollywood Studios, Animal Kingdom, or a ticketed event.
 4. Transportation caveats: theme park parking, Disney Springs parking, resort self-parking, rideshare, Minnie Van, walking routes, monorail/Skyliner/boat access, and what recently changed.
 
-No-ticket deep links:
+No-ticket guide links:
 
-- `/activities?ticket_required=false`
+- `/activities`
 - `/activities?free=true`
 - `/activities?transport=monorail`
 - `/activities?transport=skyliner`
 - `/activities?area=disney-springs`
 - `/resorts?no_ticket_friendly=true`
-- `/today?ticket_required=false`
-- `/tonight?ticket_required=false`
+- `/today`
+- `/tonight`
 
 Audience-fit fields:
 

@@ -28,12 +28,11 @@ import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine"
 import { WeatherPrecipMapPreview } from "@/components/weather/WeatherPrecipMapPreview";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { getActivityWeatherProfile } from "@/lib/weather/activityProfiles";
-import { getCachedNwsAlerts, getCachedNwsAlertsForAllWdw, getCachedWeatherSnapshot } from "@/lib/weather/cache";
 import { compareForecastTiming } from "@/lib/weather/forecastCompare";
-import { buildWeatherGuidanceForTimeSpan } from "@/lib/weather/guidance";
-import { getWeatherLocationForResort } from "@/lib/weather/locations";
-import { getWeatherApiPrecipMapContext } from "@/lib/weather/precipMap";
-import { chooseWeatherProviderForTimeSpan } from "@/lib/weather/providerRouter";
+import {
+  loadWeatherGuidanceForLocation,
+  weatherQueryForActivity,
+} from "@/lib/weather/serverGuidance";
 import { notFound, redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -420,48 +419,28 @@ export default async function ActivityDetailPage({
   const homeBase = homeResort
     ? { slug: homeResort.slug, area: homeResort.area }
     : undefined;
-  const activityWeatherLocation = getWeatherLocationForResort(activity.resort.slug);
+  const activityWeatherProfile = getActivityWeatherProfile(activity.activitySlug);
   const activityWeatherNow = new Date();
-  const activityWeatherStartsAt =
-    upcoming[0]?.startDateTime ?? activity.startDateTime ?? activityWeatherNow.toISOString();
-  const activityWeatherEndsAt =
-    upcoming[0]?.endDateTime ??
-    activity.endDateTime ??
-    new Date(activityWeatherNow.getTime() + 2 * 60 * 60 * 1000).toISOString();
-  const activityWeatherSelection = chooseWeatherProviderForTimeSpan({
+  const activityWeatherSource = upcoming[0] ?? activity;
+  const activityWeatherQuery =
+    weatherQueryForActivity(activityWeatherSource, activityWeatherNow) ?? {
+      id: activity.id,
+      resortSlug: activity.resort.slug,
+      startsAt: activityWeatherNow.toISOString(),
+      endsAt: new Date(activityWeatherNow.getTime() + 2 * 60 * 60 * 1000).toISOString(),
+      activitySlug: activity.activitySlug,
+      timeBasis: "page_area_window" as const,
+      timeBasisLabel: "Activity-area weather",
+    };
+  const activityWeatherGuidance = await loadWeatherGuidanceForLocation({
+    resortSlug: activity.resort.slug,
     now: activityWeatherNow,
-    startsAt: activityWeatherStartsAt,
-    endsAt: activityWeatherEndsAt,
-  });
-  const [activityWeatherSnapshotResult, activityWeatherAlertsResult] =
-    await Promise.allSettled([
-      getCachedWeatherSnapshot({
-        location: activityWeatherLocation,
-        provider: activityWeatherSelection.provider,
-      }),
-      activityWeatherLocation.key === "all_wdw"
-        ? getCachedNwsAlertsForAllWdw()
-        : getCachedNwsAlerts({ location: activityWeatherLocation }),
-    ]);
-  const activityWeatherSnapshot =
-    activityWeatherSnapshotResult.status === "fulfilled"
-      ? activityWeatherSnapshotResult.value
-      : null;
-  const activityWeatherAlertState =
-    activityWeatherAlertsResult.status === "fulfilled"
-      ? { status: "available" as const, alerts: activityWeatherAlertsResult.value }
-      : { status: "unavailable" as const, alerts: [] };
-  const activityWeatherGuidance = buildWeatherGuidanceForTimeSpan({
-    locationKey: activityWeatherLocation.key,
-    startsAt: activityWeatherStartsAt,
-    endsAt: activityWeatherEndsAt,
-    snapshot: activityWeatherSnapshot,
-    alerts: activityWeatherAlertState.alerts,
-    officialAlertStatus: activityWeatherAlertState.status,
-    precipMap: getWeatherApiPrecipMapContext({
-      location: activityWeatherLocation,
-      now: activityWeatherNow,
-    }),
+    startsAt: activityWeatherQuery.startsAt,
+    endsAt: activityWeatherQuery.endsAt,
+    includePrecipMap: true,
+    activityWeatherFits: activityWeatherProfile.weatherFit,
+    timeBasis: activityWeatherQuery.timeBasis,
+    timeBasisLabel: activityWeatherQuery.timeBasisLabel,
   });
 
   const nearby = nearbyActivities.filter(
@@ -525,7 +504,7 @@ export default async function ActivityDetailPage({
       <section className="mt-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Weather fit</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          {getActivityWeatherProfile(activity.activitySlug).defaultWeatherCaveat ??
+          {activityWeatherProfile.defaultWeatherCaveat ??
             "Use the latest weather guidance to decide whether this activity needs a backup."}
         </p>
         <WeatherFreshnessLine
@@ -534,7 +513,7 @@ export default async function ActivityDetailPage({
         />
         <NearTermRainLine signal={activityWeatherGuidance.nearTermRain} />
         <div className="mt-4 flex flex-wrap gap-2">
-          {getActivityWeatherProfile(activity.activitySlug).weatherFit.map((fit) => (
+          {activityWeatherProfile.weatherFit.map((fit) => (
             <ActivityWeatherBadge key={fit} fit={fit} />
           ))}
         </div>

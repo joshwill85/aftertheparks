@@ -12,18 +12,12 @@ import { NightEmptyState } from "@/components/tonight/NightEmptyState";
 import { NightActivityCard } from "@/components/tonight/NightActivityCard";
 import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import { TonightHero } from "@/components/tonight/TonightHero";
-import { NightfallTimeline } from "@/components/tonight/NightfallTimeline";
 import { EmptyState } from "@/components/atlas/EmptyState";
 import { ActivityCollectionView } from "@/components/atlas/ActivityCollectionView";
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 import { ForecastTimeline } from "@/components/weather/ForecastTimeline";
-import { StormModeBanner } from "@/components/weather/StormModeBanner";
 import { WeatherStatusStrip } from "@/components/weather/WeatherStatusStrip";
-import { WeatherStoryStrip } from "@/components/weather/WeatherStoryStrip";
-import { WeatherWindowStrip } from "@/components/weather/WeatherWindowStrip";
-import { buildWeatherDayStory } from "@/lib/weather/dayStory";
 import { getStormModeState } from "@/lib/weather/stormMode";
-import { buildWeatherWindows } from "@/lib/weather/windows";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
 function NightSectionEmpty({
@@ -56,46 +50,58 @@ function dedupeBySlot(activities: ActivityOccurrence[]): ActivityOccurrence[] {
 
 export function TonightClient({
   activities,
+  weekEveningActivities,
   movieNights,
   filteredMode = false,
+  initialPageWeather,
+  initialWeatherById = {},
+  initialTimelineNowIso,
 }: {
   activities: ActivityOccurrence[];
+  weekEveningActivities: ActivityOccurrence[];
   movieNights: MovieNightOccurrence[];
   filteredMode?: boolean;
+  initialPageWeather: WeatherForTimeSpan | null;
+  initialWeatherById?: Record<string, WeatherForTimeSpan>;
+  initialTimelineNowIso: string;
 }) {
   const { addActivity } = usePlan();
   const { setForceDaypart } = useDaypart();
-  const [pageWeather, setPageWeather] = useState<WeatherForTimeSpan | null>(null);
-  const [weatherById, setWeatherById] = useState<Record<string, WeatherForTimeSpan>>({});
+  const [pageWeather, setPageWeather] = useState<WeatherForTimeSpan | null>(initialPageWeather);
+  const [weatherById, setWeatherById] = useState<Record<string, WeatherForTimeSpan>>(initialWeatherById);
+  const [timelineNow] = useState(() => new Date(initialTimelineNowIso));
 
   useEffect(() => {
     setForceDaypart("evening");
     return () => setForceDaypart(null);
   }, [setForceDaypart]);
 
-  const visibleActivities = dedupeBySlot(filterVisible(activities));
-  const visibleEveningActivities = visibleActivities.filter(
-    (activity) => activity.category !== "movies_under_stars"
+  const visibleActivities = useMemo(
+    () => dedupeBySlot(filterVisible(activities)),
+    [activities]
   );
-  const tonightMovies = movieNights.filter((m) => m.isTonight);
-  const weekMovies = movieNights.filter((m) => !m.isTonight);
-  const weatherWindows = useMemo(() => {
-    const base = pageWeather?.startsAt ?? new Date().toISOString();
-    return buildWeatherWindows({
-      locationKey: pageWeather?.locationKey ?? "all_wdw",
-      startsAt: base,
-      endsAt: pageWeather?.endsAt ?? base,
-      risksByWindow: [
-        {
-          startsAt: base,
-          endsAt: pageWeather?.endsAt ?? base,
-          rainRisk: pageWeather?.risk.rainRisk ?? "low",
-          stormRisk: pageWeather?.risk.stormRisk ?? "low",
-          heatRisk: pageWeather?.risk.heatRisk ?? "low",
-        },
-      ],
-    });
-  }, [pageWeather]);
+  const visibleEveningActivities = useMemo(
+    () =>
+      visibleActivities.filter(
+        (activity) => activity.category !== "movies_under_stars"
+      ),
+    [visibleActivities]
+  );
+  const visibleWeekEveningActivities = useMemo(
+    () =>
+      dedupeBySlot(filterVisible(weekEveningActivities)).filter(
+        (activity) => activity.category !== "movies_under_stars"
+      ),
+    [weekEveningActivities]
+  );
+  const tonightMovies = useMemo(
+    () => movieNights.filter((m) => m.isTonight),
+    [movieNights]
+  );
+  const weekMovies = useMemo(
+    () => movieNights.filter((m) => !m.isTonight),
+    [movieNights]
+  );
   const stormMode = useMemo(
     () =>
       getStormModeState({
@@ -104,14 +110,8 @@ export function TonightClient({
       }),
     [pageWeather]
   );
-  const weatherStory = useMemo(
-    () =>
-      buildWeatherDayStory({
-        windows: weatherWindows,
-        stormModeActive: stormMode.active,
-      }),
-    [stormMode.active, weatherWindows]
-  );
+  const weatherForMovie = (movie: MovieNightOccurrence) =>
+    movie.startDateTime ? weatherById[movie.id] ?? null : undefined;
 
   useEffect(() => {
     let cancelled = false;
@@ -127,8 +127,16 @@ export function TonightClient({
   }, []);
 
   useEffect(() => {
-    const dated = visibleEveningActivities
+    const activityWeatherPool = [...visibleEveningActivities, ...visibleWeekEveningActivities];
+    const dated: {
+      id: string;
+      resortSlug: string;
+      startsAt: string;
+      endsAt?: string;
+      activitySlug?: string;
+    }[] = activityWeatherPool
       .filter((activity) => activity.startDateTime)
+      .filter((activity) => !weatherById[activity.id])
       .map((activity) => ({
         id: activity.id,
         resortSlug: activity.resort.slug,
@@ -136,6 +144,16 @@ export function TonightClient({
         endsAt: activity.endDateTime,
         activitySlug: activity.activitySlug,
       }));
+    const datedMovies = movieNights
+      .filter((movie) => movie.startDateTime)
+      .filter((movie) => !weatherById[movie.id])
+      .map((movie) => ({
+        id: movie.id,
+        resortSlug: movie.resortSlug,
+        startsAt: movie.startDateTime!,
+        endsAt: movie.endDateTime,
+      }));
+    dated.push(...datedMovies);
     if (dated.length === 0) return;
     let cancelled = false;
     fetch("/api/weather/guidance/batch", {
@@ -145,13 +163,15 @@ export function TonightClient({
     })
       .then((response) => (response.ok ? response.json() : null))
       .then((body: { weatherById?: Record<string, WeatherForTimeSpan> } | null) => {
-        if (!cancelled && body?.weatherById) setWeatherById(body.weatherById);
+        if (!cancelled && body?.weatherById) {
+          setWeatherById((current) => ({ ...current, ...body.weatherById }));
+        }
       })
       .catch(() => {});
     return () => {
       cancelled = true;
     };
-  }, [visibleEveningActivities]);
+  }, [movieNights, visibleEveningActivities, visibleWeekEveningActivities, weatherById]);
 
   if (filteredMode) {
     const showMovies = movieNights.length > 0;
@@ -175,7 +195,6 @@ export function TonightClient({
         <p className="tonight-callout">
           Filtered evening picks — confirm showtimes with your resort before heading out.
         </p>
-        <NightfallTimeline activities={visibleEveningActivities} movieNights={movieNights} />
         {visibleEveningActivities.length > 0 && (
           <EventCardList columns={2}>
             {visibleEveningActivities.map((activity) => (
@@ -197,7 +216,10 @@ export function TonightClient({
             <EventCardList>
               {movieNights.map((movie) => (
                 <EventCardListItem key={movie.id}>
-                  <MovieCard movie={movie} />
+                  <MovieCard
+                    movie={movie}
+                    weatherSummary={weatherForMovie(movie)}
+                  />
                 </EventCardListItem>
               ))}
             </EventCardList>
@@ -234,19 +256,13 @@ export function TonightClient({
       <TonightHero />
 
       <div className="space-y-4">
-        <StormModeBanner state={stormMode} />
         <WeatherStatusStrip
           state={stormMode.active ? "storm" : "normal"}
           weather={pageWeather}
-          actions={[
-            { label: "Indoor tonight", href: "/tonight?weather=indoor" },
-            { label: "Covered options", href: "/activities?weather=covered" },
-          ]}
+          actions={[{ label: "Covered Options", href: "/activities?weather=covered" }]}
         />
-        <WeatherWindowStrip windows={weatherWindows} />
-        <WeatherStoryStrip story={weatherStory} />
         {pageWeather?.hourlyBreakdown.length ? (
-          <ForecastTimeline hours={pageWeather.hourlyBreakdown} />
+          <ForecastTimeline hours={pageWeather.hourlyBreakdown} now={timelineNow} />
         ) : null}
       </div>
 
@@ -254,8 +270,6 @@ export function TonightClient({
         Confirm showtimes with your resort before heading out; schedules can
         change without notice.
       </p>
-
-      <NightfallTimeline activities={visibleEveningActivities} movieNights={movieNights} />
 
       <section id="movies" className="scroll-mt-24">
         <div className="mb-5">
@@ -287,7 +301,10 @@ export function TonightClient({
                 <EventCardList>
                   {tonightMovies.map((movie) => (
                     <EventCardListItem key={movie.id}>
-                      <MovieCard movie={movie} />
+                      <MovieCard
+                        movie={movie}
+                        weatherSummary={weatherForMovie(movie)}
+                      />
                     </EventCardListItem>
                   ))}
                 </EventCardList>
@@ -301,7 +318,10 @@ export function TonightClient({
                 <EventCardList>
                   {weekMovies.map((movie) => (
                     <EventCardListItem key={movie.id}>
-                      <MovieCard movie={movie} />
+                      <MovieCard
+                        movie={movie}
+                        weatherSummary={weatherForMovie(movie)}
+                      />
                     </EventCardListItem>
                   ))}
                 </EventCardList>
@@ -322,7 +342,7 @@ export function TonightClient({
           </p>
         </div>
 
-        {visibleEveningActivities.length === 0 ? (
+        {visibleWeekEveningActivities.length === 0 ? (
           <NightSectionEmpty
             title="No evening activities listed right now"
             description="Try movies under the stars, browse all resort activities, or check back after the next schedule update."
@@ -332,7 +352,11 @@ export function TonightClient({
             ]}
           />
         ) : (
-          <ActivityCollectionView activities={visibleEveningActivities} showResort />
+          <ActivityCollectionView
+            activities={visibleWeekEveningActivities}
+            showResort
+            weatherById={weatherById}
+          />
         )}
       </section>
     </div>

@@ -27,6 +27,7 @@ import {
 } from "@/lib/data/goldActivities";
 import { sortActivities } from "@/lib/activities/sort";
 import { enrichMovieNightsWithPosters } from "@/lib/movies/posters";
+import { movieEndsAt, movieStartsAt } from "@/lib/movies/time";
 import { isUsableMovieTitle, sanitizeMovieTitle } from "@/lib/movies/sanitize";
 import {
   dedupeOccurrences,
@@ -61,10 +62,14 @@ interface IngestActivityRow {
   resort_slugs?: string[];
   name?: string;
   normalized_name?: string;
+  canonical_slug?: string;
   category?: string;
   section?: string;
-  location?: string | null;
+  location?: string | { label?: string | null } | null;
   schedule_text?: string | null;
+  schedule?: {
+    text?: string | null;
+  } | null;
   movie_nights?: IngestMovieNight[];
 }
 
@@ -94,6 +99,19 @@ const DEMO_RESORTS: ResortSummary[] = [
     offeringCount: 0,
   },
 ];
+
+function activitySlugForMovieRow(activity: IngestActivityRow): string | undefined {
+  return activity.normalized_name ?? activity.canonical_slug;
+}
+
+function movieScheduleTextForRow(activity: IngestActivityRow): string | null | undefined {
+  return activity.schedule_text ?? activity.schedule?.text;
+}
+
+function movieLocationForRow(activity: IngestActivityRow): string | null | undefined {
+  if (typeof activity.location === "string") return activity.location;
+  return activity.location?.label;
+}
 
 export const DEFAULT_ACTIVITY_DATA_PIPELINE = "gold-v2";
 export const LEGACY_ACTIVITY_DATA_PIPELINE = "legacy-temporal";
@@ -431,6 +449,16 @@ function filterTonightAvailability(
     );
 }
 
+function isEveningActivity(activity: ActivityOccurrence): boolean {
+  return (
+    activity.daypart === "evening" ||
+    activity.daypart === "late" ||
+    activity.category === "movies_under_stars" ||
+    activity.category === "campfire" ||
+    activity.category === "nighttime_entertainment"
+  );
+}
+
 function filterBrowseActivities(
   activities: ActivityOccurrence[],
   filters: ActivityFilters = {}
@@ -454,6 +482,21 @@ export async function getTonightActivities(
   const all = annotateHappeningNow(await getAllOccurrences(1));
   const tonight = filterTonightAvailability(all);
   return filterBrowseActivities(tonight, filters);
+}
+
+export async function getEveningActivitiesThisWeek(
+  filters: ActivityFilters = {}
+): Promise<ActivityOccurrence[]> {
+  const now = nowInstant();
+  const all = annotateHappeningNow(await getAllOccurrences(7), now);
+  const evening = all
+    .filter(isEveningActivity)
+    .filter((activity) => {
+      const { state } = getActivityAvailability(activity, now);
+      return state !== "expired" && state !== "uncertain_time";
+    });
+
+  return filterBrowseActivities(evening, filters);
 }
 
 export async function getHappeningNow(
@@ -780,11 +823,14 @@ function calendarGroupToResortName(calendarGroupKey?: string): string {
 export const getMovieNights = cache(async function getMovieNights(): Promise<
   MovieNightOccurrence[]
 > {
-  const ingestPath = path.join(process.cwd(), "data/processed/activities_ingest.json");
+  const ingestPath = path.join(process.cwd(), "data/processed/activity_gold_v2_preview.json");
 
   let payload: ActivitiesIngestPayload;
   try {
-    payload = JSON.parse(await readFile(ingestPath, "utf8")) as ActivitiesIngestPayload;
+    const parsed = JSON.parse(await readFile(ingestPath, "utf8")) as
+      | ActivitiesIngestPayload
+      | IngestActivityRow[];
+    payload = Array.isArray(parsed) ? { activities: parsed } : parsed;
   } catch (error) {
     console.error("getMovieNights:", error);
     return [];
@@ -796,8 +842,9 @@ export const getMovieNights = cache(async function getMovieNights(): Promise<
   const seen = new Set<string>();
 
   for (const activity of payload.activities ?? []) {
+    const activitySlug = activitySlugForMovieRow(activity);
     if (
-      activity.normalized_name !== "movie-under-the-stars" &&
+      activitySlug !== "movie-under-the-stars" &&
       activity.category !== "movies_under_stars"
     ) {
       continue;
@@ -807,12 +854,14 @@ export const getMovieNights = cache(async function getMovieNights(): Promise<
     if (!resortSlug) continue;
     const resort = resortBySlug.get(resortSlug);
     const resortName = resort?.name ?? calendarGroupToResortName(activity.calendar_group_key);
-    const location = normalizeMovieLocation(activity.location);
+    const location = normalizeMovieLocation(movieLocationForRow(activity));
 
     for (const night of activity.movie_nights ?? []) {
       const rawTitle = night.movie_title?.trim();
       const dayOfWeek = normalizeMovieDay(night.day_of_week);
-      const showTime = normalizeMovieShowTime(night.show_time ?? activity.schedule_text);
+      const showTime = normalizeMovieShowTime(
+        night.show_time ?? movieScheduleTextForRow(activity)
+      );
       if (!rawTitle || !dayOfWeek || !showTime) continue;
       if (!isUsableMovieTitle(rawTitle)) continue;
 
@@ -822,6 +871,9 @@ export const getMovieNights = cache(async function getMovieNights(): Promise<
       const key = `${resortSlug}:${dayOfWeek}:${displayTitle}:${showTime}`;
       if (seen.has(key)) continue;
       seen.add(key);
+
+      const startDateTime = movieStartsAt({ dayOfWeek, showTime });
+      const endDateTime = movieEndsAt(startDateTime)?.toISOString();
 
       movies.push({
         id: `movie-${resortSlug}-${dayOfWeek}-${displayTitle
@@ -835,6 +887,8 @@ export const getMovieNights = cache(async function getMovieNights(): Promise<
         showTime,
         location,
         dayOfWeek,
+        startDateTime: startDateTime?.toISOString(),
+        endDateTime,
         isTonight: isMovieTonight(dayOfWeek),
       });
     }

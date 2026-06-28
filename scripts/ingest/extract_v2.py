@@ -132,6 +132,7 @@ def _repair_location_text(value: str) -> tuple[str, bool]:
 
 def _repair_description_text(value: str) -> tuple[str, bool]:
     repaired = re.sub(r"\bselfled\b", "self-led", value, flags=re.I)
+    repaired = re.sub(r"\bour Lush lawn\b", "our lush lawn", repaired)
     return repaired, repaired != value
 
 
@@ -1492,6 +1493,11 @@ def _reviewed_manual_candidate(
         "document_key_legends": document_key_legends,
         "manual_review": record.get("manual_review"),
     }
+    if isinstance(record.get("movie_nights"), list):
+        normalized_fields["movie_nights"] = [
+            dict(row) for row in record["movie_nights"] if isinstance(row, dict)
+        ]
+        normalized_fields["movie_night_spans"] = _span_list(record, "movie_nights")
     return {
         "candidate_id": f"{snapshot['content_sha256']}:{calendar_group_key}:{slug}:reviewed_manual",
         "calendar_group_key": calendar_group_key,

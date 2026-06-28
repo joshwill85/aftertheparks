@@ -191,7 +191,7 @@ export function EventMediaDisplay({
     >
       <CategoryIcon
         category={media.category}
-        size={isDetail ? "md" : "sm"}
+        size={isDetail ? "md" : "md"}
         showStamp={isDetail}
       />
     </div>
@@ -241,10 +241,21 @@ export function EventTitleBlock({
         {title}
       </Heading>
       {extra && <p className="event-card__extra">{extra}</p>}
-      {resort && <p className="event-card__resort">{resort}</p>}
-      {location && <p className="event-card__location">{location}</p>}
+      {resort && (
+        <p className="event-card__resort">
+          <span className="sr-only">Resort:</span>
+          {resort}
+        </p>
+      )}
+      {location && (
+        <p className="event-card__location">
+          <span className="sr-only">Where:</span>
+          {location}
+        </p>
+      )}
       {scheduleDayLabel && (
         <p className="event-card__day">
+          <span className="sr-only">Day:</span>
           {scheduleDayDateTime ? (
             <time dateTime={scheduleDayDateTime}>{scheduleDayLabel}</time>
           ) : (
@@ -259,6 +270,7 @@ export function EventTitleBlock({
             timeUncertain && "event-card__time--uncertain"
           )}
         >
+          <span className="sr-only">When:</span>
           {timeDateTime ? (
             <time dateTime={timeDateTime}>{timeLabel}</time>
           ) : (

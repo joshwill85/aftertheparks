@@ -1,7 +1,7 @@
 import type {
   ActivityFilters,
   ActivityAreaFilter,
-  ActivityDurationFilter,
+  ActivityIntentPreset,
   ActivityNearFilter,
   ActivitySortKey,
   ActivityTransportFilter,
@@ -11,23 +11,28 @@ import type {
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 import {
   areaMatchesFilter,
+  areaFilterForResort,
   resortAreaMatchesOrigin,
   transportMatchesFilter,
 } from "@/lib/explore/routeTaxonomy";
+import {
+  selectedResortSlugs,
+  serializeResortSlugs,
+} from "@/lib/explore/resortFilters";
+import { isActivityIntentPreset } from "@/lib/planning/presetDefinitions";
 
 export const BROWSE_PARAM_KEYS = [
   "resort",
   "category",
+  "preset",
   "daypart",
   "time",
-  "duration",
   "near",
   "transport",
   "area",
   "weather",
   "free",
   "reservation",
-  "ticket_required",
   "sort",
   "q",
 ] as const;
@@ -54,7 +59,6 @@ const VALID_SORT: ActivitySortKey[] = [
   "quality",
 ];
 const VALID_WEATHER = new Set<ActivityWeatherFilter>(["indoor", "covered"]);
-const VALID_DURATION = new Set<ActivityDurationFilter>(["short"]);
 const VALID_NEAR = new Set<ActivityNearFilter>(["my-resort"]);
 const VALID_TRANSPORT = new Set<ActivityTransportFilter>([
   "monorail",
@@ -72,6 +76,68 @@ const VALID_AREA = new Set<ActivityAreaFilter>([
   "disney-springs",
   "fort-wilderness",
 ]);
+
+function movieTimeWindow(movie: MovieNightOccurrence): "after_7_pm" | "dinner_window" | undefined {
+  const dateTime = movie.startDateTime;
+  if (!dateTime) return undefined;
+  const zoned = new Date(dateTime).toLocaleTimeString("en-US", {
+    timeZone: "America/New_York",
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const [hour, minute] = zoned.split(":").map(Number);
+  const minutes = hour * 60 + minute;
+  if (minutes >= 19 * 60 && minutes <= 23 * 60 + 59) return "after_7_pm";
+  if (minutes >= 17 * 60 && minutes < 19 * 60) return "dinner_window";
+  return undefined;
+}
+
+function movieMatchesPreset(
+  movie: MovieNightOccurrence,
+  filters: ActivityFilters,
+  homeResortSlug?: string
+): boolean {
+  switch (filters.preset) {
+    case "at_my_resort":
+      return Boolean(homeResortSlug && movie.resortSlug === homeResortSlug);
+    case "nearby_resort_area":
+      return Boolean(
+        homeResortSlug &&
+          resortAreaMatchesOrigin(
+            homeResortSlug,
+            movie.resortSlug,
+            areaFilterForResort(movie.resortSlug)
+          )
+      );
+    case "after_7_pm":
+      return movieTimeWindow(movie) === "after_7_pm";
+    case "dinner_window":
+      return movieTimeWindow(movie) === "dinner_window";
+    case "rain_backup":
+      return false;
+    case "no_booking_required":
+      return true;
+    case "reservation_needed":
+      return false;
+    case "little_kids":
+      return false;
+    case "free_today":
+      return movie.isTonight === true || Boolean(movie.startDateTime);
+    case "low_transfer":
+      return Boolean(
+        homeResortSlug &&
+          (movie.resortSlug === homeResortSlug ||
+            resortAreaMatchesOrigin(
+              homeResortSlug,
+              movie.resortSlug,
+              areaFilterForResort(movie.resortSlug)
+            ))
+      );
+    case undefined:
+      return true;
+  }
+}
 
 export function isBrowsePath(pathname: string): pathname is BrowsePath {
   return (BROWSE_PATHS as readonly string[]).includes(pathname);
@@ -99,14 +165,16 @@ export function parseBrowseParams(
   const weather = VALID_WEATHER.has(weatherRaw as ActivityWeatherFilter)
     ? (weatherRaw as ActivityWeatherFilter)
     : undefined;
-  const durationRaw = get("duration");
-  const duration = VALID_DURATION.has(durationRaw as ActivityDurationFilter)
-    ? (durationRaw as ActivityDurationFilter)
+  const resort = serializeResortSlugs(selectedResortSlugs(get("resort")));
+  const presetRaw = get("preset");
+  const preset: ActivityIntentPreset | undefined = isActivityIntentPreset(
+    presetRaw
+  )
+    ? presetRaw
     : undefined;
-  const resort = get("resort");
   const nearRaw = get("near");
   const near = VALID_NEAR.has(nearRaw as ActivityNearFilter)
-    && Boolean(resort)
+    && selectedResortSlugs(resort).length === 1
     ? (nearRaw as ActivityNearFilter)
     : undefined;
   const transportRaw = get("transport");
@@ -117,26 +185,17 @@ export function parseBrowseParams(
   const area = VALID_AREA.has(areaRaw as ActivityAreaFilter)
     ? (areaRaw as ActivityAreaFilter)
     : undefined;
-  const ticketRequiredRaw = get("ticket_required");
-  const ticketRequired =
-    ticketRequiredRaw === "false"
-      ? false
-      : ticketRequiredRaw === "true"
-        ? true
-        : undefined;
-
   return {
     resort,
     category: get("category"),
     daypart,
-    duration,
+    preset,
     near,
     transport,
     area,
     weather,
     free: get("free") === "true",
     reservation: get("reservation") === "true",
-    ticketRequired,
     sort: sort ?? "time",
     q: get("q"),
   };
@@ -171,15 +230,14 @@ export function hasActiveBrowseFilters(filters: ActivityFilters): boolean {
   return Boolean(
     filters.resort ||
       filters.category ||
+      filters.preset ||
       filters.daypart ||
-      filters.duration ||
       filters.near ||
       filters.transport ||
       filters.area ||
       filters.weather ||
       filters.free ||
       filters.reservation ||
-      filters.ticketRequired !== undefined ||
       filters.q
   );
 }
@@ -222,13 +280,16 @@ export function filterMovieNights(
   filters: ActivityFilters
 ): MovieNightOccurrence[] {
   let result = movies;
+  const selectedResorts = selectedResortSlugs(filters.resort);
 
-  if (filters.near === "my-resort" && filters.resort) {
+  if (filters.near === "my-resort" && selectedResorts.length === 1) {
+    const homeResort = selectedResorts[0];
     result = result.filter((m) =>
-      resortAreaMatchesOrigin(filters.resort!, m.resortSlug)
+      resortAreaMatchesOrigin(homeResort, m.resortSlug)
     );
-  } else if (filters.resort) {
-    result = result.filter((m) => m.resortSlug === filters.resort);
+  } else if (selectedResorts.length > 0) {
+    const resortSet = new Set(selectedResorts);
+    result = result.filter((m) => resortSet.has(m.resortSlug));
   }
 
   if (filters.category && filters.category !== "movies_under_stars") {
@@ -245,12 +306,10 @@ export function filterMovieNights(
     result = result.filter((m) => areaMatchesFilter(m.resortSlug, undefined, filters.area!));
   }
 
-  if (filters.duration === "short") {
-    return [];
-  }
-
-  if (filters.ticketRequired === true) {
-    return [];
+  if (filters.preset) {
+    result = result.filter((m) =>
+      movieMatchesPreset(m, filters, selectedResorts[0])
+    );
   }
 
   if (filters.q) {

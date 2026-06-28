@@ -4,8 +4,13 @@ import {
   buildNoResultsRecovery,
   type FilterableItem,
 } from "@/lib/explore/filterImpact";
-import { parseBrowseParams, preserveBrowseParams } from "@/lib/explore/browseParams";
+import {
+  filterMovieNights,
+  parseBrowseParams,
+  preserveBrowseParams,
+} from "@/lib/explore/browseParams";
 import type { ActivityFilters } from "@/lib/types/occurrence";
+import { readFileSync } from "node:fs";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -25,7 +30,6 @@ const items: FilterableItem[] = [
     resortArea: "magic_kingdom",
     category: "campfire",
     daypart: "evening",
-    durationMinutes: 30,
     free: true,
     reservation: false,
     title: "Campfire",
@@ -37,7 +41,6 @@ const items: FilterableItem[] = [
     resortArea: "magic_kingdom",
     category: "movies_under_stars",
     daypart: "late",
-    durationMinutes: 90,
     free: true,
     reservation: false,
     title: "Movie",
@@ -49,7 +52,6 @@ const items: FilterableItem[] = [
     resortArea: "animal_kingdom",
     category: "arts_crafts",
     daypart: "afternoon",
-    durationMinutes: 25,
     free: false,
     reservation: true,
     title: "Craft",
@@ -61,7 +63,6 @@ const items: FilterableItem[] = [
     resortArea: "magic_kingdom",
     category: "arcades",
     daypart: "afternoon",
-    durationMinutes: 20,
     free: false,
     reservation: false,
     title: "Arcade",
@@ -73,7 +74,6 @@ const items: FilterableItem[] = [
     resortArea: "magic_kingdom",
     category: "fireworks",
     daypart: "late",
-    durationMinutes: 90,
     free: false,
     reservation: false,
     title: "Park Fireworks Dessert Party",
@@ -86,7 +86,6 @@ const items: FilterableItem[] = [
     resortArea: "disney_springs",
     category: "resort_exploration",
     daypart: "afternoon",
-    durationMinutes: 20,
     free: true,
     reservation: false,
     title: "Saratoga Springs Lobby Walk",
@@ -98,7 +97,6 @@ const items: FilterableItem[] = [
     resortArea: "skyliner",
     category: "arcades",
     daypart: "afternoon",
-    durationMinutes: 20,
     free: false,
     reservation: false,
     title: "Pop Century Arcade",
@@ -117,16 +115,33 @@ assert(
   preservedWeather.toString() === "resort=poly&weather=covered",
   `Weather browse param should be preserved, got ${preservedWeather.toString()}`
 );
+const parsedMultiResort = parseBrowseParams(
+  new URLSearchParams("resort=poly,akl&weather=covered")
+);
+assert(
+  parsedMultiResort.resort === "poly,akl",
+  `Multi-resort browse param should parse, got ${parsedMultiResort.resort}`
+);
+const preservedMultiResort = preserveBrowseParams(
+  new URLSearchParams("resort=poly,akl&weather=covered&ignored=yes")
+);
+assert(
+  preservedMultiResort.toString() === "resort=poly%2Cakl&weather=covered",
+  `Multi-resort browse param should be preserved, got ${preservedMultiResort.toString()}`
+);
 const parsedTicket = parseBrowseParams(
   new URLSearchParams("ticket_required=false&resort=poly")
 ) as ActivityFilters & { ticketRequired?: boolean };
-assert(parsedTicket.ticketRequired === false, "No-ticket browse param should parse");
+assert(
+  parsedTicket.ticketRequired === undefined,
+  "Park-ticket browse params should be ignored because every site listing is outside the parks"
+);
 const preservedTicket = preserveBrowseParams(
   new URLSearchParams("ticket_required=false&resort=poly&ignored=yes")
 );
 assert(
-  preservedTicket.toString() === "resort=poly&ticket_required=false",
-  `No-ticket browse param should be preserved, got ${preservedTicket.toString()}`
+  preservedTicket.toString() === "resort=poly",
+  `Park-ticket browse params should not be preserved, got ${preservedTicket.toString()}`
 );
 const parsedRoute = parseBrowseParams(
   new URLSearchParams("transport=monorail&area=disney-springs")
@@ -144,12 +159,15 @@ const parsedFirstNight = parseBrowseParams(
   new URLSearchParams("duration=short&time=evening")
 ) as ActivityFilters & { duration?: string };
 assert(parsedFirstNight.daypart === "evening", "Time browse alias should parse as daypart");
-assert(parsedFirstNight.duration === "short", "Short-duration browse param should parse");
+assert(
+  parsedFirstNight.duration === undefined,
+  "Planning pace browse params should be ignored"
+);
 const preservedFirstNight = preserveBrowseParams(
   new URLSearchParams("duration=short&time=evening&ignored=yes")
 );
 assert(
-  preservedFirstNight.toString() === "time=evening&duration=short",
+  preservedFirstNight.toString() === "time=evening",
   `First-night browse params should be preserved, got ${preservedFirstNight.toString()}`
 );
 const parsedNearMyResort = parseBrowseParams(
@@ -182,21 +200,27 @@ assert(
 );
 
 const filters: ActivityFilters = {
-  resort: "poly",
+  resort: "poly,akl",
   category: "campfire",
   free: true,
   q: "smores",
 };
 
 const chips = buildActiveFilterChips(filters, resorts, "/activities");
-assert(chips.length === 4, `Expected 4 chips, got ${chips.length}`);
+assert(chips.length === 5, `Expected 5 chips, got ${chips.length}`);
 assert(chips.some((chip) => chip.label === "Polynesian Village"), "Missing resort chip");
+assert(chips.some((chip) => chip.label === "Animal Kingdom Lodge"), "Missing second resort chip");
 assert(chips.some((chip) => chip.label === "Campfire"), "Missing category chip");
 assert(chips.some((chip) => chip.label === "Free only"), "Missing free chip");
 assert(chips.some((chip) => chip.label === "Search: smores"), "Missing query chip");
 assert(
+  chips.find((chip) => chip.label === "Polynesian Village")?.removeHref ===
+    "/activities?resort=akl&category=campfire&free=true&q=smores",
+  "One resort chip should remove only that resort"
+);
+assert(
   chips.find((chip) => chip.id === "category")?.removeHref ===
-    "/activities?resort=poly&free=true&q=smores",
+    "/activities?resort=poly%2Cakl&free=true&q=smores",
   "Category chip should remove only category"
 );
 
@@ -213,6 +237,24 @@ assert(
 assert(
   impact.practical.free === 2,
   `Expected two free results under current resort, got ${impact.practical.free}`
+);
+
+const multiResortImpact = buildFilterImpact(
+  items,
+  { resort: "poly,akl", weather: "covered" },
+  resorts
+);
+assert(
+  multiResortImpact.total === 1,
+  `Expected one covered result across selected resorts, got ${multiResortImpact.total}`
+);
+assert(
+  multiResortImpact.resorts.some((option) => option.value === "poly" && option.active),
+  "First selected resort should stay active"
+);
+assert(
+  multiResortImpact.resorts.some((option) => option.value === "akl" && option.active),
+  "Second selected resort should stay active"
 );
 
 const filteredImpact = buildFilterImpact(
@@ -275,28 +317,23 @@ assert(
   "No-results recovery should offer to remove weather"
 );
 
-const noTicketFilters = {
+const legacyTicketFilters = {
   resort: "poly",
   ticketRequired: false,
 } as ActivityFilters & { ticketRequired: boolean };
-const noTicketChips = buildActiveFilterChips(noTicketFilters, resorts, "/activities");
+const noTicketChips = buildActiveFilterChips(legacyTicketFilters, resorts, "/activities");
 assert(
-  noTicketChips.some((chip) => chip.label === "No park ticket"),
-  "No-ticket filter should create an active chip"
+  noTicketChips.every((chip) => chip.id !== "ticket_required"),
+  "Park-ticket filters should not create active chips"
+);
+const noTicketImpact = buildFilterImpact(items, legacyTicketFilters, resorts);
+assert(
+  noTicketImpact.total === 4,
+  `Park-ticket filter state should not narrow outside-park listings, got ${noTicketImpact.total}`
 );
 assert(
-  noTicketChips.find((chip) => chip.id === "ticket_required")?.removeHref ===
-    "/activities?resort=poly",
-  "No-ticket chip should remove only ticket requirement"
-);
-const noTicketImpact = buildFilterImpact(items, noTicketFilters, resorts);
-assert(
-  noTicketImpact.total === 3,
-  `Expected three no-ticket results under current resort, got ${noTicketImpact.total}`
-);
-assert(
-  noTicketImpact.practical.noParkTicket === 3,
-  `Expected three no-ticket practical results, got ${noTicketImpact.practical.noParkTicket}`
+  !("noParkTicket" in noTicketImpact.practical),
+  "Practical filter counts should not include a no-park-ticket option"
 );
 const noTicketRecovery = buildNoResultsRecovery(
   { resort: "poly", category: "fireworks", ticketRequired: false } as ActivityFilters & {
@@ -306,8 +343,8 @@ const noTicketRecovery = buildNoResultsRecovery(
   "/activities"
 );
 assert(
-  noTicketRecovery.some((action) => action.label === "Show ticketed options"),
-  "No-results recovery should offer to remove no-ticket filter"
+  noTicketRecovery.every((action) => !/ticket/i.test(action.label)),
+  "No-results recovery should not mention ticket filters"
 );
 
 const routeFilters = {
@@ -372,22 +409,17 @@ assert(
   "Time alias should still create an evening chip"
 );
 assert(
-  firstNightChips.some((chip) => chip.label === "Short activity"),
-  "Short-duration filter should create an active chip"
-);
-assert(
-  firstNightChips.find((chip) => chip.id === "duration")?.removeHref ===
-    "/activities?daypart=evening",
-  "Duration chip should remove only duration"
+  firstNightChips.every((chip) => chip.id !== "duration" && chip.label !== "Short activity"),
+  "Planning pace filters should not create active chips"
 );
 const firstNightImpact = buildFilterImpact(items, firstNightFilters, resorts);
 assert(
   firstNightImpact.total === 1,
-  `Expected one short evening result, got ${firstNightImpact.total}`
+  `Expected one evening result, got ${firstNightImpact.total}`
 );
 assert(
-  firstNightImpact.duration.some((option) => option.value === "short" && option.active),
-  "Short duration option should stay active"
+  !("duration" in firstNightImpact),
+  "Filter impact should not expose planning pace options"
 );
 
 const nearMyResortFilters = {
@@ -430,6 +462,90 @@ assert(
   `Expected four same-area results near Polynesian, got ${nearPolyImpact.total}`
 );
 
+const filteredMovies = filterMovieNights(
+  [
+    {
+      id: "movie-poly",
+      resortSlug: "poly",
+      resortName: "Polynesian Village",
+      movieTitle: "Moana",
+      displayTitle: "Moana",
+      showTime: "8:00 PM",
+      location: "Lawn",
+      dayOfWeek: "Sunday",
+    },
+    {
+      id: "movie-akl",
+      resortSlug: "akl",
+      resortName: "Animal Kingdom Lodge",
+      movieTitle: "The Lion King",
+      displayTitle: "The Lion King",
+      showTime: "8:00 PM",
+      location: "Pool",
+      dayOfWeek: "Sunday",
+    },
+    {
+      id: "movie-pop",
+      resortSlug: "pop",
+      resortName: "Pop Century",
+      movieTitle: "Cars",
+      displayTitle: "Cars",
+      showTime: "8:00 PM",
+      location: "Pool",
+      dayOfWeek: "Sunday",
+    },
+  ],
+  { resort: "poly,akl" }
+);
+assert(
+  filteredMovies.map((movie) => movie.id).join(",") === "movie-poly,movie-akl",
+  "Movie filters should support multiple selected resorts"
+);
+
+const rainBackupMovies = filterMovieNights(
+  [
+    {
+      id: "movie-poly",
+      resortSlug: "poly",
+      resortName: "Polynesian Village",
+      movieTitle: "Moana",
+      displayTitle: "Moana",
+      showTime: "8:00 PM",
+      location: "Lawn",
+      dayOfWeek: "Sunday",
+      startDateTime: "2026-06-29T00:00:00.000Z",
+      isTonight: true,
+    },
+  ],
+  { preset: "rain_backup" }
+);
+assert(
+  rainBackupMovies.length === 0,
+  "Rain-backup preset should not include outdoor movie nights"
+);
+
+const afterSevenMovies = filterMovieNights(
+  [
+    {
+      id: "movie-poly",
+      resortSlug: "poly",
+      resortName: "Polynesian Village",
+      movieTitle: "Moana",
+      displayTitle: "Moana",
+      showTime: "8:00 PM",
+      location: "Lawn",
+      dayOfWeek: "Sunday",
+      startDateTime: "2026-06-29T00:00:00.000Z",
+      isTonight: true,
+    },
+  ],
+  { preset: "after_7_pm" }
+);
+assert(
+  afterSevenMovies.length === 1,
+  "After-7 preset should include dated movies starting after 7 PM Orlando time"
+);
+
 const activeZeroImpact = buildFilterImpact(
   items,
   { resort: "akl", category: "campfire" },
@@ -450,5 +566,15 @@ const recovery = buildNoResultsRecovery(filters, resorts, "/activities");
 assert(recovery.length >= 3, "No-results recovery should provide at least 3 actions");
 assert(recovery[0].href.includes("category") === false, "First recovery should remove category");
 assert(recovery.some((action) => action.label === "Clear all filters"), "Missing clear action");
+
+const filterRailSource = readFileSync("components/explore/FilterRail.tsx", "utf8");
+const resortSectionIndex = filterRailSource.indexOf("Resort");
+const firstNightSectionIndex = filterRailSource.indexOf("First night");
+const timeSectionIndex = filterRailSource.indexOf("Time of day");
+assert(resortSectionIndex > -1, "Filter pane should include a resort section");
+assert(
+  resortSectionIndex < firstNightSectionIndex && resortSectionIndex < timeSectionIndex,
+  "Resort filter should be the first filter section in the shared filter pane"
+);
 
 console.log("Filter impact coverage passed.");

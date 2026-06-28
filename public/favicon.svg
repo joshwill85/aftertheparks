@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="After the Parks guide companion favicon" >
+
+<defs>
+  <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF3A6"/>
+    <stop offset="0.42" stop-color="#FFC94A"/>
+    <stop offset="1" stop-color="#B76F15"/>
+  </linearGradient>
+  <radialGradient id="glowGrad" cx="50%" cy="45%" r="65%">
+    <stop offset="0" stop-color="#FFFBE8"/>
+    <stop offset="0.35" stop-color="#FFE36D"/>
+    <stop offset="0.85" stop-color="#F2A326"/>
+    <stop offset="1" stop-color="#B56F17"/>
+  </radialGradient>
+  <linearGradient id="navyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#173B60"/>
+    <stop offset="0.55" stop-color="#0B2340"/>
+    <stop offset="1" stop-color="#041226"/>
+  </linearGradient>
+  <linearGradient id="aquaGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#E9FCFF"/>
+    <stop offset="1" stop-color="#5BB8C4"/>
+  </linearGradient>
+  <linearGradient id="daySky" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FDF6D2"/>
+    <stop offset="0.4" stop-color="#BEEAF0"/>
+    <stop offset="1" stop-color="#7EC7D2"/>
+  </linearGradient>
+  <linearGradient id="twilight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#315A86"/>
+    <stop offset="0.55" stop-color="#16385E"/>
+    <stop offset="1" stop-color="#091B32"/>
+  </linearGradient>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+    <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#071426" flood-opacity="0.18"/>
+  </filter>
+  <filter id="tinyShadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#071426" flood-opacity="0.22"/>
+  </filter>
+  <filter id="goldGlow" x="-70%" y="-70%" width="240%" height="240%">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 0.73 0 0 0.55  0 0 0.15 0 0.1  0 0 0 0.75 0" result="glow"/>
+    <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .wordmark { font-family: Georgia, 'Times New Roman', serif; fill: #0B2340; }
+    .tagline { font-family: Avenir, Montserrat, Arial, sans-serif; fill: #17727F; letter-spacing: .04em; }
+    .smallcaps { font-family: Avenir, Montserrat, Arial, sans-serif; letter-spacing: .16em; font-weight: 700; }
+    .navy-stroke { stroke:#0B2340; stroke-linecap:round; stroke-linejoin:round; }
+    .gold-stroke { stroke:#E9AD2E; stroke-linecap:round; stroke-linejoin:round; }
+  </style>
+</defs>
+<rect width="100%" height="100%" fill="#0B2340"/>
+<rect x="22" y="22" width="468" height="468" rx="110" fill="url(#twilight)" stroke="#F2B63E" stroke-width="14"/><ellipse cx="270" cy="314" rx="63" ry="93" transform="rotate(-20 270 314)" fill="url(#glowGrad)" filter="url(#goldGlow)"/><ellipse cx="198" cy="204" rx="85" ry="37" fill="#DDFBFF" opacity=".76" stroke="#83D3DE" stroke-width="7" transform="rotate(-31 198 204)"/><ellipse cx="326" cy="206" rx="85" ry="37" fill="#DDFBFF" opacity=".76" stroke="#83D3DE" stroke-width="7" transform="rotate(27 326 206)"/><circle cx="246" cy="212" r="69" fill="url(#navyGrad)" stroke="#06172B" stroke-width="5"/><circle cx="222" cy="198" r="24" fill="#fff"/><circle cx="269" cy="198" r="24" fill="#fff"/><circle cx="231" cy="203" r="13" fill="#071426"/><circle cx="261" cy="203" r="13" fill="#071426"/><path d="M218 245 C236 260 262 260 280 244" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/><path d="M210 143 C190 90 151 92 142 56 M277 143 C302 90 342 92 360 52" fill="none" stroke="#06172B" stroke-width="10" stroke-linecap="round"/><circle cx="142" cy="56" r="17" fill="url(#glowGrad)" filter="url(#goldGlow)"/><circle cx="360" cy="52" r="17" fill="url(#glowGrad)" filter="url(#goldGlow)"/><path d="M116 372 C206 316 302 386 397 312" fill="none" stroke="#FFE063" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 23" filter="url(#goldGlow)"/><g opacity="1" filter="url(#goldGlow)">
+<circle cx="385" cy="387.8" r="10.62" fill="#E9AD2E"/>
+<circle cx="363.76" cy="366.56" r="7.08" fill="#E9AD2E"/>
+<circle cx="406.24" cy="366.56" r="7.08" fill="#E9AD2E"/>
+</g></svg>

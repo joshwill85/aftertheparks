@@ -1,7 +1,7 @@
 {
   "passed": true,
   "summary": {
-    "manual_review_record_count": 21,
+    "manual_review_record_count": 22,
     "manual_review_error_count": 0,
     "manual_review_errors_by_code": {}
   },
@@ -35,13 +35,26 @@
     {
       "fixture": "boardwalk-full-calendar.json",
       "calendar_group_key": "boardwalk",
+      "slug": "movie-under-the-stars",
+      "title": "Movie Under the Stars",
+      "reviewer": "codex-pipeline-overhaul",
+      "reviewed_at": "2026-06-28T00:00:00Z",
+      "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "decision": "publish",
+      "reason": "Verified against rendered official BW_Aframe_Recreation-0526_DIGITAL.pdf. OCR mangles the movie list, but the visible Movie Under the Stars block prints these seven day/title rows at Village Green Lawn | 8:30PM.",
+      "has_source_text_or_bbox": true,
+      "errors": []
+    },
+    {
+      "fixture": "boardwalk-full-calendar.json",
+      "calendar_group_key": "boardwalk",
       "slug": "poolside-activities",
       "title": "Poolside Activities",
       "reviewer": "codex-pipeline-overhaul",
       "reviewed_at": "2026-06-23T00:00:00Z",
-      "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+      "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
       "decision": "publish",
-      "reason": "Verified against rendered PDF and OCR. The static PDF provides location/description but points guests to the QR/digital activity schedule instead of printing a time.",
+      "reason": "Verified against rendered official BW_Aframe_Recreation-0526_DIGITAL.pdf. OCR interleaves nearby text, but the visible Poolside Activities block prints Daily at 1:30pm.",
       "has_source_text_or_bbox": true,
       "errors": []
     },
@@ -52,7 +65,7 @@
       "title": "Crescent Lake Wellness Challenge",
       "reviewer": "codex-pipeline-overhaul",
       "reviewed_at": "2026-06-23T00:00:00Z",
-      "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+      "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
       "decision": "publish",
       "reason": "Verified against rendered PDF. The challenge is source-described as self-guided on nearly 1 mile of Crescent Lake pathways; no static time is printed.",
       "has_source_text_or_bbox": true,

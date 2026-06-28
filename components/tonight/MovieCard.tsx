@@ -15,6 +15,7 @@ export function MovieCard({ movie, weatherSummary }: MovieCardProps) {
       variant="day"
       linkToTonight={false}
       weatherSummary={weatherSummary}
+      showWeatherSignal={weatherSummary === undefined}
     />
   );
 }

@@ -12,6 +12,7 @@ export interface TmdbMovieResult {
   overview?: string;
   popularity?: number;
   vote_average?: number;
+  runtime?: number | null;
 }
 
 export function tmdbImageUrl(
@@ -53,6 +54,33 @@ function buildSearchUrl(query: string, year?: string): string {
   }
 
   return `https://api.themoviedb.org/3/search/movie?${params}`;
+}
+
+function buildMovieDetailsUrl(tmdbId: number): string {
+  const params = new URLSearchParams();
+  const apiKey = process.env.TMDB_API_KEY;
+  if (apiKey && !process.env.TMDB_READ_ACCESS_TOKEN) {
+    params.set("api_key", apiKey);
+  }
+  const suffix = params.toString();
+  return `https://api.themoviedb.org/3/movie/${tmdbId}${suffix ? `?${suffix}` : ""}`;
+}
+
+export async function fetchTmdbMovieRuntime(
+  tmdbId: number
+): Promise<number | null> {
+  if (!tmdbConfigured()) return null;
+  try {
+    const detailRes = await fetch(buildMovieDetailsUrl(tmdbId), tmdbRequestInit());
+    if (!detailRes.ok) return null;
+    const detail = (await detailRes.json()) as Pick<TmdbMovieResult, "runtime">;
+    return typeof detail.runtime === "number" && Number.isFinite(detail.runtime)
+      ? detail.runtime
+      : null;
+  } catch (err) {
+    console.error("TMDB runtime lookup error:", err);
+    return null;
+  }
 }
 
 function normalizeForMatch(title: string): string {
@@ -132,7 +160,14 @@ export async function searchTmdbMovie(
     }
 
     const data = (await res.json()) as { results?: TmdbMovieResult[] };
-    return pickBestMatch(data.results ?? [], query, year);
+    const match = pickBestMatch(data.results ?? [], query, year);
+    if (!match) return null;
+
+    const runtime = await fetchTmdbMovieRuntime(match.id);
+    return {
+      ...match,
+      runtime,
+    };
   } catch (err) {
     console.error("TMDB search error:", err);
     return null;

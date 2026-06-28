@@ -20,6 +20,39 @@ export async function GET(request: Request) {
     searchParams.get("summary"),
     "Current resort activities, calendars, source caveats, and no-park-day planning."
   );
+  const afterTheParksWordmark = (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "baseline",
+        gap: 10,
+        color: "#0B2340",
+        fontFamily: "Georgia, serif",
+        fontSize: 42,
+        fontWeight: 700,
+      }}
+    >
+      <span>After</span>
+      <span style={{ fontStyle: "italic", fontSize: 26 }}>the</span>
+      <span>Parks</span>
+    </div>
+  );
+  const pocketMapMotif = (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        color: "#E9AD2E",
+        fontSize: 26,
+        fontWeight: 900,
+      }}
+    >
+      <span>✦</span>
+      <span style={{ letterSpacing: 8 }}>•••</span>
+      <span>✦</span>
+    </div>
+  );
 
   return new ImageResponse(
     (
@@ -49,7 +82,7 @@ export async function GET(request: Request) {
           }}
         >
           <span>{eyebrow}</span>
-          <span>After the Parks</span>
+          {afterTheParksWordmark}
         </div>
         <div
           style={{
@@ -83,16 +116,21 @@ export async function GET(request: Request) {
         <div
           style={{
             display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             gap: 18,
             fontSize: 26,
             fontWeight: 700,
             color: "#21343a",
           }}
         >
-          <span>Today</span>
-          <span>Tonight</span>
-          <span>Resorts</span>
-          <span>Guides</span>
+          <div style={{ display: "flex", gap: 18 }}>
+            <span>Today</span>
+            <span>Tonight</span>
+            <span>Resorts</span>
+            <span>Guides</span>
+          </div>
+          {pocketMapMotif}
         </div>
       </div>
     ),

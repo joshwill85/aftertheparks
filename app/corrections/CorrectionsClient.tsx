@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Hero } from "@/components/atlas/Hero";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 
 export function CorrectionsClient() {
   const [submitted, setSubmitted] = useState(false);
@@ -35,9 +36,10 @@ export function CorrectionsClient() {
         subtitle="Spotted outdated info or want to send a note? We read every message."
       />
       {submitted ? (
-        <p className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-6 text-[var(--color-muted)]">
-          Thank you - we&apos;ll review your correction.
-        </p>
+        <div className="max-w-lg rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-6 text-center text-[var(--color-muted)]">
+          <BrandAsset asset="guide-companion" className="brand-asset--empty" />
+          <p className="mt-4">Thank you - we&apos;ll review your correction.</p>
+        </div>
       ) : (
         <form
           onSubmit={handleSubmit}

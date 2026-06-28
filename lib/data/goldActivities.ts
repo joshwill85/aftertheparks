@@ -128,21 +128,43 @@ const DAY_INDEX_BY_NAME: Record<string, number> = {
 const DAY_NAME_PATTERN =
   "sunday|monday|tuesday|wednesday|thursday|friday|saturday";
 
-function normalizeTime(value?: string | null): string | null {
+function shouldDefaultUnmarkedTimeToEvening(row: GoldActivityRow): boolean {
+  const haystack = [
+    row.title,
+    row.category,
+    row.section,
+    row.schedule?.text,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  return /\b(nightly|nighttime|evening|movie|movies|campfire|trivia)\b/.test(
+    haystack
+  );
+}
+
+function normalizeTime(
+  value?: string | null,
+  options: { eveningDefault?: boolean } = {}
+): string | null {
   if (!value) return null;
   if (/^\d{2}:\d{2}:\d{2}$/.test(value)) return value;
 
-  const parsed = parseScheduleTime24h(value);
+  const parsed = parseScheduleTime24h(value, options);
   if (!parsed) return null;
   return toTimeSql(parsed.hour, parsed.minute);
 }
 
 function scheduleTime(row: GoldActivityRow, field: "start_time" | "end_time"): string | null {
-  const explicit = normalizeTime(row.schedule?.[field]);
+  const eveningDefault = shouldDefaultUnmarkedTimeToEvening(row);
+  const explicit = normalizeTime(row.schedule?.[field], { eveningDefault });
   if (explicit) return explicit;
 
   if (field === "start_time") {
-    const fromText = parseScheduleTime24h(row.schedule?.text);
+    const fromText = parseScheduleTime24h(row.schedule?.text, {
+      eveningDefault,
+    });
     return fromText ? toTimeSql(fromText.hour, fromText.minute) : null;
   }
 
@@ -152,7 +174,7 @@ function scheduleTime(row: GoldActivityRow, field: "start_time" | "end_time"): s
     ),
   ];
   if (matches.length < 2) return null;
-  return normalizeTime(matches[1][1]);
+  return normalizeTime(matches[1][1], { eveningDefault });
 }
 
 function untimedEveningDisplayStart(row: GoldActivityRow): string | null {

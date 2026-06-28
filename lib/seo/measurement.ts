@@ -105,7 +105,7 @@ export const PRIORITY_RANK_TRACKING_QUERIES: RankTrackingQuery[] = [
   { query: "Disney World things to do without park tickets", canonicalPath: "/guides/things-to-do-without-park-ticket", pageType: "guide", intent: "no_ticket", reviewCadence: "weekly" },
   { query: "Disney resort activities without park ticket", canonicalPath: "/guides/things-to-do-without-park-ticket", pageType: "guide", intent: "no_ticket", reviewCadence: "weekly" },
   { query: "can you do Disney resort activities without staying there", canonicalPath: "/guides/things-to-do-without-park-ticket", pageType: "guide", intent: "no_ticket", reviewCadence: "weekly" },
-  { query: "Disney World no ticket activities", canonicalPath: "/activities?ticket_required=false", pageType: "activity", intent: "no_ticket", reviewCadence: "weekly" },
+  { query: "Disney World no ticket activities", canonicalPath: "/guides/things-to-do-without-park-ticket", pageType: "guide", intent: "no_ticket", reviewCadence: "weekly" },
   { query: "Movies Under the Stars Disney resorts", canonicalPath: "/activities/movies-under-the-stars", pageType: "activity", intent: "activity_specific", reviewCadence: "weekly" },
   { query: "Disney Movies Under the Stars schedule", canonicalPath: "/activities/movies-under-the-stars", pageType: "activity", intent: "activity_specific", reviewCadence: "weekly" },
   { query: "Disney resort campfires", canonicalPath: "/activities/campfire", pageType: "activity", intent: "activity_specific", reviewCadence: "weekly" },

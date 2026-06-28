@@ -87,14 +87,6 @@ export function latestResortSitemapLastModified(
 
 const FILTERED_LANDING_PAGES = [
   {
-    path: "/activities?ticket_required=false",
-    title: "Disney Resort Activities Without a Park Ticket",
-    changeFrequency: "daily" as const,
-    priority: 0.76,
-    imageSummary:
-      "Current no-ticket-friendly resort activities with access, transportation, source, and reservation caveats.",
-  },
-  {
     path: "/activities?free=true",
     title: "Free Walt Disney World Resort Activities",
     changeFrequency: "weekly" as const,
@@ -143,14 +135,6 @@ const FILTERED_LANDING_PAGES = [
       "Disney Springs-area resort activities with current resort stay, dining reservation, and access caveats.",
   },
   {
-    path: "/activities?duration=short&time=evening",
-    title: "Short Evening Disney Resort Activities for First Night",
-    changeFrequency: "daily" as const,
-    priority: 0.7,
-    imageSummary:
-      "Short evening resort activities for first-night and check-in-day plans with current schedule caveats.",
-  },
-  {
     path: "/resorts?no_ticket_friendly=true",
     title: "Disney Resorts With No-Ticket-Friendly Activities",
     changeFrequency: "daily" as const,
@@ -159,28 +143,12 @@ const FILTERED_LANDING_PAGES = [
       "Resorts with current no-ticket-friendly activities plus access, parking, transportation, and reservation caveats.",
   },
   {
-    path: "/today?ticket_required=false",
-    title: "Disney Resort Activities Today Without a Park Ticket",
-    changeFrequency: "daily" as const,
-    priority: 0.74,
-    imageSummary:
-      "Current no-ticket-friendly resort activities for today with source, access, and transportation caveats.",
-  },
-  {
     path: "/today?weather=indoor",
     title: "Indoor Disney Resort Activities Today",
     changeFrequency: "daily" as const,
     priority: 0.74,
     imageSummary:
       "Indoor and weather-safer resort activities available today, with current schedule and source notes.",
-  },
-  {
-    path: "/tonight?ticket_required=false",
-    title: "Disney Resort Activities Tonight Without a Park Ticket",
-    changeFrequency: "daily" as const,
-    priority: 0.74,
-    imageSummary:
-      "Tonight's no-ticket-friendly resort activities with access, weather, transportation, and source caveats.",
   },
   {
     path: "/tonight?weather=indoor",
@@ -255,6 +223,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.85,
+    }),
+    seoEntry(base, "/weather", "Disney World Weather", {
+      lastModified: now,
+      changeFrequency: "hourly",
+      priority: 0.82,
+      imageEyebrow: "Disney resort weather",
+      imageSummary:
+        "Now, next, hourly, daily, and weekly weather guidance for Walt Disney World resort areas.",
     }),
     seoEntry(base, "/about", "About After the Parks", {
       lastModified: now,

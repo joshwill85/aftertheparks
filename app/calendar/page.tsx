@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarClient } from "@/components/atlas/CalendarClient";
 import { Hero } from "@/components/atlas/Hero";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { sanitizePublicActivities, dedupeOccurrences } from "@/lib/api/publicActivities";
 import { getAllOccurrences } from "@/lib/data/activities";
 import {
@@ -68,17 +69,23 @@ export default async function CalendarPage({
         title="Disney World Resort Activity Calendar"
         subtitle="A month-at-a-glance view of current resort activities across your stay."
       />
-      <section className="mb-6 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-          Quick answer
-        </p>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          This calendar shows currently tracked Walt Disney World resort
-          activities for the next 31 days, including movies, campfires, crafts,
-          poolside recreation, and other resort-calendar events. Use it to spot
-          busy activity days, compare resorts, and confirm what is worth checking
-          before you walk or travel.
-        </p>
+      <section className="mb-6 grid gap-5 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:grid-cols-[minmax(0,1fr)_280px] md:items-center">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
+            Quick answer
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+            This calendar shows currently tracked Walt Disney World resort
+            activities for the next 31 days, including movies, campfires, crafts,
+            poolside recreation, and other resort-calendar events. Use it to spot
+            busy activity days, compare resorts, and confirm what is worth checking
+            before you walk or travel.
+          </p>
+        </div>
+        <BrandAsset
+          asset="pocket-map-only"
+          className="brand-asset--map-panel justify-self-center"
+        />
       </section>
       <section className="mb-6 grid gap-3 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm md:grid-cols-4">
         <div>

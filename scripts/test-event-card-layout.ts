@@ -9,6 +9,7 @@ const eventCard = read("components/events/EventCard.tsx");
 const eventUi = read("components/events/event-ui.tsx");
 const mapper = read("lib/events/mapToEventCard.ts");
 const polish = read("src/styles/polish.css");
+const todayClient = read("components/atlas/TodayClient.tsx");
 
 assert.match(
   eventCard,
@@ -54,32 +55,104 @@ assert.doesNotMatch(
 
 assert.match(
   polish,
-  /\.event-card-list--cols-2 \.event-card-list__item\s*\{[\s\S]*height:\s*clamp\(31rem,\s*35vw,\s*35rem\)/,
-  "Two-column event grid items should use a fixed card footprint."
+  /\.event-card-list--cols-2 \.event-card-list__item\s*\{[\s\S]*height:\s*100%/,
+  "Two-column event grid items should stretch to the tallest card in the row without a fixed oversized footprint."
 );
 
 assert.match(
   polish,
-  /\.event-card-list--cols-3 \.event-card-list__item,[\s\S]*\.event-card-list--compact \.event-card-list__item\s*\{[\s\S]*height:\s*clamp\(23rem,\s*30vw,\s*28rem\)/,
-  "Three-column and compact event grid items should use a fixed card footprint."
+  /\.event-card-list--cols-3 \.event-card-list__item,[\s\S]*\.event-card-list--compact \.event-card-list__item\s*\{[\s\S]*height:\s*100%/,
+  "Three-column and compact event grid items should stretch to the tallest card in the row without a fixed oversized footprint."
 );
 
 assert.match(
   polish,
-  /\.event-card-list--cols-2 \.event-card\s*\{[\s\S]*height:\s*clamp\(31rem,\s*35vw,\s*35rem\)[\s\S]*min-height:\s*0/,
-  "Two-column event cards should use the fixed footprint instead of content-only height."
+  /\.event-card-list--cols-2 \.event-card\s*\{[\s\S]*height:\s*100%[\s\S]*min-height:\s*0/,
+  "Two-column event cards should fill the row height chosen by content, not a hard-coded card height."
 );
 
 assert.match(
   polish,
-  /\.event-card-list--cols-2 \.event-card__hit-area,[\s\S]*\.event-card-list--compact \.event-card__hit-area\s*\{[\s\S]*overflow:\s*hidden/,
-  "Fixed-size event cards should hide overflow rather than stretching unevenly."
+  /\.event-card-list--cols-2 \.event-card__hit-area,[\s\S]*\.event-card-list--compact \.event-card__hit-area\s*\{[\s\S]*flex-direction:\s*column/,
+  "Grid event cards should stack media above copy so the card does not split into a sparse icon column."
+);
+
+assert.match(
+  eventCard,
+  /<div className="event-card__footer">[\s\S]*<EventBadgeRow/,
+  "EventCard should render badges in a bottom footer, not at the top of the text block."
+);
+
+assert.match(
+  polish,
+  /\.event-card__footer\s*\{[\s\S]*margin-top:\s*auto/,
+  "Event card footer badges should sit at the bottom of the card body."
+);
+
+assert.match(
+  eventCard,
+  /<EventWeatherSignal[\s\S]*className="event-card__inline-weather"/,
+  "Fetched event weather should render as an inline card row with weather icon space."
+);
+
+assert.match(
+  eventUi,
+  /<CategoryIcon[\s\S]*size=\{isDetail \? "md" : "md"\}/,
+  "Card category icons should be large enough to recognize in browsing grids."
+);
+
+assert.match(
+  eventUi,
+  /<span className="sr-only">Resort:<\/span>/,
+  "Event card resort metadata should include a screen-reader label."
+);
+
+assert.match(
+  eventUi,
+  /<span className="sr-only">Where:<\/span>/,
+  "Event card location metadata should include a screen-reader label."
+);
+
+assert.match(
+  eventUi,
+  /<span className="sr-only">When:<\/span>/,
+  "Event card time metadata should include a screen-reader label."
+);
+
+assert.match(
+  polish,
+  /\.event-weather-signal__icon\s*\{[\s\S]*width:\s*2\.25rem[\s\S]*height:\s*2\.25rem/,
+  "Inline weather signals should use a recognizable weather icon size."
 );
 
 assert.match(
   polish,
   /\.event-card-list--cols-2 \.event-card__title,[\s\S]*-webkit-line-clamp:\s*2/,
   "Fixed-size event cards should clamp long titles and resort lines."
+);
+
+assert.match(
+  todayClient,
+  /import \{ EventCardList, EventCardListItem \} from "@\/components\/events\/EventCardList"/,
+  "Today timeline cards should use the shared EventCardList grid wrapper."
+);
+
+assert.match(
+  todayClient,
+  /<EventCardList[\s\S]+columns=\{2\}[\s\S]+className="today-activity-timeline"/,
+  "Today timeline should get the same two-column card sizing behavior as other card surfaces."
+);
+
+assert.match(
+  todayClient,
+  /<EventCardListItem key=\{activity\.id\}/,
+  "Today timeline items should use EventCardListItem so row heights are shared."
+);
+
+assert.doesNotMatch(
+  todayClient,
+  /formatOrlandoTime|absolute bottom-0 left-4 top-0|-left-\[1\.85rem\]/,
+  "Today timeline should not render the old rail, dot, or duplicate time label outside the shared card."
 );
 
 console.log("Event card layout coverage passed.");

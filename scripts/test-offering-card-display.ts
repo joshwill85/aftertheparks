@@ -104,8 +104,8 @@ const movieSession = {
   summary: "",
   category: "movies_under_stars",
   section: "Resort Activities",
-  startDateTime: "2026-06-27T20:30:00-04:00",
-  endDateTime: "2026-06-27T22:00:00-04:00",
+  startDateTime: "2026-06-28T20:30:00-04:00",
+  endDateTime: "2026-06-28T22:00:00-04:00",
   daypart: "evening",
   price: { state: "free" },
   location: { label: "Movie Lawn" },
@@ -121,7 +121,7 @@ const movieSession = {
 const nextSession = findNextOfferingSession(
   moviesOffering,
   [movieSession],
-  new Date("2026-06-27T12:00:00-04:00")
+  new Date("2026-06-28T12:00:00-04:00")
 );
 assert.equal(nextSession?.id, "movie-session");
 assert.equal(

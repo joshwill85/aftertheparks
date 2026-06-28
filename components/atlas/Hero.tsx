@@ -11,6 +11,7 @@ interface HeroProps {
   children?: React.ReactNode;
   image?: boolean;
   dark?: boolean;
+  compactBrowse?: boolean;
 }
 
 export function Hero({
@@ -20,13 +21,18 @@ export function Hero({
   children,
   image = false,
   dark = false,
+  compactBrowse = false,
 }: HeroProps) {
   const isOverlayText = dark || image;
 
   return (
     <section
       className={`relative mb-10 overflow-hidden rounded-3xl border border-[var(--color-card-border)] ${
-        image ? "min-h-[320px] md:min-h-[380px]" : "p-8 md:p-12"
+        compactBrowse
+          ? "browse-hero-compact p-6 md:p-10"
+          : image
+            ? "min-h-[320px] md:min-h-[380px]"
+            : "p-8 md:p-12"
       }`}
     >
       {image && (

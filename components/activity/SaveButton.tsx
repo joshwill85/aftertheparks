@@ -42,6 +42,7 @@ export function SaveButton({
         onClick={handleClick}
         disabled={saved}
         aria-pressed={saved}
+        aria-label={saved ? "Saved to My Plan" : "Add to My Plan"}
         className={cn(
           variant === "day" ? "btn-save" : "btn-save-night",
           "relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border px-4 text-sm font-bold transition-transform",
@@ -58,10 +59,10 @@ export function SaveButton({
       >
         {saved ? (
           <span className="inline-flex items-center gap-1">
-            Saved <IconGlyph iconKey="check_mark" className="text-sm" />
+            In My Plan <IconGlyph iconKey="check_mark" className="text-sm" />
           </span>
         ) : (
-          "Save"
+          "Add to My Plan"
         )}
       </button>
       {stamping && !reducedMotion && (

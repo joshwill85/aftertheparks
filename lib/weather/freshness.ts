@@ -38,12 +38,22 @@ export function weatherConfidenceLabel(weather: Pick<WeatherForTimeSpan, "foreca
 }
 
 export function formatWeatherFreshness(
-  weather: Pick<WeatherForTimeSpan, "fetchedAt" | "forecastStatus" | "forecastConfidence" | "locationKey">,
+  weather: Pick<
+    WeatherForTimeSpan,
+    | "fetchedAt"
+    | "forecastStatus"
+    | "forecastConfidence"
+    | "locationKey"
+    | "timeBasisLabel"
+  >,
   now = new Date()
 ): string {
   return [
     ageLabel(weather.fetchedAt, now),
     weatherConfidenceLabel(weather),
+    weather.timeBasisLabel,
     weatherLocationLabel(weather.locationKey),
-  ].join(" · ");
+  ]
+    .filter(Boolean)
+    .join(" · ");
 }

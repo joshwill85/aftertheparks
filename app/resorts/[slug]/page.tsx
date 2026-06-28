@@ -20,16 +20,8 @@ import { NearTermRainLine } from "@/components/weather/NearTermRainLine";
 import { ResortWeatherPersonality } from "@/components/weather/ResortWeatherPersonality";
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { WeatherPrecipMapPreview } from "@/components/weather/WeatherPrecipMapPreview";
-import { WeatherWindowStrip } from "@/components/weather/WeatherWindowStrip";
-import { WeatherStoryStrip } from "@/components/weather/WeatherStoryStrip";
-import { buildWeatherDayStory } from "@/lib/weather/dayStory";
-import { buildWeatherGuidanceForTimeSpan } from "@/lib/weather/guidance";
 import { getResortWeatherProfile } from "@/lib/weather/resortWeatherProfiles";
-import { buildWeatherWindows } from "@/lib/weather/windows";
-import { getCachedNwsAlerts, getCachedNwsAlertsForAllWdw, getCachedWeatherSnapshot } from "@/lib/weather/cache";
-import { getWeatherLocationForResort } from "@/lib/weather/locations";
-import { getWeatherApiPrecipMapContext } from "@/lib/weather/precipMap";
-import { chooseWeatherProviderForTimeSpan } from "@/lib/weather/providerRouter";
+import { loadWeatherGuidanceForLocation } from "@/lib/weather/serverGuidance";
 import {
   buildActivityEventJsonLd,
   buildBreadcrumbJsonLd,
@@ -58,7 +50,7 @@ export async function generateMetadata({
   if (!resort) return {};
 
   const title = `${resort.name} Activities, Movies & Recreation Calendar`;
-  const description = `Current Walt Disney World resort activities for ${resort.name}, including today and tonight highlights, movies, campfires, recreation offerings, and source-backed planning caveats.`;
+  const description = `Current Walt Disney World resort activities for ${resort.name}, including today and tonight highlights, movies, campfires, recreation offerings, and planning caveats.`;
 
   return {
     title,
@@ -270,8 +262,8 @@ function ResortPlanningSnapshot({
           <h2 className="font-display text-2xl font-semibold">Today at this resort</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {todayActivities.length > 0
-              ? `${resort.name} has ${todayActivities.length} source-backed ${todayActivities.length === 1 ? "activity" : "activities"} tracked for today, including ${activityExamples(todayActivities) || "current resort recreation"}.`
-              : `${resort.name} does not currently have a source-backed activity row for today in After the Parks data. Check the official resort source before planning around a same-day activity.`}
+              ? `${resort.name} has ${todayActivities.length} verified ${todayActivities.length === 1 ? "activity" : "activities"} tracked for today, including ${activityExamples(todayActivities) || "current resort recreation"}.`
+              : `${resort.name} does not currently have a verified activity row for today in After the Parks data. Check the official resort source before planning around a same-day activity.`}
           </p>
           <Link href={`/today?resort=${resort.slug}`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             View today at this resort
@@ -283,7 +275,7 @@ function ResortPlanningSnapshot({
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {tonightActivities.length > 0
               ? `Tonight at ${resort.name}, After the Parks is tracking ${tonightActivities.length} ${tonightActivities.length === 1 ? "option" : "options"} such as ${activityExamples(tonightActivities) || "evening resort recreation"}. Confirm time, location, weather, and eligibility before heading out.`
-              : `No source-backed tonight listing is currently tracked for ${resort.name}. Use nearby resort and indoor filters if you need a backup plan.`}
+              : `No verified tonight listing is currently tracked for ${resort.name}. Use nearby resort and indoor filters if you need a backup plan.`}
           </p>
           <Link href={`/tonight?resort=${resort.slug}`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             View tonight at this resort
@@ -295,7 +287,7 @@ function ResortPlanningSnapshot({
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {freeActivities.length > 0
               ? `${freeActivities.length} tracked ${freeActivities.length === 1 ? "activity is" : "activities are"} currently marked free, including ${activityExamples(freeActivities) || "resort recreation"}. Access can still depend on resort rules, capacity, weather, or guest eligibility.`
-              : "No currently tracked activity for this resort is marked free in the source-backed data. Confirm cost and eligibility before planning around a free option."}
+              : "No currently tracked activity for this resort is marked free in the verified data. Confirm cost and eligibility before planning around a free option."}
           </p>
           <Link href={`/activities?resort=${resort.slug}&free=true`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             Filter free activities
@@ -446,66 +438,15 @@ export default async function ResortDetailPage({
     sourceCount: officialSourceUrls.length,
   });
   const resortWeatherProfile = getResortWeatherProfile(resort.slug);
-  const resortWeatherLocation = getWeatherLocationForResort(resort.slug);
   const resortWeatherNow = new Date();
-  const resortWeatherStartsAt = resortWeatherNow.toISOString();
-  const resortWeatherEndsAt = new Date(
-    resortWeatherNow.getTime() + 12 * 60 * 60 * 1000
-  ).toISOString();
-  const resortWeatherSelection = chooseWeatherProviderForTimeSpan({
+  const resortWeatherGuidance = await loadWeatherGuidanceForLocation({
+    resortSlug: resort.slug,
     now: resortWeatherNow,
-    startsAt: resortWeatherStartsAt,
-    endsAt: resortWeatherEndsAt,
-  });
-  const [resortWeatherSnapshotResult, resortWeatherAlertsResult] =
-    await Promise.allSettled([
-      getCachedWeatherSnapshot({
-        location: resortWeatherLocation,
-        provider: resortWeatherSelection.provider,
-      }),
-      resortWeatherLocation.key === "all_wdw"
-        ? getCachedNwsAlertsForAllWdw()
-        : getCachedNwsAlerts({ location: resortWeatherLocation }),
-    ]);
-  const resortWeatherSnapshot =
-    resortWeatherSnapshotResult.status === "fulfilled"
-      ? resortWeatherSnapshotResult.value
-      : null;
-  const resortWeatherAlertState =
-    resortWeatherAlertsResult.status === "fulfilled"
-      ? { status: "available" as const, alerts: resortWeatherAlertsResult.value }
-      : { status: "unavailable" as const, alerts: [] };
-  const resortWeatherGuidance = buildWeatherGuidanceForTimeSpan({
-    locationKey: resortWeatherLocation.key,
-    startsAt: resortWeatherStartsAt,
-    endsAt: resortWeatherEndsAt,
-    snapshot: resortWeatherSnapshot,
-    alerts: resortWeatherAlertState.alerts,
-    officialAlertStatus: resortWeatherAlertState.status,
-    precipMap: getWeatherApiPrecipMapContext({
-      location: resortWeatherLocation,
-      now: resortWeatherNow,
-    }),
-  });
-  const resortWeatherWindows = buildWeatherWindows({
-    locationKey: resortWeatherLocation.key,
-    startsAt: resortWeatherStartsAt,
-    endsAt: resortWeatherEndsAt,
-    risksByWindow: [
-      {
-        startsAt: resortWeatherStartsAt,
-        endsAt: new Date(
-          resortWeatherNow.getTime() + 4 * 60 * 60 * 1000
-        ).toISOString(),
-        rainRisk: resortWeatherGuidance.risk.rainRisk,
-        stormRisk: resortWeatherGuidance.risk.stormRisk,
-        heatRisk: resortWeatherGuidance.risk.heatRisk,
-      },
-    ],
-  });
-  const resortWeatherStory = buildWeatherDayStory({
-    windows: resortWeatherWindows,
-    stormModeActive: false,
+    startsAt: resortWeatherNow,
+    endsAt: new Date(resortWeatherNow.getTime() + 12 * 60 * 60 * 1000),
+    includePrecipMap: true,
+    timeBasis: "page_area_window",
+    timeBasisLabel: `${resort.name} resort-area weather`,
   });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const eventJsonLd = scheduledActivities
@@ -520,7 +461,7 @@ export default async function ResortDetailPage({
     buildResortAccommodationJsonLd(baseUrl, {
       slug: resort.slug,
       name: resort.name,
-      description: `Current After the Parks recreation calendar for ${resort.name}, including source-backed activities, today and tonight highlights, and planning caveats.`,
+      description: `Current After the Parks recreation calendar for ${resort.name}, including verified activities, today and tonight highlights, and planning caveats.`,
       dateModified: latestVerifiedAt,
       sourceUrl: officialSourceUrls[0],
     }),
@@ -681,7 +622,7 @@ export default async function ResortDetailPage({
           </div>
           <div>
             <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Source-backed rows
+              Verified activity rows
             </dt>
             <dd className="mt-1 font-semibold">{scheduledActivities.length}</dd>
           </div>
@@ -823,8 +764,6 @@ export default async function ResortDetailPage({
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="space-y-4">
             <WeatherPrecipMapPreview precipMap={resortWeatherGuidance.precipMap} />
-            <WeatherWindowStrip windows={resortWeatherWindows} />
-            <WeatherStoryStrip story={resortWeatherStory} />
           </div>
           <div className="space-y-4">
             {resortWeatherProfile && (

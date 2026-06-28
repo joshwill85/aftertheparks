@@ -4,10 +4,13 @@ import { GET } from "@/app/api/weather/guidance/route";
 
 async function main() {
   const batchRoute = readFileSync("app/api/weather/guidance/batch/route.ts", "utf8");
-  assert.match(batchRoute, /Promise\.allSettled/);
-  assert.match(batchRoute, /alertState/);
-  assert.match(batchRoute, /snapshots\.set/);
-  assert.match(batchRoute, /:\s*snapshot\s*\?[\s\S]*available[\s\S]*unavailable/);
+  assert.match(batchRoute, /loadWeatherByOccurrence/);
+
+  const serverGuidance = readFileSync("lib/weather/serverGuidance.ts", "utf8");
+  assert.match(serverGuidance, /Promise\.allSettled/);
+  assert.match(serverGuidance, /officialAlertStatus/);
+  assert.match(serverGuidance, /snapshots\.set/);
+  assert.match(serverGuidance, /snapshot/);
 
   const response = await GET(
     new Request(

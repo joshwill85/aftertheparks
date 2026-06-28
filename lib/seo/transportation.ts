@@ -3,10 +3,6 @@ export const DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT = {
   title: "Disney Springs resort transportation access caveat",
   summary:
     "Do not use Disney Springs as a free way to get to Disney resort hotels. Current reporting says Disney Springs buses and boats to resort hotels are being restricted to guests with a Disney Resort hotel stay, resort stay, or a confirmed dining/experience reservation, with verification at Disney Springs.",
-  sourceUrls: [
-    "https://www.fox35orlando.com/news/disney-world-restricts-disney-springs-bus-boat-access",
-    "https://people.com/disney-world-is-permanently-restricting-this-beloved-free-transportation-perk-reports-12000854",
-  ],
 } as const;
 
 export function disneySpringsTransportationCaveat(): string {

@@ -5,7 +5,11 @@ import {
 } from "@/lib/weather/forecastHorizon";
 import { trackWeatherEvent } from "@/lib/weather/analytics";
 import { getWeatherLocationForResort, parseWeatherLocationKey } from "@/lib/weather/locations";
-import type { ForecastConfidence, WeatherLocationKey } from "@/lib/weather/types";
+import type {
+  ForecastConfidence,
+  WeatherLocationKey,
+  WeatherTimeBasis,
+} from "@/lib/weather/types";
 
 export type WeatherGuidanceBatchOccurrence = {
   id: string;
@@ -14,6 +18,8 @@ export type WeatherGuidanceBatchOccurrence = {
   startsAt: string;
   endsAt?: string;
   activitySlug?: string;
+  timeBasis?: WeatherTimeBasis;
+  timeBasisLabel?: string;
 };
 
 export function chooseWeatherProviderForTimeSpan(input: {

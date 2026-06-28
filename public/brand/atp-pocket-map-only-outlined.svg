@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="After the Parks pocket map supporting mark" >
+
+<defs>
+  <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF3A6"/>
+    <stop offset="0.42" stop-color="#FFC94A"/>
+    <stop offset="1" stop-color="#B76F15"/>
+  </linearGradient>
+  <radialGradient id="glowGrad" cx="50%" cy="45%" r="65%">
+    <stop offset="0" stop-color="#FFFBE8"/>
+    <stop offset="0.35" stop-color="#FFE36D"/>
+    <stop offset="0.85" stop-color="#F2A326"/>
+    <stop offset="1" stop-color="#B56F17"/>
+  </radialGradient>
+  <linearGradient id="navyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#173B60"/>
+    <stop offset="0.55" stop-color="#0B2340"/>
+    <stop offset="1" stop-color="#041226"/>
+  </linearGradient>
+  <linearGradient id="aquaGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#E9FCFF"/>
+    <stop offset="1" stop-color="#5BB8C4"/>
+  </linearGradient>
+  <linearGradient id="daySky" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FDF6D2"/>
+    <stop offset="0.4" stop-color="#BEEAF0"/>
+    <stop offset="1" stop-color="#7EC7D2"/>
+  </linearGradient>
+  <linearGradient id="twilight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#315A86"/>
+    <stop offset="0.55" stop-color="#16385E"/>
+    <stop offset="1" stop-color="#091B32"/>
+  </linearGradient>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+    <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#071426" flood-opacity="0.18"/>
+  </filter>
+  <filter id="tinyShadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#071426" flood-opacity="0.22"/>
+  </filter>
+  <filter id="goldGlow" x="-70%" y="-70%" width="240%" height="240%">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 0.73 0 0 0.55  0 0 0.15 0 0.1  0 0 0 0.75 0" result="glow"/>
+    <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .wordmark { font-family: Georgia, 'Times New Roman', serif; fill: #0B2340; }
+    .tagline { font-family: Avenir, Montserrat, Arial, sans-serif; fill: #17727F; letter-spacing: .04em; }
+    .smallcaps { font-family: Avenir, Montserrat, Arial, sans-serif; letter-spacing: .16em; font-weight: 700; }
+    .navy-stroke { stroke:#0B2340; stroke-linecap:round; stroke-linejoin:round; }
+    .gold-stroke { stroke:#E9AD2E; stroke-linecap:round; stroke-linejoin:round; }
+  </style>
+</defs>
+
+<g transform="translate(80 80) scale(1.05)" filter="url(#softShadow)">
+  <polygon points="40,210 250,118 380,156 350,412 16,386" fill="#F9F0D9" stroke="#A9C7BD" stroke-width="3"/>
+  <polygon points="250,118 500,148 506,410 350,412 380,156" fill="#F3E8CC" stroke="#A9C7BD" stroke-width="3"/>
+  <polygon points="500,148 748,108 820,396 506,410" fill="#F7EED7" stroke="#A9C7BD" stroke-width="3"/>
+  <polygon points="748,108 984,198 1026,386 820,396" fill="#F9F0D9" stroke="#A9C7BD" stroke-width="3"/>
+
+  <polygon points="54,212 246,138 368,168 344,381 45,360" fill="url(#daySky)" opacity=".65"/>
+  <polygon points="260,136 492,166 492,389 362,392 390,172" fill="#DDF3DA" opacity=".86"/>
+  <polygon points="512,166 736,132 792,378 512,390" fill="#D8F0E8" opacity=".9"/>
+  <polygon points="760,132 970,212 1000,363 806,378" fill="#16385E" opacity=".80"/>
+
+  <!-- pool stop -->
+  <ellipse cx="158" cy="292" rx="86" ry="42" fill="#76C9D4" stroke="#fff" stroke-width="6"/>
+  <ellipse cx="158" cy="292" rx="55" ry="22" fill="none" stroke="#A9EEF1" stroke-width="4" opacity=".8"/>
+  <path d="M112 256 C130 230 168 226 200 250" fill="none" stroke="#6FA34E" stroke-width="8" opacity=".45"/>
+  <path d="M82 342 C120 324 160 326 206 346" fill="none" stroke="#6FA34E" stroke-width="12" opacity=".5"/>
+
+  <!-- left lower activity / play -->
+  <path d="M92 363 C111 332 137 324 170 314 C199 303 228 278 254 242" fill="none" stroke="#C99045" stroke-width="10" stroke-linecap="round" opacity=".5"/>
+  <rect x="110" y="326" width="64" height="10" rx="5" fill="#B57A3A"/><line x1="118" y1="326" x2="100" y2="360" stroke="#B57A3A" stroke-width="6"/><line x1="166" y1="326" x2="184" y2="360" stroke="#B57A3A" stroke-width="6"/>
+
+  <!-- craft table -->
+  <circle cx="415" cy="294" r="64" fill="#7ECBD1" stroke="#fff" stroke-width="6"/>
+  <rect x="387" y="268" width="74" height="48" rx="7" fill="#FFF9E8" stroke="#E8C877" stroke-width="3"/>
+  <circle cx="406" cy="288" r="8" fill="#E67A54"/><circle cx="424" cy="291" r="7" fill="#E9AD2E"/><circle cx="442" cy="286" r="7" fill="#5BB8C4"/>
+  <path d="M398 304 C422 294 440 308 454 300" stroke="#E9AD2E" stroke-width="3" fill="none"/>
+
+  <!-- snack hut -->
+  <g transform="translate(596 264)">
+    <rect x="0" y="40" width="102" height="82" rx="8" fill="#F5B36A" stroke="#BC6E35" stroke-width="4"/>
+    <path d="M-8 42 L50 0 L112 42 Z" fill="#F28A62" stroke="#BC6E35" stroke-width="4"/>
+    <rect x="18" y="66" width="66" height="45" rx="5" fill="#FFF3D2"/>
+    <g class="outlined-text" fill="#fff" aria-hidden="true" data-text-source="SNACK"><path d="M31.798000000000002 20.212Q31.338 19.545 30.567500000000003 19.2345Q29.797 18.924 28.945999999999998 18.924Q28.439999999999998 18.924 27.9685 19.039Q27.497 19.154 27.1175 19.407Q26.738 19.66 26.508 20.0625Q26.278 20.465 26.278 21.017Q26.278 21.845 26.853 22.282Q27.428 22.719 28.279 23.041Q29.13 23.363 30.142 23.662Q31.154 23.961 32.005 24.49Q32.856 25.019 33.431 25.893Q34.006 26.767 34.006 28.216Q34.006 29.527 33.522999999999996 30.5045Q33.04 31.482 32.2235 32.126000000000005Q31.407 32.77 30.326 33.092Q29.245 33.414 28.049 33.414Q26.531 33.414 25.128 32.908Q23.725 32.402 22.713 31.206L24.898 29.09Q25.427 29.895 26.2895 30.3435Q27.152 30.792 28.118000000000002 30.792Q28.624 30.792 29.13 30.654Q29.636 30.516 30.049999999999997 30.24Q30.464 29.964 30.717 29.5385Q30.97 29.113 30.97 28.561Q30.97 27.664 30.395 27.181Q29.82 26.698 28.969 26.3645Q28.118000000000002 26.031 27.106 25.732Q26.094 25.433 25.243000000000002 24.9155Q24.392 24.398 23.817 23.5355Q23.242 22.673000000000002 23.242 21.224Q23.242 19.959 23.759500000000003 19.039Q24.277 18.119 25.116500000000002 17.5095Q25.956 16.9 27.037 16.601Q28.118000000000002 16.302 29.245 16.302Q30.533 16.302 31.7405 16.692999999999998Q32.948 17.084 33.914 17.981Z"/><path d="M37.019 16.716H40.86L48.748999999999995 28.814H48.795V16.716H51.693V33.0H48.013L39.963 20.511000000000003H39.917V33.0H37.019Z"/><path d="M60.593999999999994 16.716H63.101L70.116 33.0H66.804L65.286 29.274H58.224999999999994L56.753 33.0H53.51ZM64.274 26.79 61.766999999999996 20.166 59.214 26.79Z"/><path d="M83.111 20.534Q82.214 19.567999999999998 81.3745 19.246Q80.535 18.924 79.684 18.924Q78.419 18.924 77.3955 19.3725Q76.372 19.820999999999998 75.636 20.6145Q74.9 21.408 74.4975 22.466Q74.095 23.524 74.095 24.743000000000002Q74.095 26.054000000000002 74.4975 27.158Q74.9 28.262 75.636 29.067Q76.372 29.872 77.3955 30.332Q78.419 30.792 79.684 30.792Q80.673 30.792 81.6045 30.320500000000003Q82.536 29.849 83.341 28.814L85.733 30.516Q84.629 32.034 83.042 32.724000000000004Q81.455 33.414 79.661 33.414Q77.775 33.414 76.1995 32.804500000000004Q74.624 32.195 73.4855 31.0795Q72.347 29.964 71.703 28.4Q71.059 26.836 71.059 24.927Q71.059 22.972 71.703 21.3735Q72.347 19.775 73.4855 18.648Q74.624 17.521 76.1995 16.9115Q77.775 16.302 79.661 16.302Q81.31700000000001 16.302 82.73150000000001 16.8885Q84.146 17.475 85.365 18.878Z"/><path d="M87.68799999999999 16.716H90.586V23.616H90.72399999999999L97.463 16.716H101.37299999999999L93.75999999999999 24.237000000000002L101.87899999999999 33.0H97.80799999999999L90.747 24.996000000000002H90.586V33.0H87.68799999999999Z"/></g>
+  </g>
+
+  <!-- boat / explore -->
+  <g transform="translate(800 230)">
+    <path d="M0 68 C54 96 130 88 168 58 L151 94 C98 118 33 104 0 68 Z" fill="#FDF2D3" stroke="#0B2340" stroke-width="5"/>
+    <rect x="52" y="19" width="82" height="52" rx="8" fill="#fff" stroke="#0B2340" stroke-width="4"/>
+    <path d="M65 16 L90 -12 L124 16" fill="#F0C053" stroke="#0B2340" stroke-width="4"/>
+    <path d="M-10 102 C40 83 90 121 170 94" fill="none" stroke="#5BB8C4" stroke-width="7" opacity=".8"/>
+  </g>
+
+  <!-- twilight cozy room -->
+  <g transform="translate(825 268)"><rect x="0" y="22" width="118" height="92" rx="10" fill="#F6E2B8" opacity=".95"/><path d="M0 22 L58 -18 L118 22" fill="#294E74"/><rect x="30" y="48" width="60" height="44" rx="6" fill="#CBEAF0"/><path d="M51 59 C63 46 76 64 62 76 C58 79 54 82 51 85 C48 82 44 79 40 76 C27 64 39 46 51 59 Z" fill="#6AB3BA" opacity=".8"/></g>
+
+  <!-- route line -->
+  <path d="M132 250 C230 160 336 184 420 258 C508 338 604 322 686 274 C772 224 855 245 904 296 C938 331 933 362 892 373 C814 394 677 365 575 324 C454 276 341 282 212 338" fill="none" stroke="#FFE063" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 22" filter="url(#goldGlow)"/>
+  <path d="M132 250 C230 160 336 184 420 258 C508 338 604 322 686 274 C772 224 855 245 904 296 C938 331 933 362 892 373 C814 394 677 365 575 324 C454 276 341 282 212 338" fill="none" stroke="#E9AD2E" stroke-width="4" stroke-linecap="round"/>
+
+  <g opacity="0.95" filter="url(#goldGlow)">
+<circle cx="702" cy="252.5" r="6.75" fill="#E9AD2E"/>
+<circle cx="688.5" cy="239.0" r="4.5" fill="#E9AD2E"/>
+<circle cx="715.5" cy="239.0" r="4.5" fill="#E9AD2E"/>
+</g>
+  <g transform="translate(120 238) scale(0.55)" filter="url(#tinyShadow)">
+<path d="M0,-34 C20,-34 34,-20 34,-1 C34,24 0,48 0,48 C0,48 -34,24 -34,-1 C-34,-20 -20,-34 0,-34 Z" fill="#FFFFFF" stroke="#E9AD2E" stroke-width="4"/>
+<circle cx="0" cy="-3" r="17" fill="#FFF3BF"/>
+<path d="M-9.6,-3 C-4.8,-7.2 0.0,1.2000000000000002 5.3999999999999995,-3 C9.6,-6.0 12.0,-3 12.0,-3" fill="none" stroke="#5BB8C4" stroke-width="4" stroke-linecap="round"/>
+</g>
+  <g transform="translate(420 225) scale(0.55)" filter="url(#tinyShadow)">
+<path d="M0,-34 C20,-34 34,-20 34,-1 C34,24 0,48 0,48 C0,48 -34,24 -34,-1 C-34,-20 -20,-34 0,-34 Z" fill="#FFFFFF" stroke="#E9AD2E" stroke-width="4"/>
+<circle cx="0" cy="-3" r="17" fill="#FFF3BF"/>
+<g opacity="1">
+<path d="M0 -15 L2.42 -6.42 L11 -4 L2.42 -1.58 L0 7 L-2.42 -1.58 L-11 -4 L-2.42 -6.42 Z" fill="#E67A54"/>
+</g>
+</g>
+  <g transform="translate(705 238) scale(0.55)" filter="url(#tinyShadow)">
+<path d="M0,-34 C20,-34 34,-20 34,-1 C34,24 0,48 0,48 C0,48 -34,24 -34,-1 C-34,-20 -20,-34 0,-34 Z" fill="#FFFFFF" stroke="#E9AD2E" stroke-width="4"/>
+<circle cx="0" cy="-3" r="17" fill="#FFF3BF"/>
+<circle cx="0" cy="-4" r="10" fill="#E9AD2E"/><circle cx="-7" cy="-7" r="3" fill="#fff" opacity=".8"/><circle cx="7" cy="-7" r="3" fill="#fff" opacity=".8"/>
+</g>
+  <g transform="translate(875 217) scale(0.55)" filter="url(#tinyShadow)">
+<path d="M0,-34 C20,-34 34,-20 34,-1 C34,24 0,48 0,48 C0,48 -34,24 -34,-1 C-34,-20 -20,-34 0,-34 Z" fill="#FFFFFF" stroke="#E9AD2E" stroke-width="4"/>
+<circle cx="0" cy="-3" r="17" fill="#FFF3BF"/>
+<path d="M-15 3 C-2 -10 14 -2 16 12" stroke="#5BB8C4" stroke-width="5" fill="none" stroke-linecap="round"/>
+</g>
+</g></svg>

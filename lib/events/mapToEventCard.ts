@@ -3,7 +3,7 @@ import type { DisplayActivity } from "@/lib/displayActivity";
 import type { ActivityOccurrence, MovieNightOccurrence } from "@/lib/types/occurrence";
 import type { EventBadge, EventCardProps } from "@/components/events/EventCard";
 import { formatActivityEventDay, formatMovieEventDay } from "@/lib/events/formatEventDay";
-import { formatMovieShowTime } from "@/components/atlas/MoviePosterFallback";
+import { formatMovieDuration, formatMovieShowTime } from "@/lib/movies/time";
 import { activityDetailHref } from "@/lib/activities/links";
 import { activityDecisionProfile } from "@/lib/activityDecision";
 
@@ -56,7 +56,7 @@ export function activityToEventCard(
     badges.push({ label: "Now", tone: "now" });
   }
 
-  if (display.daypart !== "anytime" || display.startDateTime || display.timeLabel) {
+  if (display.daypart !== "anytime" || display.startDateTime) {
     badges.push({
       label: DAYPART_LABELS[display.daypart] ?? display.daypart,
       tone: "muted",
@@ -111,6 +111,7 @@ export function movieToEventCard(
   const title = getMovieDisplayTitle(movie);
   const showTime = formatMovieShowTime(movie.showTime);
   const scheduleDay = formatMovieEventDay(movie);
+  const runtime = formatMovieDuration(movie.runtimeMinutes);
   const metadata = [
     movie.releaseYear && title !== MOVIE_FALLBACK_TITLE
       ? String(movie.releaseYear)
@@ -118,6 +119,7 @@ export function movieToEventCard(
     typeof movie.voteAverage === "number" && Number.isFinite(movie.voteAverage)
       ? `TMDB ${movie.voteAverage.toFixed(1)}`
       : undefined,
+    runtime ? `Duration ${runtime}` : undefined,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -135,7 +137,16 @@ export function movieToEventCard(
     resort: movie.resortName,
     location: movie.location,
     extra: metadata || undefined,
-    timeLabel: showTime,
+    timeLabel: showTime === "Evening" ? showTime : `Starts ${showTime}`,
+    timeDateTime: movie.startDateTime,
+    endDateTime: movie.endDateTime,
+    weatherQuery: movie.startDateTime
+      ? {
+          resortSlug: movie.resortSlug,
+          startsAt: movie.startDateTime,
+          endsAt: movie.endDateTime,
+        }
+      : undefined,
     scheduleDayLabel: scheduleDay.label,
     scheduleDayDateTime: scheduleDay.dateTime,
     summary: movie.overview ?? undefined,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T01:30:21.190388+00:00",
+  "generated_at": "2026-06-28T06:06:18.319233+00:00",
   "overall_status": "blocked",
   "confidence": {
     "current_gold_price_labels": "medium",
@@ -10,22 +10,27 @@
   },
   "counts": {
     "source_inventory": {
-      "source_count": 137,
+      "source_count": 154,
       "by_role": {
+        "community_hall_official_fact": 5,
+        "golf_official_fact": 8,
         "main_recreation_index": 1,
-        "parent_activity_detail": 76,
+        "parent_activity_detail": 78,
         "resort_pdf": 29,
-        "resort_recreation_page": 31
+        "resort_recreation_page": 31,
+        "supporting_price_image": 2
       },
       "by_kind": {
         "official_api": 1,
-        "official_html": 107,
-        "official_pdf": 29
+        "official_html": 109,
+        "official_image": 1,
+        "official_manual_extract": 13,
+        "official_pdf": 30
       }
     },
     "source_freshness": {
-      "sources_checked": 137,
-      "current": 137,
+      "sources_checked": 154,
+      "current": 154,
       "url_changed": 0,
       "hash_changed": 0,
       "missing_from_parent": 0,
@@ -42,12 +47,12 @@
       },
       "price_state_counts": {
         "fee": 78,
-        "free": 139,
-        "unknown": 8
+        "free": 146,
+        "unknown": 1
       },
       "field_confidence_counts": {
-        "high": 1091,
-        "unknown": 8
+        "high": 1098,
+        "unknown": 1
       }
     },
     "manual_review": {
@@ -56,8 +61,8 @@
       "manual_review_errors_by_code": {}
     },
     "official_recreation": {
-      "program_count": 40,
-      "offering_count": 224,
+      "program_count": 42,
+      "offering_count": 233,
       "quarantine_count": 0
     },
     "official_parent_classification": {
@@ -88,9 +93,9 @@
         "errors": 0
       },
       "official_offerings": {
-        "expected_official_offerings": 224,
-        "live_official_offerings": 224,
-        "matched_official_offerings": 224,
+        "expected_official_offerings": 233,
+        "live_official_offerings": 233,
+        "matched_official_offerings": 233,
         "errors": 0
       }
     }

@@ -13,7 +13,7 @@ interface ResultSummaryProps {
 }
 
 const SORT_OPTIONS: { value: ActivitySortKey; label: string; help: string }[] = [
-  { value: "time", label: "Happening soon", help: "Soonest useful activities first." },
+  { value: "time", label: "Happening soon", help: "Next future start first." },
   { value: "alpha", label: "Alphabetical", help: "Activity names from A to Z." },
   { value: "free", label: "Free first", help: "Free activities before paid ones." },
   { value: "paid", label: "Paid first", help: "Paid activities before free ones." },
@@ -35,14 +35,12 @@ export function ResultSummary({
     searchParams.get("resort"),
     searchParams.get("category"),
     searchParams.get("daypart") ?? searchParams.get("time"),
-    searchParams.get("duration"),
     searchParams.get("near"),
     searchParams.get("transport"),
     searchParams.get("area"),
     searchParams.get("weather"),
     searchParams.get("free") === "true" ? "free" : null,
     searchParams.get("reservation") === "true" ? "reservation" : null,
-    searchParams.get("ticket_required") ? "ticket_required" : null,
     searchParams.get("q"),
   ].filter(Boolean).length;
 
@@ -79,7 +77,7 @@ export function ResultSummary({
       )}
     >
       <p
-        className="font-bold text-[var(--color-foreground)]"
+        className="result-summary__count font-bold text-[var(--color-foreground)]"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -92,7 +90,7 @@ export function ResultSummary({
       </p>
 
       <label className={cn("result-summary__sort", compact ? "text-xs" : "text-sm")}>
-        <span className="sr-only">Sort by</span>
+        <span className="result-summary__sort-label">Sort</span>
         <select
           className="form-control"
           value={currentSort}

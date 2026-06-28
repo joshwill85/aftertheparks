@@ -84,9 +84,9 @@ export const SEASONAL_CALENDAR_PAGES: SeasonalCalendarPageDefinition[] = [
     scheduleWindow: "Late November through December 2026",
     userPromise:
       "Holiday resort planning works best when festive ideas are grounded in current calendars, access rules, transportation caveats, and resort-specific next steps.",
-    primaryAction: { label: "Find no-ticket-friendly ideas", href: "/activities?ticket_required=false" },
+    primaryAction: { label: "Browse resort activities", href: "/activities" },
     deepLinks: [
-      "/activities?ticket_required=false",
+      "/activities",
       "/today",
       "/tonight",
       "/guides/things-to-do-without-park-ticket",

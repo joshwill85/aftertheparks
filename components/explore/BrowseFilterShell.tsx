@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { IconGlyph } from "@/components/icons/IconGlyph";
-import { MOOD_CHIPS } from "@/lib/categories/meta";
-import { mergeMoodChipHref, parseBrowseParams } from "@/lib/explore/browseParams";
+import { parseBrowseParams } from "@/lib/explore/browseParams";
 import {
   buildActiveFilterChips,
   buildNoResultsRecovery,
@@ -13,13 +12,13 @@ import {
   type FilterImpact,
   type FilterRecoveryAction,
 } from "@/lib/explore/filterImpact";
-import { isMoodChipActive } from "@/lib/ui/moodChipActive";
 import { cn } from "@/lib/utils";
 import { FilterRail } from "@/components/explore/FilterRail";
 import { FilterSheet } from "@/components/explore/FilterSheet";
 import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
 import { ResultSummary } from "@/components/explore/ResultSummary";
 import { BrowseDayTabs } from "@/components/explore/BrowseDayTabs";
+import { PresetChips } from "@/components/explore/PresetChips";
 import { usePlan } from "@/components/atlas/PlanProvider";
 
 export type BrowseFilterVariant = "today" | "tonight" | "explore";
@@ -91,7 +90,7 @@ export function BrowseFilterShell({
 
       <div className="grid grid-cols-1 gap-6 min-[900px]:grid-cols-[280px_minmax(0,1fr)] lg:gap-6">
         <div className="filter-rail-wrapper hidden min-[900px]:block">
-          <div className="filter-rail sticky top-24">
+          <div className="filter-rail-scroll-frame sticky top-24">
             <FilterRail
               resorts={resorts}
               basePath={basePath}
@@ -106,14 +105,18 @@ export function BrowseFilterShell({
         <div className="results-column min-w-0 space-y-4">
           <div className="browse-controls explore-controls sticky top-[64px] z-40 -mx-4 border-b border-[var(--color-card-border)] bg-[var(--color-sun-cream)]/92 px-4 py-3 backdrop-blur-[18px] min-[900px]:static min-[900px]:mx-0 min-[900px]:border-0 min-[900px]:bg-transparent min-[900px]:p-0 min-[900px]:backdrop-blur-none">
             <ExploreSearchBar basePath={basePath} />
-            {showGlobalSearchLink && (
-              <Link
-                href="/search"
-                className="explore-search__global-link inline-flex items-center"
-              >
-                Search everything <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
-              </Link>
-            )}
+            <div className="browse-controls__utility">
+              {showGlobalSearchLink ? (
+                <Link
+                  href="/search"
+                  className="explore-search__global-link"
+                >
+                  Search everything <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
+                </Link>
+              ) : (
+                <span aria-hidden />
+              )}
+            </div>
 
             <div className="mt-3 flex items-center gap-3 min-[900px]:hidden">
               <button
@@ -133,23 +136,8 @@ export function BrowseFilterShell({
               </button>
             </div>
 
-            <div className="mood-chips-scroll mt-3 min-[900px]:mt-0 min-[900px]:hidden">
-              <div className="mood-chips">
-                {MOOD_CHIPS.map((chip) => {
-                  const href = mergeMoodChipHref(chip.href, pathname, searchParams);
-                  const active = isMoodChipActive(href, pathname, searchParams);
-                  return (
-                    <Link
-                      key={chip.id}
-                      href={href}
-                      className={cn("mood-chip", active && "mood-chip--active")}
-                      aria-current={active ? "page" : undefined}
-                    >
-                      {chip.label}
-                    </Link>
-                  );
-                })}
-              </div>
+            <div className="preset-chips-scroll mt-3">
+              <PresetChips homeResortSlug={homeResortSlug} />
             </div>
 
             {(activeChips.length > 0 || undoHref) && (
@@ -170,9 +158,6 @@ export function BrowseFilterShell({
                 basePath={basePath}
               />
             </div>
-            {activeChips.length > 0 && (
-              <FilterAlchemyBoard chips={activeChips} resultCount={resultCount} />
-            )}
           </div>
 
           <div id="activities" className="scroll-mt-24">
@@ -191,6 +176,7 @@ export function BrowseFilterShell({
         basePath={basePath}
         hideDaypart={hideDaypart}
         activeCount={activeCount}
+        resultCount={resultCount}
         filterImpact={filterImpact}
         homeResortSlug={homeResortSlug}
         onClearAll={handleClearAll}
@@ -220,50 +206,6 @@ function NearMyResortNote({
           ? `Showing tonight options in the same resort area as ${selectedResortName}, useful for arrival nights when a nearby direct-route plan is safer than a long transfer.`
           : "Choose a resort to narrow tonight to your resort area. Until then, this stays as a broad first-night planning mode instead of guessing where you are staying."}
       </p>
-    </section>
-  );
-}
-
-function FilterAlchemyBoard({
-  chips,
-  resultCount,
-}: {
-  chips: ActiveFilterChip[];
-  resultCount: number;
-}) {
-  const visibleChips = chips.slice(0, 4);
-  const blocked = resultCount === 0;
-
-  return (
-    <section
-      className={cn(
-        "wow-filter-alchemy-board",
-        blocked && "wow-filter-alchemy-board--blocked"
-      )}
-      data-wow-moment="filter_alchemy_board"
-      aria-label="Filter effect summary"
-    >
-      <div className="wow-filter-alchemy-board__orb" aria-hidden>
-        {visibleChips.map((chip, index) => (
-          <span
-            key={chip.id}
-            className="wow-filter-alchemy-board__token"
-            style={{ "--alchemy-index": index } as CSSProperties & Record<"--alchemy-index", number>}
-          >
-            {chip.label}
-          </span>
-        ))}
-      </div>
-      <div className="wow-filter-alchemy-board__copy">
-        <p className="wow-filter-alchemy-board__count">
-          {resultCount} {resultCount === 1 ? "match" : "matches"}
-        </p>
-        <p>
-          {blocked
-            ? "That mix has no results. Remove one filter or try a nearby resort."
-            : `${chips.length} ${chips.length === 1 ? "filter" : "filters"} applied.`}
-        </p>
-      </div>
     </section>
   );
 }

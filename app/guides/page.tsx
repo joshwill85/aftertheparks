@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/atlas/Hero";
+import { BrandMotif } from "@/components/brand/BrandAsset";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { GUIDES } from "@/lib/guides";
 import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
@@ -45,6 +46,7 @@ export default function GuidesPage() {
         subtitle="Research-backed planning guides for resort days, no-park days, rainy days, and current activity calendars."
       />
       <section className="mb-6 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+        <BrandMotif className="brand-motif--divider mb-3" />
         <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
           Research-gated guide cluster
         </p>
@@ -69,7 +71,7 @@ export default function GuidesPage() {
             Source standard
           </p>
           <p className="mt-1 text-[var(--brand-ink)]">
-            Official Disney sources first, with freshness and caveats visible.
+            Disney official sources first, with freshness and caveats visible.
           </p>
         </div>
         <div>

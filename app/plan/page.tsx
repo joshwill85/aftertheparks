@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PlanPageClient } from "@/components/atlas/PlanPageClient";
 import { Hero } from "@/components/atlas/Hero";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { getResorts } from "@/lib/data/activities";
 
 export const metadata: Metadata = {
@@ -24,6 +25,24 @@ export default async function PlanPage() {
         title="My Plan"
         subtitle="Line up pool breaks, campfires, and movie nights into one easy rest day."
       />
+      <section className="mb-8 grid gap-5 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:grid-cols-[minmax(0,1fr)_300px] md:items-center">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
+            Pocket map companion
+          </p>
+          <h2 className="font-display mt-2 text-2xl font-semibold">
+            Turn loose ideas into a low-stress route.
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+            Save the moments worth keeping, then use My Plan like a little resort
+            map for pool breaks, dinner gaps, campfires, and starlight wins.
+          </p>
+        </div>
+        <BrandAsset
+          asset="pocket-map-only"
+          className="brand-asset--map-panel justify-self-center"
+        />
+      </section>
       <PlanPageClient resorts={resortOptions} />
     </>
   );

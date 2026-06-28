@@ -51,7 +51,7 @@ if (captureAgentReadinessEvidenceForHtml && renderAgentReadinessEvidenceJsonl) {
             <p>Last verified June 27, 2026. Source and accuracy policy applies.</p>
           </section>
           <button aria-label="Open filters">Filters</button>
-          <a href="/today?ticket_required=false">See no-ticket activities today</a>
+          <a href="/today">See activities today</a>
           <details><summary>Transportation notes</summary><p>Access rules can change.</p></details>
         </main>
       </body>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getPlanShare } from "@/lib/data/activities";
+import { BrandMark, BrandMotif } from "@/components/brand/BrandAsset";
 import type { PlanItem } from "@/lib/types/occurrence";
 import { notFound } from "next/navigation";
 
@@ -25,6 +26,16 @@ export default async function PlanSharePage({
 
   return (
     <div>
+      <div className="mb-6 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <BrandMark variant="horizontal" className="brand-mark--footer" />
+          <BrandMotif className="brand-motif--divider" />
+        </div>
+        <p className="text-sm text-[var(--color-muted)]">
+          Shared through After the Parks, an independent resort-day planning
+          guide.
+        </p>
+      </div>
       <h1 className="font-display mb-2 text-3xl font-bold">
         View-only legacy shared plan
       </h1>

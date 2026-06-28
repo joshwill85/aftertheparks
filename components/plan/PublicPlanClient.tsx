@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePlan } from "@/components/atlas/PlanProvider";
+import { BrandMark, BrandMotif } from "@/components/brand/BrandAsset";
 import { trackPlanEvent } from "@/lib/plan/analytics";
 import { ensureAnonymousSession } from "@/lib/plan/sync-client";
 import { executeTurnstile } from "@/lib/turnstile/browser";
@@ -101,6 +102,10 @@ export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
   return (
     <div className="public-plan space-y-6">
       <div className="rounded-2xl border border-[var(--border-soft)] bg-white/90 px-5 py-4">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <BrandMark variant="horizontal" className="brand-mark--footer" />
+          <BrandMotif className="brand-motif--divider" />
+        </div>
         <span className="stamp-badge">View only</span>
         <h1 className="font-display mt-3 text-3xl font-bold">{plan.title}</h1>
         <p className="mt-2 text-sm text-[var(--muted)]">

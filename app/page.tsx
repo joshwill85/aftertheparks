@@ -73,7 +73,7 @@ export default async function HomePage() {
               Quick answer
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-              After the Parks is a current, source-backed guide to Walt Disney
+              After the Parks is a current guide to Walt Disney
               World resort activities, including today&apos;s schedules,
               tonight&apos;s movies and campfires, resort recreation calendars,
               and no-park-day planning ideas.
@@ -99,7 +99,7 @@ export default async function HomePage() {
                 </dd>
               </div>
               <div>
-                <dt className="font-bold text-[var(--color-muted)]">Source-backed rows</dt>
+                <dt className="font-bold text-[var(--color-muted)]">Verified activity rows</dt>
                 <dd className="font-semibold">{sourceSummary.activityCount}</dd>
               </div>
               <div>

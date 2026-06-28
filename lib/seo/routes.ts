@@ -186,8 +186,8 @@ const HIGH_VALUE_GUIDE_DRAFTS: SeoGuideDraft[] = [
     userPromise:
       "No-ticket Disney World planning should clearly separate Disney Springs, resort dining, resort recreation, and anything that actually requires park admission.",
     primaryAction: {
-      label: "Find no-ticket-friendly activities",
-      href: "/activities?ticket_required=false",
+      label: "Browse resort activities",
+      href: "/activities",
     },
     sections: [
       "Usually straightforward no-ticket ideas",
@@ -262,7 +262,7 @@ const HIGH_VALUE_GUIDE_DRAFTS: SeoGuideDraft[] = [
       "Plan Saratoga Springs, Old Key West, Port Orleans, and nearby Disney Springs-area resort activities with current access and transportation caveats.",
     userPromise:
       "Disney Springs-area resort plans work best when they are based on a resort stay, confirmed dining or experience reservation, rideshare, or another currently allowed direct route.",
-    primaryAction: { label: "Find no-ticket-friendly activities", href: "/activities?ticket_required=false" },
+    primaryAction: { label: "Browse resort activities", href: "/activities" },
     sections: [
       "Best Disney Springs-area resort ideas",
       "Access and reservation caveats",
@@ -437,10 +437,10 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "Do not frame Disney Springs as a free way to get to resort hotels; current reporting says resort stay or dining/experience reservation is required for Disney Springs resort buses and boats.",
     ],
     deepLinks: [
-      "/activities?ticket_required=false",
+      "/activities",
       "/activities?free=true",
-      "/today?ticket_required=false",
-      "/tonight?ticket_required=false",
+      "/today",
+      "/tonight",
       "/resorts",
       "/source-and-accuracy-policy",
     ],
@@ -573,7 +573,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
     ],
     deepLinks: [
       "/activities?area=disney-springs",
-      "/activities?ticket_required=false",
+      "/activities",
       "/resorts",
       "/guides/things-to-do-without-park-ticket",
       "/source-and-accuracy-policy",

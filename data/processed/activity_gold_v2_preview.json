@@ -272,7 +272,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -569,7 +569,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -1276,13 +1276,14 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -1579,7 +1580,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-movies-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "b5ef005c06cbf0078fd286d9f2b51fb2c17c243241915e4e5fe8231489d5ee85",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -2126,7 +2127,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -2429,7 +2430,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -2730,7 +2731,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -3074,7 +3075,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -3997,7 +3998,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-music-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "2c1702b123815a4fc0e38fe31edd0ba3eee3960dc7bdea06e223b41e63866fbf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -4310,7 +4311,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -4631,7 +4632,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -4905,13 +4906,20 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Incredibles",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -5214,7 +5222,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -5515,7 +5523,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -5836,7 +5844,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -6115,7 +6123,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-sports-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d6578841db6633c7c26226ea7e0a6f465d8a786403bab702d8558639b60bb927",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -6649,7 +6657,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -7118,13 +7126,35 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Lilo & Stitch (2002)",
+        "show_time": "8:00pm"
+      },
+      {
+        "day_of_week": "monday",
+        "movie_title": "Meet the Robinsons",
+        "show_time": "8:00pm"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "Toy Story",
+        "show_time": "8:00pm"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "Wish",
+        "show_time": "8:00pm"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -7432,7 +7462,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-sports-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d6578841db6633c7c26226ea7e0a6f465d8a786403bab702d8558639b60bb927",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -7745,7 +7775,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -8066,7 +8096,7 @@
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -9456,7 +9486,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -9771,7 +9801,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -10070,7 +10100,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -10556,7 +10586,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -10847,7 +10877,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -11105,6 +11135,23 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "monday",
+        "movie_title": "Aladdin (1992)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "High School Musical 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "Moana Ps",
+        "show_time": "8:30PM"
+      }
+    ],
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -11530,7 +11577,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1dfe8e57ccfb0e0a75f9b2c1890360c2ed7b7689a7b0a4bcd9cac7a4de947c96",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -12738,7 +12785,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -13016,7 +13063,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -13359,7 +13406,7 @@
         "source_url": "https://www.magicalresortguide.com/akl-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1dfe8e57ccfb0e0a75f9b2c1890360c2ed7b7689a7b0a4bcd9cac7a4de947c96",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -13631,6 +13678,7 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "valid_from": "2026-05-26",
     "valid_until": "2026-09-08",
     "enrichment": {
@@ -14060,7 +14108,7 @@
         "source_url": "https://www.magicalresortguide.com/art-of-animation-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1376b94ef6a102ec4f0d61d98e20b1d374fb0b24fdd5f8b36e9b7216b5448c73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -14802,7 +14850,7 @@
         "source_url": "https://www.magicalresortguide.com/art-of-animation-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1376b94ef6a102ec4f0d61d98e20b1d374fb0b24fdd5f8b36e9b7216b5448c73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -15108,7 +15156,7 @@
         "source_url": "https://www.magicalresortguide.com/art-of-animation-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "6979e365561951ddc551f654b8f694a01e12cc8cd0f4fc44e478f5f7f72792d2",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -15426,7 +15474,7 @@
         "source_url": "https://www.magicalresortguide.com/art-of-animation-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "6979e365561951ddc551f654b8f694a01e12cc8cd0f4fc44e478f5f7f72792d2",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -15725,7 +15773,7 @@
         "source_url": "https://www.magicalresortguide.com/art-of-animation-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "6979e365561951ddc551f654b8f694a01e12cc8cd0f4fc44e478f5f7f72792d2",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -16011,7 +16059,7 @@
         "source_url": "https://www.magicalresortguide.com/art-of-animation-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1376b94ef6a102ec4f0d61d98e20b1d374fb0b24fdd5f8b36e9b7216b5448c73",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -16309,13 +16357,20 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "monday",
+        "movie_title": "The Many Adventures of Winnie the Pooh",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/art-of-animation-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "6979e365561951ddc551f654b8f694a01e12cc8cd0f4fc44e478f5f7f72792d2",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -16798,7 +16853,7 @@
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "19df4f9dedfc72ed50d95b0b886493287bfffb95d76d03bcc36b8f2b59027081",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -17712,7 +17767,7 @@
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -17986,13 +18041,35 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Toy Story 4",
+        "show_time": "7:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "The Little Mermaid (1989)",
+        "show_time": "7:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Lilo & Stitch (2002)",
+        "show_time": "7:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Luca",
+        "show_time": "7:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -18523,7 +18600,7 @@
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "19df4f9dedfc72ed50d95b0b886493287bfffb95d76d03bcc36b8f2b59027081",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -18850,7 +18927,7 @@
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -19155,7 +19232,7 @@
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -19446,7 +19523,7 @@
     }
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:side-show-games-arcade",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:side-show-games-arcade",
     "activity_catalog_id": "4884c13f-1a09-d09a-6393-ea8013df2e3a",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -19476,10 +19553,10 @@
         "evidence": [
           {
             "page": 1,
-            "line": 3,
+            "line": 4,
             "bbox": [
-              912.0,
-              509.5,
+              912.5,
+              509.0,
               1582.0,
               540.5
             ],
@@ -19487,14 +19564,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
           }
         ]
       },
@@ -19548,10 +19625,10 @@
       "title": [
         {
           "page": 1,
-          "line": 3,
+          "line": 4,
           "bbox": [
-            912.0,
-            509.5,
+            912.5,
+            509.0,
             1582.0,
             540.5
           ],
@@ -19561,12 +19638,12 @@
       "schedule": [
         {
           "page": 1,
-          "line": 6,
+          "line": 7,
           "bbox": [
             912.5,
             554.5,
             1259.0,
-            576.5
+            576.0
           ],
           "text": "Daily from 8:00am-11:00pm"
         }
@@ -19574,10 +19651,10 @@
       "location": [
         {
           "page": 1,
-          "line": 3,
+          "line": 4,
           "bbox": [
-            912.0,
-            509.5,
+            912.5,
+            509.0,
             1582.0,
             540.5
           ],
@@ -19587,7 +19664,7 @@
       "description": [
         {
           "page": 1,
-          "line": 7,
+          "line": 8,
           "bbox": [
             913.0,
             588.5,
@@ -19600,10 +19677,10 @@
       "price": [
         {
           "page": 1,
-          "line": 3,
+          "line": 4,
           "bbox": [
-            912.0,
-            509.5,
+            912.5,
+            509.0,
             1582.0,
             540.5
           ],
@@ -19611,25 +19688,25 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -19638,14 +19715,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -19658,7 +19735,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "fbefa14920b6d2aa7b37a46665087e7b81eda5f2992b1616e9b3260928ad806e",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -19736,7 +19813,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:community-hall",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:community-hall",
     "activity_catalog_id": "0d31bcf7-1ca4-0372-5434-2605ff945566",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -19766,12 +19843,12 @@
         "evidence": [
           {
             "page": 1,
-            "line": 12,
+            "line": 13,
             "bbox": [
               913.0,
               734.0,
-              1513.5,
-              761.5
+              1513.0,
+              761.0
             ],
             "text": "Play video games and billiards, check out sporting",
             "field": "source_pdf_body_fee_language",
@@ -19779,7 +19856,7 @@
           },
           {
             "page": 1,
-            "line": 13,
+            "line": 14,
             "bbox": [
               911.5,
               770.5,
@@ -19792,7 +19869,7 @@
           },
           {
             "page": 1,
-            "line": 14,
+            "line": 15,
             "bbox": [
               911.0,
               807.0,
@@ -19805,12 +19882,12 @@
           },
           {
             "page": 1,
-            "line": 16,
+            "line": 17,
             "bbox": [
               910.5,
               843.5,
               1403.5,
-              864.5
+              864.0
             ],
             "text": "before checkout for ceramics and mosaics.",
             "field": "source_pdf_body_fee_language",
@@ -19851,12 +19928,12 @@
       "title": [
         {
           "page": 1,
-          "line": 8,
+          "line": 9,
           "bbox": [
             912.5,
             656.5,
-            1292.0,
-            682.0
+            1292.5,
+            681.5
           ],
           "text": "COMMUNITY HALL"
         }
@@ -19864,11 +19941,11 @@
       "schedule": [
         {
           "page": 1,
-          "line": 9,
+          "line": 10,
           "bbox": [
             912.5,
             700.0,
-            1279.0,
+            1279.5,
             721.5
           ],
           "text": "Daily from 10:00am-10:00pm"
@@ -19877,12 +19954,12 @@
       "location": [
         {
           "page": 1,
-          "line": 8,
+          "line": 9,
           "bbox": [
             912.5,
             656.5,
-            1292.0,
-            682.0
+            1292.5,
+            681.5
           ],
           "text": "COMMUNITY HALL"
         }
@@ -19890,18 +19967,18 @@
       "description": [
         {
           "page": 1,
-          "line": 12,
+          "line": 13,
           "bbox": [
             913.0,
             734.0,
-            1513.5,
-            761.5
+            1513.0,
+            761.0
           ],
           "text": "Play video games and billiards, check out sporting"
         },
         {
           "page": 1,
-          "line": 13,
+          "line": 14,
           "bbox": [
             911.5,
             770.5,
@@ -19912,7 +19989,7 @@
         },
         {
           "page": 1,
-          "line": 14,
+          "line": 15,
           "bbox": [
             911.0,
             807.0,
@@ -19923,12 +20000,12 @@
         },
         {
           "page": 1,
-          "line": 16,
+          "line": 17,
           "bbox": [
             910.5,
             843.5,
             1403.5,
-            864.5
+            864.0
           ],
           "text": "before checkout for ceramics and mosaics."
         }
@@ -19936,12 +20013,12 @@
       "price": [
         {
           "page": 1,
-          "line": 12,
+          "line": 13,
           "bbox": [
             913.0,
             734.0,
-            1513.5,
-            761.5
+            1513.0,
+            761.0
           ],
           "text": "Play video games and billiards, check out sporting",
           "field": "source_pdf_body_fee_language",
@@ -19949,7 +20026,7 @@
         },
         {
           "page": 1,
-          "line": 13,
+          "line": 14,
           "bbox": [
             911.5,
             770.5,
@@ -19962,7 +20039,7 @@
         },
         {
           "page": 1,
-          "line": 14,
+          "line": 15,
           "bbox": [
             911.0,
             807.0,
@@ -19975,12 +20052,12 @@
         },
         {
           "page": 1,
-          "line": 16,
+          "line": 17,
           "bbox": [
             910.5,
             843.5,
             1403.5,
-            864.5
+            864.0
           ],
           "text": "before checkout for ceramics and mosaics.",
           "field": "source_pdf_body_fee_language",
@@ -19988,14 +20065,14 @@
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -20004,14 +20081,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -20027,7 +20104,7 @@
     }
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:boardwalk-croquet",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:boardwalk-croquet",
     "activity_catalog_id": "d0bf8c1a-e577-33ac-c1e2-7182395cb29f",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -20057,11 +20134,11 @@
         "evidence": [
           {
             "page": 1,
-            "line": 15,
+            "line": 16,
             "bbox": [
               160.0,
-              813.0,
-              648.5,
+              813.5,
+              648.0,
               838.5
             ],
             "text": "BOARDWALK CROQUET (no ($) marker)",
@@ -20070,14 +20147,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -20132,11 +20209,11 @@
       "title": [
         {
           "page": 1,
-          "line": 15,
+          "line": 16,
           "bbox": [
             160.0,
-            813.0,
-            648.5,
+            813.5,
+            648.0,
             838.5
           ],
           "text": "BOARDWALK CROQUET"
@@ -20145,12 +20222,12 @@
       "schedule": [
         {
           "page": 1,
-          "line": 18,
+          "line": 19,
           "bbox": [
             159.0,
-            888.5,
+            888.0,
             466.5,
-            909.5
+            910.0
           ],
           "text": "Daily from Dawn to Dusk"
         }
@@ -20158,7 +20235,7 @@
       "location": [
         {
           "page": 1,
-          "line": 17,
+          "line": 18,
           "bbox": [
             158.0,
             855.0,
@@ -20171,24 +20248,24 @@
       "description": [
         {
           "page": 1,
-          "line": 20,
+          "line": 21,
           "bbox": [
-            159.5,
+            159.0,
             919.5,
-            765.5,
+            766.0,
             947.0
           ],
-          "text": "Enjoy a friendly game of croquet on our lush lawn."
+          "text": "Enjoy a friendly game of croquet on our Lush lawn."
         }
       ],
       "price": [
         {
           "page": 1,
-          "line": 15,
+          "line": 16,
           "bbox": [
             160.0,
-            813.0,
-            648.5,
+            813.5,
+            648.0,
             838.5
           ],
           "text": "BOARDWALK CROQUET (no ($) marker)",
@@ -20197,27 +20274,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -20226,14 +20303,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -20246,7 +20323,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -20318,7 +20395,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:mickey-tie-dye",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:mickey-tie-dye",
     "activity_catalog_id": "c182ed5e-c8cc-b767-45d0-edddfe6aace3",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -20352,7 +20429,7 @@
         "evidence": [
           {
             "page": 1,
-            "line": 28,
+            "line": 29,
             "bbox": [
               913.5,
               1128.5,
@@ -20363,14 +20440,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
           }
         ]
       },
@@ -20424,7 +20501,7 @@
       "title": [
         {
           "page": 1,
-          "line": 28,
+          "line": 29,
           "bbox": [
             913.5,
             1128.5,
@@ -20440,7 +20517,7 @@
           "line": 32,
           "bbox": [
             911.5,
-            1210.5,
+            1210.0,
             1417.0,
             1231.5
           ],
@@ -20448,9 +20525,9 @@
         },
         {
           "page": 1,
-          "line": 33,
+          "line": 34,
           "bbox": [
-            911.0,
+            911.5,
             1246.5,
             1187.0,
             1268.0
@@ -20461,10 +20538,10 @@
       "location": [
         {
           "page": 1,
-          "line": 30,
+          "line": 31,
           "bbox": [
             912.5,
-            1173.5,
+            1174.0,
             1167.5,
             1191.5
           ],
@@ -20474,10 +20551,10 @@
       "description": [
         {
           "page": 1,
-          "line": 35,
+          "line": 36,
           "bbox": [
-            911.5,
-            1280.0,
+            912.0,
+            1280.5,
             1622.0,
             1308.0
           ],
@@ -20487,7 +20564,7 @@
       "price": [
         {
           "page": 1,
-          "line": 28,
+          "line": 29,
           "bbox": [
             913.5,
             1128.5,
@@ -20498,25 +20575,25 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -20525,14 +20602,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -20545,7 +20622,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "fbefa14920b6d2aa7b37a46665087e7b81eda5f2992b1616e9b3260928ad806e",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -20622,7 +20699,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:family-wellness-yoga",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:family-wellness-yoga",
     "activity_catalog_id": "2ba2cd61-3ee1-9314-81da-f9489625e9fa",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -20652,10 +20729,10 @@
         "evidence": [
           {
             "page": 1,
-            "line": 31,
+            "line": 33,
             "bbox": [
               160.0,
-              1210.5,
+              1211.0,
               686.0,
               1236.0
             ],
@@ -20665,14 +20742,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -20727,10 +20804,10 @@
       "title": [
         {
           "page": 1,
-          "line": 31,
+          "line": 33,
           "bbox": [
             160.0,
-            1210.5,
+            1211.0,
             686.0,
             1236.0
           ],
@@ -20740,12 +20817,12 @@
       "schedule": [
         {
           "page": 1,
-          "line": 36,
+          "line": 37,
           "bbox": [
             158.0,
-            1286.5,
+            1286.0,
             438.0,
-            1307.5
+            1307.0
           ],
           "text": "Wednesday at 9:00am"
         }
@@ -20753,12 +20830,12 @@
       "location": [
         {
           "page": 1,
-          "line": 34,
+          "line": 35,
           "bbox": [
             157.5,
             1252.0,
             397.5,
-            1273.5
+            1273.0
           ],
           "text": "Village Green Lawn"
         }
@@ -20766,7 +20843,7 @@
       "description": [
         {
           "page": 1,
-          "line": 37,
+          "line": 38,
           "bbox": [
             158.0,
             1317.0,
@@ -20777,12 +20854,12 @@
         },
         {
           "page": 1,
-          "line": 38,
+          "line": 39,
           "bbox": [
             158.5,
-            1345.0,
-            399.0,
-            1380.5
+            1345.5,
+            399.5,
+            1381.0
           ],
           "text": "by our Disney friends."
         }
@@ -20790,10 +20867,10 @@
       "price": [
         {
           "page": 1,
-          "line": 31,
+          "line": 33,
           "bbox": [
             160.0,
-            1210.5,
+            1211.0,
             686.0,
             1236.0
           ],
@@ -20803,27 +20880,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -20832,14 +20909,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -20852,7 +20929,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -20926,7 +21003,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:arts-crafts",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:arts-crafts",
     "activity_catalog_id": "4fc3fb59-d89e-c3f9-3001-023f3e994b42",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -20938,7 +21015,7 @@
     "category": "arts_crafts",
     "section": "Resort Activities",
     "schedule": {
-      "text": "Monday, Wednesday, and Friday from 4:00pm-5:00pm",
+      "text": "Monday, Wednesday and Friday from 4:00pm-5:00pm",
       "start_time": "4:00pm",
       "end_time": "5:00pm"
     },
@@ -20956,25 +21033,25 @@
         "evidence": [
           {
             "page": 1,
-            "line": 39,
+            "line": 40,
             "bbox": [
               911.5,
-              1347.0,
-              1319.5,
+              1346.5,
+              1320.0,
               1378.0
             ],
             "text": "ARTS & CRAFTS ($)"
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
           }
         ]
       },
@@ -21011,11 +21088,11 @@
       "title": [
         {
           "page": 1,
-          "line": 39,
+          "line": 40,
           "bbox": [
             911.5,
-            1347.0,
-            1319.5,
+            1346.5,
+            1320.0,
             1378.0
           ],
           "text": "ARTS & CRAFTS ($)"
@@ -21024,23 +21101,23 @@
       "schedule": [
         {
           "page": 1,
-          "line": 42,
+          "line": 43,
           "bbox": [
             912.5,
             1428.5,
-            1598.0,
+            1592.0,
             1450.0
           ],
-          "text": "Monday, Wednesday, and Friday from 4:00pm-5:00pm"
+          "text": "Monday, Wednesday and Friday from 4:00pm-5:00pm"
         }
       ],
       "location": [
         {
           "page": 1,
-          "line": 40,
+          "line": 41,
           "bbox": [
-            911.0,
-            1392.5,
+            911.5,
+            1392.0,
             1151.0,
             1413.5
           ],
@@ -21050,12 +21127,12 @@
       "description": [
         {
           "page": 1,
-          "line": 44,
+          "line": 45,
           "bbox": [
             911.0,
-            1462.0,
+            1462.5,
             1403.0,
-            1489.5
+            1490.0
           ],
           "text": "Join us for family-friendly arts and crafts."
         }
@@ -21063,36 +21140,36 @@
       "price": [
         {
           "page": 1,
-          "line": 39,
+          "line": 40,
           "bbox": [
             911.5,
-            1347.0,
-            1319.5,
+            1346.5,
+            1320.0,
             1378.0
           ],
           "text": "ARTS & CRAFTS ($)"
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -21101,14 +21178,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -21124,7 +21201,7 @@
     }
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:pickleball-clinic",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:pickleball-clinic",
     "activity_catalog_id": "701124f3-9220-a4f6-85c7-fcaba8b486fb",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -21154,10 +21231,10 @@
         "evidence": [
           {
             "page": 1,
-            "line": 41,
+            "line": 42,
             "bbox": [
               160.0,
-              1409.5,
+              1410.0,
               571.5,
               1435.0
             ],
@@ -21167,14 +21244,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -21230,10 +21307,10 @@
       "title": [
         {
           "page": 1,
-          "line": 41,
+          "line": 42,
           "bbox": [
             160.0,
-            1409.5,
+            1410.0,
             571.5,
             1435.0
           ],
@@ -21243,7 +21320,7 @@
       "schedule": [
         {
           "page": 1,
-          "line": 47,
+          "line": 46,
           "bbox": [
             159.0,
             1484.5,
@@ -21256,12 +21333,12 @@
       "location": [
         {
           "page": 1,
-          "line": 43,
+          "line": 44,
           "bbox": [
             159.0,
-            1450.5,
-            640.0,
-            1468.5
+            1451.0,
+            640.5,
+            1469.0
           ],
           "text": "BoardWalk Tennis and Pickleball Court"
         }
@@ -21269,18 +21346,18 @@
       "description": [
         {
           "page": 1,
-          "line": 48,
+          "line": 47,
           "bbox": [
             157.0,
-            1514.0,
+            1516.0,
             756.0,
-            1557.0
+            1543.5
           ],
           "text": "This complimentary introduction to pickleball will"
         },
         {
           "page": 1,
-          "line": 50,
+          "line": 49,
           "bbox": [
             157.0,
             1550.0,
@@ -21291,18 +21368,18 @@
         },
         {
           "page": 1,
-          "line": 52,
+          "line": 51,
           "bbox": [
             158.0,
             1584.0,
-            746.0,
+            745.5,
             1611.0
           ],
           "text": "about. Learn skills and techniques, then compete"
         },
         {
           "page": 1,
-          "line": 54,
+          "line": 53,
           "bbox": [
             158.5,
             1618.0,
@@ -21313,7 +21390,7 @@
         },
         {
           "page": 1,
-          "line": 56,
+          "line": 55,
           "bbox": [
             157.5,
             1652.0,
@@ -21326,10 +21403,10 @@
       "price": [
         {
           "page": 1,
-          "line": 41,
+          "line": 42,
           "bbox": [
             160.0,
-            1409.5,
+            1410.0,
             571.5,
             1435.0
           ],
@@ -21339,27 +21416,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -21368,14 +21445,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -21388,7 +21465,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -21465,7 +21542,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:campfire",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:campfire",
     "activity_catalog_id": "7d7f77a8-43d7-6998-b6f5-d94664d495fb",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -21477,9 +21554,9 @@
     "category": "campfire",
     "section": "Resort Activities",
     "schedule": {
-      "text": "Nightly from 6:00pm-7:00pm",
+      "text": "Nightly from 6:00pm-7:30pm",
       "start_time": "6:00pm",
-      "end_time": "7:00pm"
+      "end_time": "7:30pm"
     },
     "location": {
       "label": "Village Green Lawn"
@@ -21508,27 +21585,27 @@
         "evidence": [
           {
             "page": 1,
-            "line": 49,
+            "line": 48,
             "bbox": [
               912.5,
               1530.5,
               1123.0,
-              1555.5
+              1577.5
             ],
-            "text": "CAMPFIRE (no ($) marker)",
+            "text": "CA MPFIRE (no ($) marker)",
             "field": "source_pdf_fee_marker_absent",
             "source": "pdf_layout"
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -21583,36 +21660,36 @@
       "title": [
         {
           "page": 1,
-          "line": 49,
+          "line": 48,
           "bbox": [
             912.5,
             1530.5,
             1123.0,
-            1555.5
+            1577.5
           ],
-          "text": "CAMPFIRE"
+          "text": "CA MPFIRE"
         }
       ],
       "schedule": [
         {
           "page": 1,
-          "line": 53,
+          "line": 52,
           "bbox": [
             912.5,
-            1609.0,
-            1282.5,
-            1652.0
+            1608.5,
+            1279.5,
+            1651.5
           ],
-          "text": "Nightly from 6:00pm-7:00pm"
+          "text": "Nightly from 6:00pm-7:30pm"
         }
       ],
       "location": [
         {
           "page": 1,
-          "line": 51,
+          "line": 50,
           "bbox": [
-            911.0,
-            1574.5,
+            911.5,
+            1574.0,
             1151.0,
             1614.0
           ],
@@ -21622,7 +21699,7 @@
       "description": [
         {
           "page": 1,
-          "line": 55,
+          "line": 54,
           "bbox": [
             913.0,
             1644.5,
@@ -21633,11 +21710,11 @@
         },
         {
           "page": 1,
-          "line": 57,
+          "line": 56,
           "bbox": [
             912.5,
             1681.0,
-            1505.0,
+            1504.5,
             1708.0
           ],
           "text": "marshmallows. S’mores kits available for purchase."
@@ -21646,27 +21723,27 @@
       "price": [
         {
           "page": 1,
-          "line": 49,
+          "line": 48,
           "bbox": [
             912.5,
             1530.5,
             1123.0,
-            1555.5
+            1577.5
           ],
-          "text": "CAMPFIRE (no ($) marker)",
+          "text": "CA MPFIRE (no ($) marker)",
           "field": "source_pdf_fee_marker_absent",
           "source": "pdf_layout"
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         },
@@ -21677,14 +21754,14 @@
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -21693,14 +21770,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -21713,7 +21790,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -21786,7 +21863,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:nighttime-trivia",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:nighttime-trivia",
     "activity_catalog_id": "95476b5a-fcfa-3da5-d607-d6d038b1f247",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -21798,8 +21875,8 @@
     "category": "other",
     "section": "Resort Activities",
     "schedule": {
-      "text": "Nightly at 7:30",
-      "start_time": null,
+      "text": "Nightly at 8:00pm",
+      "start_time": "8:00pm",
       "end_time": null
     },
     "location": {
@@ -21816,12 +21893,12 @@
         "evidence": [
           {
             "page": 1,
-            "line": 60,
+            "line": 59,
             "bbox": [
               913.5,
               1749.0,
               1300.5,
-              1774.5
+              1774.0
             ],
             "text": "NIGHTTIME TRIVIA (no ($) marker)",
             "field": "source_pdf_fee_marker_absent",
@@ -21829,14 +21906,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -21891,12 +21968,12 @@
       "title": [
         {
           "page": 1,
-          "line": 60,
+          "line": 59,
           "bbox": [
             913.5,
             1749.0,
             1300.5,
-            1774.5
+            1774.0
           ],
           "text": "NIGHTTIME TRIVIA"
         }
@@ -21904,22 +21981,22 @@
       "schedule": [
         {
           "page": 1,
-          "line": 64,
+          "line": 63,
           "bbox": [
             912.5,
-            1829.5,
-            1095.0,
+            1829.0,
+            1138.5,
             1850.5
           ],
-          "text": "Nightly at 7:30"
+          "text": "Nightly at 8:00pm"
         }
       ],
       "location": [
         {
           "page": 1,
-          "line": 62,
+          "line": 61,
           "bbox": [
-            911.0,
+            911.5,
             1793.0,
             1151.0,
             1814.0
@@ -21930,12 +22007,12 @@
       "description": [
         {
           "page": 1,
-          "line": 66,
+          "line": 65,
           "bbox": [
             911.0,
             1863.0,
             1256.0,
-            1890.5
+            1890.0
           ],
           "text": "Join us for a trivia challenge."
         }
@@ -21943,12 +22020,12 @@
       "price": [
         {
           "page": 1,
-          "line": 60,
+          "line": 59,
           "bbox": [
             913.5,
             1749.0,
             1300.5,
-            1774.5
+            1774.0
           ],
           "text": "NIGHTTIME TRIVIA (no ($) marker)",
           "field": "source_pdf_fee_marker_absent",
@@ -21956,27 +22033,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -21985,27 +22062,27 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
       ]
     },
-    "trust_state": "confirm_before_going",
+    "trust_state": "source_backed",
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -22077,7 +22154,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:movie-under-the-stars",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:movie-under-the-stars:reviewed_manual",
     "activity_catalog_id": "850fc5b5-2a93-8900-fd39-cf212a459deb",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -22089,8 +22166,8 @@
     "category": "movies_under_stars",
     "section": "Movie Under the Stars",
     "schedule": {
-      "text": "Village Green Lawn | 8:00PM",
-      "start_time": "8:00pm",
+      "text": "Village Green Lawn | 8:30PM",
+      "start_time": "8:30pm",
       "end_time": null
     },
     "location": {
@@ -22107,7 +22184,7 @@
         "evidence": [
           {
             "page": 1,
-            "line": 69,
+            "line": 68,
             "bbox": [
               913.5,
               1955.0,
@@ -22120,14 +22197,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -22182,7 +22259,7 @@
       "title": [
         {
           "page": 1,
-          "line": 69,
+          "line": 68,
           "bbox": [
             913.5,
             1955.0,
@@ -22195,34 +22272,34 @@
       "schedule": [
         {
           "page": 1,
-          "line": 70,
+          "line": 69,
           "bbox": [
             911.0,
-            2026.0,
-            1428.5,
-            2052.5
+            2024.0,
+            1425.0,
+            2058.0
           ],
-          "text": "VILLAGE GREEN LAWN | 8:00PM"
+          "text": "VILLAGE GREEN LAWN | 8:30PM"
         }
       ],
       "location": [
         {
           "page": 1,
-          "line": 70,
+          "line": 69,
           "bbox": [
             911.0,
-            2026.0,
-            1428.5,
-            2052.5
+            2024.0,
+            1425.0,
+            2058.0
           ],
-          "text": "VILLAGE GREEN LAWN | 8:00PM"
+          "text": "VILLAGE GREEN LAWN | 8:30PM"
         }
       ],
       "description": [],
       "price": [
         {
           "page": 1,
-          "line": 69,
+          "line": 68,
           "bbox": [
             913.5,
             1955.0,
@@ -22235,27 +22312,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -22264,27 +22341,64 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "Beauty and the Beast (1991)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "monday",
+        "movie_title": "Moana",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "The Lion King (1994)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "Toy Story 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Mulan (1998)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "Monsters, Inc.",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Finding Nemo",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -22359,7 +22473,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:poolside-activities:reviewed_manual",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:poolside-activities:reviewed_manual",
     "activity_catalog_id": "8e1583bc-6b25-58b2-1016-ff5d4efb9a25",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -22371,8 +22485,8 @@
     "category": "poolside",
     "section": "Resort Activities",
     "schedule": {
-      "text": "Activities schedule available digitally; no posted time in PDF",
-      "start_time": null,
+      "text": "Daily at 1:30pm",
+      "start_time": "1:30pm",
       "end_time": null
     },
     "location": {
@@ -22396,14 +22510,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -22466,12 +22580,12 @@
         {
           "page": 1,
           "bbox": [
-            380,
-            1275,
-            2560,
-            1455
+            910,
+            1030,
+            1375,
+            1085
           ],
-          "text": "SCAN THIS QR CODE AND SELECT ACTIVITIES SCHEDULE TO VIEW THIS INFORMATION DIGITALLY!",
+          "text": "Daily at 1:30pm",
           "source": "manual_visual_bbox"
         }
       ],
@@ -22504,27 +22618,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -22533,27 +22647,27 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
       ]
     },
-    "trust_state": "confirm_before_going",
+    "trust_state": "source_backed",
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -22625,7 +22739,7 @@
     "valid_until": "2026-09-08"
   },
   {
-    "candidate_id": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b:boardwalk:crescent-lake-wellness-challenge:reviewed_manual",
+    "candidate_id": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d:boardwalk:crescent-lake-wellness-challenge:reviewed_manual",
     "activity_catalog_id": "fa428e63-8fd2-68f0-ad51-cdd275a7f06a",
     "calendar_group_key": "boardwalk",
     "resort_slugs": [
@@ -22662,14 +22776,14 @@
           },
           {
             "page": 1,
-            "line": 93,
+            "line": 88,
             "bbox": [
               113.5,
-              2490.0,
+              2490.5,
               1615.5,
-              2509.0
+              2509.5
             ],
-            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+            "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
             "field": "source_pdf_fee_legend",
             "source": "pdf_layout"
           }
@@ -22788,27 +22902,27 @@
         },
         {
           "page": 1,
-          "line": 93,
+          "line": 88,
           "bbox": [
             113.5,
-            2490.0,
+            2490.5,
             1615.5,
-            2509.0
+            2509.5
           ],
-          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526",
           "field": "source_pdf_fee_legend",
           "source": "pdf_layout"
         }
       ]
     },
-    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "source_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-    "source_pdf_edition": "fy26-q2-0326",
+    "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "source_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "source_pdf_edition": "fy26-q3-0526",
     "source": {
-      "path": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "documentHash": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
-      "edition": "fy26-q2-0326",
+      "path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "documentHash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "edition": "fy26-q3-0526",
       "documentKeyLegends": [
         {
           "kind": "fee",
@@ -22817,14 +22931,14 @@
           "spans": [
             {
               "page": 1,
-              "line": 93,
+              "line": 88,
               "bbox": [
                 113.5,
-                2490.0,
+                2490.5,
                 1615.5,
-                2509.0
+                2509.5
               ],
-              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0326"
+              "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. 0526"
             }
           ]
         }
@@ -22837,7 +22951,7 @@
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -23577,7 +23691,7 @@
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "456ff20d4f3ac6c061084a826e39cc354b7fa67de2a08dc026e6918fc287dba6",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -23907,7 +24021,7 @@
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "02524648ce3aa42a6bea4f2bb1322b4f61a6713eb008c017d4e3b2464ca920fd",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -24184,13 +24298,20 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Brave",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "456ff20d4f3ac6c061084a826e39cc354b7fa67de2a08dc026e6918fc287dba6",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -24496,7 +24617,7 @@
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "02524648ce3aa42a6bea4f2bb1322b4f61a6713eb008c017d4e3b2464ca920fd",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -24819,7 +24940,7 @@
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "456ff20d4f3ac6c061084a826e39cc354b7fa67de2a08dc026e6918fc287dba6",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -25712,7 +25833,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "f8f6996df8c8f3f93c76a6727def1b9e1f7e4c888a46b2a56a21e2af0ea96805",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -26068,7 +26189,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -26594,7 +26715,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "f8f6996df8c8f3f93c76a6727def1b9e1f7e4c888a46b2a56a21e2af0ea96805",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -26947,7 +27068,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -27285,7 +27406,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -27599,7 +27720,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -28133,13 +28254,30 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "Frozen 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "A Goofy Movie",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "The Little Mermaid (1989)",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -28474,7 +28612,7 @@
         "source_url": "https://www.magicalresortguide.com/contemporary-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "f8f6996df8c8f3f93c76a6727def1b9e1f7e4c888a46b2a56a21e2af0ea96805",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -29035,7 +29173,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -29545,7 +29683,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -29828,7 +29966,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -30332,13 +30470,20 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "/he Many Adventures of Winnie the Pooh",
+        "show_time": "8:00PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -30629,7 +30774,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -31076,7 +31221,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d8367eda56f144f174c61753594c1535a3671feb81f2f147c3f658c6a1c4f17a",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -31386,7 +31531,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d8367eda56f144f174c61753594c1535a3671feb81f2f147c3f658c6a1c4f17a",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -31782,7 +31927,7 @@
         "source_url": "https://www.magicalresortguide.com/coronado-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d8367eda56f144f174c61753594c1535a3671feb81f2f147c3f658c6a1c4f17a",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -32002,7 +32147,7 @@
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -32347,7 +32492,7 @@
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "ed01057e56234ecf315e886242cf426301116d69eac874b0ec6d782a38691e72",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -33516,7 +33661,7 @@
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -34028,13 +34173,14 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -34565,7 +34711,7 @@
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -35072,7 +35218,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -35379,7 +35525,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -35701,7 +35847,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -36011,7 +36157,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "86bc38f9c3956580c2edb605bf445d5a673b49b53dd09679732dd59375bfab6d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -36328,7 +36474,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -36647,7 +36793,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -36971,7 +37117,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -37300,7 +37446,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -38031,7 +38177,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -38324,13 +38470,14 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -38653,7 +38800,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "86bc38f9c3956580c2edb605bf445d5a673b49b53dd09679732dd59375bfab6d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -38964,7 +39111,7 @@
         "source_url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "86bc38f9c3956580c2edb605bf445d5a673b49b53dd09679732dd59375bfab6d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -39271,7 +39418,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -39580,7 +39727,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -39882,7 +40029,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -40187,7 +40334,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "95736f1de17b96c1e5686115adcc2ef3cb99141f5889d3f555134e5a3eb0af61",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -40520,7 +40667,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "95736f1de17b96c1e5686115adcc2ef3cb99141f5889d3f555134e5a3eb0af61",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -40815,7 +40962,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -41088,13 +41235,14 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -41367,7 +41515,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -41687,7 +41835,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -41990,7 +42138,7 @@
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -42284,7 +42432,7 @@
         "source_url": "https://www.magicalresortguide.com/pop-century-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "13c16285a316c1fbbd42c85cc4c66bf334f7d8255584d36ebffe7d9c7f1d0538",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -43026,7 +43174,7 @@
         "source_url": "https://www.magicalresortguide.com/pop-century-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "13c16285a316c1fbbd42c85cc4c66bf334f7d8255584d36ebffe7d9c7f1d0538",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -43360,7 +43508,7 @@
         "source_url": "https://www.magicalresortguide.com/pop-century-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "13c16285a316c1fbbd42c85cc4c66bf334f7d8255584d36ebffe7d9c7f1d0538",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -43636,13 +43784,14 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pop-century-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "046a03b8b261d127c6e090b0f315b0b4ebfecb237c6da82dd5cf646da9b9d74d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -43962,7 +44111,7 @@
         "source_url": "https://www.magicalresortguide.com/pop-century-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "046a03b8b261d127c6e090b0f315b0b4ebfecb237c6da82dd5cf646da9b9d74d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -44480,7 +44629,7 @@
         "source_url": "https://www.magicalresortguide.com/pop-century-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "046a03b8b261d127c6e090b0f315b0b4ebfecb237c6da82dd5cf646da9b9d74d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -44759,7 +44908,7 @@
         "source_url": "https://www.magicalresortguide.com/pop-century-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "13c16285a316c1fbbd42c85cc4c66bf334f7d8255584d36ebffe7d9c7f1d0538",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -45563,7 +45712,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -45883,7 +46032,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "629828e1d1b5f52b670b98cbe027f307caa0419a5723e37f3c039ea199025f22",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -46190,7 +46339,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "629828e1d1b5f52b670b98cbe027f307caa0419a5723e37f3c039ea199025f22",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -46528,7 +46677,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "629828e1d1b5f52b670b98cbe027f307caa0419a5723e37f3c039ea199025f22",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -46864,7 +47013,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -47156,7 +47305,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -47446,7 +47595,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -47706,7 +47855,7 @@
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -48719,7 +48868,7 @@
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -48971,7 +49120,7 @@
         "source_url": "https://www.magicalresortguide.com/por-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "c6c13696ebabd7091380e92bb3d081f88a5ff309f49195938b0daf5b7bb0a8c3",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -49267,7 +49416,7 @@
         "source_url": "https://www.magicalresortguide.com/por-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "c6c13696ebabd7091380e92bb3d081f88a5ff309f49195938b0daf5b7bb0a8c3",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -49531,13 +49680,14 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -49816,7 +49966,7 @@
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -50050,7 +50200,7 @@
         "source_url": "https://www.magicalresortguide.com/por-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "c6c13696ebabd7091380e92bb3d081f88a5ff309f49195938b0daf5b7bb0a8c3",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -50604,7 +50754,7 @@
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -50907,7 +51057,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -51202,7 +51352,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -51490,7 +51640,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -51808,7 +51958,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -52130,7 +52280,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1329d5a4be1fd1331d14c0d8a5a6ce66ce0c3a501a316350a55f412bea999427",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -52450,7 +52600,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -52761,7 +52911,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -53032,13 +53182,20 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "friday",
+        "movie_title": "Or Zootopia 2",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -53362,7 +53519,7 @@
         "source_url": "https://www.magicalresortguide.com/riviera-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "1329d5a4be1fd1331d14c0d8a5a6ce66ce0c3a501a316350a55f412bea999427",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -54349,7 +54506,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -54661,7 +54818,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -54971,7 +55128,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -55270,7 +55427,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d45ab3d71c236f37e573e26466caa52ffbfa9f732f472e420e6a895ba580f568",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -55821,7 +55978,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -56111,7 +56268,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -56619,7 +56776,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -56891,13 +57048,30 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "monday",
+        "movie_title": "Lilo & Stitch (2025) [Pe",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "wednesday",
+        "movie_title": "Moana [",
+        "show_time": "8:30pm"
+      },
+      {
+        "day_of_week": "friday",
+        "movie_title": "Zootopia or Zootopia 2",
+        "show_time": "8:30pm"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -57460,7 +57634,7 @@
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "d45ab3d71c236f37e573e26466caa52ffbfa9f732f472e420e6a895ba580f568",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -58521,7 +58695,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "84650fc4a7354e5ade70532f95b36915a4de5a82788e1f0a71b3de56cf2db243",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -58841,7 +59015,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -59158,7 +59332,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -59494,7 +59668,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -59797,7 +59971,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
         "source_content_sha256": "84650fc4a7354e5ade70532f95b36915a4de5a82788e1f0a71b3de56cf2db243",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -60377,7 +60551,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -60719,7 +60893,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -60994,13 +61168,35 @@
       ]
     },
     "trust_state": "source_backed",
+    "movie_nights": [
+      {
+        "day_of_week": "sunday",
+        "movie_title": "The Many Adventures of Winnie the Pooh",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "tuesday",
+        "movie_title": "The Little Mermaid (1989)",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "thursday",
+        "movie_title": "Frozen 2",
+        "show_time": "8:30PM"
+      },
+      {
+        "day_of_week": "saturday",
+        "movie_title": "Big Hero 6",
+        "show_time": "8:30PM"
+      }
+    ],
     "external_facts": [
       {
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -61306,7 +61502,7 @@
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
         "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-28T00:47:13.560992+00:00",
+        "fetched_at": "2026-06-28T13:27:59.031310+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",

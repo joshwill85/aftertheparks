@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 
 const ACTIONS = [
   { label: "Browse tonight", href: "/tonight", variant: "primary" as const },
@@ -9,6 +10,10 @@ const ACTIONS = [
 export function PlanEmptyState() {
   return (
     <section className="plan-empty journal-empty postcard-texture p-8 text-center md:p-12">
+      <BrandAsset
+        asset="pocket-map-only"
+        className="brand-asset--map-panel mx-auto"
+      />
       <div className="passport-stamp" aria-hidden>
         Rest Day
       </div>

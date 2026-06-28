@@ -31,6 +31,18 @@ export function ExploreLayout({
         resultCount={activities.length + officialOfferings.length}
         filterImpact={filterImpact}
       >
+        {(activities.length > 0 || officialOfferings.length === 0) && (
+          <div className={officialOfferings.length > 0 ? "results-grid mb-8" : "results-grid"}>
+            <ActivityGrid
+              activities={activities}
+              onSave={addActivity}
+              columns={2}
+              className="explore-activity-grid"
+              emptyMessage="No activities match your filters. Try broadening your search."
+            />
+          </div>
+        )}
+
         {officialOfferings.length > 0 && (
           <section
             id="official-offerings"
@@ -56,15 +68,6 @@ export function ExploreLayout({
             />
           </section>
         )}
-
-        <div className="results-grid">
-          <ActivityGrid
-            activities={activities}
-            onSave={addActivity}
-            columns={2}
-            emptyMessage="No activities match your filters. Try broadening your search."
-          />
-        </div>
       </BrowseFilterShell>
 
       <aside className="plan-rail-wrapper hidden min-[1280px]:block">

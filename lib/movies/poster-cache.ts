@@ -1,6 +1,11 @@
 import { createServiceClient } from "@/lib/supabase/server";
 import { normalizeMovieTitleKey, sanitizeMovieTitle } from "@/lib/movies/sanitize";
-import { searchTmdbMovie, tmdbImageUrl, type TmdbMovieResult } from "@/lib/movies/tmdb";
+import {
+  fetchTmdbMovieRuntime,
+  searchTmdbMovie,
+  tmdbImageUrl,
+  type TmdbMovieResult,
+} from "@/lib/movies/tmdb";
 
 export interface MoviePosterMeta {
   titleKey: string;
@@ -11,6 +16,7 @@ export interface MoviePosterMeta {
   tmdbId: number | null;
   overview: string | null;
   voteAverage: number | null;
+  runtimeMinutes: number | null;
   found: boolean;
 }
 
@@ -25,6 +31,7 @@ interface CacheRow {
   release_year: number | null;
   overview?: string | null;
   vote_average?: number | null;
+  runtime_minutes?: number | null;
   lookup_status: "found" | "not_found";
 }
 
@@ -68,6 +75,7 @@ function rowToMeta(row: CacheRow): MoviePosterMeta {
     tmdbId: row.tmdb_id,
     overview: row.overview ?? null,
     voteAverage: row.vote_average ?? null,
+    runtimeMinutes: row.runtime_minutes ?? null,
     found: row.lookup_status === "found",
   };
 }
@@ -89,8 +97,39 @@ function hitToMeta(titleKey: string, displayTitle: string, hit: TmdbMovieResult)
       typeof hit.vote_average === "number" && Number.isFinite(hit.vote_average)
         ? hit.vote_average
         : null,
+    runtimeMinutes:
+      typeof hit.runtime === "number" && Number.isFinite(hit.runtime)
+        ? hit.runtime
+        : null,
     found: Boolean(hit.poster_path),
   };
+}
+
+async function refreshRuntimeIfMissing(meta: MoviePosterMeta): Promise<MoviePosterMeta> {
+  if (meta.runtimeMinutes || !meta.tmdbId || !meta.found) return meta;
+
+  const runtimeMinutes = await fetchTmdbMovieRuntime(meta.tmdbId);
+  if (!runtimeMinutes) return meta;
+
+  const refreshed = { ...meta, runtimeMinutes };
+  memoryCache.set(meta.titleKey, refreshed);
+
+  if (await ensurePosterCacheDb()) {
+    const supabase = createServiceClient();
+    if (supabase) {
+      const { error } = await supabase
+        .from("movie_poster_cache")
+        .update({ runtime_minutes: runtimeMinutes })
+        .eq("title_key", meta.titleKey);
+      if (isMissingPosterCacheTable(error)) {
+        posterCacheDbAvailable = false;
+      } else if (error) {
+        console.error("movie_poster_cache runtime update:", error.message);
+      }
+    }
+  }
+
+  return refreshed;
 }
 
 async function getCachedPoster(titleKey: string): Promise<MoviePosterMeta | null> {
@@ -114,7 +153,7 @@ async function getCachedPoster(titleKey: string): Promise<MoviePosterMeta | null
 
   if (error || !data) return null;
 
-  const meta = rowToMeta(data as CacheRow);
+  const meta = await refreshRuntimeIfMissing(rowToMeta(data as CacheRow));
   memoryCache.set(titleKey, meta);
   return meta;
 }
@@ -138,6 +177,7 @@ export async function resolveMoviePoster(rawTitle: string): Promise<MoviePosterM
         tmdbId: null,
         overview: null,
         voteAverage: null,
+        runtimeMinutes: null,
         found: false,
       };
 
@@ -174,6 +214,10 @@ async function persistFromHit(
       vote_average:
         typeof hit?.vote_average === "number" && Number.isFinite(hit.vote_average)
           ? hit.vote_average
+          : null,
+      runtime_minutes:
+        typeof hit?.runtime === "number" && Number.isFinite(hit.runtime)
+          ? hit.runtime
           : null,
       lookup_status: hit?.poster_path ? "found" : "not_found",
       resolved_at: new Date().toISOString(),
@@ -227,7 +271,7 @@ export async function loadPostersForTitles(
       const dbKeys = new Set<string>();
 
       for (const row of data ?? []) {
-        const meta = rowToMeta(row as CacheRow);
+        const meta = await refreshRuntimeIfMissing(rowToMeta(row as CacheRow));
         memoryCache.set(meta.titleKey, meta);
         dbKeys.add(meta.titleKey);
         const item = toResolve.find((m) => m.key === meta.titleKey);

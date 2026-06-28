@@ -15,6 +15,7 @@ interface FilterSheetProps {
   basePath?: string;
   hideDaypart?: boolean;
   activeCount: number;
+  resultCount: number;
   filterImpact: FilterImpact;
   homeResortSlug?: string;
   onClearAll: () => void;
@@ -27,6 +28,7 @@ export function FilterSheet({
   basePath = "/activities",
   hideDaypart = false,
   activeCount,
+  resultCount,
   filterImpact,
   homeResortSlug,
   onClearAll,
@@ -103,19 +105,18 @@ export function FilterSheet({
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
-  const activeDuration = searchParams.get("duration");
   const activeNear = searchParams.get("near");
+  const activePreset = searchParams.get("preset");
   const activeTransport = searchParams.get("transport");
   const activeArea = searchParams.get("area");
   const activeWeather = searchParams.get("weather");
   const freeOnly = searchParams.get("free") === "true";
   const reservationOnly = searchParams.get("reservation") === "true";
-  const activeTicketRequired = searchParams.get("ticket_required");
 
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-50 min-[900px]:hidden">
+        <div className="fixed inset-0 z-[80] min-[900px]:hidden">
           <motion.button
             type="button"
             className="absolute inset-0 bg-black/40"
@@ -132,7 +133,7 @@ export function FilterSheet({
             aria-modal="true"
             aria-labelledby="filter-sheet-title"
             tabIndex={-1}
-            className="filter-sheet absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto overscroll-contain rounded-t-3xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 pb-10 shadow-2xl outline-none"
+            className="filter-sheet absolute inset-x-0 bottom-0 max-h-[85vh] rounded-t-3xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 shadow-2xl outline-none"
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
@@ -165,9 +166,6 @@ export function FilterSheet({
                 >
                   Clear all
                 </button>
-                <button type="button" onClick={onClose} className="btn-primary px-5 text-sm">
-                  Apply
-                </button>
                 <button
                   type="button"
                   onClick={onClose}
@@ -179,25 +177,35 @@ export function FilterSheet({
               </div>
             </div>
 
-            <FilterFields
-              resorts={resorts}
-              activeResort={activeResort}
-              activeCategory={activeCategory}
-              activeDaypart={activeDaypart}
-              activeDuration={activeDuration}
-              activeNear={activeNear}
-              activeTransport={activeTransport}
-              activeArea={activeArea}
-              activeWeather={activeWeather}
-              freeOnly={freeOnly}
-              reservationOnly={reservationOnly}
-              activeTicketRequired={activeTicketRequired}
-              hideDaypart={hideDaypart}
-              filterImpact={filterImpact}
-              homeResortSlug={homeResortSlug}
-              update={update}
-              searchableResorts
-            />
+            <div className="filter-sheet__body">
+              <FilterFields
+                resorts={resorts}
+                activeResort={activeResort}
+                activeCategory={activeCategory}
+                activeDaypart={activeDaypart}
+                activeNear={activeNear}
+                activePreset={activePreset}
+                activeTransport={activeTransport}
+                activeArea={activeArea}
+                activeWeather={activeWeather}
+                freeOnly={freeOnly}
+                reservationOnly={reservationOnly}
+                hideDaypart={hideDaypart}
+                filterImpact={filterImpact}
+                homeResortSlug={homeResortSlug}
+                update={update}
+                searchableResorts
+              />
+            </div>
+            <div className="filter-sheet__footer">
+              <button
+                type="button"
+                onClick={onClose}
+                className="btn-primary w-full justify-center px-5 text-sm"
+              >
+                Show {resultCount} result{resultCount === 1 ? "" : "s"}
+              </button>
+            </div>
           </motion.div>
         </div>
       )}

@@ -1,5 +1,6 @@
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
 import { loadPostersForTitles } from "@/lib/movies/poster-cache";
+import { movieEndsAt } from "@/lib/movies/time";
 
 export async function enrichMovieNightsWithPosters(
   items: MovieNightOccurrence[]
@@ -22,6 +23,10 @@ export async function enrichMovieNightsWithPosters(
       tmdbId: meta.tmdbId ?? undefined,
       overview: meta.overview,
       voteAverage: meta.voteAverage,
+      runtimeMinutes: meta.runtimeMinutes,
+      endDateTime:
+        movieEndsAt(item.startDateTime, meta.runtimeMinutes)?.toISOString() ??
+        item.endDateTime,
     };
   });
 }

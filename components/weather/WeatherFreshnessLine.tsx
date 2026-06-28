@@ -8,7 +8,11 @@ export function WeatherFreshnessLine({
 }: {
   weather: Pick<
     WeatherForTimeSpan,
-    "fetchedAt" | "forecastStatus" | "forecastConfidence" | "locationKey"
+    | "fetchedAt"
+    | "forecastStatus"
+    | "forecastConfidence"
+    | "locationKey"
+    | "timeBasisLabel"
   >;
   className?: string;
 }) {

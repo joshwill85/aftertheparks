@@ -19,56 +19,11 @@ import {
   areaMatchesFilter,
   transportMatchesFilter,
 } from "@/lib/explore/routeTaxonomy";
+import { selectedResortSlugs } from "@/lib/explore/resortFilters";
 import { formatResortTier, slugToTitle } from "@/lib/utils";
 
 const OFFERING_QUERY_MIN_SCORE = 18;
 const SHA256_HEX = /^[a-f0-9]{64}$/i;
-
-function textRequiresParkTicket(fields: Array<string | undefined>): boolean {
-  const text = fields.filter(Boolean).join(" ").toLowerCase();
-  return (
-    /valid (theme )?park admission|requires? (valid )?(theme )?park admission|park ticket required|theme park ticket|required admission/.test(
-      text
-    ) ||
-    /\binside (magic kingdom|epcot|hollywood studios|animal kingdom) park\b/.test(text) ||
-    /\b(magic kingdom|epcot|hollywood studios|animal kingdom) park\b/.test(text)
-  );
-}
-
-function offeringRequiresParkTicket(offering: ActivityOffering): boolean {
-  return textRequiresParkTicket([
-    offering.title,
-    offering.summary,
-    offering.category,
-    offering.location.label,
-    offering.price.notes,
-    ...offering.tags,
-    ...offering.amenities,
-  ]);
-}
-
-function offeringMatchesDuration(
-  offering: ActivityOffering,
-  duration: NonNullable<ActivityFilters["duration"]>
-): boolean {
-  if (duration !== "short") return true;
-  const text = [
-    offering.title,
-    offering.summary,
-    offering.category,
-    offering.location.label,
-    ...offering.tags,
-    ...offering.amenities,
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-
-  if (/movie|fireworks|cruise|tour|trail|surrey|horseback|wagon/.test(text)) {
-    return false;
-  }
-  return /arcade|craft|trivia|game|scavenger|lobby|drawing|animation|fitness/.test(text);
-}
 
 export interface OfficialOfferingRow {
   id: string;
@@ -416,21 +371,17 @@ export async function getFilteredOfficialOfferings(
 
   offerings = offerings.filter((offering) => offering.status !== "paused");
 
-  if (filters.resort) {
+  const selectedResorts = selectedResortSlugs(filters.resort);
+  if (selectedResorts.length > 0) {
+    const resortSet = new Set(selectedResorts);
     offerings = offerings.filter(
-      (offering) => offering.resort.slug === filters.resort
+      (offering) => resortSet.has(offering.resort.slug)
     );
   }
 
   if (filters.category) {
     offerings = offerings.filter(
       (offering) => offering.category === filters.category
-    );
-  }
-
-  if (filters.duration) {
-    offerings = offerings.filter((offering) =>
-      offeringMatchesDuration(offering, filters.duration!)
     );
   }
 
@@ -455,12 +406,6 @@ export async function getFilteredOfficialOfferings(
       (offering) =>
         offering.booking?.reservationRequired ||
         offering.booking?.reservationRecommended
-    );
-  }
-
-  if (filters.ticketRequired !== undefined) {
-    offerings = offerings.filter(
-      (offering) => offeringRequiresParkTicket(offering) === filters.ticketRequired
     );
   }
 

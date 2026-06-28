@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IconGlyph } from "@/components/icons/IconGlyph";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 
 interface EmptyStateProps {
   title: string;
@@ -10,7 +10,7 @@ interface EmptyStateProps {
 export function EmptyState({ title, description, actions = [] }: EmptyStateProps) {
   return (
     <div className="journal-empty postcard-texture p-8 text-center md:p-12">
-      <IconGlyph iconKey="resort_activity" className="mx-auto text-3xl" />
+      <BrandAsset asset="guide-companion" className="brand-asset--empty" />
       <h2 className="font-display mt-4 text-xl font-semibold md:text-2xl">{title}</h2>
       <p className="mx-auto mt-3 max-w-md text-[var(--color-muted)]">{description}</p>
       {actions.length > 0 && (

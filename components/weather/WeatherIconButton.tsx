@@ -1,11 +1,30 @@
 "use client";
 
+import Link from "next/link";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { formatTempDual } from "@/lib/weather/format";
+import { weatherPageHref } from "@/lib/weather/links";
 import { WeatherIcon } from "@/components/weather/WeatherIcon";
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { nearTermRainShortCopy } from "@/components/weather/NearTermRainLine";
 import { cn } from "@/lib/utils";
+
+function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string | undefined {
+  switch (action) {
+    case "good_now":
+      return "Good to go";
+    case "go_earlier":
+      return "Go earlier";
+    case "choose_covered_backup":
+      return "Pick covered backup";
+    case "stay_inside":
+      return "Stay inside";
+    case "official_alert":
+      return "Official alert";
+    default:
+      return undefined;
+  }
+}
 
 export function WeatherIconButton({
   weather,
@@ -23,19 +42,26 @@ export function WeatherIconButton({
       ? formatTempDual(weather.tempF, weather.tempC)
       : undefined;
   const nearTermCopy = nearTermRainShortCopy(weather.nearTermRain);
+  const actionLabel = weatherActionLabel(weather.actionGuidance);
   return (
-    <button
-      type="button"
-      className={cn("weather-icon-button", className)}
-      aria-label={`Weather: ${decisionLabel ?? weather.headline}${temp ? `, ${temp}` : ""}`}
-      onClick={onClick}
-    >
-      <WeatherIcon iconKey={weather.iconKey} decorative />
-      <span className="weather-icon-button__copy">
-        <strong>{nearTermCopy ?? decisionLabel ?? weather.headline}</strong>
+    <div className={cn("weather-icon-button", className)}>
+      <Link
+        href={weatherPageHref(weather.locationKey)}
+        className="weather-icon-button__icon-link"
+        aria-label={`Open detailed weather for ${weather.locationKey.replaceAll("_", " ")}`}
+      >
+        <WeatherIcon iconKey={weather.iconKey} decorative />
+      </Link>
+      <button
+        type="button"
+        className="weather-icon-button__details"
+        aria-label={`Weather: ${decisionLabel ?? actionLabel ?? weather.headline}${temp ? `, ${temp}` : ""}`}
+        onClick={onClick}
+      >
+        <strong>{nearTermCopy ?? decisionLabel ?? actionLabel ?? weather.headline}</strong>
         {temp && <span>{temp}</span>}
         <WeatherFreshnessLine weather={weather} />
-      </span>
-    </button>
+      </button>
+    </div>
   );
 }

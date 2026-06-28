@@ -9,6 +9,19 @@ import {
   resortAreaMatchesOrigin,
   transportMatchesFilter,
 } from "@/lib/explore/routeTaxonomy";
+import {
+  removeResortSlug,
+  selectedResortSlugs,
+} from "@/lib/explore/resortFilters";
+import {
+  ageFitForActivity,
+  bookingStatusForActivity,
+  type BookingStatus,
+} from "@/lib/planning/activityFacts";
+import {
+  INTENT_PRESETS,
+  presetLabel,
+} from "@/lib/planning/presetDefinitions";
 import { DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG, type WeatherFit } from "@/lib/seo/fit";
 import type {
   ActivityFilters,
@@ -26,11 +39,14 @@ export interface FilterableItem {
   resortArea?: string;
   category: string;
   daypart?: Daypart;
-  durationMinutes?: number;
   weatherFit?: WeatherFit;
   parkTicketRequired?: boolean;
   free: boolean;
   reservation: boolean;
+  bookingStatus?: BookingStatus;
+  littleKids?: boolean;
+  startDateTime?: string;
+  isHappeningNow?: boolean;
   title?: string;
 }
 
@@ -52,14 +68,13 @@ export interface FilterImpact {
   resorts: CountOption[];
   categories: CountOption[];
   dayparts: CountOption[];
-  duration: CountOption[];
+  presets: CountOption[];
   weather: CountOption[];
   transport: CountOption[];
   areas: CountOption[];
   practical: {
     free: number;
     reservation: number;
-    noParkTicket: number;
   };
 }
 
@@ -72,10 +87,28 @@ const WEATHER_OPTIONS: NonNullable<ActivityFilters["weather"]>[] = [
   "indoor",
   "covered",
 ];
-const DURATION_LABELS: Record<NonNullable<ActivityFilters["duration"]>, string> = {
-  short: "Short activity",
-};
-const DURATION_OPTIONS: NonNullable<ActivityFilters["duration"]>[] = ["short"];
+
+const BOOKING_NOT_REQUIRED: BookingStatus[] = [
+  "walkup_only",
+  "not_required_verified",
+];
+
+const BOOKING_NEEDED: BookingStatus[] = ["required", "recommended"];
+
+function timeWindowFromStart(startDateTime?: string): "after_7_pm" | "dinner_window" | undefined {
+  if (!startDateTime) return undefined;
+  const zoned = new Date(startDateTime).toLocaleTimeString("en-US", {
+    timeZone: "America/New_York",
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const [hour, minute] = zoned.split(":").map(Number);
+  const minutes = hour * 60 + minute;
+  if (minutes >= 19 * 60 && minutes <= 23 * 60 + 59) return "after_7_pm";
+  if (minutes >= 17 * 60 && minutes < 19 * 60) return "dinner_window";
+  return undefined;
+}
 
 function weatherFitFromText(item: {
   title?: string;
@@ -115,18 +148,6 @@ function weatherMatches(
   weather: NonNullable<ActivityFilters["weather"]>
 ): boolean {
   return item.weatherFit === weather;
-}
-
-function durationMatches(
-  item: FilterableItem,
-  duration: NonNullable<ActivityFilters["duration"]>
-): boolean {
-  if (duration !== "short") return true;
-  if (typeof item.durationMinutes === "number") return item.durationMinutes <= 45;
-
-  const text = [item.title, item.category].filter(Boolean).join(" ").toLowerCase();
-  if (/movie|fireworks|cruise|tour|trail|surrey/.test(text)) return false;
-  return /campfire|arcade|craft|trivia|game|scavenger|lobby|drawing|animation/.test(text);
 }
 
 function requiresParkTicketFromText(item: {
@@ -169,14 +190,17 @@ export interface FilterRecoveryAction {
 }
 
 export function activityToFilterableItem(activity: ActivityOccurrence): FilterableItem {
+  const booking = bookingStatusForActivity(activity);
+  const ageFit = ageFitForActivity(activity);
   return {
     id: activity.id,
     resortSlug: activity.resort.slug,
     resortArea: activity.resort.area,
     category: activity.category,
     daypart: activity.daypart,
-    durationMinutes: activity.enrichment?.durationMinutes,
     free: activity.price.state === "free",
+    startDateTime: activity.startDateTime,
+    isHappeningNow: activity.isHappeningNow,
     parkTicketRequired: requiresParkTicketFromText({
       title: activity.title,
       category: activity.category,
@@ -197,6 +221,8 @@ export function activityToFilterableItem(activity: ActivityOccurrence): Filterab
         activity.enrichment?.reservationRequired ||
         activity.enrichment?.reservationRecommended
     ),
+    bookingStatus: booking.status,
+    littleKids: ageFit.littleKids,
     title: activity.title,
   };
 }
@@ -207,7 +233,6 @@ export function offeringToFilterableItem(offering: ActivityOffering): Filterable
     resortSlug: offering.resort.slug,
     resortArea: offering.resort.area,
     category: offering.category,
-    durationMinutes: undefined,
     free: offering.price.state === "free",
     parkTicketRequired: requiresParkTicketFromText({
       title: offering.title,
@@ -231,6 +256,11 @@ export function offeringToFilterableItem(offering: ActivityOffering): Filterable
     reservation: Boolean(
       offering.booking?.reservationRequired || offering.booking?.reservationRecommended
     ),
+    bookingStatus: offering.booking?.reservationRequired
+      ? "required"
+      : offering.booking?.reservationRecommended
+        ? "recommended"
+        : "unknown",
     title: offering.title,
   };
 }
@@ -242,11 +272,12 @@ export function movieToFilterableItem(movie: MovieNightOccurrence): FilterableIt
     resortArea: areaFilterForResort(movie.resortSlug),
     category: "movies_under_stars",
     daypart: movie.isTonight ? "late" : "evening",
-    durationMinutes: 90,
     free: true,
     parkTicketRequired: false,
     weatherFit: DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG["movies-under-the-stars"]?.weatherFit,
     reservation: false,
+    bookingStatus: "not_required_verified",
+    startDateTime: movie.startDateTime,
     title: movie.displayTitle || movie.movieTitle,
   };
 }
@@ -272,16 +303,19 @@ function queryMatches(item: FilterableItem, q?: string): boolean {
 }
 
 function itemMatches(item: FilterableItem, filters: ActivityFilters): boolean {
-  if (filters.near === "my-resort" && filters.resort) {
-    if (!resortAreaMatchesOrigin(filters.resort, item.resortSlug, item.resortArea)) {
+  const selectedResorts = selectedResortSlugs(filters.resort);
+  if (filters.near === "my-resort" && selectedResorts.length === 1) {
+    if (!resortAreaMatchesOrigin(selectedResorts[0], item.resortSlug, item.resortArea)) {
       return false;
     }
-  } else if (filters.resort && item.resortSlug !== filters.resort) {
+  } else if (selectedResorts.length > 0 && !selectedResorts.includes(item.resortSlug)) {
     return false;
   }
   if (filters.category && item.category !== filters.category) return false;
   if (filters.daypart && item.daypart !== filters.daypart) return false;
-  if (filters.duration && !durationMatches(item, filters.duration)) return false;
+  if (filters.preset && !filterableItemMatchesPreset(item, filters, selectedResorts[0])) {
+    return false;
+  }
   if (
     filters.transport &&
     !transportMatchesFilter(item.resortSlug, item.resortArea, filters.transport)
@@ -294,13 +328,47 @@ function itemMatches(item: FilterableItem, filters: ActivityFilters): boolean {
   if (filters.weather && !weatherMatches(item, filters.weather)) return false;
   if (filters.free && !item.free) return false;
   if (filters.reservation && !item.reservation) return false;
-  if (
-    filters.ticketRequired !== undefined &&
-    Boolean(item.parkTicketRequired) !== filters.ticketRequired
-  ) {
-    return false;
-  }
   return queryMatches(item, filters.q);
+}
+
+function filterableItemMatchesPreset(
+  item: FilterableItem,
+  filters: Pick<ActivityFilters, "preset">,
+  homeResortSlug?: string
+): boolean {
+  switch (filters.preset) {
+    case "at_my_resort":
+      return Boolean(homeResortSlug && item.resortSlug === homeResortSlug);
+    case "nearby_resort_area":
+      return Boolean(
+        homeResortSlug &&
+          resortAreaMatchesOrigin(homeResortSlug, item.resortSlug, item.resortArea)
+      );
+    case "after_7_pm":
+      return timeWindowFromStart(item.startDateTime) === "after_7_pm";
+    case "dinner_window":
+      return timeWindowFromStart(item.startDateTime) === "dinner_window";
+    case "rain_backup":
+      return item.weatherFit === "indoor" || item.weatherFit === "covered";
+    case "no_booking_required":
+      return Boolean(
+        item.bookingStatus && BOOKING_NOT_REQUIRED.includes(item.bookingStatus)
+      );
+    case "reservation_needed":
+      return Boolean(item.bookingStatus && BOOKING_NEEDED.includes(item.bookingStatus));
+    case "little_kids":
+      return item.littleKids === true;
+    case "free_today":
+      return item.free && Boolean(item.isHappeningNow || item.startDateTime);
+    case "low_transfer":
+      return Boolean(
+        homeResortSlug &&
+          (item.resortSlug === homeResortSlug ||
+            resortAreaMatchesOrigin(homeResortSlug, item.resortSlug, item.resortArea))
+      );
+    case undefined:
+      return true;
+  }
 }
 
 function countWith(
@@ -321,17 +389,16 @@ function hrefWithout(
   const omit = new Set(keys);
   if (filters.resort && !omit.has("resort")) params.set("resort", filters.resort);
   if (filters.category && !omit.has("category")) params.set("category", filters.category);
+  if (filters.preset && !omit.has("preset")) params.set("preset", filters.preset);
   if (filters.daypart && !omit.has("daypart")) params.set("daypart", filters.daypart);
-  if (filters.duration && !omit.has("duration")) params.set("duration", filters.duration);
-  if (filters.near && !omit.has("near")) params.set("near", filters.near);
+  if (filters.near && filters.resort && !omit.has("near") && !omit.has("resort")) {
+    params.set("near", filters.near);
+  }
   if (filters.transport && !omit.has("transport")) params.set("transport", filters.transport);
   if (filters.area && !omit.has("area")) params.set("area", filters.area);
   if (filters.weather && !omit.has("weather")) params.set("weather", filters.weather);
   if (filters.free && !omit.has("free")) params.set("free", "true");
   if (filters.reservation && !omit.has("reservation")) params.set("reservation", "true");
-  if (filters.ticketRequired !== undefined && !omit.has("ticketRequired")) {
-    params.set("ticket_required", String(filters.ticketRequired));
-  }
   if (filters.q && !omit.has("q")) params.set("q", filters.q);
   if (filters.sort && filters.sort !== "time" && !omit.has("sort")) {
     params.set("sort", filters.sort);
@@ -344,6 +411,19 @@ function resortName(resorts: ResortOption[], slug: string): string {
   return resorts.find((resort) => resort.slug === slug)?.name ?? slug;
 }
 
+function hrefWithoutResort(
+  basePath: string,
+  filters: ActivityFilters,
+  slug: string
+): string {
+  const nextResort = removeResortSlug(filters.resort, slug);
+  return hrefWithout(
+    basePath,
+    { ...filters, resort: nextResort, near: nextResort ? filters.near : undefined },
+    []
+  );
+}
+
 export function buildActiveFilterChips(
   filters: ActivityFilters,
   resorts: ResortOption[],
@@ -351,11 +431,12 @@ export function buildActiveFilterChips(
 ): ActiveFilterChip[] {
   const chips: ActiveFilterChip[] = [];
 
-  if (filters.resort) {
+  const selectedResorts = selectedResortSlugs(filters.resort);
+  for (const resort of selectedResorts) {
     chips.push({
-      id: "resort",
-      label: resortName(resorts, filters.resort),
-      removeHref: hrefWithout(basePath, filters, ["resort"]),
+      id: `resort:${resort}`,
+      label: resortName(resorts, resort),
+      removeHref: hrefWithoutResort(basePath, filters, resort),
     });
   }
   if (filters.category) {
@@ -372,14 +453,14 @@ export function buildActiveFilterChips(
       removeHref: hrefWithout(basePath, filters, ["daypart"]),
     });
   }
-  if (filters.duration) {
+  if (filters.preset) {
     chips.push({
-      id: "duration",
-      label: DURATION_LABELS[filters.duration],
-      removeHref: hrefWithout(basePath, filters, ["duration"]),
+      id: "preset",
+      label: presetLabel(filters.preset),
+      removeHref: hrefWithout(basePath, filters, ["preset"]),
     });
   }
-  if (filters.near === "my-resort" && filters.resort) {
+  if (filters.near === "my-resort" && selectedResorts.length === 1) {
     chips.push({
       id: "near",
       label: "Near my resort",
@@ -421,13 +502,6 @@ export function buildActiveFilterChips(
       removeHref: hrefWithout(basePath, filters, ["reservation"]),
     });
   }
-  if (filters.ticketRequired !== undefined) {
-    chips.push({
-      id: "ticket_required",
-      label: filters.ticketRequired ? "Park ticket required" : "No park ticket",
-      removeHref: hrefWithout(basePath, filters, ["ticketRequired"]),
-    });
-  }
   if (filters.q) {
     chips.push({
       id: "q",
@@ -457,17 +531,17 @@ export function buildFilterImpact(
     count: countWith(items, filters, { daypart: value }),
     active: filters.daypart === value,
   })).filter((option) => option.count > 0 || option.active);
-  const duration = DURATION_OPTIONS.map((value) => ({
-    value,
-    label: DURATION_LABELS[value],
-    count: countWith(items, filters, { duration: value }),
-    active: filters.duration === value,
-  })).filter((option) => option.count > 0 || option.active);
   const weather = WEATHER_OPTIONS.map((value) => ({
     value,
     label: WEATHER_LABELS[value],
     count: countWith(items, filters, { weather: value }),
     active: filters.weather === value,
+  })).filter((option) => option.count > 0 || option.active);
+  const presets = INTENT_PRESETS.map((preset) => ({
+    value: preset.id,
+    label: preset.label,
+    count: countWith(items, filters, { preset: preset.id }),
+    active: filters.preset === preset.id,
   })).filter((option) => option.count > 0 || option.active);
   const transport = TRANSPORT_OPTIONS.map((value) => ({
     value,
@@ -482,24 +556,25 @@ export function buildFilterImpact(
     active: filters.area === value,
   })).filter((option) => option.count > 0 || option.active);
 
+  const selectedResorts = selectedResortSlugs(filters.resort);
+
   return {
     total: items.filter((item) => itemMatches(item, filters)).length,
     resorts: resorts.map((resort) => ({
       value: resort.slug,
       label: resort.name,
       count: countWith(items, filters, { resort: resort.slug }),
-      active: filters.resort === resort.slug,
+      active: selectedResorts.includes(resort.slug),
     })).filter((option) => option.count > 0 || option.active),
     categories,
     dayparts,
-    duration,
+    presets,
     weather,
     transport,
     areas,
     practical: {
       free: countWith(items, filters, { free: true }),
       reservation: countWith(items, filters, { reservation: true }),
-      noParkTicket: countWith(items, filters, { ticketRequired: false }),
     },
   };
 }
@@ -519,21 +594,21 @@ export function buildNoResultsRecovery(
   };
 
   if (filters.category) pushRemove("category", `Remove ${getCategoryMeta(filters.category).label}`);
-  if (filters.resort) pushRemove("resort", `Remove ${resortName(resorts, filters.resort)}`);
+  for (const resort of selectedResortSlugs(filters.resort)) {
+    actions.push({
+      label: `Remove ${resortName(resorts, resort)}`,
+      href: hrefWithoutResort(basePath, filters, resort),
+      intent: actions.length === 0 ? "primary" : "secondary",
+    });
+  }
   if (filters.daypart) pushRemove("daypart", `Remove ${DAYPART_LABELS[filters.daypart]}`);
-  if (filters.duration) pushRemove("duration", `Remove ${DURATION_LABELS[filters.duration]}`);
+  if (filters.preset) pushRemove("preset", `Remove ${presetLabel(filters.preset)}`);
   if (filters.near) pushRemove("near", "Remove near my resort");
   if (filters.transport) pushRemove("transport", `Remove ${TRANSPORT_LABELS[filters.transport]}`);
   if (filters.area) pushRemove("area", `Remove ${AREA_LABELS[filters.area]}`);
   if (filters.weather) pushRemove("weather", `Remove ${WEATHER_LABELS[filters.weather]}`);
   if (filters.free) pushRemove("free", "Show paid and free options");
   if (filters.reservation) pushRemove("reservation", "Show no-reservation options");
-  if (filters.ticketRequired !== undefined) {
-    pushRemove(
-      "ticketRequired",
-      filters.ticketRequired ? "Show no-ticket options" : "Show ticketed options"
-    );
-  }
   if (filters.q) pushRemove("q", "Clear search text");
 
   actions.push({ label: "Clear all filters", href: basePath, intent: "secondary" });

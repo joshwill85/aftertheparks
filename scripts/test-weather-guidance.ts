@@ -67,6 +67,38 @@ assert.equal(guidance.iconKey, "rain_with_thunder");
 assert.equal(guidance.headline, "Storms could interrupt outdoor plans");
 assert.equal(guidance.rainChancePct, 70);
 
+const ongoingGuidance = buildWeatherGuidanceForTimeSpan({
+  locationKey: "all_wdw",
+  startsAt: "2026-06-27T15:30:00-04:00",
+  endsAt: "2026-06-27T17:30:00-04:00",
+  snapshot,
+  now: new Date("2026-06-27T16:00:00-04:00"),
+});
+assert.equal(
+  ongoingGuidance.shouldDisplayWeather,
+  true,
+  "weather should remain visible while an event is in progress"
+);
+assert.equal(
+  ongoingGuidance.isPast,
+  false,
+  "events should become past only after their end time"
+);
+
+const completedGuidance = buildWeatherGuidanceForTimeSpan({
+  locationKey: "all_wdw",
+  startsAt: "2026-06-27T15:30:00-04:00",
+  endsAt: "2026-06-27T15:59:00-04:00",
+  snapshot,
+  now: new Date("2026-06-27T16:00:00-04:00"),
+});
+assert.equal(
+  completedGuidance.shouldDisplayWeather,
+  false,
+  "weather should be removed once an event is past"
+);
+assert.equal(completedGuidance.isPast, true);
+
 const alert: WeatherAlert = {
   provider: "nws",
   id: "alert-1",

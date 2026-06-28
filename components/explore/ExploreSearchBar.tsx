@@ -37,7 +37,7 @@ export function ExploreSearchBar({
       <label className="sr-only" htmlFor="explore-search-input">
         Search activities
       </label>
-      <div className="flex gap-2">
+      <div className="explore-search__row">
         <input
           id="explore-search-input"
           type="search"
@@ -48,10 +48,10 @@ export function ExploreSearchBar({
               ? "Search everything…"
               : "Search activities (or try full search)…"
           }
-          className="form-control flex-1"
+          className="form-control"
           autoComplete="off"
         />
-        <button type="submit" className="btn-primary shrink-0 px-5 text-sm">
+        <button type="submit" className="btn-primary text-sm">
           Search
         </button>
       </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { BrandMark } from "@/components/brand/BrandAsset";
 import { resolveBrowseNavHref } from "@/lib/explore/browseParams";
 import { PlanNavLink } from "@/components/plan/PlanNavLink";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { href: "/today", label: "Today" },
   { href: "/tonight", label: "Tonight" },
+  { href: "/weather", label: "Weather" },
   { href: "/activities", label: "Explore" },
   { href: "/resorts", label: "Resorts" },
   { href: "/plan", label: "My Plan" },
@@ -29,9 +31,19 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-3">
           <Link
             href="/"
-            className="font-display truncate text-lg font-semibold tracking-tight text-[var(--color-foreground)]"
+            className="flex min-w-0 items-center"
+            aria-label="After the Parks home"
           >
-            After the Parks
+            <span className="hidden sm:block">
+              <BrandMark
+                variant="header"
+                className="brand-mark--header"
+                priority
+              />
+            </span>
+            <span className="font-display truncate text-lg font-semibold tracking-tight text-[var(--color-foreground)] sm:hidden">
+              After the Parks
+            </span>
           </Link>
           <span className="stamp-badge hidden shrink-0 sm:inline-flex">
             Independent Guide

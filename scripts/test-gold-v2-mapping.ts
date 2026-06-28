@@ -215,6 +215,44 @@ assert.deepEqual(
   "Gold timed rows must honor weekday recurrence in source schedule text"
 );
 
+const unmarkedNighttimeRow: GoldActivityRow = {
+  ...row,
+  id: "gold-boardwalk-nighttime-trivia",
+  activity_catalog_id: "boardwalk-nighttime-trivia-catalog",
+  calendar_group_key: "boardwalk",
+  resort_slugs: ["boardwalk-inn"],
+  canonical_slug: "nighttime-trivia",
+  title: "Nighttime Trivia",
+  category: "other",
+  schedule: {
+    text: "Nightly at 7:30",
+    start_time: null,
+    end_time: null,
+  },
+  location: {
+    label: "Village Green Lawn",
+  },
+  trust_state: "confirm_before_going",
+};
+
+const [unmarkedNighttimeOccurrence] = mapGoldActivityRowToOccurrences(
+  unmarkedNighttimeRow,
+  {
+    dateRangeDays: 1,
+    referenceDate: new Date("2026-06-22T12:00:00-04:00"),
+  }
+);
+assert.match(
+  unmarkedNighttimeOccurrence.startDateTime ?? "",
+  /^2026-06-22T19:30:00-04:00$/,
+  "Nightly source text without AM/PM should map to the evening occurrence, not 7:30 AM"
+);
+assert.equal(
+  unmarkedNighttimeOccurrence.daypart,
+  "evening",
+  "Unmarked nightly times must receive evening daypart classification"
+);
+
 const unsupportedEnrichment = ensurePublicActivity({
   ...occurrences[0],
   id: "unsupported-enrichment",
@@ -336,7 +374,7 @@ assert.match(
   /dvc-cabins-at-fort-wilderness-resort\/recreation/
 );
 
-const untimedPoolsideRow: GoldActivityRow = {
+const timedPoolsideRow: GoldActivityRow = {
   id: "gold-boardwalk-poolside",
   activity_catalog_id: "boardwalk-poolside-catalog",
   calendar_group_key: "boardwalk",
@@ -346,8 +384,8 @@ const untimedPoolsideRow: GoldActivityRow = {
   category: "poolside",
   section: "Resort Activities",
   schedule: {
-    text: "Activities schedule available digitally; no posted time in PDF",
-    start_time: null,
+    text: "Daily at 1:30pm",
+    start_time: "1:30pm",
     end_time: null,
   },
   location: {
@@ -361,7 +399,7 @@ const untimedPoolsideRow: GoldActivityRow = {
   },
   field_provenance: {
     title: [{ page: 1, line: 19 }],
-    schedule: [{ page: 1, text: "ACTIVITIES SCHEDULE" }],
+    schedule: [{ page: 1, text: "Daily at 1:30pm" }],
     location: [{ page: 1, line: 21 }],
     description: [{ page: 1, line: 23 }],
   },
@@ -370,8 +408,8 @@ const untimedPoolsideRow: GoldActivityRow = {
   trust_state: "source_backed",
 };
 
-const untimedPoolsideOccurrences = mapGoldActivityRowToOccurrences(
-  untimedPoolsideRow,
+const timedPoolsideOccurrences = mapGoldActivityRowToOccurrences(
+  timedPoolsideRow,
   {
     dateRangeDays: 1,
     referenceDate: new Date("2026-06-22T12:00:00-04:00"),
@@ -379,47 +417,55 @@ const untimedPoolsideOccurrences = mapGoldActivityRowToOccurrences(
 );
 
 assert.equal(
-  untimedPoolsideOccurrences.length,
+  timedPoolsideOccurrences.length,
   1,
-  "Source-backed untimed rows should still appear in resort/all-activities surfaces"
+  "Source-backed timed rows should appear in resort/all-activities surfaces"
 );
-assert.equal(untimedPoolsideOccurrences[0].activitySlug, "poolside-activities");
-assert.equal(untimedPoolsideOccurrences[0].daypart, "anytime");
-assert.equal(untimedPoolsideOccurrences[0].startDateTime, undefined);
-assert.equal(untimedPoolsideOccurrences[0].endDateTime, undefined);
+assert.equal(timedPoolsideOccurrences[0].activitySlug, "poolside-activities");
+assert.equal(timedPoolsideOccurrences[0].daypart, "afternoon");
+assert.match(
+  timedPoolsideOccurrences[0].startDateTime ?? "",
+  /^2026-06-22T13:30:00-04:00$/
+);
+assert.equal(timedPoolsideOccurrences[0].endDateTime, undefined);
 assert.equal(
-  untimedPoolsideOccurrences[0].scheduleText,
-  "Activities schedule available digitally; no posted time in PDF"
+  timedPoolsideOccurrences[0].scheduleText,
+  "Daily at 1:30pm"
 );
-const untimedPoolsideDisplay = toDisplayActivity(untimedPoolsideOccurrences[0]);
+const timedPoolsideDisplay = toDisplayActivity(timedPoolsideOccurrences[0]);
 assert.equal(
-  untimedPoolsideDisplay.timeLabel,
-  undefined,
-  "Untimed source-backed rows must not create a public time label"
+  timedPoolsideDisplay.timeLabel,
+  "1:30 PM",
+  "BoardWalk poolside activities should use the visible Disney PDF time"
 );
-const untimedPoolsideCard = activityToEventCard(
-  untimedPoolsideOccurrences[0],
-  untimedPoolsideDisplay
+const timedPoolsideCard = activityToEventCard(
+  timedPoolsideOccurrences[0],
+  timedPoolsideDisplay
 );
 assert.equal(
-  untimedPoolsideCard.href,
+  timedPoolsideCard.href,
   "/activities/poolside-activities?resort=boardwalk-inn",
   "Activity cards must preserve resort context for shared activity slugs"
 );
 assert.equal(
-  untimedPoolsideCard.timeLabel,
-  undefined,
-  "Untimed activity cards must not show a time field"
+  timedPoolsideCard.timeLabel,
+  "1:30 PM",
+  "Timed activity cards should show the Disney PDF time"
 );
 assert.equal(
-  untimedPoolsideCard.timeDateTime,
-  undefined,
-  "Untimed activity cards must not carry a fake datetime"
+  timedPoolsideCard.timeDateTime,
+  "2026-06-22T13:30:00-04:00",
+  "Timed activity cards should carry the real datetime"
 );
 assert.equal(
-  (untimedPoolsideCard.badges ?? []).some((badge) => badge.label === "All Day"),
+  (timedPoolsideCard.badges ?? []).some((badge) => badge.label === "Afternoon"),
+  true,
+  "Timed activity cards should show the correct daypart badge"
+);
+assert.equal(
+  (timedPoolsideCard.badges ?? []).some((badge) => badge.label === "All Day"),
   false,
-  "Untimed activity cards must not show an All Day badge"
+  "Timed activity cards must not show an All Day badge"
 );
 const activityDetailClient = readFileSync(
   "components/atlas/ActivityDetailClient.tsx",
@@ -458,7 +504,7 @@ assert.match(
 
 const unsupportedFreeOccurrences = mapGoldActivityRowToOccurrences(
   {
-    ...untimedPoolsideRow,
+    ...timedPoolsideRow,
     id: "gold-boardwalk-poolside-unsupported-free",
     activity_catalog_id: "boardwalk-poolside-unsupported-free-catalog",
     claims: {
@@ -515,7 +561,7 @@ assert.equal(
 );
 
 const noDescriptionDisplay = toDisplayActivity({
-  ...untimedPoolsideOccurrences[0],
+  ...timedPoolsideOccurrences[0],
   id: "movie-without-description",
   activitySlug: "movie-under-the-stars",
   activityCatalogId: "movie-without-description",
@@ -525,12 +571,17 @@ const noDescriptionDisplay = toDisplayActivity({
 });
 assert.equal(
   noDescriptionDisplay.summary,
-  undefined,
-  "Missing source descriptions must not be replaced by synthetic UI copy"
+  "Outdoor Disney movie screening; title varies by resort schedule.",
+  "Missing movie descriptions should use the narrow guest-facing fallback copy"
+);
+assert.equal(
+  noDescriptionDisplay.answerCoverage.what.state,
+  "fallback",
+  "Fallback movie copy must not be treated as source-backed description evidence"
 );
 const noDescriptionCard = activityToEventCard(
   {
-    ...untimedPoolsideOccurrences[0],
+    ...timedPoolsideOccurrences[0],
     id: "movie-without-description",
     activitySlug: "movie-under-the-stars",
     activityCatalogId: "movie-without-description",
@@ -542,8 +593,8 @@ const noDescriptionCard = activityToEventCard(
 );
 assert.equal(
   noDescriptionCard.summary,
-  undefined,
-  "Activity cards must omit summaries when the source has no description"
+  "Outdoor Disney movie screening; title varies by resort schedule.",
+  "Activity cards should still answer what when source movie descriptions are absent"
 );
 
 const missingProvenance = ensurePublicActivity({

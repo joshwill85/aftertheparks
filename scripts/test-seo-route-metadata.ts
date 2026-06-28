@@ -79,16 +79,16 @@ async function main() {
     canonical: "/resorts?no_ticket_friendly=true",
   });
 
-  const noTicketActivities = await activitiesMetadata({
+  const legacyTicketActivities = await activitiesMetadata({
     searchParams: Promise.resolve({ ticket_required: "false" }),
   });
-  assert.match(
-    String(noTicketActivities.title),
+  assert.doesNotMatch(
+    String(legacyTicketActivities.title),
     /without a park ticket|no-ticket/i,
-    "strategic no-ticket activity filter should have intent-specific metadata"
+    "legacy ticket activity params should not have filter-specific metadata"
   );
-  assert.deepEqual(noTicketActivities.alternates, {
-    canonical: "/activities?ticket_required=false",
+  assert.deepEqual(legacyTicketActivities.alternates, {
+    canonical: "/activities",
   });
 
   const indoorActivities = await activitiesMetadata({
@@ -161,18 +161,6 @@ async function main() {
     canonical: "/activities?area=disney-springs",
   });
 
-  const firstNightShortActivities = await activitiesMetadata({
-    searchParams: Promise.resolve({ duration: "short", time: "evening" }),
-  });
-  assert.match(
-    String(firstNightShortActivities.title),
-    /first night|short evening/i,
-    "strategic first-night short evening filter should have intent-specific metadata"
-  );
-  assert.deepEqual(firstNightShortActivities.alternates, {
-    canonical: "/activities?duration=short&time=evening",
-  });
-
   const freeActivities = await activitiesMetadata({
     searchParams: Promise.resolve({ free: "true" }),
   });
@@ -194,16 +182,16 @@ async function main() {
     "non-strategic query-heavy activity views should canonicalize to the activity directory"
   );
 
-  const todayNoTicket = await todayMetadata({
+  const todayLegacyTicket = await todayMetadata({
     searchParams: Promise.resolve({ ticket_required: "false" }),
   });
-  assert.match(
-    String(todayNoTicket.title),
+  assert.doesNotMatch(
+    String(todayLegacyTicket.title),
     /without a park ticket|no-ticket/i,
-    "strategic today no-ticket filter should have intent-specific metadata"
+    "legacy today ticket params should not have filter-specific metadata"
   );
-  assert.deepEqual(todayNoTicket.alternates, {
-    canonical: "/today?ticket_required=false",
+  assert.deepEqual(todayLegacyTicket.alternates, {
+    canonical: "/today",
   });
 
   const todayIndoor = await todayMetadata({
@@ -218,16 +206,16 @@ async function main() {
     canonical: "/today?weather=indoor",
   });
 
-  const tonightNoTicket = await tonightMetadata({
+  const tonightLegacyTicket = await tonightMetadata({
     searchParams: Promise.resolve({ ticket_required: "false" }),
   });
-  assert.match(
-    String(tonightNoTicket.title),
+  assert.doesNotMatch(
+    String(tonightLegacyTicket.title),
     /without a park ticket|no-ticket/i,
-    "strategic tonight no-ticket filter should have intent-specific metadata"
+    "legacy tonight ticket params should not have filter-specific metadata"
   );
-  assert.deepEqual(tonightNoTicket.alternates, {
-    canonical: "/tonight?ticket_required=false",
+  assert.deepEqual(tonightLegacyTicket.alternates, {
+    canonical: "/tonight",
   });
 
   const tonightIndoor = await tonightMetadata({

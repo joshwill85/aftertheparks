@@ -64,6 +64,13 @@ async function fetchText(path) {
   return res.text();
 }
 
+function gateHeaders() {
+  const bypass =
+    process.env.VERCEL_AUTOMATION_BYPASS_SECRET ??
+    process.env.VERCEL_PROTECTION_BYPASS;
+  return bypass ? { "x-vercel-protection-bypass": bypass } : {};
+}
+
 function fail(check, detail) {
   return { check, pass: false, detail };
 }
@@ -629,34 +636,40 @@ async function validateUntimedDetailNoTimeField() {
   const data = await fetchJson("/api/activities/crescent-lake-wellness-challenge");
   const activity = data.activity ?? {};
   if (activity.startDateTime || activity.endDateTime) {
-    return fail("Untimed detail omits time field", "fixture is no longer untimed");
+    return fail("Untimed detail has honest time fallback", "fixture is no longer untimed");
   }
 
   const html = await fetchText("/activities/crescent-lake-wellness-challenge");
   const factsStart = html.indexOf('event-detail-facts"');
   if (factsStart === -1) {
-    return fail("Untimed detail omits time field", "detail facts section not found");
+    return fail("Untimed detail has honest time fallback", "detail facts section not found");
   }
   const factsEnd = html.indexOf("</section>", factsStart);
   const factsHtml = html.slice(
     factsStart,
     factsEnd === -1 ? factsStart + 2000 : factsEnd
   );
-  if (/event-detail-fact__label">When</.test(factsHtml)) {
+  if (!/event-detail-fact__label">When</.test(factsHtml)) {
     return fail(
-      "Untimed detail omits time field",
-      "visible When fact rendered for untimed activity"
+      "Untimed detail has honest time fallback",
+      "visible When fact missing for untimed activity"
+    );
+  }
+  if (!/Time not posted by Disney/.test(factsHtml)) {
+    return fail(
+      "Untimed detail has honest time fallback",
+      "specific not-posted timing copy missing"
     );
   }
   if (/Time needs confirmation|Confirm with resort/.test(factsHtml)) {
     return fail(
-      "Untimed detail omits time field",
-      "placeholder time label rendered for untimed activity"
+      "Untimed detail has honest time fallback",
+      "generic time-confirmation placeholder rendered for untimed activity"
     );
   }
   return pass(
-    "Untimed detail omits time field",
-    "no visible When fact for untimed source-backed activity"
+    "Untimed detail has honest time fallback",
+    "visible When fact uses explicit not-posted timing copy"
   );
 }
 
@@ -664,21 +677,27 @@ async function validateUntimedResortNoTimeBucket() {
   const data = await fetchJson("/api/activities/crescent-lake-wellness-challenge");
   const activity = data.activity ?? {};
   if (activity.startDateTime || activity.endDateTime) {
-    return fail("Untimed resort omits time bucket", "fixture is no longer untimed");
+    return fail("Untimed resort has honest time fallback", "fixture is no longer untimed");
   }
 
   const resortSlug = activity.resort?.slug ?? "boardwalk-inn";
   const html = await fetchText(`/resorts/${resortSlug}`);
-  if (/Times to confirm|Time needs confirmation|Confirm time/i.test(html)) {
+  if (!/Time not posted by Disney/i.test(html)) {
     return fail(
-      "Untimed resort omits time bucket",
-      "resort page rendered a time-confirmation bucket for untimed source-backed activity"
+      "Untimed resort has honest time fallback",
+      "resort page did not render explicit not-posted timing copy"
+    );
+  }
+  if (/Times to confirm|Time needs confirmation/i.test(html)) {
+    return fail(
+      "Untimed resort has honest time fallback",
+      "resort page rendered a vague time-confirmation bucket for untimed source-backed activity"
     );
   }
 
   return pass(
-    "Untimed resort omits time bucket",
-    "untimed resort activities are not presented as time fields"
+    "Untimed resort has honest time fallback",
+    "untimed resort activity uses explicit not-posted timing copy"
   );
 }
 

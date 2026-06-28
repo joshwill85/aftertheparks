@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import type { ResortSummary } from "@/lib/types/occurrence";
 
 export function ResortEmptyState({ resort }: { resort: ResortSummary }) {
   return (
     <section className="journal-empty postcard-texture rounded-[28px] border border-[var(--color-card-border)] p-8 text-center md:p-12">
+      <BrandAsset asset="guide-companion" className="brand-asset--empty" />
       <div className="passport-stamp mx-auto w-fit" aria-hidden>
         Schedule pending
       </div>

@@ -18,19 +18,26 @@ export function NightActivityCard({
   onSave,
   weatherSummary,
 }: NightActivityCardProps) {
-  const { isActivitySaved } = usePlan();
+  const { addActivity, isActivitySaved } = usePlan();
   const display = toDisplayActivity(activity);
   const card = activityToEventCard(activity, display, {
     showResort: true,
     variant: "day",
   });
+  const handleSave = () => {
+    if (onSave) {
+      onSave(activity);
+      return;
+    }
+    addActivity(activity);
+  };
 
   return (
     <EventCard
       {...card}
       weatherSummary={weatherSummary}
       saved={isActivitySaved(activity)}
-      onSave={onSave ? () => onSave(activity) : undefined}
+      onSave={handleSave}
     />
   );
 }

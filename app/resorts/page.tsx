@@ -134,7 +134,7 @@ export default async function ResortsPage({
               </dd>
             </div>
             <div>
-              <dt className="font-bold text-[var(--color-muted)]">Source-backed rows</dt>
+              <dt className="font-bold text-[var(--color-muted)]">Verified activity rows</dt>
               <dd className="font-semibold">{sourceSummary.activityCount}</dd>
             </div>
             <div>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img" aria-label="After the Parks guide companion character mark" >
+
+<defs>
+  <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF3A6"/>
+    <stop offset="0.42" stop-color="#FFC94A"/>
+    <stop offset="1" stop-color="#B76F15"/>
+  </linearGradient>
+  <radialGradient id="glowGrad" cx="50%" cy="45%" r="65%">
+    <stop offset="0" stop-color="#FFFBE8"/>
+    <stop offset="0.35" stop-color="#FFE36D"/>
+    <stop offset="0.85" stop-color="#F2A326"/>
+    <stop offset="1" stop-color="#B56F17"/>
+  </radialGradient>
+  <linearGradient id="navyGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#173B60"/>
+    <stop offset="0.55" stop-color="#0B2340"/>
+    <stop offset="1" stop-color="#041226"/>
+  </linearGradient>
+  <linearGradient id="aquaGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#E9FCFF"/>
+    <stop offset="1" stop-color="#5BB8C4"/>
+  </linearGradient>
+  <linearGradient id="daySky" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FDF6D2"/>
+    <stop offset="0.4" stop-color="#BEEAF0"/>
+    <stop offset="1" stop-color="#7EC7D2"/>
+  </linearGradient>
+  <linearGradient id="twilight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#315A86"/>
+    <stop offset="0.55" stop-color="#16385E"/>
+    <stop offset="1" stop-color="#091B32"/>
+  </linearGradient>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+    <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#071426" flood-opacity="0.18"/>
+  </filter>
+  <filter id="tinyShadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#071426" flood-opacity="0.22"/>
+  </filter>
+  <filter id="goldGlow" x="-70%" y="-70%" width="240%" height="240%">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 0.73 0 0 0.55  0 0 0.15 0 0.1  0 0 0 0.75 0" result="glow"/>
+    <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .wordmark { font-family: Georgia, 'Times New Roman', serif; fill: #0B2340; }
+    .tagline { font-family: Avenir, Montserrat, Arial, sans-serif; fill: #17727F; letter-spacing: .04em; }
+    .smallcaps { font-family: Avenir, Montserrat, Arial, sans-serif; letter-spacing: .16em; font-weight: 700; }
+    .navy-stroke { stroke:#0B2340; stroke-linecap:round; stroke-linejoin:round; }
+    .gold-stroke { stroke:#E9AD2E; stroke-linecap:round; stroke-linejoin:round; }
+  </style>
+</defs>
+
+<path d="M140 548 C280 462 430 582 620 444" fill="none" stroke="#FFE063" stroke-width="10" stroke-dasharray="1 24" stroke-linecap="round" filter="url(#goldGlow)"/><g transform="translate(196 170) scale(2.2)" filter="url(#tinyShadow)">
+  <ellipse cx="70" cy="65" rx="58" ry="24" fill="#DFFBFF" opacity="0.58" stroke="#5BB8C4" stroke-width="3" transform="rotate(-31 70 65)"/>
+  <ellipse cx="132" cy="66" rx="58" ry="24" fill="#DFFBFF" opacity="0.58" stroke="#5BB8C4" stroke-width="3" transform="rotate(24 132 66)"/>
+  <path d="M24 66 C50 44 88 44 116 72" fill="none" stroke="#A9DEE5" stroke-width="1.7" opacity=".72"/>
+  <path d="M98 63 C126 43 158 48 184 72" fill="none" stroke="#A9DEE5" stroke-width="1.7" opacity=".72"/>
+  <ellipse cx="112" cy="122" rx="34" ry="53" transform="rotate(-20 112 122)" fill="url(#glowGrad)" filter="url(#goldGlow)"/>
+  <path d="M88 92 C95 108 130 108 144 92" fill="#143052"/>
+  <circle cx="86" cy="68" r="38" fill="url(#navyGrad)"/>
+  <circle cx="74" cy="62" r="13" fill="#fff"/><circle cx="103" cy="62" r="13" fill="#fff"/>
+  <circle cx="79" cy="65" r="7" fill="#081426"/><circle cx="98" cy="65" r="7" fill="#081426"/>
+  <circle cx="82" cy="62" r="2.5" fill="#fff"/><circle cx="101" cy="62" r="2.5" fill="#fff"/>
+  <path d="M76 84 C86 93 100 92 110 84" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+  <path d="M73 38 C62 17 43 17 38 3" fill="none" stroke="#06172B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M98 38 C112 14 132 15 139 2" fill="none" stroke="#06172B" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="38" cy="3" r="8" fill="url(#glowGrad)" filter="url(#goldGlow)"/>
+  <circle cx="139" cy="2" r="8" fill="url(#glowGrad)" filter="url(#goldGlow)"/>
+  <path d="M69 104 C45 108 32 123 18 128" fill="none" stroke="#06172B" stroke-width="5" stroke-linecap="round"/>
+  <path d="M102 102 C120 110 136 121 154 120" fill="none" stroke="#06172B" stroke-width="5" stroke-linecap="round"/>
+  <path d="M78 101 C63 122 51 136 37 145" fill="none" stroke="#06172B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M118 102 C132 122 146 132 159 141" fill="none" stroke="#06172B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M63 96 C83 112 107 111 126 96 L115 119 C99 126 84 124 72 118 Z" fill="#5BB8C4" stroke="#0B2340" stroke-width="2"/>
+</g><g opacity="1" filter="url(#goldGlow)">
+<circle cx="620" cy="498.5" r="11.25" fill="#E9AD2E"/>
+<circle cx="597.5" cy="476.0" r="7.5" fill="#E9AD2E"/>
+<circle cx="642.5" cy="476.0" r="7.5" fill="#E9AD2E"/>
+</g></svg>

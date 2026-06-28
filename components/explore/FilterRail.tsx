@@ -1,11 +1,21 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
-import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { CATEGORY_META, MOOD_CHIPS } from "@/lib/categories/meta";
-import { mergeMoodChipHref } from "@/lib/explore/browseParams";
+import {
+  useCallback,
+  useMemo,
+  useState,
+  type KeyboardEvent,
+  type ReactNode,
+  type WheelEvent,
+} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { CATEGORY_META } from "@/lib/categories/meta";
+import {
+  selectedResortSlugs,
+  toggleResortSlug,
+} from "@/lib/explore/resortFilters";
 import type { FilterImpact } from "@/lib/explore/filterImpact";
+import { INTENT_PRESETS } from "@/lib/planning/presetDefinitions";
 import { cn } from "@/lib/utils";
 
 interface FilterRailProps {
@@ -26,7 +36,6 @@ export function FilterRail({
   onClearAll,
 }: FilterRailProps) {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const update = useCallback(
@@ -50,39 +59,55 @@ export function FilterRail({
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
-  const activeDuration = searchParams.get("duration");
   const activeNear = searchParams.get("near");
+  const activePreset = searchParams.get("preset");
   const activeTransport = searchParams.get("transport");
   const activeArea = searchParams.get("area");
   const activeWeather = searchParams.get("weather");
   const freeOnly = searchParams.get("free") === "true";
   const reservationOnly = searchParams.get("reservation") === "true";
-  const activeTicketRequired = searchParams.get("ticket_required");
+  const scrollRailBy = (element: HTMLElement, delta: number) => {
+    if (element.scrollHeight <= element.clientHeight) return;
+    element.scrollTop += delta;
+  };
+  const handleRailWheel = (event: WheelEvent<HTMLElement>) => {
+    const rail = event.currentTarget;
+    if (rail.scrollHeight <= rail.clientHeight) return;
+    event.preventDefault();
+    event.stopPropagation();
+    scrollRailBy(rail, event.deltaY);
+  };
+  const handleRailKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    const rail = event.currentTarget;
+    const pageAmount = Math.max(rail.clientHeight - 48, 120);
+    const keyScroll: Record<string, number> = {
+      ArrowDown: 48,
+      ArrowUp: -48,
+      PageDown: pageAmount,
+      PageUp: -pageAmount,
+      Home: -rail.scrollHeight,
+      End: rail.scrollHeight,
+    };
+    const delta = keyScroll[event.key];
+    if (delta == null) return;
+    event.preventDefault();
+    event.stopPropagation();
+    scrollRailBy(rail, delta);
+  };
 
   return (
-    <aside className="filter-rail space-y-5">
-      <div>
+    <aside
+      className="filter-rail"
+      aria-label="Activity filters"
+      tabIndex={0}
+      onWheel={handleRailWheel}
+      onKeyDown={handleRailKeyDown}
+    >
+      <div className="filter-rail__header">
         <h2 className="font-display text-lg font-semibold">Filters</h2>
         <p className="mt-1 text-sm text-[var(--color-muted)]">
-          Narrow by mood, resort, or time of day.
+          Narrow by resort, time, and fit.
         </p>
-      </div>
-
-      <div className="space-y-2">
-        <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-          Quick moods
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {MOOD_CHIPS.map((chip) => (
-            <Link
-              key={chip.id}
-              href={mergeMoodChipHref(chip.href, pathname, searchParams)}
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 text-xs font-bold transition-colors hover:border-[var(--accent)]"
-            >
-              {chip.label}
-            </Link>
-          ))}
-        </div>
       </div>
 
       <FilterFields
@@ -90,14 +115,13 @@ export function FilterRail({
         activeResort={activeResort}
         activeCategory={activeCategory}
         activeDaypart={activeDaypart}
-        activeDuration={activeDuration}
         activeNear={activeNear}
+        activePreset={activePreset}
         activeTransport={activeTransport}
         activeArea={activeArea}
         activeWeather={activeWeather}
         freeOnly={freeOnly}
         reservationOnly={reservationOnly}
-        activeTicketRequired={activeTicketRequired}
         hideDaypart={hideDaypart}
         filterImpact={filterImpact}
         homeResortSlug={homeResortSlug}
@@ -107,21 +131,22 @@ export function FilterRail({
       {(activeResort ||
         activeCategory ||
         activeDaypart ||
-        activeDuration ||
         activeNear ||
+        activePreset ||
         activeTransport ||
         activeArea ||
         activeWeather ||
         freeOnly ||
-        reservationOnly ||
-        activeTicketRequired) && (
-        <button
-          type="button"
-          onClick={onClearAll}
-          className="text-sm font-medium text-[var(--accent)] hover:underline"
-        >
-          Clear all filters
-        </button>
+        reservationOnly) && (
+        <div className="filter-rail__footer">
+          <button
+            type="button"
+            onClick={onClearAll}
+            className="text-sm font-medium text-[var(--accent)] hover:underline"
+          >
+            Clear all filters
+          </button>
+        </div>
       )}
     </aside>
   );
@@ -132,14 +157,13 @@ export function FilterFields({
   activeResort,
   activeCategory,
   activeDaypart,
-  activeDuration,
   activeNear,
+  activePreset,
   activeTransport,
   activeArea,
   activeWeather,
   freeOnly = false,
   reservationOnly = false,
-  activeTicketRequired,
   hideDaypart = false,
   filterImpact,
   homeResortSlug,
@@ -150,14 +174,13 @@ export function FilterFields({
   activeResort: string | null;
   activeCategory: string | null;
   activeDaypart: string | null;
-  activeDuration: string | null;
   activeNear: string | null;
+  activePreset: string | null;
   activeTransport: string | null;
   activeArea: string | null;
   activeWeather: string | null;
   freeOnly?: boolean;
   reservationOnly?: boolean;
-  activeTicketRequired: string | null;
   hideDaypart?: boolean;
   filterImpact: FilterImpact;
   homeResortSlug?: string;
@@ -166,12 +189,22 @@ export function FilterFields({
 }) {
   const [resortQuery, setResortQuery] = useState("");
 
+  const activeResortSlugs = useMemo(
+    () => selectedResortSlugs(activeResort),
+    [activeResort]
+  );
   const resortOptions = filterImpact.resorts;
   const daypartOptions = filterImpact.dayparts;
-  const durationOptions = filterImpact.duration;
+  const presetOptions = filterImpact.presets;
   const transportOptions = filterImpact.transport;
   const areaOptions = filterImpact.areas;
   const weatherOptions = filterImpact.weather;
+  const presetDescription = useMemo(
+    () => new Map<string, string>(
+      INTENT_PRESETS.map((preset) => [preset.id, preset.description])
+    ),
+    []
+  );
   const categoryOptions = useMemo(() => {
     const categoryOrder = Object.keys(CATEGORY_META);
     return [...filterImpact.categories].sort((a, b) => {
@@ -183,7 +216,6 @@ export function FilterFields({
       return aIndex - bIndex;
     });
   }, [filterImpact.categories]);
-  const noParkTicketOnly = activeTicketRequired === "false";
   const practicalOptions = [
     {
       key: "free",
@@ -199,13 +231,6 @@ export function FilterFields({
       active: reservationOnly,
       onClick: () => update("reservation", reservationOnly ? null : "true"),
     },
-    {
-      key: "ticket_required",
-      label: "No park ticket",
-      count: filterImpact.practical.noParkTicket,
-      active: noParkTicketOnly,
-      onClick: () => update("ticket_required", noParkTicketOnly ? null : "false"),
-    },
   ].filter((option) => option.count > 0 || option.active);
 
   const filteredResorts = useMemo(() => {
@@ -215,16 +240,84 @@ export function FilterFields({
   }, [resortOptions, resortQuery]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="filter-field-stack">
+      {resortOptions.length > 0 && (
+        <FilterSection
+          title="Resort"
+          defaultOpen={resortOptions.length > 0}
+          activeCount={activeResortSlugs.length}
+        >
+          {(searchableResorts || resortOptions.length > 10) && (
+            <input
+              type="search"
+              value={resortQuery}
+              onChange={(e) => setResortQuery(e.target.value)}
+              placeholder="Search resorts..."
+              className="form-control"
+              aria-label="Search resorts"
+            />
+          )}
+          <div
+            className={cn(
+              searchableResorts || resortOptions.length > 10
+                ? "filter-option-list filter-option-list--scroll"
+                : "filter-option-list"
+            )}
+          >
+            <button
+              type="button"
+              onClick={() => update("resort", null)}
+              className={cn(
+                "filter-option-row",
+                activeResortSlugs.length === 0 && "filter-option-row--active"
+              )}
+              aria-pressed={activeResortSlugs.length === 0}
+            >
+              <span>All resorts</span>
+            </button>
+            {filteredResorts.map((r) => {
+              const active = activeResortSlugs.includes(r.value);
+              return (
+                <button
+                  key={r.value}
+                  type="button"
+                  onClick={() => {
+                    const next = toggleResortSlug(activeResort, r.value);
+                    update({ resort: next ?? null, near: null });
+                  }}
+                  className={cn(
+                    "filter-option-row",
+                    active && "filter-option-row--active"
+                  )}
+                  aria-pressed={active}
+                >
+                  <span>{r.label}</span>
+                  <span className="filter-option-row__count">{r.count}</span>
+                </button>
+              );
+            })}
+            {filteredResorts.length === 0 && (
+              <p className="px-3 py-2 text-sm text-[var(--color-muted)]">
+                No resorts match &ldquo;{resortQuery}&rdquo;
+              </p>
+            )}
+          </div>
+        </FilterSection>
+      )}
+
       {homeResortSlug && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            First night
-          </p>
+        <FilterSection
+          title="First night"
+          defaultOpen={activeNear === "my-resort"}
+          activeCount={activeNear === "my-resort" ? 1 : 0}
+        >
           <button
             type="button"
             onClick={() => {
-              const active = activeNear === "my-resort" && activeResort === homeResortSlug;
+              const active =
+                activeNear === "my-resort" &&
+                activeResortSlugs.length === 1 &&
+                activeResortSlugs[0] === homeResortSlug;
               if (active) {
                 update("near", null);
                 return;
@@ -232,23 +325,25 @@ export function FilterFields({
               update({ resort: homeResortSlug, near: "my-resort" });
             }}
             className={cn(
-              "filter-pill",
+              "filter-option-row",
               activeNear === "my-resort" &&
-                activeResort === homeResortSlug &&
-                "filter-pill--active"
+                activeResortSlugs.length === 1 &&
+                activeResortSlugs[0] === homeResortSlug &&
+                "filter-option-row--active"
             )}
           >
-            Near my resort
+            <span>Near my resort</span>
           </button>
-        </div>
+        </FilterSection>
       )}
 
       {!hideDaypart && daypartOptions.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Time of day
-          </p>
-          <div className="flex flex-wrap gap-2">
+        <FilterSection
+          title="Time of day"
+          defaultOpen={Boolean(activeDaypart)}
+          activeCount={activeDaypart ? 1 : 0}
+        >
+          <div className="filter-option-list">
             {daypartOptions.map((d) => (
               <button
                 key={d.value}
@@ -257,68 +352,82 @@ export function FilterFields({
                   update("daypart", activeDaypart === d.value ? null : d.value)
                 }
                 className={cn(
-                  "filter-pill",
-                  activeDaypart === d.value && "filter-pill--active"
+                  "filter-option-row",
+                  activeDaypart === d.value && "filter-option-row--active"
                 )}
               >
-                {d.label}
-                <span className="filter-pill__count">{d.count}</span>
+                <span>{d.label}</span>
+                <span className="filter-option-row__count">{d.count}</span>
               </button>
             ))}
           </div>
-        </div>
+        </FilterSection>
       )}
 
-      {durationOptions.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Planning pace
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {durationOptions.map((option) => (
+      {presetOptions.length > 0 && (
+        <FilterSection
+          title="Plan by need"
+          defaultOpen={Boolean(activePreset)}
+          activeCount={activePreset ? 1 : 0}
+        >
+          <div className="filter-option-list">
+            {presetOptions.map((option) => (
               <button
                 key={option.value}
                 type="button"
                 onClick={() =>
-                  update("duration", activeDuration === option.value ? null : option.value)
+                  update("preset", activePreset === option.value ? null : option.value)
                 }
-                className={cn("filter-pill", option.active && "filter-pill--active")}
+                className={cn(
+                  "filter-option-row",
+                  option.active && "filter-option-row--active"
+                )}
               >
-                {option.label}
-                <span className="filter-pill__count">{option.count}</span>
+                <span>
+                  <span>{option.label}</span>
+                  <span className="filter-option-row__helper">
+                    {presetDescription.get(option.value)}
+                  </span>
+                </span>
+                <span className="filter-option-row__count">{option.count}</span>
               </button>
             ))}
           </div>
-        </div>
+        </FilterSection>
       )}
 
       {practicalOptions.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Practical
-          </p>
-          <div className="flex flex-wrap gap-2">
+        <FilterSection
+          title="Practical"
+          defaultOpen={freeOnly || reservationOnly}
+          activeCount={[freeOnly, reservationOnly].filter(Boolean).length}
+        >
+          <div className="filter-option-list">
             {practicalOptions.map((option) => (
               <button
                 key={option.key}
                 type="button"
                 onClick={option.onClick}
-                className={cn("filter-pill", option.active && "filter-pill--active")}
+                className={cn(
+                  "filter-option-row",
+                  option.active && "filter-option-row--active"
+                )}
               >
-                {option.label}
-                <span className="filter-pill__count">{option.count}</span>
+                <span>{option.label}</span>
+                <span className="filter-option-row__count">{option.count}</span>
               </button>
             ))}
           </div>
-        </div>
+        </FilterSection>
       )}
 
       {weatherOptions.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Weather backup
-          </p>
-          <div className="flex flex-wrap gap-2">
+        <FilterSection
+          title="Weather backup"
+          defaultOpen={Boolean(activeWeather)}
+          activeCount={activeWeather ? 1 : 0}
+        >
+          <div className="filter-option-list">
             {weatherOptions.map((option) => (
               <button
                 key={option.value}
@@ -326,22 +435,26 @@ export function FilterFields({
                 onClick={() =>
                   update("weather", activeWeather === option.value ? null : option.value)
                 }
-                className={cn("filter-pill", option.active && "filter-pill--active")}
+                className={cn(
+                  "filter-option-row",
+                  option.active && "filter-option-row--active"
+                )}
               >
-                {option.label}
-                <span className="filter-pill__count">{option.count}</span>
+                <span>{option.label}</span>
+                <span className="filter-option-row__count">{option.count}</span>
               </button>
             ))}
           </div>
-        </div>
+        </FilterSection>
       )}
 
       {transportOptions.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Transportation
-          </p>
-          <div className="flex flex-wrap gap-2">
+        <FilterSection
+          title="Transportation"
+          defaultOpen={Boolean(activeTransport)}
+          activeCount={activeTransport ? 1 : 0}
+        >
+          <div className="filter-option-list">
             {transportOptions.map((option) => (
               <button
                 key={option.value}
@@ -352,125 +465,90 @@ export function FilterFields({
                     activeTransport === option.value ? null : option.value
                   )
                 }
-                className={cn("filter-pill", option.active && "filter-pill--active")}
+                className={cn(
+                  "filter-option-row",
+                  option.active && "filter-option-row--active"
+                )}
               >
-                {option.label}
-                <span className="filter-pill__count">{option.count}</span>
+                <span>{option.label}</span>
+                <span className="filter-option-row__count">{option.count}</span>
               </button>
             ))}
           </div>
-        </div>
+        </FilterSection>
       )}
 
       {areaOptions.length > 0 && (
-        <label className="block text-sm">
-          <span className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Resort area
-          </span>
-          <select
-            value={activeArea ?? ""}
-            onChange={(e) => update("area", e.target.value || null)}
-            className="form-control"
-          >
-            <option value="">All resort areas</option>
-            {areaOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label} ({option.count})
-              </option>
-            ))}
-          </select>
-        </label>
-      )}
-
-      {resortOptions.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Resort
-          </p>
-          {(searchableResorts || resortOptions.length > 10) && (
-            <input
-              type="search"
-              value={resortQuery}
-              onChange={(e) => setResortQuery(e.target.value)}
-              placeholder="Search resorts…"
-                  className="form-control"
-                  aria-label="Search resorts"
-                />
-          )}
-          {searchableResorts ? (
-            <div className="max-h-48 space-y-1 overflow-y-auto overscroll-contain rounded-xl border border-[var(--color-card-border)] p-2">
-              <button
-                type="button"
-                onClick={() => update("resort", null)}
-                className={cn(
-                  "flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm font-medium transition-colors",
-                  !activeResort
-                    ? "bg-[var(--accent)]/15 text-[var(--accent)]"
-                    : "hover:bg-[var(--color-sun-cream)]"
-                )}
-              >
-                All resorts
-              </button>
-              {filteredResorts.map((r) => (
-                <button
-                  key={r.value}
-                  type="button"
-                  onClick={() => update("resort", r.value)}
-                  className={cn(
-                    "flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm font-medium transition-colors",
-                    activeResort === r.value
-                      ? "bg-[var(--accent)]/15 text-[var(--accent)]"
-                      : "hover:bg-[var(--color-sun-cream)]"
-                  )}
-                >
-                  <span>{r.label}</span>
-                  <span className="ml-auto text-xs text-[var(--color-muted)]">
-                    {r.count}
-                  </span>
-                </button>
-              ))}
-              {filteredResorts.length === 0 && (
-                <p className="px-3 py-2 text-sm text-[var(--color-muted)]">
-                  No resorts match &ldquo;{resortQuery}&rdquo;
-                </p>
-              )}
-            </div>
-          ) : (
+        <FilterSection
+          title="Resort area"
+          defaultOpen={Boolean(activeArea)}
+          activeCount={activeArea ? 1 : 0}
+        >
+          <label className="block text-sm">
+            <span className="sr-only">Resort area</span>
             <select
-              value={activeResort ?? ""}
-              onChange={(e) => update("resort", e.target.value || null)}
+              value={activeArea ?? ""}
+              onChange={(e) => update("area", e.target.value || null)}
               className="form-control"
             >
-              <option value="">All resorts</option>
-              {filteredResorts.map((r) => (
-                <option key={r.value} value={r.value}>
-                  {r.label} ({r.count})
+              <option value="">All resort areas</option>
+              {areaOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label} ({option.count})
                 </option>
               ))}
             </select>
-          )}
-        </div>
+          </label>
+        </FilterSection>
       )}
 
       {categoryOptions.length > 0 && (
-        <label className="block text-sm">
-          <span className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Category
-          </span>
-          <select
-            value={activeCategory ?? ""}
-            onChange={(e) => update("category", e.target.value || null)}
-            className="form-control"
-          >
-            <option value="">All categories</option>
-            {categoryOptions.map((c) => (
-              <option key={c.value} value={c.value}>
-                {c.label} ({c.count})
-              </option>
-            ))}
-          </select>
-        </label>
+        <FilterSection
+          title="Category"
+          defaultOpen={Boolean(activeCategory)}
+          activeCount={activeCategory ? 1 : 0}
+        >
+          <label className="block text-sm">
+            <span className="sr-only">Category</span>
+            <select
+              value={activeCategory ?? ""}
+              onChange={(e) => update("category", e.target.value || null)}
+              className="form-control"
+            >
+              <option value="">All categories</option>
+              {categoryOptions.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label} ({c.count})
+                </option>
+              ))}
+            </select>
+          </label>
+        </FilterSection>
       )}
     </div>
+  );
+}
+
+function FilterSection({
+  title,
+  defaultOpen = false,
+  activeCount = 0,
+  children,
+}: {
+  title: string;
+  defaultOpen?: boolean;
+  activeCount?: number;
+  children: ReactNode;
+}) {
+  return (
+    <details className="filter-section" open={defaultOpen}>
+      <summary className="filter-section__summary">
+        <span>{title}</span>
+        {activeCount > 0 && (
+          <span className="filter-section__active-count">{activeCount}</span>
+        )}
+      </summary>
+      <div className="filter-section__body">{children}</div>
+    </details>
   );
 }

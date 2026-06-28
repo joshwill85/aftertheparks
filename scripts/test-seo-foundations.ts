@@ -70,18 +70,14 @@ async function main() {
     "sitemap should include guide pages"
   );
   for (const filteredPath of [
-    "/activities?ticket_required=false",
     "/activities?free=true",
     "/activities?weather=indoor",
     "/activities?weather=covered",
     "/activities?transport=monorail",
     "/activities?transport=skyliner",
     "/activities?area=disney-springs",
-    "/activities?duration=short&time=evening",
     "/resorts?no_ticket_friendly=true",
-    "/today?ticket_required=false",
     "/today?weather=indoor",
-    "/tonight?ticket_required=false",
     "/tonight?weather=indoor",
   ]) {
     assert.ok(
@@ -226,10 +222,10 @@ async function main() {
     /effectiveDate/,
     "source policy should expose the Disney Springs caveat effective date"
   );
-  assert.match(
+  assert.doesNotMatch(
     sourcePolicyPage,
-    /sourceUrls\.map/,
-    "source policy should link to the Disney Springs caveat evidence sources"
+    /sourceUrls\.map|Caveat source|fox35orlando\.com|people\.com/,
+    "source policy should not expose third-party Disney Springs caveat source links"
   );
   const privacyPage = readFileSync("app/privacy/page.tsx", "utf8");
   assert.match(

@@ -7,6 +7,8 @@ import {
   resortAreaMatchesOrigin,
   transportMatchesFilter,
 } from "@/lib/explore/routeTaxonomy";
+import { selectedResortSlugs } from "@/lib/explore/resortFilters";
+import { itemMatchesPreset } from "@/lib/planning/presetDefinitions";
 import type { ActivityFilters, ActivityOccurrence } from "@/lib/types/occurrence";
 
 function weatherMatches(
@@ -32,54 +34,22 @@ function weatherMatches(
   return /\bcovered\b|porch|pavilion|under cover|covered walkway/.test(text);
 }
 
-function requiresParkTicket(occurrence: ActivityOccurrence): boolean {
-  const text = [
-    occurrence.title,
-    occurrence.summary,
-    occurrence.category,
-    occurrence.section,
-    occurrence.location.label,
-    occurrence.scheduleText,
-    occurrence.price.notes,
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-
-  return (
-    /valid (theme )?park admission|requires? (valid )?(theme )?park admission|park ticket required|theme park ticket|required admission/.test(
-      text
-    ) ||
-    /\binside (magic kingdom|epcot|hollywood studios|animal kingdom) park\b/.test(text) ||
-    /\b(magic kingdom|epcot|hollywood studios|animal kingdom) park\b/.test(text)
-  );
-}
-
-function isShortDuration(occurrence: ActivityOccurrence): boolean {
-  const duration = occurrence.enrichment?.durationMinutes;
-  if (typeof duration === "number") return duration <= 45;
-
-  const text = [occurrence.title, occurrence.category, occurrence.summary, occurrence.scheduleText]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  if (/movie|fireworks|cruise|tour|trail|surrey/.test(text)) return false;
-  return /campfire|arcade|craft|trivia|game|scavenger|lobby|drawing|animation/.test(text);
-}
-
 /** Apply URL browse filters to an already day-scoped activity list. */
 export function applyBrowseFilters(
   occurrences: ActivityOccurrence[],
   filters: ActivityFilters
 ): ActivityOccurrence[] {
   let result = occurrences;
+  const selectedResorts = selectedResortSlugs(filters.resort);
 
-  if (filters.near === "my-resort" && filters.resort) {
+  if (filters.near === "my-resort" && selectedResorts.length === 1) {
+    const homeResort = selectedResorts[0];
     result = result.filter((o) =>
-      resortAreaMatchesOrigin(filters.resort!, o.resort.slug, o.resort.area)
+      resortAreaMatchesOrigin(homeResort, o.resort.slug, o.resort.area)
     );
-  } else if (filters.resort) {
-    result = result.filter((o) => o.resort.slug === filters.resort);
+  } else if (selectedResorts.length > 0) {
+    const resortSet = new Set(selectedResorts);
+    result = result.filter((o) => resortSet.has(o.resort.slug));
   }
   if (filters.category) {
     result = result.filter((o) => o.category === filters.category);
@@ -87,8 +57,12 @@ export function applyBrowseFilters(
   if (filters.daypart) {
     result = filterByDaypart(result, filters.daypart);
   }
-  if (filters.duration === "short") {
-    result = result.filter(isShortDuration);
+  if (filters.preset) {
+    result = result.filter((o) =>
+      itemMatchesPreset(o, filters.preset!, {
+        homeResortSlug: selectedResorts[0],
+      })
+    );
   }
   if (filters.transport) {
     result = result.filter((o) =>
@@ -111,9 +85,6 @@ export function applyBrowseFilters(
         o.enrichment?.reservationRequired ||
         o.enrichment?.reservationRecommended
     );
-  }
-  if (filters.ticketRequired !== undefined) {
-    result = result.filter((o) => requiresParkTicket(o) === filters.ticketRequired);
   }
   if (filters.q) {
     result = rankActivitiesByQuery(result, filters.q);

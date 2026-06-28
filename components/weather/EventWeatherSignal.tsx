@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent } from "react";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { formatTempDual } from "@/lib/weather/format";
+import { weatherPageHref } from "@/lib/weather/links";
+import { WeatherIcon } from "@/components/weather/WeatherIcon";
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { NearTermRainLine } from "@/components/weather/NearTermRainLine";
 import { cn } from "@/lib/utils";
@@ -39,6 +41,23 @@ function detailText(guidance: WeatherForTimeSpan): string | undefined {
     guidance.nwsAlerts.length > 0 ? "official alert" : undefined,
   ].filter(Boolean);
   return pieces.length > 0 ? pieces.join(" · ") : undefined;
+}
+
+function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string | undefined {
+  switch (action) {
+    case "good_now":
+      return "Good to go";
+    case "go_earlier":
+      return "Go earlier";
+    case "choose_covered_backup":
+      return "Pick covered backup";
+    case "stay_inside":
+      return "Stay inside";
+    case "official_alert":
+      return "Official alert";
+    default:
+      return undefined;
+  }
 }
 
 export function EventWeatherSignal({
@@ -92,6 +111,15 @@ export function EventWeatherSignal({
   const guidance = state.guidance;
   const tone = toneForGuidance(guidance);
   const detail = detailText(guidance);
+  const actionLabel = weatherActionLabel(guidance.actionGuidance);
+  const weatherHref = weatherPageHref(guidance.locationKey);
+  const openWeatherPage = (
+    event: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.assign(weatherHref);
+  };
 
   return (
     <div
@@ -101,9 +129,21 @@ export function EventWeatherSignal({
         className
       )}
     >
-      <span className="event-weather-signal__mark" aria-hidden />
+      <span
+        role="link"
+        tabIndex={0}
+        className="event-weather-signal__icon event-weather-signal__icon-link"
+        aria-label={`Open detailed weather for ${guidance.locationKey.replaceAll("_", " ")}`}
+        data-href={weatherHref}
+        onClick={openWeatherPage}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") openWeatherPage(event);
+        }}
+      >
+        <WeatherIcon iconKey={guidance.iconKey} decorative />
+      </span>
       <span className="event-weather-signal__copy">
-        <strong>{guidance.nearTermRain?.answer !== "unknown" ? guidance.nearTermRain?.headline : guidance.headline}</strong>
+        <strong>{actionLabel ?? (guidance.nearTermRain?.answer !== "unknown" ? guidance.nearTermRain?.headline : guidance.headline)}</strong>
         {detail && <span>{detail}</span>}
         <NearTermRainLine signal={guidance.nearTermRain} compact />
         <WeatherFreshnessLine weather={guidance} />

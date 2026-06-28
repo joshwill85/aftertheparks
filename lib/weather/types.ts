@@ -66,6 +66,10 @@ export type ForecastStatus =
   | "stale"
   | "unavailable"
   | "not_available_yet";
+export type WeatherTimeBasis =
+  | "exact_event_time"
+  | "flexible_activity_window"
+  | "page_area_window";
 
 export type NearTermRainAnswer =
   | "unlikely"
@@ -263,6 +267,9 @@ export interface WeatherForTimeSpan {
   forecastConfidence?: ForecastConfidence;
   forecastStatus: ForecastStatus;
   officialAlertStatus: OfficialAlertStatus;
+  actionGuidance?: import("@/lib/weather/guidance").WeatherActionGuidance;
+  timeBasis?: WeatherTimeBasis;
+  timeBasisLabel?: string;
   nearTermRain?: NearTermRainSignal;
   precipMap?: WeatherPrecipMapContext;
 }

@@ -16,14 +16,17 @@ assert.match(guidance, /precipMap/);
 const batch = readFileSync("app/api/weather/guidance/batch/route.ts", "utf8");
 assert.match(batch, /validateWeatherGuidanceBatchRequest/);
 assert.match(batch, /validateWeatherGuidanceBatchOptions/);
-assert.match(batch, /groupOccurrencesByWeatherLocation/);
-assert.match(batch, /getCachedNwsAlerts/);
-assert.match(batch, /getCachedNwsAlertsForAllWdw/);
-assert.match(batch, /Promise\.allSettled/);
-assert.match(batch, /officialAlertStatus/);
-assert.match(batch, /alertState\.alerts/);
+assert.match(batch, /loadWeatherByOccurrence/);
 assert.match(batch, /weatherById/);
 assert.match(batch, /includeNearTerm/);
+
+const serverGuidance = readFileSync("lib/weather/serverGuidance.ts", "utf8");
+assert.match(serverGuidance, /groupOccurrencesByWeatherLocation/);
+assert.match(serverGuidance, /getCachedNwsAlerts/);
+assert.match(serverGuidance, /getCachedNwsAlertsForAllWdw/);
+assert.match(serverGuidance, /Promise\.allSettled/);
+assert.match(serverGuidance, /officialAlertStatus/);
+assert.match(serverGuidance, /buildWeatherGuidanceForTimeSpan/);
 
 const validation = readFileSync("lib/weather/apiValidation.ts", "utf8");
 assert.match(validation, /validateWeatherGuidanceSearchParams/);

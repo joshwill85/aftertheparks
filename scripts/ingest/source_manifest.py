@@ -154,8 +154,8 @@ ACTIVITY_SOURCES: list[ActivitySource] = [
     "boardwalk",
     ("boardwalk-inn", "boardwalk-villas"),
     recreation_url("boardwalk-inn"),
-    f"{CDN_COLLATERAL}/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-    "fy26-q2-0326",
+    f"{CDN_COLLATERAL}/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "fy26-q3-0526",
     "Shared calendar for Disney's BoardWalk Inn and BoardWalk Villas.",
   ),
   ActivitySource(

@@ -1,7 +1,7 @@
 {
   "calendar_group_key": "boardwalk",
-  "source_pdf": "data/raw/pdfs/BW_Aframe_Recreation-0326.pdf",
-  "source_pdf_sha256": "7ffb83903ac81cd21ac16bd4a9c02032e707ead4993c1a3473eceaa5cf3b084b",
+  "source_pdf": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+  "source_pdf_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
   "expected_records": [
     {
       "title": "Side Show Games Arcade",
@@ -17,28 +17,52 @@
         "title": [
           {
             "page": 1,
-            "line": 3,
+            "line": 4,
+            "bbox": [
+              912.5,
+              509.0,
+              1582.0,
+              540.5
+            ],
             "text": "SIDE SHOW GAMES ARCADE ($)"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 3,
+            "line": 4,
+            "bbox": [
+              912.5,
+              509.0,
+              1582.0,
+              540.5
+            ],
             "text": "SIDE SHOW GAMES ARCADE ($)"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 6,
+            "line": 7,
+            "bbox": [
+              912.5,
+              554.5,
+              1259.0,
+              576.0
+            ],
             "text": "Daily from 8:00am-11:00pm"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 7,
+            "line": 8,
+            "bbox": [
+              913.0,
+              588.5,
+              1586.0,
+              616.0
+            ],
             "text": "Play the latest and greatest family-friendly video games."
           }
         ]
@@ -58,43 +82,85 @@
         "title": [
           {
             "page": 1,
-            "line": 8,
+            "line": 9,
+            "bbox": [
+              912.5,
+              656.5,
+              1292.5,
+              681.5
+            ],
             "text": "COMMUNITY HALL"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 8,
+            "line": 9,
+            "bbox": [
+              912.5,
+              656.5,
+              1292.5,
+              681.5
+            ],
             "text": "COMMUNITY HALL"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 9,
+            "line": 10,
+            "bbox": [
+              912.5,
+              700.0,
+              1279.5,
+              721.5
+            ],
             "text": "Daily from 10:00am-10:00pm"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 12,
+            "line": 13,
+            "bbox": [
+              913.0,
+              734.0,
+              1513.0,
+              761.0
+            ],
             "text": "Play video games and billiards, check out sporting"
           },
           {
             "page": 1,
-            "line": 13,
+            "line": 14,
+            "bbox": [
+              911.5,
+              770.5,
+              1571.5,
+              798.0
+            ],
             "text": "equipment and grilling tools, and enjoy arts and crafts."
           },
           {
             "page": 1,
-            "line": 14,
+            "line": 15,
+            "bbox": [
+              911.0,
+              807.0,
+              1534.0,
+              834.5
+            ],
             "text": "Fees may apply. Please allow a minimum of 48 hours"
           },
           {
             "page": 1,
-            "line": 16,
+            "line": 17,
+            "bbox": [
+              910.5,
+              843.5,
+              1403.5,
+              864.0
+            ],
             "text": "before checkout for ceramics and mosaics."
           }
         ]
@@ -114,29 +180,53 @@
         "title": [
           {
             "page": 1,
-            "line": 15,
+            "line": 16,
+            "bbox": [
+              160.0,
+              813.5,
+              648.0,
+              838.5
+            ],
             "text": "BOARDWALK CROQUET"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 17,
+            "line": 18,
+            "bbox": [
+              158.0,
+              855.0,
+              329.5,
+              876.0
+            ],
             "text": "Croquet Lawn"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 18,
+            "line": 19,
+            "bbox": [
+              159.0,
+              888.0,
+              466.5,
+              910.0
+            ],
             "text": "Daily from Dawn to Dusk"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 20,
-            "text": "Enjoy a friendly game of croquet on our lush lawn."
+            "line": 21,
+            "bbox": [
+              159.0,
+              919.5,
+              766.0,
+              947.0
+            ],
+            "text": "Enjoy a friendly game of croquet on our Lush lawn."
           }
         ]
       }
@@ -155,14 +245,26 @@
         "title": [
           {
             "page": 1,
-            "line": 28,
+            "line": 29,
+            "bbox": [
+              913.5,
+              1128.5,
+              1331.0,
+              1159.5
+            ],
             "text": "MICKEY TIE-DYE ($)"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 30,
+            "line": 31,
+            "bbox": [
+              912.5,
+              1174.0,
+              1167.5,
+              1191.5
+            ],
             "text": "Luna Park Pool Deck"
           }
         ],
@@ -170,18 +272,36 @@
           {
             "page": 1,
             "line": 32,
+            "bbox": [
+              911.5,
+              1210.0,
+              1417.0,
+              1231.5
+            ],
             "text": "Sunday, Tuesday, Thursday and Saturday"
           },
           {
             "page": 1,
-            "line": 33,
+            "line": 34,
+            "bbox": [
+              911.5,
+              1246.5,
+              1187.0,
+              1268.0
+            ],
             "text": "from 4:00pm-5:00pm"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 35,
+            "line": 36,
+            "bbox": [
+              912.0,
+              1280.5,
+              1622.0,
+              1308.0
+            ],
             "text": "Get creative with a Disney twist on this arts and crafts favorite!"
           }
         ]
@@ -201,33 +321,63 @@
         "title": [
           {
             "page": 1,
-            "line": 31,
+            "line": 33,
+            "bbox": [
+              160.0,
+              1211.0,
+              686.0,
+              1236.0
+            ],
             "text": "FAMILY WELLNESS YOGA"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 34,
+            "line": 35,
+            "bbox": [
+              157.5,
+              1252.0,
+              397.5,
+              1273.0
+            ],
             "text": "Village Green Lawn"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 36,
+            "line": 37,
+            "bbox": [
+              158.0,
+              1286.0,
+              438.0,
+              1307.0
+            ],
             "text": "Wednesday at 9:00am"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 37,
+            "line": 38,
+            "bbox": [
+              158.0,
+              1317.0,
+              770.0,
+              1344.5
+            ],
             "text": "Get active and enjoy a story time yoga session inspired"
           },
           {
             "page": 1,
-            "line": 38,
+            "line": 39,
+            "bbox": [
+              158.5,
+              1345.5,
+              399.5,
+              1381.0
+            ],
             "text": "by our Disney friends."
           }
         ]
@@ -237,7 +387,7 @@
       "title": "Arts & Crafts",
       "slug": "arts-crafts",
       "category": "arts_crafts",
-      "schedule_text": "Monday, Wednesday, and Friday from 4:00pm-5:00pm",
+      "schedule_text": "Monday, Wednesday and Friday from 4:00pm-5:00pm",
       "start_time": "4:00pm",
       "end_time": "5:00pm",
       "location": "Village Green Lawn",
@@ -247,28 +397,52 @@
         "title": [
           {
             "page": 1,
-            "line": 39,
+            "line": 40,
+            "bbox": [
+              911.5,
+              1346.5,
+              1320.0,
+              1378.0
+            ],
             "text": "ARTS & CRAFTS ($)"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 40,
+            "line": 41,
+            "bbox": [
+              911.5,
+              1392.0,
+              1151.0,
+              1413.5
+            ],
             "text": "Village Green Lawn"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 42,
-            "text": "Monday, Wednesday, and Friday from 4:00pm-5:00pm"
+            "line": 43,
+            "bbox": [
+              912.5,
+              1428.5,
+              1592.0,
+              1450.0
+            ],
+            "text": "Monday, Wednesday and Friday from 4:00pm-5:00pm"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 44,
+            "line": 45,
+            "bbox": [
+              911.0,
+              1462.5,
+              1403.0,
+              1490.0
+            ],
             "text": "Join us for family-friendly arts and crafts."
           }
         ]
@@ -288,48 +462,96 @@
         "title": [
           {
             "page": 1,
-            "line": 41,
+            "line": 42,
+            "bbox": [
+              160.0,
+              1410.0,
+              571.5,
+              1435.0
+            ],
             "text": "PICKLEBALL CLINIC"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 43,
+            "line": 44,
+            "bbox": [
+              159.0,
+              1451.0,
+              640.5,
+              1469.0
+            ],
             "text": "BoardWalk Tennis and Pickleball Court"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 47,
+            "line": 46,
+            "bbox": [
+              159.0,
+              1484.5,
+              527.0,
+              1506.0
+            ],
             "text": "Friday from 9:00am-10:00am"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 48,
+            "line": 47,
+            "bbox": [
+              157.0,
+              1516.0,
+              756.0,
+              1543.5
+            ],
             "text": "This complimentary introduction to pickleball will"
           },
           {
             "page": 1,
-            "line": 50,
+            "line": 49,
+            "bbox": [
+              157.0,
+              1550.0,
+              735.5,
+              1577.5
+            ],
             "text": "teach the basics of the game everyone is talking"
           },
           {
             "page": 1,
-            "line": 52,
+            "line": 51,
+            "bbox": [
+              158.0,
+              1584.0,
+              745.5,
+              1611.0
+            ],
             "text": "about. Learn skills and techniques, then compete"
           },
           {
             "page": 1,
-            "line": 54,
+            "line": 53,
+            "bbox": [
+              158.5,
+              1618.0,
+              769.5,
+              1645.5
+            ],
             "text": "in our Pickleball Challenge at the end of the clinic!"
           },
           {
             "page": 1,
-            "line": 56,
+            "line": 55,
+            "bbox": [
+              157.5,
+              1652.0,
+              724.5,
+              1679.5
+            ],
             "text": "Pre-register at Community Hall. Space is limited."
           }
         ]
@@ -339,9 +561,9 @@
       "title": "Campfire",
       "slug": "campfire",
       "category": "campfire",
-      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "schedule_text": "Nightly from 6:00pm-7:30pm",
       "start_time": "6:00pm",
-      "end_time": "7:00pm",
+      "end_time": "7:30pm",
       "location": "Village Green Lawn",
       "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
       "is_fee_based": false,
@@ -349,33 +571,63 @@
         "title": [
           {
             "page": 1,
-            "line": 49,
-            "text": "CAMPFIRE"
+            "line": 48,
+            "bbox": [
+              912.5,
+              1530.5,
+              1123.0,
+              1577.5
+            ],
+            "text": "CA MPFIRE"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 51,
+            "line": 50,
+            "bbox": [
+              911.5,
+              1574.0,
+              1151.0,
+              1614.0
+            ],
             "text": "Village Green Lawn"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 53,
-            "text": "Nightly from 6:00pm-7:00pm"
+            "line": 52,
+            "bbox": [
+              912.5,
+              1608.5,
+              1279.5,
+              1651.5
+            ],
+            "text": "Nightly from 6:00pm-7:30pm"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 55,
+            "line": 54,
+            "bbox": [
+              913.0,
+              1644.5,
+              1603.5,
+              1672.0
+            ],
             "text": "Enjoy the warm glow of the campfire with complimentary"
           },
           {
             "page": 1,
-            "line": 57,
+            "line": 56,
+            "bbox": [
+              912.5,
+              1681.0,
+              1504.5,
+              1708.0
+            ],
             "text": "marshmallows. S’mores kits available for purchase."
           }
         ]
@@ -385,8 +637,8 @@
       "title": "Nighttime Trivia",
       "slug": "nighttime-trivia",
       "category": "other",
-      "schedule_text": "Nightly at 7:30",
-      "start_time": null,
+      "schedule_text": "Nightly at 8:00pm",
+      "start_time": "8:00pm",
       "end_time": null,
       "location": "Village Green Lawn",
       "description": "Join us for a trivia challenge.",
@@ -395,28 +647,52 @@
         "title": [
           {
             "page": 1,
-            "line": 60,
+            "line": 59,
+            "bbox": [
+              913.5,
+              1749.0,
+              1300.5,
+              1774.0
+            ],
             "text": "NIGHTTIME TRIVIA"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 62,
+            "line": 61,
+            "bbox": [
+              911.5,
+              1793.0,
+              1151.0,
+              1814.0
+            ],
             "text": "Village Green Lawn"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 64,
-            "text": "Nightly at 7:30"
+            "line": 63,
+            "bbox": [
+              912.5,
+              1829.0,
+              1138.5,
+              1850.5
+            ],
+            "text": "Nightly at 8:00pm"
           }
         ],
         "description": [
           {
             "page": 1,
-            "line": 66,
+            "line": 65,
+            "bbox": [
+              911.0,
+              1863.0,
+              1256.0,
+              1890.0
+            ],
             "text": "Join us for a trivia challenge."
           }
         ]
@@ -426,8 +702,8 @@
       "title": "Movie Under the Stars",
       "slug": "movie-under-the-stars",
       "category": "movies_under_stars",
-      "schedule_text": "Village Green Lawn | 8:00PM",
-      "start_time": "8:00pm",
+      "schedule_text": "Village Green Lawn | 8:30PM",
+      "start_time": "8:30pm",
       "end_time": null,
       "location": "Village Green Lawn",
       "description": "",
@@ -436,22 +712,40 @@
         "title": [
           {
             "page": 1,
-            "line": 69,
+            "line": 68,
+            "bbox": [
+              913.5,
+              1955.0,
+              1583.0,
+              1983.5
+            ],
             "text": "MOVIE UNDER THE STARS"
           }
         ],
         "location": [
           {
             "page": 1,
-            "line": 70,
-            "text": "VILLAGE GREEN LAWN | 8:00PM"
+            "line": 69,
+            "bbox": [
+              911.0,
+              2024.0,
+              1425.0,
+              2058.0
+            ],
+            "text": "VILLAGE GREEN LAWN | 8:30PM"
           }
         ],
         "schedule": [
           {
             "page": 1,
-            "line": 70,
-            "text": "VILLAGE GREEN LAWN | 8:00PM"
+            "line": 69,
+            "bbox": [
+              911.0,
+              2024.0,
+              1425.0,
+              2058.0
+            ],
+            "text": "VILLAGE GREEN LAWN | 8:30PM"
           }
         ]
       }
@@ -460,11 +754,119 @@
   "expected_quarantine_records": [],
   "reviewed_manual_records": [
     {
+      "title": "Movie Under the Stars",
+      "slug": "movie-under-the-stars",
+      "category": "movies_under_stars",
+      "section": "Movie Under the Stars",
+      "schedule_text": "Village Green Lawn | 8:30PM",
+      "start_time": "8:30pm",
+      "end_time": null,
+      "location": "Village Green Lawn",
+      "description": "",
+      "is_fee_based": false,
+      "movie_nights": [
+        {
+          "day_of_week": "sunday",
+          "movie_title": "Beauty and the Beast (1991)",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "monday",
+          "movie_title": "Moana",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "tuesday",
+          "movie_title": "The Lion King (1994)",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "wednesday",
+          "movie_title": "Toy Story 2",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "thursday",
+          "movie_title": "Mulan (1998)",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "friday",
+          "movie_title": "Monsters, Inc.",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "saturday",
+          "movie_title": "Finding Nemo",
+          "show_time": "8:30PM"
+        }
+      ],
+      "manual_review": {
+        "reviewer": "codex-pipeline-overhaul",
+        "reviewed_at": "2026-06-28T00:00:00Z",
+        "notes": "Verified against rendered official BW_Aframe_Recreation-0526_DIGITAL.pdf. OCR mangles the movie list, but the visible Movie Under the Stars block prints these seven day/title rows at Village Green Lawn | 8:30PM."
+      },
+      "required_spans": {
+        "title": [
+          {
+            "page": 1,
+            "line": 68,
+            "bbox": [
+              913.5,
+              1955.0,
+              1583.0,
+              1983.5
+            ],
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 69,
+            "bbox": [
+              911.0,
+              2024.0,
+              1425.0,
+              2058.0
+            ],
+            "text": "VILLAGE GREEN LAWN | 8:30PM"
+          }
+        ],
+        "schedule": [
+          {
+            "page": 1,
+            "line": 69,
+            "bbox": [
+              911.0,
+              2024.0,
+              1425.0,
+              2058.0
+            ],
+            "text": "VILLAGE GREEN LAWN | 8:30PM"
+          }
+        ],
+        "movie_nights": [
+          {
+            "page": 1,
+            "bbox": [
+              910,
+              2070,
+              1616,
+              2420
+            ],
+            "text": "Sunday Beauty and the Beast (1991); Monday Moana; Tuesday The Lion King (1994); Wednesday Toy Story 2; Thursday Mulan (1998); Friday Monsters, Inc.; Saturday Finding Nemo",
+            "source": "manual_visual_bbox"
+          }
+        ]
+      }
+    },
+    {
       "title": "Poolside Activities",
       "slug": "poolside-activities",
       "category": "poolside",
-      "schedule_text": "Activities schedule available digitally; no posted time in PDF",
-      "start_time": null,
+      "schedule_text": "Daily at 1:30pm",
+      "start_time": "1:30pm",
       "end_time": null,
       "location": "Luna Park Pool Deck",
       "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
@@ -472,7 +874,7 @@
       "manual_review": {
         "reviewer": "codex-pipeline-overhaul",
         "reviewed_at": "2026-06-23T00:00:00Z",
-        "notes": "Verified against rendered PDF and OCR. The static PDF provides location/description but points guests to the QR/digital activity schedule instead of printing a time."
+        "notes": "Verified against rendered official BW_Aframe_Recreation-0526_DIGITAL.pdf. OCR interleaves nearby text, but the visible Poolside Activities block prints Daily at 1:30pm."
       },
       "required_spans": {
         "title": [
@@ -493,12 +895,12 @@
           {
             "page": 1,
             "bbox": [
-              380,
-              1275,
-              2560,
-              1455
+              910,
+              1030,
+              1375,
+              1085
             ],
-            "text": "SCAN THIS QR CODE AND SELECT ACTIVITIES SCHEDULE TO VIEW THIS INFORMATION DIGITALLY!",
+            "text": "Daily at 1:30pm",
             "source": "manual_visual_bbox"
           }
         ],

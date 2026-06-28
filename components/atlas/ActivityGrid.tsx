@@ -3,6 +3,7 @@
 import { ActivityCard } from "@/components/activity/ActivityCard";
 import { EventCardList, EventCardListItem } from "@/components/events/EventCardList";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
 export function ActivityGrid({
   activities,
@@ -10,12 +11,16 @@ export function ActivityGrid({
   showResort = true,
   onSave,
   columns = 1,
+  weatherById,
+  className,
 }: {
   activities: ActivityOccurrence[];
   emptyMessage?: string;
   showResort?: boolean;
   onSave?: (a: ActivityOccurrence) => void;
   columns?: 1 | 2;
+  weatherById?: Record<string, WeatherForTimeSpan>;
+  className?: string;
 }) {
   if (activities.length === 0) {
     return (
@@ -26,13 +31,14 @@ export function ActivityGrid({
   }
 
   return (
-    <EventCardList columns={columns === 2 ? 2 : 1}>
+    <EventCardList columns={columns === 2 ? 2 : 1} className={className}>
       {activities.map((activity) => (
         <EventCardListItem key={activity.id}>
           <ActivityCard
             activity={activity}
             showResort={showResort}
             onSave={onSave}
+            weatherSummary={weatherById?.[activity.id] ?? null}
           />
         </EventCardListItem>
       ))}

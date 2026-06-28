@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { getCategoryMeta } from "@/lib/categories/meta";
 import { sortActivities } from "@/lib/activities/sort";
 import { formatOrlandoDate } from "@/lib/daypart";
 import type { ActivityOccurrence, ActivitySortKey } from "@/lib/types/occurrence";
+import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { cn } from "@/lib/utils";
 
 type ActivityCollectionViewKey = "cards" | "day" | "category";
@@ -108,15 +109,18 @@ export function ActivityCollectionView({
   defaultView = "cards",
   defaultSort = "time",
   emptyMessage = "No activities match this view.",
+  weatherById,
 }: {
   activities: ActivityOccurrence[];
   showResort?: boolean;
   defaultView?: ActivityCollectionViewKey;
   defaultSort?: ActivitySortKey;
   emptyMessage?: string;
+  weatherById?: Record<string, WeatherForTimeSpan>;
 }) {
   const [view, setView] = useState<ActivityCollectionViewKey>(defaultView);
   const [sort, setSort] = useState<ActivitySortKey>(defaultSort);
+  const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const sortedOccurrences = useMemo(
     () => sortActivities(uniqueOccurrences(activities), sort),
     [activities, sort]
@@ -127,6 +131,23 @@ export function ActivityCollectionView({
   );
   const dayGroups = useMemo(() => groupByDay(sortedOccurrences), [sortedOccurrences]);
   const categoryGroups = useMemo(() => groupByCategory(sortedExperiences), [sortedExperiences]);
+  const dayOptions = useMemo(
+    () => dayGroups.dated.map(([date, items]) => ({ date, items })),
+    [dayGroups]
+  );
+  const effectiveSelectedDay = selectedDay ?? dayOptions[0]?.date ?? "";
+  const selectedDayItems =
+    dayOptions.find((option) => option.date === effectiveSelectedDay)?.items ?? [];
+
+  useEffect(() => {
+    if (dayOptions.length === 0) {
+      if (selectedDay !== null) setSelectedDay(null);
+      return;
+    }
+    if (!selectedDay || !dayOptions.some((option) => option.date === selectedDay)) {
+      setSelectedDay(dayOptions[0].date);
+    }
+  }, [dayOptions, selectedDay]);
 
   if (activities.length === 0) {
     return (
@@ -181,23 +202,57 @@ export function ActivityCollectionView({
           showResort={showResort}
           columns={2}
           emptyMessage={emptyMessage}
+          weatherById={weatherById}
         />
       )}
 
       {view === "day" && (
         <div className="space-y-8">
-          {dayGroups.dated.map(([date, items]) => (
-            <section key={date} aria-label={formatOrlandoDate(`${date}T12:00:00`)}>
-              <h3 className="mb-3 font-display text-lg font-semibold">
-                {formatOrlandoDate(`${date}T12:00:00`)}
-                {" "}
-                <span className="ml-2 text-sm font-normal text-[var(--color-muted)]">
-                  {items.length} {items.length === 1 ? "activity" : "activities"}
-                </span>
-              </h3>
-              <ActivityGrid activities={items} showResort={showResort} columns={2} />
-            </section>
-          ))}
+          {dayOptions.length > 0 && effectiveSelectedDay && (
+            <>
+              <div
+                className="activity-collection-view__day-picker"
+                aria-label="Choose activity day"
+              >
+                {dayOptions.map(({ date, items }) => {
+                  const active = date === effectiveSelectedDay;
+                  return (
+                    <button
+                      key={date}
+                      type="button"
+                      className={cn(
+                        "activity-collection-view__day",
+                        active && "activity-collection-view__day--active"
+                      )}
+                      aria-pressed={active}
+                      onClick={() => setSelectedDay(date)}
+                    >
+                      <span>{formatOrlandoDate(`${date}T12:00:00`)}</span>
+                      <span className="activity-collection-view__day-count">
+                        {items.length} {items.length === 1 ? "activity" : "activities"}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <section aria-label={formatOrlandoDate(`${effectiveSelectedDay}T12:00:00`)}>
+                <h3 className="mb-3 font-display text-lg font-semibold">
+                  {formatOrlandoDate(`${effectiveSelectedDay}T12:00:00`)}
+                  {" "}
+                  <span className="ml-2 text-sm font-normal text-[var(--color-muted)]">
+                    {selectedDayItems.length}{" "}
+                    {selectedDayItems.length === 1 ? "activity" : "activities"}
+                  </span>
+                </h3>
+                <ActivityGrid
+                  activities={selectedDayItems}
+                  showResort={showResort}
+                  columns={2}
+                  weatherById={weatherById}
+                />
+              </section>
+            </>
+          )}
           {dayGroups.untimed.length > 0 && (
             <section aria-label="Anytime activities">
               <h3 className="mb-3 font-display text-lg font-semibold">
@@ -212,6 +267,7 @@ export function ActivityCollectionView({
                 activities={dayGroups.untimed}
                 showResort={showResort}
                 columns={2}
+                weatherById={weatherById}
               />
             </section>
           )}
@@ -232,7 +288,12 @@ export function ActivityCollectionView({
                     {items.length}
                   </span>
                 </h3>
-                <ActivityGrid activities={items} showResort={showResort} columns={2} />
+                <ActivityGrid
+                  activities={items}
+                  showResort={showResort}
+                  columns={2}
+                  weatherById={weatherById}
+                />
               </section>
             );
           })}

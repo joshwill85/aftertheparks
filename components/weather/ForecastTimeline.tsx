@@ -1,24 +1,39 @@
 import type { WeatherHour } from "@/lib/weather/types";
 import { formatTempDual } from "@/lib/weather/format";
+import { WeatherIcon } from "@/components/weather/WeatherIcon";
+import { buildForecastTimelineGroups } from "@/lib/weather/forecastTimeline";
 
-export function ForecastTimeline({ hours }: { hours: WeatherHour[] }) {
-  const groups = [
-    { label: "Now", rows: hours.slice(0, 1) },
-    { label: "Next 2 hours", rows: hours.slice(1, 3) },
-    { label: "Afternoon", rows: hours.filter((hour) => new Date(hour.time).getHours() >= 12 && new Date(hour.time).getHours() < 17) },
-    { label: "Evening", rows: hours.filter((hour) => new Date(hour.time).getHours() >= 17 && new Date(hour.time).getHours() < 22) },
-    { label: "Tonight", rows: hours.filter((hour) => new Date(hour.time).getHours() >= 22 || new Date(hour.time).getHours() < 6) },
-  ];
+export function ForecastTimeline({
+  hours,
+  now,
+}: {
+  hours: WeatherHour[];
+  now?: Date;
+}) {
+  const groups = buildForecastTimelineGroups({ hours, now });
+  if (groups.length === 0) return null;
+
   return (
     <section className="forecast-timeline">
       {groups.map((group) => (
-        <article key={group.label}>
+        <article className="forecast-timeline__group" key={group.label}>
           <h3>{group.label}</h3>
-          {group.rows.slice(0, 3).map((hour) => (
-            <p key={`${group.label}-${hour.time}`}>
-              <time dateTime={hour.time}>{new Date(hour.time).toLocaleTimeString()}</time>{" "}
-              {hour.conditionText} · {formatTempDual(hour.tempF, hour.tempC)}
-            </p>
+          {group.rows.map(({ hour, displayTime, isNow }) => (
+            <div className="forecast-timeline__row" key={`${group.label}-${hour.time}`}>
+              <WeatherIcon
+                iconKey={hour.iconKey}
+                className="forecast-timeline__icon"
+                decorative
+              />
+              <div>
+                <time dateTime={isNow ? now?.toISOString() ?? hour.time : hour.time}>
+                  {displayTime}
+                </time>
+                <p>
+                  {hour.conditionText} · {formatTempDual(hour.tempF, hour.tempC)}
+                </p>
+              </div>
+            </div>
           ))}
         </article>
       ))}

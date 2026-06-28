@@ -60,8 +60,8 @@ export function getWeatherApiPrecipMapContext({
 
   return {
     provider: "weatherapi",
-    label: "Precipitation map context",
-    description: "WeatherAPI precipitation map context; useful for orientation, not live radar certainty.",
+    label: "Rain map",
+    description: "Nearby precipitation outlook for planning context, not live radar certainty.",
     locationKey: location.key,
     center: { lat: location.lat, lon: location.lon },
     zoom,

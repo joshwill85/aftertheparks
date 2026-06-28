@@ -1,0 +1,410 @@
+[
+  {
+    "cards": [
+      {
+        "badges": [
+          "Paid",
+          "Morning"
+        ],
+        "day": "Today",
+        "location": "Ol’ Man Island",
+        "resort": "Port Orleans Resort - Riverside",
+        "summary": "Last fishing pole issued at 1:15pm Old-fashioned cane pole fishing for the whole family! Prices vary based on rental time. Please see a Recreation Cast Member for assistance.",
+        "time": "7:00 AM – 1:45 PM",
+        "title": "Fishin’ Hole"
+      },
+      {
+        "badges": [
+          "Free",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Throughout Disney’s All-Star Resorts",
+        "resort": "All-Star Movies Resort",
+        "summary": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you've finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+        "time": "7:00 AM – 11:00 PM",
+        "title": "Wellness Scavenger Hunt"
+      },
+      {
+        "badges": [
+          "Free",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Throughout Disney’s All-Star Resorts",
+        "resort": "All-Star Music Resort",
+        "summary": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Maestro Mickey’s to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at isney’s All-Star Resorts.",
+        "time": "7:00 AM – 11:00 PM",
+        "title": "Wellness Scavenger Hunt"
+      },
+      {
+        "badges": [
+          "Free",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Throughout Disney’s All-Star Resorts",
+        "resort": "All-Star Sports Resort",
+        "summary": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+        "time": "7:00 AM – 11:00 PM",
+        "title": "Wellness Scavenger Hunt"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Arcadia Games",
+        "resort": "Grand Floridian Resort & Spa",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Arcadia Games"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Arcadia Games",
+        "resort": "The Villas at Disney's Grand Floridian Resort & Spa",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Arcadia Games"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Near Wilderness Lodge Mercantile",
+        "resort": "Wilderness Lodge",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Buttons And Bells Game Arcade"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Near Wilderness Lodge Mercantile",
+        "resort": "Boulder Ridge Villas at Disney's Wilderness Lodge",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Buttons And Bells Game Arcade"
+      }
+    ],
+    "detailFacts": [],
+    "detailSections": [],
+    "h1": "Walt Disney World Resort Activities",
+    "headings": [
+      "Walt Disney World Resort Activities",
+      "Quick answer",
+      "Source and freshness",
+      "Filters",
+      "Fishin’ Hole",
+      "Wellness Scavenger Hunt",
+      "Wellness Scavenger Hunt",
+      "Wellness Scavenger Hunt",
+      "Arcadia Games",
+      "Arcadia Games",
+      "Buttons And Bells Game Arcade",
+      "Buttons And Bells Game Arcade",
+      "Buttons And Bells Game Arcade",
+      "Fast Forward Arcade",
+      "Game Point Arcade",
+      "Lafferty Place Arcade"
+    ],
+    "title": "Walt Disney World Resort Activities | After the Parks",
+    "url": "http://localhost:3002/activities"
+  },
+  {
+    "cards": [
+      {
+        "badges": [
+          "Paid",
+          "Morning"
+        ],
+        "day": "Today",
+        "location": "Ol’ Man Island",
+        "resort": "Port Orleans Resort - Riverside",
+        "summary": "Last fishing pole issued at 1:15pm Old-fashioned cane pole fishing for the whole family! Prices vary based on rental time. Please see a Recreation Cast Member for assistance.",
+        "time": "7:00 AM – 1:45 PM",
+        "title": "Fishin’ Hole"
+      },
+      {
+        "badges": [
+          "Free",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Throughout Disney’s All-Star Resorts",
+        "resort": "All-Star Movies Resort",
+        "summary": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Donald’s Double Feature to start exploring. Once you've finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+        "time": "7:00 AM – 11:00 PM",
+        "title": "Wellness Scavenger Hunt"
+      },
+      {
+        "badges": [
+          "Free",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Throughout Disney’s All-Star Resorts",
+        "resort": "All-Star Music Resort",
+        "summary": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Maestro Mickey’s to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at isney’s All-Star Resorts.",
+        "time": "7:00 AM – 11:00 PM",
+        "title": "Wellness Scavenger Hunt"
+      },
+      {
+        "badges": [
+          "Free",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Throughout Disney’s All-Star Resorts",
+        "resort": "All-Star Sports Resort",
+        "summary": "Find hidden wellness challenges and partake in a scavenger hunt across all three of Disney’s All-Star Resorts. Pick up a map from Sport Goofy Gifts and Sundries to start exploring. Once you’ve finished the challenges, pick up a prize from any merchandise location at Disney’s All-Star Resorts.",
+        "time": "7:00 AM – 11:00 PM",
+        "title": "Wellness Scavenger Hunt"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Arcadia Games",
+        "resort": "Grand Floridian Resort & Spa",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Arcadia Games"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Arcadia Games",
+        "resort": "The Villas at Disney's Grand Floridian Resort & Spa",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Arcadia Games"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Near Wilderness Lodge Mercantile",
+        "resort": "Wilderness Lodge",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Buttons And Bells Game Arcade"
+      },
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Near Wilderness Lodge Mercantile",
+        "resort": "Boulder Ridge Villas at Disney's Wilderness Lodge",
+        "summary": "Play the latest and greatest family-friendly video games.",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Buttons And Bells Game Arcade"
+      }
+    ],
+    "detailFacts": [],
+    "detailSections": [],
+    "h1": "Today",
+    "headings": [
+      "Today",
+      "Quick answer",
+      "Source and freshness",
+      "Filters",
+      "Weather is temporarily unavailable",
+      "Fishin’ Hole",
+      "Wellness Scavenger Hunt",
+      "Wellness Scavenger Hunt",
+      "Wellness Scavenger Hunt",
+      "Arcadia Games",
+      "Arcadia Games",
+      "Buttons And Bells Game Arcade",
+      "Buttons And Bells Game Arcade",
+      "Buttons And Bells Game Arcade",
+      "Fast Forward Arcade",
+      "Game Point Arcade"
+    ],
+    "title": "Disney World Resort Activities Today | After the Parks",
+    "url": "http://localhost:3002/today"
+  },
+  {
+    "cards": [
+      {
+        "badges": [
+          "Paid",
+          "All Day"
+        ],
+        "day": "Today",
+        "location": "Inside Classic Hall",
+        "resort": "",
+        "summary": "Take a step back in time with all your favorite classic video games!",
+        "time": "8:00 AM – 11:00 PM",
+        "title": "Fast Forward Arcade"
+      },
+      {
+        "badges": [
+          "Free",
+          "Afternoon"
+        ],
+        "day": "Today",
+        "location": "Hippy Dippy Pool Deck",
+        "resort": "",
+        "summary": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information.",
+        "time": "1:00 PM – 2:30 PM",
+        "title": "Poolside Activities"
+      },
+      {
+        "badges": [
+          "Paid",
+          "Afternoon"
+        ],
+        "day": "Today",
+        "location": "‘90s Sign near Classic Hall",
+        "resort": "",
+        "summary": "Get creative with a Disney twist on this arts and crafts favorite!",
+        "time": "3:00 PM – 4:00 PM",
+        "title": "Mickey Tie-Dye"
+      },
+      {
+        "badges": [
+          "Free",
+          "Evening"
+        ],
+        "day": "Today",
+        "location": "",
+        "resort": "",
+        "summary": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+        "time": "6:30 PM – 7:30 PM",
+        "title": "Groovy Campfire"
+      },
+      {
+        "badges": [
+          "Free",
+          "Evening"
+        ],
+        "day": "Today",
+        "location": "Hippy Dippy Pool Deck",
+        "resort": "",
+        "summary": "Groove out with some righteous dance moves at our Glow themed party.",
+        "time": "8:00 PM",
+        "title": "Glow Party"
+      },
+      {
+        "badges": [
+          "Free",
+          "Evening"
+        ],
+        "day": "Today",
+        "location": "Hippy Dippy Pool Deck",
+        "resort": "",
+        "summary": "",
+        "time": "8:30 PM",
+        "title": "Movie Under the Stars"
+      },
+      {
+        "badges": [
+          "Paid",
+          "Afternoon"
+        ],
+        "day": "Tomorrow",
+        "location": "‘90s Sign near Classic Hall",
+        "resort": "",
+        "summary": "Create your own groovy paint designs on a vinyl record— complete with the Disney’s Pop Century Resort logo!",
+        "time": "3:00 PM – 4:00 PM",
+        "title": "Marble Painting On Vinyl Records"
+      },
+      {
+        "badges": [
+          "Free",
+          "Evening"
+        ],
+        "day": "Tomorrow",
+        "location": "Hippy Dippy Pool Deck",
+        "resort": "",
+        "summary": "Enjoy family-friendly games before the Movie begins.",
+        "time": "8:00 PM",
+        "title": "Nighttime Activities"
+      }
+    ],
+    "detailFacts": [],
+    "detailSections": [],
+    "h1": "Pop Century Resort",
+    "headings": [
+      "Pop Century Resort",
+      "Source and freshness",
+      "No-park-day plan",
+      "Related planning guides",
+      "Resort planning snapshot",
+      "Today at this resort",
+      "Tonight at this resort",
+      "Free activities",
+      "Paid activities",
+      "Best for kids",
+      "Best for adults",
+      "Rainy-day options",
+      "Evening options",
+      "Transportation notes",
+      "Nearby resorts with activities tonight",
+      "Related activities"
+    ],
+    "title": "Pop Century Resort Activities, Movies & Recreation Calendar | After the Parks",
+    "url": "http://localhost:3002/resorts/pop-century-resort"
+  },
+  {
+    "cards": [],
+    "detailFacts": [
+      "WhenSunday, Jun 28 · 6:30 PM – 7:30 PM",
+      "CostFree",
+      "Best forCampfire · all ages"
+    ],
+    "detailSections": [
+      "Activity planning snapshotOverviewGroovy Campfire is a campfire activity currently tracked at Pop Century Resort. It is listed as free, with the next known timing shown as Sunday, Jun 28 at 6:30 PM.Participating resortsAfter the Parks currently has this activity tied to Pop Century Resort. Check the broader activity directory for related resort listings.Browse this activity typeToday and tonightToday has 1 tracked listing for this activity family, with 1 evening or tonight option. Times can change, so confirm before walking over.See todaySee tonightCost and reservationsCost: Free. No reservation requirement is currently tracked, but access and eligibility can still change.Find reservation-sensitive activitiesBest resorts for this activityPop Century Resort (15 tracked listings)TipsStart with the current listing at Pop Century Resort, compare the easiest nearby alternatives, and keep the plan flexible if timing, travel time, or eligibility matters.Compare this categoryDay-of cancellation caveatsOperations can affect movies, campfires, pools, boats, sports, and longer walks. Confirm the final time, location, and cancellation status before leaving your resort area.Find backup optionsSimilar activitiesIf this exact listing does not fit, use the same-category activity view or nearby resort collections to find alternatives without turning the plan into a long transfer.Browse similar activitiesOfficial-source notesAfter the Parks organizes resort activity data for planning. Disney remains the official source for current times, access, pricing, eligibility, day-of decisions, and operational changes.Source policyConfirm before goingCurrent time and exact locationDay-of cancellations and operating changesCost, supplies, eligibility, and resort accessNo reservation requirement is currently tracked, but access and eligibility can still change.",
+      "What to expectEnjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+      "Where to goLocated by Surfer GoofyResortPop Century Resort",
+      "Optional purchasesMickey S'mores Kit: Usually around $7 plus tax",
+      "Good to knowLimited to guests staying at the resort.Current schedule window: May 26, 2026 through Sep 8, 2026.Next schedule update expected Sep 9, 2026.",
+      "ScheduleSunday, Jun 286:30 PM – 7:30 PMMonday, Jun 296:30 PM – 7:30 PMTuesday, Jun 306:30 PM – 7:30 PMWednesday, Jul 16:30 PM – 7:30 PMThursday, Jul 26:30 PM – 7:30 PMFriday, Jul 36:30 PM – 7:30 PMSaturday, Jul 46:30 PM – 7:30 PMSunday, Jul 56:30 PM – 7:30 PMMonday, Jul 66:30 PM – 7:30 PMTuesday, Jul 76:30 PM – 7:30 PMWednesday, Jul 86:30 PM – 7:30 PMThursday, Jul 96:30 PM – 7:30 PMFriday, Jul 106:30 PM – 7:30 PMSaturday, Jul 116:30 PM – 7:30 PM",
+      "Plan this oneCampfireTiming6:30 PM – 7:30 PMScheduled enough to plan around.CostFreeThe current guide lists this as free.Add to My PlanMore at Pop Century Resort",
+      "Source and freshnessLast verifiedJun 28, 2026Source statusSource-backed, but still confirm before heading out.Schedule windowMay 26, 2026 through Sep 8, 2026Open official sourceSource and accuracy policy"
+    ],
+    "h1": "Groovy Campfire",
+    "headings": [
+      "Groovy Campfire",
+      "Activity planning snapshot",
+      "Overview",
+      "Participating resorts",
+      "Today and tonight",
+      "Cost and reservations",
+      "Best resorts for this activity",
+      "Tips",
+      "Day-of cancellation caveats",
+      "Similar activities",
+      "Official-source notes",
+      "Confirm before going",
+      "What to expect",
+      "Where to go",
+      "Optional purchases",
+      "Good to know"
+    ],
+    "title": "Groovy Campfire at Pop Century Resort | After the Parks",
+    "url": "http://localhost:3002/activities/groovy-campfire?resort=pop-century-resort"
+  }
+]

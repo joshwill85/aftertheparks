@@ -7,6 +7,7 @@ import type { ActivityOffering, ActivityOccurrence, MovieNightOccurrence, Resort
 import type { GuideEntry } from "@/lib/guides";
 import type { SearchHit } from "@/lib/search/types";
 import type { SearchFacet, SearchSuggestion } from "@/lib/search/schema";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { SearchHitRow } from "@/components/search/SearchHitRow";
 
 interface SearchPayload {
@@ -332,10 +333,13 @@ export function SearchClient({
       </div>
 
       {!q && (
-        <p className="search-empty-intro">
-          Ask like a concierge — campfires near your resort, pool games,
-          tonight&apos;s movies, or arcade games.
-        </p>
+        <div className="search-empty-intro">
+          <BrandAsset asset="guide-companion" className="brand-asset--empty" />
+          <p>
+            Ask like a concierge — campfires near your resort, pool games,
+            tonight&apos;s movies, or arcade games.
+          </p>
+        </div>
       )}
 
       {loading && q && (
@@ -346,6 +350,7 @@ export function SearchClient({
 
       {!loading && q && payload && !hasResults && (
         <div className="search-no-results">
+          <BrandAsset asset="guide-companion" className="brand-asset--empty" />
           <p className="search-no-results__title">
             No strong matches for &ldquo;{q}&rdquo;
           </p>

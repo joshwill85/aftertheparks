@@ -1,10 +1,16 @@
 import type { DisplayActivity } from "@/lib/displayActivity";
+import {
+  ageFitForActivity,
+  bookingStatusForActivity,
+  weatherFitForActivity,
+  type BookingStatus,
+} from "@/lib/planning/activityFacts";
 import type { ActivityOccurrence, ActivityOffering } from "@/lib/types/occurrence";
 
 export type DecisionTone = "positive" | "notice" | "neutral" | "warm";
 
 export interface DecisionSignal {
-  id: "time" | "cost";
+  id: "time" | "place" | "weather" | "cost" | "booking" | "fit";
   label: string;
   value: string;
   helper: string;
@@ -68,6 +74,69 @@ function offeringTimeSignal(offering: ActivityOffering): DecisionSignal {
   };
 }
 
+function weatherSignal(activity: ActivityOccurrence): DecisionSignal {
+  const weather = weatherFitForActivity(activity);
+  return {
+    id: "weather",
+    label: "Weather",
+    value: weather.rainBackup ? "Backup fit" : "Check forecast",
+    helper: weather.reason,
+    tone: weather.rainBackup ? "positive" : "neutral",
+  };
+}
+
+function bookingValue(status: BookingStatus): string {
+  switch (status) {
+    case "required":
+      return "Required";
+    case "recommended":
+      return "Recommended";
+    case "walkup_only":
+      return "Walk-up";
+    case "not_required_verified":
+      return "No booking";
+    case "unknown":
+      return "Unclear";
+  }
+}
+
+function bookingTone(status: BookingStatus): DecisionTone {
+  switch (status) {
+    case "required":
+    case "recommended":
+      return "warm";
+    case "walkup_only":
+    case "not_required_verified":
+      return "positive";
+    case "unknown":
+      return "neutral";
+  }
+}
+
+function bookingSignal(activity: ActivityOccurrence): DecisionSignal {
+  const booking = bookingStatusForActivity(activity);
+  return {
+    id: "booking",
+    label: "Booking",
+    value: bookingValue(booking.status),
+    helper: booking.reason,
+    tone: bookingTone(booking.status),
+  };
+}
+
+function fitSignal(activity: ActivityOccurrence): DecisionSignal | undefined {
+  const age = ageFitForActivity(activity);
+  if (!age.littleKids && !age.familyFriendly) return undefined;
+
+  return {
+    id: "fit",
+    label: "Fit",
+    value: age.littleKids ? "Little kids" : "Family",
+    helper: age.reason,
+    tone: "positive",
+  };
+}
+
 function activityTimeSignal(activity: ActivityOccurrence, display: DisplayActivity): DecisionSignal {
   if (display.timeUncertain) {
     return {
@@ -109,8 +178,13 @@ export function activityDecisionProfile(
   display: DisplayActivity
 ): DecisionProfile {
   const time = activityTimeSignal(activity, display);
+  const weather = weatherSignal(activity);
   const cost = costSignal(activity.price.state);
+  const booking = bookingSignal(activity);
+  const fit = fitSignal(activity);
   return {
-    signals: [time, cost].filter((signal): signal is DecisionSignal => Boolean(signal)),
+    signals: [time, weather, cost, booking, fit].filter(
+      (signal): signal is DecisionSignal => Boolean(signal)
+    ),
   };
 }

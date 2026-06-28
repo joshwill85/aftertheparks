@@ -10,6 +10,7 @@ import {
   type WeatherForTimeSpan,
   type WeatherHour,
   type WeatherLocationKey,
+  type WeatherTimeBasis,
   type WeatherRisk,
   type WeatherRiskLevel,
   type WeatherSnapshot,
@@ -240,9 +241,17 @@ export type WeatherVisualState =
   | "stale"
   | "unavailable";
 
+export type WeatherActionGuidance =
+  | "good_now"
+  | "go_earlier"
+  | "choose_covered_backup"
+  | "stay_inside"
+  | "official_alert";
+
 export interface WeatherGuidanceDecision {
   safetyLevel: "normal" | "caution" | "danger";
   decisionState: import("@/lib/weather/types").WeatherDecisionState;
+  actionGuidance: WeatherActionGuidance;
   visualState: WeatherVisualState;
   headline: string;
   recommendedAction: string;
@@ -265,6 +274,36 @@ function hasOutdoorSensitiveTag(tags: ActivityWeatherFit[]): boolean {
   );
 }
 
+function chooseWeatherActionGuidance(input: {
+  risk: WeatherRisk;
+  alerts?: WeatherAlert[];
+  activityWeatherTags?: ActivityWeatherFit[];
+  forecastStatus?: ForecastStatus;
+}): WeatherActionGuidance {
+  const alerts = input.alerts ?? [];
+  const tags = input.activityWeatherTags ?? [];
+  const severeAlert = alerts.some(isSevereOrImmediateAlert);
+  const outdoorSensitive = hasOutdoorSensitiveTag(tags);
+
+  if (severeAlert) return "official_alert";
+  if (input.risk.stormRisk === "high") return "stay_inside";
+  if (input.risk.rainRisk === "high" && outdoorSensitive) {
+    return "choose_covered_backup";
+  }
+  if (
+    outdoorSensitive &&
+    (input.risk.rainRisk === "medium" ||
+      input.risk.heatRisk === "medium" ||
+      input.risk.windRisk === "medium")
+  ) {
+    return "go_earlier";
+  }
+  if (input.forecastStatus === "stale" || input.forecastStatus === "unavailable") {
+    return "go_earlier";
+  }
+  return "good_now";
+}
+
 export function getWeatherGuidance(input: {
   risk: WeatherRisk;
   alerts?: WeatherAlert[];
@@ -279,11 +318,13 @@ export function getWeatherGuidance(input: {
       alert.severity === "Severe" ||
       alert.urgency === "Immediate"
   );
+  const actionGuidance = chooseWeatherActionGuidance(input);
 
   if (severeAlert) {
     return {
       safetyLevel: "danger",
       decisionState: "official_alert_follow_guidance",
+      actionGuidance,
       visualState: "official_alert",
       headline: "Official weather alert in effect",
       recommendedAction: severeAlert.instruction ?? "Follow official guidance and move indoors if instructed.",
@@ -295,6 +336,7 @@ export function getWeatherGuidance(input: {
     return {
       safetyLevel: "caution",
       decisionState: "good_with_caveat",
+      actionGuidance,
       visualState: input.forecastStatus,
       headline: "Weather guidance needs a fresh check",
       recommendedAction: "Keep the plan visible, but confirm conditions before leaving.",
@@ -306,6 +348,7 @@ export function getWeatherGuidance(input: {
     return {
       safetyLevel: "danger",
       decisionState: "avoid_outdoor",
+      actionGuidance,
       visualState: "storm",
       headline: "Stay indoors for storm-sensitive plans",
       recommendedAction: "Avoid outdoor, pool, campfire, boat, and Skyliner-dependent plans until risk drops.",
@@ -317,6 +360,7 @@ export function getWeatherGuidance(input: {
     return {
       safetyLevel: "caution",
       decisionState: "indoor_backup_recommended",
+      actionGuidance,
       visualState: "rain",
       headline: "Rain backup recommended",
       recommendedAction: "Add a nearby indoor backup before you commit to this plan.",
@@ -333,6 +377,7 @@ export function getWeatherGuidance(input: {
     return {
       safetyLevel: "caution",
       decisionState: "bring_backup",
+      actionGuidance,
       visualState: "heat",
       headline: "Heat-friendly backup recommended",
       recommendedAction: "Bring water, shade time, and an indoor reset option.",
@@ -344,6 +389,7 @@ export function getWeatherGuidance(input: {
     return {
       safetyLevel: "normal",
       decisionState: "go",
+      actionGuidance,
       visualState: "normal",
       headline: "Good to go",
       recommendedAction: "Weather should work for this plan.",
@@ -354,6 +400,7 @@ export function getWeatherGuidance(input: {
   return {
     safetyLevel: "caution",
     decisionState: "good_with_caveat",
+    actionGuidance,
     visualState: "normal",
     headline: "Good with a caveat",
     recommendedAction: "Keep a flexible backup nearby.",
@@ -569,14 +616,18 @@ export function buildWeatherGuidanceForTimeSpan(input: {
   activityWeatherFits?: ActivityWeatherFit[];
   includeNearTerm?: boolean;
   precipMap?: WeatherPrecipMapContext;
+  timeBasis?: WeatherTimeBasis;
+  timeBasisLabel?: string;
 }): WeatherForTimeSpan {
   const now = input.now ?? new Date();
   const startsAt = input.startsAt ? new Date(input.startsAt) : now;
   const endsAt = input.endsAt ? new Date(input.endsAt) : defaultWeatherEndTime(startsAt);
+  const isPast = endsAt.getTime() < now.getTime();
+  const representativeStart = startsAt.getTime() < now.getTime() && !isPast ? now : startsAt;
   const snapshot = input.snapshot ?? null;
   const alerts = input.alerts ?? [];
-  const hour = selectWeatherHour({ snapshot, startsAt, endsAt });
-  const day = selectWeatherDay({ snapshot, startsAt });
+  const hour = selectWeatherHour({ snapshot, startsAt: representativeStart, endsAt });
+  const day = selectWeatherDay({ snapshot, startsAt: representativeStart });
   const risk = snapshot
     ? calculateWeatherRisk({
         hour,
@@ -606,20 +657,26 @@ export function buildWeatherGuidanceForTimeSpan(input: {
     input.includeNearTerm === false
       ? undefined
       : buildNearTermRainSignal({
-          startsAt,
+          startsAt: representativeStart,
           endsAt,
           now,
           snapshot,
           alerts,
-        });
+      });
+  const actionGuidance = chooseWeatherActionGuidance({
+    risk,
+    alerts,
+    activityWeatherTags: input.activityWeatherFits,
+    forecastStatus,
+  });
 
   return {
     locationKey: input.locationKey,
     startsAt: startsAt.toISOString(),
     endsAt: endsAt.toISOString(),
-    isPast: startsAt.getTime() < now.getTime(),
-    shouldDisplayWeather: startsAt.getTime() >= now.getTime(),
-    representativeHour: (hour?.time ? new Date(hour.time) : startsAt).toISOString(),
+    isPast,
+    shouldDisplayWeather: !isPast,
+    representativeHour: (hour?.time ? new Date(hour.time) : representativeStart).toISOString(),
     iconKey: hour?.iconKey ?? day?.iconKey ?? snapshot?.iconKey ?? "unknown",
     headline,
     plainLanguageSummary: buildSummary({
@@ -648,6 +705,9 @@ export function buildWeatherGuidanceForTimeSpan(input: {
     forecastConfidence: snapshot?.confidence,
     forecastStatus,
     officialAlertStatus: input.officialAlertStatus ?? "available",
+    actionGuidance,
+    timeBasis: input.timeBasis,
+    timeBasisLabel: input.timeBasisLabel,
     nearTermRain,
     precipMap: input.precipMap,
   };

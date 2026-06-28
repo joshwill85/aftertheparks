@@ -9,6 +9,8 @@ import {
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { NearTermRainLine } from "@/components/weather/NearTermRainLine";
 import { WeatherPrecipMapPreview } from "@/components/weather/WeatherPrecipMapPreview";
+import { WeatherIcon } from "@/components/weather/WeatherIcon";
+import { formatDisneyForecastTime } from "@/lib/weather/forecastTimeline";
 
 export function WeatherTimeSpanPopover({
   weather,
@@ -67,7 +69,8 @@ export function WeatherTimeSpanPopover({
       <div className="weather-popover__hours">
         {weather.hourlyBreakdown.map((hour) => (
           <div key={hour.time} className="weather-popover__hour">
-            <time dateTime={hour.time}>{new Date(hour.time).toLocaleTimeString()}</time>
+            <WeatherIcon iconKey={hour.iconKey} className="weather-popover__hour-icon" decorative />
+            <time dateTime={hour.time}>{formatDisneyForecastTime(hour.time)}</time>
             <span>{hour.conditionText}</span>
             <span>{formatTempDual(hour.tempF, hour.tempC)}</span>
             {formatWindDual(hour.windMph, hour.windKph) && (

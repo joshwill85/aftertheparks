@@ -24,7 +24,8 @@ for (const file of [
 
 const resortPage = readFileSync("app/resorts/[slug]/page.tsx", "utf8");
 assert.match(resortPage, /ResortWeatherPersonality/);
-assert.match(resortPage, /WeatherWindowStrip/);
+assert.doesNotMatch(resortPage, /WeatherWindowStrip/);
+assert.doesNotMatch(resortPage, /WeatherStoryStrip/);
 assert.match(resortPage, /rainy-day-options/);
 
 const activityPage = readFileSync("app/activities/[slug]/page.tsx", "utf8");

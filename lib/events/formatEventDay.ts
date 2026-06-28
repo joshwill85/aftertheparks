@@ -68,7 +68,25 @@ export function formatActivityEventDay(
 export function formatMovieEventDay(movie: {
   dayOfWeek: string;
   isTonight?: boolean;
+  startDateTime?: string;
 }): EventDayDisplay {
+  if (movie.startDateTime) {
+    const isoDate = formatInTimeZone(
+      parseISO(movie.startDateTime),
+      TIMEZONE,
+      "yyyy-MM-dd"
+    );
+    const dayAndDate = formatInTimeZone(
+      parseISO(movie.startDateTime),
+      TIMEZONE,
+      "EEE, MMM d"
+    );
+    return {
+      label: movie.isTonight ? `Tonight · ${dayAndDate}` : dayAndDate,
+      dateTime: isoDate,
+    };
+  }
+
   if (movie.isTonight) {
     return {
       label: "Tonight",

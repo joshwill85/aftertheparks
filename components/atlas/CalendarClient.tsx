@@ -11,6 +11,7 @@ import {
   parseISO,
 } from "date-fns";
 import { EventCard } from "@/components/events/EventCard";
+import { usePlan } from "@/components/atlas/PlanProvider";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
@@ -101,6 +102,7 @@ export function CalendarClient({
   initialResort?: string;
   initialCategory?: string;
 }) {
+  const { addActivity, isActivitySaved } = usePlan();
   const [month, setMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [resortFilter, setResortFilter] = useState(initialResort ?? "all");
@@ -286,7 +288,14 @@ export function CalendarClient({
           {selectedActivities.map((activity) => {
             const display = toDisplayActivity(activity);
             const card = activityToEventCard(activity, display);
-            return <EventCard key={activity.id} {...card} />;
+            return (
+              <EventCard
+                key={activity.id}
+                {...card}
+                saved={isActivitySaved(activity)}
+                onSave={() => addActivity(activity)}
+              />
+            );
           })}
           {selectedActivities.length === 0 && (
             <p className="rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] p-4 text-sm text-[var(--color-muted)]">

@@ -99,7 +99,9 @@ def probe_cdn_candidates(group_key: str, months: list[str]) -> list[str]:
             else:
                 urls.extend(
                     [
+                        f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation-{mmyy}_DIGITAL.pdf",
                         f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation-{mmyy}.pdf",
+                        f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation_{mmyy}_DIGITAL.pdf",
                         f"{CDN_COLLATERAL}/{folder}/{code}_Aframe_Recreation_{mmyy}.pdf",
                     ]
                 )

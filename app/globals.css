@@ -136,6 +136,46 @@
   border-bottom: 1px solid rgba(22, 33, 42, 0.08);
 }
 
+.brand-mark,
+.brand-asset,
+.brand-motif {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.brand-mark--header {
+  width: clamp(150px, 18vw, 210px);
+}
+
+.brand-mark--footer {
+  width: min(100%, 260px);
+}
+
+.brand-mark--primary {
+  width: min(100%, 360px);
+}
+
+.brand-asset--empty {
+  width: clamp(86px, 18vw, 132px);
+  margin-inline: auto;
+}
+
+.brand-asset--map-panel {
+  width: min(100%, 300px);
+}
+
+.brand-asset--night-feature {
+  width: min(100%, 360px);
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgba(7, 26, 38, 0.22);
+}
+
+.brand-motif--divider {
+  width: 82px;
+  opacity: 0.9;
+}
+
 /* Mobile bottom nav */
 .mobile-bottom-nav {
   position: fixed;

@@ -56,15 +56,6 @@ export default function SourceAndAccuracyPolicyPage() {
             </time>
             .
           </p>
-          <ul>
-            {DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT.sourceUrls.map((url) => (
-              <li key={url}>
-                <Link href={url} className="text-[var(--accent)] hover:underline">
-                  Caveat source
-                </Link>
-              </li>
-            ))}
-          </ul>
           <p>
             This is especially important for no-ticket and resort-hopping plans:
             do not plan to use Disney Springs as a free transfer hub to reach

@@ -83,14 +83,14 @@ assert.deepEqual(
   "rainy-day indoor filter should exclude outdoor weather-dependent activities"
 );
 
-const noTicketParams = parseBrowseParams(new URLSearchParams("ticket_required=false"));
+const legacyTicketParams = parseBrowseParams(new URLSearchParams("ticket_required=false"));
 assert.equal(
-  (noTicketParams as ActivityFilters & { ticketRequired?: boolean }).ticketRequired,
-  false,
-  "no-ticket SEO deep links should activate the no-park-ticket filter"
+  (legacyTicketParams as ActivityFilters & { ticketRequired?: boolean }).ticketRequired,
+  undefined,
+  "legacy ticket params should not activate a browse filter"
 );
 
-const noTicketFiltered = applyBrowseFilters(
+const legacyTicketFiltered = applyBrowseFilters(
   [
     {
       ...baseOccurrence,
@@ -109,12 +109,12 @@ const noTicketFiltered = applyBrowseFilters(
       location: { label: "Inside Magic Kingdom Park" },
     },
   ] as ActivityOccurrence[],
-  noTicketParams
+  legacyTicketParams
 );
 assert.deepEqual(
-  noTicketFiltered.map((activity) => activity.id),
-  ["resort-arcade"],
-  "no-ticket filter should exclude activities that require park admission"
+  legacyTicketFiltered.map((activity) => activity.id),
+  ["resort-arcade", "park-fireworks-party"],
+  "legacy ticket params should not narrow browse results"
 );
 
 const routeParams = parseBrowseParams(
@@ -213,8 +213,8 @@ assert.equal(
 );
 assert.equal(
   (firstNightParams as ActivityFilters & { duration?: string }).duration,
-  "short",
-  "first-night SEO deep links should activate the short-duration filter"
+  undefined,
+  "removed planning pace params should be ignored"
 );
 
 const firstNightFiltered = applyBrowseFilters(
@@ -251,8 +251,8 @@ const firstNightFiltered = applyBrowseFilters(
 );
 assert.deepEqual(
   firstNightFiltered.map((activity) => activity.id),
-  ["short-campfire"],
-  "first-night short evening filter should keep short evening activities only"
+  ["short-campfire", "long-movie"],
+  "first-night evening filter should keep evening activities without planning pace narrowing"
 );
 
 const nearMyResortParams = parseBrowseParams(new URLSearchParams("near=my-resort"));

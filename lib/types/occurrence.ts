@@ -10,7 +10,6 @@ export type ActivitySortKey =
   | "quality";
 
 export type ActivityWeatherFilter = "indoor" | "covered";
-export type ActivityDurationFilter = "short";
 export type ActivityNearFilter = "my-resort";
 export type ActivityTransportFilter =
   | "monorail"
@@ -26,6 +25,17 @@ export type ActivityAreaFilter =
   | "animal-kingdom"
   | "disney-springs"
   | "fort-wilderness";
+export type ActivityIntentPreset =
+  | "at_my_resort"
+  | "nearby_resort_area"
+  | "after_7_pm"
+  | "dinner_window"
+  | "rain_backup"
+  | "no_booking_required"
+  | "reservation_needed"
+  | "little_kids"
+  | "free_today"
+  | "low_transfer";
 
 export type ActivityStatus = "active" | "seasonal" | "paused";
 
@@ -278,6 +288,9 @@ export interface MovieNightOccurrence {
   tmdbId?: number;
   overview?: string | null;
   voteAverage?: number | null;
+  runtimeMinutes?: number | null;
+  startDateTime?: string;
+  endDateTime?: string;
   isTonight?: boolean;
 }
 
@@ -313,14 +326,13 @@ export interface ActivityFilters {
   resort?: string;
   category?: string;
   daypart?: Daypart;
-  duration?: ActivityDurationFilter;
+  preset?: ActivityIntentPreset;
   near?: ActivityNearFilter;
   weather?: ActivityWeatherFilter;
   transport?: ActivityTransportFilter;
   area?: ActivityAreaFilter;
   free?: boolean;
   reservation?: boolean;
-  ticketRequired?: boolean;
   q?: string;
   sort?: ActivitySortKey;
   limit?: number;

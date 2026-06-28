@@ -35,6 +35,9 @@ const iconButton = readFileSync("components/weather/WeatherIconButton.tsx", "utf
 assert.match(iconButton, /aria-label/);
 assert.match(iconButton, /formatTempDual/);
 assert.match(iconButton, /WeatherFreshnessLine/);
+assert.match(iconButton, /next\/link/);
+assert.match(iconButton, /weatherPageHref\(weather\.locationKey\)/);
+assert.match(iconButton, /weather-icon-button__icon-link/);
 
 const popover = readFileSync("components/weather/WeatherTimeSpanPopover.tsx", "utf8");
 assert.match(popover, /hourlyBreakdown/);
@@ -48,10 +51,26 @@ assert.match(popover, /WeatherPrecipMapPreview/);
 const statusStrip = readFileSync("components/weather/WeatherStatusStrip.tsx", "utf8");
 assert.match(statusStrip, /WeatherFreshnessLine/);
 assert.match(statusStrip, /NearTermRainLine/);
+assert.doesNotMatch(statusStrip, /WeatherPrecipMapPreview/);
+assert.match(statusStrip, /weather-status-strip__action/);
+
+const tonightClient = readFileSync("components/atlas/TonightClient.tsx", "utf8");
+assert.doesNotMatch(tonightClient, /StormModeBanner/);
+assert.doesNotMatch(tonightClient, /Indoor tonight/);
+assert.match(tonightClient, /Covered Options/);
+
+const todayClient = readFileSync("components/atlas/TodayClient.tsx", "utf8");
+assert.doesNotMatch(todayClient, /StormModeBanner/);
+assert.doesNotMatch(todayClient, /Indoor backups/);
+assert.match(todayClient, /Covered Options/);
 
 const eventSignal = readFileSync("components/weather/EventWeatherSignal.tsx", "utf8");
 assert.match(eventSignal, /WeatherFreshnessLine/);
 assert.match(eventSignal, /nearTermRain/);
+assert.match(eventSignal, /weatherPageHref\(guidance\.locationKey\)/);
+assert.match(eventSignal, /event-weather-signal__icon-link/);
+assert.match(eventSignal, /window\.location\.assign\(weatherHref\)/);
+assert.match(eventSignal, /event\.stopPropagation\(\)/);
 
 const nearTermRain = readFileSync("components/weather/NearTermRainLine.tsx", "utf8");
 assert.match(nearTermRain, /not radar-confirmed|nearTermRainShortCopy/);
@@ -59,6 +78,12 @@ assert.match(nearTermRain, /not radar-confirmed|nearTermRainShortCopy/);
 const precipMapPreview = readFileSync("components/weather/WeatherPrecipMapPreview.tsx", "utf8");
 assert.match(precipMapPreview, /previewTileUrl/);
 assert.match(precipMapPreview, /PrecipMapContext|precipMap/);
+
+const precipMapContext = readFileSync("lib/weather/precipMap.ts", "utf8");
+assert.doesNotMatch(
+  precipMapContext,
+  /Precipitation map context|WeatherAPI precipitation map context/
+);
 
 const freshness = readFileSync("lib/weather/freshness.ts", "utf8");
 assert.match(freshness, /Updated \${minutes} min ago/);

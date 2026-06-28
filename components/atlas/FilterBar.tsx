@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { MOOD_CHIPS } from "@/lib/categories/meta";
+import { selectedResortSlugs, toggleResortSlug } from "@/lib/explore/resortFilters";
 import { cn, formatCategory } from "@/lib/utils";
 import type { Daypart } from "@/lib/types/occurrence";
 
@@ -47,11 +48,14 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
   );
 
   const activeResort = searchParams.get("resort");
+  const activeResortSlugs = selectedResortSlugs(activeResort);
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
-  const activeCount = [activeResort, activeCategory, activeDaypart].filter(
-    Boolean
-  ).length;
+  const activeCount = [
+    activeResortSlugs.length > 0 ? "resort" : null,
+    activeCategory,
+    activeDaypart,
+  ].filter(Boolean).length;
 
   return (
     <div className="space-y-4">
@@ -88,6 +92,7 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
           <FilterControls
             resorts={resorts}
             activeResort={activeResort}
+            activeResortSlugs={activeResortSlugs}
             activeCategory={activeCategory}
             activeDaypart={activeDaypart}
             update={update}
@@ -117,6 +122,7 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
             <FilterControls
               resorts={resorts}
               activeResort={activeResort}
+              activeResortSlugs={activeResortSlugs}
               activeCategory={activeCategory}
               activeDaypart={activeDaypart}
               update={update}
@@ -131,18 +137,62 @@ export function FilterBar({ resorts = [], basePath = "/activities" }: FilterBarP
 function FilterControls({
   resorts,
   activeResort,
+  activeResortSlugs,
   activeCategory,
   activeDaypart,
   update,
 }: {
   resorts: { slug: string; name: string }[];
   activeResort: string | null;
+  activeResortSlugs: string[];
   activeCategory: string | null;
   activeDaypart: string | null;
   update: (key: string, value: string | null) => void;
 }) {
   return (
     <div className="flex w-full flex-col gap-4">
+      {resorts.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted)]">
+            Resort
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => update("resort", null)}
+              className={cn(
+                "rounded-full px-3 py-1.5 text-sm transition-all",
+                activeResortSlugs.length === 0
+                  ? "bg-[var(--color-citrus)] text-white shadow-sm"
+                  : "border border-[var(--color-card-border)]"
+              )}
+              aria-pressed={activeResortSlugs.length === 0}
+            >
+              All resorts
+            </button>
+            {resorts.map((resort) => {
+              const active = activeResortSlugs.includes(resort.slug);
+              return (
+                <button
+                  key={resort.slug}
+                  type="button"
+                  onClick={() => update("resort", toggleResortSlug(activeResort, resort.slug) ?? null)}
+                  className={cn(
+                    "rounded-full px-3 py-1.5 text-sm transition-all",
+                    active
+                      ? "bg-[var(--color-citrus)] text-white shadow-sm"
+                      : "border border-[var(--color-card-border)]"
+                  )}
+                  aria-pressed={active}
+                >
+                  {resort.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-2">
         {DAYPARTS.map((d) => (
           <button
@@ -164,26 +214,6 @@ function FilterControls({
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        {resorts.length > 0 && (
-          <label className="block text-sm">
-            <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-[var(--color-muted)]">
-              Resort
-            </span>
-            <select
-              value={activeResort ?? ""}
-              onChange={(e) => update("resort", e.target.value || null)}
-              className="w-full rounded-xl border border-[var(--color-card-border)] bg-transparent px-3 py-2"
-            >
-              <option value="">All resorts</option>
-              {resorts.map((r) => (
-                <option key={r.slug} value={r.slug}>
-                  {r.name}
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
-
         <label className="block text-sm">
           <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-[var(--color-muted)]">
             Category

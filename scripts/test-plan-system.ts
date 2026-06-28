@@ -102,6 +102,20 @@ check("optional stay settings are persisted through plan contract", () => {
   assert.match(apiRoute, /updatePlanSettings/);
 });
 
+check("stay details form is compact and avoids redundant optional copy", () => {
+  const stayDetails = read("components/plan/PlanStayDetails.tsx");
+  const polish = read("src/styles/polish.css");
+
+  assert.doesNotMatch(stayDetails, /Optional stay shell/i);
+  assert.doesNotMatch(stayDetails, /You can still use the full site without this/i);
+  assert.match(stayDetails, /className="plan-stay-details/);
+  assert.match(stayDetails, /className="plan-stay-details__fields"/);
+  assert.match(stayDetails, /className="form-control plan-stay-details__control"/);
+  assert.match(polish, /\.plan-stay-details__fields[\s\S]+repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(polish, /\.plan-stay-details__control[\s\S]+min-height: 3\.5rem/);
+  assert.match(polish, /\.plan-stay-details__control[\s\S]+text-align: center/);
+});
+
 check("core plan mutations are transactional RPCs", () => {
   const auditMigration = read(
     "supabase/migrations/20260625190000_plan_system_audit_fixes.sql"
@@ -172,6 +186,32 @@ check("save state uses occurrence identity before catalog fallback", () => {
   assert.match(activityCard, /isActivitySaved\(activity\)/);
   assert.match(nightCard, /isActivitySaved\(activity\)/);
   assert.match(detail, /isActivitySaved\(activity\)/);
+});
+
+check("every activity-style card can add itself to My Plan", () => {
+  const activityCard = read("components/activity/ActivityCard.tsx");
+  const nightCard = read("components/tonight/NightActivityCard.tsx");
+  const calendar = read("components/atlas/CalendarClient.tsx");
+  const movies = read("components/movies/MovieListingCard.tsx");
+  const saveButton = read("components/activity/SaveButton.tsx");
+
+  assert.match(activityCard, /const \{\s*addActivity,\s*isActivitySaved\s*\} = usePlan\(\)/);
+  assert.match(activityCard, /addActivity\(activity\)/);
+  assert.doesNotMatch(activityCard, /onSave=\{onSave \? \(\) => onSave\(activity\) : undefined\}/);
+
+  assert.match(nightCard, /const \{\s*addActivity,\s*isActivitySaved\s*\} = usePlan\(\)/);
+  assert.match(nightCard, /addActivity\(activity\)/);
+  assert.doesNotMatch(nightCard, /onSave=\{onSave \? \(\) => onSave\(activity\) : undefined\}/);
+
+  assert.match(calendar, /const \{\s*addActivity,\s*isActivitySaved\s*\} = usePlan\(\)/);
+  assert.match(calendar, /onSave=\{\(\) => addActivity\(activity\)\}/);
+  assert.match(calendar, /saved=\{isActivitySaved\(activity\)\}/);
+
+  assert.match(movies, /movieToPlanActivity/);
+  assert.match(movies, /addActivity\(planActivity\)/);
+  assert.match(movies, /saved=\{isActivitySaved\(planActivity\)\}/);
+
+  assert.match(saveButton, /Add to My Plan/);
 });
 
 check("legacy snapshot shares no longer auto-import", () => {
