@@ -56,7 +56,8 @@ def _review_decision_map(review_decisions: list[dict[str, Any]]) -> dict[str, di
 
 
 def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
-    reviewed = {**candidate, "validation_status": "manually_approved"}
+    original_findings = list(candidate.get("validation_findings") or [])
+    reviewed = {**candidate, "validation_status": "manually_approved", "validation_findings": []}
     approved_fields = decision.get("approved_fields") if isinstance(decision.get("approved_fields"), dict) else {}
     schedule = approved_fields.get("schedule")
     if isinstance(schedule, dict):
@@ -91,6 +92,7 @@ def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) 
         "content_sha256": decision.get("content_sha256"),
         "page_image_sha256": decision.get("page_image_sha256"),
         "field_crop_sha256": decision.get("field_crop_sha256"),
+        "original_validation_findings": original_findings,
         "approved_fields": approved_fields,
     }
     return reviewed

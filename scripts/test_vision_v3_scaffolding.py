@@ -1571,6 +1571,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         needs_review = {
             "candidate_id": "cand-review-1",
             "validation_status": "needs_review",
+            "validation_findings": ["engine_disagreement:schedule", "unparsed_schedule"],
             "source_document_id": "source-doc-1",
             "content_sha256": "sourcehash",
             "calendar_group_key": "boardwalk",
@@ -1649,6 +1650,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("sourcehash", row["review_decision"]["content_sha256"])
         self.assertEqual("pagehash", row["review_decision"]["page_image_sha256"])
         self.assertEqual("schedulecrop", row["review_decision"]["field_crop_sha256"])
+        self.assertEqual([], row["validation_findings"])
+        self.assertEqual(
+            ["engine_disagreement:schedule", "unparsed_schedule"],
+            row["review_decision"]["original_validation_findings"],
+        )
         self.assertEqual(1, current_preview["summary"]["manually_approved_by_review"])
 
     def test_promote_gold_v3_cli_can_include_approved_review_decisions(self) -> None:
