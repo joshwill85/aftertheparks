@@ -20,6 +20,7 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 
 DEFAULT_FLAGS_PATH = ROOT / "config" / "publish_flags.yaml"
+DEFAULT_PREVIEW_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
 CRITICAL_FIELD_EVIDENCE = ("title", "schedule", "location", "fee")
@@ -212,7 +213,7 @@ def evaluate_publish_readiness(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Check whether Gold v3 preview is publish-ready")
-    parser.add_argument("preview", type=Path)
+    parser.add_argument("preview", type=Path, nargs="?", default=DEFAULT_PREVIEW_PATH)
     parser.add_argument("--flags", type=Path, default=DEFAULT_FLAGS_PATH)
     parser.add_argument("--require-clean-preview", action="store_true")
     parser.add_argument("--dual-run-report", type=Path, default=DEFAULT_DUAL_RUN_REPORT_PATH)

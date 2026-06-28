@@ -2469,6 +2469,65 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     ):
                         publish_gold_v3.main()
 
+    def test_publish_gold_v3_cli_uses_default_preview_path_for_runbook_command(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            flags_path = root / "publish_flags.yaml"
+            preview_path = root / "activity_gold_v3_preview.json"
+            dual_run_path = root / "v3_dual_run_report.json"
+            drift_path = root / "source_drift_report.json"
+            flags_path.write_text("public_gold_source: v3\nv3_publish_enabled: true\n")
+            preview_path.write_text(
+                json.dumps(
+                    {
+                        "publication_mode": "vision_v3_preview",
+                        "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                        "rows": [
+                            {
+                                "source_document_id": "source-doc-1",
+                                "source_sha256": "sourcehash",
+                                "validation_status": "auto_publishable",
+                                "source": {"canonicalUrl": "https://example.com/calendar.pdf", "documentHash": "sourcehash"},
+                                "schedule": {"text": "Daily at 1:30pm", "normalized": {"start_time": "13:30"}},
+                                "location": {"id": "village_green_lawn", "label": "Village Green Lawn"},
+                                "price": {"state": "free"},
+                                "field_evidence": {
+                                    field: {
+                                        "source": {
+                                            "content_sha256": "sourcehash",
+                                            "page_number": 1,
+                                            "page_image_sha256": "pagehash",
+                                            "bbox_px": [10, 20, 100, 40],
+                                            "crop_sha256": f"{field}crop",
+                                            "crop_storage_path": f"{field}.png",
+                                        },
+                                        "agreement": "exact_after_normalization",
+                                    }
+                                    for field in ("title", "schedule", "location", "fee")
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+            dual_run_path.write_text(json.dumps({"status": "clean", "publish_blockers": [], "unreviewed_diff_keys": []}))
+            drift_path.write_text(json.dumps({"status": "clean", "publish_blockers": []}))
+
+            with patch.object(publish_gold_v3, "DEFAULT_PREVIEW_PATH", preview_path):
+                with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
+                    with patch.object(publish_gold_v3, "DEFAULT_SOURCE_DRIFT_REPORT_PATH", drift_path):
+                        with patch.object(
+                            sys,
+                            "argv",
+                            [
+                                "publish_gold_v3.py",
+                                "--flags",
+                                str(flags_path),
+                                "--require-clean-preview",
+                            ],
+                        ):
+                            publish_gold_v3.main()
+
     def test_source_drift_report_flags_changed_fields_for_review(self) -> None:
         old_rows = [
             {
