@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 from typing import Any, Callable
+from urllib.parse import urlparse
 
 from PIL import Image
 
@@ -25,6 +26,35 @@ def _bbox(width: int, height: int, x1: float, y1: float, x2: float, y2: float) -
         max(0, min(width, round(width * x2))),
         max(0, min(height, round(height * y2))),
     ]
+
+
+OFFICIAL_DISNEY_QR_HOSTS = {
+    "disneyworld.disney.go.com",
+    "cdn1.parksmedia.wdprapps.disney.com",
+    "cdn2.parksmedia.wdprapps.disney.com",
+}
+
+
+def _is_official_disney_url(url: str) -> bool:
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+    return parsed.scheme in {"http", "https"} and (
+        host in OFFICIAL_DISNEY_QR_HOSTS
+        or host.endswith(".disneyworld.disney.go.com")
+        or host.endswith(".parksmedia.wdprapps.disney.com")
+    )
+
+
+def _derived_source_link(target: dict[str, Any], *, crop_sha256: str) -> dict[str, Any]:
+    url = str(target.get("target_url") or "").strip()
+    is_official = _is_official_disney_url(url)
+    return {
+        **target,
+        "source_role": "derived_source_link",
+        "is_official_source": is_official,
+        "source_authority": "official_disney" if is_official else "non_official",
+        "source_crop_sha256": crop_sha256,
+    }
 
 
 def _region_specs(document_family: str, width: int, height: int) -> list[tuple[str, list[int]]]:
@@ -86,7 +116,7 @@ def segment_major_regions(
             if region_type == "qr_callout":
                 decoder = qr_decoder or decode_qr_targets
                 qr_targets = [
-                    {**target, "source_crop_sha256": crop_sha256}
+                    _derived_source_link(target, crop_sha256=crop_sha256)
                     for target in decoder(crop_path)
                     if isinstance(target, dict) and target.get("target_url")
                 ]

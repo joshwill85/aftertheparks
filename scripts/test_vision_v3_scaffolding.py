@@ -815,7 +815,42 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
                 qr_region["qr_targets"][0]["target_url"],
             )
+            self.assertEqual("derived_source_link", qr_region["qr_targets"][0]["source_role"])
+            self.assertTrue(qr_region["qr_targets"][0]["is_official_source"])
+            self.assertEqual("official_disney", qr_region["qr_targets"][0]["source_authority"])
             self.assertEqual(qr_region["crop_sha256"], qr_region["qr_targets"][0]["source_crop_sha256"])
+
+    def test_region_segmentation_classifies_non_official_qr_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            page_path = root / "page.png"
+            Image.new("RGB", (1200, 1800), color=(255, 255, 255)).save(page_path, "PNG")
+            snapshot = {
+                "source_sha256": "abc123",
+                "source_pages": [
+                    {
+                        "page_number": 1,
+                        "page_image_path": str(page_path),
+                        "page_image_sha256": "pagehash",
+                    }
+                ],
+            }
+
+            result = segment_major_regions(
+                snapshot=snapshot,
+                classification={"document_family": "aframe_recreation", "allow_auto_publish": True},
+                output_dir=root / "regions",
+                qr_decoder=lambda crop_path: [
+                    {"target_url": "https://example.org/untrusted-schedule", "decoder": "test_decoder"}
+                ],
+            )
+
+            qr_region = next(region for region in result["regions"] if region["region_type"] == "qr_callout")
+            target = qr_region["qr_targets"][0]
+            self.assertEqual("derived_source_link", target["source_role"])
+            self.assertFalse(target["is_official_source"])
+            self.assertEqual("non_official", target["source_authority"])
+            self.assertEqual(qr_region["crop_sha256"], target["source_crop_sha256"])
 
     def test_vision_snapshot_can_attach_family_classification_and_regions(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -1926,11 +1961,6 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "fee_required": False,
             "field_evidence": {
                 field: {
-                    **(
-                        {"raw_value": "Moana", "normalized_value": "moana"}
-                        if field == "movie_title"
-                        else {}
-                    ),
                     "source": {
                         "content_sha256": "sourcehash",
                         "page_number": 1,
@@ -2042,6 +2072,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "fee_required": False,
             "field_evidence": {
                 field: {
+                    **(
+                        {"raw_value": "Moana", "normalized_value": "moana"}
+                        if field == "movie_title"
+                        else {}
+                    ),
                     "source": {
                         "content_sha256": "sourcehash",
                         "page_number": 1,
