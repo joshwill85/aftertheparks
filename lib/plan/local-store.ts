@@ -5,7 +5,8 @@ export type PlanOperationType =
   | "add_item"
   | "remove_item"
   | "rename_plan"
-  | "update_note";
+  | "update_note"
+  | "update_plan_settings";
 
 export interface PendingPlanOperation {
   operationId: string;
@@ -19,6 +20,9 @@ export interface LocalPlanCache {
   planId: string | null;
   title: string;
   version: number;
+  homeResortSlug: string | null;
+  tripStartDate: string | null;
+  tripEndDate: string | null;
   items: PlanItem[];
   pendingOperations: PendingPlanOperation[];
   updatedAt: string;
@@ -58,17 +62,30 @@ const EMPTY_CACHE: LocalPlanCache = {
   planId: null,
   title: "My Rest Day Plan",
   version: 0,
+  homeResortSlug: null,
+  tripStartDate: null,
+  tripEndDate: null,
   items: [],
   pendingOperations: [],
   updatedAt: new Date().toISOString(),
 };
+
+function normalizeCache(cache: LocalPlanCache): LocalPlanCache {
+  return {
+    ...cache,
+    homeResortSlug: cache.homeResortSlug ?? null,
+    tripStartDate: cache.tripStartDate ?? null,
+    tripEndDate: cache.tripEndDate ?? null,
+    pendingOperations: cache.pendingOperations ?? [],
+  };
+}
 
 export async function loadLocalPlanCache(): Promise<LocalPlanCache> {
   if (typeof window === "undefined") return { ...EMPTY_CACHE };
   const db = await getDb();
   const cached = await db.get(STORE, CACHE_KEY);
   if (cached && !Array.isArray(cached) && "items" in cached) {
-    return cached as LocalPlanCache;
+    return normalizeCache(cached as LocalPlanCache);
   }
 
   const legacy = await db.get(STORE, LEGACY_KEY);

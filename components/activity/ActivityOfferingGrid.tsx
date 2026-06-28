@@ -1,14 +1,17 @@
 import { ActivityOfferingCard } from "@/components/activity/ActivityOfferingCard";
-import type { ActivityOffering } from "@/lib/types/occurrence";
+import { findNextOfferingSession } from "@/lib/activityOfferingDisplay";
+import type { ActivityOccurrence, ActivityOffering } from "@/lib/types/occurrence";
 
 export function ActivityOfferingGrid({
   offerings,
   showResort = false,
   emptyMessage = "No official recreation offerings published yet.",
+  nextSessions = [],
 }: {
   offerings: ActivityOffering[];
   showResort?: boolean;
   emptyMessage?: string;
+  nextSessions?: ActivityOccurrence[];
 }) {
   if (offerings.length === 0) {
     return (
@@ -25,6 +28,7 @@ export function ActivityOfferingGrid({
           key={offering.offeringKey}
           offering={offering}
           showResort={showResort}
+          nextSession={findNextOfferingSession(offering, nextSessions)}
         />
       ))}
     </div>

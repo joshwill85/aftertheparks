@@ -18,13 +18,39 @@ interface SearchHitRowProps {
   hit: SearchHit;
   compact?: boolean;
   onNavigate?: () => void;
+  id?: string;
+  role?: string;
+  tabIndex?: number;
+  ariaSelected?: boolean;
+  onMouseDown?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-export function SearchHitRow({ hit, compact = false, onNavigate }: SearchHitRowProps) {
+export function SearchHitRow({
+  hit,
+  compact = false,
+  onNavigate,
+  id,
+  role,
+  tabIndex,
+  ariaSelected,
+  onMouseDown,
+}: SearchHitRowProps) {
+  const firstHighlight = hit.highlights
+    ? Object.values(hit.highlights)
+        .flat()
+        .find(Boolean)
+        ?.replace(/<\/?mark>/g, "")
+    : undefined;
+
   return (
     <Link
+      id={id}
       href={hit.href}
       onClick={onNavigate}
+      onMouseDown={onMouseDown}
+      role={role}
+      tabIndex={tabIndex}
+      aria-selected={ariaSelected}
       className={cn("search-hit", compact && "search-hit--compact")}
     >
       <span className="search-hit__icon" aria-hidden>
@@ -48,6 +74,9 @@ export function SearchHitRow({ hit, compact = false, onNavigate }: SearchHitRowP
         )}
         {!compact && hit.description && (
           <span className="search-hit__description">{hit.description}</span>
+        )}
+        {!compact && firstHighlight && (
+          <span className="search-hit__description">{firstHighlight}</span>
         )}
       </span>
     </Link>

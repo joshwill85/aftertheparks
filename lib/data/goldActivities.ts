@@ -1,5 +1,5 @@
 import {
-  daypartFromHour,
+  daypartFromTimeRange,
   getDayOfWeekIndex,
   orlandoDateString,
   addOrlandoDays,
@@ -490,7 +490,10 @@ export function mapGoldActivityRowToOccurrences(
         resort: resortForSlug(resortSlug, options.resortMeta),
         startDateTime: startIso,
         endDateTime: endIso,
-        daypart: daypartFromHour(Number(startTime.slice(0, 2))),
+        daypart: daypartFromTimeRange(
+          Number(startTime.slice(0, 2)),
+          endTime ? Number(endTime.slice(0, 2)) : undefined
+        ),
       });
     }
   }

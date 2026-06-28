@@ -5,6 +5,10 @@ import {
   getResortInitial,
   getResortTagline,
 } from "@/lib/resorts/display";
+import {
+  hasResortStoryIcon,
+  ResortStoryIcon,
+} from "@/components/resort/ResortStoryIcon";
 import { cn, formatResortTier } from "@/lib/utils";
 
 const TIER_GRADIENTS: Record<string, string> = {
@@ -74,6 +78,7 @@ export function ResortCard({
   const tierLabel = formatResortTier(resort.category);
   const isDarkBanner = resort.category === "deluxe";
   const initial = getResortInitial(resort.name);
+  const hasStoryIcon = hasResortStoryIcon(resort.slug);
   const areaLabel = formatResortArea(resort.area);
   const tagline = getResortTagline(resort.category);
   const hasLiveCounts =
@@ -103,15 +108,19 @@ export function ResortCard({
             data-hidden-detail="resort_card_tilework"
             aria-hidden
           />
-          <span
-            className={cn(
-              "resort-card__initial",
-              isDarkBanner && "resort-card__initial--light"
-            )}
-            aria-hidden
-          >
-            {initial}
-          </span>
+          {hasStoryIcon ? (
+            <ResortStoryIcon slug={resort.slug} isDarkBanner={isDarkBanner} />
+          ) : (
+            <span
+              className={cn(
+                "resort-card__initial",
+                isDarkBanner && "resort-card__initial--light"
+              )}
+              aria-hidden
+            >
+              {initial}
+            </span>
+          )}
           <span
             className={cn(
               "resort-card__tier",

@@ -4,7 +4,7 @@ import { publicPriceLabel } from "@/lib/priceLabels";
 const INTERNAL_NO_TIME_SCHEDULE_TEXT =
   /no posted time in PDF|Activities schedule available digitally/i;
 
-export function priceLabelFromActivity(activity: ActivityOccurrence): string {
+export function priceLabelFromActivity(activity: ActivityOccurrence): string | undefined {
   return publicPriceLabel(activity.price.state);
 }
 

@@ -3,19 +3,10 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type {
-  ActivityOffering,
-  ActivityOccurrence,
-  MovieNightOccurrence,
-  ResortSummary,
-} from "@/lib/types/occurrence";
+import type { ActivityOffering, ActivityOccurrence, MovieNightOccurrence, ResortSummary } from "@/lib/types/occurrence";
 import type { GuideEntry } from "@/lib/guides";
 import type { SearchHit } from "@/lib/search/types";
-import { ActivityGrid } from "@/components/atlas/ActivityGrid";
-import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
-import { usePlan } from "@/components/atlas/PlanProvider";
-import { ResortCard } from "@/components/resort/ResortCard";
-import { MovieListingCard } from "@/components/movies/MovieListingCard";
+import type { SearchFacet, SearchSuggestion } from "@/lib/search/schema";
 import { SearchHitRow } from "@/components/search/SearchHitRow";
 
 interface SearchPayload {
@@ -24,9 +15,12 @@ interface SearchPayload {
   resorts: ResortSummary[];
   guides: GuideEntry[];
   movies: MovieNightOccurrence[];
+  hits: SearchHit[];
   topHits: SearchHit[];
   categories: SearchHit[];
   pages: SearchHit[];
+  facets: SearchFacet[];
+  suggestedQueries: SearchSuggestion[];
   total: number;
   query: string;
 }
@@ -61,9 +55,10 @@ export function SearchClient({
     q === initialQuery && initialPayload ? initialPayload : null
   );
   const [previewHits, setPreviewHits] = useState<SearchHit[]>([]);
+  const [previewSuggestions, setPreviewSuggestions] = useState<SearchSuggestion[]>([]);
+  const [activePreviewIndex, setActivePreviewIndex] = useState(-1);
   const [loading, setLoading] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
-  const { addActivity } = usePlan();
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -77,9 +72,12 @@ export function SearchClient({
         resorts: [],
         guides: [],
         movies: [],
+        hits: [],
         topHits: [],
         categories: [],
         pages: [],
+        facets: [],
+        suggestedQueries: [],
         total: 0,
         query: "",
       } satisfies SearchPayload;
@@ -95,12 +93,28 @@ export function SearchClient({
       resorts: data.resorts ?? [],
       guides: data.guides ?? [],
       movies: data.movies ?? [],
+      hits: data.hits ?? [],
       topHits: data.topHits ?? [],
       categories: data.categories ?? [],
       pages: data.pages ?? [],
+      facets: data.facets ?? [],
+      suggestedQueries: data.suggestedQueries ?? data.suggestions ?? [],
       total: data.total ?? 0,
       query: data.query ?? trimmed,
     } satisfies SearchPayload;
+  }, []);
+
+  const fetchSuggest = useCallback(async (term: string, signal?: AbortSignal) => {
+    const trimmed = term.trim();
+    const response = await fetch(
+      `/api/search/suggest?q=${encodeURIComponent(trimmed)}&limit=8`,
+      { signal }
+    );
+    const data = await response.json();
+    return {
+      hits: data.hits ?? data.topHits ?? [],
+      suggestions: data.suggestions ?? data.suggestedQueries ?? [],
+    } as { hits: SearchHit[]; suggestions: SearchSuggestion[] };
   }, []);
 
   useEffect(() => {
@@ -108,6 +122,7 @@ export function SearchClient({
     if (!q) {
       setPayload(null);
       setPreviewHits([]);
+      setPreviewSuggestions([]);
       return;
     }
 
@@ -148,12 +163,14 @@ export function SearchClient({
   const handleQueryChange = (value: string) => {
     setQuery(value);
     setPreviewOpen(true);
+    setActivePreviewIndex(-1);
 
     if (debounceRef.current) clearTimeout(debounceRef.current);
     const trimmed = value.trim();
 
     if (trimmed.length < 2) {
       setPreviewHits([]);
+      setPreviewSuggestions([]);
       return;
     }
 
@@ -161,24 +178,57 @@ export function SearchClient({
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
-      fetchSearch(trimmed, controller.signal)
-        .then((data) => setPreviewHits(data.topHits.slice(0, 6)))
+      fetchSuggest(trimmed, controller.signal)
+        .then((data) => {
+          setPreviewHits(data.hits.slice(0, 6));
+          setPreviewSuggestions(data.suggestions.slice(0, 4));
+        })
         .catch(() => {
-          if (!controller.signal.aborted) setPreviewHits([]);
+          if (!controller.signal.aborted) {
+            setPreviewHits([]);
+            setPreviewSuggestions([]);
+          }
         });
     }, 180);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!previewOpen || previewHits.length === 0) return;
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setActivePreviewIndex((index) => (index + 1) % previewHits.length);
+    }
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setActivePreviewIndex((index) =>
+        index <= 0 ? previewHits.length - 1 : index - 1
+      );
+    }
+    if (event.key === "Enter" && activePreviewIndex >= 0) {
+      event.preventDefault();
+      const hit = previewHits[activePreviewIndex];
+      if (hit) router.push(hit.href);
+      setPreviewOpen(false);
+    }
+    if (event.key === "Escape") {
+      setPreviewOpen(false);
+      setActivePreviewIndex(-1);
+    }
   };
 
   const hasResults =
     payload &&
     (payload.total > 0 ||
+      payload.hits.length > 0 ||
       payload.activities.length > 0 ||
       payload.officialOfferings.length > 0 ||
       payload.resorts.length > 0);
-
-  const quickLinks = payload
-    ? [...payload.pages, ...payload.categories].slice(0, 6)
-    : [];
+  const visibleHits = payload?.hits?.length ? payload.hits : payload?.topHits ?? [];
+  const visibleFacets =
+    payload?.facets
+      .filter((facet) => ["kind", "resortName", "categoryLabel", "priceState"].includes(facet.field))
+      .flatMap((facet) => facet.values.slice(0, 4).map((value) => ({ facet, value })))
+      .slice(0, 10) ?? [];
 
   return (
     <div className="search-shell">
@@ -199,6 +249,7 @@ export function SearchClient({
               role="combobox"
               value={query}
               onChange={(e) => handleQueryChange(e.target.value)}
+              onKeyDown={handleKeyDown}
               onFocus={() => setPreviewOpen(true)}
               onBlur={() => window.setTimeout(() => setPreviewOpen(false), 160)}
               placeholder='Try "campfire", "Polynesian", or "pool games"'
@@ -208,14 +259,45 @@ export function SearchClient({
               aria-haspopup="listbox"
               aria-controls={previewOpen ? "search-preview-list" : undefined}
               aria-expanded={previewOpen && previewHits.length > 0}
+              aria-activedescendant={
+                activePreviewIndex >= 0
+                  ? `search-preview-option-${activePreviewIndex}`
+                  : undefined
+              }
             />
-            {previewOpen && previewHits.length > 0 && query.trim().length >= 2 && (
+            {previewOpen &&
+              (previewHits.length > 0 || previewSuggestions.length > 0) &&
+              query.trim().length >= 2 && (
               <div className="search-preview" id="search-preview-list" role="listbox">
-                {previewHits.map((hit) => (
+                {previewSuggestions.length > 0 && (
+                  <div className="search-preview__group">
+                    <span className="search-section__meta">Suggested searches</span>
+                    {previewSuggestions.map((suggestion) => (
+                      <button
+                        key={suggestion.id}
+                        type="button"
+                        className="search-preview__more"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => runSearch(suggestion.query)}
+                      >
+                        {suggestion.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {previewHits.length > 0 && (
+                  <span className="search-section__meta">Best matches</span>
+                )}
+                {previewHits.map((hit, index) => (
                   <SearchHitRow
                     key={hit.id}
+                    id={`search-preview-option-${index}`}
                     hit={hit}
                     compact
+                    role="option"
+                    tabIndex={-1}
+                    ariaSelected={activePreviewIndex === index}
+                    onMouseDown={(e) => e.preventDefault()}
                     onNavigate={() => setPreviewOpen(false)}
                   />
                 ))}
@@ -287,111 +369,29 @@ export function SearchClient({
             <section className="search-section" aria-labelledby="search-top-heading">
               <div className="search-section__header">
                 <h2 id="search-top-heading" className="search-section__title">
-                  Best matches
+                  Results
                 </h2>
                 <p className="search-section__meta">{payload.total} results</p>
               </div>
+              {visibleFacets.length > 0 && (
+                <div className="search-suggestions" aria-label="Search filters">
+                  {visibleFacets.map(({ facet, value }) => (
+                    <button
+                      key={`${facet.field}:${value.value}`}
+                      type="button"
+                      className="search-suggestion"
+                      onClick={() => runSearch(`${query} ${value.label}`)}
+                    >
+                      {value.label} ({value.count})
+                    </button>
+                  ))}
+                </div>
+              )}
               <div className="search-hit-list">
-                {payload.topHits.map((hit) => (
+                {visibleHits.map((hit) => (
                   <SearchHitRow key={hit.id} hit={hit} />
                 ))}
               </div>
-            </section>
-          )}
-
-          {quickLinks.length > 0 && (
-            <section className="search-section" aria-labelledby="search-quick-heading">
-              <h2 id="search-quick-heading" className="search-section__title">
-                Quick jumps
-              </h2>
-              <div className="search-quick-grid">
-                {quickLinks.map((hit) => (
-                  <SearchHitRow key={hit.id} hit={hit} compact />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {payload.resorts.length > 0 && (
-            <section className="search-section" aria-labelledby="search-resorts-heading">
-              <h2 id="search-resorts-heading" className="search-section__title">
-                Resorts
-              </h2>
-              <div className="search-resort-grid">
-                {payload.resorts.map((resort) => (
-                  <ResortCard key={resort.slug} resort={resort} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {payload.movies.length > 0 && (
-            <section className="search-section" aria-labelledby="search-movies-heading">
-              <h2 id="search-movies-heading" className="search-section__title">
-                Movies under the stars
-              </h2>
-              <div className="search-movie-list">
-                {payload.movies.map((movie) => (
-                  <MovieListingCard
-                    key={movie.id}
-                    movie={movie}
-                    variant="day"
-                    linkToTonight
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {payload.officialOfferings.length > 0 && (
-            <section className="search-section" aria-labelledby="search-offerings-heading">
-              <h2 id="search-offerings-heading" className="search-section__title">
-                Official recreation offerings
-              </h2>
-              <ActivityOfferingGrid
-                offerings={payload.officialOfferings}
-                showResort
-                emptyMessage="No official recreation offerings matched."
-              />
-            </section>
-          )}
-
-          {payload.guides.length > 0 && (
-            <section className="search-section" aria-labelledby="search-guides-heading">
-              <h2 id="search-guides-heading" className="search-section__title">
-                Guides
-              </h2>
-              <div className="search-hit-list">
-                {payload.guides.map((guide) => (
-                  <SearchHitRow
-                    key={guide.slug}
-                    hit={{
-                      id: `guide-${guide.slug}`,
-                      kind: "guide",
-                      title: guide.title,
-                      subtitle: "Planning guide",
-                      description: guide.description,
-                      href: guide.href,
-                      score: 0,
-                      badges: ["Guide"],
-                      guide,
-                    }}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {payload.activities.length > 0 && (
-            <section className="search-section" aria-labelledby="search-activities-heading">
-              <h2 id="search-activities-heading" className="search-section__title">
-                Activities
-              </h2>
-              <ActivityGrid
-                activities={payload.activities}
-                onSave={addActivity}
-                emptyMessage="No activities matched."
-              />
             </section>
           )}
         </div>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ice pellets">
+  <title>Ice pellets</title>
+  <desc>After the Parks storybook weather icon for ice pellets.</desc>
+  <defs>
+    <linearGradient id="sky" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#CFF4FF"/>
+      <stop offset="1" stop-color="#F9FEFF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#17324D" flood-opacity=".18"/>
+    </filter>
+    <style>
+      @media (prefers-reduced-motion:no-preference) {
+        .float { animation: float-ice_pellets 4.8s ease-in-out infinite; transform-origin: 32px 32px; }
+        .drift { animation: drift-ice_pellets 5.6s ease-in-out infinite; }
+        .fall { animation: fall-ice_pellets 1.9s ease-in-out infinite; }
+        .slow { animation-duration: 3.2s; }
+        .pulse { animation: pulse-ice_pellets 3.4s ease-in-out infinite; transform-origin: 32px 32px; }
+        .flash { animation: flash-ice_pellets 2.6s ease-in-out infinite; transform-origin: 34px 40px; }
+        .sparkle { animation: sparkle-ice_pellets 3.8s ease-in-out infinite; transform-origin: 52px 14px; }
+        .spin { animation: spin-ice_pellets 5.5s ease-in-out infinite; transform-origin: 32px 39px; }
+      }
+      @keyframes float-ice_pellets { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+      @keyframes drift-ice_pellets { 0%,100% { transform: translateX(0); opacity: .95; } 50% { transform: translateX(2px); opacity: .72; } }
+      @keyframes fall-ice_pellets { 0%,100% { transform: translateY(0); opacity: .95; } 50% { transform: translateY(2.2px); opacity: .65; } }
+      @keyframes pulse-ice_pellets { 0%,100% { transform: scale(1); } 50% { transform: scale(1.045); } }
+      @keyframes flash-ice_pellets { 0%,100% { opacity: .88; transform: scale(1); } 52% { opacity: 1; transform: scale(1.08); } }
+      @keyframes sparkle-ice_pellets { 0%,100% { opacity: .45; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.08); } }
+      @keyframes spin-ice_pellets { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#sky)"/>
+  <circle cx="50" cy="14" r="7" fill="#5DAFD3" opacity=".16"/>
+  <g filter="url(#softShadow)" stroke-linecap="round" stroke-linejoin="round">
+
+      <path d="M14 29h34c6 0 10-4 10-9 0-6-5-9-11-9-4-8-16-9-22-1-8-1-14 4-14 11 0 5 2 8 3 8Z" fill="#FFFFFF" stroke="#527F9A" stroke-width="2.2"/>
+      <g class="fall slow" fill="#A7E8F7" stroke="#428DB3" stroke-width="1.5">
+        <polygon points="19,40 23,43 22,48 17,48 16,43"/>
+        <polygon points="34,38 39,41 38,47 32,47 31,41"/>
+        <polygon points="48,41 53,44 52,50 46,50 45,44"/>
+      </g>
+      <path d="M14 56c11 2 27 2 39-1" stroke="#B7E9F5" stroke-width="2.2" stroke-linecap="round"/>
+
+  </g>
+
+    <g class="sparkle" stroke="#FFF6B8" stroke-width="1.8" stroke-linecap="round">
+      <path d="M54 12v5M51.5 14.5h5"/>
+      <path d="M11 17v4M9 19h4"/>
+      <path d="M53 55v4M51 57h4"/>
+    </g>
+
+</svg>

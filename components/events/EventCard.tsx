@@ -1,10 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { DecisionSignals } from "@/components/activity/DecisionSignals";
 import { SaveButton } from "@/components/activity/SaveButton";
+import { EventWeatherSignal } from "@/components/weather/EventWeatherSignal";
+import { WeatherIconButton } from "@/components/weather/WeatherIconButton";
+import { WeatherTimeSpanPopover } from "@/components/weather/WeatherTimeSpanPopover";
 import type { DecisionProfile } from "@/lib/activityDecision";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { cn } from "@/lib/utils";
 import {
   EventBadgeRow,
@@ -29,17 +34,36 @@ export interface EventBadge {
 export type EventMedia =
   | { kind: "category"; category: string }
   | { kind: "poster"; src: string; alt?: string }
+  | { kind: "movie"; posterSrc: string; backdropSrc?: string | null; alt?: string }
   | { kind: "initial"; letter: string; category?: string };
+
+export interface EventWeatherQuery {
+  resortSlug?: string;
+  locationKey?: string;
+  startsAt?: string;
+  endsAt?: string;
+  activitySlug?: string;
+}
+
+export type WeatherDecisionLabel =
+  | "Good to go"
+  | "Go earlier"
+  | "Bring backup"
+  | "Likely affected"
+  | "Stay indoors"
+  | "Official alert";
 
 export interface EventCardProps {
   variant?: "day" | "night";
   href?: string;
   title: string;
   resort: string;
+  resortSlug?: string;
   location?: string;
   extra?: string;
   timeLabel?: string;
   timeDateTime?: string;
+  endDateTime?: string;
   timeUncertain?: boolean;
   scheduleDayLabel?: string;
   scheduleDayDateTime?: string;
@@ -53,6 +77,12 @@ export interface EventCardProps {
   showTrust?: boolean;
   trustActivity?: ActivityOccurrence;
   decisionProfile?: DecisionProfile;
+  onOpen?: () => void;
+  openLabel?: string;
+  showWeatherSignal?: boolean;
+  weatherSummary?: WeatherForTimeSpan | null;
+  weatherQuery?: EventWeatherQuery;
+  weatherDecisionLabel?: WeatherDecisionLabel;
   className?: string;
 }
 
@@ -61,10 +91,12 @@ export function EventCard({
   href,
   title,
   resort,
+  resortSlug,
   location,
   extra,
   timeLabel,
   timeDateTime,
+  endDateTime,
   timeUncertain,
   scheduleDayLabel,
   scheduleDayDateTime,
@@ -78,15 +110,25 @@ export function EventCard({
   showTrust,
   trustActivity,
   decisionProfile,
+  onOpen,
+  openLabel,
+  showWeatherSignal = true,
+  weatherSummary,
+  weatherQuery,
+  weatherDecisionLabel,
   className,
 }: EventCardProps) {
+  const [weatherOpen, setWeatherOpen] = useState(false);
   const isNight = variant === "night";
   const saveVariant = isNight ? "night" : "day";
-  const isClickable = Boolean(href);
+  const isClickable = Boolean(href || onOpen);
+  const shouldShowWeatherSummary = Boolean(
+    weatherSummary?.shouldDisplayWeather
+  );
 
   const body = (
     <>
-      <EventMediaDisplay media={media} size="card" />
+      <EventMediaDisplay media={media} size="card" resortSlug={resortSlug} />
       <div className="event-card__body">
         <EventBadgeRow
           badges={badges}
@@ -110,6 +152,14 @@ export function EventCard({
         {decisionProfile && (
           <DecisionSignals profile={decisionProfile} compact maxSignals={2} />
         )}
+        {!shouldShowWeatherSummary && showWeatherSignal && (weatherQuery?.startsAt ?? timeDateTime) ? (
+          <EventWeatherSignal
+            resortSlug={weatherQuery?.resortSlug ?? resortSlug}
+            locationKey={weatherQuery?.locationKey}
+            startsAt={weatherQuery?.startsAt ?? timeDateTime}
+            endsAt={weatherQuery?.endsAt ?? endDateTime}
+          />
+        ) : null}
       </div>
     </>
   );
@@ -122,15 +172,44 @@ export function EventCard({
         isHappeningNow && "event-card--now",
         isClickable && "event-card--clickable",
         onSave && "event-card--has-save",
+        shouldShowWeatherSummary && "event-card--has-weather",
         className
       )}
     >
-      {isClickable ? (
+      {onOpen ? (
+        <button
+          type="button"
+          className="event-card__hit-area"
+          aria-label={openLabel ?? `View ${title}`}
+          onClick={onOpen}
+        >
+          {body}
+        </button>
+      ) : href ? (
         <Link href={href!} className="event-card__hit-area" aria-label={`View ${title}`}>
           {body}
         </Link>
       ) : (
         <div className="event-card__hit-area">{body}</div>
+      )}
+
+      {shouldShowWeatherSummary && weatherSummary && (
+        <div
+          className="event-card__weather"
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+        >
+          <WeatherIconButton
+            weather={weatherSummary}
+            decisionLabel={weatherDecisionLabel}
+            onClick={() => setWeatherOpen(true)}
+          />
+          <WeatherTimeSpanPopover
+            weather={weatherSummary}
+            open={weatherOpen}
+            onClose={() => setWeatherOpen(false)}
+          />
+        </div>
       )}
 
       {onSave && (

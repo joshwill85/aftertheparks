@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { CategoryIcon } from "@/components/activity/CategoryIcon";
-import { TrustBadge } from "@/components/activity/TrustBadge";
+import {
+  shouldRenderTrustBadge,
+  TrustBadge,
+} from "@/components/activity/TrustBadge";
+import {
+  hasResortStoryIcon,
+  ResortStoryIcon,
+} from "@/components/resort/ResortStoryIcon";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 import type { EventBadge, EventBadgeTone, EventMedia } from "@/components/events/EventCard";
@@ -40,7 +47,11 @@ export function EventBadgeRow({
   showTrust?: boolean;
   trustActivity?: ActivityOccurrence;
 }) {
-  if (badges.length === 0 && !showTrust) return null;
+  const renderTrust = Boolean(
+    showTrust && trustActivity && shouldRenderTrustBadge(trustActivity)
+  );
+
+  if (badges.length === 0 && !renderTrust) return null;
 
   return (
     <div className="event-card__badges">
@@ -52,7 +63,7 @@ export function EventBadgeRow({
           {badge.label}
         </span>
       ))}
-      {showTrust && trustActivity && (
+      {renderTrust && trustActivity && (
         <TrustBadge activity={trustActivity} />
       )}
     </div>
@@ -62,16 +73,37 @@ export function EventBadgeRow({
 export function EventMediaDisplay({
   media,
   size = "card",
+  resortSlug,
 }: {
   media: EventMedia;
   size?: "card" | "detail";
+  resortSlug?: string;
 }) {
   const isDetail = size === "detail";
+  const showResortIcon = Boolean(
+    resortSlug && hasResortStoryIcon(resortSlug)
+  );
+
+  const withResortIdentity = (children: React.ReactNode) => (
+    <div
+      className={cn(
+        "event-card__media-shell",
+        isDetail && "event-card__media-shell--detail"
+      )}
+    >
+      {children}
+      {showResortIcon && resortSlug && (
+        <span className="event-card__resort-story-icon" aria-hidden>
+          <ResortStoryIcon slug={resortSlug} />
+        </span>
+      )}
+    </div>
+  );
 
   if (media.kind === "poster") {
     const w = isDetail ? 120 : 80;
     const h = isDetail ? 180 : 120;
-    return (
+    return withResortIdentity(
       <div
         className={cn(
           "event-card__media event-card__media--poster",
@@ -93,8 +125,43 @@ export function EventMediaDisplay({
     );
   }
 
+  if (media.kind === "movie") {
+    const w = isDetail ? 120 : 86;
+    const h = isDetail ? 180 : 130;
+    return withResortIdentity(
+      <div
+        className={cn(
+          "event-card__media event-card__media--movie",
+          isDetail && "event-card__media--movie-lg"
+        )}
+      >
+        {media.backdropSrc && (
+          <Image
+            src={media.backdropSrc}
+            alt=""
+            fill
+            className="event-card__movie-backdrop"
+            sizes={isDetail ? "120px" : "86px"}
+          />
+        )}
+        <span className="event-card__movie-shine" aria-hidden />
+        <Image
+          src={media.posterSrc}
+          alt=""
+          width={w}
+          height={h}
+          className={cn(
+            "event-card__movie-poster",
+            isDetail && "event-card__movie-poster--lg"
+          )}
+          sizes={isDetail ? "120px" : "86px"}
+        />
+      </div>
+    );
+  }
+
   if (media.kind === "initial") {
-    return (
+    return withResortIdentity(
       <div
         className={cn(
           "event-card__media event-card__media--initial",
@@ -114,7 +181,7 @@ export function EventMediaDisplay({
     );
   }
 
-  return (
+  return withResortIdentity(
     <div
       className={cn(
         "event-card__media event-card__media--category",
@@ -144,6 +211,7 @@ export function EventTitleBlock({
   summary,
   footnote,
   headingLevel = "h3",
+  headingId,
 }: {
   title: string;
   resort?: string;
@@ -157,12 +225,14 @@ export function EventTitleBlock({
   summary?: string;
   footnote?: string;
   headingLevel?: "h1" | "h3";
+  headingId?: string;
 }) {
   const Heading = headingLevel;
 
   return (
     <>
       <Heading
+        id={headingId}
         className={cn(
           "event-card__title",
           headingLevel === "h1" && "event-card__title--detail"

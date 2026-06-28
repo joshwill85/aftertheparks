@@ -20,6 +20,8 @@ export async function enrichMovieNightsWithPosters(
       backdropUrl: meta.backdropUrl,
       releaseYear: meta.releaseYear ?? undefined,
       tmdbId: meta.tmdbId ?? undefined,
+      overview: meta.overview,
+      voteAverage: meta.voteAverage,
     };
   });
 }

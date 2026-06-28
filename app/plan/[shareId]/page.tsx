@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import { getPlanShare } from "@/lib/data/activities";
 import type { PlanItem } from "@/lib/types/occurrence";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Shared resort plan | After the Parks",
+  description:
+    "View-only legacy shared After the Parks plan snapshot.",
+  robots: { index: false, follow: true },
+};
 
 export default async function PlanSharePage({
   params,

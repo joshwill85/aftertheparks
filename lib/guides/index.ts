@@ -1,3 +1,6 @@
+import { HIGH_VALUE_GUIDES } from "@/lib/seo/routes";
+import { SEO_COMPARISON_PAGES } from "@/lib/seo/comparisonPages";
+
 export interface GuideEntry {
   slug: string;
   title: string;
@@ -8,22 +11,22 @@ export interface GuideEntry {
 }
 
 export const GUIDES: GuideEntry[] = [
-  {
-    slug: "first-night-at-the-resort",
-    title: "Your first night at the resort",
-    description:
-      "Settle in, scout tonight's activities, and ease into vacation mode without a park ticket.",
-    href: "/guides/first-night-at-the-resort",
-    exploreHref: "/tonight",
-    keywords: [
-      "first night",
-      "check-in",
-      "arrival",
-      "settle in",
-      "tonight",
-      "evening",
-    ],
-  },
+  ...HIGH_VALUE_GUIDES.map((guide) => ({
+    slug: guide.slug,
+    title: guide.title,
+    description: guide.description,
+    href: `/guides/${guide.slug}`,
+    exploreHref: guide.primaryAction.href,
+    keywords: guide.keywords,
+  })),
+  ...SEO_COMPARISON_PAGES.map((page) => ({
+    slug: page.slug,
+    title: page.title,
+    description: page.description,
+    href: `/guides/${page.slug}`,
+    exploreHref: page.primaryAction.href,
+    keywords: page.keywords,
+  })),
   {
     slug: "arcade-and-crafts",
     title: "Arcade and crafts",

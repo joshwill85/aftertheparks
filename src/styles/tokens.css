@@ -125,6 +125,22 @@
   --state-error-bg: rgba(184, 50, 50, 0.1);
   --state-error-border: rgba(184, 50, 50, 0.34);
   --state-error-text: var(--danger);
+
+  /* Weather guidance */
+  --weather-normal-bg: rgba(22, 166, 182, 0.12);
+  --weather-normal-text: var(--lagoon-deep);
+  --weather-rain-bg: rgba(8, 121, 138, 0.12);
+  --weather-rain-text: #075f6d;
+  --weather-heat-bg: rgba(253, 185, 78, 0.18);
+  --weather-heat-text: #7a4a00;
+  --weather-storm-bg: rgba(7, 26, 38, 0.12);
+  --weather-storm-text: var(--night);
+  --weather-alert-bg: rgba(184, 50, 50, 0.12);
+  --weather-alert-text: var(--danger);
+  --weather-stale-bg: rgba(107, 114, 128, 0.14);
+  --weather-stale-text: var(--muted);
+  --weather-unavailable-bg: rgba(22, 33, 42, 0.08);
+  --weather-unavailable-text: var(--brand-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

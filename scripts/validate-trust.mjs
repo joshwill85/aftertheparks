@@ -5,7 +5,6 @@
  * Default: http://localhost:3000
  */
 
-import { createHmac } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -35,19 +34,6 @@ function loadLocalEnvIfPresent() {
 
 loadLocalEnvIfPresent();
 
-const SITE_GATE_COOKIE_NAME =
-  process.env.SITE_GATE_COOKIE_NAME ?? "aftertheparks_site_gate";
-const SITE_GATE_PASSWORD = process.env.SITE_GATE_PASSWORD?.trim();
-const SITE_GATE_PAYLOAD = "aftertheparks-site-gate-v1";
-
-function gateHeaders() {
-  if (!SITE_GATE_PASSWORD) return {};
-  const token = createHmac("sha256", SITE_GATE_PASSWORD)
-    .update(SITE_GATE_PAYLOAD)
-    .digest("hex");
-  return { Cookie: `${SITE_GATE_COOKIE_NAME}=${token}` };
-}
-
 const LETTER_SPACED = /\b[A-Z](?:\s[A-Z]){3,}\b/;
 const KNOWN_TITLE_BREAKS = /Wellnessscav|Engerhunt/i;
 const SUSPICIOUS_BLOCK = /9:00\s*AM\s*[–-]\s*9:00\s*PM/i;
@@ -67,13 +53,13 @@ const INTERNAL_SCHEDULE_NORMALIZATION_TEXT =
   /no posted time in PDF|Activities schedule available digitally/i;
 
 async function fetchJson(path) {
-  const res = await fetch(`${BASE}${path}`, { headers: gateHeaders() });
+  const res = await fetch(`${BASE}${path}`);
   if (!res.ok) throw new Error(`${path} → ${res.status}`);
   return res.json();
 }
 
 async function fetchText(path) {
-  const res = await fetch(`${BASE}${path}`, { headers: gateHeaders() });
+  const res = await fetch(`${BASE}${path}`);
   if (!res.ok) throw new Error(`${path} → ${res.status}`);
   return res.text();
 }

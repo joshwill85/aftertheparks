@@ -63,6 +63,7 @@ assert.deepEqual(june26.costMix, { free: 2, paid: 1, unknown: 1 });
 assert.match(june26.ariaLabel, /4 activities/);
 assert.match(june26.ariaLabel, /Top resort: Polynesian Village Resort/);
 assert.match(june26.ariaLabel, /Starlight 1/);
+assert.doesNotMatch(june26.ariaLabel, /price unclear/i);
 
 const empty = getCalendarDaySummary(summaries, "2026-06-30");
 assert.equal(empty.total, 0, "Missing days should return an empty summary");

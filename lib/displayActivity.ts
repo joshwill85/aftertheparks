@@ -26,7 +26,7 @@ export interface DisplayActivity {
   timeLabel?: string;
   timeUncertain: boolean;
   daypart: ActivityOccurrence["daypart"] | "unclear";
-  costLabel: PublicPriceLabel;
+  costLabel?: PublicPriceLabel;
   summary?: string;
   trustState: TrustState;
   displayQuality: DisplayQualityResult;

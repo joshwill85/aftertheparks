@@ -5,17 +5,20 @@ import { usePlan } from "@/components/atlas/PlanProvider";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
 interface ActivityCardProps {
   activity: ActivityOccurrence;
   showResort?: boolean;
   onSave?: (activity: ActivityOccurrence) => void;
+  weatherSummary?: WeatherForTimeSpan | null;
 }
 
 export function ActivityCard({
   activity,
   showResort = true,
   onSave,
+  weatherSummary,
 }: ActivityCardProps) {
   const { isActivitySaved } = usePlan();
   const display = toDisplayActivity(activity);
@@ -27,6 +30,7 @@ export function ActivityCard({
   return (
     <EventCard
       {...card}
+      weatherSummary={weatherSummary}
       saved={isActivitySaved(activity)}
       onSave={onSave ? () => onSave(activity) : undefined}
     />

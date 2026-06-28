@@ -1,12 +1,11 @@
 import { IconGlyph } from "@/components/icons/IconGlyph";
-import type { ActivityOffering } from "@/lib/types/occurrence";
-import { DecisionSignals } from "@/components/activity/DecisionSignals";
+import type { ActivityOccurrence, ActivityOffering } from "@/lib/types/occurrence";
 import { getCategoryMeta } from "@/lib/categories/meta";
-import { offeringDecisionProfile } from "@/lib/activityDecision";
 import {
-  getPublicOfferingAvailabilityLabel,
-  shouldShowOfferingAvailability,
-} from "@/lib/activityAvailabilityDisplay";
+  formatOfferingAvailabilityLabel,
+  formatOfferingTimingLabel,
+} from "@/lib/activityOfferingDisplay";
+import { shouldShowOfferingAvailability } from "@/lib/activityAvailabilityDisplay";
 import {
   optionalPriceAddOnsLabel,
   publicPriceDetail,
@@ -32,19 +31,22 @@ function bookingNotes(offering: ActivityOffering): string[] {
 export function ActivityOfferingCard({
   offering,
   showResort = false,
+  nextSession,
 }: {
   offering: ActivityOffering;
   showResort?: boolean;
+  nextSession?: ActivityOccurrence;
 }) {
   const meta = getCategoryMeta(offering.category);
   const notes = bookingNotes(offering);
-  const showAvailability = shouldShowOfferingAvailability(offering.availability);
-  const availabilityLabel = getPublicOfferingAvailabilityLabel(
-    offering.availability
-  );
-  const decisionProfile = offeringDecisionProfile(offering);
+  const availabilityLabel = formatOfferingAvailabilityLabel(offering, nextSession);
+  const timingLabel = formatOfferingTimingLabel(offering, nextSession);
+  const showAvailability =
+    Boolean(nextSession) || shouldShowOfferingAvailability(offering.availability);
   const addOnsLabel = optionalPriceAddOnsLabel(offering.price.options);
   const priceDetail = publicPriceDetail(offering.price);
+  const priceLabel = publicPriceLabel(offering.price.state);
+  const highlights = offering.amenities.slice(0, 4);
 
   return (
     <article className="activity-offering-card rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 shadow-sm">
@@ -60,9 +62,11 @@ export function ActivityOfferingCard({
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-muted)]">
               {meta.label}
             </p>
-            <span className="rounded-full bg-[var(--color-surface)] px-2 py-1 text-xs font-semibold text-[var(--color-muted)]">
-              {publicPriceLabel(offering.price.state)}
-            </span>
+            {priceLabel && (
+              <span className="rounded-full bg-[var(--color-surface)] px-2 py-1 text-xs font-semibold text-[var(--color-muted)]">
+                {priceLabel}
+              </span>
+            )}
             {priceDetail && (
               <span className="rounded-full bg-[var(--color-surface)] px-2 py-1 text-xs font-semibold text-[var(--color-muted)]">
                 {priceDetail}
@@ -90,9 +94,15 @@ export function ActivityOfferingCard({
         </div>
       </div>
 
-      <DecisionSignals profile={decisionProfile} compact />
-
-      <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+      <dl className="activity-offering-card__facts mt-4 grid gap-3 text-sm sm:grid-cols-2">
+        {timingLabel && (
+          <div>
+            <dt className="font-bold text-[var(--brand-ink)]">Timing</dt>
+            <dd className="mt-1 text-[var(--color-muted)]">
+              {timingLabel}
+            </dd>
+          </div>
+        )}
         {showAvailability && (
           <div>
             <dt className="font-bold text-[var(--brand-ink)]">Availability</dt>
@@ -109,6 +119,21 @@ export function ActivityOfferingCard({
         </div>
       </dl>
 
+      {highlights.length > 0 && (
+        <section className="mt-4">
+          <h4 className="text-sm font-bold text-[var(--brand-ink)]">
+            Highlights
+          </h4>
+          <ul className="mt-2 grid gap-2 text-sm leading-5 text-[var(--color-muted)]">
+            {highlights.map((highlight) => (
+              <li key={highlight} className="activity-offering-card__highlight">
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {notes.length > 0 && (
         <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-[var(--brand-ink)]">
           {notes.map((note) => (
@@ -122,16 +147,6 @@ export function ActivityOfferingCard({
         </ul>
       )}
 
-      {offering.source?.url && (
-        <a
-          href={offering.source.url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-4 inline-flex text-sm font-bold text-[var(--accent)] hover:underline"
-        >
-          Official Disney source
-        </a>
-      )}
     </article>
   );
 }

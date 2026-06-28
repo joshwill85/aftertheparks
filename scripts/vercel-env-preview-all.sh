@@ -18,21 +18,12 @@ if [ -n "$TEAM_ID" ]; then
   QS="?teamId=${TEAM_ID}"
 fi
 
-BASE="https://api.vercel.com/v10/projects/${PROJECT_ID}/env${QS}"
-
-# Remove existing preview entries for this key (all branches)
-EXISTING=$(curl -sfS -H "Authorization: Bearer $TOKEN" "$BASE" | python3 -c "
-import json, sys
-name = sys.argv[1]
-data = json.load(sys.stdin)
-for row in data.get('envs', []):
-    if row.get('key') == name and 'preview' in (row.get('target') or []):
-        print(row['id'])
-" "$NAME" || true)
-
-for id in $EXISTING; do
-  curl -sfS -X DELETE -H "Authorization: Bearer $TOKEN" "${BASE}/${id}" >/dev/null || true
-done
+BASE="https://api.vercel.com/v10/projects/${PROJECT_ID}/env"
+if [ -n "$QS" ]; then
+  UPSERT_URL="${BASE}${QS}&upsert=true"
+else
+  UPSERT_URL="${BASE}?upsert=true"
+fi
 
 BODY=$(python3 -c "
 import json, sys
@@ -44,9 +35,17 @@ print(json.dumps({
 }))
 " "$NAME" "$VALUE" "$SENSITIVE")
 
-curl -sfS -X POST "$BASE" \
+response=$(curl -sS -X POST "$UPSERT_URL" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d "$BODY" >/dev/null
+  -d "$BODY")
+
+python3 -c "
+import json, sys
+data = json.loads(sys.stdin.read())
+if data.get('error') or data.get('failed'):
+    print(json.dumps({'error': data.get('error'), 'failed': data.get('failed')}), file=sys.stderr)
+    raise SystemExit(1)
+" <<< "$response"
 
 echo "Vercel preview (all branches): $NAME"

@@ -58,6 +58,8 @@ const constellation = buildResortActivityConstellation([
 assert.equal(constellation.total, 6);
 assert.equal(constellation.orbits.length, 5);
 assert.equal(constellation.orbits[0].key, "morning");
+assert.equal(constellation.orbits[4].label, "All Day");
+assert.equal(constellation.orbits[4].shortLabel, "ALL");
 assert.equal(constellation.orbits[0].count, 2);
 assert.equal(constellation.orbits[0].intensity, 1);
 assert.equal(constellation.orbits[1].intensity, 0.5);
@@ -74,8 +76,10 @@ assert.equal(
   "6 resort activities, led by Morning and Crafts."
 );
 assert.match(constellation.ariaLabel, /Morning has 2 activities/);
+assert.match(constellation.ariaLabel, /All Day has 1 activity/);
 assert.match(constellation.ariaLabel, /Crafts 2/);
-assert.match(constellation.ariaLabel, /4 free, 1 paid, 1 price unclear/);
+assert.match(constellation.ariaLabel, /4 free, 1 paid/);
+assert.doesNotMatch(constellation.ariaLabel, /price unclear/i);
 
 const empty = buildResortActivityConstellation([]);
 assert.equal(empty.total, 0);
@@ -91,5 +95,18 @@ assert.equal(
   "1 resort activity, led by Evening and Resort fun."
 );
 assert.match(fallbackCategory.ariaLabel, /Resort fun 1/);
+
+const crowdedEvening = buildResortActivityConstellation([
+  activity("campfire", "evening", "campfire"),
+  activity("movie", "evening", "movies_under_stars"),
+  activity("pool", "evening", "poolside"),
+]);
+const crowdedAngles = crowdedEvening.orbits
+  .find((orbit) => orbit.key === "evening")
+  ?.nodes.map((node) => node.angle);
+assert.ok(
+  crowdedAngles?.every((angle) => angle <= 235 || angle >= 305),
+  "Constellation nodes should avoid the top label lane so icons never cover AM/PM/EVE/STAR/ANY labels."
+);
 
 console.log("Resort constellation coverage passed.");

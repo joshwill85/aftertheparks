@@ -14,6 +14,9 @@ interface ResultSummaryProps {
 
 const SORT_OPTIONS: { value: ActivitySortKey; label: string; help: string }[] = [
   { value: "time", label: "Happening soon", help: "Soonest useful activities first." },
+  { value: "alpha", label: "Alphabetical", help: "Activity names from A to Z." },
+  { value: "free", label: "Free first", help: "Free activities before paid ones." },
+  { value: "paid", label: "Paid first", help: "Paid activities before free ones." },
   { value: "quality", label: "Recently verified", help: "Newest verified listings first." },
   { value: "resort", label: "By resort", help: "Grouped for comparing places." },
   { value: "category", label: "By category", help: "Grouped by kind of activity." },
@@ -31,9 +34,15 @@ export function ResultSummary({
   const activeFilters = [
     searchParams.get("resort"),
     searchParams.get("category"),
-    searchParams.get("daypart"),
+    searchParams.get("daypart") ?? searchParams.get("time"),
+    searchParams.get("duration"),
+    searchParams.get("near"),
+    searchParams.get("transport"),
+    searchParams.get("area"),
+    searchParams.get("weather"),
     searchParams.get("free") === "true" ? "free" : null,
     searchParams.get("reservation") === "true" ? "reservation" : null,
+    searchParams.get("ticket_required") ? "ticket_required" : null,
     searchParams.get("q"),
   ].filter(Boolean).length;
 

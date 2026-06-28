@@ -1,5 +1,11 @@
 import { cache } from "react";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { cachePublicData } from "@/lib/cache/publicData";
+import {
+  buildCorrectionInsert,
+  type CorrectionSubmission,
+} from "@/lib/corrections";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import {
   expandOccurrences,
@@ -20,6 +26,8 @@ import {
   loadGoldPreviewOccurrences,
 } from "@/lib/data/goldActivities";
 import { sortActivities } from "@/lib/activities/sort";
+import { enrichMovieNightsWithPosters } from "@/lib/movies/posters";
+import { isUsableMovieTitle, sanitizeMovieTitle } from "@/lib/movies/sanitize";
 import {
   dedupeOccurrences,
   ensurePublicActivity,
@@ -40,6 +48,29 @@ import type {
   RawActivityRow,
   ResortSummary,
 } from "@/lib/types/occurrence";
+
+interface IngestMovieNight {
+  day_of_week?: string | null;
+  movie_title?: string | null;
+  show_time?: string | null;
+  rain_backup_location?: string | null;
+}
+
+interface IngestActivityRow {
+  calendar_group_key?: string;
+  resort_slugs?: string[];
+  name?: string;
+  normalized_name?: string;
+  category?: string;
+  section?: string;
+  location?: string | null;
+  schedule_text?: string | null;
+  movie_nights?: IngestMovieNight[];
+}
+
+interface ActivitiesIngestPayload {
+  activities?: IngestActivityRow[];
+}
 
 const DEMO_RESORTS: ResortSummary[] = [
   {
@@ -637,13 +668,191 @@ export async function getResortTimeline(
   );
 }
 
+const MOVIE_DAY_NAMES = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+] as const;
+
+const VALID_MOVIE_TITLES_WITH_SCHEDULE_OR_LOCATION_WORDS = [
+  "Freaky Friday",
+  "Freakier Friday",
+  "Teen Beach Movie",
+] as const;
+const MOVIE_DAY_PATTERN = MOVIE_DAY_NAMES.join("|");
+const MOVIE_LOCATION_WORD_PATTERN = [
+  "building",
+  "pool",
+  "beach",
+  "lawn",
+  "courtyard",
+  "deck",
+].join("|");
+const MOVIE_SCHEDULE_ONLY_RE = new RegExp(
+  `^(?:${MOVIE_DAY_PATTERN})(?:\\s*(?:,|and|&)?\\s*(?:${MOVIE_DAY_PATTERN}))*$`,
+  "i"
+);
+const MOVIE_DAY_FROM_TIME_RE = new RegExp(
+  `\\b(?:${MOVIE_DAY_PATTERN})\\b\\s+from\\s+\\d{1,2}(?::\\d{2})?\\s*(?:am|pm)`,
+  "i"
+);
+const MOVIE_LOCATION_FRAGMENT_RE = new RegExp(
+  `\\b(?:${MOVIE_LOCATION_WORD_PATTERN})\\b(?:\\s+\\d+)?$`,
+  "i"
+);
+
+function normalizeMovieDay(value?: string | null): string | null {
+  const day = value?.trim().toLowerCase();
+  if (!day) return null;
+  return MOVIE_DAY_NAMES.includes(day as (typeof MOVIE_DAY_NAMES)[number])
+    ? day
+    : null;
+}
+
+function dayOrder(dayOfWeek: string): number {
+  const index = MOVIE_DAY_NAMES.indexOf(
+    dayOfWeek.toLowerCase() as (typeof MOVIE_DAY_NAMES)[number]
+  );
+  return index === -1 ? 99 : index;
+}
+
+function normalizeMovieShowTime(value?: string | null): string | null {
+  const text = value?.trim();
+  if (!text) return null;
+  const match = text.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
+  if (!match) return null;
+  const hour = Number.parseInt(match[1], 10);
+  const minute = match[2] ?? "00";
+  if (hour < 1 || hour > 12) return null;
+  return `${hour}:${minute}${match[3].toUpperCase()}`;
+}
+
+function isMovieTonight(dayOfWeek: string): boolean {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    weekday: "long",
+  });
+  return formatter.format(nowInstant()).toLowerCase() === dayOfWeek.toLowerCase();
+}
+
+function isRejectedMovieTitle(title: string): boolean {
+  const normalized = title.trim().toLowerCase();
+  if (!normalized) return true;
+  if (/^(pg|p|ps|pe|s)$/i.test(normalized)) return true;
+  if (
+    VALID_MOVIE_TITLES_WITH_SCHEDULE_OR_LOCATION_WORDS.some((validTitle) =>
+      normalized.includes(validTitle.toLowerCase())
+    )
+  ) {
+    return false;
+  }
+  if (MOVIE_SCHEDULE_ONLY_RE.test(title) || MOVIE_DAY_FROM_TIME_RE.test(title)) {
+    return true;
+  }
+  if (/\b(?:am|pm)\b/i.test(title) || /\d{1,2}:\d{2}/.test(title)) return true;
+  if (MOVIE_LOCATION_FRAGMENT_RE.test(title)) return true;
+  return false;
+}
+
+function normalizeMovieLocation(value?: string | null): string | undefined {
+  const location = value?.trim();
+  if (!location || location.toLowerCase() === "none") return undefined;
+  return location
+    .toLowerCase()
+    .replace(/\b\w/g, (char) => char.toUpperCase())
+    .replace(/\bAnd\b/g, "and")
+    .replace(/\bOf\b/g, "of")
+    .replace(/\bThe\b/g, "the");
+}
+
+function calendarGroupToResortName(calendarGroupKey?: string): string {
+  if (!calendarGroupKey) return "Disney Resort";
+  return calendarGroupKey
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
 export const getMovieNights = cache(async function getMovieNights(): Promise<
   MovieNightOccurrence[]
 > {
-  // Film titles need their own source-backed feed. Gold v2 still publishes the
-  // scheduled "Movie Under the Stars" activity, so the site does not need to
-  // fall back to legacy movie_nights rows to show the event itself.
-  return [];
+  const ingestPath = path.join(process.cwd(), "data/processed/activities_ingest.json");
+
+  let payload: ActivitiesIngestPayload;
+  try {
+    payload = JSON.parse(await readFile(ingestPath, "utf8")) as ActivitiesIngestPayload;
+  } catch (error) {
+    console.error("getMovieNights:", error);
+    return [];
+  }
+
+  const resorts = await getResorts();
+  const resortBySlug = new Map(resorts.map((resort) => [resort.slug, resort]));
+  const movies: MovieNightOccurrence[] = [];
+  const seen = new Set<string>();
+
+  for (const activity of payload.activities ?? []) {
+    if (
+      activity.normalized_name !== "movie-under-the-stars" &&
+      activity.category !== "movies_under_stars"
+    ) {
+      continue;
+    }
+
+    const resortSlug = activity.resort_slugs?.[0];
+    if (!resortSlug) continue;
+    const resort = resortBySlug.get(resortSlug);
+    const resortName = resort?.name ?? calendarGroupToResortName(activity.calendar_group_key);
+    const location = normalizeMovieLocation(activity.location);
+
+    for (const night of activity.movie_nights ?? []) {
+      const rawTitle = night.movie_title?.trim();
+      const dayOfWeek = normalizeMovieDay(night.day_of_week);
+      const showTime = normalizeMovieShowTime(night.show_time ?? activity.schedule_text);
+      if (!rawTitle || !dayOfWeek || !showTime) continue;
+      if (!isUsableMovieTitle(rawTitle)) continue;
+
+      const displayTitle = sanitizeMovieTitle(rawTitle);
+      if (isRejectedMovieTitle(displayTitle)) continue;
+
+      const key = `${resortSlug}:${dayOfWeek}:${displayTitle}:${showTime}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      movies.push({
+        id: `movie-${resortSlug}-${dayOfWeek}-${displayTitle
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "")}`,
+        resortSlug,
+        resortName,
+        movieTitle: rawTitle,
+        displayTitle,
+        showTime,
+        location,
+        dayOfWeek,
+        isTonight: isMovieTonight(dayOfWeek),
+      });
+    }
+  }
+
+  const enriched = await enrichMovieNightsWithPosters(
+    movies.sort((a, b) => {
+      if (a.isTonight && !b.isTonight) return -1;
+      if (!a.isTonight && b.isTonight) return 1;
+      return (
+        dayOrder(a.dayOfWeek) - dayOrder(b.dayOfWeek) ||
+        a.showTime.localeCompare(b.showTime) ||
+        a.displayTitle.localeCompare(b.displayTitle)
+      );
+    })
+  );
+
+  return enriched.filter((movie) => Boolean(movie.posterUrl));
 });
 
 export async function createPlanShare(
@@ -683,18 +892,14 @@ export async function getPlanShare(
 }
 
 export async function submitCorrection(
-  activityCatalogId: string | null,
-  field: string,
-  suggestedValue: string
+  submission: CorrectionSubmission
 ): Promise<boolean> {
   const supabase = createServiceClient();
   if (!supabase) return false;
 
-  const { error } = await supabase.from("content_corrections").insert({
-    activity_catalog_id: activityCatalogId,
-    field,
-    suggested_value: suggestedValue,
-  });
+  const { error } = await supabase
+    .from("content_corrections")
+    .insert(buildCorrectionInsert(submission));
 
   return !error;
 }

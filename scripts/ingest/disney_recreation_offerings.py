@@ -885,6 +885,10 @@ def _amenities_for_slug(
     program_lines: list[dict[str, Any]],
     resort_slug: str,
 ) -> tuple[list[str], list[dict[str, Any]]]:
+    if program_key == "pools":
+        amenities, spans, _pool_names = _pool_amenities_for_lines(program_lines)
+        return amenities, spans
+
     amenities: list[str] = []
     spans: list[dict[str, Any]] = []
     cabana_heading_active = False
@@ -915,6 +919,211 @@ def _amenities_for_slug(
                 amenities.append(item)
         spans.append(_span(line))
     return amenities, spans
+
+
+POOL_DETAIL_STOP_HEADINGS = {
+    "all ages",
+    "know before you go",
+    "related activities",
+    "safety accessibility and guest policies",
+}
+
+POOL_FEATURE_PATTERN = re.compile(
+    r"waterslide|water slide|slide|zero-depth|zero entry|kiddie pool|"
+    r"water playground|aquatic play|play area|poolside activities|"
+    r"pool games|relays|trivia|whirlpool|spa|towels|lifejackets",
+    re.I,
+)
+
+
+def _is_stale_or_operational_pool_notice(text: str) -> bool:
+    lower = text.lower()
+    return (
+        "will be closed" in lower
+        or "closed from" in lower
+        or "closed for maintenance" in lower
+        or "routine maintenance" in lower
+    )
+
+
+def _looks_like_pool_detail_heading(text: str, next_text: str = "") -> bool:
+    cleaned = _clean_heading(text)
+    normalized = _normalize(cleaned)
+    if not cleaned or normalized in POOL_DETAIL_STOP_HEADINGS:
+        return False
+    if normalized.startswith(("pools at ", "locatedin", "multiplewalt disney")):
+        return False
+    if _is_stale_or_operational_pool_notice(cleaned):
+        return False
+    if len(cleaned.split()) > 8:
+        return False
+    if "poolside activities" in normalized:
+        return True
+    if re.search(r"\b(pool|pools|camp|play)\b", normalized):
+        return True
+    return bool(next_text and POOL_FEATURE_PATTERN.search(next_text))
+
+
+def _pool_names_from_text(text: str) -> list[str]:
+    names: list[str] = []
+    for match in re.finditer(
+        r"\b((?:The\s+)?(?:[A-Z0-9][A-Za-z0-9’'&-]*|S’il)"
+        r"(?:\s+(?:[A-Z0-9][A-Za-z0-9’'&-]*|Vous)){0,5}"
+        r"\s+(?:Pool|Pools|Camp|Play))\b",
+        text,
+    ):
+        name = _clean_text(match.group(1))
+        if name.lower().startswith(("hours and", "pool hours")):
+            continue
+        if name not in names:
+            names.append(name)
+    return names
+
+
+def _pool_feature_phrases(text: str) -> list[str]:
+    lower = text.lower()
+    phrases: list[str] = []
+    for match in re.finditer(r"\b\d+-foot(?:-long)?\s+waterslide\b", text, flags=re.I):
+        phrase = match.group(0)
+        if phrase not in phrases:
+            phrases.append(phrase)
+    if "water slide" in lower and not any("water slide" in phrase.lower() or "waterslide" in phrase.lower() for phrase in phrases):
+        phrases.append("water slide")
+    if "zero-depth" in lower or "zero depth" in lower or "zero entry" in lower:
+        phrases.append("zero-depth entry")
+    if "kiddie pool" in lower:
+        phrases.append("kiddie pool")
+    water_play_match = re.search(r"water playground with \d+ distinct zones", text, flags=re.I)
+    if water_play_match:
+        phrases.append(water_play_match.group(0))
+    elif "water playground" in lower:
+        phrases.append("water playground")
+    if "aquatic play area" in lower:
+        phrases.append("aquatic play area")
+    if "miniature waterslide" in lower:
+        phrases.append("miniature waterslide")
+    if "whirlpool spa" in lower:
+        phrases.append("whirlpool spa")
+    if "pool games" in lower or "relays" in lower or "trivia" in lower:
+        phrases.append("themed pool games, relays and trivia")
+
+    deduped: list[str] = []
+    for phrase in phrases:
+        phrase = _clean_text(phrase)
+        if phrase and phrase not in deduped:
+            deduped.append(phrase)
+    return deduped
+
+
+def _pool_detail_sentence(body_text: str) -> str:
+    feature_phrases = _pool_feature_phrases(body_text)
+    if feature_phrases:
+        return " and ".join(feature_phrases[:3])
+
+    sentences = [
+        _clean_text(sentence)
+        for sentence in re.split(r"(?<=[.!?])\s+", body_text)
+        if _clean_text(sentence)
+    ]
+    if not sentences:
+        return ""
+    chosen = next(
+        (sentence for sentence in sentences if POOL_FEATURE_PATTERN.search(sentence)),
+        sentences[0],
+    )
+    if len(chosen) > 190:
+        chosen = chosen[:187].rstrip(" ,;") + "..."
+    return chosen.rstrip(".")
+
+
+def _pool_amenities_for_lines(
+    program_lines: list[dict[str, Any]],
+) -> tuple[list[str], list[dict[str, Any]], list[str]]:
+    amenities: list[str] = []
+    spans: list[dict[str, Any]] = []
+    pool_names: list[str] = []
+    index = 0
+    while index < len(program_lines):
+        line = program_lines[index]
+        heading = _clean_heading(str(line.get("text", "")))
+        next_text = (
+            _clean_heading(str(program_lines[index + 1].get("text", "")))
+            if index + 1 < len(program_lines)
+            else ""
+        )
+        if not _looks_like_pool_detail_heading(heading, next_text):
+            index += 1
+            continue
+
+        section_lines = [line]
+        body_lines: list[dict[str, Any]] = []
+        cursor = index + 1
+        while cursor < len(program_lines):
+            candidate = program_lines[cursor]
+            candidate_text = _clean_heading(str(candidate.get("text", "")))
+            following_text = (
+                _clean_heading(str(program_lines[cursor + 1].get("text", "")))
+                if cursor + 1 < len(program_lines)
+                else ""
+            )
+            if _normalize(candidate_text) in POOL_DETAIL_STOP_HEADINGS:
+                break
+            if _looks_like_pool_detail_heading(candidate_text, following_text):
+                break
+            if not _is_boilerplate_line(candidate_text) and not _is_stale_or_operational_pool_notice(candidate_text):
+                body_lines.append(candidate)
+                section_lines.append(candidate)
+            cursor += 1
+
+        body_text = " ".join(_clean_heading(str(body.get("text", ""))) for body in body_lines)
+        if body_text:
+            generic_heading = bool(re.search(r"\b(themed|leisure|feature)\b", heading, flags=re.I)) or bool(
+                re.match(r"^\d+", heading)
+            )
+            names_from_body = _pool_names_from_text(body_text)
+            names_to_add = names_from_body if generic_heading and names_from_body else [heading]
+            for name in names_to_add:
+                if name not in pool_names and "poolside activities" not in _normalize(name):
+                    pool_names.append(name)
+            detail = _pool_detail_sentence(body_text)
+            if detail:
+                label = "Poolside activities" if "poolside activities" in _normalize(heading) else heading
+                item = f"{label}: {detail}"
+                if item not in amenities:
+                    amenities.append(item)
+                    spans.extend(_span(section_line) for section_line in section_lines)
+        index = max(cursor, index + 1)
+
+    for line in program_lines:
+        text = _clean_heading(str(line.get("text", "")))
+        lower = text.lower()
+        if "complimentary towels" in lower or "complimentary lifejackets" in lower:
+            item = text.rstrip(".")
+            if len(item) > 150:
+                item = item[:147].rstrip(" ,;") + "..."
+            if item not in amenities:
+                amenities.append(item)
+                spans.append(_span(line))
+
+    deduped_spans: list[dict[str, Any]] = []
+    seen_span_keys: set[tuple[Any, Any, Any]] = set()
+    for span in spans:
+        key = (span.get("page"), span.get("line"), span.get("text"))
+        if key in seen_span_keys:
+            continue
+        seen_span_keys.add(key)
+        deduped_spans.append(span)
+
+    return amenities, deduped_spans, pool_names
+
+
+def _pool_location_for_lines(
+    program_lines: list[dict[str, Any]],
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]]]:
+    _amenities, spans, pool_names = _pool_amenities_for_lines(program_lines)
+    if not pool_names:
+        return None, []
+    return {"label": "; ".join(pool_names[:5])}, spans[:5]
 
 
 def _free_price_line(text: str) -> bool:
@@ -1347,7 +1556,9 @@ def _location_from_line_text(text: str) -> str | None:
     if reception:
         return reception.group(1).strip()
     if cleaned.lower().startswith("locatedin"):
-        return _clean_text(re.sub(r"^Locatedin", "", cleaned, flags=re.I))
+        located = re.sub(r"^Locatedin", "", cleaned, flags=re.I)
+        located = re.sub(r"\batDisney", " at Disney", located)
+        return _clean_text(located)
     return None
 
 
@@ -1802,7 +2013,15 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
     for resort_slug in resort_slugs:
         variant_key = _variant_key(program_key, resort_slug, program_lines)
         amenities, amenity_spans = _amenities_for_slug(program_key, program_lines, resort_slug)
-        location, location_spans = _location_for_slug(title, resort_slug, program_lines)
+        pool_location, pool_location_spans = (
+            _pool_location_for_lines(program_lines)
+            if program_key == "pools"
+            else (None, [])
+        )
+        if pool_location:
+            location, location_spans = pool_location, pool_location_spans
+        else:
+            location, location_spans = _location_for_slug(title, resort_slug, program_lines)
         field_provenance = {
             "title": title_spans,
             "resort_join": resort_join_spans,

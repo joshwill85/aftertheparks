@@ -461,6 +461,12 @@ button,
 a.btn-primary,
 a.btn-secondary {
   cursor: pointer;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: normal;
 }
 
 button:disabled,
@@ -536,6 +542,8 @@ textarea.form-control {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
   min-height: var(--control-height-md);
   padding: 0 16px;
   border-radius: 999px;
@@ -544,7 +552,11 @@ textarea.form-control {
   color: var(--brand-ink);
   font-size: 0.875rem;
   font-weight: 850;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  text-align: center;
   text-decoration: none;
+  white-space: normal;
   transition:
     border-color var(--motion-duration-fast) var(--motion-ease-standard),
     color var(--motion-duration-fast) var(--motion-ease-standard),
@@ -561,6 +573,8 @@ textarea.form-control {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
   min-height: var(--control-height-md);
   padding: 0 14px;
   border: 0;
@@ -568,6 +582,10 @@ textarea.form-control {
   background: transparent;
   font-size: 0.875rem;
   font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: normal;
   color: var(--text-secondary);
 }
 
@@ -593,6 +611,7 @@ textarea.form-control {
 /* Result summary — stack cleanly on narrow screens */
 .result-summary {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   align-items: stretch;
   gap: 10px;
@@ -608,12 +627,14 @@ textarea.form-control {
 
 .result-summary__sort {
   display: flex;
+  min-width: 0;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
 }
 
 .result-summary__sort-help {
+  min-width: 0;
   max-width: 12rem;
   color: var(--color-muted);
   font-size: 0.72rem;
@@ -703,6 +724,7 @@ textarea.form-control {
 
 .filter-chip {
   display: inline-flex;
+  min-width: 0;
   min-height: 34px;
   max-width: 100%;
   align-items: center;
@@ -718,12 +740,15 @@ textarea.form-control {
 }
 
 .filter-chip span {
+  min-width: 0;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .filter-chip__remove {
+  flex-shrink: 0;
   font-size: 0.8rem;
 }
 
@@ -766,11 +791,29 @@ textarea.form-control {
   color: var(--color-muted);
 }
 
+.filter-recovery__title,
+.filter-recovery__copy {
+  overflow-wrap: anywhere;
+}
+
 .filter-recovery__actions {
   display: flex;
+  min-width: 0;
   flex-wrap: wrap;
   gap: 0.6rem;
   margin-top: 0.9rem;
+}
+
+.filter-recovery__actions .btn-primary,
+.filter-recovery__actions .btn-secondary {
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 1 auto;
+  padding: 0.72rem 1.25rem;
+  line-height: 1.15;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .wow-filter-alchemy-board {
@@ -779,6 +822,8 @@ textarea.form-control {
   align-items: center;
   gap: 0.75rem;
   margin-top: 0.8rem;
+  min-width: 0;
+  overflow: hidden;
   border-radius: 18px;
   border: 1px solid rgba(22, 166, 182, 0.16);
   background:
@@ -796,7 +841,9 @@ textarea.form-control {
 
 .wow-filter-alchemy-board__orb {
   position: relative;
+  min-width: 0;
   min-height: 4.5rem;
+  overflow: hidden;
   border-radius: 999px;
   border: 1px solid rgba(22, 166, 182, 0.16);
   background:
@@ -808,7 +855,7 @@ textarea.form-control {
   position: absolute;
   left: 50%;
   top: 50%;
-  max-width: min(7rem, 42vw);
+  max-width: min(6rem, 70%);
   overflow: hidden;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.92);
@@ -823,12 +870,13 @@ textarea.form-control {
   transform:
     translate(-50%, -50%)
     rotate(calc(var(--alchemy-index) * 82deg))
-    translateX(2.5rem)
+    translateX(1.25rem)
     rotate(calc(var(--alchemy-index) * -82deg));
 }
 
 .wow-filter-alchemy-board__copy {
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .wow-filter-alchemy-board__copy p {
@@ -1535,12 +1583,14 @@ textarea.form-control {
   .home-section .event-card-list--cols-3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    grid-auto-rows: 1fr;
     gap: 14px;
   }
 
   .event-card-list--cols-2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    grid-auto-rows: 1fr;
     gap: 14px;
   }
 }
@@ -1558,12 +1608,24 @@ textarea.form-control {
 }
 
 .event-card-list__item {
+  height: 100%;
   min-width: 0;
+}
+
+.event-card-list--cols-2 .event-card-list__item {
+  height: clamp(31rem, 35vw, 35rem);
+}
+
+.event-card-list--cols-3 .event-card-list__item,
+.event-card-list--compact .event-card-list__item {
+  height: clamp(23rem, 30vw, 28rem);
 }
 
 .event-card {
   display: flex;
   align-items: stretch;
+  height: 100%;
+  min-height: 16rem;
   border-radius: 22px;
   border: 1px solid var(--border-soft);
   background: rgba(255, 255, 255, 0.92);
@@ -1572,6 +1634,17 @@ textarea.form-control {
     border-color 180ms ease,
     box-shadow 180ms ease,
     transform 180ms ease;
+}
+
+.event-card-list--cols-2 .event-card {
+  height: clamp(31rem, 35vw, 35rem);
+  min-height: 0;
+}
+
+.event-card-list--cols-3 .event-card,
+.event-card-list--compact .event-card {
+  height: clamp(23rem, 30vw, 28rem);
+  min-height: 0;
 }
 
 .event-card--clickable {
@@ -1589,11 +1662,22 @@ textarea.form-control {
   flex: 1;
   gap: 14px;
   align-items: flex-start;
+  height: 100%;
   min-width: 0;
   padding: 14px;
   color: inherit;
   text-decoration: none;
   border-radius: 22px;
+  background: transparent;
+  border: 0;
+  appearance: none;
+  text-align: left;
+}
+
+.event-card-list--cols-2 .event-card__hit-area,
+.event-card-list--cols-3 .event-card__hit-area,
+.event-card-list--compact .event-card__hit-area {
+  overflow: hidden;
 }
 
 .event-card--has-save .event-card__hit-area {
@@ -1601,10 +1685,18 @@ textarea.form-control {
   padding-bottom: 54px;
 }
 
+.event-card--has-weather .event-card__hit-area {
+  padding-bottom: 70px;
+}
+
 @media (max-width: 520px) {
   .event-card--has-save .event-card__hit-area {
     padding-right: 14px;
     padding-bottom: 70px;
+  }
+
+  .event-card--has-save.event-card--has-weather .event-card__hit-area {
+    padding-bottom: 122px;
   }
 }
 
@@ -1613,6 +1705,33 @@ textarea.form-control {
   right: 14px;
   bottom: 14px;
   z-index: 2;
+}
+
+.event-card__weather {
+  position: absolute;
+  left: 108px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  max-width: min(19rem, calc(100% - 122px));
+}
+
+.event-card--has-save .event-card__weather {
+  right: 118px;
+  max-width: min(19rem, calc(100% - 226px));
+}
+
+@media (max-width: 520px) {
+  .event-card__weather,
+  .event-card--has-save .event-card__weather {
+    left: 14px;
+    right: 14px;
+    max-width: none;
+  }
+
+  .event-card--has-save .event-card__weather {
+    bottom: 70px;
+  }
 }
 
 .event-card--clickable.event-card--day .event-card__hit-area:hover .event-card__title {
@@ -1650,6 +1769,42 @@ textarea.form-control {
   border-radius: 12px;
 }
 
+.event-card__media-shell {
+  position: relative;
+  flex-shrink: 0;
+  width: 80px;
+}
+
+.event-card__media-shell--detail {
+  width: 120px;
+}
+
+.event-card__resort-story-icon {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 249, 239, 0.9);
+  box-shadow: 0 10px 24px rgba(22, 33, 42, 0.16);
+  overflow: hidden;
+}
+
+.event-card__resort-story-icon .resort-card__story-icon {
+  width: 34px;
+  height: 34px;
+  box-shadow: none;
+}
+
+.event-card__resort-story-icon .resort-card__story-svg {
+  width: 34px;
+  height: 34px;
+}
+
 .event-card__media--poster {
   width: 80px;
   height: 120px;
@@ -1673,6 +1828,59 @@ textarea.form-control {
   width: 120px;
   height: 180px;
   border-radius: 14px;
+}
+
+.event-card__media--movie {
+  position: relative;
+  width: 86px;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 35% 18%, rgba(255, 255, 255, 0.45), transparent 34%),
+    linear-gradient(145deg, rgba(8, 121, 138, 0.18), rgba(255, 200, 87, 0.22));
+  box-shadow:
+    0 14px 28px rgba(22, 33, 42, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+}
+
+.event-card__media--movie-lg {
+  width: 120px;
+  height: 180px;
+  border-radius: 18px;
+}
+
+.event-card__movie-backdrop {
+  object-fit: cover;
+  opacity: 0.32;
+  filter: blur(5px) saturate(1.2);
+  transform: scale(1.16);
+}
+
+.event-card__movie-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.32), transparent 34%),
+    linear-gradient(180deg, transparent 58%, rgba(22, 33, 42, 0.18));
+  pointer-events: none;
+}
+
+.event-card__movie-poster {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 86px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.event-card__movie-poster--lg {
+  width: 120px;
+  height: 180px;
+  border-radius: 18px;
 }
 
 .event-card__media--category {
@@ -1726,9 +1934,304 @@ textarea.form-control {
 .event-card__body {
   display: flex;
   min-width: 0;
+  min-height: 0;
   flex: 1;
   flex-direction: column;
   gap: 4px;
+}
+
+.event-weather-signal {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  width: 100%;
+  margin-top: 0.1rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--border-soft) 72%, transparent);
+  background: color-mix(in srgb, var(--color-card) 88%, white);
+  padding: 0.45rem 0.55rem;
+  color: var(--brand-ink);
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.event-weather-signal__mark {
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-top: 0.18rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--lagoon);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lagoon) 18%, transparent);
+}
+
+.event-weather-signal__copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.08rem;
+}
+
+.event-weather-signal__copy strong,
+.event-weather-signal__copy span {
+  overflow-wrap: anywhere;
+}
+
+.event-weather-signal__copy strong {
+  font-weight: 800;
+}
+
+.event-weather-signal__copy span {
+  color: var(--color-muted);
+}
+
+.event-weather-signal--good .event-weather-signal__mark {
+  background: var(--palm);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--palm) 18%, transparent);
+}
+
+.event-weather-signal--mixed .event-weather-signal__mark {
+  background: var(--sun-gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sun-gold) 22%, transparent);
+}
+
+.event-weather-signal--poor .event-weather-signal__mark {
+  background: var(--sun-coral);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sun-coral) 18%, transparent);
+}
+
+.event-weather-signal--quiet {
+  color: var(--color-muted);
+}
+
+.plan-item__weather {
+  max-width: 32rem;
+  margin-top: 0.6rem;
+}
+
+.weather-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.weather-icon-button {
+  min-height: 44px;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: var(--weather-normal-bg);
+  color: var(--weather-normal-text);
+  padding: 0.45rem 0.7rem;
+  text-align: left;
+}
+
+.weather-icon-button__copy {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.weather-icon-button__copy strong,
+.weather-icon-button__copy span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weather-freshness-line {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.weather-status-strip .weather-freshness-line,
+.weather-popover .weather-freshness-line {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+}
+
+.event-weather-signal .weather-freshness-line,
+.weather-icon-button .weather-freshness-line {
+  max-width: 100%;
+}
+
+.near-term-rain-line {
+  display: grid;
+  gap: 0.1rem;
+  margin-top: 0.55rem;
+  border-left: 3px solid var(--lagoon);
+  padding-left: 0.65rem;
+  color: var(--brand-ink);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.near-term-rain-line strong,
+.near-term-rain-line span {
+  overflow-wrap: anywhere;
+}
+
+.near-term-rain-line span {
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.near-term-rain-line--possible,
+.near-term-rain-line--likely {
+  border-left-color: var(--sun-gold);
+}
+
+.near-term-rain-line--storm_alert {
+  border-left-color: var(--sun-coral);
+}
+
+.near-term-rain-line--unlikely {
+  border-left-color: var(--palm);
+}
+
+.event-weather-signal .near-term-rain-line {
+  margin-top: 0;
+  border-left-width: 0;
+  padding-left: 0;
+  font-size: 0.7rem;
+}
+
+.weather-precip-map {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.weather-precip-map__tile {
+  min-height: 8rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--border-soft) 70%, transparent);
+  background-color: color-mix(in srgb, var(--lagoon) 10%, white);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.weather-precip-map figcaption {
+  display: grid;
+  gap: 0.1rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.weather-precip-map figcaption strong {
+  color: var(--brand-ink);
+}
+
+.weather-popover,
+.weather-status-strip,
+.nws-alert-banner,
+.forecast-timeline,
+.weather-window-card,
+.weather-story-strip,
+.plan-resilience-score,
+.storm-mode-banner,
+.storm-mode-suppression,
+.forecast-compare,
+.resort-weather-personality,
+.route-weather-impact,
+.plan-weather-panel {
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: var(--color-card);
+  padding: 1rem;
+}
+
+.weather-status-strip--rain {
+  background: var(--weather-rain-bg);
+  color: var(--weather-rain-text);
+}
+
+.weather-status-strip--heat {
+  background: var(--weather-heat-bg);
+  color: var(--weather-heat-text);
+}
+
+.weather-status-strip--storm {
+  background: var(--weather-storm-bg);
+  color: var(--weather-storm-text);
+}
+
+.weather-status-strip--official_alert,
+.storm-mode-banner,
+.nws-alert-banner {
+  background: var(--weather-alert-bg);
+  color: var(--weather-alert-text);
+}
+
+.weather-window-strip,
+.weather-story-strip__chapters,
+.forecast-timeline,
+.plan-weather-panel__actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.activity-weather-badge {
+  display: inline-flex;
+  border-radius: 999px;
+  background: var(--weather-normal-bg);
+  color: var(--weather-normal-text);
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.event-card-list--cols-2 .event-card__title,
+.event-card-list--cols-2 .event-card__resort,
+.event-card-list--cols-2 .event-card__location,
+.event-card-list--cols-2 .event-card__extra,
+.event-card-list--cols-2 .event-card__footnote,
+.event-card-list--cols-3 .event-card__title,
+.event-card-list--cols-3 .event-card__resort,
+.event-card-list--cols-3 .event-card__location,
+.event-card-list--cols-3 .event-card__extra,
+.event-card-list--cols-3 .event-card__footnote,
+.event-card-list--compact .event-card__title,
+.event-card-list--compact .event-card__resort,
+.event-card-list--compact .event-card__location,
+.event-card-list--compact .event-card__extra,
+.event-card-list--compact .event-card__footnote {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.event-card-list--cols-2 .event-card__title,
+.event-card-list--cols-2 .event-card__resort,
+.event-card-list--cols-2 .event-card__location,
+.event-card-list--cols-3 .event-card__title,
+.event-card-list--cols-3 .event-card__resort,
+.event-card-list--cols-3 .event-card__location,
+.event-card-list--compact .event-card__title,
+.event-card-list--compact .event-card__resort,
+.event-card-list--compact .event-card__location {
+  -webkit-line-clamp: 2;
+}
+
+.event-card-list--cols-2 .event-card__extra,
+.event-card-list--cols-3 .event-card__extra,
+.event-card-list--compact .event-card__extra {
+  -webkit-line-clamp: 1;
+}
+
+.event-card-list--cols-2 .event-card__footnote,
+.event-card-list--cols-3 .event-card__footnote,
+.event-card-list--compact .event-card__footnote {
+  -webkit-line-clamp: 2;
 }
 
 .event-card__badges {
@@ -1878,6 +2381,131 @@ textarea.form-control {
 
 .event-card .card-actions {
   margin-top: 10px;
+}
+
+.movie-details {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.movie-details__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(22, 33, 42, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.movie-details__panel {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  max-height: min(88vh, 760px);
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 200, 87, 0.2), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 239, 0.96));
+  box-shadow: 0 28px 80px rgba(22, 33, 42, 0.28);
+}
+
+.movie-details__close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 2;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(22, 33, 42, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--brand-ink);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.movie-details__content {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 20px;
+  padding: 28px;
+}
+
+.movie-details__copy {
+  min-width: 0;
+  padding-right: 74px;
+}
+
+.movie-details__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.movie-details__facts span {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(22, 166, 182, 0.12);
+  color: var(--lagoon-deep);
+  padding: 0 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.movie-details__source {
+  display: inline-flex;
+  margin-top: 16px;
+  color: var(--accent);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.movie-details__source:hover {
+  text-decoration: underline;
+}
+
+.movie-details__attribution {
+  margin-top: 16px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .movie-details {
+    align-items: end;
+    padding: 10px;
+  }
+
+  .movie-details__panel {
+    max-height: 92vh;
+    border-radius: 24px;
+  }
+
+  .movie-details__content {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 14px;
+    padding: 22px;
+  }
+
+  .movie-details__copy {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .movie-details__close {
+    position: static;
+    float: right;
+    margin: 14px 14px 0 0;
+  }
 }
 
 /* Calendar density bands — summarize daypart patterns without tiny unreadable dots */
@@ -2078,13 +2706,80 @@ textarea.form-control {
 .activity-offering-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  grid-auto-rows: 1fr;
   gap: 1rem;
 }
 
 .activity-offering-card {
   display: flex;
+  height: 100%;
   min-width: 0;
+  overflow: hidden;
   flex-direction: column;
+}
+
+.activity-offering-card__facts {
+  margin-top: auto;
+}
+
+.activity-offering-card__highlight {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.activity-collection-view {
+  min-width: 0;
+}
+
+.activity-collection-view__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.activity-collection-view__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.activity-collection-view__tab {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: 999px;
+  background: var(--color-card);
+  color: var(--brand-ink);
+  font-size: 0.875rem;
+  font-weight: 750;
+  padding: 0.55rem 0.9rem;
+  white-space: nowrap;
+}
+
+.activity-collection-view__tab--active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--color-card));
+  color: var(--accent);
+}
+
+.activity-collection-view__sort {
+  display: inline-flex;
+  min-width: min(100%, 14rem);
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  font-weight: 750;
+}
+
+.activity-collection-view__sort .form-control {
+  min-height: 2.75rem;
 }
 
 .decision-signals {
@@ -2338,18 +3033,6 @@ textarea.form-control {
 .event-detail-schedule__row:last-child {
   border-bottom: 0;
   padding-bottom: 0;
-}
-
-.event-detail-trust {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  background: rgba(255, 200, 87, 0.2);
-  padding: 6px 12px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: #7a4a00;
 }
 
 .event-detail-aside-link {
@@ -2787,18 +3470,32 @@ textarea.form-control {
   transform: translate(-50%, -50%) scaleX(1.35);
 }
 
-.resort-constellation__orbit span {
+.resort-constellation__orbit-labels {
+  pointer-events: none;
   position: absolute;
-  top: -0.52rem;
+  inset: 0;
+  z-index: 4;
+}
+
+.resort-constellation__orbit-label {
+  position: absolute;
+  z-index: 4;
+  top: var(--orbit-label-top);
   left: 50%;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.04rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 10px rgba(22, 33, 42, 0.08);
   padding: 0.08rem 0.34rem;
   color: var(--color-muted);
   font-size: 0.58rem;
   font-weight: 950;
   letter-spacing: 0.06em;
-  transform: translateX(-50%) scaleX(0.82);
+  line-height: 1;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
 }
 
 .resort-constellation-node {
@@ -2926,7 +3623,7 @@ textarea.form-control {
     transform: translate(-50%, -50%) scaleX(1.08);
   }
 
-  .resort-constellation__orbit span {
+  .resort-constellation__orbit-label {
     display: none;
   }
 
@@ -2943,280 +3640,6 @@ textarea.form-control {
   .resort-constellation-node--large {
     width: 3rem;
     height: 3rem;
-  }
-}
-
-.source-confidence,
-.source-confidence-summary {
-  overflow: hidden;
-  border: 1px solid rgba(22, 166, 182, 0.18);
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 12% 12%, rgba(22, 166, 182, 0.13), transparent 30%),
-    radial-gradient(circle at 92% 0%, rgba(255, 200, 87, 0.16), transparent 28%),
-    rgba(255, 255, 255, 0.94);
-  box-shadow: 0 14px 30px rgba(22, 33, 42, 0.08);
-}
-
-.source-confidence {
-  padding: 1rem;
-}
-
-.source-confidence__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.source-confidence__eyebrow {
-  margin: 0 0 0.3rem;
-  color: var(--lagoon-deep);
-  font-size: 0.66rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.source-confidence h3,
-.source-confidence-summary h2 {
-  margin: 0;
-  color: var(--brand-ink);
-  font-family: var(--font-display);
-  font-weight: 780;
-  line-height: 1.08;
-}
-
-.source-confidence h3 {
-  font-size: 1.14rem;
-}
-
-.source-confidence-summary h2 {
-  font-size: clamp(1.25rem, 2.4vw, 1.72rem);
-}
-
-.source-confidence-summary p {
-  margin: 0.45rem 0 0;
-  color: var(--color-muted);
-  font-size: 0.92rem;
-  font-weight: 740;
-}
-
-.source-confidence__meter,
-.source-confidence-summary__meter {
-  --meter-color: var(--lagoon);
-  position: relative;
-  display: grid;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 56%, transparent 57%),
-    conic-gradient(
-      var(--meter-color) var(--source-confidence-score),
-      rgba(22, 33, 42, 0.11) 0
-    );
-  box-shadow: inset 0 0 0 1px rgba(22, 33, 42, 0.08);
-}
-
-.source-confidence__meter {
-  width: 3.45rem;
-  height: 3.45rem;
-}
-
-.source-confidence-summary__meter {
-  width: 5rem;
-  height: 5rem;
-}
-
-.source-confidence--mixed .source-confidence__meter {
-  --meter-color: var(--sun-gold);
-}
-
-.source-confidence--needs_confirmation .source-confidence__meter {
-  --meter-color: var(--sun-coral);
-}
-
-.source-confidence__meter span,
-.source-confidence-summary__meter span {
-  color: var(--brand-ink);
-  font-family: var(--font-display);
-  font-weight: 840;
-}
-
-.source-confidence__meter span {
-  font-size: 1rem;
-}
-
-.source-confidence-summary__meter span {
-  font-size: 1.1rem;
-}
-
-.source-confidence__checks {
-  display: grid;
-  gap: 0.5rem;
-  margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.source-confidence__check {
-  display: grid;
-  grid-template-columns: 1.85rem minmax(0, 1fr);
-  align-items: start;
-  gap: 0.55rem;
-  min-width: 0;
-  border: 1px solid rgba(22, 33, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.72);
-  padding: 0.62rem;
-}
-
-.source-confidence__check svg {
-  align-self: center;
-  width: 1.15rem;
-  height: 1.15rem;
-}
-
-.source-confidence__check span {
-  display: grid;
-  min-width: 0;
-  gap: 0.12rem;
-}
-
-.source-confidence__check strong {
-  overflow-wrap: anywhere;
-  color: var(--brand-ink);
-  font-size: 0.78rem;
-  font-weight: 880;
-  line-height: 1.15;
-}
-
-.source-confidence__check small {
-  color: var(--color-muted);
-  font-size: 0.72rem;
-  font-weight: 680;
-  line-height: 1.25;
-}
-
-.source-confidence__check--good {
-  border-color: rgba(58, 134, 95, 0.18);
-}
-
-.source-confidence__check--mixed {
-  border-color: rgba(253, 185, 78, 0.32);
-}
-
-.source-confidence__check--needs_confirmation {
-  border-color: rgba(243, 111, 92, 0.28);
-}
-
-.source-confidence--compact .source-confidence__checks {
-  gap: 0.42rem;
-}
-
-.source-confidence--compact .source-confidence__check {
-  grid-template-columns: 1.45rem minmax(0, 1fr);
-  padding: 0.52rem;
-}
-
-.source-confidence--compact .source-confidence__check strong {
-  font-size: 0.74rem;
-}
-
-.source-confidence-summary {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(14rem, 0.72fr);
-  gap: clamp(1rem, 2.4vw, 1.5rem);
-  align-items: center;
-  margin-bottom: 2.5rem;
-  padding: clamp(1rem, 2.6vw, 1.35rem);
-}
-
-.source-confidence-summary__stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin: 0;
-}
-
-.source-confidence-summary__stats div {
-  min-width: 0;
-  border: 1px solid rgba(22, 166, 182, 0.14);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.68);
-  padding: 0.65rem 0.7rem;
-}
-
-.source-confidence-summary__stats dt {
-  color: var(--color-muted);
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.source-confidence-summary__stats dd {
-  margin: 0.25rem 0 0;
-  color: var(--brand-ink);
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 820;
-  line-height: 1;
-}
-
-.source-confidence-pill {
-  display: inline-flex;
-  min-height: 1.7rem;
-  align-items: center;
-  border-radius: 999px;
-  padding: 0 0.62rem;
-  font-size: 0.72rem;
-  font-weight: 900;
-}
-
-.source-confidence-pill--strong {
-  background: rgba(58, 134, 95, 0.12);
-  color: #256341;
-}
-
-.source-confidence-pill--mixed {
-  background: rgba(253, 185, 78, 0.2);
-  color: #7a4a00;
-}
-
-.source-confidence-pill--needs_confirmation {
-  background: rgba(243, 111, 92, 0.16);
-  color: #8a3327;
-}
-
-@media (max-width: 820px) {
-  .source-confidence-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .source-confidence-summary__meter {
-    justify-self: start;
-  }
-}
-
-@media (max-width: 520px) {
-  .source-confidence__header {
-    align-items: center;
-  }
-
-  .source-confidence__meter {
-    width: 3rem;
-    height: 3rem;
-  }
-
-  .source-confidence-summary__stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .source-confidence-summary__stats div {
-    padding: 0.58rem 0.48rem;
   }
 }
 
@@ -3376,6 +3799,7 @@ textarea.form-control {
 
 .resort-card-grid {
   display: grid;
+  grid-auto-rows: 1fr;
   gap: 14px;
 }
 
@@ -3477,6 +3901,1402 @@ textarea.form-control {
   color: white;
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(0, 0, 0, 0.22);
+}
+
+.resort-card__story-icon {
+  display: grid;
+  height: 76px;
+  width: 76px;
+  place-items: center;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 12px 26px rgba(5, 18, 24, 0.18);
+}
+
+.resort-card__story-icon--light {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.resort-card__story-svg {
+  height: 70px;
+  width: 70px;
+  overflow: visible;
+  filter: drop-shadow(0 6px 10px rgba(5, 18, 24, 0.18));
+}
+
+.resort-card__story-icon-monorail,
+.resort-card__story-icon-water,
+.resort-card__story-icon-spark,
+.resort-card__story-icon-bridge,
+.resort-card__story-icon-pool,
+.resort-card__story-icon-balconies,
+.resort-card__story-icon-slide,
+.resort-card__story-icon-shipwreck,
+.resort-card__story-icon-roofline,
+.resort-card__story-icon-villa-balconies,
+.resort-card__story-icon-boardwalk,
+.resort-card__story-icon-marquee,
+.resort-card__story-icon-coaster,
+.resort-card__story-icon-elephant,
+.resort-card__story-icon-lamp,
+.resort-card__story-icon-courtyard,
+.resort-card__story-icon-community-hall,
+.resort-card__story-icon-rose,
+.resort-card__story-icon-beach,
+.resort-card__story-icon-skyliner,
+.resort-card__story-icon-palm,
+.resort-card__story-icon-fortress,
+.resort-card__story-icon-splash,
+.resort-card__story-icon-hammock,
+.resort-card__story-icon-tower,
+.resort-card__story-icon-turret,
+.resort-card__story-icon-pyramid,
+.resort-card__story-icon-falls,
+.resort-card__story-icon-jaguar,
+.resort-card__story-icon-pavilion,
+.resort-card__story-icon-tile,
+.resort-card__story-icon-film,
+.resort-card__story-icon-hat,
+.resort-card__story-icon-rink,
+.resort-card__story-icon-note,
+.resort-card__story-icon-keys,
+.resort-card__story-icon-guitar,
+.resort-card__story-icon-caballeros,
+.resort-card__story-icon-rhythm,
+.resort-card__story-icon-surfboard,
+.resort-card__story-icon-diamond,
+.resort-card__story-icon-goofy,
+.resort-card__story-icon-bats,
+.resort-card__story-icon-savanna-tree,
+.resort-card__story-icon-kraal-lodge,
+.resort-card__story-icon-savanna-animals,
+.resort-card__story-icon-medallion,
+.resort-card__story-icon-overlook,
+.resort-card__story-icon-villa-overlook,
+.resort-card__story-icon-jambo-villa-house,
+.resort-card__story-icon-villa-home-glow,
+.resort-card__story-icon-string-of-memories,
+.resort-card__story-icon-jambo-art-heart,
+.resort-card__story-icon-savanna-life,
+.resort-card__story-icon-villa-spark,
+.resort-card__story-icon-kidani-overlook,
+.resort-card__story-icon-kidani-village-arch,
+.resort-card__story-icon-kidani-savanna-palms,
+.resort-card__story-icon-kidani-community-play,
+.resort-card__story-icon-kidani-string-of-memories,
+.resort-card__story-icon-kidani-savanna-life,
+.resort-card__story-icon-kidani-wellness,
+.resort-card__story-icon-kidani-spark,
+.resort-card__story-icon-art-blue-pool,
+.resort-card__story-icon-animation-paper,
+.resort-card__story-icon-art-worlds,
+.resort-card__story-icon-animation-hall,
+.resort-card__story-icon-art-skyliner,
+.resort-card__story-icon-art-spark,
+.resort-card__story-icon-yacht-pool,
+.resort-card__story-icon-yacht-clubhouse,
+.resort-card__story-icon-yacht-lighthouse,
+.resort-card__story-icon-yacht-burgee,
+.resort-card__story-icon-yacht-compass,
+.resort-card__story-icon-yacht-anchor,
+.resort-card__story-icon-yacht-shipwreck,
+.resort-card__story-icon-yacht-spark,
+.resort-card__story-icon-wilderness-mountains,
+.resort-card__story-icon-wilderness-lodge,
+.resort-card__story-icon-wilderness-bear,
+.resort-card__story-icon-wilderness-springs,
+.resort-card__story-icon-wilderness-water,
+.resort-card__story-icon-wilderness-spark,
+.resort-card__story-icon-boulder-pines,
+.resort-card__story-icon-boulder-villa,
+.resort-card__story-icon-boulder-lantern,
+.resort-card__story-icon-boulder-rails,
+.resort-card__story-icon-boulder-cove,
+.resort-card__story-icon-boulder-rocks,
+.resort-card__story-icon-boulder-spark,
+.resort-card__story-icon-copper-trails,
+.resort-card__story-icon-copper-cabin,
+.resort-card__story-icon-copper-rails,
+.resort-card__story-icon-copper-water,
+.resort-card__story-icon-copper-slide,
+.resort-card__story-icon-copper-boulders,
+.resort-card__story-icon-copper-geyser,
+.resort-card__story-icon-copper-spark,
+.resort-card__story-icon-fort-cabins-pines,
+.resort-card__story-icon-fort-cabins-cabin,
+.resort-card__story-icon-fort-cabins-golf-cart,
+.resort-card__story-icon-fort-cabins-pool,
+.resort-card__story-icon-fort-cabins-movie,
+.resort-card__story-icon-fort-cabins-campfire,
+.resort-card__story-icon-fort-cabins-horseshoe,
+.resort-card__story-icon-fort-cabins-spark,
+.resort-card__story-icon-fort-campsites-pines,
+.resort-card__story-icon-fort-campsites-water,
+.resort-card__story-icon-fort-campsites-tent,
+.resort-card__story-icon-fort-campsites-rv,
+.resort-card__story-icon-fort-campsites-campfire,
+.resort-card__story-icon-fort-campsites-movie,
+.resort-card__story-icon-fort-campsites-wagon,
+.resort-card__story-icon-fort-campsites-wildlife,
+.resort-card__story-icon-fort-campsites-spark,
+.resort-card__story-icon-old-key-west-water,
+.resort-card__story-icon-old-key-west-fairway,
+.resort-card__story-icon-old-key-west-palms,
+.resort-card__story-icon-old-key-west-villa,
+.resort-card__story-icon-old-key-west-sandcastle,
+.resort-card__story-icon-old-key-west-lighthouse,
+.resort-card__story-icon-old-key-west-dolphin,
+.resort-card__story-icon-old-key-west-surrey,
+.resort-card__story-icon-old-key-west-spark,
+.resort-card__story-icon-polynesian-lagoon,
+.resort-card__story-icon-polynesian-palms,
+.resort-card__story-icon-polynesian-house,
+.resort-card__story-icon-polynesian-volcano,
+.resort-card__story-icon-polynesian-slide,
+.resort-card__story-icon-polynesian-canoe,
+.resort-card__story-icon-polynesian-monorail,
+.resort-card__story-icon-polynesian-torch,
+.resort-card__story-icon-polynesian-pageant,
+.resort-card__story-icon-poly-villas-lagoon,
+.resort-card__story-icon-poly-villas-cove,
+.resort-card__story-icon-poly-villas-tower,
+.resort-card__story-icon-poly-villas-bungalow,
+.resort-card__story-icon-poly-villas-canoe,
+.resort-card__story-icon-poly-villas-patio,
+.resort-card__story-icon-poly-villas-palm,
+.resort-card__story-icon-poly-villas-spark,
+.resort-card__story-icon-pop-century-lake,
+.resort-card__story-icon-pop-century-hippy-pool,
+.resort-card__story-icon-pop-century-generation-gap,
+.resort-card__story-icon-pop-century-flower,
+.resort-card__story-icon-pop-century-bowling,
+.resort-card__story-icon-pop-century-computer,
+.resort-card__story-icon-pop-century-skyliner,
+.resort-card__story-icon-pop-century-cube,
+.resort-card__story-icon-pop-century-yoyo,
+.resort-card__story-icon-pop-century-spark,
+.resort-card__story-icon-port-fq-lagoon,
+.resort-card__story-icon-port-fq-courtyard,
+.resort-card__story-icon-port-fq-balcony,
+.resort-card__story-icon-port-fq-scales,
+.resort-card__story-icon-port-fq-neptune,
+.resort-card__story-icon-port-fq-lamp,
+.resort-card__story-icon-port-fq-magnolia,
+.resort-card__story-icon-port-fq-sassagoula,
+.resort-card__story-icon-port-fq-beads,
+.resort-card__story-icon-port-fq-jazz,
+.resort-card__story-icon-port-fq-surrey,
+.resort-card__story-icon-port-fq-spark,
+.resort-card__story-icon-port-riverside-river,
+.resort-card__story-icon-port-riverside-sassagoula,
+.resort-card__story-icon-port-riverside-island,
+.resort-card__story-icon-port-riverside-cypress,
+.resort-card__story-icon-port-riverside-magnolia-bend,
+.resort-card__story-icon-port-riverside-sawmill,
+.resort-card__story-icon-port-riverside-slide,
+.resort-card__story-icon-port-riverside-bridges,
+.resort-card__story-icon-port-riverside-fishing,
+.resort-card__story-icon-port-riverside-carriage,
+.resort-card__story-icon-port-riverside-spark,
+.resort-card__story-icon-riviera-water,
+.resort-card__story-icon-riviera-waterfront,
+.resort-card__story-icon-riviera-tower,
+.resort-card__story-icon-riviera-slide,
+.resort-card__story-icon-riviera-mosaic,
+.resort-card__story-icon-riviera-gardens,
+.resort-card__story-icon-riviera-skyliner,
+.resort-card__story-icon-riviera-fantasia,
+.resort-card__story-icon-riviera-art,
+.resort-card__story-icon-riviera-spark,
+.resort-card__story-icon-saratoga-water,
+.resort-card__story-icon-saratoga-waterfront,
+.resort-card__story-icon-saratoga-victorian,
+.resort-card__story-icon-saratoga-golf,
+.resort-card__story-icon-saratoga-gardens,
+.resort-card__story-icon-saratoga-community,
+.resort-card__story-icon-saratoga-paddock,
+.resort-card__story-icon-saratoga-spring,
+.resort-card__story-icon-saratoga-horse,
+.resort-card__story-icon-saratoga-spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 260ms ease, opacity 260ms ease;
+}
+
+.resort-card:hover .resort-card__story-icon-monorail,
+.resort-card:focus-within .resort-card__story-icon-monorail {
+  transform: translateX(5px);
+}
+
+.resort-card:hover .resort-card__story-icon-water,
+.resort-card:focus-within .resort-card__story-icon-water {
+  transform: translateY(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-spark,
+.resort-card:focus-within .resort-card__story-icon-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-bridge,
+.resort-card:focus-within .resort-card__story-icon-bridge {
+  transform: translate(4px, -2px);
+}
+
+.resort-card:hover .resort-card__story-icon-pool,
+.resort-card:focus-within .resort-card__story-icon-pool {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.resort-card:hover .resort-card__story-icon-balconies,
+.resort-card:focus-within .resort-card__story-icon-balconies {
+  opacity: 0.88;
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-slide,
+.resort-card:focus-within .resort-card__story-icon-slide {
+  transform: translate(3px, 2px);
+}
+
+.resort-card:hover .resort-card__story-icon-shipwreck,
+.resort-card:focus-within .resort-card__story-icon-shipwreck {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-roofline,
+.resort-card:focus-within .resort-card__story-icon-roofline {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-villa-balconies,
+.resort-card:focus-within .resort-card__story-icon-villa-balconies {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-boardwalk,
+.resort-card:focus-within .resort-card__story-icon-boardwalk {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-marquee,
+.resort-card:focus-within .resort-card__story-icon-marquee {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-coaster,
+.resort-card:focus-within .resort-card__story-icon-coaster {
+  transform: translate(3px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-elephant,
+.resort-card:focus-within .resort-card__story-icon-elephant {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-lamp,
+.resort-card:focus-within .resort-card__story-icon-lamp {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-courtyard,
+.resort-card:focus-within .resort-card__story-icon-courtyard {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-community-hall,
+.resort-card:focus-within .resort-card__story-icon-community-hall {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-rose,
+.resort-card:focus-within .resort-card__story-icon-rose {
+  transform: translate(-1px, -2px) scale(1.04);
+}
+
+.resort-card:hover .resort-card__story-icon-beach,
+.resort-card:focus-within .resort-card__story-icon-beach {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-skyliner,
+.resort-card:focus-within .resort-card__story-icon-skyliner {
+  transform: translateX(3px);
+}
+
+.resort-card:hover .resort-card__story-icon-palm,
+.resort-card:focus-within .resort-card__story-icon-palm {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fortress,
+.resort-card:focus-within .resort-card__story-icon-fortress {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-splash,
+.resort-card:focus-within .resort-card__story-icon-splash {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-hammock,
+.resort-card:focus-within .resort-card__story-icon-hammock {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-tower,
+.resort-card:focus-within .resort-card__story-icon-tower {
+  transform: translateY(-1px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-turret,
+.resort-card:focus-within .resort-card__story-icon-turret {
+  transform: translateY(-1px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-pyramid,
+.resort-card:focus-within .resort-card__story-icon-pyramid {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-falls,
+.resort-card:focus-within .resort-card__story-icon-falls {
+  transform: translateY(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-jaguar,
+.resort-card:focus-within .resort-card__story-icon-jaguar {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-pavilion,
+.resort-card:focus-within .resort-card__story-icon-pavilion {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-tile,
+.resort-card:focus-within .resort-card__story-icon-tile {
+  transform: translateX(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-film,
+.resort-card:focus-within .resort-card__story-icon-film {
+  transform: rotate(-2deg) translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-hat,
+.resort-card:focus-within .resort-card__story-icon-hat {
+  transform: translateY(-2px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-rink,
+.resort-card:focus-within .resort-card__story-icon-rink {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-note,
+.resort-card:focus-within .resort-card__story-icon-note {
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-keys,
+.resort-card:focus-within .resort-card__story-icon-keys {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-guitar,
+.resort-card:focus-within .resort-card__story-icon-guitar {
+  transform: rotate(-1deg) translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-caballeros,
+.resort-card:focus-within .resort-card__story-icon-caballeros {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-rhythm,
+.resort-card:focus-within .resort-card__story-icon-rhythm {
+  transform: rotate(2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-surfboard,
+.resort-card:focus-within .resort-card__story-icon-surfboard {
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-diamond,
+.resort-card:focus-within .resort-card__story-icon-diamond {
+  transform: translateY(1px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-goofy,
+.resort-card:focus-within .resort-card__story-icon-goofy {
+  transform: translate(2px, -2px);
+}
+
+.resort-card:hover .resort-card__story-icon-bats,
+.resort-card:focus-within .resort-card__story-icon-bats {
+  transform: rotate(2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-savanna-tree,
+.resort-card:focus-within .resort-card__story-icon-savanna-tree {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-kraal-lodge,
+.resort-card:focus-within .resort-card__story-icon-kraal-lodge {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-savanna-animals,
+.resort-card:focus-within .resort-card__story-icon-savanna-animals {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-medallion,
+.resort-card:focus-within .resort-card__story-icon-medallion {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-overlook,
+.resort-card:focus-within .resort-card__story-icon-overlook {
+  transform: translateY(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-villa-overlook,
+.resort-card:focus-within .resort-card__story-icon-villa-overlook {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-jambo-villa-house,
+.resort-card:focus-within .resort-card__story-icon-jambo-villa-house {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-villa-home-glow,
+.resort-card:focus-within .resort-card__story-icon-villa-home-glow {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-string-of-memories,
+.resort-card:focus-within .resort-card__story-icon-string-of-memories {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-jambo-art-heart,
+.resort-card:focus-within .resort-card__story-icon-jambo-art-heart {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-savanna-life,
+.resort-card:focus-within .resort-card__story-icon-savanna-life {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-villa-spark,
+.resort-card:focus-within .resort-card__story-icon-villa-spark {
+  transform: scale(1.08) rotate(7deg);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-overlook,
+.resort-card:focus-within .resort-card__story-icon-kidani-overlook {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-village-arch,
+.resort-card:focus-within .resort-card__story-icon-kidani-village-arch {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-savanna-palms,
+.resort-card:focus-within .resort-card__story-icon-kidani-savanna-palms {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-community-play,
+.resort-card:focus-within .resort-card__story-icon-kidani-community-play {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-string-of-memories,
+.resort-card:focus-within .resort-card__story-icon-kidani-string-of-memories {
+  transform: translate(1px, -2px);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-savanna-life,
+.resort-card:focus-within .resort-card__story-icon-kidani-savanna-life {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-wellness,
+.resort-card:focus-within .resort-card__story-icon-kidani-wellness {
+  transform: translateY(-1px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-kidani-spark,
+.resort-card:focus-within .resort-card__story-icon-kidani-spark {
+  transform: scale(1.08) rotate(7deg);
+}
+
+.resort-card:hover .resort-card__story-icon-art-blue-pool,
+.resort-card:focus-within .resort-card__story-icon-art-blue-pool {
+  transform: translateY(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-animation-paper,
+.resort-card:focus-within .resort-card__story-icon-animation-paper {
+  transform: rotate(-2deg) translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-art-worlds,
+.resort-card:focus-within .resort-card__story-icon-art-worlds {
+  transform: translate(2px, -2px);
+}
+
+.resort-card:hover .resort-card__story-icon-animation-hall,
+.resort-card:focus-within .resort-card__story-icon-animation-hall {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-art-skyliner,
+.resort-card:focus-within .resort-card__story-icon-art-skyliner {
+  transform: translateX(4px);
+}
+
+.resort-card:hover .resort-card__story-icon-art-spark,
+.resort-card:focus-within .resort-card__story-icon-art-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-pool,
+.resort-card:focus-within .resort-card__story-icon-yacht-pool {
+  transform: translateY(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-clubhouse,
+.resort-card:focus-within .resort-card__story-icon-yacht-clubhouse {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-lighthouse,
+.resort-card:focus-within .resort-card__story-icon-yacht-lighthouse {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-burgee,
+.resort-card:focus-within .resort-card__story-icon-yacht-burgee {
+  transform: translateX(3px) rotate(2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-compass,
+.resort-card:focus-within .resort-card__story-icon-yacht-compass {
+  transform: rotate(4deg);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-anchor,
+.resort-card:focus-within .resort-card__story-icon-yacht-anchor {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-shipwreck,
+.resort-card:focus-within .resort-card__story-icon-yacht-shipwreck {
+  transform: translateX(2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-yacht-spark,
+.resort-card:focus-within .resort-card__story-icon-yacht-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-wilderness-mountains,
+.resort-card:focus-within .resort-card__story-icon-wilderness-mountains {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-wilderness-lodge,
+.resort-card:focus-within .resort-card__story-icon-wilderness-lodge {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-wilderness-bear,
+.resort-card:focus-within .resort-card__story-icon-wilderness-bear {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-wilderness-springs,
+.resort-card:focus-within .resort-card__story-icon-wilderness-springs {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-wilderness-water,
+.resort-card:focus-within .resort-card__story-icon-wilderness-water {
+  transform: translateY(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-wilderness-spark,
+.resort-card:focus-within .resort-card__story-icon-wilderness-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-pines,
+.resort-card:focus-within .resort-card__story-icon-boulder-pines {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-villa,
+.resort-card:focus-within .resort-card__story-icon-boulder-villa {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-lantern,
+.resort-card:focus-within .resort-card__story-icon-boulder-lantern {
+  transform: translateY(-1px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-rails,
+.resort-card:focus-within .resort-card__story-icon-boulder-rails {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-cove,
+.resort-card:focus-within .resort-card__story-icon-boulder-cove {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-rocks,
+.resort-card:focus-within .resort-card__story-icon-boulder-rocks {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-boulder-spark,
+.resort-card:focus-within .resort-card__story-icon-boulder-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-trails,
+.resort-card:focus-within .resort-card__story-icon-copper-trails {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-cabin,
+.resort-card:focus-within .resort-card__story-icon-copper-cabin {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-rails,
+.resort-card:focus-within .resort-card__story-icon-copper-rails {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-water,
+.resort-card:focus-within .resort-card__story-icon-copper-water {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-slide,
+.resort-card:focus-within .resort-card__story-icon-copper-slide {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-boulders,
+.resort-card:focus-within .resort-card__story-icon-copper-boulders {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-geyser,
+.resort-card:focus-within .resort-card__story-icon-copper-geyser {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-copper-spark,
+.resort-card:focus-within .resort-card__story-icon-copper-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-pines,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-pines {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-cabin,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-cabin {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-golf-cart,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-golf-cart {
+  transform: translateX(3px);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-pool,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-pool {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-movie,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-movie {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-campfire,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-campfire {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-horseshoe,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-horseshoe {
+  transform: rotate(5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-cabins-spark,
+.resort-card:focus-within .resort-card__story-icon-fort-cabins-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-pines,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-pines {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-water,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-water {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-tent,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-tent {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-rv,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-rv {
+  transform: translateX(3px);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-campfire,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-campfire {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-movie,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-movie {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-wagon,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-wagon {
+  transform: translateX(2px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-wildlife,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-wildlife {
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-fort-campsites-spark,
+.resort-card:focus-within .resort-card__story-icon-fort-campsites-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-water,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-water {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-fairway,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-fairway {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-palms,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-palms {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-villa,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-villa {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-sandcastle,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-sandcastle {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-lighthouse,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-lighthouse {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-dolphin,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-dolphin {
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-surrey,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-surrey {
+  transform: translateX(3px);
+}
+
+.resort-card:hover .resort-card__story-icon-old-key-west-spark,
+.resort-card:focus-within .resort-card__story-icon-old-key-west-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-lagoon,
+.resort-card:focus-within .resort-card__story-icon-polynesian-lagoon {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-palms,
+.resort-card:focus-within .resort-card__story-icon-polynesian-palms {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-house,
+.resort-card:focus-within .resort-card__story-icon-polynesian-house {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-volcano,
+.resort-card:focus-within .resort-card__story-icon-polynesian-volcano {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-slide,
+.resort-card:focus-within .resort-card__story-icon-polynesian-slide {
+  transform: translate(2px, 1px);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-canoe,
+.resort-card:focus-within .resort-card__story-icon-polynesian-canoe {
+  transform: translateX(3px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-monorail,
+.resort-card:focus-within .resort-card__story-icon-polynesian-monorail {
+  transform: translateX(5px);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-torch,
+.resort-card:focus-within .resort-card__story-icon-polynesian-torch {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.resort-card:hover .resort-card__story-icon-polynesian-pageant,
+.resort-card:focus-within .resort-card__story-icon-polynesian-pageant {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-lagoon,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-lagoon {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-cove,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-cove {
+  transform: translateX(2px) scale(1.03);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-tower,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-tower {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-bungalow,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-bungalow {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-canoe,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-canoe {
+  transform: translateX(3px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-patio,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-patio {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-palm,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-palm {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-poly-villas-spark,
+.resort-card:focus-within .resort-card__story-icon-poly-villas-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-lake,
+.resort-card:focus-within .resort-card__story-icon-pop-century-lake {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-hippy-pool,
+.resort-card:focus-within .resort-card__story-icon-pop-century-hippy-pool {
+  transform: translateX(2px) scale(1.03);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-generation-gap,
+.resort-card:focus-within .resort-card__story-icon-pop-century-generation-gap {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-flower,
+.resort-card:focus-within .resort-card__story-icon-pop-century-flower {
+  transform: rotate(8deg) scale(1.04);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-bowling,
+.resort-card:focus-within .resort-card__story-icon-pop-century-bowling {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-computer,
+.resort-card:focus-within .resort-card__story-icon-pop-century-computer {
+  transform: translateY(-2px) rotate(1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-skyliner,
+.resort-card:focus-within .resort-card__story-icon-pop-century-skyliner {
+  transform: translateX(5px);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-cube,
+.resort-card:focus-within .resort-card__story-icon-pop-century-cube {
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-yoyo,
+.resort-card:focus-within .resort-card__story-icon-pop-century-yoyo {
+  transform: translate(2px, -2px) rotate(4deg);
+}
+
+.resort-card:hover .resort-card__story-icon-pop-century-spark,
+.resort-card:focus-within .resort-card__story-icon-pop-century-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-lagoon,
+.resort-card:focus-within .resort-card__story-icon-port-fq-lagoon {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-courtyard,
+.resort-card:focus-within .resort-card__story-icon-port-fq-courtyard {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-balcony,
+.resort-card:focus-within .resort-card__story-icon-port-fq-balcony {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-scales,
+.resort-card:focus-within .resort-card__story-icon-port-fq-scales {
+  transform: translate(2px, -1px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-neptune,
+.resort-card:focus-within .resort-card__story-icon-port-fq-neptune {
+  transform: translateY(-2px) rotate(3deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-lamp,
+.resort-card:focus-within .resort-card__story-icon-port-fq-lamp {
+  transform: rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-magnolia,
+.resort-card:focus-within .resort-card__story-icon-port-fq-magnolia {
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-sassagoula,
+.resort-card:focus-within .resort-card__story-icon-port-fq-sassagoula {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-beads,
+.resort-card:focus-within .resort-card__story-icon-port-fq-beads {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-jazz,
+.resort-card:focus-within .resort-card__story-icon-port-fq-jazz {
+  transform: translate(2px, -2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-surrey,
+.resort-card:focus-within .resort-card__story-icon-port-fq-surrey {
+  transform: translateX(3px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-fq-spark,
+.resort-card:focus-within .resort-card__story-icon-port-fq-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-river,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-river {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-sassagoula,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-sassagoula {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-island,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-island {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-cypress,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-cypress {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-magnolia-bend,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-magnolia-bend {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-sawmill,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-sawmill {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-slide,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-slide {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-bridges,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-bridges {
+  transform: translateY(1px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-fishing,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-fishing {
+  transform: translate(2px, -2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-carriage,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-carriage {
+  transform: translateX(3px);
+}
+
+.resort-card:hover .resort-card__story-icon-port-riverside-spark,
+.resort-card:focus-within .resort-card__story-icon-port-riverside-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-water,
+.resort-card:focus-within .resort-card__story-icon-riviera-water {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-waterfront,
+.resort-card:focus-within .resort-card__story-icon-riviera-waterfront {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-tower,
+.resort-card:focus-within .resort-card__story-icon-riviera-tower {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-slide,
+.resort-card:focus-within .resort-card__story-icon-riviera-slide {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-mosaic,
+.resort-card:focus-within .resort-card__story-icon-riviera-mosaic {
+  transform: translateY(-1px) rotate(-1deg);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-gardens,
+.resort-card:focus-within .resort-card__story-icon-riviera-gardens {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-skyliner,
+.resort-card:focus-within .resort-card__story-icon-riviera-skyliner {
+  transform: translate(3px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-fantasia,
+.resort-card:focus-within .resort-card__story-icon-riviera-fantasia {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-art,
+.resort-card:focus-within .resort-card__story-icon-riviera-art {
+  transform: translate(1px, -2px);
+}
+
+.resort-card:hover .resort-card__story-icon-riviera-spark,
+.resort-card:focus-within .resort-card__story-icon-riviera-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-water,
+.resort-card:focus-within .resort-card__story-icon-saratoga-water {
+  transform: translateY(2px) scale(1.02);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-waterfront,
+.resort-card:focus-within .resort-card__story-icon-saratoga-waterfront {
+  transform: translateX(2px);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-victorian,
+.resort-card:focus-within .resort-card__story-icon-saratoga-victorian {
+  transform: translateY(-2px);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-golf,
+.resort-card:focus-within .resort-card__story-icon-saratoga-golf {
+  transform: translate(1px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-gardens,
+.resort-card:focus-within .resort-card__story-icon-saratoga-gardens {
+  transform: rotate(-1.5deg);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-community,
+.resort-card:focus-within .resort-card__story-icon-saratoga-community {
+  transform: translateY(-1px);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-paddock,
+.resort-card:focus-within .resort-card__story-icon-saratoga-paddock {
+  transform: translate(2px, -1px);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-spring,
+.resort-card:focus-within .resort-card__story-icon-saratoga-spring {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-horse,
+.resort-card:focus-within .resort-card__story-icon-saratoga-horse {
+  transform: translate(2px, -2px) rotate(-2deg);
+}
+
+.resort-card:hover .resort-card__story-icon-saratoga-spark,
+.resort-card:focus-within .resort-card__story-icon-saratoga-spark {
+  transform: scale(1.08) rotate(8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resort-card__story-icon-monorail,
+  .resort-card__story-icon-water,
+  .resort-card__story-icon-spark,
+  .resort-card__story-icon-bridge,
+  .resort-card__story-icon-pool,
+  .resort-card__story-icon-balconies,
+  .resort-card__story-icon-slide,
+  .resort-card__story-icon-shipwreck,
+  .resort-card__story-icon-roofline,
+  .resort-card__story-icon-villa-balconies,
+  .resort-card__story-icon-boardwalk,
+  .resort-card__story-icon-marquee,
+  .resort-card__story-icon-coaster,
+  .resort-card__story-icon-elephant,
+  .resort-card__story-icon-lamp,
+  .resort-card__story-icon-courtyard,
+  .resort-card__story-icon-community-hall,
+  .resort-card__story-icon-rose,
+  .resort-card__story-icon-beach,
+  .resort-card__story-icon-skyliner,
+  .resort-card__story-icon-palm,
+  .resort-card__story-icon-fortress,
+  .resort-card__story-icon-splash,
+  .resort-card__story-icon-hammock,
+  .resort-card__story-icon-tower,
+  .resort-card__story-icon-turret,
+  .resort-card__story-icon-pyramid,
+  .resort-card__story-icon-falls,
+  .resort-card__story-icon-jaguar,
+  .resort-card__story-icon-pavilion,
+  .resort-card__story-icon-tile,
+  .resort-card__story-icon-film,
+  .resort-card__story-icon-hat,
+  .resort-card__story-icon-rink,
+  .resort-card__story-icon-note,
+  .resort-card__story-icon-keys,
+  .resort-card__story-icon-guitar,
+  .resort-card__story-icon-caballeros,
+  .resort-card__story-icon-rhythm,
+  .resort-card__story-icon-surfboard,
+  .resort-card__story-icon-diamond,
+  .resort-card__story-icon-goofy,
+  .resort-card__story-icon-bats,
+  .resort-card__story-icon-savanna-tree,
+  .resort-card__story-icon-kraal-lodge,
+  .resort-card__story-icon-savanna-animals,
+  .resort-card__story-icon-medallion,
+  .resort-card__story-icon-overlook,
+  .resort-card__story-icon-villa-overlook,
+  .resort-card__story-icon-jambo-villa-house,
+  .resort-card__story-icon-villa-home-glow,
+  .resort-card__story-icon-string-of-memories,
+  .resort-card__story-icon-jambo-art-heart,
+  .resort-card__story-icon-savanna-life,
+  .resort-card__story-icon-villa-spark,
+  .resort-card__story-icon-kidani-overlook,
+  .resort-card__story-icon-kidani-village-arch,
+  .resort-card__story-icon-kidani-savanna-palms,
+  .resort-card__story-icon-kidani-community-play,
+  .resort-card__story-icon-kidani-string-of-memories,
+  .resort-card__story-icon-kidani-savanna-life,
+  .resort-card__story-icon-kidani-wellness,
+  .resort-card__story-icon-kidani-spark,
+  .resort-card__story-icon-art-blue-pool,
+  .resort-card__story-icon-animation-paper,
+  .resort-card__story-icon-art-worlds,
+  .resort-card__story-icon-animation-hall,
+  .resort-card__story-icon-art-skyliner,
+  .resort-card__story-icon-art-spark,
+  .resort-card__story-icon-yacht-pool,
+  .resort-card__story-icon-yacht-clubhouse,
+  .resort-card__story-icon-yacht-lighthouse,
+  .resort-card__story-icon-yacht-burgee,
+  .resort-card__story-icon-yacht-compass,
+  .resort-card__story-icon-yacht-anchor,
+  .resort-card__story-icon-yacht-shipwreck,
+  .resort-card__story-icon-yacht-spark,
+  .resort-card__story-icon-wilderness-mountains,
+  .resort-card__story-icon-wilderness-lodge,
+  .resort-card__story-icon-wilderness-bear,
+  .resort-card__story-icon-wilderness-springs,
+  .resort-card__story-icon-wilderness-water,
+  .resort-card__story-icon-wilderness-spark,
+  .resort-card__story-icon-boulder-pines,
+  .resort-card__story-icon-boulder-villa,
+  .resort-card__story-icon-boulder-lantern,
+  .resort-card__story-icon-boulder-rails,
+  .resort-card__story-icon-boulder-cove,
+  .resort-card__story-icon-boulder-rocks,
+  .resort-card__story-icon-boulder-spark,
+  .resort-card__story-icon-copper-trails,
+  .resort-card__story-icon-copper-cabin,
+  .resort-card__story-icon-copper-rails,
+  .resort-card__story-icon-copper-water,
+  .resort-card__story-icon-copper-slide,
+  .resort-card__story-icon-copper-boulders,
+  .resort-card__story-icon-copper-geyser,
+  .resort-card__story-icon-copper-spark,
+  .resort-card__story-icon-fort-cabins-pines,
+  .resort-card__story-icon-fort-cabins-cabin,
+  .resort-card__story-icon-fort-cabins-golf-cart,
+  .resort-card__story-icon-fort-cabins-pool,
+  .resort-card__story-icon-fort-cabins-movie,
+  .resort-card__story-icon-fort-cabins-campfire,
+  .resort-card__story-icon-fort-cabins-horseshoe,
+  .resort-card__story-icon-fort-cabins-spark,
+  .resort-card__story-icon-fort-campsites-pines,
+  .resort-card__story-icon-fort-campsites-water,
+  .resort-card__story-icon-fort-campsites-tent,
+  .resort-card__story-icon-fort-campsites-rv,
+  .resort-card__story-icon-fort-campsites-campfire,
+  .resort-card__story-icon-fort-campsites-movie,
+  .resort-card__story-icon-fort-campsites-wagon,
+  .resort-card__story-icon-fort-campsites-wildlife,
+  .resort-card__story-icon-fort-campsites-spark,
+  .resort-card__story-icon-old-key-west-water,
+  .resort-card__story-icon-old-key-west-fairway,
+  .resort-card__story-icon-old-key-west-palms,
+  .resort-card__story-icon-old-key-west-villa,
+  .resort-card__story-icon-old-key-west-sandcastle,
+  .resort-card__story-icon-old-key-west-lighthouse,
+  .resort-card__story-icon-old-key-west-dolphin,
+  .resort-card__story-icon-old-key-west-surrey,
+  .resort-card__story-icon-old-key-west-spark,
+  .resort-card__story-icon-polynesian-lagoon,
+  .resort-card__story-icon-polynesian-palms,
+  .resort-card__story-icon-polynesian-house,
+  .resort-card__story-icon-polynesian-volcano,
+  .resort-card__story-icon-polynesian-slide,
+  .resort-card__story-icon-polynesian-canoe,
+  .resort-card__story-icon-polynesian-monorail,
+  .resort-card__story-icon-polynesian-torch,
+  .resort-card__story-icon-polynesian-pageant,
+  .resort-card__story-icon-poly-villas-lagoon,
+  .resort-card__story-icon-poly-villas-cove,
+  .resort-card__story-icon-poly-villas-tower,
+  .resort-card__story-icon-poly-villas-bungalow,
+  .resort-card__story-icon-poly-villas-canoe,
+  .resort-card__story-icon-poly-villas-patio,
+  .resort-card__story-icon-poly-villas-palm,
+  .resort-card__story-icon-poly-villas-spark,
+  .resort-card__story-icon-pop-century-lake,
+  .resort-card__story-icon-pop-century-hippy-pool,
+  .resort-card__story-icon-pop-century-generation-gap,
+  .resort-card__story-icon-pop-century-flower,
+  .resort-card__story-icon-pop-century-bowling,
+  .resort-card__story-icon-pop-century-computer,
+  .resort-card__story-icon-pop-century-skyliner,
+  .resort-card__story-icon-pop-century-cube,
+  .resort-card__story-icon-pop-century-yoyo,
+  .resort-card__story-icon-pop-century-spark,
+  .resort-card__story-icon-port-fq-lagoon,
+  .resort-card__story-icon-port-fq-courtyard,
+  .resort-card__story-icon-port-fq-balcony,
+  .resort-card__story-icon-port-fq-scales,
+  .resort-card__story-icon-port-fq-neptune,
+  .resort-card__story-icon-port-fq-lamp,
+  .resort-card__story-icon-port-fq-magnolia,
+  .resort-card__story-icon-port-fq-sassagoula,
+  .resort-card__story-icon-port-fq-beads,
+  .resort-card__story-icon-port-fq-jazz,
+  .resort-card__story-icon-port-fq-surrey,
+  .resort-card__story-icon-port-fq-spark,
+  .resort-card__story-icon-port-riverside-river,
+  .resort-card__story-icon-port-riverside-sassagoula,
+  .resort-card__story-icon-port-riverside-island,
+  .resort-card__story-icon-port-riverside-cypress,
+  .resort-card__story-icon-port-riverside-magnolia-bend,
+  .resort-card__story-icon-port-riverside-sawmill,
+  .resort-card__story-icon-port-riverside-slide,
+  .resort-card__story-icon-port-riverside-bridges,
+  .resort-card__story-icon-port-riverside-fishing,
+  .resort-card__story-icon-port-riverside-carriage,
+  .resort-card__story-icon-port-riverside-spark,
+  .resort-card__story-icon-riviera-water,
+  .resort-card__story-icon-riviera-waterfront,
+  .resort-card__story-icon-riviera-tower,
+  .resort-card__story-icon-riviera-slide,
+  .resort-card__story-icon-riviera-mosaic,
+  .resort-card__story-icon-riviera-gardens,
+  .resort-card__story-icon-riviera-skyliner,
+  .resort-card__story-icon-riviera-fantasia,
+  .resort-card__story-icon-riviera-art,
+  .resort-card__story-icon-riviera-spark,
+  .resort-card__story-icon-saratoga-water,
+  .resort-card__story-icon-saratoga-waterfront,
+  .resort-card__story-icon-saratoga-victorian,
+  .resort-card__story-icon-saratoga-golf,
+  .resort-card__story-icon-saratoga-gardens,
+  .resort-card__story-icon-saratoga-community,
+  .resort-card__story-icon-saratoga-paddock,
+  .resort-card__story-icon-saratoga-spring,
+  .resort-card__story-icon-saratoga-horse,
+  .resort-card__story-icon-saratoga-spark {
+    transition: none;
+  }
 }
 
 .resort-card__tier {
@@ -3594,7 +5414,8 @@ textarea.form-control {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 .resort-card__chip {
@@ -3612,7 +5433,8 @@ textarea.form-control {
 }
 
 .resort-card__hint {
-  margin: 4px 0 0;
+  margin: auto 0 0;
+  padding-top: 8px;
   font-size: 0.75rem;
   line-height: 1.45;
   color: var(--muted);

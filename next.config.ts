@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
 
 const serviceWorkerEnabled =
-  process.env.NODE_ENV === "production" &&
-  process.env.SITE_VISIBILITY_MODE?.trim().toLowerCase() === "public";
+  process.env.NODE_ENV === "production";
 
 const withSerwist = withSerwistInit({
   swSrc: "app/sw.ts",

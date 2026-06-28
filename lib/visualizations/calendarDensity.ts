@@ -62,7 +62,7 @@ function buildAriaLabel(summary: Omit<CalendarDaySummary, "ariaLabel">): string 
   const daypartText = CALENDAR_DAYPARTS
     .map(({ key, label }) => `${label} ${summary.dayparts[key]}`)
     .join(", ");
-  const costText = `${summary.costMix.free} free, ${summary.costMix.paid} paid, ${summary.costMix.unknown} price unclear`;
+  const costText = `${summary.costMix.free} free, ${summary.costMix.paid} paid`;
   const resortText = summary.topResort
     ? `Top resort: ${summary.topResort.name}.`
     : "No top resort.";

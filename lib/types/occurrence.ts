@@ -2,9 +2,30 @@ export type Daypart = "morning" | "afternoon" | "evening" | "late" | "anytime";
 
 export type ActivitySortKey =
   | "time"
+  | "alpha"
+  | "free"
+  | "paid"
   | "resort"
   | "category"
   | "quality";
+
+export type ActivityWeatherFilter = "indoor" | "covered";
+export type ActivityDurationFilter = "short";
+export type ActivityNearFilter = "my-resort";
+export type ActivityTransportFilter =
+  | "monorail"
+  | "skyliner"
+  | "boat"
+  | "walk"
+  | "bus"
+  | "rideshare";
+export type ActivityAreaFilter =
+  | "magic-kingdom"
+  | "epcot-boardwalk"
+  | "skyliner"
+  | "animal-kingdom"
+  | "disney-springs"
+  | "fort-wilderness";
 
 export type ActivityStatus = "active" | "seasonal" | "paused";
 
@@ -255,6 +276,8 @@ export interface MovieNightOccurrence {
   backdropUrl?: string | null;
   releaseYear?: number;
   tmdbId?: number;
+  overview?: string | null;
+  voteAverage?: number | null;
   isTonight?: boolean;
 }
 
@@ -290,8 +313,14 @@ export interface ActivityFilters {
   resort?: string;
   category?: string;
   daypart?: Daypart;
+  duration?: ActivityDurationFilter;
+  near?: ActivityNearFilter;
+  weather?: ActivityWeatherFilter;
+  transport?: ActivityTransportFilter;
+  area?: ActivityAreaFilter;
   free?: boolean;
   reservation?: boolean;
+  ticketRequired?: boolean;
   q?: string;
   sort?: ActivitySortKey;
   limit?: number;

@@ -1,17 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { canonicalActivitySlug } from "@/lib/activities/legacySlugs";
-import {
-  applyPrivateNoIndex,
-  applySiteGate,
-} from "@/lib/site-gate/middleware";
 
-export async function middleware(request: NextRequest) {
-  const gateResponse = await applySiteGate(request);
-  if (gateResponse) return gateResponse;
-
+export function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
-  response = applyPrivateNoIndex(response);
 
   const slug = request.nextUrl.pathname.match(/^\/activities\/([^/]+)$/)?.[1];
   if (!slug) return response;
@@ -21,8 +13,7 @@ export async function middleware(request: NextRequest) {
 
   const redirectUrl = request.nextUrl.clone();
   redirectUrl.pathname = `/activities/${canonicalSlug}`;
-  const redirect = NextResponse.redirect(redirectUrl, 308);
-  return applyPrivateNoIndex(redirect);
+  return NextResponse.redirect(redirectUrl, 308);
 }
 
 export const config = {

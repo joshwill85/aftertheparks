@@ -1,0 +1,61 @@
+export const DOMAIN_ALIASES = {
+  horse: [
+    "horse",
+    "horses",
+    "pony",
+    "ponies",
+    "pony rides",
+    "carriage",
+    "carage",
+    "carriage rides",
+    "wagon",
+    "wagon rides",
+    "sleigh",
+    "sleigh rides",
+    "ranch",
+    "trail ride",
+    "horse trail ride",
+    "horseback riding",
+    "tri circle d",
+  ],
+  free: ["free", "included", "complimentary", "no cost"],
+  schedule: ["schedule", "time", "times", "calendar", "today", "tonight", "now"],
+  activities: {
+    pool: ["pool", "pool games", "swim", "swimming"],
+    campfire: ["campfire", "campfires", "marshmallow", "smores", "s'mores"],
+    crafts: ["craft", "crafts", "painting", "coloring", "art"],
+    movies: ["movie", "movies", "film", "cinema", "under the stars"],
+    arcade: ["arcade", "games", "game room"],
+    fitness: ["fitness", "yoga", "wellness", "run", "jogging"],
+  },
+  resorts: {
+    poly: "Disney's Polynesian Village Resort",
+    pofq: "Disney's Port Orleans Resort - French Quarter",
+    por: "Disney's Port Orleans Resort - Riverside",
+    gf: "Disney's Grand Floridian Resort & Spa",
+    akl: "Disney's Animal Kingdom Lodge",
+    okw: "Disney's Old Key West Resort",
+    fw: "Disney's Fort Wilderness Resort",
+  },
+} as const;
+
+export const TYPESENSE_SYNONYMS = [
+  { id: "poly-polynesian", root: "polynesian", synonyms: ["poly"] },
+  {
+    id: "pofq-port-orleans-french-quarter",
+    root: "port orleans french quarter",
+    synonyms: ["pofq"],
+  },
+  {
+    id: "por-port-orleans-riverside",
+    root: "port orleans riverside",
+    synonyms: ["por"],
+  },
+  { id: "gf-grand-floridian", root: "grand floridian", synonyms: ["gf"] },
+  {
+    id: "akl-animal-kingdom-lodge",
+    root: "animal kingdom lodge",
+    synonyms: ["akl"],
+  },
+  { id: "okw-old-key-west", root: "old key west", synonyms: ["okw"] },
+] as const;

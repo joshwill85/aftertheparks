@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Shared resort plan",
   description: "View-only look at a shared After the Parks rest day plan.",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 export default async function PublicPlanPage({

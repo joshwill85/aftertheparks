@@ -1,7 +1,7 @@
 import { addHours, isAfter, isBefore, isEqual } from "date-fns";
 import {
   addOrlandoDays,
-  daypartFromHour,
+  daypartFromTimeRange,
   endOfOrlandoDay,
   getDayOfWeekIndex,
   hourInOrlando,
@@ -304,8 +304,9 @@ function buildOccurrence(
   scheduleText?: string
 ): ActivityOccurrence {
   const now = nowInstant();
-  const hour = hourInOrlando(start);
-  const daypart: Daypart = daypartFromHour(hour);
+  const startHour = hourInOrlando(start);
+  const endHour = end ? hourInOrlando(end) : undefined;
+  const daypart: Daypart = daypartFromTimeRange(startHour, endHour);
   const displayInput = displayInputFromRow(
     row,
     enrichment,

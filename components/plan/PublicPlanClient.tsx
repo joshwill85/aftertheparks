@@ -14,6 +14,14 @@ interface PublicPlanClientProps {
   initial: PublicPlanResponse;
 }
 
+function labelFromSlug(slug?: string): string | undefined {
+  if (!slug) return undefined;
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
   const { openPreview, refreshFromServer } = usePlan();
   const [plan, setPlan] = useState(initial);
@@ -98,6 +106,18 @@ export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
         <p className="mt-2 text-sm text-[var(--muted)]">
           A live look at the plan. Changes appear here as the day evolves.
         </p>
+        {(plan.homeResortSlug || (plan.tripStartDate && plan.tripEndDate)) && (
+          <p className="mt-2 text-sm font-semibold text-[var(--lagoon-deep)]">
+            {[
+              labelFromSlug(plan.homeResortSlug),
+              plan.tripStartDate && plan.tripEndDate
+                ? `${plan.tripStartDate} to ${plan.tripEndDate}`
+                : undefined,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        )}
         <p className="mt-1 text-xs text-[var(--muted)]">
           Last updated{" "}
           {new Date(plan.lastUpdatedAt).toLocaleString("en-US", {

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Partly cloudy day">
+  <title>Partly cloudy day</title>
+  <desc>After the Parks storybook weather icon for partly cloudy day.</desc>
+  <defs>
+    <linearGradient id="sky" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#BDEBFF"/>
+      <stop offset="1" stop-color="#FFF3BF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#17324D" flood-opacity=".18"/>
+    </filter>
+    <style>
+      @media (prefers-reduced-motion:no-preference) {
+        .float { animation: float-partly_cloudy_day 4.8s ease-in-out infinite; transform-origin: 32px 32px; }
+        .drift { animation: drift-partly_cloudy_day 5.6s ease-in-out infinite; }
+        .fall { animation: fall-partly_cloudy_day 1.9s ease-in-out infinite; }
+        .slow { animation-duration: 3.2s; }
+        .pulse { animation: pulse-partly_cloudy_day 3.4s ease-in-out infinite; transform-origin: 32px 32px; }
+        .flash { animation: flash-partly_cloudy_day 2.6s ease-in-out infinite; transform-origin: 34px 40px; }
+        .sparkle { animation: sparkle-partly_cloudy_day 3.8s ease-in-out infinite; transform-origin: 52px 14px; }
+        .spin { animation: spin-partly_cloudy_day 5.5s ease-in-out infinite; transform-origin: 32px 39px; }
+      }
+      @keyframes float-partly_cloudy_day { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+      @keyframes drift-partly_cloudy_day { 0%,100% { transform: translateX(0); opacity: .95; } 50% { transform: translateX(2px); opacity: .72; } }
+      @keyframes fall-partly_cloudy_day { 0%,100% { transform: translateY(0); opacity: .95; } 50% { transform: translateY(2.2px); opacity: .65; } }
+      @keyframes pulse-partly_cloudy_day { 0%,100% { transform: scale(1); } 50% { transform: scale(1.045); } }
+      @keyframes flash-partly_cloudy_day { 0%,100% { opacity: .88; transform: scale(1); } 52% { opacity: 1; transform: scale(1.08); } }
+      @keyframes sparkle-partly_cloudy_day { 0%,100% { opacity: .45; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.08); } }
+      @keyframes spin-partly_cloudy_day { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#sky)"/>
+  <circle cx="50" cy="14" r="7" fill="#FFC44D" opacity=".16"/>
+  <g filter="url(#softShadow)" stroke-linecap="round" stroke-linejoin="round">
+
+      <g class="float">
+        <circle cx="22" cy="23" r="9" fill="#FFD45A" stroke="#8F4E13" stroke-width="2"/>
+        <path d="M22 7v5M22 34v5M7 23h5M32 23h5M11 12l4 4M33 12l-4 4" stroke="#DA7625" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+      <path d="M18 43h28c6 0 10-3 10-8s-4-8-9-8c-2-8-13-10-18-3-7-2-13 2-13 9 0 5 2 8 2 10Z" fill="#FFFFFF" stroke="#2D6B8F" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M22 40c8 3 18 3 28-1" stroke="#9DD7EC" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  </g>
+
+    <g class="sparkle" stroke="#FFF6B8" stroke-width="1.8" stroke-linecap="round">
+      <path d="M54 12v5M51.5 14.5h5"/>
+      <path d="M11 17v4M9 19h4"/>
+      <path d="M53 55v4M51 57h4"/>
+    </g>
+
+</svg>

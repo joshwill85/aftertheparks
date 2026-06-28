@@ -8,18 +8,27 @@ import { PlanPaceMeter } from "@/components/plan/PlanPaceMeter";
 import { PlanStorySummary } from "@/components/plan/PlanStorySummary";
 import { ResortPassport } from "@/components/plan/ResortPassport";
 import { PlanSyncBadge } from "@/components/plan/PlanSyncBadge";
+import { PlanStayDetails } from "@/components/plan/PlanStayDetails";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { findPlanConflicts } from "@/lib/plan/conflicts";
 import { sharePlanCalendar, sharePlanLink } from "@/lib/plan/share";
 import { trackPlanEvent } from "@/lib/plan/analytics";
 
-export function PlanPageClient() {
+export function PlanPageClient({
+  resorts,
+}: {
+  resorts: { slug: string; name: string }[];
+}) {
   const {
     items,
     planTitle,
+    homeResortSlug,
+    tripStartDate,
+    tripEndDate,
     removeItem,
     updateNotes,
     renamePlan,
+    updatePlanSettings,
     createShare,
     rotateShare,
     revokeShare,
@@ -84,7 +93,26 @@ export function PlanPageClient() {
   };
 
   if (items.length === 0) {
-    return <PlanEmptyState />;
+    return (
+      <div className="space-y-6">
+        <PlanStayDetails
+          resorts={resorts}
+          homeResortSlug={homeResortSlug}
+          tripStartDate={tripStartDate}
+          tripEndDate={tripEndDate}
+          onSave={updatePlanSettings}
+        />
+        {tripStartDate && tripEndDate && (
+          <PlanTimeline
+            items={[]}
+            staySettings={{ homeResortSlug, tripStartDate, tripEndDate }}
+            onRemove={() => undefined}
+            onUpdateNotes={() => undefined}
+          />
+        )}
+        <PlanEmptyState />
+      </div>
+    );
   }
 
   return (
@@ -139,6 +167,14 @@ export function PlanPageClient() {
 
       <PlanPaceMeter items={items} />
 
+      <PlanStayDetails
+        resorts={resorts}
+        homeResortSlug={homeResortSlug}
+        tripStartDate={tripStartDate}
+        tripEndDate={tripEndDate}
+        onSave={updatePlanSettings}
+      />
+
       <PlanStorySummary items={items} />
 
       {conflicts.length > 0 && (
@@ -161,6 +197,7 @@ export function PlanPageClient() {
 
       <PlanTimeline
         items={items}
+        staySettings={{ homeResortSlug, tripStartDate, tripEndDate }}
         onRemove={removeItem}
         onUpdateNotes={updateNotes}
       />

@@ -20,6 +20,7 @@ import { FilterSheet } from "@/components/explore/FilterSheet";
 import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
 import { ResultSummary } from "@/components/explore/ResultSummary";
 import { BrowseDayTabs } from "@/components/explore/BrowseDayTabs";
+import { usePlan } from "@/components/atlas/PlanProvider";
 
 export type BrowseFilterVariant = "today" | "tonight" | "explore";
 
@@ -46,6 +47,7 @@ export function BrowseFilterShell({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { homeResortSlug } = usePlan();
   const basePath = pathname;
   const filters = useMemo(
     () => parseBrowseParams(searchParams),
@@ -95,6 +97,7 @@ export function BrowseFilterShell({
               basePath={basePath}
               hideDaypart={hideDaypart}
               filterImpact={filterImpact}
+              homeResortSlug={homeResortSlug}
               onClearAll={handleClearAll}
             />
           </div>
@@ -157,6 +160,9 @@ export function BrowseFilterShell({
                 onUndo={handleUndo}
               />
             )}
+            {filters.near === "my-resort" && filters.resort && (
+              <NearMyResortNote selectedResortName={resortName(resorts, filters.resort)} />
+            )}
             <div className="mt-3 min-[900px]:mt-0">
               <ResultSummary
                 count={resultCount}
@@ -186,9 +192,35 @@ export function BrowseFilterShell({
         hideDaypart={hideDaypart}
         activeCount={activeCount}
         filterImpact={filterImpact}
+        homeResortSlug={homeResortSlug}
         onClearAll={handleClearAll}
       />
     </div>
+  );
+}
+
+function resortName(
+  resorts: { slug: string; name: string }[],
+  slug?: string
+): string | undefined {
+  if (!slug) return undefined;
+  return resorts.find((resort) => resort.slug === slug)?.name ?? slug;
+}
+
+function NearMyResortNote({
+  selectedResortName,
+}: {
+  selectedResortName?: string;
+}) {
+  return (
+    <section className="mt-3 rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2 text-sm leading-relaxed text-[var(--color-muted)]">
+      <p className="font-semibold text-[var(--color-foreground)]">First-night near my resort mode</p>
+      <p>
+        {selectedResortName
+          ? `Showing tonight options in the same resort area as ${selectedResortName}, useful for arrival nights when a nearby direct-route plan is safer than a long transfer.`
+          : "Choose a resort to narrow tonight to your resort area. Until then, this stays as a broad first-night planning mode instead of guessing where you are staying."}
+      </p>
+    </section>
   );
 }
 

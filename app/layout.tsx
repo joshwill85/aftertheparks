@@ -3,6 +3,13 @@ import { Fraunces, Nunito_Sans } from "next/font/google";
 import { DaypartShell } from "@/components/atlas/DaypartShell";
 import { PlanProvider } from "@/components/atlas/PlanProvider";
 import { WebVitals } from "@/components/analytics/WebVitals";
+import {
+  buildOrganizationJsonLd,
+  buildWebsiteJsonLd,
+  stringifyJsonLd,
+} from "@/lib/seo/jsonLd";
+import { buildSocialMetadata } from "@/lib/seo/metadata";
+import { buildSiteVerificationMetadata } from "@/lib/seo/siteVerification";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -33,6 +40,13 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "After the Parks",
   },
+  ...buildSocialMetadata({
+    title: "After the Parks",
+    description:
+      "Independent Walt Disney World resort activity planner for current resort recreation, calendars, and no-park-day planning.",
+    path: "/",
+  }),
+  ...buildSiteVerificationMetadata(),
 };
 
 export const viewport: Viewport = {
@@ -44,9 +58,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
+  const siteJsonLd = stringifyJsonLd([
+    buildOrganizationJsonLd(baseUrl),
+    buildWebsiteJsonLd(baseUrl),
+  ]);
+
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className={`${fraunces.variable} ${nunitoSans.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: siteJsonLd }}
+        />
         <WebVitals />
         <PlanProvider>
           <DaypartShell>{children}</DaypartShell>

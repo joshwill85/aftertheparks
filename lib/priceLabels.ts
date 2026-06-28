@@ -1,13 +1,13 @@
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
-export type PublicPriceLabel = "Free" | "Paid" | "Price unclear";
+export type PublicPriceLabel = "Free" | "Paid";
 
 export function publicPriceLabel(
   state: ActivityOccurrence["price"]["state"] | undefined
-): PublicPriceLabel {
+): PublicPriceLabel | undefined {
   if (state === "free") return "Free";
   if (state === "fee") return "Paid";
-  return "Price unclear";
+  return undefined;
 }
 
 export function optionalPriceAddOnsLabel(

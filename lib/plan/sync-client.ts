@@ -2,7 +2,7 @@ import { createBrowserSupabaseClient } from "@/lib/supabase/browser";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type { ActivityOccurrence, PlanItem } from "@/lib/types/occurrence";
 import { activityToPlanSnapshot } from "@/lib/plan/snapshot";
-import type { AddItemPayload } from "@/lib/plan/types";
+import type { AddItemPayload, PlanStaySettings } from "@/lib/plan/types";
 import type { LocalPlanCache, PendingPlanOperation } from "@/lib/plan/local-store";
 
 export async function hasAuthSession(): Promise<boolean> {
@@ -73,6 +73,25 @@ export async function fetchServerPlan(): Promise<{
     if (res.status === 401) return null;
     if (!res.ok) return null;
     return res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function syncUpdatePlanSettings(
+  settings: PlanStaySettings,
+  operationId: string
+): Promise<import("@/lib/plan/types").PlanMeta | null> {
+  try {
+    const res = await fetch("/api/plan", {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ settings, operationId }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.plan ?? null;
   } catch {
     return null;
   }
@@ -160,6 +179,28 @@ export async function replayPendingOperations(
       const notes = String(op.payload.notes ?? "");
       const ok = await syncUpdateItem(itemId, notes, op.operationId);
       if (!ok) remaining.push(op);
+    } else if (op.type === "update_plan_settings") {
+      const result = await syncUpdatePlanSettings(
+        {
+          homeResortSlug: String(op.payload.homeResortSlug ?? "") || undefined,
+          tripStartDate: String(op.payload.tripStartDate ?? "") || undefined,
+          tripEndDate: String(op.payload.tripEndDate ?? "") || undefined,
+        },
+        op.operationId
+      );
+      if (!result) {
+        remaining.push(op);
+        continue;
+      }
+      next = {
+        ...next,
+        planId: result.id,
+        title: result.title,
+        version: result.version,
+        homeResortSlug: result.homeResortSlug ?? null,
+        tripStartDate: result.tripStartDate ?? null,
+        tripEndDate: result.tripEndDate ?? null,
+      };
     }
   }
 
@@ -179,7 +220,10 @@ function mergeServerItem(items: PlanItem[], serverItem: PlanItem): PlanItem[] {
 
 export function mergeServerPlan(
   local: LocalPlanCache,
-  server: { plan: { id: string; title: string; version: number } | null; items: PlanItem[] }
+  server: {
+    plan: (import("@/lib/plan/types").PlanMeta & { id: string; title: string; version: number }) | null;
+    items: PlanItem[];
+  }
 ): LocalPlanCache {
   if (!server.plan) {
     if (local.items.length === 0) return local;
@@ -192,6 +236,9 @@ export function mergeServerPlan(
       planId: server.plan.id,
       title: server.plan.title,
       version: server.plan.version,
+      homeResortSlug: server.plan.homeResortSlug ?? null,
+      tripStartDate: server.plan.tripStartDate ?? null,
+      tripEndDate: server.plan.tripEndDate ?? null,
       items: server.items,
     };
   }
@@ -200,5 +247,8 @@ export function mergeServerPlan(
     ...local,
     planId: server.plan.id ?? local.planId,
     title: server.plan.title || local.title,
+    homeResortSlug: local.homeResortSlug ?? server.plan.homeResortSlug ?? null,
+    tripStartDate: local.tripStartDate ?? server.plan.tripStartDate ?? null,
+    tripEndDate: local.tripEndDate ?? server.plan.tripEndDate ?? null,
   };
 }

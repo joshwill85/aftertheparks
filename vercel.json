@@ -24,6 +24,10 @@
     {
       "path": "/api/cron/plan-cleanup",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/weather-warm",
+      "schedule": "*/10 * * * *"
     }
   ]
 }

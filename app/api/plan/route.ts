@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { requireApiUser } from "@/lib/plan/auth";
-import { fetchOwnerPlan, renamePlan, deletePlan } from "@/lib/plan/server";
+import {
+  fetchOwnerPlan,
+  renamePlan,
+  deletePlan,
+  updatePlanSettings,
+} from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { planErrorResponse } from "@/lib/plan/api-response";
@@ -46,15 +51,13 @@ export async function PATCH(request: Request) {
   }
 
   try {
-    const plan = await renamePlan(
-      client,
-      user.id,
-      body.title ?? "",
-      body.operationId ?? crypto.randomUUID()
-    );
+    const operationId = body.operationId ?? crypto.randomUUID();
+    const plan = body.settings
+      ? await updatePlanSettings(client, user.id, body.settings, operationId)
+      : await renamePlan(client, user.id, body.title ?? "", operationId);
     return NextResponse.json({ plan });
   } catch (error) {
-    return planErrorResponse(error, "Failed to rename plan");
+    return planErrorResponse(error, body.settings ? "Failed to update plan settings" : "Failed to rename plan");
   }
 }
 

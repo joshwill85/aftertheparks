@@ -12,7 +12,7 @@ const DAYPART_LABELS: Record<string, string> = {
   afternoon: "Afternoon",
   evening: "Evening",
   late: "Starlight",
-  anytime: "Anytime",
+  anytime: "All Day",
   unclear: "Time unclear",
 };
 
@@ -48,15 +48,15 @@ export function activityToEventCard(
     includeDate: includeScheduleDate,
   });
 
-  const badges: EventBadge[] = [
-    { label: display.costLabel, tone: priceBadgeTone(display.costLabel) },
-  ];
+  const badges: EventBadge[] = display.costLabel
+    ? [{ label: display.costLabel, tone: priceBadgeTone(display.costLabel) }]
+    : [];
 
   if (display.isHappeningNow) {
     badges.push({ label: "Now", tone: "now" });
   }
 
-  if (display.daypart !== "anytime") {
+  if (display.daypart !== "anytime" || display.startDateTime || display.timeLabel) {
     badges.push({
       label: DAYPART_LABELS[display.daypart] ?? display.daypart,
       tone: "muted",
@@ -78,9 +78,19 @@ export function activityToEventCard(
     href: activityDetailHref(display.activitySlug, display.resortSlug),
     title: display.title,
     resort: showResort ? display.resortName : "",
+    resortSlug: display.resortSlug,
     location,
     timeLabel: display.timeLabel,
     timeDateTime: display.startDateTime,
+    endDateTime: activity.endDateTime,
+    weatherQuery: display.startDateTime
+      ? {
+          resortSlug: display.resortSlug,
+          startsAt: display.startDateTime,
+          endsAt: display.endDateTime,
+          activitySlug: display.activitySlug,
+        }
+      : undefined,
     timeUncertain: display.timeUncertain,
     scheduleDayLabel: scheduleDay.label,
     scheduleDayDateTime: scheduleDay.dateTime,
@@ -89,12 +99,6 @@ export function activityToEventCard(
     media: { kind: "category", category: display.category },
     isHappeningNow: display.isHappeningNow,
     decisionProfile: activityDecisionProfile(activity, display),
-    showTrust:
-      display.trustState !== "verified" &&
-      display.trustState !== "recently_updated" &&
-      display.trustState !== "price_unclear" &&
-      !display.timeUncertain,
-    trustActivity: activity,
   };
 }
 
@@ -103,10 +107,20 @@ export function movieToEventCard(
   variant: "day" | "night" = "day",
   options: { linkToTonight?: boolean } = {}
 ): Omit<EventCardProps, "saved" | "onSave"> {
-  const { linkToTonight = true } = options;
+  const { linkToTonight = false } = options;
   const title = getMovieDisplayTitle(movie);
   const showTime = formatMovieShowTime(movie.showTime);
   const scheduleDay = formatMovieEventDay(movie);
+  const metadata = [
+    movie.releaseYear && title !== MOVIE_FALLBACK_TITLE
+      ? String(movie.releaseYear)
+      : undefined,
+    typeof movie.voteAverage === "number" && Number.isFinite(movie.voteAverage)
+      ? `TMDB ${movie.voteAverage.toFixed(1)}`
+      : undefined,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   const badges: EventBadge[] = movie.isTonight
     ? [{ label: "Tonight", tone: "tonight" }]
@@ -120,16 +134,20 @@ export function movieToEventCard(
     title,
     resort: movie.resortName,
     location: movie.location,
-    extra: movie.releaseYear && title !== MOVIE_FALLBACK_TITLE
-      ? String(movie.releaseYear)
-      : undefined,
+    extra: metadata || undefined,
     timeLabel: showTime,
     scheduleDayLabel: scheduleDay.label,
     scheduleDayDateTime: scheduleDay.dateTime,
+    summary: movie.overview ?? undefined,
     footnote: "Confirm showtime with the resort before heading over.",
     badges,
     media: movie.posterUrl
-      ? { kind: "poster", src: movie.posterUrl, alt: `${title} poster` }
+      ? {
+          kind: "movie",
+          posterSrc: movie.posterUrl,
+          backdropSrc: movie.backdropUrl,
+          alt: `${title} poster`,
+        }
       : {
           kind: "initial",
           letter: title.replace(/^["']|["']$/g, "").charAt(0).toUpperCase() || "M",

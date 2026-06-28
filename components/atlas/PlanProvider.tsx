@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import type { ActivityOccurrence, PlanItem } from "@/lib/types/occurrence";
+import type { PlanStaySettings } from "@/lib/plan/types";
 import {
   broadcastPlanUpdate,
   createPlanItem,
@@ -36,6 +37,7 @@ import {
   syncAddItem,
   syncRemoveItem,
   syncUpdateItem,
+  syncUpdatePlanSettings,
 } from "@/lib/plan/sync-client";
 import { migrateLocalItemsToServer } from "@/lib/plan/migrate";
 import { trackPlanEvent } from "@/lib/plan/analytics";
@@ -45,6 +47,9 @@ import { executeTurnstile } from "@/lib/turnstile/browser";
 interface PlanContextValue {
   items: PlanItem[];
   planTitle: string;
+  homeResortSlug?: string;
+  tripStartDate?: string;
+  tripEndDate?: string;
   itemCount: number;
   syncStatus: PlanSyncStatus;
   previewOpen: boolean;
@@ -59,6 +64,7 @@ interface PlanContextValue {
   undoRemove: () => void;
   updateNotes: (id: string, notes: string) => void;
   renamePlan: (title: string) => void;
+  updatePlanSettings: (settings: PlanStaySettings) => void;
   isInPlan: (catalogId: string) => boolean;
   isActivitySaved: (activity: ActivityOccurrence) => boolean;
   openPreview: () => void;
@@ -519,6 +525,79 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     [cache, persist, resolvePendingOperation]
   );
 
+  const updatePlanSettings = useCallback(
+    (settings: PlanStaySettings) => {
+      void (async () => {
+        const base = cache ?? (await loadLocalPlanCache());
+        const operationId = crypto.randomUUID();
+        const normalized = {
+          homeResortSlug: settings.homeResortSlug?.trim() || undefined,
+          tripStartDate: settings.tripStartDate?.trim() || undefined,
+          tripEndDate: settings.tripEndDate?.trim() || undefined,
+        };
+        const op: PendingPlanOperation = {
+          operationId,
+          type: "update_plan_settings",
+          planId: base.planId ?? undefined,
+          payload: normalized,
+          createdAt: new Date().toISOString(),
+        };
+        const next: LocalPlanCache = {
+          ...base,
+          homeResortSlug: normalized.homeResortSlug ?? null,
+          tripStartDate: normalized.tripStartDate ?? null,
+          tripEndDate: normalized.tripEndDate ?? null,
+          pendingOperations: [
+            ...base.pendingOperations.filter((pending) => pending.type !== "update_plan_settings"),
+            op,
+          ],
+        };
+
+        persist(next);
+        trackPlanEvent("plan_stay_settings_saved");
+
+        if (!isSupabaseConfigured()) {
+          setSyncStatus("offline");
+          return;
+        }
+
+        let turnstileToken: string | undefined;
+        if (!(await hasAuthSession())) {
+          turnstileToken =
+            (await executeTurnstile("plan_first_save")) ?? undefined;
+        }
+        const user = await ensureAnonymousSession(turnstileToken);
+        if (!user) {
+          setSyncStatus("offline");
+          return;
+        }
+
+        const result = await syncUpdatePlanSettings(normalized, operationId);
+        if (!result) {
+          setSyncStatus("offline");
+          return;
+        }
+
+        const latest = await loadLocalPlanCache();
+        const synced: LocalPlanCache = {
+          ...latest,
+          planId: result.id,
+          title: result.title,
+          version: result.version,
+          homeResortSlug: result.homeResortSlug ?? null,
+          tripStartDate: result.tripStartDate ?? null,
+          tripEndDate: result.tripEndDate ?? null,
+          pendingOperations: latest.pendingOperations.filter(
+            (pending) => pending.operationId !== operationId
+          ),
+        };
+        persist(synced);
+        setSyncStatus("synced");
+      })();
+    },
+    [cache, persist]
+  );
+
   const renamePlan = useCallback(
     (title: string) => {
       if (!cache) return;
@@ -622,6 +701,9 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       planId: null,
       title: "My Rest Day Plan",
       version: 0,
+      homeResortSlug: null,
+      tripStartDate: null,
+      tripEndDate: null,
       items: [],
       pendingOperations: [],
       updatedAt: new Date().toISOString(),
@@ -650,6 +732,9 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     () => ({
       items,
       planTitle: cache?.title ?? "My Rest Day Plan",
+      homeResortSlug: cache?.homeResortSlug ?? undefined,
+      tripStartDate: cache?.tripStartDate ?? undefined,
+      tripEndDate: cache?.tripEndDate ?? undefined,
       itemCount: items.length,
       syncStatus,
       previewOpen,
@@ -664,6 +749,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       undoRemove,
       updateNotes,
       renamePlan,
+      updatePlanSettings,
       isInPlan,
       isActivitySaved,
       openPreview: () => setPreviewOpen(true),
@@ -684,6 +770,9 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     [
       items,
       cache?.title,
+      cache?.homeResortSlug,
+      cache?.tripStartDate,
+      cache?.tripEndDate,
       syncStatus,
       previewOpen,
       lastSavedId,
@@ -697,6 +786,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
       undoRemove,
       updateNotes,
       renamePlan,
+      updatePlanSettings,
       isInPlan,
       isActivitySaved,
       createShare,

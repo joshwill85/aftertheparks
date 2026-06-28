@@ -15,10 +15,60 @@ import {
   tokenizeQuery,
 } from "@/lib/search/normalize";
 import { scoreOffering } from "@/lib/search/score";
+import {
+  areaMatchesFilter,
+  transportMatchesFilter,
+} from "@/lib/explore/routeTaxonomy";
 import { formatResortTier, slugToTitle } from "@/lib/utils";
 
 const OFFERING_QUERY_MIN_SCORE = 18;
 const SHA256_HEX = /^[a-f0-9]{64}$/i;
+
+function textRequiresParkTicket(fields: Array<string | undefined>): boolean {
+  const text = fields.filter(Boolean).join(" ").toLowerCase();
+  return (
+    /valid (theme )?park admission|requires? (valid )?(theme )?park admission|park ticket required|theme park ticket|required admission/.test(
+      text
+    ) ||
+    /\binside (magic kingdom|epcot|hollywood studios|animal kingdom) park\b/.test(text) ||
+    /\b(magic kingdom|epcot|hollywood studios|animal kingdom) park\b/.test(text)
+  );
+}
+
+function offeringRequiresParkTicket(offering: ActivityOffering): boolean {
+  return textRequiresParkTicket([
+    offering.title,
+    offering.summary,
+    offering.category,
+    offering.location.label,
+    offering.price.notes,
+    ...offering.tags,
+    ...offering.amenities,
+  ]);
+}
+
+function offeringMatchesDuration(
+  offering: ActivityOffering,
+  duration: NonNullable<ActivityFilters["duration"]>
+): boolean {
+  if (duration !== "short") return true;
+  const text = [
+    offering.title,
+    offering.summary,
+    offering.category,
+    offering.location.label,
+    ...offering.tags,
+    ...offering.amenities,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (/movie|fireworks|cruise|tour|trail|surrey|horseback|wagon/.test(text)) {
+    return false;
+  }
+  return /arcade|craft|trivia|game|scavenger|lobby|drawing|animation|fitness/.test(text);
+}
 
 export interface OfficialOfferingRow {
   id: string;
@@ -378,6 +428,24 @@ export async function getFilteredOfficialOfferings(
     );
   }
 
+  if (filters.duration) {
+    offerings = offerings.filter((offering) =>
+      offeringMatchesDuration(offering, filters.duration!)
+    );
+  }
+
+  if (filters.transport) {
+    offerings = offerings.filter((offering) =>
+      transportMatchesFilter(offering.resort.slug, offering.resort.area, filters.transport!)
+    );
+  }
+
+  if (filters.area) {
+    offerings = offerings.filter((offering) =>
+      areaMatchesFilter(offering.resort.slug, offering.resort.area, filters.area!)
+    );
+  }
+
   if (filters.free) {
     offerings = offerings.filter((offering) => offering.price.state === "free");
   }
@@ -387,6 +455,12 @@ export async function getFilteredOfficialOfferings(
       (offering) =>
         offering.booking?.reservationRequired ||
         offering.booking?.reservationRecommended
+    );
+  }
+
+  if (filters.ticketRequired !== undefined) {
+    offerings = offerings.filter(
+      (offering) => offeringRequiresParkTicket(offering) === filters.ticketRequired
     );
   }
 

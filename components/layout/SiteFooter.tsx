@@ -21,11 +21,20 @@ export function SiteFooter() {
           <Link href="/corrections" className="hover:text-[var(--lagoon)]">
             Corrections
           </Link>
+          <Link href="/privacy" className="hover:text-[var(--lagoon)]">
+            Privacy
+          </Link>
+          <Link href="/terms" className="hover:text-[var(--lagoon)]">
+            Terms
+          </Link>
+          <Link href="/guides" className="hover:text-[var(--lagoon)]">
+            Guides
+          </Link>
           <Link
-            href="/guides/first-night-at-the-resort"
+            href="/source-and-accuracy-policy"
             className="hover:text-[var(--lagoon)]"
           >
-            Guides
+            Sources
           </Link>
         </div>
       </div>

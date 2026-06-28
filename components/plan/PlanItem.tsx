@@ -10,6 +10,7 @@ import {
 import { getLivingState, livingStateLabel } from "@/lib/plan/living";
 import { activityDetailHref } from "@/lib/activities/links";
 import { trackPlanEvent } from "@/lib/plan/analytics";
+import { EventWeatherSignal } from "@/components/weather/EventWeatherSignal";
 import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 
@@ -112,6 +113,28 @@ function PlanItemCard({
             </div>
           )}
         </dl>
+        {(item.sourceVerifiedAt || item.sourceUrl) && (
+          <p className="mt-2 text-xs text-[var(--color-muted)]">
+            {item.sourceVerifiedAt && (
+              <span>
+                Source verified{" "}
+                <time dateTime={item.sourceVerifiedAt}>
+                  {new Intl.DateTimeFormat("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  }).format(new Date(item.sourceVerifiedAt))}
+                </time>
+              </span>
+            )}
+            {item.sourceVerifiedAt && item.sourceUrl && <span> · </span>}
+            {item.sourceUrl && (
+              <Link href={item.sourceUrl} className="font-bold text-[var(--accent)] hover:underline">
+                View source
+              </Link>
+            )}
+          </p>
+        )}
         {item.startDateTime && (
           <time
             dateTime={item.startDateTime}
@@ -131,32 +154,13 @@ function PlanItemCard({
           </p>
         )}
 
-        {(item.sourceVerifiedAt || item.sourceUrl) && (
-          <p className="mt-2 text-xs text-[var(--color-muted)]">
-            {item.sourceVerifiedAt && (
-              <>
-                Source checked{" "}
-                {new Date(item.sourceVerifiedAt).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </>
-            )}
-            {item.sourceUrl && (
-              <>
-                {item.sourceVerifiedAt ? " · " : ""}
-                <a
-                  href={item.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-[var(--accent)] hover:underline"
-                >
-                  Source
-                </a>
-              </>
-            )}
-          </p>
+        {item.startDateTime && (
+          <EventWeatherSignal
+            className="plan-item__weather"
+            resortSlug={item.resortSlug}
+            startsAt={item.startDateTime}
+            endsAt={item.endDateTime}
+          />
         )}
 
         {item.notes && !editingNotes && (

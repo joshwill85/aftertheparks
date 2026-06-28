@@ -8,6 +8,7 @@ import {
 } from "@/lib/daypart";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem } from "@/lib/types/occurrence";
+import type { PlanStaySettings } from "@/lib/plan/types";
 
 export type PlanSectionKey =
   | "morning"
@@ -115,4 +116,118 @@ export function groupPlanByDate(
       sections,
     };
   });
+}
+
+export interface PlanStayShellDay {
+  dateKey: string;
+  label: string;
+  items: PlanItem[];
+  sections: Map<PlanSectionKey, PlanItem[]>;
+}
+
+export interface PlanStayShell {
+  enabled: boolean;
+  stayDays: PlanStayShellDay[];
+  outsideStayItems: PlanItem[];
+  flexibleItems: PlanItem[];
+  findHomeResortHref?: string;
+  findNearbyHref?: string;
+}
+
+function isDateOnly(value?: string): value is string {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value ?? "");
+}
+
+function sectionMapForItems(items: PlanItem[]): Map<PlanSectionKey, PlanItem[]> {
+  const sections = new Map<PlanSectionKey, PlanItem[]>(
+    PLAN_SECTION_ORDER.map((key) => [key, []])
+  );
+
+  for (const item of items) {
+    sections.get(itemPlanSection(item))!.push(item);
+  }
+
+  for (const sectionItems of sections.values()) {
+    sectionItems.sort((a, b) => {
+      if (!a.startDateTime && !b.startDateTime) return a.title.localeCompare(b.title);
+      if (!a.startDateTime) return 1;
+      if (!b.startDateTime) return -1;
+      return a.startDateTime.localeCompare(b.startDateTime) || a.title.localeCompare(b.title);
+    });
+  }
+
+  return sections;
+}
+
+function stayDateKeys(startDate: string, endDate: string): string[] {
+  const keys: string[] = [];
+  let cursor = startDate;
+  while (cursor <= endDate) {
+    keys.push(cursor);
+    cursor = addOrlandoDays(cursor, 1);
+  }
+  return keys;
+}
+
+export function buildPlanStayShell(
+  items: PlanItem[],
+  settings: PlanStaySettings
+): PlanStayShell {
+  const { homeResortSlug, tripStartDate, tripEndDate } = settings;
+  const hasValidRange =
+    isDateOnly(tripStartDate) &&
+    isDateOnly(tripEndDate) &&
+    tripStartDate <= tripEndDate;
+
+  if (!hasValidRange) {
+    return {
+      enabled: false,
+      stayDays: [],
+      outsideStayItems: [],
+      flexibleItems: items.filter((item) => !item.startDateTime),
+    };
+  }
+
+  const flexibleItems = items.filter((item) => !item.startDateTime);
+  const timedItems = items.filter((item) => item.startDateTime);
+  const byDate = new Map<string, PlanItem[]>();
+  const outsideStayItems: PlanItem[] = [];
+
+  for (const item of timedItems) {
+    const key = planDateKey(item);
+    if (key >= tripStartDate && key <= tripEndDate) {
+      byDate.set(key, [...(byDate.get(key) ?? []), item]);
+    } else {
+      outsideStayItems.push(item);
+    }
+  }
+
+  outsideStayItems.sort((a, b) =>
+    (a.startDateTime ?? "").localeCompare(b.startDateTime ?? "") ||
+    a.title.localeCompare(b.title)
+  );
+
+  const stayDays = stayDateKeys(tripStartDate, tripEndDate).map((dateKey) => {
+    const dayItems = [...(byDate.get(dateKey) ?? [])].sort((a, b) =>
+      (a.startDateTime ?? "").localeCompare(b.startDateTime ?? "") ||
+      a.title.localeCompare(b.title)
+    );
+    return {
+      dateKey,
+      label: planDateLabel(dateKey),
+      items: dayItems,
+      sections: sectionMapForItems(dayItems),
+    };
+  });
+
+  return {
+    enabled: true,
+    stayDays,
+    outsideStayItems,
+    flexibleItems,
+    findHomeResortHref: homeResortSlug ? `/activities?resort=${homeResortSlug}` : undefined,
+    findNearbyHref: homeResortSlug
+      ? `/activities?near=my-resort&resort=${homeResortSlug}`
+      : undefined,
+  };
 }

@@ -27256,7 +27256,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's All-Star Movies Resort"
+        "label": "Fantasia Pool; Duck Pond Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27269,7 +27269,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Fantasia Pool: kiddie pool",
+        "Duck Pond Pool: Go for a “splash-shot” at this pool based on The Mighty Ducks film series",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -27323,8 +27328,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's All-Star Movies Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Fantasia Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Inspired by the Disney classic Fantasia, this sprawling pool is home to a Sorcerer Mickey fountain. For the little ones, a smaller kiddie pool and water play area are located nearby."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "The Fantasia Pool is located between the Fantasia building and Cinema Hall."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Duck Pond Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Go for a “splash-shot” at this pool based on The Mighty Ducks film series. Designed to resemble a hockey rink, this 105,438-gallon pool is the perfect place for families to relax and unwind before or after a visit to the parks."
           }
         ],
         "price": [
@@ -27339,6 +27364,48 @@
             "line": 2,
             "text": "Pools at Disney's All-Star Movies Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Fantasia Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Inspired by the Disney classic Fantasia, this sprawling pool is home to a Sorcerer Mickey fountain. For the little ones, a smaller kiddie pool and water play area are located nearby."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "The Fantasia Pool is located between the Fantasia building and Cinema Hall."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Duck Pond Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Go for a “splash-shot” at this pool based on The Mighty Ducks film series. Designed to resemble a hockey rink, this 105,438-gallon pool is the perfect place for families to relax and unwind before or after a visit to the parks."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Fantasia Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -27367,7 +27434,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's All-Star Music Resort"
+        "label": "Calypso Pool; Piano Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27380,7 +27447,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Calypso Pool: kiddie pool",
+        "Piano Pool: Strike a chord at the Piano Pool, a grand piano shaped swimming hole featuring black and white keys",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -27439,8 +27511,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's All-Star Music Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Calypso Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Go for a dip at the Calypso Pool, home to a colorful fountain of the Three Caballeros. Featuring Donald Duck, José Carioca and Panchito in the center of the 251,418-gallon, guitar-shaped pool, the fountain lightheartedly shoots water at nearby swimmers. Bongos and maracas line the pool area and add to the charming musical theme."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "For little ones, a kiddie pool is located nearby behind Melody Hall."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Movies Under the Stars"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For even more fun, Disney movies are screened on select nights at the Calypso Pool."
           }
         ],
         "price": [
@@ -27455,6 +27547,58 @@
             "line": 2,
             "text": "Pools at Disney's All-Star Music Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Calypso Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Go for a dip at the Calypso Pool, home to a colorful fountain of the Three Caballeros. Featuring Donald Duck, José Carioca and Panchito in the center of the 251,418-gallon, guitar-shaped pool, the fountain lightheartedly shoots water at nearby swimmers. Bongos and maracas line the pool area and add to the charming musical theme."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "For little ones, a kiddie pool is located nearby behind Melody Hall."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Movies Under the Stars"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For even more fun, Disney movies are screened on select nights at the Calypso Pool."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Piano Pool"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Strike a chord at the Piano Pool, a grand piano shaped swimming hole featuring black and white keys. This 106,036 gallon leisure pool is the perfect place to relax and unwind after a busy day at the parks."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Let’s make a splash at Calypso Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -27483,7 +27627,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's All-Star Sports Resort"
+        "label": "Surfboard Bay Pool; Grand Slam Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27496,7 +27640,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Surfboard Bay Pool: kiddie pool",
+        "Grand Slam Pool: Shaped like a baseball diamond, this pool features Goofy on a pitcher’s mound lobbing a stream of water at swimmers",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -27560,8 +27709,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's All-Star Sports Resort | Walt Disney World Resort"
+            "line": 7,
+            "text": "Surfboard Bay Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Surf’s up at this 242,471-gallon swimming hole designed to make you feel like you’re at the beach. Featuring giant, 3-story surfboards lining the pool area, it’s the perfect place to catch some rays and cool off."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "For little ones, a kiddie pool is located behind Stadium Hall adjacent to Surfboard Bay Pool."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Grand Slam Pool"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Shaped like a baseball diamond, this pool features Goofy on a pitcher’s mound lobbing a stream of water at swimmers. Continuing the sporty theme, the sundeck is designed like an outfield and huge 3-story baseball bats line the pool area."
           }
         ],
         "price": [
@@ -27576,6 +27745,48 @@
             "line": 2,
             "text": "Pools at Disney's All-Star Sports Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Surfboard Bay Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Surf’s up at this 242,471-gallon swimming hole designed to make you feel like you’re at the beach. Featuring giant, 3-story surfboards lining the pool area, it’s the perfect place to catch some rays and cool off."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "For little ones, a kiddie pool is located behind Stadium Hall adjacent to Surfboard Bay Pool."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Grand Slam Pool"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Shaped like a baseball diamond, this pool features Goofy on a pitcher’s mound lobbing a stream of water at swimmers. Continuing the sporty theme, the sundeck is designed like an outfield and huge 3-story baseball bats line the pool area."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Let’s make a splash at Surfboard Bay Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -27604,7 +27815,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Disney's Animal Kingdom LodgeatDisney's Animal Kingdom Resort Area"
+        "label": "Uzima Springs Pool; Samawati Springs Pool; Uwanja Camp"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27617,7 +27828,13 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Uzima Springs Pool: 67-foot-long waterslide and zero-depth entry",
+        "Samawati Springs Pool: 128-foot waterslide and zero-depth entry",
+        "Uwanja Camp: water playground with 3 distinct zones",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -27676,8 +27893,28 @@
         "location": [
           {
             "page": 1,
-            "line": 3,
-            "text": "LocatedinDisney's Animal Kingdom LodgeatDisney's Animal Kingdom Resort Area"
+            "line": 6,
+            "text": "Uzima Springs Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Go for a dip in the enchanting Uzima Springs Pool, an 11,000-square-foot tropical oasis facing Uzima Savanna. Surrounded by large canopy trees and Floridian palms, the 234,980-gallon pool features a gently sloping, zero-depth entry point similar to that of a natural beach, along with a 67-foot-long waterslide."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Samawati Springs Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Make a splash at the Samawati Springs Pool—located just a short walk away at Disney’s Animal Kingdom Villas – Kidani! Featuring an exciting 128-foot waterslide and zero-depth-entry, this 4,700-square-foot, 118,138-gallon pool is the perfect place to cool off and have fun."
           }
         ],
         "price": [
@@ -27692,6 +27929,68 @@
             "line": 2,
             "text": "Pools at Disney's Animal Kingdom Lodge",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Uzima Springs Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Go for a dip in the enchanting Uzima Springs Pool, an 11,000-square-foot tropical oasis facing Uzima Savanna. Surrounded by large canopy trees and Floridian palms, the 234,980-gallon pool features a gently sloping, zero-depth entry point similar to that of a natural beach, along with a 67-foot-long waterslide."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Samawati Springs Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Make a splash at the Samawati Springs Pool—located just a short walk away at Disney’s Animal Kingdom Villas – Kidani! Featuring an exciting 128-foot waterslide and zero-depth-entry, this 4,700-square-foot, 118,138-gallon pool is the perfect place to cool off and have fun."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Uwanja Camp"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "The pool area also includes Uwanja Camp, a water playground with 3 distinct zones to please kids of all ages. At Observation Station, children 4 years of age and younger can climb through cargo crates, unscramble animal images and frolic through a gently bubbling geyser and shallow cistern pool—while their parents watch from nearby."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "At Departure Zone, a leaky water tower and sneaky African irises squirt children 5 to 7 years of age, while at Base Camp, kids 8 years of age and up can douse each other with water cannons."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Let’s make a splash at Uzima Springs and Samawati Springs Pools! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -27720,7 +28019,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Art of Animation Resort"
+        "label": "The Big Blue Pool; Cozy Cone Pool; Flippin’ Fins Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27733,7 +28032,13 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "The Big Blue Pool: Just keep swimming in the largest hotel pool in all of Walt Disney World Resort",
+        "Cozy Cone Pool: Check in and chill in cone-shaped cabanas around the Cozy Cone Motel swimming pool!",
+        "Flippin’ Fins Pool: Make a splash in the Flippin' Fins Pool—or let your cares drift away as you lounge poolside",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -27797,8 +28102,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Art of Animation Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "The Big Blue Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Just keep swimming in the largest hotel pool in all of Walt Disney World Resort."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Inspired by the Disney•Pixar “splash hit” Finding Nemo, this huge, zero-entry pool contains over 308,527 gallons! Guests can relive the story of their favorite clown fish alongside giant set pieces of Nemo, Crush and other beloved characters from the film."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "For the little ones, Schoolyard Sprayground is home to pop-up jets, gushing water and more familiar faces from Finding Nemo, while Squirt’s Righteous Reef is a Nemo-themed playground perfect for kids who prefer to stay dry during playtime."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For refreshing snacks and beverages, drop by The Drop Off pool bar conveniently located nearby."
           }
         ],
         "price": [
@@ -27813,6 +28138,83 @@
             "line": 2,
             "text": "Pools at Disney's Art of Animation Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "The Big Blue Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Just keep swimming in the largest hotel pool in all of Walt Disney World Resort."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Inspired by the Disney•Pixar “splash hit” Finding Nemo, this huge, zero-entry pool contains over 308,527 gallons! Guests can relive the story of their favorite clown fish alongside giant set pieces of Nemo, Crush and other beloved characters from the film."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "For the little ones, Schoolyard Sprayground is home to pop-up jets, gushing water and more familiar faces from Finding Nemo, while Squirt’s Righteous Reef is a Nemo-themed playground perfect for kids who prefer to stay dry during playtime."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For refreshing snacks and beverages, drop by The Drop Off pool bar conveniently located nearby."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Cozy Cone Pool"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Check in and chill in cone-shaped cabanas around the Cozy Cone Motel swimming pool! Inspired by the Disney•Pixar mega-hit Cars, the this is the perfect place for families looking to cool their jets."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Surrounded by life-sized models of beloved Cars characters—Doc, Sally, Mater, McQueen and more—your crew can make a splash in this kid-friendly 74,740-gallon watering hole, while you blissfully “idle” in the shade of our unique, orange-cone cabanas. Ka-chow!"
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Pool lifts and other access options are available for guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Flippin’ Fins Pool"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Make a splash in the Flippin' Fins Pool—or let your cares drift away as you lounge poolside. Based on the Disney animated classic The Little Mermaid, this 103,642-gallon pool features the “Under the Sea Orchestra” conducted by Sebastian and whimsical set pieces based on popular characters from the film."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Pool lifts and other access options are available for guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Let’s make a splash at The Big Blue Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -27841,7 +28243,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Bay Lake Tower at Disney's Contemporary Resort"
+        "label": "Bay Cove Pool; The Main Pool; Bay Lake Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27854,7 +28256,13 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Bay Cove Pool: 148-foot-long waterslide and zero-depth entry and whirlpool spa",
+        "The Main Pool: whirlpool spa",
+        "Bay Lake Pool: Go for a gentle swim in the Bay Lake Pool—a round, leisure pool which is shallow on the outside and deeper in the center",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -27902,8 +28310,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Bay Lake Tower at Disney's Contemporary Resort | Walt Disney World Resort"
+            "line": 7,
+            "text": "Bay Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Sweep down the 148-foot-long waterslide and delight in the zero-depth entry at this pool overlooking Bay Lake."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Adults can relax at the whirlpool spa or enjoy light bites and cold drinks and at the Cove Bar poolside bar, while kids splash about in the bubbling geysers of the water play area. This pool area is exclusive to Guests staying at Bay Lake Tower and Disney Vacation Club members! Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Pools at Disney’s Contemporary Resort"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "You can also escape to the 2 pools at the adjacent Disney’s Contemporary Resort."
           }
         ],
         "price": [
@@ -27918,6 +28346,68 @@
             "line": 2,
             "text": "Pools at Bay Lake Tower at Disney's Contemporary Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Bay Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Sweep down the 148-foot-long waterslide and delight in the zero-depth entry at this pool overlooking Bay Lake."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Adults can relax at the whirlpool spa or enjoy light bites and cold drinks and at the Cove Bar poolside bar, while kids splash about in the bubbling geysers of the water play area. This pool area is exclusive to Guests staying at Bay Lake Tower and Disney Vacation Club members! Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Pools at Disney’s Contemporary Resort"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "You can also escape to the 2 pools at the adjacent Disney’s Contemporary Resort."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "The Main Pool"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Breeze down the 17-foot-high, 131-foot-long curving waterslide and take in views of the marina, or simply relax and rejuvenate in one of 2 whirlpool spas. Little ones will surely love to splash it up in the water play area."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Bay Lake Pool"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Go for a gentle swim in the Bay Lake Pool—a round, leisure pool which is shallow on the outside and deeper in the center. Poolside cabanas are also available to rent on a daily basis. It’s the perfect place to unwind after a busy day at the parks."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Let’s make a splash at Bay Cove Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -27946,7 +28436,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Bay Lake Tower at Disney's Contemporary Resort"
+        "label": "Bay Cove Pool; The Main Pool; Bay Lake Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -27959,7 +28449,13 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Bay Cove Pool: 148-foot-long waterslide and zero-depth entry and whirlpool spa",
+        "The Main Pool: whirlpool spa",
+        "Bay Lake Pool: Go for a gentle swim in the Bay Lake Pool—a round, leisure pool which is shallow on the outside and deeper in the center",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28007,8 +28503,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Bay Lake Tower at Disney's Contemporary Resort | Walt Disney World Resort"
+            "line": 7,
+            "text": "Bay Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Sweep down the 148-foot-long waterslide and delight in the zero-depth entry at this pool overlooking Bay Lake."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Adults can relax at the whirlpool spa or enjoy light bites and cold drinks and at the Cove Bar poolside bar, while kids splash about in the bubbling geysers of the water play area. This pool area is exclusive to Guests staying at Bay Lake Tower and Disney Vacation Club members! Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Pools at Disney’s Contemporary Resort"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "You can also escape to the 2 pools at the adjacent Disney’s Contemporary Resort."
           }
         ],
         "price": [
@@ -28023,6 +28539,68 @@
             "line": 2,
             "text": "Pools at Bay Lake Tower at Disney's Contemporary Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Bay Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Sweep down the 148-foot-long waterslide and delight in the zero-depth entry at this pool overlooking Bay Lake."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Adults can relax at the whirlpool spa or enjoy light bites and cold drinks and at the Cove Bar poolside bar, while kids splash about in the bubbling geysers of the water play area. This pool area is exclusive to Guests staying at Bay Lake Tower and Disney Vacation Club members! Hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Pools at Disney’s Contemporary Resort"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "You can also escape to the 2 pools at the adjacent Disney’s Contemporary Resort."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "The Main Pool"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Breeze down the 17-foot-high, 131-foot-long curving waterslide and take in views of the marina, or simply relax and rejuvenate in one of 2 whirlpool spas. Little ones will surely love to splash it up in the water play area."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Bay Lake Pool"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Go for a gentle swim in the Bay Lake Pool—a round, leisure pool which is shallow on the outside and deeper in the center. Poolside cabanas are also available to rent on a daily basis. It’s the perfect place to unwind after a busy day at the parks."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Let’s make a splash at Bay Cove Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28051,7 +28629,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Disney's Beach Club ResortatEPCOT Resort Area"
+        "label": "3 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28064,7 +28642,11 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "3 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28128,8 +28710,28 @@
         "location": [
           {
             "page": 1,
-            "line": 3,
-            "text": "LocatedinDisney's Beach Club ResortatEPCOT Resort Area"
+            "line": 11,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Guests seeking a tranquil swim can choose from 3 leisure pools in Disney's Beach and Yacht Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Stormalong Bay! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
           }
         ],
         "price": [
@@ -28144,6 +28746,38 @@
             "line": 2,
             "text": "Pools at Disney's Beach Club Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Guests seeking a tranquil swim can choose from 3 leisure pools in Disney's Beach and Yacht Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Stormalong Bay! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28172,7 +28806,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+        "label": "3 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28185,7 +28819,11 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "3 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28249,8 +28887,28 @@
         "location": [
           {
             "page": 1,
+            "line": 11,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Guests seeking a tranquil swim can choose from 3 leisure pools in Disney's Beach and Yacht Club Resorts."
+          },
+          {
+            "page": 1,
             "line": 13,
             "text": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Stormalong Bay! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
           }
         ],
         "price": [
@@ -28265,6 +28923,38 @@
             "line": 2,
             "text": "Pools at Disney's Beach Club Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Guests seeking a tranquil swim can choose from 3 leisure pools in Disney's Beach and Yacht Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Stormalong Bay! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28293,7 +28983,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+        "label": "3 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28306,7 +28996,11 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "3 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28370,8 +29064,28 @@
         "location": [
           {
             "page": 1,
+            "line": 11,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Guests seeking a tranquil swim can choose from 3 leisure pools in Disney's Beach and Yacht Club Resorts."
+          },
+          {
+            "page": 1,
             "line": 13,
             "text": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Stormalong Bay! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
           }
         ],
         "price": [
@@ -28386,6 +29100,38 @@
             "line": 2,
             "text": "Pools at Disney's Beach Club Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 11,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Guests seeking a tranquil swim can choose from 3 leisure pools in Disney's Beach and Yacht Club Resorts."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Disney's Beach Club Resort pool—the 43,000-gallon Tidal pool—is located in a garden area on the far end of the resort facing Crescent Lake. Disney's Yacht Club Resort pool—the 54,000-gallon Admiral pool—can be found in its own quiet garden area. A third pool—the 55,350-gallon Dunes Cove pool—is privately located at Disney’s Beach Club Villas. Though it is situated for the convenience of Guests staying at the Disney Beach Club Villas, all Resort Guests are welcome to enjoy it. All pools also include steaming whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Stormalong Bay! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28414,7 +29160,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's BoardWalk Inn"
+        "label": "Luna Park Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28427,7 +29173,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Luna Park Pool: 200-foot-long waterslide and kiddie pool and whirlpool spa",
+        "2 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28481,8 +29232,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's BoardWalk Inn"
+            "line": 6,
+            "text": "Luna Park Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Swim in this carnival-themed pool that is home to a 200-foot-long waterslide. Make a splash in a 184,217-gallon pool inspired by a 1920s amusement park. Adults can enjoy the serenity of the whirlpool spa while little ones will surely want to splash it up in the kiddie pool."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Plus, be sure to stop by the nearby Leaping Horse Libations for tasty sandwiches, refreshing beverages and so much more."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "2 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Guests seeking a tranquil swimming experience can choose from 2 leisure pools. One is located south of Luna Park Pool and the other is located on the east side of the Resort hotel. Both feature whirlpool spas for additional relaxation."
           }
         ],
         "price": [
@@ -28497,6 +29268,48 @@
             "line": 3,
             "text": "Relax at the Luna Park Pool plus 2 leisure pools amid the elegance of turn-of-the-century Atlantic City.",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Luna Park Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Swim in this carnival-themed pool that is home to a 200-foot-long waterslide. Make a splash in a 184,217-gallon pool inspired by a 1920s amusement park. Adults can enjoy the serenity of the whirlpool spa while little ones will surely want to splash it up in the kiddie pool."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Plus, be sure to stop by the nearby Leaping Horse Libations for tasty sandwiches, refreshing beverages and so much more."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "2 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Guests seeking a tranquil swimming experience can choose from 2 leisure pools. One is located south of Luna Park Pool and the other is located on the east side of the Resort hotel. Both feature whirlpool spas for additional relaxation."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Luna Park Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28525,7 +29338,7 @@
         "tweens"
       ],
       "location": {
-        "label": "From January 11, 2027, through April 2027, the Luna Park Pool, the Luna Park Crazy Play Area and Leaping Horse Libations at Disney’s BoardWalk Inn and Disney’s BoardWalk Villas will be closed for routine maintenance. Guests may see and hear work taking place during daytime hours. However, the Villas Pool and the Inn Pool will remain open for Guests to enjoy."
+        "label": "Luna Park Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28538,7 +29351,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Luna Park Pool: 200-foot-long waterslide and kiddie pool and whirlpool spa",
+        "2 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28592,8 +29410,28 @@
         "location": [
           {
             "page": 1,
-            "line": 5,
-            "text": "From January 11, 2027, through April 2027, the Luna Park Pool, the Luna Park Crazy Play Area and Leaping Horse Libations at Disney’s BoardWalk Inn and Disney’s BoardWalk Villas will be closed for routine maintenance. Guests may see and hear work taking place during daytime hours. However, the Villas Pool and the Inn Pool will remain open for Guests to enjoy."
+            "line": 6,
+            "text": "Luna Park Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Swim in this carnival-themed pool that is home to a 200-foot-long waterslide. Make a splash in a 184,217-gallon pool inspired by a 1920s amusement park. Adults can enjoy the serenity of the whirlpool spa while little ones will surely want to splash it up in the kiddie pool."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Plus, be sure to stop by the nearby Leaping Horse Libations for tasty sandwiches, refreshing beverages and so much more."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "2 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Guests seeking a tranquil swimming experience can choose from 2 leisure pools. One is located south of Luna Park Pool and the other is located on the east side of the Resort hotel. Both feature whirlpool spas for additional relaxation."
           }
         ],
         "price": [
@@ -28608,6 +29446,48 @@
             "line": 3,
             "text": "Relax at the Luna Park Pool plus 2 leisure pools amid the elegance of turn-of-the-century Atlantic City.",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Luna Park Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Swim in this carnival-themed pool that is home to a 200-foot-long waterslide. Make a splash in a 184,217-gallon pool inspired by a 1920s amusement park. Adults can enjoy the serenity of the whirlpool spa while little ones will surely want to splash it up in the kiddie pool."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Plus, be sure to stop by the nearby Leaping Horse Libations for tasty sandwiches, refreshing beverages and so much more."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "2 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Guests seeking a tranquil swimming experience can choose from 2 leisure pools. One is located south of Luna Park Pool and the other is located on the east side of the Resort hotel. Both feature whirlpool spas for additional relaxation."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Luna Park Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28636,7 +29516,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at The Cabins at Disney's Fort Wilderness Resort"
+        "label": "Meadow Swimmin’ Pool; Wilderness Swimmin’ Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28649,7 +29529,11 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Meadow Swimmin’ Pool: whirlpool spa",
+        "Wilderness Swimmin’ Pool: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28703,8 +29587,28 @@
         "location": [
           {
             "page": 1,
-            "line": 2,
-            "text": "Pools at The Cabins at Disney's Fort Wilderness Resort"
+            "line": 6,
+            "text": "Meadow Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at Meadow Swimmin’ Pool, the feature pool with a 67-foot-long corkscrew waterslide. Adults are invited to enjoy the serenity of whirlpool spa, while little ones will surely want to splash it up in the adjacent fort-themed water play area—where young buckaroos can breeze down on their own tot-friendly slides."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, a snack shop offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Wilderness Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Retreat to Wilderness Swimmin’ Pool, the all-ages leisure pool with a whirlpool spa, for a more tranquil swim."
           }
         ],
         "price": [
@@ -28719,6 +29623,43 @@
             "line": 2,
             "text": "Pools at The Cabins at Disney's Fort Wilderness Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Meadow Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at Meadow Swimmin’ Pool, the feature pool with a 67-foot-long corkscrew waterslide. Adults are invited to enjoy the serenity of whirlpool spa, while little ones will surely want to splash it up in the adjacent fort-themed water play area—where young buckaroos can breeze down on their own tot-friendly slides."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, a snack shop offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Wilderness Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Retreat to Wilderness Swimmin’ Pool, the all-ages leisure pool with a whirlpool spa, for a more tranquil swim."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Meadow Swimmin’ Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
           }
         ]
       },
@@ -28747,7 +29688,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Fort Wilderness Resort"
+        "label": "Meadow Swimmin’ Pool; Wilderness Swimmin’ Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28760,7 +29701,11 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Meadow Swimmin’ Pool: whirlpool spa",
+        "Wilderness Swimmin’ Pool: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28814,8 +29759,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Fort Wilderness Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Meadow Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at Meadow Swimmin’ Pool, the feature pool with a 67-foot-long corkscrew waterslide. Adults are invited to enjoy the serenity of whirlpool spa, while little ones will surely want to splash it up in the adjacent fort-themed water play area—where young buckaroos can breeze down on their own tot-friendly slides."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, a snack shop offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Wilderness Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Retreat to Wilderness Swimmin’ Pool, the all-ages leisure pool with a whirlpool spa, for a more tranquil swim."
           }
         ],
         "price": [
@@ -28830,6 +29795,43 @@
             "line": 2,
             "text": "Pools at The Cabins at Disney's Fort Wilderness Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Meadow Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at Meadow Swimmin’ Pool, the feature pool with a 67-foot-long corkscrew waterslide. Adults are invited to enjoy the serenity of whirlpool spa, while little ones will surely want to splash it up in the adjacent fort-themed water play area—where young buckaroos can breeze down on their own tot-friendly slides."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, a snack shop offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Wilderness Swimmin’ Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Retreat to Wilderness Swimmin’ Pool, the all-ages leisure pool with a whirlpool spa, for a more tranquil swim."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Meadow Swimmin’ Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
           }
         ]
       },
@@ -28858,7 +29860,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Caribbean Beach Resort"
+        "label": "Fuentes del Morro Pool; 5 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28871,7 +29873,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Fuentes del Morro Pool: Make a splash at this zero-entry pirate’s paradise, themed like a colonial Spanish fortress",
+        "5 Leisure Pools: Five leisure pools, one in each village, offer escape for the less boisterous buccaneers of your crew",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -28925,8 +29932,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Caribbean Beach Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Fuentes del Morro Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at this zero-entry pirate’s paradise, themed like a colonial Spanish fortress. Swashbuckling adventurers can zip by on one of 2 waterslides—including one measuring 102 feet long—and feel the spray of man-of-war-cannons. Little ones can cavort at the shipwreck play area, complete with mini slides, a crow’s nest and a barrel of laughs that dispenses a drenching downpour."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "A 12-person spa pool provides relaxation after a long day on the high seas, as do tropical drinks from the nearby Banana Cabana pool bar."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Please note: Guests must be 48\" or under to enjoy the Fuentes del Morro Water Play Area."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "5 Leisure Pools"
           }
         ],
         "price": [
@@ -28941,6 +29968,53 @@
             "line": 2,
             "text": "Pools at Disney's Caribbean Beach Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Fuentes del Morro Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at this zero-entry pirate’s paradise, themed like a colonial Spanish fortress. Swashbuckling adventurers can zip by on one of 2 waterslides—including one measuring 102 feet long—and feel the spray of man-of-war-cannons. Little ones can cavort at the shipwreck play area, complete with mini slides, a crow’s nest and a barrel of laughs that dispenses a drenching downpour."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "A 12-person spa pool provides relaxation after a long day on the high seas, as do tropical drinks from the nearby Banana Cabana pool bar."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Please note: Guests must be 48\" or under to enjoy the Fuentes del Morro Water Play Area."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "5 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Five leisure pools, one in each village, offer escape for the less boisterous buccaneers of your crew. Take the plunge and cool down or simply lounge the day away on deck while catching some golden rays."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Let’s make a splash at Fuentes del Morro Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -28969,7 +30043,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Coronado Springs Resort"
+        "label": "The Lost City of Cibola Pool; 3 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -28982,7 +30056,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "The Lost City of Cibola Pool: 123-foot-long waterslide and kiddie pool",
+        "3 Leisure Pools: For the less adventurous, 3 leisure pools are located at each settlement—the Casitas, Ranchos and Cabanas",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29036,8 +30115,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Coronado Springs Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "The Lost City of Cibola Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Sun worshipers of all ages will dig the Dig Site, a sprawling pool complex with a Mayan ruins theme. Discover the Lost City of Cibola pool, whose centerpiece is a 50-foot pyramid where weary explorers can revive themselves in the waters streaming down its stone steps. A 123-foot-long waterslide featuring a spitting Jaguar spirit animal makes for a fierce ride."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "The Dig Site also boasts the largest hot tub on Walt Disney World Resort property, with room for 22 tribesmen. Seasonal poolside activities, Siesta’s pool bar, a white-sand volleyball court, the Iguana Arcade and a kiddie pool offer golden opportunities for fun."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Join us for family-friendly activities each day including “The Swimming of the Bulls” and themed pool parties celebrating Walt Disney World’s 50th Anniversary as well as the rich cultures of the Coronado Springs Resort. See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "3 Leisure Pools"
           }
         ],
         "price": [
@@ -29052,6 +30151,53 @@
             "line": 2,
             "text": "Pools at Disney's Coronado Springs Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "The Lost City of Cibola Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Sun worshipers of all ages will dig the Dig Site, a sprawling pool complex with a Mayan ruins theme. Discover the Lost City of Cibola pool, whose centerpiece is a 50-foot pyramid where weary explorers can revive themselves in the waters streaming down its stone steps. A 123-foot-long waterslide featuring a spitting Jaguar spirit animal makes for a fierce ride."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "The Dig Site also boasts the largest hot tub on Walt Disney World Resort property, with room for 22 tribesmen. Seasonal poolside activities, Siesta’s pool bar, a white-sand volleyball court, the Iguana Arcade and a kiddie pool offer golden opportunities for fun."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Join us for family-friendly activities each day including “The Swimming of the Bulls” and themed pool parties celebrating Walt Disney World’s 50th Anniversary as well as the rich cultures of the Coronado Springs Resort. See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "For the less adventurous, 3 leisure pools are located at each settlement—the Casitas, Ranchos and Cabanas. Take the plunge and cool down or simply lounge the day away on deck while catching some golden rays."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Let’s make a splash at The Lost City of Cibola Pool. Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29080,7 +30226,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Grand Floridian Resort & Spa"
+        "label": "Beach Pool; Courtyard Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29093,7 +30239,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Beach Pool: 181-foot-long waterslide and zero-depth entry and aquatic play area",
+        "Courtyard Pool: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29147,8 +30298,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Grand Floridian Resort & Spa | Walt Disney World Resort"
+            "line": 6,
+            "text": "Beach Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Cool off in this 111,261-gallon pool overlooking Seven Seas Lagoon. Breeze down the 181-foot-long waterslide amid a serene natural springs-themed setting, complete with cascading waterfalls and zero-depth entry similar to that of a beach. A walking bridge provides a picturesque view of the pool for snapping pictures of family and friends gliding down the slide and an onsite lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, little ones will surely want to splash it up in the adjacent aquatic play area. For added luxury, cabanas are available for rent."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Courtyard Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Escape to a serene environment at this zero-entry leisure pool, conveniently located behind the main building. Offering a calm and peaceful swimming experience, the heated Courtyard Pool descends to a maximum depth of nearly 5 feet, and features an adjacent whirlpool spa."
           }
         ],
         "price": [
@@ -29163,6 +30334,53 @@
             "line": 2,
             "text": "Pools at Disney's Grand Floridian Resort & Spa",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Beach Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Cool off in this 111,261-gallon pool overlooking Seven Seas Lagoon. Breeze down the 181-foot-long waterslide amid a serene natural springs-themed setting, complete with cascading waterfalls and zero-depth entry similar to that of a beach. A walking bridge provides a picturesque view of the pool for snapping pictures of family and friends gliding down the slide and an onsite lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Nearby, little ones will surely want to splash it up in the adjacent aquatic play area. For added luxury, cabanas are available for rent."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Courtyard Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Escape to a serene environment at this zero-entry leisure pool, conveniently located behind the main building. Offering a calm and peaceful swimming experience, the heated Courtyard Pool descends to a maximum depth of nearly 5 feet, and features an adjacent whirlpool spa."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Towels are available at the pool and lifejackets are available at The Captain’s Shipyard. Pools lifts and other access options can be arranged for Guests with disabilities or limited mobility. For assistance, please contact the Resort Front Desk or speak to a Cast Member."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Let’s make a splash at Beach Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29191,7 +30409,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Old Key West Resort"
+        "label": "Sandcastle Pool; 3 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29204,7 +30422,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Sandcastle Pool: 125-foot-long waterslide and kiddie pool and whirlpool spa",
+        "3 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29258,8 +30481,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Old Key West Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Sandcastle Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Glide down a 125-foot-long waterslide through a giant sandcastle, and sunbathe on a sand beach. Decorative dolphins spout water at this 149,600-gallon feature pool that recalls the carefree romantic attitude of the Florida Keys. After your swim, relax in the whirlpool spa and feel your cares melt away in a dry sauna inside the pool deck’s lighthouse."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Located near Hospitality House, the Sandcastle Pool even has a kiddie pool for little ones."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "All-ages pools—each with a whirlpool spa—are located in the Old Turtle Pond, South Point and Miller’s Road sections. Offering a more relaxing respite, these pools are perfect for Guests looking to lounge the day away."
           }
         ],
         "price": [
@@ -29274,6 +30517,48 @@
             "line": 2,
             "text": "Pools at Disney's Old Key West Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Sandcastle Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Glide down a 125-foot-long waterslide through a giant sandcastle, and sunbathe on a sand beach. Decorative dolphins spout water at this 149,600-gallon feature pool that recalls the carefree romantic attitude of the Florida Keys. After your swim, relax in the whirlpool spa and feel your cares melt away in a dry sauna inside the pool deck’s lighthouse."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Located near Hospitality House, the Sandcastle Pool even has a kiddie pool for little ones."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "All-ages pools—each with a whirlpool spa—are located in the Old Turtle Pond, South Point and Miller’s Road sections. Offering a more relaxing respite, these pools are perfect for Guests looking to lounge the day away."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Sandcastle Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29302,7 +30587,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Polynesian Village Resort"
+        "label": "Lava Pool; Cove Pool; Oasis Pool; Oasis Patio"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29317,7 +30602,14 @@
         "reservation_recommended": false
       },
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Lava Pool: zero-depth entry",
+        "Cove Pool: zero-depth entry",
+        "Oasis Pool: Nestled amid a lush garden, this all-ages leisure pool promises a more tranquil swim for those looking to relax and unwind",
+        "Oasis Patio: Relax in your own private shaded area close to the pool—complete with cushioned lounge chairs, towels and more!",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29375,8 +30667,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Polynesian Village Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Lava Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at this pool which features a towering volcano, a waterfall and a thrilling 142 foot-long waterslide. A zero-depth entry point, similar to a beach, slopes gently into the pool making for easy entry and exit. Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Island Tower at Disney’s Polynesian Villas & Bungalows is home to this zero entry pool, offering relaxation for Guests staying at Disney’s Polynesian Village Resort."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Moana’s Voyage"
           }
         ],
         "price": [
@@ -29398,6 +30710,83 @@
             "page": 1,
             "line": 17,
             "text": "Oasis Patios accommodate up to 6 Guests and are available for rent on a first-come, first-served basis. For advanced reservations and pricing information, call (407) WDW-PLAY [(407) 939-7529]. Guests under 18 years of age must have parent or guardian permission to call."
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Lava Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at this pool which features a towering volcano, a waterfall and a thrilling 142 foot-long waterslide. A zero-depth entry point, similar to a beach, slopes gently into the pool making for easy entry and exit. Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Island Tower at Disney’s Polynesian Villas & Bungalows is home to this zero entry pool, offering relaxation for Guests staying at Disney’s Polynesian Village Resort."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Moana’s Voyage"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Little ones can embrace their inner wayfinder at Island Tower at Disney’s Polynesian Villas & Bungalows with this whimsical, new splash area featuring life-size sculptures of Moana and her iconic canoe—inspired by Disney’s beloved movie Moana."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Oasis Pool"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Nestled amid a lush garden, this all-ages leisure pool promises a more tranquil swim for those looking to relax and unwind."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Oasis Patio"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Relax in your own private shaded area close to the pool—complete with cushioned lounge chairs, towels and more!"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "You can also place food and drink orders to be delivered from the Oasis Bar & Grill—featuring tasty favorites like fish tacos, kalua pork sliders and Polynesian-themed burgers, along with tropical cocktails, wine, Hawaiian beer and assorted beverages (separate dining charges apply)."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Oasis Patios accommodate up to 6 Guests and are available for rent on a first-come, first-served basis. For advanced reservations and pricing information, call (407) WDW-PLAY [(407) 939-7529]. Guests under 18 years of age must have parent or guardian permission to call."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Let’s make a splash at Lava Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29426,7 +30815,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Little ones can embrace their inner wayfinder at Island Tower at Disney’s Polynesian Villas & Bungalows with this whimsical, new splash area featuring life-size sculptures of Moana and her iconic canoe—inspired by Disney’s beloved movie Moana."
+        "label": "Lava Pool; Cove Pool; Oasis Pool; Oasis Patio"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29441,7 +30830,14 @@
         "reservation_recommended": false
       },
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Lava Pool: zero-depth entry",
+        "Cove Pool: zero-depth entry",
+        "Oasis Pool: Nestled amid a lush garden, this all-ages leisure pool promises a more tranquil swim for those looking to relax and unwind",
+        "Oasis Patio: Relax in your own private shaded area close to the pool—complete with cushioned lounge chairs, towels and more!",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29499,8 +30895,28 @@
         "location": [
           {
             "page": 1,
-            "line": 11,
-            "text": "Little ones can embrace their inner wayfinder at Island Tower at Disney’s Polynesian Villas & Bungalows with this whimsical, new splash area featuring life-size sculptures of Moana and her iconic canoe—inspired by Disney’s beloved movie Moana."
+            "line": 6,
+            "text": "Lava Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at this pool which features a towering volcano, a waterfall and a thrilling 142 foot-long waterslide. A zero-depth entry point, similar to a beach, slopes gently into the pool making for easy entry and exit. Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Island Tower at Disney’s Polynesian Villas & Bungalows is home to this zero entry pool, offering relaxation for Guests staying at Disney’s Polynesian Village Resort."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Moana’s Voyage"
           }
         ],
         "price": [
@@ -29522,6 +30938,83 @@
             "page": 1,
             "line": 17,
             "text": "Oasis Patios accommodate up to 6 Guests and are available for rent on a first-come, first-served basis. For advanced reservations and pricing information, call (407) WDW-PLAY [(407) 939-7529]. Guests under 18 years of age must have parent or guardian permission to call."
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Lava Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Make a splash at this pool which features a towering volcano, a waterfall and a thrilling 142 foot-long waterslide. A zero-depth entry point, similar to a beach, slopes gently into the pool making for easy entry and exit. Nearby, a lounge and bar offer refreshments and snacks."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Island Tower at Disney’s Polynesian Villas & Bungalows is home to this zero entry pool, offering relaxation for Guests staying at Disney’s Polynesian Village Resort."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Moana’s Voyage"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Little ones can embrace their inner wayfinder at Island Tower at Disney’s Polynesian Villas & Bungalows with this whimsical, new splash area featuring life-size sculptures of Moana and her iconic canoe—inspired by Disney’s beloved movie Moana."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Oasis Pool"
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Nestled amid a lush garden, this all-ages leisure pool promises a more tranquil swim for those looking to relax and unwind."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Oasis Patio"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Relax in your own private shaded area close to the pool—complete with cushioned lounge chairs, towels and more!"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "You can also place food and drink orders to be delivered from the Oasis Bar & Grill—featuring tasty favorites like fish tacos, kalua pork sliders and Polynesian-themed burgers, along with tropical cocktails, wine, Hawaiian beer and assorted beverages (separate dining charges apply)."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Oasis Patios accommodate up to 6 Guests and are available for rent on a first-come, first-served basis. For advanced reservations and pricing information, call (407) WDW-PLAY [(407) 939-7529]. Guests under 18 years of age must have parent or guardian permission to call."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Let’s make a splash at Lava Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 22,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29550,7 +31043,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Pop Century Resort"
+        "label": "Hippy Dippy Pool; Bowling Pool; Computer Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29563,7 +31056,13 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Hippy Dippy Pool: kiddie pool",
+        "Bowling Pool: Celebrate the 1950s at this 144,352-gallon pool shaped like a bowling pin",
+        "Computer Pool: Go for a dip at this 1990s-themed, computer-shaped pool that includes a giant floppy disc and keypad",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29617,8 +31116,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Pop Century Resort | Walt Disney World Resort"
+            "line": 6,
+            "text": "Hippy Dippy Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Go with the flow at the Hippy Dippy Pool, home to far-out flower-shaped water jets and a lazy 1960’s attitude. Featuring over 235,613 gallons, this pool is big on fun."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "For the little ones, a kiddie pool is located behind Classic Hall, just behind the Hippy Dippy Pool."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Movies Under the Stars"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For even more enjoyment, Disney movies are screened on select nights at the Hippy Dippy Pool."
           }
         ],
         "price": [
@@ -29633,6 +31152,68 @@
             "line": 2,
             "text": "Pools at Disney's Pop Century Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Hippy Dippy Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Go with the flow at the Hippy Dippy Pool, home to far-out flower-shaped water jets and a lazy 1960’s attitude. Featuring over 235,613 gallons, this pool is big on fun."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "For the little ones, a kiddie pool is located behind Classic Hall, just behind the Hippy Dippy Pool."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Movies Under the Stars"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "For even more enjoyment, Disney movies are screened on select nights at the Hippy Dippy Pool."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Bowling Pool"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Celebrate the 1950s at this 144,352-gallon pool shaped like a bowling pin."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Computer Pool"
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Go for a dip at this 1990s-themed, computer-shaped pool that includes a giant floppy disc and keypad."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "Let’s make a splash at Hippy Dippy Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 19,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29661,7 +31242,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Port Orleans Resort – French Quarter"
+        "label": "Doubloon Lagoon; Ol’ Man Island"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29674,7 +31255,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Doubloon Lagoon: whirlpool spa",
+        "Ol’ Man Island: 95-foot waterslide and kiddie pool and whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29748,8 +31334,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Port Orleans Resort – French Quarter | Walt Disney World Resort"
+            "line": 6,
+            "text": "Doubloon Lagoon"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Festive decorations, an all-alligator band and a blue sea serpent waterslide immerse you in the magic of New Orleans."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "At Doubloon Lagoon, it’s Mardi Gras every day! Come slide down Scales, the 51-foot-long snaking sea serpent slide, whose tongue deposits you into the lagoon with a mighty splash. Alligator jazz aficionados, a water play area, a whirlpool spa and the Mardi Grogs pool bar make it even more of a party—as King Neptune watches over all of the merriment from on high."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Please note: Guests must be 48” or under to play at the Doubloon Lagoon Water Play Area."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Ol’ Man Island"
           }
         ],
         "price": [
@@ -29764,6 +31370,63 @@
             "line": 2,
             "text": "Pools at Disney's Port Orleans Resort – French Quarter",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Doubloon Lagoon"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Festive decorations, an all-alligator band and a blue sea serpent waterslide immerse you in the magic of New Orleans."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "At Doubloon Lagoon, it’s Mardi Gras every day! Come slide down Scales, the 51-foot-long snaking sea serpent slide, whose tongue deposits you into the lagoon with a mighty splash. Alligator jazz aficionados, a water play area, a whirlpool spa and the Mardi Grogs pool bar make it even more of a party—as King Neptune watches over all of the merriment from on high."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Please note: Guests must be 48” or under to play at the Doubloon Lagoon Water Play Area."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Ol’ Man Island"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Make a splash at Ol’ Man Island pool complex, just a short walk away at Disney’s Port Orleans Resort – Riverside. Located down the Sassagoula River, this 3.5-acre refuge includes a swimmin’ hole with rushing waterfalls and a rustic 95-foot waterslide fashioned after an old mill. A whirlpool spa, kiddie pool and even a fishin’ hole are also located on the premises."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "A nearby bar and lounge offer snacks and refreshments."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Pool lifts and other access options are available for Guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Double Doubloon Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29792,7 +31455,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Dive into Mardi Gras at Doubloon Lagoon or swim in the pool at nearby Disney’s Port Orleans Resort – Riverside."
+        "label": "Doubloon Lagoon; Ol’ Man Island"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29805,7 +31468,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Doubloon Lagoon: whirlpool spa",
+        "Ol’ Man Island: 95-foot waterslide and kiddie pool and whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at all pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29879,8 +31547,28 @@
         "location": [
           {
             "page": 1,
-            "line": 4,
-            "text": "Dive into Mardi Gras at Doubloon Lagoon or swim in the pool at nearby Disney’s Port Orleans Resort – Riverside."
+            "line": 6,
+            "text": "Doubloon Lagoon"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Festive decorations, an all-alligator band and a blue sea serpent waterslide immerse you in the magic of New Orleans."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "At Doubloon Lagoon, it’s Mardi Gras every day! Come slide down Scales, the 51-foot-long snaking sea serpent slide, whose tongue deposits you into the lagoon with a mighty splash. Alligator jazz aficionados, a water play area, a whirlpool spa and the Mardi Grogs pool bar make it even more of a party—as King Neptune watches over all of the merriment from on high."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Please note: Guests must be 48” or under to play at the Doubloon Lagoon Water Play Area."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Ol’ Man Island"
           }
         ],
         "price": [
@@ -29895,6 +31583,63 @@
             "line": 2,
             "text": "Pools at Disney's Port Orleans Resort – French Quarter",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Doubloon Lagoon"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Festive decorations, an all-alligator band and a blue sea serpent waterslide immerse you in the magic of New Orleans."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "At Doubloon Lagoon, it’s Mardi Gras every day! Come slide down Scales, the 51-foot-long snaking sea serpent slide, whose tongue deposits you into the lagoon with a mighty splash. Alligator jazz aficionados, a water play area, a whirlpool spa and the Mardi Grogs pool bar make it even more of a party—as King Neptune watches over all of the merriment from on high."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Please note: Guests must be 48” or under to play at the Doubloon Lagoon Water Play Area."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Ol’ Man Island"
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Make a splash at Ol’ Man Island pool complex, just a short walk away at Disney’s Port Orleans Resort – Riverside. Located down the Sassagoula River, this 3.5-acre refuge includes a swimmin’ hole with rushing waterfalls and a rustic 95-foot waterslide fashioned after an old mill. A whirlpool spa, kiddie pool and even a fishin’ hole are also located on the premises."
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "A nearby bar and lounge offer snacks and refreshments."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Pool lifts and other access options are available for Guests with disabilities or limited mobility. Pool hours and lifeguard availability vary by pool and are subject to change."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Let’s make a splash at Double Doubloon Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Complimentary towels are provided at all pools."
           }
         ]
       },
@@ -29923,7 +31668,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney’s Riviera Resort"
+        "label": "Riviera Pool; S’il Vous Play; Beau Soleil Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -29936,7 +31681,10 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Mediterranean-Themed Pools: Pure vacation bliss awaits at this family-friendly pool, which features a pool slide that winds around a stately column tower",
+        "Hours and lifeguard availability vary by pool and are subject to change. Complimentary towels are provided at both pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -29995,8 +31743,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney’s Riviera Resort | Walt Disney World Resort"
+            "line": 5,
+            "text": "Mediterranean-Themed Pools"
+          },
+          {
+            "page": 1,
+            "line": 6,
+            "text": "A family-friendly pool area invites you to play—while a more serene pool offers relaxation."
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "At the Riviera Pool, sun umbrellas dot the grounds as the inviting waters cast a warm, golden glow upon the surrounding stucco façades. Pure vacation bliss awaits at this family-friendly pool, which features a pool slide that winds around a stately column tower. And little mademoiselles and messieurs can make a splash at S’il Vous Play, an interactive water play area for kids that’s inspired by the grand public fountains of Europe—featuring a ballet of friendly Fantasia characters."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "For a quieter afternoon, Beau Soleil Pool beckons you to unwind alongside shimmering waters in a soothing setting."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change. Complimentary towels are provided at both pools."
           }
         ],
         "price": [
@@ -30011,6 +31779,33 @@
             "line": 2,
             "text": "Pools at Disney's Riviera Resort",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 5,
+            "text": "Mediterranean-Themed Pools"
+          },
+          {
+            "page": 1,
+            "line": 6,
+            "text": "A family-friendly pool area invites you to play—while a more serene pool offers relaxation."
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "At the Riviera Pool, sun umbrellas dot the grounds as the inviting waters cast a warm, golden glow upon the surrounding stucco façades. Pure vacation bliss awaits at this family-friendly pool, which features a pool slide that winds around a stately column tower. And little mademoiselles and messieurs can make a splash at S’il Vous Play, an interactive water play area for kids that’s inspired by the grand public fountains of Europe—featuring a ballet of friendly Fantasia characters."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "For a quieter afternoon, Beau Soleil Pool beckons you to unwind alongside shimmering waters in a soothing setting."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hours and lifeguard availability vary by pool and are subject to change. Complimentary towels are provided at both pools."
           }
         ]
       },
@@ -30039,7 +31834,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Saratoga Springs Resort & Spa"
+        "label": "High Rock Spring Pool; The Paddock Pool; 3 Leisure Pools"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -30052,7 +31847,13 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "High Rock Spring Pool: zero-depth entry and miniature waterslide and whirlpool spa",
+        "The Paddock Pool: 146-foot-long waterslide and zero-depth entry and aquatic play area",
+        "3 Leisure Pools: whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "At all pools, hours and lifeguard availability are subject to change, complimentary towels are provided and complimentary lifejackets are available..."
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -30104,8 +31905,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Saratoga Springs Resort & Spa | Walt Disney World Resort"
+            "line": 7,
+            "text": "High Rock Spring Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Soak up the sun at this pool with gushing waterfalls, zero-depth entry and a 128-foot-long slide built into the rocks. Then, unwind in one of 2 whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Kids can frolic through bubbling jets at the Donald Duck play area and splash down the miniature waterslide."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hungry? Grab a bite from On the Rocks Pool Bar."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "The Paddock Pool"
           }
         ],
         "price": [
@@ -30120,6 +31941,73 @@
             "line": 2,
             "text": "Pools at Disney's Saratoga Springs Resort & Spa",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 7,
+            "text": "High Rock Spring Pool"
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Soak up the sun at this pool with gushing waterfalls, zero-depth entry and a 128-foot-long slide built into the rocks. Then, unwind in one of 2 whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Kids can frolic through bubbling jets at the Donald Duck play area and splash down the miniature waterslide."
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Hungry? Grab a bite from On the Rocks Pool Bar."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "The Paddock Pool"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Glide down a 146-foot-long waterslide that flows from atop a water tower. And make your way out of the pool along a gently sloping, zero-depth entry point to ride it all over again. Afterward, relax in a horseshoe-shaped whirlpool spa."
+          },
+          {
+            "page": 1,
+            "line": 13,
+            "text": "Children can make a splash in the aquatic play area boasting 2 pint-sized waterslides—including a miniature curving slide."
+          },
+          {
+            "page": 1,
+            "line": 14,
+            "text": "Hungry? Grab a bite to eat from The Paddock Grill."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "3 Leisure Pools"
+          },
+          {
+            "page": 1,
+            "line": 16,
+            "text": "All-ages leisure pools—each with a whirlpool spa—are located at the Treehouse Villas, Congress Park and The Grandstand. The latter 2 pools also feature children’s playgrounds and barbeque grilling areas."
+          },
+          {
+            "page": 1,
+            "line": 17,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 18,
+            "text": "Let’s make a splash at High Rock Spring Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 20,
+            "text": "At all pools, hours and lifeguard availability are subject to change, complimentary towels are provided and complimentary lifejackets are available upon request."
           }
         ],
         "availability": [
@@ -30157,7 +32045,7 @@
         "tweens"
       ],
       "location": {
-        "label": "Pools at Disney's Wilderness Lodge"
+        "label": "Copper Creek Springs Pool; Boulder Ridge Cove Pool"
       },
       "availability": {
         "kind": "evergreen_hours",
@@ -30170,7 +32058,12 @@
       },
       "booking": {},
       "eligibility": {},
-      "amenities": [],
+      "amenities": [
+        "Copper Creek Springs Pool: 67-foot waterslide and whirlpool spa",
+        "Boulder Ridge Cove Pool: zero-depth entry and whirlpool spa",
+        "Poolside activities: themed pool games, relays and trivia",
+        "Complimentary towels are provided at both pools"
+      ],
       "claims": {
         "walkability": {
           "value": "unknown",
@@ -30213,8 +32106,28 @@
         "location": [
           {
             "page": 1,
-            "line": 1,
-            "text": "Pools at Disney's Wilderness Lodge | Walt Disney World Resort"
+            "line": 6,
+            "text": "Copper Creek Springs Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Follow the bubbling Copper Creek to discover a dazzling heated pool surrounded by nature. Here, you can zip down an exciting 67-foot waterslide built into rocks and relax in hot and cold whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Children can have a blast exploring the newly added activity play area. Nearby, Geyser Point Bar & Grill offers refreshments and snacks for you to savor at a patio table or on a lounge chair by the pool."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Boulder Ridge Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Bask in the laid-back charm of this watery oasis nestled within the Boulder Ridge Villas at Disney's Wilderness Lodge. At this location, you can soak in the whirlpool spa, enjoy a swim in the zero-depth entry pool or score a first come, first served spot at one of 6 shaded seating areas."
           }
         ],
         "price": [
@@ -30229,6 +32142,48 @@
             "line": 2,
             "text": "Pools at Disney's Wilderness Lodge",
             "field": "source_disney_official_resort_amenity_no_fee_language"
+          }
+        ],
+        "amenities": [
+          {
+            "page": 1,
+            "line": 6,
+            "text": "Copper Creek Springs Pool"
+          },
+          {
+            "page": 1,
+            "line": 7,
+            "text": "Follow the bubbling Copper Creek to discover a dazzling heated pool surrounded by nature. Here, you can zip down an exciting 67-foot waterslide built into rocks and relax in hot and cold whirlpool spas."
+          },
+          {
+            "page": 1,
+            "line": 8,
+            "text": "Children can have a blast exploring the newly added activity play area. Nearby, Geyser Point Bar & Grill offers refreshments and snacks for you to savor at a patio table or on a lounge chair by the pool."
+          },
+          {
+            "page": 1,
+            "line": 9,
+            "text": "Boulder Ridge Cove Pool"
+          },
+          {
+            "page": 1,
+            "line": 10,
+            "text": "Bask in the laid-back charm of this watery oasis nestled within the Boulder Ridge Villas at Disney's Wilderness Lodge. At this location, you can soak in the whirlpool spa, enjoy a swim in the zero-depth entry pool or score a first come, first served spot at one of 6 shaded seating areas."
+          },
+          {
+            "page": 1,
+            "line": 11,
+            "text": "Poolside Activities"
+          },
+          {
+            "page": 1,
+            "line": 12,
+            "text": "Let’s make a splash at Copper Creek Springs Pool! Join us for family-friendly activities each day, like themed pool parties and other cool activities. Fun offerings include themed pool games, relays, trivia and more! See a Recreation Host for additional details."
+          },
+          {
+            "page": 1,
+            "line": 15,
+            "text": "Complimentary towels are provided at both pools."
           }
         ]
       },

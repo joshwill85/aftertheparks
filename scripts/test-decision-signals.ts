@@ -25,7 +25,12 @@ const offering = {
 } as ActivityOffering;
 
 const offeringProfile = offeringDecisionProfile(offering);
-assert.equal(offeringProfile.signals.length, 3, "Offering should expose three guest-facing decision signals");
+assert.equal(offeringProfile.signals.length, 2, "Offering should expose only timing and cost decision signals");
+assert.deepEqual(
+  offeringProfile.signals.map((signal) => signal.id),
+  ["time", "cost"],
+  "Offering decision blocks should only include timing and cost"
+);
 assert.equal(
   offeringProfile.signals[0]?.id,
   "time",
@@ -37,14 +42,14 @@ assert.equal(
   "Decision blocks should not show internal source-strength language"
 );
 assert.equal(
-  offeringProfile.signals.find((signal) => signal.id === "effort")?.value,
-  "Reservation",
-  "Reservation-required offerings should disclose planning effort"
+  offeringProfile.signals.some((signal) => signal.label === "Effort"),
+  false,
+  "Decision blocks should not show effort cards"
 );
-assert.match(
+assert.equal(
   offeringProfile.whyFits,
-  /Fort Wilderness Resort/,
-  "Why-fit copy should include the resort context"
+  undefined,
+  "Decision blocks should not generate low-value why-fit copy"
 );
 
 const display = {
@@ -67,20 +72,21 @@ const activity = {
 } as ActivityOccurrence;
 
 const activityProfile = activityDecisionProfile(activity, display);
+assert.deepEqual(
+  activityProfile.signals.map((signal) => signal.id),
+  ["time"],
+  "Unknown-price activity decision blocks should omit public cost wording"
+);
 assert.equal(
   activityProfile.signals.find((signal) => signal.id === "time")?.value,
   "Confirm",
   "Uncertain activity timing should ask guests to confirm"
 );
+assert.equal(activityProfile.signals.some((signal) => signal.id === "cost"), false);
 assert.equal(
-  activityProfile.signals.find((signal) => signal.id === "cost")?.value,
-  "Ask first",
-  "Unknown prices should never be presented as free or paid"
-);
-assert.equal(
-  activityProfile.signals.find((signal) => signal.id === "effort")?.value,
-  "Walk-up",
-  "Walk-up allowed activities should feel low-friction"
+  activityProfile.signals.some((signal) => signal.label === "Effort"),
+  false,
+  "Decision blocks should not show effort cards"
 );
 
 console.log("Decision signal coverage passed.");

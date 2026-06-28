@@ -45,6 +45,12 @@ function nodeStyle(orbitKey: Daypart, angle: number): ConstellationStyle {
   };
 }
 
+function orbitLabelStyle(orbitKey: Daypart): ConstellationStyle {
+  return {
+    "--orbit-label-top": `${50 - ORBIT_RADIUS[orbitKey] / 2}%`,
+  };
+}
+
 export function ResortActivityConstellation({
   activities,
   resortSlug,
@@ -82,10 +88,6 @@ export function ResortActivityConstellation({
             <strong>{constellation.costMix.paid}</strong>
             paid
           </span>
-          <span>
-            <strong>{constellation.costMix.unknown}</strong>
-            price unclear
-          </span>
         </div>
       </div>
 
@@ -106,9 +108,7 @@ export function ResortActivityConstellation({
                 } as ConstellationStyle
               }
               aria-hidden="true"
-            >
-              <span>{orbit.shortLabel}</span>
-            </div>
+            />
           ))}
 
           {constellation.orbits.flatMap((orbit) =>
@@ -131,6 +131,18 @@ export function ResortActivityConstellation({
               </Link>
             ))
           )}
+
+          <div className="resort-constellation__orbit-labels" aria-hidden="true">
+            {constellation.orbits.map((orbit) => (
+              <span
+                key={orbit.key}
+                className="resort-constellation__orbit-label"
+                style={orbitLabelStyle(orbit.key)}
+              >
+                {orbit.shortLabel}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="resort-constellation__legend" aria-hidden="true">

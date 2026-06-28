@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Hero } from "@/components/atlas/Hero";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
@@ -13,8 +14,114 @@ import {
   buildFilterImpact,
   offeringToFilterableItem,
 } from "@/lib/explore/filterImpact";
+import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
+import { buildSocialMetadata } from "@/lib/seo/metadata";
+import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
+import { activitySourceSummary, formatSeoDate } from "@/lib/seo/activityPage";
 
 export const dynamic = "force-dynamic";
+
+const DEFAULT_ACTIVITY_METADATA = {
+  title: "Walt Disney World Resort Activities",
+  description:
+    "Browse current Walt Disney World resort activities by time, resort, activity type, cost, weather fit, and no-park-day planning intent.",
+  canonical: "/activities",
+};
+
+const STRATEGIC_ACTIVITY_FILTER_METADATA: Record<
+  string,
+  typeof DEFAULT_ACTIVITY_METADATA
+> = {
+  "free=true": {
+    title: "Free Walt Disney World Resort Activities",
+    description:
+      "Browse current free Walt Disney World resort activities with source-backed schedule notes, access caveats, and no-park-day planning links.",
+    canonical: "/activities?free=true",
+  },
+  "ticket_required=false": {
+    title: "Disney Resort Activities Without a Park Ticket",
+    description:
+      "Find current Walt Disney World resort activities that do not require park admission, with access, transportation, and source caveats.",
+    canonical: "/activities?ticket_required=false",
+  },
+  "weather=indoor": {
+    title: "Indoor Walt Disney World Resort Activities",
+    description:
+      "Find indoor and weather-safer Walt Disney World resort activities for rainy days, heat breaks, and flexible no-park-day plans.",
+    canonical: "/activities?weather=indoor",
+  },
+  "weather=covered": {
+    title: "Covered Walt Disney World Resort Activities",
+    description:
+      "Find covered Walt Disney World resort activities and light-rain backups with source-backed schedule notes and weather caveats.",
+    canonical: "/activities?weather=covered",
+  },
+  "transport=monorail": {
+    title: "Monorail Resort Activities at Walt Disney World",
+    description:
+      "Browse current Walt Disney World resort activities around the monorail loop with source-backed schedule notes and access caveats.",
+    canonical: "/activities?transport=monorail",
+  },
+  "transport=skyliner": {
+    title: "Skyliner Resort Activities at Walt Disney World",
+    description:
+      "Browse current Walt Disney World resort activities around Skyliner-area resorts with source-backed schedule notes and weather caveats.",
+    canonical: "/activities?transport=skyliner",
+  },
+  "area=disney-springs": {
+    title: "Disney Springs-Area Resort Activities",
+    description:
+      "Browse current Disney Springs-area resort activities with access caveats: confirm a resort stay, dining/experience reservation, or another currently allowed route before relying on resort transportation.",
+    canonical: "/activities?area=disney-springs",
+  },
+  "duration=short&time=evening": {
+    title: "Short Evening Disney Resort Activities for First Night",
+    description:
+      "Find shorter evening Walt Disney World resort activities for first-night and check-in-day plans, with current schedule and source caveats.",
+    canonical: "/activities?duration=short&time=evening",
+  },
+};
+
+function strategicFilterKey(params: Record<string, string | undefined>): string | undefined {
+  const keys = Object.keys(params).filter((key) => params[key]);
+  if (
+    keys.length === 2 &&
+    params.duration === "short" &&
+    (params.time === "evening" || params.daypart === "evening")
+  ) {
+    return "duration=short&time=evening";
+  }
+  if (keys.length !== 1) return undefined;
+  const key = keys[0];
+  return `${key}=${params[key]}`;
+}
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const pageMetadata =
+    STRATEGIC_ACTIVITY_FILTER_METADATA[strategicFilterKey(params) ?? ""] ??
+    DEFAULT_ACTIVITY_METADATA;
+
+  return {
+    title: pageMetadata.title,
+    description: pageMetadata.description,
+    alternates: { canonical: pageMetadata.canonical },
+    ...buildSocialMetadata({
+      title: pageMetadata.title,
+      description: pageMetadata.description,
+      path: pageMetadata.canonical,
+      imageEyebrow: "Resort activity finder",
+      imageSummary:
+        pageMetadata.canonical === "/activities"
+          ? "Browse current resort activities by time, cost, weather fit, source freshness, and no-park-day planning intent."
+          : "Use this high-value filtered activity view for source-backed resort planning without wading through unrelated results.",
+    }),
+  };
+}
 
 interface PageProps {
   searchParams: Promise<Record<string, string | undefined>>;
@@ -22,6 +129,10 @@ interface PageProps {
 
 export default async function ActivitiesPage({ searchParams }: PageProps) {
   const params = await searchParams;
+  const strategicKey = strategicFilterKey(params);
+  const pageMetadata =
+    STRATEGIC_ACTIVITY_FILTER_METADATA[strategicKey ?? ""] ??
+    DEFAULT_ACTIVITY_METADATA;
   const filters = parseBrowseParams(params);
   const [
     activities,
@@ -49,13 +160,80 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     filters,
     resortOptions
   );
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
+  const sourceSummary = activitySourceSummary(baseActivities);
+  const jsonLd = stringifyJsonLd(
+    buildItemListJsonLd(
+      baseUrl,
+      "Current Walt Disney World resort activities",
+      activities.slice(0, 25).map((activity) => ({
+        name: `${activity.title} at ${activity.resort.name}`,
+        path: `/activities/${activity.activitySlug}`,
+        description:
+          activity.startDateTime ??
+          activity.scheduleText ??
+          activity.summary ??
+          "Current resort activity",
+      }))
+    )
+  );
 
   return (
     <>
-      <Hero
-        title="Explore activities"
-        subtitle="Find resort activities by mood, resort, and time of day for days between park visits."
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
+      <Hero
+        title={pageMetadata.title}
+        subtitle={pageMetadata.description}
+      />
+      <section className="mb-6 grid gap-4 md:grid-cols-[1.4fr_1fr]">
+        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+          <h2 className="font-display text-2xl font-semibold">Quick answer</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+            Browse current Walt Disney World resort activities by time, resort,
+            cost, weather fit, and no-park-day intent. Start here when you want
+            the broad activity list, then narrow to today, tonight, indoor, free,
+            or transportation-area views.
+          </p>
+        </div>
+        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+          <h2 className="font-display text-2xl font-semibold">Source and freshness</h2>
+          <dl className="mt-4 grid gap-3 text-sm">
+            <div>
+              <dt className="font-bold text-[var(--color-muted)]">Last verified</dt>
+              <dd className="font-semibold">
+                {formatSeoDate(sourceSummary.latestVerified) ?? "Check current source"}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-bold text-[var(--color-muted)]">Source-backed rows</dt>
+              <dd className="font-semibold">{sourceSummary.activityCount}</dd>
+            </div>
+            <div>
+              <dt className="font-bold text-[var(--color-muted)]">Official sources</dt>
+              <dd className="font-semibold">{sourceSummary.sourceCount}</dd>
+            </div>
+          </dl>
+          <a
+            href="/source-and-accuracy-policy"
+            className="mt-4 inline-flex text-sm font-bold text-[var(--accent)] hover:underline"
+          >
+            Source and accuracy policy
+          </a>
+        </div>
+      </section>
+      {strategicKey === "area=disney-springs" && (
+        <section className="mb-6 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+          <h2 className="font-display text-2xl font-semibold">
+            Disney Springs transportation caveat
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+            {DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT.summary}
+          </p>
+        </section>
+      )}
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <ExploreLayout
           activities={activities}

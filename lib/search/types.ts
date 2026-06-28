@@ -1,5 +1,7 @@
 import type { GuideEntry } from "@/lib/guides";
 import type { IconKey } from "@/components/icons/iconRegistry";
+import type { SearchFacet, SearchSuggestion } from "@/lib/search/schema";
+import type { SearchDocument } from "@/lib/search/schema";
 import type {
   ActivityOffering,
   ActivityOccurrence,
@@ -26,6 +28,9 @@ export interface SearchHit {
   score: number;
   badges?: string[];
   iconKey?: IconKey;
+  highlights?: Record<string, string[]>;
+  reason?: string;
+  document?: SearchDocument;
   activity?: ActivityOccurrence;
   resort?: ResortSummary;
   guide?: GuideEntry;
@@ -38,6 +43,9 @@ export interface SearchResponse {
   query: string;
   tokens: string[];
   total: number;
+  hits?: SearchHit[];
+  facets?: SearchFacet[];
+  suggestedQueries?: SearchSuggestion[];
   topHits: SearchHit[];
   activities: ActivityOccurrence[];
   officialOfferings: ActivityOffering[];

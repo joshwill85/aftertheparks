@@ -9,6 +9,8 @@ export interface MoviePosterMeta {
   backdropUrl: string | null;
   releaseYear: number | null;
   tmdbId: number | null;
+  overview: string | null;
+  voteAverage: number | null;
   found: boolean;
 }
 
@@ -21,6 +23,8 @@ interface CacheRow {
   backdrop_path: string | null;
   backdrop_url: string | null;
   release_year: number | null;
+  overview?: string | null;
+  vote_average?: number | null;
   lookup_status: "found" | "not_found";
 }
 
@@ -62,6 +66,8 @@ function rowToMeta(row: CacheRow): MoviePosterMeta {
     backdropUrl: row.backdrop_url,
     releaseYear: row.release_year,
     tmdbId: row.tmdb_id,
+    overview: row.overview ?? null,
+    voteAverage: row.vote_average ?? null,
     found: row.lookup_status === "found",
   };
 }
@@ -78,6 +84,11 @@ function hitToMeta(titleKey: string, displayTitle: string, hit: TmdbMovieResult)
     backdropUrl: tmdbImageUrl(hit.backdrop_path, "w780"),
     releaseYear: Number.isFinite(releaseYear) ? releaseYear : null,
     tmdbId: hit.id,
+    overview: hit.overview?.trim() || null,
+    voteAverage:
+      typeof hit.vote_average === "number" && Number.isFinite(hit.vote_average)
+        ? hit.vote_average
+        : null,
     found: Boolean(hit.poster_path),
   };
 }
@@ -125,6 +136,8 @@ export async function resolveMoviePoster(rawTitle: string): Promise<MoviePosterM
         backdropUrl: null,
         releaseYear: null,
         tmdbId: null,
+        overview: null,
+        voteAverage: null,
         found: false,
       };
 
@@ -157,6 +170,11 @@ async function persistFromHit(
       backdrop_path: hit?.backdrop_path ?? null,
       backdrop_url: tmdbImageUrl(hit?.backdrop_path, "w780"),
       release_year: Number.isFinite(releaseYear) ? releaseYear : null,
+      overview: hit?.overview?.trim() || null,
+      vote_average:
+        typeof hit?.vote_average === "number" && Number.isFinite(hit.vote_average)
+          ? hit.vote_average
+          : null,
       lookup_status: hit?.poster_path ? "found" : "not_found",
       resolved_at: new Date().toISOString(),
     },

@@ -102,10 +102,27 @@ const userFacingCopyFiles = [
 ];
 const unsupportedCopyClaims =
   /(no transportation needed|walkable|outdoor schedules|outdoor cinema|outdoor movies?|indoor options|indoor crafts|indoor evening|inside or near|classic film on the lawn|transportation work|rainy|rain-friendly|rainy-day|rainy day|weather|outside|outdoor adventure|great pool time|close to the parks|resort-area convenience)/i;
+const unsupportedLocationTransportationClaims =
+  /(no transportation needed|walkable|inside or near|transportation work|close to the parks|resort-area convenience)/i;
+const weatherSourceBackedCopyFiles = new Set([
+  "components/atlas/TonightClient.tsx",
+]);
+
 for (const file of userFacingCopyFiles) {
+  const source = readFileSync(file, "utf8");
+  const claimPattern = weatherSourceBackedCopyFiles.has(file)
+    ? unsupportedLocationTransportationClaims
+    : unsupportedCopyClaims;
+  if (weatherSourceBackedCopyFiles.has(file)) {
+    assert.match(
+      source,
+      /\/api\/weather\/guidance/,
+      `${file} may use weather copy only when it fetches record-level weather guidance`
+    );
+  }
   assert.doesNotMatch(
-    readFileSync(file, "utf8"),
-    unsupportedCopyClaims,
+    source,
+    claimPattern,
     `${file} must not imply location, weather, or transportation facts without record-level evidence`
   );
 }

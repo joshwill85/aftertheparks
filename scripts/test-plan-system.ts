@@ -71,6 +71,37 @@ check("database enforces one active plan per owner", () => {
   assert.match(read("lib/plan/server.ts"), /\.rpc\("get_or_create_active_itinerary"/);
 });
 
+check("optional stay settings are persisted through plan contract", () => {
+  const migrations = allMigrations;
+  const server = read("lib/plan/server.ts");
+  const types = read("lib/plan/types.ts");
+  const localStore = read("lib/plan/local-store.ts");
+  const syncClient = read("lib/plan/sync-client.ts");
+  const apiRoute = read("app/api/plan/route.ts");
+
+  assert.match(migrations, /home_resort_slug text/);
+  assert.match(migrations, /references public\.resorts \(slug\)/);
+  assert.match(migrations, /trip_start_date is null and trip_end_date is null/);
+  assert.match(migrations, /trip_start_date <= trip_end_date/);
+  assert.match(migrations, /create or replace function public\.update_itinerary_settings_operation/);
+  assert.match(migrations, /'update_plan_settings'/);
+  assert.match(
+    migrations,
+    /grant execute on function public\.update_itinerary_settings_operation\(uuid, uuid, text, date, date\) to authenticated/
+  );
+
+  assert.match(types, /homeResortSlug\?: string/);
+  assert.match(types, /tripStartDate\?: string/);
+  assert.match(types, /tripEndDate\?: string/);
+  assert.match(localStore, /homeResortSlug: null/);
+  assert.match(localStore, /update_plan_settings/);
+  assert.match(syncClient, /syncUpdatePlanSettings/);
+  assert.match(syncClient, /update_plan_settings/);
+  assert.match(server, /\.rpc\("update_itinerary_settings_operation"/);
+  assert.match(server, /home_resort_slug/);
+  assert.match(apiRoute, /updatePlanSettings/);
+});
+
 check("core plan mutations are transactional RPCs", () => {
   const auditMigration = read(
     "supabase/migrations/20260625190000_plan_system_audit_fixes.sql"

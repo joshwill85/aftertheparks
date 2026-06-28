@@ -711,24 +711,33 @@ export type Database = {
       content_corrections: {
         Row: {
           activity_catalog_id: string | null
+          body: string | null
           field: string
           id: string
+          reporter_email: string | null
+          reporter_name: string | null
           status: Database["public"]["Enums"]["correction_status"]
           submitted_at: string
           suggested_value: string
         }
         Insert: {
           activity_catalog_id?: string | null
+          body?: string | null
           field: string
           id?: string
+          reporter_email?: string | null
+          reporter_name?: string | null
           status?: Database["public"]["Enums"]["correction_status"]
           submitted_at?: string
           suggested_value: string
         }
         Update: {
           activity_catalog_id?: string | null
+          body?: string | null
           field?: string
           id?: string
+          reporter_email?: string | null
+          reporter_name?: string | null
           status?: Database["public"]["Enums"]["correction_status"]
           submitted_at?: string
           suggested_value?: string

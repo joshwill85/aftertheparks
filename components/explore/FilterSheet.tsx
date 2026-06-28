@@ -16,6 +16,7 @@ interface FilterSheetProps {
   hideDaypart?: boolean;
   activeCount: number;
   filterImpact: FilterImpact;
+  homeResortSlug?: string;
   onClearAll: () => void;
 }
 
@@ -27,6 +28,7 @@ export function FilterSheet({
   hideDaypart = false,
   activeCount,
   filterImpact,
+  homeResortSlug,
   onClearAll,
 }: FilterSheetProps) {
   const router = useRouter();
@@ -34,10 +36,17 @@ export function FilterSheet({
   const sheetRef = useRef<HTMLDivElement>(null);
 
   const update = useCallback(
-    (key: string, value: string | null) => {
+    (key: string | Record<string, string | null>, value?: string | null) => {
       const params = new URLSearchParams(searchParams.toString());
-      if (value) params.set(key, value);
-      else params.delete(key);
+      if (typeof key === "string") {
+        if (value) params.set(key, value);
+        else params.delete(key);
+      } else {
+        for (const [paramKey, paramValue] of Object.entries(key)) {
+          if (paramValue) params.set(paramKey, paramValue);
+          else params.delete(paramKey);
+        }
+      }
       const qs = params.toString();
       router.push(qs ? `${basePath}?${qs}` : basePath);
     },
@@ -94,8 +103,14 @@ export function FilterSheet({
   const activeResort = searchParams.get("resort");
   const activeCategory = searchParams.get("category");
   const activeDaypart = searchParams.get("daypart");
+  const activeDuration = searchParams.get("duration");
+  const activeNear = searchParams.get("near");
+  const activeTransport = searchParams.get("transport");
+  const activeArea = searchParams.get("area");
+  const activeWeather = searchParams.get("weather");
   const freeOnly = searchParams.get("free") === "true";
   const reservationOnly = searchParams.get("reservation") === "true";
+  const activeTicketRequired = searchParams.get("ticket_required");
 
   return (
     <AnimatePresence>
@@ -169,10 +184,17 @@ export function FilterSheet({
               activeResort={activeResort}
               activeCategory={activeCategory}
               activeDaypart={activeDaypart}
+              activeDuration={activeDuration}
+              activeNear={activeNear}
+              activeTransport={activeTransport}
+              activeArea={activeArea}
+              activeWeather={activeWeather}
               freeOnly={freeOnly}
               reservationOnly={reservationOnly}
+              activeTicketRequired={activeTicketRequired}
               hideDaypart={hideDaypart}
               filterImpact={filterImpact}
+              homeResortSlug={homeResortSlug}
               update={update}
               searchableResorts
             />

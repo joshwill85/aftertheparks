@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { buildPlanDaybookPath } from "../lib/plan/daybookPath";
-import { groupPlanByDate } from "../lib/plan/sections";
+import { buildPlanStayShell, groupPlanByDate } from "../lib/plan/sections";
 import type { PlanItem } from "../lib/types/occurrence";
 
 function item(
@@ -155,6 +155,70 @@ assert.deepEqual(
   grouped[0].sections.get("afternoon")?.map((planItem) => planItem.id),
   ["early-craft", "late-craft"],
   "Story-act sections should render timed items chronologically"
+);
+
+const stayShell = buildPlanStayShell(
+  [
+    item(
+      "arrival",
+      "Arrival Campfire",
+      "polynesian-village-resort",
+      "Polynesian Village Resort",
+      "2026-07-02T22:00:00.000Z",
+      "2026-07-02T23:00:00.000Z"
+    ),
+    item(
+      "outside",
+      "Too Early Pool",
+      "polynesian-village-resort",
+      "Polynesian Village Resort",
+      "2026-07-01T15:00:00.000Z",
+      "2026-07-01T16:00:00.000Z"
+    ),
+    item("flex", "Maybe dessert", "polynesian-village-resort", "Polynesian Village Resort"),
+  ],
+  {
+    homeResortSlug: "polynesian-village-resort",
+    tripStartDate: "2026-07-02",
+    tripEndDate: "2026-07-04",
+  }
+);
+
+assert.deepEqual(
+  stayShell.stayDays.map((day) => day.dateKey),
+  ["2026-07-02", "2026-07-03", "2026-07-04"],
+  "Stay shell should render every inclusive date from check-in through check-out"
+);
+assert.deepEqual(
+  stayShell.stayDays.map((day) => day.items.map((planItem) => planItem.id)),
+  [["arrival"], [], []],
+  "Stay shell should keep empty stay days visible"
+);
+assert.deepEqual(
+  stayShell.outsideStayItems.map((planItem) => planItem.id),
+  ["outside"],
+  "Timed items outside stay dates should remain visible outside the shell"
+);
+assert.deepEqual(
+  stayShell.flexibleItems.map((planItem) => planItem.id),
+  ["flex"],
+  "Untimed ideas should remain folded notes instead of belonging to a dated stay shell day"
+);
+assert.equal(
+  stayShell.findHomeResortHref,
+  "/activities?resort=polynesian-village-resort",
+  "Home resort links should target exact resort results"
+);
+assert.equal(
+  stayShell.findNearbyHref,
+  "/activities?near=my-resort&resort=polynesian-village-resort",
+  "Nearby links should target same-area near-my-resort mode"
+);
+
+assert.equal(
+  buildPlanStayShell([], { tripStartDate: "2026-07-04", tripEndDate: "2026-07-02" }).enabled,
+  false,
+  "Invalid date ranges should not render a stay shell"
 );
 
 console.log("Plan daybook path coverage passed.");

@@ -1,17 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const siteGateForm = readFileSync("app/site-gate/SiteGateForm.tsx", "utf8");
-assert.ok(
-  !siteGateForm.includes("router.refresh("),
-  "site gate login must not refresh the current gate route after setting the cookie"
-);
-assert.match(
-  siteGateForm,
-  /window\.location\.assign/,
-  "site gate login should use a document navigation after the cookie is set"
-);
-
 const trustValidator = readFileSync("scripts/validate-trust.mjs", "utf8");
 assert.match(
   trustValidator,
@@ -27,11 +16,6 @@ assert.match(
   trustValidator,
   /if\s*\(\s*process\.env\[key\]\s*!=\s*null\s*\)\s*continue/,
   "trust validator must not override explicitly provided env vars"
-);
-assert.ok(
-  trustValidator.indexOf("loadLocalEnvIfPresent();") <
-    trustValidator.indexOf("const SITE_GATE_PASSWORD"),
-  "trust validator should load env before reading site gate credentials"
 );
 assert.match(
   trustValidator,
@@ -263,28 +247,11 @@ assert.match(
 const nextConfig = readFileSync("next.config.ts", "utf8");
 assert.match(
   nextConfig,
-  /SITE_VISIBILITY_MODE/,
-  "service worker generation should account for private site visibility"
+  /process\.env\.NODE_ENV\s*===\s*"production"/,
+  "service worker generation should only run for production builds"
 );
 assert.match(
   nextConfig,
   /disable:\s*!serviceWorkerEnabled/,
   "service worker should only be enabled when explicitly allowed"
-);
-
-const serviceWorkerRoute = readFileSync("app/sw.js/route.ts", "utf8");
-assert.match(
-  serviceWorkerRoute,
-  /registration\.unregister/,
-  "private fallback service worker should unregister stale workers"
-);
-assert.match(
-  serviceWorkerRoute,
-  /caches\.keys/,
-  "private fallback service worker should clear stale runtime caches"
-);
-assert.match(
-  serviceWorkerRoute,
-  /no-store/,
-  "private fallback service worker should not be cached"
 );

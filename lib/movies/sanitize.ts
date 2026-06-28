@@ -56,6 +56,7 @@ function cleanTitleTail(title: string): string {
     .replace(/^["'\s.|]+/, "")
     .replace(/["'\s.|]+$/, "")
     .replace(/\s+PG\)?$/i, "")
+    .replace(/\s+['’]?(?:P|PS|PE|S)\s*$/i, "")
     .replace(/\s*\(\d{4}\)\s*\([^)]*$/, (m) => m.match(/\(\d{4}\)/)?.[0] ?? "")
     .trim();
 }

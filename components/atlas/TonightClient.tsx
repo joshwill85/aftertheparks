@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { TmdbAttribution } from "@/components/atlas/TmdbAttribution";
 import { usePlan } from "@/components/atlas/PlanProvider";
@@ -15,24 +14,17 @@ import { EventCardList, EventCardListItem } from "@/components/events/EventCardL
 import { TonightHero } from "@/components/tonight/TonightHero";
 import { NightfallTimeline } from "@/components/tonight/NightfallTimeline";
 import { EmptyState } from "@/components/atlas/EmptyState";
+import { ActivityCollectionView } from "@/components/atlas/ActivityCollectionView";
 import type { MovieNightOccurrence } from "@/lib/types/occurrence";
-
-const AFTER_DINNER_CATEGORIES = new Set([
-  "nighttime_entertainment",
-  "music",
-  "movies_under_stars",
-]);
-
-const RAIN_FRIENDLY_CATEGORIES = new Set(["arcade", "arts_crafts"]);
-
-const LOW_ENERGY_CATEGORIES = new Set([
-  "fitness_wellness",
-  "resort_activity",
-  "nature",
-  "scavenger_hunt",
-  "poolside",
-  "signature",
-]);
+import { ForecastTimeline } from "@/components/weather/ForecastTimeline";
+import { StormModeBanner } from "@/components/weather/StormModeBanner";
+import { WeatherStatusStrip } from "@/components/weather/WeatherStatusStrip";
+import { WeatherStoryStrip } from "@/components/weather/WeatherStoryStrip";
+import { WeatherWindowStrip } from "@/components/weather/WeatherWindowStrip";
+import { buildWeatherDayStory } from "@/lib/weather/dayStory";
+import { getStormModeState } from "@/lib/weather/stormMode";
+import { buildWeatherWindows } from "@/lib/weather/windows";
+import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
 function NightSectionEmpty({
   title,
@@ -73,6 +65,8 @@ export function TonightClient({
 }) {
   const { addActivity } = usePlan();
   const { setForceDaypart } = useDaypart();
+  const [pageWeather, setPageWeather] = useState<WeatherForTimeSpan | null>(null);
+  const [weatherById, setWeatherById] = useState<Record<string, WeatherForTimeSpan>>({});
 
   useEffect(() => {
     setForceDaypart("evening");
@@ -80,21 +74,84 @@ export function TonightClient({
   }, [setForceDaypart]);
 
   const visibleActivities = dedupeBySlot(filterVisible(activities));
-  const campfires = visibleActivities.filter((a) => a.category === "campfire");
-  const afterDinner = visibleActivities.filter((a) =>
-    AFTER_DINNER_CATEGORIES.has(a.category)
+  const visibleEveningActivities = visibleActivities.filter(
+    (activity) => activity.category !== "movies_under_stars"
   );
-  const rainFriendly = visibleActivities.filter((a) =>
-    RAIN_FRIENDLY_CATEGORIES.has(a.category)
-  );
-  const lowEnergy = visibleActivities.filter(
-    (a) =>
-      LOW_ENERGY_CATEGORIES.has(a.category) &&
-      !AFTER_DINNER_CATEGORIES.has(a.category)
-  );
-
   const tonightMovies = movieNights.filter((m) => m.isTonight);
   const weekMovies = movieNights.filter((m) => !m.isTonight);
+  const weatherWindows = useMemo(() => {
+    const base = pageWeather?.startsAt ?? new Date().toISOString();
+    return buildWeatherWindows({
+      locationKey: pageWeather?.locationKey ?? "all_wdw",
+      startsAt: base,
+      endsAt: pageWeather?.endsAt ?? base,
+      risksByWindow: [
+        {
+          startsAt: base,
+          endsAt: pageWeather?.endsAt ?? base,
+          rainRisk: pageWeather?.risk.rainRisk ?? "low",
+          stormRisk: pageWeather?.risk.stormRisk ?? "low",
+          heatRisk: pageWeather?.risk.heatRisk ?? "low",
+        },
+      ],
+    });
+  }, [pageWeather]);
+  const stormMode = useMemo(
+    () =>
+      getStormModeState({
+        alerts: pageWeather?.nwsAlerts ?? [],
+        stormRisk: pageWeather?.risk.stormRisk ?? "low",
+      }),
+    [pageWeather]
+  );
+  const weatherStory = useMemo(
+    () =>
+      buildWeatherDayStory({
+        windows: weatherWindows,
+        stormModeActive: stormMode.active,
+      }),
+    [stormMode.active, weatherWindows]
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/weather/guidance?locationKey=all_wdw")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body) => {
+        if (!cancelled && body?.guidance) setPageWeather(body.guidance);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const dated = visibleEveningActivities
+      .filter((activity) => activity.startDateTime)
+      .map((activity) => ({
+        id: activity.id,
+        resortSlug: activity.resort.slug,
+        startsAt: activity.startDateTime!,
+        endsAt: activity.endDateTime,
+        activitySlug: activity.activitySlug,
+      }));
+    if (dated.length === 0) return;
+    let cancelled = false;
+    fetch("/api/weather/guidance/batch", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ occurrences: dated }),
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body: { weatherById?: Record<string, WeatherForTimeSpan> } | null) => {
+        if (!cancelled && body?.weatherById) setWeatherById(body.weatherById);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [visibleEveningActivities]);
 
   if (filteredMode) {
     const showMovies = movieNights.length > 0;
@@ -118,12 +175,16 @@ export function TonightClient({
         <p className="tonight-callout">
           Filtered evening picks — confirm showtimes with your resort before heading out.
         </p>
-        <NightfallTimeline activities={visibleActivities} movieNights={movieNights} />
-        {visibleActivities.length > 0 && (
+        <NightfallTimeline activities={visibleEveningActivities} movieNights={movieNights} />
+        {visibleEveningActivities.length > 0 && (
           <EventCardList columns={2}>
-            {visibleActivities.map((activity) => (
+            {visibleEveningActivities.map((activity) => (
               <EventCardListItem key={activity.id}>
-                <NightActivityCard activity={activity} onSave={addActivity} />
+                <NightActivityCard
+                  activity={activity}
+                  onSave={addActivity}
+                  weatherSummary={weatherById[activity.id]}
+                />
               </EventCardListItem>
             ))}
           </EventCardList>
@@ -149,10 +210,7 @@ export function TonightClient({
 
   const hasAnyContent =
     movieNights.length > 0 ||
-    campfires.length > 0 ||
-    afterDinner.length > 0 ||
-    rainFriendly.length > 0 ||
-    lowEnergy.length > 0;
+    visibleEveningActivities.length > 0;
 
   if (!hasAnyContent) {
     return (
@@ -175,12 +233,29 @@ export function TonightClient({
     <div className="space-y-14 scroll-mt-24 pb-8">
       <TonightHero />
 
+      <div className="space-y-4">
+        <StormModeBanner state={stormMode} />
+        <WeatherStatusStrip
+          state={stormMode.active ? "storm" : "normal"}
+          weather={pageWeather}
+          actions={[
+            { label: "Indoor tonight", href: "/tonight?weather=indoor" },
+            { label: "Covered options", href: "/activities?weather=covered" },
+          ]}
+        />
+        <WeatherWindowStrip windows={weatherWindows} />
+        <WeatherStoryStrip story={weatherStory} />
+        {pageWeather?.hourlyBreakdown.length ? (
+          <ForecastTimeline hours={pageWeather.hourlyBreakdown} />
+        ) : null}
+      </div>
+
       <p className="tonight-callout">
         Confirm showtimes with your resort before heading out; schedules can
         change without notice.
       </p>
 
-      <NightfallTimeline activities={visibleActivities} movieNights={movieNights} />
+      <NightfallTimeline activities={visibleEveningActivities} movieNights={movieNights} />
 
       <section id="movies" className="scroll-mt-24">
         <div className="mb-5">
@@ -197,7 +272,7 @@ export function TonightClient({
             title="No movie listings yet"
             description="Movie schedules are updating. Try campfires and low-key evening activities, or browse all resort fun."
             actions={[
-              { label: "Campfires", href: "#campfires", variant: "primary" },
+              { label: "Evening activities", href: "#evening-activities", variant: "primary" },
               { label: "Explore activities", href: "/activities" },
               { label: "Search", href: "/search" },
             ]}
@@ -237,151 +312,29 @@ export function TonightClient({
         )}
       </section>
 
-      <section id="campfires" className="scroll-mt-24">
+      <section id="evening-activities" className="scroll-mt-24">
         <div className="mb-5">
           <h2 className="home-section__title text-2xl md:text-3xl">
-            Campfires
+            Evening activities
           </h2>
           <p className="home-section__subtitle md:text-base">
-            Marshmallows, stories, and lantern-lit evenings across the resorts.
+            One set of evening listings. Switch views or sort by time, name, category, or cost.
           </p>
         </div>
 
-        {campfires.length === 0 ? (
+        {visibleEveningActivities.length === 0 ? (
           <NightSectionEmpty
-            title="No campfires confirmed for tonight"
-            description="Schedules shift often. Movies under the stars and low-key resort activities may still be a great fit."
-            actions={[
-              { label: "See movies", href: "#movies", variant: "primary" },
-              { label: "Low-key ideas", href: "#low-energy" },
-              { label: "Explore all", href: "/activities?category=campfire" },
-            ]}
-          />
-        ) : (
-          <EventCardList columns={2}>
-            {campfires.slice(0, 6).map((activity) => (
-              <EventCardListItem key={activity.id}>
-                <NightActivityCard activity={activity} onSave={addActivity} />
-              </EventCardListItem>
-            ))}
-          </EventCardList>
-        )}
-      </section>
-
-      <section id="after-dinner" className="scroll-mt-24">
-        <div className="mb-5">
-          <h2 className="home-section__title text-2xl md:text-3xl">
-            After-dinner activities
-          </h2>
-          <p className="home-section__subtitle md:text-base">
-            Music, entertainment, and easy resort activities once the parks wind down.
-          </p>
-        </div>
-
-        {afterDinner.length === 0 ? (
-          <NightSectionEmpty
-            title="No after-dinner picks confirmed"
-            description="Try movies or campfires, or browse all evening activities."
+            title="No evening activities listed right now"
+            description="Try movies under the stars, browse all resort activities, or check back after the next schedule update."
             actions={[
               { label: "Movies", href: "#movies", variant: "primary" },
-              { label: "Explore evening", href: "/activities?daypart=evening" },
-            ]}
-          />
-        ) : (
-          <EventCardList columns={2}>
-            {afterDinner.slice(0, 6).map((activity) => (
-              <EventCardListItem key={activity.id}>
-                <NightActivityCard activity={activity} onSave={addActivity} />
-              </EventCardListItem>
-            ))}
-          </EventCardList>
-        )}
-      </section>
-
-      <section id="low-energy" className="scroll-mt-24">
-        <div className="mb-5">
-          <h2 className="home-section__title text-2xl md:text-3xl">
-            Low-energy evening ideas
-          </h2>
-          <p className="home-section__subtitle md:text-base">
-            Cozy crafts, wellness, and easy resort activities when you want to wind down.
-          </p>
-        </div>
-
-        {lowEnergy.length === 0 ? (
-          <NightSectionEmpty
-            title="No low-key evening picks right now"
-            description="Try movies or campfires, or browse the full resort activity calendar."
-            actions={[
-              { label: "Movies tonight", href: "#movies", variant: "primary" },
               { label: "Explore activities", href: "/activities" },
-              { label: "Browse resorts", href: "/resorts" },
             ]}
           />
         ) : (
-          <EventCardList columns={2}>
-            {lowEnergy.slice(0, 6).map((activity) => (
-              <EventCardListItem key={activity.id}>
-                <NightActivityCard activity={activity} onSave={addActivity} />
-              </EventCardListItem>
-            ))}
-          </EventCardList>
+          <ActivityCollectionView activities={visibleEveningActivities} showResort />
         )}
       </section>
-
-      <section id="games-and-crafts" className="scroll-mt-24">
-        <div className="mb-5">
-          <h2 className="home-section__title text-2xl md:text-3xl">
-            Games and crafts
-          </h2>
-          <p className="home-section__subtitle md:text-base">
-            Arcade and craft listings from current resort calendars.
-          </p>
-        </div>
-
-        {rainFriendly.length === 0 ? (
-          <NightSectionEmpty
-            title="No arcade or craft evening picks listed"
-            description="Browse arcade and craft activities across all resorts."
-            actions={[
-              { label: "Arcade", href: "/activities?category=arcade", variant: "primary" },
-              { label: "Crafts", href: "/activities?category=arts_crafts" },
-            ]}
-          />
-        ) : (
-          <EventCardList columns={2}>
-            {rainFriendly.slice(0, 6).map((activity) => (
-              <EventCardListItem key={activity.id}>
-                <NightActivityCard activity={activity} onSave={addActivity} />
-              </EventCardListItem>
-            ))}
-          </EventCardList>
-        )}
-      </section>
-
-      {weekMovies.length > 0 && (
-        <section id="tomorrow-preview" className="scroll-mt-24">
-          <div className="mb-5">
-            <h2 className="home-section__title text-2xl md:text-3xl">
-              Coming up this week
-            </h2>
-            <p className="home-section__subtitle">
-              Plan ahead —{" "}
-              <Link href="/tonight" className="home-section__link">
-                see the full week
-              </Link>
-              .
-            </p>
-          </div>
-          <EventCardList compact>
-            {weekMovies.slice(0, 4).map((movie) => (
-              <EventCardListItem key={movie.id}>
-                <MovieCard movie={movie} />
-              </EventCardListItem>
-            ))}
-          </EventCardList>
-        </section>
-      )}
     </div>
   );
 }

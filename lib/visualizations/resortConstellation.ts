@@ -11,7 +11,7 @@ export const RESORT_CONSTELLATION_DAYPARTS: Array<{
   { key: "afternoon", label: "Afternoon", shortLabel: "PM" },
   { key: "evening", label: "Evening", shortLabel: "EVE" },
   { key: "late", label: "Starlight", shortLabel: "STAR" },
-  { key: "anytime", label: "Anytime", shortLabel: "ANY" },
+  { key: "anytime", label: "All Day", shortLabel: "ALL" },
 ];
 
 export type ResortConstellationNodeSize = "small" | "medium" | "large";
@@ -67,6 +67,16 @@ function nodeSize(count: number, topCount: number): ResortConstellationNodeSize 
   return "small";
 }
 
+function normalizeAngle(angle: number): number {
+  return ((angle % 360) + 360) % 360;
+}
+
+function avoidOrbitLabelLane(angle: number, nodeIndex: number): number {
+  const normalized = normalizeAngle(angle);
+  if (normalized <= 235 || normalized >= 305) return angle;
+  return nodeIndex % 2 === 0 ? 325 : 215;
+}
+
 function buildAriaLabel({
   total,
   orbits,
@@ -92,9 +102,7 @@ function buildAriaLabel({
     total,
     "activity",
     "activities"
-  )}. ${orbitText}. Cost mix: ${costMix.free} free, ${costMix.paid} paid, ${
-    costMix.unknown
-  } price unclear.`;
+  )}. ${orbitText}. Cost mix: ${costMix.free} free, ${costMix.paid} paid.`;
 }
 
 export function buildResortActivityConstellation(
@@ -155,14 +163,18 @@ export function buildResortActivityConstellation(
 
     const nodes = Array.from(categoryCounts.values())
       .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
-      .map((node, nodeIndex, allNodes) => ({
-        ...node,
-        size: nodeSize(node.count, maxCategoryCount),
-        angle:
+      .map((node, nodeIndex, allNodes) => {
+        const angle =
           32 +
           orbitIndex * 42 +
-          (allNodes.length > 1 ? (nodeIndex * 240) / allNodes.length : 0),
-      }));
+          (allNodes.length > 1 ? (nodeIndex * 240) / allNodes.length : 0);
+
+        return {
+          ...node,
+          size: nodeSize(node.count, maxCategoryCount),
+          angle: avoidOrbitLabelLane(angle, nodeIndex),
+        };
+      });
 
     const count = items.length;
     return {

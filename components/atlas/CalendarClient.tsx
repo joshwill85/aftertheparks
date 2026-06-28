@@ -87,7 +87,6 @@ function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
         <span>{strongestBand.label} is busiest</span>
         {summary.topCategory && <span>{summary.topCategory.label} leads</span>}
         <span>{summary.costMix.free} free</span>
-        {summary.costMix.unknown > 0 && <span>{summary.costMix.unknown} price unclear</span>}
       </div>
     </div>
   );
@@ -95,13 +94,17 @@ function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
 
 export function CalendarClient({
   occurrences,
+  initialResort,
+  initialCategory,
 }: {
   occurrences: ActivityOccurrence[];
+  initialResort?: string;
+  initialCategory?: string;
 }) {
   const [month, setMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(format(new Date(), "yyyy-MM-dd"));
-  const [resortFilter, setResortFilter] = useState("all");
-  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [resortFilter, setResortFilter] = useState(initialResort ?? "all");
+  const [categoryFilter, setCategoryFilter] = useState(initialCategory ?? "all");
 
   const resortOptions = useMemo(() => {
     const options = new Map<string, string>();

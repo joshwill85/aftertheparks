@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import { SearchClient } from "@/components/atlas/SearchClient";
 import { Hero } from "@/components/atlas/Hero";
 import { StarlightSearchEffect } from "@/components/magic/StarlightSearchEffect";
 import { runSearch } from "@/lib/search/runSearch";
+
+export const metadata: Metadata = {
+  title: "Search After the Parks",
+  description:
+    "Search current Walt Disney World resort activities, resorts, movies, guides, and planning categories.",
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/search" },
+};
 
 const SUGGESTIONS = [
   "campfire tonight",
@@ -43,9 +52,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 resorts: initialPayload.resorts,
                 guides: initialPayload.guides,
                 movies: initialPayload.movies,
+                hits: initialPayload.hits ?? [],
                 topHits: initialPayload.topHits,
                 categories: initialPayload.categories,
                 pages: initialPayload.pages,
+                facets: initialPayload.facets ?? [],
+                suggestedQueries: initialPayload.suggestedQueries ?? [],
                 total: initialPayload.total,
                 query: initialPayload.query,
               }

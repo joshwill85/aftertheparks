@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   BROWSE_PARAM_KEYS,
   buildBrowseHref,
@@ -15,5 +15,5 @@ export default async function ActivitiesTodayRedirect({
     const value = params[key];
     if (value) qs.set(key, value);
   }
-  redirect(buildBrowseHref("/today", qs));
+  permanentRedirect(buildBrowseHref("/today", qs));
 }

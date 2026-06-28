@@ -15,7 +15,9 @@ export function DecisionSignals({
 
   return (
     <div className={cn("decision-signals", compact && "decision-signals--compact")}>
-      <p className="decision-signals__why">{profile.whyFits}</p>
+      {profile.whyFits && (
+        <p className="decision-signals__why">{profile.whyFits}</p>
+      )}
       <dl className="decision-signals__grid">
         {signals.map((signal) => (
           <div

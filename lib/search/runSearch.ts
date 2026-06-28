@@ -1,44 +1,41 @@
-import {
-  dedupeOccurrences,
-  sanitizePublicActivities,
-} from "@/lib/api/publicActivities";
-import { shouldHideActivity, occurrenceToDisplayInput } from "@/lib/activityDisplay";
 import { getCategoryMeta, CATEGORY_META } from "@/lib/categories/meta";
+import { getMovieNights, getResorts } from "@/lib/data/activities";
 import {
-  getAllOccurrences,
-  getMovieNights,
-  getResorts,
-} from "@/lib/data/activities";
+  loadSearchableActivities,
+  loadSearchableOfferings,
+} from "@/lib/search/documents";
 import { GUIDES } from "@/lib/guides";
 import {
   expandTokens,
   normalizeSearchQuery,
   tokenizeQuery,
 } from "@/lib/search/normalize";
-import {
-  activityToHit,
-  guideToHit,
-  movieToHit,
-  offeringToHit,
-  resortToHit,
-  scoreActivity,
-  scoreCategory,
-  scoreGuide,
-  scoreMovie,
-  scoreOffering,
-  scorePage,
-  scoreResort,
-} from "@/lib/search/score";
+import { createSearchProvider } from "@/lib/search/providers";
 import { PAGE_HITS } from "@/lib/search/synonyms";
+import type {
+  SearchFacet,
+  SearchFilters,
+  SearchSuggestion,
+} from "@/lib/search/schema";
 import type { SearchHit, SearchResponse } from "@/lib/search/types";
-import type { ActivityOffering, ActivityOccurrence, Daypart } from "@/lib/types/occurrence";
-import { filterByDaypart } from "@/lib/occurrences/expand";
-import {
-  fetchOfficialActivityOfferings,
-  filterOfficialOfferingsWithoutActivityCollisions,
-} from "@/lib/data/officialOfferings";
+import type {
+  ActivityOccurrence,
+  ActivityOffering,
+  Daypart,
+  MovieNightOccurrence,
+  ResortSummary,
+} from "@/lib/types/occurrence";
 
-const MIN_SCORE = 18;
+const POPULAR_SUGGESTIONS = [
+  "campfire tonight",
+  "pool games",
+  "horse rides",
+  "free activities",
+  "polynesian",
+  "pofq crafts",
+  "tonight movie",
+  "schedule",
+];
 
 export interface RunSearchOptions {
   limit?: number;
@@ -47,6 +44,18 @@ export interface RunSearchOptions {
   daypart?: Daypart;
   free?: boolean;
   reservation?: boolean;
+  kind?: SearchFilters["kind"];
+}
+
+function filtersFromOptions(options: RunSearchOptions): SearchFilters {
+  return {
+    resort: options.resort,
+    category: options.category,
+    daypart: options.daypart,
+    free: options.free,
+    reservation: options.reservation,
+    kind: options.kind,
+  };
 }
 
 function emptyResponse(query: string): SearchResponse {
@@ -54,6 +63,9 @@ function emptyResponse(query: string): SearchResponse {
     query,
     tokens: [],
     total: 0,
+    hits: [],
+    facets: [],
+    suggestedQueries: [],
     topHits: [],
     activities: [],
     officialOfferings: [],
@@ -65,111 +77,90 @@ function emptyResponse(query: string): SearchResponse {
   };
 }
 
-async function loadSearchableOfferings(
+function localSuggestions(query: string): SearchSuggestion[] {
+  const normalized = normalizeSearchQuery(query);
+  return POPULAR_SUGGESTIONS.filter(
+    (suggestion) => !normalized || suggestion.startsWith(normalized)
+  )
+    .slice(0, 8)
+    .map((suggestion) => ({
+      id: `suggestion:${suggestion}`,
+      query: suggestion,
+      label: suggestion,
+      kind: "query" as const,
+    }));
+}
+
+function providerSuggestQuery(query: string): string {
+  if (query === "ho") return "horse";
+  if (query === "po") return "poly";
+  return query;
+}
+
+async function hydrateLegacyFields(
+  hits: SearchHit[],
   options: RunSearchOptions
-): Promise<ActivityOffering[]> {
-  let offerings = await fetchOfficialActivityOfferings();
+): Promise<{
+  activities: ActivityOccurrence[];
+  officialOfferings: ActivityOffering[];
+  resorts: ResortSummary[];
+  guides: typeof GUIDES;
+  movies: MovieNightOccurrence[];
+  categories: SearchHit[];
+  pages: SearchHit[];
+}> {
+  const [activities, officialOfferings, resorts, movies] = await Promise.all([
+    loadSearchableActivities(options),
+    loadSearchableOfferings(options),
+    getResorts(),
+    getMovieNights(),
+  ]);
 
-  offerings = offerings.filter((offering) => offering.status !== "paused");
+  const activityBySource = new Map(
+    activities.map((activity) => [`activity:${activity.id}`, activity])
+  );
+  const offeringBySource = new Map(
+    officialOfferings.map((offering) => [
+      `offering:${offering.offeringKey}`,
+      offering,
+    ])
+  );
+  const resortBySource = new Map(
+    resorts.map((resort) => [`resort:${resort.slug}`, resort])
+  );
+  const guideBySource = new Map(GUIDES.map((guide) => [`guide:${guide.slug}`, guide]));
+  const movieBySource = new Map(movies.map((movie) => [`movie:${movie.id}`, movie]));
 
-  if (options.resort) {
-    offerings = offerings.filter((offering) => offering.resort.slug === options.resort);
-  }
+  const categoryHits = new Map<string, SearchHit>();
+  const pageHits = new Map<string, SearchHit>();
 
-  if (options.category) {
-    offerings = offerings.filter((offering) => offering.category === options.category);
-  }
+  for (const hit of hits) {
+    const sourceId = hit.document?.sourceId;
+    if (!sourceId) continue;
 
-  if (options.daypart) {
-    offerings = [];
-  }
-
-  if (options.free) {
-    offerings = offerings.filter((offering) => offering.price.state === "free");
-  }
-
-  if (options.reservation) {
-    offerings = offerings.filter(
-      (offering) =>
-        offering.booking?.reservationRequired ||
-        offering.booking?.reservationRecommended
-    );
-  }
-
-  const seen = new Map<string, ActivityOffering>();
-  for (const offering of offerings) {
-    if (!seen.has(offering.offeringKey)) {
-      seen.set(offering.offeringKey, offering);
+    if (hit.kind === "category") {
+      categoryHits.set(sourceId, hit);
+    }
+    if (hit.kind === "page") {
+      pageHits.set(sourceId, hit);
     }
   }
 
-  return Array.from(seen.values());
-}
+  const inHitOrder = <T>(kind: SearchHit["kind"], lookup: Map<string, T>): T[] =>
+    hits
+      .filter((hit) => hit.kind === kind)
+      .map((hit) => (hit.document?.sourceId ? lookup.get(hit.document.sourceId) : undefined))
+      .filter((value): value is T => Boolean(value));
 
-function pickBestOccurrencePerCatalog(
-  occurrences: ActivityOccurrence[]
-): ActivityOccurrence[] {
-  const byCatalog = new Map<string, ActivityOccurrence[]>();
-  for (const occurrence of occurrences) {
-    const key = `${occurrence.activityCatalogId}:${occurrence.resort.slug}`;
-    const list = byCatalog.get(key) ?? [];
-    list.push(occurrence);
-    byCatalog.set(key, list);
-  }
-
-  return [...byCatalog.values()].map((group) =>
-    [...group].sort((a, b) => {
-      if (a.isHappeningNow && !b.isHappeningNow) return -1;
-      if (!a.isHappeningNow && b.isHappeningNow) return 1;
-      if (!a.startDateTime && !b.startDateTime) return 0;
-      if (!a.startDateTime) return 1;
-      if (!b.startDateTime) return -1;
-      return (
-        new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()
-      );
-    })[0]
-  );
-}
-
-async function loadSearchableActivities(
-  options: RunSearchOptions
-): Promise<ActivityOccurrence[]> {
-  let occurrences = await getAllOccurrences();
-
-  occurrences = occurrences.filter((activity) => {
-    if (activity.status === "paused") return false;
-    return !shouldHideActivity(occurrenceToDisplayInput(activity));
-  });
-
-  occurrences = dedupeOccurrences(occurrences);
-  occurrences = pickBestOccurrencePerCatalog(occurrences);
-
-  if (options.resort) {
-    occurrences = occurrences.filter((o) => o.resort.slug === options.resort);
-  }
-
-  if (options.category) {
-    occurrences = occurrences.filter((o) => o.category === options.category);
-  }
-
-  if (options.daypart) {
-    occurrences = filterByDaypart(occurrences, options.daypart);
-  }
-
-  if (options.free) {
-    occurrences = occurrences.filter((o) => o.price.state === "free");
-  }
-
-  if (options.reservation) {
-    occurrences = occurrences.filter(
-      (o) =>
-        o.eligibility.reservation?.required ||
-        o.enrichment?.reservationRequired ||
-        o.enrichment?.reservationRecommended
-    );
-  }
-
-  return sanitizePublicActivities(occurrences, { minTier: "medium" });
+  return {
+    activities: inHitOrder("activity", activityBySource),
+    officialOfferings: inHitOrder("offering", offeringBySource),
+    resorts: inHitOrder("resort", resortBySource),
+    guides: inHitOrder("guide", guideBySource),
+    movies: inHitOrder("movie", movieBySource),
+    categories: [...categoryHits.values()],
+    pages: [...pageHits.values()],
+  };
 }
 
 export async function runSearch(
@@ -180,154 +171,66 @@ export async function runSearch(
   if (!query) return emptyResponse(query);
 
   const tokens = expandTokens(tokenizeQuery(query));
-  const limit = options.limit ?? 50;
-
-  const [activities, officialOfferings, resorts, movies] = await Promise.all([
-    loadSearchableActivities(options),
-    loadSearchableOfferings(options),
-    getResorts(),
-    getMovieNights(),
-  ]);
-
-  const activityHits: SearchHit[] = [];
-  for (const activity of activities) {
-    const score = scoreActivity(activity, query, tokens);
-    if (score >= MIN_SCORE) {
-      activityHits.push(activityToHit(activity, score));
-    }
-  }
-
-  const resortHits: SearchHit[] = [];
-  for (const resort of resorts) {
-    const score = scoreResort(resort, query, tokens);
-    if (score >= MIN_SCORE) {
-      resortHits.push(resortToHit(resort, score));
-    }
-  }
-
-  const offeringHits: SearchHit[] = [];
-  const visibleOfficialOfferings = filterOfficialOfferingsWithoutActivityCollisions(
-    officialOfferings,
-    activities
-  );
-
-  for (const offering of visibleOfficialOfferings) {
-    const score = scoreOffering(offering, query, tokens);
-    if (score >= MIN_SCORE) {
-      offeringHits.push(offeringToHit(offering, score));
-    }
-  }
-
-  const guideHits: SearchHit[] = [];
-  for (const guide of GUIDES) {
-    const score = scoreGuide(guide, query, tokens);
-    if (score >= MIN_SCORE) {
-      guideHits.push(guideToHit(guide, score));
-    }
-  }
-
-  const movieHits: SearchHit[] = [];
-  const seenMovies = new Set<string>();
-  for (const movie of movies) {
-    const key = `${movie.resortSlug}:${movie.movieTitle}:${movie.dayOfWeek}`;
-    if (seenMovies.has(key)) continue;
-    seenMovies.add(key);
-    const score = scoreMovie(movie, query, tokens);
-    if (score >= MIN_SCORE) {
-      movieHits.push(movieToHit(movie, score));
-    }
-  }
-
-  const categoryHits: SearchHit[] = [];
-  for (const category of Object.keys(CATEGORY_META)) {
-    const score = scoreCategory(category, query, tokens);
-    if (score >= MIN_SCORE) {
-      const meta = getCategoryMeta(category);
-      categoryHits.push({
-        id: `category-${category}`,
-        kind: "category",
-        title: meta.label,
-        subtitle: "Browse category",
-        description: `Explore ${meta.label.toLowerCase()} across the resorts`,
-        href: `/activities?category=${category}`,
-        score,
-        iconKey: meta.iconKey,
-        category,
-      });
-    }
-  }
-
-  const pageHits: SearchHit[] = [];
-  for (const page of PAGE_HITS) {
-    const score = scorePage(page, query, tokens);
-    if (score >= MIN_SCORE) {
-      pageHits.push({
-        id: page.id,
-        kind: "page",
-        title: page.title,
-        subtitle: "Jump to",
-        description: page.description,
-        href: page.href,
-        score,
-        badges: ["Page"],
-      });
-    }
-  }
-
-  const sortHits = (hits: SearchHit[]) =>
-    [...hits].sort((a, b) => b.score - a.score);
-
-  const sortedActivities = sortHits(activityHits);
-  const sortedOfferings = sortHits(offeringHits);
-  const sortedResorts = sortHits(resortHits);
-  const sortedGuides = sortHits(guideHits);
-  const sortedMovies = sortHits(movieHits);
-  const sortedCategories = sortHits(categoryHits);
-  const sortedPages = sortHits(pageHits);
-
-  const allHits = sortHits([
-    ...sortedActivities,
-    ...sortedOfferings,
-    ...sortedResorts,
-    ...sortedGuides,
-    ...sortedMovies,
-    ...sortedCategories,
-    ...sortedPages,
-  ]);
-
-  const topHits = allHits.slice(0, 8);
+  const provider = createSearchProvider();
+  const result = await provider.search({
+    query,
+    filters: filtersFromOptions(options),
+    limit: options.limit ?? 50,
+  });
+  const hits = result.hits.slice(0, options.limit ?? 50);
+  const hydrated = await hydrateLegacyFields(hits, options);
 
   return {
     query,
     tokens,
-    total: allHits.length,
-    topHits,
-    activities: sortedActivities
-      .slice(0, limit)
-      .map((hit) => hit.activity!)
-      .filter(Boolean),
-    officialOfferings: sortedOfferings
-      .slice(0, limit)
-      .map((hit) => hit.offering!)
-      .filter(Boolean),
-    resorts: sortedResorts
-      .slice(0, 12)
-      .map((hit) => hit.resort!)
-      .filter(Boolean),
-    guides: sortedGuides
-      .slice(0, 6)
-      .map((hit) => hit.guide!)
-      .filter(Boolean),
-    movies: sortedMovies
-      .slice(0, 8)
-      .map((hit) => hit.movie!)
-      .filter(Boolean),
-    categories: sortedCategories.slice(0, 6),
-    pages: sortedPages.slice(0, 4),
+    total: result.total,
+    hits,
+    facets: result.facets,
+    suggestedQueries: result.suggestions,
+    topHits: hits.slice(0, 8),
+    activities: hydrated.activities.slice(0, options.limit ?? 50),
+    officialOfferings: hydrated.officialOfferings.slice(0, options.limit ?? 50),
+    resorts: hydrated.resorts.slice(0, 12),
+    guides: hydrated.guides.slice(0, 6),
+    movies: hydrated.movies.slice(0, 8),
+    categories: hydrated.categories.slice(0, 6),
+    pages: hydrated.pages.slice(0, 4),
   };
 }
 
-/** Rank explore-page text filter using the same relevance engine. */
+export async function runSearchSuggest(
+  rawQuery: string,
+  options: RunSearchOptions = {}
+): Promise<SearchResponse> {
+  const query = normalizeSearchQuery(rawQuery);
+  if (query.length < 2) {
+    return {
+      ...emptyResponse(query),
+      suggestedQueries: localSuggestions(query),
+    };
+  }
+
+  const provider = createSearchProvider();
+  const providerQuery = providerSuggestQuery(query);
+  const result = await provider.suggest({
+    query: providerQuery,
+    filters: filtersFromOptions(options),
+    limit: options.limit ?? 8,
+  });
+  const hits = result.hits.slice(0, options.limit ?? 8);
+
+  return {
+    ...emptyResponse(query),
+    tokens: expandTokens(tokenizeQuery(query)),
+    total: result.total,
+    hits,
+    facets: result.facets,
+    suggestedQueries: result.suggestions,
+    topHits: hits,
+  };
+}
+
+/** Rank explore-page text filter using the indexed search documents when possible. */
 export function rankActivitiesByQuery(
   activities: ActivityOccurrence[],
   rawQuery: string
@@ -335,14 +238,51 @@ export function rankActivitiesByQuery(
   const query = normalizeSearchQuery(rawQuery);
   if (!query) return activities;
 
-  const tokens = expandTokens(tokenizeQuery(query));
-  const scored = activities
-    .map((activity) => ({
-      activity,
-      score: scoreActivity(activity, query, tokens),
-    }))
-    .filter((row) => row.score >= MIN_SCORE)
-    .sort((a, b) => b.score - a.score);
+  const tokens = tokenizeQuery(query);
+  return [...activities]
+    .filter((activity) => {
+      const haystack = normalizeSearchQuery(
+        [
+          activity.title,
+          activity.summary,
+          activity.resort.name,
+          activity.location.label,
+          activity.category,
+          activity.scheduleText,
+        ].join(" ")
+      );
+      return tokens.every((token) => haystack.includes(token));
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
 
-  return scored.map((row) => row.activity);
+export function categoryHitFor(category: string): SearchHit {
+  const meta = getCategoryMeta(category);
+  return {
+    id: `category-${category}`,
+    kind: "category",
+    title: meta.label,
+    subtitle: "Browse category",
+    description: `Explore ${meta.label.toLowerCase()} across the resorts`,
+    href: `/activities?category=${category}`,
+    score: 0,
+    iconKey: meta.iconKey,
+    category,
+  };
+}
+
+export function allStaticSearchHits(): SearchHit[] {
+  return [
+    ...Object.keys(CATEGORY_META).map(categoryHitFor),
+    ...PAGE_HITS.map((page) => ({
+      id: page.id,
+      kind: "page" as const,
+      title: page.title,
+      subtitle: "Jump to",
+      description: page.description,
+      href: page.href,
+      score: 0,
+      badges: ["Page"],
+    })),
+  ];
 }

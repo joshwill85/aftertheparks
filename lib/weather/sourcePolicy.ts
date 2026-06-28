@@ -1,0 +1,36 @@
+export const WEATHER_SOURCE_POLICY = {
+  paidProvidersAllowed: false,
+  weatherApi: {
+    enabled: true,
+    role: "friendly_current_0_3_day",
+    maxForecastDaysOnFree: 3,
+    monthlyFreeCallLimit: 100_000,
+    commercialUseAllowedOnFree: true,
+    useAlerts: false,
+  },
+  nws: {
+    enabled: true,
+    role: "official_alerts_and_0_7_day_forecast",
+    maxForecastHours: 168,
+    alertsMinRefreshSeconds: 30,
+    requiresUserAgent: true,
+    commercialUseAllowed: true,
+    cost: "free_open_data",
+  },
+  visualCrossing: {
+    enabled: false,
+    role: "free_8_15_day_planning_outlook",
+    maxForecastDaysOnFree: 15,
+    freeRecordsPerDay: 1000,
+    commercialUseAllowedOnFree: true,
+    requiresAttribution: true,
+    publicRawDownloadAllowed: false,
+  },
+  disallowedFreeMvpProviders: [
+    "tomorrow_io_free_production",
+    "open_meteo_hosted_free_for_commercial",
+    "openweather_free_16_day",
+    "google_weather",
+    "visualcrossing_paid",
+  ],
+} as const;

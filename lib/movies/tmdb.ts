@@ -9,7 +9,9 @@ export interface TmdbMovieResult {
   poster_path: string | null;
   backdrop_path: string | null;
   release_date?: string;
+  overview?: string;
   popularity?: number;
+  vote_average?: number;
 }
 
 export function tmdbImageUrl(

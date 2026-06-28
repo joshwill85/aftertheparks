@@ -817,20 +817,20 @@ assert.match(
 const searchRunner = readFileSync("lib/search/runSearch.ts", "utf8");
 assert.match(
   searchRunner,
-  /fetchOfficialActivityOfferings/,
+  /fetchOfficialActivityOfferings|loadSearchableOfferings/,
   "Search must load official recreation offerings, not only timed occurrences"
 );
 assert.match(
-  searchRunner,
-  /scoreOffering/,
+  readFileSync("lib/search/providers/local.ts", "utf8"),
+  /kind === "offering"/,
   "Search must score official recreation offerings as first-class results"
 );
 
 const searchClient = readFileSync("components/atlas/SearchClient.tsx", "utf8");
 assert.match(
   searchClient,
-  /ActivityOfferingGrid/,
-  "Search UI must render official recreation offerings with offering cards"
+  /SearchHitRow/,
+  "Search UI must render official recreation offerings through unified search hit rows"
 );
 assert.match(
   searchClient,

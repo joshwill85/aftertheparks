@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Wind">
+  <title>Wind</title>
+  <desc>After the Parks storybook weather icon for wind.</desc>
+  <defs>
+    <linearGradient id="sky" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D7F4F3"/>
+      <stop offset="1" stop-color="#FFF7DF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#17324D" flood-opacity=".18"/>
+    </filter>
+    <style>
+      @media (prefers-reduced-motion:no-preference) {
+        .float { animation: float-wind 4.8s ease-in-out infinite; transform-origin: 32px 32px; }
+        .drift { animation: drift-wind 5.6s ease-in-out infinite; }
+        .fall { animation: fall-wind 1.9s ease-in-out infinite; }
+        .slow { animation-duration: 3.2s; }
+        .pulse { animation: pulse-wind 3.4s ease-in-out infinite; transform-origin: 32px 32px; }
+        .flash { animation: flash-wind 2.6s ease-in-out infinite; transform-origin: 34px 40px; }
+        .sparkle { animation: sparkle-wind 3.8s ease-in-out infinite; transform-origin: 52px 14px; }
+        .spin { animation: spin-wind 5.5s ease-in-out infinite; transform-origin: 32px 39px; }
+      }
+      @keyframes float-wind { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+      @keyframes drift-wind { 0%,100% { transform: translateX(0); opacity: .95; } 50% { transform: translateX(2px); opacity: .72; } }
+      @keyframes fall-wind { 0%,100% { transform: translateY(0); opacity: .95; } 50% { transform: translateY(2.2px); opacity: .65; } }
+      @keyframes pulse-wind { 0%,100% { transform: scale(1); } 50% { transform: scale(1.045); } }
+      @keyframes flash-wind { 0%,100% { opacity: .88; transform: scale(1); } 52% { opacity: 1; transform: scale(1.08); } }
+      @keyframes sparkle-wind { 0%,100% { opacity: .45; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.08); } }
+      @keyframes spin-wind { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#sky)"/>
+  <circle cx="50" cy="14" r="7" fill="#39A69B" opacity=".16"/>
+  <g filter="url(#softShadow)" stroke-linecap="round" stroke-linejoin="round">
+
+      <path class="drift" d="M8 25h30c7 0 7-10 0-10-4 0-6 3-6 6" stroke="#168A83" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path class="drift slow" d="M13 38h37c8 0 8-12 0-12-5 0-7 4-7 7" stroke="#42AFA7" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M11 50h26c6 0 6 8 0 8-4 0-5-2-5-5" stroke="#74C9C1" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+      <path d="M48 48c4-4 7-8 8-13" stroke="#E1B753" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+  </g>
+
+    <g class="sparkle" stroke="#FFF6B8" stroke-width="1.8" stroke-linecap="round">
+      <path d="M54 12v5M51.5 14.5h5"/>
+      <path d="M11 17v4M9 19h4"/>
+      <path d="M53 55v4M51 57h4"/>
+    </g>
+
+</svg>

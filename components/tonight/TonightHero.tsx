@@ -12,9 +12,9 @@ export function TonightHero() {
       <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(253,185,78,0.45)] bg-[rgba(255,249,239,0.92)] px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-[0.1em] text-[#7a4a00]">
         Evening magic
       </p>
-      <h1 className="max-w-3xl font-display text-[var(--brand-ink)]">
+      <h2 className="max-w-3xl font-display text-[var(--brand-ink)]">
         Tonight feels different.
-      </h1>
+      </h2>
       <p className="mt-5 max-w-2xl text-lg text-[var(--muted)] md:text-xl">
         Find movies, campfires, cozy activities, and low-stress resort ideas
         after the park day winds down.

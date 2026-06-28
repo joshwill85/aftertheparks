@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Thunder possible">
+  <title>Thunder possible</title>
+  <desc>After the Parks storybook weather icon for thunder possible.</desc>
+  <defs>
+    <linearGradient id="sky" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A7B2D6"/>
+      <stop offset="1" stop-color="#F0EEFF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#17324D" flood-opacity=".18"/>
+    </filter>
+    <style>
+      @media (prefers-reduced-motion:no-preference) {
+        .float { animation: float-thunder_possible 4.8s ease-in-out infinite; transform-origin: 32px 32px; }
+        .drift { animation: drift-thunder_possible 5.6s ease-in-out infinite; }
+        .fall { animation: fall-thunder_possible 1.9s ease-in-out infinite; }
+        .slow { animation-duration: 3.2s; }
+        .pulse { animation: pulse-thunder_possible 3.4s ease-in-out infinite; transform-origin: 32px 32px; }
+        .flash { animation: flash-thunder_possible 2.6s ease-in-out infinite; transform-origin: 34px 40px; }
+        .sparkle { animation: sparkle-thunder_possible 3.8s ease-in-out infinite; transform-origin: 52px 14px; }
+        .spin { animation: spin-thunder_possible 5.5s ease-in-out infinite; transform-origin: 32px 39px; }
+      }
+      @keyframes float-thunder_possible { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+      @keyframes drift-thunder_possible { 0%,100% { transform: translateX(0); opacity: .95; } 50% { transform: translateX(2px); opacity: .72; } }
+      @keyframes fall-thunder_possible { 0%,100% { transform: translateY(0); opacity: .95; } 50% { transform: translateY(2.2px); opacity: .65; } }
+      @keyframes pulse-thunder_possible { 0%,100% { transform: scale(1); } 50% { transform: scale(1.045); } }
+      @keyframes flash-thunder_possible { 0%,100% { opacity: .88; transform: scale(1); } 52% { opacity: 1; transform: scale(1.08); } }
+      @keyframes sparkle-thunder_possible { 0%,100% { opacity: .45; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.08); } }
+      @keyframes spin-thunder_possible { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#sky)"/>
+  <circle cx="50" cy="14" r="7" fill="#F6C945" opacity=".16"/>
+  <g filter="url(#softShadow)" stroke-linecap="round" stroke-linejoin="round">
+
+      <path d="M12 31h35c6 0 10-4 10-10s-5-10-11-9c-4-8-17-9-23-1-7-1-13 4-13 11 0 5 2 8 2 9Z" fill="#F8FAFF" stroke="#4B5D87" stroke-width="2.4"/>
+      <path class="flash" d="M34 32l-9 16h9l-4 10 14-18h-9l5-8Z" fill="#FFD957" stroke="#7E4A15" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M15 48c5-2 10-2 15 0" stroke="#8998C8" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  </g>
+
+    <g class="sparkle" stroke="#FFF6B8" stroke-width="1.8" stroke-linecap="round">
+      <path d="M54 12v5M51.5 14.5h5"/>
+      <path d="M11 17v4M9 19h4"/>
+      <path d="M53 55v4M51 57h4"/>
+    </g>
+
+</svg>

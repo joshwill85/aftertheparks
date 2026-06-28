@@ -107,6 +107,11 @@ assert.equal(occurrence.scheduleText, "Daily from 7:00am–11:00pm");
 assert.ok(occurrence.startDateTime);
 assert.match(occurrence.startDateTime, /^2026-06-21T07:00:00-04:00$/);
 assert.match(occurrence.endDateTime ?? "", /^2026-06-21T23:00:00-04:00$/);
+assert.equal(
+  occurrence.daypart,
+  "anytime",
+  "Explicit open-window activities that run from morning into night should be treated as all-day, not morning"
+);
 assert.equal(occurrence.summary, row.description);
 assert.equal(occurrence.source?.documentHash, row.source_sha256);
 assert.equal(occurrence.source?.url, row.source_url);
@@ -123,6 +128,17 @@ assert.equal(occurrence.fieldProvenance?.title?.[0]?.line, 5);
 assert.equal(occurrence.claims?.walkability?.value, "unknown");
 assert.equal(occurrence.claims?.transportation?.value, "unknown");
 assert.equal(occurrence.freshness.badge, "verified");
+
+const openWindowDisplay = toDisplayActivity(occurrence);
+const openWindowCard = activityToEventCard(occurrence, openWindowDisplay);
+assert.ok(
+  (openWindowCard.badges ?? []).some((badge) => badge.label === "All Day"),
+  "Timed open-window activity cards should show All Day instead of Morning"
+);
+assert.ok(
+  !(openWindowCard.badges ?? []).some((badge) => badge.label === "Morning"),
+  "Timed open-window activity cards must not show Morning just because the range starts in the morning"
+);
 
 const campfireWithSecondaryKitRow: GoldActivityRow = {
   ...row,
@@ -401,9 +417,9 @@ assert.equal(
   "Untimed activity cards must not carry a fake datetime"
 );
 assert.equal(
-  (untimedPoolsideCard.badges ?? []).some((badge) => badge.label === "Anytime"),
+  (untimedPoolsideCard.badges ?? []).some((badge) => badge.label === "All Day"),
   false,
-  "Untimed activity cards must not show an Anytime badge"
+  "Untimed activity cards must not show an All Day badge"
 );
 const activityDetailClient = readFileSync(
   "components/atlas/ActivityDetailClient.tsx",
@@ -464,13 +480,13 @@ assert.equal(
 const unsupportedFreeDisplay = toDisplayActivity(unsupportedFreeOccurrences[0]);
 assert.equal(
   unsupportedFreeDisplay.costLabel,
-  "Price unclear",
-  "Unsupported free price states must not render as Free"
+  undefined,
+  "Unsupported free price states must not render any public price label"
 );
-assert.equal(
+assert.notEqual(
   activityToEventCard(unsupportedFreeOccurrences[0], unsupportedFreeDisplay).showTrust,
-  false,
-  "Activity cards must not duplicate Price unclear as both cost and trust badges"
+  true,
+  "Activity cards must not promote unknown prices as trust badges"
 );
 assert.equal(
   publicPriceLabel("fee"),
@@ -479,8 +495,8 @@ assert.equal(
 );
 assert.equal(
   priceLabelFromActivity(unsupportedFreeOccurrences[0]),
-  "Price unclear",
-  "Plan snapshots must use the same unknown price language as cards"
+  undefined,
+  "Plan snapshots must omit unknown price labels"
 );
 assert.equal(
   publicPriceLabel("free"),

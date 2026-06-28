@@ -8,6 +8,6 @@ export const HOME_MOOD_CHIPS = [
   {
     id: "before_checkin",
     label: "Before check-in",
-    href: "/guides/first-night-at-the-resort",
+    href: "/guides/first-night-at-disney-resort",
   },
 ] as const;

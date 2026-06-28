@@ -4,6 +4,7 @@ import { generateShareToken, hashShareToken } from "@/lib/plan/token";
 import type {
   AddItemPayload,
   PlanMeta,
+  PlanStaySettings,
   PublicPlanItem,
   PublicPlanResponse,
   SourceStatus,
@@ -28,6 +29,9 @@ interface ItineraryRow {
   version: number;
   updated_at: string;
   owner_user_id: string;
+  home_resort_slug: string | null;
+  trip_start_date: string | null;
+  trip_end_date: string | null;
 }
 
 interface ItemRow {
@@ -69,6 +73,9 @@ interface PlanOperationRow {
   version: number;
   updated_at: string;
   owner_user_id: string;
+  home_resort_slug?: string | null;
+  trip_start_date?: string | null;
+  trip_end_date?: string | null;
 }
 
 interface ShareOperationRow {
@@ -113,6 +120,9 @@ function rowToPlanMeta(row: PlanOperationRow): PlanMeta {
     timezone: row.timezone,
     version: Number(row.version),
     updatedAt: row.updated_at,
+    homeResortSlug: row.home_resort_slug ?? undefined,
+    tripStartDate: row.trip_start_date ?? undefined,
+    tripEndDate: row.trip_end_date ?? undefined,
   };
 }
 
@@ -140,7 +150,7 @@ export async function getActiveItinerary(
 ): Promise<ItineraryRow | null> {
   const { data } = await client
     .from("itineraries")
-    .select("id, title, timezone, version, updated_at, owner_user_id")
+    .select("id, title, timezone, version, updated_at, owner_user_id, home_resort_slug, trip_start_date, trip_end_date")
     .eq("owner_user_id", userId)
     .eq("status", "active")
     .is("deleted_at", null)
@@ -157,7 +167,7 @@ export async function createItinerary(
   const { data, error } = await client
     .from("itineraries")
     .insert({ owner_user_id: userId })
-    .select("id, title, timezone, version, updated_at, owner_user_id")
+    .select("id, title, timezone, version, updated_at, owner_user_id, home_resort_slug, trip_start_date, trip_end_date")
     .single();
   if (error || !data) throw new Error(error?.message ?? "Failed to create plan");
   return data as ItineraryRow;
@@ -273,6 +283,9 @@ export async function fetchOwnerPlan(
       timezone: itinerary.timezone,
       version: Number(itinerary.version),
       updatedAt: itinerary.updated_at,
+      homeResortSlug: itinerary.home_resort_slug ?? undefined,
+      tripStartDate: itinerary.trip_start_date ?? undefined,
+      tripEndDate: itinerary.trip_end_date ?? undefined,
     },
     items,
   };
@@ -422,6 +435,43 @@ export async function renamePlan(
   return rowToPlanMeta(row);
 }
 
+function normalizeDateOnly(value?: string): string | null {
+  const trimmed = value?.trim();
+  return trimmed && /^\d{4}-\d{2}-\d{2}$/.test(trimmed) ? trimmed : null;
+}
+
+function normalizeOptionalSlug(value?: string): string | null {
+  const trimmed = value?.trim();
+  return trimmed || null;
+}
+
+export async function updatePlanSettings(
+  client: DbClient,
+  userId: string,
+  settings: PlanStaySettings,
+  operationId: string
+): Promise<PlanMeta> {
+  const tripStartDate = normalizeDateOnly(settings.tripStartDate);
+  const tripEndDate = normalizeDateOnly(settings.tripEndDate);
+  if ((tripStartDate && !tripEndDate) || (!tripStartDate && tripEndDate)) {
+    throw new Error("Both trip dates are required");
+  }
+  if (tripStartDate && tripEndDate && tripStartDate > tripEndDate) {
+    throw new Error("Trip start date must be before trip end date");
+  }
+
+  const { data, error } = await client.rpc("update_itinerary_settings_operation", {
+    p_operation_id: operationId,
+    p_owner_user_id: userId,
+    p_home_resort_slug: normalizeOptionalSlug(settings.homeResortSlug),
+    p_trip_start_date: tripStartDate,
+    p_trip_end_date: tripEndDate,
+  });
+  const row = firstRpcRow<PlanOperationRow>(data as PlanOperationRow[] | null);
+  if (error || !row) throw new Error(error?.message ?? "Failed to update plan settings");
+  return rowToPlanMeta(row);
+}
+
 export async function deletePlan(
   client: DbClient,
   userId: string,
@@ -466,7 +516,7 @@ function groupPublicItems(items: PlanItem[], timezone: string) {
       return a.localeCompare(b);
     })
     .map(([date, dateItems]) => ({
-      date: date === "anytime" ? "Anytime ideas" : date,
+      date: date === "anytime" ? "All Day ideas" : date,
       items: dateItems.sort((a, b) =>
         (a.startsAt ?? "").localeCompare(b.startsAt ?? "")
       ),
@@ -542,7 +592,7 @@ export async function resolvePublicPlan(
 
   const { data: itinerary } = await serviceClient
     .from("itineraries")
-    .select("id, title, timezone, updated_at, owner_user_id, status, deleted_at")
+    .select("id, title, timezone, updated_at, owner_user_id, status, deleted_at, home_resort_slug, trip_start_date, trip_end_date")
     .eq("id", share.itinerary_id)
     .maybeSingle();
 
@@ -571,6 +621,9 @@ export async function resolvePublicPlan(
     timezone: itinerary.timezone,
     lastUpdatedAt: itinerary.updated_at,
     ownerSession,
+    homeResortSlug: itinerary.home_resort_slug ?? undefined,
+    tripStartDate: itinerary.trip_start_date ?? undefined,
+    tripEndDate: itinerary.trip_end_date ?? undefined,
     dates: groupPublicItems(items, itinerary.timezone),
   };
 }

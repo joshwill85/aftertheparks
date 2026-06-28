@@ -8,6 +8,15 @@ export interface PlanMeta {
   timezone: string;
   version: number;
   updatedAt: string;
+  homeResortSlug?: string;
+  tripStartDate?: string;
+  tripEndDate?: string;
+}
+
+export interface PlanStaySettings {
+  homeResortSlug?: string;
+  tripStartDate?: string;
+  tripEndDate?: string;
 }
 
 export interface PublicPlanItem {
@@ -27,6 +36,9 @@ export interface PublicPlanResponse {
   timezone: string;
   lastUpdatedAt: string;
   ownerSession: boolean;
+  homeResortSlug?: string;
+  tripStartDate?: string;
+  tripEndDate?: string;
   dates: Array<{
     date: string;
     items: PublicPlanItem[];

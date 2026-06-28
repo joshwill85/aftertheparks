@@ -45,6 +45,24 @@ export function daypartFromHour(hour: number): Daypart {
   return "late";
 }
 
+export function isAllDayOpenWindow(startHour: number, endHour?: number): boolean {
+  if (endHour == null || Number.isNaN(startHour) || Number.isNaN(endHour)) {
+    return false;
+  }
+
+  const durationHours =
+    endHour >= startHour ? endHour - startHour : endHour + 24 - startHour;
+  return startHour <= 9 && endHour >= 20 && durationHours >= 10;
+}
+
+export function daypartFromTimeRange(
+  startHour: number,
+  endHour?: number
+): Daypart {
+  if (isAllDayOpenWindow(startHour, endHour)) return "anytime";
+  return daypartFromHour(startHour);
+}
+
 export function formatOrlandoTime(iso: string): string {
   return formatInTimeZone(parseISO(iso), TIMEZONE, "h:mm a");
 }

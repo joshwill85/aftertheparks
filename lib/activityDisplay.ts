@@ -30,7 +30,7 @@ export const TRUST_STATE_LABELS: Record<TrustState, string> = {
   recently_updated: "Updated recently",
   confirm_before_going: "Confirm before going",
   time_unclear: "Time unclear",
-  price_unclear: "Price unclear",
+  price_unclear: "Confirm before going",
   source_unclear: "Source needs review",
   weather_dependent: "Weather dependent",
 };
