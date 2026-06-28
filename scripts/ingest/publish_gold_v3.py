@@ -44,6 +44,21 @@ def _list_flag(value: Any) -> list[str]:
     return [str(item).strip() for item in raw_items if str(item).strip()]
 
 
+def _field_page_hashes(row: dict[str, Any]) -> set[str]:
+    evidence = row.get("field_evidence")
+    if not isinstance(evidence, dict):
+        return set()
+    page_hashes: set[str] = set()
+    for field_evidence in evidence.values():
+        if not isinstance(field_evidence, dict):
+            continue
+        source = field_evidence.get("source")
+        page_hash = source.get("page_image_sha256") if isinstance(source, dict) else None
+        if page_hash:
+            page_hashes.add(str(page_hash))
+    return page_hashes
+
+
 def load_publish_flags(path: Path = DEFAULT_FLAGS_PATH) -> dict[str, Any]:
     flags: dict[str, Any] = {
         "public_gold_source": "v2",
@@ -96,21 +111,27 @@ def evaluate_publish_readiness(
             errors.append(f"row_has_validation_findings:{index}")
         if row.get("validation_status") not in PROMOTABLE_ROW_STATUSES:
             errors.append(f"row_unpromotable_validation_status:{index}")
-        if row.get("validation_status") == "manually_approved":
-            review_decision = row.get("review_decision")
-            decision = review_decision.get("decision") if isinstance(review_decision, dict) else None
-            if row.get("review_status") != "manual_review_approved" or decision not in {"approve", "edit"}:
-                errors.append(f"row_missing_manual_review_approval:{index}")
-        if allowed_groups and row.get("calendar_group_key") not in allowed_groups:
-            errors.append(f"row_calendar_group_not_enabled_for_v3:{index}")
-        if allowed_families and row.get("document_family") not in allowed_families:
-            errors.append(f"row_document_family_not_enabled_for_v3:{index}")
         source = row.get("source")
         source_hash = row.get("source_sha256")
         if isinstance(source, dict):
             source_hash = source_hash or source.get("documentHash") or source.get("document_hash")
         if not source_hash:
             errors.append(f"row_missing_source_sha256:{index}")
+        if row.get("validation_status") == "manually_approved":
+            review_decision = row.get("review_decision")
+            decision = review_decision.get("decision") if isinstance(review_decision, dict) else None
+            if row.get("review_status") != "manual_review_approved" or decision not in {"approve", "edit"}:
+                errors.append(f"row_missing_manual_review_approval:{index}")
+            elif str(review_decision.get("content_sha256") or "") != str(source_hash or ""):
+                errors.append(f"row_stale_manual_review_source_hash:{index}")
+            else:
+                reviewed_page_hash = str(review_decision.get("page_image_sha256") or "")
+                if reviewed_page_hash and reviewed_page_hash not in _field_page_hashes(row):
+                    errors.append(f"row_stale_manual_review_page_image:{index}")
+        if allowed_groups and row.get("calendar_group_key") not in allowed_groups:
+            errors.append(f"row_calendar_group_not_enabled_for_v3:{index}")
+        if allowed_families and row.get("document_family") not in allowed_families:
+            errors.append(f"row_document_family_not_enabled_for_v3:{index}")
         source_url = row.get("source_url")
         if isinstance(source, dict):
             source_url = source_url or source.get("canonicalUrl") or source.get("canonical_url")

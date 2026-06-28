@@ -2056,6 +2056,22 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     }
                 ],
             }
+            manual_with_stale_page_preview = {
+                "publication_mode": "vision_v3_preview",
+                "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                "rows": [
+                    {
+                        **clean_preview["rows"][0],
+                        "validation_status": "manually_approved",
+                        "review_status": "manual_review_approved",
+                        "review_decision": {
+                            "decision": "edit",
+                            "content_sha256": "sourcehash",
+                            "page_image_sha256": "oldpagehash",
+                        },
+                    }
+                ],
+            }
             blocked_source_drift_report = {
                 "status": "review_required",
                 "publish_blockers": [
@@ -2163,6 +2179,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 flags=load_publish_flags(enabled_flags),
                 dual_run_report=clean_dual_run_report,
             )
+            manual_with_stale_page = evaluate_publish_readiness(
+                manual_with_stale_page_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+            )
             source_drift_blocked = evaluate_publish_readiness(
                 clean_preview,
                 flags=load_publish_flags(enabled_flags),
@@ -2220,6 +2241,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("row_missing_manual_review_approval:0", manual_without_review["errors"])
         self.assertFalse(manual_with_stale_review["ready"])
         self.assertIn("row_stale_manual_review_source_hash:0", manual_with_stale_review["errors"])
+        self.assertFalse(manual_with_stale_page["ready"])
+        self.assertIn("row_stale_manual_review_page_image:0", manual_with_stale_page["errors"])
         self.assertFalse(source_drift_blocked["ready"])
         self.assertIn("source_drift_report_blocked", source_drift_blocked["errors"])
         self.assertIn("recognized_family_changed", source_drift_blocked["errors"])
