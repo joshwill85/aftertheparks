@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarClient } from "@/components/atlas/CalendarClient";
 import { Hero } from "@/components/atlas/Hero";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { sanitizePublicActivities, dedupeOccurrences } from "@/lib/api/publicActivities";
 import { getAllOccurrences } from "@/lib/data/activities";
 import {
@@ -70,6 +71,9 @@ export default async function CalendarPage({
         title="Plan Ahead"
         subtitle="Pick dates for a known stay, or compare resorts before you book."
       />
+      <div className="mb-6 flex justify-center">
+        <BrandAsset asset="pocket-map-only" className="brand-asset--map-panel" />
+      </div>
       <section className="mb-6 grid gap-3 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm md:grid-cols-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">

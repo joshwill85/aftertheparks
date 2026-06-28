@@ -53,46 +53,26 @@ const data = read("lib/data/activities.ts");
 assert.match(
   data,
   /export async function getEveningActivitiesThisWeek/,
-  "Tonight should have a week-scoped evening activity feed for the bottom By day collection."
+  "Plan-ahead and collection surfaces can still use a week-scoped evening activity feed."
 );
 assert.match(
   data,
   /getAllOccurrences\(7\)/,
-  "The week-scoped evening activity feed should load the full week."
+  "The week-scoped evening activity feed should load the full week when used."
 );
 
 const tonightPage = read("app/tonight/page.tsx");
-assert.match(
+assert.doesNotMatch(
   tonightPage,
-  /getEveningActivitiesThisWeek/,
-  "Tonight page should load week evening activities for the bottom collection."
-);
-assert.match(
-  tonightPage,
-  /weekEveningActivities=\{weekEveningActivities\}/,
-  "Tonight page should pass week evening activities to TonightClient."
-);
-assert.match(
-  tonightPage,
-  /weekEveningActivities\.map\(\(activity\) =>[\s\S]*weatherQueryForActivity\(activity, weatherNow\)/,
-  "Initial weather loading should include week evening activities."
+  /getEveningActivitiesThisWeek|weekEveningActivities/,
+  "Tonight should stay scoped to tonight's event window instead of adding a second week-ahead collection."
 );
 
 const tonightClient = read("components/atlas/TonightClient.tsx");
-assert.match(
+assert.doesNotMatch(
   tonightClient,
-  /weekEveningActivities/,
-  "TonightClient should receive week evening activities."
-);
-assert.match(
-  tonightClient,
-  /visibleWeekEveningActivities/,
-  "TonightClient should filter week evening activities for the bottom collection."
-);
-assert.match(
-  tonightClient,
-  /ActivityCollectionView[\s\S]*activities=\{visibleWeekEveningActivities\}[\s\S]*weatherById=\{weatherById\}/,
-  "Bottom evening activity collection should use week activities and shared weather-aware cards."
+  /ActivityCollectionView|visibleWeekEveningActivities|weekEveningActivities/,
+  "Tonight should use the same single event timeline setup as Today."
 );
 
 console.log("Tonight evening day-picker contract passed.");

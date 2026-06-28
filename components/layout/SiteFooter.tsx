@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrandMark, BrandMotif } from "@/components/brand/BrandAsset";
+import { BrandAsset, BrandMotif } from "@/components/brand/BrandAsset";
 
 export function SiteFooter() {
   return (
@@ -11,8 +11,19 @@ export function SiteFooter() {
       />
       <div className="mx-auto flex max-w-6xl flex-col gap-5 text-sm text-[var(--muted)]">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="space-y-4">
-            <BrandMark variant="horizontal" className="brand-mark--footer" />
+          <div className="site-footer__brand">
+            <div className="site-footer__brand-row">
+              <BrandAsset
+                asset="guide-companion"
+                className="site-footer__brand-icon"
+              />
+              <div>
+                <p className="site-footer__brand-name">After the Parks</p>
+                <p className="site-footer__tagline">
+                  Find the magic between park days.
+                </p>
+              </div>
+            </div>
             <BrandMotif className="brand-motif--divider" />
           </div>
           <div className="flex flex-wrap gap-4">

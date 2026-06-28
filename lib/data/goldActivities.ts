@@ -11,6 +11,7 @@ import path from "node:path";
 import { cache } from "react";
 import { cachePublicData } from "@/lib/cache/publicData";
 import { createServiceClient } from "@/lib/supabase/server";
+import sourceInventory from "@/data/processed/source_inventory.json";
 import type {
   ActivityClaim,
   ActivityFactualEnrichment,
@@ -113,6 +114,13 @@ interface MapOptions {
   dateRangeDays?: number;
   referenceDate?: Date;
   resortMeta?: Map<string, ResortMeta> | ResortMeta[] | Record<string, ResortMeta>;
+}
+
+interface SourceInventoryRow {
+  source_role?: string | null;
+  source_kind?: string | null;
+  canonical_url?: string | null;
+  calendar_group_key?: string | null;
 }
 
 const DAY_INDEX_BY_NAME: Record<string, number> = {
@@ -402,13 +410,52 @@ function externalFactsFromRow(row: GoldActivityRow): ExternalActivityFact[] | un
 
 function sourceUrl(row: GoldActivityRow): string {
   const candidate = row.source_url ?? row.source?.url ?? row.source?.path ?? "";
-  if (!candidate.trim()) return "";
+  if (!candidate.trim()) return reviewedVisualSourceUrl(row);
   try {
     const url = new URL(candidate);
-    return url.protocol === "http:" || url.protocol === "https:" ? candidate : "";
+    return url.protocol === "http:" || url.protocol === "https:"
+      ? candidate
+      : reviewedVisualSourceUrl(row);
   } catch {
-    return "";
+    return reviewedVisualSourceUrl(row);
   }
+}
+
+function isPublicHttpUrl(value?: string | null): value is string {
+  if (!value?.trim()) return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function hasReviewedVisualEvidence(row: GoldActivityRow): boolean {
+  const provenance = row.field_provenance ?? {};
+  return Object.values(provenance).some(
+    (spans) =>
+      Array.isArray(spans) &&
+      spans.some(
+        (span) =>
+          typeof span === "object" &&
+          span !== null &&
+          "source" in span &&
+          span.source === "reviewed_visual_schedule_image"
+      )
+  );
+}
+
+function reviewedVisualSourceUrl(row: GoldActivityRow): string {
+  if (!row.calendar_group_key || !hasReviewedVisualEvidence(row)) return "";
+  const inventoryRow = (sourceInventory as SourceInventoryRow[]).find(
+    (source) =>
+      source.source_role === "reviewed_visual_schedule" &&
+      source.source_kind === "reviewed_visual_schedule_image" &&
+      source.calendar_group_key === row.calendar_group_key &&
+      isPublicHttpUrl(source.canonical_url)
+  );
+  return inventoryRow?.canonical_url ?? "";
 }
 
 function sourceHash(row: GoldActivityRow): string | undefined {

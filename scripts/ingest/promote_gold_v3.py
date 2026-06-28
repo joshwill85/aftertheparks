@@ -22,6 +22,7 @@ DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_VALIDATED_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 PROMOTABLE_STATUSES = {"auto_publishable", "manually_approved"}
+GOLD_CONFLICT_FIELDS = ("title", "schedule", "location", "price")
 
 
 def _slugify(value: str) -> str:
@@ -123,6 +124,80 @@ def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) 
     return reviewed
 
 
+def _source_hash(row: dict[str, Any]) -> str:
+    source = row.get("source")
+    source_hash = row.get("source_sha256") or row.get("content_sha256")
+    if isinstance(source, dict):
+        source_hash = source_hash or source.get("documentHash") or source.get("document_hash")
+    return str(source_hash or "").strip()
+
+
+def _edition(row: dict[str, Any]) -> str:
+    return str(row.get("edition") or row.get("source_pdf_edition") or row.get("source_edition") or "").strip()
+
+
+def _gold_identity(row: dict[str, Any]) -> tuple[str, str, str, str] | None:
+    source_hash = _source_hash(row)
+    edition = _edition(row)
+    calendar_group_key = str(row.get("calendar_group_key") or "").strip()
+    canonical_slug = str(row.get("canonical_slug") or row.get("activity_slug") or row.get("slug") or "").strip()
+    if not (source_hash and edition and calendar_group_key and canonical_slug):
+        return None
+    return (source_hash, edition, calendar_group_key, canonical_slug)
+
+
+def _field_value(row: dict[str, Any], field_name: str) -> Any:
+    if field_name == "schedule":
+        schedule = row.get("schedule") if isinstance(row.get("schedule"), dict) else {}
+        return schedule.get("text") or row.get("schedule_raw") or row.get("schedule_text")
+    if field_name == "location":
+        location = row.get("location") if isinstance(row.get("location"), dict) else {}
+        return location.get("label") or location.get("id") or location.get("value") or row.get("location_text")
+    if field_name == "price":
+        price = row.get("price") if isinstance(row.get("price"), dict) else {}
+        return price.get("state") if price else row.get("fee_required")
+    return row.get(field_name)
+
+
+def _normalize_field_value(value: Any) -> str:
+    return " ".join(str(value or "").strip().lower().split())
+
+
+def _gold_conflict(row: dict[str, Any], existing_gold: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    identity = _gold_identity(row)
+    if identity is None:
+        return None
+    existing = existing_gold.get("|".join(identity))
+    if existing is None:
+        return None
+    fields = [
+        field_name
+        for field_name in GOLD_CONFLICT_FIELDS
+        if _normalize_field_value(_field_value(row, field_name))
+        != _normalize_field_value(_field_value(existing, field_name))
+    ]
+    if not fields:
+        return None
+    source_hash, edition, calendar_group_key, canonical_slug = identity
+    return {
+        "conflict_type": "existing_gold_field_mismatch",
+        "calendar_group_key": calendar_group_key,
+        "canonical_slug": canonical_slug,
+        "source_sha256": source_hash,
+        "edition": edition,
+        "fields": fields,
+    }
+
+
+def _existing_gold_by_identity(existing_gold_rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    rows_by_identity: dict[str, dict[str, Any]] = {}
+    for row in existing_gold_rows:
+        identity = _gold_identity(row)
+        if identity is not None:
+            rows_by_identity["|".join(identity)] = row
+    return rows_by_identity
+
+
 def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
     title = str(candidate.get("normalized_title") or candidate.get("source_title") or "Untitled")
     schedule = candidate.get("schedule_normalized") if isinstance(candidate.get("schedule_normalized"), dict) else {}
@@ -131,11 +206,20 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
     return {
         "publication_mode": "vision_v3_preview",
         "pipeline_version": candidate.get("pipeline_version", "vision_v3_001"),
+        "config_hash": candidate.get("config_hash"),
+        "runtime_lineage": candidate.get("runtime_lineage"),
         "calendar_group_key": candidate.get("calendar_group_key"),
         "document_family": candidate.get("document_family"),
         "edition": candidate.get("edition"),
         "source_type": candidate.get("source_type"),
+        "source_kind": candidate.get("source_kind"),
+        "source_role": candidate.get("source_role"),
+        "http_status": candidate.get("http_status"),
+        "currentness": candidate.get("currentness"),
+        "captured_at": candidate.get("captured_at"),
         "resort_slug": candidate.get("resort_slug"),
+        "region_id": candidate.get("region_id"),
+        "region_type": candidate.get("region_type"),
         "canonical_slug": candidate.get("canonical_slug") or _slugify(title),
         "title": title,
         "category": candidate.get("category"),
@@ -153,6 +237,8 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
             else "unknown"
         },
         "candidate_type": candidate.get("candidate_type"),
+        "movie_title": candidate.get("movie_title"),
+        "normalized_movie_title": candidate.get("normalized_movie_title"),
         "source_document_id": candidate.get("source_document_id"),
         "source_sha256": candidate.get("content_sha256"),
         "source_url": canonical_url,
@@ -176,14 +262,18 @@ def build_gold_v3_preview(
     candidates: list[dict[str, Any]],
     *,
     review_decisions: list[dict[str, Any]] | None = None,
+    existing_gold_rows: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
+    gold_conflicts: list[dict[str, Any]] = []
     skipped = 0
     skipped_stale_review = 0
     skipped_invalid_review = 0
     skipped_validation_findings = 0
+    skipped_gold_conflicts = 0
     manually_approved_by_review = 0
     decisions_by_candidate = _review_decision_map(review_decisions or [])
+    existing_gold = _existing_gold_by_identity(existing_gold_rows or [])
     for candidate in candidates:
         promotable_candidate = candidate
         has_findings = bool(candidate.get("validation_findings"))
@@ -219,7 +309,14 @@ def build_gold_v3_preview(
         if promotable_candidate.get("validation_status") not in PROMOTABLE_STATUSES:
             skipped += 1
             continue
-        rows.append(_gold_row(promotable_candidate))
+        row = _gold_row(promotable_candidate)
+        conflict = _gold_conflict(row, existing_gold)
+        if conflict:
+            gold_conflicts.append(conflict)
+            skipped_gold_conflicts += 1
+            skipped += 1
+            continue
+        rows.append(row)
     return {
         "pipeline_version": "vision_v3_001",
         "publication_mode": "vision_v3_preview",
@@ -231,7 +328,9 @@ def build_gold_v3_preview(
             "skipped_invalid_review_decision": skipped_invalid_review,
             "manually_approved_by_review": manually_approved_by_review,
             "skipped_stale_review_decision": skipped_stale_review,
+            "skipped_gold_conflicts": skipped_gold_conflicts,
         },
+        "gold_conflicts": gold_conflicts,
         "rows": rows,
     }
 
@@ -245,6 +344,8 @@ def _load_json_list(path: Path) -> list[dict[str, Any]]:
             rows.extend(_load_json_list(child))
         return rows
     payload = json.loads(path.read_text())
+    if isinstance(payload, dict) and isinstance(payload.get("rows"), list):
+        return [item for item in payload["rows"] if isinstance(item, dict)]
     if not isinstance(payload, list):
         return []
     return [item for item in payload if isinstance(item, dict)]
@@ -261,12 +362,18 @@ def main() -> None:
         help="Include hash-current approve/edit review decisions for otherwise blocked candidates",
     )
     parser.add_argument("--review-decisions", type=Path, default=DEFAULT_REVIEW_DECISIONS_PATH)
+    parser.add_argument("--existing-gold", type=Path, help="Optional existing Gold preview/list for same-source conflict checks")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     candidates = _load_json_list(args.validated_candidates)
     review_decisions = _load_json_list(args.review_decisions) if args.include_approved_review else []
-    preview = build_gold_v3_preview(candidates, review_decisions=review_decisions)
+    existing_gold_rows = _load_json_list(args.existing_gold) if args.existing_gold else []
+    preview = build_gold_v3_preview(
+        candidates,
+        review_decisions=review_decisions,
+        existing_gold_rows=existing_gold_rows,
+    )
     if args.json:
         print(json.dumps(preview, indent=2, sort_keys=True))
         return

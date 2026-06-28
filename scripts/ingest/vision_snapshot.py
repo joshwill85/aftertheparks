@@ -46,6 +46,16 @@ DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_vision_snapshot_report.json"
 PIPELINE_VERSION = "vision_v3_001"
 PRIMARY_ENGINE = "paddleocr_ppstructurev3"
 SECONDARY_ENGINE = "rapidocr"
+SOURCE_METADATA_FIELDS = (
+    "source_document_id",
+    "source_kind",
+    "source_role",
+    "canonical_url",
+    "fetched_url",
+    "http_status",
+    "currentness",
+    "captured_at",
+)
 
 
 def _git_sha() -> str | None:
@@ -251,6 +261,9 @@ def build_vision_snapshot(
         "tokens": tokens,
         "errors": errors,
     }
+    for field in SOURCE_METADATA_FIELDS:
+        if field in page_manifest:
+            snapshot[field] = page_manifest[field]
     snapshot_quality = compute_snapshot_quality(snapshot)
     snapshot_quality.update(
         {

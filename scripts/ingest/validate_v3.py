@@ -22,6 +22,27 @@ DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_validate_report.json"
 REQUIRED_CRITICAL_FIELDS = ("title", "schedule", "location", "fee")
 MOVIE_CRITICAL_FIELDS = ("movie_title",)
 AUTO_PUBLISH_FAMILIES = {"aframe_recreation", "vertical_digital_rec_sign"}
+LINEAGE_BLOCKING_FINDINGS = {
+    "missing_pipeline_version",
+    "missing_config_hash",
+    "missing_runtime_lineage",
+    "missing_runtime_lineage_config_hash",
+    "missing_runtime_lineage_hash",
+    "missing_package_versions",
+    "missing_model_asset_hashes",
+    "runtime_lineage_config_hash_mismatch",
+}
+CANONICAL_PAGE_BLOCKING_FINDINGS = {
+    "missing_canonical_page_image",
+}
+SOURCE_PROVENANCE_BLOCKING_FINDINGS = {
+    "missing_source_url",
+    "missing_source_kind",
+    "non_official_source",
+    "source_fetch_not_successful",
+    "source_not_current",
+    "missing_source_captured_at",
+}
 
 
 def _evidence_for(candidate: dict[str, Any], field_name: str) -> dict[str, Any] | None:
@@ -94,9 +115,54 @@ def _has_any_reviewable_evidence(candidate: dict[str, Any]) -> bool:
     return False
 
 
+def _has_source_span(candidate: dict[str, Any], field_name: str) -> bool:
+    source_spans = candidate.get("source_spans")
+    if not isinstance(source_spans, dict):
+        return False
+    spans = source_spans.get(field_name)
+    if not isinstance(spans, list) or not spans:
+        return False
+    for span in spans:
+        if not isinstance(span, dict):
+            continue
+        if str(span.get("text") or "").strip() and span.get("page") not in {None, ""}:
+            return True
+    return False
+
+
+def _value_present(value: Any) -> bool:
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, (dict, list, tuple, set)):
+        return bool(value)
+    return True
+
+
+def _field_value_findings(candidate: dict[str, Any], field_name: str) -> list[str]:
+    field = _evidence_for(candidate, field_name)
+    if not isinstance(field, dict):
+        return []
+    findings: list[str] = []
+    if not _value_present(field.get("raw_value")):
+        findings.append(f"missing_field_raw_value:{field_name}")
+    if "normalized_value" not in field or not _value_present(field.get("normalized_value")):
+        findings.append(f"missing_field_normalized_value:{field_name}")
+    return findings
+
+
 def _validation_status(candidate: dict[str, Any], findings: list[str]) -> str:
     if not findings:
         return "auto_publishable"
+    if LINEAGE_BLOCKING_FINDINGS.intersection(findings):
+        return "rejected"
+    if CANONICAL_PAGE_BLOCKING_FINDINGS.intersection(findings):
+        return "rejected"
+    if SOURCE_PROVENANCE_BLOCKING_FINDINGS.intersection(findings):
+        return "rejected"
+    if any(finding.startswith("field_page_image_not_canonical:") for finding in findings):
+        return "rejected"
     if "missing_source_document_id" in findings or "missing_content_sha256" in findings:
         return "rejected"
     if not _has_any_reviewable_evidence(candidate):
@@ -104,8 +170,108 @@ def _validation_status(candidate: dict[str, Any], findings: list[str]) -> str:
     return "needs_review"
 
 
+def _lineage_findings(candidate: dict[str, Any]) -> list[str]:
+    findings: list[str] = []
+    pipeline_version = str(candidate.get("pipeline_version") or "").strip()
+    config_hash = str(candidate.get("config_hash") or "").strip()
+    runtime_lineage = candidate.get("runtime_lineage")
+
+    if not pipeline_version:
+        findings.append("missing_pipeline_version")
+    if not config_hash:
+        findings.append("missing_config_hash")
+    if not isinstance(runtime_lineage, dict):
+        findings.append("missing_runtime_lineage")
+        return findings
+
+    lineage_config_hash = str(runtime_lineage.get("config_hash") or "").strip()
+    if not lineage_config_hash:
+        findings.append("missing_runtime_lineage_config_hash")
+    elif config_hash and lineage_config_hash != config_hash:
+        findings.append("runtime_lineage_config_hash_mismatch")
+    if not str(runtime_lineage.get("lineage_hash") or "").strip():
+        findings.append("missing_runtime_lineage_hash")
+    if not isinstance(runtime_lineage.get("package_versions"), dict):
+        findings.append("missing_package_versions")
+    if not isinstance(runtime_lineage.get("model_asset_hashes"), dict):
+        findings.append("missing_model_asset_hashes")
+    return findings
+
+
+def _is_public_http_url(value: Any) -> bool:
+    if not isinstance(value, str) or not value.strip():
+        return False
+    return value.startswith("https://") or value.startswith("http://")
+
+
+def _source_provenance_findings(candidate: dict[str, Any]) -> list[str]:
+    findings: list[str] = []
+    canonical_url = candidate.get("canonical_url")
+    fetched_url = candidate.get("fetched_url")
+    if not (_is_public_http_url(canonical_url) or _is_public_http_url(fetched_url)):
+        findings.append("missing_source_url")
+
+    source_kind = str(candidate.get("source_kind") or "").strip()
+    if not source_kind:
+        findings.append("missing_source_kind")
+    elif not source_kind.startswith("official_"):
+        findings.append("non_official_source")
+
+    http_status = candidate.get("http_status")
+    try:
+        status_code = int(http_status)
+    except (TypeError, ValueError):
+        status_code = 0
+    if status_code < 200 or status_code >= 300:
+        findings.append("source_fetch_not_successful")
+
+    currentness = str(candidate.get("currentness") or "").strip().lower()
+    if currentness != "current":
+        findings.append("source_not_current")
+
+    if not str(candidate.get("captured_at") or "").strip():
+        findings.append("missing_source_captured_at")
+    return findings
+
+
+def _canonical_page_image_findings(candidate: dict[str, Any], required_fields: list[str]) -> list[str]:
+    findings: list[str] = []
+    canonical_page_hashes = candidate.get("canonical_page_image_sha256s")
+    if not isinstance(canonical_page_hashes, list):
+        canonical_page_hashes = []
+    canonical_page_hash_set = {
+        str(page_hash).strip()
+        for page_hash in canonical_page_hashes
+        if str(page_hash).strip()
+    }
+    if not canonical_page_hash_set:
+        findings.append("missing_canonical_page_image")
+        return findings
+
+    for field_name in required_fields:
+        field = _evidence_for(candidate, field_name)
+        source = field.get("source") if isinstance(field, dict) else None
+        page_hash = str(source.get("page_image_sha256") or "").strip() if isinstance(source, dict) else ""
+        if page_hash and page_hash not in canonical_page_hash_set:
+            findings.append(f"field_page_image_not_canonical:{field_name}")
+    return findings
+
+
+def _activity_region_findings(candidate: dict[str, Any]) -> list[str]:
+    findings: list[str] = []
+    if not str(candidate.get("region_id") or "").strip():
+        findings.append("missing_activity_region_id")
+    if not str(candidate.get("region_type") or "").strip():
+        findings.append("missing_activity_region_type")
+    if not _has_source_crop(candidate, "region"):
+        findings.append("missing_activity_region_evidence")
+    return findings
+
+
 def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     findings = list(candidate.get("validation_findings") or [])
+    findings.extend(_lineage_findings(candidate))
+    findings.extend(_source_provenance_findings(candidate))
 
     if candidate.get("document_family") not in AUTO_PUBLISH_FAMILIES:
         findings.append("unknown_document_family")
@@ -118,8 +284,13 @@ def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     required_fields = list(REQUIRED_CRITICAL_FIELDS)
     if candidate.get("candidate_type") == "movie":
         required_fields.extend(MOVIE_CRITICAL_FIELDS)
+    findings.extend(_canonical_page_image_findings(candidate, required_fields))
+    findings.extend(_activity_region_findings(candidate))
 
     for field_name in required_fields:
+        if not _has_source_span(candidate, field_name):
+            findings.append(f"missing_source_span:{field_name}")
+        findings.extend(_field_value_findings(candidate, field_name))
         if not _has_source_crop(candidate, field_name):
             findings.append(f"missing_required_field:{field_name}")
             continue

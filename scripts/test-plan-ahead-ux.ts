@@ -116,6 +116,14 @@ check("calendar href builder serializes supported filters", () => {
 check("future insights rank dates and resorts inside the selected range", () => {
   const insights = buildFutureActivityInsights([
     occurrence({
+      id: "today-overload",
+      resortSlug: "today-resort",
+      resortName: "Today Resort",
+      startDateTime: "2026-07-04T09:00:00-04:00",
+      daypart: "morning",
+      priceState: "free",
+    }),
+    occurrence({
       id: "grand-evening",
       resortSlug: "grand-floridian-resort-and-spa",
       resortName: "Disney's Grand Floridian Resort & Spa",
@@ -139,13 +147,22 @@ check("future insights rank dates and resorts inside the selected range", () => 
       daypart: "morning",
       priceState: "fee",
     }),
-  ], { start: "2026-07-04", end: "2026-07-06" });
+    occurrence({
+      id: "poly-evening",
+      resortSlug: "polynesian-village-resort",
+      resortName: "Disney's Polynesian Village Resort",
+      startDateTime: "2026-07-05T19:00:00-04:00",
+      daypart: "evening",
+      priceState: "free",
+    }),
+  ], { start: "2026-07-04", end: "2026-07-06", today: "2026-07-04" });
 
-  assert.equal(insights.topDates[0]?.date, "2026-07-04");
+  assert.equal(insights.topDates[0]?.date, "2026-07-05");
   assert.equal(insights.topDates[0]?.count, 2);
-  assert.equal(insights.topResorts[0]?.slug, "grand-floridian-resort-and-spa");
-  assert.equal(insights.eveningDates[0]?.date, "2026-07-04");
-  assert.equal(insights.freeHeavyDates[0]?.freeCount, 2);
+  assert.equal(insights.topResorts[0]?.slug, "polynesian-village-resort");
+  assert.equal(insights.eveningDates[0]?.date, "2026-07-05");
+  assert.equal(insights.freeHeavyDates[0]?.date, "2026-07-05");
+  assert.equal(insights.freeHeavyDates[0]?.freeCount, 1);
 });
 
 check("primary UI surfaces expose Now and Plan Ahead", () => {
@@ -175,6 +192,65 @@ check("known stay surfaces link to date-filtered Plan Ahead", () => {
   assert.match(sections, /end: dateKey/);
   assert.match(sections, /selected: dateKey/);
   assert.match(resortPage, /Plan ahead at this resort/);
+});
+
+check("Plan Ahead mounts weather-aware activity cards", () => {
+  const calendarPage = readFileSync("app/calendar/page.tsx", "utf8");
+  const calendarClient = readFileSync("components/atlas/CalendarClient.tsx", "utf8");
+
+  assert.doesNotMatch(
+    calendarPage,
+    /loadWeatherByOccurrence/,
+    "Plan Ahead should not block the calendar page on server-side weather fan-out."
+  );
+  assert.doesNotMatch(
+    calendarPage,
+    /initialWeatherById=\{initialWeatherById\}/,
+    "Plan Ahead should let CalendarClient batch-fetch weather after the page mounts."
+  );
+  assert.match(
+    calendarClient,
+    /initialWeatherById\?: Record<string, WeatherForTimeSpan>/,
+    "CalendarClient should accept the same weather map contract as Today and Tonight."
+  );
+  assert.match(
+    calendarClient,
+    /useState<Record<string, WeatherForTimeSpan>>\(initialWeatherById\)/,
+    "CalendarClient should keep card weather in state."
+  );
+  assert.match(
+    calendarClient,
+    /\/api\/weather\/guidance\/batch/,
+    "CalendarClient should batch-fetch weather for newly selected dates."
+  );
+  assert.match(
+    calendarClient,
+    /weatherSummary=\{weatherById\[activity\.id\]\}/,
+    "Plan Ahead EventCards should receive mounted weather summaries."
+  );
+});
+
+check("Plan Ahead insight cards explain recommendations in human terms", () => {
+  const calendarClient = readFileSync("components/atlas/CalendarClient.tsx", "utf8");
+
+  assert.match(calendarClient, /Best day to browse/);
+  assert.match(calendarClient, /Most activities in your future window/);
+  assert.match(calendarClient, /Most options at one resort/);
+  assert.match(calendarClient, /Best after-dark day/);
+  assert.match(calendarClient, /Best no-cost day/);
+  assert.match(calendarClient, /Try widening the day range or clearing a filter/);
+  assert.match(calendarClient, /No future evening-heavy day matches yet/);
+  assert.match(calendarClient, /No future free-heavy day matches yet/);
+  assert.match(calendarClient, /statLabel/);
+  assert.match(calendarClient, /countLabel\(bestDate\.count, "activity", "activities"\)/);
+  assert.doesNotMatch(calendarClient, /activitys/);
+  assert.doesNotMatch(calendarClient, /label="Best date"/);
+  assert.doesNotMatch(calendarClient, /label="Evening strongest"/);
+  assert.doesNotMatch(calendarClient, /label="Free-heavy date"/);
+  assert.doesNotMatch(calendarClient, /Try widening the date range or clearing a filter/);
+  assert.doesNotMatch(calendarClient, /No future evening-heavy date matches yet/);
+  assert.doesNotMatch(calendarClient, /No future free-heavy date matches yet/);
+  assert.doesNotMatch(calendarClient, /`\$\{format\(dateForMonth\(insights\.topDates\[0\]\.date\), "MMM d"\)\} · \$\{insights\.topDates\[0\]\.count\}`/);
 });
 
 if (failures.length > 0) {

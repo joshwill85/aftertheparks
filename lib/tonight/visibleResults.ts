@@ -39,5 +39,8 @@ export function getVisibleTonightResultCount({
   activities: ActivityOccurrence[];
   movieNights: MovieNightOccurrence[];
 }): number {
-  return getVisibleTonightActivities(activities).length + movieNights.length;
+  return (
+    getVisibleTonightActivities(activities).length +
+    movieNights.filter((movie) => movie.isTonight).length
+  );
 }

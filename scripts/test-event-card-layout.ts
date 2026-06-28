@@ -14,6 +14,9 @@ const tonightClient = read("components/atlas/TonightClient.tsx");
 const activityCard = read("components/activity/ActivityCard.tsx");
 const nightActivityCard = read("components/tonight/NightActivityCard.tsx");
 const activityDecision = read("lib/activityDecision.ts");
+const eventCardBodyStart = eventCard.indexOf('<div className="event-card__body">');
+const eventCardBodyEnd = eventCard.indexOf("</div>\n    </>\n  );", eventCardBodyStart);
+const eventCardBodyFragment = eventCard.slice(eventCardBodyStart, eventCardBodyEnd);
 
 assert.match(
   eventCard,
@@ -135,6 +138,35 @@ assert.match(
   "Badge footers should sit directly below bottom-snapped inline weather."
 );
 
+assert.ok(
+  eventCard.indexOf('className="event-card__story-watermark"') <
+    eventCard.indexOf('className="event-card__hit-area"'),
+  "The resort watermark should be positioned as a full-card background layer before the hit area."
+);
+
+assert.ok(
+  !eventCardBodyFragment.includes("event-card__story-watermark"),
+  "The resort watermark should not be clipped by the text body column."
+);
+
+assert.match(
+  polish,
+  /\.event-card\s*\{[\s\S]*overflow:\s*hidden/,
+  "Event cards should clip the card-level watermark to the rounded card, not a body column."
+);
+
+assert.match(
+  polish,
+  /\.event-card__story-watermark\s*\{[\s\S]*right:\s*12%[\s\S]*width:\s*clamp\(180px,\s*34%,\s*280px\)/,
+  "Story watermarks should share a consistent full-card placement and size."
+);
+
+assert.doesNotMatch(
+  polish,
+  /\.event-card__story-watermark\s*\{[\s\S]*right:\s*-36px/,
+  "Story watermarks should not be pushed beyond a body-column edge."
+);
+
 assert.match(
   eventUi,
   /<CategoryIcon[\s\S]*size=\{isDetail \? "md" : "md"\}/,
@@ -197,8 +229,14 @@ assert.match(
 
 assert.match(
   tonightClient,
-  /<NightActivityCard[\s\S]*activity=\{activity\}/,
-  "Tonight activity sections should render through the shared night activity card."
+  /<EventCardList[\s\S]+columns=\{2\}[\s\S]+className="today-activity-timeline tonight-activity-timeline"/,
+  "Tonight should use the same two-column event timeline wrapper as Today."
+);
+
+assert.match(
+  tonightClient,
+  /<ActivityCard[\s\S]*activity=\{item\.activity\}/,
+  "Tonight activity items should render through the same shared ActivityCard as Today."
 );
 
 assert.match(

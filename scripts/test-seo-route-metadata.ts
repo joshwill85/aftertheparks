@@ -12,8 +12,8 @@ async function main() {
   const { metadata: guidesMetadata } = await import("@/app/guides/page");
   const { metadata: searchMetadata } = await import("@/app/search/page");
   const { metadata: planMetadata } = await import("@/app/plan/page");
-  const { metadata: publicPlanMetadata } = await import("@/app/p/[shareToken]/page");
-  const { metadata: legacyPlanMetadata } = await import("@/app/plan/[shareId]/page");
+  const { generateMetadata: publicPlanMetadata } = await import("@/app/p/[shareToken]/page");
+  const { generateMetadata: legacyPlanMetadata } = await import("@/app/plan/[shareId]/page");
   const { metadata: correctionsMetadata } = await import("@/app/corrections/page");
   const { generateMetadata: activitiesMetadata } = await import("@/app/activities/page");
   const { generateMetadata: todayMetadata } = await import("@/app/today/page");
@@ -265,8 +265,18 @@ async function main() {
   for (const [metadata, label] of [
     [searchMetadata, "search page"],
     [planMetadata, "private plan page"],
-    [publicPlanMetadata, "public shared plan page"],
-    [legacyPlanMetadata, "legacy shared plan page"],
+    [
+      await publicPlanMetadata({
+        params: Promise.resolve({ shareToken: "share-token" }),
+      }),
+      "public shared plan page",
+    ],
+    [
+      await legacyPlanMetadata({
+        params: Promise.resolve({ shareId: "share-id" }),
+      }),
+      "legacy shared plan page",
+    ],
     [correctionsMetadata, "corrections/contact page"],
   ] as const) {
     assert.deepEqual(

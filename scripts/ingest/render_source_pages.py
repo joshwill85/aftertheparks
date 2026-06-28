@@ -31,6 +31,16 @@ DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "page_images"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_render_source_pages_report.json"
 DEFAULT_PDF_DPI = 450
 THUMBNAIL_MAX_SIZE = (360, 360)
+SOURCE_METADATA_FIELDS = (
+    "source_document_id",
+    "source_kind",
+    "source_role",
+    "canonical_url",
+    "fetched_url",
+    "http_status",
+    "currentness",
+    "captured_at",
+)
 
 # These are trusted official source renders, and 450-DPI one-page flyers are
 # intentionally large enough to exceed Pillow's generic decompression warning.
@@ -193,6 +203,7 @@ def render_source_document(
     edition: str,
     output_dir: Path = DEFAULT_OUTPUT_DIR,
     pdf_dpi: int = DEFAULT_PDF_DPI,
+    source_metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_path = Path(source_path)
     data = source_path.read_bytes()
@@ -247,6 +258,10 @@ def render_source_document(
         "render_config": render_config,
         "pages": pages,
     }
+    if isinstance(source_metadata, dict):
+        for field in SOURCE_METADATA_FIELDS:
+            if field in source_metadata:
+                manifest[field] = source_metadata[field]
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     manifest["manifest_path"] = str(manifest_path)
     return manifest

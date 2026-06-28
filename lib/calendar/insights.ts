@@ -1,6 +1,6 @@
 import { parseISO } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import { TIMEZONE } from "@/lib/daypart";
+import { addOrlandoDays, orlandoDateString, TIMEZONE } from "@/lib/daypart";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 export interface DateInsight {
@@ -26,6 +26,7 @@ export interface FutureActivityInsights {
 interface InsightRange {
   start: string;
   end: string;
+  today?: string;
 }
 
 function occurrenceDate(occurrence: ActivityOccurrence): string | undefined {
@@ -49,10 +50,12 @@ export function buildFutureActivityInsights(
 ): FutureActivityInsights {
   const byDate = new Map<string, DateInsight>();
   const byResort = new Map<string, ResortInsight>();
+  const tomorrow = addOrlandoDays(range.today ?? orlandoDateString(), 1);
+  const effectiveStart = range.start > tomorrow ? range.start : tomorrow;
 
   for (const occurrence of occurrences) {
     const date = occurrenceDate(occurrence);
-    if (!date || date < range.start || date > range.end) continue;
+    if (!date || date < effectiveStart || date > range.end) continue;
 
     const dateInsight =
       byDate.get(date) ??

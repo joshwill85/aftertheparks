@@ -4,14 +4,32 @@ import { PublicPlanClient } from "@/components/plan/PublicPlanClient";
 import { createServiceClient } from "@/lib/supabase/server";
 import { resolvePublicPlan } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
+import { buildSocialMetadata } from "@/lib/seo/metadata";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Shared resort plan",
-  description: "View-only look at a shared After the Parks rest day plan.",
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ shareToken: string }>;
+}): Promise<Metadata> {
+  const { shareToken } = await params;
+  const description =
+    "Find movies under the stars, campfires, pool breaks, resort activities, and no-park-day ideas.";
+
+  return {
+    title: "After the Parks",
+    description,
+    robots: { index: false, follow: true },
+    ...buildSocialMetadata({
+      title: "After the Parks",
+      description,
+      path: `/p/${shareToken}`,
+      imageSummary:
+        "Movies under the stars, campfires, pool breaks, resort activities, and no-park-day ideas in one beautiful guide.",
+    }),
+  };
+}
 
 export default async function PublicPlanPage({
   params,

@@ -31,6 +31,29 @@ PUBLISHABLE_REGION_TYPES = {
     "vertical_activity_row": "activity",
     "movie_section": "movie",
 }
+SOURCE_METADATA_FIELDS = (
+    "source_kind",
+    "source_role",
+    "canonical_url",
+    "fetched_url",
+    "http_status",
+    "currentness",
+    "captured_at",
+)
+
+
+def _canonical_page_image_sha256s(snapshot: dict[str, Any]) -> list[str]:
+    source_pages = snapshot.get("source_pages")
+    if not isinstance(source_pages, list):
+        return []
+    page_hashes: list[str] = []
+    for page in source_pages:
+        if not isinstance(page, dict):
+            continue
+        page_hash = str(page.get("canonical_image_sha256") or page.get("page_image_sha256") or "").strip()
+        if page_hash and page_hash not in page_hashes:
+            page_hashes.append(page_hash)
+    return page_hashes
 
 
 def _region_evidence(snapshot: dict[str, Any], region: dict[str, Any]) -> dict[str, Any]:
@@ -309,6 +332,7 @@ def _extracted_candidate(
 def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
     regions = snapshot.get("regions") if isinstance(snapshot.get("regions"), list) else []
     tokens = snapshot.get("tokens") if isinstance(snapshot.get("tokens"), list) else []
+    canonical_page_image_sha256s = _canonical_page_image_sha256s(snapshot)
     candidates: list[dict[str, Any]] = []
 
     for region in regions:
@@ -352,9 +376,12 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
         candidates.append(
             {
                 "pipeline_version": snapshot.get("pipeline_version", "vision_v3_001"),
+                "config_hash": snapshot.get("config_hash"),
+                "runtime_lineage": snapshot.get("runtime_lineage"),
                 "document_family": snapshot.get("document_family", "unknown_visual_schedule"),
                 "source_document_id": snapshot.get("source_document_id"),
                 "content_sha256": snapshot.get("source_sha256"),
+                "canonical_page_image_sha256s": canonical_page_image_sha256s,
                 "calendar_group_key": snapshot.get("calendar_group_key"),
                 "edition": snapshot.get("edition"),
                 "source_type": snapshot.get("source_type"),
@@ -379,6 +406,9 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
                 "source_spans": extracted_fields["source_spans"],
             }
         )
+        for field in SOURCE_METADATA_FIELDS:
+            if field in snapshot:
+                candidates[-1][field] = snapshot[field]
 
     return candidates
 

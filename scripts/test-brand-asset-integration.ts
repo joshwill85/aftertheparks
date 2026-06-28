@@ -53,12 +53,15 @@ assert.match(layout, /\/favicon\.ico/, "root metadata should reference the ICO f
 assert.match(layout, /\/brand\/apple-touch-icon-180\.png/, "root metadata should reference apple touch icon");
 
 const header = read("components/layout/SiteHeader.tsx");
-assert.match(header, /BrandMark/, "site header should use the shared BrandMark component");
-assert.match(header, /variant="header"/, "site header should use the compact header mark");
+assert.match(header, /BrandAsset/, "site header should use a shared brand asset");
+assert.match(header, /guide-companion/, "site header should use the wordless guide companion mark");
+assert.match(header, /site-brand__text/, "site header should render readable brand text");
 assert.match(header, /Independent Guide/, "site header should preserve the independent guide badge");
 
 const footer = read("components/layout/SiteFooter.tsx");
-assert.match(footer, /BrandMark/, "site footer should include brand lockup");
+assert.match(footer, /BrandAsset/, "site footer should use a shared brand asset");
+assert.match(footer, /guide-companion/, "site footer should use the wordless guide companion mark");
+assert.match(footer, /site-footer__brand-name/, "site footer should render readable brand text");
 assert.match(footer, /BrandMotif/, "site footer should include route motif");
 assert.match(footer, /not affiliated\s+with Disney/, "site footer should preserve the independent disclaimer");
 

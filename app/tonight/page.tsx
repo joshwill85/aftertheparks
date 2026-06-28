@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Hero } from "@/components/atlas/Hero";
-import { BrandAsset } from "@/components/brand/BrandAsset";
 import { TonightClient } from "@/components/atlas/TonightClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
 import {
-  getEveningActivitiesThisWeek,
   getTonightActivities,
   getMovieNights,
   getResorts,
@@ -116,15 +115,8 @@ export default async function TonightPage({
   const params = await searchParams;
   const filters = parseBrowseParams(params);
   const weatherNow = new Date();
-  const [
-    activities,
-    weekEveningActivities,
-    baseActivities,
-    movieNights,
-    resorts,
-  ] = await Promise.all([
+  const [activities, baseActivities, movieNights, resorts] = await Promise.all([
     getTonightActivities(filters),
-    getEveningActivitiesThisWeek(filters),
     getTonightActivities({}),
     getMovieNights(),
     getResorts(),
@@ -143,10 +135,7 @@ export default async function TonightPage({
   const initialWeatherById = await loadWeatherByOccurrence({
     occurrences: [
       ...activities.map((activity) => weatherQueryForActivity(activity, weatherNow)),
-      ...weekEveningActivities.map((activity) =>
-        weatherQueryForActivity(activity, weatherNow)
-      ),
-      ...filteredMovies.map(weatherQueryForMovie),
+      ...filteredMovies.filter((movie) => movie.isTonight).map(weatherQueryForMovie),
     ].filter((query): query is NonNullable<typeof query> => Boolean(query)),
     now: weatherNow,
   });
@@ -181,25 +170,9 @@ export default async function TonightPage({
         subtitle="Evening resort activities, outdoor movies, campfires, and low-pressure after-park ideas."
         compactBrowse
       />
-      <section className="mx-auto mb-8 grid max-w-6xl gap-5 rounded-2xl border border-[rgba(255,200,87,0.28)] bg-[var(--night)] p-5 text-white md:grid-cols-[minmax(0,1fr)_360px] md:items-center">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--lantern)]">
-            Starlight mode
-          </p>
-          <h2 className="font-display mt-2 text-2xl font-semibold">
-            A calmer map for after-dark resort wins.
-          </h2>
-          <p className="mt-2 text-sm leading-relaxed text-white/78">
-            Tonight is where the pocket-map idea gets cozy: movies, campfires,
-            low-energy detours, and weather-aware backups before anyone crosses
-            the resort.
-          </p>
-        </div>
-        <BrandAsset
-          asset="dark-lockup"
-          className="brand-asset--night-feature justify-self-center"
-        />
-      </section>
+      <div className="mb-6 flex justify-center">
+        <BrandAsset asset="dark-lockup" className="brand-asset--night-feature" />
+      </div>
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
         <BrowseFilterShell
           variant="tonight"
@@ -209,12 +182,10 @@ export default async function TonightPage({
         >
           <TonightClient
             activities={activities}
-            weekEveningActivities={weekEveningActivities}
             movieNights={filteredMovies}
             filteredMode={filteredMode}
             initialPageWeather={initialPageWeather}
             initialWeatherById={initialWeatherById}
-            initialTimelineNowIso={weatherNow.toISOString()}
           />
         </BrowseFilterShell>
       </Suspense>

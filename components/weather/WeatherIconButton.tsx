@@ -5,6 +5,7 @@ import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { formatTempDual } from "@/lib/weather/format";
 import { weatherPageHref } from "@/lib/weather/links";
 import { WeatherIcon } from "@/components/weather/WeatherIcon";
+import { WeatherAtmosphereScene } from "@/components/weather/WeatherAtmosphereScene";
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { nearTermRainShortCopy } from "@/components/weather/NearTermRainLine";
 import { cn } from "@/lib/utils";
@@ -45,6 +46,7 @@ export function WeatherIconButton({
   const actionLabel = weatherActionLabel(weather.actionGuidance);
   return (
     <div className={cn("weather-icon-button", className)}>
+      <WeatherAtmosphereScene iconKey={weather.iconKey} />
       <Link
         href={weatherPageHref(weather.locationKey)}
         className="weather-icon-button__icon-link"

@@ -20,8 +20,8 @@ assert.ok(
   "Today should surface weather action guidance."
 );
 assert.ok(
-  tonight.includes("ForecastTimeline"),
-  "Tonight should keep timeline weather guidance."
+  tonight.includes("WeatherStatusStrip"),
+  "Tonight should use the same weather action guidance surface as Today."
 );
 
 console.log("Weather action guidance contract passed.");

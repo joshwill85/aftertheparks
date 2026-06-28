@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { BrandMark } from "@/components/brand/BrandAsset";
+import { BrandAsset } from "@/components/brand/BrandAsset";
 import { resolveBrowseNavHref } from "@/lib/explore/browseParams";
 import { PlanNavLink } from "@/components/plan/PlanNavLink";
 import { cn } from "@/lib/utils";
@@ -33,17 +33,15 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-3">
           <Link
             href="/"
-            className="flex min-w-0 items-center"
+            className="site-brand"
             aria-label="After the Parks home"
           >
-            <span className="hidden sm:block">
-              <BrandMark
-                variant="header"
-                className="brand-mark--header"
-                priority
-              />
-            </span>
-            <span className="font-display truncate text-lg font-semibold tracking-tight text-[var(--color-foreground)] sm:hidden">
+            <BrandAsset
+              asset="guide-companion"
+              className="site-brand__icon"
+              priority
+            />
+            <span className="site-brand__text">
               After the Parks
             </span>
           </Link>

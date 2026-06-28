@@ -3,15 +3,32 @@ import { getPlanShare } from "@/lib/data/activities";
 import { BrandMark, BrandMotif } from "@/components/brand/BrandAsset";
 import type { PlanItem } from "@/lib/types/occurrence";
 import { notFound } from "next/navigation";
+import { buildSocialMetadata } from "@/lib/seo/metadata";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Shared resort plan | After the Parks",
-  description:
-    "View-only legacy shared After the Parks plan snapshot.",
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ shareId: string }>;
+}): Promise<Metadata> {
+  const { shareId } = await params;
+  const description =
+    "Find movies under the stars, campfires, pool breaks, resort activities, and no-park-day ideas.";
+
+  return {
+    title: "After the Parks",
+    description,
+    robots: { index: false, follow: true },
+    ...buildSocialMetadata({
+      title: "After the Parks",
+      description,
+      path: `/plan/${shareId}`,
+      imageSummary:
+        "Movies under the stars, campfires, pool breaks, resort activities, and no-park-day ideas in one beautiful guide.",
+    }),
+  };
+}
 
 export default async function PlanSharePage({
   params,

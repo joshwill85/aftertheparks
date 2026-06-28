@@ -32,12 +32,23 @@ for (const file of files) {
 }
 
 const iconButton = readFileSync("components/weather/WeatherIconButton.tsx", "utf8");
+const atmosphereScene = readFileSync("components/weather/WeatherAtmosphereScene.tsx", "utf8");
 assert.match(iconButton, /aria-label/);
 assert.match(iconButton, /formatTempDual/);
 assert.match(iconButton, /WeatherFreshnessLine/);
 assert.match(iconButton, /next\/link/);
 assert.match(iconButton, /weatherPageHref\(weather\.locationKey\)/);
 assert.match(iconButton, /weather-icon-button__icon-link/);
+assert.match(
+  atmosphereScene,
+  /useEffect/,
+  "Decorative weather atmosphere SVGs should mount client-side to avoid SSR/client element order mismatches."
+);
+assert.match(
+  atmosphereScene,
+  /if \(!mounted\) return null/,
+  "Decorative weather atmosphere SVGs should be absent from SSR and initial hydration."
+);
 
 const popover = readFileSync("components/weather/WeatherTimeSpanPopover.tsx", "utf8");
 assert.match(popover, /hourlyBreakdown/);
@@ -86,9 +97,15 @@ assert.doesNotMatch(
 );
 
 const freshness = readFileSync("lib/weather/freshness.ts", "utf8");
+const freshnessLine = readFileSync("components/weather/WeatherFreshnessLine.tsx", "utf8");
 assert.match(freshness, /Updated \${minutes} min ago/);
 assert.match(freshness, /Hourly forecast/);
 assert.match(freshness, /weatherLocationLabel/);
+assert.match(
+  freshnessLine,
+  /suppressHydrationWarning/,
+  "Relative weather freshness copy should not trigger hydration mismatches when preloaded weather is rendered."
+);
 
 const tokens = readFileSync("src/styles/tokens.css", "utf8");
 for (const token of [

@@ -143,11 +143,6 @@ export function EventCard({
     <>
       <EventMediaDisplay media={media} size="card" resortSlug={resortSlug} />
       <div className="event-card__body">
-        {showStoryWatermark && resortSlug && (
-          <span className="event-card__story-watermark" aria-hidden>
-            <ResortStoryIcon slug={resortSlug} />
-          </span>
-        )}
         <EventTitleBlock
           title={title}
           resort={resort}
@@ -197,6 +192,12 @@ export function EventCard({
         className
       )}
     >
+      {showStoryWatermark && resortSlug && (
+        <span className="event-card__story-watermark" aria-hidden>
+          <ResortStoryIcon slug={resortSlug} />
+        </span>
+      )}
+
       {onOpen ? (
         <button
           type="button"

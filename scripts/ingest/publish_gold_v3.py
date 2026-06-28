@@ -143,6 +143,85 @@ def _manual_review_field_mismatches(row: dict[str, Any], approved_fields: dict[s
     return mismatches
 
 
+def _lineage_errors(row: dict[str, Any], index: int) -> list[str]:
+    errors: list[str] = []
+    pipeline_version = str(row.get("pipeline_version") or "").strip()
+    config_hash = str(row.get("config_hash") or "").strip()
+    runtime_lineage = row.get("runtime_lineage")
+
+    if not pipeline_version:
+        errors.append(f"row_missing_pipeline_version:{index}")
+    if not config_hash:
+        errors.append(f"row_missing_config_hash:{index}")
+    if not isinstance(runtime_lineage, dict):
+        errors.append(f"row_missing_runtime_lineage:{index}")
+        return errors
+
+    lineage_config_hash = str(runtime_lineage.get("config_hash") or "").strip()
+    if not lineage_config_hash:
+        errors.append(f"row_missing_runtime_lineage_config_hash:{index}")
+    elif config_hash and lineage_config_hash != config_hash:
+        errors.append(f"row_runtime_lineage_config_hash_mismatch:{index}")
+    if not str(runtime_lineage.get("lineage_hash") or "").strip():
+        errors.append(f"row_missing_runtime_lineage_hash:{index}")
+    if not isinstance(runtime_lineage.get("package_versions"), dict) or not runtime_lineage.get("package_versions"):
+        errors.append(f"row_missing_package_versions:{index}")
+    if not isinstance(runtime_lineage.get("model_asset_hashes"), dict) or not runtime_lineage.get("model_asset_hashes"):
+        errors.append(f"row_missing_model_asset_hashes:{index}")
+    return errors
+
+
+def _source_provenance_errors(row: dict[str, Any], index: int) -> list[str]:
+    errors: list[str] = []
+    source_kind = str(row.get("source_kind") or "").strip()
+    if not source_kind:
+        errors.append(f"row_missing_source_kind:{index}")
+    elif not source_kind.startswith("official_"):
+        errors.append(f"row_non_official_source:{index}")
+
+    http_status = row.get("http_status")
+    try:
+        status_code = int(http_status)
+    except (TypeError, ValueError):
+        status_code = 0
+    if status_code < 200 or status_code >= 300:
+        errors.append(f"row_source_fetch_not_successful:{index}")
+
+    if str(row.get("currentness") or "").strip().lower() != "current":
+        errors.append(f"row_source_not_current:{index}")
+    if not str(row.get("captured_at") or "").strip():
+        errors.append(f"row_missing_source_captured_at:{index}")
+    return errors
+
+
+def _region_errors(row: dict[str, Any], index: int) -> list[str]:
+    errors: list[str] = []
+    if not str(row.get("region_id") or "").strip():
+        errors.append(f"row_missing_region_id:{index}")
+    if not str(row.get("region_type") or "").strip():
+        errors.append(f"row_missing_region_type:{index}")
+
+    evidence = row.get("field_evidence")
+    region_evidence = evidence.get("region") if isinstance(evidence, dict) else None
+    region_source = region_evidence.get("source") if isinstance(region_evidence, dict) else None
+    if not isinstance(region_source, dict):
+        errors.append(f"row_missing_region_evidence:{index}")
+        return errors
+    if not region_source.get("content_sha256"):
+        errors.append(f"row_missing_region_content_sha256:{index}")
+    if not region_source.get("page_image_sha256"):
+        errors.append(f"row_missing_region_page_image_sha256:{index}")
+    if region_source.get("page_number") in {None, ""}:
+        errors.append(f"row_missing_region_page_number:{index}")
+    if not region_source.get("bbox_px"):
+        errors.append(f"row_missing_region_bbox_px:{index}")
+    if not region_source.get("crop_sha256"):
+        errors.append(f"row_missing_region_crop_sha256:{index}")
+    if not region_source.get("crop_storage_path") and not region_source.get("crop_path"):
+        errors.append(f"row_missing_region_crop_path:{index}")
+    return errors
+
+
 def load_publish_flags(path: Path = DEFAULT_FLAGS_PATH) -> dict[str, Any]:
     flags: dict[str, Any] = {
         "public_gold_source": "v2",
@@ -189,6 +268,9 @@ def evaluate_publish_readiness(
         if not isinstance(row, dict):
             errors.append(f"invalid_row:{index}")
             continue
+        errors.extend(_lineage_errors(row, index))
+        errors.extend(_source_provenance_errors(row, index))
+        errors.extend(_region_errors(row, index))
         if not row.get("source_document_id"):
             errors.append(f"row_missing_source_document_id:{index}")
         if row.get("validation_findings"):

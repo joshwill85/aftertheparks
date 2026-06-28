@@ -157,6 +157,44 @@ assert.equal(
 );
 assert.equal(manualSourceOccurrence.source?.documentHash, "b".repeat(64));
 
+const [reviewedVisualMissingUrlOccurrence] = mapGoldActivityRowToOccurrences(
+  {
+    ...row,
+    id: "gold-reviewed-visual-missing-url",
+    activity_catalog_id: "reviewed-visual-missing-url-catalog",
+    calendar_group_key: "fort-wilderness",
+    resort_slugs: ["campsites-at-fort-wilderness-resort"],
+    canonical_slug: "campfire-bingo",
+    title: "Campfire Bingo",
+    category: "campfire",
+    source_url: "manual://fort-wilderness/2026-05-26-to-2026-09-08/recreation-activities",
+    source_sha256: "c".repeat(64),
+    source: {
+      documentHash: "c".repeat(64),
+      documentId: "reviewed-visual-doc",
+      documentKeyLegends: [],
+    },
+    field_provenance: {
+      title: [{ page: 1, text: "Campfire Bingo", source: "reviewed_visual_schedule_image" }],
+      schedule: [{ page: 1, text: "Tuesdays and Fridays at 7:00 PM", source: "reviewed_visual_schedule_image" }],
+      location: [{ page: 1, text: "Campfire Area", source: "reviewed_visual_schedule_image" }],
+    } as unknown as GoldActivityRow["field_provenance"],
+  },
+  {
+    dateRangeDays: 1,
+    referenceDate: new Date("2026-06-21T12:00:00Z"),
+  }
+);
+assert.equal(
+  reviewedVisualMissingUrlOccurrence.source?.url,
+  "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/",
+  "Reviewed Fort Wilderness visual rows with DB-era missing URLs should recover the public canonical Disney page"
+);
+assert.equal(
+  reviewedVisualMissingUrlOccurrence.freshness.sourceUrl,
+  "https://disneyworld.disney.go.com/resorts/campsites-at-fort-wilderness-resort/recreation/"
+);
+
 const openWindowDisplay = toDisplayActivity(occurrence);
 const openWindowCard = activityToEventCard(occurrence, openWindowDisplay);
 assert.ok(

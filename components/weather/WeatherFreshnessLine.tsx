@@ -17,7 +17,10 @@ export function WeatherFreshnessLine({
   className?: string;
 }) {
   return (
-    <span className={cn("weather-freshness-line", className)}>
+    <span
+      className={cn("weather-freshness-line", className)}
+      suppressHydrationWarning
+    >
       {formatWeatherFreshness(weather)}
     </span>
   );

@@ -15,7 +15,6 @@ import {
 import { cn } from "@/lib/utils";
 import { FilterRail } from "@/components/explore/FilterRail";
 import { FilterSheet } from "@/components/explore/FilterSheet";
-import { BrowseDayTabs } from "@/components/explore/BrowseDayTabs";
 import { usePlan } from "@/components/atlas/PlanProvider";
 
 export type BrowseFilterVariant = "today" | "tonight" | "explore";
@@ -80,8 +79,6 @@ export function BrowseFilterShell({
         `browse-filter-shell--${variant}`
       )}
     >
-      <BrowseDayTabs className="mb-5" />
-
       <div className="grid grid-cols-1 gap-6 min-[900px]:grid-cols-[280px_minmax(0,1fr)] lg:gap-6">
         <div className="filter-rail-wrapper hidden min-[900px]:block">
           <div className="filter-rail-scroll-frame sticky top-24">

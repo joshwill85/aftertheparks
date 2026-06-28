@@ -5,6 +5,7 @@ import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { formatTempDual } from "@/lib/weather/format";
 import { weatherPageHref } from "@/lib/weather/links";
 import { WeatherIcon } from "@/components/weather/WeatherIcon";
+import { WeatherAtmosphereScene } from "@/components/weather/WeatherAtmosphereScene";
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { NearTermRainLine } from "@/components/weather/NearTermRainLine";
 import { cn } from "@/lib/utils";
@@ -129,6 +130,7 @@ export function EventWeatherSignal({
         className
       )}
     >
+      <WeatherAtmosphereScene iconKey={guidance.iconKey} />
       <span
         role="link"
         tabIndex={0}

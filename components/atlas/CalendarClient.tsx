@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   format,
   startOfMonth,
@@ -15,7 +15,12 @@ import { useRouter } from "next/navigation";
 import { EventCard } from "@/components/events/EventCard";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { IconGlyph } from "@/components/icons/IconGlyph";
-import { addOrlandoDays, getDayOfWeekIndex, TIMEZONE } from "@/lib/daypart";
+import {
+  addOrlandoDays,
+  getDayOfWeekIndex,
+  orlandoDateString,
+  TIMEZONE,
+} from "@/lib/daypart";
 import {
   buildPlanAheadHref,
   parsePlanAheadParams,
@@ -35,6 +40,7 @@ import type {
   ActivityOccurrence,
   Daypart,
 } from "@/lib/types/occurrence";
+import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
 const AREA_OPTIONS: Array<{ value: ActivityAreaFilter; label: string }> = [
   { value: "magic-kingdom", label: "Magic Kingdom area" },
@@ -65,6 +71,15 @@ function nextWeekendRange(start: string): { start: string; end: string } {
   const daysUntilFriday = (5 - day + 7) % 7;
   const friday = addOrlandoDays(start, daysUntilFriday);
   return { start: friday, end: addOrlandoDays(friday, 2) };
+}
+
+function countLabel(count: number, singular: string, plural = `${singular}s`): string {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
+function formatInsightDate(date: string, today: string): string {
+  if (date === addOrlandoDays(today, 1)) return "Tomorrow";
+  return format(dateForMonth(date), "EEE, MMM d");
 }
 
 function CalendarDensityBands({ summary }: { summary: CalendarDaySummary }) {
@@ -140,14 +155,18 @@ function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
 export function CalendarClient({
   occurrences,
   initialPlanAhead,
+  initialWeatherById = {},
 }: {
   occurrences: ActivityOccurrence[];
   initialPlanAhead: PlanAheadParams;
+  initialWeatherById?: Record<string, WeatherForTimeSpan>;
 }) {
   const router = useRouter();
   const { addActivity, isActivitySaved } = usePlan();
   const [planAhead, setPlanAhead] = useState(initialPlanAhead);
   const [month, setMonth] = useState(dateForMonth(initialPlanAhead.selected));
+  const [weatherById, setWeatherById] =
+    useState<Record<string, WeatherForTimeSpan>>(initialWeatherById);
   const selectedDate = planAhead.selected;
   const startDate = planAhead.start;
   const endDate = planAhead.end;
@@ -155,6 +174,7 @@ export function CalendarClient({
   const categoryFilter = planAhead.category ?? "all";
   const areaFilter = planAhead.area ?? "all";
   const daypartFilter = planAhead.daypart ?? "all";
+  const todayKey = orlandoDateString();
 
   const applyPlanAhead = (next: Partial<PlanAheadParams>) => {
     const normalized = parsePlanAheadParams({ ...planAhead, ...next });
@@ -251,15 +271,56 @@ export function CalendarClient({
   );
   const selectedSummary = getCalendarDaySummary(daySummaries, selectedDate);
   const insights = useMemo(
-    () => buildFutureActivityInsights(visibleOccurrences, { start: startDate, end: endDate }),
-    [endDate, startDate, visibleOccurrences]
+    () =>
+      buildFutureActivityInsights(visibleOccurrences, {
+        start: startDate,
+        end: endDate,
+        today: todayKey,
+      }),
+    [endDate, startDate, todayKey, visibleOccurrences]
   );
+  const bestDate = insights.topDates[0];
+  const bestResort = insights.topResorts[0];
+  const bestEveningDate = insights.eveningDates[0];
+  const bestFreeDate = insights.freeHeavyDates[0];
   const emptyMessage =
     selectedDate < startDate || selectedDate > endDate
       ? "This selected date is outside your Plan Ahead range. Choose a date inside the range."
       : visibleOccurrences.length === 0
         ? "No activities match these filters in this date range."
         : "No activities from current resort calendars match this date yet.";
+
+  useEffect(() => {
+    const dated = selectedActivities
+      .filter((activity) => activity.startDateTime)
+      .filter((activity) => !weatherById[activity.id])
+      .map((activity) => ({
+        id: activity.id,
+        resortSlug: activity.resort.slug,
+        startsAt: activity.startDateTime!,
+        endsAt: activity.endDateTime,
+        activitySlug: activity.activitySlug,
+        timeBasis: "exact_event_time" as const,
+        timeBasisLabel: "Exact event time",
+      }));
+    if (dated.length === 0) return;
+    let cancelled = false;
+    fetch("/api/weather/guidance/batch", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ occurrences: dated }),
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body: { weatherById?: Record<string, WeatherForTimeSpan> } | null) => {
+        if (!cancelled && body?.weatherById) {
+          setWeatherById((current) => ({ ...current, ...body.weatherById }));
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedActivities, weatherById]);
 
   return (
     <div className="calendar-shell space-y-6">
@@ -395,35 +456,67 @@ export function CalendarClient({
 
       <div className="plan-ahead-insights" aria-label="Plan Ahead insights">
         <InsightCard
-          label="Best date"
-          value={
-            insights.topDates[0]
-              ? `${format(dateForMonth(insights.topDates[0].date), "MMM d")} · ${insights.topDates[0].count}`
-              : "No matches"
+          eyebrow="Best day to browse"
+          title={bestDate ? formatInsightDate(bestDate.date, todayKey) : "No future matches"}
+          description={
+            bestDate
+              ? "Most activities in your future window."
+              : "Try widening the day range or clearing a filter."
+          }
+          statLabel={
+            bestDate
+              ? `${countLabel(bestDate.count, "activity", "activities")} listed`
+              : "Tomorrow onward"
           }
         />
         <InsightCard
-          label="Best resort"
-          value={
-            insights.topResorts[0]
-              ? `${insights.topResorts[0].name} · ${insights.topResorts[0].count}`
-              : "No matches"
+          eyebrow="Most options at one resort"
+          title={bestResort ? bestResort.name : "No resort stands out"}
+          description={
+            bestResort
+              ? "Best starting point if you want one place with lots to do."
+              : "Future matches will appear as calendars fill in."
+          }
+          statLabel={
+            bestResort
+              ? `${countLabel(bestResort.count, "future activity", "future activities")}`
+              : "Future window"
           }
         />
         <InsightCard
-          label="Evening strongest"
-          value={
-            insights.eveningDates[0]
-              ? `${format(dateForMonth(insights.eveningDates[0].date), "MMM d")} · ${insights.eveningDates[0].eveningCount}`
-              : "No evening matches"
+          eyebrow="Best after-dark day"
+          title={
+            bestEveningDate
+              ? formatInsightDate(bestEveningDate.date, todayKey)
+              : "No evening standout"
+          }
+          description={
+            bestEveningDate
+              ? "Most evening and starlight activities."
+              : "No future evening-heavy day matches yet."
+          }
+          statLabel={
+            bestEveningDate
+              ? `${countLabel(bestEveningDate.eveningCount, "after-dark option")}`
+              : "Evening picks"
           }
         />
         <InsightCard
-          label="Free-heavy date"
-          value={
-            insights.freeHeavyDates[0]
-              ? `${format(dateForMonth(insights.freeHeavyDates[0].date), "MMM d")} · ${insights.freeHeavyDates[0].freeCount}`
-              : "No free matches"
+          eyebrow="Best no-cost day"
+          title={
+            bestFreeDate
+              ? formatInsightDate(bestFreeDate.date, todayKey)
+              : "No free standout"
+          }
+          description={
+            bestFreeDate
+              ? "Most free activities in the future window."
+              : "No future free-heavy day matches yet."
+          }
+          statLabel={
+            bestFreeDate
+              ? `${countLabel(bestFreeDate.freeCount, "free activity", "free activities")}`
+              : "Free picks"
           }
         />
       </div>
@@ -523,6 +616,7 @@ export function CalendarClient({
               <EventCard
                 key={activity.id}
                 {...card}
+                weatherSummary={weatherById[activity.id]}
                 saved={isActivitySaved(activity)}
                 onSave={() => addActivity(activity)}
               />
@@ -539,11 +633,23 @@ export function CalendarClient({
   );
 }
 
-function InsightCard({ label, value }: { label: string; value: string }) {
+function InsightCard({
+  eyebrow,
+  title,
+  description,
+  statLabel,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  statLabel: string;
+}) {
   return (
     <div className="plan-ahead-insight">
-      <p>{label}</p>
-      <strong>{value}</strong>
+      <p className="plan-ahead-insight__eyebrow">{eyebrow}</p>
+      <strong className="plan-ahead-insight__title">{title}</strong>
+      <span className="plan-ahead-insight__copy">{description}</span>
+      <span className="plan-ahead-insight__stat">{statLabel}</span>
     </div>
   );
 }

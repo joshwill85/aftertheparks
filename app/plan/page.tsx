@@ -3,13 +3,22 @@ import { PlanPageClient } from "@/components/atlas/PlanPageClient";
 import { Hero } from "@/components/atlas/Hero";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 import { getResorts } from "@/lib/data/activities";
+import { buildSocialMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = {
-  title: "My Plan | After the Parks",
+  title: "My Plan",
   description:
     "Private After the Parks resort-day planning workspace for saved activities and shared trip ideas.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/plan" },
+  ...buildSocialMetadata({
+    title: "After the Parks",
+    description:
+      "Find movies under the stars, campfires, pool breaks, resort activities, and no-park-day ideas.",
+    path: "/plan",
+    imageSummary:
+      "Movies under the stars, campfires, pool breaks, resort activities, and no-park-day ideas in one beautiful guide.",
+  }),
 };
 
 export default async function PlanPage() {

@@ -52,6 +52,9 @@ async function main() {
   const { generateMetadata: activityMetadata } = await import("@/app/activities/[slug]/page");
   const { generateMetadata: resortMetadata } = await import("@/app/resorts/[slug]/page");
   const { generateMetadata: guideMetadata } = await import("@/app/guides/[slug]/page");
+  const { metadata: planMetadata } = await import("@/app/plan/page");
+  const { generateMetadata: publicPlanMetadata } = await import("@/app/p/[shareToken]/page");
+  const { generateMetadata: legacyPlanMetadata } = await import("@/app/plan/[shareId]/page");
 
   const layoutSource = readFileSync("app/layout.tsx", "utf8");
   assert.match(layoutSource, /metadataBase/, "root layout should define metadataBase");
@@ -107,6 +110,19 @@ async function main() {
         searchParams: Promise.resolve({}),
       }),
       "tonight page",
+    ],
+    [planMetadata, "my plan page"],
+    [
+      await publicPlanMetadata({
+        params: Promise.resolve({ shareToken: "share-token" }),
+      }),
+      "public shared plan page",
+    ],
+    [
+      await legacyPlanMetadata({
+        params: Promise.resolve({ shareId: "share-id" }),
+      }),
+      "legacy shared plan page",
     ],
   ] as const) {
     assertSocialMetadata(metadata, label);
