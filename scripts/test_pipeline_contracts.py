@@ -50,7 +50,7 @@ from scripts.ingest.review_queue import (
     record_review_decision,
 )
 from scripts.ingest.publish import ALLOW_LEGACY_PUBLISH_ENV, publish_all as publish_legacy_temporal_all
-from scripts.ingest.run_pipeline import publish_steps, validation_gate_steps
+from scripts.ingest.run_pipeline import publish_steps, validation_gate_steps, vision_v3_report_steps
 from scripts.ingest.trust_report import build_trust_report, render_markdown_report
 from scripts.ingest.validate_v2 import validate_fixture_extractions, validate_fixture_paths
 from scripts.ingest import backfill_all_times, backfill_movie_times
@@ -2475,6 +2475,35 @@ class PipelineContractsTest(unittest.TestCase):
                 ("thursday", "Toy Story 3", "8:30PM"),
                 ("friday", "High School Musical 2", "8:30PM"),
                 ("saturday", "Moana", "8:30PM"),
+            ],
+            [
+                (
+                    night["day_of_week"],
+                    night["movie_title"],
+                    night["show_time"],
+                )
+                for night in movie["movie_nights"]
+            ],
+        )
+
+    def test_current_all_star_music_extracts_source_movie_titles(self) -> None:
+        candidates = extract_candidates_for_pdf(
+            pdf_path=CURRENT_ALL_STAR_MUSIC_PDF,
+            calendar_group_key="all-star-music",
+        )
+        movie = next(
+            candidate["normalized_fields"]
+            for candidate in candidates
+            if candidate["normalized_fields"]["slug"] == "movie-under-the-stars"
+        )
+
+        self.assertEqual("Calypso Pool Deck | 8:30PM", movie["schedule"]["text"])
+        self.assertEqual(
+            [
+                ("sunday", "Moana", "8:30PM"),
+                ("tuesday", "Bambi", "8:30PM"),
+                ("thursday", "Frozen 2", "8:30PM"),
+                ("saturday", "The Incredibles", "8:30PM"),
             ],
             [
                 (
@@ -5996,6 +6025,11 @@ class PipelineContractsTest(unittest.TestCase):
         steps = validation_gate_steps(local_only=False)
 
         self.assertIn(("audit_coverage.py", "--require-production-ready"), steps)
+        self.assertIn(("trust_report.py",), steps)
+        self.assertLess(
+            steps.index(("audit_coverage.py", "--require-production-ready")),
+            steps.index(("trust_report.py",)),
+        )
 
     def test_production_pipeline_publishes_gold_and_official_paths(self) -> None:
         steps = publish_steps(local_only=False, has_service_role=True)
@@ -6009,6 +6043,69 @@ class PipelineContractsTest(unittest.TestCase):
             steps,
         )
         self.assertNotIn(("publish.py",), steps)
+
+    def test_vision_v3_pipeline_lane_requires_quarter_for_production_readiness(self) -> None:
+        with self.assertRaisesRegex(ValueError, "vision_v3_quarter_required"):
+            vision_v3_report_steps(local_only=False)
+
+    def test_vision_v3_pipeline_lane_is_report_only_until_explicit_publish(self) -> None:
+        steps = vision_v3_report_steps(local_only=False, quarter="fy26-q4")
+
+        self.assertEqual(
+            [
+                ("evaluate_activity_extraction.py",),
+                ("render_source_pages.py", "--quarter", "fy26-q4"),
+                ("vision_snapshot.py", "--attach-regions", "--quarter", "fy26-q4"),
+                ("extract_v3.py", "--quarter", "fy26-q4"),
+                ("validate_v3.py", "--quarter", "fy26-q4"),
+                ("source_status_v3.py",),
+                ("source_metrics_v3.py",),
+                ("source_drift_report.py", "--quarter", "fy26-q4"),
+                ("build_review_queue_v3.py",),
+                ("promote_gold_v3.py", "--preview", "--include-approved-review"),
+                (
+                    "v3_dual_run_report.py",
+                    "--v2",
+                    "data/processed/activity_gold_v2_preview.json",
+                    "--v3",
+                    "data/processed/activity_gold_v3_preview.json",
+                    "--review-tasks",
+                    "data/processed/review_queue/vision_v3_review_queue.json",
+                ),
+                ("trust_report.py",),
+                ("publish_gold_v3.py", "--require-clean-preview", "--json"),
+            ],
+            steps,
+        )
+        self.assertLess(
+            steps.index(("trust_report.py",)),
+            steps.index(("publish_gold_v3.py", "--require-clean-preview", "--json")),
+        )
+        self.assertNotIn(("publish_gold_v3.py", "--publish"), steps)
+        self.assertNotIn(("publish_gold_v2.py",), steps)
+
+    def test_vision_v3_quarter_lane_generates_source_drift_before_review_and_readiness(self) -> None:
+        steps = vision_v3_report_steps(local_only=False, quarter="fy26-q4")
+
+        self.assertIn(("render_source_pages.py", "--quarter", "fy26-q4"), steps)
+        self.assertIn(("vision_snapshot.py", "--attach-regions", "--quarter", "fy26-q4"), steps)
+        self.assertIn(("extract_v3.py", "--quarter", "fy26-q4"), steps)
+        self.assertIn(("validate_v3.py", "--quarter", "fy26-q4"), steps)
+        self.assertIn(("source_drift_report.py", "--quarter", "fy26-q4"), steps)
+        self.assertLess(
+            steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
+            steps.index(("build_review_queue_v3.py",)),
+        )
+        self.assertLess(
+            steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
+            steps.index(("publish_gold_v3.py", "--require-clean-preview", "--json")),
+        )
+
+    def test_local_vision_v3_pipeline_lane_skips_publish_readiness_gate(self) -> None:
+        steps = vision_v3_report_steps(local_only=True)
+
+        self.assertIn(("promote_gold_v3.py", "--preview", "--include-approved-review"), steps)
+        self.assertNotIn(("publish_gold_v3.py", "--require-clean-preview", "--json"), steps)
 
     def test_pipeline_skips_publish_without_service_role_or_local_only(self) -> None:
         self.assertEqual([], publish_steps(local_only=True, has_service_role=True))
@@ -6038,6 +6135,7 @@ class PipelineContractsTest(unittest.TestCase):
         steps = validation_gate_steps(local_only=True)
 
         self.assertIn(("audit_coverage.py",), steps)
+        self.assertIn(("trust_report.py",), steps)
         self.assertNotIn(("audit_coverage.py", "--require-production-ready"), steps)
 
     def test_pipeline_builds_mrg_facts_before_gold_promotion(self) -> None:

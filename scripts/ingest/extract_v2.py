@@ -703,8 +703,12 @@ def _repair_ocr_movie_title(text: str) -> str | None:
         return "Cinderella"
     if "ZOOTOPIA2" in compact or "LOOCOPIC2" in compact:
         return "Zootopia 2"
-    if "FROZEN" in compact or "FFOZEN" in compact:
+    if re.search(r"F(?:ROZEN|TOZEN|FOZEN)2", compact):
+        return "Frozen 2"
+    if "FROZEN" in compact or "FFOZEN" in compact or "FTOZEN" in compact:
         return "Frozen"
+    if "BAMBI" in compact or "BOIMDI" in compact or "BOMDI" in compact:
+        return "Bambi"
     if "ALADDIN1992" in compact:
         return "Aladdin (1992)"
     if "ALADDIN" in compact:
@@ -721,6 +725,8 @@ def _repair_ocr_movie_title(text: str) -> str | None:
         return "Mulan (1998)"
     if "MULAN" in compact:
         return "Mulan"
+    if "INCREDIBLES" in compact:
+        return "The Incredibles"
     if re.search(r"M(?:OANA|OGNG|OGNA|ONA)\b", compact):
         return "Moana"
     return None

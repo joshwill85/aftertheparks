@@ -170,6 +170,13 @@ check("primary UI surfaces expose Now and Plan Ahead", () => {
   const mobile = readFileSync("components/layout/MobileBottomNav.tsx", "utf8");
   const quickFinder = readFileSync("components/home/QuickFinder.tsx", "utf8");
   const footer = readFileSync("components/layout/SiteFooter.tsx", "utf8");
+  const globalsCss = readFileSync("app/globals.css", "utf8");
+  const nowSplitHalfCss =
+    globalsCss.match(/\.mobile-now-split__half\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
+  const nowSplitIconCss =
+    globalsCss.match(/\.mobile-now-split__half svg\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
+  const nowSplitLabelCss =
+    globalsCss.match(/\.mobile-now-split__half > span\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
 
   assert.match(header, /aria-label="Now"/);
   assert.match(header, /Plan Ahead/);
@@ -179,6 +186,13 @@ check("primary UI surfaces expose Now and Plan Ahead", () => {
   assert.match(quickFinder, /Plan ahead/);
   assert.match(quickFinder, /\/calendar/);
   assert.match(footer, /Plan Ahead/);
+  assert.match(nowSplitHalfCss, /display:\s*grid;/);
+  assert.match(nowSplitHalfCss, /place-items:\s*center;/);
+  assert.match(nowSplitHalfCss, /align-content:\s*center;/);
+  assert.match(nowSplitHalfCss, /line-height:\s*1;/);
+  assert.doesNotMatch(nowSplitHalfCss, /grid-template-rows:/);
+  assert.match(nowSplitIconCss, /display:\s*none;/);
+  assert.match(nowSplitLabelCss, /line-height:\s*1;/);
 });
 
 check("known stay surfaces link to date-filtered Plan Ahead", () => {

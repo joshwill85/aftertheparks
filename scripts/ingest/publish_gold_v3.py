@@ -1,16 +1,18 @@
 """Guarded v3 publisher entrypoint.
 
-This module intentionally does not write public tables yet. It verifies the v3
-preview and feature flag state so production publication cannot happen by
-accident while the v3 pipeline is still in dual-run/report-only mode.
+By default this module only verifies the v3 preview and feature flag state.
+It writes public tables only when invoked with the explicit --publish flag.
 """
 
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
+import uuid
 from urllib.parse import urlparse
 
 try:
@@ -18,14 +20,36 @@ try:
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR, ROOT
 
+try:
+    from db import SupabaseClient
+except ImportError:  # pragma: no cover - supports package-style imports
+    try:
+        from .db import SupabaseClient
+    except ImportError:  # pragma: no cover
+        SupabaseClient = None  # type: ignore[assignment]
+
 
 DEFAULT_FLAGS_PATH = ROOT / "config" / "publish_flags.yaml"
 DEFAULT_PREVIEW_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
+DEFAULT_MONITORING_REPORT_PATH = PROCESSED_DIR / "source_trust_monitoring_report.json"
 CRITICAL_FIELD_EVIDENCE = ("title", "schedule", "location", "fee")
 MOVIE_CRITICAL_FIELD_EVIDENCE = ("movie_title",)
 PROMOTABLE_ROW_STATUSES = {"auto_publishable", "manually_approved"}
+
+
+def _stable_uuid(key: str) -> str:
+    return str(uuid.UUID(bytes=bytes.fromhex(hashlib.md5(key.encode()).hexdigest())))
+
+
+def _db_category(row: dict[str, Any]) -> str:
+    category = str(row.get("category") or "resort_activity")
+    return {
+        "character": "character_experience",
+        "scavenger_hunt": "resort_activity",
+        "sports_games": "resort_activity",
+    }.get(category, category)
 
 
 def _is_public_source_url(value: Any) -> bool:
@@ -44,6 +68,18 @@ def _list_flag(value: Any) -> list[str]:
             raw = raw[1:-1]
         raw_items = raw.split(",")
     return [str(item).strip() for item in raw_items if str(item).strip()]
+
+
+def _parse_iso_datetime(value: Any) -> datetime | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        return datetime.fromisoformat(text)
+    except ValueError:
+        return None
 
 
 def _field_page_hashes(row: dict[str, Any]) -> set[str]:
@@ -141,6 +177,80 @@ def _manual_review_field_mismatches(row: dict[str, Any], approved_fields: dict[s
         if approved_field.get("normalized_value") != _row_normalized_value(row, str(field_name)):
             mismatches.append(str(field_name))
     return mismatches
+
+
+def _source_drift_report_errors(source_drift_report: dict[str, Any]) -> list[str]:
+    status = source_drift_report.get("status")
+    if status == "reviewed":
+        errors: list[str] = []
+        review_decision = source_drift_report.get("review_decision")
+        decision = review_decision.get("decision") if isinstance(review_decision, dict) else None
+        if source_drift_report.get("review_status") != "manual_review_approved" or decision not in {"approve", "edit"}:
+            errors.append("source_drift_report_missing_review_approval")
+        reviewed_task_ids = source_drift_report.get("reviewed_source_drift_task_ids")
+        missing_task_ids = source_drift_report.get("missing_source_drift_task_ids")
+        if not isinstance(reviewed_task_ids, list) or not isinstance(missing_task_ids, list):
+            errors.append("source_drift_report_missing_review_manifest")
+        elif not reviewed_task_ids:
+            errors.append("source_drift_report_missing_reviewed_tasks")
+        elif sorted(str(task_id) for task_id in reviewed_task_ids) != _required_source_drift_task_ids(
+            source_drift_report
+        ):
+            errors.append("source_drift_report_review_manifest_mismatch")
+        if isinstance(missing_task_ids, list) and missing_task_ids:
+            errors.append("source_drift_report_missing_reviewed_tasks")
+        if not isinstance(review_decision, dict):
+            errors.append("source_drift_report_missing_review_decision")
+            return errors
+        if not str(review_decision.get("reviewer") or "").strip():
+            errors.append("source_drift_report_missing_reviewer")
+        if not str(review_decision.get("decided_at") or "").strip():
+            errors.append("source_drift_report_missing_decided_at")
+        if not str(review_decision.get("reason") or "").strip():
+            errors.append("source_drift_report_missing_reason")
+        return errors
+
+    errors: list[str] = []
+    if status not in {None, "clean"}:
+        errors.append("source_drift_report_blocked")
+    for blocker in source_drift_report.get("publish_blockers") or []:
+        errors.append(str(blocker))
+    return errors
+
+
+def _monitoring_report_errors(monitoring_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    generated_at = _parse_iso_datetime(monitoring_report.get("generated_at"))
+    preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
+    if generated_at is None:
+        errors.append("monitoring_report_missing_generated_at")
+    elif preview_generated_at is not None and generated_at < preview_generated_at:
+        errors.append("monitoring_report_stale")
+    status = str(monitoring_report.get("status") or "").strip()
+    if status not in {"pass", "attention", "blocked"}:
+        errors.append("monitoring_report_invalid_status")
+    if status == "blocked" or monitoring_report.get("recommended_action") == "withhold_publish":
+        errors.append("monitoring_report_blocked")
+    changed_sources = monitoring_report.get("changed_sources")
+    if isinstance(changed_sources, list) and changed_sources:
+        errors.append("monitoring_changed_sources")
+    affected_rows = monitoring_report.get("affected_rows")
+    if isinstance(affected_rows, list) and affected_rows:
+        errors.append("monitoring_affected_rows")
+    return errors
+
+
+def _required_source_drift_task_ids(source_drift_report: dict[str, Any]) -> list[str]:
+    try:
+        from scripts.ingest.build_review_queue_v3 import build_review_tasks
+    except ImportError:  # pragma: no cover - supports package-style imports
+        from .build_review_queue_v3 import build_review_tasks
+
+    return sorted(
+        str(task.get("task_id"))
+        for task in build_review_tasks([], source_drift_report=source_drift_report)
+        if str(task.get("task_id") or "").strip()
+    )
 
 
 def _lineage_errors(row: dict[str, Any], index: int) -> list[str]:
@@ -242,6 +352,196 @@ def load_publish_flags(path: Path = DEFAULT_FLAGS_PATH) -> dict[str, Any]:
     return flags
 
 
+def _source_url(row: dict[str, Any]) -> str:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return str(row.get("source_url") or source.get("canonicalUrl") or source.get("canonical_url") or "")
+
+
+def _source_hash(row: dict[str, Any]) -> str:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return str(row.get("source_sha256") or source.get("documentHash") or source.get("document_hash") or "")
+
+
+def _resort_slugs(row: dict[str, Any]) -> list[str]:
+    resort_slugs = row.get("resort_slugs")
+    if isinstance(resort_slugs, list):
+        return [str(slug) for slug in resort_slugs if str(slug).strip()]
+    resort_slug = str(row.get("resort_slug") or "").strip()
+    return [resort_slug] if resort_slug else []
+
+
+def _public_gold_row_from_v3(row: dict[str, Any], *, promoted_at: str) -> dict[str, Any]:
+    calendar_group_key = str(row.get("calendar_group_key") or "")
+    canonical_slug = str(row.get("canonical_slug") or "")
+    source = dict(row.get("source") or {})
+    source_url = _source_url(row)
+    source_sha256 = _source_hash(row)
+    source.setdefault("url", source_url)
+    source.setdefault("documentHash", source_sha256)
+    source.setdefault("documentId", row.get("source_document_id"))
+    source.setdefault("canonicalUrl", source_url)
+    source["fieldEvidence"] = row.get("field_evidence") or {}
+    source["sourceSpans"] = row.get("source_spans") or {}
+    source["runtimeLineage"] = row.get("runtime_lineage") or {}
+    source["documentFamily"] = row.get("document_family")
+    source["pipelineVersion"] = row.get("pipeline_version")
+    source["configHash"] = row.get("config_hash")
+    source["candidateType"] = row.get("candidate_type")
+    source["movieTitle"] = row.get("movie_title")
+    source["normalizedMovieTitle"] = row.get("normalized_movie_title")
+    source["region"] = {
+        "regionId": row.get("region_id"),
+        "regionType": row.get("region_type"),
+    }
+    return {
+        "id": _stable_uuid(f"gold-v3:{calendar_group_key}:{canonical_slug}"),
+        "activity_catalog_id": row.get("activity_catalog_id")
+        or _stable_uuid(f"activity-catalog:{calendar_group_key}:{canonical_slug}"),
+        "calendar_group_key": calendar_group_key,
+        "resort_slugs": _resort_slugs(row),
+        "canonical_slug": canonical_slug,
+        "title": row.get("title"),
+        "category": _db_category(row),
+        "schedule": row.get("schedule") or {},
+        "location": row.get("location") or {},
+        "description": row.get("description"),
+        "price": row.get("price") or {"state": "unknown"},
+        "claims": row.get("claims") or {},
+        "field_provenance": row.get("source_spans") or {},
+        "source": source,
+        "source_document_id": row.get("source_document_id"),
+        "source_url": source_url,
+        "source_sha256": source_sha256,
+        "source_pdf_edition": row.get("source_pdf_edition") or row.get("edition"),
+        "trust_state": row.get("trust_state") or (
+            "reviewed_source_backed" if row.get("validation_status") == "manually_approved" else "source_backed"
+        ),
+        "valid_from": row.get("valid_from"),
+        "valid_until": row.get("valid_until"),
+        "is_current": True,
+        "promoted_from_candidate_id": row.get("candidate_id"),
+        "promoted_at": promoted_at,
+        "enrichment": row.get("enrichment") or {},
+        "external_facts": row.get("external_facts") or [],
+    }
+
+
+def build_public_gold_rows_from_preview(
+    preview: dict[str, Any],
+    *,
+    promoted_at: str | None = None,
+) -> list[dict[str, Any]]:
+    if preview.get("publication_mode") != "vision_v3_preview":
+        raise RuntimeError("invalid_preview_mode")
+    rows = preview.get("rows")
+    if not isinstance(rows, list):
+        raise RuntimeError("preview_rows_missing")
+    timestamp = promoted_at or datetime.now(timezone.utc).isoformat()
+    return [
+        _public_gold_row_from_v3(row, promoted_at=timestamp)
+        for row in rows
+        if isinstance(row, dict)
+    ]
+
+
+def _catalog_row_from_public_gold(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": row["activity_catalog_id"],
+        "calendar_group_key": row["calendar_group_key"],
+        "canonical_name": row["title"],
+        "normalized_name": row["canonical_slug"],
+        "default_category": row["category"],
+    }
+
+
+def _observed_value(row: dict[str, Any], field_name: str) -> str:
+    if field_name == "fee":
+        value = row.get("price")
+        if isinstance(value, dict):
+            return str(value.get("state") or "")
+    elif field_name == "schedule":
+        value = row.get("schedule")
+        if isinstance(value, dict):
+            return str(value.get("text") or value.get("raw_text") or "")
+    elif field_name == "location":
+        value = row.get("location")
+        if isinstance(value, dict):
+            return str(value.get("label") or value.get("id") or value.get("value") or "")
+    elif field_name == "movie_title":
+        source = row.get("source") if isinstance(row.get("source"), dict) else {}
+        return str(source.get("movieTitle") or "")
+    else:
+        value = row.get(field_name)
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, sort_keys=True, ensure_ascii=False)
+    return str(value or "")
+
+
+def _field_audit_observation_rows(public_row: dict[str, Any]) -> list[dict[str, Any]]:
+    source = public_row.get("source") if isinstance(public_row.get("source"), dict) else {}
+    field_evidence = source.get("fieldEvidence") if isinstance(source.get("fieldEvidence"), dict) else {}
+    source_spans = public_row.get("field_provenance") if isinstance(public_row.get("field_provenance"), dict) else {}
+    row_key = f"{public_row['calendar_group_key']}:{public_row['canonical_slug']}"
+    field_names = list(CRITICAL_FIELD_EVIDENCE)
+    if source.get("candidateType") == "movie" or source.get("movieTitle"):
+        field_names.extend(MOVIE_CRITICAL_FIELD_EVIDENCE)
+    observations: list[dict[str, Any]] = []
+    for field_name in field_names:
+        spans = source_spans.get(field_name)
+        if not isinstance(spans, list):
+            spans = []
+        field_evidence_for_name = (
+            field_evidence.get(field_name)
+            if isinstance(field_evidence.get(field_name), dict)
+            else {}
+        )
+        observations.append(
+            {
+                "published_row_id": public_row["id"],
+                "source_document_id": public_row.get("source_document_id"),
+                "row_kind": "gold_activity",
+                "row_key": row_key,
+                "field_name": field_name,
+                "observed_value": _observed_value(public_row, field_name),
+                "method": "manual_visual_review"
+                if public_row.get("trust_state") == "reviewed_source_backed"
+                else "deterministic_parser",
+                "confidence": "high" if spans or field_evidence_for_name else "unknown",
+                "evidence": {
+                    "spans": spans,
+                    "field_evidence": field_evidence_for_name,
+                },
+            }
+        )
+    return observations
+
+
+def publish_gold_v3_preview(
+    db: Any,
+    preview: dict[str, Any],
+    *,
+    promoted_at: str | None = None,
+) -> dict[str, int]:
+    public_rows = build_public_gold_rows_from_preview(preview, promoted_at=promoted_at)
+    if not public_rows:
+        raise RuntimeError("gold_v3_rows_empty")
+    catalog_rows = [_catalog_row_from_public_gold(row) for row in public_rows]
+    db.upsert("activity_catalog", catalog_rows, on_conflict="id")
+    db.upsert("public_activity_gold", public_rows, on_conflict="id")
+    field_observation_rows = [
+        observation
+        for row in public_rows
+        for observation in _field_audit_observation_rows(row)
+    ]
+    if field_observation_rows:
+        db.insert("field_audit_observations", field_observation_rows)
+    return {
+        "activity_catalog": len(catalog_rows),
+        "public_activity_gold": len(public_rows),
+        "field_audit_observations": len(field_observation_rows),
+    }
+
+
 def evaluate_publish_readiness(
     preview: dict[str, Any],
     *,
@@ -249,6 +549,9 @@ def evaluate_publish_readiness(
     require_clean_preview: bool = True,
     dual_run_report: dict[str, Any] | None = None,
     source_drift_report: dict[str, Any] | None = None,
+    require_source_drift_report: bool = False,
+    monitoring_report: dict[str, Any] | None = None,
+    require_monitoring_report: bool = False,
 ) -> dict[str, Any]:
     errors: list[str] = []
     publish_v3_enabled = flags.get("public_gold_source") == "v3" and flags.get("v3_publish_enabled") is True
@@ -385,11 +688,15 @@ def evaluate_publish_readiness(
             errors.append(str(blocker))
         for diff_key in dual_run_report.get("unreviewed_diff_keys") or []:
             errors.append(f"unreviewed_diff:{diff_key}")
+    if require_source_drift_report and publish_v3_enabled and source_drift_report is None:
+        errors.append("missing_source_drift_report")
     if source_drift_report is not None:
-        if source_drift_report.get("status") not in {None, "clean"}:
-            errors.append("source_drift_report_blocked")
-        for blocker in source_drift_report.get("publish_blockers") or []:
-            errors.append(str(blocker))
+        errors.extend(_source_drift_report_errors(source_drift_report))
+    if require_monitoring_report and publish_v3_enabled:
+        if monitoring_report is None:
+            errors.append("missing_monitoring_report")
+        else:
+            errors.extend(_monitoring_report_errors(monitoring_report, preview))
     return {
         "ready": not errors,
         "errors": errors,
@@ -405,13 +712,23 @@ def main() -> None:
     parser.add_argument("--require-clean-preview", action="store_true")
     parser.add_argument("--dual-run-report", type=Path, default=DEFAULT_DUAL_RUN_REPORT_PATH)
     parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
+    parser.add_argument("--monitoring-report", type=Path, default=DEFAULT_MONITORING_REPORT_PATH)
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--publish", action="store_true", help="Write ready v3 preview rows to public Gold tables")
     args = parser.parse_args()
+
+    if args.publish and not args.require_clean_preview:
+        print("blocked")
+        print("publish_requires_clean_preview")
+        raise SystemExit(1)
 
     preview = json.loads(args.preview.read_text())
     dual_run_report = json.loads(args.dual_run_report.read_text()) if args.dual_run_report.exists() else None
     source_drift_report = (
         json.loads(args.source_drift_report.read_text()) if args.source_drift_report.exists() else None
+    )
+    monitoring_report = (
+        json.loads(args.monitoring_report.read_text()) if args.monitoring_report.exists() else None
     )
     readiness = evaluate_publish_readiness(
         preview,
@@ -419,6 +736,9 @@ def main() -> None:
         require_clean_preview=args.require_clean_preview,
         dual_run_report=dual_run_report,
         source_drift_report=source_drift_report,
+        require_source_drift_report=True,
+        monitoring_report=monitoring_report,
+        require_monitoring_report=True,
     )
     if args.json:
         print(json.dumps(readiness, indent=2, sort_keys=True))
@@ -428,6 +748,11 @@ def main() -> None:
             print(error)
     if not readiness["ready"]:
         raise SystemExit(1)
+    if args.publish:
+        if SupabaseClient is None:
+            raise RuntimeError("SupabaseClient unavailable")
+        result = publish_gold_v3_preview(SupabaseClient(), preview)
+        print(json.dumps({"published": result}, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

@@ -375,20 +375,45 @@
         "movie_nights": [
           {
             "page": 1,
-            "line": 90,
-            "text": "SAtUrday"
+            "line": 77,
+            "text": "SUN AY ..ssssessssssssssssssssssscsecsecsscssssssassessessessscassassscsscsesseeseees MOGNG"
           },
           {
             "page": 1,
-            "line": 91,
-            "text": "Incredibles"
+            "line": 77,
+            "text": "TUCSCAY ...sssessssssssssssssssecsecsessesassassassessessesassassessesseeasesseeseeeees BOIMDI [G |"
+          },
+          {
+            "page": 1,
+            "line": 77,
+            "text": "THUrsay ....sscsssssssssssssssssecscsecssssssassessecsecsecsssassassecsecsesseeseFTOZEN 2"
+          },
+          {
+            "page": 1,
+            "line": 77,
+            "text": "SAtUPaY .......sssssssssesssssssssessesseesssssssssssseeseeseeseeeeee 1 Incredibles"
           }
         ]
       },
       "movie_nights": [
         {
+          "day_of_week": "sunday",
+          "movie_title": "Moana",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "tuesday",
+          "movie_title": "Bambi",
+          "show_time": "8:30PM"
+        },
+        {
+          "day_of_week": "thursday",
+          "movie_title": "Frozen 2",
+          "show_time": "8:30PM"
+        },
+        {
           "day_of_week": "saturday",
-          "movie_title": "Incredibles",
+          "movie_title": "The Incredibles",
           "show_time": "8:30PM"
         }
       ]

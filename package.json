@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:about-page": "tsx scripts/test-about-page-content.ts",
+    "test:about-page:visual": "tsx scripts/test-about-page-visual-regression.ts",
     "test:routes": "tsx scripts/test-route-smoke.ts",
     "test:planning-facts": "tsx scripts/test-planning-facts.ts",
     "test:preset-definitions": "tsx scripts/test-preset-definitions.ts",

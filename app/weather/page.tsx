@@ -412,7 +412,6 @@ function WeatherChapterCard({
           <dd>{riskLabel(weather)}</dd>
         </div>
       </dl>
-      {slot === "thisHour" && <NearTermRainLine signal={weather.nearTermRain} compact />}
       <Link href={weatherPageHref(area.location.key)}>Read {area.location.name}</Link>
     </article>
   );

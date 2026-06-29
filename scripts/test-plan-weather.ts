@@ -18,9 +18,9 @@ assert.match(planItem, /EventWeatherSignal/);
 assert.match(planItem, /item\.startDateTime/);
 
 const timeline = readFileSync("components/plan/PlanTimeline.tsx", "utf8");
-assert.match(timeline, /PlanWeatherPanel/);
-assert.match(timeline, /scorePlanResilience/);
-assert.match(timeline, /affectedItemCount/);
+assert.doesNotMatch(timeline, /PlanWeatherPanel/);
+assert.doesNotMatch(timeline, /scorePlanResilience/);
+assert.doesNotMatch(timeline, /affectedItemCount/);
 
 const panel = readFileSync("components/weather/PlanWeatherPanel.tsx", "utf8");
 for (const label of [

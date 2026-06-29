@@ -207,6 +207,7 @@ def build_runtime_lineage(
     config: dict[str, Any],
     package_versions: dict[str, str | None] | None = None,
     model_asset_hashes: dict[str, str] | None = None,
+    ocr_engine_configs: dict[str, Any] | None = None,
     git_sha: str | None = None,
     container_image_digest: str | None = None,
 ) -> dict[str, Any]:
@@ -216,6 +217,7 @@ def build_runtime_lineage(
         "config_hash": _stable_hash(config_for_hash),
         "package_versions": dict(sorted((package_versions or {}).items())),
         "model_asset_hashes": dict(sorted((model_asset_hashes or {}).items())),
+        "ocr_engine_configs": dict(sorted((ocr_engine_configs or {}).items())),
         "git_sha": git_sha,
         "container_image_digest": container_image_digest,
     }

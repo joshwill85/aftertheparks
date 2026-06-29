@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -46,6 +47,7 @@ DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_vision_snapshot_report.json"
 PIPELINE_VERSION = "vision_v3_001"
 PRIMARY_ENGINE = "paddleocr_ppstructurev3"
 SECONDARY_ENGINE = "rapidocr"
+DOCLING_ENGINE = "docling_snapshot"
 SOURCE_METADATA_FIELDS = (
     "source_document_id",
     "source_kind",
@@ -56,6 +58,55 @@ SOURCE_METADATA_FIELDS = (
     "currentness",
     "captured_at",
 )
+
+DEFAULT_VISION_CONFIG: dict[str, Any] = {
+    "pipeline_version": PIPELINE_VERSION,
+    "engine_routing_policy": "fixed_config",
+    "render": {
+        "pdf_engine": "pypdfium2",
+        "default_dpi": 450,
+        "max_dpi": 600,
+        "output_format": "png",
+        "color_mode": "rgb",
+    },
+    "image": {
+        "apply_exif_orientation": True,
+        "preserve_original_bytes": True,
+        "canonical_format": "png",
+    },
+    "ocr": {
+        "primary": {
+            "engine": PRIMARY_ENGINE,
+            "package": "paddleocr",
+            "mode": "ppstructurev3",
+            "role": "primary_ocr_layout",
+        },
+        "secondary": {
+            "engine": SECONDARY_ENGINE,
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator",
+        },
+        "optional": {
+            "surya_enabled": False,
+        },
+        "docling_snapshot": {
+            "engine": DOCLING_ENGINE,
+            "package": "docling",
+            "role": "parallel_structural_snapshot",
+        },
+        "docling_snapshot_enabled": True,
+    },
+    "publish_gates": {
+        "require_field_evidence": True,
+        "require_engine_agreement_for_auto_publish": True,
+        "require_manual_review_on_disagreement": True,
+        "allow_generic_family_auto_publish": False,
+    },
+}
+
+
+def default_vision_config() -> dict[str, Any]:
+    return deepcopy(DEFAULT_VISION_CONFIG)
 
 
 def _git_sha() -> str | None:
@@ -82,6 +133,153 @@ def _package_versions() -> dict[str, str | None]:
         "rapidocr": package_version("rapidocr"),
         "docling": package_version("docling"),
     }
+
+
+def _engine_routes(config: dict[str, Any]) -> list[dict[str, Any]]:
+    ocr_config = config.get("ocr") if isinstance(config.get("ocr"), dict) else {}
+    routes: list[dict[str, Any]] = []
+    for role_key in ("primary", "secondary"):
+        engine_config = ocr_config.get(role_key)
+        if not isinstance(engine_config, dict):
+            continue
+        engine = str(engine_config.get("engine") or "").strip()
+        if not engine:
+            continue
+        routes.append(
+            {
+                "engine": engine,
+                "role": str(engine_config.get("role") or f"{role_key}_ocr"),
+                "package": str(engine_config.get("package") or engine),
+                "config": deepcopy(engine_config),
+            }
+        )
+    if ocr_config.get("docling_snapshot_enabled", False):
+        docling_config = ocr_config.get("docling_snapshot")
+        if isinstance(docling_config, dict):
+            routes.append(
+                {
+                    "engine": str(docling_config.get("engine") or DOCLING_ENGINE),
+                    "role": str(docling_config.get("role") or "parallel_structural_snapshot"),
+                    "package": str(docling_config.get("package") or "docling"),
+                    "config": deepcopy(docling_config),
+                }
+            )
+    return routes
+
+
+def _ocr_engine_configs(routes: list[dict[str, Any]]) -> dict[str, Any]:
+    return {str(route["engine"]): route["config"] for route in routes}
+
+
+def _model_asset_hashes(routes: list[dict[str, Any]]) -> dict[str, str]:
+    hashes: dict[str, str] = {}
+    for route in routes:
+        engine_config = route.get("config") if isinstance(route.get("config"), dict) else {}
+        model_hash = str(
+            engine_config.get("model_asset_sha256")
+            or engine_config.get("model_asset_hash")
+            or ""
+        ).strip()
+        if model_hash:
+            hashes[str(route["engine"])] = model_hash
+    return hashes
+
+
+def _adapter_for_engine(engine: str) -> Any:
+    if engine == PRIMARY_ENGINE:
+        return PaddleOcrAdapter()
+    if engine == SECONDARY_ENGINE:
+        return RapidOcrAdapter()
+    if engine == DOCLING_ENGINE:
+        return DoclingAdapter()
+    raise ValueError(f"unsupported_ocr_engine:{engine}")
+
+
+def _annotated_engine_run(
+    run: dict[str, Any],
+    *,
+    route: dict[str, Any],
+    config_hash: str,
+    pipeline_version: str,
+    package_versions: dict[str, str | None],
+) -> dict[str, Any]:
+    engine_config = route["config"]
+    engine_config_hash = stable_config_hash(engine_config)
+    engine_version = (
+        run.get("engine_version")
+        or run.get("version")
+        or package_versions.get(str(route.get("package") or ""))
+    )
+    return {
+        **run,
+        "engine": run.get("engine") or route["engine"],
+        "engine_role": route["role"],
+        "engine_config": engine_config,
+        "engine_config_hash": engine_config_hash,
+        "engine_version": engine_version,
+        "pipeline_version": pipeline_version,
+        "config_hash": config_hash,
+    }
+
+
+def _engine_config_error_run(
+    *,
+    route: dict[str, Any],
+    error: str,
+    config_hash: str,
+    pipeline_version: str,
+) -> dict[str, Any]:
+    engine_config = route["config"]
+    return {
+        "engine": route["engine"],
+        "engine_role": route["role"],
+        "engine_config": engine_config,
+        "engine_config_hash": stable_config_hash(engine_config),
+        "engine_version": None,
+        "pipeline_version": pipeline_version,
+        "config_hash": config_hash,
+        "status": "config_error",
+        "tokens": [],
+        "lines": [],
+        "regions": [],
+        "error": error,
+    }
+
+
+def _engine_exception_run(
+    *,
+    route: dict[str, Any],
+    page: dict[str, Any],
+    exc: Exception,
+    config_hash: str,
+    pipeline_version: str,
+    package_versions: dict[str, str | None],
+) -> dict[str, Any]:
+    engine_config = route["config"]
+    error = f"ocr_engine_error:{route['engine']}:{type(exc).__name__}"
+    return {
+        "engine": route["engine"],
+        "engine_role": route["role"],
+        "engine_config": engine_config,
+        "engine_config_hash": stable_config_hash(engine_config),
+        "engine_version": package_versions.get(str(route.get("package") or "")),
+        "pipeline_version": pipeline_version,
+        "config_hash": config_hash,
+        "status": "error",
+        "page_number": page.get("page_number"),
+        "page_image_sha256": page.get("page_image_sha256"),
+        "tokens": [],
+        "lines": [],
+        "regions": [],
+        "error": error,
+        "error_detail": str(exc),
+    }
+
+
+def _region_segmentation_error(exc: Exception) -> str:
+    if isinstance(exc, FileNotFoundError):
+        return "region_segmentation_error:missing_page_image"
+    return f"region_segmentation_error:{type(exc).__name__}"
 
 
 def _source_pages(page_manifest: dict[str, Any]) -> list[dict[str, Any]]:
@@ -147,6 +345,74 @@ def _canonical_tokens(engine_runs: list[dict[str, Any]]) -> list[dict[str, Any]]
     return tokens
 
 
+def _canonical_lines(engine_runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    lines: list[dict[str, Any]] = []
+    for run in engine_runs:
+        if run.get("status") != "success":
+            continue
+        run_lines = run.get("lines") if isinstance(run.get("lines"), list) else []
+        for index, line in enumerate(run_lines, start=1):
+            if not isinstance(line, dict):
+                continue
+            text = str(line.get("text") or line.get("line_text") or "").strip()
+            bbox = line.get("bbox_px")
+            if not text or not (isinstance(bbox, list) and len(bbox) == 4):
+                continue
+            lines.append(
+                {
+                    **line,
+                    "engine": line.get("engine") or run.get("engine"),
+                    "page_number": line.get("page_number") or run.get("page_number"),
+                    "page_image_sha256": line.get("page_image_sha256") or run.get("page_image_sha256"),
+                    "text": text,
+                    "line_text": line.get("line_text") or text,
+                    "bbox_px": bbox,
+                    "reading_order": line.get("reading_order", index),
+                }
+            )
+    lines.sort(
+        key=lambda line: (
+            int(line.get("page_number") or 0),
+            str(line.get("engine") or ""),
+            int(line.get("reading_order") or 0),
+        )
+    )
+    return lines
+
+
+def _canonical_engine_regions(engine_runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    regions: list[dict[str, Any]] = []
+    for run in engine_runs:
+        if run.get("status") != "success":
+            continue
+        run_regions = run.get("regions") if isinstance(run.get("regions"), list) else []
+        for index, region in enumerate(run_regions, start=1):
+            if not isinstance(region, dict):
+                continue
+            bbox = region.get("bbox_px")
+            if not (isinstance(bbox, list) and len(bbox) == 4):
+                continue
+            regions.append(
+                {
+                    **region,
+                    "engine": region.get("engine") or run.get("engine"),
+                    "page_number": region.get("page_number") or run.get("page_number"),
+                    "page_image_sha256": region.get("page_image_sha256") or run.get("page_image_sha256"),
+                    "region_type": region.get("region_type") or "unknown",
+                    "bbox_px": bbox,
+                    "reading_order": region.get("reading_order", index),
+                }
+            )
+    regions.sort(
+        key=lambda region: (
+            int(region.get("page_number") or 0),
+            str(region.get("engine") or ""),
+            int(region.get("reading_order") or 0),
+        )
+    )
+    return regions
+
+
 def _first_overlay_for_engine(
     overlays: dict[str, Any],
     engine: str,
@@ -190,56 +456,107 @@ def _write_debug_overlay_artifacts(
 def build_vision_snapshot(
     *,
     page_manifest: dict[str, Any],
+    vision_config: dict[str, Any] | None = None,
     attach_regions: bool = False,
     region_output_dir: Path | None = None,
     write_debug_overlays: bool = False,
     debug_output_dir: Path | None = None,
 ) -> dict[str, Any]:
-    config = {
-        "pipeline_version": PIPELINE_VERSION,
-        "primary_engine": PRIMARY_ENGINE,
-        "secondary_engine": SECONDARY_ENGINE,
-        "docling_snapshot_enabled": True,
-        "surya_enabled": False,
-        "engine_choice": "fixed_config",
-    }
+    config = deepcopy(vision_config) if vision_config is not None else default_vision_config()
+    config.setdefault("pipeline_version", PIPELINE_VERSION)
+    config.setdefault("engine_routing_policy", "fixed_config")
+    config.pop("config_hash", None)
     config["config_hash"] = stable_config_hash(config)
+    routes = _engine_routes(config)
+    package_versions = _package_versions()
     runtime_lineage = build_runtime_lineage(
         config=config,
-        package_versions=_package_versions(),
-        model_asset_hashes={},
+        package_versions=package_versions,
+        model_asset_hashes=_model_asset_hashes(routes),
+        ocr_engine_configs=_ocr_engine_configs(routes),
         git_sha=_git_sha(),
         container_image_digest=os.environ.get("CONTAINER_IMAGE_DIGEST"),
     )
 
-    engine_runs = [
-        PaddleOcrAdapter().run_page(page)
-        for page in _source_pages(page_manifest)
-    ]
-    engine_runs.extend(RapidOcrAdapter().run_page(page) for page in _source_pages(page_manifest))
-    if config["docling_snapshot_enabled"]:
-        engine_runs.extend(DoclingAdapter().run_page(page) for page in _source_pages(page_manifest))
+    engine_runs: list[dict[str, Any]] = []
+    for route in routes:
+        try:
+            adapter = _adapter_for_engine(str(route["engine"]))
+        except ValueError:
+            engine_runs.append(
+                _engine_config_error_run(
+                    route=route,
+                    error=f"ocr_config_error:unsupported_ocr_engine:{route['engine']}",
+                    config_hash=config["config_hash"],
+                    pipeline_version=str(config["pipeline_version"]),
+                )
+            )
+            continue
+        for page in _source_pages(page_manifest):
+            try:
+                run = adapter.run_page(page)
+            except Exception as exc:
+                engine_runs.append(
+                    _engine_exception_run(
+                        route=route,
+                        page=page,
+                        exc=exc,
+                        config_hash=config["config_hash"],
+                        pipeline_version=str(config["pipeline_version"]),
+                        package_versions=package_versions,
+                    )
+                )
+                continue
+            engine_runs.append(
+                _annotated_engine_run(
+                    run,
+                    route=route,
+                    config_hash=config["config_hash"],
+                    pipeline_version=str(config["pipeline_version"]),
+                    package_versions=package_versions,
+                )
+            )
     errors = [
         run["error"]
         for run in engine_runs
         if isinstance(run.get("error"), str) and run["error"]
     ]
+    if not routes:
+        errors.append("ocr_config_error:no_configured_ocr_routes")
     tokens = _canonical_tokens(engine_runs)
-    status = "ocr_unavailable" if errors else "ocr_complete"
+    lines = _canonical_lines(engine_runs)
+    engine_regions = _canonical_engine_regions(engine_runs)
 
     classification = classify_document_family(page_manifest)
     regions: list[dict[str, Any]] = []
+    derived_source_links: list[dict[str, Any]] = []
     if attach_regions:
         output_dir = region_output_dir or (PROCESSED_DIR / "vision_debug" / str(page_manifest.get("source_sha256")))
-        region_result = segment_major_regions(
-            snapshot={
-                "source_sha256": page_manifest.get("source_sha256"),
-                "source_pages": _source_pages(page_manifest),
-            },
-            classification=classification,
-            output_dir=output_dir,
-        )
-        regions = region_result["regions"]
+        try:
+            region_result = segment_major_regions(
+                snapshot={
+                    "source_document_id": page_manifest.get("source_document_id"),
+                    "source_sha256": page_manifest.get("source_sha256"),
+                    "source_pages": _source_pages(page_manifest),
+                },
+                classification=classification,
+                output_dir=output_dir,
+            )
+            regions = region_result["regions"]
+            derived_source_links = [
+                link
+                for link in region_result.get("derived_source_links", [])
+                if isinstance(link, dict)
+            ]
+        except Exception as exc:
+            errors.append(_region_segmentation_error(exc))
+    status = (
+        "region_segmentation_failed"
+        if any(error.startswith("region_segmentation_error:") for error in errors)
+        else "ocr_unavailable"
+        if errors
+        else "ocr_complete"
+    )
 
     snapshot = {
         "snapshot_kind": "vision_layout_v3",
@@ -258,6 +575,9 @@ def build_vision_snapshot(
         "source_pages": _source_pages(page_manifest),
         "engine_runs": engine_runs,
         "regions": regions,
+        "derived_source_links": derived_source_links,
+        "engine_regions": engine_regions,
+        "lines": lines,
         "tokens": tokens,
         "errors": errors,
     }

@@ -1,10 +1,9 @@
 "use client";
 
-import { Fragment, type ReactNode, useEffect, useMemo, useState } from "react";
+import { Fragment, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { PlanItem } from "@/components/plan/PlanItem";
-import { PlanWeatherPanel } from "@/components/weather/PlanWeatherPanel";
 import {
   buildPlanStayShell,
   groupPlanByDate,
@@ -16,44 +15,24 @@ import {
   buildPlanDaybookPath,
   type PlanDaybookConnector,
 } from "@/lib/plan/daybookPath";
+import { useTransportConnectionsForItems } from "@/lib/plan/useTransportConnections";
+import {
+  transportOptionDetail,
+  transportOptionLabel,
+  type PlanTransportConnectionMap,
+} from "@/lib/plan/transportConnections";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import type { PlanStaySettings } from "@/lib/plan/types";
-import { inferActivityWeatherFit } from "@/lib/weather/guidance";
-import { scorePlanResilience } from "@/lib/weather/resilience";
-import type { WeatherForTimeSpan } from "@/lib/weather/types";
 
-function isFuturePlanItem(item: PlanItemType, now = new Date()): boolean {
-  if (!item.startDateTime) return true;
-  const end = item.endDateTime ?? item.startDateTime;
-  return new Date(end).getTime() >= now.getTime();
-}
-
-function isWeatherSensitivePlanItem(item: PlanItemType): boolean {
-  return inferActivityWeatherFit({
-    title: item.title,
-    category: item.category ?? "resort_activity",
-  }).some((fit) =>
-    [
-      "outdoor_uncovered",
-      "outdoor_shaded",
-      "pool",
-      "campfire",
-      "outdoor_movie",
-      "boat_dependent",
-      "skyliner_dependent",
-      "walking_heavy",
-      "heat_sensitive",
-      "storm_sensitive",
-    ].includes(fit)
-  );
-}
-
-function PlanPathConnector({
+export function PlanPathConnector({
   connector,
 }: {
   connector: PlanDaybookConnector;
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const secondaryOptions = connector.transportOptions?.slice(1) ?? [];
+
   return (
     <li
       className={`plan-path-connector plan-path-connector--${connector.tone} plan-path-connector--${connector.severity}`}
@@ -65,6 +44,32 @@ function PlanPathConnector({
       <span className="plan-path-connector__copy">
         <strong>{connector.label}</strong>
         <small>{connector.detail}</small>
+        {secondaryOptions.length > 0 && (
+          <>
+            <button
+              type="button"
+              className="plan-path-connector__toggle"
+              onClick={() => setExpanded((current) => !current)}
+              aria-expanded={expanded}
+            >
+              {expanded
+                ? "Hide other routes"
+                : `Show ${secondaryOptions.length} more ${
+                    secondaryOptions.length === 1 ? "route" : "routes"
+                  }`}
+            </button>
+            {expanded && (
+              <ul className="plan-path-connector__options">
+                {secondaryOptions.map((option) => (
+                  <li key={option.id}>
+                    <strong>{transportOptionLabel(option)}</strong>
+                    <small>{transportOptionDetail(option)}</small>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
       </span>
     </li>
   );
@@ -109,94 +114,12 @@ export function PlanTimeline({
   onRemove,
   onUpdateNotes,
 }: PlanTimelineProps) {
-  const [panelWeather, setPanelWeather] = useState<WeatherForTimeSpan | null>(null);
   const dayGroups = groupPlanByDate(items);
   const stayShell = buildPlanStayShell(items, staySettings);
-  const futureItems = items.filter((item) => isFuturePlanItem(item));
-  const weatherSensitiveItems = futureItems.filter(isWeatherSensitivePlanItem);
-  const indoorBackupCount = futureItems.filter((item) =>
-    inferActivityWeatherFit({
-      title: item.title,
-      category: item.category ?? "resort_activity",
-    }).some((fit) => fit === "indoor" || fit === "covered" || fit === "mostly_indoor")
-  ).length;
-  const sameResortBackupCount = new Set(
-    futureItems
-      .filter((item) =>
-        inferActivityWeatherFit({
-          title: item.title,
-          category: item.category ?? "resort_activity",
-        }).some((fit) => fit === "indoor" || fit === "covered")
-      )
-      .map((item) => item.resortSlug)
-  ).size;
-  const resilience = scorePlanResilience({
-    futureItems: futureItems.length,
-    weatherSensitiveItems: weatherSensitiveItems.length,
-    itemsWithIndoorBackups: indoorBackupCount,
-    sameResortBackupCount,
-    transportWeatherRisk: weatherSensitiveItems.length > indoorBackupCount ? "medium" : "low",
-    stormModeActive: false,
-    heatRisk: "medium",
-    rainRisk: "medium",
-  });
-  const weatherFocusItem = useMemo(
-    () => weatherSensitiveItems.find((item) => item.startDateTime) ?? null,
-    [weatherSensitiveItems]
-  );
-  const backupHref = weatherFocusItem?.resortSlug
-    ? `/activities?resort=${weatherFocusItem.resortSlug}&weather=indoor`
-    : "/activities?weather=indoor";
-  const replaceHref = weatherFocusItem?.resortSlug
-    ? `/activities?resort=${weatherFocusItem.resortSlug}&weather=covered`
-    : "/activities?weather=covered";
-
-  useEffect(() => {
-    if (!weatherFocusItem?.startDateTime) {
-      setPanelWeather(null);
-      return;
-    }
-
-    const controller = new AbortController();
-    const params = new URLSearchParams({
-      startsAt: weatherFocusItem.startDateTime,
-      includePrecipMap: "true",
-    });
-    if (weatherFocusItem.endDateTime) params.set("endsAt", weatherFocusItem.endDateTime);
-    if (weatherFocusItem.resortSlug) params.set("resortSlug", weatherFocusItem.resortSlug);
-
-    fetch(`/api/weather/guidance?${params.toString()}`, { signal: controller.signal })
-      .then((response) => (response.ok ? response.json() : null))
-      .then((body: { guidance?: WeatherForTimeSpan } | null) => {
-        setPanelWeather(body?.guidance ?? null);
-      })
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === "AbortError") return;
-        setPanelWeather(null);
-      });
-
-    return () => controller.abort();
-  }, [weatherFocusItem]);
-
-  const applyWeatherNote = (note: string) => {
-    for (const item of weatherSensitiveItems) {
-      const nextNote = item.notes ? `${item.notes}\n${note}` : note;
-      onUpdateNotes(item.id, nextNote);
-    }
-  };
+  const transportConnections = useTransportConnectionsForItems(items);
 
   return (
     <div className="plan-timeline space-y-10">
-      {items.length > 0 && (
-        <PlanWeatherPanel
-          weather={panelWeather}
-          resilience={resilience}
-          affectedItemCount={weatherSensitiveItems.length}
-          backupHref={backupHref}
-          replaceHref={replaceHref}
-          onApplyWeatherNote={applyWeatherNote}
-        />
-      )}
       {stayShell.enabled ? (
         <>
           {stayShell.stayDays.map((day) =>
@@ -204,6 +127,7 @@ export function PlanTimeline({
               <PlanDaybook
                 key={day.dateKey}
                 day={day}
+                transportConnections={transportConnections}
                 onRemove={onRemove}
                 onUpdateNotes={onUpdateNotes}
               />
@@ -220,6 +144,7 @@ export function PlanTimeline({
             <PlanDateGroupCollection
               title="Outside stay dates"
               items={stayShell.outsideStayItems}
+              transportConnections={transportConnections}
               onRemove={onRemove}
               onUpdateNotes={onUpdateNotes}
             />
@@ -237,6 +162,7 @@ export function PlanTimeline({
           <PlanDaybook
             key={day.dateKey}
             day={day}
+            transportConnections={transportConnections}
             onRemove={onRemove}
             onUpdateNotes={onUpdateNotes}
           />
@@ -248,10 +174,12 @@ export function PlanTimeline({
 
 function PlanDaybook({
   day,
+  transportConnections,
   onRemove,
   onUpdateNotes,
 }: {
   day: PlanDaybookDay;
+  transportConnections?: PlanTransportConnectionMap;
   onRemove: (id: string) => void;
   onUpdateNotes: (id: string, notes: string) => void;
 }) {
@@ -259,7 +187,7 @@ function PlanDaybook({
     (key) => (day.sections.get(key)?.length ?? 0) > 0
   );
   const dayItems = visibleSections.flatMap((key) => day.sections.get(key) ?? []);
-  const dayPath = buildPlanDaybookPath(dayItems);
+  const dayPath = buildPlanDaybookPath(dayItems, transportConnections);
   const pathByItemId = new Map(dayPath.stops.map((stop) => [stop.itemId, stop]));
 
   return (
@@ -328,11 +256,13 @@ function EmptyStayDay({
 function PlanDateGroupCollection({
   title,
   items,
+  transportConnections,
   onRemove,
   onUpdateNotes,
 }: {
   title: string;
   items: PlanItemType[];
+  transportConnections?: PlanTransportConnectionMap;
   onRemove: (id: string) => void;
   onUpdateNotes: (id: string, notes: string) => void;
 }) {
@@ -343,6 +273,7 @@ function PlanDateGroupCollection({
         <PlanDaybook
           key={day.dateKey}
           day={day}
+          transportConnections={transportConnections}
           onRemove={onRemove}
           onUpdateNotes={onUpdateNotes}
         />

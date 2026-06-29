@@ -362,6 +362,26 @@ check("public shared plan refreshes live data", () => {
   assert.match(publicPlan, /visibilitychange|setInterval|focus/);
 });
 
+check("plan transport connections are rendered from source-backed graph data", () => {
+  const timeline = read("components/plan/PlanTimeline.tsx");
+  const publicPlan = read("components/plan/PublicPlanClient.tsx");
+  const planTypes = read("lib/plan/types.ts");
+  const planServer = read("lib/plan/server.ts");
+  const transport = read("lib/plan/transportConnections.ts");
+  const hook = read("lib/plan/useTransportConnections.ts");
+
+  assert.match(planTypes, /resortSlug: string/);
+  assert.match(planServer, /resortSlug: item\.resortSlug/);
+  assert.match(timeline, /useTransportConnectionsForItems\(items\)/);
+  assert.match(timeline, /transportOptions\?\.slice\(1\)/);
+  assert.match(timeline, /Show \$\{secondaryOptions\.length\} more/);
+  assert.match(publicPlan, /PlanPathConnector/);
+  assert.match(publicPlan, /publicItemToPlanItem/);
+  assert.match(transport, /transportConnectionPairsForItems/);
+  assert.match(transport, /Confirm current transportation day-of/);
+  assert.match(hook, /v_public_wdw_transport_connection_options/);
+});
+
 check("plan routes enforce plan-specific rate limits", () => {
   for (const path of [
     "app/api/plan/items/route.ts",

@@ -11,9 +11,9 @@ const css = readFileSync("src/styles/polish.css", "utf8");
 assert.match(css, /\.plan-item__weather/);
 
 const planTimelineSource = readFileSync("components/plan/PlanTimeline.tsx", "utf8");
-assert.match(planTimelineSource, /includePrecipMap/);
-assert.match(planTimelineSource, /onApplyWeatherNote/);
-assert.match(planTimelineSource, /backupHref/);
+assert.doesNotMatch(planTimelineSource, /includePrecipMap/);
+assert.doesNotMatch(planTimelineSource, /onApplyWeatherNote/);
+assert.doesNotMatch(planTimelineSource, /backupHref/);
 
 const planWeatherPanel = readFileSync("components/weather/PlanWeatherPanel.tsx", "utf8");
 assert.match(planWeatherPanel, /Move earlier/);

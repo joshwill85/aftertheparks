@@ -157,8 +157,8 @@ assert.match(
 
 assert.match(
   polish,
-  /\.event-card__story-watermark\s*\{[\s\S]*right:\s*12%[\s\S]*width:\s*clamp\(180px,\s*34%,\s*280px\)/,
-  "Story watermarks should share a consistent full-card placement and size."
+  /\.event-card__story-watermark\s*\{[\s\S]*left:\s*50%[\s\S]*width:\s*min\(82%,\s*520px\)[\s\S]*transform:\s*translate\(-50%,\s*-50%\)/,
+  "Story watermarks should be centered and scale close to the card width."
 );
 
 assert.doesNotMatch(

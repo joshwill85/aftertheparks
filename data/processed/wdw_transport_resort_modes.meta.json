@@ -1,0 +1,13 @@
+{
+  "graph_version": "0.1.0",
+  "graph_checksum_sha256": "7d752bebfcbe8c6fca802461964942ee280fae31f1ee571611bf4d9b5c911f3e",
+  "generated_at": "2026-06-28T23:28:17.322Z",
+  "source_file": "/Users/josh/Downloads/aftertheparks-wdw-transport-graph-v0/aftertheparks-wdw-transport-graph-v0.1.json",
+  "counts": {
+    "resorts_with_monorail": 6,
+    "resorts_with_skyliner": 4,
+    "resorts_with_boat": 20,
+    "resorts_with_walk": 14,
+    "resorts_with_bus": 31
+  }
+}

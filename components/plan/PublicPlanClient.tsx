@@ -1,13 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { BrandMark, BrandMotif } from "@/components/brand/BrandAsset";
+import { PlanPathConnector } from "@/components/plan/PlanTimeline";
 import { trackPlanEvent } from "@/lib/plan/analytics";
 import { ensureAnonymousSession } from "@/lib/plan/sync-client";
 import { executeTurnstile } from "@/lib/turnstile/browser";
+import { buildPlanDaybookPath } from "@/lib/plan/daybookPath";
+import { useTransportConnectionsForItems } from "@/lib/plan/useTransportConnections";
 import type { PublicPlanResponse } from "@/lib/plan/types";
+import type { PlanItem } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 
 interface PublicPlanClientProps {
@@ -23,11 +27,49 @@ function labelFromSlug(slug?: string): string | undefined {
     .join(" ");
 }
 
+function publicItemId(date: string, index: number, title: string): string {
+  return `${date}-${index}-${title}`;
+}
+
+function publicItemToPlanItem(
+  item: PublicPlanResponse["dates"][number]["items"][number],
+  date: string,
+  index: number
+): PlanItem {
+  const id = publicItemId(date, index, item.title);
+  return {
+    id,
+    activityCatalogId: id,
+    activitySlug: id,
+    title: item.title,
+    resortSlug: item.resortSlug,
+    resortName: item.resortName,
+    category: item.category,
+    location: item.location,
+    startDateTime: item.startsAt,
+    endDateTime: item.endsAt,
+    addedAt: item.startsAt ?? new Date(0).toISOString(),
+    priceLabel: item.priceLabel,
+    sourceVerifiedAt: item.sourceVerifiedAt,
+    sourceStatus: item.sourceStatus,
+  };
+}
+
 export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
   const { openPreview, refreshFromServer } = usePlan();
   const [plan, setPlan] = useState(initial);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
   const [copying, setCopying] = useState(false);
+  const publicPlanItems = useMemo(
+    () =>
+      plan.dates.flatMap((group) =>
+        group.items.map((item, index) =>
+          publicItemToPlanItem(item, group.date, index)
+        )
+      ),
+    [plan.dates]
+  );
+  const transportConnections = useTransportConnectionsForItems(publicPlanItems);
 
   const refreshPlan = useCallback(async () => {
     try {
@@ -149,41 +191,60 @@ export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
           <section key={group.date}>
             <h2 className="font-display mb-3 text-xl font-semibold">{group.date}</h2>
             <ul className="space-y-3">
-              {group.items.map((item, idx) => (
-                <li
-                  key={`${group.date}-${idx}`}
-                  className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3"
-                >
-                  <p className="font-semibold">{item.title}</p>
-                  <p className="text-sm text-[var(--muted)]">{item.resortName}</p>
-                  {item.location && (
-                    <p className="text-xs text-[var(--muted)]">{item.location}</p>
-                  )}
-                  {item.startsAt && (
-                    <p className="mt-1 text-xs font-bold text-[var(--lagoon-deep)]">
-                      {new Date(item.startsAt).toLocaleTimeString("en-US", {
-                        hour: "numeric",
-                        minute: "2-digit",
-                        timeZone: plan.timezone,
-                      })}
-                    </p>
-                  )}
-                  {item.sourceStatus !== "current" && (
-                    <p
-                      className={cn(
-                        "mt-2 text-xs font-bold",
-                        item.sourceStatus === "changed"
-                          ? "text-[var(--color-coral)]"
-                          : "text-[var(--muted)]"
-                      )}
-                    >
-                      {item.sourceStatus === "changed"
-                        ? "Schedule changed since this was saved"
-                        : "May no longer be available"}
-                    </p>
-                  )}
-                </li>
-              ))}
+              {(() => {
+                const groupPlanItems = group.items.map((item, index) =>
+                  publicItemToPlanItem(item, group.date, index)
+                );
+                const path = buildPlanDaybookPath(
+                  groupPlanItems,
+                  transportConnections
+                );
+                const pathByItemId = new Map(
+                  path.stops.map((stop) => [stop.itemId, stop])
+                );
+
+                return group.items.map((item, idx) => {
+                  const connector = pathByItemId.get(
+                    publicItemId(group.date, idx, item.title)
+                  )?.connectorBefore;
+
+                  return (
+                    <Fragment key={`${group.date}-${idx}`}>
+                      {connector && <PlanPathConnector connector={connector} />}
+                      <li className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3">
+                        <p className="font-semibold">{item.title}</p>
+                        <p className="text-sm text-[var(--muted)]">{item.resortName}</p>
+                        {item.location && (
+                          <p className="text-xs text-[var(--muted)]">{item.location}</p>
+                        )}
+                        {item.startsAt && (
+                          <p className="mt-1 text-xs font-bold text-[var(--lagoon-deep)]">
+                            {new Date(item.startsAt).toLocaleTimeString("en-US", {
+                              hour: "numeric",
+                              minute: "2-digit",
+                              timeZone: plan.timezone,
+                            })}
+                          </p>
+                        )}
+                        {item.sourceStatus !== "current" && (
+                          <p
+                            className={cn(
+                              "mt-2 text-xs font-bold",
+                              item.sourceStatus === "changed"
+                                ? "text-[var(--color-coral)]"
+                                : "text-[var(--muted)]"
+                            )}
+                          >
+                            {item.sourceStatus === "changed"
+                              ? "Schedule changed since this was saved"
+                              : "May no longer be available"}
+                          </p>
+                        )}
+                      </li>
+                    </Fragment>
+                  );
+                });
+              })()}
             </ul>
           </section>
         ))}

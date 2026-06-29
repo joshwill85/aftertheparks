@@ -22,6 +22,7 @@ DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_validate_report.json"
 REQUIRED_CRITICAL_FIELDS = ("title", "schedule", "location", "fee")
 MOVIE_CRITICAL_FIELDS = ("movie_title",)
 AUTO_PUBLISH_FAMILIES = {"aframe_recreation", "vertical_digital_rec_sign"}
+REVIEW_ONLY_CANDIDATE_TYPES = {"generic_visual_review"}
 LINEAGE_BLOCKING_FINDINGS = {
     "missing_pipeline_version",
     "missing_config_hash",
@@ -275,6 +276,9 @@ def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
 
     if candidate.get("document_family") not in AUTO_PUBLISH_FAMILIES:
         findings.append("unknown_document_family")
+    candidate_type = str(candidate.get("candidate_type") or "").strip()
+    if candidate_type in REVIEW_ONLY_CANDIDATE_TYPES:
+        findings.append(f"review_only_candidate_type:{candidate_type}")
 
     if not candidate.get("source_document_id"):
         findings.append("missing_source_document_id")

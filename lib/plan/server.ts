@@ -494,6 +494,7 @@ function groupPublicItems(items: PlanItem[], timezone: string) {
 
     const publicItem: PublicPlanItem = {
       title: item.title,
+      resortSlug: item.resortSlug,
       resortName: item.resortName,
       location: item.location,
       startsAt: item.startDateTime,

@@ -1,4 +1,5 @@
 import json
+import importlib
 import sys
 import tempfile
 import unittest
@@ -61,12 +62,87 @@ from scripts.ingest.source_manifest import (
 from scripts.ingest.spike_vision_v3_bakeoff import build_spike_report
 from scripts.ingest import source_status_v3
 from scripts.ingest.source_status_v3 import build_v3_source_statuses
+from scripts.ingest import trust_report
 from scripts.ingest import v3_dual_run_report
 from scripts.ingest.v3_dual_run_report import build_dual_run_report
 from scripts.ingest import validate_v3
 from scripts.ingest.validate_v3 import validate_candidate
 from scripts.ingest import vision_snapshot
 from scripts.ingest.vision_snapshot import build_vision_snapshot
+
+
+def clean_publish_v3_preview(*, generated_at: str = "2026-06-28T12:00:00+00:00") -> dict[str, Any]:
+    row = {
+        "source_document_id": "source-doc-1",
+        "source_sha256": "sourcehash",
+        "source_kind": "official_pdf",
+        "source_role": "resort_pdf",
+        "http_status": 200,
+        "currentness": "current",
+        "captured_at": generated_at,
+        "validation_status": "auto_publishable",
+        "calendar_group_key": "boardwalk",
+        "document_family": "aframe_recreation",
+        "region_id": "page-001-region-04",
+        "region_type": "resort_activities_section",
+        "pipeline_version": "vision_v3_001",
+        "config_hash": "confighash",
+        "runtime_lineage": {
+            "config_hash": "confighash",
+            "lineage_hash": "lineagehash",
+            "package_versions": {"pypdfium2": "4.30.0"},
+            "model_asset_hashes": {"paddleocr_ppstructurev3": "modelhash"},
+        },
+        "source": {"canonicalUrl": "https://example.com/calendar.pdf", "documentHash": "sourcehash"},
+        "schedule": {
+            "text": "Daily at 1:30pm",
+            "normalized": {
+                "schedule_type": "recurring",
+                "days_of_week": ["Monday"],
+                "start_time": "13:30",
+                "timezone": "America/New_York",
+            },
+        },
+        "location": {"id": "village_green_lawn", "label": "Village Green Lawn"},
+        "price": {"state": "free"},
+        "field_evidence": {
+            field: {
+                "source": {
+                    "content_sha256": "sourcehash",
+                    "page_number": 1,
+                    "page_image_sha256": "pagehash",
+                    "bbox_px": [10, 20, 100, 40],
+                    "crop_sha256": f"{field}crop",
+                    "crop_storage_path": f"{field}.png",
+                },
+                "agreement": "exact_after_normalization",
+            }
+            for field in ("title", "schedule", "location", "fee")
+        },
+        "source_spans": {
+            "title": [{"page": 1, "text": "Poolside Activities"}],
+            "schedule": [{"page": 1, "text": "Daily at 1:30pm"}],
+            "location": [{"page": 1, "text": "Village Green Lawn"}],
+            "fee": [{"page": 1, "text": "No fee marker present"}],
+        },
+    }
+    row["field_evidence"]["region"] = {
+        "source": {
+            "content_sha256": "sourcehash",
+            "page_number": 1,
+            "page_image_sha256": "pagehash",
+            "bbox_px": [0, 0, 200, 200],
+            "crop_storage_path": "region.png",
+            "crop_sha256": "regioncrop",
+        },
+        "agreement": "not_required",
+    }
+    return {
+        "publication_mode": "vision_v3_preview",
+        "generated_at": generated_at,
+        "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+        "rows": [row],
+    }
 
 
 class VisionV3ScaffoldingTests(unittest.TestCase):
@@ -409,6 +485,15 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("current", manifest["currentness"])
         self.assertEqual("2026-06-28T12:00:00+00:00", manifest["captured_at"])
 
+    def test_source_relationship_schema_allows_qr_derived_source_links(self) -> None:
+        migration_text = "\n".join(
+            path.read_text()
+            for path in sorted((ROOT / "supabase" / "migrations").glob("*.sql"))
+            if "source" in path.name or "vision" in path.name
+        )
+
+        self.assertIn("'qr_links_derived_source'", migration_text)
+
     def test_fetch_report_summarizes_pdf_and_image_source_counts(self) -> None:
         report = build_fetch_report(
             [
@@ -531,6 +616,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 calendar_group_key="boardwalk",
                 edition="fy26-q3-0526",
                 output_dir=root / "pages",
+                source_metadata={"source_document_id": "source-doc-parent"},
             )
 
             snapshot = build_vision_snapshot(page_manifest=page_manifest)
@@ -542,6 +628,193 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("pypdfium2", lineage["package_versions"])
         self.assertIn("lineage_hash", lineage)
         self.assertIn("model_asset_hashes", lineage)
+
+    def test_vision_snapshot_routes_engines_from_versioned_config_and_stamps_runs(self) -> None:
+        page_manifest = {
+            "source_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+            "source_sha256": "sourcehash",
+            "source_type": "pdf",
+            "calendar_group_key": "boardwalk",
+            "edition": "fy26-q3-0526",
+            "render_config": {"config_hash": "renderhash"},
+            "pages": [
+                {
+                    "page_number": 1,
+                    "page_kind": "pdf_page",
+                    "canonical_image_path": "page.png",
+                    "canonical_image_sha256": "pagehash",
+                    "width_px": 1200,
+                    "height_px": 1800,
+                    "render_dpi": 450,
+                    "render_engine": "pypdfium2",
+                    "render_engine_version": "4.30.0",
+                }
+            ],
+        }
+        config = vision_snapshot.default_vision_config()
+        config["ocr"]["docling_snapshot_enabled"] = False
+
+        def engine_run(page: dict[str, Any], engine: str) -> dict[str, Any]:
+            return {
+                "engine": engine,
+                "status": "success",
+                "page_number": page["page_number"],
+                "page_image_sha256": page["page_image_sha256"],
+                "tokens": [],
+                "lines": [],
+                "regions": [
+                    {
+                        "region_type": "activity_block",
+                        "bbox_px": [8, 16, 220, 92],
+                        "confidence": 0.88,
+                        "reading_order": 1,
+                    }
+                ],
+            }
+
+        with (
+            patch(
+                "scripts.ingest.vision_snapshot.PaddleOcrAdapter.run_page",
+                side_effect=lambda page: engine_run(page, "paddleocr_ppstructurev3"),
+            ),
+            patch(
+                "scripts.ingest.vision_snapshot.RapidOcrAdapter.run_page",
+                side_effect=lambda page: engine_run(page, "rapidocr"),
+            ),
+            patch("scripts.ingest.vision_snapshot._git_sha", return_value="deadbeef"),
+            patch("scripts.ingest.vision_snapshot._package_versions", return_value={"paddleocr": "3.0.0", "rapidocr": "2.0.0"}),
+        ):
+            snapshot = build_vision_snapshot(page_manifest=page_manifest, vision_config=config)
+
+        self.assertEqual(
+            ["paddleocr_ppstructurev3", "rapidocr"],
+            [run["engine"] for run in snapshot["engine_runs"]],
+        )
+        self.assertEqual("fixed_config", snapshot["config"]["engine_routing_policy"])
+        self.assertEqual(snapshot["config_hash"], snapshot["runtime_lineage"]["config_hash"])
+        self.assertEqual("deadbeef", snapshot["runtime_lineage"]["git_sha"])
+        self.assertIn("ocr_engine_configs", snapshot["runtime_lineage"])
+        self.assertIn("paddleocr_ppstructurev3", snapshot["runtime_lineage"]["ocr_engine_configs"])
+        for run in snapshot["engine_runs"]:
+            self.assertEqual("vision_v3_001", run["pipeline_version"])
+            self.assertEqual(snapshot["config_hash"], run["config_hash"])
+            self.assertRegex(run["engine_config_hash"], r"^[a-f0-9]{64}$")
+            self.assertIn(run["engine_role"], {"primary_ocr_layout", "secondary_ocr_comparator"})
+
+    def test_vision_snapshot_fails_closed_when_config_has_no_ocr_routes(self) -> None:
+        page_manifest = {
+            "source_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+            "source_sha256": "sourcehash",
+            "source_type": "pdf",
+            "calendar_group_key": "boardwalk",
+            "edition": "fy26-q3-0526",
+            "render_config": {"config_hash": "renderhash"},
+            "pages": [
+                {
+                    "page_number": 1,
+                    "page_kind": "pdf_page",
+                    "canonical_image_path": "page.png",
+                    "canonical_image_sha256": "pagehash",
+                    "width_px": 1200,
+                    "height_px": 1800,
+                    "render_dpi": 450,
+                    "render_engine": "pypdfium2",
+                    "render_engine_version": "4.30.0",
+                }
+            ],
+        }
+        config = vision_snapshot.default_vision_config()
+        config["ocr"] = {"docling_snapshot_enabled": False}
+
+        snapshot = build_vision_snapshot(page_manifest=page_manifest, vision_config=config)
+
+        self.assertEqual("ocr_unavailable", snapshot["status"])
+        self.assertEqual([], snapshot["engine_runs"])
+        self.assertEqual(["ocr_config_error:no_configured_ocr_routes"], snapshot["errors"])
+        self.assertIn("ocr_config_error:no_configured_ocr_routes", snapshot["quality"]["findings"])
+
+    def test_vision_snapshot_fails_closed_for_unsupported_configured_engine(self) -> None:
+        page_manifest = {
+            "source_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+            "source_sha256": "sourcehash",
+            "source_type": "pdf",
+            "calendar_group_key": "boardwalk",
+            "edition": "fy26-q3-0526",
+            "render_config": {"config_hash": "renderhash"},
+            "pages": [
+                {
+                    "page_number": 1,
+                    "page_kind": "pdf_page",
+                    "canonical_image_path": "page.png",
+                    "canonical_image_sha256": "pagehash",
+                    "width_px": 1200,
+                    "height_px": 1800,
+                    "render_dpi": 450,
+                    "render_engine": "pypdfium2",
+                    "render_engine_version": "4.30.0",
+                }
+            ],
+        }
+        config = vision_snapshot.default_vision_config()
+        config["ocr"]["primary"]["engine"] = "surya_ocr2"
+        config["ocr"]["primary"]["package"] = "surya"
+        config["ocr"]["primary"]["role"] = "primary_ocr_layout"
+        config["ocr"]["docling_snapshot_enabled"] = False
+
+        snapshot = build_vision_snapshot(page_manifest=page_manifest, vision_config=config)
+
+        self.assertEqual("ocr_unavailable", snapshot["status"])
+        self.assertIn("ocr_config_error:unsupported_ocr_engine:surya_ocr2", snapshot["errors"])
+        self.assertEqual("surya_ocr2", snapshot["engine_runs"][0]["engine"])
+        self.assertEqual("config_error", snapshot["engine_runs"][0]["status"])
+        self.assertEqual(snapshot["config_hash"], snapshot["engine_runs"][0]["config_hash"])
+        self.assertRegex(snapshot["engine_runs"][0]["engine_config_hash"], r"^[a-f0-9]{64}$")
+        self.assertIn(
+            "ocr_config_error:unsupported_ocr_engine:surya_ocr2",
+            snapshot["quality"]["findings"],
+        )
+
+    def test_vision_snapshot_captures_adapter_exceptions_as_structured_ocr_errors(self) -> None:
+        page_manifest = {
+            "source_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+            "source_sha256": "sourcehash",
+            "source_type": "pdf",
+            "calendar_group_key": "boardwalk",
+            "edition": "fy26-q3-0526",
+            "render_config": {"config_hash": "renderhash"},
+            "pages": [
+                {
+                    "page_number": 1,
+                    "page_kind": "pdf_page",
+                    "canonical_image_path": "page.png",
+                    "canonical_image_sha256": "pagehash",
+                    "width_px": 1200,
+                    "height_px": 1800,
+                    "render_dpi": 450,
+                    "render_engine": "pypdfium2",
+                    "render_engine_version": "4.30.0",
+                }
+            ],
+        }
+        config = vision_snapshot.default_vision_config()
+        config["ocr"]["docling_snapshot_enabled"] = False
+
+        with patch(
+            "scripts.ingest.vision_snapshot.PaddleOcrAdapter.run_page",
+            side_effect=RuntimeError("native ocr failed"),
+        ):
+            snapshot = build_vision_snapshot(page_manifest=page_manifest, vision_config=config)
+
+        self.assertEqual("ocr_unavailable", snapshot["status"])
+        self.assertIn("ocr_engine_error:paddleocr_ppstructurev3:RuntimeError", snapshot["errors"])
+        self.assertEqual("paddleocr_ppstructurev3", snapshot["engine_runs"][0]["engine"])
+        self.assertEqual("error", snapshot["engine_runs"][0]["status"])
+        self.assertEqual("native ocr failed", snapshot["engine_runs"][0]["error_detail"])
+        self.assertEqual(snapshot["config_hash"], snapshot["engine_runs"][0]["config_hash"])
+        self.assertIn(
+            "ocr_engine_error:paddleocr_ppstructurev3:RuntimeError",
+            snapshot["quality"]["findings"],
+        )
 
     def test_vision_snapshot_batch_scans_page_manifests_and_writes_status_report(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -669,8 +942,22 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                         "reading_order": 1,
                     }
                 ],
-                "lines": [],
-                "regions": [],
+                "lines": [
+                    {
+                        "text": "Poolside Activities",
+                        "bbox_px": [10, 20, 200, 44],
+                        "confidence": 0.96,
+                        "reading_order": 1,
+                    }
+                ],
+                "regions": [
+                    {
+                        "region_type": "activity_block",
+                        "bbox_px": [8, 16, 220, 92],
+                        "confidence": 0.88,
+                        "reading_order": 1,
+                    }
+                ],
             }
 
         def rapid_run(page: dict[str, Any]) -> dict[str, Any]:
@@ -687,8 +974,22 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                         "reading_order": 1,
                     }
                 ],
-                "lines": [],
-                "regions": [],
+                "lines": [
+                    {
+                        "text": "POOLSIDE ACTIVITIES",
+                        "bbox_px": [12, 22, 202, 46],
+                        "confidence": 0.93,
+                        "reading_order": 1,
+                    }
+                ],
+                "regions": [
+                    {
+                        "region_type": "activity_block",
+                        "bbox_px": [9, 18, 222, 94],
+                        "confidence": 0.81,
+                        "reading_order": 1,
+                    }
+                ],
             }
 
         def docling_run(page: dict[str, Any]) -> dict[str, Any]:
@@ -715,7 +1016,21 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("Poolside Activities", snapshot["tokens"][0]["text"])
         self.assertEqual("pagehash", snapshot["tokens"][0]["page_image_sha256"])
         self.assertEqual([10, 20, 200, 44], snapshot["tokens"][0]["bbox_px"])
+        self.assertEqual(2, len(snapshot["lines"]))
+        self.assertEqual("paddleocr_ppstructurev3", snapshot["lines"][0]["engine"])
+        self.assertEqual("Poolside Activities", snapshot["lines"][0]["text"])
+        self.assertEqual("pagehash", snapshot["lines"][0]["page_image_sha256"])
+        self.assertEqual([10, 20, 200, 44], snapshot["lines"][0]["bbox_px"])
+        self.assertEqual(0.96, snapshot["lines"][0]["confidence"])
+        self.assertEqual(2, len(snapshot["engine_regions"]))
+        self.assertEqual("paddleocr_ppstructurev3", snapshot["engine_regions"][0]["engine"])
+        self.assertEqual("activity_block", snapshot["engine_regions"][0]["region_type"])
+        self.assertEqual("pagehash", snapshot["engine_regions"][0]["page_image_sha256"])
+        self.assertEqual([8, 16, 220, 92], snapshot["engine_regions"][0]["bbox_px"])
+        self.assertEqual(0.88, snapshot["engine_regions"][0]["confidence"])
         self.assertEqual(2, snapshot["quality"]["token_count"])
+        self.assertEqual(2, snapshot["quality"]["line_count"])
+        self.assertEqual(2, snapshot["quality"]["engine_region_count"])
         self.assertTrue(snapshot["quality"]["ocr_success"])
 
     def test_family_classifier_recognizes_known_samples_and_blocks_unknown_family(self) -> None:
@@ -739,10 +1054,38 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "source_type": "image",
             "pages": [{"width_px": 800, "height_px": 800}],
         }
+        aframe_by_text = {
+            "source_path": "data/raw/pdfs/unknown-flyer.pdf",
+            "source_type": "pdf",
+            "pages": [{"width_px": 10800, "height_px": 16200}],
+            "lines": [
+                {"text": "Resort Activities"},
+                {"text": "Movie Under the Stars"},
+                {"text": "Scan the QR code for the latest schedule"},
+            ],
+        }
+        vertical_by_text = {
+            "source_path": "data/raw/pdfs/unknown-sign.jpg",
+            "source_type": "image",
+            "pages": [{"width_px": 1200, "height_px": 12696}],
+            "lines": [
+                {"text": "MONDAY"},
+                {"text": "TUESDAY"},
+                {"text": "Arts & Crafts 1:00pm"},
+            ],
+        }
 
         self.assertEqual("aframe_recreation", classify_document_family(boardwalk)["document_family"])
         self.assertEqual("aframe_recreation", classify_document_family(all_star_sports)["document_family"])
         self.assertEqual("vertical_digital_rec_sign", classify_document_family(daar)["document_family"])
+        aframe_text_classification = classify_document_family(aframe_by_text)
+        self.assertEqual("aframe_recreation", aframe_text_classification["document_family"])
+        self.assertIn("text:resort_activities", aframe_text_classification["signals"])
+        self.assertFalse(aframe_text_classification["allow_auto_publish"])
+        vertical_text_classification = classify_document_family(vertical_by_text)
+        self.assertEqual("vertical_digital_rec_sign", vertical_text_classification["document_family"])
+        self.assertIn("text:day_banners", vertical_text_classification["signals"])
+        self.assertFalse(vertical_text_classification["allow_auto_publish"])
         unknown_classification = classify_document_family(unknown)
         self.assertEqual("unknown_visual_schedule", unknown_classification["document_family"])
         self.assertFalse(unknown_classification["allow_auto_publish"])
@@ -753,6 +1096,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             page_path = root / "page.png"
             Image.new("RGB", (1200, 1800), color=(255, 255, 255)).save(page_path, "PNG")
             snapshot = {
+                "source_document_id": "source-doc-parent",
                 "source_sha256": "abc123",
                 "source_pages": [
                     {
@@ -785,6 +1129,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             page_path = root / "page.png"
             Image.new("RGB", (1200, 1800), color=(255, 255, 255)).save(page_path, "PNG")
             snapshot = {
+                "source_document_id": "source-doc-parent",
                 "source_sha256": "abc123",
                 "source_pages": [
                     {
@@ -819,6 +1164,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             self.assertTrue(qr_region["qr_targets"][0]["is_official_source"])
             self.assertEqual("official_disney", qr_region["qr_targets"][0]["source_authority"])
             self.assertEqual(qr_region["crop_sha256"], qr_region["qr_targets"][0]["source_crop_sha256"])
+            self.assertEqual("source-doc-parent", qr_region["qr_targets"][0]["parent_source_document_id"])
+            self.assertEqual("abc123", qr_region["qr_targets"][0]["parent_content_sha256"])
+            self.assertEqual(qr_region["qr_targets"], result["derived_source_links"])
 
     def test_region_segmentation_classifies_non_official_qr_targets(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -862,19 +1210,95 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 calendar_group_key="boardwalk",
                 edition="fy26-q3-0526",
                 output_dir=root / "pages",
+                source_metadata={"source_document_id": "source-doc-parent"},
             )
 
-            snapshot = build_vision_snapshot(
-                page_manifest=page_manifest,
-                attach_regions=True,
-                region_output_dir=root / "regions",
-            )
+            with patch(
+                "scripts.ingest.regions.decode_qr_targets",
+                return_value=[
+                    {
+                        "target_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
+                        "decoder": "test_decoder",
+                    }
+                ],
+            ):
+                snapshot = build_vision_snapshot(
+                    page_manifest=page_manifest,
+                    attach_regions=True,
+                    region_output_dir=root / "regions",
+                )
 
             self.assertEqual("aframe_recreation", snapshot["document_family"])
             self.assertTrue(snapshot["family_classification"]["allow_auto_publish"])
             self.assertIn("resort_activities_section", {region["region_type"] for region in snapshot["regions"]})
             self.assertTrue(all(region["page_image_sha256"] for region in snapshot["regions"]))
             self.assertGreater(snapshot["quality"]["region_count"], 0)
+            self.assertEqual(1, len(snapshot["derived_source_links"]))
+            self.assertEqual(
+                "derived_source_link",
+                snapshot["derived_source_links"][0]["source_role"],
+            )
+            self.assertEqual(
+                "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
+                snapshot["derived_source_links"][0]["target_url"],
+            )
+            self.assertEqual(
+                "source-doc-parent",
+                snapshot["derived_source_links"][0]["parent_source_document_id"],
+            )
+            self.assertEqual(
+                page_manifest["source_sha256"],
+                snapshot["derived_source_links"][0]["parent_content_sha256"],
+            )
+
+    def test_vision_snapshot_records_structured_region_segmentation_error(self) -> None:
+        page_manifest = {
+            "source_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+            "source_sha256": "sourcehash",
+            "source_type": "pdf",
+            "calendar_group_key": "boardwalk",
+            "edition": "fy26-q3-0526",
+            "pages": [
+                {
+                    "page_number": 1,
+                    "page_kind": "pdf_page",
+                    "canonical_image_path": "missing-page.png",
+                    "canonical_image_sha256": "pagehash",
+                    "width_px": 1200,
+                    "height_px": 1800,
+                    "render_dpi": 450,
+                    "render_engine": "pypdfium2",
+                    "render_engine_version": "4.30.0",
+                }
+            ],
+        }
+
+        def engine_run(page: dict[str, Any]) -> dict[str, Any]:
+            return {
+                "engine": "paddleocr_ppstructurev3",
+                "status": "success",
+                "page_number": page["page_number"],
+                "page_image_sha256": page["page_image_sha256"],
+                "tokens": [],
+                "lines": [],
+                "regions": [],
+            }
+
+        config = vision_snapshot.default_vision_config()
+        config["ocr"]["secondary"]["engine"] = ""
+        config["ocr"]["docling_snapshot_enabled"] = False
+        with patch("scripts.ingest.vision_snapshot.PaddleOcrAdapter.run_page", side_effect=engine_run):
+            snapshot = build_vision_snapshot(
+                page_manifest=page_manifest,
+                vision_config=config,
+                attach_regions=True,
+            )
+
+        self.assertEqual("region_segmentation_failed", snapshot["status"])
+        self.assertEqual([], snapshot["regions"])
+        self.assertIn("region_segmentation_error:missing_page_image", snapshot["errors"])
+        self.assertIn("region_segmentation_error:missing_page_image", snapshot["quality"]["findings"])
+        self.assertEqual(1, snapshot["quality"]["structured_error_count"])
 
     def test_region_parser_scaffolds_define_publish_policy_and_major_regions(self) -> None:
         aframe = AframeRecreationParser()
@@ -941,6 +1365,56 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("page-001-region-04", candidate["region_id"])
         self.assertIn("ocr_text_missing", candidate["validation_findings"])
         self.assertEqual("crophash", candidate["field_evidence"]["region"]["source"]["crop_sha256"])
+
+    def test_extract_v3_generic_visual_schedule_produces_review_candidate_only(self) -> None:
+        snapshot = {
+            "snapshot_kind": "vision_layout_v3",
+            "document_family": "unknown_visual_schedule",
+            "source_document_id": "source-doc-unknown",
+            "source_kind": "official_image",
+            "source_role": "resort_pdf",
+            "canonical_url": "https://example.com/unknown-sign.jpg",
+            "source_sha256": "unknownhash",
+            "calendar_group_key": "mystery-resort",
+            "source_pages": [{"page_number": 1, "canonical_image_sha256": "pagehash"}],
+            "regions": [
+                {
+                    "region_id": "page-001-region-01",
+                    "region_type": "unknown",
+                    "region_family": "unknown_visual_schedule",
+                    "page_number": 1,
+                    "page_image_sha256": "pagehash",
+                    "bbox_px": [0, 0, 1200, 1800],
+                    "crop_path": "unknown-region.png",
+                    "crop_sha256": "unknowncrop",
+                    "allow_auto_publish": False,
+                }
+            ],
+            "tokens": [
+                {
+                    "engine": "paddleocr_ppstructurev3",
+                    "text": "Pool Party Daily at 1:00pm",
+                    "page_number": 1,
+                    "page_image_sha256": "pagehash",
+                    "bbox_px": [100, 200, 700, 240],
+                    "confidence": 0.91,
+                }
+            ],
+        }
+
+        candidates = extract_candidates_from_snapshot(snapshot)
+
+        self.assertEqual(1, len(candidates))
+        candidate = candidates[0]
+        self.assertEqual("generic_visual_review", candidate["candidate_type"])
+        self.assertEqual("needs_review", candidate["validation_status"])
+        self.assertEqual("unknown_visual_schedule", candidate["document_family"])
+        self.assertEqual("page-001-region-01", candidate["region_id"])
+        self.assertEqual("unknown", candidate["region_type"])
+        self.assertIn("unknown_document_family", candidate["validation_findings"])
+        self.assertIn("generic_visual_schedule_review_required", candidate["validation_findings"])
+        self.assertEqual("unknowncrop", candidate["field_evidence"]["region"]["source"]["crop_sha256"])
+        self.assertEqual({}, candidate["source_spans"])
 
     def test_extract_v3_builds_activity_candidate_from_region_scoped_engine_tokens(self) -> None:
         region = {
@@ -1552,6 +2026,15 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         unknown_family["document_family"] = "unknown_visual_schedule"
         self.assertIn("unknown_document_family", validate_candidate(unknown_family)["validation_findings"])
 
+        generic_visual_review = json.loads(json.dumps(valid_candidate))
+        generic_visual_review["candidate_type"] = "generic_visual_review"
+        validated_generic = validate_candidate(generic_visual_review)
+        self.assertEqual("needs_review", validated_generic["validation_status"])
+        self.assertIn(
+            "review_only_candidate_type:generic_visual_review",
+            validated_generic["validation_findings"],
+        )
+
         fee_conflict = json.loads(json.dumps(valid_candidate))
         fee_conflict["fee_required"] = False
         fee_conflict["field_evidence"]["fee"]["raw_value"] = "Poolside Activities ($)"
@@ -1704,7 +2187,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("region.png", tasks[0]["field_crop"])
         hollow_candidate = json.loads(json.dumps(candidate))
         del hollow_candidate["field_evidence"]["region"]["source"]["page_image_sha256"]
-        self.assertEqual([], build_review_tasks([hollow_candidate]))
+        [unreviewable_task] = build_review_tasks([hollow_candidate])
+        self.assertEqual("unreviewable_candidate", unreviewable_task["task_type"])
+        self.assertEqual("cand-1", unreviewable_task["task_id"])
+        self.assertEqual("sourcehash", unreviewable_task["content_sha256"])
+        self.assertIn("missing_reviewable_evidence", unreviewable_task["validation_findings"])
+        self.assertEqual(hollow_candidate, unreviewable_task["candidate"])
         manual_review_candidate = {
             **candidate,
             "candidate_id": "cand-manual",
@@ -1907,6 +2395,52 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("source-drift-boardwalk-location-campfire", tasks[0]["task_id"])
         self.assertEqual("source_changed", tasks[0]["task_type"])
         self.assertEqual(["source_changed:location"], tasks[0]["validation_findings"])
+
+    def test_review_queue_v3_cli_accepts_dual_run_report(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            validated_dir = root / "validated"
+            dual_run_path = root / "v3_dual_run_report.json"
+            output_path = root / "review_queue.json"
+            validated_dir.mkdir()
+            dual_run_path.write_text(
+                json.dumps(
+                    {
+                        "status": "blocked",
+                        "field_diffs": [
+                            {
+                                "diff_key": "boardwalk:poolside-activities:schedule",
+                                "canonical_slug": "poolside-activities",
+                                "calendar_group_key": "boardwalk",
+                                "field": "schedule",
+                                "v2_value": "Daily at 1:30pm",
+                                "v3_value": "Daily at 2:30pm",
+                                "reviewed": False,
+                            }
+                        ],
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "build_review_queue_v3.py",
+                    str(validated_dir),
+                    "--dual-run-report",
+                    str(dual_run_path),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                build_review_queue_v3.main()
+
+            tasks = json.loads(output_path.read_text())
+
+        self.assertEqual(1, len(tasks))
+        self.assertEqual("dual-run-diff-boardwalk-poolside-activities-schedule", tasks[0]["task_id"])
+        self.assertEqual("gold_conflict", tasks[0]["task_type"])
 
     def test_review_queue_v3_uses_field_specific_evidence_for_disagreement_tasks(self) -> None:
         candidate = {
@@ -2292,6 +2826,96 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(["source_changed:removed_title"], tasks[2]["validation_findings"])
         self.assertEqual(["source_changed:activity_count_drift"], tasks[3]["validation_findings"])
         self.assertEqual(source_drift_report["source_reports"][0], tasks[0]["source_drift_report"])
+
+    def test_review_queue_v3_builds_tasks_from_dual_run_report_blockers(self) -> None:
+        dual_run_report = {
+            "report_version": "v3_dual_run_report_001",
+            "status": "blocked",
+            "field_diffs": [
+                {
+                    "diff_key": "boardwalk:poolside-activities:schedule",
+                    "row_key": "boardwalk:poolside-activities",
+                    "canonical_slug": "poolside-activities",
+                    "calendar_group_key": "boardwalk",
+                    "field": "schedule",
+                    "v2_value": "Daily at 1:30pm",
+                    "v3_value": "Daily at 2:30pm",
+                    "reviewed": False,
+                    "v3_field_evidence": {
+                        "source": {
+                            "content_sha256": "sourcehash",
+                            "page_number": 1,
+                            "page_image_sha256": "pagehash",
+                            "bbox_px": [10, 20, 200, 44],
+                            "crop_storage_path": "fields/schedule.png",
+                            "crop_sha256": "schedulecrop",
+                        },
+                        "engines": [
+                            {"engine": "paddleocr_ppstructurev3", "text": "Daily at 2:30pm"},
+                            {"engine": "rapidocr", "text": "Daily at 2:30pm"},
+                        ],
+                    },
+                }
+            ],
+            "status_transitions": [
+                {
+                    "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+                    "row_key": "boardwalk:poolside-activities",
+                    "canonical_slug": "poolside-activities",
+                    "calendar_group_key": "boardwalk",
+                    "from_status": "needs_review",
+                    "to_status": "auto_publishable",
+                    "evidence_changed": False,
+                    "reviewed": False,
+                }
+            ],
+            "unreviewed_status_transition_keys": [
+                "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+            ],
+            "new_v3_records": [
+                {
+                    "review_key": "boardwalk:movie-under-the-stars:new_record",
+                    "row_key": "boardwalk:movie-under-the-stars",
+                    "canonical_slug": "movie-under-the-stars",
+                    "calendar_group_key": "boardwalk",
+                    "title": "Movie Under the Stars",
+                    "content_sha256": "newsourcehash",
+                    "reviewed": False,
+                }
+            ],
+            "unreviewed_new_keys": ["boardwalk:movie-under-the-stars"],
+            "publish_blockers": [
+                "unreviewed_v2_v3_field_diffs",
+                "unreviewed_v3_status_transitions",
+                "unreviewed_new_v3_rows",
+            ],
+        }
+
+        tasks = build_review_tasks([], dual_run_report=dual_run_report)
+
+        self.assertEqual(
+            [
+                "dual-run-diff-boardwalk-poolside-activities-schedule",
+                "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+                "dual-run-new-boardwalk-movie-under-the-stars-new-record",
+            ],
+            [task["task_id"] for task in tasks],
+        )
+        self.assertEqual(
+            ["gold_conflict", "manual_review_required", "manual_review_required"],
+            [task["task_type"] for task in tasks],
+        )
+        self.assertEqual(["schedule", "status_transition", "new_record"], [task["field"] for task in tasks])
+        self.assertEqual(["sourcehash", None, "newsourcehash"], [task["content_sha256"] for task in tasks])
+        self.assertEqual("Daily at 1:30pm", tasks[0]["source_drift"]["old"])
+        self.assertEqual("Daily at 2:30pm", tasks[0]["candidate_value"])
+        self.assertEqual(["gold_conflict:v2_v3:schedule"], tasks[0]["validation_findings"])
+        self.assertEqual("schedulecrop", tasks[0]["field_crop_sha256"])
+        self.assertEqual(["manual_review_required:status_transition"], tasks[1]["validation_findings"])
+        self.assertEqual(["manual_review_required:new_record"], tasks[2]["validation_findings"])
+        self.assertEqual(dual_run_report["field_diffs"][0], tasks[0]["dual_run_diff"])
+        self.assertEqual(dual_run_report["status_transitions"][0], tasks[1]["dual_run_status_transition"])
+        self.assertEqual(dual_run_report["new_v3_records"][0], tasks[2]["dual_run_new_record"])
 
     def test_promote_gold_v3_preview_only_includes_gated_rows_with_field_evidence(self) -> None:
         auto_candidate = {
@@ -3468,6 +4092,35 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "movie_count_drift",
                 ],
             }
+            reviewed_source_drift_report_shell = {
+                "status": "reviewed",
+                "review_status": "manual_review_approved",
+                "calendar_group_key": "boardwalk",
+                "publish_blockers": ["recognized_family_changed"],
+                "review_decision": {
+                    "decision": "approve",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "reason": "Reviewed source drift report and accepted the family change.",
+                },
+            }
+            reviewed_source_drift_report = {
+                **reviewed_source_drift_report_shell,
+                "reviewed_source_drift_task_ids": [
+                    "source-drift-boardwalk-blocker-recognized-family-changed",
+                ],
+                "missing_source_drift_task_ids": [],
+            }
+            forged_reviewed_source_drift_report = {
+                **reviewed_source_drift_report_shell,
+                "reviewed_source_drift_task_ids": ["source-drift-boardwalk-blocker-unrelated"],
+                "missing_source_drift_task_ids": [],
+            }
+            incomplete_reviewed_source_drift_report = {
+                **reviewed_source_drift_report,
+                "reviewed_source_drift_task_ids": [],
+                "missing_source_drift_task_ids": ["source-drift-boardwalk-blocker-activity-count-drift"],
+            }
 
             self.assertEqual("v2", load_publish_flags(disabled_flags)["public_gold_source"])
             disabled = evaluate_publish_readiness(clean_preview, flags=load_publish_flags(disabled_flags))
@@ -3673,6 +4326,30 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 dual_run_report=clean_dual_run_report,
                 source_drift_report=blocked_source_drift_report,
             )
+            source_drift_reviewed = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+                source_drift_report=reviewed_source_drift_report,
+            )
+            source_drift_reviewed_shell = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+                source_drift_report=reviewed_source_drift_report_shell,
+            )
+            source_drift_forged_review = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+                source_drift_report=forged_reviewed_source_drift_report,
+            )
+            source_drift_incomplete_review = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+                source_drift_report=incomplete_reviewed_source_drift_report,
+            )
             dual_run_blocked = evaluate_publish_readiness(
                 clean_preview,
                 flags=load_publish_flags(enabled_flags),
@@ -3782,9 +4459,131 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("recognized_family_changed", source_drift_blocked["errors"])
         self.assertIn("activity_count_drift", source_drift_blocked["errors"])
         self.assertIn("movie_count_drift", source_drift_blocked["errors"])
+        self.assertTrue(source_drift_reviewed["ready"])
+        self.assertFalse(source_drift_reviewed_shell["ready"])
+        self.assertIn(
+            "source_drift_report_missing_review_manifest",
+            source_drift_reviewed_shell["errors"],
+        )
+        self.assertFalse(source_drift_forged_review["ready"])
+        self.assertIn(
+            "source_drift_report_review_manifest_mismatch",
+            source_drift_forged_review["errors"],
+        )
+        self.assertFalse(source_drift_incomplete_review["ready"])
+        self.assertIn(
+            "source_drift_report_missing_reviewed_tasks",
+            source_drift_incomplete_review["errors"],
+        )
         self.assertFalse(dual_run_blocked["ready"])
         self.assertIn("dual_run_report_blocked", dual_run_blocked["errors"])
         self.assertIn("unreviewed_v2_v3_field_diffs", dual_run_blocked["errors"])
+
+    def test_publish_gold_v3_requires_fresh_passing_monitoring_report_when_enabled(self) -> None:
+        preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
+        flags = {"public_gold_source": "v3", "v3_publish_enabled": True}
+        clean_dual_run_report = {"status": "clean", "publish_blockers": [], "unreviewed_diff_keys": []}
+        passing_monitoring_report = {
+            "generated_at": "2026-06-28T12:01:00+00:00",
+            "status": "pass",
+            "changed_sources": [],
+            "affected_rows": [],
+            "recommended_action": "none",
+        }
+
+        missing = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            require_monitoring_report=True,
+        )
+        stale = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report={**passing_monitoring_report, "generated_at": "2026-06-28T11:59:00+00:00"},
+            require_monitoring_report=True,
+        )
+        blocked = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report={
+                "generated_at": "2026-06-28T12:01:00+00:00",
+                "status": "blocked",
+                "changed_sources": ["source_freshness:hash_changed:https://example.com/calendar.pdf"],
+                "affected_rows": [],
+                "recommended_action": "withhold_publish",
+            },
+            require_monitoring_report=True,
+        )
+        attention = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report={
+                "generated_at": "2026-06-28T12:01:00+00:00",
+                "status": "attention",
+                "changed_sources": [],
+                "affected_rows": [{"code": "known_public_error", "severity": "blocker"}],
+                "recommended_action": "manual_review",
+            },
+            require_monitoring_report=True,
+        )
+        passed = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report=passing_monitoring_report,
+            require_monitoring_report=True,
+        )
+
+        self.assertFalse(missing["ready"])
+        self.assertIn("missing_monitoring_report", missing["errors"])
+        self.assertFalse(stale["ready"])
+        self.assertIn("monitoring_report_stale", stale["errors"])
+        self.assertFalse(blocked["ready"])
+        self.assertIn("monitoring_report_blocked", blocked["errors"])
+        self.assertIn("monitoring_changed_sources", blocked["errors"])
+        self.assertFalse(attention["ready"])
+        self.assertIn("monitoring_affected_rows", attention["errors"])
+        self.assertTrue(passed["ready"])
+
+    def test_publish_gold_v3_requires_source_drift_report_when_enabled(self) -> None:
+        preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
+        flags = {"public_gold_source": "v3", "v3_publish_enabled": True}
+        clean_dual_run_report = {"status": "clean", "publish_blockers": [], "unreviewed_diff_keys": []}
+        clean_source_drift_report = {"status": "clean", "publish_blockers": []}
+
+        missing = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            require_source_drift_report=True,
+        )
+        passed = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_drift_report=clean_source_drift_report,
+            require_source_drift_report=True,
+        )
+
+        self.assertFalse(missing["ready"])
+        self.assertIn("missing_source_drift_report", missing["errors"])
+        self.assertTrue(passed["ready"])
+
+    def test_source_trust_monitoring_report_includes_generated_at(self) -> None:
+        report = {
+            "generated_at": "2026-06-28T12:01:00+00:00",
+            "source_freshness": {"errors": []},
+            "blockers": [],
+        }
+
+        monitoring_report = trust_report._monitoring_report(report)
+
+        self.assertEqual("2026-06-28T12:01:00+00:00", monitoring_report["generated_at"])
+        self.assertEqual("pass", monitoring_report["status"])
 
     def test_publish_gold_v3_cli_can_require_clean_dual_run_report(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -3885,6 +4684,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             preview_path = root / "preview.json"
             dual_run_path = root / "dual_run.json"
             drift_path = root / "source_drift_report.json"
+            monitoring_path = root / "source_trust_monitoring_report.json"
             flags_path.write_text("public_gold_source: v3\nv3_publish_enabled: true\n")
             preview_path.write_text(
                 json.dumps(
@@ -3982,6 +4782,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             preview_path = root / "preview.json"
             dual_run_path = root / "v3_dual_run_report.json"
             drift_path = root / "source_drift_report.json"
+            monitoring_path = root / "source_trust_monitoring_report.json"
             flags_path.write_text("public_gold_source: v3\nv3_publish_enabled: true\n")
             preview_path.write_text(
                 json.dumps(
@@ -4068,21 +4869,33 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 )
             )
             drift_path.write_text(json.dumps({"status": "clean", "publish_blockers": []}))
+            monitoring_path.write_text(
+                json.dumps(
+                    {
+                        "generated_at": "2026-06-28T12:01:00+00:00",
+                        "status": "pass",
+                        "changed_sources": [],
+                        "affected_rows": [],
+                        "recommended_action": "none",
+                    }
+                )
+            )
 
             with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
                 with patch.object(publish_gold_v3, "DEFAULT_SOURCE_DRIFT_REPORT_PATH", drift_path):
-                    with patch.object(
-                        sys,
-                        "argv",
-                        [
-                            "publish_gold_v3.py",
-                            str(preview_path),
-                            "--flags",
-                            str(flags_path),
-                            "--require-clean-preview",
-                        ],
-                    ):
-                        publish_gold_v3.main()
+                    with patch.object(publish_gold_v3, "DEFAULT_MONITORING_REPORT_PATH", monitoring_path):
+                        with patch.object(
+                            sys,
+                            "argv",
+                            [
+                                "publish_gold_v3.py",
+                                str(preview_path),
+                                "--flags",
+                                str(flags_path),
+                                "--require-clean-preview",
+                            ],
+                        ):
+                            publish_gold_v3.main()
 
     def test_publish_gold_v3_cli_uses_default_preview_path_for_runbook_command(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -4091,6 +4904,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             preview_path = root / "activity_gold_v3_preview.json"
             dual_run_path = root / "v3_dual_run_report.json"
             drift_path = root / "source_drift_report.json"
+            monitoring_path = root / "source_trust_monitoring_report.json"
             flags_path.write_text("public_gold_source: v3\nv3_publish_enabled: true\n")
             preview_path.write_text(
                 json.dumps(
@@ -4168,21 +4982,299 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             )
             dual_run_path.write_text(json.dumps({"status": "clean", "publish_blockers": [], "unreviewed_diff_keys": []}))
             drift_path.write_text(json.dumps({"status": "clean", "publish_blockers": []}))
+            monitoring_path.write_text(
+                json.dumps(
+                    {
+                        "generated_at": "2026-06-28T12:01:00+00:00",
+                        "status": "pass",
+                        "changed_sources": [],
+                        "affected_rows": [],
+                        "recommended_action": "none",
+                    }
+                )
+            )
 
             with patch.object(publish_gold_v3, "DEFAULT_PREVIEW_PATH", preview_path):
                 with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
                     with patch.object(publish_gold_v3, "DEFAULT_SOURCE_DRIFT_REPORT_PATH", drift_path):
-                        with patch.object(
-                            sys,
-                            "argv",
-                            [
-                                "publish_gold_v3.py",
-                                "--flags",
-                                str(flags_path),
-                                "--require-clean-preview",
-                            ],
-                        ):
-                            publish_gold_v3.main()
+                        with patch.object(publish_gold_v3, "DEFAULT_MONITORING_REPORT_PATH", monitoring_path):
+                            with patch.object(
+                                sys,
+                                "argv",
+                                [
+                                    "publish_gold_v3.py",
+                                    "--flags",
+                                    str(flags_path),
+                                    "--require-clean-preview",
+                                ],
+                            ):
+                                publish_gold_v3.main()
+
+    def test_publish_gold_v3_cli_writes_only_with_explicit_publish_flag(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            flags_path = root / "publish_flags.yaml"
+            preview_path = root / "activity_gold_v3_preview.json"
+            dual_run_path = root / "v3_dual_run_report.json"
+            drift_path = root / "source_drift_report.json"
+            monitoring_path = root / "source_trust_monitoring_report.json"
+            preview_path.write_text(json.dumps(clean_publish_v3_preview()))
+            flags_path.write_text("public_gold_source: v3\nv3_publish_enabled: true\n")
+            dual_run_path.write_text(json.dumps({"status": "clean", "publish_blockers": [], "unreviewed_diff_keys": []}))
+            drift_path.write_text(json.dumps({"status": "clean", "publish_blockers": []}))
+            monitoring_path.write_text(
+                json.dumps(
+                    {
+                        "generated_at": "2026-06-28T12:01:00+00:00",
+                        "status": "pass",
+                        "changed_sources": [],
+                        "affected_rows": [],
+                        "recommended_action": "none",
+                    }
+                )
+            )
+            db = object()
+            publish_calls: list[tuple[Any, dict[str, Any]]] = []
+
+            def publish_spy(db_arg: Any, preview_arg: dict[str, Any], **_kwargs: Any) -> dict[str, int]:
+                publish_calls.append((db_arg, preview_arg))
+                return {"activity_catalog": 1, "public_activity_gold": 1}
+
+            with patch.object(publish_gold_v3, "DEFAULT_PREVIEW_PATH", preview_path):
+                with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
+                    with patch.object(publish_gold_v3, "DEFAULT_SOURCE_DRIFT_REPORT_PATH", drift_path):
+                        with patch.object(publish_gold_v3, "DEFAULT_MONITORING_REPORT_PATH", monitoring_path):
+                            with patch.object(publish_gold_v3, "SupabaseClient", return_value=db, create=True):
+                                with patch.object(publish_gold_v3, "publish_gold_v3_preview", side_effect=publish_spy):
+                                    with patch.object(
+                                        sys,
+                                        "argv",
+                                        [
+                                            "publish_gold_v3.py",
+                                            "--flags",
+                                            str(flags_path),
+                                            "--require-clean-preview",
+                                            "--publish",
+                                        ],
+                                    ):
+                                        try:
+                                            publish_gold_v3.main()
+                                        except SystemExit as error:
+                                            self.fail(f"publish CLI unexpectedly exited with {error.code}")
+
+            self.assertEqual([(db, json.loads(preview_path.read_text()))], publish_calls)
+
+    def test_publish_gold_v3_cli_publish_requires_clean_preview_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            flags_path = root / "publish_flags.yaml"
+            preview_path = root / "activity_gold_v3_preview.json"
+            dual_run_path = root / "v3_dual_run_report.json"
+            drift_path = root / "source_drift_report.json"
+            monitoring_path = root / "source_trust_monitoring_report.json"
+            preview_path.write_text(json.dumps(clean_publish_v3_preview()))
+            flags_path.write_text("public_gold_source: v3\nv3_publish_enabled: true\n")
+            dual_run_path.write_text(json.dumps({"status": "clean", "publish_blockers": [], "unreviewed_diff_keys": []}))
+            drift_path.write_text(json.dumps({"status": "clean", "publish_blockers": []}))
+            monitoring_path.write_text(
+                json.dumps(
+                    {
+                        "generated_at": "2026-06-28T12:01:00+00:00",
+                        "status": "pass",
+                        "changed_sources": [],
+                        "affected_rows": [],
+                        "recommended_action": "none",
+                    }
+                )
+            )
+            publish_calls: list[dict[str, Any]] = []
+
+            def publish_spy(*_args: Any, **_kwargs: Any) -> dict[str, int]:
+                publish_calls.append({"called": True})
+                return {"activity_catalog": 1, "public_activity_gold": 1}
+
+            with patch.object(publish_gold_v3, "DEFAULT_PREVIEW_PATH", preview_path):
+                with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
+                    with patch.object(publish_gold_v3, "DEFAULT_SOURCE_DRIFT_REPORT_PATH", drift_path):
+                        with patch.object(publish_gold_v3, "DEFAULT_MONITORING_REPORT_PATH", monitoring_path):
+                            with patch.object(publish_gold_v3, "SupabaseClient", return_value=object(), create=True):
+                                with patch.object(publish_gold_v3, "publish_gold_v3_preview", side_effect=publish_spy):
+                                    with patch.object(
+                                        sys,
+                                        "argv",
+                                        [
+                                            "publish_gold_v3.py",
+                                            "--flags",
+                                            str(flags_path),
+                                            "--publish",
+                                        ],
+                                    ):
+                                        with self.assertRaises(SystemExit) as raised:
+                                            publish_gold_v3.main()
+
+            self.assertEqual(1, raised.exception.code)
+            self.assertEqual([], publish_calls)
+
+    def test_publish_gold_v3_maps_ready_preview_rows_to_public_gold_contract(self) -> None:
+        preview = clean_publish_v3_preview()
+        preview["rows"][0].update(
+            {
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+                "category": "poolside",
+                "resort_slug": "boardwalk-inn",
+                "edition": "fy26-q3-0526",
+                "candidate_id": "cand-poolside",
+            }
+        )
+
+        self.assertTrue(
+            hasattr(publish_gold_v3, "build_public_gold_rows_from_preview"),
+            "publish_gold_v3 must expose public-row mapping before DB publication",
+        )
+        [public_row] = publish_gold_v3.build_public_gold_rows_from_preview(
+            preview,
+            promoted_at="2026-06-28T12:05:00+00:00",
+        )
+
+        self.assertEqual("boardwalk", public_row["calendar_group_key"])
+        self.assertEqual("poolside-activities", public_row["canonical_slug"])
+        self.assertEqual("Poolside Activities", public_row["title"])
+        self.assertEqual(["boardwalk-inn"], public_row["resort_slugs"])
+        self.assertEqual("source-doc-1", public_row["source_document_id"])
+        self.assertEqual("https://example.com/calendar.pdf", public_row["source_url"])
+        self.assertEqual("sourcehash", public_row["source_sha256"])
+        self.assertEqual("fy26-q3-0526", public_row["source_pdf_edition"])
+        self.assertEqual("source_backed", public_row["trust_state"])
+        self.assertEqual("cand-poolside", public_row["promoted_from_candidate_id"])
+        self.assertEqual("2026-06-28T12:05:00+00:00", public_row["promoted_at"])
+        self.assertEqual(preview["rows"][0]["schedule"], public_row["schedule"])
+        self.assertEqual(preview["rows"][0]["source_spans"], public_row["field_provenance"])
+        self.assertEqual(preview["rows"][0]["field_evidence"], public_row["source"]["fieldEvidence"])
+        self.assertEqual(preview["rows"][0]["runtime_lineage"], public_row["source"]["runtimeLineage"])
+        self.assertEqual("aframe_recreation", public_row["source"]["documentFamily"])
+
+    def test_publish_gold_v3_preview_upserts_activity_catalog_and_public_gold_rows(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+        preview = clean_publish_v3_preview()
+        preview["rows"][0].update(
+            {
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+                "category": "poolside",
+                "resort_slug": "boardwalk-inn",
+                "edition": "fy26-q3-0526",
+                "candidate_id": "cand-poolside",
+            }
+        )
+        db = RecordingDb()
+
+        self.assertTrue(
+            hasattr(publish_gold_v3, "publish_gold_v3_preview"),
+            "publish_gold_v3 must expose a guarded DB write helper",
+        )
+        result = publish_gold_v3.publish_gold_v3_preview(
+            db,
+            preview,
+            promoted_at="2026-06-28T12:05:00+00:00",
+        )
+
+        self.assertEqual(
+            ["activity_catalog", "public_activity_gold"],
+            [table for table, _rows, _conflict in db.upserts],
+        )
+        self.assertEqual("id", db.upserts[0][2])
+        self.assertEqual("id", db.upserts[1][2])
+        self.assertEqual("Poolside Activities", db.upserts[0][1][0]["canonical_name"])
+        self.assertEqual("poolside-activities", db.upserts[0][1][0]["normalized_name"])
+        self.assertEqual("source-doc-1", db.upserts[1][1][0]["source_document_id"])
+        self.assertEqual("sourcehash", db.upserts[1][1][0]["source_sha256"])
+        self.assertEqual(["field_audit_observations"], [table for table, _rows in db.inserts])
+        audit_rows = db.inserts[0][1]
+        self.assertEqual(["fee", "location", "schedule", "title"], sorted(row["field_name"] for row in audit_rows))
+        schedule_audit = next(row for row in audit_rows if row["field_name"] == "schedule")
+        self.assertEqual("gold_activity", schedule_audit["row_kind"])
+        self.assertEqual("boardwalk:poolside-activities", schedule_audit["row_key"])
+        self.assertEqual("Daily at 1:30pm", schedule_audit["observed_value"])
+        self.assertEqual("deterministic_parser", schedule_audit["method"])
+        self.assertEqual("high", schedule_audit["confidence"])
+        self.assertEqual("source-doc-1", schedule_audit["source_document_id"])
+        self.assertEqual("sourcehash", schedule_audit["evidence"]["field_evidence"]["source"]["content_sha256"])
+        self.assertEqual({"activity_catalog": 1, "public_activity_gold": 1, "field_audit_observations": 4}, result)
+
+    def test_publish_gold_v3_preview_inserts_movie_title_audit_observation_for_movies(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+        preview = clean_publish_v3_preview()
+        preview["rows"][0].update(
+            {
+                "canonical_slug": "movie-under-the-stars",
+                "title": "Movies Under the Stars",
+                "category": "movie",
+                "candidate_type": "movie",
+                "movie_title": "Moana",
+                "normalized_movie_title": "moana",
+                "resort_slug": "boardwalk-inn",
+                "edition": "fy26-q3-0526",
+                "candidate_id": "cand-movie",
+            }
+        )
+        preview["rows"][0]["source_spans"]["movie_title"] = [{"page": 1, "text": "Moana"}]
+        preview["rows"][0]["field_evidence"]["movie_title"] = {
+            "source": {
+                "content_sha256": "sourcehash",
+                "page_number": 1,
+                "page_image_sha256": "pagehash",
+                "bbox_px": [20, 40, 180, 70],
+                "crop_sha256": "moviecrop",
+                "crop_storage_path": "movie.png",
+            },
+            "agreement": "exact_after_normalization",
+        }
+
+        db = RecordingDb()
+        result = publish_gold_v3.publish_gold_v3_preview(
+            db,
+            preview,
+            promoted_at="2026-06-28T12:05:00+00:00",
+        )
+        inserted_rows = db.inserts[0][1]
+        self.assertEqual(
+            ["fee", "location", "movie_title", "schedule", "title"],
+            sorted(row["field_name"] for row in inserted_rows),
+        )
+        movie_audit = next(row for row in inserted_rows if row["field_name"] == "movie_title")
+        self.assertEqual("Moana", movie_audit["observed_value"])
+        self.assertEqual("high", movie_audit["confidence"])
+        self.assertEqual("moviecrop", movie_audit["evidence"]["field_evidence"]["source"]["crop_sha256"])
+        self.assertEqual({"activity_catalog": 1, "public_activity_gold": 1, "field_audit_observations": 5}, result)
 
     def test_source_drift_report_flags_changed_fields_for_review(self) -> None:
         old_rows = [
@@ -4565,6 +5657,29 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertNotIn("end_time", point_time)
         self.assertEqual("phrase", phrase["schedule_type"])
         self.assertEqual("dawn_to_dusk", phrase["phrase"])
+
+    def test_prd_named_validator_modules_expose_v3_contracts(self) -> None:
+        try:
+            schedule_parser = importlib.import_module("scripts.ingest.schedule_parser_v3")
+            location_dictionary = importlib.import_module("scripts.ingest.location_dictionary")
+            engine_agreement = importlib.import_module("scripts.ingest.engine_agreement")
+        except ModuleNotFoundError as error:
+            self.fail(f"missing PRD validator module: {error.name}")
+
+        schedule = schedule_parser.parse_schedule_text("Daily from 8:00am-11:00pm")
+        location = location_dictionary.lookup_location("Village Green Lawn")
+        agreement = engine_agreement.evaluate_engine_agreement(
+            "schedule",
+            primary_text="Daily from 8:00am-11:00pm",
+            secondary_text="Daily 8:00 AM - 11:00 PM",
+        )
+
+        self.assertEqual("recurring", schedule["schedule_type"])
+        self.assertEqual("schedule_parser_v3", schedule["parser"])
+        self.assertEqual("village_green_lawn", location["location_id"])
+        self.assertFalse(location["manual_review_required"])
+        self.assertEqual("exact_after_normalization", agreement["agreement"])
+        self.assertEqual("08:00", agreement["normalized_value"]["start_time"])
 
     def test_engine_agreement_is_field_specific_after_deterministic_normalization(self) -> None:
         schedule = evaluate_field_agreement(
@@ -5136,6 +6251,612 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         )
         self.assertEqual("reject", payload["requests"][1]["decision"])
 
+    def test_review_schema_exports_dual_run_review_keys_from_review_decisions(self) -> None:
+        diff_task = {
+            "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "task_type": "gold_conflict",
+            "field": "schedule",
+            "source_document_id": "source-doc-1",
+            "content_sha256": "sourcehash",
+            "page_image": "pagehash",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "schedulecrop",
+            "candidate_type": "dual_run_diff",
+            "calendar_group_key": "boardwalk",
+            "dual_run_diff": {
+                "diff_key": "boardwalk:poolside-activities:schedule",
+                "field": "schedule",
+            },
+        }
+        approved_diff = build_review_decision(
+            diff_task,
+            reviewer="josh",
+            decision="approve",
+            approved_fields={
+                "schedule": {
+                    "raw_value": "Daily at 2:30pm",
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "14:30",
+                        "timezone": "America/New_York",
+                    },
+                }
+            },
+            reason="Visible in the v3 crop.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        approved_status_transition = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "candidate_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "candidate_type": "dual_run_status_transition",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "sourcehash",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {},
+            "reason": "Reviewed the transition and confirmed evidence changed outside the parser output.",
+            "decided_at": "2026-06-28T12:01:00Z",
+            "original_task": {
+                "content_sha256": "sourcehash",
+                "task_type": "manual_review_required",
+                "field": "status_transition",
+                "dual_run_status_transition": {
+                    "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+                },
+            },
+        }
+        rejected_diff = {
+            **approved_diff,
+            "task_id": "dual-run-diff-rejected",
+            "decision": "reject",
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([approved_diff, approved_status_transition, rejected_diff, {}]))
+
+            report = review_schema_v3.export_dual_run_review_keys(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(4, report["summary"]["decision_count"])
+        self.assertEqual(1, report["summary"]["reviewed_diff_key_count"])
+        self.assertEqual(1, report["summary"]["reviewed_status_transition_key_count"])
+        self.assertEqual(1, report["summary"]["skipped_non_approval_count"])
+        self.assertEqual(1, report["summary"]["skipped_invalid_review_decision_count"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], payload["reviewed_diff_keys"])
+        self.assertEqual(
+            ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+            payload["reviewed_status_transition_keys"],
+        )
+        self.assertEqual(
+            {
+                "key": "boardwalk:poolside-activities:schedule",
+                "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+                "content_sha256": "sourcehash",
+                "reviewer": "josh",
+                "decided_at": "2026-06-28T12:00:00Z",
+                "decision": "approve",
+                "reason": "Visible in the v3 crop.",
+            },
+            payload["reviewed_diff_reviews"][0],
+        )
+        self.assertEqual(
+            {
+                "key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+                "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+                "content_sha256": "sourcehash",
+                "reviewer": "josh",
+                "decided_at": "2026-06-28T12:01:00Z",
+                "decision": "approve",
+                "reason": "Reviewed the transition and confirmed evidence changed outside the parser output.",
+            },
+            payload["reviewed_status_transition_reviews"][0],
+        )
+
+    def test_review_schema_rejects_stale_dual_run_review_key_decisions(self) -> None:
+        stale_diff_decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "task_type": "gold_conflict",
+            "candidate_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "candidate_type": "dual_run_diff",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "oldhash",
+            "page_image_sha256": "pagehash",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "schedulecrop",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {
+                "schedule": {
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "14:30",
+                    }
+                }
+            },
+            "reason": "Reviewed against stale source hash.",
+            "decided_at": "2026-06-28T12:00:00Z",
+            "original_task": {
+                "content_sha256": "newhash",
+                "dual_run_diff": {
+                    "diff_key": "boardwalk:poolside-activities:schedule",
+                    "field": "schedule",
+                },
+            },
+        }
+        stale_status_transition_decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "candidate_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "candidate_type": "dual_run_status_transition",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "oldhash",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {},
+            "reason": "Reviewed stale transition.",
+            "decided_at": "2026-06-28T12:01:00Z",
+            "original_task": {
+                "content_sha256": "newhash",
+                "task_type": "manual_review_required",
+                "field": "status_transition",
+                "dual_run_status_transition": {
+                    "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+                },
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([stale_diff_decision, stale_status_transition_decision]))
+
+            report = review_schema_v3.export_dual_run_review_keys(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(2, report["summary"]["decision_count"])
+        self.assertEqual(0, report["summary"]["reviewed_diff_key_count"])
+        self.assertEqual(0, report["summary"]["reviewed_status_transition_key_count"])
+        self.assertEqual(2, report["summary"]["skipped_stale_review_decision_count"])
+        self.assertEqual([], payload["reviewed_diff_keys"])
+        self.assertEqual([], payload["reviewed_status_transition_keys"])
+
+    def test_review_schema_rejects_dual_run_review_keys_without_task_hash(self) -> None:
+        missing_task_hash_decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "candidate_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "candidate_type": "dual_run_status_transition",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "sourcehash",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {},
+            "reason": "Reviewed transition without original task hash.",
+            "decided_at": "2026-06-28T12:00:00Z",
+            "original_task": {
+                "task_type": "manual_review_required",
+                "field": "status_transition",
+                "dual_run_status_transition": {
+                    "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+                },
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([missing_task_hash_decision]))
+
+            report = review_schema_v3.export_dual_run_review_keys(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(1, report["summary"]["decision_count"])
+        self.assertEqual(0, report["summary"]["reviewed_status_transition_key_count"])
+        self.assertEqual(1, report["summary"]["skipped_missing_review_hash_count"])
+        self.assertEqual([], payload["reviewed_status_transition_keys"])
+
+    def test_review_schema_builds_hash_bound_status_transition_approval(self) -> None:
+        task = {
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "field": "status_transition",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "dual_run_status_transition",
+            "dual_run_status_transition": {
+                "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+                "from_status": "needs_review",
+                "to_status": "auto_publishable",
+            },
+        }
+
+        decision = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed the status transition against the source hash and accepted it.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+
+        review_schema_v3.validate_review_decision(decision)
+        self.assertEqual("approve", decision["decision"])
+        self.assertEqual("sourcehash", decision["content_sha256"])
+        self.assertEqual({}, decision["approved_fields"])
+        self.assertEqual(task["dual_run_status_transition"], decision["original_task"]["dual_run_status_transition"])
+
+    def test_review_schema_exports_hash_bound_new_record_approval(self) -> None:
+        task = {
+            "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
+            "task_type": "manual_review_required",
+            "field": "new_record",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "dual_run_new_record",
+            "dual_run_new_record": {
+                "review_key": "boardwalk:poolside-activities:new_record",
+                "row_key": "boardwalk:poolside-activities",
+                "canonical_slug": "poolside-activities",
+                "calendar_group_key": "boardwalk",
+                "content_sha256": "sourcehash",
+            },
+        }
+
+        decision = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed the new V3 row against the source hash and accepted it.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([decision]))
+
+            report = review_schema_v3.export_dual_run_review_keys(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual("approve", decision["decision"])
+        self.assertEqual("sourcehash", decision["content_sha256"])
+        self.assertEqual({}, decision["approved_fields"])
+        self.assertEqual(1, report["summary"]["reviewed_new_record_key_count"])
+        self.assertEqual(["boardwalk:poolside-activities:new_record"], payload["reviewed_new_record_keys"])
+        self.assertEqual(
+            [
+                {
+                    "key": "boardwalk:poolside-activities:new_record",
+                    "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
+                    "content_sha256": "sourcehash",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Reviewed the new V3 row against the source hash and accepted it.",
+                }
+            ],
+            payload["reviewed_new_record_reviews"],
+        )
+
+    def test_review_schema_excludes_non_field_gate_approvals_from_fixture_and_parser_exports(self) -> None:
+        status_transition_task = {
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "field": "status_transition",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "dual_run_status_transition",
+            "dual_run_status_transition": {
+                "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+            },
+        }
+        source_drift_task = {
+            "task_id": "source-drift-boardwalk-blocker-activity-count-drift",
+            "task_type": "source_changed",
+            "field": None,
+            "content_sha256": "newhash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "source_drift",
+            "source_drift": {"publish_blocker": "activity_count_drift"},
+            "source_drift_report": {"status": "review_required", "new_hash": "newhash"},
+        }
+        status_transition_decision = build_review_decision(
+            status_transition_task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed the status transition.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        source_drift_decision = build_review_decision(
+            source_drift_task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed the source drift.",
+            decided_at="2026-06-28T12:01:00Z",
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            fixture_output_path = root / "fixture_candidates.json"
+            parser_output_path = root / "parser_rule_requests.json"
+            decisions_path.write_text(json.dumps([status_transition_decision, source_drift_decision]))
+
+            fixture_report = review_schema_v3.export_review_fixture_candidates(
+                decisions_path=decisions_path,
+                output_path=fixture_output_path,
+            )
+            parser_report = review_schema_v3.export_parser_rule_update_requests(
+                decisions_path=decisions_path,
+                output_path=parser_output_path,
+            )
+            fixture_payload = json.loads(fixture_output_path.read_text())
+            parser_payload = json.loads(parser_output_path.read_text())
+
+        self.assertEqual(0, fixture_report["summary"]["fixture_candidate_count"])
+        self.assertEqual(2, fixture_report["summary"]["skipped_non_fixture_approval_count"])
+        self.assertEqual([], fixture_payload["candidates"])
+        self.assertEqual(0, parser_report["summary"]["parser_rule_update_request_count"])
+        self.assertEqual(2, parser_report["summary"]["skipped_non_parser_rule_decision_count"])
+        self.assertEqual([], parser_payload["requests"])
+
+    def test_review_schema_builds_hash_bound_source_drift_approval(self) -> None:
+        task = {
+            "task_id": "source-drift-boardwalk-blocker-activity-count-drift",
+            "task_type": "source_changed",
+            "field": None,
+            "content_sha256": "newhash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "source_drift",
+            "validation_findings": ["source_changed:activity_count_drift"],
+            "source_drift": {"publish_blocker": "activity_count_drift"},
+            "source_drift_report": {
+                "status": "review_required",
+                "old_hash": "oldhash",
+                "new_hash": "newhash",
+                "publish_blockers": ["activity_count_drift"],
+            },
+        }
+
+        decision = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed the quarterly source drift and accepted the count change.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+
+        review_schema_v3.validate_review_decision(decision)
+        self.assertEqual("approve", decision["decision"])
+        self.assertEqual("newhash", decision["content_sha256"])
+        self.assertEqual({}, decision["approved_fields"])
+        self.assertEqual(task["source_drift"], decision["original_task"]["source_drift"])
+
+    def test_review_schema_exports_reviewed_source_drift_report_from_approved_decisions(self) -> None:
+        source_drift_report = {
+            "report_kind": "v3_quarter_source_drift",
+            "quarter": "fy26-q4",
+            "status": "review_required",
+            "publish_blockers": ["activity_count_drift"],
+            "source_reports": [
+                {
+                    "calendar_group_key": "boardwalk",
+                    "status": "review_required",
+                    "old_hash": "oldhash",
+                    "new_hash": "newhash",
+                    "changed_schedules": [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "title": "Poolside Activities",
+                            "old": "Daily at 1:30pm",
+                            "new": "Daily at 2:30pm",
+                        }
+                    ],
+                    "publish_blockers": ["activity_count_drift"],
+                }
+            ],
+        }
+        source_drift_tasks = build_review_tasks([], source_drift_report=source_drift_report)
+        decisions = [
+            build_review_decision(
+                task,
+                reviewer="josh",
+                decision="approve",
+                reason=f"Reviewed {task['task_id']}.",
+                decided_at=f"2026-06-28T12:0{index}:00Z",
+            )
+            for index, task in enumerate(source_drift_tasks)
+        ]
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            source_drift_path = root / "source_drift_report.json"
+            output_path = root / "reviewed_source_drift_report.json"
+            decisions_path.write_text(json.dumps(decisions))
+            source_drift_path.write_text(json.dumps(source_drift_report))
+
+            report = review_schema_v3.export_reviewed_source_drift_report(
+                decisions_path=decisions_path,
+                source_drift_report_path=source_drift_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(2, report["summary"]["required_source_drift_task_count"])
+        self.assertEqual(2, report["summary"]["reviewed_source_drift_task_count"])
+        self.assertEqual(0, report["summary"]["missing_source_drift_task_count"])
+        self.assertEqual("reviewed", payload["status"])
+        self.assertEqual("manual_review_approved", payload["review_status"])
+        self.assertEqual("approve", payload["review_decision"]["decision"])
+        self.assertEqual("josh", payload["review_decision"]["reviewer"])
+        self.assertEqual(
+            [task["task_id"] for task in source_drift_tasks],
+            payload["reviewed_source_drift_task_ids"],
+        )
+        self.assertEqual([], payload["missing_source_drift_task_ids"])
+
+    def test_review_schema_rejects_stale_source_drift_review_decisions(self) -> None:
+        source_drift_report = {
+            "status": "review_required",
+            "calendar_group_key": "boardwalk",
+            "new_hash": "newhash",
+            "publish_blockers": ["source_hash_changed"],
+        }
+        [task] = build_review_tasks([], source_drift_report=source_drift_report)
+        stale_decision = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed old source drift task.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        stale_decision["content_sha256"] = "oldhash"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            source_drift_path = root / "source_drift_report.json"
+            output_path = root / "reviewed_source_drift_report.json"
+            decisions_path.write_text(json.dumps([stale_decision]))
+            source_drift_path.write_text(json.dumps(source_drift_report))
+
+            report = review_schema_v3.export_reviewed_source_drift_report(
+                decisions_path=decisions_path,
+                source_drift_report_path=source_drift_path,
+                output_path=output_path,
+            )
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(1, report["summary"]["required_source_drift_task_count"])
+        self.assertEqual(0, report["summary"]["reviewed_source_drift_task_count"])
+        self.assertEqual(1, report["summary"]["missing_source_drift_task_count"])
+        self.assertEqual(1, report["summary"]["skipped_stale_review_decision_count"])
+        self.assertEqual("review_required", payload["status"])
+        self.assertEqual([], payload["reviewed_source_drift_task_ids"])
+        self.assertEqual([task["task_id"]], payload["missing_source_drift_task_ids"])
+
+    def test_review_schema_cli_can_export_dual_run_review_keys(self) -> None:
+        decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "candidate_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "candidate_type": "dual_run_status_transition",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "sourcehash",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {},
+            "reason": "Reviewed transition.",
+            "decided_at": "2026-06-28T12:01:00Z",
+            "original_task": {
+                "content_sha256": "sourcehash",
+                "dual_run_status_transition": {
+                    "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+                }
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([decision]))
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "review_schema_v3.py",
+                    str(decisions_path),
+                    "--export",
+                    "dual-run-review-keys",
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                review_schema_v3.main()
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(
+            ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+            payload["reviewed_status_transition_keys"],
+        )
+
+    def test_review_schema_cli_can_export_reviewed_source_drift_report(self) -> None:
+        source_drift_report = {
+            "status": "review_required",
+            "calendar_group_key": "boardwalk",
+            "new_hash": "newhash",
+            "publish_blockers": ["activity_count_drift"],
+        }
+        [task] = build_review_tasks([], source_drift_report=source_drift_report)
+        decision = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed source drift.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            source_drift_path = root / "source_drift_report.json"
+            output_path = root / "reviewed_source_drift_report.json"
+            decisions_path.write_text(json.dumps([decision]))
+            source_drift_path.write_text(json.dumps(source_drift_report))
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "review_schema_v3.py",
+                    str(decisions_path),
+                    "--export",
+                    "reviewed-source-drift-report",
+                    "--source-drift-report",
+                    str(source_drift_path),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                review_schema_v3.main()
+
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual("reviewed", payload["status"])
+        self.assertEqual([task["task_id"]], payload["reviewed_source_drift_task_ids"])
+
     def test_dual_run_report_surfaces_field_diffs_and_unreviewed_publish_blockers(self) -> None:
         v2_rows = [
             {
@@ -5205,7 +6926,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "schedule": {"text": "Daily at 1:30pm"},
                     "location": {"label": "Luna Park Pool Deck"},
                     "price": {"state": "free"},
-                    "field_evidence": {"schedule": {"source": {"crop_sha256": "schedulecrop"}}},
+                    "field_evidence": {
+                        "schedule": {
+                            "source": {"content_sha256": "sourcehash", "crop_sha256": "schedulecrop"}
+                        }
+                    },
                     "validation_status": "auto_publishable",
                 }
             ],
@@ -5216,6 +6941,21 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         reviewed = build_dual_run_report(
             v2_rows=[],
             v3_preview=v3_preview,
+            reviewed_new_record_reviews=[
+                {
+                    "key": "boardwalk:poolside-activities:new_record",
+                    "content_sha256": "sourcehash",
+                    "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Reviewed new V3 row.",
+                }
+            ],
+        )
+        bare_key = build_dual_run_report(
+            v2_rows=[],
+            v3_preview=v3_preview,
             reviewed_diff_keys=["boardwalk:poolside-activities:new_record"],
         )
 
@@ -5224,6 +6964,179 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("unreviewed_new_v3_rows", blocked["publish_blockers"])
         self.assertEqual("clean", reviewed["status"])
         self.assertEqual([], reviewed["unreviewed_new_keys"])
+        self.assertEqual(["boardwalk:poolside-activities:new_record"], reviewed["reviewed_new_record_keys"])
+        self.assertEqual("blocked", bare_key["status"])
+        self.assertEqual(["boardwalk:poolside-activities"], bare_key["unreviewed_new_keys"])
+        self.assertEqual([], bare_key["reviewed_new_record_keys"])
+
+    def test_dual_run_report_requires_hash_bound_review_for_field_diff(self) -> None:
+        v2_rows = [
+            {
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+                "calendar_group_key": "boardwalk",
+                "schedule": {"text": "Daily at 1:30pm"},
+            }
+        ]
+        v3_preview = {
+            "rows": [
+                {
+                    "canonical_slug": "poolside-activities",
+                    "title": "Poolside Activities",
+                    "calendar_group_key": "boardwalk",
+                    "schedule": {"text": "Daily at 2:30pm"},
+                    "validation_status": "auto_publishable",
+                    "field_evidence": {"schedule": {"source": {"content_sha256": "sourcehash"}}},
+                }
+            ]
+        }
+
+        bare_key = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=v3_preview,
+            reviewed_diff_keys=["boardwalk:poolside-activities:schedule"],
+        )
+        reviewed = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=v3_preview,
+            reviewed_diff_reviews=[
+                {
+                    "key": "boardwalk:poolside-activities:schedule",
+                    "content_sha256": "sourcehash",
+                    "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Reviewed schedule diff.",
+                }
+            ],
+        )
+
+        self.assertEqual("blocked", bare_key["status"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], bare_key["unreviewed_diff_keys"])
+        self.assertEqual([], bare_key["reviewed_diff_keys"])
+        self.assertEqual("clean", reviewed["status"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], reviewed["reviewed_diff_keys"])
+
+    def test_dual_run_report_blocks_needs_review_to_auto_publishable_without_new_evidence(self) -> None:
+        previous_rows = [
+            {
+                "canonical_slug": "poolside-activities",
+                "calendar_group_key": "boardwalk",
+                "validation_status": "needs_review",
+                "field_evidence": {
+                    "schedule": {
+                        "source": {
+                            "content_sha256": "sourcehash",
+                            "page_image_sha256": "pagehash",
+                            "crop_sha256": "schedulecrop",
+                            "bbox_px": [10, 20, 100, 40],
+                        }
+                    }
+                },
+            }
+        ]
+        current_preview = {
+            "rows": [
+                {
+                    "canonical_slug": "poolside-activities",
+                    "title": "Poolside Activities",
+                    "calendar_group_key": "boardwalk",
+                    "schedule": {"text": "Daily at 1:30pm"},
+                    "location": {"label": "Luna Park Pool Deck"},
+                    "price": {"state": "free"},
+                    "validation_status": "auto_publishable",
+                    "field_evidence": {
+                        "schedule": {
+                            "source": {
+                                "content_sha256": "sourcehash",
+                                "page_image_sha256": "pagehash",
+                                "crop_sha256": "schedulecrop",
+                                "bbox_px": [10, 20, 100, 40],
+                            }
+                        }
+                    },
+                }
+            ]
+        }
+        changed_evidence_preview = {
+            "rows": [
+                {
+                    **current_preview["rows"][0],
+                    "field_evidence": {
+                        "schedule": {
+                            "source": {
+                                "content_sha256": "sourcehash",
+                                "page_image_sha256": "pagehash",
+                                "crop_sha256": "new-schedulecrop",
+                                "bbox_px": [10, 20, 100, 40],
+                            }
+                        }
+                    },
+                }
+            ]
+        }
+        v2_rows = [
+            {
+                "canonical_slug": "poolside-activities",
+                "calendar_group_key": "boardwalk",
+                "title": "Poolside Activities",
+                "schedule": {"text": "Daily at 1:30pm"},
+                "location": {"label": "Luna Park Pool Deck"},
+                "price": {"state": "free"},
+            }
+        ]
+
+        blocked = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=current_preview,
+            previous_v3_rows=previous_rows,
+            reviewed_status_transition_keys=["boardwalk:poolside-activities:new_record"],
+        )
+        evidence_changed = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=changed_evidence_preview,
+            previous_v3_rows=previous_rows,
+            reviewed_status_transition_keys=["boardwalk:poolside-activities:new_record"],
+        )
+        reviewed = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=current_preview,
+            previous_v3_rows=previous_rows,
+            reviewed_status_transition_reviews=[
+                {
+                    "key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+                    "content_sha256": "sourcehash",
+                    "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Reviewed status transition.",
+                }
+            ],
+        )
+        bare_key = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=current_preview,
+            previous_v3_rows=previous_rows,
+            reviewed_status_transition_keys=["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+        )
+
+        self.assertEqual("blocked", blocked["status"])
+        self.assertEqual(
+            ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+            blocked["unreviewed_status_transition_keys"],
+        )
+        self.assertIn("unreviewed_v3_status_transitions", blocked["publish_blockers"])
+        self.assertEqual("clean", evidence_changed["status"])
+        self.assertEqual([], evidence_changed["unreviewed_status_transition_keys"])
+        self.assertEqual("clean", reviewed["status"])
+        self.assertEqual("blocked", bare_key["status"])
+        self.assertEqual(
+            ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+            bare_key["unreviewed_status_transition_keys"],
+        )
+        self.assertEqual([], bare_key["reviewed_status_transition_keys"])
 
     def test_dual_run_report_cli_loads_reviewed_diff_keys_file(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -5258,7 +7171,93 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                                 "location": {"label": "Luna Park Pool Deck"},
                                 "price": {"state": "free"},
                                 "validation_status": "auto_publishable",
-                                "field_evidence": {"schedule": {"source": {"crop_sha256": "schedulecrop"}}},
+                                "field_evidence": {
+                                    "schedule": {
+                                        "source": {
+                                            "content_sha256": "sourcehash",
+                                            "page_image_sha256": "pagehash",
+                                            "crop_sha256": "schedulecrop",
+                                        }
+                                    }
+                                },
+                            }
+                        ]
+                    }
+                )
+            )
+            reviewed_path.write_text(
+                json.dumps(
+                    {
+                        "reviewed_diff_reviews": [
+                            {
+                                "key": "boardwalk:poolside-activities:schedule",
+                                "content_sha256": "sourcehash",
+                                "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+                                "reviewer": "josh",
+                                "decided_at": "2026-06-28T12:00:00Z",
+                                "decision": "approve",
+                                "reason": "Reviewed schedule diff.",
+                            }
+                        ]
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "v3_dual_run_report.py",
+                    "--v2",
+                    str(v2_path),
+                    "--v3",
+                    str(v3_path),
+                    "--reviewed-diff-keys-file",
+                    str(reviewed_path),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                v3_dual_run_report.main()
+
+            report = json.loads(output_path.read_text())
+
+        self.assertEqual("clean", report["status"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], report["reviewed_diff_keys"])
+        self.assertEqual([], report["unreviewed_diff_keys"])
+
+    def test_dual_run_report_cli_rejects_bare_reviewed_diff_keys_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            v2_path = root / "v2.json"
+            v3_path = root / "v3.json"
+            reviewed_path = root / "reviewed.json"
+            output_path = root / "dual_run.json"
+            v2_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "title": "Poolside Activities",
+                            "calendar_group_key": "boardwalk",
+                            "schedule": {"text": "Daily at 1:30pm"},
+                        }
+                    ]
+                )
+            )
+            v3_path.write_text(
+                json.dumps(
+                    {
+                        "rows": [
+                            {
+                                "canonical_slug": "poolside-activities",
+                                "title": "Poolside Activities",
+                                "calendar_group_key": "boardwalk",
+                                "schedule": {"text": "Daily at 2:30pm"},
+                                "validation_status": "auto_publishable",
+                                "field_evidence": {
+                                    "schedule": {"source": {"content_sha256": "sourcehash"}}
+                                },
                             }
                         ]
                     }
@@ -5287,9 +7286,212 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
 
             report = json.loads(output_path.read_text())
 
+        self.assertEqual("blocked", report["status"])
+        self.assertEqual([], report["reviewed_diff_keys"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], report["unreviewed_diff_keys"])
+
+    def test_dual_run_report_cli_loads_previous_v3_and_reviewed_status_transitions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            v2_path = root / "v2.json"
+            v3_path = root / "v3.json"
+            previous_v3_path = root / "previous_v3.json"
+            reviewed_transitions_path = root / "reviewed_transitions.json"
+            output_path = root / "dual_run.json"
+            v2_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "title": "Poolside Activities",
+                            "calendar_group_key": "boardwalk",
+                            "schedule": {"text": "Daily at 1:30pm"},
+                            "location": {"label": "Luna Park Pool Deck"},
+                            "price": {"state": "free"},
+                        }
+                    ]
+                )
+            )
+            previous_v3_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "calendar_group_key": "boardwalk",
+                            "validation_status": "needs_review",
+                            "field_evidence": {
+                                "schedule": {
+                                    "source": {
+                                        "content_sha256": "sourcehash",
+                                        "page_image_sha256": "pagehash",
+                                        "crop_sha256": "schedulecrop",
+                                    }
+                                }
+                            },
+                        }
+                    ]
+                )
+            )
+            v3_path.write_text(
+                json.dumps(
+                    {
+                        "rows": [
+                            {
+                                "canonical_slug": "poolside-activities",
+                                "title": "Poolside Activities",
+                                "calendar_group_key": "boardwalk",
+                                "schedule": {"text": "Daily at 1:30pm"},
+                                "location": {"label": "Luna Park Pool Deck"},
+                                "price": {"state": "free"},
+                                "validation_status": "auto_publishable",
+                                "field_evidence": {
+                                    "schedule": {
+                                        "source": {
+                                            "content_sha256": "sourcehash",
+                                            "page_image_sha256": "pagehash",
+                                            "crop_sha256": "schedulecrop",
+                                        }
+                                    }
+                                },
+                            }
+                        ]
+                    }
+                )
+            )
+            reviewed_transitions_path.write_text(
+                json.dumps(
+                    {
+                        "reviewed_status_transition_reviews": [
+                            {
+                                "key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+                                "content_sha256": "sourcehash",
+                                "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+                                "reviewer": "josh",
+                                "decided_at": "2026-06-28T12:00:00Z",
+                                "decision": "approve",
+                                "reason": "Reviewed status transition.",
+                            }
+                        ]
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "v3_dual_run_report.py",
+                    "--v2",
+                    str(v2_path),
+                    "--v3",
+                    str(v3_path),
+                    "--previous-v3",
+                    str(previous_v3_path),
+                    "--reviewed-status-transition-keys-file",
+                    str(reviewed_transitions_path),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                v3_dual_run_report.main()
+
+            report = json.loads(output_path.read_text())
+
         self.assertEqual("clean", report["status"])
-        self.assertEqual(["boardwalk:poolside-activities:schedule"], report["reviewed_diff_keys"])
-        self.assertEqual([], report["unreviewed_diff_keys"])
+        self.assertEqual(
+            ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+            report["reviewed_status_transition_keys"],
+        )
+        self.assertEqual([], report["unreviewed_status_transition_keys"])
+
+    def test_dual_run_report_cli_rejects_bare_reviewed_status_transition_keys_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            v2_path = root / "v2.json"
+            v3_path = root / "v3.json"
+            previous_v3_path = root / "previous_v3.json"
+            reviewed_transitions_path = root / "reviewed_transitions.json"
+            output_path = root / "dual_run.json"
+            v2_path.write_text(json.dumps([]))
+            previous_v3_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "calendar_group_key": "boardwalk",
+                            "validation_status": "needs_review",
+                            "field_evidence": {
+                                "schedule": {
+                                    "source": {
+                                        "content_sha256": "sourcehash",
+                                        "page_image_sha256": "pagehash",
+                                        "crop_sha256": "schedulecrop",
+                                    }
+                                }
+                            },
+                        }
+                    ]
+                )
+            )
+            v3_path.write_text(
+                json.dumps(
+                    {
+                        "rows": [
+                            {
+                                "canonical_slug": "poolside-activities",
+                                "calendar_group_key": "boardwalk",
+                                "validation_status": "auto_publishable",
+                                "field_evidence": {
+                                    "schedule": {
+                                        "source": {
+                                            "content_sha256": "sourcehash",
+                                            "page_image_sha256": "pagehash",
+                                            "crop_sha256": "schedulecrop",
+                                        }
+                                    }
+                                },
+                            }
+                        ]
+                    }
+                )
+            )
+            reviewed_transitions_path.write_text(
+                json.dumps(
+                    {
+                        "reviewed_status_transition_keys": [
+                            "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+                        ]
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "v3_dual_run_report.py",
+                    "--v2",
+                    str(v2_path),
+                    "--v3",
+                    str(v3_path),
+                    "--previous-v3",
+                    str(previous_v3_path),
+                    "--reviewed-status-transition-keys-file",
+                    str(reviewed_transitions_path),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                v3_dual_run_report.main()
+
+            report = json.loads(output_path.read_text())
+
+        self.assertEqual("blocked", report["status"])
+        self.assertEqual([], report["reviewed_status_transition_keys"])
+        self.assertEqual(
+            ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
+            report["unreviewed_status_transition_keys"],
+        )
 
     def test_dual_run_report_blocks_unprocessed_sources_without_source_error(self) -> None:
         expected_sources = [
@@ -5315,6 +7517,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             v3_source_statuses=[
                 *source_statuses,
                 {"source_document_id": "source-doc-2", "status": "processed"},
+            ],
+            review_tasks=[
+                {"source_document_id": "source-doc-3", "task_type": "source_error"},
             ],
         )
 
@@ -5693,6 +7898,52 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("parser_error_without_review_task", stale_review_task["publish_blockers"])
         self.assertEqual("clean", reviewed["status"])
         self.assertEqual([], reviewed["source_coverage"]["parser_error_without_review_task_ids"])
+
+    def test_dual_run_report_blocks_source_error_sources_without_review_tasks(self) -> None:
+        expected_sources = [{"source_document_id": "source-doc-error", "content_sha256": "hash-error"}]
+        source_statuses = [
+            {"source_document_id": "source-doc-error", "content_sha256": "hash-error", "status": "source_error"}
+        ]
+
+        blocked = build_dual_run_report(
+            v2_rows=[],
+            v3_preview={"rows": []},
+            expected_sources=expected_sources,
+            v3_source_statuses=source_statuses,
+            review_tasks=[],
+        )
+        reviewed = build_dual_run_report(
+            v2_rows=[],
+            v3_preview={"rows": []},
+            expected_sources=expected_sources,
+            v3_source_statuses=source_statuses,
+            review_tasks=[
+                {"source_document_id": "source-doc-error", "content_sha256": "hash-error", "task_type": "source_error"}
+            ],
+        )
+        stale_review_task = build_dual_run_report(
+            v2_rows=[],
+            v3_preview={"rows": []},
+            expected_sources=expected_sources,
+            v3_source_statuses=source_statuses,
+            review_tasks=[
+                {"source_document_id": "source-doc-error", "content_sha256": "oldhash", "task_type": "source_error"}
+            ],
+        )
+
+        self.assertEqual("blocked", blocked["status"])
+        self.assertEqual(["source-doc-error"], blocked["source_coverage"]["source_error_ids"])
+        self.assertEqual(["source-doc-error"], blocked["source_coverage"]["source_error_without_review_task_ids"])
+        self.assertEqual(1, blocked["manual_review_backlog"])
+        self.assertIn("source_error_without_review_task", blocked["publish_blockers"])
+        self.assertEqual("blocked", stale_review_task["status"])
+        self.assertEqual(
+            ["source-doc-error"],
+            stale_review_task["source_coverage"]["source_error_without_review_task_ids"],
+        )
+        self.assertIn("source_error_without_review_task", stale_review_task["publish_blockers"])
+        self.assertEqual("clean", reviewed["status"])
+        self.assertEqual([], reviewed["source_coverage"]["source_error_without_review_task_ids"])
 
 
 if __name__ == "__main__":

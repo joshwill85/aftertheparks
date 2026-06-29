@@ -1,0 +1,551 @@
+{
+  "generatedAt": "2026-06-28T23:28:17.322Z",
+  "graphId": "aftertheparks_wdw_transport_graph:0.1.0",
+  "version": "0.1.0",
+  "source": {
+    "path": "/Users/josh/Downloads/aftertheparks-wdw-transport-graph-v0/aftertheparks-wdw-transport-graph-v0.1.json",
+    "sha256": "7d752bebfcbe8c6fca802461964942ee280fae31f1ee571611bf4d9b5c911f3e"
+  },
+  "resorts": [
+    {
+      "resortSlug": "all-star-movies-resort",
+      "placeId": "all_star_movies",
+      "placeName": "Disney's All-Star Movies Resort",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "all-star-music-resort",
+      "placeId": "all_star_music",
+      "placeName": "Disney's All-Star Music Resort",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "all-star-sports-resort",
+      "placeId": "all_star_sports",
+      "placeName": "Disney's All-Star Sports Resort",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "animal-kingdom-lodge",
+      "placeId": "animal_kingdom_lodge",
+      "placeName": "Disney's Animal Kingdom Lodge",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "animal-kingdom-villas-jambo-house",
+      "placeId": "animal_kingdom_villas_jambo",
+      "placeName": "Disney's Animal Kingdom Villas - Jambo House",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "animal-kingdom-villas-kidani-village",
+      "placeId": "animal_kingdom_villas_kidani",
+      "placeName": "Disney's Animal Kingdom Villas - Kidani Village",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "art-of-animation-resort",
+      "placeId": "art_of_animation",
+      "placeName": "Disney's Art of Animation Resort",
+      "modes": [
+        "bus",
+        "skyliner"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_skyliner",
+        "plandisney_skyliner_pop_times"
+      ]
+    },
+    {
+      "resortSlug": "bay-lake-tower-at-contemporary-resort",
+      "placeId": "bay_lake_tower",
+      "placeName": "Bay Lake Tower at Disney's Contemporary Resort",
+      "modes": [
+        "boat",
+        "bus",
+        "monorail",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bay_lake_tower",
+        "official_bus_transportation",
+        "official_contemporary",
+        "official_monorail_faq",
+        "official_monorail_transportation",
+        "official_my_disney_experience_app",
+        "official_polynesian",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "beach-club-resort",
+      "placeId": "beach_club_resort",
+      "placeName": "Disney's Beach Club Resort",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_beach_club",
+        "official_boardwalk",
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "official_yacht_club"
+      ]
+    },
+    {
+      "resortSlug": "beach-club-villas",
+      "placeId": "beach_club_villas",
+      "placeName": "Disney's Beach Club Villas",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_beach_club",
+        "official_boardwalk",
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "official_yacht_club"
+      ]
+    },
+    {
+      "resortSlug": "boardwalk-inn",
+      "placeId": "boardwalk_inn",
+      "placeName": "Disney's BoardWalk Inn",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_beach_club",
+        "official_boardwalk",
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "official_yacht_club"
+      ]
+    },
+    {
+      "resortSlug": "boardwalk-villas",
+      "placeId": "boardwalk_villas",
+      "placeName": "Disney's BoardWalk Villas",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_beach_club",
+        "official_boardwalk",
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "official_yacht_club"
+      ]
+    },
+    {
+      "resortSlug": "boulder-ridge-villas-at-wilderness-lodge",
+      "placeId": "boulder_ridge_villas",
+      "placeName": "Boulder Ridge Villas at Disney's Wilderness Lodge",
+      "modes": [
+        "boat",
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "cabins-at-fort-wilderness-resort",
+      "placeId": "fort_wilderness_cabins",
+      "placeName": "The Cabins at Disney's Fort Wilderness Resort",
+      "modes": [
+        "boat",
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "campsites-at-fort-wilderness-resort",
+      "placeId": "fort_wilderness_campsites",
+      "placeName": "The Campsites at Disney's Fort Wilderness Resort",
+      "modes": [
+        "boat",
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "caribbean-beach-resort",
+      "placeId": "caribbean_beach",
+      "placeName": "Disney's Caribbean Beach Resort",
+      "modes": [
+        "bus",
+        "skyliner"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_skyliner",
+        "thirdparty_skyliner_times"
+      ]
+    },
+    {
+      "resortSlug": "contemporary-resort",
+      "placeId": "contemporary",
+      "placeName": "Disney's Contemporary Resort",
+      "modes": [
+        "boat",
+        "bus",
+        "monorail",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bay_lake_tower",
+        "official_bus_transportation",
+        "official_contemporary",
+        "official_monorail_faq",
+        "official_monorail_transportation",
+        "official_my_disney_experience_app",
+        "official_polynesian",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "copper-creek-villas-and-cabins-at-wilderness-lodge",
+      "placeId": "copper_creek_villas",
+      "placeName": "Copper Creek Villas & Cabins at Disney's Wilderness Lodge",
+      "modes": [
+        "boat",
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "coronado-springs-resort",
+      "placeId": "coronado_springs",
+      "placeName": "Disney's Coronado Springs Resort",
+      "modes": [
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list"
+      ]
+    },
+    {
+      "resortSlug": "grand-floridian-resort-and-spa",
+      "placeId": "grand_floridian",
+      "placeName": "Disney's Grand Floridian Resort & Spa",
+      "modes": [
+        "boat",
+        "bus",
+        "monorail",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_grand_floridian",
+        "official_monorail_faq",
+        "official_monorail_transportation",
+        "official_my_disney_experience_app",
+        "official_polynesian",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "old-key-west-resort",
+      "placeId": "old_key_west",
+      "placeName": "Disney's Old Key West Resort",
+      "modes": [
+        "boat",
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "polynesian-village-resort",
+      "placeId": "polynesian_village",
+      "placeName": "Disney's Polynesian Village Resort",
+      "modes": [
+        "boat",
+        "bus",
+        "monorail",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_monorail_faq",
+        "official_monorail_transportation",
+        "official_my_disney_experience_app",
+        "official_polynesian",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "polynesian-villas-and-bungalows",
+      "placeId": "polynesian_villas",
+      "placeName": "Disney's Polynesian Villas & Bungalows",
+      "modes": [
+        "boat",
+        "bus",
+        "monorail",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_monorail_faq",
+        "official_monorail_transportation",
+        "official_my_disney_experience_app",
+        "official_polynesian",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "pop-century-resort",
+      "placeId": "pop_century",
+      "placeName": "Disney's Pop Century Resort",
+      "modes": [
+        "bus",
+        "skyliner"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_skyliner",
+        "plandisney_skyliner_pop_times",
+        "thirdparty_skyliner_times"
+      ]
+    },
+    {
+      "resortSlug": "port-orleans-resort-french-quarter",
+      "placeId": "port_orleans_french_quarter",
+      "placeName": "Disney's Port Orleans Resort - French Quarter",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "port-orleans-resort-riverside",
+      "placeId": "port_orleans_riverside",
+      "placeName": "Disney's Port Orleans Resort - Riverside",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "riviera-resort",
+      "placeId": "riviera_resort",
+      "placeName": "Disney's Riviera Resort",
+      "modes": [
+        "bus",
+        "skyliner"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_skyliner",
+        "thirdparty_skyliner_times"
+      ]
+    },
+    {
+      "resortSlug": "saratoga-springs-resort-and-spa",
+      "placeId": "saratoga_springs",
+      "placeName": "Disney's Saratoga Springs Resort & Spa",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_saratoga_springs",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "villas-at-grand-floridian-resort-and-spa",
+      "placeId": "villas_grand_floridian",
+      "placeName": "The Villas at Disney's Grand Floridian Resort & Spa",
+      "modes": [
+        "boat",
+        "bus",
+        "monorail",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_grand_floridian",
+        "official_monorail_faq",
+        "official_monorail_transportation",
+        "official_my_disney_experience_app",
+        "official_polynesian",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "wilderness-lodge",
+      "placeId": "wilderness_lodge",
+      "placeName": "Disney's Wilderness Lodge",
+      "modes": [
+        "boat",
+        "bus"
+      ],
+      "sourceIds": [
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "plandisney_boat_flags"
+      ]
+    },
+    {
+      "resortSlug": "yacht-club-resort",
+      "placeId": "yacht_club_resort",
+      "placeName": "Disney's Yacht Club Resort",
+      "modes": [
+        "boat",
+        "bus",
+        "walk"
+      ],
+      "sourceIds": [
+        "official_beach_club",
+        "official_boardwalk",
+        "official_bus_transportation",
+        "official_my_disney_experience_app",
+        "official_resorts_list",
+        "official_water_transportation",
+        "official_yacht_club"
+      ]
+    }
+  ],
+  "aliases": {
+    "akl": "animal-kingdom-lodge",
+    "bay-lake-tower-at-contemporary": "bay-lake-tower-at-contemporary-resort",
+    "fort-wilderness-resort": "campsites-at-fort-wilderness-resort",
+    "fort-wilderness": "campsites-at-fort-wilderness-resort",
+    "poly": "polynesian-village-resort",
+    "pop": "pop-century-resort",
+    "saratoga": "saratoga-springs-resort-and-spa"
+  }
+}

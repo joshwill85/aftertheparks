@@ -2,6 +2,7 @@ import type {
   ActivityAreaFilter,
   ActivityTransportFilter,
 } from "@/lib/types/occurrence";
+import transportModeSnapshot from "@/data/processed/wdw_transport_resort_modes.json";
 
 export const AREA_LABELS: Record<ActivityAreaFilter, string> = {
   "magic-kingdom": "Magic Kingdom resort area",
@@ -26,58 +27,34 @@ export const TRANSPORT_OPTIONS = Object.keys(
   TRANSPORT_LABELS
 ) as ActivityTransportFilter[];
 
-const MONORAIL_RESORTS = new Set([
-  "contemporary-resort",
-  "bay-lake-tower-at-contemporary",
-  "grand-floridian-resort-and-spa",
-  "polynesian-village-resort",
-  "poly",
-]);
+type TransportModeSnapshot = typeof transportModeSnapshot;
+type TransportMode = Exclude<ActivityTransportFilter, "rideshare">;
 
-const SKYLINER_RESORTS = new Set([
-  "pop-century-resort",
-  "art-of-animation-resort",
-  "caribbean-beach-resort",
-  "riviera-resort",
-  "boardwalk-inn",
-  "boardwalk-villas",
-  "yacht-club-resort",
-  "beach-club-resort",
-  "beach-club-villas",
-  "pop",
-]);
+const TRANSPORT_ALIAS_TO_CANONICAL = new Map(
+  Object.entries((transportModeSnapshot as TransportModeSnapshot).aliases)
+);
 
-const BOAT_RESORTS = new Set([
-  "fort-wilderness-resort",
-  "wilderness-lodge",
-  "contemporary-resort",
-  "grand-floridian-resort-and-spa",
-  "polynesian-village-resort",
-  "boardwalk-inn",
-  "boardwalk-villas",
-  "yacht-club-resort",
-  "beach-club-resort",
-  "beach-club-villas",
-  "saratoga-springs-resort-and-spa",
-  "old-key-west-resort",
-  "port-orleans-resort-riverside",
-  "port-orleans-resort-french-quarter",
-  "poly",
-  "saratoga",
-]);
+function canonicalTransportSlug(resortSlug: string): string {
+  return TRANSPORT_ALIAS_TO_CANONICAL.get(resortSlug) ?? resortSlug;
+}
 
-const WALKABLE_RESORTS = new Set([
-  "contemporary-resort",
-  "bay-lake-tower-at-contemporary",
-  "boardwalk-inn",
-  "boardwalk-villas",
-  "yacht-club-resort",
-  "beach-club-resort",
-  "beach-club-villas",
-  "saratoga-springs-resort-and-spa",
-  "poly",
-  "saratoga",
-]);
+const TRANSPORT_RESORTS_BY_MODE = (
+  transportModeSnapshot as TransportModeSnapshot
+).resorts.reduce<Record<TransportMode, Set<string>>>(
+  (acc, resort) => {
+    for (const mode of resort.modes) {
+      acc[mode as TransportMode].add(resort.resortSlug);
+    }
+    return acc;
+  },
+  {
+    monorail: new Set<string>(),
+    skyliner: new Set<string>(),
+    boat: new Set<string>(),
+    walk: new Set<string>(),
+    bus: new Set<string>(),
+  }
+);
 
 const RESORT_AREA_BY_SLUG: Record<string, ActivityAreaFilter> = {
   "contemporary-resort": "magic-kingdom",
@@ -166,9 +143,10 @@ export function transportMatchesFilter(
   filter: ActivityTransportFilter
 ): boolean {
   if (filter === "bus" || filter === "rideshare") return true;
-  if (filter === "monorail") return MONORAIL_RESORTS.has(resortSlug);
-  if (filter === "skyliner") return SKYLINER_RESORTS.has(resortSlug);
-  if (filter === "boat") return BOAT_RESORTS.has(resortSlug);
-  if (filter === "walk") return WALKABLE_RESORTS.has(resortSlug);
+  const canonicalSlug = canonicalTransportSlug(resortSlug);
+  if (filter === "monorail") return TRANSPORT_RESORTS_BY_MODE.monorail.has(canonicalSlug);
+  if (filter === "skyliner") return TRANSPORT_RESORTS_BY_MODE.skyliner.has(canonicalSlug);
+  if (filter === "boat") return TRANSPORT_RESORTS_BY_MODE.boat.has(canonicalSlug);
+  if (filter === "walk") return TRANSPORT_RESORTS_BY_MODE.walk.has(canonicalSlug);
   return false;
 }

@@ -31,6 +31,7 @@ PUBLISHABLE_REGION_TYPES = {
     "vertical_activity_row": "activity",
     "movie_section": "movie",
 }
+GENERIC_REVIEW_REGION_TYPES = {"unknown"}
 SOURCE_METADATA_FIELDS = (
     "source_kind",
     "source_role",
@@ -333,6 +334,7 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
     regions = snapshot.get("regions") if isinstance(snapshot.get("regions"), list) else []
     tokens = snapshot.get("tokens") if isinstance(snapshot.get("tokens"), list) else []
     canonical_page_image_sha256s = _canonical_page_image_sha256s(snapshot)
+    document_family = str(snapshot.get("document_family") or "unknown_visual_schedule")
     candidates: list[dict[str, Any]] = []
 
     for region in regions:
@@ -340,10 +342,15 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
             continue
         region_type = str(region.get("region_type") or "")
         candidate_type = PUBLISHABLE_REGION_TYPES.get(region_type)
+        generic_review_only = document_family == "unknown_visual_schedule" and region_type in GENERIC_REVIEW_REGION_TYPES
+        if generic_review_only:
+            candidate_type = "generic_visual_review"
         if candidate_type is None:
             continue
 
         findings: list[str] = []
+        if generic_review_only:
+            findings.extend(["unknown_document_family", "generic_visual_schedule_review_required"])
         if not tokens:
             findings.append("ocr_text_missing")
         extracted = (
@@ -378,7 +385,7 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
                 "pipeline_version": snapshot.get("pipeline_version", "vision_v3_001"),
                 "config_hash": snapshot.get("config_hash"),
                 "runtime_lineage": snapshot.get("runtime_lineage"),
-                "document_family": snapshot.get("document_family", "unknown_visual_schedule"),
+                "document_family": document_family,
                 "source_document_id": snapshot.get("source_document_id"),
                 "content_sha256": snapshot.get("source_sha256"),
                 "canonical_page_image_sha256s": canonical_page_image_sha256s,

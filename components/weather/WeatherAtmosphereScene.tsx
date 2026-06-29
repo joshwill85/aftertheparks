@@ -571,7 +571,7 @@ export function WeatherAtmosphereScene({
       focusable="false"
       className={cn("weather-atmosphere-scene", className)}
       viewBox="0 0 320 128"
-      preserveAspectRatio="none"
+      preserveAspectRatio="xMidYMid slice"
     >
       <defs>
         <linearGradient id={skyId} x1="0" y1="0" x2="320" y2="128" gradientUnits="userSpaceOnUse">

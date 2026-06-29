@@ -19,6 +19,7 @@ DEFAULT_SOURCE_STATUSES_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json
 DEFAULT_EXISTING_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 DEFAULT_GOLD_CONFLICTS_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
+DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 SOURCE_STATUS_REVIEW_TASK_TYPES = {"parser_error", "source_error"}
 
 
@@ -195,6 +196,38 @@ def _has_review_artifacts(source: dict[str, Any]) -> bool:
         and (source.get("crop_storage_path") or source.get("crop_path"))
         and source.get("crop_sha256")
     )
+
+
+def _unreviewable_candidate_task(
+    candidate: dict[str, Any],
+    *,
+    index: int,
+    findings: list[str],
+    field_name: str | None,
+) -> dict[str, Any]:
+    visible_findings = list(dict.fromkeys([*findings, "missing_reviewable_evidence"]))
+    return {
+        "task_id": str(candidate.get("candidate_id") or f"vision-v3-unreviewable-{index:04d}"),
+        "task_type": "unreviewable_candidate",
+        "field": field_name,
+        "source_document_id": candidate.get("source_document_id"),
+        "content_sha256": candidate.get("content_sha256"),
+        "calendar_group_key": candidate.get("calendar_group_key"),
+        "candidate_type": candidate.get("candidate_type"),
+        "page_number": None,
+        "page_image": None,
+        "page_image_sha256": None,
+        "field_crop": None,
+        "field_crop_sha256": None,
+        "field_bbox": None,
+        "primary_text": None,
+        "secondary_text": None,
+        "candidate_value": candidate.get("source_title") or candidate.get("schedule_raw"),
+        "normalized_value": None,
+        "validation_findings": visible_findings,
+        "source_metadata": _source_metadata(candidate),
+        "candidate": candidate,
+    }
 
 
 def _source_status_review_tasks(source_statuses: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -419,6 +452,136 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
     return tasks
 
 
+def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+    tasks: list[dict[str, Any]] = []
+    for index, diff in enumerate(dual_run_report.get("field_diffs") or [], start=1):
+        if not isinstance(diff, dict) or diff.get("reviewed") is True:
+            continue
+        diff_key = str(diff.get("diff_key") or f"diff-{index}").strip()
+        field_name = str(diff.get("field") or "").strip() or None
+        evidence = diff.get("v3_field_evidence") if isinstance(diff.get("v3_field_evidence"), dict) else {}
+        source = evidence.get("source") if isinstance(evidence.get("source"), dict) else {}
+        field_crop = source.get("crop_storage_path") or source.get("crop_path")
+        task_suffix = "-".join(_slug_fragment(part) for part in diff_key.split(":"))
+        tasks.append(
+            {
+                "task_id": f"dual-run-diff-{task_suffix}",
+                "task_type": "gold_conflict",
+                "field": field_name,
+                "source_document_id": diff.get("source_document_id"),
+                "content_sha256": source.get("content_sha256"),
+                "calendar_group_key": diff.get("calendar_group_key"),
+                "candidate_type": "dual_run_diff",
+                "page_number": source.get("page_number"),
+                "page_image": source.get("page_image_sha256"),
+                "page_image_sha256": source.get("page_image_sha256"),
+                "field_crop": field_crop,
+                "field_crop_sha256": source.get("crop_sha256"),
+                "field_bbox": source.get("bbox_px"),
+                "primary_text": _engine_text(evidence, 0),
+                "secondary_text": _engine_text(evidence, 1),
+                "candidate_value": diff.get("v3_value"),
+                "normalized_value": diff.get("v3_value"),
+                "validation_findings": [f"gold_conflict:v2_v3:{field_name or 'field'}"],
+                "source_drift": {"old": diff.get("v2_value"), "new": diff.get("v3_value")},
+                "dual_run_diff": diff,
+                "dual_run_report": dual_run_report,
+            }
+        )
+    return tasks
+
+
+def _dual_run_status_transition_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+    unreviewed = {
+        str(key)
+        for key in dual_run_report.get("unreviewed_status_transition_keys") or []
+        if str(key).strip()
+    }
+    tasks: list[dict[str, Any]] = []
+    for index, transition in enumerate(dual_run_report.get("status_transitions") or [], start=1):
+        if not isinstance(transition, dict):
+            continue
+        transition_key = str(transition.get("transition_key") or f"transition-{index}").strip()
+        if transition.get("reviewed") is True or (unreviewed and transition_key not in unreviewed):
+            continue
+        task_suffix = "-".join(_slug_fragment(part) for part in transition_key.split(":"))
+        tasks.append(
+            {
+                "task_id": f"dual-run-status-{task_suffix}",
+                "task_type": "manual_review_required",
+                "field": "status_transition",
+                "source_document_id": transition.get("source_document_id"),
+                "content_sha256": transition.get("content_sha256"),
+                "calendar_group_key": transition.get("calendar_group_key"),
+                "candidate_type": "dual_run_status_transition",
+                "page_number": None,
+                "page_image": None,
+                "field_crop": None,
+                "field_crop_sha256": None,
+                "field_bbox": None,
+                "primary_text": transition.get("from_status"),
+                "secondary_text": transition.get("to_status"),
+                "candidate_value": transition.get("to_status"),
+                "normalized_value": transition_key,
+                "validation_findings": ["manual_review_required:status_transition"],
+                "dual_run_status_transition": transition,
+                "dual_run_report": dual_run_report,
+            }
+        )
+    return tasks
+
+
+def _dual_run_new_record_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+    unreviewed = {
+        str(key)
+        for key in dual_run_report.get("unreviewed_new_keys") or []
+        if str(key).strip()
+    }
+    tasks: list[dict[str, Any]] = []
+    for index, record in enumerate(dual_run_report.get("new_v3_records") or [], start=1):
+        if not isinstance(record, dict):
+            continue
+        row_key = str(record.get("row_key") or "").strip()
+        review_key = str(record.get("review_key") or f"{row_key}:new_record" or f"new-record-{index}").strip()
+        if record.get("reviewed") is True or (unreviewed and row_key not in unreviewed):
+            continue
+        task_suffix = "-".join(_slug_fragment(part) for part in review_key.split(":"))
+        tasks.append(
+            {
+                "task_id": f"dual-run-new-{task_suffix}",
+                "task_type": "manual_review_required",
+                "field": "new_record",
+                "source_document_id": record.get("source_document_id"),
+                "content_sha256": record.get("content_sha256"),
+                "calendar_group_key": record.get("calendar_group_key"),
+                "candidate_type": "dual_run_new_record",
+                "page_number": None,
+                "page_image": None,
+                "field_crop": None,
+                "field_crop_sha256": None,
+                "field_bbox": None,
+                "primary_text": record.get("title"),
+                "secondary_text": record.get("canonical_slug"),
+                "candidate_value": record.get("title") or record.get("canonical_slug"),
+                "normalized_value": review_key,
+                "validation_findings": ["manual_review_required:new_record"],
+                "dual_run_new_record": record,
+                "dual_run_report": dual_run_report,
+            }
+        )
+    return tasks
+
+
+def _dual_run_review_tasks(dual_run_report: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if not dual_run_report or dual_run_report.get("status") in {None, "clean"}:
+        return []
+    return [
+        *_dual_run_field_diff_review_tasks(dual_run_report),
+        *_dual_run_status_transition_review_tasks(dual_run_report),
+        *_dual_run_new_record_review_tasks(dual_run_report),
+    ]
+
+
 def build_review_tasks(
     candidates: list[dict[str, Any]],
     *,
@@ -426,6 +589,7 @@ def build_review_tasks(
     existing_gold_rows: list[dict[str, Any]] | None = None,
     gold_conflicts: list[dict[str, Any]] | None = None,
     source_drift_report: dict[str, Any] | None = None,
+    dual_run_report: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     tasks: list[dict[str, Any]] = []
     existing_gold_by_key = _existing_gold_by_key(existing_gold_rows or [])
@@ -438,6 +602,14 @@ def build_review_tasks(
         source = _region_source(candidate, field_name)
         region_source = _region_source(candidate, "region")
         if not _has_review_artifacts(source):
+            tasks.append(
+                _unreviewable_candidate_task(
+                    candidate,
+                    index=index,
+                    findings=findings,
+                    field_name=field_name,
+                )
+            )
             continue
         page_image_sha256 = source.get("page_image_sha256") or region_source.get("page_image_sha256")
         tasks.append(
@@ -471,6 +643,7 @@ def build_review_tasks(
     tasks.extend(_source_status_review_tasks(source_statuses or []))
     tasks.extend(_gold_conflict_review_tasks(gold_conflicts or [], existing_gold_by_key=existing_gold_by_key))
     tasks.extend(_source_drift_review_tasks(source_drift_report))
+    tasks.extend(_dual_run_review_tasks(dual_run_report))
     return tasks
 
 
@@ -519,6 +692,7 @@ def main() -> None:
     parser.add_argument("--existing-gold", type=Path, default=DEFAULT_EXISTING_GOLD_PATH)
     parser.add_argument("--gold-conflicts", type=Path, default=DEFAULT_GOLD_CONFLICTS_PATH)
     parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
+    parser.add_argument("--dual-run-report", type=Path, default=DEFAULT_DUAL_RUN_REPORT_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -530,6 +704,7 @@ def main() -> None:
         existing_gold_rows=_load_json_list(args.existing_gold),
         gold_conflicts=_load_json_list(args.gold_conflicts),
         source_drift_report=_load_json_dict(args.source_drift_report),
+        dual_run_report=_load_json_dict(args.dual_run_report),
     )
     if args.json:
         print(json.dumps(tasks, indent=2, sort_keys=True))

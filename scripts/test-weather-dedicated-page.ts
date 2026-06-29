@@ -32,6 +32,15 @@ assert.match(page, /getCachedNwsAlerts/, "/weather should include official NWS a
 assert.match(page, /buildWeatherGuidanceForTimeSpan/, "/weather should use shared guidance logic.");
 assert.match(page, /WeatherFreshnessLine/, "/weather should show freshness/confidence copy.");
 assert.match(page, /NearTermRainLine/, "/weather should show near-term rain guidance.");
+const chapterCardStart = page.indexOf("function WeatherChapterCard");
+const chapterCardEnd = page.indexOf("function WeatherChapterArea", chapterCardStart);
+assert.ok(chapterCardStart > -1 && chapterCardEnd > chapterCardStart, "/weather should define WeatherChapterCard before WeatherChapterArea.");
+const chapterCardSource = page.slice(chapterCardStart, chapterCardEnd);
+assert.doesNotMatch(
+  chapterCardSource,
+  /NearTermRainLine/,
+  "Weather chapter cards should not show low-value near-term rain copy like 'Rain unlikely soon'."
+);
 assert.match(page, /WeatherPrecipMapPreview/, "/weather should show precipitation map context.");
 assert.match(page, /id=\{weatherAreaAnchorId\(area\.location\.key\)\}/, "/weather should expose area anchors for icon deep links.");
 

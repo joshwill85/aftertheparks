@@ -49,6 +49,11 @@ assert.match(
   /if \(!mounted\) return null/,
   "Decorative weather atmosphere SVGs should be absent from SSR and initial hydration."
 );
+assert.match(
+  atmosphereScene,
+  /preserveAspectRatio="xMidYMid slice"/,
+  "Weather atmosphere scenes should preserve their authored 320:128 proportions instead of stretching to arbitrary block shapes."
+);
 
 const popover = readFileSync("components/weather/WeatherTimeSpanPopover.tsx", "utf8");
 assert.match(popover, /hourlyBreakdown/);
@@ -108,6 +113,7 @@ assert.match(
 );
 
 const tokens = readFileSync("src/styles/tokens.css", "utf8");
+const polish = readFileSync("src/styles/polish.css", "utf8");
 for (const token of [
   "--weather-normal-bg",
   "--weather-rain-bg",
@@ -119,6 +125,42 @@ for (const token of [
 ]) {
   assert.match(tokens, new RegExp(token), `${token} missing`);
 }
+for (const token of [
+  "--weather-card-primary-text",
+  "--weather-card-secondary-text",
+]) {
+  assert.match(tokens, new RegExp(token), `${token} missing`);
+}
+assert.match(
+  polish,
+  /\.weather-icon-button\s*\{[\s\S]*color:\s*var\(--weather-card-primary-text\)/,
+  "Compact weather cards should use deep ink for primary text over illustrated weather art."
+);
+assert.match(
+  polish,
+  /\.weather-atmosphere-scene\s*\{[\s\S]*aspect-ratio:\s*320 \/ 128/,
+  "Scene artwork should keep the authored 320:128 atmosphere frame."
+);
+assert.match(
+  polish,
+  /\.weather-icon-button\s*\{[\s\S]*contain:\s*paint[\s\S]*overflow:\s*hidden/,
+  "Compact weather button shells should clip the scene layer without forcing the whole pill to the scene aspect ratio."
+);
+assert.match(
+  polish,
+  /\.event-weather-signal\s*\{[\s\S]*contain:\s*paint[\s\S]*overflow:\s*hidden/,
+  "Inline weather signal shells should clip the scene layer without forcing the whole box to the scene aspect ratio."
+);
+assert.match(
+  polish,
+  /\.weather-icon-button__details span,\n\.event-weather-signal__copy > span\s*\{[\s\S]*color:\s*var\(--weather-card-secondary-text\)/,
+  "Compact weather card metric text should use a darker secondary slate, not low-contrast muted gray."
+);
+assert.match(
+  polish,
+  /\.event-weather-signal \.weather-freshness-line,\n\.weather-icon-button \.weather-freshness-line\s*\{[\s\S]*color:\s*var\(--weather-card-secondary-text\)/,
+  "Freshness copy inside illustrated weather cards should stay readable over the artwork."
+);
 
 const stormMode = readFileSync("components/weather/StormModeBanner.tsx", "utf8");
 assert.match(stormMode, /role="alert"/);

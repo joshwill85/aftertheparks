@@ -16,7 +16,7 @@ playwright install chromium  # optional, for discovery
 | Discover | `python discover.py` | Find PDF URLs, detect changes |
 | Fetch | `python fetch.py` | Bronze — download PDFs, sha256, storage |
 | Extract | `python extract.py` | Silver — parse PDFs to JSON |
-| Validate | `python validate.py --strict` plus `python validate_v2.py` and `python audit_coverage.py` | Fail-closed quality, provenance, fixture, and coverage gates |
+| Validate | `python validate.py --strict` plus `python validate_v2.py`, `python audit_coverage.py`, and `python trust_report.py` | Fail-closed quality, provenance, fixture, coverage, and monitoring gates |
 | Third-party facts | `python magical_resort_guide.py` | MRG factual enrichment artifact: prices/options, booking details, age/access rules, exact venues, program families, and calendar validity |
 | Promote | `python promote_gold.py --fail-on-review` | Gold v2 preview plus review quarantine; widens matched Gold records with MRG facts without replacing official Disney source provenance |
 | Review | `python review_queue.py list` / `approve` / `reject` | Durable human decisions for quarantined candidates |
@@ -36,7 +36,15 @@ export SUPABASE_SERVICE_ROLE_KEY=...
 python run_pipeline.py
 ```
 
-`run_pipeline.py` now stops before publish unless strict legacy validation, v2 fixture validation, Gold v2 promotion, and the required coverage audit all pass. Production runs `audit_coverage.py --require-production-ready`; local-only runs the partial audit so gaps are visible without pretending the catalog is cut over. When publish is enabled, the pipeline writes Gold v2, official recreation offerings, and enrichment tables. It does not call the legacy temporal publisher.
+`run_pipeline.py` now stops before publish unless strict legacy validation, v2 fixture validation, Gold v2 promotion, the required coverage audit, and the trust/monitoring report all pass. Production runs `audit_coverage.py --require-production-ready`; local-only runs the partial audit so gaps are visible without pretending the catalog is cut over. When publish is enabled, the pipeline writes Gold v2, official recreation offerings, and enrichment tables. It does not call the legacy temporal publisher.
+
+Vision v3 can be run alongside the default path in report-only mode:
+
+```bash
+python run_pipeline.py --vision-v3 --quarter fy26-q4
+```
+
+That lane renders source pages, builds vision snapshots, extracts and validates v3 candidates, generates source status/metrics, writes the quarterly source drift report, builds the v3 review queue, promotes a v3 preview, generates the dual-run report, refreshes the trust/monitoring report, and runs the guarded v3 readiness check. It does not publish v3 rows; public v3 writes still require `python publish_gold_v3.py --require-clean-preview --publish` after all gates pass.
 
 Gold v2 publish is the trusted scheduled-activity publisher. After applying `activity_pipeline_v2`, `magical_resort_guide_facts`, and `preserve_gold_source_evidence` migrations, run `python publish_gold_v2.py` or `npm run publish:gold-v2` from the repo root. The publisher verifies the processed Gold artifact matches regeneration from current fixtures, review decisions, and MRG facts, then runs the production coverage preflight, then upserts `source_documents`, stable `activity_catalog` UUIDs, and current `public_activity_gold` rows, including structured `source` JSON with PDF footer/key legends, then fails if `check_activity_pipeline_v2_health()` returns any issue.
 

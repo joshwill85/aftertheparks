@@ -1,0 +1,760 @@
+.page {
+  display: grid;
+  gap: clamp(4rem, 8vw, 7.5rem);
+  overflow-x: clip;
+}
+
+.page h1,
+.page h2,
+.page h3 {
+  letter-spacing: 0;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.46fr) minmax(280px, 0.68fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  min-height: clamp(540px, 74vh, 740px);
+  padding: clamp(1.25rem, 4vw, 4.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(22, 33, 42, 0.1);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 200, 87, 0.28), transparent 28%),
+    radial-gradient(circle at 86% 62%, rgba(8, 121, 138, 0.2), transparent 32%),
+    linear-gradient(125deg, #fff9ef 0%, #fff2d9 58%, #d7eef0 100%);
+  box-shadow: 0 22px 60px rgba(22, 33, 42, 0.12);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  right: -8%;
+  bottom: -1px;
+  left: -8%;
+  height: clamp(3rem, 8vw, 6.5rem);
+  background:
+    radial-gradient(120% 120% at 50% 0%, transparent 48%, rgba(255, 255, 255, 0.62) 49%, rgba(255, 255, 255, 0.92) 74%);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(22, 33, 42, 0.07) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.42) 0 1px, transparent 1.6px);
+  background-position: 0 0, 9px 11px;
+  background-size: 22px 22px, 29px 29px;
+  opacity: 0.28;
+}
+
+.heroText,
+.heroArt {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.heroText {
+  max-width: 760px;
+}
+
+.heroText h1 {
+  max-width: 17ch;
+  font-size: clamp(3.05rem, 5.4vw, 5.15rem);
+  line-height: 0.96;
+  color: var(--brand-ink);
+}
+
+.heroText h1 span {
+  display: block;
+}
+
+.heroText h1 span:nth-child(2) {
+  white-space: nowrap;
+}
+
+.heroText p {
+  max-width: 42rem;
+  margin-top: 1.35rem;
+  font-size: clamp(1.15rem, 2vw, 1.38rem);
+  line-height: 1.55;
+  color: rgba(22, 33, 42, 0.76);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.15rem;
+}
+
+.heroActions a,
+.footerActions a {
+  min-height: 52px;
+  padding-inline: 1.35rem;
+  font-size: 0.95rem;
+  box-shadow: 0 14px 28px rgba(8, 121, 138, 0.18);
+}
+
+.heroActions a:first-child,
+.footerActions a:first-child {
+  background: linear-gradient(135deg, var(--lagoon-deep), var(--palm));
+}
+
+.heroArt {
+  justify-self: stretch;
+}
+
+.heroScene {
+  position: relative;
+  min-height: clamp(320px, 39vw, 455px);
+  overflow: hidden;
+  border: 1px solid rgba(22, 33, 42, 0.1);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1)),
+    linear-gradient(145deg, rgba(255, 247, 234, 0.9), rgba(217, 231, 255, 0.52));
+  box-shadow: 0 22px 54px rgba(7, 26, 38, 0.18);
+}
+
+.heroSky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 74% 22%, rgba(255, 200, 87, 0.32), transparent 22%),
+    linear-gradient(115deg, rgba(255, 249, 239, 0.35) 0%, rgba(22, 166, 182, 0.12) 100%);
+}
+
+.heroSvg {
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mapPaper {
+  fill: rgba(255, 247, 234, 0.96);
+  stroke: rgba(22, 33, 42, 0.16);
+  stroke-width: 3;
+}
+
+.mapFold,
+.mapRoute,
+.cabinLine,
+.picnic,
+.fireLog,
+.walkPath {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mapFold {
+  stroke: rgba(22, 33, 42, 0.1);
+  stroke-width: 2;
+}
+
+.mapRoute {
+  stroke: var(--lagoon-deep);
+  stroke-width: 4;
+  stroke-dasharray: 10 10;
+}
+
+.walkPath {
+  stroke: rgba(8, 121, 138, 0.36);
+  stroke-width: 3;
+  stroke-dasharray: 4 9;
+}
+
+.routeDot {
+  fill: var(--sun-coral);
+  stroke: #fff7ea;
+  stroke-width: 4;
+}
+
+.cabinRoof {
+  fill: var(--sun-coral);
+}
+
+.cabinBody {
+  fill: #f4c28b;
+  stroke: rgba(22, 33, 42, 0.18);
+  stroke-width: 3;
+}
+
+.cabinLine,
+.picnic,
+.fireLog {
+  stroke: var(--night-soft);
+  stroke-width: 5;
+}
+
+.tree {
+  fill: var(--palm);
+}
+
+.treeTrunk {
+  stroke: #8a5b34;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.backpack {
+  fill: none;
+  stroke: var(--lagoon-deep);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.schedule,
+.pinToday,
+.pinTonight,
+.lanternMini {
+  fill: rgba(255, 255, 255, 0.5);
+  stroke: var(--lagoon-deep);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pinToday {
+  fill: var(--sun-gold);
+}
+
+.pinTonight {
+  fill: var(--night-soft);
+}
+
+.firefly {
+  fill: var(--lantern);
+  opacity: 0.85;
+}
+
+.flame {
+  fill: var(--ember);
+}
+
+.flameInner {
+  fill: var(--lantern);
+}
+
+.sectionIntro,
+.magicIntro {
+  max-width: 780px;
+}
+
+.sectionIntro h2,
+.magicIntro h2,
+.founderCopy h2,
+.footerCta h2 {
+  color: var(--brand-ink);
+  font-size: clamp(2.35rem, 4.8vw, 3.8rem);
+  line-height: 1;
+}
+
+.sectionIntro h2 {
+  max-width: 19ch;
+}
+
+.mapLabel,
+.mapNote,
+.magicColumnLabel {
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mapLabel,
+.mapNote {
+  color: var(--lagoon-deep);
+}
+
+.story {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.75rem);
+  margin-top: clamp(-1rem, -1vw, -0.25rem);
+}
+
+.storyTrack {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.storyRoute {
+  position: absolute;
+  top: 0.65rem;
+  bottom: 0.65rem;
+  left: 15px;
+  width: 34px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 9%, var(--sun-gold) 0 4px, transparent 5px),
+    radial-gradient(circle at 54% 28%, rgba(8, 121, 138, 0.68) 0 4px, transparent 5px),
+    radial-gradient(circle at 46% 47%, rgba(255, 200, 87, 0.86) 0 4px, transparent 5px),
+    radial-gradient(circle at 54% 68%, rgba(8, 121, 138, 0.68) 0 4px, transparent 5px),
+    radial-gradient(circle at 50% 88%, var(--sun-coral) 0 4px, transparent 5px),
+    repeating-linear-gradient(177deg, transparent 0 11px, rgba(22, 166, 182, 0.52) 11px 21px);
+  opacity: 0.7;
+}
+
+.storyItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 75ch);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.storyMarker {
+  position: sticky;
+  top: calc(var(--header-height) + 1.5rem);
+  z-index: 1;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border: 1px solid rgba(22, 33, 42, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 247, 234, 0.94);
+  color: var(--lagoon-deep);
+  box-shadow: 0 12px 26px rgba(22, 33, 42, 0.1);
+}
+
+.storyIconSvg {
+  width: 38px;
+  height: 38px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.storyIconSvg circle {
+  fill: rgba(255, 200, 87, 0.36);
+}
+
+.storyCopy {
+  position: relative;
+  min-width: 0;
+  padding: clamp(1.45rem, 3.4vw, 2.55rem);
+  overflow: hidden;
+  border: 1px solid rgba(22, 33, 42, 0.1);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.62)),
+    radial-gradient(circle at 92% 14%, rgba(255, 200, 87, 0.12), transparent 24%);
+  box-shadow: 0 16px 36px rgba(22, 33, 42, 0.08);
+}
+
+.storyCopy::after {
+  content: "";
+  position: absolute;
+  right: clamp(0.9rem, 2vw, 1.45rem);
+  top: clamp(0.9rem, 2vw, 1.45rem);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 45% 55% 52% 48%;
+  opacity: 0.13;
+  background: radial-gradient(circle, var(--lagoon-deep) 0 2px, transparent 2.5px);
+  background-size: 13px 13px;
+}
+
+.storyItem:nth-child(2) .storyCopy::after {
+  background:
+    radial-gradient(circle at 24% 28%, var(--sun-gold) 0 0.28rem, transparent 0.31rem),
+    linear-gradient(135deg, transparent 42%, var(--sun-gold) 43% 56%, transparent 57%);
+}
+
+.storyItem:nth-child(3) .storyCopy::after {
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, transparent 0 72%, var(--sun-coral) 73%),
+    repeating-linear-gradient(0deg, var(--lagoon-deep) 0 2px, transparent 2px 12px);
+}
+
+.storyItem:nth-child(4) .storyCopy::after {
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, var(--night-soft) 0 8%, transparent 8%),
+    repeating-linear-gradient(0deg, var(--night-soft) 0 1px, transparent 1px 11px);
+}
+
+.storyItem:nth-child(5) .storyCopy::after {
+  background:
+    radial-gradient(circle at 20% 20%, var(--lagoon-deep) 0 3px, transparent 4px),
+    radial-gradient(circle at 55% 48%, var(--sun-gold) 0 3px, transparent 4px),
+    radial-gradient(circle at 82% 76%, var(--sun-coral) 0 3px, transparent 4px),
+    linear-gradient(135deg, transparent 15%, var(--lagoon-deep) 16% 19%, transparent 20% 58%, var(--lagoon-deep) 59% 62%, transparent 63%);
+}
+
+.storyItem:nth-child(6) .storyCopy::after,
+.storyItem:nth-child(7) .storyCopy::after {
+  background:
+    radial-gradient(circle at 50% 64%, var(--lantern) 0 0.55rem, transparent 0.6rem),
+    radial-gradient(circle at 50% 64%, rgba(255, 200, 87, 0.44), transparent 42%);
+}
+
+.storyCopy h3 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.05;
+  color: var(--brand-ink);
+}
+
+.storyCopy p {
+  margin-top: 1.12rem;
+  font-size: clamp(1.06rem, 1.5vw, 1.18rem);
+  line-height: 1.72;
+  color: rgba(22, 33, 42, 0.76);
+}
+
+.storyCopy .mapNote {
+  margin-top: 0;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.magicSection {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3.25rem);
+}
+
+.magicIntro p {
+  max-width: 65ch;
+  margin-top: 1rem;
+  font-size: clamp(1.08rem, 1.6vw, 1.22rem);
+  color: rgba(22, 33, 42, 0.74);
+  line-height: 1.65;
+}
+
+.magicBoard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(80px, 0.24fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.2rem, 3.2vw, 2.4rem);
+  padding: clamp(1.25rem, 3.4vw, 2.45rem);
+  overflow: hidden;
+  border: 1px solid rgba(22, 33, 42, 0.1);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 200, 87, 0.26), transparent 30%),
+    linear-gradient(120deg, rgba(255, 247, 234, 0.92), rgba(221, 238, 234, 0.74));
+}
+
+.magicColumn {
+  min-width: 0;
+}
+
+.magicColumnLabel {
+  color: var(--night-soft);
+}
+
+.magicCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.magicCard {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 0.85rem;
+  border-radius: 15px;
+  font-size: 0.98rem;
+  font-weight: 850;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.magicCardMessy {
+  justify-self: start;
+  border: 1px dashed rgba(22, 33, 42, 0.22);
+  background: rgba(255, 255, 255, 0.64);
+  color: rgba(22, 33, 42, 0.74);
+}
+
+.magicCardMessy:nth-child(2n) {
+  justify-self: end;
+  width: 92%;
+}
+
+.magicCardMessy:nth-child(3n) {
+  width: 78%;
+  transform: rotate(-1.2deg);
+}
+
+.magicCardMessy:nth-child(4n) {
+  width: 105%;
+  transform: rotate(0.8deg);
+}
+
+.magicCardClear {
+  width: 100%;
+  border: 1px solid rgba(8, 121, 138, 0.22);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--lagoon-deep);
+  box-shadow: 0 8px 18px rgba(8, 121, 138, 0.1);
+}
+
+.magicPath {
+  display: flex;
+  min-height: 140px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.magicPath span {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 999px;
+  background: var(--lantern);
+  box-shadow: 0 0 22px rgba(255, 200, 87, 0.72);
+}
+
+.founderCard {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: center;
+  padding: clamp(1.4rem, 3.5vw, 2.6rem);
+  border: 1px solid rgba(22, 33, 42, 0.1);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 18% 32%, rgba(255, 200, 87, 0.14), transparent 28%),
+    rgba(255, 255, 255, 0.72);
+}
+
+.founderImageSlot {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 70% 28%, rgba(255, 200, 87, 0.24), transparent 28%),
+    rgba(248, 236, 215, 0.76);
+}
+
+.objectDetailSvg {
+  width: min(100%, 260px);
+  height: auto;
+  fill: none;
+  stroke: var(--night-soft);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.objectDetailSvg rect {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+.founderCopy {
+  max-width: 64ch;
+}
+
+.founderDescriptor {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--lagoon-deep);
+}
+
+.founderCopy p:not(.founderDescriptor) {
+  margin-top: 1rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.16rem);
+  line-height: 1.65;
+  color: rgba(22, 33, 42, 0.74);
+}
+
+.footerCta {
+  position: relative;
+  display: grid;
+  gap: 1.35rem;
+  justify-items: start;
+  padding: clamp(1.55rem, 4vw, 3.25rem);
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 86% 22%, rgba(255, 200, 87, 0.34), transparent 25%),
+    radial-gradient(circle at 18% 88%, rgba(246, 106, 61, 0.22), transparent 24%),
+    linear-gradient(135deg, #092233, var(--night-soft));
+  color: white;
+}
+
+.footerCta::after {
+  content: "";
+  position: absolute;
+  inset: auto clamp(1rem, 5vw, 4rem) 1.4rem auto;
+  width: min(18rem, 42vw);
+  height: 4rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 10% 55%, rgba(255, 200, 87, 0.5) 0 0.22rem, transparent 0.25rem),
+    radial-gradient(circle at 48% 35%, rgba(255, 200, 87, 0.36) 0 0.16rem, transparent 0.19rem),
+    radial-gradient(circle at 82% 58%, rgba(255, 200, 87, 0.46) 0 0.2rem, transparent 0.23rem),
+    linear-gradient(100deg, transparent 8%, rgba(255, 200, 87, 0.18), transparent 88%);
+  opacity: 0.56;
+  pointer-events: none;
+}
+
+.footerCta h2 {
+  max-width: 740px;
+  color: white;
+}
+
+.footerCta p {
+  max-width: 70ch;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.55;
+}
+
+.footerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mapRoute {
+    animation: aboutRouteDrift 16s linear infinite;
+  }
+
+  .magicPath span {
+    animation: aboutFireflyPulse 2.8s ease-in-out infinite;
+  }
+
+  .magicPath span:nth-child(2) {
+    animation-delay: 220ms;
+  }
+
+  .magicPath span:nth-child(3) {
+    animation-delay: 440ms;
+  }
+}
+
+@keyframes aboutRouteDrift {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes aboutFireflyPulse {
+  50% {
+    transform: translateY(-0.35rem);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .heroText h1 {
+    max-width: 12ch;
+  }
+
+  .heroArt {
+    width: 100%;
+  }
+
+  .magicBoard {
+    grid-template-columns: 1fr;
+  }
+
+  .magicPath {
+    min-height: 56px;
+    transform: rotate(90deg);
+  }
+
+  .founderCard {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    gap: 3rem;
+  }
+
+  .hero {
+    padding: 1rem;
+    border-radius: 22px;
+  }
+
+  .heroText h1 {
+    font-size: clamp(2.55rem, 15vw, 4rem);
+  }
+
+  .heroActions,
+  .footerActions {
+    width: 100%;
+  }
+
+  .heroActions a,
+  .footerActions a {
+    width: 100%;
+  }
+
+  .heroScene {
+    min-height: 280px;
+  }
+
+  .storyRoute {
+    left: 25px;
+  }
+
+  .storyItem {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  .storyMarker {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
+
+  .storyIconSvg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .storyCopy {
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .magicCards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .magicCard {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.58rem 0.5rem;
+    font-size: 0.82rem;
+    justify-self: stretch;
+    transform: none;
+  }
+}

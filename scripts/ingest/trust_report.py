@@ -305,6 +305,7 @@ def _monitoring_report(report: dict[str, Any]) -> dict[str, Any]:
         action = "none"
         status = "pass"
     return {
+        "generated_at": report.get("generated_at"),
         "status": status,
         "changed_sources": changed_sources,
         "affected_rows": affected_rows,

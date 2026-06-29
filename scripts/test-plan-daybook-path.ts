@@ -92,7 +92,7 @@ assert.deepEqual(path.stops[2].connectorBefore, {
   severity: "risk",
   label: "10 min resort change",
   detail:
-    "Build in travel time before moving from Contemporary Resort to Polynesian Village Resort.",
+    "Build in travel time before moving from Contemporary Resort to Polynesian Village Resort. Confirm current transportation day-of.",
   iconKey: "nearby_area",
   ariaLabel:
     "10 min between Pool Break and Campfire with a resort change from Contemporary Resort to Polynesian Village Resort.",
@@ -206,13 +206,13 @@ assert.deepEqual(
 );
 assert.equal(
   stayShell.findHomeResortHref,
-  "/activities?resort=polynesian-village-resort",
-  "Home resort links should target exact resort results"
+  "/calendar?start=2026-07-02&end=2026-07-04&selected=2026-07-02&resort=polynesian-village-resort",
+  "Home resort links should target the dated plan-ahead calendar"
 );
 assert.equal(
   stayShell.findNearbyHref,
-  "/activities?near=my-resort&resort=polynesian-village-resort",
-  "Nearby links should target same-area near-my-resort mode"
+  "/calendar?start=2026-07-02&end=2026-07-04&selected=2026-07-02&resort=polynesian-village-resort",
+  "Nearby links should target the dated plan-ahead calendar"
 );
 
 assert.equal(

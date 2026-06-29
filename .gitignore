@@ -27,6 +27,7 @@ supabase/.temp/
 supabase/.branches/
 tmp/
 tmp/cf-playwright-profile/
+test-results/
 
 # OS / editor
 .DS_Store

@@ -45,7 +45,13 @@ def _is_official_disney_url(url: str) -> bool:
     )
 
 
-def _derived_source_link(target: dict[str, Any], *, crop_sha256: str) -> dict[str, Any]:
+def _derived_source_link(
+    target: dict[str, Any],
+    *,
+    crop_sha256: str,
+    parent_source_document_id: Any = None,
+    parent_content_sha256: Any = None,
+) -> dict[str, Any]:
     url = str(target.get("target_url") or "").strip()
     is_official = _is_official_disney_url(url)
     return {
@@ -54,6 +60,8 @@ def _derived_source_link(target: dict[str, Any], *, crop_sha256: str) -> dict[st
         "is_official_source": is_official,
         "source_authority": "official_disney" if is_official else "non_official",
         "source_crop_sha256": crop_sha256,
+        "parent_source_document_id": parent_source_document_id,
+        "parent_content_sha256": parent_content_sha256,
     }
 
 
@@ -99,6 +107,8 @@ def segment_major_regions(
         raise FileNotFoundError(page_path)
 
     document_family = str(classification.get("document_family") or "unknown_visual_schedule")
+    parent_source_document_id = snapshot.get("source_document_id")
+    parent_content_sha256 = snapshot.get("source_sha256")
     output_dir.mkdir(parents=True, exist_ok=True)
     regions: list[dict[str, Any]] = []
     with Image.open(page_path) as image:
@@ -116,7 +126,12 @@ def segment_major_regions(
             if region_type == "qr_callout":
                 decoder = qr_decoder or decode_qr_targets
                 qr_targets = [
-                    _derived_source_link(target, crop_sha256=crop_sha256)
+                    _derived_source_link(
+                        target,
+                        crop_sha256=crop_sha256,
+                        parent_source_document_id=parent_source_document_id,
+                        parent_content_sha256=parent_content_sha256,
+                    )
                     for target in decoder(crop_path)
                     if isinstance(target, dict) and target.get("target_url")
                 ]
@@ -148,9 +163,17 @@ def segment_major_regions(
                 }
             )
 
+    derived_source_links = [
+        target
+        for region in regions
+        for target in region.get("qr_targets", [])
+        if isinstance(target, dict) and target.get("source_role") == "derived_source_link"
+    ]
+
     return {
         "document_family": document_family,
         "allow_auto_publish": bool(classification.get("allow_auto_publish"))
         and document_family != "unknown_visual_schedule",
         "regions": regions,
+        "derived_source_links": derived_source_links,
     }

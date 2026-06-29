@@ -21,6 +21,7 @@ export interface PlanStaySettings {
 
 export interface PublicPlanItem {
   title: string;
+  resortSlug: string;
   resortName: string;
   location?: string;
   startsAt?: string;

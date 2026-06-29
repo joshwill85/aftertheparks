@@ -1,6 +1,13 @@
 import { parseISO } from "date-fns";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem } from "@/lib/types/occurrence";
+import {
+  connectionOptionsForPair,
+  transportOptionDetail,
+  transportOptionLabel,
+  type PlanTransportConnectionMap,
+  type PlanTransportConnectionOption,
+} from "@/lib/plan/transportConnections";
 
 export type PlanDaybookConnectorTone =
   | "breathing"
@@ -16,6 +23,7 @@ export interface PlanDaybookConnector {
   detail: string;
   iconKey: IconKey;
   ariaLabel: string;
+  transportOptions?: PlanTransportConnectionOption[];
 }
 
 export interface PlanDaybookStop {
@@ -79,7 +87,8 @@ function flexibleConnector(item: PlanItem): PlanDaybookConnector {
 
 function connectorBetween(
   previous: ScheduledItem,
-  current: ScheduledItem
+  current: ScheduledItem,
+  transportConnections?: PlanTransportConnectionMap
 ): PlanDaybookConnector {
   const gapMinutes = Math.round((current.start - previous.end) / 60_000);
   const sameResort = previous.item.resortSlug === current.item.resortSlug;
@@ -99,11 +108,33 @@ function connectorBetween(
   }
 
   if (!sameResort) {
+    const transportOptions = connectionOptionsForPair(
+      transportConnections,
+      previous.item.resortSlug,
+      current.item.resortSlug
+    );
+    const primary = transportOptions[0];
+
+    if (primary) {
+      const optionLabel = transportOptionLabel(primary);
+      return {
+        tone: "travel",
+        severity: gapMinutes < 30 ? "risk" : "watch",
+        label: `${formatMinutes(gapMinutes)} gap · ${optionLabel}`,
+        detail: transportOptionDetail(primary),
+        iconKey: "nearby_area",
+        ariaLabel: `${formatMinutes(gapMinutes)} between ${previous.item.title} and ${
+          current.item.title
+        }. Transportation option: ${optionLabel}.`,
+        transportOptions,
+      };
+    }
+
     return {
       tone: "travel",
       severity: gapMinutes < 30 ? "risk" : "watch",
       label: `${formatMinutes(gapMinutes)} resort change`,
-      detail: `Build in travel time before moving from ${previous.item.resortName} to ${current.item.resortName}.`,
+      detail: `Build in travel time before moving from ${previous.item.resortName} to ${current.item.resortName}. Confirm current transportation day-of.`,
       iconKey: "nearby_area",
       ariaLabel: `${formatMinutes(gapMinutes)} between ${previous.item.title} and ${
         current.item.title
@@ -157,7 +188,10 @@ function summaryFor(stops: PlanDaybookStop[]): string {
   return `Plan daybook path with ${parts.join(", ")}.`;
 }
 
-export function buildPlanDaybookPath(items: PlanItem[]): PlanDaybookPath {
+export function buildPlanDaybookPath(
+  items: PlanItem[],
+  transportConnections?: PlanTransportConnectionMap
+): PlanDaybookPath {
   const scheduled = items
     .map(scheduledWindow)
     .filter((item): item is ScheduledItem => Boolean(item))
@@ -171,7 +205,9 @@ export function buildPlanDaybookPath(items: PlanItem[]): PlanDaybookPath {
     stops.push({
       itemId: scheduledItem.item.id,
       connectorBefore:
-        index > 0 ? connectorBetween(scheduled[index - 1], scheduledItem) : undefined,
+        index > 0
+          ? connectorBetween(scheduled[index - 1], scheduledItem, transportConnections)
+          : undefined,
     });
   });
 

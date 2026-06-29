@@ -93,8 +93,8 @@ assert.match(tonightPage, /BrandAsset/, "tonight page should include dark brand 
 assert.match(tonightPage, /dark-lockup/, "tonight page should use the dark lockup");
 
 const aboutPage = read("app/about/page.tsx");
-assert.match(aboutPage, /BrandMark/, "about page should include the primary brand lockup");
-assert.match(aboutPage, /variant="primary"/, "about page should use the primary lockup");
+assert.match(aboutPage, /AboutHero/, "about page should include the story-led hero");
+assert.match(aboutPage, /AboutStorySpine/, "about page should include the origin story spine");
 
 const guidesPage = read("app/guides/page.tsx");
 assert.match(guidesPage, /BrandMotif/, "guides page should use the route motif");

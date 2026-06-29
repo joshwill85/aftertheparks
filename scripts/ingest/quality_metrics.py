@@ -42,7 +42,10 @@ def compute_snapshot_quality(snapshot: dict[str, Any]) -> dict[str, Any]:
     pages = [page for page in _list(snapshot.get("source_pages")) if isinstance(page, dict)]
     engine_runs = [run for run in _list(snapshot.get("engine_runs")) if isinstance(run, dict)]
     regions = _list(snapshot.get("regions"))
+    engine_regions = _list(snapshot.get("engine_regions"))
+    lines = _list(snapshot.get("lines"))
     tokens = _list(snapshot.get("tokens"))
+    errors = [str(error) for error in _list(snapshot.get("errors")) if error]
 
     engine_status_counts = Counter(str(run.get("status") or "unknown") for run in engine_runs)
     engine_token_counts = {
@@ -56,10 +59,24 @@ def compute_snapshot_quality(snapshot: dict[str, Any]) -> dict[str, Any]:
         findings.append("missing_regions")
     if not tokens and not any(engine_token_counts.values()):
         findings.append("missing_ocr_tokens")
+    findings.extend(
+        error
+        for error in errors
+        if error.startswith(
+            (
+                "ocr_config_error:",
+                "ocr_engine_unavailable:",
+                "ocr_engine_error:",
+                "region_segmentation_error:",
+            )
+        )
+    )
 
     return {
         "page_count": len(pages),
         "region_count": len(regions),
+        "engine_region_count": len(engine_regions),
+        "line_count": len(lines),
         "token_count": len(tokens),
         "engine_status_counts": dict(sorted(engine_status_counts.items())),
         "engine_token_counts": dict(sorted(engine_token_counts.items())),
