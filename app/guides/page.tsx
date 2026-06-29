@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/atlas/Hero";
-import { BrandMotif } from "@/components/brand/BrandAsset";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { GUIDES } from "@/lib/guides";
 import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
-import { disneySpringsTransportationCaveat } from "@/lib/seo/transportation";
+import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
 
 export const metadata: Metadata = {
   title: "Disney World Resort Planning Guides | After the Parks",
   description:
-    "Research-gated Walt Disney World resort planning guides for non-park days, free activities, resort hopping, rainy days, first nights, and current resort calendars.",
+    "Practical Walt Disney World resort planning guides for no-park days, rainy days, arrival nights, free activities, resort hopping, and transportation-light plans.",
   alternates: { canonical: "/guides" },
   ...buildSocialMetadata({
     title: "Disney World Resort Planning Guides",
     description:
-      "Research-gated Walt Disney World resort planning guides for non-park days, free activities, resort hopping, rainy days, first nights, and current resort calendars.",
+      "Practical Walt Disney World resort planning guides for no-park days, rainy days, arrival nights, free activities, resort hopping, and transportation-light plans.",
     path: "/guides",
   }),
 };
@@ -43,48 +42,20 @@ export default function GuidesPage() {
       />
       <Hero
         title="Disney World Resort Planning Guides"
-        subtitle="Research-backed planning guides for resort days, no-park days, rainy days, and current activity calendars."
+        subtitle="Practical guides for no-park days, rainy days, arrival nights, free activities, resort hopping, and transportation-light plans."
       />
       <section className="mb-6 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <BrandMotif className="brand-motif--divider mb-3" />
-        <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-          Research-gated guide cluster
-        </p>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          These guides exist only when After the Parks can add something a
-          static Disney blog cannot: current resort activity data, source
-          freshness, realistic transportation notes, and deep links into
-          today&apos;s and tonight&apos;s schedules.
-        </p>
-      </section>
-      <section className="mb-6 grid gap-3 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm md:grid-cols-3">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Guide standard
-          </p>
-          <p className="mt-1 text-[var(--brand-ink)]">
-            Real planning problem, current data dependency, and clear next step.
-          </p>
+        <h2 className="font-display text-2xl font-semibold">Start with your situation</h2>
+        <div className="mt-4 grid gap-4 text-sm leading-relaxed text-[var(--color-muted)] md:grid-cols-2">
+          <p><strong className="text-[var(--brand-ink)]">I need a rest day:</strong> No-park day guide, free activities, and resort-day ideas.</p>
+          <p><strong className="text-[var(--brand-ink)]">The weather looks bad:</strong> Rainy-day activities, indoor backups, and weather-aware planning.</p>
+          <p><strong className="text-[var(--brand-ink)]">We just arrived:</strong> First-night ideas, tonight&apos;s activities, and easy resort options.</p>
+          <p><strong className="text-[var(--brand-ink)]">We want to explore:</strong> Resort hopping, monorail resorts, Skyliner resorts, and BoardWalk-area plans.</p>
+          <p><strong className="text-[var(--brand-ink)]">We need simple logistics:</strong> Grandparents, little kids, and transportation-light plans.</p>
         </div>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Source standard
-          </p>
-          <p className="mt-1 text-[var(--brand-ink)]">
-            Disney official sources first, with freshness and caveats visible.
-          </p>
-        </div>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-            Transportation standard
-          </p>
-          <p className="mt-1 text-[var(--brand-ink)]">
-            Direct routes and access-sensitive advice are separated from easy
-            resort-stay plans.
-          </p>
-        </div>
-        <p className="md:col-span-3 text-xs leading-relaxed text-[var(--color-muted)]">
-          Disney Springs note: {disneySpringsTransportationCaveat()}
+        <p className="mt-4 text-sm leading-relaxed text-[var(--color-muted)]">
+          <strong className="text-[var(--brand-ink)]">Disney Springs transportation note:</strong>{" "}
+          {DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT.summary}
         </p>
       </section>
       <ul className="grid gap-5 sm:grid-cols-2">

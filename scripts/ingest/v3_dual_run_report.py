@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +17,10 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 DEFAULT_OUTPUT = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 CRITICAL_FIELDS = ("title", "schedule", "location", "price")
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _rows_from_preview(value: Any) -> list[dict[str, Any]]:
@@ -143,6 +149,26 @@ def _row_content_hash(row: dict[str, Any]) -> str:
     return _first_content_hash_from_fingerprint(_evidence_fingerprint(row))
 
 
+def _preview_fingerprint(rows: list[dict[str, Any]]) -> str:
+    row_fingerprints = []
+    for row in rows:
+        row_fingerprints.append(
+            {
+                "row_key": _row_key(row),
+                "validation_status": _validation_status(row),
+                "source_hash": _row_content_hash(row),
+                "critical_fields": {
+                    field_name: _field_value(row, field_name)
+                    for field_name in CRITICAL_FIELDS
+                },
+                "movie_title": row.get("movie_title") or row.get("normalized_movie_title"),
+                "field_evidence": _evidence_fingerprint(row),
+            }
+        )
+    payload = json.dumps(sorted(row_fingerprints, key=lambda item: item["row_key"]), sort_keys=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def _review_records_by_key(records: list[dict[str, Any]] | None) -> dict[str, dict[str, Any]]:
     by_key: dict[str, dict[str, Any]] = {}
     for record in records or []:
@@ -163,7 +189,9 @@ def _status_transition_key(row_key: str) -> str:
 
 
 def _source_id(row: dict[str, Any]) -> str:
-    return str(row.get("source_document_id") or row.get("id") or row.get("document_id") or "").strip()
+    return str(
+        row.get("source_document_id") or row.get("source_id") or row.get("id") or row.get("document_id") or ""
+    ).strip()
 
 
 def _source_hash(row: dict[str, Any]) -> str:
@@ -420,9 +448,18 @@ def build_dual_run_report(
 
     return {
         "report_version": "v3_dual_run_report_001",
+        "generated_at": _now_iso(),
         "status": "blocked" if publish_blockers else "clean",
         "v2_count": len(v2_rows),
         "v3_count": len(v3_rows),
+        "v3_source_hashes": sorted(
+            {
+                source_hash
+                for row in v3_rows
+                if (source_hash := _row_content_hash(row))
+            }
+        ),
+        "v3_preview_fingerprint": _preview_fingerprint(v3_rows),
         "new_in_v3": [_slug(v3_by_key[key]) for key in new_keys],
         "new_v3_review_keys": [new_review_keys[key] for key in new_keys],
         "new_v3_records": new_v3_records,

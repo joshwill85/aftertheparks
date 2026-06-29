@@ -79,7 +79,7 @@ export const SEASONAL_CALENDAR_PAGES: SeasonalCalendarPageDefinition[] = [
     slug: "holiday-2026",
     title: "Holiday 2026 Walt Disney World Resort Activity Calendars",
     description:
-      "Plan Holiday 2026 Walt Disney World resort activities with current recreation calendars, source-backed caveats, no-ticket guidance, and evening planning links.",
+      "Plan Holiday 2026 Walt Disney World resort activities with current recreation calendars, verified caveats, no-ticket guidance, and evening planning links.",
     seasonLabel: "Holiday 2026",
     scheduleWindow: "Late November through December 2026",
     userPromise:
@@ -98,7 +98,7 @@ export const SEASONAL_CALENDAR_PAGES: SeasonalCalendarPageDefinition[] = [
     ],
     sourceCaveats: [
       "Holiday activities, decor access, parking, and resort transportation can be capacity-sensitive and change quickly.",
-      "Do not use Disney Springs as a free way to reach resort hotels; use a resort stay, confirmed dining/experience reservation, rideshare, or currently allowed direct route.",
+      "Do not use Disney Springs as a free resort-transfer hub; use a resort stay, confirmed dining/experience reservation, rideshare, or currently allowed direct route.",
     ],
     freshnessRule:
       "Recheck weekly before holiday calendars publish, then daily during holiday schedule, access, and transportation changes.",

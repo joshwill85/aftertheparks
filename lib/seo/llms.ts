@@ -1,6 +1,5 @@
 import { HIGH_VALUE_GUIDES, PRIORITY_ACTIVITY_GUIDES } from "@/lib/seo/routes";
 import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
-import { buildSeoGuideDossier } from "@/lib/seo/guideDossiers";
 
 function absolute(baseUrl: string, path: string): string {
   return new URL(path, baseUrl).toString();
@@ -37,7 +36,6 @@ export function buildLlmsText(baseUrl: string): string {
 
 export function buildLlmsFullText(baseUrl: string): string {
   const guides = HIGH_VALUE_GUIDES.map((guide) => {
-    const dossier = buildSeoGuideDossier(guide);
     return [
       `## ${guide.title}`,
       `URL: ${absolute(baseUrl, `/guides/${guide.slug}`)}`,
@@ -45,22 +43,8 @@ export function buildLlmsFullText(baseUrl: string): string {
       `Primary action: ${guide.primaryAction.label} -> ${absolute(baseUrl, guide.primaryAction.href)}`,
       `Decision filter: ${guide.decisionFilter}`,
       `Freshness rule: ${guide.freshnessRule}`,
-      `Kill rule: ${guide.killRule}`,
       `Caveats: ${guide.caveats.join(" ")}`,
-      "Research dossier:",
-      `Official-source facts: ${dossier.officialSourceFacts.slice(0, 2).join(" ")}`,
-      `After the Parks data facts: ${dossier.afterTheParksDataFacts.slice(0, 2).join(" ")}`,
-      `Competitor gap analysis: ${dossier.competitorGapAnalysis.slice(0, 2).join(" ")}`,
-      `Transportation validation: ${dossier.transportationValidation.slice(0, 2).join(" ")}`,
-      `Bad-fit exclusions: ${dossier.badFitExclusions.slice(0, 2).join(" ")}`,
-      `Deep-link plan: ${dossier.deepLinkPlan.slice(0, 3).join(" ")}`,
-      `Editorial review: ${dossier.editorialReview.slice(0, 2).join(" ")}`,
-      `Official source links: ${dossier.officialSourceLinks
-        .slice(0, 3)
-        .map((source) => `${source.label} (${source.href}) - ${source.purpose}`)
-        .join(" ")}`,
-      `What changed in this update: ${dossier.updateNotes.slice(0, 2).join(" ")}`,
-      `Anti-thin-content checks: ${dossier.antiThinContentChecks.slice(0, 3).join(" ")}`,
+      `Best next pages: ${guide.deepLinks.map((href) => absolute(baseUrl, href)).join(" ")}`,
     ].join("\n")
   }).join("\n\n");
 
@@ -71,12 +55,12 @@ export function buildLlmsFullText(baseUrl: string): string {
   return [
     "# After the Parks Full LLM Context",
     "",
-    "Research-gated guide creation:",
-    "No SEO page exists unless it is also a useful product landing page. Every new SEO guide must prove user intent, unique After the Parks value, live data integration, research depth, bad-fit exclusions, route/access accuracy, and deep links into the product.",
+    "Planning guide creation:",
+    "Guides should answer real guest decisions in plain language, route readers to current activity pages, and clearly flag source, access, weather, and transportation caveats.",
     "",
     "Current transportation caveat:",
     DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT.summary,
-    "Do not use Disney Springs as a free way to get to Disney resort hotels.",
+    "Confirm resort access and return transportation before you go.",
     "",
     "Primary product routes:",
     `- ${absolute(baseUrl, "/disney-world-resort-activity-calendars")}`,

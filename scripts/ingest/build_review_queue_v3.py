@@ -97,6 +97,29 @@ def _source_metadata(candidate: dict[str, Any]) -> dict[str, Any]:
     return {key: candidate.get(key) for key in keys if candidate.get(key) not in {None, ""}}
 
 
+def _page_image_path(candidate: dict[str, Any], page_image_sha256: Any) -> str | None:
+    requested_hash = str(page_image_sha256 or "").strip()
+    if not requested_hash:
+        return None
+    for page in candidate.get("source_pages") or []:
+        if not isinstance(page, dict):
+            continue
+        page_hash = str(
+            page.get("page_image_sha256")
+            or page.get("canonical_image_sha256")
+            or ""
+        ).strip()
+        if page_hash != requested_hash:
+            continue
+        page_path = (
+            page.get("page_image_path")
+            or page.get("canonical_image_path")
+            or page.get("canonical_image_storage_path")
+        )
+        return str(page_path) if page_path else None
+    return None
+
+
 def _comparison_key(row: dict[str, Any]) -> str:
     calendar_group_key = str(row.get("calendar_group_key") or "").strip()
     canonical_slug = str(row.get("canonical_slug") or row.get("activity_slug") or row.get("slug") or "").strip()
@@ -178,7 +201,9 @@ def _engine_text(evidence: dict[str, Any], index: int) -> str | None:
 
 
 def _source_id(row: dict[str, Any]) -> str:
-    return str(row.get("source_document_id") or row.get("id") or row.get("document_id") or "").strip()
+    return str(
+        row.get("source_document_id") or row.get("source_id") or row.get("id") or row.get("document_id") or ""
+    ).strip()
 
 
 def _source_hash(row: dict[str, Any]) -> str:
@@ -259,6 +284,7 @@ def _source_status_review_tasks(source_statuses: list[dict[str, Any]]) -> list[d
                 "candidate_value": None,
                 "normalized_value": None,
                 "validation_findings": [message],
+                "source_metadata": _source_metadata(status),
                 "snapshot_path": status.get("snapshot_path"),
                 "source_status": status,
             }
@@ -329,28 +355,99 @@ def _source_drift_task(
     source_drift: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     calendar_group_key = str(source_report.get("calendar_group_key") or "unknown").strip()
+    source_document_id = _source_id(source_report)
+    source_fragment = f"-{_slug_fragment(source_document_id)}" if source_document_id else ""
     new_hash = str(source_report.get("new_hash") or "").strip()
+    source_drift_evidence = source_drift if isinstance(source_drift, dict) else {}
+    page_image_sha256 = (
+        source_drift_evidence.get("page_image_sha256")
+        or source_drift_evidence.get("canonical_image_sha256")
+    )
+    page_image_path = (
+        source_drift_evidence.get("page_image_path")
+        or source_drift_evidence.get("canonical_image_path")
+        or source_drift_evidence.get("canonical_image_storage_path")
+    )
+    field_crop = (
+        source_drift_evidence.get("field_crop")
+        or source_drift_evidence.get("crop_storage_path")
+        or source_drift_evidence.get("crop_path")
+    )
+    field_crop_sha256 = (
+        source_drift_evidence.get("field_crop_sha256")
+        or source_drift_evidence.get("crop_sha256")
+    )
     return {
-        "task_id": f"source-drift-{_slug_fragment(calendar_group_key)}-{task_suffix}",
+        "task_id": f"source-drift-{_slug_fragment(calendar_group_key)}{source_fragment}-{task_suffix}",
         "task_type": "source_changed",
         "field": field,
-        "source_document_id": None,
+        "source_document_id": source_document_id or None,
         "content_sha256": new_hash or None,
         "calendar_group_key": calendar_group_key or None,
         "candidate_type": "source_drift",
-        "page_number": source_drift.get("page_number") if isinstance(source_drift, dict) else None,
-        "page_image": None,
-        "field_crop": None,
-        "field_crop_sha256": None,
-        "field_bbox": source_drift.get("bbox_px") if isinstance(source_drift, dict) else None,
-        "primary_text": source_drift.get("text") if isinstance(source_drift, dict) else None,
+        "page_number": source_drift_evidence.get("page_number"),
+        "page_image": page_image_sha256,
+        "page_image_sha256": page_image_sha256,
+        "page_image_path": page_image_path,
+        "field_crop": field_crop,
+        "field_crop_sha256": field_crop_sha256,
+        "field_bbox": source_drift_evidence.get("bbox_px"),
+        "primary_text": source_drift_evidence.get("text"),
         "secondary_text": None,
         "candidate_value": candidate_value,
         "normalized_value": normalized_value,
         "validation_findings": [finding],
+        "source_metadata": _source_metadata(source_report),
         "source_drift": source_drift,
         "source_drift_report": source_report,
     }
+
+
+def _source_drift_blocker_context(source_report: dict[str, Any], blocker_name: str) -> dict[str, Any]:
+    context: dict[str, Any] = {"publish_blocker": blocker_name}
+    for key in (
+        "old_activity_count",
+        "new_activity_count",
+        "old_movie_count",
+        "new_movie_count",
+        "old_document_family",
+        "new_document_family",
+    ):
+        value = source_report.get(key)
+        if value is not None and value != "":
+            context[key] = value
+    if blocker_name == "activity_count_drift":
+        context["old_count"] = source_report.get("old_activity_count")
+        context["new_count"] = source_report.get("new_activity_count")
+    elif blocker_name == "movie_count_drift":
+        context["old_count"] = source_report.get("old_movie_count")
+        context["new_count"] = source_report.get("new_movie_count")
+    elif blocker_name == "recognized_family_changed":
+        context["old_family"] = source_report.get("old_document_family")
+        context["new_family"] = source_report.get("new_document_family")
+    elif blocker_name in {"source_hash_changed", "hash_changed"}:
+        context["old_hash"] = source_report.get("old_hash")
+        context["new_hash"] = source_report.get("new_hash")
+    return {key: value for key, value in context.items() if value is not None and value != ""}
+
+
+def _source_drift_blocker_normalized_value(blocker_context: dict[str, Any]) -> dict[str, Any]:
+    if "old_count" in blocker_context or "new_count" in blocker_context:
+        return {
+            "old_count": blocker_context.get("old_count"),
+            "new_count": blocker_context.get("new_count"),
+        }
+    if "old_family" in blocker_context or "new_family" in blocker_context:
+        return {
+            "old_family": blocker_context.get("old_family"),
+            "new_family": blocker_context.get("new_family"),
+        }
+    if "old_hash" in blocker_context or "new_hash" in blocker_context:
+        return {
+            "old_hash": blocker_context.get("old_hash"),
+            "new_hash": blocker_context.get("new_hash"),
+        }
+    return {"publish_blocker": blocker_context.get("publish_blocker")}
 
 
 def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> list[dict[str, Any]]:
@@ -383,7 +480,28 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
                         source_drift=change,
                     )
                 )
+        detailed_new_titles: set[str] = set()
+        for title_detail in source_report.get("new_title_details") or []:
+            if not isinstance(title_detail, dict):
+                continue
+            title = str(title_detail.get("title") or title_detail.get("canonical_slug") or "").strip()
+            if not title:
+                continue
+            detailed_new_titles.add(title)
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"new-title-{_slug_fragment(title)}",
+                    field="title",
+                    finding="source_changed:new_title",
+                    candidate_value=title,
+                    normalized_value=title,
+                    source_drift=title_detail,
+                )
+            )
         for title in source_report.get("new_titles") or []:
+            if title in detailed_new_titles:
+                continue
             tasks.append(
                 _source_drift_task(
                     source_report=source_report,
@@ -395,7 +513,28 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
                     source_drift={"title": title},
                 )
             )
+        detailed_removed_titles: set[str] = set()
+        for title_detail in source_report.get("removed_title_details") or []:
+            if not isinstance(title_detail, dict):
+                continue
+            title = str(title_detail.get("title") or title_detail.get("canonical_slug") or "").strip()
+            if not title:
+                continue
+            detailed_removed_titles.add(title)
+            tasks.append(
+                _source_drift_task(
+                    source_report=source_report,
+                    task_suffix=f"removed-title-{_slug_fragment(title)}",
+                    field="title",
+                    finding="source_changed:removed_title",
+                    candidate_value=None,
+                    normalized_value=None,
+                    source_drift=title_detail,
+                )
+            )
         for title in source_report.get("removed_titles") or []:
+            if title in detailed_removed_titles:
+                continue
             tasks.append(
                 _source_drift_task(
                     source_report=source_report,
@@ -439,6 +578,7 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
             )
         for blocker in source_report.get("publish_blockers") or []:
             blocker_name = str(blocker)
+            blocker_context = _source_drift_blocker_context(source_report, blocker_name)
             tasks.append(
                 _source_drift_task(
                     source_report=source_report,
@@ -446,7 +586,8 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
                     field=None,
                     finding=f"source_changed:{blocker_name}",
                     candidate_value=blocker_name,
-                    source_drift={"publish_blocker": blocker_name},
+                    normalized_value=_source_drift_blocker_normalized_value(blocker_context),
+                    source_drift=blocker_context,
                 )
             )
     return tasks
@@ -612,6 +753,11 @@ def build_review_tasks(
             )
             continue
         page_image_sha256 = source.get("page_image_sha256") or region_source.get("page_image_sha256")
+        page_image_path = (
+            source.get("page_image_path")
+            or region_source.get("page_image_path")
+            or _page_image_path(candidate, page_image_sha256)
+        )
         tasks.append(
             {
                 "task_id": str(candidate.get("candidate_id") or f"vision-v3-review-{index:04d}"),
@@ -624,7 +770,7 @@ def build_review_tasks(
                 "page_number": source.get("page_number"),
                 "page_image": page_image_sha256,
                 "page_image_sha256": page_image_sha256,
-                "page_image_path": source.get("page_image_path") or region_source.get("page_image_path"),
+                "page_image_path": page_image_path,
                 "region_crop": region_source.get("crop_storage_path") or region_source.get("crop_path"),
                 "region_crop_sha256": region_source.get("crop_sha256"),
                 "field_crop": source.get("crop_storage_path") or source.get("crop_path"),
@@ -653,9 +799,13 @@ def review_approval_is_current(
     current_content_sha256: str,
     current_page_image_sha256: str | None,
 ) -> bool:
+    if not current_content_sha256:
+        return False
     if approval.get("content_sha256") != current_content_sha256:
         return False
-    if current_page_image_sha256 and approval.get("page_image_sha256") != current_page_image_sha256:
+    if not current_page_image_sha256:
+        return False
+    if approval.get("page_image_sha256") != current_page_image_sha256:
         return False
     return True
 

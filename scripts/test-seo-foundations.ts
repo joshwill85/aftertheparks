@@ -131,6 +131,12 @@ async function main() {
     routes.every((entry) => Array.isArray(entry.images) && entry.images.length > 0),
     "all public sitemap entries should include an image sitemap hint"
   );
+  assert.ok(
+    routes.every((entry) =>
+      entry.images?.every((image) => !/&(?!amp;)/.test(image))
+    ),
+    "sitemap image hints should XML-escape query separators before Next serializes image:loc values"
+  );
   const calendarHubEntry = routes.find(
     (entry) => entry.url === "https://aftertheparks.com/disney-world-resort-activity-calendars"
   );

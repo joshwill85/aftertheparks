@@ -8,7 +8,7 @@ import { buildSocialMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = {
   title: "My Plan",
   description:
-    "Private After the Parks resort-day planning workspace for saved activities and shared trip ideas.",
+    "Save activities and build one easy resort-day plan.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/plan" },
   ...buildSocialMetadata({
@@ -32,19 +32,18 @@ export default async function PlanPage() {
     <>
       <Hero
         title="My Plan"
-        subtitle="Line up pool breaks, campfires, and movie nights into one easy rest day."
+        subtitle="Save activities and build one easy resort-day plan."
       />
       <section className="mb-8 grid gap-5 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:grid-cols-[minmax(0,1fr)_300px] md:items-center">
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-            Pocket map companion
+            Saved activities
           </p>
           <h2 className="font-display mt-2 text-2xl font-semibold">
-            Turn loose ideas into a low-stress route.
+            Build one easy resort-day plan.
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            Save the moments worth keeping, then use My Plan like a little resort
-            map for pool breaks, dinner gaps, campfires, and starlight wins.
+            Add your resort and trip dates. Then save movies, campfires, crafts, meals, pool breaks, and backups in one place.
           </p>
         </div>
         <BrandAsset

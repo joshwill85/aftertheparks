@@ -26,6 +26,7 @@ try:
     from regions import segment_major_regions
     from render_source_pages import stable_config_hash
     from source_manifest import edition_matches_quarter
+    from db import SupabaseClient
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .debug_overlays import build_debug_overlays
@@ -39,12 +40,14 @@ except ImportError:  # pragma: no cover - supports package-style imports
     from .regions import segment_major_regions
     from .render_source_pages import stable_config_hash
     from .source_manifest import edition_matches_quarter
+    from .db import SupabaseClient
 
 
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_PAGE_IMAGES_DIR = PROCESSED_DIR / "page_images"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_vision_snapshot_report.json"
 PIPELINE_VERSION = "vision_v3_001"
+ACTIVITY_LAYOUT_SNAPSHOTS_CONFLICT = "content_sha256,parser_version"
 PRIMARY_ENGINE = "paddleocr_ppstructurev3"
 SECONDARY_ENGINE = "rapidocr"
 DOCLING_ENGINE = "docling_snapshot"
@@ -605,6 +608,51 @@ def snapshot_output_path(snapshot: dict[str, Any], *, output_dir: Path = DEFAULT
     return output_dir / f"{source_sha256}.vision.json"
 
 
+def activity_layout_snapshot_row_from_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
+    if snapshot.get("snapshot_kind") != "vision_layout_v3":
+        raise ValueError("unsupported_snapshot_kind")
+    content_sha256 = str(snapshot.get("source_sha256") or "").strip()
+    if not content_sha256:
+        raise ValueError("missing_source_sha256")
+    parser_version = str(snapshot.get("pipeline_version") or PIPELINE_VERSION).strip()
+    source_pages = snapshot.get("source_pages") if isinstance(snapshot.get("source_pages"), list) else []
+    page_count = len(source_pages)
+    if page_count < 1:
+        raise ValueError("missing_source_pages")
+    return {
+        "source_document_id": snapshot.get("source_document_id"),
+        "content_sha256": content_sha256,
+        "parser_version": parser_version,
+        "snapshot_json": snapshot,
+        "page_count": page_count,
+    }
+
+
+def activity_layout_snapshot_rows_from_report(report: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for result in report.get("results") or []:
+        if not isinstance(result, dict):
+            continue
+        snapshot_path = result.get("snapshot_path")
+        if not snapshot_path:
+            continue
+        snapshot = json.loads(Path(str(snapshot_path)).read_text())
+        if isinstance(snapshot, dict):
+            rows.append(activity_layout_snapshot_row_from_snapshot(snapshot))
+    return rows
+
+
+def upsert_activity_layout_snapshots_from_report(db: Any, report: dict[str, Any]) -> dict[str, int]:
+    rows = activity_layout_snapshot_rows_from_report(report)
+    if rows:
+        db.upsert(
+            "activity_layout_snapshots",
+            rows,
+            on_conflict=ACTIVITY_LAYOUT_SNAPSHOTS_CONFLICT,
+        )
+    return {"activity_layout_snapshots": len(rows)}
+
+
 def _page_manifest_paths(page_images_dir: Path) -> list[Path]:
     if not page_images_dir.exists():
         return []
@@ -712,10 +760,17 @@ def main() -> None:
     parser.add_argument("--attach-regions", action="store_true")
     parser.add_argument("--debug-output-dir", type=Path, default=PROCESSED_DIR / "vision_debug")
     parser.add_argument("--no-debug-overlays", action="store_true")
+    parser.add_argument(
+        "--upsert-layout-snapshots",
+        action="store_true",
+        help="Upsert v3 snapshot envelopes into activity_layout_snapshots",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     if args.page_manifest:
+        if args.upsert_layout_snapshots:
+            parser.error("--upsert-layout-snapshots is only supported for batch snapshot generation")
         page_manifest = json.loads(args.page_manifest.read_text())
         snapshot = build_vision_snapshot(
             page_manifest=page_manifest,
@@ -742,6 +797,11 @@ def main() -> None:
         write_debug_overlays=not args.no_debug_overlays,
         debug_output_dir=args.debug_output_dir,
     )
+    if args.upsert_layout_snapshots:
+        report["activity_layout_snapshots_upsert"] = upsert_activity_layout_snapshots_from_report(
+            SupabaseClient(),
+            report,
+        )
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:

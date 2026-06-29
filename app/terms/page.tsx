@@ -28,23 +28,16 @@ export default function TermsPage() {
             Independent Guide
           </h2>
           <p>
-            After the Parks is an independent Walt Disney World resort planning
-            guide. We are not affiliated with, authorized by, endorsed by, or
-            sponsored by The Walt Disney Company or any of its affiliates.
+            After the Parks is independent and not affiliated with Disney. Disney names, resorts, and attractions belong to their respective owners.
           </p>
         </section>
 
         <section>
           <h2 className="font-display text-2xl font-semibold text-[var(--color-foreground)]">
-            Planning Information
+            Planning information
           </h2>
           <p>
-            We work to keep activity schedules, weather context, transportation
-            notes, pricing labels, reservation notes, and source caveats useful
-            and current. Resort operations can still change because of weather,
-            staffing, private events, refurbishments, capacity, seasonality, or
-            policy updates. Always confirm details with the official Disney
-            source, resort front desk, or venue before relying on a plan.
+            Activity times, prices, access, transportation, and availability can change. Confirm details with the official Disney source, resort front desk, or venue before relying on a plan.
           </p>
           <p>
             Our{" "}

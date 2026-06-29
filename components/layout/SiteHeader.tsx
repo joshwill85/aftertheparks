@@ -8,10 +8,11 @@ import { PlanNavLink } from "@/components/plan/PlanNavLink";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/weather", label: "Weather" },
-  { href: "/activities", label: "Explore" },
-  { href: "/calendar", label: "Plan Ahead" },
+  { href: "/activities", label: "Activities" },
   { href: "/resorts", label: "Resorts" },
+  { href: "/guides", label: "Guides" },
+  { href: "/weather", label: "Weather" },
+  { href: "/calendar", label: "Calendar" },
   { href: "/plan", label: "My Plan" },
 ];
 

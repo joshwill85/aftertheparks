@@ -199,7 +199,7 @@ def reviewed_records() -> list[dict[str, Any]]:
             page=2,
             category="fitness_wellness",
             location="Behind the Movie Screen",
-            schedule_text="Each Friday morning at 10:30 AM; arrive by 10:15 AM",
+            schedule_text="Each Friday morning at 10:30 AM. Arrive by 10:15 AM.",
             description="Complimentary beginner yoga class with an AdventHealth professional.",
             is_fee_based=False,
         ),

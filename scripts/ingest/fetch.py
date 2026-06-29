@@ -308,7 +308,7 @@ def fetch_source(
         local_path.parent.mkdir(parents=True, exist_ok=True)
         local_path.write_bytes(data)
         if db and upload_storage:
-            db.upload_storage(str(row["storage_path"]), data)
+            db.upload_storage(str(row["storage_path"]), data, content_type=str(row["mime_type"]))
 
         if not db:
             return FetchResult(source.calendar_group_key, "fetched", content_sha256=digest, message=str(row["storage_path"]))

@@ -10,7 +10,7 @@ export function AboutHero() {
         <h1 aria-label={heroContent.headline}>
           <span>I built</span>
           <span>After the Parks</span>
-          <span>because I needed it first.</span>
+          <span>to make Disney resort days easier.</span>
         </h1>
         <p>{heroContent.subhead}</p>
         <div className={styles.heroActions}>

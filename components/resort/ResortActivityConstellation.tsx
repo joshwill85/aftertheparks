@@ -70,7 +70,7 @@ export function ResortActivityConstellation({
       aria-labelledby="resort-constellation-heading"
     >
       <div className="resort-constellation__copy">
-        <p className="resort-constellation__eyebrow">Activity Constellation</p>
+        <p className="resort-constellation__eyebrow">Activity mix</p>
         <h2 id="resort-constellation-heading">
           The shape of {resortName}, before you read every card
         </h2>

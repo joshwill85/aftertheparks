@@ -155,7 +155,7 @@ export default async function SeasonalCalendarPage({
             </div>
             <div>
               <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-                Current rows
+                Current activities
               </dt>
               <dd className="font-semibold">{currentActivities.length}</dd>
             </div>

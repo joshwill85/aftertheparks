@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string | undefined {
   switch (action) {
     case "good_now":
-      return "Good to go";
+      return "Outdoor plans OK";
     case "go_earlier":
       return "Go earlier";
     case "choose_covered_backup":

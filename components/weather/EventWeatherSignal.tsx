@@ -7,7 +7,6 @@ import { weatherPageHref } from "@/lib/weather/links";
 import { WeatherIcon } from "@/components/weather/WeatherIcon";
 import { WeatherAtmosphereScene } from "@/components/weather/WeatherAtmosphereScene";
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
-import { NearTermRainLine } from "@/components/weather/NearTermRainLine";
 import { cn } from "@/lib/utils";
 
 type WeatherSignalState =
@@ -47,7 +46,7 @@ function detailText(guidance: WeatherForTimeSpan): string | undefined {
 function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string | undefined {
   switch (action) {
     case "good_now":
-      return "Good to go";
+      return "Outdoor plans OK";
     case "go_earlier":
       return "Go earlier";
     case "choose_covered_backup":
@@ -145,9 +144,8 @@ export function EventWeatherSignal({
         <WeatherIcon iconKey={guidance.iconKey} decorative />
       </span>
       <span className="event-weather-signal__copy">
-        <strong>{actionLabel ?? (guidance.nearTermRain?.answer !== "unknown" ? guidance.nearTermRain?.headline : guidance.headline)}</strong>
+        <strong>{actionLabel ?? guidance.headline}</strong>
         {detail && <span>{detail}</span>}
-        <NearTermRainLine signal={guidance.nearTermRain} compact />
         <WeatherFreshnessLine weather={guidance} />
       </span>
     </div>

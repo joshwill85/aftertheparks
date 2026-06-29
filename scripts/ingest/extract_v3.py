@@ -41,6 +41,8 @@ SOURCE_METADATA_FIELDS = (
     "currentness",
     "captured_at",
 )
+DEFAULT_PRIMARY_ENGINE = "paddleocr_ppstructurev3"
+DEFAULT_SECONDARY_ENGINE = "rapidocr"
 
 
 def _canonical_page_image_sha256s(snapshot: dict[str, Any]) -> list[str]:
@@ -117,6 +119,34 @@ def _token_for_field(tokens: list[dict[str, Any]], field_hint: str, engine: str)
     }
 
 
+def _configured_engine_name(ocr_config: dict[str, Any], role: str) -> str:
+    engine_config = ocr_config.get(role)
+    if isinstance(engine_config, dict):
+        return str(engine_config.get("engine") or "").strip()
+    if isinstance(engine_config, str):
+        return engine_config.strip()
+    return ""
+
+
+def _configured_engine_pair(snapshot: dict[str, Any]) -> tuple[str, str]:
+    config_sources: list[dict[str, Any]] = []
+    runtime_lineage = snapshot.get("runtime_lineage")
+    if isinstance(runtime_lineage, dict) and isinstance(runtime_lineage.get("config"), dict):
+        config_sources.append(runtime_lineage["config"])
+    if isinstance(snapshot.get("config"), dict):
+        config_sources.append(snapshot["config"])
+
+    for config in config_sources:
+        ocr_config = config.get("ocr")
+        if not isinstance(ocr_config, dict):
+            continue
+        primary = _configured_engine_name(ocr_config, "primary")
+        secondary = _configured_engine_name(ocr_config, "secondary")
+        if primary and secondary:
+            return primary, secondary
+    return DEFAULT_PRIMARY_ENGINE, DEFAULT_SECONDARY_ENGINE
+
+
 def _field_region(region: dict[str, Any], primary: dict[str, Any] | None, secondary: dict[str, Any] | None) -> dict[str, Any]:
     bbox = None
     if isinstance(primary, dict):
@@ -183,18 +213,19 @@ def _extracted_candidate(
     *,
     candidate_type: str,
 ) -> dict[str, Any] | None:
-    primary_title = _token_for_field(region_tokens, "title", "paddleocr_ppstructurev3")
-    secondary_title = _token_for_field(region_tokens, "title", "rapidocr")
-    primary_schedule = _token_for_field(region_tokens, "schedule", "paddleocr_ppstructurev3")
-    secondary_schedule = _token_for_field(region_tokens, "schedule", "rapidocr")
-    primary_day = _token_for_field(region_tokens, "day_banner", "paddleocr_ppstructurev3")
-    secondary_day = _token_for_field(region_tokens, "day_banner", "rapidocr")
-    primary_location = _token_for_field(region_tokens, "location", "paddleocr_ppstructurev3")
-    secondary_location = _token_for_field(region_tokens, "location", "rapidocr")
-    primary_movie_title = _token_for_field(region_tokens, "movie_title", "paddleocr_ppstructurev3")
-    secondary_movie_title = _token_for_field(region_tokens, "movie_title", "rapidocr")
-    primary_legend = _token_for_field(region_tokens, "fee_legend", "paddleocr_ppstructurev3")
-    secondary_legend = _token_for_field(region_tokens, "fee_legend", "rapidocr")
+    primary_engine, secondary_engine = _configured_engine_pair(snapshot)
+    primary_title = _token_for_field(region_tokens, "title", primary_engine)
+    secondary_title = _token_for_field(region_tokens, "title", secondary_engine)
+    primary_schedule = _token_for_field(region_tokens, "schedule", primary_engine)
+    secondary_schedule = _token_for_field(region_tokens, "schedule", secondary_engine)
+    primary_day = _token_for_field(region_tokens, "day_banner", primary_engine)
+    secondary_day = _token_for_field(region_tokens, "day_banner", secondary_engine)
+    primary_location = _token_for_field(region_tokens, "location", primary_engine)
+    secondary_location = _token_for_field(region_tokens, "location", secondary_engine)
+    primary_movie_title = _token_for_field(region_tokens, "movie_title", primary_engine)
+    secondary_movie_title = _token_for_field(region_tokens, "movie_title", secondary_engine)
+    primary_legend = _token_for_field(region_tokens, "fee_legend", primary_engine)
+    secondary_legend = _token_for_field(region_tokens, "fee_legend", secondary_engine)
     if not all([primary_title, secondary_title, primary_schedule, secondary_schedule, primary_location, secondary_location]):
         return None
     if candidate_type == "movie" and not all([primary_movie_title, secondary_movie_title]):
@@ -335,6 +366,11 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
     tokens = snapshot.get("tokens") if isinstance(snapshot.get("tokens"), list) else []
     canonical_page_image_sha256s = _canonical_page_image_sha256s(snapshot)
     document_family = str(snapshot.get("document_family") or "unknown_visual_schedule")
+    derived_source_links = (
+        snapshot.get("derived_source_links")
+        if isinstance(snapshot.get("derived_source_links"), list)
+        else []
+    )
     candidates: list[dict[str, Any]] = []
 
     for region in regions:
@@ -411,6 +447,7 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
                 "validation_findings": extracted_fields["validation_findings"],
                 "field_evidence": extracted_fields["field_evidence"],
                 "source_spans": extracted_fields["source_spans"],
+                "derived_source_links": derived_source_links,
             }
         )
         for field in SOURCE_METADATA_FIELDS:

@@ -102,8 +102,8 @@ export function buildDecisionSummary({
   return {
     primaryText:
       activities.length > 0
-        ? `${activities.length} source-backed options are ready to narrow.`
-        : "No source-backed options match this view yet.",
+        ? `${activities.length} verified options are ready to narrow.`
+        : "No verified options match this view yet.",
     trustText:
       verified > 0
         ? `${verified} verified rows; confirm times before heading out.`

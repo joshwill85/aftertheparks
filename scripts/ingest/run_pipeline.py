@@ -10,6 +10,9 @@ from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
 ROOT = SCRIPTS.parents[1]
+SOURCE_INVENTORY_PATH = "data/processed/source_inventory.json"
+SOURCE_OVERRIDES_PATH = "data/processed/resort_pdf_source_overrides.json"
+RESORT_PDF_DATE_AUDIT_PATH = "data/processed/resort_pdf_date_audit.json"
 
 
 def run(script: str, *args: str) -> None:
@@ -52,10 +55,28 @@ def _with_quarter(step: tuple[str, ...], quarter: str | None) -> tuple[str, ...]
 def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> list[tuple[str, ...]]:
     if not local_only and not quarter:
         raise ValueError("vision_v3_quarter_required")
+    render_step = (
+        "render_source_pages.py",
+        "--source-inventory",
+        SOURCE_INVENTORY_PATH,
+        *(() if local_only else ("--upsert-source-document-pages",)),
+    )
+    snapshot_step = (
+        "vision_snapshot.py",
+        "--attach-regions",
+        *(() if local_only else ("--upsert-layout-snapshots",)),
+    )
     steps: list[tuple[str, ...]] = [
         ("evaluate_activity_extraction.py",),
-        _with_quarter(("render_source_pages.py",), quarter),
-        _with_quarter(("vision_snapshot.py", "--attach-regions"), quarter),
+        (
+            "build_source_inventory.py",
+            "--source-overrides",
+            SOURCE_OVERRIDES_PATH,
+            "--resort-pdf-date-audit",
+            RESORT_PDF_DATE_AUDIT_PATH,
+        ),
+        _with_quarter(render_step, quarter),
+        _with_quarter(snapshot_step, quarter),
         _with_quarter(("extract_v3.py",), quarter),
         _with_quarter(("validate_v3.py",), quarter),
         _with_quarter(("source_status_v3.py",), quarter),
@@ -76,6 +97,10 @@ def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> l
             "data/processed/activity_gold_v2_preview.json",
             "--v3",
             "data/processed/activity_gold_v3_preview.json",
+            "--expected-sources",
+            "data/processed/source_inventory.json",
+            "--source-statuses",
+            "data/processed/eval/v3_source_statuses.json",
             "--review-tasks",
             "data/processed/review_queue/vision_v3_review_queue.json",
         ),

@@ -12,7 +12,6 @@ import {
   rankResortsForComparisonPage,
 } from "@/lib/seo/comparisonPages";
 import { SEO_MISTAKE_LOG, type SeoMistake } from "@/lib/seo/fit";
-import { buildSeoGuideDossier } from "@/lib/seo/guideDossiers";
 import {
   buildBreadcrumbJsonLd,
   buildFaqPageJsonLd,
@@ -166,7 +165,7 @@ function ComparisonPlanningContext({
       <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Who this is best for</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          This comparison is best for guests whose decision matches this filter:
+          Use this page if you want a resort that matches this planning need:
           {" "}{page.decisionFilter}
         </p>
         <Link href={page.primaryAction.href} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
@@ -176,7 +175,7 @@ function ComparisonPlanningContext({
       <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Free vs paid notes</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          Among the current matching rows, {freeCount} are marked free, {paidCount}
+          Current activity snapshot: {freeCount} are marked free, {paidCount}
           {" "}show a fee signal, and {unknownCount} need price confirmation. Free
           activity status does not guarantee unrestricted resort access.
         </p>
@@ -185,8 +184,8 @@ function ComparisonPlanningContext({
         <h2 className="font-display text-2xl font-semibold">Last verified data</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
           Last verified: {latestVerifiedForComparison(activities)}. This ranking
-          currently uses {activities.length} matching rows across {rankedResortCount}
-          {" "}ranked resorts, then applies the page freshness rule below.
+          uses {activities.length} current activities across {rankedResortCount}
+          {" "}resorts, then applies the page freshness rule below.
         </p>
       </article>
     </section>
@@ -483,7 +482,7 @@ export async function generateMetadata({
       type: "article",
       imageEyebrow: guide ? "Planning guide" : "Resort comparison",
       imageSummary:
-        "Research-backed planning guidance with live activity links, source notes, transportation caveats, and bad-fit exclusions.",
+        "Practical planning guidance with current activity links, source notes, transportation caveats, and clear exclusions.",
     }),
   };
 }
@@ -585,13 +584,13 @@ export default async function SeoGuidePage({
               </div>
               <div>
                 <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-                  Current rows
+                  Current activities
                 </dt>
                 <dd className="font-semibold">{activities.length}</dd>
               </div>
               <div>
                 <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-                  Ranked resorts
+                  Resorts with enough data
                 </dt>
                 <dd className="font-semibold">{rankedResorts.length}</dd>
               </div>
@@ -636,14 +635,19 @@ export default async function SeoGuidePage({
                     <span>{resort.activityCount} matching</span>
                     <span>{resort.freeCount} free</span>
                     <span>{resort.eveningCount} evening</span>
-                    <span>Score {resort.score}</span>
                   </div>
                 </article>
               ))}
               {shownResorts.length === 0 && (
-                <p className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm text-[var(--color-muted)]">
-                  No resorts have enough current source-backed data for this comparison right now.
-                </p>
+                <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm text-[var(--color-muted)]">
+                  <h3 className="font-display text-xl font-semibold text-[var(--brand-ink)]">
+                    We do not have enough current data to rank this yet.
+                  </h3>
+                  <p className="mt-2 leading-relaxed">
+                    We do not want to guess. Start with the current activity pages below,
+                    then confirm the resort schedule before you go.
+                  </p>
+                </div>
               )}
             </div>
           </section>
@@ -712,7 +716,6 @@ export default async function SeoGuidePage({
     guide.caveats.some((caveat) => caveat.toLowerCase().includes("disney springs"));
   const mistakes = mistakesForPage(guide);
   const faqItems = buildGuideFaqItems(guide, showDisneySpringsCaveat);
-  const dossier = buildSeoGuideDossier(guide);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const jsonLd = stringifyJsonLd([
     buildBreadcrumbJsonLd(baseUrl, [
@@ -757,7 +760,7 @@ export default async function SeoGuidePage({
         />
 
         <section>
-          <h2 className="font-display text-2xl font-semibold">Use this page to decide</h2>
+          <h2 className="font-display text-2xl font-semibold">Start here</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {guide.sections.map((section) => (
               <div
@@ -766,8 +769,8 @@ export default async function SeoGuidePage({
               >
                 <h3 className="font-display text-xl font-semibold">{section}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-                  Use live resort and activity data to evaluate this part of the
-                  plan before committing time, transportation, or money.
+                  Check current times, cost, weather, access, and transportation before
+                  building this part of the day around one activity.
                 </p>
               </div>
             ))}
@@ -808,9 +811,8 @@ export default async function SeoGuidePage({
             </Link>
           </div>
           <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
-            This guide should not dead-end as an article. Use the live pages to
-            filter what is current, nearby, weather-appropriate, and worth doing
-            today.
+            Use these pages to check what is current, nearby, weather-appropriate,
+            and worth doing today.
           </p>
         </section>
 
@@ -867,64 +869,6 @@ export default async function SeoGuidePage({
         <MistakesToAvoid mistakes={mistakes} />
 
         <SeoFaq title="FAQ" items={faqItems} />
-
-        <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Research dossier</h2>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            Every guide needs proof that it solves a real planning problem with
-            current data, official-source discipline, and route/access caveats.
-            Would this page still help if search engines sent zero traffic? The
-            anti-thin-content checks below should make the answer visible.
-          </p>
-          <div className="mt-5 grid gap-4 md:grid-cols-2">
-            {[
-              ["Official-source facts", dossier.officialSourceFacts],
-              ["After the Parks data facts", dossier.afterTheParksDataFacts],
-              ["Community sentiment use", dossier.communitySentimentUse],
-              ["Competitor gap analysis", dossier.competitorGapAnalysis],
-              ["Transportation validation", dossier.transportationValidation],
-              ["Bad-fit exclusions", dossier.badFitExclusions],
-              ["Deep-link plan", dossier.deepLinkPlan],
-              ["Editorial review", dossier.editorialReview],
-              ["What changed in this update", dossier.updateNotes],
-              ["Anti-thin-content checks", dossier.antiThinContentChecks],
-            ].map(([title, items]) => (
-              <div
-                key={title as string}
-                className="rounded-xl border border-[var(--color-card-border)] p-4"
-              >
-                <h3 className="font-display text-lg font-semibold">
-                  {title as string}
-                </h3>
-                <ul className="mt-2 space-y-2 text-sm leading-relaxed text-[var(--color-muted)]">
-                  {(items as string[]).slice(0, 3).map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-            <div className="rounded-xl border border-[var(--color-card-border)] p-4 md:col-span-2">
-              <h3 className="font-display text-lg font-semibold">
-                Official source links
-              </h3>
-              <ul className="mt-2 space-y-3 text-sm leading-relaxed text-[var(--color-muted)]">
-                {dossier.officialSourceLinks.map((source) => (
-                  <li key={source.href}>
-                    <a
-                      href={source.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-bold text-[var(--accent)] hover:underline"
-                    >
-                      {source.label}
-                    </a>
-                    <span> - {source.purpose}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
 
         <section className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <h2 className="font-display text-2xl font-semibold">Sources and update notes</h2>

@@ -82,7 +82,16 @@ assert.match(todayClient, /Covered Options/);
 
 const eventSignal = readFileSync("components/weather/EventWeatherSignal.tsx", "utf8");
 assert.match(eventSignal, /WeatherFreshnessLine/);
-assert.match(eventSignal, /nearTermRain/);
+assert.doesNotMatch(
+  eventSignal,
+  /nearTermRain/,
+  "Inline event-card weather should not include near-term rain copy or fallbacks."
+);
+assert.doesNotMatch(
+  eventSignal,
+  /NearTermRainLine/,
+  "Inline event-card weather should stay compact and avoid low-value near-term rain copy."
+);
 assert.match(eventSignal, /weatherPageHref\(guidance\.locationKey\)/);
 assert.match(eventSignal, /event-weather-signal__icon-link/);
 assert.match(eventSignal, /window\.location\.assign\(weatherHref\)/);
@@ -128,13 +137,30 @@ for (const token of [
 for (const token of [
   "--weather-card-primary-text",
   "--weather-card-secondary-text",
+  "--weather-card-light-text",
+  "--weather-card-light-muted-text",
 ]) {
   assert.match(tokens, new RegExp(token), `${token} missing`);
 }
 assert.match(
+  tokens,
+  /--weather-card-light-text:\s*#fff;/,
+  "Inline illustrated weather cards should use maximum-luminance white for primary text."
+);
+assert.match(
+  tokens,
+  /--weather-card-light-muted-text:\s*rgba\(255,\s*255,\s*255,\s*0\.94\);/,
+  "Inline illustrated weather cards should keep secondary text close to white for small-copy contrast."
+);
+assert.match(
   polish,
-  /\.weather-icon-button\s*\{[\s\S]*color:\s*var\(--weather-card-primary-text\)/,
-  "Compact weather cards should use deep ink for primary text over illustrated weather art."
+  /\.event-weather-signal\s*\{[\s\S]*color:\s*var\(--weather-card-light-text\)/,
+  "Inline event-card weather should use light text over illustrated weather art."
+);
+assert.match(
+  polish,
+  /\.event-weather-signal::before\s*\{[\s\S]*rgba\(4,\s*12,\s*22,\s*0\.98\)[\s\S]*rgba\(4,\s*12,\s*22,\s*0\.9\)/,
+  "Inline event-card weather should use a strong dark scrim behind text for contrast."
 );
 assert.match(
   polish,
@@ -153,13 +179,13 @@ assert.match(
 );
 assert.match(
   polish,
-  /\.weather-icon-button__details span,\n\.event-weather-signal__copy > span\s*\{[\s\S]*color:\s*var\(--weather-card-secondary-text\)/,
-  "Compact weather card metric text should use a darker secondary slate, not low-contrast muted gray."
+  /\.event-weather-signal__copy > span\s*\{[\s\S]*color:\s*var\(--weather-card-light-muted-text\)/,
+  "Inline event-card weather metric text should use light secondary text over the scrim."
 );
 assert.match(
   polish,
-  /\.event-weather-signal \.weather-freshness-line,\n\.weather-icon-button \.weather-freshness-line\s*\{[\s\S]*color:\s*var\(--weather-card-secondary-text\)/,
-  "Freshness copy inside illustrated weather cards should stay readable over the artwork."
+  /\.event-weather-signal \.weather-freshness-line\s*\{[\s\S]*color:\s*var\(--weather-card-light-muted-text\)/,
+  "Freshness copy inside inline illustrated weather cards should stay readable over the artwork."
 );
 
 const stormMode = readFileSync("components/weather/StormModeBanner.tsx", "utf8");

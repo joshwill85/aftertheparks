@@ -502,7 +502,7 @@ export function CalendarClient({
           }
         />
         <InsightCard
-          eyebrow="Best no-cost day"
+          eyebrow="Best free day"
           title={
             bestFreeDate
               ? formatInsightDate(bestFreeDate.date, todayKey)

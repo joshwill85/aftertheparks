@@ -23,7 +23,7 @@ export const dynamic = "force-dynamic";
 const DEFAULT_ACTIVITY_METADATA = {
   title: "Walt Disney World Resort Activities",
   description:
-    "Browse current Walt Disney World resort activities by time, resort, activity type, cost, weather fit, and no-park-day planning intent.",
+    "Browse current Disney resort activities by resort, time, category, cost, and weather fit.",
   canonical: "/activities",
 };
 

@@ -46,20 +46,33 @@ function buildResortPersonality({
   }
 
   if (resort.offeringCount >= 10) {
-    signals.push("Resort-day ready");
+    signals.push("Strong no-park-day option");
   } else if (resort.activityCount >= 6) {
-    signals.push("Good schedule depth");
+    signals.push("Many current listings");
   }
 
   if (resort.category === "campground") {
-    signals.push("Campfire energy");
+    signals.push("Campfire-friendly");
   } else if (resort.category === "deluxe" || resort.category === "deluxe_villa") {
-    signals.push("Worth lingering");
+    signals.push("Good for a resort day");
   } else if (resort.category === "value") {
-    signals.push("Easy wins");
+    signals.push("Good for quick plans");
   }
 
   return signals.slice(0, 3);
+}
+
+function bestForLine(resort: ResortSummary): string {
+  if (resort.category === "campground") {
+    return "Best for: campfires, relaxed resort time, and low-key outdoor plans.";
+  }
+  if (resort.category === "deluxe" || resort.category === "deluxe_villa") {
+    return "Best for: dining, easy resort hopping, and slower resort days.";
+  }
+  if (resort.category === "value") {
+    return "Best for: quick plans, family activities, and easy evening options.";
+  }
+  return "Best for: pool time, simple activities, and flexible resort days.";
 }
 
 interface ResortCardProps {
@@ -143,6 +156,7 @@ export function ResortCard({
 
           <h3 className="resort-card__title">{resort.name}</h3>
           <p className="resort-card__tagline">{tagline}</p>
+          <p className="resort-card__hint">{bestForLine(resort)}</p>
 
           {personality.length > 0 && (
             <div className="resort-card__personality" aria-label="Resort personality">

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 
 const ACTIONS = [
-  { label: "Browse tonight", href: "/tonight", variant: "primary" as const },
-  { label: "Explore activities", href: "/activities", variant: "secondary" as const },
+  { label: "See tonight", href: "/tonight", variant: "primary" as const },
+  { label: "Browse activities", href: "/activities", variant: "secondary" as const },
   { label: "Choose my resort", href: "/resorts", variant: "secondary" as const },
 ];
 
@@ -18,11 +18,10 @@ export function PlanEmptyState() {
         Rest Day
       </div>
       <h2 className="font-display mt-6 text-2xl font-semibold md:text-3xl">
-        Your rest day is waiting.
+        No saved activities yet.
       </h2>
       <p className="mx-auto mt-4 max-w-md text-[var(--color-muted)]">
-        Save a pool break, a craft, a campfire, or a movie under the stars and
-        build an easy day plan.
+        {"Start with tonight's options, all activities, or your resort page."}
       </p>
       <div className="empty-actions mt-8 flex flex-wrap justify-center gap-3">
         {ACTIONS.map((action) =>

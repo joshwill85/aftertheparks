@@ -161,7 +161,8 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
       "Last updated",
       "Mistakes to avoid",
       "Planning quality checks",
-      "Research dossier",
+      "Start here",
+      "Best next clicks",
     ],
     requiredJsonLd: [
       {
@@ -194,7 +195,8 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
       "Last updated",
       "Mistakes to avoid",
       "Planning quality checks",
-      "Research dossier",
+      "Start here",
+      "Best next clicks",
     ],
     requiredJsonLd: [
       {
@@ -227,7 +229,8 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
       "Last updated",
       "Mistakes to avoid",
       "Planning quality checks",
-      "Research dossier",
+      "Start here",
+      "Best next clicks",
     ],
     requiredJsonLd: [
       {
@@ -272,7 +275,7 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
   {
     path: "/llms-full.txt",
     kind: "text",
-    requiredText: ["Research dossier", "Competitor gap analysis"],
+    requiredText: ["Planning guide creation", "real guest decisions in plain language"],
   },
   {
     path: "/robots.txt",

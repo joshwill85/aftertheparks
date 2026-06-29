@@ -4,6 +4,7 @@ import type { PlanItem } from "@/lib/types/occurrence";
 import {
   connectionOptionsForPair,
   transportOptionDetail,
+  transportOptionInstructions,
   transportOptionLabel,
   type PlanTransportConnectionMap,
   type PlanTransportConnectionOption,
@@ -21,6 +22,8 @@ export interface PlanDaybookConnector {
   severity: "good" | "watch" | "risk";
   label: string;
   detail: string;
+  detailLines?: string[];
+  disclosure?: string;
   iconKey: IconKey;
   ariaLabel: string;
   transportOptions?: PlanTransportConnectionOption[];
@@ -117,11 +120,14 @@ function connectorBetween(
 
     if (primary) {
       const optionLabel = transportOptionLabel(primary);
+      const instructions = transportOptionInstructions(primary);
       return {
         tone: "travel",
         severity: gapMinutes < 30 ? "risk" : "watch",
         label: `${formatMinutes(gapMinutes)} gap · ${optionLabel}`,
         detail: transportOptionDetail(primary),
+        detailLines: instructions.lines,
+        disclosure: instructions.disclosure,
         iconKey: "nearby_area",
         ariaLabel: `${formatMinutes(gapMinutes)} between ${previous.item.title} and ${
           current.item.title

@@ -255,7 +255,7 @@ function ResortPlanningSnapshot({
     <section className="mb-10">
       <ResortSectionHeader
         title="Resort planning snapshot"
-        description="Crawlable summaries for the main planning questions guests ask before choosing a resort activity."
+        description="Helpful next pages for today, tonight, free activities, rainy-day backups, and nearby resort plans."
       />
       <div className="grid gap-4 lg:grid-cols-2">
         <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
@@ -754,7 +754,7 @@ export default async function ResortDetailPage({
       <section id="rainy-day-options" className="mb-10 scroll-mt-24">
         <ResortSectionHeader
           title="Weather near this resort area"
-          description="Use this as a planning posture: what works in rain, heat, and storm-sensitive windows before you commit to a resort day."
+          description="Use this to choose what works in rain, heat, and storm-sensitive windows before you commit to a resort day."
         />
         <WeatherFreshnessLine
           weather={resortWeatherGuidance}

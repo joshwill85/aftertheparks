@@ -34,13 +34,11 @@ interface SearchClientProps {
 
 const DEFAULT_SUGGESTIONS = [
   "campfire tonight",
+  "Polynesian movie",
   "pool games",
-  "polynesian",
-  "movie",
-  "crafts kids",
-  "arcade games",
-  "contemporary",
-  "yoga",
+  "arcade",
+  "rainy day",
+  "free activities",
 ];
 
 export function SearchClient({
@@ -235,11 +233,10 @@ export function SearchClient({
     <div className="search-shell">
       <form onSubmit={handleSearch} className="search-form" role="search">
         <label htmlFor="global-search-input" className="search-form__label">
-          Search everything
+          What are you looking for?
         </label>
         <p className="search-form__hint">
-          Activities, resorts, movies, guides, and categories — ranked by what
-          matches best.
+          Try a resort, activity type, movie title, category, or time of day.
         </p>
         <div className="search-form__row">
           <div className="search-form__input-wrap">
@@ -253,7 +250,7 @@ export function SearchClient({
               onKeyDown={handleKeyDown}
               onFocus={() => setPreviewOpen(true)}
               onBlur={() => window.setTimeout(() => setPreviewOpen(false), 160)}
-              placeholder='Try "campfire", "Polynesian", or "pool games"'
+              placeholder="campfire tonight, Polynesian movie, pool games, arcade, rainy day, free activities"
               className="form-control search-form__input"
               autoComplete="off"
               aria-autocomplete="list"
@@ -336,8 +333,8 @@ export function SearchClient({
         <div className="search-empty-intro">
           <BrandAsset asset="guide-companion" className="brand-asset--empty" />
           <p>
-            Ask like a concierge — campfires near your resort, pool games,
-            tonight&apos;s movies, or arcade games.
+            Search by what you need, such as free activities tonight, rainy day
+            at BoardWalk, or campfire near Magic Kingdom resorts.
           </p>
         </div>
       )}

@@ -67,11 +67,10 @@ export function RestDayBuilder({ resorts }: RestDayBuilderProps) {
   return (
     <div className="rest-day-builder">
       <h2 id="rest-day-heading" className="rest-day-builder__title font-display">
-        Build a low-stress rest day
+        Build an easy resort day
       </h2>
       <p className="rest-day-builder__copy">
-        Pick your resort, who&apos;s along, and the vibe — we&apos;ll stack a gentle
-        afternoon into your plan.
+        Pick your resort, your group, and your pace. Then choose a few activities you can actually fit into the day.
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">

@@ -568,7 +568,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
     ],
     researchSources: GUIDE_RESEARCH_SOURCES,
     exclusionRules: [
-      "Do not use Disney Springs as a free way to get to Disney resort hotels; current reporting says a resort stay or confirmed dining/experience reservation is required for Disney Springs resort buses and boats.",
+      "Do not use Disney Springs as a free resort-transfer hub. Resort transportation from Disney Springs may require a Disney Resort stay or a confirmed dining or experience reservation.",
       "Exclude resort visits that cannot be supported by a stay, reservation, rideshare, permitted direct route, or current official access guidance.",
     ],
     deepLinks: [
@@ -643,8 +643,8 @@ export const PRIORITY_ACTIVITY_GUIDES: SeoActivityDefinition[] = [
     slug: "arcades",
     title: "Arcades",
     description:
-      "Indoor or indoor-adjacent resort arcade options that can work well as rainy-day or heat-break backups.",
-    bestFor: "Rainy days, teens, kids, and quick indoor breaks.",
+      "Current arcade options across Disney resorts, with locations, cost notes, and source freshness.",
+    bestFor: "Rain breaks, arrival day, rest days, and kids who need an indoor activity.",
     currentCheckHref: "/activities?category=arcade",
     caveats: [
       "Arcade hours and payment systems can vary by resort.",

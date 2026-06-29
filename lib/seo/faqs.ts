@@ -25,12 +25,12 @@ function priceAnswer(activity: ActivityOccurrence): string {
 
 function scheduleAnswer(activity: ActivityOccurrence, upcomingCount: number): string {
   if (upcomingCount > 0) {
-    return `After the Parks currently has ${upcomingCount} upcoming source-backed listing${upcomingCount === 1 ? "" : "s"} for ${activity.title}. Times can change, so confirm the latest resort recreation source before heading out.`;
+    return `After the Parks currently has ${upcomingCount} upcoming verified listing${upcomingCount === 1 ? "" : "s"} for ${activity.title}. Times can change, so confirm the latest resort recreation source before heading out.`;
   }
   if (activity.scheduleText) {
     return `${activity.title} has schedule text in the current data, but day-of timing should still be confirmed with the resort before you go.`;
   }
-  return `${activity.title} is best treated as an activity guide until a current schedule row is available. Use today and tonight views for source-backed timing.`;
+  return `${activity.title} is best treated as an activity guide until a current schedule row is available. Use today and tonight views for current timing.`;
 }
 
 function weatherAnswer(activity: ActivityOccurrence): string | undefined {
@@ -97,7 +97,7 @@ export function buildResortFaqItems(
   return [
     {
       question: `What activities are currently tracked at ${resort.name}?`,
-      answer: `After the Parks currently tracks ${counts.scheduledCount} scheduled activit${counts.scheduledCount === 1 ? "y" : "ies"} and ${counts.offeringCount} standing offering${counts.offeringCount === 1 ? "" : "s"} for ${resort.name}. Use the resort page, today view, and tonight view for the current source-backed list.`,
+      answer: `After the Parks currently tracks ${counts.scheduledCount} scheduled activit${counts.scheduledCount === 1 ? "y" : "ies"} and ${counts.offeringCount} standing offering${counts.offeringCount === 1 ? "" : "s"} for ${resort.name}. Use the resort page, today view, and tonight view for the current verified list.`,
     },
     {
       question: `What can I do at ${resort.name} today or tonight?`,
@@ -105,11 +105,11 @@ export function buildResortFaqItems(
     },
     {
       question: `Are ${resort.name} activities official Disney schedules?`,
-      answer: `After the Parks is independent and uses source-backed data to make resort planning easier. This page currently references ${counts.sourceCount} official or source-backed URL${counts.sourceCount === 1 ? "" : "s"}, but Disney remains the source to confirm final times, access, cost, and cancellations.`,
+      answer: `After the Parks is independent and uses verified source data to make resort planning easier. This page currently references ${counts.sourceCount} official or verified URL${counts.sourceCount === 1 ? "" : "s"}, but Disney remains the source to confirm final times, access, cost, and cancellations.`,
     },
     {
       question: `Can non-resort guests use activities at ${resort.name}?`,
-      answer: `Access can depend on the activity, resort operations, parking, dining reservations, capacity, and guest eligibility. Do not use Disney Springs as a free way to reach resort hotels; use a resort stay, confirmed dining/experience reservation, rideshare, or another currently allowed direct route.`,
+      answer: `Access can depend on the activity, resort operations, parking, dining reservations, capacity, and guest eligibility. Do not use Disney Springs as a free resort-transfer hub; use a resort stay, confirmed dining/experience reservation, rideshare, or another currently allowed direct route.`,
     },
   ];
 }

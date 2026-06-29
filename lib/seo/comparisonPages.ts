@@ -46,15 +46,15 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     slug: "best-disney-resorts-for-activities-today",
     title: "Best Disney Resorts for Activities Today",
     description:
-      "Compare Walt Disney World resorts by current activity depth, today/tonight options, free activities, and source-backed planning usefulness.",
+      "Compare Walt Disney World resorts by current activity depth, today/tonight options, free activities, and verified planning usefulness.",
     userPromise:
-      "The best Disney resort for activities today is the one with enough current, nearby, source-backed options to justify staying put or making a simple move.",
+      "The best Disney resort for activities today is the one with enough current, nearby, verified options to justify staying put or making a simple move.",
     primaryAction: { label: "See today's activities", href: "/today" },
     deepLinks: ["/today", "/tonight", "/resorts", "/activities"],
     decisionFilter:
       "Rank resorts by current activity count, variety, free options, evening options, and how easy the plan is to use today.",
     exclusionRules: [
-      "Exclude resorts with no current source-backed activity rows from top-pick status.",
+      "Exclude resorts with no current verified activity data from top-pick status.",
       "Do not promote access-sensitive resort hopping when the guest has no resort stay or confirmed reservation.",
     ],
     skipIf: [
@@ -130,7 +130,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     description:
       "Compare Disney resorts by current free activity depth, evening options, no-ticket usefulness, and access-sensitive caveats.",
     userPromise:
-      "The best resort for free activities has source-backed free options that are current, easy to confirm, and realistic for the guest's access situation.",
+      "The best resort for free activities has verified free options that are current, easy to confirm, and realistic for the guest's access situation.",
     primaryAction: { label: "Filter free activities", href: "/activities?free=true" },
     deepLinks: ["/activities?free=true", "/today", "/tonight", "/guides/free-disney-resort-activities"],
     decisionFilter:
@@ -353,7 +353,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
       "Rank resorts by no-admission activity depth, access clarity, free/low-cost options, and transportation plans that do not depend on restricted workarounds.",
     exclusionRules: [
       "Exclude in-park restaurants, attractions, tours, and events unless clearly marked as requiring admission.",
-      "Do not use Disney Springs as a free way to reach resort hotels.",
+      "Do not use Disney Springs as a free resort-transfer hub.",
     ],
     skipIf: [
       "Your plan depends on entering a theme park.",

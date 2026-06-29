@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <>
       <Hero
         title="Privacy Policy"
-        subtitle="How After the Parks handles the information you share with us."
+        subtitle="What we collect, why we collect it, and how we use it."
       />
 
       <article className="prose max-w-none space-y-6 text-[var(--color-muted)]">
@@ -36,8 +36,7 @@ export default function PrivacyPage() {
             </li>
             <li>
               Optional email interest forms: email address, marketing consent
-              choice, consent version, and form source. The stored email value
-              may be hashed where the product flow supports it.
+              choice, consent version, and form source. We may store a protected version of your email instead of the email itself when the feature supports it.
             </li>
             <li>
               Planning features: saved activity details, plan title, notes,

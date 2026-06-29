@@ -43,7 +43,7 @@ export function SiteFooter() {
               Guides
             </Link>
             <Link href="/calendar" className="hover:text-[var(--lagoon)]">
-              Plan Ahead
+              Calendar
             </Link>
             <Link
               href="/source-and-accuracy-policy"
@@ -54,9 +54,7 @@ export function SiteFooter() {
           </div>
         </div>
         <p className="max-w-3xl">
-          After the Parks is an independent planning guide and is not affiliated
-          with Disney. Always confirm schedules with the official resort source
-          before heading out.
+          Independent planning guide. Not affiliated with Disney. Confirm schedules, access, transportation, and pricing with the official source before you go.
         </p>
       </div>
     </footer>

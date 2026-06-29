@@ -57,6 +57,23 @@ def _validate_approved_fields(approved_fields: dict[str, Any]) -> None:
             raise ValueError(f"missing_approved_field_normalized_value:{field_name}")
 
 
+def _validate_approved_fields_match_task(decision_or_task: dict[str, Any], approved_fields: dict[str, Any]) -> None:
+    original_task = (
+        decision_or_task.get("original_task")
+        if isinstance(decision_or_task.get("original_task"), dict)
+        else decision_or_task
+    )
+    if not isinstance(original_task, dict):
+        return
+    task_field = str(original_task.get("field") or "").strip()
+    if task_field in APPROVABLE_FIELDS and set(approved_fields) != {task_field}:
+        raise ValueError(f"approved_fields_do_not_match_task_field:{task_field}")
+
+
+def _task_page_image_sha256(task: dict[str, Any]) -> Any:
+    return task.get("page_image_sha256") or task.get("page_image")
+
+
 def _is_non_field_review_approval(decision_or_task: dict[str, Any]) -> bool:
     original_task = (
         decision_or_task.get("original_task")
@@ -107,6 +124,7 @@ def validate_review_decision(decision: dict[str, Any]) -> None:
         _require_text(decision.get("field_crop"), "field_crop")
         _require_text(decision.get("field_crop_sha256"), "field_crop_sha256")
         _validate_approved_fields(approved_fields)
+        _validate_approved_fields_match_task(decision, approved_fields)
 
 
 def build_review_decision(
@@ -125,7 +143,7 @@ def build_review_decision(
         if not approved_fields and not non_field_approval:
             raise ValueError("missing_approved_fields")
         if not non_field_approval:
-            _require_text(task.get("page_image"), "page_image_sha256")
+            _require_text(_task_page_image_sha256(task), "page_image_sha256")
             _require_text(task.get("field_crop"), "field_crop")
             _require_text(task.get("field_crop_sha256"), "field_crop_sha256")
         _validate_approved_fields(approved_fields or {})
@@ -140,7 +158,7 @@ def build_review_decision(
         "calendar_group_key": candidate.get("calendar_group_key") or task.get("calendar_group_key"),
         "source_document_id": task.get("source_document_id"),
         "content_sha256": _require_text(task.get("content_sha256"), "content_sha256"),
-        "page_image_sha256": task.get("page_image"),
+        "page_image_sha256": _task_page_image_sha256(task),
         "field_crop": task.get("field_crop"),
         "field_crop_sha256": task.get("field_crop_sha256"),
         "reviewer": _require_text(reviewer, "reviewer"),
@@ -192,6 +210,9 @@ def review_decision_creates_parser_rule_update_request(decision: dict[str, Any])
         "field_crop_sha256": decision.get("field_crop_sha256"),
         "validation_findings": original_task.get("validation_findings") or [],
         "existing_gold_comparison": original_task.get("existing_gold_comparison"),
+        "snapshot_path": original_task.get("snapshot_path"),
+        "source_metadata": original_task.get("source_metadata"),
+        "source_status": original_task.get("source_status"),
         "decision": decision.get("decision"),
         "approved_fields": decision.get("approved_fields") or {},
         "reviewer": decision.get("reviewer"),
@@ -290,6 +311,19 @@ def _is_source_drift_review_decision(decision: dict[str, Any]) -> bool:
         and original_task.get("task_type") == "source_changed"
         and isinstance(original_task.get("source_drift"), dict)
     )
+
+
+def _source_drift_review_matches_required_task(decision: dict[str, Any], required_task: dict[str, Any]) -> bool:
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    for key in ("task_id", "content_sha256", "source_document_id", "calendar_group_key"):
+        expected = str(required_task.get(key) or "").strip()
+        if not expected:
+            continue
+        decision_value = str(decision.get(key) or "").strip()
+        original_value = str(original_task.get(key) or "").strip()
+        if decision_value != expected or original_value != expected:
+            return False
+    return True
 
 
 def _load_json_list(path: Path) -> list[dict[str, Any]]:
@@ -534,6 +568,9 @@ def export_reviewed_source_drift_report(
         required_hash = str((required_task or {}).get("content_sha256") or "").strip()
         decision_hash = str(decision.get("content_sha256") or "").strip()
         if required_task is not None and required_hash and decision_hash != required_hash:
+            skipped_stale_review += 1
+            continue
+        if required_task is not None and not _source_drift_review_matches_required_task(decision, required_task):
             skipped_stale_review += 1
             continue
         if task_id:

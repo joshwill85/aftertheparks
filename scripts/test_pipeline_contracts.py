@@ -4,6 +4,7 @@ import sys
 import json
 import tempfile
 import os
+import hashlib
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -619,6 +620,21 @@ class PipelineContractsTest(unittest.TestCase):
             "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
             row["discovery_parent_url"],
         )
+
+    def test_checked_in_fetch_report_includes_source_type_summary(self) -> None:
+        report_path = ROOT / "data" / "processed" / "fetch_report.json"
+        report = json.loads(report_path.read_text())
+        rows = report["results"]
+
+        self.assertIn("source_type_counts", report)
+        self.assertEqual(
+            len([row for row in rows if row.get("source_type") in {"pdf", "image"}]),
+            report["document_source_count"],
+        )
+        self.assertGreater(report["source_type_counts"].get("pdf", 0), 0)
+        self.assertGreater(report["source_type_counts"].get("image", 0), 0)
+        for row in rows:
+            self.assertIn(row.get("source_type"), {"pdf", "image", "html", "unknown"})
 
     def test_fort_wilderness_visual_sources_emit_reviewed_schedule_records(self) -> None:
         from datetime import date
@@ -5369,6 +5385,55 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertEqual(image_source["id"], price_observation["source_document_id"])
 
+    def test_gold_v2_publisher_preserves_primary_source_inventory_bronze_metadata(self) -> None:
+        rows = json.loads(GOLD_PREVIEW_PATH.read_text())
+        row = next(row for row in rows if row["calendar_group_key"] == "art-of-animation")
+        db = FakeGoldV2Db()
+
+        publish_gold_rows(db, [row])
+
+        source_rows = db.upserted_by_table["source_documents"]
+        primary_source = next(source for source in source_rows if source["content_sha256"] == row["source_sha256"])
+        self.assertEqual("image", primary_source["source_type"])
+        self.assertEqual("image/jpeg", primary_source["mime_type"])
+        self.assertEqual("image/jpeg", primary_source["detected_content_type"])
+        self.assertEqual(".jpg", primary_source["file_extension"])
+        self.assertEqual(1, primary_source["raw_page_count"])
+        self.assertGreater(primary_source["raw_width"], 0)
+        self.assertGreater(primary_source["raw_height"], 0)
+
+    def test_gold_v2_source_document_from_inventory_preserves_v3_bronze_metadata(self) -> None:
+        from scripts.ingest.publish_gold_v2 import _source_document_row_from_inventory
+
+        row = _source_document_row_from_inventory(
+            {
+                "source_kind": "official_image",
+                "canonical_url": "https://cdn.example.test/source.jpg",
+                "fetched_url": "https://cdn.example.test/source.jpg",
+                "content_sha256": "a" * 64,
+                "storage_path": "data/raw/source_documents/example/fy26/source.jpg",
+                "http_status": 200,
+                "calendar_group_key": "example",
+                "captured_at": "2026-06-29T00:00:00+00:00",
+                "mime_type": "image/jpeg",
+                "http_content_type": "image/jpeg",
+                "detected_content_type": "image/jpeg",
+                "file_extension": ".jpg",
+                "raw_page_count": 1,
+                "raw_width": 7,
+                "raw_height": 5,
+            }
+        )
+
+        self.assertEqual("image", row["source_type"])
+        self.assertEqual("image/jpeg", row["mime_type"])
+        self.assertEqual("image/jpeg", row["http_content_type"])
+        self.assertEqual("image/jpeg", row["detected_content_type"])
+        self.assertEqual(".jpg", row["file_extension"])
+        self.assertEqual(1, row["raw_page_count"])
+        self.assertEqual(7, row["raw_width"])
+        self.assertEqual(5, row["raw_height"])
+
     def test_source_trust_package_scripts_include_full_independent_audit(self) -> None:
         package = json.loads(Path("package.json").read_text())
         scripts = package["scripts"]
@@ -6054,8 +6119,22 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual(
             [
                 ("evaluate_activity_extraction.py",),
-                ("render_source_pages.py", "--quarter", "fy26-q4"),
-                ("vision_snapshot.py", "--attach-regions", "--quarter", "fy26-q4"),
+                (
+                    "build_source_inventory.py",
+                    "--source-overrides",
+                    "data/processed/resort_pdf_source_overrides.json",
+                    "--resort-pdf-date-audit",
+                    "data/processed/resort_pdf_date_audit.json",
+                ),
+                (
+                    "render_source_pages.py",
+                    "--source-inventory",
+                    "data/processed/source_inventory.json",
+                    "--upsert-source-document-pages",
+                    "--quarter",
+                    "fy26-q4",
+                ),
+                ("vision_snapshot.py", "--attach-regions", "--upsert-layout-snapshots", "--quarter", "fy26-q4"),
                 ("extract_v3.py", "--quarter", "fy26-q4"),
                 ("validate_v3.py", "--quarter", "fy26-q4"),
                 ("source_status_v3.py", "--quarter", "fy26-q4"),
@@ -6069,6 +6148,10 @@ class PipelineContractsTest(unittest.TestCase):
                     "data/processed/activity_gold_v2_preview.json",
                     "--v3",
                     "data/processed/activity_gold_v3_preview.json",
+                    "--expected-sources",
+                    "data/processed/source_inventory.json",
+                    "--source-statuses",
+                    "data/processed/eval/v3_source_statuses.json",
                     "--review-tasks",
                     "data/processed/review_queue/vision_v3_review_queue.json",
                 ),
@@ -6087,8 +6170,28 @@ class PipelineContractsTest(unittest.TestCase):
     def test_vision_v3_quarter_lane_generates_source_drift_before_review_and_readiness(self) -> None:
         steps = vision_v3_report_steps(local_only=False, quarter="fy26-q4")
 
-        self.assertIn(("render_source_pages.py", "--quarter", "fy26-q4"), steps)
-        self.assertIn(("vision_snapshot.py", "--attach-regions", "--quarter", "fy26-q4"), steps)
+        source_inventory_step = (
+            "build_source_inventory.py",
+            "--source-overrides",
+            "data/processed/resort_pdf_source_overrides.json",
+            "--resort-pdf-date-audit",
+            "data/processed/resort_pdf_date_audit.json",
+        )
+        render_step = (
+            "render_source_pages.py",
+            "--source-inventory",
+            "data/processed/source_inventory.json",
+            "--upsert-source-document-pages",
+            "--quarter",
+            "fy26-q4",
+        )
+        self.assertIn(source_inventory_step, steps)
+        self.assertIn(
+            render_step,
+            steps,
+        )
+        self.assertLess(steps.index(source_inventory_step), steps.index(render_step))
+        self.assertIn(("vision_snapshot.py", "--attach-regions", "--upsert-layout-snapshots", "--quarter", "fy26-q4"), steps)
         self.assertIn(("extract_v3.py", "--quarter", "fy26-q4"), steps)
         self.assertIn(("validate_v3.py", "--quarter", "fy26-q4"), steps)
         self.assertIn(("source_status_v3.py", "--quarter", "fy26-q4"), steps)
@@ -6102,6 +6205,50 @@ class PipelineContractsTest(unittest.TestCase):
             steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
             steps.index(("publish_gold_v3.py", "--require-clean-preview", "--json")),
         )
+        self.assertIn(
+            (
+                "v3_dual_run_report.py",
+                "--v2",
+                "data/processed/activity_gold_v2_preview.json",
+                "--v3",
+                "data/processed/activity_gold_v3_preview.json",
+                "--expected-sources",
+                "data/processed/source_inventory.json",
+                "--source-statuses",
+                "data/processed/eval/v3_source_statuses.json",
+                "--review-tasks",
+                "data/processed/review_queue/vision_v3_review_queue.json",
+            ),
+            steps,
+        )
+
+    def test_vision_v3_production_lane_persists_internal_evidence_tables(self) -> None:
+        production_steps = vision_v3_report_steps(local_only=False, quarter="fy26-q4")
+        local_steps = vision_v3_report_steps(local_only=True)
+
+        self.assertIn(
+            (
+                "render_source_pages.py",
+                "--source-inventory",
+                "data/processed/source_inventory.json",
+                "--upsert-source-document-pages",
+                "--quarter",
+                "fy26-q4",
+            ),
+            production_steps,
+        )
+        self.assertIn(
+            (
+                "vision_snapshot.py",
+                "--attach-regions",
+                "--upsert-layout-snapshots",
+                "--quarter",
+                "fy26-q4",
+            ),
+            production_steps,
+        )
+        self.assertNotIn("--upsert-source-document-pages", {arg for step in local_steps for arg in step})
+        self.assertNotIn("--upsert-layout-snapshots", {arg for step in local_steps for arg in step})
 
     def test_local_vision_v3_pipeline_lane_skips_publish_readiness_gate(self) -> None:
         steps = vision_v3_report_steps(local_only=True)
@@ -6212,6 +6359,8 @@ class SourceInventoryTest(unittest.TestCase):
 
         for row in build_source_inventory(live=False):
             self.assertRegex(row["source_id"], r"^[a-f0-9]{64}$")
+            self.assertEqual(row["source_id"], row["source_document_id"])
+            self.assertRegex(row["source_document_id"], r"^[a-f0-9]{64}$")
             self.assertTrue(row["source_role"])
             self.assertTrue(row["source_kind"])
             self.assertTrue(row["canonical_url"].startswith("https://"))
@@ -6230,9 +6379,11 @@ class SourceInventoryTest(unittest.TestCase):
         self.assertTrue(pdf_rows)
         for row in pdf_rows:
             self.assertTrue(row["parent_source_id"])
+            self.assertEqual(row["parent_source_id"], row["parent_source_document_id"])
             parent_url = row["discovered_from_url"]
             self.assertIn(parent_url, by_url)
             self.assertEqual(by_url[parent_url]["source_id"], row["parent_source_id"])
+            self.assertEqual(by_url[parent_url]["source_document_id"], row["parent_source_document_id"])
 
     def test_inventory_uses_manifest_source_type_for_extensionless_visual_sources(self) -> None:
         from scripts.ingest.build_source_inventory import build_source_inventory
@@ -6298,6 +6449,137 @@ class SourceInventoryTest(unittest.TestCase):
         row = next(row for row in inventory if row["canonical_url"] == visual_source.pdf_url)
         self.assertEqual("official_image", row["source_kind"])
         self.assertEqual("example", row["calendar_group_key"])
+
+    def test_inventory_prefers_v3_bronze_source_document_cache(self) -> None:
+        from scripts.ingest.build_source_inventory import build_source_inventory
+        from PIL import Image
+        from io import BytesIO
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            image_buffer = BytesIO()
+            Image.new("RGB", (7, 5), color=(32, 64, 128)).save(image_buffer, "JPEG")
+            data = image_buffer.getvalue()
+            digest = hashlib.sha256(data).hexdigest()
+            source_documents_dir = tmp_path / "source_documents"
+            source_path = source_documents_dir / "art-of-animation" / "fy26-q3-0526" / f"{digest}.jpg"
+            source_path.parent.mkdir(parents=True)
+            source_path.write_bytes(data)
+            parent_snapshot_path = tmp_path / "parent.snapshot.json"
+            parent_snapshot_path.write_text(json.dumps({"source_url": "https://example.test/recreation"}))
+            parent_snapshot = {
+                "source_url": "https://example.test/recreation",
+                "source_kind": "official_html",
+                "content_sha256": "a" * 64,
+            }
+            visual_source = type(
+                "Source",
+                (),
+                {
+                    "resort_slug": "art-of-animation-resort",
+                    "calendar_group_key": "art-of-animation",
+                    "recreation_page_url": "https://example.test/recreation",
+                    "pdf_url": "https://cdn.example.test/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+                    "pdf_edition": "fy26-q3-0526",
+                    "source_type": "image",
+                    "notes": "v3 bronze image cache",
+                },
+            )()
+            audit_path = tmp_path / "audit.json"
+            audit_path.write_text(json.dumps({
+                "sources": [
+                    {
+                        "calendar_group_key": "art-of-animation",
+                        "live_url": visual_source.pdf_url,
+                        "discovery_evidence": {
+                            "evidence_kind": "official_resort_recreation_page",
+                            "url": visual_source.pdf_url,
+                            "parent_url": "https://example.test/recreation",
+                        },
+                    }
+                ]
+            }))
+
+            with patch(
+                "scripts.ingest.build_source_inventory.RESORT_RECREATION_SOURCES",
+                [visual_source],
+            ), patch(
+                "scripts.ingest.build_source_inventory.SOURCE_DOCUMENTS_RAW_DIR",
+                source_documents_dir,
+            ), patch(
+                "scripts.ingest.build_source_inventory._load_index_snapshot",
+                return_value={"results": [], "content_sha256": "b" * 64},
+            ), patch(
+                "scripts.ingest.build_source_inventory._refresh_or_find_web_snapshot",
+                return_value=(parent_snapshot_path, parent_snapshot),
+            ), patch(
+                "scripts.ingest.build_source_inventory._pdf_local_path",
+                return_value=tmp_path / "missing-legacy-cache.jpg",
+            ), patch(
+                "scripts.ingest.build_source_inventory._supporting_price_image_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._community_hall_fact_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._golf_official_fact_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._reviewed_visual_schedule_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._parent_detail_records",
+                return_value=[],
+            ), patch(
+                "scripts.ingest.build_source_inventory._extra_official_detail_records",
+                return_value=[],
+            ):
+                inventory = build_source_inventory(live=False, resort_pdf_date_audit=audit_path)
+
+        row = next(row for row in inventory if row["canonical_url"] == visual_source.pdf_url)
+        self.assertEqual("official_image", row["source_kind"])
+        self.assertEqual("image", row["source_type"])
+        self.assertEqual("image/jpeg", row["mime_type"])
+        self.assertEqual("image/jpeg", row["detected_content_type"])
+        self.assertEqual(".jpg", row["file_extension"])
+        self.assertEqual(1, row["raw_page_count"])
+        self.assertEqual(7, row["raw_width"])
+        self.assertEqual(5, row["raw_height"])
+        self.assertEqual(digest, row["content_sha256"])
+        self.assertEqual(str(source_path), row["storage_path"])
+        self.assertEqual("fy26-q3-0526", row["source_pdf_edition"])
+        self.assertEqual(200, row["http_status"])
+        self.assertEqual("current", row["currentness"])
+
+    def test_inventory_storage_paths_are_repo_relative(self) -> None:
+        from scripts.ingest.build_source_inventory import _portable_path
+
+        self.assertEqual(
+            "data/raw/pdfs/example.pdf",
+            _portable_path(Path.cwd() / "data/raw/pdfs/example.pdf"),
+        )
+
+    def test_inventory_records_bronze_metadata_for_supporting_price_sources(self) -> None:
+        from scripts.ingest.build_source_inventory import _supporting_price_image_records
+
+        rows = _supporting_price_image_records()
+        by_kind = {row["source_kind"]: row for row in rows}
+
+        image_row = by_kind["official_image"]
+        self.assertEqual("image", image_row["source_type"])
+        self.assertEqual("image/jpeg", image_row["mime_type"])
+        self.assertEqual("image/jpeg", image_row["detected_content_type"])
+        self.assertEqual(".jpg", image_row["file_extension"])
+        self.assertEqual(1, image_row["raw_page_count"])
+        self.assertGreater(image_row["raw_width"], 0)
+        self.assertGreater(image_row["raw_height"], 0)
+
+        pdf_row = by_kind["official_pdf"]
+        self.assertEqual("pdf", pdf_row["source_type"])
+        self.assertEqual("application/pdf", pdf_row["mime_type"])
+        self.assertEqual("application/pdf", pdf_row["detected_content_type"])
+        self.assertEqual(".pdf", pdf_row["file_extension"])
+        self.assertGreater(pdf_row["raw_page_count"], 0)
 
     def test_refreshed_inventory_records_parent_page_hash_for_pdf_sources(self) -> None:
         from scripts.ingest.build_source_inventory import build_source_inventory

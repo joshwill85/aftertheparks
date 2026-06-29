@@ -17,13 +17,48 @@ import {
 } from "@/lib/plan/daybookPath";
 import { useTransportConnectionsForItems } from "@/lib/plan/useTransportConnections";
 import {
-  transportOptionDetail,
+  transportOptionInstructions,
   transportOptionLabel,
   type PlanTransportConnectionMap,
+  type PlanTransportConnectionOption,
 } from "@/lib/plan/transportConnections";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import type { PlanStaySettings } from "@/lib/plan/types";
+
+function TransportInstructionCopy({
+  lines,
+  disclosure,
+}: {
+  lines: string[];
+  disclosure?: string;
+}) {
+  return (
+    <span className="plan-path-connector__instructions">
+      {lines.map((line) => (
+        <small key={line}>{line}</small>
+      ))}
+      {disclosure && (
+        <small className="plan-path-connector__disclosure">
+          <em>* {disclosure}</em>
+        </small>
+      )}
+    </span>
+  );
+}
+
+function TransportOptionCopy({ option }: { option: PlanTransportConnectionOption }) {
+  const instructions = transportOptionInstructions(option);
+  return (
+    <>
+      <strong>{transportOptionLabel(option)}</strong>
+      <TransportInstructionCopy
+        lines={instructions.lines}
+        disclosure={instructions.disclosure}
+      />
+    </>
+  );
+}
 
 export function PlanPathConnector({
   connector,
@@ -43,7 +78,14 @@ export function PlanPathConnector({
       </span>
       <span className="plan-path-connector__copy">
         <strong>{connector.label}</strong>
-        <small>{connector.detail}</small>
+        {connector.detailLines ? (
+          <TransportInstructionCopy
+            lines={connector.detailLines}
+            disclosure={connector.disclosure}
+          />
+        ) : (
+          <small>{connector.detail}</small>
+        )}
         {secondaryOptions.length > 0 && (
           <>
             <button
@@ -62,8 +104,7 @@ export function PlanPathConnector({
               <ul className="plan-path-connector__options">
                 {secondaryOptions.map((option) => (
                   <li key={option.id}>
-                    <strong>{transportOptionLabel(option)}</strong>
-                    <small>{transportOptionDetail(option)}</small>
+                    <TransportOptionCopy option={option} />
                   </li>
                 ))}
               </ul>

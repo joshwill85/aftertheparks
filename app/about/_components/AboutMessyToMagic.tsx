@@ -14,15 +14,19 @@ function CardList({
     <div className={styles.magicColumn}>
       <p className={styles.magicColumnLabel}>{label}</p>
       <div className={styles.magicCards}>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <span
             className={`${styles.magicCard} ${
               tone === "clear" ? styles.magicCardClear : styles.magicCardMessy
-            }`}
+            } ${item === "My Plan" ? styles.magicCardHighlight : ""}`}
             data-testid="about-messy-card"
             key={item}
           >
+            {tone === "clear" && <span className={styles.magicCardIcon} aria-hidden />}
             {item}
+            {tone === "messy" && index === 2 && (
+              <span className={styles.foldedCorner} aria-hidden />
+            )}
           </span>
         ))}
       </div>
@@ -32,7 +36,11 @@ function CardList({
 
 export function AboutMessyToMagic() {
   return (
-    <section className={styles.magicSection} aria-labelledby="about-magic-title">
+    <section
+      className={styles.magicSection}
+      aria-labelledby="about-magic-title"
+      data-about-route-step
+    >
       <div className={styles.magicIntro}>
         <h2 id="about-magic-title">{messyToMagicContent.heading}</h2>
         <p>{messyToMagicContent.body}</p>
@@ -43,8 +51,27 @@ export function AboutMessyToMagic() {
           <span />
           <span />
           <span />
+          <span />
+          <span />
+          <span />
+          <span />
         </div>
-        <CardList items={organizedOutputs} label="After the Parks output" tone="clear" />
+        <div className={styles.magicPlanColumn}>
+          <CardList
+            items={organizedOutputs}
+            label={messyToMagicContent.outputLabel}
+            tone="clear"
+          />
+          <div className={styles.miniPlan} aria-label="Sample evening plan">
+            <p>Tonight</p>
+            {messyToMagicContent.miniPlan.map((item) => (
+              <div className={styles.miniPlanRow} key={`${item.time}-${item.label}`}>
+                <span>{item.time}</span>
+                <strong>{item.label}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

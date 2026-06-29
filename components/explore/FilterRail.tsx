@@ -366,7 +366,7 @@ export function FilterFields({
 
       {presetOptions.length > 0 && (
         <FilterSection
-          title="Plan by need"
+          title="Helpful filters"
           defaultOpen={Boolean(activePreset)}
           activeCount={activePreset ? 1 : 0}
         >
@@ -398,7 +398,7 @@ export function FilterFields({
 
       {practicalOptions.length > 0 && (
         <FilterSection
-          title="Practical"
+          title="Cost"
           defaultOpen={freeOnly || reservationOnly}
           activeCount={[freeOnly, reservationOnly].filter(Boolean).length}
         >
@@ -423,7 +423,7 @@ export function FilterFields({
 
       {weatherOptions.length > 0 && (
         <FilterSection
-          title="Weather backup"
+          title="Weather"
           defaultOpen={Boolean(activeWeather)}
           activeCount={activeWeather ? 1 : 0}
         >
@@ -450,7 +450,7 @@ export function FilterFields({
 
       {transportOptions.length > 0 && (
         <FilterSection
-          title="Transportation"
+          title="Getting there"
           defaultOpen={Boolean(activeTransport)}
           activeCount={activeTransport ? 1 : 0}
         >

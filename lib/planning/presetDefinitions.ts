@@ -62,7 +62,7 @@ export const INTENT_PRESETS: IntentPresetDefinition[] = [
   {
     id: "rain_backup",
     label: "Rain backup",
-    description: "Source-backed indoor or covered fit.",
+    description: "Indoor or covered fit.",
     explanation:
       "Requires indoor/covered evidence; outdoor movies and weather-dependent activities do not qualify.",
   },
@@ -83,7 +83,7 @@ export const INTENT_PRESETS: IntentPresetDefinition[] = [
   {
     id: "little_kids",
     label: "Little kids",
-    description: "Explicit source-backed fit for preschool or young kids.",
+    description: "Explicit fit for preschool or young kids.",
     explanation:
       "Requires an explicit age fit or child-oriented all-ages source text.",
   },

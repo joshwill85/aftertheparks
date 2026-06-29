@@ -229,6 +229,16 @@ export function getDisplayTitle(activity: ActivityDisplayInput): string {
 
 function stripPdfGarbage(text: string): string {
   let cleaned = text.trim().replace(/\s+/g, " ");
+  cleaned = cleaned.replace(
+    /Enjoy the warm glow of the campfire with complimentary kits available for purchase\.?\s*marshmallows\.?/i,
+    "Campfire is free. S'mores kits may be available for purchase."
+  );
+  cleaned = cleaned.replace(/\bages\s+I2\b/g, "ages 12");
+  cleaned = cleaned.replace(
+    /Each Friday morning at 10:30 AM;\s*arrive by 10:15 AM/gi,
+    "Each Friday morning at 10:30 AM. Arrive by 10:15 AM."
+  );
+  cleaned = cleaned.replace(/\bWhere:S\$\?\s*\$\$\s*/g, "Where: ");
   cleaned = cleaned.replace(PDF_DOTS, " ");
   cleaned = cleaned.replace(/\s{2,}/g, " ").trim();
   if (!cleaned || isPdfGarbageText(cleaned)) {

@@ -105,7 +105,7 @@ export default async function ResortActivityCalendarsPage() {
         <h2 className="font-display text-2xl font-semibold">Current status</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
           After the Parks tracks Walt Disney World resort activities from official
-          and source-backed calendars, then routes you into live today, tonight,
+          and verified calendars, then routes you into live today, tonight,
           activity, and resort views. Always confirm times with the official
           resort source before heading out.
         </p>
@@ -180,7 +180,7 @@ export default async function ResortActivityCalendarsPage() {
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
           Seasonal pages keep current resort activity data connected to summer,
-          fall, and holiday planning so older advice does not outrun source-backed
+          fall, and holiday planning so older advice does not outrun verified
           schedules, weather caveats, or access rules.
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -237,7 +237,7 @@ export default async function ResortActivityCalendarsPage() {
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
           Resort activity calendars can change because of weather, staffing,
           refurbishments, private events, seasonal programming, and Disney policy
-          changes. A tracked listing means After the Parks has source-backed data;
+          changes. A tracked listing means After the Parks has verified data;
           it does not replace official Disney confirmation.
         </p>
         <Link href="/source-and-accuracy-policy" className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">

@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-06-28T06:06:18.319233+00:00",
-  "overall_status": "blocked",
+  "generated_at": "2026-06-29T03:58:29.150349+00:00",
+  "overall_status": "pass",
   "confidence": {
-    "current_gold_price_labels": "medium",
+    "current_gold_price_labels": "high",
     "current_pdf_freshness": "high",
     "official_recreation_joinable_coverage": "high",
-    "independent_visual_ocr_coverage": "low",
+    "independent_visual_ocr_coverage": "high",
     "all_parent_item_classification": "high"
   },
   "counts": {
     "source_inventory": {
-      "source_count": 154,
+      "source_count": 155,
       "by_role": {
         "community_hall_official_fact": 5,
         "golf_official_fact": 8,
@@ -18,45 +18,48 @@
         "parent_activity_detail": 78,
         "resort_pdf": 29,
         "resort_recreation_page": 31,
+        "reviewed_visual_schedule": 1,
         "supporting_price_image": 2
       },
       "by_kind": {
         "official_api": 1,
         "official_html": 109,
-        "official_image": 1,
+        "official_image": 5,
         "official_manual_extract": 13,
-        "official_pdf": 30
+        "official_pdf": 26,
+        "reviewed_visual_schedule_image": 1
       }
     },
     "source_freshness": {
-      "sources_checked": 154,
-      "current": 154,
+      "sources_checked": 155,
+      "current": 155,
       "url_changed": 0,
       "hash_changed": 0,
       "missing_from_parent": 0,
       "unreachable": 0,
       "unchecked": 0,
+      "expired": 0,
       "unknown": 0
     },
     "gold_source": {
-      "gold_record_count": 225,
-      "rows_with_document_key_legends": 208,
-      "document_key_legend_count": 208,
+      "gold_record_count": 207,
+      "rows_with_document_key_legends": 166,
+      "document_key_legend_count": 166,
       "document_key_legend_kinds": {
-        "fee": 208
+        "fee": 166
       },
       "price_state_counts": {
-        "fee": 78,
-        "free": 146,
-        "unknown": 1
+        "fee": 61,
+        "free": 120,
+        "unknown": 26
       },
       "field_confidence_counts": {
-        "high": 1098,
-        "unknown": 1
+        "high": 986,
+        "unknown": 26
       }
     },
     "manual_review": {
-      "manual_review_record_count": 21,
+      "manual_review_record_count": 22,
       "manual_review_error_count": 0,
       "manual_review_errors_by_code": {}
     },
@@ -87,9 +90,9 @@
     "publication_parity": {
       "passed": true,
       "gold": {
-        "expected_gold_rows": 225,
-        "live_gold_rows": 225,
-        "matched_gold_rows": 225,
+        "expected_gold_rows": 206,
+        "live_gold_rows": 206,
+        "matched_gold_rows": 206,
         "errors": 0
       },
       "official_offerings": {
@@ -100,22 +103,16 @@
       }
     }
   },
-  "blockers": [
-    {
-      "code": "independent_visual_ocr_coverage_not_high",
-      "severity": "blocker",
-      "current": "low"
-    }
-  ],
+  "blockers": [],
   "warnings": [
-    "coverage:legacy_overcount_groups:all-star-movies=legacy:13>fixture:10,all-star-music=legacy:14>fixture:10,all-star-sports=legacy:12>fixture:11,animal-kingdom-kidani=legacy:11>fixture:10,art-of-animation=legacy:14>fixture:10,boardwalk=legacy:13>fixture:12,contemporary=legacy:14>fixture:11,fort-wilderness=legacy:14>fixture:5,grand-floridian=legacy:14>fixture:9,old-key-west=legacy:16>fixture:14,pop-century=legacy:11>fixture:10,port-orleans-french-quarter=legacy:13>fixture:11,port-orleans-riverside=legacy:13>fixture:12,wilderness-lodge=legacy:14>fixture:13",
-    "coverage:legacy_undercount_groups:animal-kingdom-jambo=legacy:10<fixture:11,caribbean-beach=legacy:8<fixture:9,riviera=legacy:9<fixture:10,saratoga-springs=legacy:13<fixture:14",
+    "coverage:legacy_overcount_groups:animal-kingdom-kidani=legacy:11>fixture:10,boardwalk=legacy:13>fixture:12",
+    "coverage:legacy_undercount_groups:animal-kingdom-jambo=legacy:10<fixture:11",
     "coverage:fixture_quarantine_records:34",
     "coverage:official_offering_covered_quarantine_records:34",
     "coverage:official_offering_alias_covered_quarantine_records:13",
     "coverage:fixture_unextractable_records:17"
   ],
   "next_actions": [
-    "Run the full independent GPT visual PDF audit before release-grade trust approval."
+    "Continue daily source freshness monitoring and weekly full trust validation."
   ]
 }

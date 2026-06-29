@@ -32,13 +32,16 @@ export function CorrectionsClient() {
   return (
     <>
       <Hero
-        title="Contact us"
-        subtitle="Spotted outdated info or want to send a note? We read every message."
+        title="Send a correction or note"
+        subtitle="See outdated, missing, or confusing activity info? Send it here. We read every message."
       />
       {submitted ? (
         <div className="max-w-lg rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-6 text-center text-[var(--color-muted)]">
           <BrandAsset asset="guide-companion" className="brand-asset--empty" />
           <p className="mt-4">Thank you - we&apos;ll review your correction.</p>
+          <p className="mt-2 text-sm">
+            We may not be able to reply to every message, but corrections help keep the site useful.
+          </p>
         </div>
       ) : (
         <form
@@ -79,7 +82,7 @@ export function CorrectionsClient() {
               name="message"
               required
               rows={6}
-              placeholder="Tell us what you found, what page you were on, or anything else we should know."
+              placeholder="Include the resort, activity name, date, time, and what looks wrong."
               className="mt-1 w-full rounded-lg border border-[var(--color-card-border)] bg-transparent px-3 py-2"
             />
           </div>
@@ -88,7 +91,7 @@ export function CorrectionsClient() {
             type="submit"
             className="rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm text-white"
           >
-            Send message
+            Send correction
           </button>
         </form>
       )}

@@ -14,13 +14,11 @@ export const metadata: Metadata = {
 
 const SUGGESTIONS = [
   "campfire tonight",
+  "Polynesian movie",
   "pool games",
-  "polynesian",
-  "movie",
-  "crafts kids",
-  "arcade games",
-  "contemporary",
-  "yoga",
+  "arcade",
+  "rainy day",
+  "free activities",
 ];
 
 interface SearchPageProps {
@@ -39,8 +37,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <div className="relative">
       <StarlightSearchEffect />
       <Hero
-        title="Search"
-        subtitle="One search across activities, resorts, movies, guides, and categories — best matches first."
+        title="Search After the Parks"
+        subtitle="Search activities, resorts, movies, guides, and categories."
       />
       <SearchClient
         initialQuery={query}

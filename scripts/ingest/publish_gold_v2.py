@@ -23,6 +23,15 @@ DEFAULT_SOURCE_INVENTORY_PATH = Path("data/processed/source_inventory.json")
 DEFAULT_SOURCE_FRESHNESS_REPORT_PATH = Path("data/processed/source_freshness_report.json")
 DEFAULT_VISUAL_AUDIT_REPORT_PATH = Path("data/processed/pdf_visual_audit_report.json")
 DEFAULT_FIELD_AUDIT_REPORT_PATH = Path("data/processed/field_audit_report.json")
+SOURCE_DOCUMENT_METADATA_FIELDS = (
+    "mime_type",
+    "http_content_type",
+    "detected_content_type",
+    "file_extension",
+    "raw_page_count",
+    "raw_width",
+    "raw_height",
+)
 
 
 def _stable_uuid(key: str) -> str:
@@ -68,6 +77,9 @@ def _source_document_row(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _source_type_from_inventory(row: dict[str, Any]) -> str:
+    source_type = str(row.get("source_type") or "").strip()
+    if source_type in {"pdf", "image", "html"}:
+        return source_type
     source_kind = row.get("source_kind")
     if source_kind == "official_pdf":
         return "pdf"
@@ -76,8 +88,15 @@ def _source_type_from_inventory(row: dict[str, Any]) -> str:
     return "html"
 
 
+def _with_source_document_metadata(result: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
+    for field in SOURCE_DOCUMENT_METADATA_FIELDS:
+        if row.get(field) is not None:
+            result[field] = row.get(field)
+    return result
+
+
 def _source_document_row_from_inventory(row: dict[str, Any]) -> dict[str, Any]:
-    return {
+    return _with_source_document_metadata({
         "source_type": _source_type_from_inventory(row),
         "canonical_url": row["canonical_url"],
         "fetched_url": row.get("fetched_url") or row["canonical_url"],
@@ -88,7 +107,7 @@ def _source_document_row_from_inventory(row: dict[str, Any]) -> dict[str, Any]:
         "http_status": row.get("http_status") or 200,
         "calendar_group_key": row.get("calendar_group_key"),
         "fetched_at": row.get("captured_at") or datetime.now(timezone.utc).isoformat(),
-    }
+    }, row)
 
 
 def _supporting_document_hashes(row: dict[str, Any]) -> list[str]:
@@ -473,6 +492,10 @@ def publish_gold_rows(db: Any, rows: list[dict[str, Any]]) -> dict[str, int]:
         source_document_rows_by_hash.setdefault(source_hash, _source_document_row(row))
         inventory_row = inventory_by_hash.get(source_hash)
         if inventory_row:
+            source_document_rows_by_hash[source_hash] = _with_source_document_metadata(
+                source_document_rows_by_hash[source_hash],
+                inventory_row,
+            )
             currentness_source_rows_by_hash[source_hash] = inventory_row
             if _source_type(row) == "pdf":
                 parent_inventory = inventory_by_source_id.get(str(inventory_row.get("parent_source_id") or ""))

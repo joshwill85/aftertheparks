@@ -166,8 +166,8 @@ export default async function TonightPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <Hero
-        title="Tonight"
-        subtitle="Evening resort activities, outdoor movies, campfires, and low-pressure after-park ideas."
+        title="Tonight at Disney World Resorts"
+        subtitle="Low-effort movies, campfires, games, and activities after the parks."
         compactBrowse
       />
       <div className="mb-6 flex justify-center">

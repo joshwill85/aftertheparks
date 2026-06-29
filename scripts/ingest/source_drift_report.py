@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +15,10 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "source_drift_report.json"
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 DEFAULT_OLD_CANDIDATES_DIR = PROCESSED_DIR / "validated_activity_candidates_v3_previous"
 DEFAULT_NEW_CANDIDATES_DIR = PROCESSED_DIR / "validated_activity_candidates_v3"
 
@@ -33,6 +38,42 @@ def _field(row: dict[str, Any], field_name: str) -> Any:
     return value
 
 
+def _field_evidence(row: dict[str, Any], field_name: str) -> dict[str, Any]:
+    evidence = row.get("field_evidence") if isinstance(row.get("field_evidence"), dict) else {}
+    evidence_keys = [field_name]
+    if field_name == "price":
+        evidence_keys.append("fee")
+    for key in evidence_keys:
+        value = evidence.get(key)
+        if isinstance(value, dict):
+            return value
+    return {}
+
+
+def _changed_field_visual_evidence(row: dict[str, Any], field_name: str) -> dict[str, Any]:
+    evidence = _field_evidence(row, field_name)
+    source = evidence.get("source") if isinstance(evidence.get("source"), dict) else {}
+    text = (
+        evidence.get("raw_value")
+        or source.get("text")
+        or source.get("raw_text")
+    )
+    values = {
+        "page_number": source.get("page_number"),
+        "page_image_sha256": source.get("page_image_sha256") or source.get("canonical_image_sha256"),
+        "page_image_path": (
+            source.get("page_image_path")
+            or source.get("canonical_image_path")
+            or source.get("canonical_image_storage_path")
+        ),
+        "crop_storage_path": source.get("crop_storage_path") or source.get("field_crop") or source.get("crop_path"),
+        "crop_sha256": source.get("crop_sha256") or source.get("field_crop_sha256"),
+        "bbox_px": source.get("bbox_px"),
+        "text": text,
+    }
+    return {key: value for key, value in values.items() if value is not None and value != ""}
+
+
 def _changed(old_by_slug: dict[str, dict[str, Any]], new_by_slug: dict[str, dict[str, Any]], field_name: str) -> list[dict[str, Any]]:
     changes: list[dict[str, Any]] = []
     for slug in sorted(set(old_by_slug) & set(new_by_slug)):
@@ -45,9 +86,25 @@ def _changed(old_by_slug: dict[str, dict[str, Any]], new_by_slug: dict[str, dict
                     "title": new_by_slug[slug].get("title") or old_by_slug[slug].get("title"),
                     "old": old_value,
                     "new": new_value,
+                    **_changed_field_visual_evidence(new_by_slug[slug], field_name),
                 }
             )
     return changes
+
+
+def _title_details(indexed_rows: dict[str, dict[str, Any]], slugs: list[str]) -> list[dict[str, Any]]:
+    details: list[dict[str, Any]] = []
+    for slug in slugs:
+        row = indexed_rows[slug]
+        title = str(row.get("title") or slug)
+        details.append(
+            {
+                "title": title,
+                "canonical_slug": slug,
+                **_changed_field_visual_evidence(row, "title"),
+            }
+        )
+    return details
 
 
 def _is_movie_row(row: dict[str, Any]) -> bool:
@@ -66,6 +123,40 @@ def _movie_count(rows: list[dict[str, Any]]) -> int:
     return sum(1 for row in rows if _is_movie_row(row))
 
 
+def _field_from_validation_findings(findings: list[Any]) -> str | None:
+    for finding in findings:
+        value = str(finding)
+        for prefix in (
+            "missing_required_field:",
+            "engine_disagreement:",
+            "manual_review_required:",
+        ):
+            if value.startswith(prefix):
+                return value.split(":", 1)[1]
+        if value == "unknown_location":
+            return "location"
+        if value == "unparsed_schedule":
+            return "schedule"
+        if value == "fee_marker_conflict":
+            return "price"
+    return None
+
+
+def _validation_failure_visual_evidence(row: dict[str, Any], findings: list[Any]) -> dict[str, Any]:
+    field_name = _field_from_validation_findings(findings)
+    if field_name:
+        evidence = _changed_field_visual_evidence(row, field_name)
+        if evidence:
+            return evidence
+    field_evidence = row.get("field_evidence") if isinstance(row.get("field_evidence"), dict) else {}
+    for candidate_field in ("title", "schedule", "location", "price", "fee", "movie_title"):
+        if isinstance(field_evidence.get(candidate_field), dict):
+            evidence = _changed_field_visual_evidence(row, candidate_field)
+            if evidence:
+                return evidence
+    return {}
+
+
 def _validation_failures(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     failures: list[dict[str, Any]] = []
     for row in rows:
@@ -78,9 +169,24 @@ def _validation_failures(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "canonical_slug": row.get("canonical_slug"),
                 "title": row.get("title") or row.get("normalized_title"),
                 "validation_findings": [str(finding) for finding in findings],
+                **_validation_failure_visual_evidence(row, findings),
             }
         )
     return failures
+
+
+def _region_visual_evidence(region: dict[str, Any]) -> dict[str, Any]:
+    values = {
+        "page_image_sha256": region.get("page_image_sha256") or region.get("canonical_image_sha256"),
+        "page_image_path": (
+            region.get("page_image_path")
+            or region.get("canonical_image_path")
+            or region.get("canonical_image_storage_path")
+        ),
+        "crop_storage_path": region.get("crop_storage_path") or region.get("field_crop") or region.get("crop_path"),
+        "crop_sha256": region.get("crop_sha256") or region.get("field_crop_sha256"),
+    }
+    return {key: value for key, value in values.items() if value is not None and value != ""}
 
 
 def _unknown_regions(regions: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -94,6 +200,7 @@ def _unknown_regions(regions: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "region_id": region.get("region_id"),
                 "region_family": region.get("region_family") or region.get("family"),
                 "page_number": region.get("page_number"),
+                **_region_visual_evidence(region),
                 "bbox_px": region.get("bbox_px"),
                 "text": region.get("text"),
             }
@@ -147,6 +254,7 @@ def build_source_drift_report(
         or publish_blockers
     )
     return {
+        "generated_at": _now_iso(),
         "status": "review_required" if manual_review_required else "clean",
         "old_hash": old_source_hash,
         "new_hash": new_source_hash,
@@ -157,7 +265,9 @@ def build_source_drift_report(
         "old_movie_count": old_movie_count,
         "new_movie_count": new_movie_count,
         "new_titles": [str(new_by_slug[slug].get("title") or slug) for slug in added],
+        "new_title_details": _title_details(new_by_slug, added),
         "removed_titles": [str(old_by_slug[slug].get("title") or slug) for slug in removed],
+        "removed_title_details": _title_details(old_by_slug, removed),
         "changed_schedules": changed_schedules,
         "changed_locations": changed_locations,
         "changed_fees": changed_fees,
@@ -195,10 +305,26 @@ def _calendar_group_key(row: dict[str, Any]) -> str:
     return str(row.get("calendar_group_key") or row.get("group") or "unknown")
 
 
-def _group_rows_by_calendar_group(rows: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+def _source_document_id(row: dict[str, Any]) -> str:
+    return str(
+        row.get("source_document_id")
+        or row.get("source_id")
+        or row.get("document_id")
+        or ""
+    ).strip()
+
+
+def _source_group_key(row: dict[str, Any]) -> str:
+    source_document_id = _source_document_id(row)
+    if source_document_id:
+        return f"source:{source_document_id}"
+    return f"calendar_group:{_calendar_group_key(row)}"
+
+
+def _group_rows_by_source(rows: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for row in rows:
-        grouped.setdefault(_calendar_group_key(row), []).append(row)
+        grouped.setdefault(_source_group_key(row), []).append(row)
     return grouped
 
 
@@ -218,6 +344,42 @@ def _document_family_for(rows: list[dict[str, Any]]) -> str | None:
     return None
 
 
+def _first_non_empty(rows: list[dict[str, Any]], field_name: str) -> str | None:
+    for row in rows:
+        value = str(row.get(field_name) or "").strip()
+        if value:
+            return value
+    return None
+
+
+def _source_metadata_from_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    keys = (
+        "source_kind",
+        "source_role",
+        "canonical_url",
+        "fetched_url",
+        "http_status",
+        "currentness",
+        "captured_at",
+    )
+    metadata: dict[str, Any] = {}
+    for key in keys:
+        for row in rows:
+            value = row.get(key)
+            if value not in {None, ""}:
+                metadata[key] = value
+                break
+    return metadata
+
+
+def _source_document_id_from_rows(rows: list[dict[str, Any]]) -> str | None:
+    for row in rows:
+        value = _source_document_id(row)
+        if value:
+            return value
+    return None
+
+
 def build_quarter_source_drift_report(
     *,
     old_rows: list[dict[str, Any]],
@@ -226,8 +388,8 @@ def build_quarter_source_drift_report(
     activity_count_threshold: int = 0,
     movie_count_threshold: int = 0,
 ) -> dict[str, Any]:
-    old_by_group = _group_rows_by_calendar_group(old_rows)
-    new_by_group = _group_rows_by_calendar_group(new_rows)
+    old_by_group = _group_rows_by_source(old_rows)
+    new_by_group = _group_rows_by_source(new_rows)
     source_reports: list[dict[str, Any]] = []
     aggregate_blockers: set[str] = set()
 
@@ -246,7 +408,14 @@ def build_quarter_source_drift_report(
             activity_count_threshold=activity_count_threshold,
             movie_count_threshold=movie_count_threshold,
         )
-        report["calendar_group_key"] = group
+        report["source_key"] = group
+        report["source_document_id"] = _source_document_id_from_rows(new_group_rows) or _source_document_id_from_rows(
+            old_group_rows
+        )
+        report["calendar_group_key"] = _first_non_empty(new_group_rows, "calendar_group_key") or _first_non_empty(
+            old_group_rows, "calendar_group_key"
+        ) or group.removeprefix("calendar_group:")
+        report.update(_source_metadata_from_rows(new_group_rows) or _source_metadata_from_rows(old_group_rows))
         if old_hash != new_hash:
             aggregate_blockers.add("source_hash_changed")
         if old_group_rows and not new_group_rows:
@@ -261,6 +430,7 @@ def build_quarter_source_drift_report(
     status = "review_required" if review_required_count or aggregate_blockers else "clean"
     return {
         "report_kind": "v3_quarter_source_drift",
+        "generated_at": _now_iso(),
         "quarter": quarter,
         "status": status,
         "summary": {

@@ -6,18 +6,22 @@ import argparse
 import hashlib
 import json
 import re
+from io import BytesIO
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from PIL import Image
+
 try:
+    from content_type import detect_source_content
     from capture_web_snapshot import write_web_snapshot
     from capture_official_recreation_index import (
         DEFAULT_OUTPUT as DEFAULT_INDEX_SNAPSHOT,
         build_official_recreation_index_snapshot,
         write_official_recreation_index_snapshot,
     )
-    from config import RAW_DIR, PROCESSED_DIR
+    from config import ROOT, RAW_DIR, PROCESSED_DIR, SOURCE_DOCUMENTS_RAW_DIR
     from disney_recreation_offerings import (
         _index_detail_url,
         official_recreation_index_item_program_key,
@@ -30,13 +34,14 @@ try:
     )
     from web_snapshot import web_snapshot_content_hash
 except ImportError:  # pragma: no cover - supports package-style imports in tests
+    from .content_type import detect_source_content
     from .capture_web_snapshot import write_web_snapshot
     from .capture_official_recreation_index import (
         DEFAULT_OUTPUT as DEFAULT_INDEX_SNAPSHOT,
         build_official_recreation_index_snapshot,
         write_official_recreation_index_snapshot,
     )
-    from .config import RAW_DIR, PROCESSED_DIR
+    from .config import ROOT, RAW_DIR, PROCESSED_DIR, SOURCE_DOCUMENTS_RAW_DIR
     from .disney_recreation_offerings import (
         _index_detail_url,
         official_recreation_index_item_program_key,
@@ -90,6 +95,97 @@ def _pdf_local_path(pdf_url: str) -> Path:
     return RAW_DIR / pdf_url.rsplit("/", 1)[-1]
 
 
+def _source_document_extensions(source: Any) -> list[str]:
+    source_type = str(getattr(source, "source_type", "") or "").strip().lower()
+    url_path = str(getattr(source, "pdf_url", "") or "").lower().split("?", 1)[0].split("#", 1)[0]
+    suffix = Path(url_path).suffix
+    if source_type == "pdf":
+        return [".pdf"]
+    if source_type == "image":
+        if suffix in {".jpg", ".jpeg"}:
+            return [".jpg", ".jpeg"]
+        if suffix == ".png":
+            return [".png"]
+        return [".jpg", ".jpeg", ".png"]
+    if suffix == ".pdf":
+        return [".pdf"]
+    if suffix in {".jpg", ".jpeg"}:
+        return [".jpg", ".jpeg"]
+    if suffix == ".png":
+        return [".png"]
+    return [".pdf", ".jpg", ".jpeg", ".png"]
+
+
+def _source_document_local_path(source: Any) -> Path | None:
+    calendar_group_key = str(getattr(source, "calendar_group_key", "") or "").strip()
+    edition = str(getattr(source, "pdf_edition", "") or "unknown").strip() or "unknown"
+    if not calendar_group_key:
+        return None
+    source_dir = SOURCE_DOCUMENTS_RAW_DIR / calendar_group_key / edition
+    if not source_dir.exists():
+        return None
+    extensions = set(_source_document_extensions(source))
+    candidates = sorted(
+        path for path in source_dir.iterdir()
+        if path.is_file() and path.suffix.lower() in extensions
+    )
+    return candidates[0] if candidates else None
+
+
+def _image_dimensions(data: bytes) -> tuple[int | None, int | None]:
+    try:
+        with Image.open(BytesIO(data)) as image:
+            return image.size
+    except Exception:
+        return None, None
+
+
+def _pdf_page_count(path: Path) -> int | None:
+    try:
+        import pypdfium2
+
+        document = pypdfium2.PdfDocument(str(path))
+        try:
+            return len(document)
+        finally:
+            document.close()
+    except Exception:
+        return None
+
+
+def _source_document_metadata(path: Path | None) -> dict[str, Any]:
+    if path is None or not path.exists():
+        return {}
+    data = path.read_bytes()
+    detected = detect_source_content(data, fallback_path=path)
+    width, height = _image_dimensions(data) if detected.source_type == "image" else (None, None)
+    page_count = 1 if detected.source_type == "image" else _pdf_page_count(path) if detected.source_type == "pdf" else None
+    return {
+        "source_type": detected.source_type,
+        "mime_type": detected.mime_type,
+        "http_content_type": None,
+        "detected_content_type": detected.mime_type,
+        "file_extension": detected.file_extension,
+        "raw_page_count": page_count,
+        "raw_width": width,
+        "raw_height": height,
+    }
+
+
+def _portable_path(path: str | Path | None) -> str | None:
+    if path is None:
+        return None
+    if isinstance(path, str) and not path.strip():
+        return None
+    candidate = Path(path)
+    if not candidate.is_absolute():
+        return str(path)
+    try:
+        return candidate.resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def _web_snapshot_path_for_url(url: str) -> Path | None:
     raw_web = Path("data/raw/web")
     if not raw_web.exists():
@@ -135,9 +231,20 @@ def _record(
     discovered_pdf_url_evidence: dict[str, Any] | None = None,
     currentness: str = "unknown",
     notes: str | None = None,
+    source_type: str | None = None,
+    mime_type: str | None = None,
+    http_content_type: str | None = None,
+    detected_content_type: str | None = None,
+    file_extension: str | None = None,
+    raw_page_count: int | None = None,
+    raw_width: int | None = None,
+    raw_height: int | None = None,
+    source_pdf_edition: str | None = None,
 ) -> dict[str, Any]:
+    source_id = _source_id(source_role, canonical_url)
     return {
-        "source_id": _source_id(source_role, canonical_url),
+        "source_id": source_id,
+        "source_document_id": source_id,
         "source_role": source_role,
         "source_kind": source_kind,
         "canonical_url": canonical_url,
@@ -149,14 +256,24 @@ def _record(
         "resort_slug": resort_slug,
         "program_key": program_key,
         "parent_source_id": parent_source_id,
+        "parent_source_document_id": parent_source_id,
         "discovered_from_url": discovered_from_url,
-        "storage_path": storage_path,
+        "storage_path": _portable_path(storage_path),
         "parent_content_sha256": parent_content_sha256,
-        "discovered_from_storage_path": discovered_from_storage_path,
+        "discovered_from_storage_path": _portable_path(discovered_from_storage_path),
         "discovered_pdf_url_evidence": discovered_pdf_url_evidence,
         "parser_version": PARSER_VERSION,
         "currentness": currentness,
         "notes": notes,
+        "source_type": source_type,
+        "mime_type": mime_type,
+        "http_content_type": http_content_type,
+        "detected_content_type": detected_content_type,
+        "file_extension": file_extension,
+        "raw_page_count": raw_page_count,
+        "raw_width": raw_width,
+        "raw_height": raw_height,
+        "source_pdf_edition": source_pdf_edition,
     }
 
 
@@ -188,18 +305,21 @@ def _supporting_price_image_records() -> list[dict[str, Any]]:
         storage_path = str(source.get("storage_path") or "")
         if not canonical_url or not content_sha256:
             continue
+        local_path = Path(storage_path) if storage_path else None
+        source_document_metadata = _source_document_metadata(local_path)
         rows.append(
             _record(
                 source_role="supporting_price_image",
                 source_kind=str(source.get("source_kind") or "official_image"),
                 canonical_url=canonical_url,
-                http_status=200 if storage_path and Path(storage_path).exists() else None,
+                http_status=200 if local_path and local_path.exists() else None,
                 content_sha256=content_sha256,
                 calendar_group_key=source.get("calendar_group_key"),
                 resort_slug=source.get("resort_slug"),
                 storage_path=storage_path or None,
-                currentness="current" if storage_path and Path(storage_path).exists() else "unknown",
+                currentness="current" if local_path and local_path.exists() else "unknown",
                 notes=source.get("notes"),
+                **source_document_metadata,
             )
         )
     return rows
@@ -571,9 +691,10 @@ def build_source_inventory(
             resort_page_rows_by_url[source.recreation_page_url] = page_row
 
         if source.pdf_url:
-            local_path = _pdf_local_path(source.pdf_url)
+            local_path = _source_document_local_path(source) or _pdf_local_path(source.pdf_url)
             parent_row = resort_page_rows_by_url.get(source.recreation_page_url, {})
             document_source_kind = _document_source_kind(source)
+            source_document_metadata = _source_document_metadata(local_path)
             pdf_evidence = pdf_evidence_by_group.get(source.calendar_group_key)
             pdf_has_official_evidence = bool(
                 pdf_evidence and pdf_evidence.get("pdf_url") == source.pdf_url
@@ -600,6 +721,8 @@ def build_source_inventory(
                     discovered_pdf_url_evidence=pdf_evidence if pdf_has_official_evidence else None,
                     currentness=pdf_currentness,
                     notes=source.pdf_edition,
+                    source_pdf_edition=source.pdf_edition,
+                    **source_document_metadata,
                 )
             )
 

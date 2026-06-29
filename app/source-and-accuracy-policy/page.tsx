@@ -15,19 +15,16 @@ export default function SourceAndAccuracyPolicyPage() {
     <>
       <Hero
         title="Source and Accuracy Policy"
-        subtitle="How After the Parks keeps resort activity planning current, sourced, and honest about caveats."
+        subtitle="How we check resort activity listings and show what might change."
       />
 
       <article className="prose max-w-none space-y-6 text-[var(--color-muted)]">
         <section>
           <h2 className="font-display text-2xl font-semibold text-[var(--color-foreground)]">
-            The short version
+            Short version
           </h2>
           <p>
-            After the Parks is an independent Walt Disney World resort activity
-            planner. We prefer official Disney sources, label caveats, preserve
-            freshness information, and route guests back to live resort and
-            activity pages instead of treating old advice as timeless.
+            We use official Disney resort recreation calendars and official Disney web pages when available. We show source dates and caveats because schedules, access, transportation, and pricing can change.
           </p>
         </section>
 
@@ -46,7 +43,7 @@ export default function SourceAndAccuracyPolicyPage() {
 
         <section>
           <h2 className="font-display text-2xl font-semibold text-[var(--color-foreground)]">
-            Current transportation caveat
+            Disney Springs transportation note
           </h2>
           <p>{DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT.summary}</p>
           <p>
@@ -59,9 +56,9 @@ export default function SourceAndAccuracyPolicyPage() {
           <p>
             This is especially important for no-ticket and resort-hopping plans:
             do not plan to use Disney Springs as a free transfer hub to reach
-            resort hotels. Use a resort stay, restaurant reservation, dining
-            reservation, confirmed dining/experience reservation, rideshare, or
-            another currently allowed direct route before traveling.
+            resort hotels. Use a resort stay, confirmed dining or experience
+            reservation, rideshare, or another currently allowed direct route
+            before traveling.
           </p>
         </section>
 
@@ -70,10 +67,21 @@ export default function SourceAndAccuracyPolicyPage() {
             What verified means
           </h2>
           <p>
-            A verified listing means the activity is backed by a source checked
-            on a specific date. It does not guarantee the activity will run at
-            the exact time during weather, operational changes, or resort-specific
-            adjustments.
+            A verified listing means we found the activity in an official source or a directly reviewable source record. It does not guarantee the activity will run at the exact time during weather, operational changes, or resort-specific adjustments.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-display text-2xl font-semibold text-[var(--color-foreground)]">
+            See something wrong?
+          </h2>
+          <p>
+            If a listing looks stale, incomplete, or confusing, send a correction. Include the resort, activity name, date, time, and what looks wrong so we can review it.
+          </p>
+          <p>
+            <Link href="/corrections" className="text-[var(--accent)] hover:underline">
+              Send a correction
+            </Link>
           </p>
         </section>
 

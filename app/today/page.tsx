@@ -27,7 +27,7 @@ export const dynamic = "force-dynamic";
 const DEFAULT_TODAY_METADATA = {
   title: "Disney World Resort Activities Today",
   description:
-    "See current Walt Disney World resort activities for today, including resort recreation, crafts, poolside activities, movies, campfires, and source-backed schedule notes.",
+    "See current Walt Disney World resort activities for today, including resort recreation, crafts, poolside activities, movies, campfires, and verified schedule notes.",
   canonical: "/today",
 };
 
@@ -35,7 +35,7 @@ const STRATEGIC_TODAY_FILTER_METADATA: Record<string, typeof DEFAULT_TODAY_METAD
   "weather=indoor": {
     title: "Indoor Disney Resort Activities Today",
     description:
-      "Find indoor and weather-safer Walt Disney World resort activities for today, including rainy-day backups and source-backed schedule notes.",
+      "Find indoor and weather-safer Walt Disney World resort activities for today, including rainy-day backups and verified schedule notes.",
     canonical: "/today?weather=indoor",
   },
 };
@@ -68,7 +68,7 @@ export async function generateMetadata({
       imageEyebrow: "Today at Disney resorts",
       imageSummary:
         pageMetadata.canonical === "/today"
-          ? "Current resort activities for today with source-backed schedule notes, weather context, and planning links."
+          ? "Current resort activities for today with verified schedule notes, weather context, and planning links."
           : "A high-value filtered today view for current resort activities that match a specific guest-planning need.",
     }),
   };
@@ -121,8 +121,8 @@ export default async function TodayPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <Hero
-        title="Today"
-        subtitle="What's still ahead for the rest of your resort day — sorted by time."
+        title="Today at Disney World Resorts"
+        subtitle="Activities still available today, sorted by start time."
         compactBrowse
       />
       <Suspense fallback={<ActivityGridSkeleton columns={2} />}>

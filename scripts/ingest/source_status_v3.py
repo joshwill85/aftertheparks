@@ -18,10 +18,26 @@ except ImportError:  # pragma: no cover - supports package-style imports
 DEFAULT_EXPECTED_SOURCES_PATH = PROCESSED_DIR / "source_inventory.json"
 DEFAULT_SNAPSHOTS_PATH = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json"
+SOURCE_METADATA_FIELDS = (
+    "source_type",
+    "mime_type",
+    "http_content_type",
+    "detected_content_type",
+    "file_extension",
+    "raw_page_count",
+    "raw_width",
+    "raw_height",
+)
 
 
 def _source_id(row: dict[str, Any]) -> str:
-    return str(row.get("source_document_id") or row.get("id") or row.get("document_id") or "").strip()
+    return str(
+        row.get("source_document_id")
+        or row.get("source_id")
+        or row.get("id")
+        or row.get("document_id")
+        or ""
+    ).strip()
 
 
 def _source_hash(row: dict[str, Any]) -> str:
@@ -36,6 +52,24 @@ def _config_hash(row: dict[str, Any]) -> str:
 def _pipeline_version(row: dict[str, Any]) -> str:
     runtime = row.get("runtime_lineage") if isinstance(row.get("runtime_lineage"), dict) else {}
     return str(row.get("pipeline_version") or runtime.get("pipeline_version") or "").strip()
+
+
+def _source_metadata(row: dict[str, Any]) -> dict[str, Any]:
+    return {field: row.get(field) for field in SOURCE_METADATA_FIELDS if row.get(field) is not None}
+
+
+def _first_status_message(row: dict[str, Any], fallback: str) -> str:
+    errors = row.get("errors") if isinstance(row.get("errors"), list) else []
+    if errors:
+        return str(errors[0])
+    message = str(row.get("message") or "").strip()
+    if message:
+        return message
+    quality = row.get("quality") if isinstance(row.get("quality"), dict) else {}
+    findings = quality.get("findings") if isinstance(quality.get("findings"), list) else []
+    if findings:
+        return str(findings[0])
+    return fallback
 
 
 def _edition(row: dict[str, Any]) -> str | None:
@@ -66,11 +100,19 @@ def _json_objects(path: Path) -> list[dict[str, Any]]:
         return rows
     payload = json.loads(path.read_text())
     if isinstance(payload, dict) and isinstance(payload.get("rows"), list):
-        return [row for row in payload["rows"] if isinstance(row, dict)]
+        return [
+            {**row, "path": str(path)}
+            for row in payload["rows"]
+            if isinstance(row, dict)
+        ]
     if isinstance(payload, dict):
-        return [payload]
+        return [{**payload, "path": str(path)}]
     if isinstance(payload, list):
-        return [row for row in payload if isinstance(row, dict)]
+        return [
+            {**row, "path": str(path)}
+            for row in payload
+            if isinstance(row, dict)
+        ]
     return []
 
 
@@ -116,6 +158,7 @@ def build_v3_source_statuses(
             "config_hash": expected_config_hash or None,
             "pipeline_version": expected_pipeline_version or None,
             "calendar_group_key": source.get("calendar_group_key"),
+            **_source_metadata(source),
         }
         if snapshot:
             snapshot_config_hash = _config_hash(snapshot)
@@ -147,8 +190,21 @@ def build_v3_source_statuses(
                 )
                 continue
             snapshot_status = str(snapshot.get("status") or "")
-            if snapshot_status == "parser_error":
-                errors = snapshot.get("errors") if isinstance(snapshot.get("errors"), list) else []
+            quality = snapshot.get("quality") if isinstance(snapshot.get("quality"), dict) else {}
+            if snapshot_status == "source_error":
+                statuses.append(
+                    {
+                        **base,
+                        "status": "source_error",
+                        "snapshot_status": snapshot_status,
+                        "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
+                        "snapshot_config_hash": snapshot_config_hash or None,
+                        "snapshot_pipeline_version": snapshot_pipeline_version or None,
+                        "message": _first_status_message(snapshot, "source_error"),
+                    }
+                )
+                continue
+            if snapshot_status in {"parser_error", "error"} or quality.get("ocr_success") is False:
                 statuses.append(
                     {
                         **base,
@@ -157,7 +213,8 @@ def build_v3_source_statuses(
                         "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
                         "snapshot_config_hash": snapshot_config_hash or None,
                         "snapshot_pipeline_version": snapshot_pipeline_version or None,
-                        "message": str(errors[0]) if errors else "parser_error",
+                        "ocr_success": quality.get("ocr_success"),
+                        "message": _first_status_message(snapshot, "parser_error"),
                     }
                 )
                 continue
@@ -169,9 +226,7 @@ def build_v3_source_statuses(
                     "snapshot_path": snapshot.get("snapshot_path") or snapshot.get("path"),
                     "snapshot_config_hash": snapshot_config_hash or None,
                     "snapshot_pipeline_version": snapshot_pipeline_version or None,
-                    "ocr_success": (snapshot.get("quality") or {}).get("ocr_success")
-                    if isinstance(snapshot.get("quality"), dict)
-                    else None,
+                    "ocr_success": quality.get("ocr_success"),
                 }
             )
             continue

@@ -70,8 +70,13 @@ export default async function HomePage() {
         <div className="grid gap-4">
           <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 md:p-6">
             <h2 id="home-source-heading" className="font-display text-2xl font-semibold">
-              Source and freshness
+              How current is this?
             </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+              Last verified {formatSeoDate(sourceSummary.latestVerified) ?? "by current source"}. Includes{" "}
+              {sourceSummary.activityCount} verified activity rows from{" "}
+              {sourceSummary.sourceCount} official sources. Schedules can change, so confirm with the resort before you go.
+            </p>
             <dl className="mt-4 grid gap-3 text-sm">
               <div>
                 <dt className="font-bold text-[var(--color-muted)]">Last verified</dt>
@@ -106,7 +111,7 @@ export default async function HomePage() {
                 Tonight&apos;s easy wins
               </h2>
               <p className="home-section__subtitle">
-                Movies and evening favorites across the resorts.
+                Quick evening options with current times, locations, and weather notes.
               </p>
             </div>
             <Link href="/tonight" className="home-section__link">
@@ -128,10 +133,10 @@ export default async function HomePage() {
           <div className="home-section__header">
             <div>
               <h2 id="popular-activities-heading" className="home-section__title">
-                Easy resort activities
+                Current resort activities
               </h2>
               <p className="home-section__subtitle">
-                Free picks, crafts, scavenger hunts, and gentle resort fun in one list.
+                Free and low-cost activities from Disney resort calendars.
               </p>
             </div>
             <Link
@@ -149,10 +154,10 @@ export default async function HomePage() {
         <div className="home-section__header">
           <div>
             <h2 id="resorts-heading" className="home-section__title">
-              Pick your resort
+              Choose your resort
             </h2>
             <p className="home-section__subtitle">
-              Find schedules, movies, and campfires where you&apos;re staying.
+              {"See today's schedule, tonight's options, free activities, and source freshness for the resort where you are staying."}
             </p>
           </div>
         </div>

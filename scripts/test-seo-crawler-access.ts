@@ -77,10 +77,10 @@ assert.ok(
 );
 
 const textIssues = auditCrawlerResponse({
-  route: { path: "/llms-full.txt", kind: "text", requiredText: ["Research dossier"] },
+  route: { path: "/llms-full.txt", kind: "text", requiredText: ["Planning guide creation"] },
   status: 200,
   headers: new Headers({ "content-type": "text/plain; charset=utf-8" }),
-  body: "# After the Parks\nResearch dossier\n",
+  body: "# After the Parks\nPlanning guide creation\n",
 });
 assert.deepEqual(textIssues, [], "valid AI discovery text should pass crawler audit");
 

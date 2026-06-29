@@ -21,9 +21,9 @@ import { activitySourceSummary, formatSeoDate } from "@/lib/seo/activityPage";
 export const dynamic = "force-dynamic";
 
 const DEFAULT_RESORT_METADATA = {
-  title: "Walt Disney World Resort Activity Calendars by Resort",
+  title: "Disney World Resort Activity Calendars",
   description:
-    "Browse Disney-owned Walt Disney World resort hotels with current activity, movie, campfire, recreation, and today/tonight schedule highlights.",
+    "Choose your resort to see today's activities, tonight's options, free activities, weather notes, and source freshness.",
   canonical: "/resorts",
 };
 
@@ -75,6 +75,7 @@ export default async function ResortsPage({
 }) {
   const params = await searchParams;
   const noTicketFriendly = params.no_ticket_friendly === "true";
+  const pageMetadata = resortMetadataForParams(params);
   const [resorts, tonightActivities, todayActivities] = await Promise.all([
     getResorts(),
     getTonightActivities(),
@@ -111,8 +112,8 @@ export default async function ResortsPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <Hero
-        title="Resorts"
-        subtitle="All 31 Disney-owned and operated Walt Disney World resort hotels — filter by tier, area, or what's happening today."
+        title={pageMetadata.title}
+        subtitle={pageMetadata.description}
       />
       <section className="mb-6 grid gap-4">
         <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">

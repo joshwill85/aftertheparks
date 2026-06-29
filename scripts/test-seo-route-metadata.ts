@@ -23,7 +23,7 @@ async function main() {
     params: Promise.resolve({ slug: "movies-under-the-stars" }),
     searchParams: Promise.resolve({}),
   });
-  assert.equal(movies.title, "Movies Under the Stars at Walt Disney World Resorts");
+  assert.equal(movies.title, "Movies Under the Stars at Disney World Resorts");
   assert.match(
     String(movies.description),
     /outdoor movie nights/i,
@@ -31,6 +31,20 @@ async function main() {
   );
   assert.deepEqual(movies.alternates, {
     canonical: "/activities/movies-under-the-stars",
+  });
+
+  const arcades = await activityMetadata({
+    params: Promise.resolve({ slug: "arcades" }),
+    searchParams: Promise.resolve({}),
+  });
+  assert.equal(arcades.title, "Arcades at Disney World Resorts");
+  assert.match(
+    String(arcades.description),
+    /Current arcade options across Disney resorts, with locations, cost notes, and source freshness\./,
+    "Arcade category metadata should use the audit's practical category-page intro"
+  );
+  assert.deepEqual(arcades.alternates, {
+    canonical: "/activities/arcades",
   });
 
   const resort = await resortMetadata({
@@ -406,7 +420,8 @@ async function main() {
       "Last updated",
       "Mistakes to avoid",
       "Planning quality checks",
-      "Research dossier",
+      "Start here",
+      "Best next clicks",
     ] as const) {
       const escapedGuidePath = guidePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       assert.match(
@@ -649,8 +664,8 @@ async function main() {
   );
   assert.match(
     guidesPage,
-    /Research-gated guide cluster/,
-    "guide index should visibly explain the research-gated guide cluster"
+    /Disney World Resort Planning Guides/,
+    "guide index should use public-facing planning guide language"
   );
   assert.match(
     guidesPage,

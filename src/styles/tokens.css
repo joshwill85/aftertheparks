@@ -131,6 +131,8 @@
   --weather-normal-text: var(--lagoon-deep);
   --weather-card-primary-text: var(--night);
   --weather-card-secondary-text: var(--brand-ink);
+  --weather-card-light-text: #fff;
+  --weather-card-light-muted-text: rgba(255, 255, 255, 0.94);
   --weather-rain-bg: rgba(8, 121, 138, 0.12);
   --weather-rain-text: #075f6d;
   --weather-heat-bg: rgba(253, 185, 78, 0.18);

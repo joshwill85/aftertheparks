@@ -35,7 +35,11 @@ const card = movieToEventCard(movie, "day");
 
 assert.equal(card.title, "Lilo & Stitch", "movie cards must show the movie title");
 assert.equal(card.href, undefined, "movie cards should open in-app details instead of bouncing to Tonight");
-assert.equal(card.summary, movie.overview, "movie cards should surface the movie summary when TMDB provides one");
+assert.equal(
+  card.summary,
+  "Outdoor movie at Polynesian Village Resort. Confirm weather and the posted resort schedule.",
+  "movie listing cards should lead with logistics instead of a full movie synopsis"
+);
 assert.match(
   card.extra ?? "",
   /2002/,

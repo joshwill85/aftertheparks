@@ -294,18 +294,29 @@ def build_source_metrics_report(
         for snapshot in sorted(snapshots, key=_source_hash)
         if _source_hash(snapshot)
     ]
+    candidate_count = len(candidates)
+    auto_publishable_count = sum(row["auto_publishable_count"] for row in sources)
+    needs_review_count = sum(row["needs_review_count"] for row in sources)
+    rejected_count = sum(row["rejected_count"] for row in sources)
+    parser_error_count = sum(row["parser_error_count"] for row in sources)
+    source_count = len(sources)
     return {
         "report_kind": "vision_v3_source_metrics",
         "quarter": quarter,
         "summary": {
-            "source_count": len(sources),
+            "source_count": source_count,
             "page_count": sum(row["page_count"] for row in sources),
             "activity_candidate_count": sum(row["activity_candidate_count"] for row in sources),
             "movie_candidate_count": sum(row["movie_candidate_count"] for row in sources),
-            "auto_publishable_count": sum(row["auto_publishable_count"] for row in sources),
-            "needs_review_count": sum(row["needs_review_count"] for row in sources),
-            "rejected_count": sum(row["rejected_count"] for row in sources),
-            "parser_error_count": sum(row["parser_error_count"] for row in sources),
+            "candidate_count": candidate_count,
+            "auto_publishable_count": auto_publishable_count,
+            "needs_review_count": needs_review_count,
+            "rejected_count": rejected_count,
+            "parser_error_count": parser_error_count,
+            "auto_publish_rate": _rate(auto_publishable_count, candidate_count),
+            "manual_review_rate": _rate(needs_review_count, candidate_count),
+            "rejected_rate": _rate(rejected_count, candidate_count),
+            "parser_error_source_rate": _rate(parser_error_count, source_count),
             "field_metrics": _field_metrics(candidates),
         },
         "sources": sources,

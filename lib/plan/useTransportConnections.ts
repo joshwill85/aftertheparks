@@ -43,7 +43,9 @@ function isTransportMode(value: string): value is PlanTransportMode {
 }
 
 function optionKind(value: string): PlanTransportOptionKind {
-  return value === "direct_edge" ? "direct_edge" : "od_service";
+  if (value === "direct_edge") return "direct_edge";
+  if (value === "graph_path") return "graph_path";
+  return "od_service";
 }
 
 function rowToOption(row: TransportConnectionRow): PlanTransportConnectionOption | null {

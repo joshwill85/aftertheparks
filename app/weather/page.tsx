@@ -51,9 +51,9 @@ type WeatherAreaView = {
   daily: WeatherDay[];
 };
 
-const title = "Disney World Weather";
+const title = "Is it a good time for resort activities?";
 const description =
-  "Live Disney World weather guidance by resort area, with hourly conditions, official alerts, rain context, and weekly planning by day.";
+  "Check rain, heat, and storm risk by resort area before you head out.";
 
 export const metadata: Metadata = {
   title,
@@ -155,7 +155,7 @@ function riskLabel(weather: WeatherForTimeSpan): string {
   if (risk === "storm") return "Stay covered";
   if (risk === "rain") return "Rain window";
   if (risk === "heat") return "Heat buildup";
-  return "Outdoor window";
+  return "Outdoor plans right now";
 }
 
 function chapterLabel(slot: WeatherChapterSlot, weather: WeatherForTimeSpan): string {
@@ -275,7 +275,7 @@ function WeatherDayArc({ area }: { area: WeatherAreaView }) {
     <section className="weather-day-arc" aria-labelledby="weather-day-arc-heading">
       <div className="weather-day-arc__header">
         <div>
-          <span className="weather-kicker">Shape of the day</span>
+          <span className="weather-kicker">{"Today's weather pattern"}</span>
           <h2 id="weather-day-arc-heading">{chapterLabel("thisHour", area.now)}</h2>
         </div>
         <p>{area.now.plainLanguageSummary}</p>
@@ -314,10 +314,9 @@ function HeroWeatherPanel({ area }: { area: WeatherAreaView }) {
     <section className={`weather-atmosphere ${riskClass(area.now)}`}>
       <div className="weather-atmosphere__copy">
         <span className="weather-kicker">Walt Disney World</span>
-        <h1>Weather that helps you choose your window.</h1>
+        <h1>Is it a good time for resort activities?</h1>
         <p>
-          A live read on heat, rain, and official alerts across the resort areas,
-          shaped around when it is worth stepping out, slowing down, or staying covered.
+          Check rain, heat, and storm risk by resort area before you head out.
         </p>
         <div className="weather-atmosphere__actions">
           <Link href="/today?weather=indoor">Indoor backups</Link>
@@ -345,8 +344,8 @@ function MicroclimateRail({ areas }: { areas: WeatherAreaView[] }) {
   return (
     <section className="weather-page-section weather-microclimate-rail" aria-labelledby="weather-area-heading">
       <div className="weather-page-section__heading">
-        <span className="weather-kicker">Microclimates</span>
-        <h2 id="weather-area-heading">The property is not always one forecast.</h2>
+        <span className="weather-kicker">Weather by resort area</span>
+        <h2 id="weather-area-heading">Weather can differ across Disney World.</h2>
         <p>Tap an area to jump into the local read before you cross property.</p>
       </div>
       <div className="weather-microclimate-rail__track" role="list">
@@ -544,7 +543,7 @@ export default async function WeatherPage() {
 
       <section className="weather-page-section" aria-labelledby="weather-flow-heading">
         <div className="weather-page-section__heading">
-          <span className="weather-kicker">Forecast chapters</span>
+          <span className="weather-kicker">Area-by-area forecast</span>
           <h2 id="weather-flow-heading">A better rhythm for moving around property.</h2>
           <p>Each resort area gets a short sequence: what to trust, what to watch, and when to pivot.</p>
         </div>
@@ -558,7 +557,7 @@ export default async function WeatherPage() {
       <section className="weather-page-section" aria-labelledby="weather-hourly-heading">
         <div className="weather-page-section__heading">
           <span className="weather-kicker">Hour by hour</span>
-          <h2 id="weather-hourly-heading">The detailed read.</h2>
+          <h2 id="weather-hourly-heading">Hour-by-hour forecast.</h2>
           <p>Short-horizon temperature and rain context by Disney resort area.</p>
         </div>
         <div className="weather-hourly-grid">

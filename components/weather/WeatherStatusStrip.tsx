@@ -15,7 +15,7 @@ export type WeatherStatusState =
 function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string {
   switch (action) {
     case "good_now":
-      return "Good to go";
+      return "Outdoor plans OK";
     case "go_earlier":
       return "Go earlier";
     case "choose_covered_backup":

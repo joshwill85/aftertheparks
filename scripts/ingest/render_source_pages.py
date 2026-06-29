@@ -20,16 +20,19 @@ except ImportError:  # pragma: no cover - exercised only when dependency is abse
 try:
     from config import PROCESSED_DIR, SOURCE_DOCUMENTS_RAW_DIR
     from content_type import SourceContent, detect_source_content
+    from db import SupabaseClient
     from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR, SOURCE_DOCUMENTS_RAW_DIR
     from .content_type import SourceContent, detect_source_content
+    from .db import SupabaseClient
     from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "page_images"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_render_source_pages_report.json"
 DEFAULT_PDF_DPI = 450
+SOURCE_DOCUMENT_PAGES_CONFLICT = "source_document_id,page_number,canonical_image_sha256"
 THUMBNAIL_MAX_SIZE = (360, 360)
 SOURCE_METADATA_FIELDS = (
     "source_document_id",
@@ -89,6 +92,95 @@ def _source_metadata_from_path(path: Path, source_documents_dir: Path) -> dict[s
         "calendar_group_key": "unknown",
         "edition": "unknown",
     }
+
+
+def _load_source_inventory(path: Path | None) -> list[dict[str, Any]]:
+    if path is None:
+        return []
+    payload = json.loads(path.read_text())
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    if isinstance(payload, dict):
+        rows = payload.get("sources") or payload.get("results") or payload.get("documents") or []
+        if isinstance(rows, list):
+            return [row for row in rows if isinstance(row, dict)]
+    return []
+
+
+def _source_inventory_by_hash(source_inventory: list[dict[str, Any]] | None) -> dict[str, dict[str, Any]]:
+    indexed: dict[str, dict[str, Any]] = {}
+    for row in source_inventory or []:
+        content_sha256 = row.get("content_sha256") or row.get("source_sha256")
+        if isinstance(content_sha256, str) and content_sha256:
+            indexed[content_sha256] = row
+    return indexed
+
+
+def _report_source_metadata(row: dict[str, Any], source_metadata: dict[str, Any] | None) -> None:
+    if not isinstance(source_metadata, dict):
+        return
+    for field in SOURCE_METADATA_FIELDS:
+        if field in source_metadata:
+            row[field] = source_metadata[field]
+
+
+def source_document_page_rows_from_manifest(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    """Build DB-ready source_document_pages rows from a render manifest."""
+    source_document_id = str(manifest.get("source_document_id") or "").strip()
+    if not source_document_id:
+        raise ValueError("missing_source_document_id")
+    content_sha256 = str(manifest.get("source_sha256") or "").strip()
+    if not content_sha256:
+        raise ValueError("missing_source_sha256")
+
+    rows: list[dict[str, Any]] = []
+    for page in manifest.get("pages") or []:
+        if not isinstance(page, dict):
+            continue
+        rows.append(
+            {
+                "source_document_id": source_document_id,
+                "content_sha256": content_sha256,
+                "page_number": page.get("page_number"),
+                "page_kind": page.get("page_kind"),
+                "canonical_image_storage_path": page.get("canonical_image_path"),
+                "canonical_image_sha256": page.get("canonical_image_sha256"),
+                "width_px": page.get("width_px"),
+                "height_px": page.get("height_px"),
+                "render_engine": page.get("render_engine"),
+                "render_engine_version": page.get("render_engine_version"),
+                "render_dpi": page.get("render_dpi"),
+                "render_scale": page.get("render_scale"),
+                "image_orientation": page.get("image_orientation"),
+                "image_quality": {
+                    "thumbnail_storage_path": page.get("thumbnail_path"),
+                    "thumbnail_sha256": page.get("thumbnail_sha256"),
+                },
+            }
+        )
+    return rows
+
+
+def source_document_page_rows_from_report(report: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for result in report.get("results") or []:
+        if not isinstance(result, dict) or result.get("status") != "rendered":
+            continue
+        for row in result.get("source_document_pages") or []:
+            if isinstance(row, dict):
+                rows.append(row)
+    return rows
+
+
+def upsert_source_document_pages_from_report(db: Any, report: dict[str, Any]) -> dict[str, int]:
+    rows = source_document_page_rows_from_report(report)
+    if rows:
+        db.upsert(
+            "source_document_pages",
+            rows,
+            on_conflict=SOURCE_DOCUMENT_PAGES_CONFLICT,
+        )
+    return {"source_document_pages": len(rows)}
 
 
 def _matches_filters(
@@ -275,8 +367,12 @@ def render_source_documents_from_directory(
     pdf_dpi: int = DEFAULT_PDF_DPI,
     group: str | None = None,
     quarter: str | None = None,
+    source_inventory: list[dict[str, Any]] | None = None,
+    source_inventory_path: Path | None = None,
 ) -> dict[str, Any]:
     results: list[dict[str, Any]] = []
+    inventory_rows = source_inventory if source_inventory is not None else _load_source_inventory(source_inventory_path)
+    inventory_by_hash = _source_inventory_by_hash(inventory_rows)
     for source_path in _source_document_files(source_documents_dir):
         metadata = _source_metadata_from_path(source_path, source_documents_dir)
         calendar_group_key = metadata["calendar_group_key"]
@@ -289,6 +385,8 @@ def render_source_documents_from_directory(
         ):
             continue
 
+        source_sha256 = sha256_file(source_path)
+        source_metadata = inventory_by_hash.get(source_sha256)
         try:
             manifest = render_source_document(
                 source_path,
@@ -296,36 +394,46 @@ def render_source_documents_from_directory(
                 edition=edition,
                 output_dir=output_dir,
                 pdf_dpi=pdf_dpi,
+                source_metadata=source_metadata,
             )
-            results.append(
-                {
-                    "status": "rendered",
-                    "source_path": str(source_path),
-                    "calendar_group_key": calendar_group_key,
-                    "edition": edition,
-                    "source_sha256": manifest["source_sha256"],
-                    "source_type": manifest["source_type"],
-                    "mime_type": manifest["mime_type"],
-                    "page_count": manifest["page_count"],
-                    "manifest_path": manifest["manifest_path"],
-                    "error": None,
-                }
-            )
+            result = {
+                "status": "rendered",
+                "source_path": str(source_path),
+                "calendar_group_key": calendar_group_key,
+                "edition": edition,
+                "source_sha256": manifest["source_sha256"],
+                "source_type": manifest["source_type"],
+                "mime_type": manifest["mime_type"],
+                "page_count": manifest["page_count"],
+                "manifest_path": manifest["manifest_path"],
+                "error": None,
+            }
+            if manifest.get("source_document_id"):
+                page_rows = source_document_page_rows_from_manifest(manifest)
+                result["source_document_page_count"] = len(page_rows)
+                result["source_document_pages"] = page_rows
+            else:
+                result["source_document_page_count"] = 0
+                result["source_document_pages"] = []
+            _report_source_metadata(result, source_metadata)
+            results.append(result)
         except Exception as exc:
-            results.append(
-                {
-                    "status": "source_error",
-                    "source_path": str(source_path),
-                    "calendar_group_key": calendar_group_key,
-                    "edition": edition,
-                    "source_sha256": sha256_file(source_path),
-                    "source_type": None,
-                    "mime_type": None,
-                    "page_count": 0,
-                    "manifest_path": None,
-                    "error": str(exc),
-                }
-            )
+            result = {
+                "status": "source_error",
+                "source_path": str(source_path),
+                "calendar_group_key": calendar_group_key,
+                "edition": edition,
+                "source_sha256": source_sha256,
+                "source_type": None,
+                "mime_type": None,
+                "page_count": 0,
+                "manifest_path": None,
+                "source_document_page_count": 0,
+                "source_document_pages": [],
+                "error": str(exc),
+            }
+            _report_source_metadata(result, source_metadata)
+            results.append(result)
 
     report = {
         "report_kind": "v3_render_source_pages",
@@ -338,6 +446,10 @@ def render_source_documents_from_directory(
             "source_count": len(results),
             "rendered_count": sum(1 for result in results if result["status"] == "rendered"),
             "source_error_count": sum(1 for result in results if result["status"] == "source_error"),
+            "source_document_page_count": sum(
+                int(result.get("source_document_page_count") or 0)
+                for result in results
+            ),
         },
         "results": results,
     }
@@ -358,10 +470,18 @@ def main() -> None:
     parser.add_argument("--group")
     parser.add_argument("--quarter")
     parser.add_argument("--pdf-dpi", type=int, default=DEFAULT_PDF_DPI)
+    parser.add_argument("--source-inventory", type=Path)
+    parser.add_argument(
+        "--upsert-source-document-pages",
+        action="store_true",
+        help="Upsert rendered canonical page metadata into source_document_pages",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     if args.source:
+        if args.upsert_source_document_pages:
+            parser.error("--upsert-source-document-pages is only supported for batch rendering")
         if not args.calendar_group_key:
             parser.error("--calendar-group-key is required when rendering a single source")
         manifest = render_source_document(
@@ -384,7 +504,13 @@ def main() -> None:
         pdf_dpi=args.pdf_dpi,
         group=args.group,
         quarter=args.quarter,
+        source_inventory_path=args.source_inventory,
     )
+    if args.upsert_source_document_pages:
+        report["source_document_pages_upsert"] = upsert_source_document_pages_from_report(
+            SupabaseClient(),
+            report,
+        )
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:

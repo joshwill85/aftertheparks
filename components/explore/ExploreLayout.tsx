@@ -54,7 +54,7 @@ export function ExploreLayout({
                 id="official-offerings-heading"
                 className="font-display text-2xl font-semibold"
               >
-                Official recreation offerings
+                Other resort recreation
               </h2>
               <p className="mt-1 text-sm text-[var(--color-muted)]">
                 Disney recreation listings from official sources that are not

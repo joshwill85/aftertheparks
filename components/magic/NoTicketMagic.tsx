@@ -7,10 +7,10 @@ export function NoTicketMagic() {
     <section className="home-section" aria-labelledby="no-ticket-heading">
       <div className="mb-4">
         <h2 id="no-ticket-heading" className="font-display text-2xl font-semibold">
-          No-ticket magic
+          No park ticket needed
         </h2>
         <p className="mt-1 text-sm text-[var(--color-muted)]">
-          Resort fun that doesn&apos;t need a park day.
+          Find Disney-feeling activities and resort ideas that do not require entering a theme park. Confirm resort access before you go.
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

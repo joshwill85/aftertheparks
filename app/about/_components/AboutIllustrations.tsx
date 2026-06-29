@@ -83,8 +83,12 @@ export function HeroMapScene() {
         <path className={styles.cabinLine} d="M126 173h66M126 190h66M148 232v-38h25v38" />
         <path className={styles.tree} d="M242 132 261 92l18 40h-9l15 31h-48l15-31z" />
         <path className={styles.treeTrunk} d="M258 162v32" />
+        <path className={styles.palmTrunk} d="M322 181v-54" />
+        <path className={styles.palmLeaf} d="M322 128c-25-18-46-10-62 8M325 128c26-24 52-14 66 0M322 128c2-28 22-42 48-42" />
 
         <path className={styles.picnic} d="M286 172h88M300 172l-24 44M360 172l24 44M296 203h82" />
+        <path className={styles.mapNoteSlip} d="M124 248h80l-8 42h-78z" />
+        <text className={styles.mapNoteText} x="134" y="274">Tonight?</text>
         <path className={styles.backpack} d="M405 250h38v54h-38z" />
         <path className={styles.backpack} d="M413 250c0-16 22-16 22 0M405 274h38M412 286h12" />
         <path className={styles.schedule} d="M352 266h48v48h-48zM362 282h26M362 296h18" />
@@ -106,6 +110,9 @@ export function HeroMapScene() {
 export function ObjectDetailIllustration() {
   return (
     <svg viewBox="0 0 220 160" aria-hidden className={styles.objectDetailSvg}>
+      <circle className={styles.coffeeRing} cx="54" cy="116" r="20" />
+      <path className={styles.scheduleSheet} d="M143 34h44v58h-44zM153 50h22M153 66h28M153 82h18" />
+      <path className={styles.cabinKeyTag} d="M166 112c0-9 14-9 14 0s-7 15-7 15-7-6-7-15zM173 127l18 18M185 139l-5 5" />
       <path d="M24 42 93 24l62 20 42-12v86l-46 14-61-20-66 18z" />
       <path d="M93 24v88M155 44v88" />
       <path d="M42 103c30-31 57-3 79-28 25-28 43 12 72-17" />

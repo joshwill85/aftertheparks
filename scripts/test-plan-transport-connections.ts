@@ -3,6 +3,8 @@ import {
   buildTransportConnectionMap,
   connectionOptionsForPair,
   dedupeAndRankTransportOptions,
+  transportOptionDetail,
+  transportOptionLabel,
   transportConnectionPairsForItems,
   transportPairKey,
   type PlanTransportConnectionOption,
@@ -155,6 +157,133 @@ assert.equal(
   )[0]?.id,
   "monorail-adjacent",
   "Connection maps should return ranked options for a directional resort pair"
+);
+
+const graphTransfer = option("fort-wilderness-to-kidani", "bus", 1, "Bus", {
+  originResortSlug: "cabins-at-fort-wilderness-resort",
+  originName: "The Cabins at Disney's Fort Wilderness Resort",
+  destinationResortSlug: "animal-kingdom-villas-kidani-village",
+  destinationName: "Animal Kingdom Villas - Kidani Village",
+  serviceType: "one_transfer_graph_path",
+  directness: "transfer_path",
+  viaPlaceIds: ["animal_kingdom"],
+  viaPlaceNames: ["Disney's Animal Kingdom Theme Park"],
+  evidenceLevel: "generated_graph_path",
+  notes: [
+    "Graph path with one transfer; confirm current operating hours, destination access, and transfer availability day-of.",
+  ],
+  optionKind: "graph_path",
+});
+
+assert.equal(
+  transportOptionLabel(graphTransfer),
+  "Bus transfer via Disney's Animal Kingdom Theme Park",
+  "Generated graph paths should name the transfer point instead of duplicate copy like Bus via Bus"
+);
+
+assert.equal(
+  transportOptionDetail(graphTransfer),
+  "Take bus transportation from The Cabins at Disney's Fort Wilderness Resort to Disney's Animal Kingdom Theme Park. Use the resort bus stop and check posted destination signs. At Disney's Animal Kingdom Theme Park, transfer to a bus to Animal Kingdom Villas - Kidani Village. Check the bus directory/signage for the current bus bay. *Live schedules and exact pickup points are not included here; confirm current routes, bus bays, and timing in My Disney Experience, posted signage, or with a Cast Member.*",
+  "Generated graph path details should read like plain-language directions"
+);
+
+const transferMap = buildTransportConnectionMap([graphTransfer]);
+const transferPath = buildPlanDaybookPath(
+  [
+    item(
+      "campfire",
+      "cabins-at-fort-wilderness-resort",
+      "The Cabins at Disney's Fort Wilderness Resort",
+      "2026-07-02T23:00:00.000Z",
+      "2026-07-02T23:45:00.000Z"
+    ),
+    item(
+      "kidani-movie",
+      "animal-kingdom-villas-kidani-village",
+      "Animal Kingdom Villas - Kidani Village",
+      "2026-07-03T00:30:00.000Z",
+      "2026-07-03T01:00:00.000Z"
+    ),
+  ],
+  transferMap
+);
+
+assert.equal(
+  transferPath.stops[1].connectorBefore?.label,
+  "45 min gap · Bus transfer via Disney's Animal Kingdom Theme Park",
+  "One-transfer graph options should replace the generic resort-change connector"
+);
+assert.match(
+  transferPath.stops[1].connectorBefore?.detail ?? "",
+  /transfer to a bus to Animal Kingdom Villas - Kidani Village/
+);
+assert.deepEqual(
+  transferPath.stops[1].connectorBefore?.detailLines,
+  [
+    "Take bus transportation from The Cabins at Disney's Fort Wilderness Resort to Disney's Animal Kingdom Theme Park.",
+    "Use the resort bus stop and check posted destination signs.",
+    "At Disney's Animal Kingdom Theme Park, transfer to a bus to Animal Kingdom Villas - Kidani Village.",
+    "Check the bus directory/signage for the current bus bay.",
+  ],
+  "Transport connectors should expose plain-language instruction lines for rendering"
+);
+assert.equal(
+  transferPath.stops[1].connectorBefore?.disclosure,
+  "Live schedules and exact pickup points are not included here; confirm current routes, bus bays, and timing in My Disney Experience, posted signage, or with a Cast Member.",
+  "Transport uncertainty should render as a separate disclosure"
+);
+
+const alternateGraphTransfer = option("fort-wilderness-to-kidani-springs", "bus", 1, "Bus", {
+  ...graphTransfer,
+  id: "fort-wilderness-to-kidani-springs",
+  viaPlaceIds: ["disney_springs"],
+  viaPlaceNames: ["Disney Springs"],
+});
+
+assert.deepEqual(
+  buildTransportConnectionMap([graphTransfer, alternateGraphTransfer])
+    .get(
+      transportPairKey(
+        "cabins-at-fort-wilderness-resort",
+        "animal-kingdom-villas-kidani-village"
+      )
+    )
+    ?.map((row) => row.viaPlaceIds[0]),
+  ["animal_kingdom", "disney_springs"],
+  "Graph paths with different transfer points should remain separate route options"
+);
+
+const boatBusTransfer = option(
+  "fort-wilderness-to-kidani-magic-kingdom",
+  "boat",
+  1,
+  "Water Taxi / Resort Launch + Bus",
+  {
+    ...graphTransfer,
+    id: "fort-wilderness-to-kidani-magic-kingdom",
+    transportMode: "boat",
+    routeLabel: "Water Taxi / Resort Launch + Bus",
+    viaPlaceIds: ["magic_kingdom"],
+    viaPlaceNames: ["Magic Kingdom Park"],
+  }
+);
+
+assert.equal(
+  transportOptionLabel(boatBusTransfer),
+  "Boat + Bus via Magic Kingdom Park",
+  "Mixed graph paths should use plain mode names and transfer point"
+);
+
+assert.equal(
+  transportOptionDetail(boatBusTransfer),
+  "Take boat transportation from The Cabins at Disney's Fort Wilderness Resort to Magic Kingdom Park. Look for the resort boat launch or posted water transportation signs. At Magic Kingdom Park, transfer to a bus to Animal Kingdom Villas - Kidani Village. Check the bus directory/signage for the current bus bay. *Live schedules and exact pickup points are not included here; confirm current routes, bus bays, and timing in My Disney Experience, posted signage, or with a Cast Member.*",
+  "Mixed graph path details should explain each leg without exposing source-generation notes"
+);
+
+assert.deepEqual(
+  dedupeAndRankTransportOptions([boatBusTransfer, graphTransfer]).map((row) => row.id),
+  ["fort-wilderness-to-kidani", "fort-wilderness-to-kidani-magic-kingdom"],
+  "Same-transfer routes should prefer simpler same-mode transfers before mixed-mode transfers"
 );
 
 const enrichedPath = buildPlanDaybookPath(

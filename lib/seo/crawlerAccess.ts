@@ -91,7 +91,7 @@ export const DEFAULT_CRAWLER_AUDIT_ROUTES: CrawlerAuditRoute[] = [
   {
     path: "/llms-full.txt",
     kind: "text",
-    requiredText: ["Research dossier", "Competitor gap analysis"],
+    requiredText: ["Planning guide creation", "Best next pages"],
   },
   {
     path: "/robots.txt",

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 import re
 from pathlib import Path
@@ -23,6 +24,10 @@ DEFAULT_VALIDATED_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 PROMOTABLE_STATUSES = {"auto_publishable", "manually_approved"}
 GOLD_CONFLICT_FIELDS = ("title", "schedule", "location", "price")
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _slugify(value: str) -> str:
@@ -203,6 +208,11 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
     schedule = candidate.get("schedule_normalized") if isinstance(candidate.get("schedule_normalized"), dict) else {}
     canonical_url = candidate.get("canonical_url") or candidate.get("source_url")
     fetched_url = candidate.get("fetched_url")
+    derived_source_links = (
+        candidate.get("derived_source_links")
+        if isinstance(candidate.get("derived_source_links"), list)
+        else []
+    )
     return {
         "publication_mode": "vision_v3_preview",
         "pipeline_version": candidate.get("pipeline_version", "vision_v3_001"),
@@ -210,6 +220,8 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
         "runtime_lineage": candidate.get("runtime_lineage"),
         "calendar_group_key": candidate.get("calendar_group_key"),
         "document_family": candidate.get("document_family"),
+        "canonical_page_image_sha256s": candidate.get("canonical_page_image_sha256s") or [],
+        "source_pages": candidate.get("source_pages") or [],
         "edition": candidate.get("edition"),
         "source_type": candidate.get("source_type"),
         "source_kind": candidate.get("source_kind"),
@@ -243,11 +255,13 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
         "source_sha256": candidate.get("content_sha256"),
         "source_url": canonical_url,
         "fetched_url": fetched_url,
+        "derived_source_links": derived_source_links,
         "source": {
             "documentId": candidate.get("source_document_id"),
             "documentHash": candidate.get("content_sha256"),
             "canonicalUrl": canonical_url,
             "fetchedUrl": fetched_url,
+            "derivedSourceLinks": derived_source_links,
         },
         "field_evidence": candidate.get("field_evidence", {}),
         "source_spans": candidate.get("source_spans", {}),
@@ -320,6 +334,7 @@ def build_gold_v3_preview(
     return {
         "pipeline_version": "vision_v3_001",
         "publication_mode": "vision_v3_preview",
+        "generated_at": _now_iso(),
         "summary": {
             "input_candidates": len(candidates),
             "gold_rows": len(rows),

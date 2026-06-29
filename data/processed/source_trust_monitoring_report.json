@@ -1,12 +1,7 @@
 {
-  "status": "attention",
+  "generated_at": "2026-06-29T03:58:29.150349+00:00",
+  "status": "pass",
   "changed_sources": [],
-  "affected_rows": [
-    {
-      "code": "independent_visual_ocr_coverage_not_high",
-      "severity": "blocker",
-      "current": "low"
-    }
-  ],
-  "recommended_action": "manual_review"
+  "affected_rows": [],
+  "recommended_action": "none"
 }

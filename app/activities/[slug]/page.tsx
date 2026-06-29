@@ -37,6 +37,10 @@ import { notFound, redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
+function fallbackActivityTitle(title: string): string {
+  return `${title} at Disney World Resorts`;
+}
+
 export async function generateMetadata({
   params,
   searchParams,
@@ -51,12 +55,13 @@ export async function generateMetadata({
   const fallback = getSeoActivityBySlug(canonicalSlug);
 
   if (!result && fallback) {
+    const fallbackTitle = fallbackActivityTitle(fallback.title);
     return {
-      title: `${fallback.title} at Walt Disney World Resorts`,
+      title: fallbackTitle,
       description: fallback.description,
       alternates: { canonical: `/activities/${canonicalSlug}` },
       ...buildSocialMetadata({
-        title: `${fallback.title} at Walt Disney World Resorts`,
+        title: fallbackTitle,
         description: fallback.description,
         path: `/activities/${canonicalSlug}`,
         type: "article",
@@ -103,7 +108,7 @@ function ActivitySeoFallback({
     {
       question: `Is ${activity.title} currently scheduled?`,
       answer:
-        "This evergreen activity guide can exist even when there is no confirmed current schedule row. Use the live today, tonight, or activity views to confirm current source-backed timing.",
+        "This evergreen activity guide can exist even when there is no confirmed current schedule row. Use the live today, tonight, or activity views to confirm current timing.",
     },
     {
       question: `What should I confirm before planning ${activity.title}?`,
@@ -135,7 +140,7 @@ function ActivitySeoFallback({
                     name: `Current ${activity.title} listings`,
                     path: activity.currentCheckHref,
                     description:
-                      "Source-backed current activity listings when available.",
+                      "Verified current activity listings when available.",
                   },
                   {
                     name: "Today's resort activities",
@@ -150,7 +155,7 @@ function ActivitySeoFallback({
                 ],
                 {
                   dateModified,
-                  currentScheduleWindow: "Current source-backed activity listings",
+                  currentScheduleWindow: "Current activity listings",
                   sourceSummary:
                     "Evergreen activity guide with visible source and freshness notes; use current listings and official resort confirmation before planning.",
                 }
@@ -176,7 +181,7 @@ function ActivitySeoFallback({
           Activity guide
         </p>
         <h1 className="font-display mt-2 text-4xl font-bold">
-          {activity.title} at Walt Disney World Resorts
+          {fallbackActivityTitle(activity.title)}
         </h1>
         <p className="mt-3 max-w-3xl text-[var(--color-muted)]">
           {activity.description}
@@ -198,7 +203,7 @@ function ActivitySeoFallback({
             <h3 className="font-display text-lg font-semibold">Participating resorts</h3>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
               Participating resorts can change by season, calendar, and source
-              availability. The current activity views show the source-backed
+              availability. The current activity views show the verified
               resort listings available now.
             </p>
           </article>
@@ -227,7 +232,7 @@ function ActivitySeoFallback({
           <article className="rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card-subtle)] p-4">
             <h3 className="font-display text-lg font-semibold">Best resorts for this activity</h3>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-              The best resort is the one with a current source-backed listing,
+              The best resort is the one with a current verified listing,
               simple access from where you are staying, and a backup that fits
               weather, timing, and transportation.
             </p>
@@ -253,7 +258,7 @@ function ActivitySeoFallback({
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
               If this activity is unavailable, compare nearby activities in the
               same category or switch to the full activity directory for current
-              source-backed alternatives.
+              verified alternatives.
             </p>
             <Link
               href="/activities"
@@ -307,7 +312,7 @@ function ActivitySeoFallback({
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
           This evergreen activity guide exists even when there is no currently
           confirmed schedule row for the exact activity. Day-of decisions should
-          use source-backed current listings and official resort confirmation.
+          use current listings and official resort confirmation.
         </p>
         <dl className="mt-4 space-y-3 text-sm">
           <div>
@@ -315,7 +320,7 @@ function ActivitySeoFallback({
               Last verified
             </dt>
             <dd className="mt-1 text-[var(--color-muted)]">
-              No current source-backed schedule row is published for this
+              No current schedule row is published for this
               evergreen guide. Use today, tonight, and official resort sources
               before relying on a specific time.
             </dd>
@@ -451,7 +456,7 @@ export default async function ActivityDetailPage({
         dateModified: activityDateModified,
         currentScheduleWindow: activityScheduleWindow(upcoming),
         sourceSummary:
-          "Official and source-backed resort activity data is checked first, with visible freshness, schedule, cost, reservation, weather, and caveat notes on the page.",
+          "Official and verified resort activity data is checked first, with visible freshness, schedule, cost, reservation, weather, and caveat notes on the page.",
       }
     ),
     buildFaqPageJsonLd(baseUrl, `/activities/${activity.activitySlug}`, faqItems),

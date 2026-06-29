@@ -4,7 +4,11 @@ import { ObjectDetailIllustration } from "./AboutIllustrations";
 
 export function AboutFounderCard() {
   return (
-    <section className={styles.founderCard} aria-labelledby="about-founder-title">
+    <section
+      className={styles.founderCard}
+      aria-labelledby="about-founder-title"
+      data-about-route-step
+    >
       <div className={styles.founderImageSlot}>
         <ObjectDetailIllustration />
       </div>

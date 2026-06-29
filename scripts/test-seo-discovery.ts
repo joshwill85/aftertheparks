@@ -36,16 +36,16 @@ assert.match(
 );
 
 const llmsFull = buildLlmsFullText(baseUrl);
-assert.match(llmsFull, /Research-gated guide creation/i);
-assert.match(llmsFull, /Research dossier/i);
-assert.match(llmsFull, /Competitor gap analysis/i);
-assert.match(llmsFull, /Editorial review/i);
-assert.match(llmsFull, /Official source links/i);
-assert.match(llmsFull, /What changed in this update/i);
-assert.match(llmsFull, /Anti-thin-content checks/i);
-assert.match(llmsFull, /Would this page still help if search engines sent zero traffic/i);
-assert.match(llmsFull, /No SEO page exists unless it is also a useful product landing page/i);
-assert.match(llmsFull, /Do not use Disney Springs as a free way to get to Disney resort hotels/i);
+assert.match(llmsFull, /Planning guide creation/i);
+assert.match(llmsFull, /real guest decisions in plain language/i);
+assert.match(llmsFull, /Best next pages/i);
+assert.match(llmsFull, /Do not use Disney Springs as a free resort-transfer hub/i);
+assert.doesNotMatch(llmsFull, /Research-gated guide creation/i);
+assert.doesNotMatch(llmsFull, /Research dossier/i);
+assert.doesNotMatch(llmsFull, /Competitor gap analysis/i);
+assert.doesNotMatch(llmsFull, /Anti-thin-content checks/i);
+assert.doesNotMatch(llmsFull, /Would this page still help if search engines sent zero traffic/i);
+assert.doesNotMatch(llmsFull, /No SEO page exists unless it is also a useful product landing page/i);
 assert.match(llmsFull, /\/guides\/things-to-do-without-park-ticket/);
 assert.match(llmsFull, /\/activities\/movies-under-the-stars/);
 

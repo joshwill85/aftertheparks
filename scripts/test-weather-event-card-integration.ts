@@ -16,8 +16,16 @@ assert.match(css, /\.event-weather-signal--poor/);
 assert.match(css, /\.near-term-rain-line/);
 
 const eventSignalSource = readFileSync("components/weather/EventWeatherSignal.tsx", "utf8");
-assert.match(eventSignalSource, /nearTermRain/);
-assert.match(eventSignalSource, /NearTermRainLine/);
+assert.doesNotMatch(
+  eventSignalSource,
+  /nearTermRain/,
+  "Event card weather should not include near-term rain copy or headline fallbacks."
+);
+assert.doesNotMatch(
+  eventSignalSource,
+  /NearTermRainLine/,
+  "Event card weather should not render near-term rain copy inside the compact card."
+);
 
 const activity: ActivityOccurrence = {
   id: "test",

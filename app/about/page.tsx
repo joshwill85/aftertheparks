@@ -3,7 +3,9 @@ import { AboutFooterCta } from "./_components/AboutFooterCta";
 import { AboutFounderCard } from "./_components/AboutFounderCard";
 import { AboutHero } from "./_components/AboutHero";
 import { AboutMessyToMagic } from "./_components/AboutMessyToMagic";
+import { AboutRouteActivation } from "./_components/AboutRouteActivation";
 import { AboutStorySpine } from "./_components/AboutStorySpine";
+import { AboutSouvenirMarks } from "./_components/AboutSouvenirMarks";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
@@ -15,6 +17,8 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className={styles.page}>
+      <AboutRouteActivation />
+      <AboutSouvenirMarks />
       <AboutHero />
       <AboutStorySpine />
       <AboutMessyToMagic />

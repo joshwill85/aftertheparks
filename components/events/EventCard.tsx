@@ -50,7 +50,7 @@ export interface EventWeatherQuery {
 }
 
 export type WeatherDecisionLabel =
-  | "Good to go"
+  | "Outdoor plans OK"
   | "Go earlier"
   | "Bring backup"
   | "Likely affected"

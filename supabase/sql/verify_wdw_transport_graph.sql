@@ -163,6 +163,19 @@ begin
 
   if not exists (
     select 1
+    from public.v_public_wdw_transport_connection_options
+    where origin_resort_slug = 'cabins-at-fort-wilderness-resort'
+      and destination_resort_slug = 'animal-kingdom-villas-kidani-village'
+      and option_kind = 'graph_path'
+      and transport_filter_mode = 'bus'
+      and transfer_count = 1
+      and 'animal_kingdom' = any(via_place_ids)
+  ) then
+    raise exception 'Expected Fort Wilderness Cabins to Kidani to include a one-transfer bus graph path via Animal Kingdom';
+  end if;
+
+  if not exists (
+    select 1
     from public.v_public_wdw_resort_transport_modes
     where resort_slug = 'art-of-animation-resort'
       and transport_filter_mode = 'skyliner'

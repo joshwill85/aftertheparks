@@ -163,7 +163,7 @@ function ActivityPlanningSnapshot({
     upcoming.find((item) => item.startDateTime)?.startDateTime ?? activity.startDateTime;
   const nextKnownLabel = nextKnown
     ? `${formatOrlandoDate(nextKnown)} at ${formatOrlandoTime(nextKnown)}`
-    : whenLabel || "Use today and tonight views for current source-backed timing.";
+    : whenLabel || "Use today and tonight views for current timing.";
   const confirmItems = [
     "Current time and exact location",
     "Day-of cancellations and operating changes",
@@ -559,7 +559,7 @@ export function ActivityDetailClient({
         <aside className="space-y-4">
           <MagicNearbyBadge activity={activity} homeResort={homeResort} />
 
-          <EventDetailSection title="Plan this one">
+          <EventDetailSection title="Add this to your plan">
             <p className="mt-3 text-sm font-bold text-[var(--color-muted)]">
               {display.categoryLabel}
             </p>
@@ -573,7 +573,7 @@ export function ActivityDetailClient({
               href={`/resorts/${activity.resort.slug}`}
               className="event-detail-aside-link"
             >
-              More at {activity.resort.name}
+              See more at {activity.resort.name}
             </Link>
           </EventDetailSection>
 
@@ -591,11 +591,11 @@ export function ActivityDetailClient({
               )}
               <div>
                 <dt className="font-bold text-[var(--color-foreground)]">
-                  Source status
+                  Source
                 </dt>
                 <dd className="mt-1 text-[var(--color-muted)]">
                   {activity.freshness.badge === "verified"
-                    ? "Source-backed, but still confirm before heading out."
+                    ? "Verified from a source. Confirm with the resort before you go."
                     : "Needs current confirmation before you rely on it."}
                 </dd>
               </div>

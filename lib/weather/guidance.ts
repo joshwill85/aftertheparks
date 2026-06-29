@@ -391,7 +391,7 @@ export function getWeatherGuidance(input: {
       decisionState: "go",
       actionGuidance,
       visualState: "normal",
-      headline: "Good to go",
+      headline: "Outdoor plans OK",
       recommendedAction: "Weather should work for this plan.",
       affectedActivityTags: [],
     };

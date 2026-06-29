@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { MoodChips } from "@/components/home/MoodChips";
 import { addOrlandoDays, getDayOfWeekIndex, orlandoDateString } from "@/lib/daypart";
 
 const DATE_OPTIONS = [
@@ -185,9 +185,11 @@ export function QuickFinder({ resorts = [] }: QuickFinderProps) {
             aria-hidden
           />
         </button>
+        <Link href="/tonight" className="btn-secondary quick-finder__cta">
+          {"See tonight's movies and campfires"}
+        </Link>
       </form>
 
-      <MoodChips />
     </div>
   );
 }

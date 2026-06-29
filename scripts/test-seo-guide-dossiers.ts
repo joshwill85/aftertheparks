@@ -48,24 +48,35 @@ assert.deepEqual(
 
 const guidePage = readFileSync("app/guides/[slug]/page.tsx", "utf8");
 for (const expected of [
+  "Start here",
+  "Important caveats",
+  "Live planning paths",
+  "Best next clicks",
+  "Mistakes to avoid",
+  "Sources and update notes",
+]) {
+  assert.match(
+    guidePage,
+    new RegExp(expected),
+    `guide detail page should render visitor-facing section: ${expected}`
+  );
+}
+
+for (const removed of [
   "Research dossier",
   "Official-source facts",
   "After the Parks data facts",
   "Community sentiment use",
   "Competitor gap analysis",
-  "Transportation validation",
   "Bad-fit exclusions",
   "Deep-link plan",
-  "Editorial review",
-  "Official source links",
-  "What changed in this update",
   "Anti-thin-content checks",
   "Would this page still help if search engines sent zero traffic?",
 ]) {
-  assert.match(
+  assert.doesNotMatch(
     guidePage,
-    new RegExp(expected),
-    `guide detail page should visibly render ${expected}`
+    new RegExp(removed),
+    `guide detail page should not publicly render scaffold label: ${removed}`
   );
 }
 

@@ -77,7 +77,7 @@ export function bookingStatusForActivity(
       status: "required",
       label: "Reservation required",
       confidence: "verified",
-      reason: "Source-backed reservation requirement is present.",
+      reason: "Reservation required. Confirm availability before you go.",
     };
   }
 
@@ -86,7 +86,7 @@ export function bookingStatusForActivity(
       status: "recommended",
       label: "Reservation recommended",
       confidence: "verified",
-      reason: "Source-backed reservation recommendation is present.",
+      reason: "Reservation recommended. Confirm availability before you go.",
     };
   }
 
@@ -120,7 +120,7 @@ export function bookingStatusForActivity(
     status: "unknown",
     label: "Booking unclear",
     confidence: "unknown",
-    reason: "No affirmative source-backed booking status is available.",
+    reason: "No clear booking status is available.",
   };
 }
 
@@ -146,7 +146,7 @@ export function ageFitForActivity(activity: ActivityOccurrence): AgeFitFact {
       familyFriendly: ageMinimum <= 12,
       minAge: ageMinimum,
       confidence: "verified",
-      reason: `Source-backed minimum age is ${ageMinimum}.`,
+      reason: `Minimum age is ${ageMinimum}.`,
     };
   }
 
@@ -184,7 +184,7 @@ export function ageFitForActivity(activity: ActivityOccurrence): AgeFitFact {
     littleKids: false,
     familyFriendly: false,
     confidence: "unknown",
-    reason: "No explicit source-backed age fit is available.",
+    reason: "No explicit age fit is available.",
   };
 }
 
@@ -273,7 +273,7 @@ export function weatherFitForActivity(activity: ActivityOccurrence): WeatherFitF
     rainBackup,
     label: rainBackup ? "Rain backup" : "Weather check",
     reason: rainBackup
-      ? "Source-backed or curated weather fit is indoor/covered."
-      : "No source-backed indoor/covered rain-backup fit is available.",
+      ? "Weather fit is indoor or covered."
+      : "No indoor or covered rain-backup fit is available.",
   };
 }

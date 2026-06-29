@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 
 const eventCard = readFileSync("components/events/EventCard.tsx", "utf8");
 for (const label of [
-  "Good to go",
+  "Outdoor plans OK",
   "Go earlier",
   "Bring backup",
   "Likely affected",

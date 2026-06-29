@@ -27,7 +27,7 @@ function ogImage(
   summary = "Current resort activities, calendars, source caveats, and no-park-day planning."
 ): string {
   const params = new URLSearchParams({ title, eyebrow, summary });
-  return `${base}/api/og?${params.toString()}`;
+  return `${base}/api/og?${params.toString()}`.replaceAll("&", "&amp;");
 }
 
 function seoEntry(
@@ -92,7 +92,7 @@ const FILTERED_LANDING_PAGES = [
     changeFrequency: "weekly" as const,
     priority: 0.74,
     imageSummary:
-      "Current free resort activities with source-backed schedule notes and access-sensitive planning caveats.",
+      "Current free resort activities with verified schedule notes and access-sensitive planning caveats.",
   },
   {
     path: "/activities?weather=indoor",
@@ -108,7 +108,7 @@ const FILTERED_LANDING_PAGES = [
     changeFrequency: "daily" as const,
     priority: 0.72,
     imageSummary:
-      "Covered resort activities and light-rain backups with source-backed weather and schedule caveats.",
+      "Covered resort activities and light-rain backups with verified weather and schedule caveats.",
   },
   {
     path: "/activities?transport=monorail",
@@ -116,7 +116,7 @@ const FILTERED_LANDING_PAGES = [
     changeFrequency: "daily" as const,
     priority: 0.72,
     imageSummary:
-      "Current resort activities around the monorail loop with source-backed schedule and access caveats.",
+      "Current resort activities around the monorail loop with verified schedule and access caveats.",
   },
   {
     path: "/activities?transport=skyliner",
@@ -124,7 +124,7 @@ const FILTERED_LANDING_PAGES = [
     changeFrequency: "daily" as const,
     priority: 0.72,
     imageSummary:
-      "Current Skyliner-area resort activities with source-backed schedule, route, and weather caveats.",
+      "Current Skyliner-area resort activities with verified schedule, route, and weather caveats.",
   },
   {
     path: "/activities?area=disney-springs",

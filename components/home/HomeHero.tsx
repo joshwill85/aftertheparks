@@ -29,10 +29,9 @@ export function HomeHero({ resorts = [] }: HomeHeroProps) {
       <LagoonHeroEasterEgg>
         <div className="hero-content">
           <p className="eyebrow">Sunshine to Starlight</p>
-          <h1 className="display">Find the magic between park days.</h1>
+          <h1 className="display">Disney resort activities, today and tonight</h1>
           <p className="hero-copy">
-            Discover resort activities, movies, campfires, crafts, poolside fun, and
-            other current recreation-calendar ideas during your stay.
+            Find something fun to do outside the parks. Search current Disney resort movies, campfires, crafts, pool games, fitness, and free activities with source dates and weather-aware filters.
           </p>
           <QuickFinder resorts={resorts} />
         </div>

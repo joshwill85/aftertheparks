@@ -32,6 +32,10 @@ function priceBadgeTone(label: string): EventBadge["tone"] {
   return "muted";
 }
 
+function movieListingSummary(movie: MovieNightOccurrence): string {
+  return `Outdoor movie at ${movie.resortName}. Confirm weather and the posted resort schedule.`;
+}
+
 export function activityToEventCard(
   activity: ActivityOccurrence,
   display: DisplayActivity,
@@ -149,7 +153,7 @@ export function movieToEventCard(
       : undefined,
     scheduleDayLabel: scheduleDay.label,
     scheduleDayDateTime: scheduleDay.dateTime,
-    summary: movie.overview ?? undefined,
+    summary: movieListingSummary(movie),
     footnote: "Confirm showtime with the resort before heading over.",
     badges,
     media: movie.posterUrl

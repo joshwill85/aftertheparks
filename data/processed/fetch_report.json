@@ -1,6 +1,13 @@
 {
   "fetched_at": "2026-06-28T14:39:41.676807+00:00",
   "ingest_run_id": null,
+  "quarter": null,
+  "source_type_counts": {
+    "pdf": 16,
+    "image": 4,
+    "html": 1
+  },
+  "document_source_count": 20,
   "results": [
     {
       "calendar_group_key": "all-star-movies",
@@ -11,7 +18,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/All-Star-Movies_Aframe_Recreation-0326.pdf",
       "last_modified": "Wed, 20 May 2026 13:55:19 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/all-star-movies-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/all-star-movies-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -22,7 +30,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/All-Star-Music_Aframe_Recreation-0326.pdf",
       "last_modified": "Wed, 20 May 2026 13:55:18 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/all-star-music-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/all-star-music-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -33,7 +42,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/All-Star-Sports_Aframe_Recreation_0126_V3_DRAFT.pdf",
       "last_modified": "Wed, 20 May 2026 13:55:24 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/all-star-sports-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/all-star-sports-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -44,7 +54,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/DAAR_Aframe_Recreation-0326.pdf",
       "last_modified": "Sat, 13 Jun 2026 13:42:49 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/art-of-animation-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/art-of-animation-resort/recreation/",
+      "source_type": "image"
     },
     {
       "calendar_group_key": "pop-century",
@@ -55,7 +66,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POP_Aframe_Recreation-0326.pdf",
       "last_modified": "Mon, 25 May 2026 08:30:15 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/pop-century-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/pop-century-resort/recreation/",
+      "source_type": "image"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -66,7 +78,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CBR_Aframe_Recreation-0326.pdf",
       "last_modified": "Wed, 20 May 2026 15:18:13 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/caribbean-beach-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/caribbean-beach-resort/recreation/",
+      "source_type": "image"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -77,7 +90,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CSR_Aframe_Recreation-0326.pdf",
       "last_modified": "Wed, 20 May 2026 13:55:24 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/coronado-springs-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/coronado-springs-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -88,7 +102,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/POFQ_Aframe_Recreation-0326.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:11 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/port-orleans-resort-french-quarter/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/port-orleans-resort-french-quarter/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -99,7 +114,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/PORS_Aframe_Recreation-0326.pdf",
       "last_modified": "Wed, 29 Apr 2026 19:15:29 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/port-orleans-resort-riverside/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/port-orleans-resort-riverside/recreation/",
+      "source_type": "image"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -110,7 +126,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
       "replaced_stale_url": null,
       "last_modified": "Wed, 20 May 2026 13:55:23 GMT",
-      "discovery_parent_url": null
+      "discovery_parent_url": null,
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -121,7 +138,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
       "replaced_stale_url": null,
       "last_modified": "Wed, 20 May 2026 13:55:23 GMT",
-      "discovery_parent_url": null
+      "discovery_parent_url": null,
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -132,7 +150,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q1/YB_Aframe_Recreation-0126.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:11 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/beach-club-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/beach-club-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -143,7 +162,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": null,
       "last_modified": "Wed, 20 May 2026 13:55:23 GMT",
-      "discovery_parent_url": null
+      "discovery_parent_url": null,
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "contemporary",
@@ -154,7 +174,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/CTR_Aframe_Recreation-0326.pdf",
       "last_modified": "Wed, 20 May 2026 13:55:21 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/contemporary-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/contemporary-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -165,7 +186,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/GF_Aframe_Recreation-0526.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:14 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "polynesian",
@@ -176,7 +198,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/Polynesian_Aframe_Recreation-0326.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:13 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/polynesian-village-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/polynesian-village-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -187,7 +210,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/WL_Aframe_Recreation-0326.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:11 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/wilderness-lodge/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/wilderness-lodge/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -198,7 +222,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/OKWR_Aframe_Recreation-0326.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:11 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/old-key-west-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/old-key-west-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "riviera",
@@ -209,7 +234,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/DRR_Aframe_Recreation-0326.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:11 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/riviera-resort/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/riviera-resort/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -220,7 +246,8 @@
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
       "replaced_stale_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/SSR_Aframe_Recreation-0326.pdf",
       "last_modified": "Thu, 21 May 2026 12:59:11 GMT",
-      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/saratoga-springs-resort-and-spa/recreation/"
+      "discovery_parent_url": "https://disneyworld.disney.go.com/resorts/saratoga-springs-resort-and-spa/recreation/",
+      "source_type": "pdf"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -231,7 +258,8 @@
       "canonical_url": null,
       "replaced_stale_url": null,
       "last_modified": null,
-      "discovery_parent_url": null
+      "discovery_parent_url": null,
+      "source_type": "html"
     }
   ]
 }

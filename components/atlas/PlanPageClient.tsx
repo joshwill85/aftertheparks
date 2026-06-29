@@ -225,7 +225,7 @@ export function PlanPageClient({
             href="/activities"
             className="btn-secondary inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
           >
-            Add more
+            Add an activity
           </Link>
         </div>
         {shareStatus && (
