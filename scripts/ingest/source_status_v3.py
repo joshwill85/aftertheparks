@@ -9,8 +9,10 @@ from typing import Any
 
 try:
     from config import PROCESSED_DIR
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_EXPECTED_SOURCES_PATH = PROCESSED_DIR / "source_inventory.json"
@@ -36,6 +38,24 @@ def _pipeline_version(row: dict[str, Any]) -> str:
     return str(row.get("pipeline_version") or runtime.get("pipeline_version") or "").strip()
 
 
+def _edition(row: dict[str, Any]) -> str | None:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return (
+        row.get("edition")
+        or row.get("source_pdf_edition")
+        or row.get("pdf_edition")
+        or row.get("source_edition")
+        or source.get("edition")
+        or source.get("pdfEdition")
+    )
+
+
+def _filter_quarter(rows: list[dict[str, Any]], quarter: str | None) -> list[dict[str, Any]]:
+    if not quarter:
+        return rows
+    return [row for row in rows if edition_matches_quarter(_edition(row), quarter)]
+
+
 def _json_objects(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -58,7 +78,10 @@ def build_v3_source_statuses(
     *,
     expected_sources: list[dict[str, Any]],
     snapshots: list[dict[str, Any]],
+    quarter: str | None = None,
 ) -> list[dict[str, Any]]:
+    expected_sources = _filter_quarter(expected_sources, quarter)
+    snapshots = _filter_quarter(snapshots, quarter)
     snapshots_by_hash: dict[str, list[dict[str, Any]]] = {}
     for snapshot in snapshots:
         snapshot_hash = _source_hash(snapshot)
@@ -164,12 +187,14 @@ def main() -> None:
     parser.add_argument("--expected-sources", type=Path, default=DEFAULT_EXPECTED_SOURCES_PATH)
     parser.add_argument("--snapshots", type=Path, default=DEFAULT_SNAPSHOTS_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--quarter")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     statuses = build_v3_source_statuses(
         expected_sources=_json_objects(args.expected_sources),
         snapshots=_json_objects(args.snapshots),
+        quarter=args.quarter,
     )
     if args.json:
         print(json.dumps(statuses, indent=2, sort_keys=True))

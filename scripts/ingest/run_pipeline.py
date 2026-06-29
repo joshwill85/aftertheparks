@@ -58,8 +58,8 @@ def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> l
         _with_quarter(("vision_snapshot.py", "--attach-regions"), quarter),
         _with_quarter(("extract_v3.py",), quarter),
         _with_quarter(("validate_v3.py",), quarter),
-        ("source_status_v3.py",),
-        ("source_metrics_v3.py",),
+        _with_quarter(("source_status_v3.py",), quarter),
+        _with_quarter(("source_metrics_v3.py",), quarter),
     ]
     if quarter:
         steps.append(("source_drift_report.py", "--quarter", quarter))

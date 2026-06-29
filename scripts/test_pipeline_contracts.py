@@ -6058,8 +6058,8 @@ class PipelineContractsTest(unittest.TestCase):
                 ("vision_snapshot.py", "--attach-regions", "--quarter", "fy26-q4"),
                 ("extract_v3.py", "--quarter", "fy26-q4"),
                 ("validate_v3.py", "--quarter", "fy26-q4"),
-                ("source_status_v3.py",),
-                ("source_metrics_v3.py",),
+                ("source_status_v3.py", "--quarter", "fy26-q4"),
+                ("source_metrics_v3.py", "--quarter", "fy26-q4"),
                 ("source_drift_report.py", "--quarter", "fy26-q4"),
                 ("build_review_queue_v3.py",),
                 ("promote_gold_v3.py", "--preview", "--include-approved-review"),
@@ -6091,6 +6091,8 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn(("vision_snapshot.py", "--attach-regions", "--quarter", "fy26-q4"), steps)
         self.assertIn(("extract_v3.py", "--quarter", "fy26-q4"), steps)
         self.assertIn(("validate_v3.py", "--quarter", "fy26-q4"), steps)
+        self.assertIn(("source_status_v3.py", "--quarter", "fy26-q4"), steps)
+        self.assertIn(("source_metrics_v3.py", "--quarter", "fy26-q4"), steps)
         self.assertIn(("source_drift_report.py", "--quarter", "fy26-q4"), steps)
         self.assertLess(
             steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),

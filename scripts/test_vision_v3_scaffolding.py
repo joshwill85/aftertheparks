@@ -5889,6 +5889,38 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(0.5, field_metrics["engine_disagreement_rate"])
         self.assertEqual(0.5, field_metrics["description_low_confidence_rate"])
 
+    def test_source_metrics_v3_filters_snapshots_and_candidates_by_quarter(self) -> None:
+        snapshots = [
+            {"source_sha256": "hash-q3", "edition": "fy26-q3", "source_pages": [{"page_number": 1}]},
+            {"source_sha256": "hash-q4", "edition": "fy26-q4", "source_pages": [{"page_number": 1}]},
+        ]
+        candidates = [
+            {
+                "content_sha256": "hash-q3",
+                "edition": "fy26-q3",
+                "candidate_type": "activity",
+                "validation_status": "auto_publishable",
+            },
+            {
+                "content_sha256": "hash-q4",
+                "edition": "fy26-q4",
+                "candidate_type": "activity",
+                "validation_status": "needs_review",
+            },
+        ]
+
+        report = build_source_metrics_report(
+            snapshots=snapshots,
+            candidates=candidates,
+            quarter="fy26-q4",
+        )
+
+        self.assertEqual("fy26-q4", report["quarter"])
+        self.assertEqual(1, report["summary"]["source_count"])
+        self.assertEqual(["hash-q4"], [row["source_sha256"] for row in report["sources"]])
+        self.assertEqual(0, report["summary"]["auto_publishable_count"])
+        self.assertEqual(1, report["summary"]["needs_review_count"])
+
     def test_source_metrics_v3_cli_writes_report_from_snapshot_and_candidate_directories(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -7657,6 +7689,43 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("snapshots/hash-1.vision.json", statuses[0]["snapshot_path"])
         self.assertEqual("download failed", statuses[1]["message"])
         self.assertEqual("missing_v3_snapshot", statuses[2]["message"])
+
+    def test_source_status_v3_filters_expected_sources_and_snapshots_by_quarter(self) -> None:
+        statuses = build_v3_source_statuses(
+            expected_sources=[
+                {
+                    "source_document_id": "source-doc-q3",
+                    "content_sha256": "hash-q3",
+                    "calendar_group_key": "boardwalk",
+                    "edition": "fy26-q3",
+                },
+                {
+                    "source_document_id": "source-doc-q4",
+                    "content_sha256": "hash-q4",
+                    "calendar_group_key": "boardwalk",
+                    "edition": "fy26-q4",
+                },
+            ],
+            snapshots=[
+                {
+                    "source_sha256": "hash-q3",
+                    "edition": "fy26-q3",
+                    "status": "ocr_complete",
+                    "snapshot_path": "snapshots/hash-q3.vision.json",
+                },
+                {
+                    "source_sha256": "hash-q4",
+                    "edition": "fy26-q4",
+                    "status": "ocr_complete",
+                    "snapshot_path": "snapshots/hash-q4.vision.json",
+                },
+            ],
+            quarter="fy26-q4",
+        )
+
+        self.assertEqual(1, len(statuses))
+        self.assertEqual("source-doc-q4", statuses[0]["source_document_id"])
+        self.assertEqual("processed", statuses[0]["status"])
 
     def test_source_status_v3_preserves_parser_error_snapshots(self) -> None:
         statuses = build_v3_source_statuses(

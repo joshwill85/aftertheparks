@@ -10,8 +10,10 @@ from typing import Any
 
 try:
     from config import PROCESSED_DIR
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_SNAPSHOTS_PATH = PROCESSED_DIR / "vision_snapshots"
@@ -50,6 +52,24 @@ def _source_hash(row: dict[str, Any]) -> str:
         or source.get("document_hash")
         or ""
     ).strip()
+
+
+def _edition(row: dict[str, Any]) -> str | None:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return (
+        row.get("edition")
+        or row.get("source_pdf_edition")
+        or row.get("pdf_edition")
+        or row.get("source_edition")
+        or source.get("edition")
+        or source.get("pdfEdition")
+    )
+
+
+def _filter_quarter(rows: list[dict[str, Any]], quarter: str | None) -> list[dict[str, Any]]:
+    if not quarter:
+        return rows
+    return [row for row in rows if edition_matches_quarter(_edition(row), quarter)]
 
 
 def _is_movie_candidate(row: dict[str, Any]) -> bool:
@@ -259,7 +279,10 @@ def build_source_metrics_report(
     *,
     snapshots: list[dict[str, Any]],
     candidates: list[dict[str, Any]],
+    quarter: str | None = None,
 ) -> dict[str, Any]:
+    snapshots = _filter_quarter(snapshots, quarter)
+    candidates = _filter_quarter(candidates, quarter)
     candidates_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for candidate in candidates:
         source_hash = _source_hash(candidate)
@@ -273,6 +296,7 @@ def build_source_metrics_report(
     ]
     return {
         "report_kind": "vision_v3_source_metrics",
+        "quarter": quarter,
         "summary": {
             "source_count": len(sources),
             "page_count": sum(row["page_count"] for row in sources),
@@ -293,12 +317,14 @@ def main() -> None:
     parser.add_argument("--snapshots", type=Path, default=DEFAULT_SNAPSHOTS_PATH)
     parser.add_argument("--candidates", type=Path, default=DEFAULT_CANDIDATES_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--quarter")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     report = build_source_metrics_report(
         snapshots=_json_objects(args.snapshots),
         candidates=_json_objects(args.candidates),
+        quarter=args.quarter,
     )
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
