@@ -30,6 +30,7 @@ from scripts.ingest.normalization_v3 import (
 )
 from scripts.ingest.ocr.paddle_adapter import PaddleOcrAdapter
 from scripts.ingest.ocr.rapidocr_adapter import RapidOcrAdapter
+from scripts.ingest.ocr.docling_adapter import DoclingAdapter
 from scripts.ingest.ocr.schema import normalize_ocr_tokens
 from scripts.ingest import promote_gold_v3, publish_gold_v3
 from scripts.ingest.promote_gold_v3 import build_gold_v3_preview
@@ -997,7 +998,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 output_dir=root / "pages",
             )
 
-            snapshot = build_vision_snapshot(page_manifest=page_manifest)
+            with patch("scripts.ingest.ocr.paddle_adapter.module_available", return_value=False), patch(
+                "scripts.ingest.ocr.rapidocr_adapter.module_available",
+                return_value=False,
+            ):
+                snapshot = build_vision_snapshot(page_manifest=page_manifest)
 
         self.assertEqual(snapshot["snapshot_kind"], "vision_layout_v3")
         self.assertEqual(snapshot["pipeline_version"], "vision_v3_001")
@@ -1005,7 +1010,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(snapshot["source_sha256"], page_manifest["source_sha256"])
         self.assertEqual(snapshot["source_pages"][0]["page_image_sha256"], page_manifest["pages"][0]["canonical_image_sha256"])
         self.assertEqual(
-            ["paddleocr_ppstructurev3", "rapidocr", "docling_snapshot"],
+            ["paddleocr_ppstructurev3", "rapidocr"],
             [run["engine"] for run in snapshot["engine_runs"]],
         )
 
@@ -1038,7 +1043,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             ],
         }
 
-        snapshot = build_vision_snapshot(page_manifest=page_manifest)
+        with patch("scripts.ingest.ocr.paddle_adapter.module_available", return_value=False), patch(
+            "scripts.ingest.ocr.rapidocr_adapter.module_available",
+            return_value=False,
+        ):
+            snapshot = build_vision_snapshot(page_manifest=page_manifest)
 
         self.assertEqual("source-doc-1", snapshot["source_document_id"])
         self.assertEqual("official_image", snapshot["source_kind"])
@@ -1056,7 +1065,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             snapshot["source_pages"][0]["page_image_sha256"],
             snapshot["quality"]["pages"][0]["page_image_sha256"],
         )
-        self.assertEqual(3, snapshot["quality"]["engine_status_counts"]["unavailable"])
+        self.assertEqual(2, snapshot["quality"]["engine_status_counts"]["unavailable"])
         self.assertIn("missing_ocr_tokens", snapshot["quality"]["findings"])
 
     def test_vision_snapshot_records_runtime_lineage_for_reproducibility(self) -> None:
@@ -1282,11 +1291,32 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             )
             report_path = root / "vision_report.json"
 
-            report = vision_snapshot.build_vision_snapshots_from_directory(
-                page_images_dir=root / "pages",
-                output_dir=root / "snapshots",
-                report_path=report_path,
-            )
+            with patch(
+                "scripts.ingest.vision_snapshot.PaddleOcrAdapter.run_page",
+                return_value={
+                    "engine": "paddleocr_ppstructurev3",
+                    "status": "unavailable",
+                    "tokens": [],
+                    "lines": [],
+                    "regions": [],
+                    "error": "ocr_engine_unavailable:paddleocr_ppstructurev3",
+                },
+            ), patch(
+                "scripts.ingest.vision_snapshot.RapidOcrAdapter.run_page",
+                return_value={
+                    "engine": "rapidocr",
+                    "status": "unavailable",
+                    "tokens": [],
+                    "lines": [],
+                    "regions": [],
+                    "error": "ocr_engine_unavailable:rapidocr",
+                },
+            ):
+                report = vision_snapshot.build_vision_snapshots_from_directory(
+                    page_images_dir=root / "pages",
+                    output_dir=root / "snapshots",
+                    report_path=report_path,
+                )
 
             self.assertEqual(1, report["summary"]["snapshot_count"])
             self.assertEqual(0, report["summary"]["parser_error_count"])
@@ -4679,8 +4709,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         paddle = PaddleOcrAdapter()
         rapid = RapidOcrAdapter()
 
-        paddle_result = paddle.run_page(page)
-        rapid_result = rapid.run_page(page)
+        with patch("scripts.ingest.ocr.paddle_adapter.module_available", return_value=False), patch(
+            "scripts.ingest.ocr.rapidocr_adapter.module_available",
+            return_value=False,
+        ):
+            paddle_result = paddle.run_page(page)
+            rapid_result = rapid.run_page(page)
 
         self.assertEqual("paddleocr_ppstructurev3", paddle_result["engine"])
         self.assertEqual("rapidocr", rapid_result["engine"])
@@ -4688,6 +4722,139 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("unavailable", rapid_result["status"])
         self.assertEqual([], paddle_result["tokens"])
         self.assertIn("ocr_engine_unavailable:paddleocr_ppstructurev3", paddle_result["error"])
+
+    def test_paddle_ocr_adapter_normalizes_legacy_ocr_rows_when_available(self) -> None:
+        class FakePaddleOcr:
+            def __init__(self, **kwargs: Any) -> None:
+                self.kwargs = kwargs
+
+            def ocr(self, image_path: str, cls: bool = True) -> list[Any]:
+                self.image_path = image_path
+                self.cls = cls
+                return [
+                    [
+                        [
+                            [[10, 20], [110, 20], [110, 44], [10, 44]],
+                            ("Poolside Activities", 0.91),
+                        ],
+                        [
+                            [[12, 50], [180, 50], [180, 72], [12, 72]],
+                            ("Daily at 2:30pm", 0.88),
+                        ],
+                    ]
+                ]
+
+        page = {
+            "page_number": 1,
+            "page_image_path": "/tmp/page.png",
+            "page_image_sha256": "pagehash",
+        }
+
+        with patch("scripts.ingest.ocr.paddle_adapter.module_available", return_value=True), patch(
+            "scripts.ingest.ocr.paddle_adapter._paddle_ocr_class",
+            return_value=FakePaddleOcr,
+        ):
+            result = PaddleOcrAdapter().run_page(page)
+
+        self.assertEqual("success", result["status"])
+        self.assertEqual("paddleocr_ppstructurev3", result["engine"])
+        self.assertEqual("primary_ocr_layout", result["role"])
+        self.assertEqual(2, len(result["tokens"]))
+        self.assertEqual("Poolside Activities", result["tokens"][0]["text"])
+        self.assertEqual([10, 20, 110, 44], result["tokens"][0]["bbox_px"])
+        self.assertEqual(0.91, result["tokens"][0]["confidence"])
+        self.assertEqual(result["tokens"], result["lines"])
+
+    def test_rapid_ocr_adapter_normalizes_tuple_rows_when_available(self) -> None:
+        class FakeRapidOcr:
+            def __call__(self, image_path: str) -> tuple[list[Any], float]:
+                self.image_path = image_path
+                return (
+                    [
+                        [
+                            [[20, 30], [140, 30], [140, 58], [20, 58]],
+                            "Movie Under the Stars",
+                            0.94,
+                        ],
+                        [
+                            [[22, 70], [155, 70], [155, 92], [22, 92]],
+                            "7:00pm",
+                            0.9,
+                        ],
+                    ],
+                    0.12,
+                )
+
+        page = {
+            "page_number": 2,
+            "page_image_path": "/tmp/page-2.png",
+            "page_image_sha256": "pagehash2",
+        }
+
+        with patch("scripts.ingest.ocr.rapidocr_adapter.module_available", return_value=True), patch(
+            "scripts.ingest.ocr.rapidocr_adapter._rapid_ocr_class",
+            return_value=FakeRapidOcr,
+        ):
+            result = RapidOcrAdapter().run_page(page)
+
+        self.assertEqual("success", result["status"])
+        self.assertEqual("rapidocr", result["engine"])
+        self.assertEqual("secondary_ocr_comparator", result["role"])
+        self.assertEqual(2, len(result["tokens"]))
+        self.assertEqual("Movie Under the Stars", result["tokens"][0]["text"])
+        self.assertEqual([20, 30, 140, 58], result["tokens"][0]["bbox_px"])
+        self.assertEqual(0.94, result["tokens"][0]["confidence"])
+        self.assertEqual(0.12, result["elapsed_seconds"])
+
+    def test_docling_adapter_normalizes_exported_text_items_when_available(self) -> None:
+        class FakeDocument:
+            def export_to_dict(self) -> dict[str, Any]:
+                return {
+                    "texts": [
+                        {
+                            "text": "Campfire Activities",
+                            "prov": [
+                                {
+                                    "page_no": 1,
+                                    "bbox": {
+                                        "l": 30,
+                                        "t": 40,
+                                        "r": 220,
+                                        "b": 70,
+                                    },
+                                }
+                            ],
+                        }
+                    ]
+                }
+
+        class FakeConversionResult:
+            document = FakeDocument()
+
+        class FakeDocumentConverter:
+            def convert(self, image_path: str) -> FakeConversionResult:
+                self.image_path = image_path
+                return FakeConversionResult()
+
+        page = {
+            "page_number": 1,
+            "page_image_path": "/tmp/page.png",
+            "page_image_sha256": "doclingpagehash",
+        }
+
+        with patch("scripts.ingest.ocr.docling_adapter.module_available", return_value=True), patch(
+            "scripts.ingest.ocr.docling_adapter._document_converter_class",
+            return_value=FakeDocumentConverter,
+        ):
+            result = DoclingAdapter().run_page(page)
+
+        self.assertEqual("success", result["status"])
+        self.assertEqual("docling_snapshot", result["engine"])
+        self.assertEqual("parallel_structural_snapshot", result["role"])
+        self.assertEqual("Campfire Activities", result["tokens"][0]["text"])
+        self.assertEqual([30, 40, 220, 70], result["tokens"][0]["bbox_px"])
+        self.assertEqual(result["tokens"], result["lines"])
+        self.assertEqual(1, len(result["regions"]))
 
     def test_publish_gold_v3_requires_feature_flag_and_clean_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

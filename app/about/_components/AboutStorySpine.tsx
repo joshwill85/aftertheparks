@@ -23,6 +23,11 @@ export function AboutStorySpine() {
             className={styles.storyRoutePath}
             d="M36 8 C12 96 58 168 34 260 C10 352 58 430 36 526 C14 626 58 712 34 810 C12 906 58 986 36 1084 C24 1144 34 1204 46 1252"
           />
+          <path
+            className={styles.storyRouteProgress}
+            d="M36 8 C12 96 58 168 34 260 C10 352 58 430 36 526 C14 626 58 712 34 810 C12 906 58 986 36 1084 C24 1144 34 1204 46 1252"
+            pathLength="1"
+          />
           {storySections.map((section, index) => (
             <circle
               className={styles.storyRouteNode}

@@ -97,7 +97,7 @@ DEFAULT_VISION_CONFIG: dict[str, Any] = {
             "package": "docling",
             "role": "parallel_structural_snapshot",
         },
-        "docling_snapshot_enabled": True,
+        "docling_snapshot_enabled": False,
     },
     "publish_gates": {
         "require_field_evidence": True,

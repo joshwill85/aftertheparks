@@ -6,3 +6,11 @@ Pillow>=10.0.0
 httpx>=0.27.0
 playwright>=1.44.0
 wordninja>=2.0.0
+
+# Vision v3 document OCR/layout engines.
+# These are used by scripts/ingest/vision_snapshot.py when running the
+# source-document vision lane. The adapters fail closed when unavailable.
+paddleocr>=3.0.0,<4.0.0
+paddlepaddle>=3.0.0,<4.0.0
+rapidocr>=3.0.0,<4.0.0
+onnxruntime>=1.16.0,<2.0.0

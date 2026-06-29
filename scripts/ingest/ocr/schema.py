@@ -11,6 +11,8 @@ def normalize_text(value: object) -> str:
 
 
 def _bbox_px(value: Any) -> list[int] | None:
+    if hasattr(value, "tolist"):
+        value = value.tolist()
     if isinstance(value, list) and len(value) == 4 and all(isinstance(item, (int, float)) for item in value):
         x1, y1, x2, y2 = value
         return [round(x1), round(y1), round(x2), round(y2)]
@@ -33,7 +35,8 @@ def normalize_ocr_tokens(
         if not isinstance(raw, dict):
             continue
         text = str(raw.get("text") or "").strip()
-        bbox = _bbox_px(raw.get("bbox") or raw.get("bbox_px"))
+        raw_bbox = raw["bbox"] if "bbox" in raw and raw["bbox"] is not None else raw.get("bbox_px")
+        bbox = _bbox_px(raw_bbox)
         if not text or bbox is None:
             continue
         tokens.append(

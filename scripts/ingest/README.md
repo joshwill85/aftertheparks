@@ -41,10 +41,15 @@ python run_pipeline.py
 Vision v3 can be run alongside the default path in report-only mode:
 
 ```bash
+pip install -r scripts/ingest/requirements.txt
+# Optional parallel structural snapshot engine:
+# pip install -r scripts/ingest/requirements-vision-v3-optional.txt
 python run_pipeline.py --vision-v3 --quarter fy26-q4
 ```
 
 That lane renders source pages, builds vision snapshots, extracts and validates v3 candidates, generates source status/metrics, writes the quarterly source drift report, builds the v3 review queue, promotes a v3 preview, generates the dual-run report, refreshes the trust/monitoring report, and runs the guarded v3 readiness check. It does not publish v3 rows; public v3 writes still require `python publish_gold_v3.py --require-clean-preview --publish` after all gates pass.
+
+The v3 vision lane uses `pypdfium2` for deterministic PDF page renders, `PaddleOCR` as the primary OCR/layout engine, and `RapidOCR` as the secondary comparator. `Docling` is supported as an optional parallel structural snapshot via `requirements-vision-v3-optional.txt`; it can pull platform-specific OCR dependencies, so keep it out of the default install unless that runtime is validated. If any OCR package is missing or fails, the v3 snapshot records a structured unavailable/error result and downstream publish gates fail closed instead of silently publishing guessed data.
 
 Gold v2 publish is the trusted scheduled-activity publisher. After applying `activity_pipeline_v2`, `magical_resort_guide_facts`, and `preserve_gold_source_evidence` migrations, run `python publish_gold_v2.py` or `npm run publish:gold-v2` from the repo root. The publisher verifies the processed Gold artifact matches regeneration from current fixtures, review decisions, and MRG facts, then runs the production coverage preflight, then upserts `source_documents`, stable `activity_catalog` UUIDs, and current `public_activity_gold` rows, including structured `source` JSON with PDF footer/key legends, then fails if `check_activity_pipeline_v2_health()` returns any issue.
 

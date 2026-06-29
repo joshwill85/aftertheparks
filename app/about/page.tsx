@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-about-page>
       <AboutRouteActivation />
       <AboutSouvenirMarks />
       <AboutHero />

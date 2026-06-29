@@ -440,6 +440,17 @@
   filter: drop-shadow(0 0 10px rgba(255, 200, 87, 0.18));
 }
 
+.storyRouteProgress {
+  fill: none;
+  stroke: rgba(255, 200, 87, 0.86);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--about-route-progress, 0));
+  filter: drop-shadow(0 0 14px rgba(255, 200, 87, 0.38));
+  transition: stroke-dashoffset 420ms var(--motion-ease-story);
+}
+
 .storyRouteNode {
   fill: var(--about-story-paper);
   stroke: rgba(8, 121, 138, 0.62);
@@ -1202,6 +1213,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .storyRouteProgress {
+    stroke-dashoffset: 0;
+  }
+
   .storyItem,
   .storyMarker,
   .storyCopy,

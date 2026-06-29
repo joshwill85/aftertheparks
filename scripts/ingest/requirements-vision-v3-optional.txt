@@ -1,0 +1,8 @@
+# Optional parallel structural snapshot engine for the vision v3 lane.
+#
+# Docling is supported by scripts/ingest/ocr/docling_adapter.py, but it can
+# pull platform-specific OCR dependencies such as pyobjc/ocrmac on macOS.
+# Install this file only in runtimes where those wheels/build tools are known
+# to work. The v3 pipeline records a structured unavailable result and fails
+# closed when Docling is absent.
+docling>=2.7.0,<3.0.0

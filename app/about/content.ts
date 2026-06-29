@@ -19,7 +19,7 @@ export interface StorySection {
 }
 
 export const heroContent = {
-  headline: "I built After the Parks to make Disney resort days easier.",
+  headline: "I built After the Parks because I needed it first.",
   subhead:
     "After the Parks turns scattered Disney resort calendars into a simple way to find what is happening today, tonight, and during your stay.",
   primaryCta: {

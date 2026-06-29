@@ -37,6 +37,12 @@ assert.deepEqual(
   "About story sections should preserve the approved origin-story order."
 );
 
+assert.equal(
+  heroContent.headline,
+  "I built After the Parks because I needed it first.",
+  "Hero headline should match the approved storybook opening line."
+);
+
 assert.deepEqual(
   storySections.map((section) => section.artifact),
   ["summer", "cabin", "problem", "builder", "born", "twilight"],
@@ -157,6 +163,11 @@ assert.doesNotMatch(
 
 assert.match(aboutSources, /data-about-route-step/, "About page should expose route activation stops.");
 assert.match(aboutSources, /className=\{styles\.storyRoute\}/, "Story spine should use an SVG route.");
+assert.match(
+  aboutSources,
+  /--about-route-progress/,
+  "About page should expose scroll-driven route progress for the premium route wow factor."
+);
 assert.match(aboutSources, /ctaSignpost/, "Final CTA should include a signpost scene.");
 assert.match(aboutSources, /Tonight\?/, "Hero/story visuals should include the small Tonight note.");
 assert.doesNotMatch(aboutSources, /from ["']motion["']|from ["']framer-motion["']/, "About page must not use a client-side animation library.");

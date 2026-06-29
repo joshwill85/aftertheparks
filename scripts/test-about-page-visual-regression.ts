@@ -110,6 +110,26 @@ async function assertMessyCardsReadableOnMobile(page: Page) {
   }
 }
 
+async function assertRouteProgressUpdates(page: Page) {
+  await page.evaluate(() => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight * 0.42,
+      behavior: "instant",
+    });
+  });
+  await page.waitForTimeout(120);
+  const progress = await page.locator("[data-about-page]").evaluate((element) => {
+    return Number.parseFloat(
+      element.style.getPropertyValue("--about-route-progress") || "0"
+    );
+  });
+
+  assert.ok(
+    progress > 0.05,
+    `Story route progress should update on scroll; received ${progress}.`
+  );
+}
+
 async function gotoAbout(page: Page) {
   let lastStatus = 0;
 
@@ -155,6 +175,7 @@ async function run() {
       await assertNoHorizontalOverflow(page);
       await assertHeroArtDoesNotOverlapText(page);
       await assertStorySpineDoesNotCutBodyCopy(page);
+      await assertRouteProgressUpdates(page);
 
       if (viewport.width === 390) {
         await assertMessyCardsReadableOnMobile(page);
