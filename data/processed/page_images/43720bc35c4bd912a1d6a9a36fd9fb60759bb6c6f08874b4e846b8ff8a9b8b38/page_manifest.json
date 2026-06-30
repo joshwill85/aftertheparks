@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "grand-floridian",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.374157+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
+      "canonical_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.thumb.png",
+      "thumbnail_sha256": "e081ea124b7d4f2a13925c0bdc611b3d8768f4a0a8ab2727230beced0236773e",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "ce2b57abe3d7f00e013c261f1c0762ae47dccd9d85221b634638d36cacff341c",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/grand-floridian/fy26-q3-0526/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38",
+  "source_type": "pdf"
+}

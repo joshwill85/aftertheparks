@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "all-star-movies",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.239967+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+      "canonical_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.thumb.png",
+      "thumbnail_sha256": "decd08e33a36b24942ff99bb6487e07310299cc43bb25f2f8b0fcdc9faa2bbd9",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "62c3260f33d925eec99ea321e948c27efb76c384dab0fb582febba00117a2c13",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/all-star-movies/fy26-q3-0526/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+  "source_type": "pdf"
+}

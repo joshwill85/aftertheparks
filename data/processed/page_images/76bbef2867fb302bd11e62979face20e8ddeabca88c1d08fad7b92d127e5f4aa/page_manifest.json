@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "beach-yacht-club",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.340685+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+      "canonical_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.thumb.png",
+      "thumbnail_sha256": "85718b71b8334a37a6eaed77b61dcc7bf70af0a2dcc98c4adfa680227d40551f",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "a14a6dedc284910cdc501ebfb211047e0149ee9501cbdf5984c28a83da896d20",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/beach-yacht-club/fy26-q3-0526/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+  "source_type": "pdf"
+}

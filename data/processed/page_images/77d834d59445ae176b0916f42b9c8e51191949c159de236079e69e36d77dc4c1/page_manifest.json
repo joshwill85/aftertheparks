@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "contemporary",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.359744+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
+      "canonical_image_sha256": "28edc2b735154e04db6434833b0a2b40546e7a7f3bfc71a059a51f6186439fde",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.thumb.png",
+      "thumbnail_sha256": "a556a9b9f50e4030c6071036e2466c9293a2ccd5fb46edbd9f7d67a2d94acd8c",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "04f658d731fee7796101de9cdb9e1851c15dc6a756089c6cae14fbdac0067986",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/contemporary/fy26-q3-0526/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1",
+  "source_type": "pdf"
+}

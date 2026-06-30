@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "coronado-springs",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.284677+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.png",
+      "canonical_image_sha256": "cb67d18d7fd48318f946c58ba24c760cc4ada856c0b11802115662cec7673969",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.thumb.png",
+      "thumbnail_sha256": "13f504b67e1101a486a7c2c86f78d24ebb884279c447e75889bc71a7b717b1c9",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "47e30131c544288511a6da0358c7b561fe4d5533d635612e456ed8fb0d4c8aa0",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/coronado-springs/fy26-q3-0526/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+  "source_type": "pdf"
+}

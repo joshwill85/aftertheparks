@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "animal-kingdom-kidani",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.318911+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526-kidani",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png",
+      "canonical_image_sha256": "32c1f9acfc38e09a0738a6629de65172a0322674691e2f336d0ce903431cb6d8",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.thumb.png",
+      "thumbnail_sha256": "4db5f0219cdf2aabddcef850292ae1d10c7fefb7528404c375e255588dded8f3",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "8c085f9e28a251db549a40c552c567c623a1d383d04f1bd7822130eaca2fc986",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/animal-kingdom-kidani/fy26-q3-0526-kidani/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0",
+  "source_type": "pdf"
+}

@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "caribbean-beach",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+  "captured_at": "2026-06-30T00:07:31.276644+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+  "file_extension": ".jpg",
+  "http_status": 200,
+  "mime_type": "image/jpeg",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+      "canonical_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+      "height_px": 11304,
+      "image_orientation": 1,
+      "page_kind": "image_file",
+      "page_number": 1,
+      "render_dpi": null,
+      "render_engine": "Pillow",
+      "render_engine_version": "11.3.0",
+      "render_scale": null,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.thumb.png",
+      "thumbnail_sha256": "2c8af13057463e3aed683ec4c347ed0d051211a1ebdd43895027e93ae6bdc9c6",
+      "width_px": 1200
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+  "source_kind": "official_image",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/caribbean-beach/fy26-q3-0526/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988.jpg",
+  "source_role": "resort_pdf",
+  "source_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+  "source_type": "image"
+}

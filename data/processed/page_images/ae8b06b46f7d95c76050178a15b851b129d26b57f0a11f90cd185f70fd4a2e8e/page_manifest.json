@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "old-key-west",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.412834+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+      "canonical_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.thumb.png",
+      "thumbnail_sha256": "82c6b76668c91272edb6d36ab69a6b266dfb1d119a2fdb225dae2f33c7f18e85",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/old-key-west/fy26-q3-0526/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+  "source_type": "pdf"
+}
