@@ -33,10 +33,10 @@ Full pipeline:
 ```bash
 export SUPABASE_URL=...
 export SUPABASE_SERVICE_ROLE_KEY=...
-python run_pipeline.py
+python scripts/ingest/run_pipeline.py
 ```
 
-`run_pipeline.py` now stops before publish unless strict legacy validation, v2 fixture validation, Gold v2 promotion, the required coverage audit, and the trust/monitoring report all pass. Production runs `audit_coverage.py --require-production-ready`; local-only runs the partial audit so gaps are visible without pretending the catalog is cut over. When publish is enabled, the pipeline writes Gold v2, official recreation offerings, and enrichment tables. It does not call the legacy temporal publisher.
+`scripts/ingest/run_pipeline.py` now stops before publish unless strict legacy validation, v2 fixture validation, Gold v2 promotion, the required coverage audit, and the trust/monitoring report all pass. Production runs `audit_coverage.py --require-production-ready`; local-only runs the partial audit so gaps are visible without pretending the catalog is cut over. When publish is enabled, the pipeline writes Gold v2, official recreation offerings, and enrichment tables. It does not call the legacy temporal publisher.
 
 Vision v3 can be run alongside the default path in report-only mode:
 
@@ -44,7 +44,7 @@ Vision v3 can be run alongside the default path in report-only mode:
 pip install -r scripts/ingest/requirements.txt
 # Optional parallel structural snapshot engine:
 # pip install -r scripts/ingest/requirements-vision-v3-optional.txt
-python run_pipeline.py --vision-v3 --quarter fy26-q4
+python scripts/ingest/run_pipeline.py --vision-v3 --quarter fy26-q4
 ```
 
 That lane renders source pages, builds vision snapshots, extracts and validates v3 candidates, generates source status/metrics, writes the quarterly source drift report, builds the v3 review queue, promotes a v3 preview, generates the dual-run report, refreshes the trust/monitoring report, and runs the guarded v3 readiness check. It does not publish v3 rows; public v3 writes still require `python publish_gold_v3.py --require-clean-preview --publish` after all gates pass.

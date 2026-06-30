@@ -51,7 +51,6 @@ assert.deepEqual(
 
 for (const section of storySections) {
   assert.ok(section.stamp.length > 0, `${section.heading} should have an artifact stamp.`);
-  assert.ok(section.motif.length > 0, `${section.heading} should have a unique visual motif.`);
   assert.ok(section.phase.length > 0, `${section.heading} should have a story phase.`);
 }
 
@@ -141,6 +140,31 @@ assert.deepEqual(
 );
 
 const aboutSources = readAboutSources();
+const expectedMotifIds = [
+  "summer-sun",
+  "kid-pack",
+  "vpk-paper-shape",
+  "cabin-key-tag",
+  "pine-tree",
+  "split-receipt",
+  "calendar-circle",
+  "pdf-stack",
+  "phone-screen",
+  "image-thumb",
+  "calendar-grid",
+  "question-cues",
+  "pencil",
+  "data-dots",
+  "spreadsheet-route",
+  "signpost",
+  "map-pin",
+  "name-note",
+  "activity-cards",
+  "lantern",
+  "twilight-path",
+  "pass-card-shape",
+  "campfire-glow",
+] as const;
 
 for (const section of storySections) {
   for (const paragraph of section.paragraphs) {
@@ -165,11 +189,28 @@ assert.match(aboutSources, /data-about-route-step/, "About page should expose ro
 assert.match(aboutSources, /className=\{styles\.storyRoute\}/, "Story spine should use an SVG route.");
 assert.match(
   aboutSources,
+  /AboutMotifSet/,
+  "Story cards should render integrated motif artwork, not text-only artifact notes."
+);
+for (const motifId of expectedMotifIds) {
+  assert.match(
+    aboutSources,
+    new RegExp(`data-motif="${motifId}"`),
+    `Story motif artwork should include ${motifId}.`
+  );
+}
+assert.match(
+  aboutSources,
   /--about-route-progress/,
   "About page should expose scroll-driven route progress for the premium route wow factor."
 );
 assert.match(aboutSources, /ctaSignpost/, "Final CTA should include a signpost scene.");
 assert.match(aboutSources, /Tonight\?/, "Hero/story visuals should include the small Tonight note.");
+assert.doesNotMatch(
+  aboutSources,
+  /artifactMotif|section\.motif|section\.mapNote|Map note 0|Soft sun, kid backpack|Cabin key tag, pine tree|Scattered PDFs, phone screen|Pencil, data dots|Signpost, map pin|Lantern, twilight path/,
+  "Visual motif and map-note planning notes should not render as story-card words."
+);
 assert.doesNotMatch(aboutSources, /from ["']motion["']|from ["']framer-motion["']/, "About page must not use a client-side animation library.");
 assert.doesNotMatch(aboutSources, /next\/image|https?:\/\//, "About page should not add remote images in this pass.");
 

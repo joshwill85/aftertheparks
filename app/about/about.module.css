@@ -392,7 +392,6 @@
 }
 
 .mapLabel,
-.mapNote,
 .magicColumnLabel {
   font-size: 0.84rem;
   font-weight: 900;
@@ -401,8 +400,7 @@
   text-transform: uppercase;
 }
 
-.mapLabel,
-.mapNote {
+.mapLabel {
   color: var(--lagoon-deep);
 }
 
@@ -538,69 +536,6 @@
     0 0 0 1px rgba(255, 200, 87, 0.14);
 }
 
-.storyCopy::after {
-  content: "";
-  position: absolute;
-  right: clamp(0.9rem, 2vw, 1.45rem);
-  top: clamp(0.9rem, 2vw, 1.45rem);
-  width: 4rem;
-  height: 4rem;
-  border-radius: 45% 55% 52% 48%;
-  opacity: 0.13;
-  background: radial-gradient(circle, var(--lagoon-deep) 0 2px, transparent 2.5px);
-  background-size: 13px 13px;
-}
-
-.artifact_summer .storyCopy::after {
-  background:
-    radial-gradient(circle at 24% 28%, var(--sun-gold) 0 0.28rem, transparent 0.31rem),
-    linear-gradient(135deg, transparent 42%, var(--sun-gold) 43% 56%, transparent 57%);
-}
-
-.artifact_cabin .storyCopy::after {
-  border-radius: 12px;
-  background:
-    linear-gradient(135deg, transparent 0 72%, var(--sun-coral) 73%),
-    repeating-linear-gradient(0deg, var(--lagoon-deep) 0 2px, transparent 2px 12px);
-}
-
-.artifact_problem .storyCopy::before {
-  content: "";
-  position: absolute;
-  right: 1rem;
-  top: 1.15rem;
-  width: 4.7rem;
-  height: 5.4rem;
-  border: 1px solid rgba(22, 33, 42, 0.08);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.42);
-  box-shadow:
-    -0.75rem 0.65rem 0 rgba(255, 255, 255, 0.34),
-    -1.35rem 1.25rem 0 rgba(255, 255, 255, 0.26);
-}
-
-.artifact_problem .storyCopy::after {
-  border-radius: 10px;
-  background:
-    linear-gradient(90deg, var(--night-soft) 0 8%, transparent 8%),
-    repeating-linear-gradient(0deg, var(--night-soft) 0 1px, transparent 1px 11px);
-}
-
-.artifact_builder .storyCopy::after {
-  background:
-    radial-gradient(circle at 20% 20%, var(--lagoon-deep) 0 3px, transparent 4px),
-    radial-gradient(circle at 55% 48%, var(--sun-gold) 0 3px, transparent 4px),
-    radial-gradient(circle at 82% 76%, var(--sun-coral) 0 3px, transparent 4px),
-    linear-gradient(135deg, transparent 15%, var(--lagoon-deep) 16% 19%, transparent 20% 58%, var(--lagoon-deep) 59% 62%, transparent 63%);
-}
-
-.artifact_born .storyCopy::after,
-.artifact_twilight .storyCopy::after {
-  background:
-    radial-gradient(circle at 50% 64%, var(--lantern) 0 0.55rem, transparent 0.6rem),
-    radial-gradient(circle at 50% 64%, rgba(255, 200, 87, 0.44), transparent 42%);
-}
-
 .artifact_cabin .storyCopy {
   background:
     linear-gradient(180deg, rgba(255, 253, 247, 0.84), rgba(255, 248, 237, 0.68)),
@@ -649,19 +584,121 @@
   color: rgba(22, 33, 42, 0.76);
 }
 
-.storyCopy .artifactMotif {
-  max-width: 48ch;
-  margin-top: 0.55rem;
-  color: rgba(8, 121, 138, 0.76);
-  font-size: clamp(0.92rem, 1.2vw, 1rem);
-  font-weight: 850;
-  line-height: 1.45;
+.storyMotifStrip {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 18rem);
+  margin-top: 1.25rem;
+  padding: 0.48rem 0.62rem;
+  overflow: hidden;
+  border: 1px solid rgba(22, 33, 42, 0.07);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 247, 0.76), rgba(255, 247, 234, 0.54)),
+    radial-gradient(circle at 15% 20%, rgba(255, 200, 87, 0.18), transparent 28%),
+    radial-gradient(circle at 88% 72%, rgba(22, 166, 182, 0.14), transparent 30%);
 }
 
-.storyCopy .mapNote {
-  margin-top: 0;
-  font-size: 0.8rem;
-  line-height: 1.2;
+.storyMotifSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 4.6rem;
+}
+
+.motifLineInk,
+.motifLineGold,
+.motifLineBlue,
+.motifLineCoral,
+.motifLineSoft {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.motifLineInk {
+  stroke: rgba(22, 33, 42, 0.62);
+  stroke-width: 3.4;
+}
+
+.motifLineGold {
+  stroke: rgba(255, 177, 40, 0.9);
+  stroke-width: 3.2;
+}
+
+.motifLineBlue {
+  stroke: rgba(8, 121, 138, 0.76);
+  stroke-width: 4;
+}
+
+.motifLineCoral {
+  stroke: rgba(246, 106, 61, 0.85);
+  stroke-width: 4;
+}
+
+.motifLineSoft {
+  stroke: rgba(22, 33, 42, 0.2);
+  stroke-width: 2;
+}
+
+.motifPaper,
+.motifPaperSoft,
+.motifPaperDot {
+  fill: rgba(255, 255, 255, 0.82);
+  stroke: rgba(22, 33, 42, 0.34);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+
+.motifPaperSoft {
+  fill: rgba(255, 253, 247, 0.54);
+}
+
+.motifPaperDot {
+  stroke-width: 1.8;
+}
+
+.motifGold,
+.motifBlue,
+.motifCoral,
+.motifGlow,
+.motifFillGold,
+.motifFillBlue,
+.motifFillCoral,
+.motifFillGreen {
+  stroke-linejoin: round;
+}
+
+.motifGold,
+.motifFillGold {
+  fill: rgba(255, 200, 87, 0.84);
+}
+
+.motifBlue,
+.motifFillBlue {
+  fill: rgba(22, 166, 182, 0.5);
+}
+
+.motifCoral,
+.motifFillCoral {
+  fill: rgba(246, 106, 61, 0.78);
+}
+
+.motifFillGreen {
+  fill: rgba(89, 148, 114, 0.7);
+}
+
+.motifFillGold,
+.motifFillBlue,
+.motifFillCoral,
+.motifFillGreen {
+  stroke: rgba(22, 33, 42, 0.48);
+  stroke-width: 2.6;
+}
+
+.motifGlow {
+  fill: rgba(255, 200, 87, 0.2);
+  stroke: none;
 }
 
 .artifactStamp {
@@ -1328,6 +1365,16 @@
     border-radius: 18px;
   }
 
+  .storyMotifStrip {
+    width: 100%;
+    padding: 0.38rem 0.45rem;
+    border-radius: 14px;
+  }
+
+  .storyMotifSvg {
+    min-height: 3.95rem;
+  }
+
   .magicCards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.5rem;
@@ -1361,10 +1408,6 @@
     right: auto;
     display: inline-block;
     margin-top: 1rem;
-  }
-
-  .storyCopy .artifactMotif {
-    font-size: 0.86rem;
   }
 
   .footerCta {

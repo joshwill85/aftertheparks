@@ -277,11 +277,11 @@ def _schedule_ok(schedule: Any) -> bool:
 
 def _fee_marker_conflicts(candidate: dict[str, Any]) -> bool:
     field = _evidence_for(candidate, "fee")
-    raw_value = str(field.get("raw_value") or "") if isinstance(field, dict) else ""
     normalized_value = field.get("normalized_value") if isinstance(field, dict) else None
     if normalized_value is not None and normalized_value != candidate.get("fee_required"):
         return True
-    return "($)" in raw_value and candidate.get("fee_required") is False
+    engine_texts = _engine_texts(candidate, "fee")
+    return any(text.strip() == "($)" for text in engine_texts) and candidate.get("fee_required") is False
 
 
 def _has_any_reviewable_evidence(candidate: dict[str, Any]) -> bool:

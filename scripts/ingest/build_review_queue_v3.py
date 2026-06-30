@@ -27,6 +27,12 @@ def _task_type(findings: list[str]) -> str:
     if not findings:
         return "needs_review"
     first = findings[0]
+    if first in {
+        "fee_legend_missing_for_unmarked_title",
+        "fee_marker_without_legend",
+        "fee_marker_conflict",
+    } or first.startswith("missing_field_normalized_value:") or first.startswith("field_engine_value_mismatch:"):
+        return "manual_review_required"
     if first.startswith("missing_required_field:"):
         return "missing_required_field"
     if first == "unknown_location":
@@ -49,11 +55,21 @@ def _task_type(findings: list[str]) -> str:
 
 
 def _field_from_findings(findings: list[str]) -> str | None:
+    if (
+        "fee_legend_missing_for_unmarked_title" in findings
+        or "fee_marker_without_legend" in findings
+        or "fee_marker_conflict" in findings
+    ):
+        return "fee"
     for finding in findings:
         if ":" in finding and (
             finding.startswith("missing_required_field:")
             or finding.startswith("engine_disagreement:")
             or finding.startswith("manual_review_required:")
+            or finding.startswith("missing_field_normalized_value:")
+            or finding.startswith("field_engine_value_mismatch:")
+            or finding.startswith("field_normalized_value_mismatch:")
+            or finding.startswith("field_raw_value_mismatch:")
         ):
             return finding.split(":", 1)[1]
     if "unknown_location" in findings:

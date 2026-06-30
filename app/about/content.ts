@@ -9,14 +9,20 @@ export type AboutIconName =
 export interface StorySection {
   heading: string;
   icon: AboutIconName;
-  mapNote: string;
   phase: string;
-  artifact: "summer" | "cabin" | "problem" | "builder" | "born" | "twilight";
+  artifact: StoryArtifact;
   stamp: string;
-  motif: string;
   paragraphs: string[];
   hingeNote?: string;
 }
+
+export type StoryArtifact =
+  | "summer"
+  | "cabin"
+  | "problem"
+  | "builder"
+  | "born"
+  | "twilight";
 
 export const heroContent = {
   headline: "I built After the Parks because I needed it first.",
@@ -45,11 +51,9 @@ export const storySections: StorySection[] = [
   {
     heading: "The summer we wanted to make count",
     icon: "sun-pack",
-    mapNote: "Map note 01 · The wish",
     phase: "Paper White",
     artifact: "summer",
     stamp: "Summer start",
-    motif: "Soft sun, kid backpack, and a tiny VPK paper shape",
     paragraphs: [
       "I'm Josh, the dad behind After the Parks.",
       "This whole thing started because my wife and I wanted to give our daughter a summer she would remember.",
@@ -59,11 +63,9 @@ export const storySections: StorySection[] = [
   {
     heading: "The cabin that made it possible",
     icon: "cabin-key",
-    mapNote: "Map note 02 · Cabin math",
     phase: "Cabin Staycation",
     artifact: "cabin",
     stamp: "Split cost",
-    motif: "Cabin key tag, pine tree, split-cost receipt, and calendar circle",
     paragraphs: [
       "Living in Orlando, though, it made sense for us to build something Disney into our summer. We called my sister, and she agreed to split the cost of one of the new cabins at Fort Wilderness with us. My wife and daughter had annual passes, there were dining deals we could work around, and suddenly we had the makings of a real staycation with extended family.",
       "My wife and daughter are Disney people. I am not.",
@@ -74,11 +76,9 @@ export const storySections: StorySection[] = [
   {
     heading: "The planning problem",
     icon: "paper-stack",
-    mapNote: "Map note 03 · The problem",
     phase: "Planning Fog",
     artifact: "problem",
     stamp: "Too scattered",
-    motif: "Scattered PDFs, phone screen, image thumbnail, calendar grid, and question marks",
     paragraphs: [
       "Once the cabin was booked, I did what I always do. I started planning way too much.",
       "I wanted to make the trip feel full without making it feel expensive. I wanted to visit other resorts. I wanted to find the campfires, movies, scavenger hunts, crafts, community halls, boat rides, playgrounds, and all the little things that make Disney feel magical even when you are not walking into a park.",
@@ -90,11 +90,9 @@ export const storySections: StorySection[] = [
   {
     heading: "The part where I could not leave it alone",
     icon: "pencil-dots",
-    mapNote: "Map note 04 · Dad brain activates",
     phase: "Organizing",
     artifact: "builder",
     stamp: "Dad brain",
-    motif: "Pencil, data dots, and a spreadsheet grid becoming a map route",
     paragraphs: [
       "A few things about me probably explain what happened next.",
       "First, I am a planner. Sometimes to an unhealthy degree.",
@@ -106,11 +104,9 @@ export const storySections: StorySection[] = [
   {
     heading: "After the Parks is born",
     icon: "route-sign",
-    mapNote: "Map note 05 · A useful map",
     phase: "Useful Map",
     artifact: "born",
     stamp: "After the Parks",
-    motif: "Signpost, map pin, name idea note, and clean activity cards",
     paragraphs: [
       "I started playing with name ideas. The names I wanted most were already taken, because of course they were. Maybe one day, if this grows into something useful enough, I will try to buy one of them. But I move fast, sometimes too fast, and within about an hour After the Parks had a name.",
       "That is really what this site is about.",
@@ -122,11 +118,9 @@ export const storySections: StorySection[] = [
   {
     heading: "Maybe I'm becoming a Disney person",
     icon: "lantern-path",
-    mapNote: "Map note 06 · Still in progress",
     phase: "Twilight",
     artifact: "twilight",
     stamp: "Still in progress",
-    motif: "Lantern, twilight path, generic pass-card shape, and campfire glow",
     paragraphs: [
       "We did take that Fort Wilderness trip. It was fun. It was not as organized as I hoped it would be. I missed things. I found things too late.",
       "So I started building the thing I wish I had before we went.",

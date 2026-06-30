@@ -1091,6 +1091,23 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("lineage_hash", lineage)
         self.assertIn("model_asset_hashes", lineage)
 
+    def test_vision_snapshot_hashes_configured_model_asset_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            model_dir = root / "model"
+            model_dir.mkdir()
+            (model_dir / "weights.bin").write_bytes(b"model-weights")
+
+            config = vision_snapshot.default_vision_config()
+            config["ocr"]["primary"]["model_asset_path"] = str(model_dir)
+
+            hashes = vision_snapshot._model_asset_hashes(
+                vision_snapshot._engine_routes(config)
+            )
+
+        self.assertIn("paddleocr_ppstructurev3", hashes)
+        self.assertEqual(64, len(hashes["paddleocr_ppstructurev3"]))
+
     def test_vision_snapshot_routes_engines_from_versioned_config_and_stamps_runs(self) -> None:
         page_manifest = {
             "source_path": "data/raw/pdfs/BW_Aframe_Recreation-0526_DIGITAL.pdf",
@@ -2363,6 +2380,295 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("Tuesday at 8:30pm", candidate["field_evidence"]["schedule"]["raw_value"])
         self.assertEqual("exact_after_normalization", candidate["field_evidence"]["schedule"]["agreement"])
 
+    def test_extract_v3_vertical_sign_derives_field_evidence_from_unhinted_ocr_tokens(self) -> None:
+        region = {
+            "region_id": "page-001-region-03",
+            "region_type": "vertical_activity_row",
+            "region_family": "vertical_digital_rec_sign",
+            "page_number": 1,
+            "page_image_sha256": "pagehash",
+            "bbox_px": [0, 180, 1200, 900],
+            "crop_path": "vertical-row.png",
+            "crop_sha256": "verticalrowcrop",
+        }
+
+        def token(engine: str, text: str, y1: int, y2: int, order: int) -> dict[str, Any]:
+            return {
+                "engine": engine,
+                "text": text,
+                "page_number": 1,
+                "page_image_sha256": "pagehash",
+                "bbox_px": [200, y1, 900, y2],
+                "confidence": 0.93,
+                "reading_order": order,
+            }
+
+        snapshot = {
+            "snapshot_kind": "vision_layout_v3",
+            "pipeline_version": "vision_v3_001",
+            "document_family": "vertical_digital_rec_sign",
+            "source_document_id": "source-doc-1",
+            "source_kind": "official_image",
+            "source_role": "supporting_price_image",
+            "canonical_url": "https://example.com/sign.jpg",
+            "fetched_url": "https://example.com/sign.jpg",
+            "http_status": 200,
+            "currentness": "current",
+            "captured_at": "2026-06-28T12:00:00+00:00",
+            "source_sha256": "sourcehash",
+            "calendar_group_key": "port-orleans-riverside",
+            "source_pages": [{"page_number": 1, "canonical_image_sha256": "pagehash"}],
+            "regions": [region],
+            "tokens": [
+                token("paddleocr_ppstructurev3", "MONDAY", 120, 150, 1),
+                token("paddleocr_ppstructurev3", "POOL PARTY", 200, 230, 2),
+                token("paddleocr_ppstructurev3", "Ol' Man Island Pool Deck", 240, 270, 3),
+                token("paddleocr_ppstructurev3", "From 2:30pm-3:30pm", 280, 310, 4),
+                token("rapidocr", "MONDAY", 121, 151, 1),
+                token("rapidocr", "POOL PARTY", 201, 231, 2),
+                token("rapidocr", "O. Man Island Pool Deck", 241, 271, 3),
+                token("rapidocr", "From 2:30pm-3:30pm", 281, 311, 4),
+            ],
+        }
+
+        candidates = extract_candidates_from_snapshot(snapshot)
+
+        self.assertEqual(1, len(candidates))
+        candidate = candidates[0]
+        self.assertEqual("POOL PARTY", candidate["source_title"])
+        self.assertEqual("Monday at From 2:30pm-3:30pm", candidate["schedule_raw"])
+        self.assertEqual(["Monday"], candidate["schedule_normalized"]["days_of_week"])
+        self.assertEqual("14:30", candidate["schedule_normalized"]["start_time"])
+        self.assertEqual("ol_man_island_pool_deck", candidate["normalized_location_id"])
+        self.assertEqual("verticalrowcrop", candidate["field_evidence"]["title"]["source"]["crop_sha256"])
+        self.assertEqual("POOL PARTY", candidate["source_spans"]["title"][0]["text"])
+        self.assertEqual("rapidocr", candidate["field_evidence"]["title"]["engines"][1]["engine"])
+        self.assertRegex(candidate["candidate_id"], r"^vision-v3-[0-9a-f]{24}$")
+        self.assertEqual(candidate["candidate_id"], extract_candidates_from_snapshot(snapshot)[0]["candidate_id"])
+
+    def test_extract_v3_aframe_activity_derives_field_evidence_from_unhinted_ocr_tokens(self) -> None:
+        region = {
+            "region_id": "page-001-region-04",
+            "region_type": "resort_activities_section",
+            "region_family": "aframe_recreation",
+            "page_number": 1,
+            "page_image_sha256": "pagehash",
+            "bbox_px": [5000, 2000, 10800, 12000],
+            "crop_path": "activities.png",
+            "crop_sha256": "activitiescrop",
+        }
+
+        def token(engine: str, text: str, y1: int, y2: int, order: int) -> dict[str, Any]:
+            return {
+                "engine": engine,
+                "text": text,
+                "page_number": 1,
+                "page_image_sha256": "pagehash",
+                "bbox_px": [5700, y1, 9000, y2],
+                "confidence": 0.94,
+                "reading_order": order,
+            }
+
+        snapshot = {
+            "snapshot_kind": "vision_layout_v3",
+            "pipeline_version": "vision_v3_001",
+            "document_family": "aframe_recreation",
+            "source_document_id": "source-doc-1",
+            "source_kind": "official_pdf",
+            "source_role": "resort_pdf",
+            "canonical_url": "https://example.com/boardwalk.pdf",
+            "fetched_url": "https://example.com/boardwalk.pdf",
+            "http_status": 200,
+            "currentness": "current",
+            "captured_at": "2026-06-28T12:00:00+00:00",
+            "source_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "source_pages": [{"page_number": 1, "canonical_image_sha256": "pagehash"}],
+            "regions": [region],
+            "tokens": [
+                token("paddleocr_ppstructurev3", "POOLSIDE ACTIVITIES", 5500, 5750, 1),
+                token("paddleocr_ppstructurev3", "Luna Park Pool Deck", 5800, 6000, 2),
+                token("paddleocr_ppstructurev3", "Daily at 1:30pm", 6050, 6250, 3),
+                token("rapidocr", "POOLSIDE ACTIVITIES", 5520, 5770, 1),
+                token("rapidocr", "Luna Park Pool Deck", 5820, 6020, 2),
+                token("rapidocr", "Daily at 1:30pm", 6070, 6270, 3),
+            ],
+        }
+
+        candidates = extract_candidates_from_snapshot(snapshot)
+
+        self.assertEqual(1, len(candidates))
+        candidate = candidates[0]
+        self.assertEqual("POOLSIDE ACTIVITIES", candidate["source_title"])
+        self.assertEqual("Daily at 1:30pm", candidate["schedule_raw"])
+        self.assertEqual("13:30", candidate["schedule_normalized"]["start_time"])
+        self.assertEqual("luna_park_pool_deck", candidate["normalized_location_id"])
+        self.assertEqual("activitiescrop", candidate["field_evidence"]["title"]["source"]["crop_sha256"])
+        self.assertEqual("POOLSIDE ACTIVITIES", candidate["source_spans"]["title"][0]["text"])
+
+    def test_extract_v3_uses_page_fee_legend_for_unmarked_aframe_activity_fee(self) -> None:
+        region = {
+            "region_id": "page-001-region-04",
+            "region_type": "resort_activities_section",
+            "region_family": "aframe_recreation",
+            "page_number": 1,
+            "page_image_sha256": "pagehash",
+            "bbox_px": [5000, 2000, 10800, 12000],
+            "crop_path": "activities.png",
+            "crop_sha256": "activitiescrop",
+        }
+
+        def token(engine: str, text: str, y1: int, y2: int, order: int) -> dict[str, Any]:
+            return {
+                "engine": engine,
+                "text": text,
+                "page_number": 1,
+                "page_image_sha256": "pagehash",
+                "bbox_px": [5700, y1, 9000, y2],
+                "confidence": 0.94,
+                "reading_order": order,
+            }
+
+        snapshot = {
+            "snapshot_kind": "vision_layout_v3",
+            "pipeline_version": "vision_v3_001",
+            "document_family": "aframe_recreation",
+            "source_document_id": "source-doc-1",
+            "source_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "source_pages": [{"page_number": 1, "canonical_image_sha256": "pagehash"}],
+            "regions": [region],
+            "tokens": [
+                token("paddleocr_ppstructurev3", "POOLSIDE ACTIVITIES", 5500, 5750, 1),
+                token("paddleocr_ppstructurev3", "Luna Park Pool Deck", 5800, 6000, 2),
+                token("paddleocr_ppstructurev3", "Daily at 1:30pm", 6050, 6250, 3),
+                token("paddleocr_ppstructurev3", "($) There is a fee associated with this activity.", 15000, 15100, 4),
+                token("rapidocr", "POOLSIDE ACTIVITIES", 5520, 5770, 1),
+                token("rapidocr", "Luna Park Pool Deck", 5820, 6020, 2),
+                token("rapidocr", "Daily at 1:30pm", 6070, 6270, 3),
+                token("rapidocr", "($) There is a fee associated with this activity.", 15020, 15120, 4),
+            ],
+        }
+
+        candidates = extract_candidates_from_snapshot(snapshot)
+
+        self.assertEqual(1, len(candidates))
+        candidate = candidates[0]
+        self.assertFalse(candidate["fee_required"])
+        self.assertNotIn("fee_legend_missing_for_unmarked_title", candidate["validation_findings"])
+        self.assertEqual("exact_after_normalization", candidate["field_evidence"]["fee"]["agreement"])
+        self.assertFalse(candidate["field_evidence"]["fee"]["normalized_value"])
+        self.assertIn("($) There is a fee associated", candidate["field_evidence"]["fee"]["raw_value"])
+
+    def test_extract_v3_aframe_movie_rows_derive_field_evidence_from_unhinted_ocr_tokens(self) -> None:
+        region = {
+            "region_id": "page-001-region-05",
+            "region_type": "movie_section",
+            "region_family": "aframe_recreation",
+            "page_number": 1,
+            "page_image_sha256": "pagehash",
+            "bbox_px": [5000, 12000, 10800, 15000],
+            "crop_path": "movies.png",
+            "crop_sha256": "moviescrop",
+        }
+
+        def token(engine: str, text: str, y1: int, y2: int, order: int, x1: int = 5700, x2: int = 9800) -> dict[str, Any]:
+            return {
+                "engine": engine,
+                "text": text,
+                "page_number": 1,
+                "page_image_sha256": "pagehash",
+                "bbox_px": [x1, y1, x2, y2],
+                "confidence": 0.94,
+                "reading_order": order,
+            }
+
+        snapshot = {
+            "snapshot_kind": "vision_layout_v3",
+            "pipeline_version": "vision_v3_001",
+            "document_family": "aframe_recreation",
+            "source_document_id": "source-doc-1",
+            "source_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "source_pages": [{"page_number": 1, "canonical_image_sha256": "pagehash"}],
+            "regions": [region],
+            "tokens": [
+                token("paddleocr_ppstructurev3", "MOVIE UNDER THE STARS", 12400, 12650, 1),
+                token("paddleocr_ppstructurev3", "VILLAGE GREEN LAWN | 8:30PM", 12900, 13100, 2),
+                token("paddleocr_ppstructurev3", "Sunday", 13300, 13500, 3, 5700, 6400),
+                token("paddleocr_ppstructurev3", "Beauty and the Beast (1991)", 13300, 13500, 4, 7900, 10200),
+                token("rapidocr", "MOVIE UNDER THE STARS", 12420, 12670, 1),
+                token("rapidocr", "VILLAGE GREEN LAWN | 8:30PM", 12920, 13120, 2),
+                token("rapidocr", "Sunday", 13320, 13520, 3, 5700, 6400),
+                token("rapidocr", "Beauty and the Beast (1991) G", 13320, 13520, 4, 7900, 10200),
+            ],
+        }
+
+        candidates = extract_candidates_from_snapshot(snapshot)
+
+        self.assertEqual(1, len(candidates))
+        candidate = candidates[0]
+        self.assertEqual("movie", candidate["candidate_type"])
+        self.assertEqual("MOVIE UNDER THE STARS", candidate["source_title"])
+        self.assertEqual("Beauty and the Beast (1991)", candidate["movie_title"])
+        self.assertEqual("Sunday at 8:30PM", candidate["schedule_raw"])
+        self.assertEqual(["Sunday"], candidate["schedule_normalized"]["days_of_week"])
+        self.assertEqual("20:30", candidate["schedule_normalized"]["start_time"])
+        self.assertEqual("village_green_lawn", candidate["normalized_location_id"])
+        self.assertEqual("moviescrop", candidate["field_evidence"]["movie_title"]["source"]["crop_sha256"])
+
+    def test_extract_v3_aframe_lower_right_section_can_fall_back_to_activity_rows(self) -> None:
+        region = {
+            "region_id": "page-001-region-05",
+            "region_type": "movie_section",
+            "region_family": "aframe_recreation",
+            "page_number": 1,
+            "page_image_sha256": "pagehash",
+            "bbox_px": [5000, 11000, 10800, 15500],
+            "crop_path": "lower-right.png",
+            "crop_sha256": "lowerrightcrop",
+        }
+
+        def token(engine: str, text: str, y1: int, y2: int, order: int) -> dict[str, Any]:
+            return {
+                "engine": engine,
+                "text": text,
+                "page_number": 1,
+                "page_image_sha256": "pagehash",
+                "bbox_px": [5600, y1, 9500, y2],
+                "confidence": 0.94,
+                "reading_order": order,
+            }
+
+        snapshot = {
+            "snapshot_kind": "vision_layout_v3",
+            "pipeline_version": "vision_v3_001",
+            "document_family": "aframe_recreation",
+            "source_document_id": "source-doc-1",
+            "source_sha256": "sourcehash",
+            "calendar_group_key": "all-star-sports",
+            "source_pages": [{"page_number": 1, "canonical_image_sha256": "pagehash"}],
+            "regions": [region],
+            "tokens": [
+                token("paddleocr_ppstructurev3", "FIELD DAY", 11700, 11900, 1),
+                token("paddleocr_ppstructurev3", "Touchdown! Football Field", 12000, 12200, 2),
+                token("paddleocr_ppstructurev3", "Tuesday at 8:30pm", 12300, 12500, 3),
+                token("rapidocr", "FIELD DAY", 11720, 11920, 1),
+                token("rapidocr", "Touchdown! Football Field", 12020, 12220, 2),
+                token("rapidocr", "Tuesday at 8:30pm", 12320, 12520, 3),
+            ],
+        }
+
+        candidates = extract_candidates_from_snapshot(snapshot)
+
+        self.assertEqual(1, len(candidates))
+        candidate = candidates[0]
+        self.assertEqual("activity", candidate["candidate_type"])
+        self.assertEqual("movie_section", candidate["region_type"])
+        self.assertEqual("FIELD DAY", candidate["source_title"])
+        self.assertEqual("Tuesday at 8:30pm", candidate["schedule_raw"])
+        self.assertEqual("touchdown_football_field", candidate["normalized_location_id"])
+
     def test_extract_v3_batch_scans_vision_snapshots_and_writes_report(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -2884,7 +3190,22 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         fee_conflict = json.loads(json.dumps(valid_candidate))
         fee_conflict["fee_required"] = False
         fee_conflict["field_evidence"]["fee"]["raw_value"] = "Poolside Activities ($)"
+        for engine_record in fee_conflict["field_evidence"]["fee"]["engines"]:
+            engine_record["text"] = "($)"
         self.assertIn("fee_marker_conflict", validate_candidate(fee_conflict)["validation_findings"])
+
+        page_legend_not_conflict = json.loads(json.dumps(valid_candidate))
+        page_legend_not_conflict["fee_required"] = False
+        page_legend_not_conflict["field_evidence"]["fee"]["raw_value"] = (
+            "Poolside Activities ($) There is a fee associated with this activity."
+        )
+        page_legend_not_conflict["field_evidence"]["fee"]["normalized_value"] = False
+        for engine_record in page_legend_not_conflict["field_evidence"]["fee"]["engines"]:
+            engine_record["text"] = "no fee marker"
+        self.assertNotIn(
+            "fee_marker_conflict",
+            validate_candidate(page_legend_not_conflict)["validation_findings"],
+        )
 
         movie_missing_title_evidence = json.loads(json.dumps(valid_candidate))
         movie_missing_title_evidence["candidate_type"] = "movie"
@@ -3697,18 +4018,49 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "candidate_id": "cand-gold-conflict",
                 "validation_findings": ["gold_conflict:schedule"],
             },
+            {
+                **base_candidate,
+                "candidate_id": "cand-fee-legend",
+                "validation_findings": ["fee_legend_missing_for_unmarked_title", "engine_disagreement:title"],
+                "field_evidence": {
+                    **base_candidate["field_evidence"],
+                    "fee": {
+                        "raw_value": "no fee marker",
+                        "normalized_value": None,
+                        "source": {
+                            "content_sha256": "sourcehash",
+                            "page_number": 1,
+                            "page_image_sha256": "pagehash",
+                            "bbox_px": [10, 10, 100, 30],
+                            "crop_storage_path": "fee.png",
+                            "crop_sha256": "feecrop",
+                        },
+                        "engines": [
+                            {"engine": "paddleocr_ppstructurev3", "text": "no fee marker", "confidence": 0.97},
+                            {"engine": "rapidocr", "text": "no fee marker", "confidence": 0.94},
+                        ],
+                    },
+                },
+            },
         ]
 
         tasks = build_review_tasks(candidates)
 
         self.assertEqual(
-            ["low_quality_image", "source_changed", "gold_conflict"],
+            ["low_quality_image", "source_changed", "gold_conflict", "manual_review_required"],
             [task["task_type"] for task in tasks],
         )
         self.assertEqual(
-            [["low_quality_image:page_1"], ["source_changed:content_sha256"], ["gold_conflict:schedule"]],
+            [
+                ["low_quality_image:page_1"],
+                ["source_changed:content_sha256"],
+                ["gold_conflict:schedule"],
+                ["fee_legend_missing_for_unmarked_title", "engine_disagreement:title"],
+            ],
             [task["validation_findings"] for task in tasks],
         )
+        self.assertEqual("fee", tasks[3]["field"])
+        self.assertEqual("fee.png", tasks[3]["field_crop"])
 
     def test_review_queue_v3_builds_gold_conflict_tasks_from_promotion_report(self) -> None:
         gold_conflicts = [
@@ -7888,7 +8240,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         daily = normalize_schedule_text("Daily from 8:00am–11:00pm")
         weekly = normalize_schedule_text("Monday, Wednesday and Friday from 4:00pm-5:00pm")
         point_time = normalize_schedule_text("Tuesday and Thursday at 8:30pm")
+        ocr_zero_repair = normalize_schedule_text("Sunday at 8:3OPM")
         phrase = normalize_schedule_text("Dawn to Dusk")
+        daily_phrase = normalize_schedule_text("Daily from Dawn to Dusk")
 
         self.assertEqual("recurring", daily["schedule_type"])
         self.assertEqual(ALL_DAYS, daily["days_of_week"])
@@ -7904,8 +8258,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(["Tuesday", "Thursday"], point_time["days_of_week"])
         self.assertEqual("20:30", point_time["start_time"])
         self.assertNotIn("end_time", point_time)
+        self.assertEqual(["Sunday"], ocr_zero_repair["days_of_week"])
+        self.assertEqual("20:30", ocr_zero_repair["start_time"])
         self.assertEqual("phrase", phrase["schedule_type"])
         self.assertEqual("dawn_to_dusk", phrase["phrase"])
+        self.assertEqual("phrase", daily_phrase["schedule_type"])
+        self.assertEqual("dawn_to_dusk", daily_phrase["phrase"])
 
     def test_prd_named_validator_modules_expose_v3_contracts(self) -> None:
         try:

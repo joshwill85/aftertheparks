@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { storySections } from "../content";
 import styles from "../about.module.css";
-import { AboutIcon } from "./AboutIllustrations";
+import { AboutIcon, AboutMotifSet } from "./AboutIllustrations";
 
 export function AboutStorySpine() {
   return (
@@ -51,14 +51,15 @@ export function AboutStorySpine() {
             </div>
             <div className={styles.storyCopy} data-testid="about-story-copy">
               <div className={styles.storyCardMeta}>
-                <p className={styles.mapNote}>{section.mapNote}</p>
                 <span>{section.phase}</span>
               </div>
               <h3>{section.heading}</h3>
-              <p className={styles.artifactMotif}>{section.motif}</p>
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
+              <div className={styles.storyMotifStrip} data-testid="about-story-motif-strip" aria-hidden>
+                <AboutMotifSet artifact={section.artifact} />
+              </div>
               <span className={styles.artifactStamp} aria-hidden>
                 {section.stamp}
               </span>

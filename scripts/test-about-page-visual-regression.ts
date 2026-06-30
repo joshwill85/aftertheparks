@@ -13,6 +13,32 @@ const viewports = [
   { name: "1440", width: 1440, height: 1200 },
 ] as const;
 
+const expectedMotifs = [
+  "summer-sun",
+  "kid-pack",
+  "vpk-paper-shape",
+  "cabin-key-tag",
+  "pine-tree",
+  "split-receipt",
+  "calendar-circle",
+  "pdf-stack",
+  "phone-screen",
+  "image-thumb",
+  "calendar-grid",
+  "question-cues",
+  "pencil",
+  "data-dots",
+  "spreadsheet-route",
+  "signpost",
+  "map-pin",
+  "name-note",
+  "activity-cards",
+  "lantern",
+  "twilight-path",
+  "pass-card-shape",
+  "campfire-glow",
+] as const;
+
 type Box = NonNullable<Awaited<ReturnType<Locator["boundingBox"]>>>;
 
 function intersects(a: Box, b: Box): boolean {
@@ -80,6 +106,47 @@ async function assertStorySpineDoesNotCutBodyCopy(page: Page) {
   }
 }
 
+async function assertStoryMotifsRenderCleanly(page: Page) {
+  const strips = page.getByTestId("about-story-motif-strip");
+  const stripCount = await strips.count();
+  assert.equal(stripCount, 6, "Each story card should render one integrated motif strip.");
+
+  const motifIds = await page.locator("[data-motif]").evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute("data-motif"))
+  );
+
+  assert.deepEqual(
+    motifIds.toSorted(),
+    [...expectedMotifs].toSorted(),
+    "Rendered story motif artwork should cover every planned visual object once."
+  );
+
+  for (let index = 0; index < stripCount; index += 1) {
+    const strip = strips.nth(index);
+    await requiredBox(strip, `story motif strip ${index + 1}`);
+    assert.equal(
+      (await strip.innerText()).trim(),
+      "",
+      `Story motif strip ${index + 1} should not expose visible planning-note words.`
+    );
+
+    const clipState = await strip.evaluate((element) => ({
+      scrollWidth: element.scrollWidth,
+      clientWidth: element.clientWidth,
+      scrollHeight: element.scrollHeight,
+      clientHeight: element.clientHeight,
+    }));
+    assert.ok(
+      clipState.scrollWidth <= clipState.clientWidth + 1,
+      `Story motif strip ${index + 1} clips horizontally.`
+    );
+    assert.ok(
+      clipState.scrollHeight <= clipState.clientHeight + 1,
+      `Story motif strip ${index + 1} clips vertically.`
+    );
+  }
+}
+
 async function assertMessyCardsReadableOnMobile(page: Page) {
   const cards = page.getByTestId("about-messy-card");
   const count = await cards.count();
@@ -112,12 +179,33 @@ async function assertMessyCardsReadableOnMobile(page: Page) {
 
 async function assertRouteProgressUpdates(page: Page) {
   await page.evaluate(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  });
+
+  await page.evaluate(() => {
+    const route = document.querySelector<SVGElement>(
+      '[data-testid="about-story-route"]'
+    );
+    if (!route) return;
+
+    const box = route.getBoundingClientRect();
+    const routeTop = window.scrollY + box.top;
     window.scrollTo({
-      top: document.documentElement.scrollHeight * 0.42,
+      top: Math.max(0, routeTop - window.innerHeight * 0.35),
       behavior: "instant",
     });
+    window.dispatchEvent(new Event("scroll"));
   });
-  await page.waitForTimeout(120);
+
+  await page.waitForFunction(() => {
+    const pageElement = document.querySelector<HTMLElement>("[data-about-page]");
+    const progress = Number.parseFloat(
+      pageElement?.style.getPropertyValue("--about-route-progress") || "0"
+    );
+
+    return progress > 0.05;
+  });
+
   const progress = await page.locator("[data-about-page]").evaluate((element) => {
     return Number.parseFloat(
       element.style.getPropertyValue("--about-route-progress") || "0"
@@ -175,6 +263,7 @@ async function run() {
       await assertNoHorizontalOverflow(page);
       await assertHeroArtDoesNotOverlapText(page);
       await assertStorySpineDoesNotCutBodyCopy(page);
+      await assertStoryMotifsRenderCleanly(page);
       await assertRouteProgressUpdates(page);
 
       if (viewport.width === 390) {

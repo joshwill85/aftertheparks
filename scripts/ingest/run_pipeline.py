@@ -28,11 +28,12 @@ def validation_gate_steps(*, local_only: bool) -> list[tuple[str, ...]]:
         if local_only
         else ("audit_coverage.py", "--require-production-ready")
     )
+    promote_step = ("promote_gold.py",) if local_only else ("promote_gold.py", "--fail-on-review")
     return [
         ("validate.py", "--strict"),
         ("validate_v2.py",),
         ("magical_resort_guide.py",),
-        ("promote_gold.py", "--fail-on-review"),
+        promote_step,
         coverage_gate,
         ("trust_report.py",),
     ]

@@ -6,6 +6,7 @@ import argparse
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -174,17 +175,54 @@ def _ocr_engine_configs(routes: list[dict[str, Any]]) -> dict[str, Any]:
     return {str(route["engine"]): route["config"] for route in routes}
 
 
+def _hash_model_asset_path(path: Path) -> str:
+    hasher = hashlib.sha256()
+    if path.is_file():
+        hasher.update(path.name.encode("utf-8"))
+        hasher.update(path.read_bytes())
+        return hasher.hexdigest()
+
+    for child in sorted(item for item in path.rglob("*") if item.is_file()):
+        relative = child.relative_to(path).as_posix()
+        hasher.update(relative.encode("utf-8"))
+        hasher.update(str(child.stat().st_size).encode("utf-8"))
+        hasher.update(child.read_bytes())
+    return hasher.hexdigest()
+
+
+def _known_model_asset_path(engine: str, package: str) -> Path | None:
+    if engine == PRIMARY_ENGINE:
+        path = Path.home() / ".paddlex" / "official_models"
+        return path if path.exists() else None
+    if engine == SECONDARY_ENGINE:
+        spec = importlib.util.find_spec(package)
+        if spec and spec.origin:
+            path = Path(spec.origin).resolve().parent / "models"
+            return path if path.exists() else None
+    return None
+
+
 def _model_asset_hashes(routes: list[dict[str, Any]]) -> dict[str, str]:
     hashes: dict[str, str] = {}
     for route in routes:
         engine_config = route.get("config") if isinstance(route.get("config"), dict) else {}
+        engine = str(route["engine"])
         model_hash = str(
             engine_config.get("model_asset_sha256")
             or engine_config.get("model_asset_hash")
             or ""
         ).strip()
         if model_hash:
-            hashes[str(route["engine"])] = model_hash
+            hashes[engine] = model_hash
+            continue
+
+        model_asset_path = str(engine_config.get("model_asset_path") or "").strip()
+        path = Path(model_asset_path).expanduser() if model_asset_path else _known_model_asset_path(
+            engine,
+            str(route.get("package") or ""),
+        )
+        if path and path.exists():
+            hashes[engine] = _hash_model_asset_path(path)
     return hashes
 
 

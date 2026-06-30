@@ -1,5 +1,5 @@
 {
-  "ingested_at": "2026-06-26T22:33:44.454627+00:00",
+  "ingested_at": "2026-06-29T23:56:16.637824+00:00",
   "parser_version": "2.0.0",
   "sources": [
     {
@@ -180,8 +180,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "notes": "Shared calendar for Disney's BoardWalk Inn and BoardWalk Villas.",
       "activity_count": 13,
       "confidence": 0.835,
@@ -333,7 +333,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -360,7 +360,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -418,7 +418,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -445,7 +445,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -472,7 +472,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -505,7 +505,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -535,7 +535,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -562,7 +562,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -591,7 +591,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -621,7 +621,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -650,7 +650,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -677,7 +677,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-movies",
@@ -704,7 +704,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -731,7 +731,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -758,7 +758,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -787,7 +787,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -839,7 +839,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -871,7 +871,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -903,7 +903,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -934,7 +934,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -961,7 +961,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -988,7 +988,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1018,7 +1018,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1047,7 +1047,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1074,7 +1074,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1103,7 +1103,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-music",
@@ -1130,7 +1130,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1157,7 +1157,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1184,7 +1184,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1211,7 +1211,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1238,7 +1238,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1265,7 +1265,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1294,7 +1294,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1324,7 +1324,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1355,7 +1355,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1382,7 +1382,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1411,7 +1411,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1438,7 +1438,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "all-star-sports",
@@ -1502,7 +1502,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1529,7 +1529,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1558,7 +1558,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1587,7 +1587,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1616,7 +1616,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1647,7 +1647,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1674,7 +1674,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1701,7 +1701,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1732,7 +1732,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1759,7 +1759,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1794,7 +1794,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1824,7 +1824,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1855,7 +1855,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1882,7 +1882,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "art-of-animation",
@@ -1940,7 +1940,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -1967,7 +1967,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2019,7 +2019,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2046,7 +2046,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2073,7 +2073,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2104,7 +2104,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2134,7 +2134,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2163,7 +2163,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2190,7 +2190,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2220,7 +2220,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2252,7 +2252,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "pop-century",
@@ -2279,7 +2279,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2325,7 +2325,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2352,7 +2352,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2379,7 +2379,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2410,7 +2410,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2442,7 +2442,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2469,7 +2469,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2502,7 +2502,7 @@
       ],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "caribbean-beach",
@@ -2531,7 +2531,7 @@
       "warnings": [],
       "profile_key": "aframe_caribbean_graphic",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2558,7 +2558,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2585,7 +2585,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2612,7 +2612,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2639,7 +2639,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2666,7 +2666,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2695,7 +2695,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2726,7 +2726,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2753,7 +2753,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2784,7 +2784,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2800,7 +2800,7 @@
       "section": "SIGNATURE ACTIVITIES",
       "location": "Toledo - Tapas, Steak & Seafood",
       "schedule_text": "Friday from 1:00pm-3:00pm",
-      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages 12 and up. Space is limited. To book, search Colors of Coronado Painting Experience on the My Disney Experience app",
+      "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages I2 and up. Space is limited. To book, search Colors of Coronado Painting Experience on the My Disney Experience app",
       "is_fee_based": true,
       "is_daily": false,
       "days_of_week": [
@@ -2813,7 +2813,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2843,7 +2843,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "coronado-springs",
@@ -2895,7 +2895,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2922,7 +2922,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2951,7 +2951,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -2997,7 +2997,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3024,7 +3024,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3058,7 +3058,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3085,7 +3085,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3115,7 +3115,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3142,7 +3142,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3171,7 +3171,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3200,7 +3200,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3229,7 +3229,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3258,7 +3258,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
@@ -3285,7 +3285,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3312,7 +3312,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3339,7 +3339,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3366,7 +3366,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3396,7 +3396,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3425,7 +3425,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3452,7 +3452,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3485,7 +3485,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3515,7 +3515,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3542,7 +3542,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3571,7 +3571,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3601,7 +3601,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3628,7 +3628,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "port-orleans-riverside",
@@ -3686,7 +3686,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3714,7 +3714,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3744,7 +3744,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3774,7 +3774,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3806,7 +3806,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3836,7 +3836,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3864,7 +3864,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3892,7 +3892,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3920,7 +3920,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3950,7 +3950,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
@@ -3991,7 +3991,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4018,7 +4018,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4045,7 +4045,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4074,7 +4074,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4101,7 +4101,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4128,7 +4128,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4155,7 +4155,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4182,7 +4182,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4209,7 +4209,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4241,7 +4241,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4270,7 +4270,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
@@ -4316,7 +4316,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4345,7 +4345,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4374,7 +4374,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4403,7 +4403,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4432,7 +4432,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4461,7 +4461,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4490,7 +4490,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4521,7 +4521,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4550,7 +4550,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4582,7 +4582,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4613,7 +4613,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "beach-yacht-club",
@@ -4679,7 +4679,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "text_layer",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4688,15 +4688,15 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Boardwalk Croquet",
       "normalized_name": "boardwalk-croquet",
       "category": "other",
       "section": "RESORT ACTIVITIES",
       "location": "Croquet Lawn",
       "schedule_text": "Daily from Dawn to Dusk",
-      "description": "Enjoy a friendly game of croquet on our lush lawn",
+      "description": "Enjoy a friendly game of croquet on our Lush lawn",
       "is_fee_based": false,
       "is_daily": true,
       "days_of_week": [],
@@ -4709,7 +4709,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4718,8 +4718,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Disney Fit Yoga",
       "normalized_name": "disney-fit-yoga",
       "category": "fitness_wellness",
@@ -4739,7 +4739,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4748,8 +4748,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Family Wellness Yoga",
       "normalized_name": "family-wellness-yoga",
       "category": "fitness_wellness",
@@ -4769,7 +4769,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4778,8 +4778,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Pickleball Clinic",
       "normalized_name": "pickleball-clinic",
       "category": "fitness_wellness",
@@ -4799,7 +4799,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4808,15 +4808,15 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Wellness Challenge",
       "normalized_name": "wellness-challenge",
       "category": "fitness_wellness",
       "section": "RESORT ACTIVITIES",
       "location": "Enjoy beautiful views of Crescent Lake as you explore",
-      "schedule_text": "nearly | mile of pathways on this self-guided fitness",
-      "description": "nearly | mile of pathways on this self-guided fitness challenge. After completing the course, head to Community Hall for a prize! Register at Community Hall or the Screen Door General Store to participate",
+      "schedule_text": "nearly 1 mile of pathways on this self-guided fitness",
+      "description": "nearly 1 mile of pathways on this self-guided fitness challenge. After completing the course, head to Community Hall for a prize! Register at Community Hall or the Screen Door General Store to participate",
       "is_fee_based": false,
       "is_daily": false,
       "days_of_week": [],
@@ -4827,7 +4827,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4836,8 +4836,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Side Show Games Arcade",
       "normalized_name": "side-show-games-arcade",
       "category": "arcade",
@@ -4855,7 +4855,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4864,8 +4864,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Community Hall",
       "normalized_name": "community-hall",
       "category": "resort_activity",
@@ -4883,7 +4883,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4892,26 +4892,26 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Poolside Activities",
       "normalized_name": "poolside-activities",
       "category": "poolside",
       "section": "RESORT ACTIVITIES",
       "location": "Luna Park Pool Deck",
-      "schedule_text": "Daily at 2:00pm",
+      "schedule_text": "Daily at 1:30pm",
       "description": "Join us for family-friendly activities, both in and out of the pool. See a Recreation Cast Member for more information",
       "is_fee_based": false,
       "is_daily": true,
       "days_of_week": [],
-      "start_time": "2:00pm",
+      "start_time": "1:30pm",
       "end_time": null,
       "movie_nights": [],
       "confidence": 0.85,
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4920,8 +4920,8 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Mickey Tie-Dye",
       "normalized_name": "mickey-tie-dye",
       "category": "arts_crafts",
@@ -4944,7 +4944,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4953,14 +4953,14 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Arts & Crafts",
       "normalized_name": "arts-crafts",
       "category": "arts_crafts",
       "section": "RESORT ACTIVITIES",
       "location": "Village Green Lawn",
-      "schedule_text": "Monday, Wednesday, and Friday from 4:00pm-5:00pm",
+      "schedule_text": "Monday, Wednesday and Friday from 4:00pm-5:00pm",
       "description": "Join us for family-friendly arts and crafts",
       "is_fee_based": true,
       "is_daily": false,
@@ -4976,7 +4976,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -4985,26 +4985,26 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Campfire",
       "normalized_name": "campfire",
       "category": "campfire",
       "section": "RESORT ACTIVITIES",
       "location": "Village Green Lawn",
-      "schedule_text": "Nightly from 6:00pm-7:00pm",
+      "schedule_text": "Nightly from 6:00pm-7:30pm",
       "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S\u2019mores kits available for purchase",
       "is_fee_based": false,
       "is_daily": true,
       "days_of_week": [],
       "start_time": "6:00pm",
-      "end_time": "7:00pm",
+      "end_time": "7:30pm",
       "movie_nights": [],
       "confidence": 0.85,
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5013,26 +5013,26 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Nighttime Trivia",
       "normalized_name": "nighttime-trivia",
       "category": "nighttime_entertainment",
       "section": "RESORT ACTIVITIES",
       "location": "Village Green Lawn",
-      "schedule_text": "Nightly at 7:30",
+      "schedule_text": "Nightly at 8:00pm",
       "description": "Join us for a trivia challenge",
       "is_fee_based": false,
       "is_daily": true,
       "days_of_week": [],
-      "start_time": "7:30",
+      "start_time": "8:00pm",
       "end_time": null,
       "movie_nights": [],
       "confidence": 0.85,
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "boardwalk",
@@ -5041,14 +5041,14 @@
         "boardwalk-villas"
       ],
       "recreation_page_url": "https://disneyworld.disney.go.com/resorts/boardwalk-inn/recreation/",
-      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q2/BW_Aframe_Recreation-0326.pdf",
-      "pdf_edition": "fy26-q2-0326",
+      "pdf_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "pdf_edition": "fy26-q3-0526",
       "name": "Movie Under the Stars",
       "normalized_name": "movie-under-the-stars",
       "category": "movies_under_stars",
       "section": "MOVIE UNDER THE STARS",
       "location": "VILLAGE GREEN LAWN",
-      "schedule_text": "8:00PM",
+      "schedule_text": "8:30PM",
       "description": null,
       "is_fee_based": false,
       "is_daily": false,
@@ -5057,39 +5057,33 @@
       "end_time": null,
       "movie_nights": [
         {
-          "day_of_week": "sunday",
-          "movie_title": "PG",
-          "show_time": "8:00PM",
-          "rain_backup_location": ""
-        },
-        {
           "day_of_week": "monday",
-          "movie_title": "Ps",
-          "show_time": "8:00PM",
+          "movie_title": "Moana",
+          "show_time": "8:30PM",
           "rain_backup_location": ""
         },
         {
           "day_of_week": "tuesday",
-          "movie_title": "The Many Adventures of Winnie the Pooh",
-          "show_time": "8:00PM",
+          "movie_title": "Le",
+          "show_time": "8:30PM",
           "rain_backup_location": ""
         },
         {
           "day_of_week": "wednesday",
-          "movie_title": "Aladdin (1992)",
-          "show_time": "8:00PM",
+          "movie_title": "Toy Story 2",
+          "show_time": "8:30PM",
           "rain_backup_location": ""
         },
         {
           "day_of_week": "thursday",
-          "movie_title": "Cars",
-          "show_time": "8:00PM",
+          "movie_title": "Mulan (1998)",
+          "show_time": "8:30PM",
           "rain_backup_location": ""
         },
         {
           "day_of_week": "saturday",
-          "movie_title": "Tangled",
-          "show_time": "8:00PM",
+          "movie_title": "Finding Nemo",
+          "show_time": "8:30PM",
           "rain_backup_location": ""
         }
       ],
@@ -5097,7 +5091,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5125,7 +5119,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5156,7 +5150,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5186,7 +5180,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5216,7 +5210,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5246,7 +5240,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5274,7 +5268,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5302,7 +5296,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5333,7 +5327,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5365,7 +5359,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5393,7 +5387,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5426,7 +5420,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5457,7 +5451,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5488,7 +5482,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "contemporary",
@@ -5547,7 +5541,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5577,7 +5571,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5607,7 +5601,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5642,7 +5636,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5672,7 +5666,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5700,7 +5694,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5728,7 +5722,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5758,7 +5752,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5786,7 +5780,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5814,7 +5808,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5842,7 +5836,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5876,7 +5870,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5907,7 +5901,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5935,7 +5929,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "grand-floridian",
@@ -5969,7 +5963,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -5999,7 +5993,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6029,7 +6023,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6061,7 +6055,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6102,7 +6096,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6130,7 +6124,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6163,7 +6157,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6198,7 +6192,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6230,7 +6224,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6263,7 +6257,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "polynesian",
@@ -6297,7 +6291,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6326,7 +6320,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6357,7 +6351,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6386,7 +6380,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6417,7 +6411,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6471,7 +6465,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6500,7 +6494,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6531,7 +6525,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6560,7 +6554,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6589,7 +6583,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6622,7 +6616,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6651,7 +6645,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6683,7 +6677,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6714,7 +6708,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "wilderness-lodge",
@@ -6745,7 +6739,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6774,7 +6768,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6803,7 +6797,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6832,7 +6826,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6859,7 +6853,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6886,7 +6880,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6915,7 +6909,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6942,7 +6936,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -6969,7 +6963,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7001,7 +6995,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7028,7 +7022,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7059,7 +7053,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7088,7 +7082,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7118,7 +7112,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7147,7 +7141,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7174,7 +7168,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "old-key-west",
@@ -7238,7 +7232,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7265,7 +7259,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7292,7 +7286,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7308,7 +7302,7 @@
       "section": "SIGNATURE ACTIVITIES",
       "location": "The Eventi Room",
       "schedule_text": "Sunday and Tuesday from 11:00am-1:00pm",
-      "description": "Experience the timeless and classic tradition of mosaic creation with an instructor-led crafting class. This experience is recommended for Guests ages 12 and up. To sign up, please see a Recreation Cast Member inside The Eventi Room",
+      "description": "Experience the timeless and classic tradition of mosaic creation with an instructor-led crafting class. This experience is recommended for Guests ages I2 and up. To sign up, please see a Recreation Cast Member inside The Eventi Room",
       "is_fee_based": true,
       "is_daily": false,
       "days_of_week": [
@@ -7322,7 +7316,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7351,7 +7345,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7384,7 +7378,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7411,7 +7405,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7444,7 +7438,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7475,7 +7469,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "riviera",
@@ -7539,7 +7533,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7568,7 +7562,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7597,7 +7591,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7624,7 +7618,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7651,7 +7645,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7685,7 +7679,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7717,7 +7711,7 @@
       ],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7744,7 +7738,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7771,7 +7765,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7802,7 +7796,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7829,7 +7823,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7859,7 +7853,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7888,7 +7882,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "saratoga-springs",
@@ -7917,7 +7911,7 @@
       "warnings": [],
       "profile_key": "aframe_standard",
       "extraction_method": "ocr",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -7945,7 +7939,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -7973,7 +7967,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8001,7 +7995,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8029,7 +8023,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8057,7 +8051,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8085,7 +8079,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8113,7 +8107,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8141,7 +8135,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8169,7 +8163,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8197,7 +8191,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8225,7 +8219,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8253,7 +8247,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8281,7 +8275,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     },
     {
       "calendar_group_key": "fort-wilderness",
@@ -8309,7 +8303,7 @@
       "warnings": [],
       "profile_key": "fort_wilderness_html",
       "extraction_method": "manual",
-      "ingested_at": "2026-06-26T22:33:44.454627+00:00"
+      "ingested_at": "2026-06-29T23:56:16.637824+00:00"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import type { AboutIconName } from "../content";
+import type { AboutIconName, StoryArtifact } from "../content";
 import styles from "../about.module.css";
 
 interface AboutIconProps {
@@ -63,6 +63,168 @@ export function AboutIcon({ name }: AboutIconProps) {
         </svg>
       );
   }
+}
+
+interface AboutMotifSetProps {
+  artifact: StoryArtifact;
+}
+
+export function AboutMotifSet({ artifact }: AboutMotifSetProps) {
+  return (
+    <svg
+      viewBox="0 0 260 92"
+      aria-hidden
+      className={styles.storyMotifSvg}
+      data-motif-set={artifact}
+    >
+      {artifact === "summer" && (
+        <>
+          <g data-motif="summer-sun">
+            <circle className={styles.motifGlow} cx="30" cy="28" r="18" />
+            <circle className={styles.motifGold} cx="30" cy="28" r="9" />
+            <path className={styles.motifLineGold} d="M30 6v8M30 42v8M8 28h8M44 28h8M15 13l6 6M45 13l-6 6" />
+          </g>
+          <g data-motif="kid-pack">
+            <path className={styles.motifFillBlue} d="M80 30h36l7 44H73z" />
+            <path className={styles.motifLineInk} d="M84 30c1-17 31-17 32 0M76 50h44M87 63h18M73 74h50" />
+          </g>
+          <g data-motif="vpk-paper-shape">
+            <path className={styles.motifPaper} d="M164 17h48l12 12v48h-60z" />
+            <path className={styles.motifLineInk} d="M212 17v14h12M176 38h24M176 50h34M176 62h22" />
+            <circle className={styles.motifCoral} cx="211" cy="61" r="6" />
+            <path className={styles.motifLineGold} d="M210 54v14M203 61h15" />
+          </g>
+        </>
+      )}
+
+      {artifact === "cabin" && (
+        <>
+          <g data-motif="cabin-key-tag">
+            <path className={styles.motifPaper} d="M18 32c0-13 20-13 20 0 0 12-10 24-10 24S18 44 18 32z" />
+            <circle className={styles.motifLineInk} cx="28" cy="32" r="4" />
+            <path className={styles.motifLineInk} d="M28 56l24 24M44 72l-8 8M52 80l-8 8" />
+          </g>
+          <g data-motif="pine-tree">
+            <path className={styles.motifFillGreen} d="M88 10 106 42h-9l15 25H76l15-25h-9z" />
+            <path className={styles.motifLineInk} d="M94 67v16" />
+          </g>
+          <g data-motif="split-receipt">
+            <path className={styles.motifPaper} d="M136 14h50v62l-7-5-7 5-7-5-7 5-7-5-8 5z" />
+            <path className={styles.motifLineInk} d="M148 30h26M148 43h26M161 25v39" />
+            <circle className={styles.motifGold} cx="153" cy="60" r="4" />
+            <circle className={styles.motifBlue} cx="171" cy="60" r="4" />
+          </g>
+          <g data-motif="calendar-circle">
+            <path className={styles.motifPaper} d="M210 22h34v34h-34z" />
+            <path className={styles.motifLineInk} d="M210 33h34M219 18v9M235 18v9M220 43h14" />
+            <circle className={styles.motifLineGold} cx="227" cy="45" r="15" />
+          </g>
+        </>
+      )}
+
+      {artifact === "problem" && (
+        <>
+          <g data-motif="pdf-stack">
+            <path className={styles.motifPaper} d="M18 24h36v48H18z" />
+            <path className={styles.motifPaperSoft} d="M27 15h36v48" />
+            <path className={styles.motifLineInk} d="M28 38h18M28 50h17M28 62h13" />
+          </g>
+          <g data-motif="phone-screen">
+            <rect className={styles.motifFillBlue} x="82" y="16" width="33" height="62" rx="8" />
+            <path className={styles.motifLineInk} d="M92 25h13M94 68h9" />
+            <circle className={styles.motifGold} cx="99" cy="46" r="8" />
+          </g>
+          <g data-motif="image-thumb">
+            <path className={styles.motifPaper} d="M138 25h42v38h-42z" />
+            <circle className={styles.motifCoral} cx="151" cy="38" r="5" />
+            <path className={styles.motifLineInk} d="M141 61l14-15 9 8 8-11 8 18" />
+          </g>
+          <g data-motif="calendar-grid">
+            <path className={styles.motifPaper} d="M202 18h38v42h-38z" />
+            <path className={styles.motifLineInk} d="M202 30h38M215 18v42M228 18v42M202 44h38" />
+          </g>
+          <g data-motif="question-cues">
+            <path className={styles.motifLineCoral} d="M70 35c0-8 13-9 13 0 0 8-9 7-9 15" />
+            <circle className={styles.motifCoral} cx="74" cy="62" r="3" />
+            <path className={styles.motifLineGold} d="M235 65c0-7 11-8 11 0 0 7-8 6-8 13" />
+            <circle className={styles.motifGold} cx="238" cy="86" r="2.5" />
+          </g>
+        </>
+      )}
+
+      {artifact === "builder" && (
+        <>
+          <g data-motif="pencil">
+            <path className={styles.motifFillGold} d="M18 66 75 9l13 13-57 57H18z" />
+            <path className={styles.motifLineInk} d="M71 13l13 13M25 61l11 11M18 79l13-4" />
+          </g>
+          <g data-motif="data-dots">
+            <circle className={styles.motifBlue} cx="114" cy="28" r="6" />
+            <circle className={styles.motifGold} cx="139" cy="48" r="6" />
+            <circle className={styles.motifCoral} cx="166" cy="25" r="6" />
+            <path className={styles.motifLineInk} d="M114 28l25 20 27-23" />
+          </g>
+          <g data-motif="spreadsheet-route">
+            <path className={styles.motifPaper} d="M190 18h48v48h-48z" />
+            <path className={styles.motifLineSoft} d="M190 34h48M190 50h48M206 18v48M222 18v48" />
+            <path className={styles.motifLineGold} d="M194 62c14-20 28 0 42-20" />
+            <circle className={styles.motifGold} cx="194" cy="62" r="3" />
+            <circle className={styles.motifGold} cx="236" cy="42" r="3" />
+          </g>
+        </>
+      )}
+
+      {artifact === "born" && (
+        <>
+          <g data-motif="signpost">
+            <path className={styles.motifLineInk} d="M34 80V14" />
+            <path className={styles.motifPaper} d="M12 15h55l-10 11 10 11H12z" />
+            <path className={styles.motifPaperSoft} d="M9 42h56L55 53l10 11H9z" />
+          </g>
+          <g data-motif="map-pin">
+            <path className={styles.motifFillCoral} d="M99 28c0-19 29-19 29 0 0 16-14 32-14 32S99 44 99 28z" />
+            <circle className={styles.motifPaperDot} cx="114" cy="29" r="6" />
+          </g>
+          <g data-motif="name-note">
+            <path className={styles.motifPaper} d="M153 18h46l9 10v42h-55z" />
+            <path className={styles.motifLineInk} d="M199 18v11h9M164 38h29M164 50h20" />
+            <path className={styles.motifLineGold} d="M194 54l3 6 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z" />
+          </g>
+          <g data-motif="activity-cards">
+            <path className={styles.motifPaperSoft} d="M218 24h28v18h-28zM214 49h33v19h-33z" />
+            <path className={styles.motifLineInk} d="M223 33h14M221 58h17" />
+            <circle className={styles.motifBlue} cx="242" cy="58" r="3" />
+          </g>
+        </>
+      )}
+
+      {artifact === "twilight" && (
+        <>
+          <g data-motif="lantern">
+            <path className={styles.motifFillGold} d="M22 27h30l6 46H16z" />
+            <path className={styles.motifLineInk} d="M25 27c0-14 24-14 24 0M22 43h30" />
+            <circle className={styles.motifPaperDot} cx="37" cy="55" r="8" />
+          </g>
+          <g data-motif="twilight-path">
+            <path className={styles.motifLineBlue} d="M80 72c26-21 47 17 76-8 18-15 31-18 47-13" />
+            <circle className={styles.motifBlue} cx="91" cy="66" r="4" />
+            <circle className={styles.motifGold} cx="151" cy="64" r="4" />
+          </g>
+          <g data-motif="pass-card-shape">
+            <rect className={styles.motifPaper} x="101" y="18" width="53" height="32" rx="8" />
+            <path className={styles.motifLineInk} d="M110 29h18M110 39h31" />
+            <circle className={styles.motifCoral} cx="141" cy="31" r="5" />
+          </g>
+          <g data-motif="campfire-glow">
+            <circle className={styles.motifGlow} cx="219" cy="54" r="26" />
+            <path className={styles.motifLineInk} d="M197 75h43M204 81h32" />
+            <path className={styles.motifFillCoral} d="M218 60c-11-12 8-18 1-35 20 16 24 30 7 43-3 2-6 1-8-8z" />
+            <path className={styles.motifFillGold} d="M224 63c-7-8 4-13 2-22 10 10 12 17 4 26-2 1-4 1-6-4z" />
+          </g>
+        </>
+      )}
+    </svg>
+  );
 }
 
 export function HeroMapScene() {

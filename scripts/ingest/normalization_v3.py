@@ -41,6 +41,10 @@ CONTROLLED_LOCATIONS = {
     "boardwalk tennis and pickleball court": "boardwalk_tennis_and_pickleball_court",
     "touchdown football field": "touchdown_football_field",
     "outside stadium hall near touchdown buildings": "outside_stadium_hall_near_touchdown_buildings",
+    "ol man island": "ol_man_island",
+    "ol man island pool deck": "ol_man_island_pool_deck",
+    "throughout disneys all-star resorts": "throughout_all_star_resorts",
+    "throughout disney's all-star resorts": "throughout_all_star_resorts",
 }
 
 _TIME_PATTERN = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)\b", re.IGNORECASE)
@@ -53,6 +57,12 @@ def _stable_hash(payload: dict[str, Any]) -> str:
 
 def _clean_text(value: object) -> str:
     return re.sub(r"\s+", " ", str(value or "").replace("–", "-").replace("—", "-").strip())
+
+
+def _repair_ocr_time_text(value: str) -> str:
+    repaired = re.sub(r"(?<=\d:)O(?=\d)", "0", value, flags=re.IGNORECASE)
+    repaired = re.sub(r"(?<=\d:\d)O(?=\s*[ap]\.?m\.?)", "0", repaired, flags=re.IGNORECASE)
+    return repaired
 
 
 def _dictionary_key(value: object) -> str:
@@ -91,9 +101,9 @@ def _days_from_text(text: str) -> list[str]:
 
 
 def normalize_schedule_text(value: object) -> dict[str, Any]:
-    raw_text = _clean_text(value)
+    raw_text = _repair_ocr_time_text(_clean_text(value))
     lowered = raw_text.lower()
-    if lowered == "dawn to dusk":
+    if "dawn to dusk" in lowered:
         return {
             "schedule_type": "phrase",
             "phrase": "dawn_to_dusk",

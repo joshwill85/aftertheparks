@@ -6109,6 +6109,14 @@ class PipelineContractsTest(unittest.TestCase):
         )
         self.assertNotIn(("publish.py",), steps)
 
+    def test_ingest_readme_points_to_existing_pipeline_entrypoint(self) -> None:
+        readme = Path("scripts/ingest/README.md").read_text()
+
+        self.assertIn("python scripts/ingest/run_pipeline.py", readme)
+        self.assertIn("python scripts/ingest/run_pipeline.py --vision-v3 --quarter fy26-q4", readme)
+        self.assertTrue(Path("scripts/ingest/run_pipeline.py").exists())
+        self.assertNotIn("python run_pipeline.py", readme)
+
     def test_vision_v3_pipeline_lane_requires_quarter_for_production_readiness(self) -> None:
         with self.assertRaisesRegex(ValueError, "vision_v3_quarter_required"):
             vision_v3_report_steps(local_only=False)
@@ -6288,12 +6296,22 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertNotIn(("audit_coverage.py", "--require-production-ready"), steps)
 
     def test_pipeline_builds_mrg_facts_before_gold_promotion(self) -> None:
-        steps = validation_gate_steps(local_only=True)
+        steps = validation_gate_steps(local_only=False)
 
         self.assertIn(("magical_resort_guide.py",), steps)
         self.assertLess(
             steps.index(("magical_resort_guide.py",)),
             steps.index(("promote_gold.py", "--fail-on-review")),
+        )
+
+    def test_local_pipeline_allows_review_queue_preview_without_hard_publish_gate(self) -> None:
+        steps = validation_gate_steps(local_only=True)
+
+        self.assertIn(("promote_gold.py",), steps)
+        self.assertNotIn(("promote_gold.py", "--fail-on-review"), steps)
+        self.assertLess(
+            steps.index(("promote_gold.py",)),
+            steps.index(("audit_coverage.py",)),
         )
 
 

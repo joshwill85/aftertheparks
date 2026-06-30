@@ -72,15 +72,15 @@ def _region_specs(document_family: str, width: int, height: int) -> list[tuple[s
             ("qr_callout", _bbox(width, height, 0.00, 0.13, 0.36, 0.31)),
             ("wellness_section", _bbox(width, height, 0.00, 0.30, 0.50, 0.55)),
             ("resort_activities_section", _bbox(width, height, 0.48, 0.13, 1.00, 0.72)),
-            ("movie_section", _bbox(width, height, 0.00, 0.54, 0.62, 0.90)),
-            ("footer", _bbox(width, height, 0.00, 0.90, 1.00, 1.00)),
+            ("movie_section", _bbox(width, height, 0.48, 0.72, 1.00, 0.96)),
+            ("footer", _bbox(width, height, 0.00, 0.96, 1.00, 1.00)),
         ]
     if document_family == "vertical_digital_rec_sign":
         return [
             ("header", _bbox(width, height, 0.00, 0.00, 1.00, 0.08)),
             ("day_banner", _bbox(width, height, 0.00, 0.08, 1.00, 0.16)),
-            ("vertical_activity_row", _bbox(width, height, 0.00, 0.16, 1.00, 0.92)),
-            ("footer", _bbox(width, height, 0.00, 0.92, 1.00, 1.00)),
+            ("vertical_activity_row", _bbox(width, height, 0.00, 0.16, 1.00, 0.985)),
+            ("footer", _bbox(width, height, 0.00, 0.985, 1.00, 1.00)),
         ]
     return [
         ("unknown", _bbox(width, height, 0.00, 0.00, 1.00, 1.00)),

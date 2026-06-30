@@ -69,7 +69,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -282,7 +282,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -499,7 +499,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -743,7 +743,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -894,8 +894,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -1058,7 +1058,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -1209,8 +1209,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -1379,7 +1379,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -1508,8 +1508,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -1655,7 +1655,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -1877,7 +1877,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -1994,8 +1994,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -2156,7 +2156,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -2285,8 +2285,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-jambo",
         "resort_slugs": [
           "animal-kingdom-lodge",
@@ -2432,7 +2432,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -2650,7 +2650,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -2849,7 +2849,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -2985,8 +2985,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "1dfe8e57ccfb0e0a75f9b2c1890360c2ed7b7689a7b0a4bcd9cac7a4de947c96",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "e45599ebd746b080d471e79ad064f1418891d6934a063dedeb638146ee46d83a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -3136,7 +3136,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -3376,7 +3376,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -3616,7 +3616,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -3843,7 +3843,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -4064,7 +4064,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -4193,8 +4193,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -4354,7 +4354,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -4471,8 +4471,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "1ab4ba87e4434628870846cabdc18cb0d368d3072b063ed1f69b8830ef66ca73",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "d6d5d5168f4b7073c3d94ca812da2d07ce98b327d5094de65a381ef65eeb8336",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -4634,7 +4634,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -4814,8 +4814,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/akl-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "1dfe8e57ccfb0e0a75f9b2c1890360c2ed7b7689a7b0a4bcd9cac7a4de947c96",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "e45599ebd746b080d471e79ad064f1418891d6934a063dedeb638146ee46d83a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "animal-kingdom-kidani",
         "resort_slugs": [
           "animal-kingdom-villas-kidani-village"
@@ -4975,7 +4975,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -5202,7 +5202,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -5413,7 +5413,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -5538,8 +5538,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "fbefa14920b6d2aa7b37a46665087e7b81eda5f2992b1616e9b3260928ad806e",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "60bfb778136a8a41063a00922fa4caf615ea3e95483c14e2b3da8f2930183483",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -5716,7 +5716,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -5997,7 +5997,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -6126,8 +6126,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -6289,7 +6289,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -6425,8 +6425,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "fbefa14920b6d2aa7b37a46665087e7b81eda5f2992b1616e9b3260928ad806e",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "60bfb778136a8a41063a00922fa4caf615ea3e95483c14e2b3da8f2930183483",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -6592,7 +6592,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -6732,8 +6732,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -6876,7 +6876,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -7095,7 +7095,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -7268,8 +7268,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -7448,7 +7448,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -7593,8 +7593,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -7756,7 +7756,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -7885,8 +7885,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -8047,7 +8047,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -8201,8 +8201,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -8360,7 +8360,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -8470,8 +8470,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -8625,7 +8625,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -8754,8 +8754,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/boardwalk-inn-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "26eb26372babadcf7a0740a8b57d416bfec39c415559009a2ceb42ae6d80e35f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fa4ffc9d88a0cab5b07309dd1c1fd269127590266f4d28b037066c9decd2f738",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "boardwalk",
         "resort_slugs": [
           "boardwalk-inn",
@@ -8908,7 +8908,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -9033,8 +9033,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "b5ef005c06cbf0078fd286d9f2b51fb2c17c243241915e4e5fe8231489d5ee85",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "fc7e03b7aa5cef6b97a1013afdcecf7b61ee4550f75055d6eaa3a294ad9ef481",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -9199,7 +9199,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -9383,8 +9383,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "50680a5e7ccd0437f7a3ff21489d5820ebe1a179bd8c4524ab1843a987ca4ba6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -9520,7 +9520,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -9732,7 +9732,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -9959,7 +9959,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -10191,7 +10191,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -10345,8 +10345,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "50680a5e7ccd0437f7a3ff21489d5820ebe1a179bd8c4524ab1843a987ca4ba6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -10438,7 +10438,7 @@
     "location": {
       "label": "Located between Fantasia Buildings 5 and 8"
     },
-    "description": "Enjoy the warm glow of the campfire with complimentary marshmallows. S’mores kits available for purchase.",
+    "description": "Enjoy the warm glow of the campfire with complimentary kits available for purchase. marshmallows.",
     "price": {
       "state": "free"
     },
@@ -10508,7 +10508,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -10659,8 +10659,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "50680a5e7ccd0437f7a3ff21489d5820ebe1a179bd8c4524ab1843a987ca4ba6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -10822,7 +10822,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -10962,8 +10962,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "50680a5e7ccd0437f7a3ff21489d5820ebe1a179bd8c4524ab1843a987ca4ba6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -11125,7 +11125,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -11265,8 +11265,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-movies-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "627994ca773a5dc4e053653b41798dd0c2ed335cd1ae92f08b3b508c6c0d6746",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "50680a5e7ccd0437f7a3ff21489d5820ebe1a179bd8c4524ab1843a987ca4ba6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-movies",
         "resort_slugs": [
           "all-star-movies-resort"
@@ -11406,7 +11406,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -11623,7 +11623,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -11774,8 +11774,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -11933,7 +11933,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -12117,8 +12117,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -12254,7 +12254,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -12491,7 +12491,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -12616,8 +12616,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "2c1702b123815a4fc0e38fe31edd0ba3eee3960dc7bdea06e223b41e63866fbf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f60c6f6614ec4a397a51a5db3345c05df66cf6578f65a43e00f27b83238e8423",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -12773,7 +12773,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -13016,7 +13016,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -13156,8 +13156,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -13332,7 +13332,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -13488,8 +13488,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -13654,7 +13654,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -13856,8 +13856,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "2c1702b123815a4fc0e38fe31edd0ba3eee3960dc7bdea06e223b41e63866fbf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f60c6f6614ec4a397a51a5db3345c05df66cf6578f65a43e00f27b83238e8423",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -14035,7 +14035,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -14164,8 +14164,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -14325,7 +14325,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -14464,8 +14464,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -14627,7 +14627,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -14767,8 +14767,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-music-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "a2dd030120d82d0b60dc42479e0080dd4b5ef4b8947bb0b4f9fd1b9b3ce78e49",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c11e8923981ea006679fe804d8ff6dd68a9b5f22ec7536ec1403767b5c5a81ab",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-music",
         "resort_slugs": [
           "all-star-music-resort"
@@ -14925,7 +14925,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -15050,8 +15050,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "d6578841db6633c7c26226ea7e0a6f465d8a786403bab702d8558639b60bb927",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "8d5112fd58c4cd6f94c48523fbaf0c544746279a85e66a3343f589f85f0ba58d",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -15200,7 +15200,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -15399,8 +15399,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -15536,7 +15536,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -15773,7 +15773,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -15898,8 +15898,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "d6578841db6633c7c26226ea7e0a6f465d8a786403bab702d8558639b60bb927",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "8d5112fd58c4cd6f94c48523fbaf0c544746279a85e66a3343f589f85f0ba58d",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -16055,7 +16055,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -16298,7 +16298,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -16438,8 +16438,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -16614,7 +16614,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -16770,8 +16770,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -16933,7 +16933,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -17072,8 +17072,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -17235,7 +17235,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -17364,8 +17364,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -17525,7 +17525,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -17665,8 +17665,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -17825,7 +17825,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -17965,8 +17965,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/all-star-sports-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "df729f5f0110167a182cb93e9e40a1bc0267a0a8b4802a6e9d1f90b02512b261",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "75905df0a8f6351594f7c2dcea301fb53177282f5ae1fbe91743961f00d0d4f0",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "all-star-sports",
         "resort_slugs": [
           "all-star-sports-resort"
@@ -18083,7 +18083,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -18194,7 +18194,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -18313,7 +18313,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -18449,7 +18449,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -18511,8 +18511,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/art-of-animation-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "6979e365561951ddc551f654b8f694a01e12cc8cd0f4fc44e478f5f7f72792d2",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c147bbc229f875d502ee7a17a8431edd454a0df4e5cb3a2080c546b5b7442e0f",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -18646,7 +18646,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -18745,8 +18745,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/art-of-animation-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "6979e365561951ddc551f654b8f694a01e12cc8cd0f4fc44e478f5f7f72792d2",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "c147bbc229f875d502ee7a17a8431edd454a0df4e5cb3a2080c546b5b7442e0f",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "art-of-animation",
         "resort_slugs": [
           "art-of-animation-resort"
@@ -18906,7 +18906,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -19031,8 +19031,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "19df4f9dedfc72ed50d95b0b886493287bfffb95d76d03bcc36b8f2b59027081",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "5cc9fdc6ad7b85705eae869d8161a794eb9dd92aea6f1f5ca9be62795d941cf2",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -19181,7 +19181,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -19318,7 +19318,7 @@
     "location": {
       "label": "Lounde"
     },
-    "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages 12 and up. Space is limited. Available first-come, first-served. Arrive early to secure your spot.",
+    "description": "Get in touch with your inner artist during this master-led painting class. This experience is recommended for Guests ages I2 and up. Space is limited. Available first-come, first-served. Arrive early to secure your spot.",
     "price": {
       "state": "fee",
       "amountCents": 4500,
@@ -19390,7 +19390,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -19474,7 +19474,7 @@
             1544.5,
             984.0
           ],
-          "text": "ages 12 and up. Space is limited. Available first-come,"
+          "text": "ages I2 and up. Space is limited. Available first-come,"
         },
         {
           "page": 1,
@@ -19548,8 +19548,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "19df4f9dedfc72ed50d95b0b886493287bfffb95d76d03bcc36b8f2b59027081",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "5cc9fdc6ad7b85705eae869d8161a794eb9dd92aea6f1f5ca9be62795d941cf2",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -19707,7 +19707,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -19941,7 +19941,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -20081,8 +20081,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f114d9f3dcdde738fa3df6f4a28cd18c9d0f29ad571a44e23612173c94a3d191",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -20244,7 +20244,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -20383,8 +20383,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f114d9f3dcdde738fa3df6f4a28cd18c9d0f29ad571a44e23612173c94a3d191",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -20529,7 +20529,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -20748,7 +20748,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -20877,8 +20877,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/yacht-beach-club-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "072eb91d044f6305d4f64fc0fa105c4853878993f4a684015a88793c53cd24d4",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f114d9f3dcdde738fa3df6f4a28cd18c9d0f29ad571a44e23612173c94a3d191",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "beach-yacht-club",
         "resort_slugs": [
           "beach-club-resort",
@@ -20995,7 +20995,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -21106,7 +21106,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -21225,7 +21225,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -21361,7 +21361,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -21423,8 +21423,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "456ff20d4f3ac6c061084a826e39cc354b7fa67de2a08dc026e6918fc287dba6",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "78205747e8e74e59158ed6c82b79d334eb77635afef1d39cba22e6bef1cb8826",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -21558,7 +21558,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -21657,8 +21657,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/caribbean-beach-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "456ff20d4f3ac6c061084a826e39cc354b7fa67de2a08dc026e6918fc287dba6",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "78205747e8e74e59158ed6c82b79d334eb77635afef1d39cba22e6bef1cb8826",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "caribbean-beach",
         "resort_slugs": [
           "caribbean-beach-resort"
@@ -21804,7 +21804,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -22038,7 +22038,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -22222,8 +22222,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7d11c95f072490f5f9b70e8577d3abdd98545c1f00fa7b890074191bcdadd144",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -22392,7 +22392,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -22505,8 +22505,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "f8f6996df8c8f3f93c76a6727def1b9e1f7e4c888a46b2a56a21e2af0ea96805",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "8ee6f65b1c74aa10ad9a356e305294b0e20cb1dc32e0f76df28edad799f865de",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -22672,7 +22672,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -22828,8 +22828,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7d11c95f072490f5f9b70e8577d3abdd98545c1f00fa7b890074191bcdadd144",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -22993,7 +22993,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -23117,8 +23117,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "f8f6996df8c8f3f93c76a6727def1b9e1f7e4c888a46b2a56a21e2af0ea96805",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "8ee6f65b1c74aa10ad9a356e305294b0e20cb1dc32e0f76df28edad799f865de",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -23298,7 +23298,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -23454,8 +23454,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7d11c95f072490f5f9b70e8577d3abdd98545c1f00fa7b890074191bcdadd144",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -23619,7 +23619,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -23788,8 +23788,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "f8f6996df8c8f3f93c76a6727def1b9e1f7e4c888a46b2a56a21e2af0ea96805",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "8ee6f65b1c74aa10ad9a356e305294b0e20cb1dc32e0f76df28edad799f865de",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -23962,7 +23962,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -24113,8 +24113,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/contemporary-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "81a41b1c7c53c077fe1cebfb0d58a66aacb12d145fcc295e4fd392d85b29d79c",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7d11c95f072490f5f9b70e8577d3abdd98545c1f00fa7b890074191bcdadd144",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "contemporary",
         "resort_slugs": [
           "contemporary-resort",
@@ -24258,7 +24258,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -24500,7 +24500,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -24662,8 +24662,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7a23ea8dc2b2c5742e6fbcfa6d853cf78b2d1619e0fdff01945ce030201d424c",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -24801,7 +24801,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -25032,7 +25032,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -25172,8 +25172,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7a23ea8dc2b2c5742e6fbcfa6d853cf78b2d1619e0fdff01945ce030201d424c",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -25326,7 +25326,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -25455,8 +25455,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7a23ea8dc2b2c5742e6fbcfa6d853cf78b2d1619e0fdff01945ce030201d424c",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -25598,7 +25598,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -25841,7 +25841,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -25980,8 +25980,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7a23ea8dc2b2c5742e6fbcfa6d853cf78b2d1619e0fdff01945ce030201d424c",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -26142,7 +26142,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -26271,8 +26271,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/coronado-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dbd01c00ebca39a8bd78a9c0d98c57e7b2e8efb653f8533fc39fd4e723d52918",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7a23ea8dc2b2c5742e6fbcfa6d853cf78b2d1619e0fdff01945ce030201d424c",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "coronado-springs",
         "resort_slugs": [
           "coronado-springs-resort"
@@ -26411,7 +26411,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -26609,7 +26609,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -26822,7 +26822,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -27046,7 +27046,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -27252,7 +27252,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -27381,8 +27381,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "af750d31681fc37fa742e5db8a04ab23497f6ba22aa4b3e567ea223a88831bec",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -27527,7 +27527,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -27760,7 +27760,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -27911,8 +27911,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "af750d31681fc37fa742e5db8a04ab23497f6ba22aa4b3e567ea223a88831bec",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -28073,7 +28073,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -28202,8 +28202,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "af750d31681fc37fa742e5db8a04ab23497f6ba22aa4b3e567ea223a88831bec",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -28346,7 +28346,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -28588,7 +28588,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -28733,8 +28733,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "af750d31681fc37fa742e5db8a04ab23497f6ba22aa4b3e567ea223a88831bec",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -28896,7 +28896,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -29025,8 +29025,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "af750d31681fc37fa742e5db8a04ab23497f6ba22aa4b3e567ea223a88831bec",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -29187,7 +29187,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -29316,8 +29316,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/grand-floridian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "0310e885c2050737f46da6e6e8953102ff07cdb5b5f1ceb631f009eaffda5c6f",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "af750d31681fc37fa742e5db8a04ab23497f6ba22aa4b3e567ea223a88831bec",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "grand-floridian",
         "resort_slugs": [
           "grand-floridian-resort-and-spa",
@@ -29476,7 +29476,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -29616,8 +29616,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -29772,7 +29772,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -29923,8 +29923,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -30083,7 +30083,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -30245,8 +30245,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -30408,7 +30408,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -30555,8 +30555,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "86bc38f9c3956580c2edb605bf445d5a673b49b53dd09679732dd59375bfab6d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "4594dfd1006d830d9e8f320990174a3ff9f9744d5220432a8e5cc6bfa4692f60",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -30721,7 +30721,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -30872,8 +30872,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -31046,7 +31046,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -31191,8 +31191,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -31353,7 +31353,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -31515,8 +31515,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -31666,7 +31666,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -31887,7 +31887,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -32027,8 +32027,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -32171,7 +32171,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -32414,7 +32414,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -32587,8 +32587,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -32743,7 +32743,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -32868,8 +32868,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "86bc38f9c3956580c2edb605bf445d5a673b49b53dd09679732dd59375bfab6d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "4594dfd1006d830d9e8f320990174a3ff9f9744d5220432a8e5cc6bfa4692f60",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -33033,7 +33033,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -33172,8 +33172,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/old-key-west-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "d8ff67b53fb7981a36a0586702217abfc441ff5440cc0d61cfa2271cb758850b",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9f8596e0c6b1086f0359475062d2ec4366f75a620065a363577365aaac0e7479",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "old-key-west",
         "resort_slugs": [
           "old-key-west-resort"
@@ -33336,7 +33336,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -33476,8 +33476,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -33645,7 +33645,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -33785,8 +33785,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -33947,7 +33947,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -34087,8 +34087,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -34245,7 +34245,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -34392,8 +34392,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "95736f1de17b96c1e5686115adcc2ef3cb99141f5889d3f555134e5a3eb0af61",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f95f356707639cce78fd5b9531853ea18053e10d7c934f59bc9108be771cddfb",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -34567,7 +34567,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -34725,8 +34725,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "95736f1de17b96c1e5686115adcc2ef3cb99141f5889d3f555134e5a3eb0af61",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "f95f356707639cce78fd5b9531853ea18053e10d7c934f59bc9108be771cddfb",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -34891,7 +34891,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -35042,8 +35042,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -35204,7 +35204,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -35333,8 +35333,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -35497,7 +35497,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -35637,8 +35637,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -35799,7 +35799,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -35939,8 +35939,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/polynesian-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "f031d14f6c558079793ee27f06cca18ccc79504f3a2364a1cd90091c1a3ba914",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7848317dc0ceab2556add99ba39dad47d16d9524f28efad05a09f254ca360394",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "polynesian",
         "resort_slugs": [
           "polynesian-village-resort",
@@ -36057,7 +36057,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -36168,7 +36168,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -36287,7 +36287,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -36423,7 +36423,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -36485,8 +36485,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pop-century-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "046a03b8b261d127c6e090b0f315b0b4ebfecb237c6da82dd5cf646da9b9d74d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "bc94ae594eaf3bc1ff9402b8cd91bbf74cfbc834bdda00008bb4320fa14438e2",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -36620,7 +36620,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -36682,8 +36682,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pop-century-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "046a03b8b261d127c6e090b0f315b0b4ebfecb237c6da82dd5cf646da9b9d74d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "bc94ae594eaf3bc1ff9402b8cd91bbf74cfbc834bdda00008bb4320fa14438e2",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -36815,7 +36815,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -36877,8 +36877,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pop-century-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "046a03b8b261d127c6e090b0f315b0b4ebfecb237c6da82dd5cf646da9b9d74d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "bc94ae594eaf3bc1ff9402b8cd91bbf74cfbc834bdda00008bb4320fa14438e2",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "pop-century",
         "resort_slugs": [
           "pop-century-resort"
@@ -37023,7 +37023,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -37268,7 +37268,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -37518,7 +37518,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -37680,8 +37680,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "4297e46102692c1745a03933b7bb619b99939dc83980b0a9254fcfab5cf3720f",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -37842,7 +37842,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -38000,8 +38000,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "629828e1d1b5f52b670b98cbe027f307caa0419a5723e37f3c039ea199025f22",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "35f30c7984a04dfd3c389db9b1b3614fb6ab45de6b2183cac1d200d6dff88cb4",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -38171,7 +38171,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -38307,8 +38307,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "629828e1d1b5f52b670b98cbe027f307caa0419a5723e37f3c039ea199025f22",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "35f30c7984a04dfd3c389db9b1b3614fb6ab45de6b2183cac1d200d6dff88cb4",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -38476,7 +38476,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -38645,8 +38645,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "629828e1d1b5f52b670b98cbe027f307caa0419a5723e37f3c039ea199025f22",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "35f30c7984a04dfd3c389db9b1b3614fb6ab45de6b2183cac1d200d6dff88cb4",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -38836,7 +38836,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -38981,8 +38981,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "4297e46102692c1745a03933b7bb619b99939dc83980b0a9254fcfab5cf3720f",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -39144,7 +39144,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -39305,8 +39305,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "4297e46102692c1745a03933b7bb619b99939dc83980b0a9254fcfab5cf3720f",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -39468,7 +39468,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -39597,8 +39597,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/pofq-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "4848eb01648fec357840802a2efac375fef9802b39061029d0a50018b62884da",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "4297e46102692c1745a03933b7bb619b99939dc83980b0a9254fcfab5cf3720f",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-french-quarter",
         "resort_slugs": [
           "port-orleans-resort-french-quarter"
@@ -39715,7 +39715,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -39834,7 +39834,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -39954,7 +39954,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -40092,7 +40092,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -40175,8 +40175,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "ac9e2f6d36de6c387020f43b88e37ada3b8e2196bab40bdd6746e8f891c9fea3",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -40319,7 +40319,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -40402,8 +40402,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "ac9e2f6d36de6c387020f43b88e37ada3b8e2196bab40bdd6746e8f891c9fea3",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -40522,7 +40522,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -40660,7 +40660,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -40743,8 +40743,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/por-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "adc1c83acc5d1b4adc740b061630f3e43286f8e1bea5bfa37c13759735ba8183",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "ac9e2f6d36de6c387020f43b88e37ada3b8e2196bab40bdd6746e8f891c9fea3",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "port-orleans-riverside",
         "resort_slugs": [
           "port-orleans-resort-riverside"
@@ -40890,7 +40890,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -41128,7 +41128,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -41275,8 +41275,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -41430,7 +41430,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -41570,8 +41570,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -41729,7 +41729,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -41869,8 +41869,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -42042,7 +42042,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -42187,8 +42187,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -42351,7 +42351,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -42509,8 +42509,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "1329d5a4be1fd1331d14c0d8a5a6ce66ce0c3a501a316350a55f412bea999427",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "a8a94a033b57eed3ccbdd28aa29ad0ddc8640f2f339f94fe76192feedaba22c2",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -42678,7 +42678,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -42829,8 +42829,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -42989,7 +42989,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -43140,8 +43140,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -43300,7 +43300,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -43444,8 +43444,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/riviera-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "62becf5c634683fadd85f293b9f7bbcfa99597409b4f0ba7a8c594dae4a0fc5d",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9ab3f0ede4f70183c71c4531c390b0ea445ca544803cab822f76a48255945ce6",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "riviera",
         "resort_slugs": [
           "riviera-resort"
@@ -43590,7 +43590,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -43822,7 +43822,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -43973,8 +43973,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -44132,7 +44132,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -44294,8 +44294,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -44456,7 +44456,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -44592,8 +44592,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "d45ab3d71c236f37e573e26466caa52ffbfa9f732f472e420e6a895ba580f568",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "53b6373bb1e9b6473c21f85c1a992f8470156c0e3b608611e70b1ec80ff60f53",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -44758,7 +44758,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -44909,8 +44909,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -45084,7 +45084,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -45229,8 +45229,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -45374,7 +45374,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -45617,7 +45617,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -45746,8 +45746,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -45906,7 +45906,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -46046,8 +46046,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -46187,7 +46187,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -46415,7 +46415,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -46549,8 +46549,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "329c8368adf4d3398467eceef68ab9446df62671225302e17045d93fe36715bf",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "0b20f5eb43c2fbfca7acfe6bb6d9810caa683d21b377d997aec8ec76347d3f02",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -46691,7 +46691,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -46954,7 +46954,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -47112,8 +47112,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/saratoga-springs-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "d45ab3d71c236f37e573e26466caa52ffbfa9f732f472e420e6a895ba580f568",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "53b6373bb1e9b6473c21f85c1a992f8470156c0e3b608611e70b1ec80ff60f53",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "saratoga-springs",
         "resort_slugs": [
           "saratoga-springs-resort-and-spa"
@@ -47276,7 +47276,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -47501,7 +47501,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -47741,7 +47741,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -47994,7 +47994,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -48162,8 +48162,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "84650fc4a7354e5ade70532f95b36915a4de5a82788e1f0a71b3de56cf2db243",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "bf713acf4fe89f4b8c3b72f5c2c04a8e627495aa0592626a0138f3fa3e59e928",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -48331,7 +48331,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -48482,8 +48482,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9a28628aed2665746a4ae58f234d0d10efaf570cbfcb37e2eb1d56387325828a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -48647,7 +48647,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -48820,8 +48820,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9a28628aed2665746a4ae58f234d0d10efaf570cbfcb37e2eb1d56387325828a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -48979,7 +48979,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -49130,8 +49130,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9a28628aed2665746a4ae58f234d0d10efaf570cbfcb37e2eb1d56387325828a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -49291,7 +49291,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -49438,8 +49438,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "84650fc4a7354e5ade70532f95b36915a4de5a82788e1f0a71b3de56cf2db243",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "bf713acf4fe89f4b8c3b72f5c2c04a8e627495aa0592626a0138f3fa3e59e928",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -49597,7 +49597,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -49873,7 +49873,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -50018,8 +50018,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9a28628aed2665746a4ae58f234d0d10efaf570cbfcb37e2eb1d56387325828a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -50183,7 +50183,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -50317,8 +50317,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9a28628aed2665746a4ae58f234d0d10efaf570cbfcb37e2eb1d56387325828a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -50483,7 +50483,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -50634,8 +50634,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/wilderness-lodge-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "dec3c48878b69e2b0ba7d40eb98effe1acdbcde58a479121e381dcd8f5f3e9ca",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "9a28628aed2665746a4ae58f234d0d10efaf570cbfcb37e2eb1d56387325828a",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "wilderness-lodge",
         "resort_slugs": [
           "wilderness-lodge",
@@ -50762,7 +50762,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -50899,7 +50899,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -50963,8 +50963,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7bee96a46162dee26b29f5574c02f4a3c8556d735059b1fbe1203a35bb7e8b22",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -51087,7 +51087,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -51216,7 +51216,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -51353,7 +51353,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -51417,8 +51417,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7bee96a46162dee26b29f5574c02f4a3c8556d735059b1fbe1203a35bb7e8b22",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -51552,7 +51552,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -51616,8 +51616,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7bee96a46162dee26b29f5574c02f4a3c8556d735059b1fbe1203a35bb7e8b22",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -51751,7 +51751,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -51815,8 +51815,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7bee96a46162dee26b29f5574c02f4a3c8556d735059b1fbe1203a35bb7e8b22",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -51950,7 +51950,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -52014,8 +52014,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7bee96a46162dee26b29f5574c02f4a3c8556d735059b1fbe1203a35bb7e8b22",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -52149,7 +52149,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -52250,8 +52250,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-free-recreation-activities",
         "source_page_kind": "free_recreation",
-        "source_content_sha256": "c6aa1e0b183b8a81bba0984a50517eade7526c1985d811a0a44c14d1e56e3f6a",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "7bee96a46162dee26b29f5574c02f4a3c8556d735059b1fbe1203a35bb7e8b22",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -52377,7 +52377,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -52528,7 +52528,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -52601,8 +52601,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "ed01057e56234ecf315e886242cf426301116d69eac874b0ec6d782a38691e72",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "203191a4b412af1455150f1f32aee5435d58ba94b1d1ff8974dc97c5a3760984",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -52728,7 +52728,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -52753,7 +52753,7 @@
         {
           "page": 2,
           "line_no": 3,
-            "text": "Each Friday morning at 10:30 AM. Arrive by 10:15 AM.",
+          "text": "Each Friday morning at 10:30 AM. Arrive by 10:15 AM.",
           "source": "reviewed_visual_schedule_image"
         }
       ],
@@ -52866,7 +52866,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -52939,8 +52939,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "ed01057e56234ecf315e886242cf426301116d69eac874b0ec6d782a38691e72",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "203191a4b412af1455150f1f32aee5435d58ba94b1d1ff8974dc97c5a3760984",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -53066,7 +53066,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -53178,7 +53178,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -53320,7 +53320,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -53393,8 +53393,8 @@
         "source": "magical_resort_guide",
         "source_url": "https://www.magicalresortguide.com/fort-wilderness-paid-recreation-activities",
         "source_page_kind": "paid_recreation",
-        "source_content_sha256": "ed01057e56234ecf315e886242cf426301116d69eac874b0ec6d782a38691e72",
-        "fetched_at": "2026-06-29T02:06:38.914684+00:00",
+        "source_content_sha256": "203191a4b412af1455150f1f32aee5435d58ba94b1d1ff8974dc97c5a3760984",
+        "fetched_at": "2026-06-30T00:02:30.912410+00:00",
         "calendar_group_key": "fort-wilderness",
         "resort_slugs": [
           "campsites-at-fort-wilderness-resort",
@@ -53522,7 +53522,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
@@ -53642,7 +53642,7 @@
           {
             "source": "magical_resort_guide",
             "url": "https://www.magicalresortguide.com/resort-activities-main",
-            "contentHash": "59d1df83f1612fc7a5478da7576d13a3b56c79f9c845db8a69b4b89fe5bc0a3e",
+            "contentHash": "1dff3eeacebc96d05ba069e2bd92ffcd53f33ea6ac8483e6c6627a0e30758220",
             "fields": [
               "valid_from",
               "valid_until",
