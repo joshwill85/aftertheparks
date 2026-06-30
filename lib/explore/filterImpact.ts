@@ -16,6 +16,8 @@ import {
 import {
   ageFitForActivity,
   bookingStatusForActivity,
+  timeWindowIdForStart,
+  weatherFitValueForActivity,
   type BookingStatus,
 } from "@/lib/planning/activityFacts";
 import {
@@ -36,6 +38,8 @@ type ResortOption = { slug: string; name: string };
 
 export interface FilterableItem {
   id: string;
+  sourceType?: "activity" | "officialOffering" | "movie";
+  activitySlug?: string;
   resortSlug: string;
   resortArea?: string;
   category: string;
@@ -96,21 +100,6 @@ const BOOKING_NOT_REQUIRED: BookingStatus[] = [
 
 const BOOKING_NEEDED: BookingStatus[] = ["required", "recommended"];
 
-function timeWindowFromStart(startDateTime?: string): "after_7_pm" | "dinner_window" | undefined {
-  if (!startDateTime) return undefined;
-  const zoned = new Date(startDateTime).toLocaleTimeString("en-US", {
-    timeZone: "America/New_York",
-    hour12: false,
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const [hour, minute] = zoned.split(":").map(Number);
-  const minutes = hour * 60 + minute;
-  if (minutes >= 19 * 60 && minutes <= 23 * 60 + 59) return "after_7_pm";
-  if (minutes >= 17 * 60 && minutes < 19 * 60) return "dinner_window";
-  return undefined;
-}
-
 function weatherMatches(
   item: FilterableItem,
   weather: NonNullable<ActivityFilters["weather"]>
@@ -162,6 +151,8 @@ export function activityToFilterableItem(activity: ActivityOccurrence): Filterab
   const ageFit = ageFitForActivity(activity);
   return {
     id: activity.id,
+    sourceType: "activity",
+    activitySlug: activity.activitySlug,
     resortSlug: activity.resort.slug,
     resortArea: activity.resort.area,
     category: activity.category,
@@ -177,15 +168,7 @@ export function activityToFilterableItem(activity: ActivityOccurrence): Filterab
       location: activity.location.label,
       priceNotes: activity.price.notes,
     }),
-    weatherFit:
-      DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[activity.activitySlug]?.weatherFit ??
-      inferWeatherFitFromText({
-        title: activity.title,
-        category: activity.category,
-        summary: activity.summary,
-        location: activity.location.label,
-        weatherDependency: activity.enrichment?.weatherDependency,
-      }),
+    weatherFit: weatherFitValueForActivity(activity),
     reservation: Boolean(
       activity.eligibility.reservation?.required ||
         activity.enrichment?.reservationRequired ||
@@ -200,6 +183,8 @@ export function activityToFilterableItem(activity: ActivityOccurrence): Filterab
 export function offeringToFilterableItem(offering: ActivityOffering): FilterableItem {
   return {
     id: offering.id,
+    sourceType: "officialOffering",
+    activitySlug: offering.activitySlug,
     resortSlug: offering.resort.slug,
     resortArea: offering.resort.area,
     category: offering.category,
@@ -238,6 +223,8 @@ export function offeringToFilterableItem(offering: ActivityOffering): Filterable
 export function movieToFilterableItem(movie: MovieNightOccurrence): FilterableItem {
   return {
     id: movie.id,
+    sourceType: "movie",
+    activitySlug: "movies-under-the-stars",
     resortSlug: movie.resortSlug,
     resortArea: areaFilterForResort(movie.resortSlug),
     category: "movies_under_stars",
@@ -272,7 +259,10 @@ function queryMatches(item: FilterableItem, q?: string): boolean {
     .includes(normalized);
 }
 
-function itemMatches(item: FilterableItem, filters: ActivityFilters): boolean {
+export function filterableItemMatchesFilters(
+  item: FilterableItem,
+  filters: ActivityFilters
+): boolean {
   const selectedResorts = selectedResortSlugs(filters.resort);
   if (filters.near === "my-resort" && selectedResorts.length === 1) {
     if (!resortAreaMatchesOrigin(selectedResorts[0], item.resortSlug, item.resortArea)) {
@@ -315,9 +305,9 @@ function filterableItemMatchesPreset(
           resortAreaMatchesOrigin(homeResortSlug, item.resortSlug, item.resortArea)
       );
     case "after_7_pm":
-      return timeWindowFromStart(item.startDateTime) === "after_7_pm";
+      return timeWindowIdForStart(item.startDateTime) === "after_7_pm";
     case "dinner_window":
-      return timeWindowFromStart(item.startDateTime) === "dinner_window";
+      return timeWindowIdForStart(item.startDateTime) === "dinner_window";
     case "rain_backup":
       return item.weatherFit === "indoor" || item.weatherFit === "covered";
     case "no_booking_required":
@@ -347,7 +337,40 @@ function countWith(
   override: Partial<ActivityFilters>
 ): number {
   const next = { ...filters, ...override };
-  return items.filter((item) => itemMatches(item, next)).length;
+  return filterVisibleItems(items, next).length;
+}
+
+function collisionKey(item: FilterableItem): string | undefined {
+  if (!item.activitySlug) return undefined;
+  return `${item.resortSlug}:${item.activitySlug}`;
+}
+
+function removeOfficialOfferingCollisions(
+  items: FilterableItem[]
+): FilterableItem[] {
+  const visibleActivityKeys = new Set(
+    items
+      .filter((item) => item.sourceType === "activity")
+      .map(collisionKey)
+      .filter((key): key is string => Boolean(key))
+  );
+
+  if (visibleActivityKeys.size === 0) return items;
+
+  return items.filter((item) => {
+    if (item.sourceType !== "officialOffering") return true;
+    const key = collisionKey(item);
+    return !key || !visibleActivityKeys.has(key);
+  });
+}
+
+function filterVisibleItems(
+  items: FilterableItem[],
+  filters: ActivityFilters
+): FilterableItem[] {
+  return removeOfficialOfferingCollisions(
+    items.filter((item) => filterableItemMatchesFilters(item, filters))
+  );
 }
 
 function hrefWithout(
@@ -529,7 +552,7 @@ export function buildFilterImpact(
   const selectedResorts = selectedResortSlugs(filters.resort);
 
   return {
-    total: items.filter((item) => itemMatches(item, filters)).length,
+    total: filterVisibleItems(items, filters).length,
     resorts: resorts.map((resort) => ({
       value: resort.slug,
       label: resort.name,

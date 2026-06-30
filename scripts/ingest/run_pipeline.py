@@ -104,6 +104,7 @@ def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> l
             "data/processed/eval/v3_source_statuses.json",
             "--review-tasks",
             "data/processed/review_queue/vision_v3_review_queue.json",
+            *(() if not quarter else ("--quarter", quarter)),
         ),
         ("trust_report.py",),
     ])

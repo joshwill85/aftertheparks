@@ -1,0 +1,3400 @@
+[
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-f5f41799b404a888017a44d8",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9884795546531677,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99247,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "DISNEY FIT YOGA ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            667,
+            4977,
+            3192,
+            5200
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9890545606613159,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Near the Sandcastle Pool area"
+          },
+          {
+            "confidence": 0.98839,
+            "engine": "rapidocr",
+            "text": "Near the Sandcastle Pool area"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "near_the_sandcastle_pool_area",
+        "raw_value": "Near the Sandcastle Pool area",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            663,
+            5257,
+            3217,
+            5431
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9641882181167603,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Sunday at 9:00am"
+          },
+          {
+            "confidence": 0.99305,
+            "engine": "rapidocr",
+            "text": "Sunday at 9:00am"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Sunday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Sunday at 9:00am",
+          "schedule_type": "recurring",
+          "start_time": "09:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Sunday at 9:00am",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            671,
+            5488,
+            2220,
+            5654
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9884795546531677,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "DISNEY FIT YOGA"
+          },
+          {
+            "confidence": 0.99247,
+            "engine": "rapidocr",
+            "text": "DISNEY FIT YOGA"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "disney fit yoga",
+        "raw_value": "DISNEY FIT YOGA",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            667,
+            4977,
+            3192,
+            5200
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Near the Sandcastle Pool area",
+    "movie_title": null,
+    "normalized_location_id": "near_the_sandcastle_pool_area",
+    "normalized_movie_title": null,
+    "normalized_title": "disney fit yoga",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "wellness_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Sunday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Sunday at 9:00am",
+      "schedule_type": "recurring",
+      "start_time": "09:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Sunday at 9:00am",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            667,
+            4977,
+            3192,
+            5200
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY FIT YOGA"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            663,
+            5257,
+            3217,
+            5431
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "Near the Sandcastle Pool area"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            671,
+            5488,
+            2220,
+            5654
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "Sunday at 9:00am"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            667,
+            4977,
+            3192,
+            5200
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY FIT YOGA"
+        }
+      ]
+    },
+    "source_title": "DISNEY FIT YOGA",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-a7e051f1d0773ca08bef5981",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9683154821395874,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.9871,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "DISNEY FIT AQUA FITNESS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            662,
+            6731,
+            4473,
+            6974
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999902844429016,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Sandcastle Pool"
+          },
+          {
+            "confidence": 0.99985,
+            "engine": "rapidocr",
+            "text": "Sandcastle Pool"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "sandcastle_pool",
+        "raw_value": "Sandcastle Pool",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            658,
+            7022,
+            2009,
+            7209
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9601140022277832,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Tuesday at 9:00am"
+          },
+          {
+            "confidence": 0.98828,
+            "engine": "rapidocr",
+            "text": "Tuesday at 9:00am"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Tuesday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Tuesday at 9:00am",
+          "schedule_type": "recurring",
+          "start_time": "09:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Tuesday at 9:00am",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            646,
+            7253,
+            2282,
+            7444
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9683154821395874,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "DISNEY FIT AQUA FITNESS"
+          },
+          {
+            "confidence": 0.9871,
+            "engine": "rapidocr",
+            "text": "DISNEY FIT AQUA FITNESS"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "disney fit aqua fitness",
+        "raw_value": "DISNEY FIT AQUA FITNESS",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            662,
+            6731,
+            4473,
+            6974
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Sandcastle Pool",
+    "movie_title": null,
+    "normalized_location_id": "sandcastle_pool",
+    "normalized_movie_title": null,
+    "normalized_title": "disney fit aqua fitness",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "wellness_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Tuesday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Tuesday at 9:00am",
+      "schedule_type": "recurring",
+      "start_time": "09:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Tuesday at 9:00am",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            662,
+            6731,
+            4473,
+            6974
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY FIT AQUA FITNESS"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            658,
+            7022,
+            2009,
+            7209
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "Sandcastle Pool"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            646,
+            7253,
+            2282,
+            7444
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "Tuesday at 9:00am"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            662,
+            6731,
+            4473,
+            6974
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY FIT AQUA FITNESS"
+        }
+      ]
+    },
+    "source_title": "DISNEY FIT AQUA FITNESS",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-0b0cb73d0d9c6714b4dffd38",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9786420464515686,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99152,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "PICKLEBALL CLINIC ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            646,
+            8270,
+            3465,
+            8510
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999970018863678,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Tennis Courts near Hospitality House"
+          },
+          {
+            "confidence": 0.96562,
+            "engine": "rapidocr",
+            "text": "Tennis Courts near Hospitality House"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "tennis_courts_near_hospitality_house",
+        "raw_value": "Tennis Courts near Hospitality House",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            638,
+            8549,
+            3762,
+            8740
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9806985855102539,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Thursday at 9:30am"
+          },
+          {
+            "confidence": 0.9766,
+            "engine": "rapidocr",
+            "text": "Thursday at 9:3Oam"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at 9:30am",
+          "schedule_type": "recurring",
+          "start_time": "09:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at 9:30am",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            642,
+            8793,
+            2330,
+            8959
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9786420464515686,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "PICKLEBALL CLINIC"
+          },
+          {
+            "confidence": 0.99152,
+            "engine": "rapidocr",
+            "text": "PICKLEBALL CLINIC"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "pickleball clinic",
+        "raw_value": "PICKLEBALL CLINIC",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            646,
+            8270,
+            3465,
+            8510
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Tennis Courts near Hospitality House",
+    "movie_title": null,
+    "normalized_location_id": "tennis_courts_near_hospitality_house",
+    "normalized_movie_title": null,
+    "normalized_title": "pickleball clinic",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "wellness_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday at 9:30am",
+      "schedule_type": "recurring",
+      "start_time": "09:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday at 9:30am",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            646,
+            8270,
+            3465,
+            8510
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "PICKLEBALL CLINIC"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            638,
+            8549,
+            3762,
+            8740
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "Tennis Courts near Hospitality House"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            642,
+            8793,
+            2330,
+            8959
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "Thursday at 9:30am"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            646,
+            8270,
+            3465,
+            8510
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-03",
+          "text": "PICKLEBALL CLINIC"
+        }
+      ]
+    },
+    "source_title": "PICKLEBALL CLINIC",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-f7de45b3ce635d81b2a75b6e",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9984865188598633,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99846,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "CONCH FLATS COMMUNITY HALL ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            2908,
+            10402,
+            3155
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999810457229614,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Hospitality House"
+          },
+          {
+            "confidence": 0.99987,
+            "engine": "rapidocr",
+            "text": "Hospitality House"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "hospitality_house",
+        "raw_value": "Hospitality House",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            3195,
+            7194,
+            3378
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9996833801269531,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 10:00am-10:00pm"
+          },
+          {
+            "confidence": 0.99497,
+            "engine": "rapidocr",
+            "text": "Daily from 10:00am-10:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "22:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 10:00am-10:00pm",
+          "schedule_type": "recurring",
+          "start_time": "10:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 10:00am-10:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5704,
+            3422,
+            8194,
+            3621
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9984865188598633,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "CONCH FLATS COMMUNITY HALL"
+          },
+          {
+            "confidence": 0.99846,
+            "engine": "rapidocr",
+            "text": "RESOR"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "conch flats community hall",
+        "raw_value": "CONCH FLATS COMMUNITY HALL",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5709,
+            2908,
+            10402,
+            3155
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Hospitality House",
+    "movie_title": null,
+    "normalized_location_id": "hospitality_house",
+    "normalized_movie_title": null,
+    "normalized_title": "conch flats community hall",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "22:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 10:00am-10:00pm",
+      "schedule_type": "recurring",
+      "start_time": "10:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 10:00am-10:00pm",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5709,
+            2908,
+            10402,
+            3155
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "CONCH FLATS COMMUNITY HALL"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5709,
+            3195,
+            7194,
+            3378
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Hospitality House"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5704,
+            3422,
+            8194,
+            3621
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Daily from 10:00am-10:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5709,
+            2908,
+            10402,
+            3155
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "CONCH FLATS COMMUNITY HALL"
+        }
+      ]
+    },
+    "source_title": "CONCH FLATS COMMUNITY HALL",
+    "source_type": "pdf",
+    "validation_findings": [
+      "engine_disagreement:title"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-42ae0d08c50b1edd4c78732d",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9992035031318665,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99789,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "POOLSIDE ACTIVITIES ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            4236,
+            8861,
+            4480
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999930739402771,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Sandcastle Pool Deck"
+          },
+          {
+            "confidence": 0.99982,
+            "engine": "rapidocr",
+            "text": "Sandcastle Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "sandcastle_pool_deck",
+        "raw_value": "Sandcastle Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            4528,
+            7523,
+            4706
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9997822046279907,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 12:00pm-2:00pm"
+          },
+          {
+            "confidence": 0.9958,
+            "engine": "rapidocr",
+            "text": "Daily from 12:00pm-2:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "14:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 12:00pm-2:00pm",
+          "schedule_type": "recurring",
+          "start_time": "12:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 12:00pm-2:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            4754,
+            8109,
+            4949
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9992035031318665,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "POOLSIDE ACTIVITIES"
+          },
+          {
+            "confidence": 0.99789,
+            "engine": "rapidocr",
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "poolside activities",
+        "raw_value": "POOLSIDE ACTIVITIES",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            4236,
+            8861,
+            4480
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Sandcastle Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "sandcastle_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "poolside activities",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "14:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 12:00pm-2:00pm",
+      "schedule_type": "recurring",
+      "start_time": "12:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 12:00pm-2:00pm",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5705,
+            4236,
+            8861,
+            4480
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "POOLSIDE ACTIVITIES"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5705,
+            4528,
+            7523,
+            4706
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Sandcastle Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5705,
+            4754,
+            8109,
+            4949
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Daily from 12:00pm-2:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5705,
+            4236,
+            8861,
+            4480
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "POOLSIDE ACTIVITIES"
+        }
+      ]
+    },
+    "source_title": "POOLSIDE ACTIVITIES",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-901c452e9adf8e10531e063a",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999829530715942,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99851,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "CAMPFIRE ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            7383,
+            7161,
+            7594
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999801516532898,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Near the Sandcastle Pool Area Tennis Courts"
+          },
+          {
+            "confidence": 0.99164,
+            "engine": "rapidocr",
+            "text": "Near the Sandcastle Pool Area Tennis Courts"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "near_the_sandcastle_pool_area_tennis_courts",
+        "raw_value": "Near the Sandcastle Pool Area Tennis Courts",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            7667,
+            9499,
+            7841
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9993571639060974,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Nightly from 6:00pm-7:00pm"
+          },
+          {
+            "confidence": 0.99621,
+            "engine": "rapidocr",
+            "text": "Nightly from 6:00pm-7:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "19:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Nightly from 6:00pm-7:00pm",
+          "schedule_type": "recurring",
+          "start_time": "18:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Nightly from 6:00pm-7:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            7906,
+            8210,
+            8072
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999829530715942,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "CAMPFIRE"
+          },
+          {
+            "confidence": 0.99851,
+            "engine": "rapidocr",
+            "text": "CAMPFIRE"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "campfire",
+        "raw_value": "CAMPFIRE",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            7383,
+            7161,
+            7594
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Near the Sandcastle Pool Area Tennis Courts",
+    "movie_title": null,
+    "normalized_location_id": "near_the_sandcastle_pool_area_tennis_courts",
+    "normalized_movie_title": null,
+    "normalized_title": "campfire",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "19:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Nightly from 6:00pm-7:00pm",
+      "schedule_type": "recurring",
+      "start_time": "18:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Nightly from 6:00pm-7:00pm",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5713,
+            7383,
+            7161,
+            7594
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "CAMPFIRE"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5705,
+            7667,
+            9499,
+            7841
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Near the Sandcastle Pool Area Tennis Courts"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5709,
+            7906,
+            8210,
+            8072
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Nightly from 6:00pm-7:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5713,
+            7383,
+            7161,
+            7594
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "CAMPFIRE"
+        }
+      ]
+    },
+    "source_title": "CAMPFIRE",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-cf0495b878f6400450f6396f",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9800117015838623,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99352,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "NIGHTTIME TRIVIA ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5697,
+            8711,
+            8344,
+            8943
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9984714984893799,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Papa's Den near the lobby"
+          },
+          {
+            "confidence": 0.96942,
+            "engine": "rapidocr",
+            "text": "Papa\u2019s Den near the lobby"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "papas_den_near_the_lobby",
+        "raw_value": "Papa's Den near the lobby",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5696,
+            8991,
+            7905,
+            9186
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9996411204338074,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Monday 7:30pm-8:30pm"
+          },
+          {
+            "confidence": 0.99766,
+            "engine": "rapidocr",
+            "text": "Monday 7:30pm-8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday"
+          ],
+          "end_time": "20:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Monday 7:30pm-8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "19:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Monday 7:30pm-8:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5688,
+            9230,
+            7783,
+            9421
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9800117015838623,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "NIGHTTIME TRIVIA"
+          },
+          {
+            "confidence": 0.99352,
+            "engine": "rapidocr",
+            "text": "NIGHTTIME TRIVIA"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "nighttime trivia",
+        "raw_value": "NIGHTTIME TRIVIA",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5697,
+            8711,
+            8344,
+            8943
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Papa's Den near the lobby",
+    "movie_title": null,
+    "normalized_location_id": "papas_den_near_the_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "nighttime trivia",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday"
+      ],
+      "end_time": "20:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Monday 7:30pm-8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "19:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Monday 7:30pm-8:30pm",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5697,
+            8711,
+            8344,
+            8943
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "NIGHTTIME TRIVIA"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5696,
+            8991,
+            7905,
+            9186
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Papa's Den near the lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5688,
+            9230,
+            7783,
+            9421
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Monday 7:30pm-8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5697,
+            8711,
+            8344,
+            8943
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "NIGHTTIME TRIVIA"
+        }
+      ]
+    },
+    "source_title": "NIGHTTIME TRIVIA",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-e7a31537979203c524f52cac",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9951627254486084,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99106,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "CONCH CRAZY BINGO ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5692,
+            9800,
+            8841,
+            10057
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9997662305831909,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Papa's Den near the Lobby"
+          },
+          {
+            "confidence": 0.98236,
+            "engine": "rapidocr",
+            "text": "Papa's Den near the Lobby"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "papas_den_near_the_lobby",
+        "raw_value": "Papa's Den near the Lobby",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5692,
+            10088,
+            7962,
+            10300
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9842736721038818,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Wednesday and Friday from 7:30pm-8:30pm"
+          },
+          {
+            "confidence": 0.98493,
+            "engine": "rapidocr",
+            "text": "Wednesday and Friday from 7:30pm-8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Wednesday",
+            "Friday"
+          ],
+          "end_time": "20:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Wednesday and Friday from 7:30pm-8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "19:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Wednesday and Friday from 7:30pm-8:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5688,
+            10315,
+            9532,
+            10526
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9951627254486084,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "CONCH CRAZY BINGO"
+          },
+          {
+            "confidence": 0.99106,
+            "engine": "rapidocr",
+            "text": "CONCH CRAZY BINGO"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "conch crazy bingo",
+        "raw_value": "CONCH CRAZY BINGO",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5692,
+            9800,
+            8841,
+            10057
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Papa's Den near the Lobby",
+    "movie_title": null,
+    "normalized_location_id": "papas_den_near_the_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "conch crazy bingo",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Wednesday",
+        "Friday"
+      ],
+      "end_time": "20:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Wednesday and Friday from 7:30pm-8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "19:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Wednesday and Friday from 7:30pm-8:30pm",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5692,
+            9800,
+            8841,
+            10057
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "CONCH CRAZY BINGO"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5692,
+            10088,
+            7962,
+            10300
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Papa's Den near the Lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5688,
+            10315,
+            9532,
+            10526
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "Wednesday and Friday from 7:30pm-8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5692,
+            9800,
+            8841,
+            10057
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-04",
+          "text": "CONCH CRAZY BINGO"
+        }
+      ]
+    },
+    "source_title": "CONCH CRAZY BINGO",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "old-key-west",
+    "candidate_id": "vision-v3-c9202a82a419d33b42dd15c8",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.412834+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+        "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+        "source_authority": "non_official",
+        "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
+        "source_role": "derived_source_link",
+        "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9980267286300659,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.9799,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "CONCH FLATS MOSAICS ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5685,
+            13644,
+            9633,
+            13904
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9998330473899841,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Papa's Den near the Lobby"
+          },
+          {
+            "confidence": 0.9864,
+            "engine": "rapidocr",
+            "text": "Papa\u2019s Den near the Lobby"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "papas_den_near_the_lobby",
+        "raw_value": "Papa's Den near the Lobby",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5684,
+            13932,
+            7962,
+            14127
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9988328814506531,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Wednesday at 3:00pm"
+          },
+          {
+            "confidence": 0.99786,
+            "engine": "rapidocr",
+            "text": "Wednesday at 3:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Wednesday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Wednesday at 3:00pm",
+          "schedule_type": "recurring",
+          "start_time": "15:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Wednesday at 3:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5684,
+            14175,
+            7604,
+            14349
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9980267286300659,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "CONCH FLATS MOSAICS ($)"
+          },
+          {
+            "confidence": 0.9799,
+            "engine": "rapidocr",
+            "text": "CONCH FLATS MOSAICS ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "conch flats mosaics ($)",
+        "raw_value": "CONCH FLATS MOSAICS ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5685,
+            13644,
+            9633,
+            13904
+          ],
+          "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+          "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Papa's Den near the Lobby",
+    "movie_title": null,
+    "normalized_location_id": "papas_den_near_the_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "conch flats mosaics ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Wednesday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Wednesday at 3:00pm",
+      "schedule_type": "recurring",
+      "start_time": "15:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Wednesday at 3:00pm",
+    "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5685,
+            13644,
+            9633,
+            13904
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-05",
+          "text": "CONCH FLATS MOSAICS ($)"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5684,
+            13932,
+            7962,
+            14127
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-05",
+          "text": "Papa's Den near the Lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5684,
+            14175,
+            7604,
+            14349
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-05",
+          "text": "Wednesday at 3:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5685,
+            13644,
+            9633,
+            13904
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "region_id": "page-001-region-05",
+          "text": "CONCH FLATS MOSAICS ($)"
+        }
+      ]
+    },
+    "source_title": "CONCH FLATS MOSAICS ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  }
+]

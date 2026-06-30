@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicPlanClient } from "@/components/plan/PublicPlanClient";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { createServiceClient } from "@/lib/supabase/server";
 import { resolvePublicPlan } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
@@ -54,6 +55,8 @@ export default async function PublicPlanPage({
   if (!plan) notFound();
 
   return (
-    <PublicPlanClient token={shareToken} initial={plan} />
+    <PlanClientBoundary syncOnMount>
+      <PublicPlanClient token={shareToken} initial={plan} />
+    </PlanClientBoundary>
   );
 }

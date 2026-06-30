@@ -1,0 +1,1452 @@
+[
+  {
+    "calendar_group_key": "art-of-animation",
+    "candidate_id": "vision-v3-cb820d3e7402bda747cccfd3",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.261998+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999887228012085,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99572,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            200,
+            6929,
+            1038,
+            7024
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9967809915542603,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Movie Lawn near the Big Blue Pool"
+          },
+          {
+            "confidence": 0.63884,
+            "engine": "rapidocr",
+            "text": "Frun63\u03bc= 73\u03bcn"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "movie_lawn_near_the_big_blue_pool",
+        "raw_value": "Movie Lawn near the Big Blue Pool",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            197,
+            6995,
+            916,
+            7069
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9996941089630127,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 8:00pm-8:30pm"
+          },
+          {
+            "confidence": 0.64869,
+            "engine": "rapidocr",
+            "text": "1 mm 431pm 1.20pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Wednesday"
+          ],
+          "end_time": "20:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Wednesday at From 8:00pm-8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Wednesday at From 8:00pm-8:30pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            7049,
+            632,
+            7117
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.999887228012085,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "ACTIVITIES ON THE LAWN"
+          },
+          {
+            "confidence": 0.99572,
+            "engine": "rapidocr",
+            "text": "CAMPFIRE AT PRIDE ROCK"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "activities on the lawn",
+        "raw_value": "ACTIVITIES ON THE LAWN",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            200,
+            6929,
+            1038,
+            7024
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Movie Lawn near the Big Blue Pool",
+    "movie_title": null,
+    "normalized_location_id": "movie_lawn_near_the_big_blue_pool",
+    "normalized_movie_title": null,
+    "normalized_title": "activities on the lawn",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Wednesday"
+      ],
+      "end_time": "20:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Wednesday at From 8:00pm-8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Wednesday at From 8:00pm-8:30pm",
+    "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            200,
+            6929,
+            1038,
+            7024
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "ACTIVITIES ON THE LAWN"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            197,
+            6995,
+            916,
+            7069
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "Movie Lawn near the Big Blue Pool"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            199,
+            7049,
+            632,
+            7117
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "Wednesday at From 8:00pm-8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            200,
+            6929,
+            1038,
+            7024
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "ACTIVITIES ON THE LAWN"
+        }
+      ]
+    },
+    "source_title": "ACTIVITIES ON THE LAWN",
+    "source_type": "image",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "art-of-animation",
+    "candidate_id": "vision-v3-66039a243e90e9c50fcad5ef",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.261998+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9988524317741394,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99919,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            200,
+            7157,
+            1022,
+            7275
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999319314956665,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Movie Lawn near the Big Blue Pool"
+          },
+          {
+            "confidence": 0.74888,
+            "engine": "rapidocr",
+            "text": "Movde Lewt nesr the Gilg Diun Poot"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "movie_lawn_near_the_big_blue_pool",
+        "raw_value": "Movie Lawn near the Big Blue Pool",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            203,
+            7278,
+            909,
+            7322
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999880790710449,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:30pm"
+          },
+          {
+            "confidence": 0.64869,
+            "engine": "rapidocr",
+            "text": "1 mm 431pm 1.20pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Wednesday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Wednesday at 8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Wednesday at 8:30pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            206,
+            7326,
+            356,
+            7373
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9988524317741394,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MOVIE UNDER THE STARS TOY STORY 2 G"
+          },
+          {
+            "confidence": 0.99919,
+            "engine": "rapidocr",
+            "text": "ACTIVITIES ON THE LAWN"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "movie under the stars toy story 2",
+        "raw_value": "MOVIE UNDER THE STARS TOY STORY 2 G",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            200,
+            7157,
+            1022,
+            7275
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Movie Lawn near the Big Blue Pool",
+    "movie_title": null,
+    "normalized_location_id": "movie_lawn_near_the_big_blue_pool",
+    "normalized_movie_title": null,
+    "normalized_title": "movie under the stars toy story 2",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Wednesday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Wednesday at 8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Wednesday at 8:30pm",
+    "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            200,
+            7157,
+            1022,
+            7275
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "MOVIE UNDER THE STARS TOY STORY 2 G"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            203,
+            7278,
+            909,
+            7322
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "Movie Lawn near the Big Blue Pool"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            206,
+            7326,
+            356,
+            7373
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "Wednesday at 8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            200,
+            7157,
+            1022,
+            7275
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "MOVIE UNDER THE STARS TOY STORY 2 G"
+        }
+      ]
+    },
+    "source_title": "MOVIE UNDER THE STARS TOY STORY 2 G",
+    "source_type": "image",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "art-of-animation",
+    "candidate_id": "vision-v3-b6c7643e3b4fa5f88d34996a",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.261998+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999864399433136,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.98038,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            199,
+            9873,
+            613,
+            9955
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9996532797813416,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "The Big Blue Pool Deck"
+          },
+          {
+            "confidence": 0.78091,
+            "engine": "rapidocr",
+            "text": "Outad: Ammstiv? Hall"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "the_big_blue_pool_deck",
+        "raw_value": "The Big Blue Pool Deck",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            202,
+            9931,
+            685,
+            10008
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9990718364715576,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 1:00pm-2:00pm"
+          },
+          {
+            "confidence": 0.59405,
+            "engine": "rapidocr",
+            "text": "1mm \u00d7p74:2pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Friday"
+          ],
+          "end_time": "14:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Friday at From 1:00pm-2:00pm",
+          "schedule_type": "recurring",
+          "start_time": "13:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Friday at From 1:00pm-2:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            9985,
+            626,
+            10059
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.999864399433136,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "POOL PARTY"
+          },
+          {
+            "confidence": 0.98038,
+            "engine": "rapidocr",
+            "text": "MICKEY TIE-DYE (S)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "pool party",
+        "raw_value": "POOL PARTY",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            9873,
+            613,
+            9955
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "The Big Blue Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "the_big_blue_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "pool party",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Friday"
+      ],
+      "end_time": "14:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Friday at From 1:00pm-2:00pm",
+      "schedule_type": "recurring",
+      "start_time": "13:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Friday at From 1:00pm-2:00pm",
+    "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            199,
+            9873,
+            613,
+            9955
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "POOL PARTY"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            202,
+            9931,
+            685,
+            10008
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "The Big Blue Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            199,
+            9985,
+            626,
+            10059
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "Friday at From 1:00pm-2:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            199,
+            9873,
+            613,
+            9955
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "POOL PARTY"
+        }
+      ]
+    },
+    "source_title": "POOL PARTY",
+    "source_type": "image",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "art-of-animation",
+    "candidate_id": "vision-v3-f6da30dc703dd9e218d479b1",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.261998+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9998300671577454,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99218,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            201,
+            11389,
+            615,
+            11498
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999774694442749,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "The Big Blue Pool Deck"
+          },
+          {
+            "confidence": 0.65519,
+            "engine": "rapidocr",
+            "text": "Or>d. Anntio-Hall"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "the_big_blue_pool_deck",
+        "raw_value": "The Big Blue Pool Deck",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            198,
+            11437,
+            689,
+            11552
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9832245707511902,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 1:00pm-2:00pm"
+          },
+          {
+            "confidence": 0.57986,
+            "engine": "rapidocr",
+            "text": "frum k00\u03bcm 4:2pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Saturday"
+          ],
+          "end_time": "14:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Saturday at From 1:00pm-2:00pm",
+          "schedule_type": "recurring",
+          "start_time": "13:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Saturday at From 1:00pm-2:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            198,
+            11494,
+            630,
+            11603
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9998300671577454,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "POOL PARTY"
+          },
+          {
+            "confidence": 0.99218,
+            "engine": "rapidocr",
+            "text": "MICKEY TIE-DYE (S)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "pool party",
+        "raw_value": "POOL PARTY",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            201,
+            11389,
+            615,
+            11498
+          ],
+          "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "The Big Blue Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "the_big_blue_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "pool party",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Saturday"
+      ],
+      "end_time": "14:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Saturday at From 1:00pm-2:00pm",
+      "schedule_type": "recurring",
+      "start_time": "13:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Saturday at From 1:00pm-2:00pm",
+    "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            201,
+            11389,
+            615,
+            11498
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "POOL PARTY"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            198,
+            11437,
+            689,
+            11552
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "The Big Blue Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            198,
+            11494,
+            630,
+            11603
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "Saturday at From 1:00pm-2:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            201,
+            11389,
+            615,
+            11498
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "region_id": "page-001-region-03",
+          "text": "POOL PARTY"
+        }
+      ]
+    },
+    "source_title": "POOL PARTY",
+    "source_type": "image",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  }
+]

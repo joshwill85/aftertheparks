@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { publicCacheJson } from "@/lib/cache/http";
 import { getCachedNwsAlerts, getCachedNwsAlertsForAllWdw, getCachedWeatherSnapshot } from "@/lib/weather/cache";
 import {
   getWeatherLocation,
@@ -9,8 +9,6 @@ import { buildWeatherGuidanceForTimeSpan } from "@/lib/weather/guidance";
 import { chooseWeatherProviderForTimeSpan } from "@/lib/weather/providerRouter";
 import { validateWeatherGuidanceSearchParams } from "@/lib/weather/apiValidation";
 import { getWeatherApiPrecipMapContext } from "@/lib/weather/precipMap";
-
-export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -50,7 +48,7 @@ export async function GET(request: Request) {
       : undefined,
   });
 
-  return NextResponse.json({
+  return publicCacheJson({
     location,
     snapshot,
     guidance,
@@ -59,5 +57,5 @@ export async function GET(request: Request) {
     precipMap: guidance.precipMap,
     officialAlertStatus: alertState.status,
     forecastStatus: guidance.forecastStatus,
-  });
+  }, "weather");
 }

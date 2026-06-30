@@ -18,7 +18,7 @@ import { buildSocialMetadata } from "@/lib/seo/metadata";
 import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
 import { activitySourceSummary, formatSeoDate } from "@/lib/seo/activityPage";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 const DEFAULT_RESORT_METADATA = {
   title: "Disney World Resort Activity Calendars",

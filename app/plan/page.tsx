@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { PlanPageClient } from "@/components/atlas/PlanPageClient";
 import { Hero } from "@/components/atlas/Hero";
 import { BrandAsset } from "@/components/brand/BrandAsset";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { getResorts } from "@/lib/data/activities";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "My Plan",
@@ -51,7 +54,9 @@ export default async function PlanPage() {
           className="brand-asset--map-panel justify-self-center"
         />
       </section>
-      <PlanPageClient resorts={resortOptions} />
+      <PlanClientBoundary syncOnMount>
+        <PlanPageClient resorts={resortOptions} />
+      </PlanClientBoundary>
     </>
   );
 }

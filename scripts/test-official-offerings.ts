@@ -106,6 +106,54 @@ assert.ok(
   "Tri-Circle-D Ranch free label requires source evidence from Disney's stable walkthrough language"
 );
 
+const expectedDocksideFishingKeys = [
+  "dockside-fishing:campsites-at-fort-wilderness-resort:fort-wilderness",
+  "dockside-fishing:port-orleans-resort-riverside:port-orleans-resort-riverside",
+];
+for (const offeringKey of expectedDocksideFishingKeys) {
+  const offering = generatedOfferingByKey(offeringKey);
+  assert.equal(offering.title, "Dockside Fishing", `${offeringKey} should publish as dockside fishing`);
+  assert.equal(offering.price.state, "fee", `${offeringKey} should not publish as Free`);
+  assert.equal(
+    offering.claims?.gear_policy?.value,
+    "rental_poles_required",
+    `${offeringKey} should carry the planDisney rental-pole policy`
+  );
+  assert.equal(
+    offering.claims?.catch_policy?.value,
+    "catch_and_release_only",
+    `${offeringKey} should carry Disney's catch-and-release policy`
+  );
+  assert.equal(
+    offering.claims?.fish_species,
+    undefined,
+    `${offeringKey} should not inherit excursion-only fish species claims`
+  );
+  assert.equal(
+    offering.claims?.waterways,
+    undefined,
+    `${offeringKey} should not inherit excursion-only waterway claims`
+  );
+  assert.ok(
+    offering.field_provenance?.price?.some((span) =>
+      String(span.text).includes("Fishing gear is available for rental")
+    ),
+    `${offeringKey} fee state requires Disney fishing-page evidence`
+  );
+}
+assert.equal(
+  generatedOfferingByKey(
+    "dockside-fishing:campsites-at-fort-wilderness-resort:fort-wilderness"
+  ).location.label,
+  "Bike Barn"
+);
+assert.equal(
+  generatedOfferingByKey(
+    "dockside-fishing:port-orleans-resort-riverside:port-orleans-resort-riverside"
+  ).location.label,
+  "Fishin' Hole at Ol' Man Island"
+);
+
 const expectedEquestrianPrices: Array<[string, string, number | undefined, number | undefined]> = [
   [
     "horseback-riding:campsites-at-fort-wilderness-resort:campsites-at-fort-wilderness-resort",

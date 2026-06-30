@@ -22,6 +22,7 @@ interface FilterRailProps {
   resorts: { slug: string; name: string }[];
   basePath?: string;
   hideDaypart?: boolean;
+  hideFreeOnly?: boolean;
   filterImpact: FilterImpact;
   homeResortSlug?: string;
   onClearAll: () => void;
@@ -31,6 +32,7 @@ export function FilterRail({
   resorts,
   basePath = "/activities",
   hideDaypart = false,
+  hideFreeOnly = false,
   filterImpact,
   homeResortSlug,
   onClearAll,
@@ -123,6 +125,7 @@ export function FilterRail({
         freeOnly={freeOnly}
         reservationOnly={reservationOnly}
         hideDaypart={hideDaypart}
+        hideFreeOnly={hideFreeOnly}
         filterImpact={filterImpact}
         homeResortSlug={homeResortSlug}
         update={update}
@@ -165,6 +168,7 @@ export function FilterFields({
   freeOnly = false,
   reservationOnly = false,
   hideDaypart = false,
+  hideFreeOnly = false,
   filterImpact,
   homeResortSlug,
   update,
@@ -182,6 +186,7 @@ export function FilterFields({
   freeOnly?: boolean;
   reservationOnly?: boolean;
   hideDaypart?: boolean;
+  hideFreeOnly?: boolean;
   filterImpact: FilterImpact;
   homeResortSlug?: string;
   update: (key: string | Record<string, string | null>, value?: string | null) => void;
@@ -216,22 +221,36 @@ export function FilterFields({
       return aIndex - bIndex;
     });
   }, [filterImpact.categories]);
-  const practicalOptions = [
-    {
+  const practicalOptions: Array<{
+    key: "free" | "reservation";
+    label: string;
+    count: number;
+    active?: boolean;
+    onClick: () => void;
+  }> = [];
+  if (!hideFreeOnly) {
+    practicalOptions.push({
       key: "free",
       label: "Free only",
       count: filterImpact.practical.free,
       active: freeOnly,
       onClick: () => update("free", freeOnly ? null : "true"),
-    },
-    {
-      key: "reservation",
-      label: "Reservations",
-      count: filterImpact.practical.reservation,
-      active: reservationOnly,
-      onClick: () => update("reservation", reservationOnly ? null : "true"),
-    },
-  ].filter((option) => option.count > 0 || option.active);
+    });
+  }
+  practicalOptions.push({
+    key: "reservation",
+    label: "Reservations",
+    count: filterImpact.practical.reservation,
+    active: reservationOnly,
+    onClick: () => update("reservation", reservationOnly ? null : "true"),
+  });
+  const visiblePracticalOptions = practicalOptions.filter(
+    (option) => option.count > 0 || option.active
+  );
+  const practicalActiveCount = [
+    !hideFreeOnly && freeOnly,
+    reservationOnly,
+  ].filter(Boolean).length;
 
   const filteredResorts = useMemo(() => {
     const q = resortQuery.trim().toLowerCase();
@@ -396,14 +415,14 @@ export function FilterFields({
         </FilterSection>
       )}
 
-      {practicalOptions.length > 0 && (
+      {visiblePracticalOptions.length > 0 && (
         <FilterSection
           title="Cost"
-          defaultOpen={freeOnly || reservationOnly}
-          activeCount={[freeOnly, reservationOnly].filter(Boolean).length}
+          defaultOpen={practicalActiveCount > 0}
+          activeCount={practicalActiveCount}
         >
           <div className="filter-option-list">
-            {practicalOptions.map((option) => (
+            {visiblePracticalOptions.map((option) => (
               <button
                 key={option.key}
                 type="button"

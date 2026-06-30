@@ -148,4 +148,17 @@ assert.equal(
   true
 );
 
+assert.equal(
+  weatherFitForActivity(
+    baseActivity({
+      activitySlug: "community-hall",
+      title: "Community Hall",
+      category: "other",
+      location: { label: "Community Hall" },
+    })
+  ).rainBackup,
+  true,
+  "Rain backup should include inferred indoor community hall activities"
+);
+
 console.log("Planning facts contract passed.");

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePlan } from "@/components/atlas/PlanProvider";
+import { useLocalPlanCount } from "@/components/plan/useLocalPlanCount";
 import { cn } from "@/lib/utils";
 
 interface PlanNavLinkProps {
@@ -17,7 +17,7 @@ export function PlanNavLink({
   onClick,
   "aria-current": ariaCurrent,
 }: PlanNavLinkProps) {
-  const { itemCount } = usePlan();
+  const itemCount = useLocalPlanCount();
   const label =
     itemCount > 0 ? `My Plan · ${itemCount}` : "My Plan";
 

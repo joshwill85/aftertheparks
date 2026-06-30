@@ -1,35 +1,18 @@
-import { NextResponse } from "next/server";
 import { publicActivitiesResponse } from "@/lib/api/publicActivities";
+import { publicCacheJson } from "@/lib/cache/http";
 import { getFilteredActivities } from "@/lib/data/activities";
 import {
   filterOfficialOfferingsWithoutActivityCollisions,
   getFilteredOfficialOfferings,
 } from "@/lib/data/officialOfferings";
-import type { Daypart } from "@/lib/types/occurrence";
-
-export const dynamic = "force-dynamic";
+import { parseBrowseParams } from "@/lib/explore/browseParams";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const resort = searchParams.get("resort") ?? undefined;
-  const category = searchParams.get("category") ?? undefined;
-  const daypart = (searchParams.get("daypart") as Daypart) ?? undefined;
-  const free = searchParams.get("free") === "true";
-  const reservation = searchParams.get("reservation") === "true";
-  const q = searchParams.get("q") ?? undefined;
   const limit = searchParams.get("limit")
     ? Number(searchParams.get("limit"))
-    : undefined;
-
-  const filters = {
-    resort,
-    category,
-    daypart,
-    free,
-    reservation,
-    q,
-    limit,
-  };
+    : 500;
+  const filters = { ...parseBrowseParams(searchParams), limit };
   const [activities, officialOfferingsPool] = await Promise.all([
     getFilteredActivities(filters),
     getFilteredOfficialOfferings(filters),
@@ -39,9 +22,9 @@ export async function GET(request: Request) {
     activities
   );
 
-  return NextResponse.json({
+  return publicCacheJson({
     ...publicActivitiesResponse(activities),
     officialOfferings,
     offeringCount: officialOfferings.length,
-  });
+  }, "evergreen");
 }

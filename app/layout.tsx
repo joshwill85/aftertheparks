@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Nunito_Sans } from "next/font/google";
 import { DaypartShell } from "@/components/atlas/DaypartShell";
-import { PlanProvider } from "@/components/atlas/PlanProvider";
 import { WebVitals } from "@/components/analytics/WebVitals";
 import {
   buildOrganizationJsonLd,
@@ -90,9 +89,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: siteJsonLd }}
         />
         <WebVitals />
-        <PlanProvider>
-          <DaypartShell>{children}</DaypartShell>
-        </PlanProvider>
+        <DaypartShell>{children}</DaypartShell>
       </body>
     </html>
   );

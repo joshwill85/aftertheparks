@@ -14,6 +14,7 @@ interface FilterSheetProps {
   resorts: { slug: string; name: string }[];
   basePath?: string;
   hideDaypart?: boolean;
+  hideFreeOnly?: boolean;
   activeCount: number;
   resultCount: number;
   filterImpact: FilterImpact;
@@ -27,6 +28,7 @@ export function FilterSheet({
   resorts,
   basePath = "/activities",
   hideDaypart = false,
+  hideFreeOnly = false,
   activeCount,
   resultCount,
   filterImpact,
@@ -191,6 +193,7 @@ export function FilterSheet({
                 freeOnly={freeOnly}
                 reservationOnly={reservationOnly}
                 hideDaypart={hideDaypart}
+                hideFreeOnly={hideFreeOnly}
                 filterImpact={filterImpact}
                 homeResortSlug={homeResortSlug}
                 update={update}

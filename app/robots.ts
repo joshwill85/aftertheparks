@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export default function robots(): MetadataRoute.Robots {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";

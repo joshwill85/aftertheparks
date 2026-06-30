@@ -127,7 +127,13 @@ function planItemToActivityOccurrence(item: PlanItem): ActivityOccurrence {
   };
 }
 
-export function PlanProvider({ children }: { children: ReactNode }) {
+export function PlanProvider({
+  children,
+  syncOnMount = false,
+}: {
+  children: ReactNode;
+  syncOnMount?: boolean;
+}) {
   const [cache, setCache] = useState<LocalPlanCache | null>(null);
   const [syncStatus, setSyncStatus] = useState<PlanSyncStatus>("idle");
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -217,9 +223,11 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         const dismissed = sessionStorage.getItem("plan-interest-dismissed");
         if (dismissed === "1") setInterestPromptDismissed(true);
       }
-      void runSync(loaded);
+      if (syncOnMount) {
+        void runSync(loaded);
+      }
     });
-  }, [runSync]);
+  }, [runSync, syncOnMount]);
 
   useEffect(() => {
     return subscribePlanUpdates((remote) => {

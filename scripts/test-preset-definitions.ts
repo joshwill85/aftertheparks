@@ -63,6 +63,23 @@ assert.equal(
   "After 7 PM should use the defined Orlando time window"
 );
 assert.equal(
+  itemMatchesPreset(activity({ isHappeningNow: true }), "after_7_pm", {}),
+  true,
+  "After 7 PM should still use start time when an activity is currently happening"
+);
+assert.equal(
+  itemMatchesPreset(
+    activity({
+      isHappeningNow: true,
+      startDateTime: "2026-06-28T22:30:00.000Z",
+    }),
+    "dinner_window",
+    {}
+  ),
+  true,
+  "5-7 PM should still use start time when an activity is currently happening"
+);
+assert.equal(
   itemMatchesPreset(
     activity({
       enrichment: { reservationRequired: false },

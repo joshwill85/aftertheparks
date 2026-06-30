@@ -1,0 +1,49 @@
+{
+  "calendar_group_key": "riviera",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "captured_at": "2026-06-30T00:07:31.420896+00:00",
+  "currentness": "current",
+  "edition": "fy26-q3-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+  "file_extension": ".pdf",
+  "http_status": 200,
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+      "canonical_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+      "height_px": 16200,
+      "image_orientation": null,
+      "page_kind": "pdf_page",
+      "page_number": 1,
+      "render_dpi": 450,
+      "render_engine": "pypdfium2",
+      "render_engine_version": "5.10.1",
+      "render_scale": 6.25,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.thumb.png",
+      "thumbnail_sha256": "390c25efbc9e1a01dbcd17a721eeb1998df9097b18ee35e2f19d446826acd8ac",
+      "width_px": 10800
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "51e6ce58ef1db448f5275fece5826ff0fbbad226a50679f86212b61cdf6021ba",
+  "source_kind": "official_pdf",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/riviera/fy26-q3-0526/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4.pdf",
+  "source_role": "resort_pdf",
+  "source_sha256": "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4",
+  "source_type": "pdf"
+}

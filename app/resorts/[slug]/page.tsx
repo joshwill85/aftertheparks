@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ActivityCollectionView } from "@/components/atlas/ActivityCollectionView";
 import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { getResortTierGradient } from "@/components/resort/ResortCard";
 import { ResortActivityConstellation } from "@/components/resort/ResortActivityConstellation";
 import { ResortEmptyState } from "@/components/resort/ResortEmptyState";
@@ -38,7 +39,7 @@ import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { formatResortTier } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export async function generateMetadata({
   params,
@@ -830,11 +831,13 @@ export default async function ResortDetailPage({
                   Plan ahead at this resort
                 </Link>
               </div>
-              <ActivityCollectionView
-                activities={scheduledActivities}
-                showResort={false}
-                defaultView="cards"
-              />
+              <PlanClientBoundary>
+                <ActivityCollectionView
+                  activities={scheduledActivities}
+                  showResort={false}
+                  defaultView="cards"
+                />
+              </PlanClientBoundary>
             </section>
           )}
 

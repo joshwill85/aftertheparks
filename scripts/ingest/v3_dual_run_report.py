@@ -5,14 +5,17 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 try:
     from config import PROCESSED_DIR
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_OUTPUT = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
@@ -89,8 +92,26 @@ def _field_value(row: dict[str, Any], field: str) -> Any:
     return row.get(field)
 
 
+def _repair_ocr_time_text(value: str) -> str:
+    repaired = re.sub(r"(?<=\d:)O(?=\d)", "0", value, flags=re.IGNORECASE)
+    repaired = re.sub(r"(?<=\d:\d)O(?=\s*[ap]\.?m\.?)", "0", repaired, flags=re.IGNORECASE)
+    return repaired
+
+
 def _normalize(value: Any) -> str:
     return " ".join(str(value or "").strip().lower().split())
+
+
+def _normalize_for_field(field: str, value: Any) -> str:
+    text = str(value or "").replace("’", "'").replace("–", "-").replace("—", "-")
+    if field == "schedule":
+        text = _repair_ocr_time_text(text)
+    if field == "title":
+        text = re.sub(r"\s*\(\$\)\s*", " ", text)
+    normalized = _normalize(text)
+    if field == "location":
+        normalized = normalized.replace("'", "")
+    return normalized
 
 
 def _title(row: dict[str, Any]) -> str:
@@ -198,11 +219,50 @@ def _source_hash(row: dict[str, Any]) -> str:
     return str(row.get("content_sha256") or row.get("source_sha256") or row.get("documentHash") or "").strip()
 
 
+def _source_edition(row: dict[str, Any]) -> str | None:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return (
+        row.get("edition")
+        or row.get("source_pdf_edition")
+        or row.get("pdf_edition")
+        or row.get("source_edition")
+        or source.get("edition")
+        or source.get("pdfEdition")
+    )
+
+
+def _is_v3_visual_source(row: dict[str, Any]) -> bool:
+    if str(row.get("currentness") or "current") != "current":
+        return False
+    source_type = str(row.get("source_type") or "").strip().lower()
+    source_kind = str(row.get("source_kind") or "").strip()
+    source_role = str(row.get("source_role") or "").strip()
+    if not source_type and not source_kind and not source_role:
+        return True
+    return source_role == "resort_pdf" and source_type in {"pdf", "image"} and source_kind in {
+        "official_pdf",
+        "official_image",
+    }
+
+
+def _filter_expected_v3_sources(
+    expected_sources: list[dict[str, Any]] | None,
+    *,
+    quarter: str | None = None,
+) -> list[dict[str, Any]]:
+    sources = [source for source in expected_sources or [] if _is_v3_visual_source(source)]
+    if quarter:
+        sources = [source for source in sources if edition_matches_quarter(_source_edition(source), quarter)]
+    return sources
+
+
 def _source_coverage(
     expected_sources: list[dict[str, Any]] | None,
     v3_source_statuses: list[dict[str, Any]] | None,
     review_tasks: list[dict[str, Any]] | None = None,
+    quarter: str | None = None,
 ) -> dict[str, Any]:
+    expected_sources = _filter_expected_v3_sources(expected_sources, quarter=quarter)
     expected_ids = sorted({_source_id(source) for source in expected_sources or [] if _source_id(source)})
     statuses_by_id = {
         _source_id(status): status
@@ -311,6 +371,7 @@ def build_dual_run_report(
     expected_sources: list[dict[str, Any]] | None = None,
     v3_source_statuses: list[dict[str, Any]] | None = None,
     review_tasks: list[dict[str, Any]] | None = None,
+    quarter: str | None = None,
 ) -> dict[str, Any]:
     v3_rows = _rows_from_preview(v3_preview)
     reviewed_diff_reviews_by_key = _review_records_by_key(reviewed_diff_reviews)
@@ -355,7 +416,7 @@ def build_dual_run_report(
         for field in CRITICAL_FIELDS:
             v2_value = _field_value(v2_row, field)
             v3_value = _field_value(v3_row, field)
-            if _normalize(v2_value) == _normalize(v3_value):
+            if _normalize_for_field(field, v2_value) == _normalize_for_field(field, v3_value):
                 continue
             diff_key = f"{key}:{field}"
             v3_field_evidence = (
@@ -432,7 +493,12 @@ def build_dual_run_report(
     ]
     if unreviewed_status_transition_keys:
         publish_blockers.append("unreviewed_v3_status_transitions")
-    source_coverage = _source_coverage(expected_sources, v3_source_statuses, review_tasks=review_tasks)
+    source_coverage = _source_coverage(
+        expected_sources,
+        v3_source_statuses,
+        review_tasks=review_tasks,
+        quarter=quarter,
+    )
     if source_coverage["unprocessed_source_ids"]:
         publish_blockers.append("v3_unprocessed_sources")
     if source_coverage["stale_source_status_ids"]:
@@ -509,6 +575,7 @@ def main() -> None:
     parser.add_argument("--expected-sources", type=Path)
     parser.add_argument("--source-statuses", type=Path)
     parser.add_argument("--review-tasks", type=Path)
+    parser.add_argument("--quarter")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -534,6 +601,7 @@ def main() -> None:
         expected_sources=_json_list_from_file(args.expected_sources),
         v3_source_statuses=_json_list_from_file(args.source_statuses),
         review_tasks=_json_list_from_file(args.review_tasks),
+        quarter=args.quarter,
     )
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))

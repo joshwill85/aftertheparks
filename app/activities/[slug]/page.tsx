@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ActivityDetailClient } from "@/components/atlas/ActivityDetailClient";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SeoFaq } from "@/components/seo/SeoFaq";
 import {
@@ -35,7 +36,7 @@ import {
 } from "@/lib/weather/serverGuidance";
 import { notFound, redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 function fallbackActivityTitle(title: string): string {
   return `${title} at Disney World Resorts`;
@@ -475,14 +476,16 @@ export default async function ActivityDetailPage({
           { name: activity.title },
         ]}
       />
-      <ActivityDetailClient
-        activity={activity}
-        upcoming={upcoming}
-        similar={similar}
-        nearbyActivities={nearby}
-        homeResort={homeBase}
-        faqItems={faqItems}
-      />
+      <PlanClientBoundary>
+        <ActivityDetailClient
+          activity={activity}
+          upcoming={upcoming}
+          similar={similar}
+          nearbyActivities={nearby}
+          homeResort={homeBase}
+          faqItems={faqItems}
+        />
+      </PlanClientBoundary>
       <section className="mt-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">Weather fit</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">

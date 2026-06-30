@@ -1,7 +1,6 @@
 import { filterByDaypart } from "@/lib/occurrences/expand";
 import { rankActivitiesByQuery } from "@/lib/search/runSearch";
 import { sortActivities, type ActivitySortKey } from "@/lib/activities/sort";
-import { DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG } from "@/lib/seo/fit";
 import {
   areaMatchesFilter,
   resortAreaMatchesOrigin,
@@ -9,28 +8,14 @@ import {
 } from "@/lib/explore/routeTaxonomy";
 import { selectedResortSlugs } from "@/lib/explore/resortFilters";
 import { itemMatchesPreset } from "@/lib/planning/presetDefinitions";
-import { inferWeatherFitFromText } from "@/lib/explore/weatherFit";
+import { weatherFitValueForActivity } from "@/lib/planning/activityFacts";
 import type { ActivityFilters, ActivityOccurrence } from "@/lib/types/occurrence";
 
 function weatherMatches(
   occurrence: ActivityOccurrence,
   weather: NonNullable<ActivityFilters["weather"]>
 ): boolean {
-  const fit = DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[occurrence.activitySlug]?.weatherFit;
-  if (fit === weather) return true;
-
-  const inferred = inferWeatherFitFromText({
-    title: occurrence.title,
-    category: occurrence.category,
-    summary: occurrence.summary,
-    location: occurrence.location.label,
-    weatherDependency: occurrence.enrichment?.weatherDependency,
-  });
-
-  if (weather === "indoor") {
-    return inferred === "indoor";
-  }
-  return inferred === "covered";
+  return weatherFitValueForActivity(occurrence) === weather;
 }
 
 /** Apply URL browse filters to an already day-scoped activity list. */

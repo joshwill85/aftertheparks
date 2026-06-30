@@ -19,8 +19,8 @@ DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "source_drift_report.json"
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
-DEFAULT_OLD_CANDIDATES_DIR = PROCESSED_DIR / "validated_activity_candidates_v3_previous"
-DEFAULT_NEW_CANDIDATES_DIR = PROCESSED_DIR / "validated_activity_candidates_v3"
+DEFAULT_OLD_CANDIDATES_DIR = PROCESSED_DIR / "validated_candidates_v3_previous"
+DEFAULT_NEW_CANDIDATES_DIR = PROCESSED_DIR / "validated_candidates_v3"
 
 
 def _index_by_slug(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -219,6 +219,7 @@ def build_source_drift_report(
     new_document_family: str | None = None,
     activity_count_threshold: int = 0,
     movie_count_threshold: int = 0,
+    baseline_mode: str | None = None,
 ) -> dict[str, Any]:
     old_by_slug = _index_by_slug(old_rows)
     new_by_slug = _index_by_slug(new_rows)
@@ -234,27 +235,29 @@ def build_source_drift_report(
     validation_failures = _validation_failures(new_rows)
     new_unknown_regions = _unknown_regions(new_regions or [])
     publish_blockers: list[str] = []
-    if old_document_family and new_document_family and old_document_family != new_document_family:
+    first_v3_baseline = baseline_mode == "first_v3_baseline"
+    if not first_v3_baseline and old_document_family and new_document_family and old_document_family != new_document_family:
         publish_blockers.append("recognized_family_changed")
-    if abs(new_activity_count - old_activity_count) > activity_count_threshold:
+    if not first_v3_baseline and abs(new_activity_count - old_activity_count) > activity_count_threshold:
         publish_blockers.append("activity_count_drift")
-    if abs(new_movie_count - old_movie_count) > movie_count_threshold:
+    if not first_v3_baseline and abs(new_movie_count - old_movie_count) > movie_count_threshold:
         publish_blockers.append("movie_count_drift")
     if validation_failures:
         publish_blockers.append("validation_failures")
     if new_unknown_regions:
         publish_blockers.append("new_unknown_regions")
     manual_review_required = bool(
-        old_source_hash != new_source_hash
-        or added
-        or removed
-        or changed_schedules
-        or changed_locations
-        or changed_fees
+        (not first_v3_baseline and old_source_hash != new_source_hash)
+        or (not first_v3_baseline and added)
+        or (not first_v3_baseline and removed)
+        or (not first_v3_baseline and changed_schedules)
+        or (not first_v3_baseline and changed_locations)
+        or (not first_v3_baseline and changed_fees)
         or publish_blockers
     )
     return {
         "generated_at": _now_iso(),
+        "baseline_mode": baseline_mode,
         "status": "review_required" if manual_review_required else "clean",
         "old_hash": old_source_hash,
         "new_hash": new_source_hash,
@@ -390,6 +393,7 @@ def build_quarter_source_drift_report(
 ) -> dict[str, Any]:
     old_by_group = _group_rows_by_source(old_rows)
     new_by_group = _group_rows_by_source(new_rows)
+    first_v3_baseline = not old_by_group and bool(new_by_group)
     source_reports: list[dict[str, Any]] = []
     aggregate_blockers: set[str] = set()
 
@@ -407,6 +411,7 @@ def build_quarter_source_drift_report(
             new_document_family=_document_family_for(new_group_rows),
             activity_count_threshold=activity_count_threshold,
             movie_count_threshold=movie_count_threshold,
+            baseline_mode="first_v3_baseline" if first_v3_baseline else None,
         )
         report["source_key"] = group
         report["source_document_id"] = _source_document_id_from_rows(new_group_rows) or _source_document_id_from_rows(
@@ -416,11 +421,11 @@ def build_quarter_source_drift_report(
             old_group_rows, "calendar_group_key"
         ) or group.removeprefix("calendar_group:")
         report.update(_source_metadata_from_rows(new_group_rows) or _source_metadata_from_rows(old_group_rows))
-        if old_hash != new_hash:
+        if not first_v3_baseline and old_hash != new_hash:
             aggregate_blockers.add("source_hash_changed")
         if old_group_rows and not new_group_rows:
             aggregate_blockers.add("missing_new_source")
-        if new_group_rows and not old_group_rows:
+        if not first_v3_baseline and new_group_rows and not old_group_rows:
             aggregate_blockers.add("missing_old_source")
         for blocker in report.get("publish_blockers") or []:
             aggregate_blockers.add(str(blocker))
@@ -432,6 +437,7 @@ def build_quarter_source_drift_report(
         "report_kind": "v3_quarter_source_drift",
         "generated_at": _now_iso(),
         "quarter": quarter,
+        "baseline_mode": "first_v3_baseline" if first_v3_baseline else None,
         "status": status,
         "summary": {
             "source_count": len(source_reports),

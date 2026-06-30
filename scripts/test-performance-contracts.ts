@@ -1,7 +1,38 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
-const trustValidator = readFileSync("scripts/validate-trust.mjs", "utf8");
+function read(path: string) {
+  return readFileSync(path, "utf8");
+}
+
+function assertNoForceDynamic(path: string) {
+  const source = read(path);
+  assert.doesNotMatch(
+    source,
+    /export\s+const\s+dynamic\s*=\s*["']force-dynamic["']/,
+    `${path} should not force per-request SSR for anonymous public traffic`
+  );
+}
+
+function assertRevalidate(path: string, seconds: number) {
+  const source = read(path);
+  assert.match(
+    source,
+    new RegExp(`export\\s+const\\s+revalidate\\s*=\\s*${seconds}\\b`),
+    `${path} should use ISR revalidate=${seconds}`
+  );
+}
+
+function assertForceDynamic(path: string) {
+  const source = read(path);
+  assert.match(
+    source,
+    /export\s+const\s+dynamic\s*=\s*["']force-dynamic["']/,
+    `${path} should stay dynamic/private`
+  );
+}
+
+const trustValidator = read("scripts/validate-trust.mjs");
 assert.match(
   trustValidator,
   /function\s+loadLocalEnvIfPresent\(\)/,
@@ -53,7 +84,7 @@ assert.match(
   "HTTP trust validator must reject placeholder availability text in search output"
 );
 
-const dbTrustValidator = readFileSync("scripts/validate-db-trust.mjs", "utf8");
+const dbTrustValidator = read("scripts/validate-db-trust.mjs");
 assert.match(
   dbTrustValidator,
   /function\s+loadLocalEnvIfPresent\(\)/,
@@ -125,7 +156,7 @@ assert.match(
   "DB trust validator imports must not execute the live Supabase audit"
 );
 
-const packageJson = readFileSync("package.json", "utf8");
+const packageJson = read("package.json");
 assert.match(
   packageJson,
   /"validate:db-trust":\s*"node scripts\/validate-db-trust\.mjs"/,
@@ -137,7 +168,7 @@ assert.match(
   "contract validation should exercise DB trust audit helper behavior"
 );
 
-const publicDataCache = readFileSync("lib/cache/publicData.ts", "utf8");
+const publicDataCache = read("lib/cache/publicData.ts");
 assert.match(
   publicDataCache,
   /import\s+\{\s*unstable_cache\s*\}\s+from\s+"next\/cache"/,
@@ -145,8 +176,13 @@ assert.match(
 );
 assert.match(
   publicDataCache,
-  /PUBLIC_DATA_REVALIDATE_SECONDS\s*=\s*60/,
-  "public catalogue data should revalidate quickly"
+  /PUBLIC_DATA_REVALIDATE_SECONDS\s*=\s*CACHE_SECONDS\.evergreen/,
+  "public catalogue data should use the shared evergreen cache policy"
+);
+assert.match(
+  publicDataCache,
+  /PUBLIC_CACHE_TAGS\.catalogue/,
+  "public catalogue data should be tagged for publish-time invalidation"
 );
 assert.match(
   publicDataCache,
@@ -154,7 +190,7 @@ assert.match(
   "public data cache helper should fall back for non-Next script contexts"
 );
 
-const goldActivities = readFileSync("lib/data/goldActivities.ts", "utf8");
+const goldActivities = read("lib/data/goldActivities.ts");
 assert.match(
   goldActivities,
   /import\s+\{\s*cache\s*\}\s+from\s+"react"/,
@@ -176,7 +212,7 @@ assert.match(
   "gold resort metadata should be cached per request"
 );
 
-const activities = readFileSync("lib/data/activities.ts", "utf8");
+const activities = read("lib/data/activities.ts");
 assert.match(
   activities,
   /import\s+\{\s*cache\s*\}\s+from\s+"react"/,
@@ -213,11 +249,145 @@ assert.match(
   "legacy temporal UI reads should require an explicit operator opt-in"
 );
 
-const warmMoviePosters = readFileSync("scripts/warm-movie-posters.ts", "utf8");
+const warmMoviePosters = read("scripts/warm-movie-posters.ts");
 assert.match(
   warmMoviePosters,
   /legacy_movie_poster_warm_disabled/,
   "legacy movie poster warming must be explicitly guarded"
+);
+
+const cacheHttp = read("lib/cache/http.ts");
+assert.match(
+  cacheHttp,
+  /Vercel-CDN-Cache-Control/,
+  "public API cache helper should emit Vercel CDN cache headers"
+);
+assert.match(
+  cacheHttp,
+  /CDN-Cache-Control/,
+  "public API cache helper should emit standard CDN cache headers"
+);
+assert.match(
+  cacheHttp,
+  /private,\s*no-store/,
+  "cache helper should expose an explicit private no-store policy"
+);
+
+const cacheTags = read("lib/cache/tags.ts");
+assert.match(
+  cacheTags,
+  /catalogue:\s*"public-activity-data"/,
+  "public cache tags should include the catalogue tag"
+);
+assert.match(
+  cacheTags,
+  /weather:\s*"public-weather-data"/,
+  "public cache tags should include the weather tag"
+);
+assert.match(
+  cacheTags,
+  /seo:\s*"public-seo-data"/,
+  "public cache tags should include the SEO tag"
+);
+
+const evergreenPublicRoutes = [
+  "app/activities/page.tsx",
+  "app/activities/[slug]/page.tsx",
+  "app/resorts/page.tsx",
+  "app/resorts/[slug]/page.tsx",
+  "app/disney-world-resort-activity-calendars/page.tsx",
+  "app/disney-world-resort-activity-calendars/[season]/page.tsx",
+  "app/guides/[slug]/page.tsx",
+  "app/sitemap.ts",
+  "app/robots.ts",
+  "app/llms.txt/route.ts",
+  "app/llms-full.txt/route.ts",
+];
+
+for (const route of evergreenPublicRoutes) {
+  assertNoForceDynamic(route);
+  assertRevalidate(route, 86400);
+}
+
+const timeRelativePublicRoutes = [
+  "app/page.tsx",
+  "app/today/page.tsx",
+  "app/tonight/page.tsx",
+  "app/calendar/page.tsx",
+];
+
+for (const route of timeRelativePublicRoutes) {
+  assertNoForceDynamic(route);
+  assertRevalidate(route, 900);
+}
+
+assertNoForceDynamic("app/weather/page.tsx");
+assertRevalidate("app/weather/page.tsx", 60);
+
+const privateRoutes = [
+  "app/plan/page.tsx",
+  "app/plan/[shareId]/page.tsx",
+  "app/p/[shareToken]/page.tsx",
+  "app/api/plan/route.ts",
+  "app/api/plan/share/route.ts",
+  "app/api/cron/weather-warm/route.ts",
+];
+
+for (const route of privateRoutes) {
+  assertForceDynamic(route);
+}
+
+const publicApiRoutes = [
+  ["app/api/activities/route.ts", "publicCacheJson", "evergreen"],
+  ["app/api/activities/[slug]/route.ts", "publicCacheJson", "evergreen"],
+  ["app/api/resorts/route.ts", "publicCacheJson", "evergreen"],
+  ["app/api/resorts/[slug]/route.ts", "publicCacheJson", "evergreen"],
+  ["app/api/today/route.ts", "publicCacheJson", "timeRelative"],
+  ["app/api/tonight/route.ts", "publicCacheJson", "timeRelative"],
+  ["app/api/search/suggest/route.ts", "publicCacheJson", "timeRelative"],
+  ["app/api/weather/guidance/route.ts", "publicCacheJson", "weather"],
+] as const;
+
+for (const [route, helper, policy] of publicApiRoutes) {
+  const source = read(route);
+  assert.match(source, new RegExp(`\\b${helper}\\b`), `${route} should use ${helper}`);
+  assert.match(source, new RegExp(`["']${policy}["']`), `${route} should use ${policy} cache policy`);
+}
+
+const revalidateRoutePath = "app/api/revalidate/route.ts";
+assert.ok(
+  existsSync(revalidateRoutePath),
+  "protected public cache revalidation route should exist"
+);
+const revalidateRoute = read(revalidateRoutePath);
+assert.match(
+  revalidateRoute,
+  /CACHE_REVALIDATION_SECRET/,
+  "revalidation route should require a dedicated secret"
+);
+assert.match(
+  revalidateRoute,
+  /isPublicCacheTagName/,
+  "revalidation route should reject tags outside the fixed public tag enum"
+);
+assert.match(
+  revalidateRoute,
+  /revalidateTag\(/,
+  "revalidation route should invalidate cache tags"
+);
+
+const layout = read("app/layout.tsx");
+assert.doesNotMatch(
+  layout,
+  /PlanProvider/,
+  "root layout should not mount the plan provider for every public page"
+);
+
+const daypartShell = read("components/atlas/DaypartShell.tsx");
+assert.doesNotMatch(
+  daypartShell,
+  /PlanPreview|Fireflies|FirstVisitWelcome/,
+  "global daypart shell should not mount planning preview or decorative first-visit UI"
 );
 assert.match(
   warmMoviePosters,

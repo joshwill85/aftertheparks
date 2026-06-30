@@ -3,7 +3,13 @@ import {
   shouldHideActivity,
 } from "@/lib/activityDisplay";
 import { dedupeOccurrences } from "@/lib/api/publicActivities";
+import {
+  activityToFilterableItem,
+  movieToFilterableItem,
+  type FilterableItem,
+} from "@/lib/explore/filterImpact";
 import type {
+  ActivityFilters,
   ActivityOccurrence,
   MovieNightOccurrence,
 } from "@/lib/types/occurrence";
@@ -16,6 +22,10 @@ function dedupeBySlot(activities: ActivityOccurrence[]): ActivityOccurrence[] {
     seen.add(key);
     return true;
   });
+}
+
+export function normalizeTonightFilters(filters: ActivityFilters): ActivityFilters {
+  return { ...filters, free: false };
 }
 
 export function getVisibleTonightActivities(
@@ -32,6 +42,25 @@ export function getVisibleTonightActivities(
   );
 }
 
+export function getVisibleTonightMovieNights(
+  movieNights: MovieNightOccurrence[]
+): MovieNightOccurrence[] {
+  return movieNights.filter((movie) => movie.isTonight);
+}
+
+export function getVisibleTonightFilterItems({
+  activities,
+  movieNights,
+}: {
+  activities: ActivityOccurrence[];
+  movieNights: MovieNightOccurrence[];
+}): FilterableItem[] {
+  return [
+    ...getVisibleTonightActivities(activities).map(activityToFilterableItem),
+    ...getVisibleTonightMovieNights(movieNights).map(movieToFilterableItem),
+  ];
+}
+
 export function getVisibleTonightResultCount({
   activities,
   movieNights,
@@ -41,6 +70,6 @@ export function getVisibleTonightResultCount({
 }): number {
   return (
     getVisibleTonightActivities(activities).length +
-    movieNights.filter((movie) => movie.isTonight).length
+    getVisibleTonightMovieNights(movieNights).length
   );
 }

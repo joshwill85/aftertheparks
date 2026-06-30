@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Hero } from "@/components/atlas/Hero";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { ExploreLayout } from "@/components/explore/ExploreLayout";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
 import {
   filterOfficialOfferingsWithoutActivityCollisions,
@@ -18,7 +19,7 @@ import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 const DEFAULT_ACTIVITY_METADATA = {
   title: "Walt Disney World Resort Activities",
@@ -114,6 +115,8 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     STRATEGIC_ACTIVITY_FILTER_METADATA[strategicKey ?? ""] ??
     DEFAULT_ACTIVITY_METADATA;
   const filters = parseBrowseParams(params);
+  const activityFilters = { ...filters, limit: 500 };
+  const baseFilters = { limit: 500 };
   const [
     activities,
     officialOfferingsPool,
@@ -121,10 +124,10 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     baseOfficialOfferings,
     resorts,
   ] = await Promise.all([
-    getFilteredActivities(filters),
-    getFilteredOfficialOfferings(filters),
-    getFilteredActivities({ limit: 500 }),
-    getFilteredOfficialOfferings({ limit: 500 }),
+    getFilteredActivities(activityFilters),
+    getFilteredOfficialOfferings(activityFilters),
+    getFilteredActivities(baseFilters),
+    getFilteredOfficialOfferings(baseFilters),
     getResorts(),
   ]);
   const officialOfferings = filterOfficialOfferingsWithoutActivityCollisions(
@@ -178,14 +181,16 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
           </p>
         </section>
       )}
-      <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
-        <ExploreLayout
-          activities={activities}
-          officialOfferings={officialOfferings}
-          resorts={resortOptions}
-          filterImpact={filterImpact}
-        />
-      </Suspense>
+      <PlanClientBoundary>
+        <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
+          <ExploreLayout
+            activities={activities}
+            officialOfferings={officialOfferings}
+            resorts={resortOptions}
+            filterImpact={filterImpact}
+          />
+        </Suspense>
+      </PlanClientBoundary>
     </>
   );
 }

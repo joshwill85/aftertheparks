@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { publicActivitiesResponse } from "@/lib/api/publicActivities";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { getTodayActivities, getTonightActivities } from "@/lib/data/activities";
 import {
   buildRestDayPlan,
@@ -17,12 +18,12 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return privateNoStoreJson({ error: "Invalid JSON" }, { status: 400 });
   }
 
   const resort = body.resort?.trim();
   if (!resort) {
-    return NextResponse.json({ error: "resort is required" }, { status: 400 });
+    return privateNoStoreJson({ error: "resort is required" }, { status: 400 });
   }
 
   const vibe = VALID_VIBES.includes(body.vibe as RestDayVibe)
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
 
   const activities = buildRestDayPlan(today, tonight, { vibe, who });
 
-  return NextResponse.json({
+  return privateNoStoreJson({
     ...publicActivitiesResponse(activities),
     resort,
     vibe,

@@ -11,8 +11,8 @@ from typing import Any
 
 try:
     from config import PROCESSED_DIR
-    from scripts.ingest.build_review_queue_v3 import review_approval_is_current
-    from scripts.ingest.review_schema_v3 import validate_review_decision
+    from build_review_queue_v3 import review_approval_is_current
+    from review_schema_v3 import validate_review_decision
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .build_review_queue_v3 import review_approval_is_current

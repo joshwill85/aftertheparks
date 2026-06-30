@@ -4,6 +4,7 @@ import { TodayClient } from "@/components/atlas/TodayClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { Hero } from "@/components/atlas/Hero";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { getTodayActivities, getTomorrowPreview, getResorts } from "@/lib/data/activities";
 import { parseBrowseParams } from "@/lib/explore/browseParams";
 import {
@@ -22,7 +23,7 @@ import {
   weatherQueryForActivity,
 } from "@/lib/weather/serverGuidance";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 900;
 
 const DEFAULT_TODAY_METADATA = {
   title: "Disney World Resort Activities Today",
@@ -125,21 +126,23 @@ export default async function TodayPage({
         subtitle="Activities still available today, sorted by start time."
         compactBrowse
       />
-      <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
-        <BrowseFilterShell
-          variant="today"
-          resorts={resortOptions}
-          resultCount={activities.length}
-          filterImpact={filterImpact}
-        >
-          <TodayClient
-            initialActivities={activities}
-            tomorrowPreview={tomorrowPreview}
-            initialPageWeather={initialPageWeather}
-            initialWeatherById={initialWeatherById}
-          />
-        </BrowseFilterShell>
-      </Suspense>
+      <PlanClientBoundary>
+        <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
+          <BrowseFilterShell
+            variant="today"
+            resorts={resortOptions}
+            resultCount={activities.length}
+            filterImpact={filterImpact}
+          >
+            <TodayClient
+              initialActivities={activities}
+              tomorrowPreview={tomorrowPreview}
+              initialPageWeather={initialPageWeather}
+              initialWeatherById={initialWeatherById}
+            />
+          </BrowseFilterShell>
+        </Suspense>
+      </PlanClientBoundary>
     </>
   );
 }

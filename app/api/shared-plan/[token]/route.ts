@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { createAppServerClient } from "@/lib/supabase/server-app";
 import { createServiceClient } from "@/lib/supabase/server";
 import { requireApiUser, getApiUser } from "@/lib/plan/auth";
@@ -23,7 +23,7 @@ export async function GET(
   const { token } = await params;
   const serviceClient = createServiceClient();
   if (!serviceClient) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   const viewer = await getApiUser();
@@ -37,14 +37,10 @@ export async function GET(
     console.info("shared-plan-miss", {
       path: redactTokenFromPath(`/p/${token}`),
     });
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return privateNoStoreJson({ error: "Not found" }, { status: 404 });
   }
 
-  return NextResponse.json(plan, {
-    headers: {
-      "Cache-Control": "private, no-store, max-age=0",
-    },
-  });
+  return privateNoStoreJson(plan);
 }
 
 export async function POST(
@@ -53,7 +49,7 @@ export async function POST(
 ) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const rateLimited = await guardRateLimit({
     request,
@@ -71,7 +67,7 @@ export async function POST(
   const userClient = await createAppServerClient();
   const serviceClient = createServiceClient();
   if (!userClient || !serviceClient) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   try {
@@ -82,7 +78,7 @@ export async function POST(
       token,
       body.operationId ?? crypto.randomUUID()
     );
-    return NextResponse.json(result);
+    return privateNoStoreJson(result);
   } catch (error) {
     return planErrorResponse(error, "Failed to copy plan");
   }

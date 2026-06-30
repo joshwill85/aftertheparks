@@ -45,6 +45,65 @@ CONTROLLED_LOCATIONS = {
     "ol man island pool deck": "ol_man_island_pool_deck",
     "throughout disneys all-star resorts": "throughout_all_star_resorts",
     "throughout disney's all-star resorts": "throughout_all_star_resorts",
+    "across from buttons and bells game arcade": "across_from_buttons_and_bells_game_arcade",
+    "arusha savanna overlook": "arusha_savanna_overlook",
+    "bay lake tower sports court": "bay_lake_tower_sports_court",
+    "bayside marina": "bayside_marina",
+    "beach pool deck": "beach_pool_deck",
+    "calypso pool deck": "calypso_pool_deck",
+    "campfire pit between buildings 5 and 6": "campfire_pit_between_buildings_5_and_6",
+    "caribbean cay island movie lawn": "caribbean_cay_island_movie_lawn",
+    "congress park-overlooking disney springs": "congress_park_overlooking_disney_springs",
+    "contemporary feature pool": "contemporary_feature_pool",
+    "copper creek springs pool": "copper_creek_springs_pool",
+    "copper creek springs pool deck": "copper_creek_springs_pool_deck",
+    "courtyard lawn": "courtyard_lawn",
+    "dahlia lounge": "dahlia_lounge",
+    "disney vacation club courtyard at franklin square": "disney_vacation_club_courtyard_at_franklin_square",
+    "doubloon lagoon pool deck": "doubloon_lagoon_pool_deck",
+    "fantasia pool deck": "fantasia_pool_deck",
+    "fire pit near riviera feature pool waterfront": "fire_pit_near_riviera_feature_pool_waterfront",
+    "fuentes del morro pool deck": "fuentes_del_morro_pool_deck",
+    "great ceremonial house lawn": "great_ceremonial_house_lawn",
+    "gran destino lawn": "gran_destino_lawn",
+    "hakuna matata playground": "hakuna_matata_playground",
+    "high rock spring pool deck": "high_rock_spring_pool_deck",
+    "hospitality house": "hospitality_house",
+    "inside cinema hall": "inside_cinema_hall",
+    "inside melody hall": "inside_melody_hall",
+    "lava pool deck": "lava_pool_deck",
+    "lobby entrance": "lobby_entrance",
+    "marthas vineyard lounge": "marthas_vineyard_lounge",
+    "martinique beach": "martinique_beach",
+    "meet near resort lobby fireplace": "meet_near_resort_lobby_fireplace",
+    "movie lawn": "movie_lawn",
+    "movie lawn near the big blue pool": "movie_lawn_near_the_big_blue_pool",
+    "near the sandcastle pool area": "near_the_sandcastle_pool_area",
+    "near the sandcastle pool area tennis courts": "near_the_sandcastle_pool_area_tennis_courts",
+    "near wilderness lodge mercantile": "near_wilderness_lodge_mercantile",
+    "noteable games arcade": "noteable_games_arcade",
+    "old port royale lobby": "old_port_royale_lobby",
+    "outside of community hall at bay lake tower": "outside_of_community_hall_at_bay_lake_tower",
+    "palace library": "palace_library",
+    "papas den near the lobby": "papas_den_near_the_lobby",
+    "pembe savanna overlook": "pembe_savanna_overlook",
+    "reel fun arcade": "reel_fun_arcade",
+    "reunion station lawn": "reunion_station_lawn",
+    "riviera feature pool deck": "riviera_feature_pool_deck",
+    "samawati springs pool deck": "samawati_springs_pool_deck",
+    "sandcastle pool": "sandcastle_pool",
+    "sandcastle pool deck": "sandcastle_pool_deck",
+    "shipwreck beach": "shipwreck_beach",
+    "stormalong bay": "stormalong_bay",
+    "stormalong bay pool": "stormalong_bay_pool",
+    "tennis courts near hospitality house": "tennis_courts_near_hospitality_house",
+    "the big blue pool deck": "the_big_blue_pool_deck",
+    "the boat nook marina": "the_boat_nook_marina",
+    "throughout disneys riviera resort": "throughout_disneys_riviera_resort",
+    "throughout disneys saratoga springs resort": "throughout_disneys_saratoga_springs_resort",
+    "throughout the main building": "throughout_the_main_building",
+    "toledo - tapas steak and seafood": "toledo_tapas_steak_and_seafood",
+    "uzima springs pool deck": "uzima_springs_pool_deck",
 }
 
 _TIME_PATTERN = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)\b", re.IGNORECASE)
@@ -60,7 +119,15 @@ def _clean_text(value: object) -> str:
 
 
 def _repair_ocr_time_text(value: str) -> str:
-    repaired = re.sub(r"(?<=\d:)O(?=\d)", "0", value, flags=re.IGNORECASE)
+    value = re.sub(r"(?i)(?:=|\b)ro(?=\d)", "from ", value)
+    value = re.sub(r"\b(\d{1,2})\.(\d{2})(\s*[ap]\.?m\.?)", r"\1:\2\3", value, flags=re.IGNORECASE)
+    repaired = re.sub(
+        r"\b(\d{1,2}):([0-9O]{2})(\s*[ap]\.?m\.?)",
+        lambda match: f"{match.group(1)}:{match.group(2).replace('O', '0').replace('o', '0')}{match.group(3)}",
+        value,
+        flags=re.IGNORECASE,
+    )
+    repaired = re.sub(r"(?<=\d:)O(?=\d)", "0", repaired, flags=re.IGNORECASE)
     repaired = re.sub(r"(?<=\d:\d)O(?=\s*[ap]\.?m\.?)", "0", repaired, flags=re.IGNORECASE)
     return repaired
 
@@ -151,7 +218,18 @@ def normalize_location_text(value: object) -> dict[str, Any]:
 
 
 def _normalize_title(value: object) -> str:
-    return _clean_text(value).lower()
+    normalized = _clean_text(value).lower()
+    compact = re.sub(r"[^a-z0-9]+", "", normalized)
+    if compact in {"movieunderthestars", "underthestars", "thestars"}:
+        return "movie under the stars"
+    if compact == "nighttimetrivia":
+        return "nighttime trivia"
+    normalized = re.sub(r"!\s*\(\$\)", "! ($)", normalized)
+    normalized = re.sub(r"\s*[\[\(]\s*(?:g|pg|pg-13)\s*[\]\)]?\s*$", "", normalized)
+    normalized = re.sub(r"(?<=\))\s*(?:g|pg|pg-13)\s*$", "", normalized)
+    normalized = re.sub(r"(?<=\d)\s*(?:g|pg|pg-13)\s*$", "", normalized)
+    normalized = re.sub(r"\s+&\s*$", "", normalized)
+    return normalized
 
 
 def _normalize_fee(value: object) -> bool:

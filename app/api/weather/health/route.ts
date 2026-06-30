@@ -1,10 +1,8 @@
-import { NextResponse } from "next/server";
+import { publicCacheJson } from "@/lib/cache/http";
 import { getCachedNwsAlerts, getCachedWeatherSnapshot } from "@/lib/weather/cache";
 import { isVisualCrossingAvailable, isWeatherApiAvailable } from "@/lib/weather/forecastHorizon";
 import { WEATHER_LOCATIONS } from "@/lib/weather/locations";
 import { trackWeatherEvent } from "@/lib/weather/analytics";
-
-export const dynamic = "force-dynamic";
 
 export async function GET() {
   const weatherApiEnabled = isWeatherApiAvailable();
@@ -69,7 +67,7 @@ export async function GET() {
     });
   }
 
-  return NextResponse.json({
+  return publicCacheJson({
     ok: !degraded,
     checkedAt,
     providers: {
@@ -84,5 +82,5 @@ export async function GET() {
       warmCache: process.env.WEATHER_WARM_CACHE_ENABLED !== "false",
     },
     locations: rows,
-  });
+  }, "weather");
 }

@@ -20,6 +20,7 @@ export const ICON_REGISTRY: Record<IconKey, IconRegistryEntry> = {
   signature: { label: "Signature", tone: "lagoon" },
   resort_activity: { label: "Resort fun", tone: "palm" },
   arcade: { label: "Games", tone: "starlight" },
+  character: { label: "Characters", tone: "coral" },
   rental: { label: "Rentals", tone: "lagoon" },
   sports_games: { label: "Sports and games", tone: "sunshine" },
   nighttime_entertainment: { label: "Evening", tone: "starlight" },

@@ -45,8 +45,11 @@ def _page_dimensions(manifest: dict[str, Any]) -> tuple[int, int]:
 
 
 def _source_name(manifest: dict[str, Any]) -> str:
-    path = str(manifest.get("source_path") or manifest.get("page_image_path") or "")
-    return Path(path).name.lower()
+    for key in ("source_path", "canonical_url", "fetched_url", "source_url", "page_image_path"):
+        value = str(manifest.get(key) or "").strip()
+        if value:
+            return Path(value.split("?", 1)[0]).name.lower()
+    return ""
 
 
 def _text_items(value: Any) -> list[str]:

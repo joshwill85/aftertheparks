@@ -1,11 +1,9 @@
-import { NextResponse } from "next/server";
+import { publicCacheJson } from "@/lib/cache/http";
 import { getResortBySlug, getResortActivities } from "@/lib/data/activities";
 import {
   filterOfficialOfferingsWithoutActivityCollisions,
   getOfficialOfferingsForResort,
 } from "@/lib/data/officialOfferings";
-
-export const dynamic = "force-dynamic";
 
 export async function GET(
   _request: Request,
@@ -23,14 +21,14 @@ export async function GET(
   );
 
   if (!resort) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return publicCacheJson({ error: "Not found" }, "evergreen", { status: 404 });
   }
 
-  return NextResponse.json({
+  return publicCacheJson({
     resort,
     activities,
     officialOfferings,
     count: activities.length,
     offeringCount: officialOfferings.length,
-  });
+  }, "evergreen");
 }

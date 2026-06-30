@@ -4,3 +4,5 @@ docs/
 supabase/.temp/
 *.pdf
 *.docx
+data/processed/page_images/
+data/processed/vision_debug/

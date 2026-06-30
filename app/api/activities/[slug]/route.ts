@@ -4,9 +4,8 @@ import {
   sanitizePublicActivities,
 } from "@/lib/api/publicActivities";
 import { canonicalActivitySlug } from "@/lib/activities/legacySlugs";
+import { publicCacheJson } from "@/lib/cache/http";
 import { getActivityBySlug } from "@/lib/data/activities";
-
-export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request,
@@ -25,11 +24,11 @@ export async function GET(
   const result = await getActivityBySlug(canonicalSlug, { resort });
 
   if (!result) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return publicCacheJson({ error: "Not found" }, "evergreen", { status: 404 });
   }
 
-  return NextResponse.json({
+  return publicCacheJson({
     activity: ensurePublicActivity(result.activity),
     upcoming: sanitizePublicActivities(result.upcoming),
-  });
+  }, "evergreen");
 }

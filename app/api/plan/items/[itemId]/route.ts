@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { requireApiUser } from "@/lib/plan/auth";
 import { removePlanItem, updatePlanItemNote } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
@@ -13,7 +13,7 @@ export async function DELETE(
 ) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const limited = await guardRateLimit({
     request,
@@ -29,12 +29,12 @@ export async function DELETE(
 
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   try {
     const plan = await removePlanItem(client, user.id, itemId, operationId);
-    return NextResponse.json({ plan });
+    return privateNoStoreJson({ plan });
   } catch (error) {
     return planErrorResponse(error, "Failed to remove item");
   }
@@ -46,7 +46,7 @@ export async function PATCH(
 ) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const limited = await guardRateLimit({
     request,
@@ -59,7 +59,7 @@ export async function PATCH(
   const body = await request.json().catch(() => ({}));
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   try {
@@ -70,7 +70,7 @@ export async function PATCH(
       String(body.notes ?? ""),
       body.operationId ?? crypto.randomUUID()
     );
-    return NextResponse.json({ plan });
+    return privateNoStoreJson({ plan });
   } catch (error) {
     return planErrorResponse(error, "Failed to update note");
   }

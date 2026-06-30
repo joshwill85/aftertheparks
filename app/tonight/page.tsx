@@ -5,6 +5,7 @@ import { TonightClient } from "@/components/atlas/TonightClient";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import {
   getTonightActivities,
   getMovieNights,
@@ -15,18 +16,20 @@ import {
   hasActiveBrowseFilters,
   parseBrowseParams,
 } from "@/lib/explore/browseParams";
-import {
-  activityToFilterableItem,
-  buildFilterImpact,
-  movieToFilterableItem,
-} from "@/lib/explore/filterImpact";
+import { buildFilterImpact } from "@/lib/explore/filterImpact";
 import {
   activityEventJsonLd,
   activityListJsonLd,
 } from "@/lib/seo/activityPage";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
-import { getVisibleTonightResultCount } from "@/lib/tonight/visibleResults";
+import {
+  getVisibleTonightActivities,
+  getVisibleTonightFilterItems,
+  getVisibleTonightMovieNights,
+  getVisibleTonightResultCount,
+  normalizeTonightFilters,
+} from "@/lib/tonight/visibleResults";
 import {
   loadWeatherByOccurrence,
   loadWeatherGuidanceForLocation,
@@ -36,7 +39,7 @@ import {
 import { WEATHER_TIMEZONE } from "@/lib/weather/time";
 import { fromZonedTime } from "date-fns-tz";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 900;
 
 const DEFAULT_TONIGHT_METADATA = {
   title: "Disney World Resort Activities Tonight",
@@ -113,7 +116,7 @@ export default async function TonightPage({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
-  const filters = parseBrowseParams(params);
+  const filters = normalizeTonightFilters(parseBrowseParams(params));
   const weatherNow = new Date();
   const [activities, baseActivities, movieNights, resorts] = await Promise.all([
     getTonightActivities(filters),
@@ -122,7 +125,10 @@ export default async function TonightPage({
     getResorts(),
   ]);
 
-  const filteredMovies = filterMovieNights(movieNights, filters);
+  const filteredMovies = getVisibleTonightMovieNights(
+    filterMovieNights(movieNights, filters)
+  );
+  const visibleActivities = getVisibleTonightActivities(activities);
   const weatherWindow = tonightWeatherWindow(weatherNow);
   const initialPageWeather = await loadWeatherGuidanceForLocation({
     locationKey: "all_wdw",
@@ -134,29 +140,29 @@ export default async function TonightPage({
   });
   const initialWeatherById = await loadWeatherByOccurrence({
     occurrences: [
-      ...activities.map((activity) => weatherQueryForActivity(activity, weatherNow)),
-      ...filteredMovies.filter((movie) => movie.isTonight).map(weatherQueryForMovie),
+      ...visibleActivities.map((activity) => weatherQueryForActivity(activity, weatherNow)),
+      ...filteredMovies.map(weatherQueryForMovie),
     ].filter((query): query is NonNullable<typeof query> => Boolean(query)),
     now: weatherNow,
   });
   const filteredMode = hasActiveBrowseFilters(filters);
   const resultCount = getVisibleTonightResultCount({
-    activities,
+    activities: visibleActivities,
     movieNights: filteredMovies,
   });
   const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
   const filterImpact = buildFilterImpact(
-    [
-      ...baseActivities.map(activityToFilterableItem),
-      ...movieNights.map(movieToFilterableItem),
-    ],
+    getVisibleTonightFilterItems({
+      activities: baseActivities,
+      movieNights,
+    }),
     filters,
     resortOptions
   );
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const jsonLd = stringifyJsonLd([
-    activityListJsonLd(baseUrl, "Walt Disney World resort activities tonight", activities),
-    ...activityEventJsonLd(baseUrl, activities),
+    activityListJsonLd(baseUrl, "Walt Disney World resort activities tonight", visibleActivities),
+    ...activityEventJsonLd(baseUrl, visibleActivities),
   ]);
 
   return (
@@ -173,22 +179,24 @@ export default async function TonightPage({
       <div className="mb-6 flex justify-center">
         <BrandAsset asset="dark-lockup" className="brand-asset--night-feature" />
       </div>
-      <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
-        <BrowseFilterShell
-          variant="tonight"
-          resorts={resortOptions}
-          resultCount={resultCount}
-          filterImpact={filterImpact}
-        >
-          <TonightClient
-            activities={activities}
-            movieNights={filteredMovies}
-            filteredMode={filteredMode}
-            initialPageWeather={initialPageWeather}
-            initialWeatherById={initialWeatherById}
-          />
-        </BrowseFilterShell>
-      </Suspense>
+      <PlanClientBoundary>
+        <Suspense fallback={<ActivityGridSkeleton columns={2} />}>
+          <BrowseFilterShell
+            variant="tonight"
+            resorts={resortOptions}
+            resultCount={resultCount}
+            filterImpact={filterImpact}
+          >
+            <TonightClient
+              activities={visibleActivities}
+              movieNights={filteredMovies}
+              filteredMode={filteredMode}
+              initialPageWeather={initialPageWeather}
+              initialWeatherById={initialWeatherById}
+            />
+          </BrowseFilterShell>
+        </Suspense>
+      </PlanClientBoundary>
     </div>
   );
 }

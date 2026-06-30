@@ -1,0 +1,958 @@
+{
+  "field_diffs": [
+    {
+      "calendar_group_key": "all-star-movies",
+      "canonical_slug": "reel-fun-arcade",
+      "diff_key": "all-star-movies:reel-fun-arcade:location",
+      "field": "location",
+      "reviewed": false,
+      "row_key": "all-star-movies:reel-fun-arcade",
+      "v2_value": "inside",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999686479568481,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Inside Cinema Hall"
+          },
+          {
+            "confidence": 0.99943,
+            "engine": "rapidocr",
+            "text": "Inside Cinema Hall"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "inside_cinema_hall",
+        "raw_value": "Inside Cinema Hall",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5668,
+            3244,
+            7209,
+            3398
+          ],
+          "content_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+          "crop_sha256": "0971ce20d14fec3250b9914b7b5035d25b3866f7006377779b28770aec722e33",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "v3_value": "Inside Cinema Hall"
+    },
+    {
+      "calendar_group_key": "animal-kingdom-jambo",
+      "canonical_slug": "movie-under-the-stars",
+      "diff_key": "animal-kingdom-jambo:movie-under-the-stars:schedule",
+      "field": "schedule",
+      "reviewed": false,
+      "row_key": "animal-kingdom-jambo:movie-under-the-stars",
+      "v2_value": "Hakuna Matata Playground | 8:30PM",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9820087552070618,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:3OPM"
+          },
+          {
+            "confidence": 0.97072,
+            "engine": "rapidocr",
+            "text": "8:30PM"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Friday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Friday at 8:30PM",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Friday at 8:3OPM",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5676,
+            14183,
+            10170,
+            14394
+          ],
+          "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
+          "crop_sha256": "956695c921a31d46d39400f04bddb5067ba2d1095297a8b969c9adc431395a56",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "v3_value": "Friday at 8:3OPM"
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "canonical_slug": "painting-in-the-vineyard",
+      "diff_key": "beach-yacht-club:painting-in-the-vineyard:location",
+      "field": "location",
+      "reviewed": false,
+      "row_key": "beach-yacht-club:painting-in-the-vineyard",
+      "v2_value": "Lounde",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9992399215698242,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Martha's Vineyard Lounge"
+          },
+          {
+            "confidence": 0.99129,
+            "engine": "rapidocr",
+            "text": "Martha's Vineyard Lounge"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "marthas_vineyard_lounge",
+        "raw_value": "Martha's Vineyard Lounge",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5717,
+            4949,
+            7877,
+            5128
+          ],
+          "content_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+          "crop_sha256": "8853d5b5c62b99f4feb39ffab6799a79cec7f2bac362442d7818b725fe986092",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "v3_value": "Martha's Vineyard Lounge"
+    },
+    {
+      "calendar_group_key": "boardwalk",
+      "canonical_slug": "movie-under-the-stars",
+      "diff_key": "boardwalk:movie-under-the-stars:schedule",
+      "field": "schedule",
+      "reviewed": false,
+      "row_key": "boardwalk:movie-under-the-stars",
+      "v2_value": "Village Green Lawn | 8:30PM",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9893639087677002,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:3OPM"
+          },
+          {
+            "confidence": 0.95466,
+            "engine": "rapidocr",
+            "text": "8:3OPM"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at 8:30PM",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at 8:3OPM",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5688,
+            12923,
+            9214,
+            13138
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "v3_value": "Thursday at 8:3OPM"
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "canonical_slug": "caribbean-campfire",
+      "diff_key": "caribbean-beach:caribbean-campfire:schedule",
+      "field": "schedule",
+      "reviewed": false,
+      "row_key": "caribbean-beach:caribbean-campfire",
+      "v2_value": "Daily from 6:30pm-7:30pm",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9981968402862549,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 6:30pm-7:30pm"
+          },
+          {
+            "confidence": 0.90535,
+            "engine": "rapidocr",
+            "text": "=ro6.30pm-7.30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "end_time": "19:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at From 6:30pm-7:30pm",
+          "schedule_type": "recurring",
+          "start_time": "18:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at From 6:30pm-7:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            202,
+            7514,
+            626,
+            7571
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "v3_value": "Thursday at From 6:30pm-7:30pm"
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "canonical_slug": "caribbean-campfire",
+      "diff_key": "caribbean-beach:caribbean-campfire:price",
+      "field": "price",
+      "reviewed": false,
+      "row_key": "caribbean-beach:caribbean-campfire",
+      "v2_value": "unknown",
+      "v3_field_evidence": null,
+      "v3_value": "free"
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "canonical_slug": "movie-under-the-stars",
+      "diff_key": "coronado-springs:movie-under-the-stars:schedule",
+      "field": "schedule",
+      "reviewed": false,
+      "row_key": "coronado-springs:movie-under-the-stars",
+      "v2_value": "Gran Destino Lawn | 8:30PM",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9810831546783447,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:3OPM"
+          },
+          {
+            "confidence": 0.97153,
+            "engine": "rapidocr",
+            "text": "8:3OPM"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Friday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Friday at 8:30PM",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Friday at 8:3OPM",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5672,
+            14029,
+            9076,
+            14228
+          ],
+          "content_sha256": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+          "crop_sha256": "a5b3dba79b4041d77585d82d8da1f05634c068c90c4159f7475ee4d0a71caf27",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.png",
+          "page_image_sha256": "cb67d18d7fd48318f946c58ba24c760cc4ada856c0b11802115662cec7673969",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "v3_value": "Friday at 8:3OPM"
+    },
+    {
+      "calendar_group_key": "riviera",
+      "canonical_slug": "movie-under-the-stars",
+      "diff_key": "riviera:movie-under-the-stars:schedule",
+      "field": "schedule",
+      "reviewed": false,
+      "row_key": "riviera:movie-under-the-stars",
+      "v2_value": "Movie Lawn | 8:30PM",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9595439434051514,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:3OPM"
+          },
+          {
+            "confidence": 0.93384,
+            "engine": "rapidocr",
+            "text": "8:3OPM"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at 8:30PM",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at 8:3OPM",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5704,
+            13822,
+            8133,
+            14050
+          ],
+          "content_sha256": "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4",
+          "crop_sha256": "17b246b17584bbfa1b38d22678332214b384743d1478ad138c6628207b0ddf26",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+          "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "v3_value": "Thursday at 8:3OPM"
+    },
+    {
+      "calendar_group_key": "saratoga-springs",
+      "canonical_slug": "glow-with-the-flow",
+      "diff_key": "saratoga-springs:glow-with-the-flow:schedule",
+      "field": "schedule",
+      "reviewed": false,
+      "row_key": "saratoga-springs:glow-with-the-flow",
+      "v2_value": "unday and Thursday from 7:30pm-8:30pm",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9850180745124817,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Sunday and Thursday from 7:30pm-8:30pm"
+          },
+          {
+            "confidence": 0.99406,
+            "engine": "rapidocr",
+            "text": "Sunday and Thursday from 7:30pm-8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Sunday",
+            "Thursday"
+          ],
+          "end_time": "20:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Sunday and Thursday from 7:30pm-8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "19:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Sunday and Thursday from 7:30pm-8:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5693,
+            8910,
+            9397,
+            9104
+          ],
+          "content_sha256": "a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5",
+          "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "v3_value": "Sunday and Thursday from 7:30pm-8:30pm"
+    },
+    {
+      "calendar_group_key": "saratoga-springs",
+      "canonical_slug": "glow-with-the-flow",
+      "diff_key": "saratoga-springs:glow-with-the-flow:location",
+      "field": "location",
+      "reviewed": false,
+      "row_key": "saratoga-springs:glow-with-the-flow",
+      "v2_value": "High Rock S Pool Deck",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999903440475464,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "High Rock Spring Pool Deck"
+          },
+          {
+            "confidence": 0.99982,
+            "engine": "rapidocr",
+            "text": "High Rock Spring Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "high_rock_spring_pool_deck",
+        "raw_value": "High Rock Spring Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5700,
+            8679,
+            8072,
+            8874
+          ],
+          "content_sha256": "a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5",
+          "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "v3_value": "High Rock Spring Pool Deck"
+    },
+    {
+      "calendar_group_key": "wilderness-lodge",
+      "canonical_slug": "storytime-yoga",
+      "diff_key": "wilderness-lodge:storytime-yoga:location",
+      "field": "location",
+      "reviewed": false,
+      "row_key": "wilderness-lodge:storytime-yoga",
+      "v2_value": "from Buttons and Bells Game Arcade",
+      "v3_field_evidence": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9954555034637451,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Across from Buttons and Bells Game Arcade"
+          },
+          {
+            "confidence": 0.99952,
+            "engine": "rapidocr",
+            "text": "Across from Buttons and Bells Game Arcade"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "across_from_buttons_and_bells_game_arcade",
+        "raw_value": "Across from Buttons and Bells Game Arcade",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            655,
+            6950,
+            4420,
+            7112
+          ],
+          "content_sha256": "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62",
+          "crop_sha256": "3d0112fa83264976c29ad0af1afafae65f4e4ec564b37eca5ce629922dd206c3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "v3_value": "Across from Buttons and Bells Game Arcade"
+    }
+  ],
+  "generated_at": "2026-06-30T02:14:21.329153+00:00",
+  "manual_review_backlog": 30,
+  "missing_in_v3": [
+    "arts-crafts",
+    "complimentary-craft",
+    "find-a-friend",
+    "movie-under-the-stars",
+    "sorcerers-campfire",
+    "arts-crafts",
+    "calypso-campfire",
+    "design-your-own-mosaic",
+    "movie-under-the-stars",
+    "noteable-games-arcade",
+    "poolside-activities",
+    "arts-crafts",
+    "find-a-friend",
+    "movie-under-the-stars",
+    "touchdown-campfire",
+    "find-a-friend",
+    "jambo-house-lobby-art-tour",
+    "jammin-at-jambo-house",
+    "poolside-activities",
+    "pumbaas-fun-and-games-arcade",
+    "simbas-activity-center",
+    "trivia-night",
+    "african-mosaic-art",
+    "community-hall",
+    "find-a-friend",
+    "fitness-center",
+    "movie-under-the-stars",
+    "poolside-activities",
+    "safari-so-good-arcade",
+    "sunset-splash",
+    "campfire-at-pride-rock",
+    "craft-activity",
+    "disney-character-greetings",
+    "movie-under-the-stars",
+    "pool-party",
+    "arts-crafts",
+    "lafferty-place-arcade",
+    "movie-under-the-stars",
+    "ship-shape-fitness-center",
+    "community-hall",
+    "crescent-lake-wellness-challenge",
+    "mickey-tie-dye",
+    "nighttime-trivia",
+    "pickleball-clinic",
+    "side-show-games-arcade",
+    "craft-activity",
+    "disney-character-greetings",
+    "movie-under-the-stars",
+    "pool-party",
+    "campfire",
+    "mickey-tie-dye",
+    "movie-under-the-stars",
+    "olympiad-fitness-center",
+    "silent-disco",
+    "the-magic-of-mosaics",
+    "coronado-nights-pool-party",
+    "disney-trivia",
+    "explorers-campfire",
+    "find-a-friend",
+    "fitness-centers",
+    "nature-walk",
+    "poolside-activities",
+    "afternoon-crafts",
+    "bike-barn",
+    "campfire-bingo",
+    "campfire-games",
+    "carriage-rides",
+    "chip-n-dales-campfire-sing-a-long",
+    "country-campfire",
+    "crocketts-craft-corner-wine-woodshop",
+    "find-a-friend-scavenger-hunt",
+    "guided-fishing-excursions",
+    "morning-crafts",
+    "movie-under-the-stars",
+    "poolside-activities",
+    "ready-aim-archery",
+    "storytime-yoga",
+    "visit-chip-and-dale",
+    "visit-tri-circle-d-ranch",
+    "wilderness-back-trail-adventure",
+    "arcadia-games",
+    "arts-crafts",
+    "boat-rentals",
+    "cabana-rentals",
+    "campfire",
+    "health-club",
+    "movie-under-the-stars",
+    "nighttime-pool-party",
+    "nighttime-trivia",
+    "bike-rentals",
+    "conch-flats-community-hall",
+    "find-a-friend",
+    "mickey-tie-dye",
+    "movie-under-the-stars",
+    "sunset-celebration",
+    "make-your-own-kukui-nut-leis",
+    "mickey-tie-dye",
+    "movie-under-the-stars",
+    "the-big-kahuna-quiz",
+    "video-game-dance-party",
+    "craft-activity",
+    "disney-character-greetings",
+    "groovy-campfire",
+    "movie-under-the-stars",
+    "nighttime-activities",
+    "pool-party",
+    "find-a-friend",
+    "mosaic-class",
+    "movie-under-the-stars",
+    "painting-on-de-bayou",
+    "poolside-activities",
+    "south-quarter-games-arcade",
+    "campfire-on-de-bayou",
+    "craft-activity",
+    "disney-character-greetings",
+    "movie-under-the-stars",
+    "nighttime-activities",
+    "pool-party",
+    "poolside-activities",
+    "art-de-la-mosaique",
+    "cote-dazur-campfire",
+    "nature-walk",
+    "nighttime-trivia",
+    "starlight-soiree",
+    "the-eventi-room",
+    "bicycle-rentals",
+    "community-hall",
+    "disney-fit-yoga",
+    "find-a-friend",
+    "mickey-tie-dye",
+    "movie-under-the-stars",
+    "winners-circle-mosaics",
+    "art-architecture-tour",
+    "buttons-and-bells-game-arcade",
+    "campfire",
+    "family-activities-and-crafts",
+    "mickey-tie-dye",
+    "movie-under-the-stars",
+    "nature-walk",
+    "tasteful-artistry-at-disneys-wilderness-lodge"
+  ],
+  "new_in_v3": [
+    "mickey-tie-dye",
+    "poolside-activities",
+    "shine-like-a-star-glow-party",
+    "note-able-games-arcade",
+    "poolside-activities",
+    "shine-like-a-star-glow-party",
+    "campfire",
+    "silent-disco",
+    "yo-ho-let-s-glow",
+    "disney-fit-yoga",
+    "cabana-rentals",
+    "motorized-boat-rentals",
+    "painting-experience",
+    "spanish-mosaic-art",
+    "conch-flats-mosaics",
+    "glow-with-the-flow",
+    "c-te-d-azur-campfire",
+    "winner-s-circle-mosaics",
+    "wild-wilderness-bingo"
+  ],
+  "new_v3_records": [
+    {
+      "calendar_group_key": "all-star-movies",
+      "canonical_slug": "mickey-tie-dye",
+      "content_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+      "review_key": "all-star-movies:mickey-tie-dye:new_record",
+      "reviewed": false,
+      "row_key": "all-star-movies:mickey-tie-dye",
+      "title": "mickey tie-dye ($)"
+    },
+    {
+      "calendar_group_key": "all-star-movies",
+      "canonical_slug": "poolside-activities",
+      "content_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+      "review_key": "all-star-movies:poolside-activities:new_record",
+      "reviewed": false,
+      "row_key": "all-star-movies:poolside-activities",
+      "title": "poolside activities"
+    },
+    {
+      "calendar_group_key": "all-star-movies",
+      "canonical_slug": "shine-like-a-star-glow-party",
+      "content_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+      "review_key": "all-star-movies:shine-like-a-star-glow-party:new_record",
+      "reviewed": false,
+      "row_key": "all-star-movies:shine-like-a-star-glow-party",
+      "title": "shine like a star glow party"
+    },
+    {
+      "calendar_group_key": "all-star-music",
+      "canonical_slug": "note-able-games-arcade",
+      "content_sha256": "0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21",
+      "review_key": "all-star-music:note-able-games-arcade:new_record",
+      "reviewed": false,
+      "row_key": "all-star-music:note-able-games-arcade",
+      "title": "note'able games arcade ($)"
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "canonical_slug": "poolside-activities",
+      "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+      "review_key": "all-star-sports:poolside-activities:new_record",
+      "reviewed": false,
+      "row_key": "all-star-sports:poolside-activities",
+      "title": "poolside activities"
+    },
+    {
+      "calendar_group_key": "all-star-sports",
+      "canonical_slug": "shine-like-a-star-glow-party",
+      "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+      "review_key": "all-star-sports:shine-like-a-star-glow-party:new_record",
+      "reviewed": false,
+      "row_key": "all-star-sports:shine-like-a-star-glow-party",
+      "title": "shine like a star glow party"
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "canonical_slug": "campfire",
+      "content_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+      "review_key": "beach-yacht-club:campfire:new_record",
+      "reviewed": false,
+      "row_key": "beach-yacht-club:campfire",
+      "title": "campfire"
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "canonical_slug": "silent-disco",
+      "content_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+      "review_key": "beach-yacht-club:silent-disco:new_record",
+      "reviewed": false,
+      "row_key": "beach-yacht-club:silent-disco",
+      "title": "silent disco"
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "canonical_slug": "yo-ho-let-s-glow",
+      "content_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+      "review_key": "beach-yacht-club:yo-ho-let-s-glow:new_record",
+      "reviewed": false,
+      "row_key": "beach-yacht-club:yo-ho-let-s-glow",
+      "title": "yo ho let's glow"
+    },
+    {
+      "calendar_group_key": "boardwalk",
+      "canonical_slug": "disney-fit-yoga",
+      "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "review_key": "boardwalk:disney-fit-yoga:new_record",
+      "reviewed": false,
+      "row_key": "boardwalk:disney-fit-yoga",
+      "title": "disney fit yoga"
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "canonical_slug": "cabana-rentals",
+      "content_sha256": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1",
+      "review_key": "contemporary:cabana-rentals:new_record",
+      "reviewed": false,
+      "row_key": "contemporary:cabana-rentals",
+      "title": "cabana rentals ($)"
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "canonical_slug": "motorized-boat-rentals",
+      "content_sha256": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1",
+      "review_key": "contemporary:motorized-boat-rentals:new_record",
+      "reviewed": false,
+      "row_key": "contemporary:motorized-boat-rentals",
+      "title": "motorized boat rentals ($)"
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "canonical_slug": "painting-experience",
+      "content_sha256": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+      "review_key": "coronado-springs:painting-experience:new_record",
+      "reviewed": false,
+      "row_key": "coronado-springs:painting-experience",
+      "title": "painting experience ($)"
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "canonical_slug": "spanish-mosaic-art",
+      "content_sha256": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+      "review_key": "coronado-springs:spanish-mosaic-art:new_record",
+      "reviewed": false,
+      "row_key": "coronado-springs:spanish-mosaic-art",
+      "title": "spanish mosaic art ($)"
+    },
+    {
+      "calendar_group_key": "old-key-west",
+      "canonical_slug": "conch-flats-mosaics",
+      "content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+      "review_key": "old-key-west:conch-flats-mosaics:new_record",
+      "reviewed": false,
+      "row_key": "old-key-west:conch-flats-mosaics",
+      "title": "conch flats mosaics ($)"
+    },
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "canonical_slug": "glow-with-the-flow",
+      "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+      "review_key": "port-orleans-french-quarter:glow-with-the-flow:new_record",
+      "reviewed": false,
+      "row_key": "port-orleans-french-quarter:glow-with-the-flow",
+      "title": "glow with the flow"
+    },
+    {
+      "calendar_group_key": "riviera",
+      "canonical_slug": "c-te-d-azur-campfire",
+      "content_sha256": "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4",
+      "review_key": "riviera:c-te-d-azur-campfire:new_record",
+      "reviewed": false,
+      "row_key": "riviera:c-te-d-azur-campfire",
+      "title": "c\u00f4te d'azur campfire"
+    },
+    {
+      "calendar_group_key": "saratoga-springs",
+      "canonical_slug": "winner-s-circle-mosaics",
+      "content_sha256": "a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5",
+      "review_key": "saratoga-springs:winner-s-circle-mosaics:new_record",
+      "reviewed": false,
+      "row_key": "saratoga-springs:winner-s-circle-mosaics",
+      "title": "winner's circle mosaics ($)"
+    },
+    {
+      "calendar_group_key": "wilderness-lodge",
+      "canonical_slug": "wild-wilderness-bingo",
+      "content_sha256": "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62",
+      "review_key": "wilderness-lodge:wild-wilderness-bingo:new_record",
+      "reviewed": false,
+      "row_key": "wilderness-lodge:wild-wilderness-bingo",
+      "title": "wild wilderness bingo"
+    }
+  ],
+  "new_v3_review_keys": [
+    "all-star-movies:mickey-tie-dye:new_record",
+    "all-star-movies:poolside-activities:new_record",
+    "all-star-movies:shine-like-a-star-glow-party:new_record",
+    "all-star-music:note-able-games-arcade:new_record",
+    "all-star-sports:poolside-activities:new_record",
+    "all-star-sports:shine-like-a-star-glow-party:new_record",
+    "beach-yacht-club:campfire:new_record",
+    "beach-yacht-club:silent-disco:new_record",
+    "beach-yacht-club:yo-ho-let-s-glow:new_record",
+    "boardwalk:disney-fit-yoga:new_record",
+    "contemporary:cabana-rentals:new_record",
+    "contemporary:motorized-boat-rentals:new_record",
+    "coronado-springs:painting-experience:new_record",
+    "coronado-springs:spanish-mosaic-art:new_record",
+    "old-key-west:conch-flats-mosaics:new_record",
+    "port-orleans-french-quarter:glow-with-the-flow:new_record",
+    "riviera:c-te-d-azur-campfire:new_record",
+    "saratoga-springs:winner-s-circle-mosaics:new_record",
+    "wilderness-lodge:wild-wilderness-bingo:new_record"
+  ],
+  "publish_blockers": [
+    "unreviewed_v2_v3_field_diffs",
+    "unreviewed_new_v3_rows",
+    "v3_missing_v2_rows"
+  ],
+  "report_version": "v3_dual_run_report_001",
+  "reviewed_diff_keys": [],
+  "reviewed_new_record_keys": [],
+  "reviewed_status_transition_keys": [],
+  "source_coverage": {
+    "expected_source_count": 18,
+    "parser_error_ids": [],
+    "parser_error_without_review_task_ids": [],
+    "processed_source_count": 18,
+    "source_error_count": 0,
+    "source_error_ids": [],
+    "source_error_without_review_task_ids": [],
+    "stale_source_status_config_ids": [],
+    "stale_source_status_ids": [],
+    "stale_source_status_pipeline_ids": [],
+    "unprocessed_source_ids": []
+  },
+  "status": "blocked",
+  "status_transitions": [],
+  "unreviewed_diff_keys": [
+    "all-star-movies:reel-fun-arcade:location",
+    "animal-kingdom-jambo:movie-under-the-stars:schedule",
+    "beach-yacht-club:painting-in-the-vineyard:location",
+    "boardwalk:movie-under-the-stars:schedule",
+    "caribbean-beach:caribbean-campfire:schedule",
+    "caribbean-beach:caribbean-campfire:price",
+    "coronado-springs:movie-under-the-stars:schedule",
+    "riviera:movie-under-the-stars:schedule",
+    "saratoga-springs:glow-with-the-flow:schedule",
+    "saratoga-springs:glow-with-the-flow:location",
+    "wilderness-lodge:storytime-yoga:location"
+  ],
+  "unreviewed_new_keys": [
+    "all-star-movies:mickey-tie-dye",
+    "all-star-movies:poolside-activities",
+    "all-star-movies:shine-like-a-star-glow-party",
+    "all-star-music:note-able-games-arcade",
+    "all-star-sports:poolside-activities",
+    "all-star-sports:shine-like-a-star-glow-party",
+    "beach-yacht-club:campfire",
+    "beach-yacht-club:silent-disco",
+    "beach-yacht-club:yo-ho-let-s-glow",
+    "boardwalk:disney-fit-yoga",
+    "contemporary:cabana-rentals",
+    "contemporary:motorized-boat-rentals",
+    "coronado-springs:painting-experience",
+    "coronado-springs:spanish-mosaic-art",
+    "old-key-west:conch-flats-mosaics",
+    "port-orleans-french-quarter:glow-with-the-flow",
+    "riviera:c-te-d-azur-campfire",
+    "saratoga-springs:winner-s-circle-mosaics",
+    "wilderness-lodge:wild-wilderness-bingo"
+  ],
+  "unreviewed_status_transition_keys": [],
+  "v2_count": 207,
+  "v3_count": 98,
+  "v3_preview_fingerprint": "6ffa561b183002f105ef64a996eb0fea001482ab0c931374aa206a0c6d930ea0",
+  "v3_source_hashes": [
+    "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62",
+    "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
+    "0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21",
+    "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38",
+    "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+    "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1",
+    "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4",
+    "9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a",
+    "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5",
+    "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+    "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+    "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+    "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0"
+  ]
+}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CalendarClient } from "@/components/atlas/CalendarClient";
 import { Hero } from "@/components/atlas/Hero";
 import { BrandAsset } from "@/components/brand/BrandAsset";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { sanitizePublicActivities, dedupeOccurrences } from "@/lib/api/publicActivities";
 import { getAllOccurrences } from "@/lib/data/activities";
 import {
@@ -15,7 +16,7 @@ import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import { parsePlanAheadParams } from "@/lib/calendar/params";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: "Plan Ahead | Disney World Resort Activity Calendar",
@@ -120,10 +121,12 @@ export default async function CalendarPage({
           for how verification works.
         </p>
       </section>
-      <CalendarClient
-        occurrences={occurrences}
-        initialPlanAhead={planAhead}
-      />
+      <PlanClientBoundary>
+        <CalendarClient
+          occurrences={occurrences}
+          initialPlanAhead={planAhead}
+        />
+      </PlanClientBoundary>
     </>
   );
 }

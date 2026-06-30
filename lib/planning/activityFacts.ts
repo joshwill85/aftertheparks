@@ -2,7 +2,9 @@ import { toZonedTime } from "date-fns-tz";
 import {
   DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG,
   isPrimaryRainyDayFit,
+  type WeatherFit,
 } from "@/lib/seo/fit";
+import { inferWeatherFitFromText } from "@/lib/explore/weatherFit";
 import {
   areaFilterForResort,
   resortAreaMatchesOrigin,
@@ -197,7 +199,8 @@ export function timeWindowForActivity(activity: ActivityOccurrence): TimeWindowF
     };
   }
 
-  if (!activity.startDateTime) {
+  const startWindow = timeWindowIdForStart(activity.startDateTime);
+  if (startWindow === "unknown") {
     return {
       id: "flexible",
       label: "Flexible timing",
@@ -205,10 +208,7 @@ export function timeWindowForActivity(activity: ActivityOccurrence): TimeWindowF
     };
   }
 
-  const zoned = toZonedTime(new Date(activity.startDateTime), ORLANDO_TZ);
-  const minutes = zoned.getHours() * 60 + zoned.getMinutes();
-
-  if (minutes >= 19 * 60 && minutes <= 23 * 60 + 59) {
+  if (startWindow === "after_7_pm") {
     return {
       id: "after_7_pm",
       label: "After 7 PM",
@@ -216,7 +216,7 @@ export function timeWindowForActivity(activity: ActivityOccurrence): TimeWindowF
     };
   }
 
-  if (minutes >= 17 * 60 && minutes < 19 * 60) {
+  if (startWindow === "dinner_window") {
     return {
       id: "dinner_window",
       label: "5-7 PM",
@@ -229,6 +229,19 @@ export function timeWindowForActivity(activity: ActivityOccurrence): TimeWindowF
     label: "Daytime",
     reason: "Start time is before 5:00 PM Orlando time.",
   };
+}
+
+export function timeWindowIdForStart(
+  startDateTime?: string
+): "after_7_pm" | "dinner_window" | "daytime" | "unknown" {
+  if (!startDateTime) return "unknown";
+
+  const zoned = toZonedTime(new Date(startDateTime), ORLANDO_TZ);
+  const minutes = zoned.getHours() * 60 + zoned.getMinutes();
+
+  if (minutes >= 19 * 60 && minutes <= 23 * 60 + 59) return "after_7_pm";
+  if (minutes >= 17 * 60 && minutes < 19 * 60) return "dinner_window";
+  return "daytime";
 }
 
 export function travelFitForActivity(
@@ -262,12 +275,8 @@ export function travelFitForActivity(
 }
 
 export function weatherFitForActivity(activity: ActivityOccurrence): WeatherFitFact {
-  const explicit = activity.enrichment?.weatherDependency;
-  const fit = DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[activity.activitySlug];
-  const rainBackup =
-    explicit === "indoor" ||
-    explicit === "covered" ||
-    Boolean(fit && isPrimaryRainyDayFit(fit));
+  const resolvedFit = weatherFitValueForActivity(activity);
+  const rainBackup = resolvedFit === "indoor" || resolvedFit === "covered";
 
   return {
     rainBackup,
@@ -276,4 +285,20 @@ export function weatherFitForActivity(activity: ActivityOccurrence): WeatherFitF
       ? "Weather fit is indoor or covered."
       : "No indoor or covered rain-backup fit is available.",
   };
+}
+
+export function weatherFitValueForActivity(
+  activity: ActivityOccurrence
+): WeatherFit | undefined {
+  const explicit = activity.enrichment?.weatherDependency;
+  const fit = DEFAULT_ACTIVITY_SEO_FIT_BY_SLUG[activity.activitySlug];
+  if (explicit === "indoor" || explicit === "covered") return explicit;
+  if (fit) return fit.weatherFit;
+  return inferWeatherFitFromText({
+    title: activity.title,
+    category: activity.category,
+    summary: activity.summary,
+    location: activity.location.label,
+    weatherDependency: activity.enrichment?.weatherDependency,
+  });
 }

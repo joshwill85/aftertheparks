@@ -45,18 +45,22 @@ export function BrowseFilterShell({
     () => parseBrowseParams(searchParams),
     [searchParams]
   );
+  const hideDaypart = variant === "tonight";
+  const hideFreeOnly = variant === "tonight";
+  const effectiveFilters = useMemo(
+    () => (hideFreeOnly ? { ...filters, free: false } : filters),
+    [filters, hideFreeOnly]
+  );
   const activeChips = useMemo(
-    () => buildActiveFilterChips(filters, resorts, basePath),
-    [filters, resorts, basePath]
+    () => buildActiveFilterChips(effectiveFilters, resorts, basePath),
+    [effectiveFilters, resorts, basePath]
   );
   const recoveryActions = useMemo(
-    () => buildNoResultsRecovery(filters, resorts, basePath),
-    [filters, resorts, basePath]
+    () => buildNoResultsRecovery(effectiveFilters, resorts, basePath),
+    [effectiveFilters, resorts, basePath]
   );
 
   const activeCount = activeChips.length;
-
-  const hideDaypart = variant === "tonight";
   const currentHref = searchParams.toString()
     ? `${basePath}?${searchParams.toString()}`
     : basePath;
@@ -86,6 +90,7 @@ export function BrowseFilterShell({
               resorts={resorts}
               basePath={basePath}
               hideDaypart={hideDaypart}
+              hideFreeOnly={hideFreeOnly}
               filterImpact={filterImpact}
               homeResortSlug={homeResortSlug}
               onClearAll={handleClearAll}
@@ -141,6 +146,7 @@ export function BrowseFilterShell({
         resorts={resorts}
         basePath={basePath}
         hideDaypart={hideDaypart}
+        hideFreeOnly={hideFreeOnly}
         activeCount={activeCount}
         resultCount={resultCount}
         filterImpact={filterImpact}

@@ -5,6 +5,7 @@ import { HomeHero } from "@/components/home/HomeHero";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { RestDayBuilder } from "@/components/home/RestDayBuilder";
 import { NoTicketMagic } from "@/components/magic/NoTicketMagic";
+import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import { ActivityCollectionView } from "@/components/atlas/ActivityCollectionView";
 import { MovieNightCard } from "@/components/atlas/MovieNightCard";
@@ -19,7 +20,7 @@ import {
 import { buildResortEnrichment } from "@/lib/resorts/enrichment";
 import { activitySourceSummary, formatSeoDate } from "@/lib/seo/activityPage";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: "After the Parks",
@@ -63,7 +64,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <>
+    <PlanClientBoundary>
       <HomeHero resorts={resortOptions} />
 
       <section className="home-section" aria-labelledby="home-source-heading">
@@ -192,6 +193,6 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
-    </>
+    </PlanClientBoundary>
   );
 }

@@ -1,0 +1,2564 @@
+[
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-961de10ecac7924088ce999a",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9994747042655945,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99757,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            206,
+            2197,
+            855,
+            2349
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999831914901733,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Old Port Royale Lobby"
+          },
+          {
+            "confidence": 0.91607,
+            "engine": "rapidocr",
+            "text": "Caribbcart Cay Islauid Movie Lawn"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "old_port_royale_lobby",
+        "raw_value": "Old Port Royale Lobby",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            207,
+            2325,
+            673,
+            2400
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9928855895996094,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 9:30am-9:50am and 2:40pm-3:00pm"
+          },
+          {
+            "confidence": 0.91311,
+            "engine": "rapidocr",
+            "text": "8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday"
+          ],
+          "end_time": "09:50",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "schedule_type": "recurring",
+          "start_time": "09:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            200,
+            2333,
+            1037,
+            2463
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9994747042655945,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "DISNEY CHARACTER GREETINGS"
+          },
+          {
+            "confidence": 0.99757,
+            "engine": "rapidocr",
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "disney character greetings",
+        "raw_value": "DISNEY CHARACTER GREETINGS",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            206,
+            2197,
+            855,
+            2349
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Old Port Royale Lobby",
+    "movie_title": null,
+    "normalized_location_id": "old_port_royale_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "disney character greetings",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday"
+      ],
+      "end_time": "09:50",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "schedule_type": "recurring",
+      "start_time": "09:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            206,
+            2197,
+            855,
+            2349
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            207,
+            2325,
+            673,
+            2400
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Old Port Royale Lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            200,
+            2333,
+            1037,
+            2463
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            206,
+            2197,
+            855,
+            2349
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ]
+    },
+    "source_title": "DISNEY CHARACTER GREETINGS",
+    "source_type": "image",
+    "validation_findings": [
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-459c1bb1a1a6908205616849",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9989227056503296,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.93467,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            204,
+            3571,
+            854,
+            3700
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999929070472717,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Old Port Royale Lobby"
+          },
+          {
+            "confidence": 0.89334,
+            "engine": "rapidocr",
+            "text": "Caribbcart Cay Islard Movic Lawn"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "old_port_royale_lobby",
+        "raw_value": "Old Port Royale Lobby",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            208,
+            3693,
+            669,
+            3747
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9996398091316223,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 9:30am-9:50am and 2:40pm-3:00pm"
+          },
+          {
+            "confidence": 0.70196,
+            "engine": "rapidocr",
+            "text": "3:56pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Tuesday"
+          ],
+          "end_time": "09:50",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "schedule_type": "recurring",
+          "start_time": "09:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            202,
+            3727,
+            1030,
+            3801
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9989227056503296,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "DISNEY CHARACTER GREETINGS"
+          },
+          {
+            "confidence": 0.93467,
+            "engine": "rapidocr",
+            "text": "LILO & STITCH (2025)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "disney character greetings",
+        "raw_value": "DISNEY CHARACTER GREETINGS",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            204,
+            3571,
+            854,
+            3700
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Old Port Royale Lobby",
+    "movie_title": null,
+    "normalized_location_id": "old_port_royale_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "disney character greetings",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Tuesday"
+      ],
+      "end_time": "09:50",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "schedule_type": "recurring",
+      "start_time": "09:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            204,
+            3571,
+            854,
+            3700
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            208,
+            3693,
+            669,
+            3747
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Old Port Royale Lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            202,
+            3727,
+            1030,
+            3801
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            204,
+            3571,
+            854,
+            3700
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ]
+    },
+    "source_title": "DISNEY CHARACTER GREETINGS",
+    "source_type": "image",
+    "validation_findings": [
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-62ff9fd56eadcb39b5750f67",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9997925758361816,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99644,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            199,
+            6596,
+            854,
+            6718
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999901652336121,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Old Port Royale Lobby"
+          },
+          {
+            "confidence": 0.96698,
+            "engine": "rapidocr",
+            "text": "Old Port Royale Lobby"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "old_port_royale_lobby",
+        "raw_value": "Old Port Royale Lobby",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            202,
+            6709,
+            672,
+            6774
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9986789226531982,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 9:30am-9:50am and 2:40pm-3:00pm"
+          },
+          {
+            "confidence": 0.90436,
+            "engine": "rapidocr",
+            "text": "Fro* 9.30am-9:500m a1d 2:40pm-3:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "end_time": "09:50",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "schedule_type": "recurring",
+          "start_time": "09:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            202,
+            6765,
+            1030,
+            6822
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9997925758361816,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "DISNEY CHARACTER GREETINGS"
+          },
+          {
+            "confidence": 0.99644,
+            "engine": "rapidocr",
+            "text": "DISNEY CHARACTER"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "disney character greetings",
+        "raw_value": "DISNEY CHARACTER GREETINGS",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            6596,
+            854,
+            6718
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Old Port Royale Lobby",
+    "movie_title": null,
+    "normalized_location_id": "old_port_royale_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "disney character greetings",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "end_time": "09:50",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "schedule_type": "recurring",
+      "start_time": "09:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            199,
+            6596,
+            854,
+            6718
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            202,
+            6709,
+            672,
+            6774
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Old Port Royale Lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            202,
+            6765,
+            1030,
+            6822
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            199,
+            6596,
+            854,
+            6718
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ]
+    },
+    "source_title": "DISNEY CHARACTER GREETINGS",
+    "source_type": "image",
+    "validation_findings": [
+      "engine_disagreement:title",
+      "engine_disagreement:schedule"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-bdf42a55ff8e9a214b01a6b1",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9997029304504395,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99972,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            205,
+            6870,
+            617,
+            6927
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.997613251209259,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Fuentes del Morro Pool Deck"
+          },
+          {
+            "confidence": 0.96698,
+            "engine": "rapidocr",
+            "text": "Old Port Royale Lobby"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "fuentes_del_morro_pool_deck",
+        "raw_value": "Fuentes del Morro Pool Deck",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            202,
+            6927,
+            802,
+            6983
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9982685446739197,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 1:30pm-2:30pm"
+          },
+          {
+            "confidence": 0.90436,
+            "engine": "rapidocr",
+            "text": "Fro* 9.30am-9:500m a1d 2:40pm-3:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "end_time": "14:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at From 1:30pm-2:30pm",
+          "schedule_type": "recurring",
+          "start_time": "13:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at From 1:30pm-2:30pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            6971,
+            621,
+            7040
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9997029304504395,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "POOL PARTY"
+          },
+          {
+            "confidence": 0.99972,
+            "engine": "rapidocr",
+            "text": "GREETINGS"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "pool party",
+        "raw_value": "POOL PARTY",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            205,
+            6870,
+            617,
+            6927
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Fuentes del Morro Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "fuentes_del_morro_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "pool party",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "end_time": "14:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday at From 1:30pm-2:30pm",
+      "schedule_type": "recurring",
+      "start_time": "13:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday at From 1:30pm-2:30pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            205,
+            6870,
+            617,
+            6927
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "POOL PARTY"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            202,
+            6927,
+            802,
+            6983
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Fuentes del Morro Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            199,
+            6971,
+            621,
+            7040
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Thursday at From 1:30pm-2:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            205,
+            6870,
+            617,
+            6927
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "POOL PARTY"
+        }
+      ]
+    },
+    "source_title": "POOL PARTY",
+    "source_type": "image",
+    "validation_findings": [
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-fbffcaf87b40a81b7359a49a",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999263346195221,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99917,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            202,
+            7392,
+            929,
+            7472
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999984085559845,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Martinique Beach"
+          },
+          {
+            "confidence": 0.99483,
+            "engine": "rapidocr",
+            "text": "Martinique Beach"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "martinique_beach",
+        "raw_value": "Martinique Beach",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            202,
+            7463,
+            565,
+            7512
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9981968402862549,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 6:30pm-7:30pm"
+          },
+          {
+            "confidence": 0.90535,
+            "engine": "rapidocr",
+            "text": "=ro6.30pm-7.30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "end_time": "19:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at From 6:30pm-7:30pm",
+          "schedule_type": "recurring",
+          "start_time": "18:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at From 6:30pm-7:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            202,
+            7514,
+            626,
+            7571
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999263346195221,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "CARIBBEAN CAMPFIRE"
+          },
+          {
+            "confidence": 0.99917,
+            "engine": "rapidocr",
+            "text": "CARIBBEAN CAMPFIRE"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "caribbean campfire",
+        "raw_value": "CARIBBEAN CAMPFIRE",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            202,
+            7392,
+            929,
+            7472
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Martinique Beach",
+    "movie_title": null,
+    "normalized_location_id": "martinique_beach",
+    "normalized_movie_title": null,
+    "normalized_title": "caribbean campfire",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "end_time": "19:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday at From 6:30pm-7:30pm",
+      "schedule_type": "recurring",
+      "start_time": "18:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday at From 6:30pm-7:30pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            202,
+            7392,
+            929,
+            7472
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "CARIBBEAN CAMPFIRE"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            202,
+            7463,
+            565,
+            7512
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Martinique Beach"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            202,
+            7514,
+            626,
+            7571
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Thursday at From 6:30pm-7:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            202,
+            7392,
+            929,
+            7472
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "CARIBBEAN CAMPFIRE"
+        }
+      ]
+    },
+    "source_title": "CARIBBEAN CAMPFIRE",
+    "source_type": "image",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-09be60e3a5e8d80047e5b114",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9972606897354126,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99779,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            199,
+            7819,
+            1027,
+            7947
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999874234199524,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Caribbean Cay Island Movie Lawn"
+          },
+          {
+            "confidence": 0.93985,
+            "engine": "rapidocr",
+            "text": "Carlbbcan Cay Istuid Movic Lawn"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "caribbean_cay_island_movie_lawn",
+        "raw_value": "Caribbean Cay Island Movie Lawn",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            7929,
+            889,
+            7998
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.999904453754425,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:30pm"
+          },
+          {
+            "confidence": 0.76518,
+            "engine": "rapidocr",
+            "text": "3:56pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at 8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at 8:30pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            201,
+            7983,
+            359,
+            8046
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9972606897354126,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MOVIE UNDER THE STARS MOANA 2 PG"
+          },
+          {
+            "confidence": 0.99779,
+            "engine": "rapidocr",
+            "text": "MOVIE UNDER THE STARS"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "movie under the stars moana 2",
+        "raw_value": "MOVIE UNDER THE STARS MOANA 2 PG",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            199,
+            7819,
+            1027,
+            7947
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Caribbean Cay Island Movie Lawn",
+    "movie_title": null,
+    "normalized_location_id": "caribbean_cay_island_movie_lawn",
+    "normalized_movie_title": null,
+    "normalized_title": "movie under the stars moana 2",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday at 8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday at 8:30pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            199,
+            7819,
+            1027,
+            7947
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "MOVIE UNDER THE STARS MOANA 2 PG"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            199,
+            7929,
+            889,
+            7998
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Caribbean Cay Island Movie Lawn"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            201,
+            7983,
+            359,
+            8046
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Thursday at 8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            199,
+            7819,
+            1027,
+            7947
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "MOVIE UNDER THE STARS MOANA 2 PG"
+        }
+      ]
+    },
+    "source_title": "MOVIE UNDER THE STARS MOANA 2 PG",
+    "source_type": "image",
+    "validation_findings": [
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "caribbean-beach",
+    "candidate_id": "vision-v3-1ceb017b4b06be6670e7d189",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "captured_at": "2026-06-30T00:07:31.276644+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9965991973876953,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99975,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            198,
+            8248,
+            857,
+            8386
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999907612800598,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Old Port Royale Lobby"
+          },
+          {
+            "confidence": 0.91388,
+            "engine": "rapidocr",
+            "text": "Old Port Royale Looby"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "old_port_royale_lobby",
+        "raw_value": "Old Port Royale Lobby",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            198,
+            8359,
+            676,
+            8439
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1809,
+            1200,
+            11134
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9988729953765869,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 9:30am-9:50am and 2:40pm-3:00pm"
+          },
+          {
+            "confidence": 0.89216,
+            "engine": "rapidocr",
+            "text": "ro9.50am-9:500m a1d2:40pm-5:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Friday"
+          ],
+          "end_time": "09:50",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "schedule_type": "recurring",
+          "start_time": "09:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            196,
+            8413,
+            1033,
+            8490
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9965991973876953,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "DISNEY CHARACTER GREETINGS"
+          },
+          {
+            "confidence": 0.99975,
+            "engine": "rapidocr",
+            "text": "GREETINGS"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "disney character greetings",
+        "raw_value": "DISNEY CHARACTER GREETINGS",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            198,
+            8248,
+            857,
+            8386
+          ],
+          "content_sha256": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Old Port Royale Lobby",
+    "movie_title": null,
+    "normalized_location_id": "old_port_royale_lobby",
+    "normalized_movie_title": null,
+    "normalized_title": "disney character greetings",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Friday"
+      ],
+      "end_time": "09:50",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "schedule_type": "recurring",
+      "start_time": "09:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            198,
+            8248,
+            857,
+            8386
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            198,
+            8359,
+            676,
+            8439
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Old Port Royale Lobby"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            196,
+            8413,
+            1033,
+            8490
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            198,
+            8248,
+            857,
+            8386
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "region_id": "page-001-region-03",
+          "text": "DISNEY CHARACTER GREETINGS"
+        }
+      ]
+    },
+    "source_title": "DISNEY CHARACTER GREETINGS",
+    "source_type": "image",
+    "validation_findings": [
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  }
+]

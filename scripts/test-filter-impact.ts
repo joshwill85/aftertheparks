@@ -2,6 +2,7 @@ import {
   buildActiveFilterChips,
   buildFilterImpact,
   buildNoResultsRecovery,
+  filterableItemMatchesFilters,
   type FilterableItem,
 } from "@/lib/explore/filterImpact";
 import {
@@ -103,6 +104,34 @@ const items: FilterableItem[] = [
     weatherFit: "indoor",
   },
 ];
+
+const collisionItems = [
+  {
+    id: "activity-arcade-poly",
+    sourceType: "activity",
+    activitySlug: "arcade",
+    resortSlug: "poly",
+    resortArea: "magic_kingdom",
+    category: "arcades",
+    daypart: "afternoon",
+    free: false,
+    reservation: false,
+    title: "Arcade",
+    weatherFit: "indoor",
+  },
+  {
+    id: "offering-arcade-poly",
+    sourceType: "officialOffering",
+    activitySlug: "arcade",
+    resortSlug: "poly",
+    resortArea: "magic_kingdom",
+    category: "arcades",
+    free: false,
+    reservation: true,
+    title: "Arcade",
+    weatherFit: "indoor",
+  },
+] satisfies FilterableItem[];
 
 const parsedWeather = parseBrowseParams(
   new URLSearchParams("weather=indoor&resort=poly")
@@ -239,6 +268,16 @@ assert(
   `Expected two free results under current resort, got ${impact.practical.free}`
 );
 
+const collisionImpact = buildFilterImpact(collisionItems, {}, resorts);
+assert(
+  collisionImpact.total === 1,
+  `Unfiltered official offerings should be hidden behind matching activities, got ${collisionImpact.total}`
+);
+assert(
+  collisionImpact.practical.reservation === 1,
+  `Reservation counts should include the official offering when the matching activity does not satisfy the filter, got ${collisionImpact.practical.reservation}`
+);
+
 const multiResortImpact = buildFilterImpact(
   items,
   { resort: "poly,akl", weather: "covered" },
@@ -306,6 +345,38 @@ assert(
 assert(
   weatherImpact.weather.every((option) => option.value !== "covered"),
   "Inactive zero-count covered weather option should not be selectable"
+);
+assert(
+  filterableItemMatchesFilters(
+    {
+      id: "offering-indoor",
+      resortSlug: "poly",
+      resortArea: "magic_kingdom",
+      category: "resort_activity",
+      free: true,
+      reservation: false,
+      weatherFit: "indoor",
+      title: "Community Hall",
+    },
+    { weather: "indoor" }
+  ),
+  "Shared filter predicate should allow official offerings to match indoor weather"
+);
+assert(
+  filterableItemMatchesFilters(
+    {
+      id: "offering-indoor",
+      resortSlug: "poly",
+      resortArea: "magic_kingdom",
+      category: "resort_activity",
+      free: true,
+      reservation: false,
+      weatherFit: "indoor",
+      title: "Community Hall",
+    },
+    { preset: "rain_backup" }
+  ),
+  "Shared filter predicate should allow official offerings to match rain-backup presets"
 );
 const weatherRecovery = buildNoResultsRecovery(
   { resort: "poly", weather: "covered" },
@@ -524,6 +595,72 @@ assert(
   "Rain-backup preset should not include outdoor movie nights"
 );
 
+const indoorMovies = filterMovieNights(
+  [
+    {
+      id: "movie-poly",
+      resortSlug: "poly",
+      resortName: "Polynesian Village",
+      movieTitle: "Moana",
+      displayTitle: "Moana",
+      showTime: "8:00 PM",
+      location: "Lawn",
+      dayOfWeek: "Sunday",
+      startDateTime: "2026-06-29T00:00:00.000Z",
+      isTonight: true,
+    },
+  ],
+  { weather: "indoor" }
+);
+assert(
+  indoorMovies.length === 0,
+  "Indoor weather filter should not include outdoor movie nights"
+);
+
+const reservationMovies = filterMovieNights(
+  [
+    {
+      id: "movie-poly",
+      resortSlug: "poly",
+      resortName: "Polynesian Village",
+      movieTitle: "Moana",
+      displayTitle: "Moana",
+      showTime: "8:00 PM",
+      location: "Lawn",
+      dayOfWeek: "Sunday",
+      startDateTime: "2026-06-29T00:00:00.000Z",
+      isTonight: true,
+    },
+  ],
+  { reservation: true }
+);
+assert(
+  reservationMovies.length === 0,
+  "Reservation filter should not include no-reservation movie nights"
+);
+
+const afternoonMovies = filterMovieNights(
+  [
+    {
+      id: "movie-poly",
+      resortSlug: "poly",
+      resortName: "Polynesian Village",
+      movieTitle: "Moana",
+      displayTitle: "Moana",
+      showTime: "8:00 PM",
+      location: "Lawn",
+      dayOfWeek: "Sunday",
+      startDateTime: "2026-06-29T00:00:00.000Z",
+      isTonight: true,
+    },
+  ],
+  { daypart: "afternoon" }
+);
+assert(
+  afternoonMovies.length === 0,
+  "Daypart filter should only include movie nights in the matching movie daypart"
+);
+
 const afterSevenMovies = filterMovieNights(
   [
     {
@@ -568,6 +705,8 @@ assert(recovery[0].href.includes("category") === false, "First recovery should r
 assert(recovery.some((action) => action.label === "Clear all filters"), "Missing clear action");
 
 const filterRailSource = readFileSync("components/explore/FilterRail.tsx", "utf8");
+const browseFilterShellSource = readFileSync("components/explore/BrowseFilterShell.tsx", "utf8");
+const filterSheetSource = readFileSync("components/explore/FilterSheet.tsx", "utf8");
 const resortSectionIndex = filterRailSource.indexOf("Resort");
 const firstNightSectionIndex = filterRailSource.indexOf("First night");
 const timeSectionIndex = filterRailSource.indexOf("Time of day");
@@ -575,6 +714,20 @@ assert(resortSectionIndex > -1, "Filter pane should include a resort section");
 assert(
   resortSectionIndex < firstNightSectionIndex && resortSectionIndex < timeSectionIndex,
   "Resort filter should be the first filter section in the shared filter pane"
+);
+assert(
+  browseFilterShellSource.includes('const hideFreeOnly = variant === "tonight";'),
+  "Tonight browse shell should hide free-only filters because tonight is not a free-only browse surface"
+);
+assert(
+  browseFilterShellSource.includes("hideFreeOnly={hideFreeOnly}") &&
+    filterSheetSource.includes("hideFreeOnly={hideFreeOnly}"),
+  "Tonight free-filter hiding should apply to both desktop rail and mobile sheet"
+);
+assert(
+  filterRailSource.includes("if (!hideFreeOnly)") &&
+    filterRailSource.includes('key: "free"'),
+  "Shared filter fields should suppress the Free only option when hideFreeOnly is enabled"
 );
 
 console.log("Filter impact coverage passed.");

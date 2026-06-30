@@ -901,6 +901,89 @@
       "source_path": "data/raw/web/official-fishing.snapshot.json"
     },
     {
+      "program_key": "dockside-fishing",
+      "title": "Dockside Fishing",
+      "description": "Old-fashioned dockside catch-and-release fishing with rental gear at select Disney Resort locations.",
+      "category": "resort_activity",
+      "tags": [
+        "fishing",
+        "dockside_fishing",
+        "resort_recreation"
+      ],
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Fishing gear is available for rental at the resort dockside fishing locations."
+      },
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "gear_policy": {
+          "value": "rental_poles_required",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 29,
+              "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+            },
+            {
+              "source": "planDisney",
+              "source_url": "https://plandisney.disney.go.com/question/helloi-go-fishing-disney-resorts-past-brought-own-gear-605932/",
+              "date": "2025-03-16",
+              "text": "planDisney says a Cast Member confirmed dockside fishing uses the rental poles available at the resort."
+            }
+          ]
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Dockside Fishing at Disney’s Port Orleans Resort – Riverside and Disney’s Fort Wilderness Resort & Campground"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fishing/",
+      "source_sha256": "86a328ccafc91a3ef4e40fe8699ec20c2fe266f3631aa9ac74bb6644a0bd4b2d",
+      "source_path": "data/raw/web/official-fishing.snapshot.json"
+    },
+    {
       "program_key": "footgolf-at-disneys-oak-trail",
       "title": "FootGolf at Disney's Oak Trail",
       "description": "FootGolf at Oak Trail Golf Course",
@@ -16255,6 +16338,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -16420,6 +16533,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -16585,6 +16728,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -16750,6 +16923,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -16915,6 +17118,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -17080,6 +17313,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -17245,6 +17508,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -17410,6 +17703,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -17575,6 +17898,36 @@
         "transportation": {
           "value": "unknown",
           "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "fish_species": {
+          "value": "largemouth_bass",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 41,
+              "text": "During your excursion, you will be fishing for largemouth bass."
+            }
+          ]
+        },
+        "waterways": {
+          "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 17,
+              "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon. Fishing excursions are available at the following marinas:"
+            }
+          ]
         }
       },
       "field_provenance": {
@@ -17673,6 +18026,218 @@
             "page": 1,
             "line": 27,
             "text": "Call (407) 939-3474 to make a reservation. Advance reservations are highly recommended."
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fishing/",
+      "source_sha256": "86a328ccafc91a3ef4e40fe8699ec20c2fe266f3631aa9ac74bb6644a0bd4b2d",
+      "source_path": "data/raw/web/official-fishing.snapshot.json"
+    },
+    {
+      "program_key": "dockside-fishing",
+      "offering_key": "dockside-fishing:port-orleans-resort-riverside:port-orleans-resort-riverside",
+      "resort_slug": "port-orleans-resort-riverside",
+      "variant_key": "port-orleans-resort-riverside",
+      "title": "Dockside Fishing",
+      "description": "Old-fashioned dockside catch-and-release fishing with rental gear at select Disney Resort locations.",
+      "category": "resort_activity",
+      "tags": [
+        "fishing",
+        "dockside_fishing",
+        "resort_recreation"
+      ],
+      "location": {
+        "label": "Fishin' Hole at Ol' Man Island"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Fishing gear is available for rental at the resort dockside fishing locations."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "gear_policy": {
+          "value": "rental_poles_required",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 29,
+              "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+            },
+            {
+              "source": "planDisney",
+              "source_url": "https://plandisney.disney.go.com/question/helloi-go-fishing-disney-resorts-past-brought-own-gear-605932/",
+              "date": "2025-03-16",
+              "text": "planDisney says a Cast Member confirmed dockside fishing uses the rental poles available at the resort."
+            }
+          ]
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Dockside Fishing at Disney’s Port Orleans Resort – Riverside and Disney’s Fort Wilderness Resort & Campground"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 30,
+            "text": "Fishin' Hole at Ol' Man Island at Disney's Port Orleans Resort – Riverside"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 30,
+            "text": "Fishin' Hole at Ol' Man Island at Disney's Port Orleans Resort – Riverside"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+          }
+        ]
+      },
+      "trust_state": "source_backed",
+      "source_url": "https://disneyworld.disney.go.com/recreation/fishing/",
+      "source_sha256": "86a328ccafc91a3ef4e40fe8699ec20c2fe266f3631aa9ac74bb6644a0bd4b2d",
+      "source_path": "data/raw/web/official-fishing.snapshot.json"
+    },
+    {
+      "program_key": "dockside-fishing",
+      "offering_key": "dockside-fishing:campsites-at-fort-wilderness-resort:fort-wilderness",
+      "resort_slug": "campsites-at-fort-wilderness-resort",
+      "variant_key": "fort-wilderness",
+      "title": "Dockside Fishing",
+      "description": "Old-fashioned dockside catch-and-release fishing with rental gear at select Disney Resort locations.",
+      "category": "resort_activity",
+      "tags": [
+        "fishing",
+        "dockside_fishing",
+        "resort_recreation"
+      ],
+      "location": {
+        "label": "Bike Barn"
+      },
+      "availability": {
+        "kind": "evergreen_all_day",
+        "hours_state": "source_unspecified",
+        "label": "Hours not specified by Disney"
+      },
+      "price": {
+        "state": "fee",
+        "notes": "Fishing gear is available for rental at the resort dockside fishing locations."
+      },
+      "booking": {},
+      "eligibility": {},
+      "amenities": [],
+      "claims": {
+        "walkability": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "transportation": {
+          "value": "unknown",
+          "evidence": []
+        },
+        "catch_policy": {
+          "value": "catch_and_release_only",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 32,
+              "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only."
+            }
+          ]
+        },
+        "gear_policy": {
+          "value": "rental_poles_required",
+          "evidence": [
+            {
+              "page": 1,
+              "line": 29,
+              "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+            },
+            {
+              "source": "planDisney",
+              "source_url": "https://plandisney.disney.go.com/question/helloi-go-fishing-disney-resorts-past-brought-own-gear-605932/",
+              "date": "2025-03-16",
+              "text": "planDisney says a Cast Member confirmed dockside fishing uses the rental poles available at the resort."
+            }
+          ]
+        }
+      },
+      "field_provenance": {
+        "title": [
+          {
+            "page": 1,
+            "line": 28,
+            "text": "Dockside Fishing at Disney’s Port Orleans Resort – Riverside and Disney’s Fort Wilderness Resort & Campground"
+          }
+        ],
+        "resort_join": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "Bike Barn at Disney’s Fort Wilderness Resort & Campground"
+          }
+        ],
+        "location": [
+          {
+            "page": 1,
+            "line": 31,
+            "text": "Bike Barn at Disney’s Fort Wilderness Resort & Campground"
+          }
+        ],
+        "description": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
+          }
+        ],
+        "price": [
+          {
+            "page": 1,
+            "line": 29,
+            "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:"
           }
         ]
       },

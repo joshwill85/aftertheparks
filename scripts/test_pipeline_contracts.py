@@ -5,6 +5,7 @@ import json
 import tempfile
 import os
 import hashlib
+import subprocess
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -4066,6 +4067,113 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertEqual("fee", by_program["golf-lessons"]["price"]["state"])
         self.assertEqual(14, by_program["golf-lessons"]["field_provenance"]["price"][0]["line"])
 
+    def test_official_fishing_detail_extracts_dockside_fishing_with_gear_policy(self) -> None:
+        result = extract_official_recreation_offerings(
+            {
+                "source_kind": "official_recreation_detail",
+                "slug": "fishing",
+                "source_url": "https://disneyworld.disney.go.com/recreation/fishing/",
+                "source_web_sha256": "g" * 64,
+                "lines": [
+                    {"line": 1, "text": "Fishing | Walt Disney World Resort"},
+                    {"line": 2, "text": "Fishing Excursions"},
+                    {
+                        "line": 4,
+                        "text": "Reel in the fun with guided excursions and dockside fishing on select waterways of Walt Disney World Resort.",
+                    },
+                    {
+                        "line": 6,
+                        "text": "Guided catch-and-release outings let you experience bass fishing at its finest—all year round!",
+                    },
+                    {
+                        "line": 8,
+                        "text": "Both 2-hour and 4-hour excursions are offered. Solo anglers may book an afternoon excursion at a reduced rate.",
+                    },
+                    {
+                        "line": 17,
+                        "text": "Venture out on Bay Lake and Seven Seas Lagoon, skim across Village Lake or cruise Crescent Lake and World Showcase Lagoon.",
+                    },
+                    {"line": 18, "text": "Disney's Fort Wilderness Resort & Campground"},
+                    {"line": 24, "text": "Disney's Port Orleans Resort - Riverside"},
+                    {
+                        "line": 28,
+                        "text": "Dockside Fishing at Disney’s Port Orleans Resort – Riverside and Disney’s Fort Wilderness Resort & Campground",
+                    },
+                    {
+                        "line": 29,
+                        "text": "Reel in some fun the old-fashioned way in our well-stocked waters. Fishing gear is available for rental at:",
+                    },
+                    {
+                        "line": 30,
+                        "text": "Fishin' Hole at Ol' Man Island at Disney's Port Orleans Resort – Riverside",
+                    },
+                    {
+                        "line": 31,
+                        "text": "Bike Barn at Disney’s Fort Wilderness Resort & Campground",
+                    },
+                    {
+                        "line": 32,
+                        "text": "Please note: fishing at Walt Disney World Resort is catch-and-release only.",
+                    },
+                    {
+                        "line": 41,
+                        "text": "During your excursion, you will be fishing for largemouth bass.",
+                    },
+                ],
+            }
+        )
+
+        by_program = {program["program_key"]: program for program in result["programs"]}
+        self.assertIn("dockside-fishing", by_program)
+        self.assertEqual("fee", by_program["dockside-fishing"]["price"]["state"])
+
+        dockside = {
+            offering["resort_slug"]: offering
+            for offering in result["offerings"]
+            if offering["program_key"] == "dockside-fishing"
+        }
+        self.assertEqual(
+            {
+                "campsites-at-fort-wilderness-resort",
+                "port-orleans-resort-riverside",
+            },
+            set(dockside),
+        )
+        self.assertEqual("Bike Barn", dockside["campsites-at-fort-wilderness-resort"]["location"]["label"])
+        self.assertEqual("Fishin' Hole at Ol' Man Island", dockside["port-orleans-resort-riverside"]["location"]["label"])
+        self.assertEqual(
+            "rental_poles_required",
+            dockside["campsites-at-fort-wilderness-resort"]["claims"]["gear_policy"]["value"],
+        )
+        self.assertEqual(
+            "catch_and_release_only",
+            dockside["port-orleans-resort-riverside"]["claims"]["catch_policy"]["value"],
+        )
+        self.assertNotIn(
+            "fish_species",
+            dockside["port-orleans-resort-riverside"]["claims"],
+            "Disney's largemouth-bass line is excursion-specific and should not be attached to dockside fishing.",
+        )
+        self.assertNotIn(
+            "waterways",
+            dockside["campsites-at-fort-wilderness-resort"]["claims"],
+            "Disney's named-waterways line is excursion-specific and should not be attached to dockside fishing.",
+        )
+        self.assertTrue(
+            any(
+                evidence.get("source_url", "").startswith("https://plandisney.disney.go.com/question/")
+                for evidence in dockside["port-orleans-resort-riverside"]["claims"]["gear_policy"]["evidence"]
+            )
+        )
+
+        guided = next(
+            offering
+            for offering in result["offerings"]
+            if offering["program_key"] == "fishing-excursions"
+        )
+        self.assertEqual("largemouth_bass", guided["claims"]["fish_species"]["value"])
+        self.assertIn("Bay Lake", guided["claims"]["waterways"]["value"])
+
     def test_official_recreation_offerings_keep_cabana_resort_variants(self) -> None:
         result = extract_official_recreation_offerings(
             {
@@ -6162,6 +6270,8 @@ class PipelineContractsTest(unittest.TestCase):
                     "data/processed/eval/v3_source_statuses.json",
                     "--review-tasks",
                     "data/processed/review_queue/vision_v3_review_queue.json",
+                    "--quarter",
+                    "fy26-q4",
                 ),
                 ("trust_report.py",),
                 ("publish_gold_v3.py", "--require-clean-preview", "--json"),
@@ -6226,6 +6336,8 @@ class PipelineContractsTest(unittest.TestCase):
                 "data/processed/eval/v3_source_statuses.json",
                 "--review-tasks",
                 "data/processed/review_queue/vision_v3_review_queue.json",
+                "--quarter",
+                "fy26-q4",
             ),
             steps,
         )
@@ -6313,6 +6425,19 @@ class PipelineContractsTest(unittest.TestCase):
             steps.index(("promote_gold.py",)),
             steps.index(("audit_coverage.py",)),
         )
+
+    def test_promote_gold_v3_script_entrypoint_imports_in_file_execution_mode(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "scripts/ingest/promote_gold_v3.py", "--help"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual("", result.stderr)
+        self.assertEqual(0, result.returncode)
+        self.assertIn("Build preview-only Gold v3 rows", result.stdout)
 
 
 class SourceAuthorityPolicyTest(unittest.TestCase):

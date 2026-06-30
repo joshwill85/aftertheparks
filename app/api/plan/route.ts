@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { requireApiUser } from "@/lib/plan/auth";
 import {
   fetchOwnerPlan,
@@ -15,27 +15,27 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   if (!isSupabaseConfigured()) {
-    return NextResponse.json({ plan: null, items: [] });
+    return privateNoStoreJson({ plan: null, items: [] });
   }
 
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
 
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   const { plan, items } = await fetchOwnerPlan(client, user.id);
-  return NextResponse.json({ plan, items });
+  return privateNoStoreJson({ plan, items });
 }
 
 export async function PATCH(request: Request) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const limited = await guardRateLimit({
     request,
@@ -47,7 +47,7 @@ export async function PATCH(request: Request) {
   const body = await request.json();
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   try {
@@ -55,7 +55,7 @@ export async function PATCH(request: Request) {
     const plan = body.settings
       ? await updatePlanSettings(client, user.id, body.settings, operationId)
       : await renamePlan(client, user.id, body.title ?? "", operationId);
-    return NextResponse.json({ plan });
+    return privateNoStoreJson({ plan });
   } catch (error) {
     return planErrorResponse(error, body.settings ? "Failed to update plan settings" : "Failed to rename plan");
   }
@@ -64,7 +64,7 @@ export async function PATCH(request: Request) {
 export async function DELETE(request: Request) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const limited = await guardRateLimit({
     request,
@@ -76,9 +76,9 @@ export async function DELETE(request: Request) {
   const body = await request.json().catch(() => ({}));
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   await deletePlan(client, user.id, body.operationId ?? crypto.randomUUID());
-  return NextResponse.json({ ok: true });
+  return privateNoStoreJson({ ok: true });
 }

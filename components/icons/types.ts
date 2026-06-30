@@ -7,6 +7,7 @@ export type IconKey =
   | "signature"
   | "resort_activity"
   | "arcade"
+  | "character"
   | "rental"
   | "sports_games"
   | "nighttime_entertainment"

@@ -2,6 +2,7 @@ import {
   ageFitForActivity,
   bookingStatusForActivity,
   timeWindowForActivity,
+  timeWindowIdForStart,
   travelFitForActivity,
   weatherFitForActivity,
   type BookingStatus,
@@ -131,9 +132,9 @@ export function itemMatchesPreset(
     case "nearby_resort_area":
       return travelFitForActivity(activity, context).nearbyResortArea;
     case "after_7_pm":
-      return timeWindowForActivity(activity).id === "after_7_pm";
+      return timeWindowIdForStart(activity.startDateTime) === "after_7_pm";
     case "dinner_window":
-      return timeWindowForActivity(activity).id === "dinner_window";
+      return timeWindowIdForStart(activity.startDateTime) === "dinner_window";
     case "rain_backup":
       return weatherFitForActivity(activity).rainBackup;
     case "no_booking_required":

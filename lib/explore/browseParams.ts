@@ -93,6 +93,10 @@ function movieTimeWindow(movie: MovieNightOccurrence): "after_7_pm" | "dinner_wi
   return undefined;
 }
 
+function movieDaypart(movie: MovieNightOccurrence): Daypart {
+  return movie.isTonight ? "late" : "evening";
+}
+
 function movieMatchesPreset(
   movie: MovieNightOccurrence,
   filters: ActivityFilters,
@@ -293,6 +297,18 @@ export function filterMovieNights(
   }
 
   if (filters.category && filters.category !== "movies_under_stars") {
+    return [];
+  }
+
+  if (filters.daypart) {
+    result = result.filter((m) => movieDaypart(m) === filters.daypart);
+  }
+
+  if (filters.weather) {
+    return [];
+  }
+
+  if (filters.reservation) {
     return [];
   }
 

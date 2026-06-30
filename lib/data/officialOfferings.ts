@@ -16,10 +16,9 @@ import {
 } from "@/lib/search/normalize";
 import { scoreOffering } from "@/lib/search/score";
 import {
-  areaMatchesFilter,
-  transportMatchesFilter,
-} from "@/lib/explore/routeTaxonomy";
-import { selectedResortSlugs } from "@/lib/explore/resortFilters";
+  filterableItemMatchesFilters,
+  offeringToFilterableItem,
+} from "@/lib/explore/filterImpact";
 import { formatResortTier, slugToTitle } from "@/lib/utils";
 
 const OFFERING_QUERY_MIN_SCORE = 18;
@@ -365,42 +364,10 @@ export async function getOfficialOfferingsForResort(
 export async function getFilteredOfficialOfferings(
   filters: ActivityFilters = {}
 ): Promise<ActivityOffering[]> {
-  if (filters.daypart) return [];
-
   let offerings = await fetchOfficialActivityOfferings();
 
   offerings = offerings.filter((offering) => offering.status !== "paused");
-
-  const selectedResorts = selectedResortSlugs(filters.resort);
-  if (selectedResorts.length > 0) {
-    const resortSet = new Set(selectedResorts);
-    offerings = offerings.filter(
-      (offering) => resortSet.has(offering.resort.slug)
-    );
-  }
-
-  if (filters.category) {
-    offerings = offerings.filter(
-      (offering) => offering.category === filters.category
-    );
-  }
-
-  if (filters.transport) {
-    offerings = offerings.filter((offering) =>
-      transportMatchesFilter(offering.resort.slug, offering.resort.area, filters.transport!)
-    );
-  }
-
-  if (filters.area) {
-    offerings = offerings.filter((offering) =>
-      areaMatchesFilter(offering.resort.slug, offering.resort.area, filters.area!)
-    );
-  }
-
-  if (filters.free) {
-    offerings = offerings.filter((offering) => offering.price.state === "free");
-  }
-
+  const structuralFilters = { ...filters, q: undefined };
   if (filters.reservation) {
     offerings = offerings.filter(
       (offering) =>
@@ -408,6 +375,12 @@ export async function getFilteredOfficialOfferings(
         offering.booking?.reservationRecommended
     );
   }
+  offerings = offerings.filter((offering) =>
+    filterableItemMatchesFilters(
+      offeringToFilterableItem(offering),
+      structuralFilters
+    )
+  );
 
   const q = normalizeSearchQuery(filters.q ?? "");
   if (q) {

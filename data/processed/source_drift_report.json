@@ -1,0 +1,3094 @@
+{
+  "baseline_mode": "first_v3_baseline",
+  "generated_at": "2026-06-30T02:14:20.726582+00:00",
+  "manual_review_required": true,
+  "publish_blockers": [
+    "validation_failures"
+  ],
+  "quarter": "fy26-q3",
+  "report_kind": "v3_quarter_source_drift",
+  "source_reports": [
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "contemporary",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.359744+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.723809+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 4,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1",
+      "new_movie_count": 1,
+      "new_title_details": [
+        {
+          "canonical_slug": "None",
+          "title": "None"
+        },
+        {
+          "bbox_px": [
+            5721,
+            5889,
+            8848,
+            6136
+          ],
+          "canonical_slug": "cabana rentals ($)",
+          "crop_sha256": "09e4714e2dd1e1f3f5da9a2ca3609128a9490f3db509ee3fc16defeb40055ea0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
+          "page_image_sha256": "28edc2b735154e04db6434833b0a2b40546e7a7f3bfc71a059a51f6186439fde",
+          "page_number": 1,
+          "text": "CABANA RENTALS ($)",
+          "title": "cabana rentals ($)"
+        },
+        {
+          "bbox_px": [
+            5693,
+            10052,
+            9991,
+            10307
+          ],
+          "canonical_slug": "create your own slime ($)",
+          "crop_sha256": "09e4714e2dd1e1f3f5da9a2ca3609128a9490f3db509ee3fc16defeb40055ea0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
+          "page_image_sha256": "28edc2b735154e04db6434833b0a2b40546e7a7f3bfc71a059a51f6186439fde",
+          "page_number": 1,
+          "text": "CREATE YOUR OWN SLIME ($)",
+          "title": "create your own slime ($)"
+        },
+        {
+          "bbox_px": [
+            5709,
+            7039,
+            10076,
+            7290
+          ],
+          "canonical_slug": "motorized boat rentals ($)",
+          "crop_sha256": "09e4714e2dd1e1f3f5da9a2ca3609128a9490f3db509ee3fc16defeb40055ea0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
+          "page_image_sha256": "28edc2b735154e04db6434833b0a2b40546e7a7f3bfc71a059a51f6186439fde",
+          "page_number": 1,
+          "text": "MOTORIZED BOAT RENTALS ($)",
+          "title": "motorized boat rentals ($)"
+        },
+        {
+          "bbox_px": [
+            654,
+            8079,
+            3477,
+            8311
+          ],
+          "canonical_slug": "pickleball clinic",
+          "crop_sha256": "88b0a267ba006c3da728f65ad05ffafc6bf69246cf2ca2d828e5e413d0c11b12",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
+          "page_image_sha256": "28edc2b735154e04db6434833b0a2b40546e7a7f3bfc71a059a51f6186439fde",
+          "page_number": 1,
+          "text": "PICKLEBALL CLINIC",
+          "title": "pickleball clinic"
+        }
+      ],
+      "new_titles": [
+        "None",
+        "cabana rentals ($)",
+        "create your own slime ($)",
+        "motorized boat rentals ($)",
+        "pickleball clinic"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "04f658d731fee7796101de9cdb9e1851c15dc6a756089c6cae14fbdac0067986",
+      "source_key": "source:04f658d731fee7796101de9cdb9e1851c15dc6a756089c6cae14fbdac0067986",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "candidate_id": "vision-v3-ac4fc9803537f4f48cb6500a",
+          "canonical_slug": null,
+          "title": null,
+          "validation_findings": [
+            "field_extraction_not_implemented",
+            "missing_source_span:title",
+            "missing_required_field:title",
+            "missing_source_span:schedule",
+            "missing_required_field:schedule",
+            "missing_source_span:location",
+            "missing_required_field:location",
+            "missing_source_span:fee",
+            "missing_required_field:fee",
+            "missing_source_span:movie_title",
+            "missing_required_field:movie_title",
+            "unparsed_schedule",
+            "unknown_location"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "caribbean-beach",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "captured_at": "2026-06-30T00:07:31.276644+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "generated_at": "2026-06-30T02:14:20.724241+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 7,
+      "new_document_family": "vertical_digital_rec_sign",
+      "new_hash": "ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            202,
+            7392,
+            929,
+            7472
+          ],
+          "canonical_slug": "caribbean campfire",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "CARIBBEAN CAMPFIRE",
+          "title": "caribbean campfire"
+        },
+        {
+          "bbox_px": [
+            198,
+            8248,
+            857,
+            8386
+          ],
+          "canonical_slug": "disney character greetings",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "DISNEY CHARACTER GREETINGS",
+          "title": "disney character greetings"
+        },
+        {
+          "bbox_px": [
+            199,
+            7819,
+            1027,
+            7947
+          ],
+          "canonical_slug": "movie under the stars moana 2",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "MOVIE UNDER THE STARS MOANA 2 PG",
+          "title": "movie under the stars moana 2"
+        },
+        {
+          "bbox_px": [
+            205,
+            6870,
+            617,
+            6927
+          ],
+          "canonical_slug": "pool party",
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "POOL PARTY",
+          "title": "pool party"
+        }
+      ],
+      "new_titles": [
+        "caribbean campfire",
+        "disney character greetings",
+        "movie under the stars moana 2",
+        "pool party"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+      "source_key": "source:110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
+      "source_kind": "official_image",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            206,
+            2197,
+            855,
+            2349
+          ],
+          "candidate_id": "vision-v3-961de10ecac7924088ce999a",
+          "canonical_slug": null,
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "DISNEY CHARACTER GREETINGS",
+          "title": "disney character greetings",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            204,
+            3571,
+            854,
+            3700
+          ],
+          "candidate_id": "vision-v3-459c1bb1a1a6908205616849",
+          "canonical_slug": null,
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "DISNEY CHARACTER GREETINGS",
+          "title": "disney character greetings",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            199,
+            6596,
+            854,
+            6718
+          ],
+          "candidate_id": "vision-v3-62ff9fd56eadcb39b5750f67",
+          "canonical_slug": null,
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "DISNEY CHARACTER GREETINGS",
+          "title": "disney character greetings",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule"
+          ]
+        },
+        {
+          "bbox_px": [
+            205,
+            6870,
+            617,
+            6927
+          ],
+          "candidate_id": "vision-v3-bdf42a55ff8e9a214b01a6b1",
+          "canonical_slug": null,
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "POOL PARTY",
+          "title": "pool party",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            199,
+            7819,
+            1027,
+            7947
+          ],
+          "candidate_id": "vision-v3-09be60e3a5e8d80047e5b114",
+          "canonical_slug": null,
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "MOVIE UNDER THE STARS MOANA 2 PG",
+          "title": "movie under the stars moana 2",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            198,
+            8248,
+            857,
+            8386
+          ],
+          "candidate_id": "vision-v3-1ceb017b4b06be6670e7d189",
+          "canonical_slug": null,
+          "crop_sha256": "c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png",
+          "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
+          "page_number": 1,
+          "text": "DISNEY CHARACTER GREETINGS",
+          "title": "disney character greetings",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "all-star-sports",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.255151+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724299+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 10,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5676,
+            7630,
+            8954,
+            7857
+          ],
+          "canonical_slug": "arcade tournament",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "ARCADE TOURNAMENT",
+          "title": "arcade tournament"
+        },
+        {
+          "bbox_px": [
+            5680,
+            10432,
+            8409,
+            10664
+          ],
+          "canonical_slug": "bingo challenge",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "BINGO CHALLENGE",
+          "title": "bingo challenge"
+        },
+        {
+          "bbox_px": [
+            5681,
+            11733,
+            7165,
+            11939
+          ],
+          "canonical_slug": "field day",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "FIELD DAY",
+          "title": "field day"
+        },
+        {
+          "bbox_px": [
+            646,
+            7354,
+            2831,
+            7586
+          ],
+          "canonical_slug": "find a friend",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend"
+        },
+        {
+          "bbox_px": [
+            5684,
+            2920,
+            9275,
+            3175
+          ],
+          "canonical_slug": "game point arcade ($)",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "GAME POINT ARCADE ($)",
+          "title": "game point arcade ($)"
+        },
+        {
+          "bbox_px": [
+            5681,
+            6549,
+            8523,
+            6796
+          ],
+          "canonical_slug": "mickey tie-dye ($)",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "MICKEY TIE-DYE ($)",
+          "title": "mickey tie-dye ($)"
+        },
+        {
+          "bbox_px": [
+            5689,
+            3977,
+            8816,
+            4220
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        },
+        {
+          "bbox_px": [
+            5652,
+            14321,
+            10434,
+            14544
+          ],
+          "canonical_slug": "shine like a star glow party",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "SHINE LIKE A STAR GLOW PARTY",
+          "title": "shine like a star glow party"
+        },
+        {
+          "bbox_px": [
+            5660,
+            13016,
+            7637,
+            13248
+          ],
+          "canonical_slug": "silent disco",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "SILENT DISCO",
+          "title": "silent disco"
+        },
+        {
+          "bbox_px": [
+            655,
+            5006,
+            4908,
+            5233
+          ],
+          "canonical_slug": "wellness scavenger hunt",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "WELLNESS SCAVENGER HUNT",
+          "title": "wellness scavenger hunt"
+        }
+      ],
+      "new_titles": [
+        "arcade tournament",
+        "bingo challenge",
+        "field day",
+        "find a friend",
+        "game point arcade ($)",
+        "mickey tie-dye ($)",
+        "poolside activities",
+        "shine like a star glow party",
+        "silent disco",
+        "wellness scavenger hunt"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+      "source_key": "source:3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            646,
+            7354,
+            2831,
+            7586
+          ],
+          "candidate_id": "vision-v3-eaa719a6c49d9964264fab6d",
+          "canonical_slug": null,
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend",
+          "validation_findings": [
+            "engine_disagreement:title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "old-key-west",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.412834+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724380+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 9,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5713,
+            7383,
+            7161,
+            7594
+          ],
+          "canonical_slug": "campfire",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "CAMPFIRE",
+          "title": "campfire"
+        },
+        {
+          "bbox_px": [
+            5692,
+            9800,
+            8841,
+            10057
+          ],
+          "canonical_slug": "conch crazy bingo",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "CONCH CRAZY BINGO",
+          "title": "conch crazy bingo"
+        },
+        {
+          "bbox_px": [
+            5709,
+            2908,
+            10402,
+            3155
+          ],
+          "canonical_slug": "conch flats community hall",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "CONCH FLATS COMMUNITY HALL",
+          "title": "conch flats community hall"
+        },
+        {
+          "bbox_px": [
+            5685,
+            13644,
+            9633,
+            13904
+          ],
+          "canonical_slug": "conch flats mosaics ($)",
+          "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "CONCH FLATS MOSAICS ($)",
+          "title": "conch flats mosaics ($)"
+        },
+        {
+          "bbox_px": [
+            662,
+            6731,
+            4473,
+            6974
+          ],
+          "canonical_slug": "disney fit aqua fitness",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "DISNEY FIT AQUA FITNESS",
+          "title": "disney fit aqua fitness"
+        },
+        {
+          "bbox_px": [
+            667,
+            4977,
+            3192,
+            5200
+          ],
+          "canonical_slug": "disney fit yoga",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "DISNEY FIT YOGA",
+          "title": "disney fit yoga"
+        },
+        {
+          "bbox_px": [
+            5697,
+            8711,
+            8344,
+            8943
+          ],
+          "canonical_slug": "nighttime trivia",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "NIGHTTIME TRIVIA",
+          "title": "nighttime trivia"
+        },
+        {
+          "bbox_px": [
+            646,
+            8270,
+            3465,
+            8510
+          ],
+          "canonical_slug": "pickleball clinic",
+          "crop_sha256": "25d59705a793c36deeb729d496e4e27b5ea115988cc2e401f5a92ef9342a0d50",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "PICKLEBALL CLINIC",
+          "title": "pickleball clinic"
+        },
+        {
+          "bbox_px": [
+            5705,
+            4236,
+            8861,
+            4480
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        }
+      ],
+      "new_titles": [
+        "campfire",
+        "conch crazy bingo",
+        "conch flats community hall",
+        "conch flats mosaics ($)",
+        "disney fit aqua fitness",
+        "disney fit yoga",
+        "nighttime trivia",
+        "pickleball clinic",
+        "poolside activities"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+      "source_key": "source:3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            5709,
+            2908,
+            10402,
+            3155
+          ],
+          "candidate_id": "vision-v3-f7de45b3ce635d81b2a75b6e",
+          "canonical_slug": null,
+          "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
+          "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
+          "page_number": 1,
+          "text": "CONCH FLATS COMMUNITY HALL",
+          "title": "conch flats community hall",
+          "validation_findings": [
+            "engine_disagreement:title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "all-star-music",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.247491+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724438+00:00",
+      "http_status": 200,
+      "manual_review_required": false,
+      "new_activity_count": 7,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5709,
+            8338,
+            8991,
+            8578
+          ],
+          "canonical_slug": "arcade tournament",
+          "crop_sha256": "f89ca8316c12da8600966fa2e449393325a54077c87912e27e76d7c9ef5045a8",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "ARCADE TOURNAMENT",
+          "title": "arcade tournament"
+        },
+        {
+          "bbox_px": [
+            658,
+            7427,
+            2835,
+            7659
+          ],
+          "canonical_slug": "find a friend",
+          "crop_sha256": "4a7459435fde1c12609d172a15ed8ae2c5c89d64eec5b29f96660543f1b113ce",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend"
+        },
+        {
+          "bbox_px": [
+            5713,
+            7164,
+            8559,
+            7412
+          ],
+          "canonical_slug": "mickey tie-dye ($)",
+          "crop_sha256": "f89ca8316c12da8600966fa2e449393325a54077c87912e27e76d7c9ef5045a8",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "MICKEY TIE-DYE ($)",
+          "title": "mickey tie-dye ($)"
+        },
+        {
+          "bbox_px": [
+            5721,
+            2940,
+            10202,
+            3187
+          ],
+          "canonical_slug": "note'able games arcade ($)",
+          "crop_sha256": "f89ca8316c12da8600966fa2e449393325a54077c87912e27e76d7c9ef5045a8",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "NOTE'ABLE GAMES ARCADE ($)",
+          "title": "note'able games arcade ($)"
+        },
+        {
+          "bbox_px": [
+            5697,
+            12810,
+            10410,
+            13053
+          ],
+          "canonical_slug": "shine like a star glow party",
+          "crop_sha256": "03a4d19dc2534d204e134d3b934f7521c072ee33e101d4cde665f0c732716ec1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "SHINE LIKE A STAR GLOW PARTY",
+          "title": "shine like a star glow party"
+        },
+        {
+          "bbox_px": [
+            5692,
+            14248,
+            7641,
+            14463
+          ],
+          "canonical_slug": "silent disco",
+          "crop_sha256": "03a4d19dc2534d204e134d3b934f7521c072ee33e101d4cde665f0c732716ec1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "SILENT DISCO",
+          "title": "silent disco"
+        },
+        {
+          "bbox_px": [
+            662,
+            5038,
+            4921,
+            5277
+          ],
+          "canonical_slug": "wellness scavenger hunt",
+          "crop_sha256": "4a7459435fde1c12609d172a15ed8ae2c5c89d64eec5b29f96660543f1b113ce",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
+          "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
+          "page_number": 1,
+          "text": "WELLNESS SCAVENGER HUNT",
+          "title": "wellness scavenger hunt"
+        }
+      ],
+      "new_titles": [
+        "arcade tournament",
+        "find a friend",
+        "mickey tie-dye ($)",
+        "note'able games arcade ($)",
+        "shine like a star glow party",
+        "silent disco",
+        "wellness scavenger hunt"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "4424fc235f3f7f293ef1fcbc8182123c01a42a577136df0b141c63c93cf0dc6e",
+      "source_key": "source:4424fc235f3f7f293ef1fcbc8182123c01a42a577136df0b141c63c93cf0dc6e",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "clean",
+      "validation_failures": []
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "coronado-springs",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.284677+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724503+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 3,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c",
+      "new_movie_count": 4,
+      "new_title_details": [
+        {
+          "canonical_slug": "None",
+          "title": "None"
+        },
+        {
+          "bbox_px": [
+            5660,
+            13462,
+            10239,
+            13746
+          ],
+          "canonical_slug": "movie under the stars",
+          "crop_sha256": "a5b3dba79b4041d77585d82d8da1f05634c068c90c4159f7475ee4d0a71caf27",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.png",
+          "page_image_sha256": "cb67d18d7fd48318f946c58ba24c760cc4ada856c0b11802115662cec7673969",
+          "page_number": 1,
+          "text": "MOVIEUNDER THE STARS",
+          "title": "movie under the stars"
+        },
+        {
+          "bbox_px": [
+            5684,
+            8476,
+            9467,
+            8736
+          ],
+          "canonical_slug": "painting experience ($)",
+          "crop_sha256": "99af5cb1074e302dd36eef3550d440441cd4e833469393eb0f3d833ddce77742",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.png",
+          "page_image_sha256": "cb67d18d7fd48318f946c58ba24c760cc4ada856c0b11802115662cec7673969",
+          "page_number": 1,
+          "text": "PAINTING EXPERIENCE ($)",
+          "title": "painting experience ($)"
+        },
+        {
+          "bbox_px": [
+            5688,
+            5168,
+            9340,
+            5439
+          ],
+          "canonical_slug": "spanish mosaic art ($)",
+          "crop_sha256": "99af5cb1074e302dd36eef3550d440441cd4e833469393eb0f3d833ddce77742",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.png",
+          "page_image_sha256": "cb67d18d7fd48318f946c58ba24c760cc4ada856c0b11802115662cec7673969",
+          "page_number": 1,
+          "text": "SPANISH MOSAIC ART ($)",
+          "title": "spanish mosaic art ($)"
+        }
+      ],
+      "new_titles": [
+        "None",
+        "movie under the stars",
+        "painting experience ($)",
+        "spanish mosaic art ($)"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "47e30131c544288511a6da0358c7b561fe4d5533d635612e456ed8fb0d4c8aa0",
+      "source_key": "source:47e30131c544288511a6da0358c7b561fe4d5533d635612e456ed8fb0d4c8aa0",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "candidate_id": "vision-v3-467e6391040826cf229247d5",
+          "canonical_slug": null,
+          "title": null,
+          "validation_findings": [
+            "field_extraction_not_implemented",
+            "missing_source_span:title",
+            "missing_required_field:title",
+            "missing_source_span:schedule",
+            "missing_required_field:schedule",
+            "missing_source_span:location",
+            "missing_required_field:location",
+            "missing_source_span:fee",
+            "missing_required_field:fee",
+            "unparsed_schedule",
+            "unknown_location"
+          ]
+        },
+        {
+          "bbox_px": [
+            7880,
+            14969,
+            10174,
+            15172
+          ],
+          "candidate_id": "vision-v3-65274d48d258231660293ccd",
+          "canonical_slug": null,
+          "crop_sha256": "a5b3dba79b4041d77585d82d8da1f05634c068c90c4159f7475ee4d0a71caf27",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_001.png",
+          "page_image_sha256": "cb67d18d7fd48318f946c58ba24c760cc4ada856c0b11802115662cec7673969",
+          "page_number": 1,
+          "text": "Beauty and the Beast (1991)",
+          "title": "movie under the stars",
+          "validation_findings": [
+            "engine_disagreement:movie_title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "riviera",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.420896+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724606+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 3,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4",
+      "new_movie_count": 6,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5717,
+            8841,
+            9243,
+            9125
+          ],
+          "canonical_slug": "c\u00f4te d'azur campfire",
+          "crop_sha256": "143e4258ffdbbbf833f0a16fdaa1b6494eeebda12483667567c0057fb0af811d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+          "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+          "page_number": 1,
+          "text": "C\u00d4TE D'AZUR CAMPFIRE",
+          "title": "c\u00f4te d'azur campfire"
+        },
+        {
+          "bbox_px": [
+            654,
+            5054,
+            2843,
+            5290
+          ],
+          "canonical_slug": "find a friend",
+          "crop_sha256": "cbec6264dd5477a9874ea269798915ac3cc169a2e61aae6f3c36821b3c4566f9",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+          "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend"
+        },
+        {
+          "bbox_px": [
+            5705,
+            13235,
+            10288,
+            13507
+          ],
+          "canonical_slug": "movie under the stars",
+          "crop_sha256": "17b246b17584bbfa1b38d22678332214b384743d1478ad138c6628207b0ddf26",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+          "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+          "page_number": 1,
+          "text": "MOVIE UNDER THE STARS",
+          "title": "movie under the stars"
+        },
+        {
+          "bbox_px": [
+            5729,
+            7598,
+            8873,
+            7837
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "143e4258ffdbbbf833f0a16fdaa1b6494eeebda12483667567c0057fb0af811d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+          "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        }
+      ],
+      "new_titles": [
+        "c\u00f4te d'azur campfire",
+        "find a friend",
+        "movie under the stars",
+        "poolside activities"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "51e6ce58ef1db448f5275fece5826ff0fbbad226a50679f86212b61cdf6021ba",
+      "source_key": "source:51e6ce58ef1db448f5275fece5826ff0fbbad226a50679f86212b61cdf6021ba",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            8315,
+            15252,
+            10195,
+            15471
+          ],
+          "candidate_id": "vision-v3-d785e9785448ac2dd4814575",
+          "canonical_slug": null,
+          "crop_sha256": "17b246b17584bbfa1b38d22678332214b384743d1478ad138c6628207b0ddf26",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
+          "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
+          "page_number": 1,
+          "text": "The Parent Trap (1998)",
+          "title": "movie under the stars",
+          "validation_findings": [
+            "engine_disagreement:movie_title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "all-star-movies",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.239967+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724704+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 8,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5652,
+            8334,
+            8942,
+            8578
+          ],
+          "canonical_slug": "arcade tournament",
+          "crop_sha256": "0971ce20d14fec3250b9914b7b5035d25b3866f7006377779b28770aec722e33",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "ARCADE TOURNAMENT",
+          "title": "arcade tournament"
+        },
+        {
+          "bbox_px": [
+            630,
+            7318,
+            2819,
+            7558
+          ],
+          "canonical_slug": "find a friend",
+          "crop_sha256": "ee2692314bf6f1b2e05a32c8fc7f149d8fc912941f7776d0817c3085921a4a93",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend"
+        },
+        {
+          "bbox_px": [
+            5656,
+            6921,
+            8498,
+            7168
+          ],
+          "canonical_slug": "mickey tie-dye ($)",
+          "crop_sha256": "0971ce20d14fec3250b9914b7b5035d25b3866f7006377779b28770aec722e33",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "MICKEY TIE-DYE ($)",
+          "title": "mickey tie-dye ($)"
+        },
+        {
+          "bbox_px": [
+            5652,
+            4107,
+            8800,
+            4346
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "0971ce20d14fec3250b9914b7b5035d25b3866f7006377779b28770aec722e33",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        },
+        {
+          "bbox_px": [
+            5648,
+            2932,
+            8865,
+            3204
+          ],
+          "canonical_slug": "reel fun arcade ($)",
+          "crop_sha256": "0971ce20d14fec3250b9914b7b5035d25b3866f7006377779b28770aec722e33",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "REEL FUN ARCADE ($)",
+          "title": "reel fun arcade ($)"
+        },
+        {
+          "bbox_px": [
+            5623,
+            14244,
+            10345,
+            14475
+          ],
+          "canonical_slug": "shine like a star glow party",
+          "crop_sha256": "62ed5e8a0fbdfb2927f2388bd79abd8f6c515e4c3527b314cf9aa45ef65f676a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "SHINE LIKE A STAR GLOW PARTY",
+          "title": "shine like a star glow party"
+        },
+        {
+          "bbox_px": [
+            5636,
+            12826,
+            7612,
+            13053
+          ],
+          "canonical_slug": "silent disco",
+          "crop_sha256": "62ed5e8a0fbdfb2927f2388bd79abd8f6c515e4c3527b314cf9aa45ef65f676a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "SILENT DISCO",
+          "title": "silent disco"
+        },
+        {
+          "bbox_px": [
+            638,
+            5046,
+            4892,
+            5282
+          ],
+          "canonical_slug": "wellness scavenger hunt",
+          "crop_sha256": "ee2692314bf6f1b2e05a32c8fc7f149d8fc912941f7776d0817c3085921a4a93",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "WELLNESS SCAVENGER HUNT",
+          "title": "wellness scavenger hunt"
+        }
+      ],
+      "new_titles": [
+        "arcade tournament",
+        "find a friend",
+        "mickey tie-dye ($)",
+        "poolside activities",
+        "reel fun arcade ($)",
+        "shine like a star glow party",
+        "silent disco",
+        "wellness scavenger hunt"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "62c3260f33d925eec99ea321e948c27efb76c384dab0fb582febba00117a2c13",
+      "source_key": "source:62c3260f33d925eec99ea321e948c27efb76c384dab0fb582febba00117a2c13",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            630,
+            7318,
+            2819,
+            7558
+          ],
+          "candidate_id": "vision-v3-a162c7e0ac4609dbec54ab0f",
+          "canonical_slug": null,
+          "crop_sha256": "ee2692314bf6f1b2e05a32c8fc7f149d8fc912941f7776d0817c3085921a4a93",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
+          "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend",
+          "validation_findings": [
+            "engine_disagreement:title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "polynesian",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.388829+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724763+00:00",
+      "http_status": 200,
+      "manual_review_required": false,
+      "new_activity_count": 4,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5697,
+            14232,
+            8645,
+            14447
+          ],
+          "canonical_slug": "aloha after dark",
+          "crop_sha256": "6054478aa293103b967ddea42513710e52448274c980ecd2c6ac6603db57caf4",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",
+          "page_image_sha256": "6836935f7245dd0cd1b9aa4c551fa4668e872d9edc3db110837ffa0550b21b6d",
+          "page_number": 1,
+          "text": "ALOHA AFTER DARK",
+          "title": "aloha after dark"
+        },
+        {
+          "bbox_px": [
+            663,
+            5006,
+            4835,
+            5224
+          ],
+          "canonical_slug": "disney family fitness fun",
+          "crop_sha256": "952ec4577fb4abf12825d2a5db2dc1ce837265ea40b526deeb2dd279b22d6c7a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",
+          "page_image_sha256": "6836935f7245dd0cd1b9aa4c551fa4668e872d9edc3db110837ffa0550b21b6d",
+          "page_number": 1,
+          "text": "DISNEY FAMILY FITNESS FUN",
+          "title": "disney family fitness fun"
+        },
+        {
+          "bbox_px": [
+            659,
+            6427,
+            3457,
+            6667
+          ],
+          "canonical_slug": "disney fit tai chi",
+          "crop_sha256": "952ec4577fb4abf12825d2a5db2dc1ce837265ea40b526deeb2dd279b22d6c7a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",
+          "page_image_sha256": "6836935f7245dd0cd1b9aa4c551fa4668e872d9edc3db110837ffa0550b21b6d",
+          "page_number": 1,
+          "text": "DISNEY FIT TAI CHI",
+          "title": "disney fit tai chi"
+        },
+        {
+          "bbox_px": [
+            5721,
+            7176,
+            8389,
+            7404
+          ],
+          "canonical_slug": "lava pool party",
+          "crop_sha256": "7f08d00ba22bb90d2dcc99afcaceea4f8844d5d997d60ca8ea3aba48d43cc532",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",
+          "page_image_sha256": "6836935f7245dd0cd1b9aa4c551fa4668e872d9edc3db110837ffa0550b21b6d",
+          "page_number": 1,
+          "text": "LAVA POOL PARTY",
+          "title": "lava pool party"
+        }
+      ],
+      "new_titles": [
+        "aloha after dark",
+        "disney family fitness fun",
+        "disney fit tai chi",
+        "lava pool party"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "761372974296f28c558922100ed957c51cac85f7915ea7a3084b8b438558ba86",
+      "source_key": "source:761372974296f28c558922100ed957c51cac85f7915ea7a3084b8b438558ba86",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "clean",
+      "validation_failures": []
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "boardwalk",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.350146+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.724847+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 6,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+      "new_movie_count": 7,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5705,
+            8424,
+            8474,
+            8671
+          ],
+          "canonical_slug": "arts & crafts ($)",
+          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "ARTS & CRAFTS ($)",
+          "title": "arts & crafts ($)"
+        },
+        {
+          "bbox_px": [
+            663,
+            4868,
+            3993,
+            5087
+          ],
+          "canonical_slug": "boardwalk croquet",
+          "crop_sha256": "c53281ddc707d3cf3d1b46e3c50e440e999c8fbe582338861b44b3e7b5208940",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "BOARDWALK CROQUET",
+          "title": "boardwalk croquet"
+        },
+        {
+          "bbox_px": [
+            5712,
+            9634,
+            7169,
+            9870
+          ],
+          "canonical_slug": "campfire",
+          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "CAMPFIRE",
+          "title": "campfire"
+        },
+        {
+          "bbox_px": [
+            659,
+            5958,
+            3196,
+            6188
+          ],
+          "canonical_slug": "disney fit yoga",
+          "crop_sha256": "c53281ddc707d3cf3d1b46e3c50e440e999c8fbe582338861b44b3e7b5208940",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "DISNEY FIT YOGA",
+          "title": "disney fit yoga"
+        },
+        {
+          "bbox_px": [
+            638,
+            7496,
+            4241,
+            7744
+          ],
+          "canonical_slug": "family wellness yoga",
+          "crop_sha256": "c53281ddc707d3cf3d1b46e3c50e440e999c8fbe582338861b44b3e7b5208940",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "FAMILY WELLNESS YOGA",
+          "title": "family wellness yoga"
+        },
+        {
+          "bbox_px": [
+            5688,
+            12437,
+            10276,
+            12705
+          ],
+          "canonical_slug": "movie under the stars",
+          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "MOVIE UNDER THESTARS",
+          "title": "movie under the stars"
+        },
+        {
+          "bbox_px": [
+            5725,
+            5532,
+            8856,
+            5751
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        }
+      ],
+      "new_titles": [
+        "arts & crafts ($)",
+        "boardwalk croquet",
+        "campfire",
+        "disney fit yoga",
+        "family wellness yoga",
+        "movie under the stars",
+        "poolside activities"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+      "source_key": "source:7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            9092,
+            14976,
+            10186,
+            15168
+          ],
+          "candidate_id": "vision-v3-2b90015c9a93f9926c31be79",
+          "canonical_slug": null,
+          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "o 1n",
+          "title": "movie under the stars",
+          "validation_findings": [
+            "engine_disagreement:movie_title"
+          ]
+        },
+        {
+          "bbox_px": [
+            9027,
+            15300,
+            10186,
+            15504
+          ],
+          "candidate_id": "vision-v3-34f938e9fd4db2dcc79806c3",
+          "canonical_slug": null,
+          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "text": "in  m",
+          "title": "movie under the stars",
+          "validation_findings": [
+            "engine_disagreement:movie_title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "animal-kingdom-kidani",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.318911+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726069+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 4,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "canonical_slug": "None",
+          "title": "None"
+        },
+        {
+          "bbox_px": [
+            5684,
+            8622,
+            8047,
+            8837
+          ],
+          "canonical_slug": "arts & crafts ($)",
+          "crop_sha256": "8be41aaa6b0b1786def9be0681b56907f56c634dfe8087e7e2feb61b6c2492ac",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png",
+          "page_image_sha256": "32c1f9acfc38e09a0738a6629de65172a0322674691e2f336d0ce903431cb6d8",
+          "page_number": 1,
+          "text": "ARTS & CRAFTS ($)",
+          "title": "arts & crafts ($)"
+        },
+        {
+          "bbox_px": [
+            5689,
+            12531,
+            6473,
+            12717
+          ],
+          "canonical_slug": "bingo",
+          "crop_sha256": "56bde41f205006da9eac4b88cc05a2c5c75144dee8600dea5c8aa03204ee19c8",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png",
+          "page_image_sha256": "32c1f9acfc38e09a0738a6629de65172a0322674691e2f336d0ce903431cb6d8",
+          "page_number": 1,
+          "text": "BINGO",
+          "title": "bingo"
+        },
+        {
+          "bbox_px": [
+            5696,
+            10169,
+            6933,
+            10360
+          ],
+          "canonical_slug": "campfire",
+          "crop_sha256": "8be41aaa6b0b1786def9be0681b56907f56c634dfe8087e7e2feb61b6c2492ac",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png",
+          "page_image_sha256": "32c1f9acfc38e09a0738a6629de65172a0322674691e2f336d0ce903431cb6d8",
+          "page_number": 1,
+          "text": "CAMPFIRE",
+          "title": "campfire"
+        }
+      ],
+      "new_titles": [
+        "None",
+        "arts & crafts ($)",
+        "bingo",
+        "campfire"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "8c085f9e28a251db549a40c552c567c623a1d383d04f1bd7822130eaca2fc986",
+      "source_key": "source:8c085f9e28a251db549a40c552c567c623a1d383d04f1bd7822130eaca2fc986",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "candidate_id": "vision-v3-98f1a048a4a55d2cb668d6ee",
+          "canonical_slug": null,
+          "title": null,
+          "validation_findings": [
+            "field_extraction_not_implemented",
+            "missing_source_span:title",
+            "missing_required_field:title",
+            "missing_source_span:schedule",
+            "missing_required_field:schedule",
+            "missing_source_span:location",
+            "missing_required_field:location",
+            "missing_source_span:fee",
+            "missing_required_field:fee",
+            "unparsed_schedule",
+            "unknown_location"
+          ]
+        },
+        {
+          "bbox_px": [
+            5692,
+            9124,
+            7072,
+            9303
+          ],
+          "candidate_id": "vision-v3-aa725232b282e199ad62f9e5",
+          "canonical_slug": null,
+          "crop_sha256": "8be41aaa6b0b1786def9be0681b56907f56c634dfe8087e7e2feb61b6c2492ac",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png",
+          "page_image_sha256": "32c1f9acfc38e09a0738a6629de65172a0322674691e2f336d0ce903431cb6d8",
+          "page_number": 1,
+          "text": "3:30pm-4:30pm",
+          "title": "arts & crafts ($)",
+          "validation_findings": [
+            "engine_disagreement:schedule",
+            "unparsed_schedule"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "beach-yacht-club",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.340685+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726139+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 8,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "canonical_slug": "None",
+          "title": "None"
+        },
+        {
+          "bbox_px": [
+            5713,
+            3819,
+            8348,
+            4067
+          ],
+          "canonical_slug": "boat rentals ($)",
+          "crop_sha256": "8853d5b5c62b99f4feb39ffab6799a79cec7f2bac362442d7818b725fe986092",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "BOAT RENTALS ($)",
+          "title": "boat rentals ($)"
+        },
+        {
+          "bbox_px": [
+            5708,
+            10764,
+            7161,
+            11000
+          ],
+          "canonical_slug": "campfire",
+          "crop_sha256": "8853d5b5c62b99f4feb39ffab6799a79cec7f2bac362442d7818b725fe986092",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "CAMPFIRE",
+          "title": "campfire"
+        },
+        {
+          "bbox_px": [
+            5705,
+            12065,
+            8328,
+            12284
+          ],
+          "canonical_slug": "nighttime trivia",
+          "crop_sha256": "e5e406b5326e6366473b0d84a3008620ed560c36af9c930e366a23f3f916907c",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "NIGHTTIMETRIVIA",
+          "title": "nighttime trivia"
+        },
+        {
+          "bbox_px": [
+            5713,
+            4658,
+            10194,
+            4900
+          ],
+          "canonical_slug": "painting in the vineyard ($)",
+          "crop_sha256": "8853d5b5c62b99f4feb39ffab6799a79cec7f2bac362442d7818b725fe986092",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "PAINTING IN THE VINEYARD ($)",
+          "title": "painting in the vineyard ($)"
+        },
+        {
+          "bbox_px": [
+            5717,
+            6395,
+            8832,
+            6638
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "8853d5b5c62b99f4feb39ffab6799a79cec7f2bac362442d7818b725fe986092",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        },
+        {
+          "bbox_px": [
+            5689,
+            13134,
+            7653,
+            13353
+          ],
+          "canonical_slug": "silent disco",
+          "crop_sha256": "e5e406b5326e6366473b0d84a3008620ed560c36af9c930e366a23f3f916907c",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "SILENT DISCO",
+          "title": "silent disco"
+        },
+        {
+          "bbox_px": [
+            5668,
+            14422,
+            8454,
+            14665
+          ],
+          "canonical_slug": "yo ho let's glow",
+          "crop_sha256": "e5e406b5326e6366473b0d84a3008620ed560c36af9c930e366a23f3f916907c",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
+          "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
+          "page_number": 1,
+          "text": "YO HO LET'S GLOW",
+          "title": "yo ho let's glow"
+        }
+      ],
+      "new_titles": [
+        "None",
+        "boat rentals ($)",
+        "campfire",
+        "nighttime trivia",
+        "painting in the vineyard ($)",
+        "poolside activities",
+        "silent disco",
+        "yo ho let's glow"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "a14a6dedc284910cdc501ebfb211047e0149ee9501cbdf5984c28a83da896d20",
+      "source_key": "source:a14a6dedc284910cdc501ebfb211047e0149ee9501cbdf5984c28a83da896d20",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "candidate_id": "vision-v3-87d2da2f2d5ff9f383a13a26",
+          "canonical_slug": null,
+          "title": null,
+          "validation_findings": [
+            "field_extraction_not_implemented",
+            "missing_source_span:title",
+            "missing_required_field:title",
+            "missing_source_span:schedule",
+            "missing_required_field:schedule",
+            "missing_source_span:location",
+            "missing_required_field:location",
+            "missing_source_span:fee",
+            "missing_required_field:fee",
+            "unparsed_schedule",
+            "unknown_location"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "saratoga-springs",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.423676+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726197+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 8,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5717,
+            7051,
+            7157,
+            7258
+          ],
+          "canonical_slug": "campfire",
+          "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "CAMPFIRE",
+          "title": "campfire"
+        },
+        {
+          "bbox_px": [
+            646,
+            8116,
+            2831,
+            8352
+          ],
+          "canonical_slug": "find a friend",
+          "crop_sha256": "90fc3aca50eeb8b3ee77da081872449908a090986390fef5ec452000c3b607a3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend"
+        },
+        {
+          "bbox_px": [
+            5709,
+            8412,
+            9023,
+            8627
+          ],
+          "canonical_slug": "glow with the flow",
+          "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "GLOW WITH THE FLOW",
+          "title": "glow with the flow"
+        },
+        {
+          "bbox_px": [
+            5696,
+            9549,
+            8292,
+            9785
+          ],
+          "canonical_slug": "nighttime bingo",
+          "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "NIGHTTIME BINGO",
+          "title": "nighttime bingo"
+        },
+        {
+          "bbox_px": [
+            5713,
+            4058,
+            8848,
+            4297
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        },
+        {
+          "bbox_px": [
+            654,
+            6581,
+            3302,
+            6821
+          ],
+          "canonical_slug": "story time yoga",
+          "crop_sha256": "90fc3aca50eeb8b3ee77da081872449908a090986390fef5ec452000c3b607a3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "STORY TIME YOGA",
+          "title": "story time yoga"
+        },
+        {
+          "bbox_px": [
+            5676,
+            13806,
+            9015,
+            14078
+          ],
+          "canonical_slug": "win, paint, show! ($)",
+          "crop_sha256": "84217078f18c085ee6f8a5ce129d3c921834776bd594a28c45c8f7deca6e77df",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "WIN, PAINT, SHOW! ($)",
+          "title": "win, paint, show! ($)"
+        },
+        {
+          "bbox_px": [
+            5693,
+            11769,
+            10198,
+            12037
+          ],
+          "canonical_slug": "winner's circle mosaics ($)",
+          "crop_sha256": "84217078f18c085ee6f8a5ce129d3c921834776bd594a28c45c8f7deca6e77df",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "WINNER'S CIRCLE MOSAICS ($)",
+          "title": "winner's circle mosaics ($)"
+        }
+      ],
+      "new_titles": [
+        "campfire",
+        "find a friend",
+        "glow with the flow",
+        "nighttime bingo",
+        "poolside activities",
+        "story time yoga",
+        "win, paint, show! ($)",
+        "winner's circle mosaics ($)"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "a95a68b00968dcbc871e9c3d43526cd3af6495e488e793df51ec54a9b7d06ddd",
+      "source_key": "source:a95a68b00968dcbc871e9c3d43526cd3af6495e488e793df51ec54a9b7d06ddd",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            646,
+            8116,
+            2831,
+            8352
+          ],
+          "candidate_id": "vision-v3-853dfa25a7cb420dae9066cf",
+          "canonical_slug": null,
+          "crop_sha256": "90fc3aca50eeb8b3ee77da081872449908a090986390fef5ec452000c3b607a3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
+          "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend",
+          "validation_findings": [
+            "engine_disagreement:title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "wilderness-lodge",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.409940+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726251+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 7,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5729,
+            4645,
+            9743,
+            4868
+          ],
+          "canonical_slug": "art & architecture tour",
+          "crop_sha256": "289ad3464c47b7245fd0bf8d32b1e74c889ceb2cd8540c542b09d169f9655171",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "ART & ARCHITECTURE TOUR",
+          "title": "art & architecture tour"
+        },
+        {
+          "bbox_px": [
+            659,
+            5083,
+            2846,
+            5301
+          ],
+          "canonical_slug": "find a friend",
+          "crop_sha256": "3d0112fa83264976c29ad0af1afafae65f4e4ec564b37eca5ce629922dd206c3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "FIND A FRIEND",
+          "title": "find a friend"
+        },
+        {
+          "bbox_px": [
+            5721,
+            3248,
+            8316,
+            3500
+          ],
+          "canonical_slug": "game arcade ($)",
+          "crop_sha256": "289ad3464c47b7245fd0bf8d32b1e74c889ceb2cd8540c542b09d169f9655171",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "GAME ARCADE ($)",
+          "title": "game arcade ($)"
+        },
+        {
+          "bbox_px": [
+            5705,
+            12936,
+            9218,
+            13151
+          ],
+          "canonical_slug": "nighttime pool party",
+          "crop_sha256": "e4d98c857da58138ca8f48dd20b034f1a6440cbb13357f62e4aa5200b7098573",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "NIGHTTIME POOL PARTY",
+          "title": "nighttime pool party"
+        },
+        {
+          "bbox_px": [
+            5721,
+            8322,
+            8861,
+            8558
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "289ad3464c47b7245fd0bf8d32b1e74c889ceb2cd8540c542b09d169f9655171",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        },
+        {
+          "bbox_px": [
+            659,
+            6670,
+            3216,
+            6877
+          ],
+          "canonical_slug": "storytime yoga",
+          "crop_sha256": "3d0112fa83264976c29ad0af1afafae65f4e4ec564b37eca5ce629922dd206c3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "STORYTIME YOGA",
+          "title": "storytime yoga"
+        },
+        {
+          "bbox_px": [
+            5692,
+            14308,
+            9454,
+            14536
+          ],
+          "canonical_slug": "wild wilderness bingo",
+          "crop_sha256": "e4d98c857da58138ca8f48dd20b034f1a6440cbb13357f62e4aa5200b7098573",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "WILD WILDERNESS BINGO",
+          "title": "wild wilderness bingo"
+        }
+      ],
+      "new_titles": [
+        "art & architecture tour",
+        "find a friend",
+        "game arcade ($)",
+        "nighttime pool party",
+        "poolside activities",
+        "storytime yoga",
+        "wild wilderness bingo"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "af4528d505c55170f22035d0280484c7a5a05d3bb56da4ed757a640cb2b87807",
+      "source_key": "source:af4528d505c55170f22035d0280484c7a5a05d3bb56da4ed757a640cb2b87807",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            5721,
+            3248,
+            8316,
+            3500
+          ],
+          "candidate_id": "vision-v3-e6a71038ea690f238fb524ff",
+          "canonical_slug": null,
+          "crop_sha256": "289ad3464c47b7245fd0bf8d32b1e74c889ceb2cd8540c542b09d169f9655171",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "GAME ARCADE ($)",
+          "title": "game arcade ($)",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:fee"
+          ]
+        },
+        {
+          "bbox_px": [
+            5729,
+            4645,
+            9743,
+            4868
+          ],
+          "candidate_id": "vision-v3-b9d83d64098f589efdfa7e43",
+          "canonical_slug": null,
+          "crop_sha256": "289ad3464c47b7245fd0bf8d32b1e74c889ceb2cd8540c542b09d169f9655171",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+          "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+          "page_number": 1,
+          "text": "ART & ARCHITECTURE TOUR",
+          "title": "art & architecture tour",
+          "validation_findings": [
+            "engine_disagreement:title"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "art-of-animation",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "captured_at": "2026-06-30T00:07:31.261998+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "generated_at": "2026-06-30T02:14:20.726317+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 4,
+      "new_document_family": "vertical_digital_rec_sign",
+      "new_hash": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            200,
+            6929,
+            1038,
+            7024
+          ],
+          "canonical_slug": "activities on the lawn",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "ACTIVITIES ON THE LAWN",
+          "title": "activities on the lawn"
+        },
+        {
+          "bbox_px": [
+            200,
+            7157,
+            1022,
+            7275
+          ],
+          "canonical_slug": "movie under the stars toy story 2",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "MOVIE UNDER THE STARS TOY STORY 2 G",
+          "title": "movie under the stars toy story 2"
+        },
+        {
+          "bbox_px": [
+            201,
+            11389,
+            615,
+            11498
+          ],
+          "canonical_slug": "pool party",
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "POOL PARTY",
+          "title": "pool party"
+        }
+      ],
+      "new_titles": [
+        "activities on the lawn",
+        "movie under the stars toy story 2",
+        "pool party"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
+      "source_key": "source:af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
+      "source_kind": "official_image",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            200,
+            6929,
+            1038,
+            7024
+          ],
+          "candidate_id": "vision-v3-cb820d3e7402bda747cccfd3",
+          "canonical_slug": null,
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "ACTIVITIES ON THE LAWN",
+          "title": "activities on the lawn",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            200,
+            7157,
+            1022,
+            7275
+          ],
+          "candidate_id": "vision-v3-66039a243e90e9c50fcad5ef",
+          "canonical_slug": null,
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "MOVIE UNDER THE STARS TOY STORY 2 G",
+          "title": "movie under the stars toy story 2",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            199,
+            9873,
+            613,
+            9955
+          ],
+          "candidate_id": "vision-v3-b6c7643e3b4fa5f88d34996a",
+          "canonical_slug": null,
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "POOL PARTY",
+          "title": "pool party",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        },
+        {
+          "bbox_px": [
+            201,
+            11389,
+            615,
+            11498
+          ],
+          "candidate_id": "vision-v3-f6da30dc703dd9e218d479b1",
+          "canonical_slug": null,
+          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
+          "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
+          "page_number": 1,
+          "text": "POOL PARTY",
+          "title": "pool party",
+          "validation_findings": [
+            "engine_disagreement:title",
+            "engine_disagreement:schedule",
+            "engine_disagreement:location"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "grand-floridian",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.374157+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726357+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 4,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38",
+      "new_movie_count": 1,
+      "new_title_details": [
+        {
+          "canonical_slug": "None",
+          "title": "None"
+        },
+        {
+          "bbox_px": [
+            5696,
+            9598,
+            8470,
+            9850
+          ],
+          "canonical_slug": "arts & crafts ($)",
+          "crop_sha256": "7cb5dbc00a80815149c7495241bb6025544f6dd0bbad64982af4bfd4d9f449cc",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
+          "page_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
+          "page_number": 1,
+          "text": "ARTS & CRAFTS ($)",
+          "title": "arts & crafts ($)"
+        },
+        {
+          "bbox_px": [
+            5725,
+            6419,
+            9129,
+            6642
+          ],
+          "canonical_slug": "cheshire challenges",
+          "crop_sha256": "7cb5dbc00a80815149c7495241bb6025544f6dd0bbad64982af4bfd4d9f449cc",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
+          "page_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
+          "page_number": 1,
+          "text": "CHESHIRE CHALLENGES",
+          "title": "cheshire challenges"
+        },
+        {
+          "bbox_px": [
+            5717,
+            7735,
+            8848,
+            7967
+          ],
+          "canonical_slug": "poolside activities",
+          "crop_sha256": "7cb5dbc00a80815149c7495241bb6025544f6dd0bbad64982af4bfd4d9f449cc",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
+          "page_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
+          "page_number": 1,
+          "text": "POOLSIDE ACTIVITIES",
+          "title": "poolside activities"
+        },
+        {
+          "bbox_px": [
+            655,
+            5475,
+            4229,
+            5707
+          ],
+          "canonical_slug": "storytime yoga class",
+          "crop_sha256": "fd01a8d8de855149d45906bd12825ea49d51d5b7717122545231c27ba487a2e3",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
+          "page_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
+          "page_number": 1,
+          "text": "STORYTIME YOGA CLASS",
+          "title": "storytime yoga class"
+        }
+      ],
+      "new_titles": [
+        "None",
+        "arts & crafts ($)",
+        "cheshire challenges",
+        "poolside activities",
+        "storytime yoga class"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "ce2b57abe3d7f00e013c261f1c0762ae47dccd9d85221b634638d36cacff341c",
+      "source_key": "source:ce2b57abe3d7f00e013c261f1c0762ae47dccd9d85221b634638d36cacff341c",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            5705,
+            10202,
+            7567,
+            10368
+          ],
+          "candidate_id": "vision-v3-96f17811106dbfa5959eebb8",
+          "canonical_slug": null,
+          "crop_sha256": "7cb5dbc00a80815149c7495241bb6025544f6dd0bbad64982af4bfd4d9f449cc",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
+          "page_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
+          "page_number": 1,
+          "text": "From 3:30pm-4:30pm",
+          "title": "arts & crafts ($)",
+          "validation_findings": [
+            "engine_disagreement:schedule",
+            "unparsed_schedule"
+          ]
+        },
+        {
+          "candidate_id": "vision-v3-115209c5b129ecf0efed2534",
+          "canonical_slug": null,
+          "title": null,
+          "validation_findings": [
+            "field_extraction_not_implemented",
+            "missing_source_span:title",
+            "missing_required_field:title",
+            "missing_source_span:schedule",
+            "missing_required_field:schedule",
+            "missing_source_span:location",
+            "missing_required_field:location",
+            "missing_source_span:fee",
+            "missing_required_field:fee",
+            "missing_source_span:movie_title",
+            "missing_required_field:movie_title",
+            "unparsed_schedule",
+            "unknown_location"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "animal-kingdom-jambo",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.315975+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726439+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 4,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
+      "new_movie_count": 3,
+      "new_title_details": [
+        {
+          "bbox_px": [
+            5697,
+            8622,
+            8059,
+            8817
+          ],
+          "canonical_slug": "arts & crafts ($)",
+          "crop_sha256": "50fb72058021feef2bc6fe1524eedc89b3f343f61c93f0ca386a4997be4a6041",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "text": "ARTS & CRAFTS ($)",
+          "title": "arts & crafts ($)"
+        },
+        {
+          "bbox_px": [
+            5705,
+            10193,
+            6950,
+            10385
+          ],
+          "canonical_slug": "campfire",
+          "crop_sha256": "50fb72058021feef2bc6fe1524eedc89b3f343f61c93f0ca386a4997be4a6041",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "text": "CAMPFIRE",
+          "title": "campfire"
+        },
+        {
+          "bbox_px": [
+            654,
+            6338,
+            4237,
+            6541
+          ],
+          "canonical_slug": "disney family fitness fun",
+          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "text": "DISNEY FAMILY FITNESS FUN",
+          "title": "disney family fitness fun"
+        },
+        {
+          "bbox_px": [
+            5701,
+            6670,
+            8320,
+            6873
+          ],
+          "canonical_slug": "medallion rubbing",
+          "crop_sha256": "50fb72058021feef2bc6fe1524eedc89b3f343f61c93f0ca386a4997be4a6041",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "text": "MEDALLION RUBBING",
+          "title": "medallion rubbing"
+        },
+        {
+          "bbox_px": [
+            5676,
+            13616,
+            10276,
+            13904
+          ],
+          "canonical_slug": "movie under the stars",
+          "crop_sha256": "956695c921a31d46d39400f04bddb5067ba2d1095297a8b969c9adc431395a56",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "text": "MOVIE UNDER THE STARS",
+          "title": "movie under the stars"
+        }
+      ],
+      "new_titles": [
+        "arts & crafts ($)",
+        "campfire",
+        "disney family fitness fun",
+        "medallion rubbing",
+        "movie under the stars"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
+      "source_key": "source:e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "bbox_px": [
+            5697,
+            9120,
+            7088,
+            9299
+          ],
+          "candidate_id": "vision-v3-817b23fc7645c5c451e62107",
+          "canonical_slug": null,
+          "crop_sha256": "50fb72058021feef2bc6fe1524eedc89b3f343f61c93f0ca386a4997be4a6041",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
+          "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
+          "page_number": 1,
+          "text": "3:30pm-4:30pm",
+          "title": "arts & crafts ($)",
+          "validation_findings": [
+            "engine_disagreement:schedule",
+            "unparsed_schedule"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline_mode": "first_v3_baseline",
+      "calendar_group_key": "port-orleans-french-quarter",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "captured_at": "2026-06-30T00:07:31.292404+00:00",
+      "changed_fees": [],
+      "changed_locations": [],
+      "changed_schedules": [],
+      "currentness": "current",
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "generated_at": "2026-06-30T02:14:20.726550+00:00",
+      "http_status": 200,
+      "manual_review_required": true,
+      "new_activity_count": 6,
+      "new_document_family": "aframe_recreation",
+      "new_hash": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+      "new_movie_count": 0,
+      "new_title_details": [
+        {
+          "canonical_slug": "None",
+          "title": "None"
+        },
+        {
+          "bbox_px": [
+            5709,
+            8999,
+            8470,
+            9246
+          ],
+          "canonical_slug": "arts & crafts ($)",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "text": "ARTS & CRAFTS ($)",
+          "title": "arts & crafts ($)"
+        },
+        {
+          "bbox_px": [
+            5725,
+            11830,
+            8226,
+            12037
+          ],
+          "canonical_slug": "cajun campfire",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "text": "CAJUN CAMPFIRE",
+          "title": "cajun campfire"
+        },
+        {
+          "bbox_px": [
+            5709,
+            14410,
+            9019,
+            14616
+          ],
+          "canonical_slug": "glow with the flow",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "text": "GLOW WITH THE FLOW",
+          "title": "glow with the flow"
+        },
+        {
+          "bbox_px": [
+            5713,
+            10400,
+            8547,
+            10647
+          ],
+          "canonical_slug": "mickey tie-dye ($)",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "text": "MICKEY TIE-DYE ($)",
+          "title": "mickey tie-dye ($)"
+        },
+        {
+          "bbox_px": [
+            5709,
+            13239,
+            10149,
+            13446
+          ],
+          "canonical_slug": "nighttime trivia challenge",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "text": "NIGHTTIME TRIVIA CHALLENGE",
+          "title": "nighttime trivia challenge"
+        }
+      ],
+      "new_titles": [
+        "None",
+        "arts & crafts ($)",
+        "cajun campfire",
+        "glow with the flow",
+        "mickey tie-dye ($)",
+        "nighttime trivia challenge"
+      ],
+      "new_unknown_regions": [],
+      "old_activity_count": 0,
+      "old_document_family": null,
+      "old_hash": "",
+      "old_movie_count": 0,
+      "publish_blockers": [
+        "validation_failures"
+      ],
+      "removed_title_details": [],
+      "removed_titles": [],
+      "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+      "source_key": "source:ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+      "source_kind": "official_pdf",
+      "source_role": "resort_pdf",
+      "status": "review_required",
+      "validation_failures": [
+        {
+          "candidate_id": "vision-v3-d21a75dda8a4df250c349c6f",
+          "canonical_slug": null,
+          "title": null,
+          "validation_findings": [
+            "field_extraction_not_implemented",
+            "missing_source_span:title",
+            "missing_required_field:title",
+            "missing_source_span:schedule",
+            "missing_required_field:schedule",
+            "missing_source_span:location",
+            "missing_required_field:location",
+            "missing_source_span:fee",
+            "missing_required_field:fee",
+            "unparsed_schedule",
+            "unknown_location"
+          ]
+        },
+        {
+          "bbox_px": [
+            5717,
+            9558,
+            7588,
+            9736
+          ],
+          "candidate_id": "vision-v3-9b057581a7cc95d1a8da1453",
+          "canonical_slug": null,
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "text": "From 3:00pm-4:00pm",
+          "title": "arts & crafts ($)",
+          "validation_findings": [
+            "engine_disagreement:schedule",
+            "unparsed_schedule"
+          ]
+        }
+      ]
+    }
+  ],
+  "status": "review_required",
+  "summary": {
+    "clean_count": 2,
+    "review_required_count": 16,
+    "source_count": 18
+  }
+}

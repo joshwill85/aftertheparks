@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { requireApiUser } from "@/lib/plan/auth";
 import { createLiveShare, revokeLiveShare } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
@@ -35,7 +35,7 @@ async function userHasActiveShare(
 export async function POST(request: Request) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const rateLimited = await guardRateLimit({
     request,
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}));
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   const hasExistingShare = await userHasActiveShare(client, user.id);
@@ -65,10 +65,10 @@ export async function POST(request: Request) {
       process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
 
     if (result.reused) {
-      return NextResponse.json({ reused: true, hasExistingShare: true });
+      return privateNoStoreJson({ reused: true, hasExistingShare: true });
     }
 
-    return NextResponse.json({
+    return privateNoStoreJson({
       token: result.token,
       url: result.url,
       fullUrl: `${origin}${result.url}`,
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const rateLimited = await guardRateLimit({
     request,
@@ -93,9 +93,9 @@ export async function DELETE(request: Request) {
 
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   await revokeLiveShare(client, user.id);
-  return NextResponse.json({ ok: true });
+  return privateNoStoreJson({ ok: true });
 }

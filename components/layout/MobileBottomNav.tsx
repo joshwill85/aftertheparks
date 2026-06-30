@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { usePlan } from "@/components/atlas/PlanProvider";
 import { IconGlyph } from "@/components/icons/IconGlyph";
+import { useLocalPlanCount } from "@/components/plan/useLocalPlanCount";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import { resolveBrowseNavHref } from "@/lib/explore/browseParams";
 
@@ -32,7 +32,7 @@ function isActive(pathname: string, href: string) {
 export function MobileBottomNav() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { itemCount } = usePlan();
+  const itemCount = useLocalPlanCount();
   const todayHref = resolveBrowseNavHref("/today", pathname, searchParams);
   const tonightHref = resolveBrowseNavHref("/tonight", pathname, searchParams);
   const nowActive = isActive(pathname, "/today") || isActive(pathname, "/tonight");

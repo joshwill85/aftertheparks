@@ -27,7 +27,7 @@ import type {
 } from "@/lib/weather/types";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const DISNEY_WEATHER_LOCATION_KEYS: WeatherLocationKey[] = [
   "magic_kingdom_resort_area",

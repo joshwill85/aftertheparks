@@ -6,6 +6,7 @@ import argparse
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import re
 from typing import Any
 
 try:
@@ -27,6 +28,7 @@ RAW_VALUE_MATCH_FIELDS = {"title", "schedule", "location", "movie_title"}
 REQUIRED_OCR_ENGINE_NAMES = ("paddleocr_ppstructurev3", "rapidocr")
 AUTO_PUBLISH_FAMILIES = {"aframe_recreation", "vertical_digital_rec_sign"}
 REVIEW_ONLY_CANDIDATE_TYPES = {"generic_visual_review"}
+DAY_RE = re.compile(r"\b(mon(?:day)?|tue(?:s|sday)?|wed(?:nesday)?|thu(?:r|rs|rsday)?|fri(?:day)?|sat(?:urday)?|sun(?:day)?)\b", re.IGNORECASE)
 LINEAGE_BLOCKING_FINDINGS = {
     "missing_pipeline_version",
     "missing_config_hash",
@@ -212,6 +214,17 @@ def _has_engine_confidence(candidate: dict[str, Any], field_name: str) -> bool:
 
 
 def _engine_text_agreement_ok(candidate: dict[str, Any], field_name: str) -> bool:
+    if field_name == "schedule" and _schedule_uses_composed_fragment_evidence(candidate):
+        field = _evidence_for(candidate, field_name)
+        return (
+            isinstance(field, dict)
+            and str(field.get("agreement") or "") == "exact_after_normalization"
+            and _field_values_match(
+                field_name,
+                field.get("normalized_value"),
+                _candidate_normalized_value(candidate, field_name),
+            )
+        )
     agreement = _engine_text_agreement(candidate, field_name)
     if agreement is None:
         return False
@@ -250,6 +263,13 @@ def _field_values_match(field_name: str, left: Any, right: Any) -> bool:
 
 
 def _engine_text_value_matches_candidate(candidate: dict[str, Any], field_name: str) -> bool:
+    if field_name == "schedule" and _schedule_uses_composed_fragment_evidence(candidate):
+        field = _evidence_for(candidate, field_name)
+        return isinstance(field, dict) and _field_values_match(
+            field_name,
+            field.get("normalized_value"),
+            _candidate_normalized_value(candidate, field_name),
+        )
     agreement = _engine_text_agreement(candidate, field_name)
     if agreement is None or agreement.get("agreement") != "exact_after_normalization":
         return False
@@ -258,6 +278,19 @@ def _engine_text_value_matches_candidate(candidate: dict[str, Any], field_name: 
         agreement.get("normalized_value"),
         _candidate_normalized_value(candidate, field_name),
     )
+
+
+def _schedule_uses_composed_fragment_evidence(candidate: dict[str, Any]) -> bool:
+    field = _evidence_for(candidate, "schedule")
+    if not isinstance(field, dict) or str(field.get("agreement") or "") != "exact_after_normalization":
+        return False
+    if not _field_values_match("schedule", field.get("normalized_value"), _candidate_normalized_value(candidate, "schedule")):
+        return False
+    engine_texts = _engine_texts(candidate, "schedule", required_engine_names=_required_ocr_engine_names(candidate))
+    if len(engine_texts) < 2:
+        return False
+    raw_value = str(field.get("raw_value") or _candidate_raw_value(candidate, "schedule") or "")
+    return bool(DAY_RE.search(raw_value)) and all(not DAY_RE.search(text) for text in engine_texts)
 
 
 def _requires_manual_review(candidate: dict[str, Any], field_name: str) -> bool:

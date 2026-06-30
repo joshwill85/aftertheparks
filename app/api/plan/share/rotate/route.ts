@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { requireApiUser } from "@/lib/plan/auth";
 import { createLiveShare } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   const user = await requireApiUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return privateNoStoreJson({ error: "Unauthorized" }, { status: 401 });
   }
   const rateLimited = await guardRateLimit({
     request,
@@ -26,14 +26,14 @@ export async function POST(request: Request) {
 
   const client = await createAppServerClient();
   if (!client) {
-    return NextResponse.json({ error: "Unavailable" }, { status: 503 });
+    return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });
   }
 
   try {
     const result = await createLiveShare(client, user.id, { rotate: true });
     const origin =
       process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
-    return NextResponse.json({
+    return privateNoStoreJson({
       token: result.token,
       url: result.url,
       fullUrl: `${origin}${result.url}`,

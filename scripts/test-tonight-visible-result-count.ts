@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import {
   getVisibleTonightResultCount,
   getVisibleTonightActivities,
+  getVisibleTonightFilterItems,
+  normalizeTonightFilters,
 } from "../lib/tonight/visibleResults";
+import { buildFilterImpact } from "../lib/explore/filterImpact";
 import type {
   ActivityOccurrence,
   MovieNightOccurrence,
@@ -73,6 +76,12 @@ const movieNight: MovieNightOccurrence = {
   endDateTime: "2026-06-28T22:00:00-04:00",
   isTonight: true,
 };
+const futureMovieNight: MovieNightOccurrence = {
+  ...movieNight,
+  id: "future-movie-night",
+  dayOfWeek: "Monday",
+  isTonight: false,
+};
 
 assert.deepEqual(
   getVisibleTonightActivities([
@@ -97,6 +106,37 @@ assert.equal(
   }),
   2,
   "Tonight result count should match rendered activity cards plus rendered movie cards."
+);
+
+const filterImpact = buildFilterImpact(
+  getVisibleTonightFilterItems({
+    activities: [
+      visibleCampfire,
+      duplicateCampfire,
+      movieProxyActivity,
+      corruptActivity,
+    ],
+    movieNights: [movieNight, futureMovieNight],
+  }),
+  {},
+  [{ slug: "art-of-animation-resort", name: "Art of Animation Resort" }]
+);
+
+assert.equal(
+  filterImpact.total,
+  2,
+  "Tonight filter impact should count only rendered activity cards plus tonight movie cards."
+);
+assert.equal(
+  filterImpact.categories.find((option) => option.value === "movies_under_stars")?.count,
+  1,
+  "Tonight movie filter count should exclude weekly/non-tonight movie rows."
+);
+
+assert.deepEqual(
+  normalizeTonightFilters({ free: true, reservation: true }),
+  { free: false, reservation: true },
+  "Tonight filters should ignore hidden free-only filtering while preserving reservation filtering."
 );
 
 console.log("Tonight visible result count coverage passed.");

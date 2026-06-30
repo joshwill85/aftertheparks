@@ -1,10 +1,8 @@
-import { NextResponse } from "next/server";
 import { publicActivitiesResponse } from "@/lib/api/publicActivities";
+import { publicCacheJson } from "@/lib/cache/http";
 import { runSearch } from "@/lib/search/runSearch";
 import type { Daypart } from "@/lib/types/occurrence";
 import { guardRateLimit } from "@/lib/rate-limit/guard";
-
-export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   const limited = await guardRateLimit({
@@ -29,7 +27,7 @@ export async function GET(request: Request) {
     reservation,
   });
 
-  return NextResponse.json({
+  return publicCacheJson({
     ...publicActivitiesResponse(result.activities),
     query: result.query,
     tokens: result.tokens,
@@ -45,5 +43,5 @@ export async function GET(request: Request) {
     movies: result.movies,
     categories: result.categories,
     pages: result.pages,
-  });
+  }, "timeRelative");
 }

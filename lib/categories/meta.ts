@@ -16,6 +16,7 @@ export const CATEGORY_META: Record<string, CategoryMeta> = {
   signature: { label: "Signature", iconKey: "signature", stamp: "signature", mood: ["worth_travel"] },
   resort_activity: { label: "Resort fun", iconKey: "resort_activity", stamp: "resort" },
   arcade: { label: "Games", iconKey: "arcade", stamp: "games", mood: ["easy_break", "pool_break"] },
+  character: { label: "Characters", iconKey: "character", stamp: "greet", mood: ["little_kids", "worth_travel"] },
   rental: { label: "Rentals", iconKey: "rental", stamp: "rental", mood: ["pool_break"] },
   sports_games: { label: "Sports & games", iconKey: "sports_games", stamp: "sports" },
   nighttime_entertainment: { label: "Evening", iconKey: "nighttime_entertainment", stamp: "evening", mood: ["tonight"] },

@@ -43,6 +43,10 @@ KNOWN_PROGRAM_TITLES = {
 CAMPFIRE_PRICE_MATRIX_PATH = Path("data/quality/campfire_price_matrix.json")
 COMMUNITY_HALL_FACTS_PATH = Path("data/quality/community_hall_official_facts.json")
 GOLF_OFFICIAL_FACTS_PATH = Path("data/quality/golf_official_facts.json")
+PLANDISNEY_DOCKSIDE_FISHING_URL = (
+    "https://plandisney.disney.go.com/question/"
+    "helloi-go-fishing-disney-resorts-past-brought-own-gear-605932/"
+)
 FREE_RESORT_AMENITY_PROGRAM_KEYS = {
     "basketball-courts",
     "electrical-water-pageant",
@@ -256,6 +260,13 @@ def _span(line: dict[str, Any], *, source: str | None = None) -> dict[str, Any]:
     return span
 
 
+def _base_claims() -> dict[str, dict[str, Any]]:
+    return {
+        "walkability": {"value": "unknown", "evidence": []},
+        "transportation": {"value": "unknown", "evidence": []},
+    }
+
+
 def _lines(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         line
@@ -396,6 +407,75 @@ def _primary_program_lines(program_key: str, lines: list[dict[str, Any]]) -> lis
             break
         result.append(line)
     return result or lines
+
+
+def _first_line_matching(
+    program_lines: list[dict[str, Any]],
+    pattern: str,
+) -> dict[str, Any] | None:
+    matcher = re.compile(pattern, flags=re.I)
+    for line in program_lines:
+        if matcher.search(_clean_text(str(line.get("text", "")))):
+            return line
+    return None
+
+
+def _fishing_policy_claims(program_lines: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    claims: dict[str, dict[str, Any]] = {}
+
+    catch_line = _first_line_matching(program_lines, r"catch[- ]and[- ]release only")
+    if catch_line:
+        claims["catch_policy"] = {
+            "value": "catch_and_release_only",
+            "evidence": [_span(catch_line)],
+        }
+
+    species_line = _first_line_matching(program_lines, r"largemouth bass")
+    if species_line:
+        claims["fish_species"] = {
+            "value": "largemouth_bass",
+            "evidence": [_span(species_line)],
+        }
+
+    waterways_line = _first_line_matching(program_lines, r"Bay Lake.*Seven Seas Lagoon")
+    if waterways_line:
+        claims["waterways"] = {
+            "value": "Bay Lake; Seven Seas Lagoon; Village Lake; Crescent Lake; World Showcase Lagoon",
+            "evidence": [_span(waterways_line)],
+        }
+
+    return claims
+
+
+def _fishing_catch_policy_claims(program_lines: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    catch_line = _first_line_matching(program_lines, r"catch[- ]and[- ]release only")
+    if not catch_line:
+        return {}
+    return {
+        "catch_policy": {
+            "value": "catch_and_release_only",
+            "evidence": [_span(catch_line)],
+        }
+    }
+
+
+def _dockside_fishing_gear_claim(program_lines: list[dict[str, Any]]) -> dict[str, Any]:
+    evidence: list[dict[str, Any]] = []
+    rental_line = _first_line_matching(program_lines, r"Fishing gear is available for rental")
+    if rental_line:
+        evidence.append(_span(rental_line))
+    evidence.append(
+        {
+            "source": "planDisney",
+            "source_url": PLANDISNEY_DOCKSIDE_FISHING_URL,
+            "date": "2025-03-16",
+            "text": (
+                "planDisney says a Cast Member confirmed dockside fishing uses "
+                "the rental poles available at the resort."
+            ),
+        }
+    )
+    return {"value": "rental_poles_required", "evidence": evidence}
 
 
 def _source_sha(payload: dict[str, Any]) -> str:
@@ -1670,6 +1750,125 @@ def _source_documentish(payload: dict[str, Any]) -> dict[str, str]:
     return source
 
 
+def _dockside_fishing_location_specs(
+    program_lines: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    specs: list[dict[str, Any]] = []
+    location_patterns = [
+        (
+            "port-orleans-resort-riverside",
+            "port-orleans-resort-riverside",
+            r"Fishin'? Hole at Ol'? Man Island",
+            "Fishin' Hole at Ol' Man Island",
+        ),
+        (
+            "campsites-at-fort-wilderness-resort",
+            "fort-wilderness",
+            r"Bike Barn",
+            "Bike Barn",
+        ),
+    ]
+    for resort_slug, variant_key, pattern, label in location_patterns:
+        line = _first_line_matching(program_lines, pattern)
+        if line:
+            specs.append(
+                {
+                    "resort_slug": resort_slug,
+                    "variant_key": variant_key,
+                    "location": {"label": label},
+                    "spans": [_span(line)],
+                }
+            )
+    return specs
+
+
+def _dockside_fishing_extract(
+    program_lines: list[dict[str, Any]],
+    source: dict[str, str],
+) -> dict[str, list[dict[str, Any]]] | None:
+    title_line = _first_line_matching(program_lines, r"^Dockside Fishing\b")
+    rental_line = _first_line_matching(program_lines, r"Fishing gear is available for rental")
+    if not title_line or not rental_line:
+        return None
+
+    location_specs = _dockside_fishing_location_specs(program_lines)
+    if not location_specs:
+        return None
+
+    title_spans = [_span(title_line)]
+    description = (
+        "Old-fashioned dockside catch-and-release fishing with rental gear at "
+        "select Disney Resort locations."
+    )
+    description_spans = [_span(rental_line)]
+    price = {
+        "state": "fee",
+        "notes": "Fishing gear is available for rental at the resort dockside fishing locations.",
+    }
+    claims = {
+        **_base_claims(),
+        **_fishing_catch_policy_claims(program_lines),
+        "gear_policy": _dockside_fishing_gear_claim(program_lines),
+    }
+    program = {
+        "program_key": "dockside-fishing",
+        "title": "Dockside Fishing",
+        "description": description,
+        "category": "resort_activity",
+        "tags": ["fishing", "dockside_fishing", "resort_recreation"],
+        "availability": {
+            "kind": "evergreen_all_day",
+            "hours_state": "source_unspecified",
+            "label": "Hours not specified by Disney",
+        },
+        "price": price,
+        "claims": claims,
+        "field_provenance": {
+            "title": title_spans,
+            "description": description_spans,
+            "price": [_span(rental_line)],
+        },
+        "trust_state": "source_backed",
+        **source,
+    }
+
+    offerings: list[dict[str, Any]] = []
+    for spec in location_specs:
+        resort_slug = spec["resort_slug"]
+        variant_key = spec["variant_key"]
+        resort_join_spans = spec["spans"]
+        offerings.append(
+            {
+                "program_key": "dockside-fishing",
+                "offering_key": f"dockside-fishing:{resort_slug}:{variant_key}",
+                "resort_slug": resort_slug,
+                "variant_key": variant_key,
+                "title": "Dockside Fishing",
+                "description": description,
+                "category": "resort_activity",
+                "tags": ["fishing", "dockside_fishing", "resort_recreation"],
+                "location": spec["location"],
+                "availability": program["availability"],
+                "price": price,
+                "booking": {},
+                "eligibility": {},
+                "amenities": [],
+                "claims": claims,
+                "field_provenance": {
+                    "title": title_spans,
+                    "resort_join": resort_join_spans,
+                    "location": resort_join_spans,
+                    "description": description_spans,
+                    "price": [_span(rental_line)],
+                },
+                "trust_state": "source_backed",
+                **source,
+            }
+        )
+
+    return {"programs": [program], "offerings": offerings, "quarantine": []}
+
+
 def _index_detail_url(item: dict[str, Any], fallback_url: str) -> str:
     web_links = item.get("webLinks")
     if isinstance(web_links, dict):
@@ -1845,10 +2044,7 @@ def _extract_index_payload(payload: dict[str, Any]) -> dict[str, list[dict[str, 
             continue
 
         result["programs"].append(program)
-        base_claims = {
-            "walkability": {"value": "unknown", "evidence": []},
-            "transportation": {"value": "unknown", "evidence": []},
-        }
+        base_claims = _base_claims()
         for resort_source in resort_sources:
             resort_slug = resort_source["slug"]
             variant_key = resort_slug
@@ -2004,10 +2200,9 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
 
     booking, booking_provenance = _booking(program_key, program_lines)
     eligibility, eligibility_provenance = _eligibility(program_lines)
-    base_claims = {
-        "walkability": {"value": "unknown", "evidence": []},
-        "transportation": {"value": "unknown", "evidence": []},
-    }
+    base_claims = _base_claims()
+    if program_key == "fishing-excursions":
+        base_claims = {**base_claims, **_fishing_policy_claims(program_lines)}
 
     offerings: list[dict[str, Any]] = []
     for resort_slug in resort_slugs:
@@ -2057,7 +2252,21 @@ def _extract_one(payload: dict[str, Any], program_lines: list[dict[str, Any]]) -
             }
         )
 
-    return {"programs": [program], "offerings": offerings, "quarantine": []}
+    programs = [program]
+    dockside = (
+        _dockside_fishing_extract(program_lines, source)
+        if program_key == "fishing-excursions"
+        else None
+    )
+    if dockside:
+        programs.extend(dockside["programs"])
+        offerings.extend(dockside["offerings"])
+
+    return {
+        "programs": programs,
+        "offerings": offerings,
+        "quarantine": [],
+    }
 
 
 def _availability_quality(availability: dict[str, Any] | None) -> int:

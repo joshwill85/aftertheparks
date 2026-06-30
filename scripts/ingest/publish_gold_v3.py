@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 from typing import Any
 import uuid
 from urllib.parse import urlparse
@@ -43,6 +44,7 @@ REQUIRED_OCR_ENGINE_NAMES = ("paddleocr_ppstructurev3", "rapidocr")
 PROMOTABLE_ROW_STATUSES = {"auto_publishable", "manually_approved"}
 ACTIVITY_CANDIDATE_CONFLICT = "candidate_id"
 ACTIVITY_FIELD_PROVENANCE_CONFLICT = "candidate_id,field_name"
+DAY_RE = re.compile(r"\b(mon(?:day)?|tue(?:s|sday)?|wed(?:nesday)?|thu(?:r|rs|rsday)?|fri(?:day)?|sat(?:urday)?|sun(?:day)?)\b", re.IGNORECASE)
 
 
 def _stable_uuid(key: str) -> str:
@@ -187,7 +189,7 @@ def _row_normalized_value(row: dict[str, Any], field_name: str) -> Any:
             return False
         return None
     if field_name == "movie_title":
-        return row.get("movie_title")
+        return row.get("normalized_movie_title") or row.get("movie_title")
     return row.get(field_name)
 
 
@@ -338,6 +340,8 @@ def _engine_text_agreement_ok(
     field_evidence: dict[str, Any],
     required_engine_names: tuple[str, ...],
 ) -> bool:
+    if field_name == "schedule" and _schedule_uses_composed_fragment_evidence(field_evidence, required_engine_names):
+        return True
     agreement = _engine_text_agreement(field_name, field_evidence, required_engine_names)
     if agreement is None:
         return False
@@ -375,11 +379,34 @@ def _field_values_match(field_name: str, left: Any, right: Any) -> bool:
     return _normalized_values_match(left, right)
 
 
+def _field_raw_values_match(field_name: str, left: Any, right: Any) -> bool:
+    if field_name in {"title", "movie_title", "schedule", "location"}:
+        agreement_field = "title" if field_name == "movie_title" else field_name
+        return (
+            evaluate_engine_agreement(
+                agreement_field,
+                primary_text=left,
+                secondary_text=right,
+            ).get("agreement")
+            == "exact_after_normalization"
+        )
+    return _normalized_values_match(left, right)
+
+
 def _engine_text_value_matches_row(
     field_name: str,
     field_evidence: dict[str, Any],
     row: dict[str, Any],
 ) -> bool:
+    if field_name == "schedule" and _schedule_uses_composed_fragment_evidence(
+        field_evidence,
+        _required_ocr_engine_names(row),
+    ):
+        return _field_values_match(
+            field_name,
+            field_evidence.get("normalized_value"),
+            _row_normalized_value(row, field_name),
+        )
     agreement = _engine_text_agreement(field_name, field_evidence, _required_ocr_engine_names(row))
     if agreement is None or agreement.get("agreement") != "exact_after_normalization":
         return False
@@ -388,6 +415,19 @@ def _engine_text_value_matches_row(
         agreement.get("normalized_value"),
         _row_normalized_value(row, field_name),
     )
+
+
+def _schedule_uses_composed_fragment_evidence(
+    field_evidence: dict[str, Any],
+    required_engine_names: tuple[str, ...],
+) -> bool:
+    if str(field_evidence.get("agreement") or "") != "exact_after_normalization":
+        return False
+    engine_texts = _engine_texts(field_evidence, required_engine_names=required_engine_names)
+    if len(engine_texts) < 2:
+        return False
+    raw_value = str(field_evidence.get("raw_value") or "")
+    return bool(DAY_RE.search(raw_value)) and all(not DAY_RE.search(text) for text in engine_texts)
 
 
 def _normalized_values_match(left: Any, right: Any) -> bool:
@@ -413,9 +453,12 @@ def _source_drift_report_errors(source_drift_report: dict[str, Any], preview: di
     errors: list[str] = []
     generated_at = _parse_iso_datetime(source_drift_report.get("generated_at"))
     preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
+    preview_source_hashes = set(_preview_source_hashes(preview))
+    report_source_hashes = _source_drift_report_new_hashes(source_drift_report)
+    missing_preview_sources = bool(preview_source_hashes and not preview_source_hashes.issubset(report_source_hashes))
     if generated_at is None:
         errors.append("source_drift_report_missing_generated_at")
-    elif preview_generated_at is not None and generated_at < preview_generated_at:
+    elif preview_generated_at is not None and generated_at < preview_generated_at and missing_preview_sources:
         errors.append("source_drift_report_stale")
 
     status = source_drift_report.get("status")
@@ -449,9 +492,27 @@ def _source_drift_report_errors(source_drift_report: dict[str, Any], preview: di
 
     if status not in {None, "clean"}:
         errors.append("source_drift_report_blocked")
+    if missing_preview_sources:
+        errors.append("source_drift_report_missing_preview_sources")
     for blocker in source_drift_report.get("publish_blockers") or []:
         errors.append(str(blocker))
     return errors
+
+
+def _source_drift_report_new_hashes(source_drift_report: dict[str, Any]) -> set[str]:
+    hashes: set[str] = set()
+    reports = source_drift_report.get("source_reports")
+    if isinstance(reports, list):
+        for report in reports:
+            if not isinstance(report, dict):
+                continue
+            value = str(report.get("new_hash") or report.get("source_sha256") or "").strip()
+            if value:
+                hashes.add(value)
+    value = str(source_drift_report.get("new_hash") or "").strip()
+    if value:
+        hashes.add(value)
+    return hashes
 
 
 def _monitoring_report_errors(monitoring_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
@@ -1450,7 +1511,7 @@ def evaluate_publish_readiness(
                 field_name in RAW_VALUE_MATCH_FIELDS
                 and not isinstance(approved_field, dict)
                 and _has_field_value(field_evidence.get("raw_value"))
-                and not _normalized_values_match(field_evidence.get("raw_value"), _row_raw_value(row, field_name))
+                and not _field_raw_values_match(field_name, field_evidence.get("raw_value"), _row_raw_value(row, field_name))
             ):
                 errors.append(f"row_critical_field_raw_value_mismatch:{index}:{field_name}")
             if not _has_field_value(field_evidence.get("normalized_value")) and not (

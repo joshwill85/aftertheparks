@@ -1,0 +1,2025 @@
+[
+  {
+    "calendar_group_key": "port-orleans-french-quarter",
+    "candidate_id": "vision-v3-d21a75dda8a4df250c349c6f",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.292404+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+        "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+        "source_authority": "non_official",
+        "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": null,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "316ea990cb3d7a8ccae475ff20c26825bd76668025557718f6da5f5ee17bb0e8",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": null,
+    "movie_title": null,
+    "normalized_location_id": null,
+    "normalized_movie_title": null,
+    "normalized_title": null,
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "wellness_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": null,
+    "schedule_raw": null,
+    "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {},
+    "source_title": null,
+    "source_type": "pdf",
+    "validation_findings": [
+      "field_extraction_not_implemented"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "port-orleans-french-quarter",
+    "candidate_id": "vision-v3-9b057581a7cc95d1a8da1453",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.292404+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+        "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+        "source_authority": "non_official",
+        "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9968757629394531,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.94601,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "ARTS & CRAFTS ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            8999,
+            8470,
+            9246
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999634027481079,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Doubloon Lagoon Pool Deck"
+          },
+          {
+            "confidence": 0.99196,
+            "engine": "rapidocr",
+            "text": "Doubloon Lagoon Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "doubloon_lagoon_pool_deck",
+        "raw_value": "Doubloon Lagoon Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            9298,
+            8076,
+            9490
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9975765943527222,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 3:00pm-4:00pm"
+          },
+          {
+            "confidence": 0.99887,
+            "engine": "rapidocr",
+            "text": "From 3:00pm-4:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "needs_review",
+          "parser": "schedule_parser_v3",
+          "raw_text": "From 3:00pm-4:00pm",
+          "schedule_type": "unparsed",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "From 3:00pm-4:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5717,
+            9558,
+            7588,
+            9736
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9968757629394531,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "ARTS & CRAFTS ($)"
+          },
+          {
+            "confidence": 0.94601,
+            "engine": "rapidocr",
+            "text": "ARTS & CRAFTS ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "arts & crafts ($)",
+        "raw_value": "ARTS & CRAFTS ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            8999,
+            8470,
+            9246
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Doubloon Lagoon Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "doubloon_lagoon_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "arts & crafts ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "needs_review",
+      "parser": "schedule_parser_v3",
+      "raw_text": "From 3:00pm-4:00pm",
+      "schedule_type": "unparsed",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "From 3:00pm-4:00pm",
+    "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5709,
+            8999,
+            8470,
+            9246
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "ARTS & CRAFTS ($)"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5713,
+            9298,
+            8076,
+            9490
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "Doubloon Lagoon Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5717,
+            9558,
+            7588,
+            9736
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "From 3:00pm-4:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5709,
+            8999,
+            8470,
+            9246
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "ARTS & CRAFTS ($)"
+        }
+      ]
+    },
+    "source_title": "ARTS & CRAFTS ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "port-orleans-french-quarter",
+    "candidate_id": "vision-v3-1b2494dd4d9432fc29176675",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.292404+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+        "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+        "source_authority": "non_official",
+        "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9972299933433533,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.99326,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "MICKEY TIE-DYE ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            10400,
+            8547,
+            10647
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999874234199524,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Doubloon Lagoon Pool Deck"
+          },
+          {
+            "confidence": 0.99342,
+            "engine": "rapidocr",
+            "text": "Doubloon Lagoon Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "doubloon_lagoon_pool_deck",
+        "raw_value": "Doubloon Lagoon Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5721,
+            10700,
+            8076,
+            10887
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9837852120399475,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Tuesday and Saturday from 3:00pm-4:00pm"
+          },
+          {
+            "confidence": 0.99896,
+            "engine": "rapidocr",
+            "text": "Tuesday and Saturday from 3:00pm-4:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Tuesday",
+            "Saturday"
+          ],
+          "end_time": "16:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Tuesday and Saturday from 3:00pm-4:00pm",
+          "schedule_type": "recurring",
+          "start_time": "15:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Tuesday and Saturday from 3:00pm-4:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            10951,
+            9409,
+            11134
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9972299933433533,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MICKEY TIE-DYE ($)"
+          },
+          {
+            "confidence": 0.99326,
+            "engine": "rapidocr",
+            "text": "MICKEY TIE-DYE ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "mickey tie-dye ($)",
+        "raw_value": "MICKEY TIE-DYE ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            10400,
+            8547,
+            10647
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Doubloon Lagoon Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "doubloon_lagoon_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "mickey tie-dye ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Tuesday",
+        "Saturday"
+      ],
+      "end_time": "16:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Tuesday and Saturday from 3:00pm-4:00pm",
+      "schedule_type": "recurring",
+      "start_time": "15:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Tuesday and Saturday from 3:00pm-4:00pm",
+    "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5713,
+            10400,
+            8547,
+            10647
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5721,
+            10700,
+            8076,
+            10887
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "Doubloon Lagoon Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5713,
+            10951,
+            9409,
+            11134
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "Tuesday and Saturday from 3:00pm-4:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5713,
+            10400,
+            8547,
+            10647
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-04",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ]
+    },
+    "source_title": "MICKEY TIE-DYE ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "port-orleans-french-quarter",
+    "candidate_id": "vision-v3-c24141a4b89c237d804532ed",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.292404+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+        "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+        "source_authority": "non_official",
+        "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9958335757255554,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99601,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "CAJUN CAMPFIRE ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5725,
+            11830,
+            8226,
+            12037
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999489784240723,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Campfire Pit Between Buildings 5 and 6"
+          },
+          {
+            "confidence": 0.99939,
+            "engine": "rapidocr",
+            "text": "Campfire Pit Between Buildings 5 and 6"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "campfire_pit_between_buildings_5_and_6",
+        "raw_value": "Campfire Pit Between Buildings 5 and 6",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5725,
+            12113,
+            9007,
+            12292
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9979375600814819,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Nightly from 6:00pm-7:00pm"
+          },
+          {
+            "confidence": 0.99827,
+            "engine": "rapidocr",
+            "text": "Nightly from 6:00pm-7:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "19:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Nightly from 6:00pm-7:00pm",
+          "schedule_type": "recurring",
+          "start_time": "18:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Nightly from 6:00pm-7:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            12352,
+            8174,
+            12547
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9958335757255554,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "CAJUN CAMPFIRE"
+          },
+          {
+            "confidence": 0.99601,
+            "engine": "rapidocr",
+            "text": "CAJUN CAMPFIRE"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "cajun campfire",
+        "raw_value": "CAJUN CAMPFIRE",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5725,
+            11830,
+            8226,
+            12037
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Campfire Pit Between Buildings 5 and 6",
+    "movie_title": null,
+    "normalized_location_id": "campfire_pit_between_buildings_5_and_6",
+    "normalized_movie_title": null,
+    "normalized_title": "cajun campfire",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "19:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Nightly from 6:00pm-7:00pm",
+      "schedule_type": "recurring",
+      "start_time": "18:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Nightly from 6:00pm-7:00pm",
+    "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5725,
+            11830,
+            8226,
+            12037
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "CAJUN CAMPFIRE"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5725,
+            12113,
+            9007,
+            12292
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "Campfire Pit Between Buildings 5 and 6"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5713,
+            12352,
+            8174,
+            12547
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "Nightly from 6:00pm-7:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5725,
+            11830,
+            8226,
+            12037
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "CAJUN CAMPFIRE"
+        }
+      ]
+    },
+    "source_title": "CAJUN CAMPFIRE",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "port-orleans-french-quarter",
+    "candidate_id": "vision-v3-7222f8ed8566f97806178bd9",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.292404+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+        "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+        "source_authority": "non_official",
+        "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9870726466178894,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99681,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "NIGHTTIME TRIVIA CHALLENGE ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            13239,
+            10149,
+            13446
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999780058860779,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Doubloon Lagoon Pool Deck"
+          },
+          {
+            "confidence": 0.98381,
+            "engine": "rapidocr",
+            "text": "Doubloon Lagoon Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "doubloon_lagoon_pool_deck",
+        "raw_value": "Doubloon Lagoon Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            13535,
+            8076,
+            13697
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9767748117446899,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Wednesday at 8:O0pm"
+          },
+          {
+            "confidence": 0.9879,
+            "engine": "rapidocr",
+            "text": "Wednesday at 8:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Wednesday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Wednesday at 8:00pm",
+          "schedule_type": "recurring",
+          "start_time": "20:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Wednesday at 8:O0pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            13786,
+            7580,
+            13952
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9870726466178894,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "NIGHTTIME TRIVIA CHALLENGE"
+          },
+          {
+            "confidence": 0.99681,
+            "engine": "rapidocr",
+            "text": "NIGHTTIME TRIVIA CHALLENGE"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "nighttime trivia challenge",
+        "raw_value": "NIGHTTIME TRIVIA CHALLENGE",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            13239,
+            10149,
+            13446
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Doubloon Lagoon Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "doubloon_lagoon_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "nighttime trivia challenge",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Wednesday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Wednesday at 8:00pm",
+      "schedule_type": "recurring",
+      "start_time": "20:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Wednesday at 8:O0pm",
+    "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5709,
+            13239,
+            10149,
+            13446
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "NIGHTTIME TRIVIA CHALLENGE"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5713,
+            13535,
+            8076,
+            13697
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "Doubloon Lagoon Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5713,
+            13786,
+            7580,
+            13952
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "Wednesday at 8:O0pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5709,
+            13239,
+            10149,
+            13446
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "NIGHTTIME TRIVIA CHALLENGE"
+        }
+      ]
+    },
+    "source_title": "NIGHTTIME TRIVIA CHALLENGE",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "port-orleans-french-quarter",
+    "candidate_id": "vision-v3-3e9d437c52f2cce9f6670e4c",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.292404+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+        "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+        "source_authority": "non_official",
+        "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.976836621761322,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.96802,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "GLOW WITH THE FLOW ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            14410,
+            9019,
+            14616
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999874830245972,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Doubloon Lagoon Pool Deck"
+          },
+          {
+            "confidence": 0.99371,
+            "engine": "rapidocr",
+            "text": "Doubloon Lagoon Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "doubloon_lagoon_pool_deck",
+        "raw_value": "Doubloon Lagoon Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            14697,
+            8076,
+            14864
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9620739221572876,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Friday at 8:00pm"
+          },
+          {
+            "confidence": 0.99868,
+            "engine": "rapidocr",
+            "text": "Friday at 8:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Friday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Friday at 8:00pm",
+          "schedule_type": "recurring",
+          "start_time": "20:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Friday at 8:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5705,
+            14944,
+            7145,
+            15123
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.976836621761322,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "GLOW WITH THE FLOW"
+          },
+          {
+            "confidence": 0.96802,
+            "engine": "rapidocr",
+            "text": "GLOW WITH THE FLOW"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "glow with the flow",
+        "raw_value": "GLOW WITH THE FLOW",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            14410,
+            9019,
+            14616
+          ],
+          "content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
+          "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Doubloon Lagoon Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "doubloon_lagoon_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "glow with the flow",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Friday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Friday at 8:00pm",
+      "schedule_type": "recurring",
+      "start_time": "20:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Friday at 8:00pm",
+    "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5709,
+            14410,
+            9019,
+            14616
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "GLOW WITH THE FLOW"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5705,
+            14697,
+            8076,
+            14864
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "Doubloon Lagoon Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5705,
+            14944,
+            7145,
+            15123
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "Friday at 8:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5709,
+            14410,
+            9019,
+            14616
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
+          "region_id": "page-001-region-05",
+          "text": "GLOW WITH THE FLOW"
+        }
+      ]
+    },
+    "source_title": "GLOW WITH THE FLOW",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  }
+]

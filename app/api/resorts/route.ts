@@ -1,16 +1,14 @@
-import { NextResponse } from "next/server";
+import { publicCacheJson } from "@/lib/cache/http";
 import { getResorts } from "@/lib/data/activities";
-
-export const dynamic = "force-dynamic";
 
 export async function GET() {
   const resorts = await getResorts();
-  return NextResponse.json({
+  return publicCacheJson({
     resorts,
     count: resorts.length,
     offeringCount: resorts.reduce(
       (sum, resort) => sum + resort.offeringCount,
       0
     ),
-  });
+  }, "evergreen");
 }

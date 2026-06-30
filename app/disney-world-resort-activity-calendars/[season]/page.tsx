@@ -19,7 +19,7 @@ import {
 } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export function generateStaticParams() {
   return SEASONAL_CALENDAR_PAGES.map((page) => ({ season: page.slug }));

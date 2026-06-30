@@ -393,13 +393,12 @@ export async function getFilteredActivities(
   }
   occurrences = Array.from(deduped.values());
 
-  occurrences = applyBrowseFilters(occurrences, filters);
+  occurrences = filterPublicBrowseActivities(occurrences, filters, {
+    minTier: "medium",
+  });
 
   const limit = filters.limit ?? 100;
-  return sanitizePublicActivities(
-    occurrences.slice(0, limit),
-    { minTier: "medium" }
-  );
+  return occurrences.slice(0, limit);
 }
 
 export async function getActivityBySlug(
@@ -488,13 +487,23 @@ function isEveningActivity(activity: ActivityOccurrence): boolean {
   );
 }
 
+export function filterPublicBrowseActivities(
+  activities: ActivityOccurrence[],
+  filters: ActivityFilters = {},
+  options: Parameters<typeof sanitizePublicActivities>[1] = {}
+): ActivityOccurrence[] {
+  const publicActivities = sanitizePublicActivities(
+    dedupeOccurrences(activities),
+    options
+  );
+  return applyBrowseFilters(publicActivities, filters);
+}
+
 function filterBrowseActivities(
   activities: ActivityOccurrence[],
   filters: ActivityFilters = {}
 ): ActivityOccurrence[] {
-  return sanitizePublicActivities(
-    dedupeOccurrences(applyBrowseFilters(activities, filters))
-  );
+  return filterPublicBrowseActivities(activities, filters);
 }
 
 export async function getTodayActivities(

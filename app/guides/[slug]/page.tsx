@@ -26,7 +26,7 @@ import type { SeoFaqItem } from "@/lib/seo/faqs";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 import { WeatherStatusStrip } from "@/components/weather/WeatherStatusStrip";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 const GUIDE_DATE_MODIFIED = "2026-06-27";
 const GUIDE_LAST_UPDATED_LABEL = "June 27, 2026";

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { privateNoStoreJson } from "@/lib/cache/http";
 import { createServiceClient } from "@/lib/supabase/server";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { hashInterestEmail } from "@/lib/plan/interest";
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     .toLowerCase();
 
   if (!email || !email.includes("@")) {
-    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+    return privateNoStoreJson({ error: "Invalid email" }, { status: 400 });
   }
 
   const rateLimited = await guardRateLimit({
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
   const client = createServiceClient();
   if (!client) {
-    return NextResponse.json(
+    return privateNoStoreJson(
       { message: "Thanks — we will let you know when account save is ready." },
       { status: 200 }
     );
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
   logSecurityEvent("interest_capture_success", { source: body.source ?? "plan_preview" });
 
-  return NextResponse.json({
+  return privateNoStoreJson({
     message: "Thanks — we will let you know when account save is ready.",
   });
 }

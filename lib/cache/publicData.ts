@@ -1,6 +1,7 @@
 import { unstable_cache } from "next/cache";
+import { CACHE_SECONDS, PUBLIC_CACHE_TAGS } from "@/lib/cache/tags";
 
-export const PUBLIC_DATA_REVALIDATE_SECONDS = 60;
+export const PUBLIC_DATA_REVALIDATE_SECONDS = CACHE_SECONDS.evergreen;
 
 type AsyncCallback<TArgs extends unknown[], TResult> = (
   ...args: TArgs
@@ -12,7 +13,7 @@ export function cachePublicData<TArgs extends unknown[], TResult>(
 ): AsyncCallback<TArgs, TResult> {
   const cached = unstable_cache(callback, keyParts, {
     revalidate: PUBLIC_DATA_REVALIDATE_SECONDS,
-    tags: ["public-activity-data"],
+    tags: [PUBLIC_CACHE_TAGS.catalogue],
   });
 
   return async (...args: TArgs) => {

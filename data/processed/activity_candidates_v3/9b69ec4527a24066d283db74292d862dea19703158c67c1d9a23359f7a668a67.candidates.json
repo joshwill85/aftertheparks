@@ -1,0 +1,3800 @@
+[
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-2d9417297d9f3f9c4844eb8b",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9934024810791016,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99916,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "WELLNESS SCAVENGER HUNT ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            655,
+            5006,
+            4908,
+            5233
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9985076189041138,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Throughout Disney's All-Star Resorts"
+          },
+          {
+            "confidence": 0.99664,
+            "engine": "rapidocr",
+            "text": "Throughout Disney's All-Star Resorts"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "throughout_all_star_resorts",
+        "raw_value": "Throughout Disney's All-Star Resorts",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            642,
+            5289,
+            3790,
+            5488
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9987002015113831,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 7:00am-11:00pm"
+          },
+          {
+            "confidence": 0.98497,
+            "engine": "rapidocr",
+            "text": "Daily from 7:00am-11:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "23:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 7:00am-11:00pm",
+          "schedule_type": "recurring",
+          "start_time": "07:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 7:00am-11:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            654,
+            5536,
+            3021,
+            5723
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9934024810791016,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "WELLNESS SCAVENGER HUNT"
+          },
+          {
+            "confidence": 0.99916,
+            "engine": "rapidocr",
+            "text": "WELLNESS SCAVENGER HUNT"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "wellness scavenger hunt",
+        "raw_value": "WELLNESS SCAVENGER HUNT",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            655,
+            5006,
+            4908,
+            5233
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Throughout Disney's All-Star Resorts",
+    "movie_title": null,
+    "normalized_location_id": "throughout_all_star_resorts",
+    "normalized_movie_title": null,
+    "normalized_title": "wellness scavenger hunt",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "wellness_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "23:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 7:00am-11:00pm",
+      "schedule_type": "recurring",
+      "start_time": "07:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 7:00am-11:00pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            642,
+            5289,
+            3790,
+            5488
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "Throughout Disney's All-Star Resorts"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            654,
+            5536,
+            3021,
+            5723
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "Daily from 7:00am-11:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            655,
+            5006,
+            4908,
+            5233
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "WELLNESS SCAVENGER HUNT"
+        }
+      ]
+    },
+    "source_title": "WELLNESS SCAVENGER HUNT",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-eaa719a6c49d9964264fab6d",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9899418950080872,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99952,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "FIND A FRIEND ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            646,
+            7354,
+            2831,
+            7586
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9969499111175537,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Throughout Disney's All-Star Resorts"
+          },
+          {
+            "confidence": 0.9985,
+            "engine": "rapidocr",
+            "text": "Throughout Disney's All-Star Resorts"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "throughout_all_star_resorts",
+        "raw_value": "Throughout Disney's All-Star Resorts",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            638,
+            7638,
+            3778,
+            7841
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9991285800933838,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 8:00am-9:00pm"
+          },
+          {
+            "confidence": 0.9831,
+            "engine": "rapidocr",
+            "text": "Daily from 8:00am-9:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "21:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 8:00am-9:00pm",
+          "schedule_type": "recurring",
+          "start_time": "08:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 8:00am-9:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            642,
+            7885,
+            3005,
+            8080
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9899418950080872,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "FIND A FRIEND"
+          },
+          {
+            "confidence": 0.99952,
+            "engine": "rapidocr",
+            "text": "FIND"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "find a friend",
+        "raw_value": "FIND A FRIEND",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            646,
+            7354,
+            2831,
+            7586
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "7815c75165af515469bf42908545720ebe9449d73f3b8e7e264739bbfa8934ad",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_03-wellness_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Throughout Disney's All-Star Resorts",
+    "movie_title": null,
+    "normalized_location_id": "throughout_all_star_resorts",
+    "normalized_movie_title": null,
+    "normalized_title": "find a friend",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "wellness_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "21:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 8:00am-9:00pm",
+      "schedule_type": "recurring",
+      "start_time": "08:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 8:00am-9:00pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            638,
+            7638,
+            3778,
+            7841
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "Throughout Disney's All-Star Resorts"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            642,
+            7885,
+            3005,
+            8080
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "Daily from 8:00am-9:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            646,
+            7354,
+            2831,
+            7586
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-03",
+          "text": "FIND A FRIEND"
+        }
+      ]
+    },
+    "source_title": "FIND A FRIEND",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-5ba14a8a6f8358b9a4c90a74",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9837344884872437,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.98984,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "GAME POINT ARCADE ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5684,
+            2920,
+            9275,
+            3175
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.999961256980896,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Inside Stadium Hall"
+          },
+          {
+            "confidence": 0.99981,
+            "engine": "rapidocr",
+            "text": "Inside Stadium Hall"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "inside_stadium_hall",
+        "raw_value": "Inside Stadium Hall",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5697,
+            3204,
+            7303,
+            3366
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9986770153045654,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 8:00am-11:00pm"
+          },
+          {
+            "confidence": 0.9795,
+            "engine": "rapidocr",
+            "text": "Daily from 8:00am-11:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "23:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 8:00am-11:00pm",
+          "schedule_type": "recurring",
+          "start_time": "08:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 8:00am-11:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5692,
+            3402,
+            8031,
+            3593
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9837344884872437,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "GAME POINT ARCADE ($)"
+          },
+          {
+            "confidence": 0.98984,
+            "engine": "rapidocr",
+            "text": "GAME POINT ARCADE ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "game point arcade ($)",
+        "raw_value": "GAME POINT ARCADE ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5684,
+            2920,
+            9275,
+            3175
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Inside Stadium Hall",
+    "movie_title": null,
+    "normalized_location_id": "inside_stadium_hall",
+    "normalized_movie_title": null,
+    "normalized_title": "game point arcade ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "23:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 8:00am-11:00pm",
+      "schedule_type": "recurring",
+      "start_time": "08:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 8:00am-11:00pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5697,
+            3204,
+            7303,
+            3366
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Inside Stadium Hall"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5692,
+            3402,
+            8031,
+            3593
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Daily from 8:00am-11:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5684,
+            2920,
+            9275,
+            3175
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "GAME POINT ARCADE ($)"
+        }
+      ]
+    },
+    "source_title": "GAME POINT ARCADE ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-1bad4e8d49672ad1d53e570e",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9995705485343933,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99776,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "POOLSIDE ACTIVITIES ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5689,
+            3977,
+            8816,
+            4220
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999597072601318,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Surfboard Bay Pool Deck"
+          },
+          {
+            "confidence": 0.99986,
+            "engine": "rapidocr",
+            "text": "Surfboard Bay Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "surfboard_bay_pool_deck",
+        "raw_value": "Surfboard Bay Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5693,
+            4265,
+            7791,
+            4431
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9997797608375549,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily at 12:30pm"
+          },
+          {
+            "confidence": 0.98291,
+            "engine": "rapidocr",
+            "text": "Daily at 12:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily at 12:30pm",
+          "schedule_type": "recurring",
+          "start_time": "12:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily at 12:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5684,
+            4471,
+            7092,
+            4658
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9995705485343933,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "POOLSIDE ACTIVITIES"
+          },
+          {
+            "confidence": 0.99776,
+            "engine": "rapidocr",
+            "text": "POOLSIDE ACTIVITIES"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "poolside activities",
+        "raw_value": "POOLSIDE ACTIVITIES",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5689,
+            3977,
+            8816,
+            4220
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Surfboard Bay Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "surfboard_bay_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "poolside activities",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily at 12:30pm",
+      "schedule_type": "recurring",
+      "start_time": "12:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily at 12:30pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5693,
+            4265,
+            7791,
+            4431
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Surfboard Bay Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5684,
+            4471,
+            7092,
+            4658
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Daily at 12:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5689,
+            3977,
+            8816,
+            4220
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "POOLSIDE ACTIVITIES"
+        }
+      ]
+    },
+    "source_title": "POOLSIDE ACTIVITIES",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-a1ac761225b3c0a2e7ae14e1",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9943952560424805,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.99308,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "MICKEY TIE-DYE ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5681,
+            6549,
+            8523,
+            6796
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999669194221497,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Surfboard Bay Pool Deck"
+          },
+          {
+            "confidence": 0.99973,
+            "engine": "rapidocr",
+            "text": "Surfboard Bay Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "surfboard_bay_pool_deck",
+        "raw_value": "Surfboard Bay Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5684,
+            6832,
+            7787,
+            7007
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.986116349697113,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm"
+          },
+          {
+            "confidence": 0.99309,
+            "engine": "rapidocr",
+            "text": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Tuesday",
+            "Thursday",
+            "Saturday"
+          ],
+          "end_time": "16:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm",
+          "schedule_type": "recurring",
+          "start_time": "15:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5680,
+            7039,
+            10268,
+            7234
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9943952560424805,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MICKEY TIE-DYE ($)"
+          },
+          {
+            "confidence": 0.99308,
+            "engine": "rapidocr",
+            "text": "MICKEY TIE-DYE ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "mickey tie-dye ($)",
+        "raw_value": "MICKEY TIE-DYE ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5681,
+            6549,
+            8523,
+            6796
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Surfboard Bay Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "surfboard_bay_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "mickey tie-dye ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "end_time": "16:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm",
+      "schedule_type": "recurring",
+      "start_time": "15:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5684,
+            6832,
+            7787,
+            7007
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Surfboard Bay Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5680,
+            7039,
+            10268,
+            7234
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Tuesday, Thursday and Saturday from 3:30pm-4:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5681,
+            6549,
+            8523,
+            6796
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ]
+    },
+    "source_title": "MICKEY TIE-DYE ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-3f838f6dafdbbf494e5a62ff",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9834375977516174,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.97156,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "ARCADE TOURNAMENT ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5676,
+            7630,
+            8954,
+            7857
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9912915825843811,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Game Point Arcade"
+          },
+          {
+            "confidence": 0.99994,
+            "engine": "rapidocr",
+            "text": "Game Point Arcade"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "game_point_arcade",
+        "raw_value": "Game Point Arcade",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5689,
+            7914,
+            7311,
+            8076
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9995951652526855,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 4:00pm-5:00pm"
+          },
+          {
+            "confidence": 0.99763,
+            "engine": "rapidocr",
+            "text": "Daily from 4:00pm-5:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "17:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 4:00pm-5:00pm",
+          "schedule_type": "recurring",
+          "start_time": "16:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 4:00pm-5:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5681,
+            8128,
+            8011,
+            8307
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9834375977516174,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "ARCADE TOURNAMENT"
+          },
+          {
+            "confidence": 0.97156,
+            "engine": "rapidocr",
+            "text": "ARCADE TOURNAMENT"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "arcade tournament",
+        "raw_value": "ARCADE TOURNAMENT",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5676,
+            7630,
+            8954,
+            7857
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Game Point Arcade",
+    "movie_title": null,
+    "normalized_location_id": "game_point_arcade",
+    "normalized_movie_title": null,
+    "normalized_title": "arcade tournament",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "17:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 4:00pm-5:00pm",
+      "schedule_type": "recurring",
+      "start_time": "16:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 4:00pm-5:00pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5689,
+            7914,
+            7311,
+            8076
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Game Point Arcade"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5681,
+            8128,
+            8011,
+            8307
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Daily from 4:00pm-5:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5676,
+            7630,
+            8954,
+            7857
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "ARCADE TOURNAMENT"
+        }
+      ]
+    },
+    "source_title": "ARCADE TOURNAMENT",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-3c078724103f901380419c49",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9987928867340088,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99759,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "BINGO CHALLENGE ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5680,
+            10432,
+            8409,
+            10664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9999657273292542,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Surfboard Bay Pool Deck"
+          },
+          {
+            "confidence": 0.98386,
+            "engine": "rapidocr",
+            "text": "Surfboard Bay Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "surfboard_bay_pool_deck",
+        "raw_value": "Surfboard Bay Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5676,
+            10704,
+            7779,
+            10883
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            11664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9833900332450867,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Tuesday and Thursday from 6:30pm-7:30pm"
+          },
+          {
+            "confidence": 0.99684,
+            "engine": "rapidocr",
+            "text": "Tuesday and Thursday from 6:30pm-7:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Tuesday",
+            "Thursday"
+          ],
+          "end_time": "19:30",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Tuesday and Thursday from 6:30pm-7:30pm",
+          "schedule_type": "recurring",
+          "start_time": "18:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Tuesday and Thursday from 6:30pm-7:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5672,
+            10931,
+            9405,
+            11105
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9987928867340088,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "BINGO CHALLENGE"
+          },
+          {
+            "confidence": 0.99759,
+            "engine": "rapidocr",
+            "text": "BINGO CHALLENGE"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "bingo challenge",
+        "raw_value": "BINGO CHALLENGE",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5680,
+            10432,
+            8409,
+            10664
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "ba3218feb930bbd2eb01df4adeb802540e491d85997b543218fe1f1a0917b2c2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Surfboard Bay Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "surfboard_bay_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "bingo challenge",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "end_time": "19:30",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Tuesday and Thursday from 6:30pm-7:30pm",
+      "schedule_type": "recurring",
+      "start_time": "18:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Tuesday and Thursday from 6:30pm-7:30pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5676,
+            10704,
+            7779,
+            10883
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Surfboard Bay Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5672,
+            10931,
+            9405,
+            11105
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "Tuesday and Thursday from 6:30pm-7:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5680,
+            10432,
+            8409,
+            10664
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-04",
+          "text": "BINGO CHALLENGE"
+        }
+      ]
+    },
+    "source_title": "BINGO CHALLENGE",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-5b76c37b34c4509ec6d4a4c0",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9996148347854614,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.975,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "FIELD DAY ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5681,
+            11733,
+            7165,
+            11939
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9989863634109497,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Touchdown! Football Field"
+          },
+          {
+            "confidence": 0.99979,
+            "engine": "rapidocr",
+            "text": "Touchdown! Football Field"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "touchdown_football_field",
+        "raw_value": "Touchdown! Football Field",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5672,
+            11992,
+            7905,
+            12166
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9947097897529602,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Tuesday at 8:30pm"
+          },
+          {
+            "confidence": 0.99391,
+            "engine": "rapidocr",
+            "text": "Tuesday at 8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Tuesday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Tuesday at 8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Tuesday at 8:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5664,
+            12206,
+            7271,
+            12398
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9996148347854614,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "FIELD DAY"
+          },
+          {
+            "confidence": 0.975,
+            "engine": "rapidocr",
+            "text": "FIELD DAY"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "field day",
+        "raw_value": "FIELD DAY",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5681,
+            11733,
+            7165,
+            11939
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Touchdown! Football Field",
+    "movie_title": null,
+    "normalized_location_id": "touchdown_football_field",
+    "normalized_movie_title": null,
+    "normalized_title": "field day",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Tuesday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Tuesday at 8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Tuesday at 8:30pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5672,
+            11992,
+            7905,
+            12166
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "Touchdown! Football Field"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5664,
+            12206,
+            7271,
+            12398
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "Tuesday at 8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5681,
+            11733,
+            7165,
+            11939
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "FIELD DAY"
+        }
+      ]
+    },
+    "source_title": "FIELD DAY",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-46a4ad3c6941ef38e92678d9",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9995894432067871,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99918,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "SILENT DISCO ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5660,
+            13016,
+            7637,
+            13248
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9992070198059082,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Surfboard Bay Pool Deck"
+          },
+          {
+            "confidence": 0.99992,
+            "engine": "rapidocr",
+            "text": "Surfboard Bay Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "surfboard_bay_pool_deck",
+        "raw_value": "Surfboard Bay Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5660,
+            13292,
+            7771,
+            13471
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9925944209098816,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Thursday at 8:30pm"
+          },
+          {
+            "confidence": 0.99853,
+            "engine": "rapidocr",
+            "text": "Thursday at 8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday at 8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday at 8:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5652,
+            13506,
+            7344,
+            13697
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9995894432067871,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "SILENT DISCO"
+          },
+          {
+            "confidence": 0.99918,
+            "engine": "rapidocr",
+            "text": "SILENT DISCO"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "silent disco",
+        "raw_value": "SILENT DISCO",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5660,
+            13016,
+            7637,
+            13248
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Surfboard Bay Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "surfboard_bay_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "silent disco",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday at 8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday at 8:30pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5660,
+            13292,
+            7771,
+            13471
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "Surfboard Bay Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5652,
+            13506,
+            7344,
+            13697
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "Thursday at 8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5660,
+            13016,
+            7637,
+            13248
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "SILENT DISCO"
+        }
+      ]
+    },
+    "source_title": "SILENT DISCO",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "all-star-sports",
+    "candidate_id": "vision-v3-d42d099a3546b011b499f031",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.255151+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+        "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+        "source_authority": "non_official",
+        "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9969096779823303,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99846,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "SHINE LIKE A STAR GLOW PARTY ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice. ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5652,
+            14321,
+            10434,
+            14544
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9867645502090454,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Surfboard Bay Pool Deck"
+          },
+          {
+            "confidence": 0.98717,
+            "engine": "rapidocr",
+            "text": "Surfboard Bay Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "surfboard_bay_pool_deck",
+        "raw_value": "Surfboard Bay Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5652,
+            14584,
+            7771,
+            14758
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            11664,
+            10800,
+            15552
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9985349178314209,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Saturday at 8:30pm"
+          },
+          {
+            "confidence": 0.99657,
+            "engine": "rapidocr",
+            "text": "Saturday at 8:30pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Saturday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Saturday at 8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Saturday at 8:30pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5656,
+            14807,
+            7323,
+            14973
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9969096779823303,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "SHINE LIKE A STAR GLOW PARTY"
+          },
+          {
+            "confidence": 0.99846,
+            "engine": "rapidocr",
+            "text": "SHINE LIKE A STAR GLOW PARTY"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "shine like a star glow party",
+        "raw_value": "SHINE LIKE A STAR GLOW PARTY",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5652,
+            14321,
+            10434,
+            14544
+          ],
+          "content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
+          "crop_sha256": "6ee25a2f205e82e01de3e17271f1836477f8e1f15d54cb7816770401a77248b0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png",
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "page_number": 1,
+          "region_id": "page-001-region-05"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Surfboard Bay Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "surfboard_bay_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "shine like a star glow party",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-05",
+    "region_type": "movie_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Saturday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Saturday at 8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Saturday at 8:30pm",
+    "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            338,
+            15921,
+            9800,
+            16083
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice."
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5652,
+            14584,
+            7771,
+            14758
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "Surfboard Bay Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5656,
+            14807,
+            7323,
+            14973
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "Saturday at 8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5652,
+            14321,
+            10434,
+            14544
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e",
+          "region_id": "page-001-region-05",
+          "text": "SHINE LIKE A STAR GLOW PARTY"
+        }
+      ]
+    },
+    "source_title": "SHINE LIKE A STAR GLOW PARTY",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  }
+]

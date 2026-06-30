@@ -5,7 +5,7 @@ import { HIGH_VALUE_GUIDES, PRIORITY_ACTIVITY_SLUGS } from "@/lib/seo/routes";
 import { SEASONAL_CALENDAR_PAGES } from "@/lib/seo/seasonalCalendarPages";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 function entry(
   url: string,

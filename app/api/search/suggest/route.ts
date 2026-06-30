@@ -1,9 +1,7 @@
-import { NextResponse } from "next/server";
+import { publicCacheJson } from "@/lib/cache/http";
 import { guardRateLimit } from "@/lib/rate-limit/guard";
 import { runSearchSuggest } from "@/lib/search/runSearch";
 import type { Daypart } from "@/lib/types/occurrence";
-
-export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   const limited = await guardRateLimit({
@@ -30,7 +28,7 @@ export async function GET(request: Request) {
     limit: Number.isFinite(limit) ? limit : 8,
   });
 
-  return NextResponse.json({
+  return publicCacheJson({
     query: result.query,
     tokens: result.tokens,
     total: result.total,
@@ -39,5 +37,5 @@ export async function GET(request: Request) {
     facets: result.facets ?? [],
     suggestions: result.suggestedQueries ?? [],
     suggestedQueries: result.suggestedQueries ?? [],
-  });
+  }, "timeRelative");
 }

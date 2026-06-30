@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T00:07:30.938680+00:00",
+  "generated_at": "2026-06-30T01:09:04.199763+00:00",
   "overall_status": "pass",
   "confidence": {
     "current_gold_price_labels": "high",
@@ -64,8 +64,8 @@
       "manual_review_errors_by_code": {}
     },
     "official_recreation": {
-      "program_count": 42,
-      "offering_count": 233,
+      "program_count": 43,
+      "offering_count": 235,
       "quarantine_count": 0
     },
     "official_parent_classification": {
