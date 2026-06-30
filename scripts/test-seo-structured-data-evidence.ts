@@ -135,7 +135,7 @@ if (
     ...completeEvidence.filter(
       (record) =>
         !(
-          record.representativePath === "/guides/disney-world-non-park-day" &&
+          record.representativePath === "/activities" &&
           record.schemaType === "Article"
         )
     ),
@@ -143,7 +143,7 @@ if (
       checkedAt: "2026-06-27T20:02:00Z",
       source: "Schema validator",
       routeGroup: "guide_pages",
-      representativePath: "/guides/disney-world-non-park-day",
+      representativePath: "/activities",
       schemaType: "Article",
       valid: true,
       errors: 0,

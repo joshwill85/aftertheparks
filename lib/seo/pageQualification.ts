@@ -165,18 +165,18 @@ export const SEO_PAGE_MATRIX: SeoPageMatrixEntry[] = [
     title: "Disney resort activities for grandparents at night in rain by boat",
     tier: 4,
     decision: "merge",
-    primaryProductPath: "/guides/best-disney-resorts-for-grandparents",
+    primaryProductPath: "/activities",
     minimumStrongRecommendations: 0,
     rationale:
       "Too narrow for a standalone canonical page; use the grandparents guide plus rainy-day and transportation filters.",
-    mergeInto: "/guides/best-disney-resorts-for-grandparents",
+    mergeInto: "/activities",
   },
   {
     slug: "skyliner-rainy-day-resort-hopping",
     title: "Skyliner rainy-day resort hopping",
     tier: 4,
     decision: "reject",
-    primaryProductPath: "/guides/rainy-day-disney-resort-activities",
+    primaryProductPath: "/activities?weather=indoor",
     minimumStrongRecommendations: 0,
     rationale:
       "The intent conflicts with weather-risk guidance because Skyliner service can pause during lightning and severe weather.",

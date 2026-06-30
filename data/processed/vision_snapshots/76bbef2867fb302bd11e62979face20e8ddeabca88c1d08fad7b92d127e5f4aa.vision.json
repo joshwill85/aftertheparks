@@ -8152,19 +8152,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
       "page_image_sha256": "fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa",
-          "parent_source_document_id": "a14a6dedc284910cdc501ebfb211047e0149ee9501cbdf5984c28a83da896d20",
-          "source_authority": "non_official",
-          "source_crop_sha256": "dab3902c2683a5668f3e74458a854ae5955c8f58527172f4e0fb6d8b72495ac0",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/Beach_Club_Resort?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -8196,10 +8185,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "8853d5b5c62b99f4feb39ffab6799a79cec7f2bac362442d7818b725fe986092",
+      "crop_sha256": "5dcc0288bf1441bc6eeacffa9ffc4373599ec6802d182b3a5acd170cb59cee2b",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",
@@ -8213,13 +8202,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png",
-      "crop_sha256": "e5e406b5326e6366473b0d84a3008620ed560c36af9c930e366a23f3f916907c",
+      "crop_sha256": "442a63927ea3ec3960fb9e479ae31f26c38aa6d84584e60b07ae98c936ff64e0",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png",

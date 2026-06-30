@@ -29,6 +29,17 @@ PAID_HTML = """
 </html>
 """
 
+NO_RESERVATION_HTML = """
+<html>
+  <body>
+    <h2>Free Recreation Activities at Animal Kingdom Lodge</h2>
+    <h2>Disney Family Fitness Fun</h2>
+    <p>Jambo House | Tuesdays at 10:30 AM | Uzima Springs Pool Deck</p>
+    <p>No reservations required.</p>
+  </body>
+</html>
+"""
+
 
 class MagicalResortGuideFactsTest(unittest.TestCase):
     def test_paid_activity_fact_parser_extracts_joinable_factual_atoms(self) -> None:
@@ -87,9 +98,21 @@ class MagicalResortGuideFactsTest(unittest.TestCase):
             },
             fields["access_rules"],
         )
-
         self.assertTrue(any(e["field"] == "price" for e in fact["evidence"]))
         self.assertTrue(all("description" not in e["field"] for e in fact["evidence"]))
+
+    def test_no_reservations_required_is_not_parsed_as_required(self) -> None:
+        facts = extract_facts_from_html(
+            NO_RESERVATION_HTML,
+            url="https://www.magicalresortguide.com/akl-free-recreation-activities",
+            calendar_group_key="animal-kingdom-jambo",
+            resort_slugs=["animal-kingdom-lodge"],
+            page_kind="free_recreation",
+            fetched_at="2026-06-21T12:00:00+00:00",
+        )
+
+        self.assertEqual(1, len(facts))
+        self.assertFalse(facts[0]["facts"]["reservation_required"])
 
     def test_gold_merge_preserves_official_source_and_adds_external_facts(self) -> None:
         gold = {

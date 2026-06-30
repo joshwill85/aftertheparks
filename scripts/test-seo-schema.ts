@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {
   buildActivityEventJsonLd,
   buildBreadcrumbJsonLd,
-  buildGuideArticleJsonLd,
+  buildPlanningArticleJsonLd,
   buildFaqPageJsonLd,
   buildItemListJsonLd,
   buildOrganizationJsonLd,
@@ -35,19 +35,19 @@ assert.equal(
 );
 
 const breadcrumbs = buildBreadcrumbJsonLd(baseUrl, [
-  { name: "Guides", path: "/guides" },
-  { name: "Rainy Day Disney Resort Activities", path: "/guides/rainy-day-disney-resort-activities" },
+  { name: "Activities", path: "/activities" },
+  { name: "Indoor Disney Resort Activities", path: "/activities?weather=indoor" },
 ]);
 assert.equal(breadcrumbs["@type"], "BreadcrumbList");
 assert.equal(breadcrumbs.itemListElement.length, 2);
 assert.equal(breadcrumbs.itemListElement[1].position, 2);
 assert.equal(
   breadcrumbs.itemListElement[1].item,
-  `${baseUrl}/guides/rainy-day-disney-resort-activities`
+  `${baseUrl}/activities?weather=indoor`
 );
 
-const article = buildGuideArticleJsonLd(baseUrl, {
-  slug: "rainy-day-disney-resort-activities",
+const article = buildPlanningArticleJsonLd(baseUrl, {
+  path: "/activities?weather=indoor",
   title: "Rainy Day Disney Resort Activities",
   description: "Indoor and covered Walt Disney World resort activity planning.",
   dateModified: "2026-06-27",
@@ -57,7 +57,7 @@ assert.equal(article.headline, "Rainy Day Disney Resort Activities");
 assert.equal(article.author.name, "After the Parks");
 assert.equal(article.reviewedBy.name, "After the Parks");
 assert.equal(article.publisher.name, "After the Parks");
-assert.equal(article.mainEntityOfPage, `${baseUrl}/guides/rainy-day-disney-resort-activities`);
+assert.equal(article.mainEntityOfPage, `${baseUrl}/activities?weather=indoor`);
 assert.equal(article.dateModified, "2026-06-27");
 
 const itemList = buildItemListJsonLd(

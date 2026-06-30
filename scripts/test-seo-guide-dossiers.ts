@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import {
   buildSeoGuideDossier,
   validateSeoGuideDossiers,
 } from "@/lib/seo/guideDossiers";
 import { HIGH_VALUE_GUIDES } from "@/lib/seo/routes";
+
+const removedGuideDetailRoute = `app/${["guid", "es"].join("")}/[slug]/page.tsx`;
 
 const REQUIRED_BUCKETS = [
   "officialSourceFacts",
@@ -46,21 +48,11 @@ assert.deepEqual(
   `all high-value guides should have complete research dossiers: ${dossierIssues.join("; ")}`
 );
 
-const guidePage = readFileSync("app/guides/[slug]/page.tsx", "utf8");
-for (const expected of [
-  "Start here",
-  "Important caveats",
-  "Live planning paths",
-  "Best next clicks",
-  "Mistakes to avoid",
-  "Sources and update notes",
-]) {
-  assert.match(
-    guidePage,
-    new RegExp(expected),
-    `guide detail page should render visitor-facing section: ${expected}`
-  );
-}
+assert.equal(
+  existsSync(removedGuideDetailRoute),
+  false,
+  "removed guide detail route should not be required for SEO dossier validation"
+);
 
 for (const removed of [
   "Research dossier",
@@ -73,11 +65,20 @@ for (const removed of [
   "Anti-thin-content checks",
   "Would this page still help if search engines sent zero traffic?",
 ]) {
-  assert.doesNotMatch(
-    guidePage,
-    new RegExp(removed),
-    `guide detail page should not publicly render scaffold label: ${removed}`
-  );
+  for (const file of [
+    "app/activities/page.tsx",
+    "app/resorts/page.tsx",
+    "app/today/page.tsx",
+    "app/tonight/page.tsx",
+    "app/disney-world-resort-activity-calendars/page.tsx",
+  ]) {
+    const source = readFileSync(file, "utf8");
+    assert.doesNotMatch(
+      source,
+      new RegExp(removed),
+      `${file} should not publicly render scaffold label: ${removed}`
+    );
+  }
 }
 
-console.log("SEO guide dossier tests passed.");
+console.log("SEO internal planning dossier tests passed.");

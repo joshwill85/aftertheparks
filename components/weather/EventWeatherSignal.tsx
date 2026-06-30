@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent } from "react";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
+import { weatherDecisionLabelForGuidance } from "@/lib/weather/guidance";
 import { formatTempDual } from "@/lib/weather/format";
 import { weatherPageHref } from "@/lib/weather/links";
 import { WeatherIcon } from "@/components/weather/WeatherIcon";
@@ -41,23 +42,6 @@ function detailText(guidance: WeatherForTimeSpan): string | undefined {
     guidance.nwsAlerts.length > 0 ? "official alert" : undefined,
   ].filter(Boolean);
   return pieces.length > 0 ? pieces.join(" · ") : undefined;
-}
-
-function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string | undefined {
-  switch (action) {
-    case "good_now":
-      return "Outdoor plans OK";
-    case "go_earlier":
-      return "Go earlier";
-    case "choose_covered_backup":
-      return "Pick covered backup";
-    case "stay_inside":
-      return "Stay inside";
-    case "official_alert":
-      return "Official alert";
-    default:
-      return undefined;
-  }
 }
 
 export function EventWeatherSignal({
@@ -111,7 +95,7 @@ export function EventWeatherSignal({
   const guidance = state.guidance;
   const tone = toneForGuidance(guidance);
   const detail = detailText(guidance);
-  const actionLabel = weatherActionLabel(guidance.actionGuidance);
+  const actionLabel = weatherDecisionLabelForGuidance(guidance);
   const weatherHref = weatherPageHref(guidance.locationKey);
   const openWeatherPage = (
     event: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>

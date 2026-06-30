@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   format,
   startOfMonth,
@@ -29,6 +30,7 @@ import {
 import { buildFutureActivityInsights } from "@/lib/calendar/insights";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
+import { weatherFitValueForActivity } from "@/lib/planning/activityFacts";
 import {
   CALENDAR_DAYPARTS,
   buildCalendarDaySummaries,
@@ -36,20 +38,11 @@ import {
   type CalendarDaySummary,
 } from "@/lib/visualizations/calendarDensity";
 import type {
-  ActivityAreaFilter,
   ActivityOccurrence,
+  ActivityWeatherFilter,
   Daypart,
 } from "@/lib/types/occurrence";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
-
-const AREA_OPTIONS: Array<{ value: ActivityAreaFilter; label: string }> = [
-  { value: "magic-kingdom", label: "Magic Kingdom area" },
-  { value: "epcot-boardwalk", label: "EPCOT / BoardWalk" },
-  { value: "skyliner", label: "Skyliner" },
-  { value: "animal-kingdom", label: "Animal Kingdom area" },
-  { value: "disney-springs", label: "Disney Springs area" },
-  { value: "fort-wilderness", label: "Fort Wilderness" },
-];
 
 const DAYPART_OPTIONS: Array<{ value: Exclude<Daypart, "anytime">; label: string }> = [
   { value: "morning", label: "Morning" },
@@ -80,6 +73,13 @@ function countLabel(count: number, singular: string, plural = `${singular}s`): s
 function formatInsightDate(date: string, today: string): string {
   if (date === addOrlandoDays(today, 1)) return "Tomorrow";
   return format(dateForMonth(date), "EEE, MMM d");
+}
+
+function scheduleConfidenceLabel(summary: CalendarDaySummary): string {
+  if (summary.total >= 8) return "Strong schedule coverage";
+  if (summary.total >= 3) return "Some current listings";
+  if (summary.total > 0) return "Limited current listings";
+  return "Limited current listings";
 }
 
 function CalendarDensityBands({ summary }: { summary: CalendarDaySummary }) {
@@ -120,6 +120,13 @@ function CalendarDensityBands({ summary }: { summary: CalendarDaySummary }) {
 }
 
 function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
+  const strongestBand = CALENDAR_DAYPARTS.reduce((best, band) =>
+    summary.dayparts[band.key] > summary.dayparts[best.key] ? band : best
+  );
+  const confidence = scheduleConfidenceLabel(summary);
+  const weatherAvailability =
+    summary.total > 0 ? "Schedule details may change" : "Weather not available yet";
+
   if (summary.total === 0) {
     return (
       <div className="calendar-story calendar-story--empty">
@@ -128,13 +135,14 @@ function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
         <p className="calendar-story__copy">
           Try another date, clear a filter, or use the empty space as breathing room.
         </p>
+        <div className="calendar-story__stats" aria-label={summary.ariaLabel}>
+          <span>{format(dateForMonth(summary.date), "EEE, MMM d")}</span>
+          <span>{confidence}</span>
+          <span>{weatherAvailability}</span>
+        </div>
       </div>
     );
   }
-
-  const strongestBand = CALENDAR_DAYPARTS.reduce((best, band) =>
-    summary.dayparts[band.key] > summary.dayparts[best.key] ? band : best
-  );
 
   return (
     <div className="calendar-story">
@@ -144,9 +152,13 @@ function CalendarStorySummary({ summary }: { summary: CalendarDaySummary }) {
         {summary.topResort ? `, led by ${summary.topResort.name}` : ""}
       </p>
       <div className="calendar-story__stats" aria-label={summary.ariaLabel}>
+        <span>{format(dateForMonth(summary.date), "EEE, MMM d")}</span>
         <span>{strongestBand.label} is busiest</span>
         {summary.topCategory && <span>{summary.topCategory.label} leads</span>}
+        {summary.topResort && <span>{summary.topResort.name} leads</span>}
         <span>{summary.costMix.free} free</span>
+        <span>{confidence}</span>
+        <span>{weatherAvailability}</span>
       </div>
     </div>
   );
@@ -174,6 +186,8 @@ export function CalendarClient({
   const categoryFilter = planAhead.category ?? "all";
   const areaFilter = planAhead.area ?? "all";
   const daypartFilter = planAhead.daypart ?? "all";
+  const freeOnly = planAhead.free === true;
+  const weatherFilter = planAhead.weather ?? "all";
   const todayKey = orlandoDateString();
 
   const applyPlanAhead = (next: Partial<PlanAheadParams>) => {
@@ -201,6 +215,14 @@ export function CalendarClient({
       start: planAhead.start,
       end: addOrlandoDays(planAhead.start, 30),
       selected: planAhead.start,
+    });
+  };
+
+  const applyQuickDate = (selected: string) => {
+    applyPlanAhead({
+      start: selected,
+      end: selected,
+      selected,
     });
   };
 
@@ -238,9 +260,18 @@ export function CalendarClient({
       if (daypartFilter !== "all" && occurrence.daypart !== daypartFilter) {
         return false;
       }
+      if (freeOnly && occurrence.price.state !== "free") {
+        return false;
+      }
+      if (
+        weatherFilter !== "all" &&
+        weatherFitValueForActivity(occurrence) !== weatherFilter
+      ) {
+        return false;
+      }
       return true;
     });
-  }, [areaFilter, categoryFilter, daypartFilter, endDate, occurrences, resortFilter, startDate]);
+  }, [areaFilter, categoryFilter, daypartFilter, endDate, freeOnly, occurrences, resortFilter, startDate, weatherFilter]);
 
   const days = useMemo(() => {
     const start = startOfMonth(month);
@@ -334,21 +365,24 @@ export function CalendarClient({
           </p>
         </div>
         <div className="plan-ahead-presets" aria-label="Quick date ranges">
-          <button type="button" onClick={() => applyPreset("next7")}>
-            Next 7 days
+          <button type="button" onClick={() => applyQuickDate(todayKey)}>
+            Today
+          </button>
+          <button type="button" onClick={() => applyQuickDate(addOrlandoDays(todayKey, 1))}>
+            Tomorrow
           </button>
           <button type="button" onClick={() => applyPreset("weekend")}>
             This weekend
           </button>
-          <button type="button" onClick={() => applyPreset("next30")}>
-            Next 30 days
+          <button type="button" onClick={() => applyPreset("next7")}>
+            Trip dates
           </button>
         </div>
       </section>
 
       <div className="plan-ahead-filters">
         <label className="space-y-1 text-sm font-medium">
-          <span>Start date</span>
+          <span>Trip dates</span>
           <input
             type="date"
             value={startDate}
@@ -371,7 +405,16 @@ export function CalendarClient({
           />
         </label>
         <label className="space-y-1 text-sm font-medium">
-          <span>Filter by resort</span>
+          <span>Choose a date</span>
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(event) => applyPlanAhead({ selected: event.target.value })}
+            className="w-full rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2"
+          />
+        </label>
+        <label className="space-y-1 text-sm font-medium">
+          <span>Resort</span>
           <select
             value={resortFilter}
             onChange={(event) =>
@@ -390,7 +433,7 @@ export function CalendarClient({
           </select>
         </label>
         <label className="space-y-1 text-sm font-medium">
-          <span>Filter by category</span>
+          <span>Category</span>
           <select
             value={categoryFilter}
             onChange={(event) =>
@@ -409,29 +452,7 @@ export function CalendarClient({
           </select>
         </label>
         <label className="space-y-1 text-sm font-medium">
-          <span>Filter by area</span>
-          <select
-            value={areaFilter}
-            onChange={(event) =>
-              applyPlanAhead({
-                area:
-                  event.target.value === "all"
-                    ? undefined
-                    : (event.target.value as ActivityAreaFilter),
-              })
-            }
-            className="w-full rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2"
-          >
-            <option value="all">All areas</option>
-            {AREA_OPTIONS.map((area) => (
-              <option key={area.value} value={area.value}>
-                {area.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="space-y-1 text-sm font-medium">
-          <span>Filter by time</span>
+          <span>Time of day</span>
           <select
             value={daypartFilter}
             onChange={(event) =>
@@ -450,6 +471,38 @@ export function CalendarClient({
                 {daypart.label}
               </option>
             ))}
+          </select>
+        </label>
+        <label className="space-y-1 text-sm font-medium">
+          <span>Free</span>
+          <select
+            value={freeOnly ? "true" : "all"}
+            onChange={(event) =>
+              applyPlanAhead({ free: event.target.value === "true" ? true : undefined })
+            }
+            className="w-full rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2"
+          >
+            <option value="all">Any cost</option>
+            <option value="true">Free only</option>
+          </select>
+        </label>
+        <label className="space-y-1 text-sm font-medium">
+          <span>Indoor or covered</span>
+          <select
+            value={weatherFilter}
+            onChange={(event) =>
+              applyPlanAhead({
+                weather:
+                  event.target.value === "all"
+                    ? undefined
+                    : (event.target.value as ActivityWeatherFilter),
+              })
+            }
+            className="w-full rounded-lg border border-[var(--color-card-border)] bg-[var(--color-card)] px-3 py-2"
+          >
+            <option value="all">Any weather fit</option>
+            <option value="indoor">Indoor</option>
+            <option value="covered">Covered</option>
           </select>
         </label>
       </div>
@@ -612,14 +665,38 @@ export function CalendarClient({
           {selectedActivities.map((activity) => {
             const display = toDisplayActivity(activity);
             const card = activityToEventCard(activity, display);
+            const saved = isActivitySaved(activity);
             return (
-              <EventCard
-                key={activity.id}
-                {...card}
-                weatherSummary={weatherById[activity.id]}
-                saved={isActivitySaved(activity)}
-                onSave={() => addActivity(activity)}
-              />
+              <div key={activity.id} className="space-y-2">
+                <EventCard
+                  {...card}
+                  weatherSummary={weatherById[activity.id]}
+                  saved={saved}
+                  onSave={() => addActivity(activity)}
+                />
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className="btn-secondary rounded-full px-4 py-2 text-xs font-bold"
+                    onClick={() => addActivity(activity)}
+                    disabled={saved}
+                  >
+                    {saved ? "Added to My Plan" : "Add to My Plan"}
+                  </button>
+                  <Link
+                    href={`/activities/${activity.activitySlug}`}
+                    className="btn-secondary rounded-full px-4 py-2 text-xs font-bold"
+                  >
+                    View details
+                  </Link>
+                  <Link
+                    href={`/activities?resort=${activity.resort.slug}&weather=indoor`}
+                    className="btn-secondary rounded-full px-4 py-2 text-xs font-bold"
+                  >
+                    Find indoor backup
+                  </Link>
+                </div>
+              </div>
             );
           })}
           {selectedActivities.length === 0 && (

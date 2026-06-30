@@ -1,0 +1,1927 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision v3 Review Queue</title>
+<style>
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;background:#f7f7f4;color:#1e2329}
+header{position:sticky;top:0;background:#ffffff;border-bottom:1px solid #d8d6ce;padding:16px 24px;z-index:1}
+main{max-width:1180px;margin:0 auto;padding:24px}
+h1{font-size:24px;margin:0 0 8px} h2{font-size:18px;margin:0} h3{font-size:13px;margin:0 0 8px;color:#48515a}
+.summary{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}.summary strong{font-size:18px}
+.task{background:#fff;border:1px solid #d8d6ce;border-radius:8px;margin:0 0 18px;padding:16px}
+.task-heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid #eceae3;padding-bottom:12px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:12px 0;font-size:13px}
+.evidence{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}
+.evidence section,.grid section{border:1px solid #eceae3;border-radius:6px;padding:10px;background:#fbfbf8}
+.media-link{display:grid;gap:8px;text-decoration:none;color:#185abc}.media-link img{display:block;width:100%;max-height:260px;object-fit:contain;background:#fff;border:1px solid #d8d6ce;border-radius:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+pre{white-space:pre-wrap;word-break:break-word;margin:0;font-size:12px;line-height:1.4}
+code{font-size:12px}.missing{color:#8b2f2f}a{color:#185abc}
+</style>
+</head>
+<body>
+<header>
+<h1>Vision v3 Review Queue</h1>
+<div class="summary">
+<span><strong>38</strong> tasks</span>
+<span><strong>0</strong> missing visual artifacts</span>
+<span>Types: <code>{
+  &quot;gold_conflict&quot;: 1,
+  &quot;manual_review_required&quot;: 9,
+  &quot;missing_field_engine_evidence:title&quot;: 1,
+  &quot;ocr_disagreement&quot;: 24,
+  &quot;partial_movie_row_review_required&quot;: 3
+}</code></span>
+</div>
+</header>
+<main>
+<article class="task">
+<div class="task-heading">
+<h2>animal-kingdom-jambo / ocr_disagreement</h2>
+<code>vision-v3-7e8ba13f9e678ea93621e75f</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955</code></span>
+<span>Page image SHA: <code>cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981</code></span>
+<span>Field crop SHA: <code>609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png"><img src="../vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png"><img src="../vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png"><img src="../page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:title&quot;,
+  &quot;engine_disagreement:schedule&quot;,
+  &quot;engine_disagreement:location&quot;,
+  &quot;unknown_location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>MEMORIESACTIVITIES</pre></section>
+<section><h3>Normalized Value</h3><pre>memories activities</pre></section>
+<section><h3>Primary OCR</h3><pre>MEMORIESACTIVITIES</pre></section>
+<section><h3>Secondary OCR</h3><pre>C TI</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.315975+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-7e8ba13f9e678ea93621e75f&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-7e8ba13f9e678ea93621e75f&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;memories activities&quot;, &quot;raw_value&quot;: &quot;MEMORIESACTIVITIES&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-7e8ba13f9e678ea93621e75f&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>grand-floridian / ocr_disagreement</h2>
+<code>vision-v3-932beb27d087ecf6f8e48912</code>
+</div>
+<div class="meta">
+<span>Field: <strong>movie_title</strong></span>
+<span>Candidate: <strong>movie</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38</code></span>
+<span>Page image SHA: <code>641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320</code></span>
+<span>Field crop SHA: <code>72af30846e433d4617a176e5e64fdaf5781040847cb22074606f97bbce021c66</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_05-movie_section.png"><img src="../vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_05-movie_section.png"><img src="../vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png"><img src="../page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:movie_title&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Moana 2</pre></section>
+<section><h3>Normalized Value</h3><pre>moana 2</pre></section>
+<section><h3>Primary OCR</h3><pre>Moana 2</pre></section>
+<section><h3>Secondary OCR</h3><pre>Lilo and Stitch (2025)PG</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.374157+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-932beb27d087ecf6f8e48912&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-932beb27d087ecf6f8e48912&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;movie_title&quot;: {&quot;normalized_value&quot;: &quot;moana 2&quot;, &quot;raw_value&quot;: &quot;Moana 2&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-932beb27d087ecf6f8e48912&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>beach-yacht-club / partial_movie_row_review_required</h2>
+<code>vision-v3-27621d5e99db1cbcbcd7a07e</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>movie</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa</code></span>
+<span>Page image SHA: <code>fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3</code></span>
+<span>Field crop SHA: <code>442a63927ea3ec3960fb9e479ae31f26c38aa6d84584e60b07ae98c936ff64e0</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png"><img src="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png"><img src="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png"><img src="../page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;partial_movie_row_review_required&quot;,
+  &quot;missing_source_span:title&quot;,
+  &quot;missing_required_field:title&quot;,
+  &quot;missing_field_engine_evidence:schedule&quot;,
+  &quot;engine_disagreement:schedule&quot;,
+  &quot;missing_source_span:location&quot;,
+  &quot;missing_required_field:location&quot;,
+  &quot;missing_source_span:fee&quot;,
+  &quot;missing_required_field:fee&quot;,
+  &quot;missing_field_engine_evidence:movie_title&quot;,
+  &quot;engine_disagreement:movie_title&quot;,
+  &quot;unparsed_schedule&quot;,
+  &quot;unknown_location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Tuesday</pre></section>
+<section><h3>Normalized Value</h3><pre></pre></section>
+<section><h3>Primary OCR</h3><pre></pre></section>
+<section><h3>Secondary OCR</h3><pre></pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.340685+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-27621d5e99db1cbcbcd7a07e&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-27621d5e99db1cbcbcd7a07e&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: null, &quot;raw_value&quot;: &quot;Tuesday&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-27621d5e99db1cbcbcd7a07e&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>beach-yacht-club / partial_movie_row_review_required</h2>
+<code>vision-v3-fb192141c4d790e26002b4b9</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>movie</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa</code></span>
+<span>Page image SHA: <code>fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3</code></span>
+<span>Field crop SHA: <code>442a63927ea3ec3960fb9e479ae31f26c38aa6d84584e60b07ae98c936ff64e0</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png"><img src="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png"><img src="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png"><img src="../page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;partial_movie_row_review_required&quot;,
+  &quot;missing_source_span:title&quot;,
+  &quot;missing_required_field:title&quot;,
+  &quot;engine_disagreement:schedule&quot;,
+  &quot;missing_source_span:location&quot;,
+  &quot;missing_required_field:location&quot;,
+  &quot;missing_source_span:fee&quot;,
+  &quot;missing_required_field:fee&quot;,
+  &quot;unparsed_schedule&quot;,
+  &quot;unknown_location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Thursday</pre></section>
+<section><h3>Normalized Value</h3><pre></pre></section>
+<section><h3>Primary OCR</h3><pre></pre></section>
+<section><h3>Secondary OCR</h3><pre></pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.340685+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-fb192141c4d790e26002b4b9&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-fb192141c4d790e26002b4b9&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: null, &quot;raw_value&quot;: &quot;Thursday&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-fb192141c4d790e26002b4b9&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>beach-yacht-club / partial_movie_row_review_required</h2>
+<code>vision-v3-078538dfa52c049c86ce8056</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>movie</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa</code></span>
+<span>Page image SHA: <code>fdb6afa351076fc2d91ef129dcfb86b6dc717b849e1ce977b1d309abbc0273c3</code></span>
+<span>Field crop SHA: <code>442a63927ea3ec3960fb9e479ae31f26c38aa6d84584e60b07ae98c936ff64e0</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png"><img src="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png"><img src="../vision_debug/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png"><img src="../page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;partial_movie_row_review_required&quot;,
+  &quot;missing_source_span:title&quot;,
+  &quot;missing_required_field:title&quot;,
+  &quot;engine_disagreement:schedule&quot;,
+  &quot;missing_source_span:location&quot;,
+  &quot;missing_required_field:location&quot;,
+  &quot;missing_source_span:fee&quot;,
+  &quot;missing_required_field:fee&quot;,
+  &quot;unparsed_schedule&quot;,
+  &quot;unknown_location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Saturday</pre></section>
+<section><h3>Normalized Value</h3><pre></pre></section>
+<section><h3>Primary OCR</h3><pre></pre></section>
+<section><h3>Secondary OCR</h3><pre></pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.340685+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-078538dfa52c049c86ce8056&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-078538dfa52c049c86ce8056&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: null, &quot;raw_value&quot;: &quot;Saturday&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-078538dfa52c049c86ce8056&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>boardwalk / missing_field_engine_evidence:title</h2>
+<code>vision-v3-e9800cec782372c2def30bb2</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d</code></span>
+<span>Page image SHA: <code>e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336</code></span>
+<span>Field crop SHA: <code>ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png"><img src="../vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png"><img src="../vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png"><img src="../page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;missing_field_engine_evidence:title&quot;,
+  &quot;engine_disagreement:title&quot;,
+  &quot;missing_field_engine_evidence:fee&quot;,
+  &quot;engine_disagreement:fee&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>PICKLEBALL CLINIC</pre></section>
+<section><h3>Normalized Value</h3><pre>pickleball clinic</pre></section>
+<section><h3>Primary OCR</h3><pre>PICKLEBALL CLINIC</pre></section>
+<section><h3>Secondary OCR</h3><pre></pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.350146+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-e9800cec782372c2def30bb2&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-e9800cec782372c2def30bb2&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;pickleball clinic&quot;, &quot;raw_value&quot;: &quot;PICKLEBALL CLINIC&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-e9800cec782372c2def30bb2&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-d671d2f2f3915cee12326e12-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Old Port Royale Lobby</pre></section>
+<section><h3>Normalized Value</h3><pre>old_port_royale_lobby</pre></section>
+<section><h3>Primary OCR</h3><pre>Old Port Royale Lobby</pre></section>
+<section><h3>Secondary OCR</h3><pre>Caribbcart Cay Islauid Movie Lawn</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;old_port_royale_lobby&quot;, &quot;raw_value&quot;: &quot;Old Port Royale Lobby&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-d671d2f2f3915cee12326e12-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Monday from 9:30am-9:50am and 2:40pm-3:00pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Monday&quot;
+  ],
+  &quot;end_time&quot;: &quot;09:50&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Monday from 9:30am-9:50am and 2:40pm-3:00pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;09:30&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 9:30am-9:50am and 2:40pm-3:00pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>8:30pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Monday&quot;], &quot;end_time&quot;: &quot;09:50&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Monday from 9:30am-9:50am and 2:40pm-3:00pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;09:30&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Monday from 9:30am-9:50am and 2:40pm-3:00pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-d671d2f2f3915cee12326e12-title</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:title&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>DISNEY CHARACTER GREETINGS</pre></section>
+<section><h3>Normalized Value</h3><pre>disney character greetings</pre></section>
+<section><h3>Primary OCR</h3><pre>DISNEY CHARACTER GREETINGS</pre></section>
+<section><h3>Secondary OCR</h3><pre>MOVIE UNDER THE STARS</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-title&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-title&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;disney character greetings&quot;, &quot;raw_value&quot;: &quot;DISNEY CHARACTER GREETINGS&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-d671d2f2f3915cee12326e12-title&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-0bd7b9e1abd4066097d4c806-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Old Port Royale Lobby</pre></section>
+<section><h3>Normalized Value</h3><pre>old_port_royale_lobby</pre></section>
+<section><h3>Primary OCR</h3><pre>Old Port Royale Lobby</pre></section>
+<section><h3>Secondary OCR</h3><pre>Caribbcart Cay Islard Movic Lawn</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;old_port_royale_lobby&quot;, &quot;raw_value&quot;: &quot;Old Port Royale Lobby&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-0bd7b9e1abd4066097d4c806-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Tuesday from 9:30am-9:50am and 2:40pm-3:00pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Tuesday&quot;
+  ],
+  &quot;end_time&quot;: &quot;09:50&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Tuesday from 9:30am-9:50am and 2:40pm-3:00pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;09:30&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 9:30am-9:50am and 2:40pm-3:00pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>3:56pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Tuesday&quot;], &quot;end_time&quot;: &quot;09:50&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Tuesday from 9:30am-9:50am and 2:40pm-3:00pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;09:30&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Tuesday from 9:30am-9:50am and 2:40pm-3:00pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-0bd7b9e1abd4066097d4c806-title</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:title&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>DISNEY CHARACTER GREETINGS</pre></section>
+<section><h3>Normalized Value</h3><pre>disney character greetings</pre></section>
+<section><h3>Primary OCR</h3><pre>DISNEY CHARACTER GREETINGS</pre></section>
+<section><h3>Secondary OCR</h3><pre>LILO &amp; STITCH (2025)</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-title&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-title&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;disney character greetings&quot;, &quot;raw_value&quot;: &quot;DISNEY CHARACTER GREETINGS&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0bd7b9e1abd4066097d4c806-title&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-874e50880bc3a90f052a085d-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Fuentes del Morro Pool Deck</pre></section>
+<section><h3>Normalized Value</h3><pre>fuentes_del_morro_pool_deck</pre></section>
+<section><h3>Primary OCR</h3><pre>Fuentes del Morro Pool Deck</pre></section>
+<section><h3>Secondary OCR</h3><pre>Old Port Royale Lobby</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-874e50880bc3a90f052a085d-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-874e50880bc3a90f052a085d-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;fuentes_del_morro_pool_deck&quot;, &quot;raw_value&quot;: &quot;Fuentes del Morro Pool Deck&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-874e50880bc3a90f052a085d-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-874e50880bc3a90f052a085d-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Thursday from 1:30pm-2:30pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Thursday&quot;
+  ],
+  &quot;end_time&quot;: &quot;14:30&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Thursday from 1:30pm-2:30pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;13:30&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 1:30pm-2:30pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>Fro* 9.30am-9:500m a1d 2:40pm-3:00pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-874e50880bc3a90f052a085d-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-874e50880bc3a90f052a085d-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Thursday&quot;], &quot;end_time&quot;: &quot;14:30&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Thursday from 1:30pm-2:30pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;13:30&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Thursday from 1:30pm-2:30pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-874e50880bc3a90f052a085d-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-09be60e3a5e8d80047e5b114</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Thursday at 8:30pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Thursday&quot;
+  ],
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Thursday at 8:30pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;20:30&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>8:30pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>3:56pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-09be60e3a5e8d80047e5b114&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-09be60e3a5e8d80047e5b114&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Thursday&quot;], &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Thursday at 8:30pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;20:30&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Thursday at 8:30pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-09be60e3a5e8d80047e5b114&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>caribbean-beach / ocr_disagreement</h2>
+<code>vision-v3-e179c9a92d669ea3e75591eb</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988</code></span>
+<span>Page image SHA: <code>b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7</code></span>
+<span>Field crop SHA: <code>c2b4811133dedb29048dc07ce2741d319d4f54ba87916a9c707c7f67c0bd0eb7</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png"><img src="../page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Friday from 9:30am-9:50am and 2:40pm-3:00pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Friday&quot;
+  ],
+  &quot;end_time&quot;: &quot;09:50&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Friday from 9:30am-9:50am and 2:40pm-3:00pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;09:30&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 9:30am-9:50am and 2:40pm-3:00pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>ro9.50am-9:500m a1d2:40pm-5:00pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.276644+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-e179c9a92d669ea3e75591eb&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-e179c9a92d669ea3e75591eb&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Friday&quot;], &quot;end_time&quot;: &quot;09:50&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Friday from 9:30am-9:50am and 2:40pm-3:00pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;09:30&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Friday from 9:30am-9:50am and 2:40pm-3:00pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-e179c9a92d669ea3e75591eb&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-f05847b31f0416f5e1a8d924-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Movie Lawn near the Big Blue Pool</pre></section>
+<section><h3>Normalized Value</h3><pre>movie_lawn_near_the_big_blue_pool</pre></section>
+<section><h3>Primary OCR</h3><pre>Movie Lawn near the Big Blue Pool</pre></section>
+<section><h3>Secondary OCR</h3><pre>Frun63μ= 73μn</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;movie_lawn_near_the_big_blue_pool&quot;, &quot;raw_value&quot;: &quot;Movie Lawn near the Big Blue Pool&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-f05847b31f0416f5e1a8d924-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Wednesday from 8:00pm-8:30pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Wednesday&quot;
+  ],
+  &quot;end_time&quot;: &quot;20:30&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Wednesday from 8:00pm-8:30pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;20:00&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 8:00pm-8:30pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>1 mm 431pm 1.20pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Wednesday&quot;], &quot;end_time&quot;: &quot;20:30&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Wednesday from 8:00pm-8:30pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;20:00&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Wednesday from 8:00pm-8:30pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-f05847b31f0416f5e1a8d924-title</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:title&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>ACTIVITIES ON THE LAWN</pre></section>
+<section><h3>Normalized Value</h3><pre>activities on the lawn</pre></section>
+<section><h3>Primary OCR</h3><pre>ACTIVITIES ON THE LAWN</pre></section>
+<section><h3>Secondary OCR</h3><pre>CAMPFIRE AT PRIDE ROCK</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-title&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-title&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;activities on the lawn&quot;, &quot;raw_value&quot;: &quot;ACTIVITIES ON THE LAWN&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-f05847b31f0416f5e1a8d924-title&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-66039a243e90e9c50fcad5ef-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Movie Lawn near the Big Blue Pool</pre></section>
+<section><h3>Normalized Value</h3><pre>movie_lawn_near_the_big_blue_pool</pre></section>
+<section><h3>Primary OCR</h3><pre>Movie Lawn near the Big Blue Pool</pre></section>
+<section><h3>Secondary OCR</h3><pre>Movde Lewt nesr the Gilg Diun Poot</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;movie_lawn_near_the_big_blue_pool&quot;, &quot;raw_value&quot;: &quot;Movie Lawn near the Big Blue Pool&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-66039a243e90e9c50fcad5ef-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Wednesday at 8:30pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Wednesday&quot;
+  ],
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Wednesday at 8:30pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;20:30&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>8:30pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>1 mm 431pm 1.20pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Wednesday&quot;], &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Wednesday at 8:30pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;20:30&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Wednesday at 8:30pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-66039a243e90e9c50fcad5ef-title</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:title&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>MOVIE UNDER THE STARS TOY STORY 2 G</pre></section>
+<section><h3>Normalized Value</h3><pre>movie under the stars toy story 2</pre></section>
+<section><h3>Primary OCR</h3><pre>MOVIE UNDER THE STARS TOY STORY 2 G</pre></section>
+<section><h3>Secondary OCR</h3><pre>ACTIVITIES ON THE LAWN</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-title&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-title&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;movie under the stars toy story 2&quot;, &quot;raw_value&quot;: &quot;MOVIE UNDER THE STARS TOY STORY 2 G&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-66039a243e90e9c50fcad5ef-title&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-026c16f14d7af1e92772d62c-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>The Big Blue Pool Deck</pre></section>
+<section><h3>Normalized Value</h3><pre>the_big_blue_pool_deck</pre></section>
+<section><h3>Primary OCR</h3><pre>The Big Blue Pool Deck</pre></section>
+<section><h3>Secondary OCR</h3><pre>Outad: Ammstiv? Hall</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-026c16f14d7af1e92772d62c-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-026c16f14d7af1e92772d62c-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;the_big_blue_pool_deck&quot;, &quot;raw_value&quot;: &quot;The Big Blue Pool Deck&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-026c16f14d7af1e92772d62c-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-026c16f14d7af1e92772d62c-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Friday from 1:00pm-2:00pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Friday&quot;
+  ],
+  &quot;end_time&quot;: &quot;14:00&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Friday from 1:00pm-2:00pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;13:00&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 1:00pm-2:00pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>1mm ×p74:2pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-026c16f14d7af1e92772d62c-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-026c16f14d7af1e92772d62c-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Friday&quot;], &quot;end_time&quot;: &quot;14:00&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Friday from 1:00pm-2:00pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;13:00&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Friday from 1:00pm-2:00pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-026c16f14d7af1e92772d62c-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-81f061632b0e7a49ca1da55c-location</code>
+</div>
+<div class="meta">
+<span>Field: <strong>location</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>The Big Blue Pool Deck</pre></section>
+<section><h3>Normalized Value</h3><pre>the_big_blue_pool_deck</pre></section>
+<section><h3>Primary OCR</h3><pre>The Big Blue Pool Deck</pre></section>
+<section><h3>Secondary OCR</h3><pre>Or&gt;d. Anntio-Hall</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-location&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-location&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;location&quot;: {&quot;normalized_value&quot;: &quot;the_big_blue_pool_deck&quot;, &quot;raw_value&quot;: &quot;The Big Blue Pool Deck&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-location&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-81f061632b0e7a49ca1da55c-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Saturday from 1:00pm-2:00pm</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;days_of_week&quot;: [
+    &quot;Saturday&quot;
+  ],
+  &quot;end_time&quot;: &quot;14:00&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;Saturday from 1:00pm-2:00pm&quot;,
+  &quot;schedule_type&quot;: &quot;recurring&quot;,
+  &quot;start_time&quot;: &quot;13:00&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>From 1:00pm-2:00pm</pre></section>
+<section><h3>Secondary OCR</h3><pre>frum k00μm 4:2pm</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;days_of_week&quot;: [&quot;Saturday&quot;], &quot;end_time&quot;: &quot;14:00&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;Saturday from 1:00pm-2:00pm&quot;, &quot;schedule_type&quot;: &quot;recurring&quot;, &quot;start_time&quot;: &quot;13:00&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;Saturday from 1:00pm-2:00pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>art-of-animation / ocr_disagreement</h2>
+<code>vision-v3-81f061632b0e7a49ca1da55c-title</code>
+</div>
+<div class="meta">
+<span>Field: <strong>title</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383</code></span>
+<span>Page image SHA: <code>8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9</code></span>
+<span>Field crop SHA: <code>7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png"><img src="../vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png"><img src="../page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:title&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>POOL PARTY</pre></section>
+<section><h3>Normalized Value</h3><pre>pool party</pre></section>
+<section><h3>Primary OCR</h3><pre>POOL PARTY</pre></section>
+<section><h3>Secondary OCR</h3><pre>MICKEY TIE-DYE (S)</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.261998+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_image&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-title&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-title&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;title&quot;: {&quot;normalized_value&quot;: &quot;pool party&quot;, &quot;raw_value&quot;: &quot;POOL PARTY&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-81f061632b0e7a49ca1da55c-title&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>animal-kingdom-kidani / ocr_disagreement</h2>
+<code>vision-v3-0d5b27572e61c2747ec608d7</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>activity</strong></span>
+<span>Slug: <strong>n/a</strong></span>
+<span>Review key: <code>n/a</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0</code></span>
+<span>Page image SHA: <code>32c1f9acfc38e09a0738a6629de65172a0322674691e2f336d0ce903431cb6d8</code></span>
+<span>Field crop SHA: <code>3ba7925c31ad4f0a24c4d2b33d04be1b3005719370282f03cdbb3274ec5da8fc</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_05-movie_section.png"><img src="../vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><a class="media-link" href="../vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_05-movie_section.png"><img src="../vision_debug/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001-region_05-movie_section.png" alt="open region crop" loading="lazy"><span>open region crop</span></a></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png"><img src="../page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;engine_disagreement:schedule&quot;,
+  &quot;engine_disagreement:location&quot;,
+  &quot;unknown_location&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>12:00pm-1:00pm..</pre></section>
+<section><h3>Normalized Value</h3><pre>{
+  &quot;confidence&quot;: &quot;validated&quot;,
+  &quot;end_time&quot;: &quot;13:00&quot;,
+  &quot;parser&quot;: &quot;schedule_parser_v3&quot;,
+  &quot;raw_text&quot;: &quot;12:00pm-1:00pm..&quot;,
+  &quot;schedule_type&quot;: &quot;time_range&quot;,
+  &quot;start_time&quot;: &quot;12:00&quot;,
+  &quot;timezone&quot;: &quot;America/New_York&quot;
+}</pre></section>
+<section><h3>Primary OCR</h3><pre>12:00pm-1:00pm..</pre></section>
+<section><h3>Secondary OCR</h3><pre>12:00pm-1:00pm.</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{
+  &quot;fields&quot;: {},
+  &quot;match_key&quot;: null,
+  &quot;matched&quot;: false
+}</pre></section>
+<section><h3>Source Metadata</h3><pre>{
+  &quot;canonical_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf&quot;,
+  &quot;captured_at&quot;: &quot;2026-06-30T00:07:31.318911+00:00&quot;,
+  &quot;currentness&quot;: &quot;current&quot;,
+  &quot;fetched_url&quot;: &quot;https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf&quot;,
+  &quot;http_status&quot;: 200,
+  &quot;source_kind&quot;: &quot;official_pdf&quot;,
+  &quot;source_role&quot;: &quot;resort_pdf&quot;
+}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0d5b27572e61c2747ec608d7&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0d5b27572e61c2747ec608d7&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: {&quot;confidence&quot;: &quot;validated&quot;, &quot;end_time&quot;: &quot;13:00&quot;, &quot;parser&quot;: &quot;schedule_parser_v3&quot;, &quot;raw_text&quot;: &quot;12:00pm-1:00pm..&quot;, &quot;schedule_type&quot;: &quot;time_range&quot;, &quot;start_time&quot;: &quot;12:00&quot;, &quot;timezone&quot;: &quot;America/New_York&quot;}, &quot;raw_value&quot;: &quot;12:00pm-1:00pm..&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;vision-v3-0d5b27572e61c2747ec608d7&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>all-star-sports / gold_conflict</h2>
+<code>dual-run-diff-all-star-sports-movie-under-the-stars-schedule</code>
+</div>
+<div class="meta">
+<span>Field: <strong>schedule</strong></span>
+<span>Candidate: <strong>dual_run_diff</strong></span>
+<span>Slug: <strong>movie-under-the-stars</strong></span>
+<span>Review key: <code>all-star-sports:movie-under-the-stars:schedule</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67</code></span>
+<span>Page image SHA: <code>62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e</code></span>
+<span>Field crop SHA: <code>1d0d941a19f49ce7b7760031f5f92ced602f29e5181f5c049fd10add9fcb1eac</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png"><img src="../vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_05-movie_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png"><img src="../page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;gold_conflict:v2_v3:schedule&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Friday at 8:30pm</pre></section>
+<section><h3>Normalized Value</h3><pre>Friday at 8:30pm</pre></section>
+<section><h3>Primary OCR</h3><pre>8:3Opm</pre></section>
+<section><h3>Secondary OCR</h3><pre>8:3OpM</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-diff-all-star-sports-movie-under-the-stars-schedule&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-diff-all-star-sports-movie-under-the-stars-schedule&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot; --approved-fields-json &#x27;{&quot;schedule&quot;: {&quot;normalized_value&quot;: &quot;Friday at 8:30pm&quot;, &quot;raw_value&quot;: &quot;Friday at 8:30pm&quot;}}&#x27;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-diff-all-star-sports-movie-under-the-stars-schedule&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>all-star-sports / manual_review_required</h2>
+<code>dual-run-new-all-star-sports-poolside-activities-new-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>new_record</strong></span>
+<span>Candidate: <strong>dual_run_new_record</strong></span>
+<span>Slug: <strong>poolside-activities</strong></span>
+<span>Review key: <code>all-star-sports:poolside-activities:new_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67</code></span>
+<span>Page image SHA: <code>62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e</code></span>
+<span>Field crop SHA: <code>33980319a8e1330228db5e5a7250e8bb2c9b3bea4cdb6ab34c6bb2ef2bad6923</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png"><img src="../vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png"><img src="../page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:new_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>poolside activities</pre></section>
+<section><h3>Normalized Value</h3><pre>all-star-sports:poolside-activities:new_record</pre></section>
+<section><h3>Primary OCR</h3><pre>POOLSIDE ACTIVITIES</pre></section>
+<section><h3>Secondary OCR</h3><pre>poolside-activities</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-new-all-star-sports-poolside-activities-new-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-new-all-star-sports-poolside-activities-new-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-new-all-star-sports-poolside-activities-new-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>all-star-sports / manual_review_required</h2>
+<code>dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>new_record</strong></span>
+<span>Candidate: <strong>dual_run_new_record</strong></span>
+<span>Slug: <strong>shine-like-a-star-glow-party</strong></span>
+<span>Review key: <code>all-star-sports:shine-like-a-star-glow-party:new_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67</code></span>
+<span>Page image SHA: <code>62b0a534edf501fad81a5fba5110c7f0d43275418d58a705794580bde53e106e</code></span>
+<span>Field crop SHA: <code>33980319a8e1330228db5e5a7250e8bb2c9b3bea4cdb6ab34c6bb2ef2bad6923</code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><a class="media-link" href="../vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png"><img src="../vision_debug/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001-region_04-resort_activities_section.png" alt="open field crop" loading="lazy"><span>open field crop</span></a></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png"><img src="../page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:new_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>shine like a star glow party</pre></section>
+<section><h3>Normalized Value</h3><pre>all-star-sports:shine-like-a-star-glow-party:new_record</pre></section>
+<section><h3>Primary OCR</h3><pre>SHINE LIKE A STAR GLOW PARTY</pre></section>
+<section><h3>Secondary OCR</h3><pre>shine-like-a-star-glow-party</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-campfire-on-de-bayou-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>campfire-on-de-bayou</strong></span>
+<span>Review key: <code>port-orleans-riverside:campfire-on-de-bayou:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Campfire on de&#x27; Bayou</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:campfire-on-de-bayou:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Campfire on de&#x27; Bayou</pre></section>
+<section><h3>Secondary OCR</h3><pre>campfire-on-de-bayou</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-campfire-on-de-bayou-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-campfire-on-de-bayou-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-campfire-on-de-bayou-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>craft-activity</strong></span>
+<span>Review key: <code>port-orleans-riverside:craft-activity:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Craft Activity</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:craft-activity:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Craft Activity</pre></section>
+<section><h3>Secondary OCR</h3><pre>craft-activity</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-disney-character-greetings-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>disney-character-greetings</strong></span>
+<span>Review key: <code>port-orleans-riverside:disney-character-greetings:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Disney Character Greetings</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:disney-character-greetings:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Disney Character Greetings</pre></section>
+<section><h3>Secondary OCR</h3><pre>disney-character-greetings</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-disney-character-greetings-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-disney-character-greetings-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-disney-character-greetings-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>movie-under-the-stars</strong></span>
+<span>Review key: <code>port-orleans-riverside:movie-under-the-stars:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Movie Under the Stars</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:movie-under-the-stars:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Movie Under the Stars</pre></section>
+<section><h3>Secondary OCR</h3><pre>movie-under-the-stars</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>nighttime-activities</strong></span>
+<span>Review key: <code>port-orleans-riverside:nighttime-activities:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Nighttime Activities</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:nighttime-activities:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Nighttime Activities</pre></section>
+<section><h3>Secondary OCR</h3><pre>nighttime-activities</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-pool-party-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>pool-party</strong></span>
+<span>Review key: <code>port-orleans-riverside:pool-party:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Pool Party</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:pool-party:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Pool Party</pre></section>
+<section><h3>Secondary OCR</h3><pre>pool-party</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-pool-party-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-pool-party-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-pool-party-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+<article class="task">
+<div class="task-heading">
+<h2>port-orleans-riverside / manual_review_required</h2>
+<code>dual-run-missing-v2-port-orleans-riverside-poolside-activities-missing-v2-record</code>
+</div>
+<div class="meta">
+<span>Field: <strong>missing_v2_record</strong></span>
+<span>Candidate: <strong>dual_run_missing_v2_record</strong></span>
+<span>Slug: <strong>poolside-activities</strong></span>
+<span>Review key: <code>port-orleans-riverside:poolside-activities:missing_v2_record</code></span>
+<span>Page: <strong>1</strong></span>
+<span>Content SHA: <code>ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995</code></span>
+<span>Page image SHA: <code></code></span>
+<span>Field crop SHA: <code></code></span>
+</div>
+<div class="evidence">
+<section><h3>Field Crop</h3><span class="missing">missing</span></section>
+<section><h3>Region Crop</h3><span class="missing">missing</span></section>
+<section><h3>Page Image</h3><a class="media-link" href="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png"><img src="../page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png" alt="open page image" loading="lazy"><span>open page image</span></a></section>
+</div>
+<div class="grid">
+<section><h3>Findings</h3><pre>[
+  &quot;manual_review_required:missing_v2_record&quot;
+]</pre></section>
+<section><h3>Candidate Value</h3><pre>Poolside Activities</pre></section>
+<section><h3>Normalized Value</h3><pre>port-orleans-riverside:poolside-activities:missing_v2_record</pre></section>
+<section><h3>Primary OCR</h3><pre>Poolside Activities</pre></section>
+<section><h3>Secondary OCR</h3><pre>poolside-activities</pre></section>
+<section><h3>Existing Gold Comparison</h3><pre>{}</pre></section>
+<section><h3>Source Metadata</h3><pre>{}</pre></section>
+<section><h3>Decision Commands</h3><pre>python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-poolside-activities-missing-v2-record&quot; --decision approve --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-poolside-activities-missing-v2-record&quot; --decision edit --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;
+
+python scripts/ingest/review_schema_v3.py data/processed/review_queue/vision_v3_review_decisions.json --record-task-id &quot;dual-run-missing-v2-port-orleans-riverside-poolside-activities-missing-v2-record&quot; --decision reject --reviewer &quot;reviewer-name&quot; --reason &quot;Verified against source crop&quot;</pre></section>
+</div>
+</article>
+</main>
+</body>
+</html>

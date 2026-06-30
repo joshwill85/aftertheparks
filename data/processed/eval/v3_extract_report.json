@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T02:14:20.051094+00:00",
+  "generated_at": "2026-06-30T06:51:30.068278+00:00",
   "group": null,
   "output_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3",
   "quarter": "fy26-q3",
@@ -7,7 +7,7 @@
   "results": [
     {
       "calendar_group_key": "wilderness-lodge",
-      "candidate_count": 7,
+      "candidate_count": 14,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -17,7 +17,7 @@
     },
     {
       "calendar_group_key": "animal-kingdom-jambo",
-      "candidate_count": 7,
+      "candidate_count": 13,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955.candidates.json",
       "edition": "fy26-q3-0526-jambo",
       "error": null,
@@ -27,7 +27,7 @@
     },
     {
       "calendar_group_key": "all-star-music",
-      "candidate_count": 7,
+      "candidate_count": 12,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -37,7 +37,7 @@
     },
     {
       "calendar_group_key": "grand-floridian",
-      "candidate_count": 5,
+      "candidate_count": 13,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -47,7 +47,7 @@
     },
     {
       "calendar_group_key": "beach-yacht-club",
-      "candidate_count": 8,
+      "candidate_count": 14,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -57,7 +57,7 @@
     },
     {
       "calendar_group_key": "contemporary",
-      "candidate_count": 5,
+      "candidate_count": 12,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -77,7 +77,7 @@
     },
     {
       "calendar_group_key": "polynesian",
-      "candidate_count": 4,
+      "candidate_count": 10,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -87,7 +87,7 @@
     },
     {
       "calendar_group_key": "all-star-sports",
-      "candidate_count": 10,
+      "candidate_count": 16,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -97,7 +97,7 @@
     },
     {
       "calendar_group_key": "saratoga-springs",
-      "candidate_count": 8,
+      "candidate_count": 14,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -107,7 +107,7 @@
     },
     {
       "calendar_group_key": "boardwalk",
-      "candidate_count": 13,
+      "candidate_count": 12,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -127,7 +127,7 @@
     },
     {
       "calendar_group_key": "old-key-west",
-      "candidate_count": 9,
+      "candidate_count": 13,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -147,7 +147,7 @@
     },
     {
       "calendar_group_key": "port-orleans-french-quarter",
-      "candidate_count": 6,
+      "candidate_count": 12,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -157,7 +157,7 @@
     },
     {
       "calendar_group_key": "all-star-movies",
-      "candidate_count": 8,
+      "candidate_count": 12,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -167,7 +167,7 @@
     },
     {
       "calendar_group_key": "coronado-springs",
-      "candidate_count": 7,
+      "candidate_count": 9,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c.candidates.json",
       "edition": "fy26-q3-0526",
       "error": null,
@@ -177,7 +177,7 @@
     },
     {
       "calendar_group_key": "animal-kingdom-kidani",
-      "candidate_count": 4,
+      "candidate_count": 10,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0.candidates.json",
       "edition": "fy26-q3-0526-kidani",
       "error": null,
@@ -188,7 +188,7 @@
   ],
   "snapshots_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_snapshots",
   "summary": {
-    "candidate_count": 128,
+    "candidate_count": 206,
     "parser_error_count": 0,
     "snapshot_count": 18
   }

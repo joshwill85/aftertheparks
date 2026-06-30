@@ -53,7 +53,7 @@ const summary = buildDecisionSummary({
 
 assert.ok(summary.actions.some((action) => action.id === "at_my_resort"));
 assert.ok(summary.actions.some((action) => action.id === "rain_backup"));
-assert.ok(summary.primaryText.includes("source-backed"));
+assert.ok(summary.primaryText.includes("verified"));
 assert.ok(summary.trustText.includes("verified"));
 assert.ok(
   summary.actions.every((action) => !action.href.includes("after_dinner")),

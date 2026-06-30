@@ -149,7 +149,7 @@ def _validation_failure_visual_evidence(row: dict[str, Any], findings: list[Any]
         if evidence:
             return evidence
     field_evidence = row.get("field_evidence") if isinstance(row.get("field_evidence"), dict) else {}
-    for candidate_field in ("title", "schedule", "location", "price", "fee", "movie_title"):
+    for candidate_field in ("title", "schedule", "location", "price", "fee", "movie_title", "region"):
         if isinstance(field_evidence.get(candidate_field), dict):
             evidence = _changed_field_visual_evidence(row, candidate_field)
             if evidence:
@@ -162,6 +162,9 @@ def _validation_failures(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for row in rows:
         findings = row.get("validation_findings")
         if not isinstance(findings, list) or not findings:
+            continue
+        validation_status = str(row.get("validation_status") or "").strip()
+        if validation_status == "needs_review":
             continue
         failures.append(
             {

@@ -8,6 +8,7 @@ import {
   activityToPlanSnapshot,
   sanitizePlanSnapshotJson,
 } from "@/lib/plan/snapshot";
+import { buildMagicCheck } from "@/lib/plan/magicCheck";
 import type { ActivityOccurrence, PlanItem } from "@/lib/types/occurrence";
 
 const failures: string[] = [];
@@ -35,6 +36,19 @@ function readMigrations() {
 }
 
 const allMigrations = readMigrations();
+
+function samplePlanItem(overrides: Partial<PlanItem>): PlanItem {
+  return {
+    id: overrides.id ?? "sample",
+    activityCatalogId: overrides.activityCatalogId ?? "sample",
+    activitySlug: overrides.activitySlug ?? "sample",
+    title: overrides.title ?? "Sample Activity",
+    resortSlug: overrides.resortSlug ?? "polynesian-village-resort",
+    resortName: overrides.resortName ?? "Polynesian Village Resort",
+    addedAt: overrides.addedAt ?? "2026-06-25T10:00:00-04:00",
+    ...overrides,
+  };
+}
 
 check("turnstile client config is browser-safe", () => {
   const config = read("lib/turnstile/config.ts");
@@ -205,7 +219,8 @@ check("every activity-style card can add itself to My Plan", () => {
 
   assert.match(calendar, /const \{\s*addActivity,\s*isActivitySaved\s*\} = usePlan\(\)/);
   assert.match(calendar, /onSave=\{\(\) => addActivity\(activity\)\}/);
-  assert.match(calendar, /saved=\{isActivitySaved\(activity\)\}/);
+  assert.match(calendar, /const saved = isActivitySaved\(activity\)/);
+  assert.match(calendar, /saved=\{saved\}/);
 
   assert.match(movies, /movieToPlanActivity/);
   assert.match(movies, /addActivity\(planActivity\)/);
@@ -355,6 +370,95 @@ check("calendar export does not invent events or end times", () => {
   assert.doesNotMatch(startOnlyIcs, /DTEND/);
 });
 
+check("magic check labels realistic plan risk without inventing travel times", () => {
+  const overlap = buildMagicCheck([
+    samplePlanItem({
+      id: "a",
+      title: "Campfire A",
+      startDateTime: "2026-06-25T18:00:00-04:00",
+      endDateTime: "2026-06-25T18:45:00-04:00",
+    }),
+    samplePlanItem({
+      id: "b",
+      title: "Movie B",
+      startDateTime: "2026-06-25T18:30:00-04:00",
+      endDateTime: "2026-06-25T19:30:00-04:00",
+    }),
+  ]);
+  assert.equal(overlap.label, "Too tight");
+  assert.ok(
+    overlap.issues.some(
+      (issue) =>
+        issue.label === "Two activities overlap" &&
+        issue.actionLabel === "Remove one"
+    )
+  );
+
+  const tightHop = buildMagicCheck([
+    samplePlanItem({
+      id: "poly",
+      resortSlug: "polynesian-village-resort",
+      resortName: "Polynesian Village Resort",
+      startDateTime: "2026-06-25T18:00:00-04:00",
+      endDateTime: "2026-06-25T18:45:00-04:00",
+    }),
+    samplePlanItem({
+      id: "fort",
+      resortSlug: "fort-wilderness-resort",
+      resortName: "Fort Wilderness Resort",
+      startDateTime: "2026-06-25T19:05:00-04:00",
+      endDateTime: "2026-06-25T19:35:00-04:00",
+    }),
+  ]);
+  assert.ok(
+    tightHop.issues.some(
+      (issue) =>
+        issue.label === "This resort hop may be tight" &&
+        issue.detail.includes("Confirm transportation") &&
+        !/\b\d+\s*(minute|min)\b/i.test(issue.detail)
+    ),
+    "tight resort hop should warn without inventing exact travel time"
+  );
+
+  const weatherAndRules = buildMagicCheck([
+    samplePlanItem({
+      id: "campfire",
+      title: "Campfire",
+      category: "campfire",
+      priceLabel: "Price not listed",
+      snapshotJson: {
+        weatherSensitive: true,
+        access: "Resort guests only",
+        reservationRequired: true,
+      },
+    }),
+  ]);
+  assert.equal(weatherAndRules.label, "Needs backup");
+  for (const expected of [
+    "Outdoor activity may need a backup",
+    "Access may be limited",
+    "Reservation required",
+    "Cost unclear",
+  ]) {
+    assert.ok(
+      weatherAndRules.issues.some((issue) => issue.label === expected),
+      `Magic Check should include ${expected}`
+    );
+  }
+
+  const easy = buildMagicCheck([
+    samplePlanItem({
+      id: "easy",
+      title: "Arcade",
+      category: "arcade",
+      priceLabel: "Free",
+      startDateTime: "2026-06-25T17:00:00-04:00",
+      endDateTime: "2026-06-25T17:30:00-04:00",
+    }),
+  ]);
+  assert.equal(easy.label, "Easy plan");
+});
+
 check("public shared plan refreshes live data", () => {
   const publicPlan = read("components/plan/PublicPlanClient.tsx");
   assert.match(publicPlan, /setPlan/);
@@ -362,9 +466,33 @@ check("public shared plan refreshes live data", () => {
   assert.match(publicPlan, /visibilitychange|setInterval|focus/);
 });
 
+check("public shared plan renders a read-only resort day ticket", () => {
+  const publicPlan = read("components/plan/PublicPlanClient.tsx");
+  const magicCheck = read("components/plan/PlanMagicCheck.tsx");
+
+  assert.match(publicPlan, /Resort Day Ticket/);
+  assert.match(publicPlan, /PlanMagicCheck/);
+  assert.match(publicPlan, /readOnly/);
+  assert.match(publicPlan, /PLAN_SECTION_ORDER/);
+  assert.match(publicPlan, /PLAN_SECTION_META/);
+  assert.match(publicPlan, /Weather caveats/);
+  assert.match(publicPlan, /Source and freshness/);
+  assert.match(publicPlan, /Transportation disclosures/);
+  assert.doesNotMatch(publicPlan, /Edit my plan/);
+  assert.doesNotMatch(publicPlan, /Share plan/);
+  assert.doesNotMatch(publicPlan, /Add to calendar/);
+
+  assert.match(magicCheck, /Magic Check/);
+  assert.match(magicCheck, /buildMagicCheck/);
+  assert.match(magicCheck, /readOnly/);
+  assert.match(magicCheck, /Find backup/);
+  assert.match(magicCheck, /Add travel buffer/);
+});
+
 check("plan transport connections are rendered from source-backed graph data", () => {
   const timeline = read("components/plan/PlanTimeline.tsx");
   const publicPlan = read("components/plan/PublicPlanClient.tsx");
+  const transportEdge = read("components/plan/PlanTransportEdge.tsx");
   const planTypes = read("lib/plan/types.ts");
   const planServer = read("lib/plan/server.ts");
   const transport = read("lib/plan/transportConnections.ts");
@@ -373,9 +501,12 @@ check("plan transport connections are rendered from source-backed graph data", (
   assert.match(planTypes, /resortSlug: string/);
   assert.match(planServer, /resortSlug: item\.resortSlug/);
   assert.match(timeline, /useTransportConnectionsForItems\(items\)/);
-  assert.match(timeline, /transportOptions\?\.slice\(1\)/);
-  assert.match(timeline, /Show \$\{secondaryOptions\.length\} more/);
-  assert.match(publicPlan, /PlanPathConnector/);
+  assert.match(timeline, /PlanTransportEdge/);
+  assert.match(publicPlan, /PlanTransportEdge/);
+  assert.match(transportEdge, /transportOptions\?\.slice\(1\)/);
+  assert.match(transportEdge, /Show \$\{secondaryOptions\.length\} more/);
+  assert.match(transportEdge, /originResortName|destinationResortName/);
+  assert.match(transportEdge, /Confirm current transportation day-of/);
   assert.match(publicPlan, /publicItemToPlanItem/);
   assert.match(transport, /transportConnectionPairsForItems/);
   assert.match(transport, /Confirm current transportation day-of/);

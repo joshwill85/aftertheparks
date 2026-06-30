@@ -9764,19 +9764,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
       "page_image_sha256": "7f5633af11a079553b5959dcd3d7ceb38d6b2d6a87308b4336f311d437c42b75",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5",
-          "parent_source_document_id": "a95a68b00968dcbc871e9c3d43526cd3af6495e488e793df51ec54a9b7d06ddd",
-          "source_authority": "non_official",
-          "source_crop_sha256": "c9515d91d04edb2fb2219ddc05c4d4cf10f1d167fa422929d713e19534d7b547",
-          "source_role": "derived_source_link",
-          "target_url": "https://qr.disneyworld.com/Saratoga-Springs-Recreation-A-Frame"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -9808,10 +9797,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "a6aba4933725a6d0fddce72e29b032a3cac489b89600cca0023d144af380bb99",
+      "crop_sha256": "9013eac5cf14f77bdb5d3a2576f9e08d14bf9b826ce974ff3c6f86d1d7dc1562",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",
@@ -9825,13 +9814,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001-region_05-movie_section.png",
-      "crop_sha256": "84217078f18c085ee6f8a5ce129d3c921834776bd594a28c45c8f7deca6e77df",
+      "crop_sha256": "67f3c3391276c645272bbd44805d97daee6df4a8d445e61c574e9c2b79f48e39",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_001.png",

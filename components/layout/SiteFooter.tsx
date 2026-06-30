@@ -39,11 +39,8 @@ export function SiteFooter() {
             <Link href="/terms" className="hover:text-[var(--lagoon)]">
               Terms
             </Link>
-            <Link href="/guides" className="hover:text-[var(--lagoon)]">
-              Guides
-            </Link>
             <Link href="/calendar" className="hover:text-[var(--lagoon)]">
-              Calendar
+              Plan Ahead
             </Link>
             <Link
               href="/source-and-accuracy-policy"

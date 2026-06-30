@@ -22,6 +22,9 @@ function bookingNotes(offering: ActivityOffering): string[] {
   if (offering.eligibility.resortGuestOnly) {
     notes.push("Resort guests only");
   }
+  if (offering.category === "poolside" && !notes.includes("Resort guests only")) {
+    notes.push("Pool area access may be limited");
+  }
   if (offering.booking?.cancellationNoticeHours) {
     notes.push(`${offering.booking.cancellationNoticeHours}-hour cancellation notice`);
   }

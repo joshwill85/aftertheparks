@@ -87,7 +87,7 @@ assert.match(
 );
 assert.match(
   resortFaqs.map((item) => `${item.question} ${item.answer}`).join(" "),
-  /Do not use Disney Springs as a free way/i,
+  /Do not use Disney Springs as a free resort-transfer hub/i,
   "resort FAQ should warn against Disney Springs as a free transfer route"
 );
 assert.match(

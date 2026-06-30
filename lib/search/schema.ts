@@ -5,7 +5,6 @@ export type SearchDocumentKind =
   | "offering"
   | "resort"
   | "movie"
-  | "guide"
   | "category"
   | "page";
 

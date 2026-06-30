@@ -260,7 +260,7 @@ function ResortPlanningSnapshot({
       />
       <div className="grid gap-4 lg:grid-cols-2">
         <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Today at this resort</h2>
+          <h2 className="font-display text-2xl font-semibold">What&apos;s happening today</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {todayActivities.length > 0
               ? `${resort.name} has ${todayActivities.length} verified ${todayActivities.length === 1 ? "activity" : "activities"} tracked for today, including ${activityExamples(todayActivities) || "current resort recreation"}.`
@@ -272,11 +272,11 @@ function ResortPlanningSnapshot({
         </article>
 
         <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Tonight at this resort</h2>
+          <h2 className="font-display text-2xl font-semibold">Best options tonight</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {tonightActivities.length > 0
               ? `Tonight at ${resort.name}, After the Parks is tracking ${tonightActivities.length} ${tonightActivities.length === 1 ? "option" : "options"} such as ${activityExamples(tonightActivities) || "evening resort recreation"}. Confirm time, location, weather, and eligibility before heading out.`
-              : `No verified tonight listing is currently tracked for ${resort.name}. Use nearby resort and indoor filters if you need a backup plan.`}
+              : `No verified tonight listing is currently listed for ${resort.name}. Use nearby resort and indoor filters if you need a backup plan.`}
           </p>
           <Link href={`/tonight?resort=${resort.slug}`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             View tonight at this resort
@@ -284,11 +284,11 @@ function ResortPlanningSnapshot({
         </article>
 
         <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Free activities</h2>
+          <h2 className="font-display text-2xl font-semibold">Free or low-cost options</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {freeActivities.length > 0
               ? `${freeActivities.length} tracked ${freeActivities.length === 1 ? "activity is" : "activities are"} currently marked free, including ${activityExamples(freeActivities) || "resort recreation"}. Access can still depend on resort rules, capacity, weather, or guest eligibility.`
-              : "No currently tracked activity for this resort is marked free in the verified data. Confirm cost and eligibility before planning around a free option."}
+              : "No verified activity for this resort is marked free right now. Confirm cost and eligibility before planning around a free option."}
           </p>
           <Link href={`/activities?resort=${resort.slug}&free=true`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             Filter free activities
@@ -300,7 +300,7 @@ function ResortPlanningSnapshot({
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {paidActivities.length > 0
               ? `${paidActivities.length} tracked ${paidActivities.length === 1 ? "activity has" : "activities have"} a fee signal, including ${activityExamples(paidActivities) || "paid recreation"}. Check reservation, cancellation, and current price notes before committing.`
-              : "No currently tracked scheduled activity is marked as fee-based for this resort. Paid recreation can still exist as standing offerings, rentals, dining, or separately booked experiences."}
+              : "No verified scheduled activity is marked as fee-based for this resort right now. Paid recreation can still exist as standing offerings, rentals, dining, or separately booked experiences."}
           </p>
           <Link href={`/activities?resort=${resort.slug}&sort=paid`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             See paid-first activity view
@@ -332,11 +332,11 @@ function ResortPlanningSnapshot({
         </article>
 
         <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Rainy-day options</h2>
+          <h2 className="font-display text-2xl font-semibold">Indoor/weather backups</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {rainyDayOptions.length > 0
               ? `${resort.name} has ${rainyDayOptions.length} tracked rainy-day candidate ${rainyDayOptions.length === 1 ? "option" : "options"}, including ${activityExamples(rainyDayOptions) || "indoor or covered resort recreation"}. Keep outdoor movies, campfires, pools, boats, and exposed walks as confirm-before-going choices.`
-              : `No strong indoor or covered activity set is currently tracked for ${resort.name}. Start with the indoor and covered filters before relying on this resort during rain, lightning, or high heat.`}
+              : `No strong indoor or covered activity set is currently listed for ${resort.name}. Start with the indoor and covered filters before relying on this resort during rain, lightning, or high heat.`}
           </p>
           <Link href={`/activities?resort=${resort.slug}&weather=indoor`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             Filter indoor options
@@ -348,7 +348,7 @@ function ResortPlanningSnapshot({
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {eveningOptions.length > 0
               ? `${resort.name} has ${eveningOptions.length} tracked evening-leaning ${eveningOptions.length === 1 ? "option" : "options"}, including ${activityExamples(eveningOptions) || "campfires, movies, or nighttime recreation"}.`
-              : "No strong evening activity set is currently tracked here. Use tonight and nearby-resort filters before building the night around this resort."}
+              : "No strong evening activity set is currently listed here. Use tonight and nearby-resort filters before building the night around this resort."}
           </p>
           <Link href={`/activities?resort=${resort.slug}&time=evening`} className="mt-3 inline-flex text-sm font-bold text-[var(--accent)] hover:underline">
             Filter evening activities
@@ -356,7 +356,7 @@ function ResortPlanningSnapshot({
         </article>
 
         <article className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 lg:col-span-2">
-          <h2 className="font-display text-2xl font-semibold">Transportation notes</h2>
+          <h2 className="font-display text-2xl font-semibold">Transportation and access notes</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             For a low-stress resort day, start at {resort.name}, then compare
             same-area resorts{nearbyNames ? ` such as ${nearbyNames}` : ""} before
@@ -371,8 +371,8 @@ function ResortPlanningSnapshot({
             <Link href={`/tonight?near=my-resort&resort=${resort.slug}`} className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
               Tonight near this resort
             </Link>
-            <Link href="/guides/disney-resort-hopping" className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-              Resort-hopping guide
+            <Link href={`/activities?area=${resort.area}`} className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
+              Compare nearby activities
             </Link>
           </div>
         </article>
@@ -597,6 +597,54 @@ export default async function ResortDetailPage({
         </div>
       </header>
 
+      <section className="mb-10 grid gap-4 lg:grid-cols-2">
+        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+          <h2 className="font-display text-2xl font-semibold">No-park-day plan</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+            Start with activities at {resort.name}, keep the route simple, then
+            add a nearby or evening option only after checking today&apos;s current
+            schedule and weather.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href={`/today?resort=${resort.slug}`} className="btn-primary rounded-full px-5 py-3 text-sm font-bold">
+              Start with today
+            </Link>
+            <Link href={`/activities?resort=${resort.slug}&free=true`} className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
+              Free options
+            </Link>
+            <Link href={`/tonight?resort=${resort.slug}`} className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
+              Evening plan
+            </Link>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
+          <h2 className="font-display text-2xl font-semibold">Planning shortcuts</h2>
+          <div className="mt-3 grid gap-2 text-sm font-bold">
+            <Link href={`/today?resort=${resort.slug}`} className="text-[var(--accent)] hover:underline">
+              Activities today at {resort.name}
+            </Link>
+            <Link href={`/activities?resort=${resort.slug}&free=true`} className="text-[var(--accent)] hover:underline">
+              Free activities at this resort
+            </Link>
+            <Link href={`/tonight?resort=${resort.slug}`} className="text-[var(--accent)] hover:underline">
+              Tonight at your resort
+            </Link>
+            <Link href={`/activities?resort=${resort.slug}&weather=indoor`} className="text-[var(--accent)] hover:underline">
+              Indoor and rainy-day options
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <ResortPlanningSnapshot
+        resort={resort}
+        scheduledActivities={scheduledActivities}
+        todayActivities={todayActivities}
+        tonightActivities={tonightActivities}
+        nearbyResorts={nearbyResorts}
+      />
+
       <section className="mb-10 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <ResortSectionHeader
           title="Source and freshness"
@@ -654,55 +702,12 @@ export default async function ResortDetailPage({
         </div>
       </section>
 
-      <section className="mb-10 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">No-park-day plan</h2>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-            Start with activities at {resort.name}, keep the route simple, then
-            add a nearby or evening option only after checking today&apos;s current
-            schedule and weather.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link href={`/today?resort=${resort.slug}`} className="btn-primary rounded-full px-5 py-3 text-sm font-bold">
-              Start with today
-            </Link>
-            <Link href={`/activities?resort=${resort.slug}&free=true`} className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-              Free options
-            </Link>
-            <Link href={`/tonight?resort=${resort.slug}`} className="btn-secondary rounded-full px-5 py-3 text-sm font-bold">
-              Evening plan
-            </Link>
-          </div>
+      <section className="mb-10 grid gap-4 lg:grid-cols-2" aria-labelledby="nearby-related-heading">
+        <div className="lg:col-span-2">
+          <h2 id="nearby-related-heading" className="font-display text-2xl font-semibold">
+            Nearby resorts and related activity links
+          </h2>
         </div>
-
-        <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <h2 className="font-display text-2xl font-semibold">Related planning guides</h2>
-          <div className="mt-3 grid gap-2 text-sm font-bold">
-            <Link href="/guides/disney-world-non-park-day" className="text-[var(--accent)] hover:underline">
-              What to do on a non-park day
-            </Link>
-            <Link href="/guides/free-disney-resort-activities" className="text-[var(--accent)] hover:underline">
-              Free Disney resort activities
-            </Link>
-            <Link href="/guides/first-night-at-disney-resort" className="text-[var(--accent)] hover:underline">
-              First night at your resort
-            </Link>
-            <Link href="/guides/rainy-day-disney-resort-activities" className="text-[var(--accent)] hover:underline">
-              Rainy-day resort activities
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <ResortPlanningSnapshot
-        resort={resort}
-        scheduledActivities={scheduledActivities}
-        todayActivities={todayActivities}
-        tonightActivities={tonightActivities}
-        nearbyResorts={nearbyResorts}
-      />
-
-      <section className="mb-10 grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <h2 className="font-display text-2xl font-semibold">Nearby resorts with activities tonight</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
@@ -745,8 +750,8 @@ export default async function ResortDetailPage({
             <Link href={`/activities?area=${resort.area}`} className="text-[var(--accent)] hover:underline">
               Activities near this resort area
             </Link>
-            <Link href="/guides/disney-resort-hopping" className="text-[var(--accent)] hover:underline">
-              Resort-hopping planning guide
+            <Link href="/resorts" className="text-[var(--accent)] hover:underline">
+              Compare all resorts
             </Link>
           </div>
         </div>
@@ -844,8 +849,8 @@ export default async function ResortDetailPage({
           {uniqueOfferings.length > 0 && (
             <section id="official-offerings" className="mb-10 scroll-mt-24">
               <ResortSectionHeader
-                title="Available at this resort"
-                description="Official Disney recreation offerings that are not tied to a dated calendar time."
+                title="Anytime resort options"
+                description="These are resort activities or amenities that may not have a specific calendar time. Confirm hours, access, and availability before you go."
               />
               <ActivityOfferingGrid
                 offerings={uniqueOfferings}

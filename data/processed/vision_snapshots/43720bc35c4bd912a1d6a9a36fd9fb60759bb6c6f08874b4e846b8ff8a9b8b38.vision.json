@@ -7112,19 +7112,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
       "page_image_sha256": "641d25c9409611c82cbd7920d4127805e01f2417b70d7e6ff1da7db56eb93320",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38",
-          "parent_source_document_id": "ce2b57abe3d7f00e013c261f1c0762ae47dccd9d85221b634638d36cacff341c",
-          "source_authority": "non_official",
-          "source_crop_sha256": "7250d1af442c97d6391613c8ffa111c0e51406430b66c27359d507dc9a695a1a",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/Grand_Floridian_Resort?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -7156,10 +7145,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "7cb5dbc00a80815149c7495241bb6025544f6dd0bbad64982af4bfd4d9f449cc",
+      "crop_sha256": "88f62934d67cdef28d0eb68398e7381dffc1df2a5a8b07534b26041ccea48e4c",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",
@@ -7173,13 +7162,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001-region_05-movie_section.png",
-      "crop_sha256": "e10b479ee493fad9a12e9e4286e48663576ffb73b56474bac58f96334359a75f",
+      "crop_sha256": "72af30846e433d4617a176e5e64fdaf5781040847cb22074606f97bbce021c66",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_001.png",

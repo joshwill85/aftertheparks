@@ -6256,8 +6256,54 @@ class PipelineContractsTest(unittest.TestCase):
                 ("source_status_v3.py", "--quarter", "fy26-q4"),
                 ("source_metrics_v3.py", "--quarter", "fy26-q4"),
                 ("source_drift_report.py", "--quarter", "fy26-q4"),
-                ("build_review_queue_v3.py",),
-                ("promote_gold_v3.py", "--preview", "--include-approved-review"),
+                (
+                    "review_schema_v3.py",
+                    "data/processed/review_queue/vision_v3_review_decisions.json",
+                    "--export",
+                    "reviewed-source-drift-report",
+                    "--source-drift-report",
+                    "data/processed/source_drift_report.json",
+                    "--output",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                ),
+                (
+                    "build_review_queue_v3.py",
+                    "--source-drift-report",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                ),
+                (
+                    "review_schema_v3.py",
+                    "data/processed/review_queue/vision_v3_review_decisions.json",
+                    "--export",
+                    "fixture-candidates",
+                    "--output",
+                    "data/processed/review_queue/vision_v3_review_fixture_candidates.json",
+                ),
+                (
+                    "review_schema_v3.py",
+                    "data/processed/review_queue/vision_v3_review_decisions.json",
+                    "--export",
+                    "parser-rule-requests",
+                    "--output",
+                    "data/processed/review_queue/vision_v3_parser_rule_update_requests.json",
+                ),
+                (
+                    "promote_gold_v3.py",
+                    "--preview",
+                    "--include-approved-review",
+                    "--expected-sources",
+                    "data/processed/source_inventory.json",
+                    "--quarter",
+                    "fy26-q4",
+                ),
+                (
+                    "review_schema_v3.py",
+                    "data/processed/review_queue/vision_v3_review_decisions.json",
+                    "--export",
+                    "dual-run-review-keys",
+                    "--output",
+                    "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
+                ),
                 (
                     "v3_dual_run_report.py",
                     "--v2",
@@ -6270,17 +6316,40 @@ class PipelineContractsTest(unittest.TestCase):
                     "data/processed/eval/v3_source_statuses.json",
                     "--review-tasks",
                     "data/processed/review_queue/vision_v3_review_queue.json",
+                    "--reviewed-diff-keys-file",
+                    "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
+                    "--reviewed-status-transition-keys-file",
+                    "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
                     "--quarter",
                     "fy26-q4",
                 ),
+                (
+                    "build_review_queue_v3.py",
+                    "--source-drift-report",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                ),
                 ("trust_report.py",),
-                ("publish_gold_v3.py", "--require-clean-preview", "--json"),
+                (
+                    "publish_gold_v3.py",
+                    "--require-clean-preview",
+                    "--json",
+                    "--source-drift-report",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                ),
             ],
             steps,
         )
         self.assertLess(
             steps.index(("trust_report.py",)),
-            steps.index(("publish_gold_v3.py", "--require-clean-preview", "--json")),
+            steps.index(
+                (
+                    "publish_gold_v3.py",
+                    "--require-clean-preview",
+                    "--json",
+                    "--source-drift-report",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                )
+            ),
         )
         self.assertNotIn(("publish_gold_v3.py", "--publish"), steps)
         self.assertNotIn(("publish_gold_v2.py",), steps)
@@ -6317,30 +6386,56 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn(("source_drift_report.py", "--quarter", "fy26-q4"), steps)
         self.assertLess(
             steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
-            steps.index(("build_review_queue_v3.py",)),
+            steps.index(
+                (
+                    "build_review_queue_v3.py",
+                    "--source-drift-report",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                )
+            ),
         )
+        review_queue_step = (
+            "build_review_queue_v3.py",
+            "--source-drift-report",
+            "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+        )
+        dual_run_step = (
+            "v3_dual_run_report.py",
+            "--v2",
+            "data/processed/activity_gold_v2_preview.json",
+            "--v3",
+            "data/processed/activity_gold_v3_preview.json",
+            "--expected-sources",
+            "data/processed/source_inventory.json",
+            "--source-statuses",
+            "data/processed/eval/v3_source_statuses.json",
+            "--review-tasks",
+            "data/processed/review_queue/vision_v3_review_queue.json",
+            "--reviewed-diff-keys-file",
+            "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
+            "--reviewed-status-transition-keys-file",
+            "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
+            "--quarter",
+            "fy26-q4",
+        )
+        review_queue_indexes = [index for index, step in enumerate(steps) if step == review_queue_step]
+        self.assertEqual(2, len(review_queue_indexes))
+        self.assertLess(review_queue_indexes[0], steps.index(dual_run_step))
+        self.assertLess(steps.index(dual_run_step), review_queue_indexes[1])
+        self.assertLess(review_queue_indexes[1], steps.index(("trust_report.py",)))
         self.assertLess(
             steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
-            steps.index(("publish_gold_v3.py", "--require-clean-preview", "--json")),
-        )
-        self.assertIn(
-            (
-                "v3_dual_run_report.py",
-                "--v2",
-                "data/processed/activity_gold_v2_preview.json",
-                "--v3",
-                "data/processed/activity_gold_v3_preview.json",
-                "--expected-sources",
-                "data/processed/source_inventory.json",
-                "--source-statuses",
-                "data/processed/eval/v3_source_statuses.json",
-                "--review-tasks",
-                "data/processed/review_queue/vision_v3_review_queue.json",
-                "--quarter",
-                "fy26-q4",
+            steps.index(
+                (
+                    "publish_gold_v3.py",
+                    "--require-clean-preview",
+                    "--json",
+                    "--source-drift-report",
+                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                )
             ),
-            steps,
         )
+        self.assertIn(dual_run_step, steps)
 
     def test_vision_v3_production_lane_persists_internal_evidence_tables(self) -> None:
         production_steps = vision_v3_report_steps(local_only=False, quarter="fy26-q4")
@@ -6375,6 +6470,22 @@ class PipelineContractsTest(unittest.TestCase):
 
         self.assertIn(("promote_gold_v3.py", "--preview", "--include-approved-review"), steps)
         self.assertNotIn(("publish_gold_v3.py", "--require-clean-preview", "--json"), steps)
+
+    def test_quarter_vision_v3_pipeline_scopes_gold_preview_to_expected_sources(self) -> None:
+        steps = vision_v3_report_steps(local_only=False, quarter="fy26-q4")
+
+        self.assertIn(
+            (
+                "promote_gold_v3.py",
+                "--preview",
+                "--include-approved-review",
+                "--expected-sources",
+                "data/processed/source_inventory.json",
+                "--quarter",
+                "fy26-q4",
+            ),
+            steps,
+        )
 
     def test_pipeline_skips_publish_without_service_role_or_local_only(self) -> None:
         self.assertEqual([], publish_steps(local_only=True, has_service_role=True))

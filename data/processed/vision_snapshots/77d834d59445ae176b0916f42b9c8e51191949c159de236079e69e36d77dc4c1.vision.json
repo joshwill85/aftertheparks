@@ -9036,19 +9036,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
       "page_image_sha256": "28edc2b735154e04db6434833b0a2b40546e7a7f3bfc71a059a51f6186439fde",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1",
-          "parent_source_document_id": "04f658d731fee7796101de9cdb9e1851c15dc6a756089c6cae14fbdac0067986",
-          "source_authority": "non_official",
-          "source_crop_sha256": "f27e612f0a555b43e74c26687fa45c530db8640c459a489d32a11e51037c7b8e",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/Contemporary_Resort?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -9080,10 +9069,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "09e4714e2dd1e1f3f5da9a2ca3609128a9490f3db509ee3fc16defeb40055ea0",
+      "crop_sha256": "d2c2db909b995134d20ee630a5e2c7e7c06af4e1bf5b5a2ef258a68bd53df813",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",
@@ -9097,13 +9086,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001-region_05-movie_section.png",
-      "crop_sha256": "8cd292a73ca554d3afa7978e1858bee4692ee3f7503962a37ea0cf24c1883a82",
+      "crop_sha256": "05c3aa4910e9ab26cf2902d27bfb87220329f39d5be9f0ba82e63e372cd0e6d4",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_001.png",

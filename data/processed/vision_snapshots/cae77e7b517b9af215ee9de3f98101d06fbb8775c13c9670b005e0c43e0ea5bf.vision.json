@@ -9660,19 +9660,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
       "page_image_sha256": "7ed1174717ec1b700b21e9840b28de9f7a80f7f4f80c3d45265f2b68c8693f29",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
-          "parent_source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
-          "source_authority": "non_official",
-          "source_crop_sha256": "dec0ea94e524aba031eed9b191d6608e92808a1ea854b80e888429569231c7bf",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/Port_Orleans_French_Quarter?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -9704,10 +9693,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "ce1f4c9b64dc62c92bfa7c60a3f046793f7934ef5bc088d11285d091385da08d",
+      "crop_sha256": "2e1052d859f69b62af4c5394eb04f580cc1b63222d66613415ff62c09860ca98",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",
@@ -9721,13 +9710,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001-region_05-movie_section.png",
-      "crop_sha256": "118f708b74314b13c3e0afebe76580e1a0a93429cc7722180f1ae82e09bc0560",
+      "crop_sha256": "4d7f0363e189c2287e5465b5d4e81bdf8bf837d9fc78741e4c106c5571a86ba6",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_001.png",

@@ -21,6 +21,7 @@ const ALLOWED_EVENTS = new Set([
   "plan_share_rotated",
   "shared_plan_items_added",
   "plan_schedule_change_displayed",
+  "plan_weather_backup_selected",
   "plan_deleted",
 ]);
 

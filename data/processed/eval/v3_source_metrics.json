@@ -3,10 +3,10 @@
   "report_kind": "vision_v3_source_metrics",
   "sources": [
     {
-      "activity_candidate_count": 7,
-      "auto_publishable_count": 5,
-      "movie_candidate_count": 0,
-      "needs_review_count": 2,
+      "activity_candidate_count": 10,
+      "auto_publishable_count": 14,
+      "movie_candidate_count": 4,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -18,9 +18,9 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 4,
-      "auto_publishable_count": 6,
-      "movie_candidate_count": 3,
+      "activity_candidate_count": 13,
+      "auto_publishable_count": 12,
+      "movie_candidate_count": 0,
       "needs_review_count": 1,
       "ocr_success": true,
       "page_count": 1,
@@ -33,9 +33,9 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 7,
-      "auto_publishable_count": 7,
-      "movie_candidate_count": 0,
+      "activity_candidate_count": 10,
+      "auto_publishable_count": 12,
+      "movie_candidate_count": 2,
       "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
@@ -48,10 +48,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 4,
-      "auto_publishable_count": 3,
-      "movie_candidate_count": 1,
-      "needs_review_count": 2,
+      "activity_candidate_count": 11,
+      "auto_publishable_count": 12,
+      "movie_candidate_count": 2,
+      "needs_review_count": 1,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -63,10 +63,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 8,
-      "auto_publishable_count": 7,
-      "movie_candidate_count": 0,
-      "needs_review_count": 1,
+      "activity_candidate_count": 11,
+      "auto_publishable_count": 11,
+      "movie_candidate_count": 3,
+      "needs_review_count": 3,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -78,10 +78,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 4,
-      "auto_publishable_count": 4,
-      "movie_candidate_count": 1,
-      "needs_review_count": 1,
+      "activity_candidate_count": 9,
+      "auto_publishable_count": 12,
+      "movie_candidate_count": 3,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -93,10 +93,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 3,
-      "auto_publishable_count": 8,
-      "movie_candidate_count": 6,
-      "needs_review_count": 1,
+      "activity_candidate_count": 9,
+      "auto_publishable_count": 9,
+      "movie_candidate_count": 0,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -108,9 +108,9 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 4,
-      "auto_publishable_count": 4,
-      "movie_candidate_count": 0,
+      "activity_candidate_count": 8,
+      "auto_publishable_count": 10,
+      "movie_candidate_count": 2,
       "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
@@ -123,10 +123,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 10,
-      "auto_publishable_count": 9,
-      "movie_candidate_count": 0,
-      "needs_review_count": 1,
+      "activity_candidate_count": 12,
+      "auto_publishable_count": 16,
+      "movie_candidate_count": 4,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -138,10 +138,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 8,
-      "auto_publishable_count": 7,
-      "movie_candidate_count": 0,
-      "needs_review_count": 1,
+      "activity_candidate_count": 11,
+      "auto_publishable_count": 14,
+      "movie_candidate_count": 3,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -153,10 +153,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 6,
+      "activity_candidate_count": 12,
       "auto_publishable_count": 11,
-      "movie_candidate_count": 7,
-      "needs_review_count": 2,
+      "movie_candidate_count": 0,
+      "needs_review_count": 1,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -169,9 +169,9 @@
     },
     {
       "activity_candidate_count": 7,
-      "auto_publishable_count": 1,
+      "auto_publishable_count": 2,
       "movie_candidate_count": 0,
-      "needs_review_count": 6,
+      "needs_review_count": 5,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -183,10 +183,10 @@
       "source_type": "image"
     },
     {
-      "activity_candidate_count": 9,
-      "auto_publishable_count": 8,
+      "activity_candidate_count": 13,
+      "auto_publishable_count": 13,
       "movie_candidate_count": 0,
-      "needs_review_count": 1,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -213,10 +213,10 @@
       "source_type": "image"
     },
     {
-      "activity_candidate_count": 6,
-      "auto_publishable_count": 4,
-      "movie_candidate_count": 0,
-      "needs_review_count": 2,
+      "activity_candidate_count": 8,
+      "auto_publishable_count": 12,
+      "movie_candidate_count": 4,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -228,10 +228,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 8,
-      "auto_publishable_count": 7,
+      "activity_candidate_count": 12,
+      "auto_publishable_count": 12,
       "movie_candidate_count": 0,
-      "needs_review_count": 1,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -243,10 +243,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 3,
-      "auto_publishable_count": 5,
-      "movie_candidate_count": 4,
-      "needs_review_count": 2,
+      "activity_candidate_count": 9,
+      "auto_publishable_count": 9,
+      "movie_candidate_count": 0,
+      "needs_review_count": 0,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -258,10 +258,10 @@
       "source_type": "pdf"
     },
     {
-      "activity_candidate_count": 4,
-      "auto_publishable_count": 2,
+      "activity_candidate_count": 10,
+      "auto_publishable_count": 9,
       "movie_candidate_count": 0,
-      "needs_review_count": 2,
+      "needs_review_count": 1,
       "ocr_success": true,
       "page_count": 1,
       "page_render_success": true,
@@ -274,23 +274,23 @@
     }
   ],
   "summary": {
-    "activity_candidate_count": 106,
-    "auto_publish_rate": 0.765625,
-    "auto_publishable_count": 98,
-    "candidate_count": 128,
+    "activity_candidate_count": 179,
+    "auto_publish_rate": 0.9223300970873787,
+    "auto_publishable_count": 190,
+    "candidate_count": 206,
     "field_metrics": {
       "description_low_confidence_rate": 0.0,
       "engine_disagreement_rate": 1.0,
-      "fee_disagreement_rate": 0.0078125,
-      "location_missing_rate": 0.046875,
-      "location_unknown_rate": 0.046875,
-      "schedule_missing_rate": 0.046875,
-      "schedule_unparsed_rate": 0.078125,
-      "title_missing_rate": 0.046875
+      "fee_disagreement_rate": 0.0,
+      "location_missing_rate": 0.014563106796116505,
+      "location_unknown_rate": 0.024271844660194174,
+      "schedule_missing_rate": 0.0,
+      "schedule_unparsed_rate": 0.08737864077669903,
+      "title_missing_rate": 0.0
     },
-    "manual_review_rate": 0.234375,
-    "movie_candidate_count": 22,
-    "needs_review_count": 30,
+    "manual_review_rate": 0.07766990291262135,
+    "movie_candidate_count": 27,
+    "needs_review_count": 16,
     "page_count": 18,
     "parser_error_count": 0,
     "parser_error_source_rate": 0.0,

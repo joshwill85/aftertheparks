@@ -2,7 +2,6 @@ import { getCategoryMeta } from "@/lib/categories/meta";
 import { occurrenceToDisplayInput } from "@/lib/activityDisplay";
 import { computeDisplayQuality } from "@/lib/displayQuality";
 import { formatResortArea } from "@/lib/resorts/display";
-import type { GuideEntry } from "@/lib/guides";
 import {
   countTokenHits,
   matchesAllTokens,
@@ -188,32 +187,6 @@ export function scoreResort(
   return score;
 }
 
-export function scoreGuide(guide: GuideEntry, query: string, tokens: string[]): number {
-  const haystacks = [
-    guide.title,
-    guide.description,
-    guide.slug.replace(/-/g, " "),
-    ...guide.keywords,
-  ]
-    .join(" ")
-    .toLowerCase();
-
-  return (
-    phraseScore(guide.title.toLowerCase(), query, tokens, {
-      exact: 100,
-      prefix: 85,
-      contains: 65,
-      token: 48,
-    }) +
-    phraseScore(haystacks, query, tokens, {
-      exact: 0,
-      prefix: 0,
-      contains: 28,
-      token: 22,
-    })
-  );
-}
-
 export function scoreMovie(
   movie: MovieNightOccurrence,
   query: string,
@@ -358,20 +331,6 @@ export function resortToHit(resort: ResortSummary, score: number): SearchHit {
     score,
     badges: [formatResortTier(resort.category)],
     resort,
-  };
-}
-
-export function guideToHit(guide: GuideEntry, score: number): SearchHit {
-  return {
-    id: `guide-${guide.slug}`,
-    kind: "guide",
-    title: guide.title,
-    subtitle: "Planning guide",
-    description: guide.description,
-    href: guide.href,
-    score,
-    badges: ["Guide"],
-    guide,
   };
 }
 

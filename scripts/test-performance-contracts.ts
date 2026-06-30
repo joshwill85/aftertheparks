@@ -297,15 +297,22 @@ const evergreenPublicRoutes = [
   "app/resorts/[slug]/page.tsx",
   "app/disney-world-resort-activity-calendars/page.tsx",
   "app/disney-world-resort-activity-calendars/[season]/page.tsx",
-  "app/guides/[slug]/page.tsx",
+];
+
+for (const route of evergreenPublicRoutes) {
+  assertNoForceDynamic(route);
+  assertRevalidate(route, 86400);
+}
+
+const crawlerMetadataRoutes = [
   "app/sitemap.ts",
   "app/robots.ts",
   "app/llms.txt/route.ts",
   "app/llms-full.txt/route.ts",
 ];
 
-for (const route of evergreenPublicRoutes) {
-  assertNoForceDynamic(route);
+for (const route of crawlerMetadataRoutes) {
+  assertForceDynamic(route);
   assertRevalidate(route, 86400);
 }
 

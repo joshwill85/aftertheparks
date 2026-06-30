@@ -139,6 +139,16 @@ for (const token of [
   "--weather-card-secondary-text",
   "--weather-card-light-text",
   "--weather-card-light-muted-text",
+  "--weather-card-dark-bg",
+  "--weather-card-dark-bg-2",
+  "--weather-card-dark-surface",
+  "--weather-card-dark-surface-strong",
+  "--weather-card-dark-text",
+  "--weather-card-dark-muted-text",
+  "--weather-card-dark-soft-text",
+  "--weather-card-dark-border",
+  "--weather-card-dark-chip-bg",
+  "--weather-card-dark-chip-border",
 ]) {
   assert.match(tokens, new RegExp(token), `${token} missing`);
 }
@@ -186,6 +196,51 @@ assert.match(
   polish,
   /\.event-weather-signal \.weather-freshness-line\s*\{[\s\S]*color:\s*var\(--weather-card-light-muted-text\)/,
   "Freshness copy inside inline illustrated weather cards should stay readable over the artwork."
+);
+assert.match(
+  polish,
+  /\.event-weather-signal::after\s*\{[\s\S]*background:\s*rgba\(5,\s*12,\s*24,\s*0\.34\)/,
+  "Inline event-card weather should lock artwork behind text with a dark overlay."
+);
+assert.match(
+  polish,
+  /\.weather-page-dark-card,\n\.weather-atmosphere,\n\.weather-current-orb,\n\.weather-day-arc,\n\.weather-risk-constellation,\n\.weather-area-card,\n\.weather-chapter-card\s*\{[\s\S]*color:\s*var\(--weather-card-dark-text\)/,
+  "Dark weather page cards should share high-contrast text color."
+);
+assert.match(
+  polish,
+  /\.weather-atmosphere,\n\.weather-story-stage,\n\.weather-page-section\s*\{[\s\S]*width:\s*min\(78rem,\s*100%\)/,
+  "Weather page sections should size against the padded app shell, not 100vw, to avoid desktop horizontal overflow."
+);
+assert.doesNotMatch(
+  polish,
+  /\.weather-atmosphere,\n\.weather-story-stage,\n\.weather-page-section\s*\{[\s\S]*100vw/,
+  "Weather page section containers must not use viewport width inside the padded app shell."
+);
+assert.match(
+  polish,
+  /\.weather-page-dark-card::after,\n\.weather-atmosphere::after,\n\.weather-current-orb::after,\n\.weather-day-arc::after,\n\.weather-risk-constellation::after,\n\.weather-area-card::after,\n\.weather-chapter-card::after\s*\{[\s\S]*background:\s*rgba\(5,\s*12,\s*24,\s*0\.34\)/,
+  "Dark weather page cards should use a dark contrast overlay behind copy."
+);
+assert.match(
+  polish,
+  /\.weather-popover,\n\.forecast-timeline,\n\.weather-window-card,\n\.weather-story-strip,\n\.storm-mode-banner,\n\.storm-mode-suppression,\n\.forecast-compare,\n\.resort-weather-personality,\n\.route-weather-impact,\n\.plan-weather-panel\s*\{[\s\S]*background:[\s\S]*var\(--weather-card-dark-bg\)/,
+  "Reusable weather modules should render as dark high-contrast information cards."
+);
+assert.match(
+  polish,
+  /\.weather-popover p,\n\.weather-window-card p,\n\.weather-story-strip p,\n\.forecast-timeline__row p,\n\.resort-weather-personality p,\n\.route-weather-impact p,\n\.plan-weather-panel p\s*\{[\s\S]*color:\s*var\(--weather-card-dark-muted-text\)/,
+  "Reusable weather module body copy should use high-contrast muted text instead of low-opacity gray."
+);
+assert.match(
+  polish,
+  /\.weather-current-orb \.weather-precip-map figcaption,\n\.weather-chapter-card \.weather-precip-map figcaption,\n\.weather-popover \.weather-precip-map figcaption\s*\{[\s\S]*color:\s*var\(--weather-card-dark-muted-text\)/,
+  "Weather map captions inside dark cards should remain readable."
+);
+assert.match(
+  polish,
+  /\.weather-hour-chip,\n\.weather-day-chip,\n\.weather-week-cell\s*\{[\s\S]*background:\s*var\(--weather-card-dark-surface\)[\s\S]*color:\s*var\(--weather-card-dark-text\)/,
+  "Weather timeline chips should use dark-card backgrounds when inheriting light timestamp text."
 );
 
 const stormMode = readFileSync("components/weather/StormModeBanner.tsx", "utf8");

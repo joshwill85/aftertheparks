@@ -62,9 +62,27 @@ function buildResortPersonality({
   return signals.slice(0, 3);
 }
 
-function bestForLine(resort: ResortSummary): string {
+export function bestForLine(
+  resort: ResortSummary,
+  highlights: string[] = [],
+  todayCount = 0,
+  tonightCount = 0
+): string {
+  const highlightText = highlights.join(" ").toLowerCase();
   if (resort.category === "campground") {
-    return "Best for: campfires, relaxed resort time, and low-key outdoor plans.";
+    return "Best for: campfires, trail time, and a full outdoor resort day.";
+  }
+  if (highlightText.includes("campfire")) {
+    return "Best for: campfires, outdoor evenings, and longer resort days.";
+  }
+  if (tonightCount >= 3 || highlightText.includes("movie")) {
+    return "Best for: evening plans, movies, and low-effort after-park time.";
+  }
+  if (highlightText.includes("pool") || highlightText.includes("poolside")) {
+    return "Best for: pool breaks, simple daytime activities, and staying close.";
+  }
+  if (todayCount >= 4) {
+    return "Best for: flexible daytime plans and comparing several current options.";
   }
   if (resort.category === "deluxe" || resort.category === "deluxe_villa") {
     return "Best for: dining, easy resort hopping, and slower resort days.";
@@ -73,6 +91,68 @@ function bestForLine(resort: ResortSummary): string {
     return "Best for: quick plans, family activities, and easy evening options.";
   }
   return "Best for: pool time, simple activities, and flexible resort days.";
+}
+
+export type TravelWorthLabel =
+  | "Best if staying here"
+  | "Worth visiting if nearby"
+  | "Worth a dedicated trip"
+  | "Not worth crossing property for";
+
+export interface TravelWorthResult {
+  label: TravelWorthLabel;
+  reason: string;
+}
+
+export function travelWorthForResort({
+  resort,
+  todayCount = 0,
+  tonightCount = 0,
+  highlights = [],
+}: {
+  resort: ResortSummary;
+  todayCount?: number;
+  tonightCount?: number;
+  highlights?: string[];
+}): TravelWorthResult {
+  const categoryCount = new Set(highlights).size;
+  let score = 0;
+
+  if (resort.activityCount >= 8) score += 2;
+  else if (resort.activityCount >= 4) score += 1;
+  else if (resort.activityCount > 0) score += 1;
+  if (resort.offeringCount >= 5) score += 1;
+  if (todayCount >= 4) score += 2;
+  else if (todayCount >= 2) score += 1;
+  if (tonightCount >= 3) score += 2;
+  else if (tonightCount >= 1) score += 1;
+  if (categoryCount >= 3) score += 2;
+  else if (categoryCount >= 2) score += 1;
+  if (resort.category === "campground" || resort.category === "deluxe") score += 1;
+  if (resort.category === "value" && score > 5) score = 5;
+
+  if (score >= 8) {
+    return {
+      label: "Worth a dedicated trip",
+      reason: "Many current options, evening depth, and enough variety to anchor a resort day.",
+    };
+  }
+  if (score >= 5) {
+    return {
+      label: "Worth visiting if nearby",
+      reason: "A useful cluster of activities, best when the route is simple.",
+    };
+  }
+  if (score >= 1) {
+    return {
+      label: "Best if staying here",
+      reason: "A lighter set of simple options works best when you are already at the resort.",
+    };
+  }
+  return {
+    label: "Not worth crossing property for",
+    reason: "Limited current activity depth, so use it as a stay-put option.",
+  };
 }
 
 interface ResortCardProps {
@@ -98,6 +178,12 @@ export function ResortCard({
     (todayCount != null && todayCount > 0) ||
     (tonightCount != null && tonightCount > 0);
   const personality = buildResortPersonality({ resort, tonightCount, todayCount });
+  const travelWorth = travelWorthForResort({
+    resort,
+    todayCount,
+    tonightCount,
+    highlights,
+  });
 
   return (
     <article
@@ -156,7 +242,12 @@ export function ResortCard({
 
           <h3 className="resort-card__title">{resort.name}</h3>
           <p className="resort-card__tagline">{tagline}</p>
-          <p className="resort-card__hint">{bestForLine(resort)}</p>
+          <p className="resort-card__hint">
+            {bestForLine(resort, highlights, todayCount, tonightCount)}
+          </p>
+          <p className="resort-card__hint">
+            <strong>{travelWorth.label}:</strong> {travelWorth.reason}
+          </p>
 
           {personality.length > 0 && (
             <div className="resort-card__personality" aria-label="Resort personality">

@@ -22,9 +22,9 @@ export type CapturedAgentReadinessRecord = {
 
 const DEFAULT_TOOL = "HTML agent-readiness capture";
 const DISNEY_SPRINGS_ACCESS_ROUTES = new Set([
-  "/guides/things-to-do-without-park-ticket",
-  "/guides/disney-springs-area-resort-activities",
-  "/guides/best-resorts-if-you-do-not-have-a-park-ticket",
+  "/resorts?no_ticket_friendly=true",
+  "/activities?area=disney-springs",
+  "/resorts?no_ticket_friendly=true",
 ]);
 
 function stripTags(value: string): string {

@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-06-30T08:11:26.880665Z",
+  "review_kind": "dual_run_review_keys_v3",
+  "reviewed_diff_keys": [],
+  "reviewed_diff_reviews": [],
+  "reviewed_missing_v2_record_keys": [],
+  "reviewed_missing_v2_record_reviews": [],
+  "reviewed_new_record_keys": [],
+  "reviewed_new_record_reviews": [],
+  "reviewed_status_transition_keys": [],
+  "reviewed_status_transition_reviews": [],
+  "schema_version": "dual_run_review_keys_v3_001",
+  "source_decisions_path": "data/processed/review_queue/vision_v3_review_decisions.json"
+}

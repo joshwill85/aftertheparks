@@ -349,7 +349,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "Exclude Disney Springs as a free resort-transfer hub.",
       "Exclude bus-to-park-to-bus chains unless clearly labeled as advanced or inconvenient.",
     ],
-    deepLinks: ["/resorts", "/activities", "/today", "/tonight", "/guides/things-to-do-without-park-ticket"],
+    deepLinks: ["/resorts", "/activities", "/today", "/tonight", "/resorts?no_ticket_friendly=true"],
     decisionFilter:
       "Direct or near-direct routes first, then only hops with enough current activity or dining value to justify the transfer.",
     freshnessRule:
@@ -410,7 +410,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "Exclude complex cross-property plans for late arrivals unless a direct route or confirmed reservation justifies them.",
       "Avoid weather-dependent activities without indoor backups.",
     ],
-    deepLinks: ["/tonight", "/today", "/activities", "/resorts", "/guides/disney-world-non-park-day"],
+    deepLinks: ["/tonight", "/today", "/activities", "/resorts", "/activities"],
     decisionFilter:
       "Close, flexible, low-stakes activities ordered by arrival window and how easy they are to abandon.",
     freshnessRule:
@@ -469,7 +469,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "Downgrade loud, hot, high-walking, late-night, and multi-transfer plans.",
       "Do not recommend access-sensitive resort visits without reservation or stay caveats.",
     ],
-    deepLinks: ["/resorts", "/today", "/tonight", "/activities", "/guides/monorail-resort-activities"],
+    deepLinks: ["/resorts", "/today", "/tonight", "/activities", "/activities?transport=monorail"],
     decisionFilter:
       "Low walking, seating nearby, shade or AC, calm environment, flexible timing, and simple transportation.",
     freshnessRule:
@@ -495,7 +495,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "Exclude overstuffed itineraries and routes that require too many transfers for a relaxed evening.",
       "Separate family-heavy activities from genuinely couple-friendly atmosphere picks.",
     ],
-    deepLinks: ["/tonight", "/activities", "/resorts", "/guides/monorail-resort-activities", "/guides/skyliner-resort-activities"],
+    deepLinks: ["/tonight", "/activities", "/resorts", "/activities?transport=monorail", "/activities?transport=skyliner"],
     decisionFilter:
       "Atmosphere, evening timing, dining or lounge proximity, scenic setting, and simple route quality.",
     freshnessRule:
@@ -545,7 +545,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "Do not recommend Skyliner-dependent plans as weather-safe during lightning or high-wind conditions.",
       "Do not treat EPCOT International Gateway paths as park access unless admission requirements are clearly separated.",
     ],
-    deepLinks: ["/activities", "/today", "/tonight", "/resorts", "/guides/rainy-day-disney-resort-activities"],
+    deepLinks: ["/activities", "/today", "/tonight", "/resorts", "/activities?weather=indoor"],
     decisionFilter:
       "Skyliner-connected resorts and nearby BoardWalk walks, filtered by weather risk and whether the route stays outside park admission.",
     freshnessRule:
@@ -575,7 +575,7 @@ const GUIDE_QUALIFICATIONS: Record<string, SeoGuideQualification> = {
       "/activities?area=disney-springs",
       "/activities",
       "/resorts",
-      "/guides/things-to-do-without-park-ticket",
+      "/resorts?no_ticket_friendly=true",
       "/source-and-accuracy-policy",
     ],
     decisionFilter:
@@ -595,6 +595,8 @@ function qualificationFor(slug: string): SeoGuideQualification {
   return qualification;
 }
 
+// Internal SEO planning definitions only. The public /guides route family was
+// removed; these records feed qualification, discovery, and product-route links.
 export const HIGH_VALUE_GUIDES: SeoGuideDefinition[] = HIGH_VALUE_GUIDE_DRAFTS.map(
   (guide) => ({
     ...guide,
@@ -602,6 +604,7 @@ export const HIGH_VALUE_GUIDES: SeoGuideDefinition[] = HIGH_VALUE_GUIDE_DRAFTS.m
   })
 );
 
+// Internal activity-explainer definitions that point into current product pages.
 export const PRIORITY_ACTIVITY_GUIDES: SeoActivityDefinition[] = [
   {
     slug: "movies-under-the-stars",

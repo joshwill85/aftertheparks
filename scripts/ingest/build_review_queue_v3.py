@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +22,8 @@ DEFAULT_EXISTING_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 DEFAULT_GOLD_CONFLICTS_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
 DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
+DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_review_queue_report.json"
+DEFAULT_HTML_OUTPUT_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_queue.html"
 SOURCE_STATUS_REVIEW_TASK_TYPES = {"parser_error", "source_error"}
 
 
@@ -79,6 +83,26 @@ def _field_from_findings(findings: list[str]) -> str | None:
     if "fee_marker_conflict" in findings:
         return "fee"
     return None
+
+
+def _field_specific_findings(findings: list[str]) -> list[tuple[str, list[str]]]:
+    grouped: dict[str, list[str]] = {}
+    for finding in findings:
+        if ":" not in finding:
+            return []
+        field_name = _field_from_findings([finding])
+        if not field_name or _task_type([finding]) not in {
+            "ocr_disagreement",
+            "missing_required_field",
+            "manual_review_required",
+            "unparsed_schedule",
+            "unknown_location",
+        }:
+            return []
+        grouped.setdefault(field_name, []).append(finding)
+    if len(grouped) <= 1:
+        return []
+    return sorted(grouped.items())
 
 
 def _field_evidence(candidate: dict[str, Any], field_name: str | None) -> dict[str, Any]:
@@ -216,6 +240,17 @@ def _engine_text(evidence: dict[str, Any], index: int) -> str | None:
     return engines[index].get("text")
 
 
+def _first_reviewable_evidence(evidence_by_field: dict[str, Any]) -> dict[str, Any]:
+    for field_name in ("title", "movie_title", "schedule", "location", "price", "fee", "region"):
+        evidence = evidence_by_field.get(field_name)
+        if not isinstance(evidence, dict):
+            continue
+        source = evidence.get("source") if isinstance(evidence.get("source"), dict) else {}
+        if _has_review_artifacts(source):
+            return evidence
+    return {}
+
+
 def _source_id(row: dict[str, Any]) -> str:
     return str(
         row.get("source_document_id") or row.get("source_id") or row.get("id") or row.get("document_id") or ""
@@ -249,6 +284,7 @@ def _unreviewable_candidate_task(
     visible_findings = list(dict.fromkeys([*findings, "missing_reviewable_evidence"]))
     return {
         "task_id": str(candidate.get("candidate_id") or f"vision-v3-unreviewable-{index:04d}"),
+        "candidate_id": candidate.get("candidate_id"),
         "task_type": "unreviewable_candidate",
         "field": field_name,
         "source_document_id": candidate.get("source_document_id"),
@@ -266,6 +302,58 @@ def _unreviewable_candidate_task(
         "candidate_value": candidate.get("source_title") or candidate.get("schedule_raw"),
         "normalized_value": None,
         "validation_findings": visible_findings,
+        "source_metadata": _source_metadata(candidate),
+        "candidate": candidate,
+    }
+
+
+def _candidate_review_task(
+    candidate: dict[str, Any],
+    *,
+    index: int,
+    findings: list[str],
+    field_name: str | None,
+    task_id: str | None = None,
+) -> dict[str, Any]:
+    evidence = _field_evidence(candidate, field_name)
+    source = _region_source(candidate, field_name)
+    region_source = _region_source(candidate, "region")
+    if not _has_review_artifacts(source):
+        return _unreviewable_candidate_task(
+            candidate,
+            index=index,
+            findings=findings,
+            field_name=field_name,
+        )
+    page_image_sha256 = source.get("page_image_sha256") or region_source.get("page_image_sha256")
+    page_image_path = (
+        source.get("page_image_path")
+        or region_source.get("page_image_path")
+        or _page_image_path(candidate, page_image_sha256)
+    )
+    return {
+        "task_id": task_id or str(candidate.get("candidate_id") or f"vision-v3-review-{index:04d}"),
+        "candidate_id": candidate.get("candidate_id"),
+        "task_type": _task_type(findings),
+        "field": field_name,
+        "source_document_id": candidate.get("source_document_id"),
+        "content_sha256": candidate.get("content_sha256"),
+        "calendar_group_key": candidate.get("calendar_group_key"),
+        "candidate_type": candidate.get("candidate_type"),
+        "page_number": source.get("page_number"),
+        "page_image": page_image_sha256,
+        "page_image_sha256": page_image_sha256,
+        "page_image_path": page_image_path,
+        "region_crop": region_source.get("crop_storage_path") or region_source.get("crop_path"),
+        "region_crop_sha256": region_source.get("crop_sha256"),
+        "field_crop": source.get("crop_storage_path") or source.get("crop_path"),
+        "field_crop_sha256": source.get("crop_sha256"),
+        "field_bbox": source.get("bbox_px"),
+        "primary_text": _engine_text(evidence, 0),
+        "secondary_text": _engine_text(evidence, 1),
+        "candidate_value": evidence.get("raw_value") or candidate.get("source_title") or candidate.get("schedule_raw"),
+        "normalized_value": evidence.get("normalized_value"),
+        "validation_findings": findings,
         "source_metadata": _source_metadata(candidate),
         "candidate": candidate,
     }
@@ -473,6 +561,7 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
     for source_report in _source_drift_source_reports(source_drift_report):
         if source_report.get("status") in {None, "clean"} and not source_report.get("publish_blockers"):
             continue
+        first_v3_baseline = source_report.get("baseline_mode") == "first_v3_baseline"
         for field_name, report_key in (
             ("schedule", "changed_schedules"),
             ("location", "changed_locations"),
@@ -504,31 +593,33 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
             if not title:
                 continue
             detailed_new_titles.add(title)
-            tasks.append(
-                _source_drift_task(
-                    source_report=source_report,
-                    task_suffix=f"new-title-{_slug_fragment(title)}",
-                    field="title",
-                    finding="source_changed:new_title",
-                    candidate_value=title,
-                    normalized_value=title,
-                    source_drift=title_detail,
+            if not first_v3_baseline:
+                tasks.append(
+                    _source_drift_task(
+                        source_report=source_report,
+                        task_suffix=f"new-title-{_slug_fragment(title)}",
+                        field="title",
+                        finding="source_changed:new_title",
+                        candidate_value=title,
+                        normalized_value=title,
+                        source_drift=title_detail,
+                    )
                 )
-            )
         for title in source_report.get("new_titles") or []:
             if title in detailed_new_titles:
                 continue
-            tasks.append(
-                _source_drift_task(
-                    source_report=source_report,
-                    task_suffix=f"new-title-{_slug_fragment(title)}",
-                    field="title",
-                    finding="source_changed:new_title",
-                    candidate_value=title,
-                    normalized_value=title,
-                    source_drift={"title": title},
+            if not first_v3_baseline:
+                tasks.append(
+                    _source_drift_task(
+                        source_report=source_report,
+                        task_suffix=f"new-title-{_slug_fragment(title)}",
+                        field="title",
+                        finding="source_changed:new_title",
+                        candidate_value=title,
+                        normalized_value=title,
+                        source_drift={"title": title},
+                    )
                 )
-            )
         detailed_removed_titles: set[str] = set()
         for title_detail in source_report.get("removed_title_details") or []:
             if not isinstance(title_detail, dict):
@@ -576,7 +667,8 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
                     source_drift=region,
                 )
             )
-        for failure in source_report.get("validation_failures") or []:
+        validation_failures = source_report.get("validation_failures") or []
+        for failure in validation_failures:
             if not isinstance(failure, dict):
                 continue
             candidate_id = failure.get("candidate_id") or failure.get("canonical_slug") or len(tasks) + 1
@@ -594,6 +686,8 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
             )
         for blocker in source_report.get("publish_blockers") or []:
             blocker_name = str(blocker)
+            if blocker_name == "validation_failures" and validation_failures:
+                continue
             blocker_context = _source_drift_blocker_context(source_report, blocker_name)
             tasks.append(
                 _source_drift_task(
@@ -628,10 +722,13 @@ def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[d
                 "source_document_id": diff.get("source_document_id"),
                 "content_sha256": source.get("content_sha256"),
                 "calendar_group_key": diff.get("calendar_group_key"),
+                "canonical_slug": diff.get("canonical_slug"),
+                "review_key": diff_key,
                 "candidate_type": "dual_run_diff",
                 "page_number": source.get("page_number"),
                 "page_image": source.get("page_image_sha256"),
                 "page_image_sha256": source.get("page_image_sha256"),
+                "page_image_path": source.get("page_image_path"),
                 "field_crop": field_crop,
                 "field_crop_sha256": source.get("crop_sha256"),
                 "field_bbox": source.get("bbox_px"),
@@ -670,6 +767,8 @@ def _dual_run_status_transition_review_tasks(dual_run_report: dict[str, Any]) ->
                 "source_document_id": transition.get("source_document_id"),
                 "content_sha256": transition.get("content_sha256"),
                 "calendar_group_key": transition.get("calendar_group_key"),
+                "canonical_slug": transition.get("canonical_slug"),
+                "review_key": transition_key,
                 "candidate_type": "dual_run_status_transition",
                 "page_number": None,
                 "page_image": None,
@@ -702,6 +801,11 @@ def _dual_run_new_record_review_tasks(dual_run_report: dict[str, Any]) -> list[d
         review_key = str(record.get("review_key") or f"{row_key}:new_record" or f"new-record-{index}").strip()
         if record.get("reviewed") is True or (unreviewed and row_key not in unreviewed):
             continue
+        evidence_by_field = record.get("v3_field_evidence") if isinstance(record.get("v3_field_evidence"), dict) else {}
+        evidence = _first_reviewable_evidence(evidence_by_field)
+        source = evidence.get("source") if isinstance(evidence.get("source"), dict) else {}
+        page_image_sha256 = source.get("page_image_sha256")
+        field_crop = source.get("crop_storage_path") or source.get("crop_path")
         task_suffix = "-".join(_slug_fragment(part) for part in review_key.split(":"))
         tasks.append(
             {
@@ -711,18 +815,64 @@ def _dual_run_new_record_review_tasks(dual_run_report: dict[str, Any]) -> list[d
                 "source_document_id": record.get("source_document_id"),
                 "content_sha256": record.get("content_sha256"),
                 "calendar_group_key": record.get("calendar_group_key"),
+                "canonical_slug": record.get("canonical_slug"),
+                "review_key": review_key,
                 "candidate_type": "dual_run_new_record",
-                "page_number": None,
-                "page_image": None,
-                "field_crop": None,
-                "field_crop_sha256": None,
-                "field_bbox": None,
-                "primary_text": record.get("title"),
+                "page_number": source.get("page_number"),
+                "page_image": page_image_sha256,
+                "page_image_sha256": page_image_sha256,
+                "page_image_path": source.get("page_image_path"),
+                "field_crop": field_crop,
+                "field_crop_sha256": source.get("crop_sha256"),
+                "field_bbox": source.get("bbox_px"),
+                "primary_text": _engine_text(evidence, 0) or record.get("title"),
                 "secondary_text": record.get("canonical_slug"),
                 "candidate_value": record.get("title") or record.get("canonical_slug"),
                 "normalized_value": review_key,
                 "validation_findings": ["manual_review_required:new_record"],
                 "dual_run_new_record": record,
+                "dual_run_report": dual_run_report,
+            }
+        )
+    return tasks
+
+
+def _dual_run_missing_v2_record_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+    tasks: list[dict[str, Any]] = []
+    for index, record in enumerate(dual_run_report.get("missing_v2_records") or [], start=1):
+        if not isinstance(record, dict):
+            continue
+        if record.get("reviewed") is True:
+            continue
+        row_key = str(record.get("row_key") or "").strip()
+        review_key = str(record.get("review_key") or f"{row_key}:missing_v2_record" or f"missing-v2-{index}").strip()
+        task_suffix = "-".join(_slug_fragment(part) for part in review_key.split(":"))
+        v2_value = record.get("v2_value") if isinstance(record.get("v2_value"), dict) else {}
+        tasks.append(
+            {
+                "task_id": f"dual-run-missing-v2-{task_suffix}",
+                "task_type": "manual_review_required",
+                "field": "missing_v2_record",
+                "source_document_id": record.get("source_document_id"),
+                "content_sha256": record.get("content_sha256"),
+                "calendar_group_key": record.get("calendar_group_key"),
+                "canonical_slug": record.get("canonical_slug"),
+                "review_key": review_key,
+                "candidate_type": "dual_run_missing_v2_record",
+                "page_number": record.get("page_number"),
+                "page_image": record.get("page_image_sha256"),
+                "page_image_sha256": record.get("page_image_sha256"),
+                "page_image_path": record.get("page_image_path"),
+                "field_crop": record.get("field_crop"),
+                "field_crop_sha256": record.get("field_crop_sha256"),
+                "field_bbox": record.get("field_bbox"),
+                "primary_text": record.get("title") or v2_value.get("title"),
+                "secondary_text": record.get("canonical_slug"),
+                "candidate_value": record.get("title") or record.get("canonical_slug"),
+                "normalized_value": review_key,
+                "validation_findings": ["manual_review_required:missing_v2_record"],
+                "source_drift": {"old": v2_value, "new": None},
+                "dual_run_missing_v2_record": record,
                 "dual_run_report": dual_run_report,
             }
         )
@@ -736,6 +886,7 @@ def _dual_run_review_tasks(dual_run_report: dict[str, Any] | None) -> list[dict[
         *_dual_run_field_diff_review_tasks(dual_run_report),
         *_dual_run_status_transition_review_tasks(dual_run_report),
         *_dual_run_new_record_review_tasks(dual_run_report),
+        *_dual_run_missing_v2_record_review_tasks(dual_run_report),
     ]
 
 
@@ -754,59 +905,280 @@ def build_review_tasks(
         if candidate.get("validation_status") not in {"needs_review", "parser_error", "source_error"}:
             continue
         findings = [str(finding) for finding in candidate.get("validation_findings") or []]
-        field_name = _field_from_findings(findings)
-        evidence = _field_evidence(candidate, field_name)
-        source = _region_source(candidate, field_name)
-        region_source = _region_source(candidate, "region")
-        if not _has_review_artifacts(source):
-            tasks.append(
-                _unreviewable_candidate_task(
+        split_findings = _field_specific_findings(findings)
+        if split_findings:
+            base_task_id = str(candidate.get("candidate_id") or f"vision-v3-review-{index:04d}")
+            for field_name, field_findings in split_findings:
+                task = _candidate_review_task(
                     candidate,
                     index=index,
-                    findings=findings,
+                    findings=field_findings,
                     field_name=field_name,
+                    task_id=f"{base_task_id}-{_slug_fragment(field_name)}",
                 )
-            )
+                task["existing_gold_comparison"] = _existing_gold_comparison(candidate, existing_gold_by_key)
+                tasks.append(task)
             continue
-        page_image_sha256 = source.get("page_image_sha256") or region_source.get("page_image_sha256")
-        page_image_path = (
-            source.get("page_image_path")
-            or region_source.get("page_image_path")
-            or _page_image_path(candidate, page_image_sha256)
+
+        field_name = _field_from_findings(findings)
+        task = _candidate_review_task(
+            candidate,
+            index=index,
+            findings=findings,
+            field_name=field_name,
         )
-        tasks.append(
-            {
-                "task_id": str(candidate.get("candidate_id") or f"vision-v3-review-{index:04d}"),
-                "task_type": _task_type(findings),
-                "field": field_name,
-                "source_document_id": candidate.get("source_document_id"),
-                "content_sha256": candidate.get("content_sha256"),
-                "calendar_group_key": candidate.get("calendar_group_key"),
-                "candidate_type": candidate.get("candidate_type"),
-                "page_number": source.get("page_number"),
-                "page_image": page_image_sha256,
-                "page_image_sha256": page_image_sha256,
-                "page_image_path": page_image_path,
-                "region_crop": region_source.get("crop_storage_path") or region_source.get("crop_path"),
-                "region_crop_sha256": region_source.get("crop_sha256"),
-                "field_crop": source.get("crop_storage_path") or source.get("crop_path"),
-                "field_crop_sha256": source.get("crop_sha256"),
-                "field_bbox": source.get("bbox_px"),
-                "primary_text": _engine_text(evidence, 0),
-                "secondary_text": _engine_text(evidence, 1),
-                "candidate_value": evidence.get("raw_value") or candidate.get("source_title") or candidate.get("schedule_raw"),
-                "normalized_value": evidence.get("normalized_value"),
-                "validation_findings": findings,
-                "source_metadata": _source_metadata(candidate),
-                "existing_gold_comparison": _existing_gold_comparison(candidate, existing_gold_by_key),
-                "candidate": candidate,
-            }
-        )
+        task["existing_gold_comparison"] = _existing_gold_comparison(candidate, existing_gold_by_key)
+        tasks.append(task)
     tasks.extend(_source_status_review_tasks(source_statuses or []))
     tasks.extend(_gold_conflict_review_tasks(gold_conflicts or [], existing_gold_by_key=existing_gold_by_key))
     tasks.extend(_source_drift_review_tasks(source_drift_report))
     tasks.extend(_dual_run_review_tasks(dual_run_report))
+    for task in tasks:
+        task.setdefault("status", "pending")
     return tasks
+
+
+def _count_by_key(tasks: list[dict[str, Any]], key: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for task in tasks:
+        value = str(task.get(key) or "").strip()
+        if value:
+            counts[value] = counts.get(value, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _count_by_primary_finding(tasks: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for task in tasks:
+        findings = task.get("validation_findings")
+        finding = str(findings[0] if isinstance(findings, list) and findings else "").strip()
+        if finding:
+            counts[finding] = counts.get(finding, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def build_review_queue_report(tasks: list[dict[str, Any]]) -> dict[str, Any]:
+    missing_visual_artifact_task_ids = [
+        str(task.get("task_id") or "")
+        for task in tasks
+        if not (task.get("field_crop") or task.get("page_image_path"))
+    ]
+    missing_visual_artifact_task_ids = [
+        task_id for task_id in missing_visual_artifact_task_ids if task_id
+    ]
+    missing_visual_artifact_file_task_ids = [
+        str(task.get("task_id") or "")
+        for task in tasks
+        if not _task_has_existing_visual_artifact(task)
+    ]
+    missing_visual_artifact_file_task_ids = [
+        task_id for task_id in missing_visual_artifact_file_task_ids if task_id
+    ]
+    return {
+        "report_kind": "review_queue_v3_report",
+        "schema_version": "review_queue_v3_report_001",
+        "summary": {
+            "task_count": len(tasks),
+            "task_count_by_type": _count_by_key(tasks, "task_type"),
+            "task_count_by_finding": _count_by_primary_finding(tasks),
+            "visual_artifact_missing_count": len(missing_visual_artifact_task_ids),
+            "visual_artifact_missing_file_count": len(missing_visual_artifact_file_task_ids),
+            "all_tasks_have_visual_artifacts": not missing_visual_artifact_task_ids,
+            "all_tasks_have_existing_visual_artifacts": not missing_visual_artifact_file_task_ids,
+        },
+        "visual_artifact_missing_task_ids": missing_visual_artifact_task_ids,
+        "visual_artifact_missing_file_task_ids": missing_visual_artifact_file_task_ids,
+    }
+
+
+def _html_text(value: Any) -> str:
+    if isinstance(value, (dict, list)):
+        value = json.dumps(value, indent=2, sort_keys=True)
+    return html.escape("" if value is None else str(value))
+
+
+def _html_artifact_path(path: Any, *, relative_to: Path | None = None) -> str:
+    path_text = str(path or "").strip()
+    if not path_text:
+        return ""
+    if "://" in path_text or path_text.startswith("#") or path_text.startswith("data:"):
+        return path_text
+    candidate_path = Path(path_text)
+    if relative_to is None:
+        return path_text
+    target_path = candidate_path if candidate_path.is_absolute() else Path.cwd() / candidate_path
+    try:
+        return os.path.relpath(target_path.resolve(), relative_to.resolve())
+    except Exception:
+        return path_text
+
+
+def _local_artifact_exists(path: Any) -> bool:
+    path_text = str(path or "").strip()
+    if not path_text:
+        return False
+    if "://" in path_text or path_text.startswith("data:"):
+        return True
+    candidate_path = Path(path_text)
+    target_path = candidate_path if candidate_path.is_absolute() else Path.cwd() / candidate_path
+    return target_path.exists()
+
+
+def _task_has_existing_visual_artifact(task: dict[str, Any]) -> bool:
+    return any(_local_artifact_exists(task.get(key)) for key in ("field_crop", "region_crop", "page_image_path"))
+
+
+def _html_media(path: Any, label: str, *, relative_to: Path | None = None) -> str:
+    href = _html_artifact_path(path, relative_to=relative_to)
+    if not href:
+        return '<span class="missing">missing</span>'
+    escaped_href = html.escape(href, quote=True)
+    escaped_label = html.escape(label)
+    if not _local_artifact_exists(path):
+        return (
+            f'<a class="missing media-link" href="{escaped_href}">'
+            f"<span>{escaped_label}</span>"
+            "<span>file not found locally</span>"
+            "</a>"
+        )
+    return (
+        f'<a class="media-link" href="{escaped_href}">'
+        f'<img src="{escaped_href}" alt="{escaped_label}" loading="lazy">'
+        f"<span>{escaped_label}</span>"
+        "</a>"
+    )
+
+
+def _review_command(task: dict[str, Any], decision: str) -> str:
+    task_id = str(task.get("task_id") or "").replace('"', '\\"')
+    command = (
+        "python scripts/ingest/review_schema_v3.py "
+        "data/processed/review_queue/vision_v3_review_decisions.json "
+        f'--record-task-id "{task_id}" '
+        f"--decision {decision} "
+        '--reviewer "reviewer-name" '
+        '--reason "Verified against source crop"'
+    )
+    if decision == "edit":
+        approved_fields = _review_command_approved_fields(task)
+        if approved_fields:
+            command = f"{command} --approved-fields-json {_shell_single_quote(json.dumps(approved_fields, sort_keys=True))}"
+    return command
+
+
+def _shell_single_quote(value: str) -> str:
+    return "'" + value.replace("'", "'\"'\"'") + "'"
+
+
+def _review_command_approved_fields(task: dict[str, Any]) -> dict[str, Any]:
+    field_name = str(task.get("field") or "").strip()
+    if field_name == "price":
+        field_name = "fee"
+    if field_name not in {"title", "schedule", "location", "fee", "movie_title"}:
+        return {}
+    approved_field: dict[str, Any] = {"normalized_value": task.get("normalized_value")}
+    if task.get("candidate_value") is not None:
+        approved_field["raw_value"] = task.get("candidate_value")
+    return {field_name: approved_field}
+
+
+def build_review_queue_html(
+    tasks: list[dict[str, Any]],
+    report: dict[str, Any] | None = None,
+    *,
+    output_path: Path | None = None,
+) -> str:
+    """Render a static local review page for the v3 review queue."""
+    report = report or build_review_queue_report(tasks)
+    summary = report.get("summary") if isinstance(report.get("summary"), dict) else {}
+    relative_to = output_path.parent if output_path else None
+    rows: list[str] = []
+    for task in tasks:
+        findings = task.get("validation_findings") if isinstance(task.get("validation_findings"), list) else []
+        source_metadata = task.get("source_metadata") if isinstance(task.get("source_metadata"), dict) else {}
+        existing_comparison = (
+            task.get("existing_gold_comparison")
+            if isinstance(task.get("existing_gold_comparison"), dict)
+            else {}
+        )
+        rows.append(
+            "\n".join(
+                [
+                    '<article class="task">',
+                    '<div class="task-heading">',
+                    f'<h2>{_html_text(task.get("calendar_group_key") or "Unknown source")} / {_html_text(task.get("task_type"))}</h2>',
+                    f'<code>{_html_text(task.get("task_id"))}</code>',
+                    "</div>",
+                    '<div class="meta">',
+                    f"<span>Field: <strong>{_html_text(task.get('field') or 'source')}</strong></span>",
+                    f"<span>Candidate: <strong>{_html_text(task.get('candidate_type'))}</strong></span>",
+                    f"<span>Slug: <strong>{_html_text(task.get('canonical_slug') or 'n/a')}</strong></span>",
+                    f"<span>Review key: <code>{_html_text(task.get('review_key') or 'n/a')}</code></span>",
+                    f"<span>Page: <strong>{_html_text(task.get('page_number') or 'n/a')}</strong></span>",
+                    f"<span>Content SHA: <code>{_html_text(task.get('content_sha256'))}</code></span>",
+                    f"<span>Page image SHA: <code>{_html_text(task.get('page_image_sha256') or task.get('page_image'))}</code></span>",
+                    f"<span>Field crop SHA: <code>{_html_text(task.get('field_crop_sha256'))}</code></span>",
+                    "</div>",
+                    '<div class="evidence">',
+                    f"<section><h3>Field Crop</h3>{_html_media(task.get('field_crop'), 'open field crop', relative_to=relative_to)}</section>",
+                    f"<section><h3>Region Crop</h3>{_html_media(task.get('region_crop'), 'open region crop', relative_to=relative_to)}</section>",
+                    f"<section><h3>Page Image</h3>{_html_media(task.get('page_image_path'), 'open page image', relative_to=relative_to)}</section>",
+                    "</div>",
+                    '<div class="grid">',
+                    f"<section><h3>Findings</h3><pre>{_html_text(findings)}</pre></section>",
+                    f"<section><h3>Candidate Value</h3><pre>{_html_text(task.get('candidate_value'))}</pre></section>",
+                    f"<section><h3>Normalized Value</h3><pre>{_html_text(task.get('normalized_value'))}</pre></section>",
+                    f"<section><h3>Primary OCR</h3><pre>{_html_text(task.get('primary_text'))}</pre></section>",
+                    f"<section><h3>Secondary OCR</h3><pre>{_html_text(task.get('secondary_text'))}</pre></section>",
+                    f"<section><h3>Existing Gold Comparison</h3><pre>{_html_text(existing_comparison)}</pre></section>",
+                    f"<section><h3>Source Metadata</h3><pre>{_html_text(source_metadata)}</pre></section>",
+                    f"<section><h3>Decision Commands</h3><pre>{_html_text(_review_command(task, 'approve'))}\n\n{_html_text(_review_command(task, 'edit'))}\n\n{_html_text(_review_command(task, 'reject'))}</pre></section>",
+                    "</div>",
+                    "</article>",
+                ]
+            )
+        )
+    return "\n".join(
+        [
+            "<!doctype html>",
+            '<html lang="en">',
+            "<head>",
+            '<meta charset="utf-8">',
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
+            "<title>Vision v3 Review Queue</title>",
+            "<style>",
+            "body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;background:#f7f7f4;color:#1e2329}",
+            "header{position:sticky;top:0;background:#ffffff;border-bottom:1px solid #d8d6ce;padding:16px 24px;z-index:1}",
+            "main{max-width:1180px;margin:0 auto;padding:24px}",
+            "h1{font-size:24px;margin:0 0 8px} h2{font-size:18px;margin:0} h3{font-size:13px;margin:0 0 8px;color:#48515a}",
+            ".summary{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}.summary strong{font-size:18px}",
+            ".task{background:#fff;border:1px solid #d8d6ce;border-radius:8px;margin:0 0 18px;padding:16px}",
+            ".task-heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid #eceae3;padding-bottom:12px}",
+            ".meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:12px 0;font-size:13px}",
+            ".evidence{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}",
+            ".evidence section,.grid section{border:1px solid #eceae3;border-radius:6px;padding:10px;background:#fbfbf8}",
+            ".media-link{display:grid;gap:8px;text-decoration:none;color:#185abc}.media-link img{display:block;width:100%;max-height:260px;object-fit:contain;background:#fff;border:1px solid #d8d6ce;border-radius:4px}",
+            ".grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}",
+            "pre{white-space:pre-wrap;word-break:break-word;margin:0;font-size:12px;line-height:1.4}",
+            "code{font-size:12px}.missing{color:#8b2f2f}a{color:#185abc}",
+            "</style>",
+            "</head>",
+            "<body>",
+            "<header>",
+            "<h1>Vision v3 Review Queue</h1>",
+            '<div class="summary">',
+            f"<span><strong>{_html_text(summary.get('task_count', len(tasks)))}</strong> tasks</span>",
+            f"<span><strong>{_html_text(summary.get('visual_artifact_missing_count', 0))}</strong> missing visual artifacts</span>",
+            f"<span>Types: <code>{_html_text(summary.get('task_count_by_type', {}))}</code></span>",
+            "</div>",
+            "</header>",
+            "<main>",
+            *rows,
+            "</main>",
+            "</body>",
+            "</html>",
+        ]
+    ) + "\n"
 
 
 def review_approval_is_current(
@@ -844,6 +1216,18 @@ def _load_json_list(path: Path) -> list[dict[str, Any]]:
     return [item for item in payload if isinstance(item, dict)]
 
 
+def _load_gold_conflicts(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    payload = json.loads(path.read_text())
+    if isinstance(payload, dict):
+        conflicts = payload.get("gold_conflicts")
+        return [item for item in conflicts if isinstance(item, dict)] if isinstance(conflicts, list) else []
+    if isinstance(payload, list):
+        return [item for item in payload if isinstance(item, dict)]
+    return []
+
+
 def _load_json_dict(path: Path) -> dict[str, Any] | None:
     if not path.exists() or path.is_dir():
         return None
@@ -860,6 +1244,8 @@ def main() -> None:
     parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
     parser.add_argument("--dual-run-report", type=Path, default=DEFAULT_DUAL_RUN_REPORT_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--report-output", type=Path, default=DEFAULT_REPORT_PATH)
+    parser.add_argument("--html-output", type=Path, default=DEFAULT_HTML_OUTPUT_PATH)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
@@ -868,7 +1254,7 @@ def main() -> None:
         candidates,
         source_statuses=_load_json_list(args.source_statuses),
         existing_gold_rows=_load_json_list(args.existing_gold),
-        gold_conflicts=_load_json_list(args.gold_conflicts),
+        gold_conflicts=_load_gold_conflicts(args.gold_conflicts),
         source_drift_report=_load_json_dict(args.source_drift_report),
         dual_run_report=_load_json_dict(args.dual_run_report),
     )
@@ -877,6 +1263,11 @@ def main() -> None:
         return
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(tasks, indent=2, sort_keys=True) + "\n")
+    report = build_review_queue_report(tasks)
+    args.report_output.parent.mkdir(parents=True, exist_ok=True)
+    args.report_output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    args.html_output.parent.mkdir(parents=True, exist_ok=True)
+    args.html_output.write_text(build_review_queue_html(tasks, report, output_path=args.html_output))
     print(args.output)
 
 

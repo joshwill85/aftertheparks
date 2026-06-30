@@ -22,9 +22,9 @@ const REQUIRED_CHECKS = AGENT_READINESS_CHECKS.map((check) => check.check);
 const REQUIRED_CHECK_SET = new Set<AgentReadinessCheckName>(REQUIRED_CHECKS);
 const MIN_EVIDENCE_LENGTH = 48;
 const DISNEY_SPRINGS_ACCESS_ROUTES = new Set([
-  "/guides/things-to-do-without-park-ticket",
-  "/guides/disney-springs-area-resort-activities",
-  "/guides/best-resorts-if-you-do-not-have-a-park-ticket",
+  "/resorts?no_ticket_friendly=true",
+  "/activities?area=disney-springs",
+  "/resorts?no_ticket_friendly=true",
 ]);
 const DISNEY_SPRINGS_CAVEAT_CHECKS = new Set<AgentReadinessCheckName>([
   "accessibilityTree",

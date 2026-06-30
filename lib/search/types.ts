@@ -1,4 +1,3 @@
-import type { GuideEntry } from "@/lib/guides";
 import type { IconKey } from "@/components/icons/iconRegistry";
 import type { SearchFacet, SearchSuggestion } from "@/lib/search/schema";
 import type { SearchDocument } from "@/lib/search/schema";
@@ -12,7 +11,6 @@ import type {
 export type SearchResultKind =
   | "activity"
   | "resort"
-  | "guide"
   | "category"
   | "page"
   | "movie"
@@ -33,7 +31,6 @@ export interface SearchHit {
   document?: SearchDocument;
   activity?: ActivityOccurrence;
   resort?: ResortSummary;
-  guide?: GuideEntry;
   movie?: MovieNightOccurrence;
   offering?: ActivityOffering;
   category?: string;
@@ -50,7 +47,6 @@ export interface SearchResponse {
   activities: ActivityOccurrence[];
   officialOfferings: ActivityOffering[];
   resorts: ResortSummary[];
-  guides: GuideEntry[];
   movies: MovieNightOccurrence[];
   categories: SearchHit[];
   pages: SearchHit[];

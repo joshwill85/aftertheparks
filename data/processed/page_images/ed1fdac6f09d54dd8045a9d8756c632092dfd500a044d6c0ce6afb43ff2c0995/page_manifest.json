@@ -1,0 +1,50 @@
+{
+  "calendar_group_key": "port-orleans-riverside",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+  "captured_at": "2026-06-30T00:07:31.301331+00:00",
+  "currentness": "current",
+  "edition": "official-schedule-0526",
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+  "file_extension": ".jpg",
+  "http_status": 200,
+  "mime_type": "image/jpeg",
+  "page_count": 1,
+  "pages": [
+    {
+      "canonical_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png",
+      "canonical_image_sha256": "cf7243a23398ae0c605b00d5233dc2e4efb3a030f98cce96dc526622fb884dd6",
+      "height_px": 12048,
+      "image_orientation": 1,
+      "page_kind": "image_file",
+      "page_number": 1,
+      "render_dpi": null,
+      "render_engine": "Pillow",
+      "render_engine_version": "11.3.0",
+      "render_scale": null,
+      "thumbnail_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.thumb.png",
+      "thumbnail_sha256": "ebd372cf5d6a3f5c921c658a3e1a3a986226bfd64f86630d118d1ff57ae5f390",
+      "width_px": 1200
+    }
+  ],
+  "pipeline_version": "vision_v3_001",
+  "render_config": {
+    "bbox_format": "[x1,y1,x2,y2]",
+    "config_hash": "3bf9c8f4e165b6f0bb4c33dd73249838b81427e4f3a5a5ce3ea913d58a8fb262",
+    "coordinate_origin": "top_left",
+    "image_engine": "Pillow",
+    "image_engine_version": "11.3.0",
+    "image_manifest_policy": "render_each_manifest_image_as_canonical_page",
+    "image_policy": "exif_transpose_rgb_png",
+    "output_format": "png",
+    "pdf_dpi": 450,
+    "pdf_engine": "pypdfium2",
+    "pdf_engine_version": "5.10.1",
+    "pipeline_version": "vision_v3_001"
+  },
+  "source_document_id": "0b05025643c17f9d2e14ae8e28ed6100e160e5f6ed8c4cec2cde7d6a982ed6b9",
+  "source_kind": "official_image",
+  "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/port-orleans-riverside/official-schedule-0526/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995.jpg",
+  "source_role": "resort_pdf",
+  "source_sha256": "ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995",
+  "source_type": "image"
+}

@@ -4,6 +4,9 @@ import { Hero } from "@/components/atlas/Hero";
 import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { ExploreLayout } from "@/components/explore/ExploreLayout";
 import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
+import { AnswerBlock } from "@/components/seo/AnswerBlock";
+import { FreshnessFacts } from "@/components/seo/FreshnessFacts";
+import { IntentLinkCluster } from "@/components/seo/IntentLinkCluster";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
 import {
   filterOfficialOfferingsWithoutActivityCollisions,
@@ -15,6 +18,8 @@ import {
   buildFilterImpact,
   offeringToFilterableItem,
 } from "@/lib/explore/filterImpact";
+import { canonicalPolicyForParams } from "@/lib/seo/canonicalPolicy";
+import { activitySourceSummary, formatSeoDate } from "@/lib/seo/activityPage";
 import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import { DISNEY_SPRINGS_RESORT_TRANSFER_CAVEAT } from "@/lib/seo/transportation";
@@ -32,6 +37,24 @@ const STRATEGIC_ACTIVITY_FILTER_METADATA: Record<
   string,
   typeof DEFAULT_ACTIVITY_METADATA
 > = {
+  "category=campfire": {
+    title: "Disney Resort Campfires",
+    description:
+      "Campfires are outdoor and weather-sensitive. Compare current Disney resort campfire times, locations, and supply notes before you go.",
+    canonical: "/activities?category=campfire",
+  },
+  "category=poolside": {
+    title: "Disney Resort Poolside Activities",
+    description:
+      "Browse current Disney resort poolside activities. Pool access is usually limited to guests staying at that resort, so confirm access before planning around pool games.",
+    canonical: "/activities?category=poolside",
+  },
+  "category=arcade": {
+    title: "Arcades and Games at Disney Resorts",
+    description:
+      "Find Disney resort arcades and games for indoor, low-effort backup plans during arrival days, breaks, or flexible resort time.",
+    canonical: "/activities?category=arcade",
+  },
   "free=true": {
     title: "Free Walt Disney World Resort Activities",
     description:
@@ -70,27 +93,22 @@ const STRATEGIC_ACTIVITY_FILTER_METADATA: Record<
   },
 };
 
-function strategicFilterKey(params: Record<string, string | undefined>): string | undefined {
-  const keys = Object.keys(params).filter((key) => params[key]);
-  if (keys.length !== 1) return undefined;
-  const key = keys[0];
-  return `${key}=${params[key]}`;
-}
-
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | undefined>>;
 }): Promise<Metadata> {
   const params = await searchParams;
+  const canonicalPolicy = canonicalPolicyForParams("/activities", params);
   const pageMetadata =
-    STRATEGIC_ACTIVITY_FILTER_METADATA[strategicFilterKey(params) ?? ""] ??
+    STRATEGIC_ACTIVITY_FILTER_METADATA[canonicalPolicy.strategicFilterKey ?? ""] ??
     DEFAULT_ACTIVITY_METADATA;
 
   return {
     title: pageMetadata.title,
     description: pageMetadata.description,
-    alternates: { canonical: pageMetadata.canonical },
+    robots: { index: canonicalPolicy.index, follow: true },
+    alternates: { canonical: canonicalPolicy.canonical },
     ...buildSocialMetadata({
       title: pageMetadata.title,
       description: pageMetadata.description,
@@ -110,7 +128,8 @@ interface PageProps {
 
 export default async function ActivitiesPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const strategicKey = strategicFilterKey(params);
+  const canonicalPolicy = canonicalPolicyForParams("/activities", params);
+  const strategicKey = canonicalPolicy.strategicFilterKey;
   const pageMetadata =
     STRATEGIC_ACTIVITY_FILTER_METADATA[strategicKey ?? ""] ??
     DEFAULT_ACTIVITY_METADATA;
@@ -143,6 +162,7 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
     filters,
     resortOptions
   );
+  const sourceSummary = activitySourceSummary(activities);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const jsonLd = stringifyJsonLd(
     buildItemListJsonLd(
@@ -170,6 +190,32 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
         title={pageMetadata.title}
         subtitle={pageMetadata.description}
         compactBrowse
+      />
+      <AnswerBlock
+        eyebrow="Activity finder"
+        title="Browse by what your group needs"
+        primaryAction={{ label: "Use activity filters", href: pageMetadata.canonical }}
+        secondaryActions={[
+          { label: "See today", href: "/today" },
+          { label: "See tonight", href: "/tonight" },
+        ]}
+      >
+        Use the activity directory to compare current resort recreation by
+        resort, time, category, cost, weather fit, reservation needs, and
+        transportation context.
+      </AnswerBlock>
+      <FreshnessFacts
+        lastVerified={formatSeoDate(sourceSummary.latestVerified)}
+        activityCount={sourceSummary.activityCount}
+        sourceCount={sourceSummary.sourceCount}
+      />
+      <IntentLinkCluster
+        title="Common activity needs"
+        links={[
+          { label: "Free activities", href: "/activities?free=true", description: "Current free and low-cost listings." },
+          { label: "Indoor activities", href: "/activities?weather=indoor", description: "Rain and heat backups." },
+          { label: "Movies", href: "/activities/movies-under-the-stars", description: "Outdoor movie details and schedules." },
+        ]}
       />
       {strategicKey === "area=disney-springs" && (
         <section className="mb-6 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">

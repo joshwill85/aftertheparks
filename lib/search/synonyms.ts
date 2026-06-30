@@ -1,4 +1,4 @@
-/** Query expansions and intent aliases for concierge-style search. */
+/** Query expansions and intent aliases for site search. */
 export const SEARCH_SYNONYMS: Record<string, string[]> = {
   movie: ["movies", "cinema", "film", "stars"],
   campfire: ["campfires", "marshmallow", "smores", "s'mores", "fire", "bonfire"],
@@ -78,13 +78,6 @@ export const PAGE_HITS = [
     description: "Save activities and build your daybook",
     href: "/plan",
     keywords: ["plan", "saved", "itinerary", "daybook"],
-  },
-  {
-    id: "page-guides",
-    title: "Planning guides",
-    description: "First night tips, arcade listings, and resort activities",
-    href: "/guides",
-    keywords: ["guides", "guide", "tips", "help", "planning"],
   },
   {
     id: "page-explore",

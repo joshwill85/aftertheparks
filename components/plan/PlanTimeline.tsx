@@ -1,9 +1,10 @@
 "use client";
 
-import { Fragment, useState, type ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import Link from "next/link";
 import { IconGlyph } from "@/components/icons/IconGlyph";
 import { PlanItem } from "@/components/plan/PlanItem";
+import { PlanTransportEdge } from "@/components/plan/PlanTransportEdge";
 import {
   buildPlanStayShell,
   groupPlanByDate,
@@ -13,108 +14,12 @@ import {
 } from "@/lib/plan/sections";
 import {
   buildPlanDaybookPath,
-  type PlanDaybookConnector,
 } from "@/lib/plan/daybookPath";
 import { useTransportConnectionsForItems } from "@/lib/plan/useTransportConnections";
-import {
-  transportOptionInstructions,
-  transportOptionLabel,
-  type PlanTransportConnectionMap,
-  type PlanTransportConnectionOption,
-} from "@/lib/plan/transportConnections";
+import type { PlanTransportConnectionMap } from "@/lib/plan/transportConnections";
 import type { IconKey } from "@/components/icons/iconRegistry";
-import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
+import type { ActivityOccurrence, PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import type { PlanStaySettings } from "@/lib/plan/types";
-
-function TransportInstructionCopy({
-  lines,
-  disclosure,
-}: {
-  lines: string[];
-  disclosure?: string;
-}) {
-  return (
-    <span className="plan-path-connector__instructions">
-      {lines.map((line) => (
-        <small key={line}>{line}</small>
-      ))}
-      {disclosure && (
-        <small className="plan-path-connector__disclosure">
-          <em>* {disclosure}</em>
-        </small>
-      )}
-    </span>
-  );
-}
-
-function TransportOptionCopy({ option }: { option: PlanTransportConnectionOption }) {
-  const instructions = transportOptionInstructions(option);
-  return (
-    <>
-      <strong>{transportOptionLabel(option)}</strong>
-      <TransportInstructionCopy
-        lines={instructions.lines}
-        disclosure={instructions.disclosure}
-      />
-    </>
-  );
-}
-
-export function PlanPathConnector({
-  connector,
-}: {
-  connector: PlanDaybookConnector;
-}) {
-  const [expanded, setExpanded] = useState(false);
-  const secondaryOptions = connector.transportOptions?.slice(1) ?? [];
-
-  return (
-    <li
-      className={`plan-path-connector plan-path-connector--${connector.tone} plan-path-connector--${connector.severity}`}
-      aria-label={connector.ariaLabel}
-    >
-      <span className="plan-path-connector__icon" aria-hidden>
-        <IconGlyph iconKey={connector.iconKey} decorative />
-      </span>
-      <span className="plan-path-connector__copy">
-        <strong>{connector.label}</strong>
-        {connector.detailLines ? (
-          <TransportInstructionCopy
-            lines={connector.detailLines}
-            disclosure={connector.disclosure}
-          />
-        ) : (
-          <small>{connector.detail}</small>
-        )}
-        {secondaryOptions.length > 0 && (
-          <>
-            <button
-              type="button"
-              className="plan-path-connector__toggle"
-              onClick={() => setExpanded((current) => !current)}
-              aria-expanded={expanded}
-            >
-              {expanded
-                ? "Hide other routes"
-                : `Show ${secondaryOptions.length} more ${
-                    secondaryOptions.length === 1 ? "route" : "routes"
-                  }`}
-            </button>
-            {expanded && (
-              <ul className="plan-path-connector__options">
-                {secondaryOptions.map((option) => (
-                  <li key={option.id}>
-                    <TransportOptionCopy option={option} />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
-      </span>
-    </li>
-  );
-}
 
 function PlanSection({
   title,
@@ -141,6 +46,9 @@ interface PlanTimelineProps {
   staySettings?: PlanStaySettings;
   onRemove: (id: string) => void;
   onUpdateNotes: (id: string, notes: string) => void;
+  backupCandidates?: ActivityOccurrence[];
+  onSaveBackup?: (activity: ActivityOccurrence) => void;
+  onSwap?: (itemId: string, activity: ActivityOccurrence) => void;
 }
 
 type PlanDaybookDay = {
@@ -154,6 +62,9 @@ export function PlanTimeline({
   staySettings = {},
   onRemove,
   onUpdateNotes,
+  backupCandidates = [],
+  onSaveBackup,
+  onSwap,
 }: PlanTimelineProps) {
   const dayGroups = groupPlanByDate(items);
   const stayShell = buildPlanStayShell(items, staySettings);
@@ -171,6 +82,9 @@ export function PlanTimeline({
                 transportConnections={transportConnections}
                 onRemove={onRemove}
                 onUpdateNotes={onUpdateNotes}
+                backupCandidates={backupCandidates}
+                onSaveBackup={onSaveBackup}
+                onSwap={onSwap}
               />
             ) : (
               <EmptyStayDay
@@ -188,6 +102,9 @@ export function PlanTimeline({
               transportConnections={transportConnections}
               onRemove={onRemove}
               onUpdateNotes={onUpdateNotes}
+              backupCandidates={backupCandidates}
+              onSaveBackup={onSaveBackup}
+              onSwap={onSwap}
             />
           )}
           {stayShell.flexibleItems.length > 0 && (
@@ -195,6 +112,9 @@ export function PlanTimeline({
               items={stayShell.flexibleItems}
               onRemove={onRemove}
               onUpdateNotes={onUpdateNotes}
+              backupCandidates={backupCandidates}
+              onSaveBackup={onSaveBackup}
+              onSwap={onSwap}
             />
           )}
         </>
@@ -206,6 +126,9 @@ export function PlanTimeline({
             transportConnections={transportConnections}
             onRemove={onRemove}
             onUpdateNotes={onUpdateNotes}
+            backupCandidates={backupCandidates}
+            onSaveBackup={onSaveBackup}
+            onSwap={onSwap}
           />
         ))
       )}
@@ -218,11 +141,17 @@ function PlanDaybook({
   transportConnections,
   onRemove,
   onUpdateNotes,
+  backupCandidates = [],
+  onSaveBackup,
+  onSwap,
 }: {
   day: PlanDaybookDay;
   transportConnections?: PlanTransportConnectionMap;
   onRemove: (id: string) => void;
   onUpdateNotes: (id: string, notes: string) => void;
+  backupCandidates?: ActivityOccurrence[];
+  onSaveBackup?: (activity: ActivityOccurrence) => void;
+  onSwap?: (itemId: string, activity: ActivityOccurrence) => void;
 }) {
   const visibleSections = PLAN_SECTION_ORDER.filter(
     (key) => (day.sections.get(key)?.length ?? 0) > 0
@@ -246,8 +175,15 @@ function PlanDaybook({
 
                 return (
                   <Fragment key={item.id}>
-                    {connector && <PlanPathConnector connector={connector} />}
-                    <PlanItem item={item} onRemove={onRemove} onUpdateNotes={onUpdateNotes} />
+                    {connector && <PlanTransportEdge connector={connector} />}
+                    <PlanItem
+                      item={item}
+                      onRemove={onRemove}
+                      onUpdateNotes={onUpdateNotes}
+                      backupCandidates={backupCandidates}
+                      onSaveBackup={onSaveBackup}
+                      onSwap={onSwap}
+                    />
                   </Fragment>
                 );
               })}
@@ -300,12 +236,18 @@ function PlanDateGroupCollection({
   transportConnections,
   onRemove,
   onUpdateNotes,
+  backupCandidates = [],
+  onSaveBackup,
+  onSwap,
 }: {
   title: string;
   items: PlanItemType[];
   transportConnections?: PlanTransportConnectionMap;
   onRemove: (id: string) => void;
   onUpdateNotes: (id: string, notes: string) => void;
+  backupCandidates?: ActivityOccurrence[];
+  onSaveBackup?: (activity: ActivityOccurrence) => void;
+  onSwap?: (itemId: string, activity: ActivityOccurrence) => void;
 }) {
   return (
     <section className="space-y-5">
@@ -317,6 +259,9 @@ function PlanDateGroupCollection({
           transportConnections={transportConnections}
           onRemove={onRemove}
           onUpdateNotes={onUpdateNotes}
+          backupCandidates={backupCandidates}
+          onSaveBackup={onSaveBackup}
+          onSwap={onSwap}
         />
       ))}
     </section>
@@ -327,10 +272,16 @@ function FlexiblePlanItems({
   items,
   onRemove,
   onUpdateNotes,
+  backupCandidates = [],
+  onSaveBackup,
+  onSwap,
 }: {
   items: PlanItemType[];
   onRemove: (id: string) => void;
   onUpdateNotes: (id: string, notes: string) => void;
+  backupCandidates?: ActivityOccurrence[];
+  onSaveBackup?: (activity: ActivityOccurrence) => void;
+  onSwap?: (itemId: string, activity: ActivityOccurrence) => void;
 }) {
   return (
     <section className="plan-daybook">
@@ -341,6 +292,9 @@ function FlexiblePlanItems({
             item={item}
             onRemove={onRemove}
             onUpdateNotes={onUpdateNotes}
+            backupCandidates={backupCandidates}
+            onSaveBackup={onSaveBackup}
+            onSwap={onSwap}
           />
         ))}
       </PlanSection>

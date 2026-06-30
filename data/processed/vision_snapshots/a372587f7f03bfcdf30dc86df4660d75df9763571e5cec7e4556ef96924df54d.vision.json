@@ -9556,19 +9556,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
       "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-          "source_authority": "non_official",
-          "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -9600,10 +9589,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+      "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
@@ -9617,13 +9606,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-      "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+      "crop_sha256": "ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",

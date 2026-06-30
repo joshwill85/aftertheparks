@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { startTransition } from "react";
+import type { ActiveFilterChip } from "@/lib/explore/filterImpact";
 import { cn } from "@/lib/utils";
 import type { ActivitySortKey } from "@/lib/activities/sort";
 
@@ -10,6 +11,7 @@ interface ResultSummaryProps {
   className?: string;
   compact?: boolean;
   basePath?: string;
+  activeChips?: ActiveFilterChip[];
 }
 
 const SORT_OPTIONS: { value: ActivitySortKey; label: string; help: string }[] = [
@@ -28,10 +30,11 @@ export function ResultSummary({
   className,
   compact = false,
   basePath = "/activities",
+  activeChips,
 }: ResultSummaryProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeFilters = [
+  const activeFilters = activeChips?.length ?? [
     searchParams.get("resort"),
     searchParams.get("category"),
     searchParams.get("daypart") ?? searchParams.get("time"),
@@ -48,12 +51,14 @@ export function ResultSummary({
   const currentSort =
     requestedSort && SORT_VALUES.has(requestedSort) ? requestedSort : "time";
 
-  const label =
+  const summarySentence =
     count === 0
-      ? "No results found"
-      : count === 1
-        ? "1 result"
-      : `${count} results`;
+      ? "No activities match these filters"
+      : `Showing ${count} activit${count === 1 ? "y" : "ies"}${
+          activeChips && activeChips.length > 0
+            ? `: ${activeChips.map((chip) => chip.label).join(" + ")}`
+            : ""
+        }`;
   const sortHelp =
     SORT_OPTIONS.find((option) => option.value === currentSort)?.help ??
     SORT_OPTIONS[0].help;
@@ -81,7 +86,7 @@ export function ResultSummary({
         aria-live="polite"
         aria-atomic="true"
       >
-        {label}
+        {summarySentence}
         {activeFilters > 0 && (
           <span className="ml-2 font-normal text-[var(--color-muted)]">
             · {activeFilters} filter{activeFilters !== 1 ? "s" : ""} active

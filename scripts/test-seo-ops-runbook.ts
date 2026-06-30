@@ -189,7 +189,7 @@ assert.ok(
 
 for (const expectedRoute of [
   "/resorts/polynesian-village-resort",
-  "/guides/disney-springs-area-resort-activities",
+  "/activities?area=disney-springs",
   "/llms.txt",
   "/llms-full.txt",
   "/robots.txt",

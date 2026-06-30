@@ -37,7 +37,7 @@ export const REQUIRED_STRUCTURED_DATA_EVIDENCE = [
   },
   {
     routeGroup: "guide_pages",
-    representativePath: "/guides/disney-world-non-park-day",
+    representativePath: "/activities",
     schemaTypes: ["BreadcrumbList", "Article", "FAQPage", "ItemList"],
   },
 ] as const;

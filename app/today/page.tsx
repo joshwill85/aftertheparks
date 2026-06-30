@@ -5,6 +5,9 @@ import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { Hero } from "@/components/atlas/Hero";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
 import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
+import { AnswerBlock } from "@/components/seo/AnswerBlock";
+import { FreshnessFacts } from "@/components/seo/FreshnessFacts";
+import { IntentLinkCluster } from "@/components/seo/IntentLinkCluster";
 import { getTodayActivities, getTomorrowPreview, getResorts } from "@/lib/data/activities";
 import { parseBrowseParams } from "@/lib/explore/browseParams";
 import {
@@ -12,9 +15,12 @@ import {
   buildFilterImpact,
 } from "@/lib/explore/filterImpact";
 import {
+  activitySourceSummary,
   activityEventJsonLd,
   activityListJsonLd,
+  formatSeoDate,
 } from "@/lib/seo/activityPage";
+import { canonicalPolicyForParams } from "@/lib/seo/canonicalPolicy";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import {
@@ -41,27 +47,22 @@ const STRATEGIC_TODAY_FILTER_METADATA: Record<string, typeof DEFAULT_TODAY_METAD
   },
 };
 
-function strategicTodayFilterKey(params: Record<string, string | undefined>): string | undefined {
-  const keys = Object.keys(params).filter((key) => params[key]);
-  if (keys.length !== 1) return undefined;
-  const key = keys[0];
-  return `${key}=${params[key]}`;
-}
-
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | undefined>>;
 }): Promise<Metadata> {
   const params = await searchParams;
+  const canonicalPolicy = canonicalPolicyForParams("/today", params);
   const pageMetadata =
-    STRATEGIC_TODAY_FILTER_METADATA[strategicTodayFilterKey(params) ?? ""] ??
+    STRATEGIC_TODAY_FILTER_METADATA[canonicalPolicy.strategicFilterKey ?? ""] ??
     DEFAULT_TODAY_METADATA;
 
   return {
     title: pageMetadata.title,
     description: pageMetadata.description,
-    alternates: { canonical: pageMetadata.canonical },
+    robots: { index: canonicalPolicy.index, follow: true },
+    alternates: { canonical: canonicalPolicy.canonical },
     ...buildSocialMetadata({
       title: pageMetadata.title,
       description: pageMetadata.description,
@@ -109,6 +110,7 @@ export default async function TodayPage({
     filters,
     resortOptions
   );
+  const sourceSummary = activitySourceSummary(activities);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const jsonLd = stringifyJsonLd([
     activityListJsonLd(baseUrl, "Walt Disney World resort activities today", activities),
@@ -125,6 +127,29 @@ export default async function TodayPage({
         title="Today at Disney World Resorts"
         subtitle="Activities still available today, sorted by start time."
         compactBrowse
+      />
+      <AnswerBlock
+        eyebrow="Today"
+        title="What can you still do today?"
+        primaryAction={{ label: "Browse today's activities", href: "/today" }}
+        secondaryActions={[{ label: "Indoor today", href: "/today?weather=indoor" }]}
+      >
+        Today&apos;s page shows currently listed Disney resort activities with
+        resort, time, cost, category, and weather-aware filters. Confirm the
+        final time and location with the resort before leaving.
+      </AnswerBlock>
+      <FreshnessFacts
+        lastVerified={formatSeoDate(sourceSummary.latestVerified)}
+        activityCount={sourceSummary.activityCount}
+        sourceCount={sourceSummary.sourceCount}
+      />
+      <IntentLinkCluster
+        title="Useful today shortcuts"
+        links={[
+          { label: "Tonight", href: "/tonight", description: "Evening activities after the parks." },
+          { label: "Free activities", href: "/activities?free=true", description: "Current free options." },
+          { label: "Choose a resort", href: "/resorts", description: "Filter around where you are staying." },
+        ]}
       />
       <PlanClientBoundary>
         <Suspense fallback={<ActivityGridSkeleton columns={2} />}>

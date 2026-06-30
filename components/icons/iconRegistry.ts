@@ -5,7 +5,6 @@ export type { IconKey, IconRegistryEntry };
 type SearchKind =
   | "activity"
   | "resort"
-  | "guide"
   | "category"
   | "page"
   | "movie"
@@ -58,7 +57,6 @@ export const BROWSE_DAY_TABS = [
 export const SEARCH_KIND_ICON_KEYS: Record<SearchKind, IconKey> = {
   activity: "search_activity",
   resort: "search_resort",
-  guide: "search_guide",
   category: "search_category",
   page: "search_page",
   movie: "search_movie",

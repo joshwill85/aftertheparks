@@ -9,11 +9,11 @@ import {
 
 const cleanAudit = auditTransportationPolicyRecords([
   {
-    path: "app/guides/things-to-do-without-park-ticket/page.tsx",
+    path: "app/resorts?no_ticket_friendly=true/page.tsx",
     text: "Do not use Disney Springs as a free way to get to Disney resort hotels. Use a resort stay, restaurant reservation, dining reservation, or confirmed dining/experience reservation instead.",
   },
   {
-    path: "app/guides/disney-springs-area-resort-activities/page.tsx",
+    path: "app/activities?area=disney-springs/page.tsx",
     text: "Disney Springs-area resort plans should rely on a resort stay, confirmed dining/experience reservation, rideshare, or another currently allowed route.",
   },
 ]);
@@ -27,7 +27,7 @@ assert.ok(
 
 const badFreeTransferAudit = auditTransportationPolicyRecords([
   {
-    path: "app/guides/bad-copy/page.tsx",
+    path: "app/legacy-bad-copy/page.tsx",
     text: "Use Disney Springs buses as a free way to get to Disney resort hotels for resort hopping without paying for parking.",
   },
 ]);
@@ -39,7 +39,7 @@ assert.ok(
 
 const missingReservationAudit = auditTransportationPolicyRecords([
   {
-    path: "app/guides/disney-springs-area-resort-activities/page.tsx",
+    path: "app/activities?area=disney-springs/page.tsx",
     text: "Disney Springs buses and boats can reach nearby resort hotels, but access rules may vary.",
   },
 ]);

@@ -15,7 +15,6 @@ import {
   filterOfficialOfferingsWithoutActivityCollisions,
 } from "@/lib/data/officialOfferings";
 import { loadGoldPreviewOccurrences } from "@/lib/data/goldActivities";
-import { GUIDES } from "@/lib/guides";
 import { formatResortArea } from "@/lib/resorts/display";
 import { DOMAIN_ALIASES } from "@/lib/search/domainAliases";
 import { PAGE_HITS } from "@/lib/search/synonyms";
@@ -472,19 +471,6 @@ export async function buildSearchDocuments(
     ...offerings.map(offeringDocument),
     ...resorts.map(resortDocument),
     ...movies.map(movieDocument),
-    ...GUIDES.map((guide) => ({
-      id: `guide:${guide.slug}`,
-      objectID: `guide:${guide.slug}`,
-      kind: "guide" as const,
-      title: guide.title,
-      titleSort: normalizeTitleSort(guide.title),
-      subtitle: "Planning guide",
-      description: guide.description,
-      href: guide.href,
-      aliases: uniqueStrings(guide.keywords),
-      keywords: uniqueStrings([guide.title, guide.description, ...guide.keywords]),
-      sourceId: `guide:${guide.slug}`,
-    })),
     ...Object.entries(CATEGORY_META).map(([category, meta]) => ({
       id: `category:${category}`,
       objectID: `category:${category}`,

@@ -37,6 +37,8 @@ DEFAULT_PREVIEW_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
 DEFAULT_MONITORING_REPORT_PATH = PROCESSED_DIR / "source_trust_monitoring_report.json"
+DEFAULT_REVIEW_QUEUE_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_queue.json"
+DEFAULT_REVIEW_QUEUE_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_review_queue_report.json"
 CRITICAL_FIELD_EVIDENCE = ("title", "schedule", "location", "fee")
 MOVIE_CRITICAL_FIELD_EVIDENCE = ("movie_title",)
 RAW_VALUE_MATCH_FIELDS = {"title", "schedule", "location", "movie_title"}
@@ -169,6 +171,10 @@ def _schedule_normalized_ok(schedule: Any) -> bool:
         return False
     if schedule.get("schedule_type") == "phrase":
         return bool(schedule.get("raw_text"))
+    if schedule.get("schedule_type") == "time_range":
+        return bool(schedule.get("raw_text") and schedule.get("start_time") and schedule.get("end_time"))
+    if schedule.get("schedule_type") == "time_point":
+        return bool(schedule.get("raw_text") and schedule.get("start_time"))
     return bool(schedule.get("days_of_week") and (schedule.get("start_time") or schedule.get("raw_text")))
 
 
@@ -342,6 +348,10 @@ def _engine_text_agreement_ok(
 ) -> bool:
     if field_name == "schedule" and _schedule_uses_composed_fragment_evidence(field_evidence, required_engine_names):
         return True
+    if field_name == "location" and _location_uses_inferred_title_evidence(field_evidence):
+        return True
+    if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(field_evidence):
+        return True
     agreement = _engine_text_agreement(field_name, field_evidence, required_engine_names)
     if agreement is None:
         return False
@@ -366,11 +376,10 @@ def _engine_text_agreement(
 def _schedule_signature(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         return {}
-    return {
-        key: value[key]
-        for key in ("schedule_type", "days_of_week", "start_time", "end_time", "phrase", "timezone")
-        if key in value
-    }
+    keys = ["schedule_type", "days_of_week", "start_time", "end_time", "phrase", "timezone"]
+    if value.get("schedule_type") in {"time_range", "time_point"}:
+        keys.append("raw_text")
+    return {key: value[key] for key in keys if key in value}
 
 
 def _field_values_match(field_name: str, left: Any, right: Any) -> bool:
@@ -407,6 +416,18 @@ def _engine_text_value_matches_row(
             field_evidence.get("normalized_value"),
             _row_normalized_value(row, field_name),
         )
+    if field_name == "location" and _location_uses_inferred_title_evidence(field_evidence):
+        return _field_values_match(
+            field_name,
+            field_evidence.get("normalized_value"),
+            _row_normalized_value(row, field_name),
+        )
+    if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(field_evidence):
+        return _field_values_match(
+            field_name,
+            field_evidence.get("normalized_value"),
+            _row_normalized_value(row, field_name),
+        )
     agreement = _engine_text_agreement(field_name, field_evidence, _required_ocr_engine_names(row))
     if agreement is None or agreement.get("agreement") != "exact_after_normalization":
         return False
@@ -428,6 +449,23 @@ def _schedule_uses_composed_fragment_evidence(
         return False
     raw_value = str(field_evidence.get("raw_value") or "")
     return bool(DAY_RE.search(raw_value)) and all(not DAY_RE.search(text) for text in engine_texts)
+
+
+def _location_uses_inferred_title_evidence(field_evidence: dict[str, Any]) -> bool:
+    return (
+        field_evidence.get("inferred_location_from_title") is True
+        and str(field_evidence.get("agreement") or "") == "exact_after_normalization"
+        and _has_field_value(field_evidence.get("normalized_value"))
+    )
+
+
+def _movie_title_recovered_from_secondary_ocr(field_evidence: dict[str, Any]) -> bool:
+    return (
+        field_evidence.get("recovered_from_secondary_ocr") is True
+        and str(field_evidence.get("agreement") or "") == "exact_after_normalization"
+        and _has_field_value(field_evidence.get("raw_value"))
+        and _has_field_value(field_evidence.get("normalized_value"))
+    )
 
 
 def _normalized_values_match(left: Any, right: Any) -> bool:
@@ -629,8 +667,33 @@ def _dual_run_preview_fingerprint(preview: dict[str, Any]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def _dual_run_scoped_preview(dual_run_report: dict[str, Any], preview: dict[str, Any]) -> dict[str, Any]:
+    source_coverage = dual_run_report.get("source_coverage")
+    expected_hashes = (
+        source_coverage.get("expected_source_hashes")
+        if isinstance(source_coverage, dict)
+        else None
+    )
+    if not isinstance(expected_hashes, list):
+        return preview
+    scoped_hashes = {str(source_hash).strip() for source_hash in expected_hashes if str(source_hash).strip()}
+    if not scoped_hashes:
+        return preview
+    rows = preview.get("rows") if isinstance(preview.get("rows"), list) else []
+    scoped = dict(preview)
+    scoped["rows"] = [
+        row
+        for row in rows
+        if isinstance(row, dict) and _preview_row_source_hash(row) in scoped_hashes
+    ]
+    return scoped
+
+
 def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    scoped_preview = _dual_run_scoped_preview(dual_run_report, preview)
+    if len(scoped_preview.get("rows") or []) != len(preview.get("rows") or []):
+        errors.append("dual_run_preview_has_unscoped_sources")
     generated_at = _parse_iso_datetime(dual_run_report.get("generated_at"))
     preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
     if generated_at is None:
@@ -647,19 +710,19 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
 
     if "v3_count" not in dual_run_report:
         errors.append("dual_run_missing_v3_count")
-    elif _int_value(dual_run_report.get("v3_count")) != len(preview.get("rows") or []):
+    elif _int_value(dual_run_report.get("v3_count")) != len(scoped_preview.get("rows") or []):
         errors.append("dual_run_preview_row_count_mismatch")
 
     report_hashes = dual_run_report.get("v3_source_hashes")
     if not isinstance(report_hashes, list) or not [hash_value for hash_value in report_hashes if str(hash_value).strip()]:
         errors.append("dual_run_missing_v3_source_hashes")
-    elif sorted({str(hash_value).strip() for hash_value in report_hashes if str(hash_value).strip()}) != _preview_source_hashes(preview):
+    elif sorted({str(hash_value).strip() for hash_value in report_hashes if str(hash_value).strip()}) != _preview_source_hashes(scoped_preview):
         errors.append("dual_run_preview_source_hash_mismatch")
 
     report_fingerprint = str(dual_run_report.get("v3_preview_fingerprint") or "").strip()
     if not report_fingerprint:
         errors.append("dual_run_missing_preview_fingerprint")
-    elif report_fingerprint != _dual_run_preview_fingerprint(preview):
+    elif report_fingerprint != _dual_run_preview_fingerprint(scoped_preview):
         errors.append("dual_run_preview_fingerprint_mismatch")
 
     source_coverage = dual_run_report.get("source_coverage")
@@ -689,6 +752,39 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
         values = source_coverage.get(field_name)
         if isinstance(values, list) and values:
             errors.append(error_name)
+    return errors
+
+
+def _review_queue_errors(review_tasks: list[dict[str, Any]] | None) -> tuple[list[str], int]:
+    if review_tasks is None:
+        return ["missing_review_queue"], 0
+    pending_count = sum(1 for task in review_tasks if str(task.get("status") or "pending") == "pending")
+    if pending_count:
+        return ["pending_review_queue_tasks"], pending_count
+    return [], 0
+
+
+def _review_queue_report_errors(
+    review_tasks: list[dict[str, Any]] | None,
+    review_queue_report: dict[str, Any] | None,
+) -> list[str]:
+    if review_tasks is None:
+        return []
+    if review_queue_report is None:
+        return ["missing_review_queue_report"]
+    errors: list[str] = []
+    if review_queue_report.get("report_kind") != "review_queue_v3_report":
+        errors.append("invalid_review_queue_report_kind")
+    summary = review_queue_report.get("summary")
+    if not isinstance(summary, dict):
+        errors.append("review_queue_report_summary_missing")
+        return errors
+    if _int_value(summary.get("task_count")) != len(review_tasks):
+        errors.append("review_queue_report_task_count_mismatch")
+    if _int_value(summary.get("visual_artifact_missing_count")):
+        errors.append("review_queue_report_missing_visual_artifacts")
+    if summary.get("all_tasks_have_visual_artifacts") is not True:
+        errors.append("review_queue_report_visual_artifact_coverage_incomplete")
     return errors
 
 
@@ -1364,8 +1460,12 @@ def evaluate_publish_readiness(
     require_source_drift_report: bool = False,
     monitoring_report: dict[str, Any] | None = None,
     require_monitoring_report: bool = False,
+    review_tasks: list[dict[str, Any]] | None = None,
+    review_queue_report: dict[str, Any] | None = None,
+    require_review_queue: bool = False,
 ) -> dict[str, Any]:
     errors: list[str] = []
+    pending_review_task_count = 0
     publish_v3_enabled = flags.get("public_gold_source") == "v3" and flags.get("v3_publish_enabled") is True
     if not publish_v3_enabled:
         errors.append("v3_publish_disabled")
@@ -1511,6 +1611,15 @@ def evaluate_publish_readiness(
                 field_name in RAW_VALUE_MATCH_FIELDS
                 and not isinstance(approved_field, dict)
                 and _has_field_value(field_evidence.get("raw_value"))
+                and not (
+                    field_name == "location"
+                    and _location_uses_inferred_title_evidence(field_evidence)
+                    and _field_values_match(
+                        field_name,
+                        field_evidence.get("normalized_value"),
+                        _row_normalized_value(row, field_name),
+                    )
+                )
                 and not _field_raw_values_match(field_name, field_evidence.get("raw_value"), _row_raw_value(row, field_name))
             ):
                 errors.append(f"row_critical_field_raw_value_mismatch:{index}:{field_name}")
@@ -1579,11 +1688,17 @@ def evaluate_publish_readiness(
             errors.append("missing_monitoring_report")
         else:
             errors.extend(_monitoring_report_errors(monitoring_report, preview))
+    if require_review_queue:
+        review_errors, pending_review_task_count = _review_queue_errors(review_tasks)
+        review_errors.extend(_review_queue_report_errors(review_tasks, review_queue_report))
+        if publish_v3_enabled:
+            errors.extend(review_errors)
     return {
         "ready": not errors,
         "errors": errors,
         "row_count": len(rows),
         "mode": flags.get("public_gold_source"),
+        "pending_review_task_count": pending_review_task_count,
     }
 
 
@@ -1595,6 +1710,8 @@ def main() -> None:
     parser.add_argument("--dual-run-report", type=Path, default=DEFAULT_DUAL_RUN_REPORT_PATH)
     parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
     parser.add_argument("--monitoring-report", type=Path, default=DEFAULT_MONITORING_REPORT_PATH)
+    parser.add_argument("--review-queue", type=Path, default=DEFAULT_REVIEW_QUEUE_PATH)
+    parser.add_argument("--review-queue-report", type=Path, default=DEFAULT_REVIEW_QUEUE_REPORT_PATH)
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--publish", action="store_true", help="Write ready v3 preview rows to public Gold tables")
     args = parser.parse_args()
@@ -1612,6 +1729,12 @@ def main() -> None:
     monitoring_report = (
         json.loads(args.monitoring_report.read_text()) if args.monitoring_report.exists() else None
     )
+    review_tasks_payload = json.loads(args.review_queue.read_text()) if args.review_queue.exists() else None
+    review_tasks = review_tasks_payload if isinstance(review_tasks_payload, list) else None
+    review_queue_report_payload = (
+        json.loads(args.review_queue_report.read_text()) if args.review_queue_report.exists() else None
+    )
+    review_queue_report = review_queue_report_payload if isinstance(review_queue_report_payload, dict) else None
     readiness = evaluate_publish_readiness(
         preview,
         flags=load_publish_flags(args.flags),
@@ -1621,6 +1744,9 @@ def main() -> None:
         require_source_drift_report=True,
         monitoring_report=monitoring_report,
         require_monitoring_report=True,
+        review_tasks=review_tasks,
+        review_queue_report=review_queue_report,
+        require_review_queue=True,
     )
     if args.json:
         print(json.dumps(readiness, indent=2, sort_keys=True))

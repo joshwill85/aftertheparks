@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 
 import { mapGoldActivityRowToOccurrences, type GoldActivityRow } from "@/lib/data/goldActivities";
 import { getDisplayTime } from "@/lib/activityDisplay";
+import { computeDisplayQuality } from "@/lib/displayQuality";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
@@ -60,6 +61,27 @@ assert.deepEqual(
   getDisplayTime({ category: "other", scheduleText: "Daily from Dawn to Dusk" }),
   { label: "Dawn to dusk", uncertain: false },
   "Dawn-to-dusk schedules should render as an intuitive public timing label."
+);
+
+assert.deepEqual(
+  getDisplayTime({
+    category: "fitness_wellness",
+    startDateTime: "2026-06-28T10:30:00-04:00",
+    endDateTime: "2026-06-28T10:15:00-04:00",
+  }),
+  { label: "Time needs confirmation", uncertain: true },
+  "End-before-start exact ranges should not render as impossible public times."
+);
+
+const impossibleRangeQuality = computeDisplayQuality({
+  category: "fitness_wellness",
+  title: "Storytime Yoga",
+  startDateTime: "2026-06-28T10:30:00-04:00",
+  endDateTime: "2026-06-28T10:15:00-04:00",
+});
+assert.ok(
+  impossibleRangeQuality.flags.includes("invalid_time_range"),
+  "End-before-start ranges should be flagged for display-quality gating."
 );
 
 const movieDisplay = toDisplayActivity(

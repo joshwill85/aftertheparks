@@ -926,7 +926,7 @@ assert.match(
 
 assert.match(
   filterRail,
-  /Reservations/,
+  /Reservation required/,
   "Explore filters must expose reservation filtering in the UI"
 );
 
@@ -938,12 +938,12 @@ assert.match(
 );
 assert.match(
   calendarClient,
-  /Filter by resort/,
+  /resortFilter[\s\S]*<span>Resort<\/span>/,
   "Calendar must let users filter visible events by resort"
 );
 assert.match(
   calendarClient,
-  /Filter by category/,
+  /categoryFilter[\s\S]*<span>Category<\/span>/,
   "Calendar must let users filter visible events by category"
 );
 

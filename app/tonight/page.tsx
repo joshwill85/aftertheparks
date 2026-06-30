@@ -6,6 +6,9 @@ import { ActivityGridSkeleton } from "@/components/atlas/Skeleton";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
 import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
+import { AnswerBlock } from "@/components/seo/AnswerBlock";
+import { FreshnessFacts } from "@/components/seo/FreshnessFacts";
+import { IntentLinkCluster } from "@/components/seo/IntentLinkCluster";
 import {
   getTonightActivities,
   getMovieNights,
@@ -18,9 +21,12 @@ import {
 } from "@/lib/explore/browseParams";
 import { buildFilterImpact } from "@/lib/explore/filterImpact";
 import {
+  activitySourceSummary,
   activityEventJsonLd,
   activityListJsonLd,
+  formatSeoDate,
 } from "@/lib/seo/activityPage";
+import { canonicalPolicyForParams } from "@/lib/seo/canonicalPolicy";
 import { stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 import {
@@ -57,13 +63,6 @@ const STRATEGIC_TONIGHT_FILTER_METADATA: Record<string, typeof DEFAULT_TONIGHT_M
   },
 };
 
-function strategicTonightFilterKey(params: Record<string, string | undefined>): string | undefined {
-  const keys = Object.keys(params).filter((key) => params[key]);
-  if (keys.length !== 1) return undefined;
-  const key = keys[0];
-  return `${key}=${params[key]}`;
-}
-
 function orlandoDateKey(date: Date): string {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: WEATHER_TIMEZONE,
@@ -89,14 +88,16 @@ export async function generateMetadata({
   searchParams: Promise<Record<string, string | undefined>>;
 }): Promise<Metadata> {
   const params = await searchParams;
+  const canonicalPolicy = canonicalPolicyForParams("/tonight", params);
   const pageMetadata =
-    STRATEGIC_TONIGHT_FILTER_METADATA[strategicTonightFilterKey(params) ?? ""] ??
+    STRATEGIC_TONIGHT_FILTER_METADATA[canonicalPolicy.strategicFilterKey ?? ""] ??
     DEFAULT_TONIGHT_METADATA;
 
   return {
     title: pageMetadata.title,
     description: pageMetadata.description,
-    alternates: { canonical: pageMetadata.canonical },
+    robots: { index: canonicalPolicy.index, follow: true },
+    alternates: { canonical: canonicalPolicy.canonical },
     ...buildSocialMetadata({
       title: pageMetadata.title,
       description: pageMetadata.description,
@@ -150,6 +151,7 @@ export default async function TonightPage({
     activities: visibleActivities,
     movieNights: filteredMovies,
   });
+  const sourceSummary = activitySourceSummary(visibleActivities);
   const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
   const filterImpact = buildFilterImpact(
     getVisibleTonightFilterItems({
@@ -175,6 +177,29 @@ export default async function TonightPage({
         title="Tonight at Disney World Resorts"
         subtitle="Low-effort movies, campfires, games, and activities after the parks."
         compactBrowse
+      />
+      <AnswerBlock
+        eyebrow="Tonight"
+        title="Find an evening plan that still makes sense"
+        primaryAction={{ label: "See tonight's options", href: "/tonight" }}
+        secondaryActions={[{ label: "Indoor tonight", href: "/tonight?weather=indoor" }]}
+      >
+        Tonight&apos;s page focuses on current evening resort activities,
+        including movies, campfires, games, crafts, and indoor backups. Outdoor
+        plans can change for weather or operations, so confirm before heading out.
+      </AnswerBlock>
+      <FreshnessFacts
+        lastVerified={formatSeoDate(sourceSummary.latestVerified)}
+        activityCount={resultCount}
+        sourceCount={sourceSummary.sourceCount}
+      />
+      <IntentLinkCluster
+        title="Evening shortcuts"
+        links={[
+          { label: "Movies", href: "/activities/movies-under-the-stars", description: "Current Movies Under the Stars details." },
+          { label: "Campfires", href: "/activities/campfire", description: "Evening campfire listings and caveats." },
+          { label: "Today", href: "/today", description: "Earlier activities and tomorrow preview." },
+        ]}
       />
       <div className="mb-6 flex justify-center">
         <BrandAsset asset="dark-lockup" className="brand-asset--night-feature" />

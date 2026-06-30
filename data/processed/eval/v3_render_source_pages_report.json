@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T00:08:48.950066+00:00",
+  "generated_at": "2026-06-30T08:52:14.188312+00:00",
   "group": null,
   "output_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images",
   "quarter": "fy26-q3",
@@ -594,6 +594,48 @@
       "status": "rendered"
     },
     {
+      "calendar_group_key": "pop-century",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+      "captured_at": "2026-06-30T00:07:31.270292+00:00",
+      "currentness": "current",
+      "edition": "official-schedule-0526",
+      "error": null,
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+      "http_status": 200,
+      "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_manifest.json",
+      "mime_type": "image/jpeg",
+      "page_count": 1,
+      "source_document_id": "7b91d036408dbcfe799340e73c5d91ebb9318f13a0d4841071ad674665bf4d2d",
+      "source_document_page_count": 1,
+      "source_document_pages": [
+        {
+          "canonical_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "canonical_image_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "height_px": 11580,
+          "image_orientation": 1,
+          "image_quality": {
+            "thumbnail_sha256": "83e919f020d3f156f888a6118bd98eac86f55ee656799bbb1827da700cbe28d9",
+            "thumbnail_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.thumb.png"
+          },
+          "page_kind": "image_file",
+          "page_number": 1,
+          "render_dpi": null,
+          "render_engine": "Pillow",
+          "render_engine_version": "11.3.0",
+          "render_scale": null,
+          "source_document_id": "7b91d036408dbcfe799340e73c5d91ebb9318f13a0d4841071ad674665bf4d2d",
+          "width_px": 1200
+        }
+      ],
+      "source_kind": "official_image",
+      "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/pop-century/official-schedule-0526/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5.jpg",
+      "source_role": "resort_pdf",
+      "source_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+      "source_type": "image",
+      "status": "rendered"
+    },
+    {
       "calendar_group_key": "port-orleans-french-quarter",
       "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
       "captured_at": "2026-06-30T00:07:31.292404+00:00",
@@ -633,6 +675,48 @@
       "source_role": "resort_pdf",
       "source_sha256": "cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf",
       "source_type": "pdf",
+      "status": "rendered"
+    },
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "captured_at": "2026-06-30T00:07:31.301331+00:00",
+      "currentness": "current",
+      "edition": "official-schedule-0526",
+      "error": null,
+      "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "http_status": 200,
+      "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_manifest.json",
+      "mime_type": "image/jpeg",
+      "page_count": 1,
+      "source_document_id": "0b05025643c17f9d2e14ae8e28ed6100e160e5f6ed8c4cec2cde7d6a982ed6b9",
+      "source_document_page_count": 1,
+      "source_document_pages": [
+        {
+          "canonical_image_sha256": "cf7243a23398ae0c605b00d5233dc2e4efb3a030f98cce96dc526622fb884dd6",
+          "canonical_image_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.png",
+          "content_sha256": "ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995",
+          "height_px": 12048,
+          "image_orientation": 1,
+          "image_quality": {
+            "thumbnail_sha256": "ebd372cf5d6a3f5c921c658a3e1a3a986226bfd64f86630d118d1ff57ae5f390",
+            "thumbnail_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_001.thumb.png"
+          },
+          "page_kind": "image_file",
+          "page_number": 1,
+          "render_dpi": null,
+          "render_engine": "Pillow",
+          "render_engine_version": "11.3.0",
+          "render_scale": null,
+          "source_document_id": "0b05025643c17f9d2e14ae8e28ed6100e160e5f6ed8c4cec2cde7d6a982ed6b9",
+          "width_px": 1200
+        }
+      ],
+      "source_kind": "official_image",
+      "source_path": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents/port-orleans-riverside/official-schedule-0526/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995.jpg",
+      "source_role": "resort_pdf",
+      "source_sha256": "ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995",
+      "source_type": "image",
       "status": "rendered"
     },
     {
@@ -764,9 +848,9 @@
   ],
   "source_documents_dir": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents",
   "summary": {
-    "rendered_count": 18,
-    "source_count": 18,
-    "source_document_page_count": 18,
+    "rendered_count": 20,
+    "source_count": 20,
+    "source_document_page_count": 20,
     "source_error_count": 0
   }
 }

@@ -29,10 +29,28 @@ export function ResortEmptyState({ resort }: { resort: ResortSummary }) {
           </a>
         )}
         <Link
-          href="/tonight"
+          href={`/today?resort=${resort.slug}`}
           className="btn-secondary inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
         >
-          Browse tonight
+          Check today
+        </Link>
+        <Link
+          href={`/tonight?resort=${resort.slug}`}
+          className="btn-secondary inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
+        >
+          Check tonight
+        </Link>
+        <Link
+          href={`/activities?resort=${resort.slug}`}
+          className="btn-secondary inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
+        >
+          See all activities
+        </Link>
+        <Link
+          href={`/activities?weather=indoor&resort=${resort.slug}`}
+          className="btn-secondary inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
+        >
+          Find weather-fit backups
         </Link>
         <Link
           href="/corrections"

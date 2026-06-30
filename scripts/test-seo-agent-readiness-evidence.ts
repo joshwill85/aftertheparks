@@ -52,7 +52,7 @@ if (
   auditAgentReadinessEvidence &&
   renderAgentReadinessEvidenceReport
 ) {
-  const disneySpringsRoute = "/guides/things-to-do-without-park-ticket";
+  const disneySpringsRoute = "/resorts?no_ticket_friendly=true";
   const validRecords = AGENT_READINESS_CHECKS.map(({ check }) => ({
     checkedAt: "2026-06-27T17:00:00Z",
     route: disneySpringsRoute,
@@ -112,7 +112,7 @@ if (
     },
     {
       checkedAt: "2026-06-27T17:09:00Z",
-      route: "/guides/disney-springs-area-resort-activities",
+      route: "/activities?area=disney-springs",
       check: "accessibilityTree",
       tool: "Playwright accessibility snapshot",
       passed: true,

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ActivityOffering, ActivityOccurrence, MovieNightOccurrence, ResortSummary } from "@/lib/types/occurrence";
-import type { GuideEntry } from "@/lib/guides";
 import type { SearchHit } from "@/lib/search/types";
 import type { SearchFacet, SearchSuggestion } from "@/lib/search/schema";
 import { BrandAsset } from "@/components/brand/BrandAsset";
@@ -14,7 +13,6 @@ interface SearchPayload {
   activities: ActivityOccurrence[];
   officialOfferings: ActivityOffering[];
   resorts: ResortSummary[];
-  guides: GuideEntry[];
   movies: MovieNightOccurrence[];
   hits: SearchHit[];
   topHits: SearchHit[];
@@ -39,6 +37,19 @@ const DEFAULT_SUGGESTIONS = [
   "arcade",
   "rainy day",
   "free activities",
+];
+
+const RESULT_GROUPS: Array<{
+  id: string;
+  label: string;
+  kinds: SearchHit["kind"][];
+  limit: number;
+}> = [
+  { id: "activities", label: "Activities", kinds: ["activity", "offering"], limit: 12 },
+  { id: "resorts", label: "Resorts", kinds: ["resort"], limit: 8 },
+  { id: "movies", label: "Movies", kinds: ["movie"], limit: 8 },
+  { id: "categories", label: "Categories", kinds: ["category"], limit: 8 },
+  { id: "pages", label: "Pages", kinds: ["page"], limit: 8 },
 ];
 
 export function SearchClient({
@@ -69,7 +80,6 @@ export function SearchClient({
         activities: [],
         officialOfferings: [],
         resorts: [],
-        guides: [],
         movies: [],
         hits: [],
         topHits: [],
@@ -90,7 +100,6 @@ export function SearchClient({
       activities: data.activities ?? [],
       officialOfferings: data.officialOfferings ?? [],
       resorts: data.resorts ?? [],
-      guides: data.guides ?? [],
       movies: data.movies ?? [],
       hits: data.hits ?? [],
       topHits: data.topHits ?? [],
@@ -228,6 +237,13 @@ export function SearchClient({
       .filter((facet) => ["kind", "resortName", "categoryLabel", "priceState"].includes(facet.field))
       .flatMap((facet) => facet.values.slice(0, 4).map((value) => ({ facet, value })))
       .slice(0, 10) ?? [];
+  const groupedHits = RESULT_GROUPS.map((group) => ({
+    ...group,
+    hits: visibleHits
+      .filter((hit) => group.kinds.includes(hit.kind))
+      .slice(0, group.limit),
+  })).filter((group) => group.hits.length > 0);
+  const shorterQuery = q.trim().split(/\s+/).slice(0, -1).join(" ");
 
   return (
     <div className="search-shell">
@@ -330,18 +346,21 @@ export function SearchClient({
       </div>
 
       {!q && (
-        <div className="search-empty-intro">
+        <div className="search-empty-intro" aria-labelledby="search-empty-heading">
           <BrandAsset asset="guide-companion" className="brand-asset--empty" />
+          <h2 id="search-empty-heading" className="search-empty-intro__title">
+            Search by what you need
+          </h2>
           <p>
-            Search by what you need, such as free activities tonight, rainy day
-            at BoardWalk, or campfire near Magic Kingdom resorts.
+            Start with a resort, activity type, movie title, weather need, or
+            cost filter.
           </p>
         </div>
       )}
 
       {loading && q && (
         <p className="search-status" aria-live="polite">
-          Searching across activities, resorts, movies, and guides…
+          Searching across activities, resorts, and movies…
         </p>
       )}
 
@@ -356,11 +375,21 @@ export function SearchClient({
           </p>
           <div className="search-no-results__actions">
             <Link href="/activities" className="btn-secondary text-sm">
-              Explore activities
+              Browse activities
             </Link>
             <Link href="/resorts" className="btn-secondary text-sm">
               Browse resorts
             </Link>
+            <Link href="/tonight" className="btn-secondary text-sm">
+              {"See tonight's options"}
+            </Link>
+            <button
+              type="button"
+              className="btn-secondary text-sm"
+              onClick={() => runSearch(shorterQuery)}
+            >
+              Try shorter search
+            </button>
           </div>
         </div>
       )}
@@ -389,11 +418,30 @@ export function SearchClient({
                   ))}
                 </div>
               )}
-              <div className="search-hit-list">
-                {visibleHits.map((hit) => (
-                  <SearchHitRow key={hit.id} hit={hit} />
-                ))}
-              </div>
+              {groupedHits.map((group) => (
+                <section
+                  key={group.id}
+                  className="search-result-group"
+                  aria-labelledby={`search-${group.id}-heading`}
+                >
+                  <div className="search-section__header">
+                    <h3
+                      id={`search-${group.id}-heading`}
+                      className="search-section__title search-section__title--subtle"
+                    >
+                      {group.label}
+                    </h3>
+                    <p className="search-section__meta">
+                      {group.hits.length} {group.hits.length === 1 ? "match" : "matches"}
+                    </p>
+                  </div>
+                  <div className="search-hit-list">
+                    {group.hits.map((hit) => (
+                      <SearchHitRow key={hit.id} hit={hit} />
+                    ))}
+                  </div>
+                </section>
+              ))}
             </section>
           )}
         </div>

@@ -19,6 +19,13 @@ DEFAULT_EXPECTED_SOURCES_PATH = PROCESSED_DIR / "source_inventory.json"
 DEFAULT_SNAPSHOTS_PATH = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json"
 SOURCE_METADATA_FIELDS = (
+    "source_kind",
+    "source_role",
+    "canonical_url",
+    "fetched_url",
+    "http_status",
+    "currentness",
+    "captured_at",
     "source_type",
     "mime_type",
     "http_content_type",
@@ -87,7 +94,7 @@ def _edition(row: dict[str, Any]) -> str | None:
 def _filter_quarter(rows: list[dict[str, Any]], quarter: str | None) -> list[dict[str, Any]]:
     if not quarter:
         return rows
-    return [row for row in rows if edition_matches_quarter(_edition(row), quarter)]
+    return [row for row in rows if not _edition(row) or edition_matches_quarter(_edition(row), quarter)]
 
 
 def _json_objects(path: Path) -> list[dict[str, Any]]:
@@ -123,7 +130,6 @@ def build_v3_source_statuses(
     quarter: str | None = None,
 ) -> list[dict[str, Any]]:
     expected_sources = _filter_quarter(expected_sources, quarter)
-    snapshots = _filter_quarter(snapshots, quarter)
     snapshots_by_hash: dict[str, list[dict[str, Any]]] = {}
     for snapshot in snapshots:
         snapshot_hash = _source_hash(snapshot)

@@ -39,7 +39,8 @@ function booleanField(record: AiVisibilityEvidenceRecord, field: string): boolea
 function canonicalFromObservedUrl(url: string): string {
   if (!url) return "";
   try {
-    return new URL(url).pathname || "/";
+    const parsed = new URL(url);
+    return `${parsed.pathname || "/"}${parsed.search}`;
   } catch {
     return url.startsWith("/") ? url : "";
   }

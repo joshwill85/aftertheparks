@@ -71,8 +71,8 @@ def _region_specs(document_family: str, width: int, height: int) -> list[tuple[s
             ("header", _bbox(width, height, 0.00, 0.00, 1.00, 0.13)),
             ("qr_callout", _bbox(width, height, 0.00, 0.13, 0.36, 0.31)),
             ("wellness_section", _bbox(width, height, 0.00, 0.30, 0.50, 0.55)),
-            ("resort_activities_section", _bbox(width, height, 0.48, 0.13, 1.00, 0.72)),
-            ("movie_section", _bbox(width, height, 0.48, 0.72, 1.00, 0.96)),
+            ("resort_activities_section", _bbox(width, height, 0.48, 0.13, 1.00, 0.96)),
+            ("movie_section", _bbox(width, height, 0.00, 0.55, 0.50, 0.96)),
             ("footer", _bbox(width, height, 0.00, 0.96, 1.00, 1.00)),
         ]
     if document_family == "vertical_digital_rec_sign":

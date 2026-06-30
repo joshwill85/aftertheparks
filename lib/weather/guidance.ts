@@ -248,6 +248,58 @@ export type WeatherActionGuidance =
   | "stay_inside"
   | "official_alert";
 
+export type WeatherDecisionLabel =
+  | "Good for outdoor plans"
+  | "Use indoor backups first"
+  | "Heat caution"
+  | "Storm risk"
+  | "Rain nearby"
+  | "Transportation-sensitive weather";
+
+export const WEATHER_DECISION_LABELS = {
+  goodForOutdoorPlans: "Good for outdoor plans",
+  useIndoorBackupsFirst: "Use indoor backups first",
+  heatCaution: "Heat caution",
+  stormRisk: "Storm risk",
+  rainNearby: "Rain nearby",
+  transportationSensitiveWeather: "Transportation-sensitive weather",
+} as const satisfies Record<string, WeatherDecisionLabel>;
+
+export function weatherDecisionLabelForGuidance(
+  weather?: Pick<WeatherForTimeSpan, "actionGuidance" | "nearTermRain" | "risk"> | null
+): WeatherDecisionLabel | undefined {
+  if (!weather) return undefined;
+  if (
+    weather.actionGuidance === "official_alert" ||
+    weather.actionGuidance === "stay_inside" ||
+    weather.risk.stormRisk === "high" ||
+    weather.nearTermRain?.answer === "storm_alert"
+  ) {
+    return WEATHER_DECISION_LABELS.stormRisk;
+  }
+  if (weather.risk.heatRisk !== "low") {
+    return WEATHER_DECISION_LABELS.heatCaution;
+  }
+  if (
+    weather.risk.windRisk !== "low" ||
+    weather.risk.boatCaution ||
+    weather.risk.skylinerCaution
+  ) {
+    return WEATHER_DECISION_LABELS.transportationSensitiveWeather;
+  }
+  if (
+    weather.nearTermRain?.answer === "likely" ||
+    weather.nearTermRain?.answer === "possible" ||
+    weather.risk.rainRisk !== "low"
+  ) {
+    return WEATHER_DECISION_LABELS.rainNearby;
+  }
+  if (weather.actionGuidance === "choose_covered_backup") {
+    return WEATHER_DECISION_LABELS.useIndoorBackupsFirst;
+  }
+  return WEATHER_DECISION_LABELS.goodForOutdoorPlans;
+}
+
 export interface WeatherGuidanceDecision {
   safetyLevel: "normal" | "caution" | "danger";
   decisionState: import("@/lib/weather/types").WeatherDecisionState;
@@ -391,8 +443,8 @@ export function getWeatherGuidance(input: {
       decisionState: "go",
       actionGuidance,
       visualState: "normal",
-      headline: "Outdoor plans OK",
-      recommendedAction: "Weather should work for this plan.",
+      headline: "Outdoor activities look reasonable right now",
+      recommendedAction: "Outdoor activities are reasonable right now. Keep checking for rain, lightning, heat, or wind.",
       affectedActivityTags: [],
     };
   }
@@ -452,8 +504,8 @@ function buildSummary(input: {
     }.`;
   }
   return input.conditionText
-    ? `${input.conditionText} should be manageable for most resort plans.`
-    : "Conditions should be manageable for most resort plans.";
+    ? `${input.conditionText} is reasonable right now. Keep checking for rain, lightning, heat, or wind.`
+    : "Outdoor activities are reasonable right now. Keep checking for rain, lightning, heat, or wind.";
 }
 
 function nearTermHours(input: {
@@ -574,7 +626,7 @@ export function buildNearTermRainSignal(input: {
     return {
       ...base,
       answer: "possible",
-      headline: "Rain possible in the next hour",
+      headline: "Rain may affect the next hour.",
       summary: "Keep the plan flexible and choose a nearby backup.",
       detail: "Hourly forecast · not radar-confirmed",
       source: "weatherapi_hourly",
@@ -595,7 +647,7 @@ export function buildNearTermRainSignal(input: {
     ...base,
     answer: "unlikely",
     headline: "Rain looks unlikely in the next hour",
-    summary: "Outdoor plans look workable, with the usual Florida flexibility.",
+    summary: "Rain looks unlikely in the next hour. This is forecast guidance, not live radar.",
     detail: "Hourly forecast · not radar-confirmed",
     source: "weatherapi_hourly",
     sourceLabel,

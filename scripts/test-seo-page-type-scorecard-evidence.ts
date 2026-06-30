@@ -17,7 +17,7 @@ const completeRecords = [
     ctr: 0.08,
     averagePosition: 8.4,
     sourceFreshnessStatus: "current",
-    topLinkedGuides: ["/guides/things-to-do-without-park-ticket"],
+    topLinkedGuides: ["/resorts?no_ticket_friendly=true"],
   },
   {
     checkedAt,

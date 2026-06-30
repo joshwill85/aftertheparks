@@ -1,14 +1,19 @@
 "use client";
 
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { usePlan } from "@/components/atlas/PlanProvider";
 import { BrandMark, BrandMotif } from "@/components/brand/BrandAsset";
-import { PlanPathConnector } from "@/components/plan/PlanTimeline";
+import { PlanMagicCheck } from "@/components/plan/PlanMagicCheck";
+import { PlanTransportEdge } from "@/components/plan/PlanTransportEdge";
 import { trackPlanEvent } from "@/lib/plan/analytics";
 import { ensureAnonymousSession } from "@/lib/plan/sync-client";
 import { executeTurnstile } from "@/lib/turnstile/browser";
 import { buildPlanDaybookPath } from "@/lib/plan/daybookPath";
+import {
+  itemPlanSection,
+  PLAN_SECTION_META,
+  PLAN_SECTION_ORDER,
+} from "@/lib/plan/sections";
 import { useTransportConnectionsForItems } from "@/lib/plan/useTransportConnections";
 import type { PublicPlanResponse } from "@/lib/plan/types";
 import type { PlanItem } from "@/lib/types/occurrence";
@@ -55,6 +60,30 @@ function publicItemToPlanItem(
   };
 }
 
+function dayTicketDateLabel(plan: PublicPlanResponse): string {
+  if (plan.tripStartDate && plan.tripEndDate) {
+    return plan.tripStartDate === plan.tripEndDate
+      ? plan.tripStartDate
+      : `${plan.tripStartDate} to ${plan.tripEndDate}`;
+  }
+  return plan.dates.map((group) => group.date).join(" · ");
+}
+
+function travelRiskLabel(items: PlanItem[]): string {
+  const resorts = new Set(items.map((item) => item.resortSlug).filter(Boolean));
+  if (resorts.size <= 1) return "Low";
+  if (resorts.size === 2) return "Confirm route";
+  return "Build in buffers";
+}
+
+function hasWeatherSensitiveItem(items: PlanItem[]): boolean {
+  return items.some((item) =>
+    ["campfire", "movies_under_stars", "poolside", "nighttime_entertainment"].includes(
+      item.category ?? ""
+    )
+  );
+}
+
 export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
   const { openPreview, refreshFromServer } = usePlan();
   const [plan, setPlan] = useState(initial);
@@ -70,6 +99,18 @@ export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
     [plan.dates]
   );
   const transportConnections = useTransportConnectionsForItems(publicPlanItems);
+  const dayTicket = useMemo(
+    () => ({
+      dateLabel: dayTicketDateLabel(plan),
+      activityCount: publicPlanItems.length,
+      resortCount: new Set(publicPlanItems.map((item) => item.resortSlug)).size,
+      travelRisk: travelRiskLabel(publicPlanItems),
+      weather: hasWeatherSensitiveItem(publicPlanItems)
+        ? "Keep an indoor backup nearby"
+        : "Check day-of conditions",
+    }),
+    [plan, publicPlanItems]
+  );
 
   const refreshPlan = useCallback(async () => {
     try {
@@ -173,28 +214,56 @@ export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
         </p>
       </div>
 
-      {plan.ownerSession ? (
-        <Link href="/plan" className="btn-primary inline-flex rounded-full px-5 py-2.5 text-sm font-bold text-white">
-          Edit my plan
-        </Link>
-      ) : (
-        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--color-sun-cream)] px-5 py-4 text-sm text-[var(--muted)]">
-          <p>
-            This is a view-only link. Copy these ideas into your own My Plan to
-            edit them on this device.
-          </p>
-        </div>
-      )}
+      <section
+        className="rounded-2xl border border-[var(--border-soft)] bg-[var(--color-sun-cream)] px-5 py-4"
+        aria-labelledby="resort-day-ticket-heading"
+      >
+        <p className="stamp-badge">Resort Day Ticket</p>
+        <h2 id="resort-day-ticket-heading" className="font-display mt-3 text-2xl font-semibold">
+          {plan.title}
+        </h2>
+        <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <dt className="font-bold text-[var(--brand-ink)]">Date</dt>
+            <dd className="text-[var(--muted)]">{dayTicket.dateLabel || "Date flexible"}</dd>
+          </div>
+          <div>
+            <dt className="font-bold text-[var(--brand-ink)]">Activities</dt>
+            <dd className="text-[var(--muted)]">
+              {dayTicket.activityCount} saved {dayTicket.activityCount === 1 ? "idea" : "ideas"}
+            </dd>
+          </div>
+          <div>
+            <dt className="font-bold text-[var(--brand-ink)]">Travel risk</dt>
+            <dd className="text-[var(--muted)]">{dayTicket.travelRisk}</dd>
+          </div>
+          <div>
+            <dt className="font-bold text-[var(--brand-ink)]">Weather</dt>
+            <dd className="text-[var(--muted)]">{dayTicket.weather}</dd>
+          </div>
+        </dl>
+        <p className="mt-4 text-sm text-[var(--muted)]">
+          This is a view-only link. Copy these ideas into your own My Plan to
+          edit them on this device.
+        </p>
+      </section>
+
+      <PlanMagicCheck items={publicPlanItems} readOnly />
 
       <div className="space-y-6">
         {plan.dates.map((group) => (
           <section key={group.date}>
             <h2 className="font-display mb-3 text-xl font-semibold">{group.date}</h2>
-            <ul className="space-y-3">
               {(() => {
                 const groupPlanItems = group.items.map((item, index) =>
                   publicItemToPlanItem(item, group.date, index)
                 );
+                const sectionGroups = PLAN_SECTION_ORDER.map((sectionKey) => ({
+                  sectionKey,
+                  items: groupPlanItems.filter(
+                    (item) => itemPlanSection(item) === sectionKey
+                  ),
+                })).filter((section) => section.items.length > 0);
                 const path = buildPlanDaybookPath(
                   groupPlanItems,
                   transportConnections
@@ -203,52 +272,89 @@ export function PublicPlanClient({ token, initial }: PublicPlanClientProps) {
                   path.stops.map((stop) => [stop.itemId, stop])
                 );
 
-                return group.items.map((item, idx) => {
-                  const connector = pathByItemId.get(
-                    publicItemId(group.date, idx, item.title)
-                  )?.connectorBefore;
+                return (
+                  <div className="space-y-4" aria-label={path.ariaLabel}>
+                    {sectionGroups.map(({ sectionKey, items }) => (
+                      <section key={sectionKey} className="space-y-3">
+                        <h3 className="font-display text-base font-semibold">
+                          {PLAN_SECTION_META[sectionKey].title}
+                        </h3>
+                        <ul className="space-y-3">
+                          {items.map((item) => {
+                            const connector = pathByItemId.get(item.id)?.connectorBefore;
 
-                  return (
-                    <Fragment key={`${group.date}-${idx}`}>
-                      {connector && <PlanPathConnector connector={connector} />}
-                      <li className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3">
-                        <p className="font-semibold">{item.title}</p>
-                        <p className="text-sm text-[var(--muted)]">{item.resortName}</p>
-                        {item.location && (
-                          <p className="text-xs text-[var(--muted)]">{item.location}</p>
-                        )}
-                        {item.startsAt && (
-                          <p className="mt-1 text-xs font-bold text-[var(--lagoon-deep)]">
-                            {new Date(item.startsAt).toLocaleTimeString("en-US", {
-                              hour: "numeric",
-                              minute: "2-digit",
-                              timeZone: plan.timezone,
-                            })}
-                          </p>
-                        )}
-                        {item.sourceStatus !== "current" && (
-                          <p
-                            className={cn(
-                              "mt-2 text-xs font-bold",
-                              item.sourceStatus === "changed"
-                                ? "text-[var(--color-coral)]"
-                                : "text-[var(--muted)]"
-                            )}
-                          >
-                            {item.sourceStatus === "changed"
-                              ? "Schedule changed since this was saved"
-                              : "May no longer be available"}
-                          </p>
-                        )}
-                      </li>
-                    </Fragment>
-                  );
-                });
+                            return (
+                              <Fragment key={item.id}>
+                                {connector && <PlanTransportEdge connector={connector} />}
+                                <li className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3">
+                                  <p className="font-semibold">{item.title}</p>
+                                  <p className="text-sm text-[var(--muted)]">{item.resortName}</p>
+                                  {item.location && (
+                                    <p className="text-xs text-[var(--muted)]">{item.location}</p>
+                                  )}
+                                  {item.startDateTime && (
+                                    <p className="mt-1 text-xs font-bold text-[var(--lagoon-deep)]">
+                                      {new Date(item.startDateTime).toLocaleTimeString("en-US", {
+                                        hour: "numeric",
+                                        minute: "2-digit",
+                                        timeZone: plan.timezone,
+                                      })}
+                                    </p>
+                                  )}
+                                  {item.sourceStatus !== "current" && (
+                                    <p
+                                      className={cn(
+                                        "mt-2 text-xs font-bold",
+                                        item.sourceStatus === "changed"
+                                          ? "text-[var(--color-coral)]"
+                                          : "text-[var(--muted)]"
+                                      )}
+                                    >
+                                      {item.sourceStatus === "changed"
+                                        ? "Schedule changed since this was saved"
+                                        : "May no longer be available"}
+                                    </p>
+                                  )}
+                                </li>
+                              </Fragment>
+                            );
+                          })}
+                        </ul>
+                      </section>
+                    ))}
+                  </div>
+                );
               })()}
-            </ul>
           </section>
         ))}
       </div>
+
+      <section className="rounded-2xl border border-[var(--border-soft)] bg-white/90 px-5 py-4">
+        <h2 className="font-display text-xl font-semibold">Transportation disclosures</h2>
+        <p className="mt-2 text-sm text-[var(--muted)]">
+          Transportation routes, operating hours, and resort access can change.
+          Confirm current transportation day-of and build in a buffer before
+          moving between resorts.
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-[var(--border-soft)] bg-white/90 px-5 py-4">
+        <h2 className="font-display text-xl font-semibold">Weather caveats</h2>
+        <p className="mt-2 text-sm text-[var(--muted)]">
+          Outdoor activities, poolside recreation, movies, campfires, boats, and
+          longer walks can change with weather. Keep a nearby indoor or covered
+          backup when the forecast is uncertain.
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-[var(--border-soft)] bg-white/90 px-5 py-4">
+        <h2 className="font-display text-xl font-semibold">Source and freshness</h2>
+        <p className="mt-2 text-sm text-[var(--muted)]">
+          After the Parks keeps this shared view live, but Disney and resort
+          teams remain the official source for current times, access, pricing,
+          weather decisions, and operating changes.
+        </p>
+      </section>
 
       {!plan.ownerSession && (
         <div className="sticky bottom-4 z-10 rounded-2xl border border-[var(--border-soft)] bg-white/95 p-4 shadow-lg backdrop-blur">

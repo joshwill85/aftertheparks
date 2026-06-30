@@ -70,10 +70,10 @@ export default async function CalendarPage({
       />
       <Hero
         title="Plan Ahead"
-        subtitle="Pick dates for a known stay, or compare resorts before you book."
+        subtitle="Pick a day of your trip to see resort activities, weather context, and easy backup ideas."
       />
       <div className="mb-6 flex justify-center">
-        <BrandAsset asset="pocket-map-only" className="brand-asset--map-panel" />
+        <BrandAsset asset="pocket-map-only" className="brand-asset--map-panel" priority />
       </div>
       <section className="mb-6 grid gap-3 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5 text-sm md:grid-cols-4">
         <div>

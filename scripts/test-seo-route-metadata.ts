@@ -9,7 +9,6 @@ async function main() {
   const { generateMetadata: resortMetadata } = await import("@/app/resorts/[slug]/page");
   const { generateMetadata: resortsMetadata } = await import("@/app/resorts/page");
   const { metadata: calendarMetadata } = await import("@/app/calendar/page");
-  const { metadata: guidesMetadata } = await import("@/app/guides/page");
   const { metadata: searchMetadata } = await import("@/app/search/page");
   const { metadata: planMetadata } = await import("@/app/plan/page");
   const { generateMetadata: publicPlanMetadata } = await import("@/app/p/[shareToken]/page");
@@ -269,13 +268,6 @@ async function main() {
   );
   assert.deepEqual(calendarMetadata.alternates, { canonical: "/calendar" });
 
-  assert.match(
-    String(guidesMetadata.title),
-    /Disney World Resort Planning Guides/i,
-    "guide index metadata should target the planning guide cluster"
-  );
-  assert.deepEqual(guidesMetadata.alternates, { canonical: "/guides" });
-
   for (const [metadata, label] of [
     [searchMetadata, "search page"],
     [planMetadata, "private plan page"],
@@ -340,8 +332,6 @@ async function main() {
   for (const [path, type, label] of [
     ["/activities/movies-under-the-stars", "BreadcrumbList", "activity detail"],
     ["/resorts/polynesian-village-resort", "BreadcrumbList", "resort detail"],
-    ["/guides/disney-world-non-park-day", "BreadcrumbList", "guide detail"],
-    ["/guides/disney-world-non-park-day", "Article", "guide detail"],
   ] as const) {
     assert.match(
       routeAudit,
@@ -352,9 +342,6 @@ async function main() {
   for (const path of [
     "/activities/movies-under-the-stars",
     "/resorts/polynesian-village-resort",
-    "/guides/disney-world-non-park-day",
-    "/guides/things-to-do-without-park-ticket",
-    "/guides/disney-springs-area-resort-activities",
     "/disney-world-resort-activity-calendars/summer-2026",
     "/disney-world-resort-activity-calendars/fall-2026",
     "/disney-world-resort-activity-calendars/holiday-2026",
@@ -393,8 +380,6 @@ async function main() {
   for (const path of [
     "/activities?area=disney-springs",
     "/resorts?no_ticket_friendly=true",
-    "/guides/things-to-do-without-park-ticket",
-    "/guides/disney-springs-area-resort-activities",
     "/source-and-accuracy-policy",
   ] as const) {
     for (const expected of [
@@ -407,34 +392,6 @@ async function main() {
         routeAudit,
         new RegExp(`path:\\s*"${escapedPath}"[\\s\\S]+requiredText:\\s*\\[[\\s\\S]+${expected}`),
         `rendered SEO route QA should require ${expected} on ${path}`
-      );
-    }
-  }
-  for (const guidePath of [
-    "/guides/disney-world-non-park-day",
-    "/guides/things-to-do-without-park-ticket",
-    "/guides/disney-springs-area-resort-activities",
-  ] as const) {
-    for (const expected of [
-      "Editorial review",
-      "Last updated",
-      "Mistakes to avoid",
-      "Planning quality checks",
-      "Start here",
-      "Best next clicks",
-    ] as const) {
-      const escapedGuidePath = guidePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      assert.match(
-        routeAudit,
-        new RegExp(`path:\\s*"${escapedGuidePath}"[\\s\\S]+requiredText:\\s*\\[[\\s\\S]+${expected}`),
-        `rendered SEO route QA should require ${expected} on ${guidePath}`
-      );
-    }
-    for (const type of ["BreadcrumbList", "Article", "FAQPage", "ItemList"] as const) {
-      assert.match(
-        routeAudit,
-        new RegExp(`path:\\s*"${guidePath}"[\\s\\S]+type:\\s*"${type}"`),
-        `rendered SEO route QA should require ${type} JSON-LD on ${guidePath}`
       );
     }
   }
@@ -552,20 +509,21 @@ async function main() {
     "resort detail pages should include a no-park-day mini itinerary"
   );
   for (const [pattern, label] of [
-    [/<h2[^>]*>\s*Today at this resort\s*<\/h2>/, "today at this resort crawlable summary"],
-    [/<h2[^>]*>\s*Tonight at this resort\s*<\/h2>/, "tonight at this resort crawlable summary"],
-    [/<h2[^>]*>\s*Free activities\s*<\/h2>/, "free activities intent section"],
+    [/<h2[^>]*>\s*What(?:'|&apos;)s happening today\s*<\/h2>/, "today at this resort crawlable summary"],
+    [/<h2[^>]*>\s*Best options tonight\s*<\/h2>/, "tonight at this resort crawlable summary"],
+    [/<h2[^>]*>\s*Free or low-cost options\s*<\/h2>/, "free activities intent section"],
     [/<h2[^>]*>\s*Paid activities\s*<\/h2>/, "paid activities intent section"],
     [/<h2[^>]*>\s*Best for kids\s*<\/h2>/, "best for kids intent section"],
     [/<h2[^>]*>\s*Best for adults\s*<\/h2>/, "best for adults intent section"],
-    [/<h2[^>]*>\s*Rainy-day options\s*<\/h2>/, "rainy-day intent section"],
+    [/<h2[^>]*>\s*Indoor\/weather backups\s*<\/h2>/, "rainy-day intent section"],
     [/<h2[^>]*>\s*Evening options\s*<\/h2>/, "evening options intent section"],
-    [/<h2[^>]*>\s*Transportation notes\s*<\/h2>/, "transportation notes section"],
+    [/<h2[^>]*>\s*Transportation and access notes\s*<\/h2>/, "transportation notes section"],
     [/<h2[^>]*>\s*Full activity calendar\s*<\/h2>/, "full activity calendar section"],
+    [/Nearby resorts and related activity links/, "nearby and related links section"],
     [/<h2[^>]*>\s*Nearby resorts with activities tonight\s*<\/h2>/, "nearby resorts tonight section"],
     [/<h2[^>]*>\s*Related activities\s*<\/h2>/, "related activities section"],
     [/<SeoFaq\s+title="FAQ"/, "FAQ section"],
-    [/<h2[^>]*>\s*Source and caveat block\s*<\/h2>/, "source and caveat block"],
+    [/Source and freshness/, "source and freshness block"],
   ] as const) {
     assert.match(
       resortDetailPage,
@@ -575,8 +533,8 @@ async function main() {
   }
   assert.match(
     resortDetailPage,
-    /Related planning guides/,
-    "resort detail pages should link into the guide cluster"
+    /Planning shortcuts/,
+    "resort detail pages should link to live planning shortcuts"
   );
   assert.match(
     resortDetailPage,
@@ -642,8 +600,8 @@ async function main() {
   const calendarHubPage = readFileSync("app/disney-world-resort-activity-calendars/page.tsx", "utf8");
   assert.match(
     calendarHubPage,
-    /Official sources checked/,
-    "calendar hub should expose official source coverage in its freshness block"
+    /FreshnessFacts[\s\S]*sourceCount=\{officialSourcesChecked\}/,
+    "calendar hub should expose official source coverage through the shared freshness block"
   );
   assert.match(
     calendarHubPage,
@@ -655,110 +613,6 @@ async function main() {
     /\/corrections/,
     "calendar hub should link to the correction workflow from its source/freshness area"
   );
-
-  const guidesPage = readFileSync("app/guides/page.tsx", "utf8");
-  assert.match(
-    guidesPage,
-    /buildItemListJsonLd/,
-    "guide index should emit ItemList JSON-LD for the guide cluster"
-  );
-  assert.match(
-    guidesPage,
-    /Disney World Resort Planning Guides/,
-    "guide index should use public-facing planning guide language"
-  );
-  assert.match(
-    guidesPage,
-    /Disney Springs/,
-    "guide index should surface transportation accuracy caveats where relevant"
-  );
-
-  const guideDetailPage = readFileSync("app/guides/[slug]/page.tsx", "utf8");
-  assert.match(
-    guideDetailPage,
-    /buildBreadcrumbJsonLd/,
-    "guide detail pages should emit BreadcrumbList JSON-LD"
-  );
-  assert.match(
-    guideDetailPage,
-    /Breadcrumbs/,
-    "guide detail pages should render visible breadcrumbs matching BreadcrumbList JSON-LD"
-  );
-  assert.match(
-    guideDetailPage,
-    /SEO_MISTAKE_LOG/,
-    "guide detail pages should source mistakes-to-avoid from the reusable SEO mistake log"
-  );
-  assert.match(
-    guideDetailPage,
-    /Mistakes to avoid/,
-    "guide detail pages should visibly render a mistakes-to-avoid editorial module"
-  );
-  assert.match(
-    guideDetailPage,
-    /evidenceType/,
-    "guide mistake modules should expose evidence type so caveats are not generic"
-  );
-  assert.match(
-    guideDetailPage,
-    /severity/,
-    "guide mistake modules should expose severity so planning risks are scannable"
-  );
-  for (const [pattern, label] of [
-    [/<h3[^>]*>\s*Best overall plan\s*<\/h3>/, "best overall guide plan"],
-    [/<h3[^>]*>\s*Free plan\s*<\/h3>/, "free guide plan"],
-    [/<h3[^>]*>\s*Toddler plan\s*<\/h3>/, "toddler guide plan"],
-    [/<h3[^>]*>\s*Teen plan\s*<\/h3>/, "teen guide plan"],
-    [/<h3[^>]*>\s*Adult\/couple plan\s*<\/h3>/, "adult/couple guide plan"],
-    [/<h3[^>]*>\s*Rainy-day plan\s*<\/h3>/, "rainy-day guide plan"],
-    [/<h3[^>]*>\s*First-night plan\s*<\/h3>/, "first-night guide plan"],
-    [/<h3[^>]*>\s*Resort-hopping plan\s*<\/h3>/, "resort-hopping guide plan"],
-    [/<h3[^>]*>\s*Live activities today\s*<\/h3>/, "live activities guide module"],
-    [/<h3[^>]*>\s*Best resorts for this plan\s*<\/h3>/, "best resorts guide module"],
-    [/<h3[^>]*>\s*Transportation notes\s*<\/h3>/, "transportation guide module"],
-    [/<h3[^>]*>\s*Sources and update notes\s*<\/h3>/, "sources guide module"],
-  ] as const) {
-    assert.match(
-      guideDetailPage,
-      pattern,
-      `guide detail pages should render a ${label}`
-    );
-  }
-  assert.match(
-    guideDetailPage,
-    /<SeoFaq\s+title="FAQ"/,
-    "guide detail pages should render a visible FAQ module"
-  );
-  assert.match(
-    guideDetailPage,
-    /buildFaqPageJsonLd/,
-    "guide detail pages should emit FAQ schema from visible FAQ items"
-  );
-  for (const [pattern, label] of [
-    [/Editorial review/, "editorial review line"],
-    [/Last updated/, "last updated date"],
-    [/What changed in this update/, "update-change summary"],
-    [/Reviewed by After the Parks/, "reviewer attribution"],
-    [/independent and not affiliated with Disney/, "independent-site disclaimer"],
-  ] as const) {
-    assert.match(
-      guideDetailPage,
-      pattern,
-      `guide detail pages should visibly render ${label}`
-    );
-  }
-  for (const [pattern, label] of [
-    [/<h2[^>]*>\s*Who this is best for\s*<\/h2>/, "comparison best-fit section"],
-    [/<h2[^>]*>\s*Free vs paid notes\s*<\/h2>/, "comparison free-vs-paid section"],
-    [/<h2[^>]*>\s*Last verified data\s*<\/h2>/, "comparison last-verified data section"],
-    [/latestVerifiedForComparison/, "comparison last-verified helper"],
-  ] as const) {
-    assert.match(
-      guideDetailPage,
-      pattern,
-      `comparison guide pages should render a ${label}`
-    );
-  }
 
   console.log("SEO route metadata tests passed.");
 }

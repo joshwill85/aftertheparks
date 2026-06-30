@@ -9,7 +9,7 @@ import {
   type WheelEvent,
 } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { CATEGORY_META } from "@/lib/categories/meta";
+import { CATEGORY_META, getCategoryMeta } from "@/lib/categories/meta";
 import {
   selectedResortSlugs,
   toggleResortSlug,
@@ -193,6 +193,7 @@ export function FilterFields({
   searchableResorts?: boolean;
 }) {
   const [resortQuery, setResortQuery] = useState("");
+  const [categoryPickerOpen, setCategoryPickerOpen] = useState(false);
 
   const activeResortSlugs = useMemo(
     () => selectedResortSlugs(activeResort),
@@ -221,35 +222,59 @@ export function FilterFields({
       return aIndex - bIndex;
     });
   }, [filterImpact.categories]);
-  const practicalOptions: Array<{
-    key: "free" | "reservation";
-    label: string;
-    count: number;
-    active?: boolean;
-    onClick: () => void;
-  }> = [];
+  const activeCategoryLabel = activeCategory
+    ? categoryOptions.find((option) => option.value === activeCategory)?.label ??
+      getCategoryMeta(activeCategory).label
+    : null;
+  let freeOption:
+    | {
+        key: "free";
+        label: string;
+        count: number;
+        active?: boolean;
+        onClick: () => void;
+      }
+    | undefined;
   if (!hideFreeOnly) {
-    practicalOptions.push({
+    freeOption = {
       key: "free",
       label: "Free only",
       count: filterImpact.practical.free,
       active: freeOnly,
       onClick: () => update("free", freeOnly ? null : "true"),
-    });
+    };
   }
-  practicalOptions.push({
+  const reservationOption: {
+    key: "reservation";
+    label: string;
+    count: number;
+    active?: boolean;
+    onClick: () => void;
+  } = {
     key: "reservation",
-    label: "Reservations",
+    label: "Reservation required",
     count: filterImpact.practical.reservation,
     active: reservationOnly,
     onClick: () => update("reservation", reservationOnly ? null : "true"),
-  });
-  const visiblePracticalOptions = practicalOptions.filter(
-    (option) => option.count > 0 || option.active
-  );
+  };
+  const visiblePrimaryCostOptions = freeOption && (freeOption.count > 0 || freeOption.active)
+    ? [freeOption]
+    : [];
+  const visibleSecondaryPracticalOptions = reservationOption.count > 0 || reservationOption.active
+    ? [reservationOption]
+    : [];
+  const secondaryFilterActiveCount = [
+    reservationOnly,
+    activeTransport,
+    activeArea,
+  ].filter(Boolean).length;
+  const hasMoreFilters =
+    visibleSecondaryPracticalOptions.length > 0 ||
+    transportOptions.length > 0 ||
+    areaOptions.length > 0 ||
+    secondaryFilterActiveCount > 0;
   const practicalActiveCount = [
     !hideFreeOnly && freeOnly,
-    reservationOnly,
   ].filter(Boolean).length;
 
   const filteredResorts = useMemo(() => {
@@ -385,7 +410,7 @@ export function FilterFields({
 
       {presetOptions.length > 0 && (
         <FilterSection
-          title="Helpful filters"
+          title="Popular needs"
           defaultOpen={Boolean(activePreset)}
           activeCount={activePreset ? 1 : 0}
         >
@@ -415,14 +440,14 @@ export function FilterFields({
         </FilterSection>
       )}
 
-      {visiblePracticalOptions.length > 0 && (
+      {visiblePrimaryCostOptions.length > 0 && (
         <FilterSection
-          title="Cost"
+          title="Cost and booking"
           defaultOpen={practicalActiveCount > 0}
           activeCount={practicalActiveCount}
         >
           <div className="filter-option-list">
-            {visiblePracticalOptions.map((option) => (
+            {visiblePrimaryCostOptions.map((option) => (
               <button
                 key={option.key}
                 type="button"
@@ -442,7 +467,7 @@ export function FilterFields({
 
       {weatherOptions.length > 0 && (
         <FilterSection
-          title="Weather"
+          title="Weather fit"
           defaultOpen={Boolean(activeWeather)}
           activeCount={activeWeather ? 1 : 0}
         >
@@ -467,81 +492,135 @@ export function FilterFields({
         </FilterSection>
       )}
 
-      {transportOptions.length > 0 && (
-        <FilterSection
-          title="Getting there"
-          defaultOpen={Boolean(activeTransport)}
-          activeCount={activeTransport ? 1 : 0}
-        >
-          <div className="filter-option-list">
-            {transportOptions.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() =>
-                  update(
-                    "transport",
-                    activeTransport === option.value ? null : option.value
-                  )
-                }
-                className={cn(
-                  "filter-option-row",
-                  option.active && "filter-option-row--active"
-                )}
-              >
-                <span>{option.label}</span>
-                <span className="filter-option-row__count">{option.count}</span>
-              </button>
-            ))}
-          </div>
-        </FilterSection>
-      )}
-
-      {areaOptions.length > 0 && (
-        <FilterSection
-          title="Resort area"
-          defaultOpen={Boolean(activeArea)}
-          activeCount={activeArea ? 1 : 0}
-        >
-          <label className="block text-sm">
-            <span className="sr-only">Resort area</span>
-            <select
-              value={activeArea ?? ""}
-              onChange={(e) => update("area", e.target.value || null)}
-              className="form-control"
-            >
-              <option value="">All resort areas</option>
-              {areaOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label} ({option.count})
-                </option>
-              ))}
-            </select>
-          </label>
-        </FilterSection>
-      )}
-
       {categoryOptions.length > 0 && (
         <FilterSection
           title="Category"
           defaultOpen={Boolean(activeCategory)}
           activeCount={activeCategory ? 1 : 0}
         >
-          <label className="block text-sm">
-            <span className="sr-only">Category</span>
-            <select
-              value={activeCategory ?? ""}
-              onChange={(e) => update("category", e.target.value || null)}
-              className="form-control"
-            >
-              <option value="">All categories</option>
-              {categoryOptions.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label} ({c.count})
-                </option>
-              ))}
-            </select>
-          </label>
+          {activeCategory && !categoryPickerOpen ? (
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-[var(--color-foreground)]">
+                {activeCategoryLabel} selected
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => setCategoryPickerOpen(true)}
+                  className="btn-secondary px-3 py-2 text-xs font-bold"
+                >
+                  Change category
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCategoryPickerOpen(false);
+                    update("category", null);
+                  }}
+                  className="btn-ghost px-3 py-2 text-xs font-bold"
+                >
+                  Clear category
+                </button>
+              </div>
+            </div>
+          ) : (
+            <label className="block text-sm">
+              <span className="sr-only">Category</span>
+              <select
+                value={activeCategory ?? ""}
+                onChange={(e) => {
+                  setCategoryPickerOpen(false);
+                  update("category", e.target.value || null);
+                }}
+                className="form-control"
+              >
+                <option value="">All categories</option>
+                {categoryOptions.map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label} ({c.count})
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+        </FilterSection>
+      )}
+
+      {hasMoreFilters && (
+        <FilterSection
+          title="More filters"
+          defaultOpen={secondaryFilterActiveCount > 0}
+          activeCount={secondaryFilterActiveCount}
+        >
+          <div className="space-y-4">
+            {visibleSecondaryPracticalOptions.length > 0 && (
+              <div className="filter-option-list">
+                {visibleSecondaryPracticalOptions.map((option) => (
+                  <button
+                    key={option.key}
+                    type="button"
+                    onClick={option.onClick}
+                    className={cn(
+                      "filter-option-row",
+                      option.active && "filter-option-row--active"
+                    )}
+                  >
+                    <span>{option.label}</span>
+                    <span className="filter-option-row__count">{option.count}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {transportOptions.length > 0 && (
+              <div>
+                <p className="mb-2 text-xs font-bold uppercase text-[var(--color-muted)]">
+                  Getting there
+                </p>
+                <div className="filter-option-list">
+                  {transportOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() =>
+                        update(
+                          "transport",
+                          activeTransport === option.value ? null : option.value
+                        )
+                      }
+                      className={cn(
+                        "filter-option-row",
+                        option.active && "filter-option-row--active"
+                      )}
+                    >
+                      <span>{option.label}</span>
+                      <span className="filter-option-row__count">{option.count}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {areaOptions.length > 0 && (
+              <label className="block text-sm">
+                <span className="mb-2 block text-xs font-bold uppercase text-[var(--color-muted)]">
+                  Resort area
+                </span>
+                <select
+                  value={activeArea ?? ""}
+                  onChange={(e) => update("area", e.target.value || null)}
+                  className="form-control"
+                >
+                  <option value="">All resort areas</option>
+                  {areaOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label} ({option.count})
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+          </div>
         </FilterSection>
       )}
     </div>

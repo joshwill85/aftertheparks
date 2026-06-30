@@ -4,7 +4,6 @@ import {
   loadSearchableActivities,
   loadSearchableOfferings,
 } from "@/lib/search/documents";
-import { GUIDES } from "@/lib/guides";
 import {
   expandTokens,
   normalizeSearchQuery,
@@ -47,6 +46,9 @@ export interface RunSearchOptions {
   kind?: SearchFilters["kind"];
 }
 
+const REMOVED_GUIDE_KIND = "guide";
+const REMOVED_GUIDE_PATH_PREFIX = ["/", "guides"].join("");
+
 function filtersFromOptions(options: RunSearchOptions): SearchFilters {
   return {
     resort: options.resort,
@@ -70,7 +72,6 @@ function emptyResponse(query: string): SearchResponse {
     activities: [],
     officialOfferings: [],
     resorts: [],
-    guides: [],
     movies: [],
     categories: [],
     pages: [],
@@ -97,6 +98,13 @@ function providerSuggestQuery(query: string): string {
   return query;
 }
 
+function isRemovedGuideHit(hit: SearchHit): boolean {
+  return (
+    (hit as { kind?: string }).kind === REMOVED_GUIDE_KIND ||
+    hit.href.startsWith(REMOVED_GUIDE_PATH_PREFIX)
+  );
+}
+
 async function hydrateLegacyFields(
   hits: SearchHit[],
   options: RunSearchOptions
@@ -104,7 +112,6 @@ async function hydrateLegacyFields(
   activities: ActivityOccurrence[];
   officialOfferings: ActivityOffering[];
   resorts: ResortSummary[];
-  guides: typeof GUIDES;
   movies: MovieNightOccurrence[];
   categories: SearchHit[];
   pages: SearchHit[];
@@ -128,7 +135,6 @@ async function hydrateLegacyFields(
   const resortBySource = new Map(
     resorts.map((resort) => [`resort:${resort.slug}`, resort])
   );
-  const guideBySource = new Map(GUIDES.map((guide) => [`guide:${guide.slug}`, guide]));
   const movieBySource = new Map(movies.map((movie) => [`movie:${movie.id}`, movie]));
 
   const categoryHits = new Map<string, SearchHit>();
@@ -156,7 +162,6 @@ async function hydrateLegacyFields(
     activities: inHitOrder("activity", activityBySource),
     officialOfferings: inHitOrder("offering", offeringBySource),
     resorts: inHitOrder("resort", resortBySource),
-    guides: inHitOrder("guide", guideBySource),
     movies: inHitOrder("movie", movieBySource),
     categories: [...categoryHits.values()],
     pages: [...pageHits.values()],
@@ -177,7 +182,9 @@ export async function runSearch(
     filters: filtersFromOptions(options),
     limit: options.limit ?? 50,
   });
-  const hits = result.hits.slice(0, options.limit ?? 50);
+  const hits = result.hits
+    .filter((hit) => !isRemovedGuideHit(hit))
+    .slice(0, options.limit ?? 50);
   const hydrated = await hydrateLegacyFields(hits, options);
 
   return {
@@ -191,7 +198,6 @@ export async function runSearch(
     activities: hydrated.activities.slice(0, options.limit ?? 50),
     officialOfferings: hydrated.officialOfferings.slice(0, options.limit ?? 50),
     resorts: hydrated.resorts.slice(0, 12),
-    guides: hydrated.guides.slice(0, 6),
     movies: hydrated.movies.slice(0, 8),
     categories: hydrated.categories.slice(0, 6),
     pages: hydrated.pages.slice(0, 4),
@@ -217,7 +223,9 @@ export async function runSearchSuggest(
     filters: filtersFromOptions(options),
     limit: options.limit ?? 8,
   });
-  const hits = result.hits.slice(0, options.limit ?? 8);
+  const hits = result.hits
+    .filter((hit) => !isRemovedGuideHit(hit))
+    .slice(0, options.limit ?? 8);
 
   return {
     ...emptyResponse(query),

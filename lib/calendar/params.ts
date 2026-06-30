@@ -1,5 +1,5 @@
 import { addOrlandoDays, orlandoDateString } from "@/lib/daypart";
-import type { ActivityAreaFilter, Daypart } from "@/lib/types/occurrence";
+import type { ActivityAreaFilter, ActivityWeatherFilter, Daypart } from "@/lib/types/occurrence";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const VALID_DAYPARTS = new Set<Exclude<Daypart, "anytime">>([
@@ -16,6 +16,7 @@ const VALID_AREAS = new Set<ActivityAreaFilter>([
   "disney-springs",
   "fort-wilderness",
 ]);
+const VALID_WEATHER = new Set<ActivityWeatherFilter>(["indoor", "covered"]);
 
 export interface PlanAheadParams {
   start: string;
@@ -25,6 +26,8 @@ export interface PlanAheadParams {
   category?: string;
   area?: ActivityAreaFilter;
   daypart?: Exclude<Daypart, "anytime">;
+  free?: boolean;
+  weather?: ActivityWeatherFilter;
 }
 
 interface ParseOptions {
@@ -32,11 +35,13 @@ interface ParseOptions {
 }
 
 function valueFor(
-  input: Record<string, string | undefined> | URLSearchParams,
+  input: Record<string, string | boolean | undefined> | URLSearchParams,
   key: string
 ): string | undefined {
   if (input instanceof URLSearchParams) return input.get(key) ?? undefined;
-  return input[key];
+  const value = input[key];
+  if (typeof value === "boolean") return value ? "true" : undefined;
+  return value;
 }
 
 function isDateOnly(value?: string): value is string {
@@ -49,7 +54,7 @@ function cleanOptional(value?: string): string | undefined {
 }
 
 export function parsePlanAheadParams(
-  input: Record<string, string | undefined> | URLSearchParams,
+  input: Record<string, string | boolean | undefined> | URLSearchParams,
   options: ParseOptions = {}
 ): PlanAheadParams {
   const today = isDateOnly(options.today) ? options.today : orlandoDateString();
@@ -68,6 +73,7 @@ export function parsePlanAheadParams(
         : start;
   const rawArea = valueFor(input, "area");
   const rawDaypart = valueFor(input, "daypart");
+  const rawWeather = valueFor(input, "weather");
 
   return {
     start,
@@ -81,6 +87,10 @@ export function parsePlanAheadParams(
     daypart: VALID_DAYPARTS.has(rawDaypart as Exclude<Daypart, "anytime">)
       ? (rawDaypart as Exclude<Daypart, "anytime">)
       : undefined,
+    free: valueFor(input, "free") === "true",
+    weather: VALID_WEATHER.has(rawWeather as ActivityWeatherFilter)
+      ? (rawWeather as ActivityWeatherFilter)
+      : undefined,
   };
 }
 
@@ -93,6 +103,8 @@ export function buildPlanAheadHref(input: Partial<PlanAheadParams> = {}): string
   if (input.category) params.set("category", input.category);
   if (input.area) params.set("area", input.area);
   if (input.daypart) params.set("daypart", input.daypart);
+  if (input.free) params.set("free", "true");
+  if (input.weather) params.set("weather", input.weather);
   const qs = params.toString();
   return qs ? `/calendar?${qs}` : "/calendar";
 }

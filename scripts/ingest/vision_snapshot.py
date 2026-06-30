@@ -787,6 +787,105 @@ def build_vision_snapshots_from_directory(
     return report
 
 
+def _snapshot_matches_filters(
+    snapshot: dict[str, Any],
+    *,
+    group: str | None,
+    quarter: str | None,
+) -> bool:
+    if group and snapshot.get("calendar_group_key") != group:
+        return False
+    edition = str(snapshot.get("edition") or "")
+    if not edition_matches_quarter(edition, quarter):
+        return False
+    return True
+
+
+def refresh_snapshot_regions(
+    *,
+    snapshots_dir: Path = DEFAULT_OUTPUT_DIR,
+    report_path: Path | None = DEFAULT_REPORT_PATH,
+    group: str | None = None,
+    quarter: str | None = None,
+    debug_output_dir: Path | None = None,
+) -> dict[str, Any]:
+    results: list[dict[str, Any]] = []
+    for snapshot_path in sorted(snapshots_dir.glob("*.vision.json")):
+        try:
+            snapshot = json.loads(snapshot_path.read_text())
+            if not isinstance(snapshot, dict) or not _snapshot_matches_filters(snapshot, group=group, quarter=quarter):
+                continue
+            classification = snapshot.get("family_classification")
+            if not isinstance(classification, dict):
+                document_family = str(snapshot.get("document_family") or "unknown_visual_schedule")
+                classification = {
+                    "document_family": document_family,
+                    "allow_auto_publish": document_family != "unknown_visual_schedule",
+                }
+            source_hash = str(snapshot.get("source_sha256") or snapshot_path.stem.replace(".vision", ""))
+            region_result = segment_major_regions(
+                snapshot={
+                    "source_document_id": snapshot.get("source_document_id"),
+                    "source_sha256": snapshot.get("source_sha256"),
+                    "source_pages": snapshot.get("source_pages") if isinstance(snapshot.get("source_pages"), list) else [],
+                },
+                classification=classification,
+                output_dir=(debug_output_dir or (PROCESSED_DIR / "vision_debug")) / source_hash,
+                qr_decoder=lambda _: [],
+            )
+            snapshot["regions"] = region_result["regions"]
+            existing_derived_links = snapshot.get("derived_source_links")
+            snapshot["derived_source_links"] = (
+                [link for link in existing_derived_links if isinstance(link, dict)]
+                if isinstance(existing_derived_links, list)
+                else []
+            )
+            snapshot_path.write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n")
+            results.append(
+                {
+                    "status": "refreshed",
+                    "snapshot_path": str(snapshot_path),
+                    "source_sha256": snapshot.get("source_sha256"),
+                    "calendar_group_key": snapshot.get("calendar_group_key"),
+                    "edition": snapshot.get("edition"),
+                    "document_family": snapshot.get("document_family"),
+                    "region_count": len(snapshot["regions"]),
+                    "error": None,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "status": "parser_error",
+                    "snapshot_path": str(snapshot_path),
+                    "source_sha256": None,
+                    "calendar_group_key": None,
+                    "edition": None,
+                    "document_family": None,
+                    "region_count": 0,
+                    "error": str(exc),
+                }
+            )
+
+    report = {
+        "report_kind": "v3_vision_snapshot_region_refresh",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "snapshots_dir": str(snapshots_dir),
+        "quarter": quarter,
+        "group": group,
+        "summary": {
+            "snapshot_count": len(results),
+            "refreshed_count": sum(1 for result in results if result["status"] == "refreshed"),
+            "parser_error_count": sum(1 for result in results if result["status"] == "parser_error"),
+        },
+        "results": results,
+    }
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build v3 vision snapshot envelope")
     parser.add_argument("page_manifest", type=Path, nargs="?")
@@ -796,6 +895,11 @@ def main() -> None:
     parser.add_argument("--group")
     parser.add_argument("--quarter")
     parser.add_argument("--attach-regions", action="store_true")
+    parser.add_argument(
+        "--refresh-regions-only",
+        action="store_true",
+        help="Refresh region crops in existing snapshots without rerunning OCR",
+    )
     parser.add_argument("--debug-output-dir", type=Path, default=PROCESSED_DIR / "vision_debug")
     parser.add_argument("--no-debug-overlays", action="store_true")
     parser.add_argument(
@@ -805,6 +909,24 @@ def main() -> None:
     )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+
+    if args.refresh_regions_only:
+        if args.page_manifest:
+            parser.error("--refresh-regions-only is only supported for batch snapshot files")
+        if args.upsert_layout_snapshots:
+            parser.error("--upsert-layout-snapshots is not supported with --refresh-regions-only")
+        report = refresh_snapshot_regions(
+            snapshots_dir=args.output_dir,
+            report_path=args.report_path,
+            group=args.group,
+            quarter=args.quarter,
+            debug_output_dir=args.debug_output_dir,
+        )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(args.report_path)
+        return
 
     if args.page_manifest:
         if args.upsert_layout_snapshots:

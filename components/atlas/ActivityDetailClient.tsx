@@ -4,6 +4,7 @@ import Link from "next/link";
 import { formatOrlandoDate, formatOrlandoTime } from "@/lib/daypart";
 import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
+import { weatherFitValueForActivity } from "@/lib/planning/activityFacts";
 import { isUncertainSchedule } from "@/lib/text/normalize";
 import type { ActivityOccurrence, ActivityPriceOption } from "@/lib/types/occurrence";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
@@ -125,12 +126,55 @@ function topResortsByActivity(activities: ActivityOccurrence[], limit = 4): Arra
 
 function reservationCopy(activity: ActivityOccurrence): string {
   if (activity.enrichment?.reservationRequired || activity.eligibility.reservation?.required) {
+    if (
+      !activity.enrichment?.reservationMethod &&
+      !activity.enrichment?.reservationPhone &&
+      !activity.eligibility.reservation?.url
+    ) {
+      return "Booking details are incomplete in the current data. Confirm with the official source before planning around this activity.";
+    }
     return "Reservation required; confirm booking method, arrival window, cancellation rules, and eligibility.";
   }
   if (activity.enrichment?.reservationRecommended) {
     return "Reservation recommended; walk-up availability may change by date, resort, and capacity.";
   }
-  return "No reservation requirement is currently tracked, but access and eligibility can still change.";
+  return "No reservation requirement is currently listed, but access and eligibility can still change.";
+}
+
+function accessCopy(activity: ActivityOccurrence): string {
+  if (activity.enrichment?.resortGuestOnly) {
+    return "Resort guests only. Confirm eligibility before you go.";
+  }
+  if (activity.enrichment?.poolGated) {
+    return "Access may be limited because this is tied to a pool area.";
+  }
+  if (activity.category === "poolside") {
+    return "Pool area access may be limited to resort guests, capacity, or posted pool rules.";
+  }
+  if (activity.enrichment?.sisterResortAccess) {
+    return "Sister-resort guest access may apply.";
+  }
+  if (activity.enrichment?.openToNonResortGuests) {
+    return "Open to non-resort guests when resort access and operations allow.";
+  }
+  return "Access may vary by resort rules, capacity, parking, and eligibility.";
+}
+
+function weatherCopy(activity: ActivityOccurrence): string {
+  const weatherFit = weatherFitValueForActivity(activity);
+  if (weatherFit === "indoor") return "Indoor or covered weather backup.";
+  if (weatherFit === "covered") return "Covered or partly protected weather backup.";
+  if (
+    activity.category === "campfire" ||
+    activity.category === "movies_under_stars" ||
+    activity.category === "poolside" ||
+    /outdoor|pool|campfire|movie|marina|boat|walk/i.test(
+      `${activity.title} ${activity.summary} ${activity.location.label}`
+    )
+  ) {
+    return "Outdoor and weather-sensitive. Confirm conditions before you go.";
+  }
+  return "Weather fit unclear. Confirm location before you go.";
 }
 
 function ActivityPlanningSnapshot({
@@ -179,7 +223,7 @@ function ActivityPlanningSnapshot({
           <h3 className="font-display text-lg font-semibold">Overview</h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
             {activity.title} is a {display.categoryLabel.toLowerCase()} activity
-            currently tracked at {activity.resort.name}. It is listed as{" "}
+            currently listed at {activity.resort.name}. It is listed as{" "}
             {display.costLabel?.toLowerCase() ?? "cost to confirm"}, with the next
             known timing shown as {nextKnownLabel}.
           </p>
@@ -393,6 +437,8 @@ export function ActivityDetailClient({
   }
   if (activity.enrichment?.poolGated) {
     addGoodToKnow("Associated with a gated pool area.");
+  } else if (activity.category === "poolside") {
+    addGoodToKnow("Pool area access may be limited to resort guests.");
   }
   const validFrom = formatDateOnly(activity.validFrom);
   const validUntil = formatDateOnly(activity.validUntil);
@@ -428,16 +474,27 @@ export function ActivityDetailClient({
                 )}
               </EventDetailFact>
             )}
+            <EventDetailFact label="Where">
+              <p className="font-display font-semibold">{display.whereLabel}</p>
+              <p className="mt-1 text-sm text-[var(--color-muted)]">
+                {display.resortName}
+              </p>
+            </EventDetailFact>
             {display.costLabel && (
               <EventDetailFact label="Cost">
                 <p className="font-display font-semibold">{display.costLabel}</p>
               </EventDetailFact>
             )}
-            <EventDetailFact label="Best for">
+            <EventDetailFact label="Reservation">
               <p className="font-display font-semibold">
-                {display.categoryLabel} ·{" "}
-                {activity.eligibility.ages.join(", ").replace(/_/g, " ")}
+                {reservationCopy(activity)}
               </p>
+            </EventDetailFact>
+            <EventDetailFact label="Access">
+              <p className="font-display font-semibold">{accessCopy(activity)}</p>
+            </EventDetailFact>
+            <EventDetailFact label="Weather">
+              <p className="font-display font-semibold">{weatherCopy(activity)}</p>
             </EventDetailFact>
           </section>
 
@@ -448,11 +505,29 @@ export function ActivityDetailClient({
             whenLabel={whenLabel}
           />
 
+          {goodToKnow.length > 0 && (
+            <EventDetailSection title="Before you go">
+              <ul className="event-detail-list">
+                {goodToKnow.map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+            </EventDetailSection>
+          )}
+
           {display.summary && (
             <EventDetailSection title="What to expect" tone="warm">
               <p className="event-detail-prose">{display.summary}</p>
             </EventDetailSection>
           )}
+
+          <EventDetailSection title="Good fit" tone="lagoon">
+            <p className="font-display text-lg font-semibold">
+              {display.categoryLabel} ·{" "}
+              {activity.eligibility.ages.join(", ").replace(/_/g, " ")}
+            </p>
+            <DecisionSignals profile={decisionProfile} />
+          </EventDetailSection>
 
           <EventDetailSection title="Where to go" tone="lagoon">
             <p className="font-display text-lg font-semibold">
@@ -480,15 +555,14 @@ export function ActivityDetailClient({
             </EventDetailSection>
           )}
 
-          {goodToKnow.length > 0 && (
-            <EventDetailSection title="Good to know">
-              <ul className="event-detail-list">
-                {goodToKnow.map((note) => (
-                  <li key={note}>{note}</li>
-                ))}
-              </ul>
-            </EventDetailSection>
-          )}
+          <EventDetailSection title="What to confirm">
+            <ul className="event-detail-list">
+              <li>Current time and exact location</li>
+              <li>Day-of cancellation or weather changes</li>
+              <li>Cost, supplies, eligibility, and resort access</li>
+              <li>{reservationCopy(activity)}</li>
+            </ul>
+          </EventDetailSection>
 
           {hasScheduleSection && (
             <EventDetailSection title="Schedule">
@@ -536,7 +610,9 @@ export function ActivityDetailClient({
 
           {similar.length > 0 && (
             <section>
-              <h2 className="font-display text-xl font-semibold">More like this</h2>
+              <h2 className="font-display text-xl font-semibold">
+                {"More"} at this resort
+              </h2>
               <p className="mt-1 text-sm text-[var(--color-muted)]">
                 Other {display.categoryLabel.toLowerCase()} activities at {display.resortName}.
               </p>

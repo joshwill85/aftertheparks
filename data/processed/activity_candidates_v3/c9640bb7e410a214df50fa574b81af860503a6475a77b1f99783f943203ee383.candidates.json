@@ -1,7 +1,7 @@
 [
   {
     "calendar_group_key": "art-of-animation",
-    "candidate_id": "vision-v3-cb820d3e7402bda747cccfd3",
+    "candidate_id": "vision-v3-f05847b31f0416f5e1a8d924",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
@@ -131,12 +131,12 @@
           ],
           "end_time": "20:30",
           "parser": "schedule_parser_v3",
-          "raw_text": "Wednesday at From 8:00pm-8:30pm",
+          "raw_text": "Wednesday from 8:00pm-8:30pm",
           "schedule_type": "recurring",
           "start_time": "20:00",
           "timezone": "America/New_York"
         },
-        "raw_value": "Wednesday at From 8:00pm-8:30pm",
+        "raw_value": "Wednesday from 8:00pm-8:30pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -281,12 +281,12 @@
       ],
       "end_time": "20:30",
       "parser": "schedule_parser_v3",
-      "raw_text": "Wednesday at From 8:00pm-8:30pm",
+      "raw_text": "Wednesday from 8:00pm-8:30pm",
       "schedule_type": "recurring",
       "start_time": "20:00",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Wednesday at From 8:00pm-8:30pm",
+    "schedule_raw": "Wednesday from 8:00pm-8:30pm",
     "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -336,7 +336,7 @@
           "page": 1,
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "region_id": "page-001-region-03",
-          "text": "Wednesday at From 8:00pm-8:30pm"
+          "text": "Wednesday from 8:00pm-8:30pm"
         }
       ],
       "title": [
@@ -725,7 +725,7 @@
   },
   {
     "calendar_group_key": "art-of-animation",
-    "candidate_id": "vision-v3-b6c7643e3b4fa5f88d34996a",
+    "candidate_id": "vision-v3-026c16f14d7af1e92772d62c",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
@@ -751,7 +751,7 @@
             "text": "no fee marker"
           },
           {
-            "confidence": 0.98038,
+            "confidence": 0.99655,
             "engine": "rapidocr",
             "text": "no fee marker"
           }
@@ -855,12 +855,12 @@
           ],
           "end_time": "14:00",
           "parser": "schedule_parser_v3",
-          "raw_text": "Friday at From 1:00pm-2:00pm",
+          "raw_text": "Friday from 1:00pm-2:00pm",
           "schedule_type": "recurring",
           "start_time": "13:00",
           "timezone": "America/New_York"
         },
-        "raw_value": "Friday at From 1:00pm-2:00pm",
+        "raw_value": "Friday from 1:00pm-2:00pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -879,7 +879,7 @@
         }
       },
       "title": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.999864399433136,
@@ -887,15 +887,15 @@
             "text": "POOL PARTY"
           },
           {
-            "confidence": 0.98038,
+            "confidence": 0.99655,
             "engine": "rapidocr",
-            "text": "MICKEY TIE-DYE (S)"
+            "text": "POOL PARTY"
           }
         ],
         "field": "title",
         "normalized_value": "pool party",
         "raw_value": "POOL PARTY",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             199,
@@ -1005,12 +1005,12 @@
       ],
       "end_time": "14:00",
       "parser": "schedule_parser_v3",
-      "raw_text": "Friday at From 1:00pm-2:00pm",
+      "raw_text": "Friday from 1:00pm-2:00pm",
       "schedule_type": "recurring",
       "start_time": "13:00",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Friday at From 1:00pm-2:00pm",
+    "schedule_raw": "Friday from 1:00pm-2:00pm",
     "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -1060,7 +1060,7 @@
           "page": 1,
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "region_id": "page-001-region-03",
-          "text": "Friday at From 1:00pm-2:00pm"
+          "text": "Friday from 1:00pm-2:00pm"
         }
       ],
       "title": [
@@ -1088,7 +1088,7 @@
   },
   {
     "calendar_group_key": "art-of-animation",
-    "candidate_id": "vision-v3-f6da30dc703dd9e218d479b1",
+    "candidate_id": "vision-v3-81f061632b0e7a49ca1da55c",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9"
@@ -1218,12 +1218,12 @@
           ],
           "end_time": "14:00",
           "parser": "schedule_parser_v3",
-          "raw_text": "Saturday at From 1:00pm-2:00pm",
+          "raw_text": "Saturday from 1:00pm-2:00pm",
           "schedule_type": "recurring",
           "start_time": "13:00",
           "timezone": "America/New_York"
         },
-        "raw_value": "Saturday at From 1:00pm-2:00pm",
+        "raw_value": "Saturday from 1:00pm-2:00pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -1368,12 +1368,12 @@
       ],
       "end_time": "14:00",
       "parser": "schedule_parser_v3",
-      "raw_text": "Saturday at From 1:00pm-2:00pm",
+      "raw_text": "Saturday from 1:00pm-2:00pm",
       "schedule_type": "recurring",
       "start_time": "13:00",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Saturday at From 1:00pm-2:00pm",
+    "schedule_raw": "Saturday from 1:00pm-2:00pm",
     "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -1423,7 +1423,7 @@
           "page": 1,
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "region_id": "page-001-region-03",
-          "text": "Saturday at From 1:00pm-2:00pm"
+          "text": "Saturday from 1:00pm-2:00pm"
         }
       ],
       "title": [

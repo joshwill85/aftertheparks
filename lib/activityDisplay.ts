@@ -295,6 +295,14 @@ function isSuspiciousAllDayBlock(
   return isEarlyStart && isLateEnd && spansMostOfDay;
 }
 
+function isEndBeforeStart(startIso?: string, endIso?: string): boolean {
+  if (!startIso || !endIso) return false;
+  const start = new Date(startIso).getTime();
+  const end = new Date(endIso).getTime();
+  if (!Number.isFinite(start) || !Number.isFinite(end)) return false;
+  return end < start;
+}
+
 /** Display time label; marks suspicious all-day parser defaults as uncertain. */
 export function getDisplayTime(activity: ActivityDisplayInput): {
   label?: string;
@@ -305,6 +313,10 @@ export function getDisplayTime(activity: ActivityDisplayInput): {
     activity.category === "movies_under_stars" ||
     activity.category === "campfire" ||
     activity.category === "nighttime_entertainment";
+
+  if (isEndBeforeStart(activity.startDateTime, activity.endDateTime)) {
+    return { label: "Time needs confirmation", uncertain: true };
+  }
 
   if (scheduleText && !isUncertainSchedule(scheduleText)) {
     const broadLabel = broadScheduleLabel(scheduleText);

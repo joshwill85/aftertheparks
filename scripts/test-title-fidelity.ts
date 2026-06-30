@@ -87,12 +87,9 @@ const userFacingCopyFiles = [
   "components/atlas/TonightClient.tsx",
   "components/atlas/MovieNightGrid.tsx",
   "components/atlas/ActivityDetailClient.tsx",
-  "components/atlas/SearchClient.tsx",
   "components/home/MoodChips.data.ts",
   "components/home/QuickFinder.tsx",
   "components/tonight/TonightHero.tsx",
-  "app/search/page.tsx",
-  "lib/guides/index.ts",
   "lib/magic/nearby.ts",
   "lib/magic/collections.ts",
   "lib/resorts/display.ts",
@@ -107,10 +104,14 @@ const unsupportedLocationTransportationClaims =
 const weatherSourceBackedCopyFiles = new Set([
   "components/atlas/TonightClient.tsx",
 ]);
+const activityRecordWeatherCopyFiles = new Set([
+  "components/atlas/ActivityDetailClient.tsx",
+]);
 
 for (const file of userFacingCopyFiles) {
   const source = readFileSync(file, "utf8");
-  const claimPattern = weatherSourceBackedCopyFiles.has(file)
+  const mayUseRecordWeatherCopy = activityRecordWeatherCopyFiles.has(file);
+  const claimPattern = weatherSourceBackedCopyFiles.has(file) || mayUseRecordWeatherCopy
     ? unsupportedLocationTransportationClaims
     : unsupportedCopyClaims;
   if (weatherSourceBackedCopyFiles.has(file)) {
@@ -118,6 +119,13 @@ for (const file of userFacingCopyFiles) {
       source,
       /\/api\/weather\/guidance/,
       `${file} may use weather copy only when it fetches record-level weather guidance`
+    );
+  }
+  if (mayUseRecordWeatherCopy) {
+    assert.match(
+      source,
+      /weatherFitValueForActivity\(activity\)/,
+      `${file} may use weather copy only when it derives it from activity evidence`
     );
   }
   assert.doesNotMatch(

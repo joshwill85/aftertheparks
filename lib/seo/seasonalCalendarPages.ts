@@ -31,7 +31,7 @@ export const SEASONAL_CALENDAR_PAGES: SeasonalCalendarPageDefinition[] = [
       "/today",
       "/tonight",
       "/activities?weather=indoor",
-      "/guides/rainy-day-disney-resort-activities",
+      "/weather",
     ],
     planningAngles: [
       "Prioritize morning and evening activities during peak heat.",
@@ -60,7 +60,7 @@ export const SEASONAL_CALENDAR_PAGES: SeasonalCalendarPageDefinition[] = [
       "/disney-world-resort-activity-calendars",
       "/today",
       "/tonight",
-      "/guides/disney-world-non-park-day",
+      "/activities",
     ],
     planningAngles: [
       "Watch for seasonal recreation changes before relying on older fall advice.",
@@ -89,7 +89,7 @@ export const SEASONAL_CALENDAR_PAGES: SeasonalCalendarPageDefinition[] = [
       "/activities",
       "/today",
       "/tonight",
-      "/guides/things-to-do-without-park-ticket",
+      "/resorts?no_ticket_friendly=true",
     ],
     planningAngles: [
       "Separate holiday atmosphere and decor ideas from activities that require a park ticket.",

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/atlas/Hero";
+import { AnswerBlock } from "@/components/seo/AnswerBlock";
+import { FreshnessFacts } from "@/components/seo/FreshnessFacts";
+import { IntentLinkCluster } from "@/components/seo/IntentLinkCluster";
 import { getResorts, getTodayActivities, getTonightActivities } from "@/lib/data/activities";
 import { buildItemListJsonLd, stringifyJsonLd } from "@/lib/seo/jsonLd";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
@@ -101,59 +104,24 @@ export default async function ResortActivityCalendarsPage() {
         subtitle="A current-first hub for resort recreation, movies, campfires, crafts, and no-park-day planning."
       />
 
-      <section className="mb-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-        <h2 className="font-display text-2xl font-semibold">Current status</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-          After the Parks tracks Walt Disney World resort activities from official
-          and verified calendars, then routes you into live today, tonight,
-          activity, and resort views. Always confirm times with the official
-          resort source before heading out.
-        </p>
-        <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Last checked
-            </dt>
-            <dd className="font-semibold">{lastVerified}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Resorts covered
-            </dt>
-            <dd className="font-semibold">{resorts.length}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Tracked now
-            </dt>
-            <dd className="font-semibold">{trackedActivities} activities</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Tonight
-            </dt>
-            <dd className="font-semibold">{tonightActivities.length} activities</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Official sources checked
-            </dt>
-            <dd className="font-semibold">{officialSourcesChecked || "Current data"}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Next expected refresh
-            </dt>
-            <dd className="font-semibold">{nextExpectedRefresh}</dd>
-          </div>
-        </dl>
-        <Link
-          href="/corrections"
-          className="mt-4 inline-flex text-sm font-bold text-[var(--accent)] hover:underline"
-        >
-          Send a correction
-        </Link>
-      </section>
+      <AnswerBlock
+        eyebrow="Current calendar hub"
+        title="Compare resort activity calendars without chasing PDFs"
+        primaryAction={{ label: "See today", href: "/today" }}
+        secondaryActions={[{ label: "See tonight", href: "/tonight" }]}
+      >
+        After the Parks tracks Walt Disney World resort activities from official
+        and verified calendars, then routes you into live today, tonight,
+        activity, and resort views.
+      </AnswerBlock>
+
+      <FreshnessFacts
+        lastVerified={lastVerified}
+        scheduleWindow={`Next expected refresh: ${nextExpectedRefresh}`}
+        activityCount={trackedActivities}
+        sourceCount={officialSourcesChecked}
+        correctionHref="/corrections"
+      />
 
       <section className="mb-8">
         <div className="mb-4 flex flex-wrap gap-3">
@@ -173,6 +141,15 @@ export default async function ResortActivityCalendarsPage() {
           based, and where to go next.
         </p>
       </section>
+
+      <IntentLinkCluster
+        title="Calendar shortcuts"
+        links={[
+          { label: "Choose your resort", href: "/resorts", description: `${resorts.length} resort calendar links.` },
+          { label: "Free activities", href: "/activities?free=true", description: "Current free and low-cost resort activities." },
+          { label: "Movies", href: "/activities/movies-under-the-stars", description: "Outdoor movie schedule details." },
+        ]}
+      />
 
       <section className="mb-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
         <h2 className="font-display text-2xl font-semibold">

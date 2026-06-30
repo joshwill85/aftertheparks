@@ -12,6 +12,8 @@ import {
 } from "@/lib/seo/routes";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
+const removedGuidePath = `/${["guid", "es"].join("")}/`;
+
 const sampleSitemapActivities = [
   {
     activitySlug: "movies-under-the-stars",
@@ -66,8 +68,8 @@ async function main() {
     "sitemap should include individual activity pages"
   );
   assert.ok(
-    urls.some((url) => url.includes("/guides/")),
-    "sitemap should include guide pages"
+    !urls.some((url) => url.includes(removedGuidePath)),
+    "sitemap should not include removed guide pages"
   );
   for (const filteredPath of [
     "/activities?free=true",

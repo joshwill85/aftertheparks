@@ -10804,19 +10804,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
       "page_image_sha256": "7962fee6a365a6938ea9f6b2a5ebd0cc203022c9601000c48faefd3d76cab512",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e",
-          "parent_source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
-          "source_authority": "non_official",
-          "source_crop_sha256": "e784ee7ef7eca3aeea5b57248120072484123c17ebe37c314bd0dd1a6e8c2923",
-          "source_role": "derived_source_link",
-          "target_url": "https://qr.disneyworld.com/Old-Key-West-Recreation-A-Frame"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -10848,10 +10837,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "3dabab96d734947d040b846f978a1c76da0c88bfd12e7508efe6df08fb42ac91",
+      "crop_sha256": "386f468457797d485e89c99afe2437db83e356fbc0b3137c3d466d31e53875da",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",
@@ -10865,13 +10854,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001-region_05-movie_section.png",
-      "crop_sha256": "b9f70f4e5aa6cc18a6d402f5910589edc42558e7bb0e59ebdbeeb4364c508d8e",
+      "crop_sha256": "654a92f994f667d0b1d48c12ba2aa380a52d7050766a84d13d4689e4b1684425",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_001.png",

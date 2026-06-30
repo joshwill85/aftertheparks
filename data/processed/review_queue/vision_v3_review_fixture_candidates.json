@@ -1,0 +1,7 @@
+{
+  "candidates": [],
+  "fixture_kind": "review_fixture_candidates_v3",
+  "generated_at": "2026-06-30T08:28:02.196527Z",
+  "schema_version": "review_fixture_candidates_v3_001",
+  "source_decisions_path": "data/processed/review_queue/vision_v3_review_decisions.json"
+}

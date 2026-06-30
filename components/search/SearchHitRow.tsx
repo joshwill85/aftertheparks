@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 const KIND_LABELS: Record<SearchHit["kind"], string> = {
   activity: "Activity",
   resort: "Resort",
-  guide: "Guide",
   category: "Category",
   page: "Page",
   movie: "Movie",

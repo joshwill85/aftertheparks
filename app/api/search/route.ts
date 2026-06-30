@@ -39,7 +39,6 @@ export async function GET(request: Request) {
     officialOfferings: result.officialOfferings,
     offeringCount: result.officialOfferings.length,
     resorts: result.resorts,
-    guides: result.guides,
     movies: result.movies,
     categories: result.categories,
     pages: result.pages,

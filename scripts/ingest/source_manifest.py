@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import re
 
 
 @dataclass(frozen=True)
@@ -271,6 +272,22 @@ def edition_matches_quarter(edition: str | None, quarter: str | None) -> bool:
     return True
   normalized = quarter.strip().lower()
   normalized_edition = str(edition or "").strip().lower()
+  official_schedule_match = re.search(r"\bofficial-schedule-(\d{2})(\d{2})\b", normalized_edition)
+  if official_schedule_match:
+    month = int(official_schedule_match.group(1))
+    year = int(official_schedule_match.group(2))
+    if 1 <= month <= 3:
+      official_schedule_quarter = f"fy{year:02d}-q2"
+    elif 4 <= month <= 6:
+      official_schedule_quarter = f"fy{year:02d}-q3"
+    elif 7 <= month <= 9:
+      official_schedule_quarter = f"fy{year:02d}-q4"
+    elif 10 <= month <= 12:
+      official_schedule_quarter = f"fy{(year + 1) % 100:02d}-q1"
+    else:
+      official_schedule_quarter = ""
+    if official_schedule_quarter == normalized:
+      return True
   return bool(normalized_edition) and (
     normalized_edition == normalized
     or normalized_edition.startswith(f"{normalized}-")

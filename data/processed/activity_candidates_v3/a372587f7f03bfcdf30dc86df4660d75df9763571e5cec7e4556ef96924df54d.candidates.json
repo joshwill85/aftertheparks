@@ -45,7 +45,7 @@
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "BOARDWALK CROQUET ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -411,7 +411,7 @@
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "DISNEY FIT YOGA ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -783,7 +783,7 @@
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "FAMILY WELLNESS YOGA ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -1111,6 +1111,780 @@
   },
   {
     "calendar_group_key": "boardwalk",
+    "candidate_id": "vision-v3-85c460e6bf4d0971f0befa6e",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.350146+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+        "source_authority": "non_official",
+        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9821032285690308,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.98966,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "SIDE SHOW GAMES ARCADE ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            2879,
+            10243,
+            3147
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9821032285690308,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "SIDE SHOW GAMES ARCADE ($)"
+          },
+          {
+            "confidence": 0.98966,
+            "engine": "rapidocr",
+            "text": "SIDE SHOW GAMES ARCADE ($)"
+          }
+        ],
+        "field": "location",
+        "inferred_location_from_title": true,
+        "normalized_value": "side_show_games_arcade",
+        "raw_value": "SIDE SHOW GAMES ARCADE ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            2879,
+            10243,
+            3147
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9988029599189758,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 8:00am-11:00pm"
+          },
+          {
+            "confidence": 0.993,
+            "engine": "rapidocr",
+            "text": "Daily from 8:00am-11:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "23:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 8:00am-11:00pm",
+          "schedule_type": "recurring",
+          "start_time": "08:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 8:00am-11:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5721,
+            3183,
+            8064,
+            3382
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9821032285690308,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "SIDE SHOW GAMES ARCADE ($)"
+          },
+          {
+            "confidence": 0.98966,
+            "engine": "rapidocr",
+            "text": "SIDE SHOW GAMES ARCADE ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "side show games arcade ($)",
+        "raw_value": "SIDE SHOW GAMES ARCADE ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            2879,
+            10243,
+            3147
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "SIDE SHOW GAMES ARCADE ($)",
+    "movie_title": null,
+    "normalized_location_id": "side_show_games_arcade",
+    "normalized_movie_title": null,
+    "normalized_title": "side show games arcade ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "23:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 8:00am-11:00pm",
+      "schedule_type": "recurring",
+      "start_time": "08:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 8:00am-11:00pm",
+    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5709,
+            2879,
+            10243,
+            3147
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "SIDE SHOW GAMES ARCADE ($)"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5709,
+            2879,
+            10243,
+            3147
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "SIDE SHOW GAMES ARCADE ($)"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5721,
+            3183,
+            8064,
+            3382
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "Daily from 8:00am-11:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5709,
+            2879,
+            10243,
+            3147
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "SIDE SHOW GAMES ARCADE ($)"
+        }
+      ]
+    },
+    "source_title": "SIDE SHOW GAMES ARCADE ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "boardwalk",
+    "candidate_id": "vision-v3-c17581bdf88317fe767bf90d",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.350146+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+        "source_authority": "non_official",
+        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": false,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9958568215370178,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.99894,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": false,
+        "raw_value": "no fee marker",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5721,
+            3847,
+            8292,
+            4087
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9958568215370178,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "COMMUNITY HALL"
+          },
+          {
+            "confidence": 0.99894,
+            "engine": "rapidocr",
+            "text": "COMMUNITY HALL"
+          }
+        ],
+        "field": "location",
+        "inferred_location_from_title": true,
+        "normalized_value": "community_hall",
+        "raw_value": "COMMUNITY HALL",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5721,
+            3847,
+            8292,
+            4087
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9994688630104065,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Daily from 10:00am-10:00pm"
+          },
+          {
+            "confidence": 0.98836,
+            "engine": "rapidocr",
+            "text": "Daily from 10:00am-10:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "end_time": "22:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Daily from 10:00am-10:00pm",
+          "schedule_type": "recurring",
+          "start_time": "10:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Daily from 10:00am-10:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5721,
+            4139,
+            8198,
+            4338
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9958568215370178,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "COMMUNITY HALL"
+          },
+          {
+            "confidence": 0.99894,
+            "engine": "rapidocr",
+            "text": "COMMUNITY HALL"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "community hall",
+        "raw_value": "COMMUNITY HALL",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5721,
+            3847,
+            8292,
+            4087
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "COMMUNITY HALL",
+    "movie_title": null,
+    "normalized_location_id": "community_hall",
+    "normalized_movie_title": null,
+    "normalized_title": "community hall",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "end_time": "22:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Daily from 10:00am-10:00pm",
+      "schedule_type": "recurring",
+      "start_time": "10:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Daily from 10:00am-10:00pm",
+    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5721,
+            3847,
+            8292,
+            4087
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "COMMUNITY HALL"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5721,
+            3847,
+            8292,
+            4087
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "COMMUNITY HALL"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5721,
+            4139,
+            8198,
+            4338
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "Daily from 10:00am-10:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5721,
+            3847,
+            8292,
+            4087
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "COMMUNITY HALL"
+        }
+      ]
+    },
+    "source_title": "COMMUNITY HALL",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "boardwalk",
     "candidate_id": "vision-v3-54cd50552f5ea7779d2c3e53",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
@@ -1155,7 +1929,7 @@
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "POOLSIDE ACTIVITIES ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -1165,7 +1939,7 @@
             5751
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1199,7 +1973,7 @@
             5994
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1219,10 +1993,10 @@
             5184,
             2106,
             10800,
-            11664
+            15552
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1272,7 +2046,7 @@
             6253
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1306,7 +2080,7 @@
             5751
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1495,6 +2269,386 @@
   },
   {
     "calendar_group_key": "boardwalk",
+    "candidate_id": "vision-v3-8e08126f83aa65984b6ca486",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "captured_at": "2026-06-30T00:07:31.350146+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+    "currentness": "current",
+    "derived_source_links": [
+      {
+        "decoder": "opencv_qrcode",
+        "is_official_source": false,
+        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+        "source_authority": "non_official",
+        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
+        "source_role": "derived_source_link",
+        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
+      }
+    ],
+    "description": null,
+    "document_family": "aframe_recreation",
+    "edition": "fy26-q3-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+    "field_evidence": {
+      "fee": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9910885691642761,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.9905,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "MICKEY TIE-DYE ($) ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            6978,
+            8551,
+            7225
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "location": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.993779718875885,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Luna Park Pool Deck"
+          },
+          {
+            "confidence": 0.99995,
+            "engine": "rapidocr",
+            "text": "Luna Park Pool Deck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "luna_park_pool_deck",
+        "raw_value": "Luna Park Pool Deck",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5717,
+            7282,
+            7445,
+            7444
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "schedule": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.990361750125885,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm"
+          },
+          {
+            "confidence": 0.99976,
+            "engine": "rapidocr",
+            "text": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Sunday",
+            "Tuesday",
+            "Thursday",
+            "Saturday"
+          ],
+          "end_time": "17:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm",
+          "schedule_type": "recurring",
+          "start_time": "16:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5709,
+            7513,
+            9133,
+            7942
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      },
+      "title": {
+        "agreement": "exact_after_normalization",
+        "engines": [
+          {
+            "confidence": 0.9910885691642761,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MICKEY TIE-DYE ($)"
+          },
+          {
+            "confidence": 0.9905,
+            "engine": "rapidocr",
+            "text": "MICKEY TIE-DYE ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "mickey tie-dye ($)",
+        "raw_value": "MICKEY TIE-DYE ($)",
+        "review_status": "not_required",
+        "source": {
+          "bbox_px": [
+            5713,
+            6978,
+            8551,
+            7225
+          ],
+          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "page_number": 1,
+          "region_id": "page-001-region-04"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Luna Park Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "luna_park_pool_deck",
+    "normalized_movie_title": null,
+    "normalized_title": "mickey tie-dye ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
+      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Sunday",
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "end_time": "17:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm",
+      "schedule_type": "recurring",
+      "start_time": "16:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm",
+    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
+    "source_kind": "official_pdf",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            5713,
+            6978,
+            8551,
+            7225
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            5717,
+            7282,
+            7445,
+            7444
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "Luna Park Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            5709,
+            7513,
+            9133,
+            7942
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "Sunday, Tuesday, Thursday and Saturday from 4:00pm-5:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            5713,
+            6978,
+            8551,
+            7225
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
+          "region_id": "page-001-region-04",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ]
+    },
+    "source_title": "MICKEY TIE-DYE ($)",
+    "source_type": "pdf",
+    "validation_findings": [],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "boardwalk",
     "candidate_id": "vision-v3-8c28362c3d0a4ad4e1e6b913",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
@@ -1549,7 +2703,7 @@
             8671
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1583,7 +2737,7 @@
             8898
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1603,10 +2757,10 @@
             5184,
             2106,
             10800,
-            11664
+            15552
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1653,7 +2807,7 @@
             9153
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1687,7 +2841,7 @@
             8671
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1917,7 +3071,7 @@
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "CAMPFIRE ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -1927,7 +3081,7 @@
             9870
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1961,7 +3115,7 @@
             10121
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -1981,10 +3135,10 @@
             5184,
             2106,
             10800,
-            11664
+            15552
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -2035,7 +3189,7 @@
             10364
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -2069,7 +3223,7 @@
             9870
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "0779b20d0de157390f705580e4af824b44c404d7404b7fa07cfc6fd28cc9fabd",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -2259,8 +3413,8 @@
   },
   {
     "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-3aa2c070971b50cf035c021c",
-    "candidate_type": "movie",
+    "candidate_id": "vision-v3-d59d84d7166dfb0bb0acc962",
+    "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
     ],
@@ -2291,102 +3445,68 @@
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9506126642227173,
+            "confidence": 0.9897297620773315,
             "engine": "paddleocr_ppstructurev3",
             "text": "no fee marker"
           },
           {
-            "confidence": 0.9576,
+            "confidence": 0.99308,
             "engine": "rapidocr",
             "text": "no fee marker"
           }
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            5713,
+            11093,
+            8352,
+            11312
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "location": {
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9893639087677002,
+            "confidence": 0.999968945980072,
             "engine": "paddleocr_ppstructurev3",
-            "text": "VILLAGE GREEN LAWN"
+            "text": "Village Green Lawn"
           },
           {
-            "confidence": 0.95466,
+            "confidence": 0.99575,
             "engine": "rapidocr",
-            "text": "VILLAGE GREEN LAWN"
+            "text": "Village Green Lawn"
           }
         ],
         "field": "location",
         "normalized_value": "village_green_lawn",
-        "raw_value": "VILLAGE GREEN LAWN",
+        "raw_value": "Village Green Lawn",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            5705,
+            11376,
+            7360,
+            11563
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9999203085899353,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "Beauty and the Beast (1991)"
-          },
-          {
-            "confidence": 0.95772,
-            "engine": "rapidocr",
-            "text": "Beauty and the Beast (1991)"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "beauty and the beast (1991)",
-        "raw_value": "Beauty and the Beast (1991)",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            7974,
-            13329,
-            10206,
-            13535
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "region": {
@@ -2399,107 +3519,113 @@
         "source": {
           "bbox_px": [
             5184,
-            11664,
+            2106,
             10800,
             15552
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "schedule": {
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9893639087677002,
+            "confidence": 0.9915022253990173,
             "engine": "paddleocr_ppstructurev3",
-            "text": "8:3OPM"
+            "text": "Nightly at 8:00pm"
           },
           {
-            "confidence": 0.95466,
+            "confidence": 0.9908,
             "engine": "rapidocr",
-            "text": "8:3OPM"
+            "text": "Nightly at 8:00pm"
           }
         ],
         "field": "schedule",
         "normalized_value": {
           "confidence": "validated",
           "days_of_week": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
             "Sunday"
           ],
           "parser": "schedule_parser_v3",
-          "raw_text": "Sunday at 8:30PM",
+          "raw_text": "Nightly at 8:00pm",
           "schedule_type": "recurring",
-          "start_time": "20:30",
+          "start_time": "20:00",
           "timezone": "America/New_York"
         },
-        "raw_value": "Sunday at 8:3OPM",
+        "raw_value": "Nightly at 8:00pm",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            5713,
+            11636,
+            7266,
+            11802
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "title": {
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9506126642227173,
+            "confidence": 0.9897297620773315,
             "engine": "paddleocr_ppstructurev3",
-            "text": "MOVIE UNDER THESTARS"
+            "text": "NIGHTTIME TRIVIA"
           },
           {
-            "confidence": 0.9576,
+            "confidence": 0.99308,
             "engine": "rapidocr",
-            "text": "UNDER THE STARS"
+            "text": "NIGHTTIME TRIVIA"
           }
         ],
         "field": "title",
-        "normalized_value": "movie under the stars",
-        "raw_value": "MOVIE UNDER THESTARS",
+        "normalized_value": "nighttime trivia",
+        "raw_value": "NIGHTTIME TRIVIA",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            5713,
+            11093,
+            8352,
+            11312
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       }
     },
     "http_status": 200,
-    "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "Beauty and the Beast (1991)",
+    "location_text": "Village Green Lawn",
+    "movie_title": null,
     "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "beauty and the beast (1991)",
-    "normalized_title": "movie under the stars",
+    "normalized_movie_title": null,
+    "normalized_title": "nighttime trivia",
     "pipeline_version": "vision_v3_001",
-    "region_id": "page-001-region-05",
-    "region_type": "movie_section",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
     "registration_required": null,
     "runtime_lineage": {
       "config": {
@@ -2579,15 +3705,21 @@
     "schedule_normalized": {
       "confidence": "validated",
       "days_of_week": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
         "Sunday"
       ],
       "parser": "schedule_parser_v3",
-      "raw_text": "Sunday at 8:30PM",
+      "raw_text": "Nightly at 8:00pm",
       "schedule_type": "recurring",
-      "start_time": "20:30",
+      "start_time": "20:00",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Sunday at 8:3OPM",
+    "schedule_raw": "Nightly at 8:00pm",
     "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
     "source_kind": "official_pdf",
     "source_role": "resort_pdf",
@@ -2595,85 +3727,69 @@
       "fee": [
         {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            5713,
+            11093,
+            8352,
+            11312
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "fee",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
+          "region_id": "page-001-region-04",
+          "text": "NIGHTTIME TRIVIA"
         }
       ],
       "location": [
         {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            5705,
+            11376,
+            7360,
+            11563
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "location",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            7974,
-            13329,
-            10206,
-            13535
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Beauty and the Beast (1991)"
+          "region_id": "page-001-region-04",
+          "text": "Village Green Lawn"
         }
       ],
       "schedule": [
         {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            5713,
+            11636,
+            7266,
+            11802
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "schedule",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Sunday at 8:3OPM"
+          "region_id": "page-001-region-04",
+          "text": "Nightly at 8:00pm"
         }
       ],
       "title": [
         {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            5713,
+            11093,
+            8352,
+            11312
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "title",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
+          "region_id": "page-001-region-04",
+          "text": "NIGHTTIME TRIVIA"
         }
       ]
     },
-    "source_title": "MOVIE UNDER THESTARS",
+    "source_title": "NIGHTTIME TRIVIA",
     "source_type": "pdf",
     "validation_findings": [],
     "validation_status": "needs_review",
@@ -2681,8 +3797,8 @@
   },
   {
     "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-79bdb4adaf8676ea87d8a734",
-    "candidate_type": "movie",
+    "candidate_id": "vision-v3-d6813bce5a40a32e770b8685",
+    "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
     ],
@@ -2725,7 +3841,7 @@
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -2735,12 +3851,12 @@
             12705
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "location": {
@@ -2769,46 +3885,12 @@
             13138
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9999662637710571,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "Moana"
-          },
-          {
-            "confidence": 0.9841,
-            "engine": "rapidocr",
-            "text": "Moana"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "moana",
-        "raw_value": "Moana",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            9576,
-            13681,
-            10214,
-            13851
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "region": {
@@ -2821,17 +3903,17 @@
         "source": {
           "bbox_px": [
             5184,
-            11664,
+            2106,
             10800,
             15552
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "schedule": {
@@ -2851,16 +3933,13 @@
         "field": "schedule",
         "normalized_value": {
           "confidence": "validated",
-          "days_of_week": [
-            "Monday"
-          ],
           "parser": "schedule_parser_v3",
-          "raw_text": "Monday at 8:30PM",
-          "schedule_type": "recurring",
+          "raw_text": "8:30PM",
+          "schedule_type": "time_point",
           "start_time": "20:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Monday at 8:3OPM",
+        "raw_value": "8:3OPM",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -2870,12 +3949,12 @@
             13138
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       },
       "title": {
@@ -2904,24 +3983,24 @@
             12705
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb8ca79bc61a26a347ae31ffb4e09c916ec19b51fcdd5acd4636c9eeb65e2575",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_04-resort_activities_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "page_number": 1,
-          "region_id": "page-001-region-05"
+          "region_id": "page-001-region-04"
         }
       }
     },
     "http_status": 200,
     "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "Moana",
+    "movie_title": null,
     "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "moana",
+    "normalized_movie_title": null,
     "normalized_title": "movie under the stars",
     "pipeline_version": "vision_v3_001",
-    "region_id": "page-001-region-05",
-    "region_type": "movie_section",
+    "region_id": "page-001-region-04",
+    "region_type": "resort_activities_section",
     "registration_required": null,
     "runtime_lineage": {
       "config": {
@@ -3000,16 +4079,13 @@
     },
     "schedule_normalized": {
       "confidence": "validated",
-      "days_of_week": [
-        "Monday"
-      ],
       "parser": "schedule_parser_v3",
-      "raw_text": "Monday at 8:30PM",
-      "schedule_type": "recurring",
+      "raw_text": "8:30PM",
+      "schedule_type": "time_point",
       "start_time": "20:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Monday at 8:3OPM",
+    "schedule_raw": "8:3OPM",
     "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
     "source_kind": "official_pdf",
     "source_role": "resort_pdf",
@@ -3026,7 +4102,7 @@
           "field": "fee",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
+          "region_id": "page-001-region-04",
           "text": "MOVIE UNDER THESTARS"
         }
       ],
@@ -3042,24 +4118,8 @@
           "field": "location",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
+          "region_id": "page-001-region-04",
           "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            9576,
-            13681,
-            10214,
-            13851
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Moana"
         }
       ],
       "schedule": [
@@ -3074,8 +4134,8 @@
           "field": "schedule",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Monday at 8:3OPM"
+          "region_id": "page-001-region-04",
+          "text": "8:3OPM"
         }
       ],
       "title": [
@@ -3090,7 +4150,7 @@
           "field": "title",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
+          "region_id": "page-001-region-04",
           "text": "MOVIE UNDER THESTARS"
         }
       ]
@@ -3103,8 +4163,8 @@
   },
   {
     "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-92ca8626da7a2535d47f462e",
-    "candidate_type": "movie",
+    "candidate_id": "vision-v3-e9800cec782372c2def30bb2",
+    "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
     ],
@@ -3135,29 +4195,24 @@
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9506126642227173,
+            "confidence": 0.9992243647575378,
             "engine": "paddleocr_ppstructurev3",
-            "text": "no fee marker"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
             "text": "no fee marker"
           }
         ],
         "field": "fee",
         "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
+        "raw_value": "no fee marker",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            638,
+            8829,
+            3473,
+            9056
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_sha256": "ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -3169,63 +4224,29 @@
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9893639087677002,
+            "confidence": 0.9999821782112122,
             "engine": "paddleocr_ppstructurev3",
-            "text": "VILLAGE GREEN LAWN"
+            "text": "BoardWalk Tennis and Pickleball Court"
           },
           {
-            "confidence": 0.95466,
+            "confidence": 0.99971,
             "engine": "rapidocr",
-            "text": "VILLAGE GREEN LAWN"
+            "text": "BoardWalk Tennis and Pickleball Court"
           }
         ],
         "field": "location",
-        "normalized_value": "village_green_lawn",
-        "raw_value": "VILLAGE GREEN LAWN",
+        "normalized_value": "boardwalk_tennis_and_pickleball_court",
+        "raw_value": "BoardWalk Tennis and Pickleball Court",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            642,
+            9117,
+            3932,
+            9279
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9994364976882935,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "The Lion King (1994)"
-          },
-          {
-            "confidence": 0.98406,
-            "engine": "rapidocr",
-            "text": "The Lion King (1994)G"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "the lion king (1994)",
-        "raw_value": "The Lion King (1994)",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            8563,
-            13988,
-            10203,
-            14208
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_sha256": "ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -3242,13 +4263,13 @@
         "review_status": "required",
         "source": {
           "bbox_px": [
-            5184,
-            11664,
-            10800,
+            0,
+            8910,
+            5400,
             15552
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_sha256": "ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -3260,1280 +4281,14 @@
         "agreement": "exact_after_normalization",
         "engines": [
           {
-            "confidence": 0.9893639087677002,
+            "confidence": 0.9834516048431396,
             "engine": "paddleocr_ppstructurev3",
-            "text": "8:3OPM"
+            "text": "Friday from 9:00am-10:00am"
           },
           {
-            "confidence": 0.95466,
+            "confidence": 0.99635,
             "engine": "rapidocr",
-            "text": "8:3OPM"
-          }
-        ],
-        "field": "schedule",
-        "normalized_value": {
-          "confidence": "validated",
-          "days_of_week": [
-            "Tuesday"
-          ],
-          "parser": "schedule_parser_v3",
-          "raw_text": "Tuesday at 8:30PM",
-          "schedule_type": "recurring",
-          "start_time": "20:30",
-          "timezone": "America/New_York"
-        },
-        "raw_value": "Tuesday at 8:3OPM",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "MOVIE UNDER THESTARS"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "UNDER THE STARS"
-          }
-        ],
-        "field": "title",
-        "normalized_value": "movie under the stars",
-        "raw_value": "MOVIE UNDER THESTARS",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      }
-    },
-    "http_status": 200,
-    "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "The Lion King (1994)",
-    "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "the lion king (1994)",
-    "normalized_title": "movie under the stars",
-    "pipeline_version": "vision_v3_001",
-    "region_id": "page-001-region-05",
-    "region_type": "movie_section",
-    "registration_required": null,
-    "runtime_lineage": {
-      "config": {
-        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-        "engine_routing_policy": "fixed_config",
-        "image": {
-          "apply_exif_orientation": true,
-          "canonical_format": "png",
-          "preserve_original_bytes": true
-        },
-        "ocr": {
-          "docling_snapshot": {
-            "engine": "docling_snapshot",
-            "package": "docling",
-            "role": "parallel_structural_snapshot"
-          },
-          "docling_snapshot_enabled": false,
-          "optional": {
-            "surya_enabled": false
-          },
-          "primary": {
-            "engine": "paddleocr_ppstructurev3",
-            "mode": "ppstructurev3",
-            "package": "paddleocr",
-            "role": "primary_ocr_layout"
-          },
-          "secondary": {
-            "engine": "rapidocr",
-            "package": "rapidocr",
-            "role": "secondary_ocr_comparator"
-          }
-        },
-        "pipeline_version": "vision_v3_001",
-        "publish_gates": {
-          "allow_generic_family_auto_publish": false,
-          "require_engine_agreement_for_auto_publish": true,
-          "require_field_evidence": true,
-          "require_manual_review_on_disagreement": true
-        },
-        "render": {
-          "color_mode": "rgb",
-          "default_dpi": 450,
-          "max_dpi": 600,
-          "output_format": "png",
-          "pdf_engine": "pypdfium2"
-        }
-      },
-      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-      "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
-      "model_asset_hashes": {
-        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
-        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
-      },
-      "ocr_engine_configs": {
-        "paddleocr_ppstructurev3": {
-          "engine": "paddleocr_ppstructurev3",
-          "mode": "ppstructurev3",
-          "package": "paddleocr",
-          "role": "primary_ocr_layout"
-        },
-        "rapidocr": {
-          "engine": "rapidocr",
-          "package": "rapidocr",
-          "role": "secondary_ocr_comparator"
-        }
-      },
-      "package_versions": {
-        "Pillow": "11.3.0",
-        "docling": null,
-        "paddleocr": "3.7.0",
-        "pypdfium2": "5.10.1",
-        "rapidocr": "3.9.0"
-      }
-    },
-    "schedule_normalized": {
-      "confidence": "validated",
-      "days_of_week": [
-        "Tuesday"
-      ],
-      "parser": "schedule_parser_v3",
-      "raw_text": "Tuesday at 8:30PM",
-      "schedule_type": "recurring",
-      "start_time": "20:30",
-      "timezone": "America/New_York"
-    },
-    "schedule_raw": "Tuesday at 8:3OPM",
-    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-    "source_kind": "official_pdf",
-    "source_role": "resort_pdf",
-    "source_spans": {
-      "fee": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "fee",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ],
-      "location": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "location",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            8563,
-            13988,
-            10203,
-            14208
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "The Lion King (1994)"
-        }
-      ],
-      "schedule": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "schedule",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Tuesday at 8:3OPM"
-        }
-      ],
-      "title": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ]
-    },
-    "source_title": "MOVIE UNDER THESTARS",
-    "source_type": "pdf",
-    "validation_findings": [],
-    "validation_status": "needs_review",
-    "weather_note": null
-  },
-  {
-    "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-08f16b3cfb51d19b07a6635b",
-    "candidate_type": "movie",
-    "canonical_page_image_sha256s": [
-      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
-    ],
-    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "captured_at": "2026-06-30T00:07:31.350146+00:00",
-    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-    "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-        "source_authority": "non_official",
-        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
-        "source_role": "derived_source_link",
-        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
-      }
-    ],
-    "description": null,
-    "document_family": "aframe_recreation",
-    "edition": "fy26-q3-0526",
-    "fee_required": false,
-    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "field_evidence": {
-      "fee": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "no fee marker"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "no fee marker"
-          }
-        ],
-        "field": "fee",
-        "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "location": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "VILLAGE GREEN LAWN"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "VILLAGE GREEN LAWN"
-          }
-        ],
-        "field": "location",
-        "normalized_value": "village_green_lawn",
-        "raw_value": "VILLAGE GREEN LAWN",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9900400042533875,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "Toy Story 2"
-          },
-          {
-            "confidence": 0.92732,
-            "engine": "rapidocr",
-            "text": "Toy Story 2 [G"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "toy story 2",
-        "raw_value": "Toy Story 2",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            9287,
-            14320,
-            10215,
-            14544
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "region": {
-        "agreement": "not_evaluated",
-        "engines": [],
-        "field": "region",
-        "normalized_value": null,
-        "raw_value": null,
-        "review_status": "required",
-        "source": {
-          "bbox_px": [
-            5184,
-            11664,
-            10800,
-            15552
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "schedule": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "8:3OPM"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "8:3OPM"
-          }
-        ],
-        "field": "schedule",
-        "normalized_value": {
-          "confidence": "validated",
-          "days_of_week": [
-            "Wednesday"
-          ],
-          "parser": "schedule_parser_v3",
-          "raw_text": "Wednesday at 8:30PM",
-          "schedule_type": "recurring",
-          "start_time": "20:30",
-          "timezone": "America/New_York"
-        },
-        "raw_value": "Wednesday at 8:3OPM",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "MOVIE UNDER THESTARS"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "UNDER THE STARS"
-          }
-        ],
-        "field": "title",
-        "normalized_value": "movie under the stars",
-        "raw_value": "MOVIE UNDER THESTARS",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      }
-    },
-    "http_status": 200,
-    "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "Toy Story 2",
-    "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "toy story 2",
-    "normalized_title": "movie under the stars",
-    "pipeline_version": "vision_v3_001",
-    "region_id": "page-001-region-05",
-    "region_type": "movie_section",
-    "registration_required": null,
-    "runtime_lineage": {
-      "config": {
-        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-        "engine_routing_policy": "fixed_config",
-        "image": {
-          "apply_exif_orientation": true,
-          "canonical_format": "png",
-          "preserve_original_bytes": true
-        },
-        "ocr": {
-          "docling_snapshot": {
-            "engine": "docling_snapshot",
-            "package": "docling",
-            "role": "parallel_structural_snapshot"
-          },
-          "docling_snapshot_enabled": false,
-          "optional": {
-            "surya_enabled": false
-          },
-          "primary": {
-            "engine": "paddleocr_ppstructurev3",
-            "mode": "ppstructurev3",
-            "package": "paddleocr",
-            "role": "primary_ocr_layout"
-          },
-          "secondary": {
-            "engine": "rapidocr",
-            "package": "rapidocr",
-            "role": "secondary_ocr_comparator"
-          }
-        },
-        "pipeline_version": "vision_v3_001",
-        "publish_gates": {
-          "allow_generic_family_auto_publish": false,
-          "require_engine_agreement_for_auto_publish": true,
-          "require_field_evidence": true,
-          "require_manual_review_on_disagreement": true
-        },
-        "render": {
-          "color_mode": "rgb",
-          "default_dpi": 450,
-          "max_dpi": 600,
-          "output_format": "png",
-          "pdf_engine": "pypdfium2"
-        }
-      },
-      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-      "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
-      "model_asset_hashes": {
-        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
-        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
-      },
-      "ocr_engine_configs": {
-        "paddleocr_ppstructurev3": {
-          "engine": "paddleocr_ppstructurev3",
-          "mode": "ppstructurev3",
-          "package": "paddleocr",
-          "role": "primary_ocr_layout"
-        },
-        "rapidocr": {
-          "engine": "rapidocr",
-          "package": "rapidocr",
-          "role": "secondary_ocr_comparator"
-        }
-      },
-      "package_versions": {
-        "Pillow": "11.3.0",
-        "docling": null,
-        "paddleocr": "3.7.0",
-        "pypdfium2": "5.10.1",
-        "rapidocr": "3.9.0"
-      }
-    },
-    "schedule_normalized": {
-      "confidence": "validated",
-      "days_of_week": [
-        "Wednesday"
-      ],
-      "parser": "schedule_parser_v3",
-      "raw_text": "Wednesday at 8:30PM",
-      "schedule_type": "recurring",
-      "start_time": "20:30",
-      "timezone": "America/New_York"
-    },
-    "schedule_raw": "Wednesday at 8:3OPM",
-    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-    "source_kind": "official_pdf",
-    "source_role": "resort_pdf",
-    "source_spans": {
-      "fee": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "fee",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ],
-      "location": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "location",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            9287,
-            14320,
-            10215,
-            14544
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Toy Story 2"
-        }
-      ],
-      "schedule": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "schedule",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Wednesday at 8:3OPM"
-        }
-      ],
-      "title": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ]
-    },
-    "source_title": "MOVIE UNDER THESTARS",
-    "source_type": "pdf",
-    "validation_findings": [],
-    "validation_status": "needs_review",
-    "weather_note": null
-  },
-  {
-    "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-0f5a5285ef728c449ecb6c02",
-    "candidate_type": "movie",
-    "canonical_page_image_sha256s": [
-      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
-    ],
-    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "captured_at": "2026-06-30T00:07:31.350146+00:00",
-    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-    "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-        "source_authority": "non_official",
-        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
-        "source_role": "derived_source_link",
-        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
-      }
-    ],
-    "description": null,
-    "document_family": "aframe_recreation",
-    "edition": "fy26-q3-0526",
-    "fee_required": false,
-    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "field_evidence": {
-      "fee": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "no fee marker"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "no fee marker"
-          }
-        ],
-        "field": "fee",
-        "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "location": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "VILLAGE GREEN LAWN"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "VILLAGE GREEN LAWN"
-          }
-        ],
-        "field": "location",
-        "normalized_value": "village_green_lawn",
-        "raw_value": "VILLAGE GREEN LAWN",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9603376984596252,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "Mulan (1998)"
-          },
-          {
-            "confidence": 0.97102,
-            "engine": "rapidocr",
-            "text": "Mulan (1998)"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "mulan (1998)",
-        "raw_value": "Mulan (1998)",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            9059,
-            14640,
-            10186,
-            14848
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "region": {
-        "agreement": "not_evaluated",
-        "engines": [],
-        "field": "region",
-        "normalized_value": null,
-        "raw_value": null,
-        "review_status": "required",
-        "source": {
-          "bbox_px": [
-            5184,
-            11664,
-            10800,
-            15552
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "schedule": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "8:3OPM"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "8:3OPM"
-          }
-        ],
-        "field": "schedule",
-        "normalized_value": {
-          "confidence": "validated",
-          "days_of_week": [
-            "Thursday"
-          ],
-          "parser": "schedule_parser_v3",
-          "raw_text": "Thursday at 8:30PM",
-          "schedule_type": "recurring",
-          "start_time": "20:30",
-          "timezone": "America/New_York"
-        },
-        "raw_value": "Thursday at 8:3OPM",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "MOVIE UNDER THESTARS"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "UNDER THE STARS"
-          }
-        ],
-        "field": "title",
-        "normalized_value": "movie under the stars",
-        "raw_value": "MOVIE UNDER THESTARS",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      }
-    },
-    "http_status": 200,
-    "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "Mulan (1998)",
-    "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "mulan (1998)",
-    "normalized_title": "movie under the stars",
-    "pipeline_version": "vision_v3_001",
-    "region_id": "page-001-region-05",
-    "region_type": "movie_section",
-    "registration_required": null,
-    "runtime_lineage": {
-      "config": {
-        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-        "engine_routing_policy": "fixed_config",
-        "image": {
-          "apply_exif_orientation": true,
-          "canonical_format": "png",
-          "preserve_original_bytes": true
-        },
-        "ocr": {
-          "docling_snapshot": {
-            "engine": "docling_snapshot",
-            "package": "docling",
-            "role": "parallel_structural_snapshot"
-          },
-          "docling_snapshot_enabled": false,
-          "optional": {
-            "surya_enabled": false
-          },
-          "primary": {
-            "engine": "paddleocr_ppstructurev3",
-            "mode": "ppstructurev3",
-            "package": "paddleocr",
-            "role": "primary_ocr_layout"
-          },
-          "secondary": {
-            "engine": "rapidocr",
-            "package": "rapidocr",
-            "role": "secondary_ocr_comparator"
-          }
-        },
-        "pipeline_version": "vision_v3_001",
-        "publish_gates": {
-          "allow_generic_family_auto_publish": false,
-          "require_engine_agreement_for_auto_publish": true,
-          "require_field_evidence": true,
-          "require_manual_review_on_disagreement": true
-        },
-        "render": {
-          "color_mode": "rgb",
-          "default_dpi": 450,
-          "max_dpi": 600,
-          "output_format": "png",
-          "pdf_engine": "pypdfium2"
-        }
-      },
-      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-      "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
-      "model_asset_hashes": {
-        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
-        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
-      },
-      "ocr_engine_configs": {
-        "paddleocr_ppstructurev3": {
-          "engine": "paddleocr_ppstructurev3",
-          "mode": "ppstructurev3",
-          "package": "paddleocr",
-          "role": "primary_ocr_layout"
-        },
-        "rapidocr": {
-          "engine": "rapidocr",
-          "package": "rapidocr",
-          "role": "secondary_ocr_comparator"
-        }
-      },
-      "package_versions": {
-        "Pillow": "11.3.0",
-        "docling": null,
-        "paddleocr": "3.7.0",
-        "pypdfium2": "5.10.1",
-        "rapidocr": "3.9.0"
-      }
-    },
-    "schedule_normalized": {
-      "confidence": "validated",
-      "days_of_week": [
-        "Thursday"
-      ],
-      "parser": "schedule_parser_v3",
-      "raw_text": "Thursday at 8:30PM",
-      "schedule_type": "recurring",
-      "start_time": "20:30",
-      "timezone": "America/New_York"
-    },
-    "schedule_raw": "Thursday at 8:3OPM",
-    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-    "source_kind": "official_pdf",
-    "source_role": "resort_pdf",
-    "source_spans": {
-      "fee": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "fee",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ],
-      "location": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "location",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            9059,
-            14640,
-            10186,
-            14848
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Mulan (1998)"
-        }
-      ],
-      "schedule": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "schedule",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Thursday at 8:3OPM"
-        }
-      ],
-      "title": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ]
-    },
-    "source_title": "MOVIE UNDER THESTARS",
-    "source_type": "pdf",
-    "validation_findings": [],
-    "validation_status": "needs_review",
-    "weather_note": null
-  },
-  {
-    "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-2b90015c9a93f9926c31be79",
-    "candidate_type": "movie",
-    "canonical_page_image_sha256s": [
-      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
-    ],
-    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "captured_at": "2026-06-30T00:07:31.350146+00:00",
-    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-    "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-        "source_authority": "non_official",
-        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
-        "source_role": "derived_source_link",
-        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
-      }
-    ],
-    "description": null,
-    "document_family": "aframe_recreation",
-    "edition": "fy26-q3-0526",
-    "fee_required": false,
-    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "field_evidence": {
-      "fee": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "no fee marker"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "no fee marker"
-          }
-        ],
-        "field": "fee",
-        "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "location": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "VILLAGE GREEN LAWN"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "VILLAGE GREEN LAWN"
-          }
-        ],
-        "field": "location",
-        "normalized_value": "village_green_lawn",
-        "raw_value": "VILLAGE GREEN LAWN",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "disagreement",
-        "engines": [
-          {
-            "confidence": 0.7304633855819702,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "o 1n"
-          },
-          {
-            "confidence": 0.99029,
-            "engine": "rapidocr",
-            "text": "Monsters, Inc"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "o 1n",
-        "raw_value": "o 1n",
-        "review_status": "required",
-        "source": {
-          "bbox_px": [
-            9092,
-            14976,
-            10186,
-            15168
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "region": {
-        "agreement": "not_evaluated",
-        "engines": [],
-        "field": "region",
-        "normalized_value": null,
-        "raw_value": null,
-        "review_status": "required",
-        "source": {
-          "bbox_px": [
-            5184,
-            11664,
-            10800,
-            15552
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "schedule": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "8:3OPM"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "8:3OPM"
+            "text": "Friday from 9:00am-10:00am"
           }
         ],
         "field": "schedule",
@@ -4542,23 +4297,24 @@
           "days_of_week": [
             "Friday"
           ],
+          "end_time": "10:00",
           "parser": "schedule_parser_v3",
-          "raw_text": "Friday at 8:30PM",
+          "raw_text": "Friday from 9:00am-10:00am",
           "schedule_type": "recurring",
-          "start_time": "20:30",
+          "start_time": "09:00",
           "timezone": "America/New_York"
         },
-        "raw_value": "Friday at 8:3OPM",
+        "raw_value": "Friday from 9:00am-10:00am",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            634,
+            9331,
+            3168,
+            9514
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_sha256": "ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -4567,32 +4323,27 @@
         }
       },
       "title": {
-        "agreement": "exact_after_normalization",
+        "agreement": "disagreement",
         "engines": [
           {
-            "confidence": 0.9506126642227173,
+            "confidence": 0.9992243647575378,
             "engine": "paddleocr_ppstructurev3",
-            "text": "MOVIE UNDER THESTARS"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "UNDER THE STARS"
+            "text": "PICKLEBALL CLINIC"
           }
         ],
         "field": "title",
-        "normalized_value": "movie under the stars",
-        "raw_value": "MOVIE UNDER THESTARS",
-        "review_status": "not_required",
+        "normalized_value": "pickleball clinic",
+        "raw_value": "PICKLEBALL CLINIC",
+        "review_status": "required",
         "source": {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            638,
+            8829,
+            3473,
+            9056
           ],
           "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
+          "crop_sha256": "ecbec1c435a501668b98ff443cbeb9589f0bf4609e3b2cd5616ac9b2decb8457",
           "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
@@ -4602,11 +4353,11 @@
       }
     },
     "http_status": 200,
-    "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "o 1n",
-    "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "o 1n",
-    "normalized_title": "movie under the stars",
+    "location_text": "BoardWalk Tennis and Pickleball Court",
+    "movie_title": null,
+    "normalized_location_id": "boardwalk_tennis_and_pickleball_court",
+    "normalized_movie_title": null,
+    "normalized_title": "pickleball clinic",
     "pipeline_version": "vision_v3_001",
     "region_id": "page-001-region-05",
     "region_type": "movie_section",
@@ -4691,13 +4442,14 @@
       "days_of_week": [
         "Friday"
       ],
+      "end_time": "10:00",
       "parser": "schedule_parser_v3",
-      "raw_text": "Friday at 8:30PM",
+      "raw_text": "Friday from 9:00am-10:00am",
       "schedule_type": "recurring",
-      "start_time": "20:30",
+      "start_time": "09:00",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Friday at 8:3OPM",
+    "schedule_raw": "Friday from 9:00am-10:00am",
     "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
     "source_kind": "official_pdf",
     "source_role": "resort_pdf",
@@ -4705,507 +4457,69 @@
       "fee": [
         {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            638,
+            8829,
+            3473,
+            9056
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "fee",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
+          "text": "PICKLEBALL CLINIC"
         }
       ],
       "location": [
         {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            642,
+            9117,
+            3932,
+            9279
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "location",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "region_id": "page-001-region-05",
-          "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            9092,
-            14976,
-            10186,
-            15168
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "o 1n"
+          "text": "BoardWalk Tennis and Pickleball Court"
         }
       ],
       "schedule": [
         {
           "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
+            634,
+            9331,
+            3168,
+            9514
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "schedule",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "region_id": "page-001-region-05",
-          "text": "Friday at 8:3OPM"
+          "text": "Friday from 9:00am-10:00am"
         }
       ],
       "title": [
         {
           "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
+            638,
+            8829,
+            3473,
+            9056
           ],
           "engine": "paddleocr_ppstructurev3",
           "field": "title",
           "page": 1,
           "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
           "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
+          "text": "PICKLEBALL CLINIC"
         }
       ]
     },
-    "source_title": "MOVIE UNDER THESTARS",
-    "source_type": "pdf",
-    "validation_findings": [],
-    "validation_status": "needs_review",
-    "weather_note": null
-  },
-  {
-    "calendar_group_key": "boardwalk",
-    "candidate_id": "vision-v3-34f938e9fd4db2dcc79806c3",
-    "candidate_type": "movie",
-    "canonical_page_image_sha256s": [
-      "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336"
-    ],
-    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "captured_at": "2026-06-30T00:07:31.350146+00:00",
-    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-    "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-    "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-        "parent_source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-        "source_authority": "non_official",
-        "source_crop_sha256": "37c54aa5d118adf81c289c018775d820e03ed39e7a15de05be0d013d6b01fa0d",
-        "source_role": "derived_source_link",
-        "target_url": "http://qr.disneyworld.com/Boardwalk_Villas?r=qr"
-      }
-    ],
-    "description": null,
-    "document_family": "aframe_recreation",
-    "edition": "fy26-q3-0526",
-    "fee_required": false,
-    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
-    "field_evidence": {
-      "fee": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "no fee marker"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "no fee marker"
-          }
-        ],
-        "field": "fee",
-        "normalized_value": false,
-        "raw_value": "MOVIE UNDER THESTARS ($) There is a fee associated with this activity. Hours of operation, lifeguard availability, and other offerings are subject to closures, weather conditions, and change or cancellation without notice.",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "location": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "VILLAGE GREEN LAWN"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "VILLAGE GREEN LAWN"
-          }
-        ],
-        "field": "location",
-        "normalized_value": "village_green_lawn",
-        "raw_value": "VILLAGE GREEN LAWN",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "movie_title": {
-        "agreement": "disagreement",
-        "engines": [
-          {
-            "confidence": 0.6880607604980469,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "in  m"
-          },
-          {
-            "confidence": 0.94267,
-            "engine": "rapidocr",
-            "text": "Finding Nemo"
-          }
-        ],
-        "field": "movie_title",
-        "normalized_value": "in m",
-        "raw_value": "in  m",
-        "review_status": "required",
-        "source": {
-          "bbox_px": [
-            9027,
-            15300,
-            10186,
-            15504
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "region": {
-        "agreement": "not_evaluated",
-        "engines": [],
-        "field": "region",
-        "normalized_value": null,
-        "raw_value": null,
-        "review_status": "required",
-        "source": {
-          "bbox_px": [
-            5184,
-            11664,
-            10800,
-            15552
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "schedule": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9893639087677002,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "8:3OPM"
-          },
-          {
-            "confidence": 0.95466,
-            "engine": "rapidocr",
-            "text": "8:3OPM"
-          }
-        ],
-        "field": "schedule",
-        "normalized_value": {
-          "confidence": "validated",
-          "days_of_week": [
-            "Saturday"
-          ],
-          "parser": "schedule_parser_v3",
-          "raw_text": "Saturday at 8:30PM",
-          "schedule_type": "recurring",
-          "start_time": "20:30",
-          "timezone": "America/New_York"
-        },
-        "raw_value": "Saturday at 8:3OPM",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      },
-      "title": {
-        "agreement": "exact_after_normalization",
-        "engines": [
-          {
-            "confidence": 0.9506126642227173,
-            "engine": "paddleocr_ppstructurev3",
-            "text": "MOVIE UNDER THESTARS"
-          },
-          {
-            "confidence": 0.9576,
-            "engine": "rapidocr",
-            "text": "UNDER THE STARS"
-          }
-        ],
-        "field": "title",
-        "normalized_value": "movie under the stars",
-        "raw_value": "MOVIE UNDER THESTARS",
-        "review_status": "not_required",
-        "source": {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "content_sha256": "a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d",
-          "crop_sha256": "f03f32c95714c36e39b3e091cead27a2dcc4bb8c732d41c6de1afe2091db23f1",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001-region_05-movie_section.png",
-          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_001.png",
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "page_number": 1,
-          "region_id": "page-001-region-05"
-        }
-      }
-    },
-    "http_status": 200,
-    "location_text": "VILLAGE GREEN LAWN",
-    "movie_title": "in  m",
-    "normalized_location_id": "village_green_lawn",
-    "normalized_movie_title": "in m",
-    "normalized_title": "movie under the stars",
-    "pipeline_version": "vision_v3_001",
-    "region_id": "page-001-region-05",
-    "region_type": "movie_section",
-    "registration_required": null,
-    "runtime_lineage": {
-      "config": {
-        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-        "engine_routing_policy": "fixed_config",
-        "image": {
-          "apply_exif_orientation": true,
-          "canonical_format": "png",
-          "preserve_original_bytes": true
-        },
-        "ocr": {
-          "docling_snapshot": {
-            "engine": "docling_snapshot",
-            "package": "docling",
-            "role": "parallel_structural_snapshot"
-          },
-          "docling_snapshot_enabled": false,
-          "optional": {
-            "surya_enabled": false
-          },
-          "primary": {
-            "engine": "paddleocr_ppstructurev3",
-            "mode": "ppstructurev3",
-            "package": "paddleocr",
-            "role": "primary_ocr_layout"
-          },
-          "secondary": {
-            "engine": "rapidocr",
-            "package": "rapidocr",
-            "role": "secondary_ocr_comparator"
-          }
-        },
-        "pipeline_version": "vision_v3_001",
-        "publish_gates": {
-          "allow_generic_family_auto_publish": false,
-          "require_engine_agreement_for_auto_publish": true,
-          "require_field_evidence": true,
-          "require_manual_review_on_disagreement": true
-        },
-        "render": {
-          "color_mode": "rgb",
-          "default_dpi": 450,
-          "max_dpi": 600,
-          "output_format": "png",
-          "pdf_engine": "pypdfium2"
-        }
-      },
-      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
-      "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
-      "model_asset_hashes": {
-        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
-        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
-      },
-      "ocr_engine_configs": {
-        "paddleocr_ppstructurev3": {
-          "engine": "paddleocr_ppstructurev3",
-          "mode": "ppstructurev3",
-          "package": "paddleocr",
-          "role": "primary_ocr_layout"
-        },
-        "rapidocr": {
-          "engine": "rapidocr",
-          "package": "rapidocr",
-          "role": "secondary_ocr_comparator"
-        }
-      },
-      "package_versions": {
-        "Pillow": "11.3.0",
-        "docling": null,
-        "paddleocr": "3.7.0",
-        "pypdfium2": "5.10.1",
-        "rapidocr": "3.9.0"
-      }
-    },
-    "schedule_normalized": {
-      "confidence": "validated",
-      "days_of_week": [
-        "Saturday"
-      ],
-      "parser": "schedule_parser_v3",
-      "raw_text": "Saturday at 8:30PM",
-      "schedule_type": "recurring",
-      "start_time": "20:30",
-      "timezone": "America/New_York"
-    },
-    "schedule_raw": "Saturday at 8:3OPM",
-    "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
-    "source_kind": "official_pdf",
-    "source_role": "resort_pdf",
-    "source_spans": {
-      "fee": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "fee",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ],
-      "location": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "location",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "VILLAGE GREEN LAWN"
-        }
-      ],
-      "movie_title": [
-        {
-          "bbox_px": [
-            9027,
-            15300,
-            10186,
-            15504
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "movie_title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "in  m"
-        }
-      ],
-      "schedule": [
-        {
-          "bbox_px": [
-            5688,
-            12923,
-            9214,
-            13138
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "schedule",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "Saturday at 8:3OPM"
-        }
-      ],
-      "title": [
-        {
-          "bbox_px": [
-            5688,
-            12437,
-            10276,
-            12705
-          ],
-          "engine": "paddleocr_ppstructurev3",
-          "field": "title",
-          "page": 1,
-          "page_image_sha256": "e1bc3920b15e464451ccb7fd1fb92b306b6f4ad0a84ff184ab16a13a2da9d336",
-          "region_id": "page-001-region-05",
-          "text": "MOVIE UNDER THESTARS"
-        }
-      ]
-    },
-    "source_title": "MOVIE UNDER THESTARS",
+    "source_title": "PICKLEBALL CLINIC",
     "source_type": "pdf",
     "validation_findings": [],
     "validation_status": "needs_review",

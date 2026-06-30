@@ -7,6 +7,7 @@ import { redactTokenFromPath } from "@/lib/plan/token";
 import { requireTurnstile } from "@/lib/turnstile/require";
 import { planErrorResponse } from "@/lib/plan/api-response";
 import { guardRateLimit } from "@/lib/rate-limit/guard";
+import { getPublicPlanPreview } from "@/lib/plan/publicPlanPreview";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,9 @@ export async function GET(
   if (rateLimited) return rateLimited;
 
   const { token } = await params;
+  const previewPlan = getPublicPlanPreview(token);
+  if (previewPlan) return privateNoStoreJson(previewPlan);
+
   const serviceClient = createServiceClient();
   if (!serviceClient) {
     return privateNoStoreJson({ error: "Unavailable" }, { status: 503 });

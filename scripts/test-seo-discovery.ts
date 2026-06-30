@@ -36,9 +36,9 @@ assert.match(
 );
 
 const llmsFull = buildLlmsFullText(baseUrl);
-assert.match(llmsFull, /Planning guide creation/i);
-assert.match(llmsFull, /real guest decisions in plain language/i);
-assert.match(llmsFull, /Best next pages/i);
+assert.match(llmsFull, /Primary product routes/i);
+assert.match(llmsFull, /Priority activity explainers/i);
+assert.match(llmsFull, /Current transportation caveat/i);
 assert.match(llmsFull, /Do not use Disney Springs as a free resort-transfer hub/i);
 assert.doesNotMatch(llmsFull, /Research-gated guide creation/i);
 assert.doesNotMatch(llmsFull, /Research dossier/i);
@@ -46,7 +46,9 @@ assert.doesNotMatch(llmsFull, /Competitor gap analysis/i);
 assert.doesNotMatch(llmsFull, /Anti-thin-content checks/i);
 assert.doesNotMatch(llmsFull, /Would this page still help if search engines sent zero traffic/i);
 assert.doesNotMatch(llmsFull, /No SEO page exists unless it is also a useful product landing page/i);
-assert.match(llmsFull, /\/guides\/things-to-do-without-park-ticket/);
+assert.doesNotMatch(llmsFull, /\/guides\//);
+assert.match(llmsFull, /\/resorts/);
+assert.match(llmsFull, /\/activities\?free=true|\/activities/);
 assert.match(llmsFull, /\/activities\/movies-under-the-stars/);
 
 const normalized = normalizeChangedUrls(baseUrl, [

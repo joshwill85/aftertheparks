@@ -165,34 +165,49 @@ check("future insights rank dates and resorts inside the selected range", () => 
   assert.equal(insights.freeHeavyDates[0]?.freeCount, 1);
 });
 
-check("primary UI surfaces expose Now and Plan Ahead", () => {
+check("primary UI surfaces expose explicit Today Tonight and Plan Ahead nav", () => {
   const header = readFileSync("components/layout/SiteHeader.tsx", "utf8");
   const mobile = readFileSync("components/layout/MobileBottomNav.tsx", "utf8");
   const quickFinder = readFileSync("components/home/QuickFinder.tsx", "utf8");
   const footer = readFileSync("components/layout/SiteFooter.tsx", "utf8");
-  const globalsCss = readFileSync("app/globals.css", "utf8");
-  const nowSplitHalfCss =
-    globalsCss.match(/\.mobile-now-split__half\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
-  const nowSplitIconCss =
-    globalsCss.match(/\.mobile-now-split__half svg\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
-  const nowSplitLabelCss =
-    globalsCss.match(/\.mobile-now-split__half > span\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
 
-  assert.match(header, /aria-label="Now"/);
-  assert.match(header, /Plan Ahead/);
-  assert.doesNotMatch(header, /const NAV = \[\s*\{\s*href: "\/today", label: "Today" \},\s*\{\s*href: "\/tonight", label: "Tonight" \}/);
-  assert.match(mobile, /mobile-now-split/);
-  assert.match(mobile, /Plan Ahead/);
+  const desktopOrder = [
+    'href: "/today", label: "Today"',
+    'href: "/tonight", label: "Tonight"',
+    'href: "/calendar", label: "Plan Ahead"',
+    'href: "/activities", label: "Activities"',
+    'href: "/resorts", label: "Resorts"',
+    'href: "/weather", label: "Weather"',
+    'href: "/plan", label: "My Plan"',
+    'href: "/search", label: "Search"',
+  ];
+  let previous = -1;
+  for (const marker of desktopOrder) {
+    const index = header.indexOf(marker);
+    assert.ok(index > previous, `Desktop nav should order ${marker}`);
+    previous = index;
+  }
+
+  const mobileOrder = [
+    'href: "/today"',
+    'href: "/tonight"',
+    'href: "/calendar"',
+    'href: "/resorts"',
+    'href: "/plan"',
+  ];
+  previous = -1;
+  for (const marker of mobileOrder) {
+    const index = mobile.indexOf(marker);
+    assert.ok(index > previous, `Mobile nav should order ${marker}`);
+    previous = index;
+  }
+
+  assert.doesNotMatch(header, /now-split-nav|aria-label="Now"/);
+  assert.doesNotMatch(mobile, /mobile-now-split|aria-label="Now"|<span>Night<\/span>/);
+  assert.match(mobile, /Tonight/);
   assert.match(quickFinder, /Plan ahead/);
   assert.match(quickFinder, /\/calendar/);
   assert.match(footer, /Plan Ahead/);
-  assert.match(nowSplitHalfCss, /display:\s*grid;/);
-  assert.match(nowSplitHalfCss, /place-items:\s*center;/);
-  assert.match(nowSplitHalfCss, /align-content:\s*center;/);
-  assert.match(nowSplitHalfCss, /line-height:\s*1;/);
-  assert.doesNotMatch(nowSplitHalfCss, /grid-template-rows:/);
-  assert.match(nowSplitIconCss, /display:\s*none;/);
-  assert.match(nowSplitLabelCss, /line-height:\s*1;/);
 });
 
 check("known stay surfaces link to date-filtered Plan Ahead", () => {
@@ -244,6 +259,43 @@ check("Plan Ahead mounts weather-aware activity cards", () => {
   );
 });
 
+check("Plan Ahead speaks as a date planning tool", () => {
+  const calendarPage = readFileSync("app/calendar/page.tsx", "utf8");
+  const calendarClient = readFileSync("components/atlas/CalendarClient.tsx", "utf8");
+
+  assert.match(
+    calendarPage,
+    /Pick a day of your trip to see resort activities, weather context, and easy backup ideas\./,
+    "Calendar hero should use the trip-day planning subtitle"
+  );
+
+  for (const label of ["Today", "Tomorrow", "This weekend", "Trip dates", "Choose a date"]) {
+    assert.match(calendarClient, new RegExp(label), `Plan Ahead should expose ${label}`);
+  }
+
+  for (const label of ["Resort", "Time of day", "Free", "Indoor or covered", "Category"]) {
+    assert.match(
+      calendarClient,
+      new RegExp(`<span>${label}</span>`),
+      `Secondary filters should include ${label}`
+    );
+  }
+
+  for (const confidence of [
+    "Strong schedule coverage",
+    "Some current listings",
+    "Limited current listings",
+    "Weather not available yet",
+    "Schedule details may change",
+  ]) {
+    assert.match(calendarClient, new RegExp(confidence), `Date summary should include ${confidence}`);
+  }
+
+  for (const action of ["Add to My Plan", "View details", "Find indoor backup"]) {
+    assert.match(calendarClient, new RegExp(action), `Calendar cards should expose ${action}`);
+  }
+});
+
 check("Plan Ahead insight cards explain recommendations in human terms", () => {
   const calendarClient = readFileSync("components/atlas/CalendarClient.tsx", "utf8");
 
@@ -251,7 +303,7 @@ check("Plan Ahead insight cards explain recommendations in human terms", () => {
   assert.match(calendarClient, /Most activities in your future window/);
   assert.match(calendarClient, /Most options at one resort/);
   assert.match(calendarClient, /Best after-dark day/);
-  assert.match(calendarClient, /Best no-cost day/);
+  assert.match(calendarClient, /Best free day/);
   assert.match(calendarClient, /Try widening the day range or clearing a filter/);
   assert.match(calendarClient, /No future evening-heavy day matches yet/);
   assert.match(calendarClient, /No future free-heavy day matches yet/);

@@ -99,19 +99,8 @@
       "page_number": 1
     }
   },
-  "derived_source_links": [
-    {
-      "decoder": "opencv_qrcode",
-      "is_official_source": false,
-      "parent_content_sha256": "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62",
-      "parent_source_document_id": "af4528d505c55170f22035d0280484c7a5a05d3bb56da4ed757a640cb2b87807",
-      "source_authority": "non_official",
-      "source_crop_sha256": "6524944be82f4372236c41b12bb9cb574fa22591888d30b37640e7ea5885fbdb",
-      "source_role": "derived_source_link",
-      "target_url": "https://qr.disneyworld.com/e/Wilderness-Lodge-Recreation"
-    }
-  ],
-  "document_family": "aframe_recreation",
+  "derived_source_links": [],
+  "document_family": "unknown_visual_schedule",
   "edition": "fy26-q3-0526",
   "engine_regions": [],
   "engine_runs": [
@@ -6865,12 +6854,12 @@
   ],
   "errors": [],
   "family_classification": {
-    "allow_auto_publish": true,
-    "confidence": "high",
-    "document_family": "aframe_recreation",
-    "parser": "AframeRecreationParser",
+    "allow_auto_publish": false,
+    "confidence": "low",
+    "document_family": "unknown_visual_schedule",
+    "parser": "GenericVisualScheduleParser",
     "signals": [
-      "filename:aframe_recreation"
+      "no_known_family_signal"
     ]
   },
   "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
@@ -10458,145 +10447,33 @@
   },
   "regions": [
     {
-      "allow_auto_publish": true,
+      "allow_auto_publish": false,
       "bbox_px": [
         0,
         0,
         10800,
-        2106
+        16200
       ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_01-header.png",
-      "crop_sha256": "5b455e26d23fad9d765b734011f3c7b410a46c6d493ac3079654718a1478faef",
-      "detection_confidence": 0.8,
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_01-unknown.png",
+      "crop_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+      "detection_confidence": 0.5,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
       "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
       "page_number": 1,
       "reading_order": 1,
-      "region_family": "aframe_recreation",
+      "region_family": "unknown_visual_schedule",
       "region_id": "page-001-region-01",
-      "region_type": "header"
-    },
-    {
-      "allow_auto_publish": true,
-      "bbox_px": [
-        0,
-        2106,
-        3888,
-        5022
-      ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_02-qr_callout.png",
-      "crop_sha256": "6524944be82f4372236c41b12bb9cb574fa22591888d30b37640e7ea5885fbdb",
-      "detection_confidence": 0.8,
-      "detection_method": "vision_v3_static_family_region_scaffold",
-      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
-      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
-      "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62",
-          "parent_source_document_id": "af4528d505c55170f22035d0280484c7a5a05d3bb56da4ed757a640cb2b87807",
-          "source_authority": "non_official",
-          "source_crop_sha256": "6524944be82f4372236c41b12bb9cb574fa22591888d30b37640e7ea5885fbdb",
-          "source_role": "derived_source_link",
-          "target_url": "https://qr.disneyworld.com/e/Wilderness-Lodge-Recreation"
-        }
-      ],
-      "reading_order": 2,
-      "region_family": "aframe_recreation",
-      "region_id": "page-001-region-02",
-      "region_type": "qr_callout"
-    },
-    {
-      "allow_auto_publish": true,
-      "bbox_px": [
-        0,
-        4860,
-        5400,
-        8910
-      ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_03-wellness_section.png",
-      "crop_sha256": "3d0112fa83264976c29ad0af1afafae65f4e4ec564b37eca5ce629922dd206c3",
-      "detection_confidence": 0.8,
-      "detection_method": "vision_v3_static_family_region_scaffold",
-      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
-      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
-      "page_number": 1,
-      "reading_order": 3,
-      "region_family": "aframe_recreation",
-      "region_id": "page-001-region-03",
-      "region_type": "wellness_section"
-    },
-    {
-      "allow_auto_publish": true,
-      "bbox_px": [
-        5184,
-        2106,
-        10800,
-        11664
-      ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "289ad3464c47b7245fd0bf8d32b1e74c889ceb2cd8540c542b09d169f9655171",
-      "detection_confidence": 0.8,
-      "detection_method": "vision_v3_static_family_region_scaffold",
-      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
-      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
-      "page_number": 1,
-      "reading_order": 4,
-      "region_family": "aframe_recreation",
-      "region_id": "page-001-region-04",
-      "region_type": "resort_activities_section"
-    },
-    {
-      "allow_auto_publish": true,
-      "bbox_px": [
-        5184,
-        11664,
-        10800,
-        15552
-      ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_05-movie_section.png",
-      "crop_sha256": "e4d98c857da58138ca8f48dd20b034f1a6440cbb13357f62e4aa5200b7098573",
-      "detection_confidence": 0.8,
-      "detection_method": "vision_v3_static_family_region_scaffold",
-      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
-      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
-      "page_number": 1,
-      "reading_order": 5,
-      "region_family": "aframe_recreation",
-      "region_id": "page-001-region-05",
-      "region_type": "movie_section"
-    },
-    {
-      "allow_auto_publish": true,
-      "bbox_px": [
-        0,
-        15552,
-        10800,
-        16200
-      ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_06-footer.png",
-      "crop_sha256": "cd9fcc4dab96948c5c5dc7d33ec0c464306b98646be7ec9421e2453cc50bf3f2",
-      "detection_confidence": 0.8,
-      "detection_method": "vision_v3_static_family_region_scaffold",
-      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
-      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
-      "page_number": 1,
-      "reading_order": 6,
-      "region_family": "aframe_recreation",
-      "region_id": "page-001-region-06",
-      "region_type": "footer"
+      "region_type": "unknown"
     }
   ],
   "render_config": {
     "bbox_format": "[x1,y1,x2,y2]",
-    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "config_hash": "3bf9c8f4e165b6f0bb4c33dd73249838b81427e4f3a5a5ce3ea913d58a8fb262",
     "coordinate_origin": "top_left",
     "image_engine": "Pillow",
     "image_engine_version": "11.3.0",
+    "image_manifest_policy": "render_each_manifest_image_as_canonical_page",
     "image_policy": "exif_transpose_rgb_png",
     "output_format": "png",
     "pdf_dpi": 450,
@@ -10652,8 +10529,8 @@
     },
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "container_image_digest": null,
-    "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-    "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+    "git_sha": "88a9305ea4abb8f5c57a946faef43f8b26d1697c",
+    "lineage_hash": "267e3440268d3a1877731cd0b3cf9fc08160397d1a26b59b822ced303082139d",
     "model_asset_hashes": {
       "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
       "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"

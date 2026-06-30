@@ -5,10 +5,22 @@ const baseUrl = process.env.ROUTE_SMOKE_BASE_URL ?? "http://localhost:3000";
 const expectedOkRoutes = [
   "/",
   "/activities",
+  "/activities?free=true",
+  "/activities?category=campfire",
+  "/activities?category=poolside",
+  "/activities?category=arcade",
+  "/activities/campfire",
+  "/activities/sorcerers-campfire",
+  "/activities/tasteful-artistry-at-disneys-wilderness-lodge",
   "/today",
   "/tonight",
   "/weather",
   "/resorts",
+  "/resorts/polynesian-village-resort",
+  "/calendar",
+  "/plan",
+  "/search?q=campfire",
+  "/search?q=rainy%20day",
 ] as const;
 
 async function main() {

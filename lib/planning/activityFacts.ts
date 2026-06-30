@@ -178,7 +178,7 @@ export function ageFitForActivity(activity: ActivityOccurrence): AgeFitFact {
       familyFriendly: true,
       confidence: "text_match",
       reason:
-        "Source text says all ages; little-kid fit only applies to child-oriented categories.",
+        "Listed for all ages; little-kid fit only applies to child-oriented categories.",
     };
   }
 

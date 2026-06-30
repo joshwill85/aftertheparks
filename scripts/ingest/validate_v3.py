@@ -56,6 +56,9 @@ SOURCE_PROVENANCE_BLOCKING_FINDINGS = {
     "source_not_current",
     "missing_source_captured_at",
 }
+EXTRACTION_BLOCKING_FINDINGS = {
+    "missing_reviewable_field_evidence",
+}
 
 
 def _evidence_for(candidate: dict[str, Any], field_name: str) -> dict[str, Any] | None:
@@ -81,6 +84,8 @@ def _agreement_ok(candidate: dict[str, Any], field_name: str) -> bool:
     field = _evidence_for(candidate, field_name)
     if not isinstance(field, dict):
         return False
+    if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(candidate):
+        return True
     return str(field.get("agreement") or "") == "exact_after_normalization"
 
 
@@ -225,6 +230,10 @@ def _engine_text_agreement_ok(candidate: dict[str, Any], field_name: str) -> boo
                 _candidate_normalized_value(candidate, field_name),
             )
         )
+    if field_name == "location" and _location_uses_inferred_title_evidence(candidate):
+        return True
+    if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(candidate):
+        return True
     agreement = _engine_text_agreement(candidate, field_name)
     if agreement is None:
         return False
@@ -249,11 +258,10 @@ def _engine_text_agreement(candidate: dict[str, Any], field_name: str) -> dict[s
 def _schedule_signature(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         return {}
-    return {
-        key: value[key]
-        for key in ("schedule_type", "days_of_week", "start_time", "end_time", "phrase", "timezone")
-        if key in value
-    }
+    keys = ["schedule_type", "days_of_week", "start_time", "end_time", "phrase", "timezone"]
+    if value.get("schedule_type") in {"time_range", "time_point"}:
+        keys.append("raw_text")
+    return {key: value[key] for key in keys if key in value}
 
 
 def _field_values_match(field_name: str, left: Any, right: Any) -> bool:
@@ -264,6 +272,15 @@ def _field_values_match(field_name: str, left: Any, right: Any) -> bool:
 
 def _engine_text_value_matches_candidate(candidate: dict[str, Any], field_name: str) -> bool:
     if field_name == "schedule" and _schedule_uses_composed_fragment_evidence(candidate):
+        field = _evidence_for(candidate, field_name)
+        return isinstance(field, dict) and _field_values_match(
+            field_name,
+            field.get("normalized_value"),
+            _candidate_normalized_value(candidate, field_name),
+        )
+    if field_name == "location" and _location_uses_inferred_title_evidence(candidate):
+        return True
+    if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(candidate):
         field = _evidence_for(candidate, field_name)
         return isinstance(field, dict) and _field_values_match(
             field_name,
@@ -293,6 +310,34 @@ def _schedule_uses_composed_fragment_evidence(candidate: dict[str, Any]) -> bool
     return bool(DAY_RE.search(raw_value)) and all(not DAY_RE.search(text) for text in engine_texts)
 
 
+def _location_uses_inferred_title_evidence(candidate: dict[str, Any]) -> bool:
+    field = _evidence_for(candidate, "location")
+    if not isinstance(field, dict):
+        return False
+    if field.get("inferred_location_from_title") is not True:
+        return False
+    if str(field.get("agreement") or "") != "exact_after_normalization":
+        return False
+    return _field_values_match("location", field.get("normalized_value"), _candidate_normalized_value(candidate, "location"))
+
+
+def _movie_title_recovered_from_secondary_ocr(candidate: dict[str, Any]) -> bool:
+    field = _evidence_for(candidate, "movie_title")
+    if not isinstance(field, dict):
+        return False
+    if field.get("recovered_from_secondary_ocr") is not True:
+        return False
+    if str(field.get("agreement") or "") != "exact_after_normalization":
+        return False
+    if not _field_values_match("movie_title", field.get("raw_value"), _candidate_raw_value(candidate, "movie_title")):
+        return False
+    return _field_values_match(
+        "movie_title",
+        field.get("normalized_value"),
+        _candidate_normalized_value(candidate, "movie_title"),
+    )
+
+
 def _requires_manual_review(candidate: dict[str, Any], field_name: str) -> bool:
     field = _evidence_for(candidate, field_name)
     if not isinstance(field, dict):
@@ -305,6 +350,10 @@ def _schedule_ok(schedule: Any) -> bool:
         return False
     if schedule.get("schedule_type") == "phrase":
         return bool(schedule.get("raw_text"))
+    if schedule.get("schedule_type") == "time_range":
+        return bool(schedule.get("raw_text") and schedule.get("start_time") and schedule.get("end_time"))
+    if schedule.get("schedule_type") == "time_point":
+        return bool(schedule.get("raw_text") and schedule.get("start_time"))
     return bool(schedule.get("days_of_week") and (schedule.get("start_time") or schedule.get("raw_text")))
 
 
@@ -322,6 +371,24 @@ def _has_any_reviewable_evidence(candidate: dict[str, Any]) -> bool:
     if not isinstance(evidence, dict):
         return False
     for field in evidence.values():
+        if not isinstance(field, dict):
+            continue
+        source = field.get("source")
+        if isinstance(source, dict) and (
+            source.get("page_image_sha256")
+            and source.get("crop_sha256")
+            and (source.get("crop_storage_path") or source.get("crop_path"))
+        ):
+            return True
+    return False
+
+
+def _has_any_reviewable_field_evidence(candidate: dict[str, Any]) -> bool:
+    evidence = candidate.get("field_evidence")
+    if not isinstance(evidence, dict):
+        return False
+    for field_name in REQUIRED_CRITICAL_FIELDS + MOVIE_CRITICAL_FIELDS:
+        field = evidence.get(field_name)
         if not isinstance(field, dict):
             continue
         source = field.get("source")
@@ -425,6 +492,8 @@ def _validation_status(candidate: dict[str, Any], findings: list[str]) -> str:
     if any(finding.startswith("field_source_hash_mismatch:") for finding in findings):
         return "rejected"
     if SOURCE_PROVENANCE_BLOCKING_FINDINGS.intersection(findings):
+        return "rejected"
+    if EXTRACTION_BLOCKING_FINDINGS.intersection(findings):
         return "rejected"
     if any(finding.startswith("field_page_image_not_canonical:") for finding in findings):
         return "rejected"
@@ -609,6 +678,8 @@ def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
         findings.append("unknown_location")
     if _fee_marker_conflicts(candidate):
         findings.append("fee_marker_conflict")
+    if "field_extraction_not_implemented" in findings and not _has_any_reviewable_field_evidence(candidate):
+        findings.append("missing_reviewable_field_evidence")
 
     deduped_findings = list(dict.fromkeys(str(finding) for finding in findings if str(finding)))
     if deduped_findings and not _has_any_reviewable_evidence(candidate):

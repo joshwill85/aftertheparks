@@ -211,11 +211,13 @@ def _image_page(
     source_sha256: str,
     output_dir: Path,
     render_config: dict[str, Any],
+    page_number: int = 1,
+    page_kind: str = "image_file",
 ) -> dict[str, Any]:
     page_dir = _page_dir(output_dir, source_sha256)
     page_dir.mkdir(parents=True, exist_ok=True)
-    canonical_path = page_dir / "page_001.png"
-    thumb_path = page_dir / "page_001.thumb.png"
+    canonical_path = page_dir / f"page_{page_number:03d}.png"
+    thumb_path = page_dir / f"page_{page_number:03d}.thumb.png"
 
     with Image.open(source_path) as image:
         oriented = ImageOps.exif_transpose(image).convert("RGB")
@@ -224,8 +226,8 @@ def _image_page(
 
     _write_thumbnail(canonical_path, thumb_path)
     return {
-        "page_number": 1,
-        "page_kind": "image_file",
+        "page_number": page_number,
+        "page_kind": page_kind,
         "canonical_image_path": str(canonical_path),
         "canonical_image_sha256": sha256_file(canonical_path),
         "thumbnail_path": str(thumb_path),
@@ -238,6 +240,56 @@ def _image_page(
         "render_scale": None,
         "image_orientation": 1,
     }
+
+
+def _visual_source_manifest_payload(source_path: Path) -> dict[str, Any] | None:
+    if source_path.suffix.lower() != ".json":
+        return None
+    try:
+        payload = json.loads(source_path.read_text())
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(payload, dict) or not isinstance(payload.get("images"), list):
+        return None
+    content_sha256 = str(payload.get("content_sha256") or "").strip()
+    if not content_sha256:
+        return None
+    return payload
+
+
+def _visual_source_manifest_pages(
+    source_path: Path,
+    payload: dict[str, Any],
+    *,
+    source_sha256: str,
+    output_dir: Path,
+    render_config: dict[str, Any],
+) -> list[dict[str, Any]]:
+    pages: list[dict[str, Any]] = []
+    for index, image_entry in enumerate(payload.get("images") or [], start=1):
+        if not isinstance(image_entry, dict):
+            continue
+        image_path = Path(str(image_entry.get("path") or ""))
+        if not image_path.is_absolute():
+            image_path = (source_path.parent / image_path).resolve() if not image_path.exists() else image_path
+        page_number = int(image_entry.get("page") or index)
+        page = _image_page(
+            image_path,
+            source_sha256=source_sha256,
+            output_dir=output_dir,
+            render_config=render_config,
+            page_number=page_number,
+            page_kind="reviewed_visual_schedule_image_page",
+        )
+        page["source_image_path"] = str(image_path)
+        page["source_image_sha256"] = image_entry.get("sha256") or sha256_file(image_path)
+        for key in ("visible_title", "visible_validity"):
+            if image_entry.get(key):
+                page[key] = image_entry[key]
+        pages.append(page)
+    if not pages:
+        raise ValueError("visual_source_manifest_missing_images")
+    return sorted(pages, key=lambda page: int(page["page_number"]))
 
 
 def _pdf_pages(
@@ -298,10 +350,15 @@ def render_source_document(
     source_metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_path = Path(source_path)
+    visual_manifest = _visual_source_manifest_payload(source_path)
     data = source_path.read_bytes()
-    source_sha256 = sha256_bytes(data)
-    detected = detect_source_content(data, fallback_path=source_path)
-    if detected.source_type not in {"pdf", "image"}:
+    source_sha256 = (
+        str(visual_manifest.get("content_sha256")).strip()
+        if visual_manifest
+        else sha256_bytes(data)
+    )
+    detected = None if visual_manifest else detect_source_content(data, fallback_path=source_path)
+    if not visual_manifest and detected.source_type not in {"pdf", "image"}:
         raise ValueError(f"unsupported_source_type:{detected.mime_type}")
 
     render_config = {
@@ -312,13 +369,22 @@ def render_source_document(
         "image_engine": "Pillow",
         "image_engine_version": _package_version("Pillow"),
         "image_policy": "exif_transpose_rgb_png",
+        "image_manifest_policy": "render_each_manifest_image_as_canonical_page",
         "output_format": "png",
         "coordinate_origin": "top_left",
         "bbox_format": "[x1,y1,x2,y2]",
     }
     render_config["config_hash"] = stable_config_hash(render_config)
 
-    if detected.source_type == "pdf":
+    if visual_manifest:
+        pages = _visual_source_manifest_pages(
+            source_path,
+            visual_manifest,
+            source_sha256=source_sha256,
+            output_dir=output_dir,
+            render_config=render_config,
+        )
+    elif detected.source_type == "pdf":
         pages = _pdf_pages(
             source_path,
             source_sha256=source_sha256,
@@ -341,15 +407,27 @@ def render_source_document(
         "pipeline_version": render_config["pipeline_version"],
         "source_path": str(source_path),
         "source_sha256": source_sha256,
-        "source_type": detected.source_type,
-        "mime_type": detected.mime_type,
-        "file_extension": detected.file_extension,
+        "source_type": "image_manifest" if visual_manifest else detected.source_type,
+        "mime_type": "application/json" if visual_manifest else detected.mime_type,
+        "file_extension": source_path.suffix.lower().lstrip(".") if visual_manifest else detected.file_extension,
         "calendar_group_key": calendar_group_key,
         "edition": edition,
         "page_count": len(pages),
         "render_config": render_config,
         "pages": pages,
     }
+    if visual_manifest:
+        for field in (
+            "source_kind",
+            "canonical_url",
+            "internal_source_id",
+            "valid_from",
+            "valid_to",
+            "source_note",
+        ):
+            value = visual_manifest.get(field) or (visual_manifest.get("manifest") or {}).get(field)
+            if value:
+                manifest[field] = value
     if isinstance(source_metadata, dict):
         for field in SOURCE_METADATA_FIELDS:
             if field in source_metadata:

@@ -3,7 +3,7 @@ import { PlanPageClient } from "@/components/atlas/PlanPageClient";
 import { Hero } from "@/components/atlas/Hero";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
-import { getResorts } from "@/lib/data/activities";
+import { getFilteredActivities, getResorts } from "@/lib/data/activities";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 
 export const dynamic = "force-dynamic";
@@ -25,7 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default async function PlanPage() {
-  const resorts = await getResorts();
+  const [resorts, backupCandidates] = await Promise.all([
+    getResorts(),
+    getFilteredActivities({ preset: "rain_backup", limit: 60 }),
+  ]);
   const resortOptions = resorts.map((resort) => ({
     slug: resort.slug,
     name: resort.name,
@@ -52,10 +55,11 @@ export default async function PlanPage() {
         <BrandAsset
           asset="pocket-map-only"
           className="brand-asset--map-panel justify-self-center"
+          priority
         />
       </section>
       <PlanClientBoundary syncOnMount>
-        <PlanPageClient resorts={resortOptions} />
+        <PlanPageClient resorts={resortOptions} backupCandidates={backupCandidates} />
       </PlanClientBoundary>
     </>
   );

@@ -15,6 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { FilterRail } from "@/components/explore/FilterRail";
 import { FilterSheet } from "@/components/explore/FilterSheet";
+import { ResultSummary } from "@/components/explore/ResultSummary";
 import { usePlan } from "@/components/atlas/PlanProvider";
 
 export type BrowseFilterVariant = "today" | "tonight" | "explore";
@@ -103,6 +104,9 @@ export function BrowseFilterShell({
             <div className="flex items-center gap-3">
               <button
                 type="button"
+                aria-label="Open filters"
+                aria-haspopup="dialog"
+                aria-expanded={sheetOpen}
                 onClick={() => setSheetOpen(true)}
                 className="explore-filters-btn btn-secondary justify-between px-4 text-sm font-bold"
               >
@@ -130,6 +134,13 @@ export function BrowseFilterShell({
               <NearMyResortNote selectedResortName={resortName(resorts, filters.resort)} />
             )}
           </div>
+
+          <ResultSummary
+            count={resultCount}
+            basePath={basePath}
+            activeChips={activeChips}
+            compact
+          />
 
           <div id="activities" className="scroll-mt-24">
             {resultCount === 0 && activeChips.length > 0 && (

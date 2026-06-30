@@ -3,7 +3,6 @@ import { readFileSync } from "node:fs";
 
 const COPY_FILES = [
   "app/activities/page.tsx",
-  "app/guides/page.tsx",
   "app/page.tsx",
   "app/resorts/[slug]/page.tsx",
   "app/resorts/page.tsx",
@@ -29,7 +28,6 @@ const COPY_FILES = [
   "components/tonight/NightfallTimeline.tsx",
   "components/tonight/TonightHero.tsx",
   "lib/activityDecision.ts",
-  "lib/guides/index.ts",
   "lib/magic/collections.ts",
   "lib/magic/nearby.ts",
   "lib/plan/daybookPath.ts",

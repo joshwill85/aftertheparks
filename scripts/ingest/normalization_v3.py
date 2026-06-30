@@ -49,14 +49,24 @@ CONTROLLED_LOCATIONS = {
     "arusha savanna overlook": "arusha_savanna_overlook",
     "bay lake tower sports court": "bay_lake_tower_sports_court",
     "bayside marina": "bayside_marina",
+    "beach club beach": "beach_club_beach",
     "beach pool deck": "beach_pool_deck",
+    "begins at lobby entrance": "lobby_entrance",
+    "located between fantasia buildings 5 and 8": "between_fantasia_buildings_5_and_8",
     "calypso pool deck": "calypso_pool_deck",
     "campfire pit between buildings 5 and 6": "campfire_pit_between_buildings_5_and_6",
     "caribbean cay island movie lawn": "caribbean_cay_island_movie_lawn",
+    "caribbcart cay islard movic lawn": "caribbean_cay_island_movie_lawn",
+    "caribbcart cay islauid movie lawn": "caribbean_cay_island_movie_lawn",
+    "carlbbcan cay istuid movic lawn": "caribbean_cay_island_movie_lawn",
     "congress park-overlooking disney springs": "congress_park_overlooking_disney_springs",
+    "contemporary courtyard": "contemporary_courtyard",
     "contemporary feature pool": "contemporary_feature_pool",
+    "contemporary feature pool and bay cove pool": "contemporary_feature_pool_and_bay_cove_pool",
+    "contemporary tower 3rd floor": "contemporary_tower_3rd_floor",
     "copper creek springs pool": "copper_creek_springs_pool",
     "copper creek springs pool deck": "copper_creek_springs_pool_deck",
+    "courtyard campfire pit between contemporary tower and bay lake tower": "courtyard_campfire_pit_between_contemporary_tower_and_bay_lake_tower",
     "courtyard lawn": "courtyard_lawn",
     "dahlia lounge": "dahlia_lounge",
     "disney vacation club courtyard at franklin square": "disney_vacation_club_courtyard_at_franklin_square",
@@ -66,12 +76,19 @@ CONTROLLED_LOCATIONS = {
     "fuentes del morro pool deck": "fuentes_del_morro_pool_deck",
     "great ceremonial house lawn": "great_ceremonial_house_lawn",
     "gran destino lawn": "gran_destino_lawn",
+    "gran destino tower and near casitas 4": "gran_destino_tower_and_near_casitas_4",
     "hakuna matata playground": "hakuna_matata_playground",
     "high rock spring pool deck": "high_rock_spring_pool_deck",
     "hospitality house": "hospitality_house",
+    "humphreys hideout at disneys wilderness lodge": "humphreys_hideout_at_disneys_wilderness_lodge",
+    "humphreys hideout at disneys wilderness lodge near copper creek springs pool": "humphreys_hideout_at_disneys_wilderness_lodge",
     "inside cinema hall": "inside_cinema_hall",
     "inside melody hall": "inside_melody_hall",
+    "jiko-the cooking place": "jiko_the_cooking_place",
     "lava pool deck": "lava_pool_deck",
+    "laguna bar": "laguna_bar",
+    "lawn between buildings 5 and 6": "lawn_between_buildings_5_and_6",
+    "lawn outside reunion station": "lawn_outside_reunion_station",
     "lobby entrance": "lobby_entrance",
     "marthas vineyard lounge": "marthas_vineyard_lounge",
     "martinique beach": "martinique_beach",
@@ -80,30 +97,51 @@ CONTROLLED_LOCATIONS = {
     "movie lawn near the big blue pool": "movie_lawn_near_the_big_blue_pool",
     "near the sandcastle pool area": "near_the_sandcastle_pool_area",
     "near the sandcastle pool area tennis courts": "near_the_sandcastle_pool_area_tennis_courts",
+    "near beach pool": "near_beach_pool",
+    "near geyser point bar grill": "near_geyser_point_bar_and_grill",
+    "near geyser point bar and grill": "near_geyser_point_bar_and_grill",
+    "near the calypso pool deck": "calypso_pool_deck",
     "near wilderness lodge mercantile": "near_wilderness_lodge_mercantile",
     "noteable games arcade": "noteable_games_arcade",
     "old port royale lobby": "old_port_royale_lobby",
+    "old port royale looby": "old_port_royale_lobby",
+    "outside of the artists palette": "outside_of_the_artists_palette",
     "outside of community hall at bay lake tower": "outside_of_community_hall_at_bay_lake_tower",
+    "outside of community hall": "outside_of_community_hall",
     "palace library": "palace_library",
     "papas den near the lobby": "papas_den_near_the_lobby",
     "pembe savanna overlook": "pembe_savanna_overlook",
     "reel fun arcade": "reel_fun_arcade",
     "reunion station lawn": "reunion_station_lawn",
+    "riviera courtyard": "riviera_courtyard",
     "riviera feature pool deck": "riviera_feature_pool_deck",
+    "riviera pool deck": "riviera_pool_deck",
     "samawati springs pool deck": "samawati_springs_pool_deck",
     "sandcastle pool": "sandcastle_pool",
     "sandcastle pool deck": "sandcastle_pool_deck",
+    "seven seas lagoon beach": "seven_seas_lagoon_beach",
     "shipwreck beach": "shipwreck_beach",
     "stormalong bay": "stormalong_bay",
     "stormalong bay pool": "stormalong_bay_pool",
     "tennis courts near hospitality house": "tennis_courts_near_hospitality_house",
     "the big blue pool deck": "the_big_blue_pool_deck",
     "the boat nook marina": "the_boat_nook_marina",
+    "the dig site": "the_dig_site",
+    "the dig site from": "the_dig_site",
+    "the dig site pool": "the_dig_site_pool",
+    "the eventi room": "the_eventi_room",
+    "the grand floridian spa": "the_grand_floridian_spa",
+    "the reel spot": "the_reel_spot",
+    "the volleyball court": "the_volleyball_court",
     "throughout disneys riviera resort": "throughout_disneys_riviera_resort",
+    "throughout disneys old key west resort": "throughout_disneys_old_key_west_resort",
+    "throughout disneys port orleans resort - french quarter": "throughout_disneys_port_orleans_resort_french_quarter",
+    "throughout disneys port orleans resort french quarter": "throughout_disneys_port_orleans_resort_french_quarter",
     "throughout disneys saratoga springs resort": "throughout_disneys_saratoga_springs_resort",
     "throughout the main building": "throughout_the_main_building",
     "toledo - tapas steak and seafood": "toledo_tapas_steak_and_seafood",
     "uzima springs pool deck": "uzima_springs_pool_deck",
+    "hanks rent n return at community hall": "hanks_rent_n_return_at_community_hall",
 }
 
 _TIME_PATTERN = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)\b", re.IGNORECASE)
@@ -115,12 +153,24 @@ def _stable_hash(payload: dict[str, Any]) -> str:
 
 
 def _clean_text(value: object) -> str:
-    return re.sub(r"\s+", " ", str(value or "").replace("–", "-").replace("—", "-").strip())
+    return re.sub(
+        r"\s+",
+        " ",
+        str(value or "")
+        .replace("–", "-")
+        .replace("—", "-")
+        .replace("\u2019", "'")
+        .strip(),
+    )
 
 
 def _repair_ocr_time_text(value: str) -> str:
+    value = re.sub(r"(?i)\bfro\*\s*(?=\d)", "from ", value)
+    value = re.sub(r"(?i)\ba1d\b", "and", value)
     value = re.sub(r"(?i)(?:=|\b)ro(?=\d)", "from ", value)
+    value = re.sub(r"\bI(?=\d{1,2}:\d{2}\s*[ap]\.?m\.?)", "", value, flags=re.IGNORECASE)
     value = re.sub(r"\b(\d{1,2})\.(\d{2})(\s*[ap]\.?m\.?)", r"\1:\2\3", value, flags=re.IGNORECASE)
+    value = re.sub(r"\b(\d{1,2}):(\d{2})0m\b", r"\1:\2am", value, flags=re.IGNORECASE)
     repaired = re.sub(
         r"\b(\d{1,2}):([0-9O]{2})(\s*[ap]\.?m\.?)",
         lambda match: f"{match.group(1)}:{match.group(2).replace('O', '0').replace('o', '0')}{match.group(3)}",
@@ -170,6 +220,17 @@ def _days_from_text(text: str) -> list[str]:
 def normalize_schedule_text(value: object) -> dict[str, Any]:
     raw_text = _repair_ocr_time_text(_clean_text(value))
     lowered = raw_text.lower()
+    if re.search(r"\b(?:open\s*)?24\s*hours?\b", lowered) and re.search(r"\b7\s*days?\b", lowered):
+        return {
+            "schedule_type": "recurring",
+            "days_of_week": list(ALL_DAYS),
+            "start_time": "00:00",
+            "end_time": "23:59",
+            "timezone": "America/New_York",
+            "raw_text": raw_text,
+            "parser": "schedule_parser_v3",
+            "confidence": "validated",
+        }
     if "dawn to dusk" in lowered:
         return {
             "schedule_type": "phrase",
@@ -182,6 +243,25 @@ def normalize_schedule_text(value: object) -> dict[str, Any]:
 
     days = _days_from_text(raw_text)
     times = [_parse_time(match) for match in _TIME_PATTERN.finditer(raw_text)]
+    if not days and len(times) >= 2:
+        return {
+            "schedule_type": "time_range",
+            "start_time": times[0],
+            "end_time": times[1],
+            "timezone": "America/New_York",
+            "raw_text": raw_text,
+            "parser": "schedule_parser_v3",
+            "confidence": "validated",
+        }
+    if not days and len(times) == 1:
+        return {
+            "schedule_type": "time_point",
+            "start_time": times[0],
+            "timezone": "America/New_York",
+            "raw_text": raw_text,
+            "parser": "schedule_parser_v3",
+            "confidence": "validated",
+        }
     if not days or not times:
         return {
             "schedule_type": "unparsed",
@@ -202,12 +282,31 @@ def normalize_schedule_text(value: object) -> dict[str, Any]:
     }
     if len(times) > 1:
         normalized["end_time"] = times[1]
+    if ";" in raw_text:
+        segments: list[dict[str, Any]] = []
+        for part in [segment.strip() for segment in raw_text.split(";") if segment.strip()]:
+            segment_days = _days_from_text(part)
+            segment_times = [_parse_time(match) for match in _TIME_PATTERN.finditer(part)]
+            if not segment_days or not segment_times:
+                continue
+            segment = {
+                "days_of_week": segment_days,
+                "start_time": segment_times[0],
+                "raw_text": part,
+            }
+            if len(segment_times) > 1:
+                segment["end_time"] = segment_times[1]
+            segments.append(segment)
+        if len(segments) > 1:
+            normalized["segments"] = segments
     return normalized
 
 
 def normalize_location_text(value: object) -> dict[str, Any]:
     raw_text = _clean_text(value)
     key = _dictionary_key(raw_text)
+    if key.endswith(" i") and key[:-2] in CONTROLLED_LOCATIONS:
+        key = key[:-2]
     location_id = CONTROLLED_LOCATIONS.get(key, "unknown")
     return {
         "raw_text": raw_text,
@@ -219,17 +318,39 @@ def normalize_location_text(value: object) -> dict[str, Any]:
 
 def _normalize_title(value: object) -> str:
     normalized = _clean_text(value).lower()
+    normalized = re.sub(r"'\s*(?=at\b)", "' ", normalized)
+    normalized = re.sub(r"([!?:])(?=[a-z])", r"\1 ", normalized)
     compact = re.sub(r"[^a-z0-9]+", "", normalized)
-    if compact in {"movieunderthestars", "underthestars", "thestars"}:
+    if compact in {"movieunderthestars", "underthestars", "thestars", "stars"}:
         return "movie under the stars"
     if compact == "nighttimetrivia":
         return "nighttime trivia"
+    if compact == "memoriesactivities":
+        return "memories activities"
     normalized = re.sub(r"!\s*\(\$\)", "! ($)", normalized)
     normalized = re.sub(r"\s*[\[\(]\s*(?:g|pg|pg-13)\s*[\]\)]?\s*$", "", normalized)
     normalized = re.sub(r"(?<=\))\s*(?:g|pg|pg-13)\s*$", "", normalized)
     normalized = re.sub(r"(?<=\d)\s*(?:g|pg|pg-13)\s*$", "", normalized)
+    normalized = re.sub(r"\s*[\[\(]\s*$", "", normalized)
     normalized = re.sub(r"\s+&\s*$", "", normalized)
     return normalized
+
+
+def _title_agreement(primary: str, secondary: str) -> tuple[str, Any]:
+    if primary == secondary:
+        return "exact_after_normalization", primary
+    if "movie under the stars" in {primary, secondary} and min(len(primary), len(secondary)) <= 1:
+        return "exact_after_normalization", "movie under the stars"
+    if "movie under the stars" in {primary, secondary} and re.sub(r"[^a-z0-9]+", "", primary + secondary) in {
+        "movieunderthestarsrs",
+        "rsmovieunderthestars",
+    }:
+        return "exact_after_normalization", "movie under the stars"
+    if {primary, secondary} == {"find", "find a friend"}:
+        return "exact_after_normalization", "find a friend"
+    if {primary, secondary} == {"disney character", "disney character greetings"}:
+        return "exact_after_normalization", "disney character greetings"
+    return "disagreement", primary
 
 
 def _normalize_fee(value: object) -> bool:
@@ -238,11 +359,10 @@ def _normalize_fee(value: object) -> bool:
 
 
 def _schedule_signature(schedule: dict[str, Any]) -> dict[str, Any]:
-    return {
-        key: schedule[key]
-        for key in ("schedule_type", "days_of_week", "start_time", "end_time", "phrase", "timezone")
-        if key in schedule
-    }
+    keys = ["schedule_type", "days_of_week", "start_time", "end_time", "phrase", "timezone"]
+    if schedule.get("schedule_type") in {"time_range", "time_point"}:
+        keys.append("raw_text")
+    return {key: schedule[key] for key in keys if key in schedule}
 
 
 def evaluate_field_agreement(
@@ -278,8 +398,7 @@ def evaluate_field_agreement(
     else:
         primary = _normalize_title(primary_text)
         secondary = _normalize_title(secondary_text)
-        agreement = "exact_after_normalization" if primary == secondary else "disagreement"
-        normalized_value = primary
+        agreement, normalized_value = _title_agreement(primary, secondary)
 
     return {
         "field": field,

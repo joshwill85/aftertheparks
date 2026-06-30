@@ -491,7 +491,7 @@ export function buildActiveFilterChips(
   if (filters.reservation) {
     chips.push({
       id: "reservation",
-      label: "Reservations",
+      label: "Reservation required",
       removeHref: hrefWithout(basePath, filters, ["reservation"]),
     });
   }

@@ -1,7 +1,7 @@
 [
   {
     "calendar_group_key": "caribbean-beach",
-    "candidate_id": "vision-v3-961de10ecac7924088ce999a",
+    "candidate_id": "vision-v3-d671d2f2f3915cee12326e12",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
@@ -131,12 +131,12 @@
           ],
           "end_time": "09:50",
           "parser": "schedule_parser_v3",
-          "raw_text": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "raw_text": "Monday from 9:30am-9:50am and 2:40pm-3:00pm",
           "schedule_type": "recurring",
           "start_time": "09:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "raw_value": "Monday from 9:30am-9:50am and 2:40pm-3:00pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -281,12 +281,12 @@
       ],
       "end_time": "09:50",
       "parser": "schedule_parser_v3",
-      "raw_text": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "raw_text": "Monday from 9:30am-9:50am and 2:40pm-3:00pm",
       "schedule_type": "recurring",
       "start_time": "09:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "schedule_raw": "Monday from 9:30am-9:50am and 2:40pm-3:00pm",
     "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -336,7 +336,7 @@
           "page": 1,
           "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
           "region_id": "page-001-region-03",
-          "text": "Monday at From 9:30am-9:50am and 2:40pm-3:00pm"
+          "text": "Monday from 9:30am-9:50am and 2:40pm-3:00pm"
         }
       ],
       "title": [
@@ -368,7 +368,7 @@
   },
   {
     "calendar_group_key": "caribbean-beach",
-    "candidate_id": "vision-v3-459c1bb1a1a6908205616849",
+    "candidate_id": "vision-v3-0bd7b9e1abd4066097d4c806",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
@@ -498,12 +498,12 @@
           ],
           "end_time": "09:50",
           "parser": "schedule_parser_v3",
-          "raw_text": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "raw_text": "Tuesday from 9:30am-9:50am and 2:40pm-3:00pm",
           "schedule_type": "recurring",
           "start_time": "09:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "raw_value": "Tuesday from 9:30am-9:50am and 2:40pm-3:00pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -648,12 +648,12 @@
       ],
       "end_time": "09:50",
       "parser": "schedule_parser_v3",
-      "raw_text": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "raw_text": "Tuesday from 9:30am-9:50am and 2:40pm-3:00pm",
       "schedule_type": "recurring",
       "start_time": "09:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "schedule_raw": "Tuesday from 9:30am-9:50am and 2:40pm-3:00pm",
     "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -703,7 +703,7 @@
           "page": 1,
           "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
           "region_id": "page-001-region-03",
-          "text": "Tuesday at From 9:30am-9:50am and 2:40pm-3:00pm"
+          "text": "Tuesday from 9:30am-9:50am and 2:40pm-3:00pm"
         }
       ],
       "title": [
@@ -735,7 +735,7 @@
   },
   {
     "calendar_group_key": "caribbean-beach",
-    "candidate_id": "vision-v3-62ff9fd56eadcb39b5750f67",
+    "candidate_id": "vision-v3-2aed1440eae1b2fc59d82b54",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
@@ -844,7 +844,7 @@
         }
       },
       "schedule": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9986789226531982,
@@ -865,13 +865,13 @@
           ],
           "end_time": "09:50",
           "parser": "schedule_parser_v3",
-          "raw_text": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "raw_text": "Thursday from 9:30am-9:50am and 2:40pm-3:00pm",
           "schedule_type": "recurring",
           "start_time": "09:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
-        "review_status": "required",
+        "raw_value": "Thursday from 9:30am-9:50am and 2:40pm-3:00pm",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             202,
@@ -889,7 +889,7 @@
         }
       },
       "title": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9997925758361816,
@@ -905,7 +905,7 @@
         "field": "title",
         "normalized_value": "disney character greetings",
         "raw_value": "DISNEY CHARACTER GREETINGS",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             199,
@@ -1015,12 +1015,12 @@
       ],
       "end_time": "09:50",
       "parser": "schedule_parser_v3",
-      "raw_text": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "raw_text": "Thursday from 9:30am-9:50am and 2:40pm-3:00pm",
       "schedule_type": "recurring",
       "start_time": "09:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "schedule_raw": "Thursday from 9:30am-9:50am and 2:40pm-3:00pm",
     "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -1070,7 +1070,7 @@
           "page": 1,
           "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
           "region_id": "page-001-region-03",
-          "text": "Thursday at From 9:30am-9:50am and 2:40pm-3:00pm"
+          "text": "Thursday from 9:30am-9:50am and 2:40pm-3:00pm"
         }
       ],
       "title": [
@@ -1092,16 +1092,13 @@
     },
     "source_title": "DISNEY CHARACTER GREETINGS",
     "source_type": "image",
-    "validation_findings": [
-      "engine_disagreement:title",
-      "engine_disagreement:schedule"
-    ],
-    "validation_status": "needs_review",
+    "validation_findings": [],
+    "validation_status": "auto_publishable",
     "weather_note": null
   },
   {
     "calendar_group_key": "caribbean-beach",
-    "candidate_id": "vision-v3-bdf42a55ff8e9a214b01a6b1",
+    "candidate_id": "vision-v3-874e50880bc3a90f052a085d",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
@@ -1127,7 +1124,7 @@
             "text": "no fee marker"
           },
           {
-            "confidence": 0.99972,
+            "confidence": 0.99098,
             "engine": "rapidocr",
             "text": "no fee marker"
           }
@@ -1231,12 +1228,12 @@
           ],
           "end_time": "14:30",
           "parser": "schedule_parser_v3",
-          "raw_text": "Thursday at From 1:30pm-2:30pm",
+          "raw_text": "Thursday from 1:30pm-2:30pm",
           "schedule_type": "recurring",
           "start_time": "13:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Thursday at From 1:30pm-2:30pm",
+        "raw_value": "Thursday from 1:30pm-2:30pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -1255,7 +1252,7 @@
         }
       },
       "title": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9997029304504395,
@@ -1263,15 +1260,15 @@
             "text": "POOL PARTY"
           },
           {
-            "confidence": 0.99972,
+            "confidence": 0.99098,
             "engine": "rapidocr",
-            "text": "GREETINGS"
+            "text": "POOL PARTY"
           }
         ],
         "field": "title",
         "normalized_value": "pool party",
         "raw_value": "POOL PARTY",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             205,
@@ -1381,12 +1378,12 @@
       ],
       "end_time": "14:30",
       "parser": "schedule_parser_v3",
-      "raw_text": "Thursday at From 1:30pm-2:30pm",
+      "raw_text": "Thursday from 1:30pm-2:30pm",
       "schedule_type": "recurring",
       "start_time": "13:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Thursday at From 1:30pm-2:30pm",
+    "schedule_raw": "Thursday from 1:30pm-2:30pm",
     "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -1436,7 +1433,7 @@
           "page": 1,
           "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
           "region_id": "page-001-region-03",
-          "text": "Thursday at From 1:30pm-2:30pm"
+          "text": "Thursday from 1:30pm-2:30pm"
         }
       ],
       "title": [
@@ -1459,7 +1456,6 @@
     "source_title": "POOL PARTY",
     "source_type": "image",
     "validation_findings": [
-      "engine_disagreement:title",
       "engine_disagreement:schedule",
       "engine_disagreement:location"
     ],
@@ -1468,7 +1464,7 @@
   },
   {
     "calendar_group_key": "caribbean-beach",
-    "candidate_id": "vision-v3-fbffcaf87b40a81b7359a49a",
+    "candidate_id": "vision-v3-5b82af4e4a32c1f5822f0ac5",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
@@ -1598,12 +1594,12 @@
           ],
           "end_time": "19:30",
           "parser": "schedule_parser_v3",
-          "raw_text": "Thursday at From 6:30pm-7:30pm",
+          "raw_text": "Thursday from 6:30pm-7:30pm",
           "schedule_type": "recurring",
           "start_time": "18:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Thursday at From 6:30pm-7:30pm",
+        "raw_value": "Thursday from 6:30pm-7:30pm",
         "review_status": "not_required",
         "source": {
           "bbox_px": [
@@ -1748,12 +1744,12 @@
       ],
       "end_time": "19:30",
       "parser": "schedule_parser_v3",
-      "raw_text": "Thursday at From 6:30pm-7:30pm",
+      "raw_text": "Thursday from 6:30pm-7:30pm",
       "schedule_type": "recurring",
       "start_time": "18:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Thursday at From 6:30pm-7:30pm",
+    "schedule_raw": "Thursday from 6:30pm-7:30pm",
     "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -1803,7 +1799,7 @@
           "page": 1,
           "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
           "region_id": "page-001-region-03",
-          "text": "Thursday at From 6:30pm-7:30pm"
+          "text": "Thursday from 6:30pm-7:30pm"
         }
       ],
       "title": [
@@ -1883,7 +1879,7 @@
         }
       },
       "location": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9999874234199524,
@@ -1899,7 +1895,7 @@
         "field": "location",
         "normalized_value": "caribbean_cay_island_movie_lawn",
         "raw_value": "Caribbean Cay Island Movie Lawn",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             199,
@@ -1984,7 +1980,7 @@
         }
       },
       "title": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9972606897354126,
@@ -1994,13 +1990,13 @@
           {
             "confidence": 0.99779,
             "engine": "rapidocr",
-            "text": "MOVIE UNDER THE STARS"
+            "text": "MOVIE UNDER THE STARS MOANA 2 PG"
           }
         ],
         "field": "title",
         "normalized_value": "movie under the stars moana 2",
         "raw_value": "MOVIE UNDER THE STARS MOANA 2 PG",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             199,
@@ -2187,16 +2183,14 @@
     "source_title": "MOVIE UNDER THE STARS MOANA 2 PG",
     "source_type": "image",
     "validation_findings": [
-      "engine_disagreement:title",
-      "engine_disagreement:schedule",
-      "engine_disagreement:location"
+      "engine_disagreement:schedule"
     ],
     "validation_status": "needs_review",
     "weather_note": null
   },
   {
     "calendar_group_key": "caribbean-beach",
-    "candidate_id": "vision-v3-1ceb017b4b06be6670e7d189",
+    "candidate_id": "vision-v3-e179c9a92d669ea3e75591eb",
     "candidate_type": "activity",
     "canonical_page_image_sha256s": [
       "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7"
@@ -2222,7 +2216,7 @@
             "text": "no fee marker"
           },
           {
-            "confidence": 0.99975,
+            "confidence": 0.99759,
             "engine": "rapidocr",
             "text": "no fee marker"
           }
@@ -2248,7 +2242,7 @@
         }
       },
       "location": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9999907612800598,
@@ -2264,7 +2258,7 @@
         "field": "location",
         "normalized_value": "old_port_royale_lobby",
         "raw_value": "Old Port Royale Lobby",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             198,
@@ -2326,12 +2320,12 @@
           ],
           "end_time": "09:50",
           "parser": "schedule_parser_v3",
-          "raw_text": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+          "raw_text": "Friday from 9:30am-9:50am and 2:40pm-3:00pm",
           "schedule_type": "recurring",
           "start_time": "09:30",
           "timezone": "America/New_York"
         },
-        "raw_value": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+        "raw_value": "Friday from 9:30am-9:50am and 2:40pm-3:00pm",
         "review_status": "required",
         "source": {
           "bbox_px": [
@@ -2350,7 +2344,7 @@
         }
       },
       "title": {
-        "agreement": "disagreement",
+        "agreement": "exact_after_normalization",
         "engines": [
           {
             "confidence": 0.9965991973876953,
@@ -2358,15 +2352,15 @@
             "text": "DISNEY CHARACTER GREETINGS"
           },
           {
-            "confidence": 0.99975,
+            "confidence": 0.99759,
             "engine": "rapidocr",
-            "text": "GREETINGS"
+            "text": "DISNEY CHARACTER"
           }
         ],
         "field": "title",
         "normalized_value": "disney character greetings",
         "raw_value": "DISNEY CHARACTER GREETINGS",
-        "review_status": "required",
+        "review_status": "not_required",
         "source": {
           "bbox_px": [
             198,
@@ -2476,12 +2470,12 @@
       ],
       "end_time": "09:50",
       "parser": "schedule_parser_v3",
-      "raw_text": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+      "raw_text": "Friday from 9:30am-9:50am and 2:40pm-3:00pm",
       "schedule_type": "recurring",
       "start_time": "09:30",
       "timezone": "America/New_York"
     },
-    "schedule_raw": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm",
+    "schedule_raw": "Friday from 9:30am-9:50am and 2:40pm-3:00pm",
     "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
     "source_kind": "official_image",
     "source_role": "resort_pdf",
@@ -2531,7 +2525,7 @@
           "page": 1,
           "page_image_sha256": "b50cdd9df3cc318387127ccbf80b855896a0febe472755cd348741c9ade47ef7",
           "region_id": "page-001-region-03",
-          "text": "Friday at From 9:30am-9:50am and 2:40pm-3:00pm"
+          "text": "Friday from 9:30am-9:50am and 2:40pm-3:00pm"
         }
       ],
       "title": [
@@ -2554,9 +2548,7 @@
     "source_title": "DISNEY CHARACTER GREETINGS",
     "source_type": "image",
     "validation_findings": [
-      "engine_disagreement:title",
-      "engine_disagreement:schedule",
-      "engine_disagreement:location"
+      "engine_disagreement:schedule"
     ],
     "validation_status": "needs_review",
     "weather_note": null

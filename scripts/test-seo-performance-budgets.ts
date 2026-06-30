@@ -33,9 +33,8 @@ if (auditSeoPerformanceBudgets && renderSeoPerformanceBudgetReport) {
       "/activities/[slug]/page": ["static/chunks/shared.js", "static/chunks/activity-detail.js"],
       "/resorts/page": ["static/chunks/shared.js", "static/chunks/resorts.js"],
       "/resorts/[slug]/page": ["static/chunks/shared.js", "static/chunks/resort-detail.js"],
-      "/guides/page": ["static/chunks/shared.js", "static/chunks/guides.js"],
-      "/guides/[slug]/page": ["static/chunks/shared.js", "static/chunks/guide-detail.js"],
       "/disney-world-resort-activity-calendars/page": ["static/chunks/shared.js", "static/chunks/calendar-hub.js"],
+      "/disney-world-resort-activity-calendars/[season]/page": ["static/chunks/shared.js", "static/chunks/seasonal-calendar.js"],
       "/calendar/page": ["static/chunks/shared.js", "static/chunks/calendar.js"],
     },
   };
@@ -48,9 +47,8 @@ if (auditSeoPerformanceBudgets && renderSeoPerformanceBudgetReport) {
     "static/chunks/activity-detail.js": smallChunk,
     "static/chunks/resorts.js": smallChunk,
     "static/chunks/resort-detail.js": smallChunk,
-    "static/chunks/guides.js": smallChunk,
-    "static/chunks/guide-detail.js": smallChunk,
     "static/chunks/calendar-hub.js": smallChunk,
+    "static/chunks/seasonal-calendar.js": smallChunk,
     "static/chunks/calendar.js": smallChunk,
   };
 

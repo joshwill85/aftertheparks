@@ -62,6 +62,14 @@ function isSuspiciousAllDayBlock(startIso?: string, endIso?: string): boolean {
   return isEarlyStart && isLateEnd && spansMostOfDay;
 }
 
+function isEndBeforeStart(startIso?: string, endIso?: string): boolean {
+  if (!startIso || !endIso) return false;
+  const start = new Date(startIso).getTime();
+  const end = new Date(endIso).getTime();
+  if (!Number.isFinite(start) || !Number.isFinite(end)) return false;
+  return end < start;
+}
+
 function isCamelCaseSmash(title: string): boolean {
   return title
     .split(/\s+/)
@@ -173,6 +181,9 @@ export function computeDisplayQuality(
   }
 
   const timeUncertain = (() => {
+    if (isEndBeforeStart(activity.startDateTime, activity.endDateTime)) {
+      return true;
+    }
     if (scheduleText && !isUncertainSchedule(scheduleText)) {
       if (formatScheduleTimeLabel(scheduleText, { eveningDefault })) {
         return false;
@@ -187,6 +198,11 @@ export function computeDisplayQuality(
   if (timeUncertain) {
     score -= 14;
     flags.push("uncertain_time");
+  }
+
+  if (isEndBeforeStart(activity.startDateTime, activity.endDateTime)) {
+    score -= 18;
+    flags.push("invalid_time_range");
   }
 
   if (

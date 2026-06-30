@@ -13,6 +13,7 @@ import {
 } from "@/components/resort/ResortStoryIcon";
 import type { DecisionProfile } from "@/lib/activityDecision";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+import type { WeatherDecisionLabel } from "@/lib/weather/guidance";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
 import { cn } from "@/lib/utils";
 import {
@@ -48,14 +49,6 @@ export interface EventWeatherQuery {
   endsAt?: string;
   activitySlug?: string;
 }
-
-export type WeatherDecisionLabel =
-  | "Outdoor plans OK"
-  | "Go earlier"
-  | "Bring backup"
-  | "Likely affected"
-  | "Stay indoors"
-  | "Official alert";
 
 export interface EventCardProps {
   variant?: "day" | "night";

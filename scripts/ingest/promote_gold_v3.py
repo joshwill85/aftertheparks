@@ -6,6 +6,7 @@ import argparse
 from datetime import datetime, timezone
 import json
 import re
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -13,10 +14,12 @@ try:
     from config import PROCESSED_DIR
     from build_review_queue_v3 import review_approval_is_current
     from review_schema_v3 import validate_review_decision
+    from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .build_review_queue_v3 import review_approval_is_current
     from .review_schema_v3 import validate_review_decision
+    from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
@@ -31,7 +34,11 @@ def _now_iso() -> str:
 
 
 def _slugify(value: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    normalized = unicodedata.normalize("NFKD", value)
+    normalized = normalized.encode("ascii", "ignore").decode("ascii").lower()
+    normalized = re.sub(r"\s*\(\$\)\s*", " ", normalized)
+    normalized = re.sub(r"(?<=[a-z0-9])[''](?=[a-z0-9])", "", normalized)
+    slug = re.sub(r"[^a-z0-9]+", "-", normalized).strip("-")
     return slug or "untitled"
 
 
@@ -70,19 +77,57 @@ def _candidate_field_crop_sha256s(
     return hashes
 
 
-def _review_decision_map(review_decisions: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    decisions_by_candidate: dict[str, dict[str, Any]] = {}
+def _review_decision_map(review_decisions: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    decisions_by_candidate: dict[str, list[dict[str, Any]]] = {}
     for decision in review_decisions:
         if decision.get("decision") not in {"approve", "edit"}:
             continue
         candidate_id = str(decision.get("candidate_id") or decision.get("task_id") or "").strip()
         if not candidate_id:
             continue
-        previous = decisions_by_candidate.get(candidate_id)
-        if previous and str(previous.get("decided_at") or "") > str(decision.get("decided_at") or ""):
-            continue
-        decisions_by_candidate[candidate_id] = decision
+        decisions_by_candidate.setdefault(candidate_id, []).append(decision)
+    for decisions in decisions_by_candidate.values():
+        decisions.sort(key=lambda decision: str(decision.get("decided_at") or ""))
     return decisions_by_candidate
+
+
+def _finding_review_field(finding: str) -> str | None:
+    if finding.startswith((
+        "engine_disagreement:",
+        "manual_review_required:",
+        "missing_required_field:",
+        "missing_field_normalized_value:",
+        "field_engine_value_mismatch:",
+        "field_normalized_value_mismatch:",
+        "field_raw_value_mismatch:",
+    )):
+        return finding.split(":", 1)[1]
+    if finding == "unparsed_schedule":
+        return "schedule"
+    if finding == "unknown_location":
+        return "location"
+    if finding in {"fee_legend_missing_for_unmarked_title", "fee_marker_without_legend", "fee_marker_conflict"}:
+        return "fee"
+    return None
+
+
+def _required_review_fields(candidate: dict[str, Any]) -> set[str]:
+    fields: set[str] = set()
+    for finding in candidate.get("validation_findings") or []:
+        field_name = _finding_review_field(str(finding))
+        if field_name:
+            fields.add(field_name)
+    return fields
+
+
+def _merged_review_decision(decisions: list[dict[str, Any]]) -> dict[str, Any]:
+    merged = {**decisions[-1]}
+    approved_fields: dict[str, Any] = {}
+    for decision in decisions:
+        fields = decision.get("approved_fields") if isinstance(decision.get("approved_fields"), dict) else {}
+        approved_fields.update(fields)
+    merged["approved_fields"] = approved_fields
+    return merged
 
 
 def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
@@ -129,16 +174,76 @@ def _candidate_with_review(candidate: dict[str, Any], decision: dict[str, Any]) 
     return reviewed
 
 
-def _source_hash(row: dict[str, Any]) -> str:
-    source = row.get("source")
-    source_hash = row.get("source_sha256") or row.get("content_sha256")
-    if isinstance(source, dict):
-        source_hash = source_hash or source.get("documentHash") or source.get("document_hash")
-    return str(source_hash or "").strip()
-
-
 def _edition(row: dict[str, Any]) -> str:
     return str(row.get("edition") or row.get("source_pdf_edition") or row.get("source_edition") or "").strip()
+
+
+def _source_hash(row: dict[str, Any]) -> str:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return str(row.get("content_sha256") or row.get("source_sha256") or source.get("documentHash") or "").strip()
+
+
+def _source_edition(row: dict[str, Any]) -> str | None:
+    source = row.get("source") if isinstance(row.get("source"), dict) else {}
+    return (
+        row.get("edition")
+        or row.get("source_pdf_edition")
+        or row.get("pdf_edition")
+        or row.get("source_edition")
+        or source.get("edition")
+        or source.get("pdfEdition")
+    )
+
+
+def _source_matches_quarter(row: dict[str, Any], quarter: str | None) -> bool:
+    if not quarter:
+        return True
+    edition = _source_edition(row)
+    if not edition:
+        return True
+    return edition_matches_quarter(edition, quarter)
+
+
+def _is_v3_visual_source(row: dict[str, Any]) -> bool:
+    if str(row.get("currentness") or "current") != "current":
+        return False
+    source_type = str(row.get("source_type") or "").strip().lower()
+    source_kind = str(row.get("source_kind") or "").strip()
+    source_role = str(row.get("source_role") or "").strip()
+    if not source_type and not source_kind and not source_role:
+        return True
+    if source_kind == "reviewed_visual_schedule_image" and source_role == "reviewed_visual_schedule":
+        return True
+    return source_role in {"resort_pdf", "supporting_price_image"} and source_type in {"pdf", "image"} and source_kind in {
+        "official_pdf",
+        "official_image",
+    }
+
+
+def _expected_source_hashes(
+    expected_sources: list[dict[str, Any]] | None,
+    *,
+    quarter: str | None = None,
+) -> set[str]:
+    return {
+        source_hash
+        for source in expected_sources or []
+        if _is_v3_visual_source(source)
+        and _source_matches_quarter(source, quarter)
+        if (source_hash := _source_hash(source))
+    }
+
+
+def _filter_candidates_to_expected_sources(
+    candidates: list[dict[str, Any]],
+    *,
+    expected_sources: list[dict[str, Any]] | None = None,
+    quarter: str | None = None,
+) -> list[dict[str, Any]]:
+    expected_hashes = _expected_source_hashes(expected_sources, quarter=quarter)
+    if not expected_hashes:
+        return candidates
+    return [candidate for candidate in candidates if _source_hash(candidate) in expected_hashes]
 
 
 def _gold_identity(row: dict[str, Any]) -> tuple[str, str, str, str] | None:
@@ -203,9 +308,21 @@ def _existing_gold_by_identity(existing_gold_rows: list[dict[str, Any]]) -> dict
     return rows_by_identity
 
 
+def _public_location_label(candidate: dict[str, Any]) -> str:
+    label = str(candidate.get("location_text") or candidate.get("normalized_location_id") or "").strip()
+    field_evidence = candidate.get("field_evidence")
+    location_evidence = field_evidence.get("location") if isinstance(field_evidence, dict) else {}
+    if isinstance(location_evidence, dict) and location_evidence.get("inferred_location_from_title") is True:
+        cleaned = re.sub(r"\s*\(\$\)\s*", " ", label).strip()
+        cleaned = re.sub(r"\s+", " ", cleaned)
+        return cleaned or label
+    return label
+
+
 def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
     title = str(candidate.get("normalized_title") or candidate.get("source_title") or "Untitled")
     schedule = candidate.get("schedule_normalized") if isinstance(candidate.get("schedule_normalized"), dict) else {}
+    location_label = _public_location_label(candidate)
     canonical_url = candidate.get("canonical_url") or candidate.get("source_url")
     fetched_url = candidate.get("fetched_url")
     derived_source_links = (
@@ -237,10 +354,10 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
         "category": candidate.get("category"),
         "location": {
             "id": candidate.get("normalized_location_id"),
-            "label": candidate.get("location_text") or candidate.get("normalized_location_id"),
+            "label": location_label,
         },
         "schedule": {
-            "text": candidate.get("schedule_raw"),
+            "text": schedule.get("raw_text") or candidate.get("schedule_raw"),
             "normalized": schedule,
         },
         "price": {
@@ -277,12 +394,16 @@ def build_gold_v3_preview(
     *,
     review_decisions: list[dict[str, Any]] | None = None,
     existing_gold_rows: list[dict[str, Any]] | None = None,
+    expected_sources: list[dict[str, Any]] | None = None,
+    quarter: str | None = None,
 ) -> dict[str, Any]:
+    candidates = _filter_candidates_to_expected_sources(candidates, expected_sources=expected_sources, quarter=quarter)
     rows: list[dict[str, Any]] = []
     gold_conflicts: list[dict[str, Any]] = []
     skipped = 0
     skipped_stale_review = 0
     skipped_invalid_review = 0
+    skipped_incomplete_review = 0
     skipped_validation_findings = 0
     skipped_gold_conflicts = 0
     manually_approved_by_review = 0
@@ -297,26 +418,39 @@ def build_gold_v3_preview(
             continue
         if candidate.get("validation_status") not in PROMOTABLE_STATUSES:
             candidate_id = str(candidate.get("candidate_id") or "").strip()
-            decision = decisions_by_candidate.get(candidate_id)
-            if decision:
+            decisions = decisions_by_candidate.get(candidate_id, [])
+            if decisions:
                 try:
-                    validate_review_decision(decision)
+                    for decision in decisions:
+                        validate_review_decision(decision)
                 except ValueError:
                     skipped_invalid_review += 1
                     skipped += 1
                     continue
-            if decision and review_approval_is_current(
-                decision,
-                current_content_sha256=str(candidate.get("content_sha256") or ""),
-                current_page_image_sha256=_candidate_page_image_sha256(candidate),
-            ) and str(decision.get("field_crop_sha256") or "") in _candidate_field_crop_sha256s(
-                candidate,
-                field_names=set(decision.get("approved_fields") or {}),
-            ):
-                promotable_candidate = _candidate_with_review(candidate, decision)
+            current_decisions = [
+                decision for decision in decisions
+                if review_approval_is_current(
+                    decision,
+                    current_content_sha256=str(candidate.get("content_sha256") or ""),
+                    current_page_image_sha256=_candidate_page_image_sha256(candidate),
+                )
+                and str(decision.get("field_crop_sha256") or "") in _candidate_field_crop_sha256s(
+                    candidate,
+                    field_names=set(decision.get("approved_fields") or {}),
+                )
+            ]
+            if current_decisions:
+                merged_decision = _merged_review_decision(current_decisions)
+                required_fields = _required_review_fields(candidate)
+                approved_fields = set(merged_decision.get("approved_fields") or {})
+                if required_fields and not required_fields <= approved_fields:
+                    skipped_incomplete_review += 1
+                    skipped += 1
+                    continue
+                promotable_candidate = _candidate_with_review(candidate, merged_decision)
                 manually_approved_by_review += 1
             else:
-                if decision:
+                if decisions:
                     skipped_stale_review += 1
                 skipped += 1
                 continue
@@ -341,6 +475,7 @@ def build_gold_v3_preview(
             "skipped_not_publishable": skipped,
             "skipped_validation_findings": skipped_validation_findings,
             "skipped_invalid_review_decision": skipped_invalid_review,
+            "skipped_incomplete_review_decision": skipped_incomplete_review,
             "manually_approved_by_review": manually_approved_by_review,
             "skipped_stale_review_decision": skipped_stale_review,
             "skipped_gold_conflicts": skipped_gold_conflicts,
@@ -378,16 +513,21 @@ def main() -> None:
     )
     parser.add_argument("--review-decisions", type=Path, default=DEFAULT_REVIEW_DECISIONS_PATH)
     parser.add_argument("--existing-gold", type=Path, help="Optional existing Gold preview/list for same-source conflict checks")
+    parser.add_argument("--expected-sources", type=Path, help="Optional source inventory used to scope preview rows")
+    parser.add_argument("--quarter", help="Optional quarter scope for expected source inventory")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     candidates = _load_json_list(args.validated_candidates)
     review_decisions = _load_json_list(args.review_decisions) if args.include_approved_review else []
     existing_gold_rows = _load_json_list(args.existing_gold) if args.existing_gold else []
+    expected_sources = _load_json_list(args.expected_sources) if args.expected_sources else []
     preview = build_gold_v3_preview(
         candidates,
         review_decisions=review_decisions,
         existing_gold_rows=existing_gold_rows,
+        expected_sources=expected_sources,
+        quarter=args.quarter,
     )
     if args.json:
         print(json.dumps(preview, indent=2, sort_keys=True))

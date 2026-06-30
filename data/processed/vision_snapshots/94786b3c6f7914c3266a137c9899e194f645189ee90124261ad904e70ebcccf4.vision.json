@@ -8620,19 +8620,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
       "page_image_sha256": "daf185e9c3dc3190da80c4669ce1351427ef801c040349b7293b5db907f5e274",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4",
-          "parent_source_document_id": "51e6ce58ef1db448f5275fece5826ff0fbbad226a50679f86212b61cdf6021ba",
-          "source_authority": "non_official",
-          "source_crop_sha256": "b88f9e56060395b003564ee65b341655e8a6423b74a4084e290098327f3a9edc",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/Riviera_Resort?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -8664,10 +8653,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "143e4258ffdbbbf833f0a16fdaa1b6494eeebda12483667567c0057fb0af811d",
+      "crop_sha256": "dff8e138d96c2e24e52534623bf2341d9b85108f723cc5ad46bf1b32bcf09c15",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",
@@ -8681,13 +8670,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001-region_05-movie_section.png",
-      "crop_sha256": "17b246b17584bbfa1b38d22678332214b384743d1478ad138c6628207b0ddf26",
+      "crop_sha256": "a2ebefea0b8da6a5cd09516715f56a40344e818fd1c42e2d2f0ac75a8e7dd8b6",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_001.png",

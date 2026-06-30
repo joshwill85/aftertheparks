@@ -115,7 +115,7 @@ if (
   const wrongCanonicalAudit = auditBingAiPerformanceEvidence(
     completeEvidence.map((record) =>
       record.promptId === "resorts-tonight-no-ticket"
-        ? { ...record, citedUrl: "https://aftertheparks.com/guides/free-disney-resort-activities" }
+        ? { ...record, citedUrl: "https://aftertheparks.com/activities?free=true" }
         : record
     ),
     { now: new Date("2026-06-28T12:00:00Z") }

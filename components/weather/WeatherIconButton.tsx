@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { WeatherForTimeSpan } from "@/lib/weather/types";
+import { weatherDecisionLabelForGuidance } from "@/lib/weather/guidance";
 import { formatTempDual } from "@/lib/weather/format";
 import { weatherPageHref } from "@/lib/weather/links";
 import { WeatherIcon } from "@/components/weather/WeatherIcon";
@@ -9,23 +10,6 @@ import { WeatherAtmosphereScene } from "@/components/weather/WeatherAtmosphereSc
 import { WeatherFreshnessLine } from "@/components/weather/WeatherFreshnessLine";
 import { nearTermRainShortCopy } from "@/components/weather/NearTermRainLine";
 import { cn } from "@/lib/utils";
-
-function weatherActionLabel(action?: WeatherForTimeSpan["actionGuidance"]): string | undefined {
-  switch (action) {
-    case "good_now":
-      return "Outdoor plans OK";
-    case "go_earlier":
-      return "Go earlier";
-    case "choose_covered_backup":
-      return "Pick covered backup";
-    case "stay_inside":
-      return "Stay inside";
-    case "official_alert":
-      return "Official alert";
-    default:
-      return undefined;
-  }
-}
 
 export function WeatherIconButton({
   weather,
@@ -43,7 +27,7 @@ export function WeatherIconButton({
       ? formatTempDual(weather.tempF, weather.tempC)
       : undefined;
   const nearTermCopy = nearTermRainShortCopy(weather.nearTermRain);
-  const actionLabel = weatherActionLabel(weather.actionGuidance);
+  const actionLabel = weatherDecisionLabelForGuidance(weather);
   return (
     <div className={cn("weather-icon-button", className)}>
       <WeatherAtmosphereScene iconKey={weather.iconKey} />

@@ -80,7 +80,7 @@ export const DEFAULT_CRAWLER_AUDIT_ROUTES: CrawlerAuditRoute[] = [
   { path: "/activities", kind: "html" },
   { path: "/resorts", kind: "html" },
   { path: "/disney-world-resort-activity-calendars", kind: "html" },
-  { path: "/guides/things-to-do-without-park-ticket", kind: "html" },
+  { path: "/resorts?no_ticket_friendly=true", kind: "html" },
   { path: "/activities/movies-under-the-stars", kind: "html" },
   { path: "/resorts/polynesian-village-resort", kind: "html" },
   {

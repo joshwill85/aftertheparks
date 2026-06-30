@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PlanEmptyState } from "@/components/plan/PlanEmptyState";
 import { PlanTimeline } from "@/components/plan/PlanTimeline";
 import { PlanPaceMeter } from "@/components/plan/PlanPaceMeter";
+import { PlanMagicCheck } from "@/components/plan/PlanMagicCheck";
 import { PlanStorySummary } from "@/components/plan/PlanStorySummary";
 import { ResortPassport } from "@/components/plan/ResortPassport";
 import { PlanSyncBadge } from "@/components/plan/PlanSyncBadge";
@@ -13,11 +14,14 @@ import { usePlan } from "@/components/atlas/PlanProvider";
 import { findPlanConflicts } from "@/lib/plan/conflicts";
 import { sharePlanCalendar, sharePlanLink } from "@/lib/plan/share";
 import { trackPlanEvent } from "@/lib/plan/analytics";
+import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 export function PlanPageClient({
   resorts,
+  backupCandidates = [],
 }: {
   resorts: { slug: string; name: string }[];
+  backupCandidates?: ActivityOccurrence[];
 }) {
   const {
     items,
@@ -25,6 +29,7 @@ export function PlanPageClient({
     homeResortSlug,
     tripStartDate,
     tripEndDate,
+    addActivity,
     removeItem,
     updateNotes,
     renamePlan,
@@ -92,6 +97,12 @@ export function PlanPageClient({
       setExportStatus("No timed activities to add to calendar yet.");
   };
 
+  const handleSwapBackup = (itemId: string, activity: ActivityOccurrence) => {
+    addActivity(activity);
+    removeItem(itemId);
+    trackPlanEvent("plan_weather_backup_selected");
+  };
+
   if (items.length === 0) {
     return (
       <div className="space-y-6">
@@ -103,11 +114,11 @@ export function PlanPageClient({
           onSave={updatePlanSettings}
         />
         {tripStartDate && tripEndDate && (
-          <PlanTimeline
-            items={[]}
-            staySettings={{ homeResortSlug, tripStartDate, tripEndDate }}
-            onRemove={() => undefined}
-            onUpdateNotes={() => undefined}
+        <PlanTimeline
+          items={[]}
+          staySettings={{ homeResortSlug, tripStartDate, tripEndDate }}
+          onRemove={() => undefined}
+          onUpdateNotes={() => undefined}
           />
         )}
         <PlanEmptyState />
@@ -167,6 +178,8 @@ export function PlanPageClient({
 
       <PlanPaceMeter items={items} />
 
+      <PlanMagicCheck items={items} />
+
       <PlanStayDetails
         resorts={resorts}
         homeResortSlug={homeResortSlug}
@@ -195,12 +208,17 @@ export function PlanPageClient({
 
       <ResortPassport items={items} />
 
+      <div id="plan-timeline">
       <PlanTimeline
         items={items}
         staySettings={{ homeResortSlug, tripStartDate, tripEndDate }}
         onRemove={removeItem}
         onUpdateNotes={updateNotes}
+        backupCandidates={backupCandidates}
+        onSaveBackup={addActivity}
+        onSwap={handleSwapBackup}
       />
+      </div>
 
       <div className="rounded-2xl border border-[var(--border-soft)] bg-white/90 p-5">
         <p className="text-sm text-[var(--muted)]">

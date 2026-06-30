@@ -66,24 +66,24 @@ export function buildBreadcrumbJsonLd(
   };
 }
 
-export function buildGuideArticleJsonLd(
+export function buildPlanningArticleJsonLd(
   baseUrl: string,
-  guide: {
-    slug: string;
+  article: {
+    path: string;
     title: string;
     description: string;
     dateModified: string;
   }
 ) {
-  const url = absoluteUrl(baseUrl, `/guides/${guide.slug}`);
+  const url = absoluteUrl(baseUrl, article.path);
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: guide.title,
-    description: guide.description,
+    headline: article.title,
+    description: article.description,
     mainEntityOfPage: url,
     url,
-    dateModified: guide.dateModified,
+    dateModified: article.dateModified,
     author: {
       "@type": "Organization",
       name: "After the Parks",

@@ -507,7 +507,9 @@ def _adult_required(text: str) -> bool | None:
 def _reservation_facts(text: str) -> dict[str, Any]:
     reservation_required: bool | None = None
     reservation_recommended: bool | None = None
-    if re.search(r"reservations?\s+(?:are\s+)?required|required reservation", text, re.I):
+    if re.search(r"\bno\s+reservations?\s+(?:are\s+)?required\b", text, re.I):
+        reservation_required = False
+    elif re.search(r"reservations?\s+(?:are\s+)?required|required reservation", text, re.I):
         reservation_required = True
     elif re.search(r"reservations?\s+(?:are\s+)?recommended|advance reservations?", text, re.I):
         reservation_recommended = True

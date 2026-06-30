@@ -393,30 +393,34 @@ export default async function ActivityDetailPage({
   }
 
   const { activity, upcoming } = result;
+  const activitySlug = activity.activitySlug || canonicalSlug;
+  const activityForDisplay: ActivityOccurrence = activity.activitySlug
+    ? activity
+    : { ...activity, activitySlug };
   const [similar, nearbyActivities, homeResort] = await Promise.all([
-    getSimilarActivities(activity),
-    getActivitiesByArea(activity.resort.area),
+    getSimilarActivities(activityForDisplay),
+    getActivitiesByArea(activityForDisplay.resort.area),
     homeResortSlug ? getResortBySlug(homeResortSlug) : Promise.resolve(null),
   ]);
 
   const homeBase = homeResort
     ? { slug: homeResort.slug, area: homeResort.area }
     : undefined;
-  const activityWeatherProfile = getActivityWeatherProfile(activity.activitySlug);
+  const activityWeatherProfile = getActivityWeatherProfile(activitySlug);
   const activityWeatherNow = new Date();
-  const activityWeatherSource = upcoming[0] ?? activity;
+  const activityWeatherSource = upcoming[0] ?? activityForDisplay;
   const activityWeatherQuery =
     weatherQueryForActivity(activityWeatherSource, activityWeatherNow) ?? {
-      id: activity.id,
-      resortSlug: activity.resort.slug,
+      id: activityForDisplay.id,
+      resortSlug: activityForDisplay.resort.slug,
       startsAt: activityWeatherNow.toISOString(),
       endsAt: new Date(activityWeatherNow.getTime() + 2 * 60 * 60 * 1000).toISOString(),
-      activitySlug: activity.activitySlug,
+      activitySlug,
       timeBasis: "page_area_window" as const,
       timeBasisLabel: "Activity-area weather",
     };
   const activityWeatherGuidance = await loadWeatherGuidanceForLocation({
-    resortSlug: activity.resort.slug,
+    resortSlug: activityForDisplay.resort.slug,
     now: activityWeatherNow,
     startsAt: activityWeatherQuery.startsAt,
     endsAt: activityWeatherQuery.endsAt,
@@ -426,24 +430,23 @@ export default async function ActivityDetailPage({
     timeBasisLabel: activityWeatherQuery.timeBasisLabel,
   });
 
-  const nearby = nearbyActivities.filter(
-    (item) => item.activitySlug !== activity.activitySlug
-  );
+  const nearby = nearbyActivities.filter((item) => item.activitySlug !== activitySlug);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
-  const faqItems = buildActivityFaqItems(activity, upcoming.length);
+  const faqItems = buildActivityFaqItems(activityForDisplay, upcoming.length);
   const eventJsonLd = upcoming
     .map((occurrence) => buildActivityEventJsonLd(baseUrl, occurrence))
     .filter((entry): entry is JsonLdObject => Boolean(entry));
   const activityDateModified =
-    latestVerifiedAt([activity, ...upcoming]) ?? activity.freshness.lastVerified;
+    latestVerifiedAt([activityForDisplay, ...upcoming]) ??
+    activityForDisplay.freshness.lastVerified;
   const jsonLd = stringifyJsonLd([
     buildBreadcrumbJsonLd(baseUrl, [
       { name: "Activities", path: "/activities" },
-      { name: activity.title, path: `/activities/${activity.activitySlug}` },
+      { name: activityForDisplay.title, path: `/activities/${activitySlug}` },
     ]),
     buildItemListJsonLd(
       baseUrl,
-      `${activity.title} upcoming schedule`,
+      `${activityForDisplay.title} upcoming schedule`,
       upcoming.slice(0, 10).map((occurrence) => ({
         name: `${occurrence.title} at ${occurrence.resort.name}`,
         path: `/activities/${occurrence.activitySlug}`,
@@ -460,7 +463,7 @@ export default async function ActivityDetailPage({
           "Official and verified resort activity data is checked first, with visible freshness, schedule, cost, reservation, weather, and caveat notes on the page.",
       }
     ),
-    buildFaqPageJsonLd(baseUrl, `/activities/${activity.activitySlug}`, faqItems),
+    buildFaqPageJsonLd(baseUrl, `/activities/${activitySlug}`, faqItems),
     ...eventJsonLd,
   ]);
 
@@ -473,12 +476,12 @@ export default async function ActivityDetailPage({
       <Breadcrumbs
         items={[
           { name: "Activities", href: "/activities" },
-          { name: activity.title },
+          { name: activityForDisplay.title },
         ]}
       />
       <PlanClientBoundary>
         <ActivityDetailClient
-          activity={activity}
+          activity={activityForDisplay}
           upcoming={upcoming}
           similar={similar}
           nearbyActivities={nearby}

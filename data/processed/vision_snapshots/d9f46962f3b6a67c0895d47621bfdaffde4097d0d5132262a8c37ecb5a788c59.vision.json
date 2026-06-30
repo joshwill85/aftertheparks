@@ -10128,19 +10128,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
       "page_image_sha256": "2ea197f820ecefc085a115c98c43d49506a7a7e668c778da037dc28870482981",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59",
-          "parent_source_document_id": "62c3260f33d925eec99ea321e948c27efb76c384dab0fb582febba00117a2c13",
-          "source_authority": "non_official",
-          "source_crop_sha256": "c5356be4ee2beba6570626eb4ddb1e35399585fba75bf0be03acbda1a241371c",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/AllStarMovies?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -10172,10 +10161,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "0971ce20d14fec3250b9914b7b5035d25b3866f7006377779b28770aec722e33",
+      "crop_sha256": "e91b9da53d3a9f3be53df2571a20956e3cf6f39c1ace0e4b35692c9e9e0913ef",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",
@@ -10189,13 +10178,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001-region_05-movie_section.png",
-      "crop_sha256": "62ed5e8a0fbdfb2927f2388bd79abd8f6c515e4c3527b314cf9aa45ef65f676a",
+      "crop_sha256": "39e7fa27b7485b814a1434efc165f75bdcddf51a90b34f0170eeb2ed914c8ab3",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_001.png",

@@ -77,7 +77,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "A strong no-park-day resort has enough current recreation, easy downtime, food nearby, and simple evening options that you do not need a park ticket to feel like the day worked.",
     primaryAction: { label: "Browse resort activities", href: "/activities" },
-    deepLinks: ["/today", "/tonight", "/activities", "/guides/things-to-do-without-park-ticket"],
+    deepLinks: ["/today", "/tonight", "/activities", "/resorts?no_ticket_friendly=true"],
     decisionFilter:
       "Rank resorts by current activity depth, free activity mix, evening payoff, and low-friction no-park-day usefulness.",
     exclusionRules: [
@@ -132,7 +132,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best resort for free activities has verified free options that are current, easy to confirm, and realistic for the guest's access situation.",
     primaryAction: { label: "Filter free activities", href: "/activities?free=true" },
-    deepLinks: ["/activities?free=true", "/today", "/tonight", "/guides/free-disney-resort-activities"],
+    deepLinks: ["/activities?free=true", "/today", "/tonight", "/activities?free=true"],
     decisionFilter:
       "Rank resorts by current free activity count, evening free options, variety, and access clarity.",
     exclusionRules: [
@@ -159,7 +159,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best toddler resort plan is short, close, flexible, shaded or indoor when possible, and easy to abandon before nap time.",
     primaryAction: { label: "See today's toddler-friendly options", href: "/today" },
-    deepLinks: ["/today", "/activities", "/resorts", "/guides/rainy-day-disney-resort-activities"],
+    deepLinks: ["/today", "/activities", "/resorts", "/activities?weather=indoor"],
     decisionFilter:
       "Rank resorts by current activity depth, short flexible options, calmer settings, weather backups, and low transportation effort.",
     exclusionRules: [
@@ -240,7 +240,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best rainy-day resort is the one with enough indoor or covered options that you do not have to chase outdoor movies, campfires, pools, or storm-sensitive routes.",
     primaryAction: { label: "Find indoor activities", href: "/activities?weather=indoor" },
-    deepLinks: ["/activities?weather=indoor", "/today?weather=indoor", "/tonight?weather=indoor", "/guides/rainy-day-disney-resort-activities"],
+    deepLinks: ["/activities?weather=indoor", "/today?weather=indoor", "/tonight?weather=indoor", "/activities?weather=indoor"],
     decisionFilter:
       "Rank resorts by indoor and covered options first, then conditional backups, while excluding weather-dependent outdoor plans by default.",
     exclusionRules: [
@@ -267,7 +267,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best resort movie night is current, easy to reach, clearly located, and backed by an indoor or low-effort alternative if weather changes.",
     primaryAction: { label: "See tonight's movies", href: "/activities/movies-under-the-stars" },
-    deepLinks: ["/activities/movies-under-the-stars", "/tonight", "/today", "/guides/best-disney-resorts-for-evening-activities"],
+    deepLinks: ["/activities/movies-under-the-stars", "/tonight", "/today", "/tonight"],
     decisionFilter:
       "Rank resorts by current movie-night availability, evening timing, source confidence, weather backup quality, and route simplicity.",
     exclusionRules: [
@@ -294,7 +294,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best campfire plan is current, close to where you are staying, weather-appropriate, and easy to replace if operations change.",
     primaryAction: { label: "See tonight's campfires", href: "/activities/campfire" },
-    deepLinks: ["/activities/campfire", "/tonight", "/guides/best-disney-resorts-for-evening-activities", "/guides/rainy-day-disney-resort-activities"],
+    deepLinks: ["/activities/campfire", "/tonight", "/tonight", "/activities?weather=indoor"],
     decisionFilter:
       "Rank resorts by current campfire availability, evening timing, free/paid clarity, weather caveats, and same-resort usefulness.",
     exclusionRules: [
@@ -321,7 +321,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best check-in-day resort plan is flexible enough for room timing, tired travelers, weather, and one easy tonight option.",
     primaryAction: { label: "See tonight's activities", href: "/tonight" },
-    deepLinks: ["/tonight", "/today", "/guides/first-night-at-disney-resort", "/activities?time=evening"],
+    deepLinks: ["/tonight", "/today", "/tonight", "/activities?time=evening"],
     decisionFilter:
       "Rank resorts by flexible same-resort activity depth, short evening options, free backups, and low route complexity.",
     exclusionRules: [
@@ -348,7 +348,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best no-ticket resort plan separates straightforward resort-stay options from access-sensitive visits, parking rules, and transportation limits.",
     primaryAction: { label: "Browse resort activities", href: "/activities" },
-    deepLinks: ["/activities", "/activities?free=true", "/today", "/guides/things-to-do-without-park-ticket"],
+    deepLinks: ["/activities", "/activities?free=true", "/today", "/resorts?no_ticket_friendly=true"],
     decisionFilter:
       "Rank resorts by no-admission activity depth, access clarity, free/low-cost options, and transportation plans that do not depend on restricted workarounds.",
     exclusionRules: [
@@ -375,7 +375,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best monorail resort plan stays on the Magic Kingdom-area resort loop and avoids treating every Disney destination as directly connected.",
     primaryAction: { label: "Browse Magic Kingdom-area resorts", href: "/resorts" },
-    deepLinks: ["/resorts", "/today", "/tonight", "/guides/monorail-resort-activities"],
+    deepLinks: ["/resorts", "/today", "/tonight", "/activities?transport=monorail"],
     decisionFilter:
       "Rank Magic Kingdom-area resort activities by current schedule depth, direct monorail usefulness, evening payoff, and access clarity.",
     exclusionRules: [
@@ -402,7 +402,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "The best Skyliner resort plan uses connected resorts and nearby walkable areas while keeping weather and park-admission boundaries clear.",
     primaryAction: { label: "Browse Skyliner-area activities", href: "/activities" },
-    deepLinks: ["/activities", "/today", "/tonight", "/guides/skyliner-resort-activities"],
+    deepLinks: ["/activities", "/today", "/tonight", "/activities?transport=skyliner"],
     decisionFilter:
       "Rank EPCOT/Skyliner-area activities by current schedule depth, simple route quality, weather risk, and nearby BoardWalk-area backup value.",
     exclusionRules: [
@@ -456,7 +456,7 @@ export const SEO_COMPARISON_PAGES: SeoComparisonPageDefinition[] = [
     userPromise:
       "Fort Wilderness can be a strong no-ticket resort plan when the activity is current, access is allowed, and the route is realistic for your group.",
     primaryAction: { label: "Browse resort activities", href: "/activities" },
-    deepLinks: ["/activities", "/today", "/tonight", "/guides/things-to-do-without-park-ticket"],
+    deepLinks: ["/activities", "/today", "/tonight", "/resorts?no_ticket_friendly=true"],
     decisionFilter:
       "Rank Fort Wilderness activities by no-admission value, current schedule proof, evening payoff, access clarity, and transportation simplicity.",
     exclusionRules: [
@@ -547,7 +547,7 @@ export function rankResortsForComparisonPage(
       freeCount,
       eveningCount,
       sampleActivities: items.slice(0, 4).map((item) => item.title),
-      reason: `${first.resort.name} has ${items.length} current matching activities, including ${freeCount} free and ${eveningCount} evening options.`,
+      reason: `${first.resort.name} has ${items.length} current activities, including ${freeCount} free and ${eveningCount} evening options.`,
     };
   }).sort((a, b) => b.score - a.score || a.resortName.localeCompare(b.resortName));
 }

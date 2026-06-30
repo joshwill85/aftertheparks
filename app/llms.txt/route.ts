@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { buildLlmsText } from "@/lib/seo/llms";
 
 export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
 export function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";

@@ -6592,19 +6592,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",
       "page_image_sha256": "6836935f7245dd0cd1b9aa4c551fa4668e872d9edc3db110837ffa0550b21b6d",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a",
-          "parent_source_document_id": "761372974296f28c558922100ed957c51cac85f7915ea7a3084b8b438558ba86",
-          "source_authority": "non_official",
-          "source_crop_sha256": "bea56b74129908cd1c027026613415573cda38978512809e88835293b2ff033e",
-          "source_role": "derived_source_link",
-          "target_url": "https://qr.disneyworld.com/Polynesian-Resort-Recreation-A-Frame"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -6636,10 +6625,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "7f08d00ba22bb90d2dcc99afcaceea4f8844d5d997d60ca8ea3aba48d43cc532",
+      "crop_sha256": "499c0ffbd35294ea76d45de9a290bd2594b0724912de23dd54b76a39fe7ec610",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",
@@ -6653,13 +6642,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001-region_05-movie_section.png",
-      "crop_sha256": "6054478aa293103b967ddea42513710e52448274c980ecd2c6ac6603db57caf4",
+      "crop_sha256": "739751669e643978741efec7010a9a8bb804bd056a9e86c6f03f4c3b3dc364bf",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_001.png",

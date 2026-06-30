@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
 import { ActivityOfferingGrid } from "@/components/activity/ActivityOfferingGrid";
 import { usePlan } from "@/components/atlas/PlanProvider";
+import { ExplorePlanRail } from "@/components/explore/ExplorePlanRail";
 import { BrowseFilterShell } from "@/components/explore/BrowseFilterShell";
 import type { FilterImpact } from "@/lib/explore/filterImpact";
 import type { ActivityOffering, ActivityOccurrence } from "@/lib/types/occurrence";
@@ -21,7 +21,7 @@ export function ExploreLayout({
   resorts,
   filterImpact,
 }: ExploreLayoutProps) {
-  const { items, addActivity } = usePlan();
+  const { addActivity } = usePlan();
 
   return (
     <div className="min-[1280px]:grid min-[1280px]:grid-cols-[minmax(0,1fr)_300px] min-[1280px]:gap-6">
@@ -70,45 +70,7 @@ export function ExploreLayout({
         )}
       </BrowseFilterShell>
 
-      <aside className="plan-rail-wrapper hidden min-[1280px]:block">
-        <div className="plan-rail sticky top-24 space-y-4 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
-          <div className="flex items-center justify-between gap-2">
-            <h2 className="font-display text-lg font-semibold">My Plan</h2>
-            <Link
-              href="/plan"
-              className="text-sm font-bold text-[var(--accent)] hover:underline"
-            >
-              Open
-            </Link>
-          </div>
-
-          {items.length === 0 ? (
-            <p className="text-sm leading-relaxed text-[var(--color-muted)]">
-              Save activities as you browse and build a low-stress rest day.
-            </p>
-          ) : (
-            <ul className="space-y-2">
-              {items.slice(0, 5).map((item) => (
-                <li
-                  key={item.id}
-                  className="rounded-xl border border-[var(--color-card-border)] px-3 py-2.5"
-                >
-                  <p className="text-sm font-bold leading-snug">{item.title}</p>
-                  <p className="text-xs text-[var(--color-muted)]">
-                    {item.resortName}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {items.length > 0 && (
-            <Link href="/plan" className="btn-primary w-full text-sm">
-              View full plan ({items.length})
-            </Link>
-          )}
-        </div>
-      </aside>
+      <ExplorePlanRail />
     </div>
   );
 }

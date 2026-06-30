@@ -10,9 +10,9 @@ const DEFAULT_AGENT_READINESS_ROUTES = [
   "/activities",
   "/resorts",
   "/disney-world-resort-activity-calendars",
-  "/guides/disney-world-non-park-day",
-  "/guides/things-to-do-without-park-ticket",
-  "/guides/disney-springs-area-resort-activities",
+  "/activities",
+  "/resorts?no_ticket_friendly=true",
+  "/activities?area=disney-springs",
   "/activities/movies-under-the-stars",
   "/resorts/polynesian-village-resort",
 ];

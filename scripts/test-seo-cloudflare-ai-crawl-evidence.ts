@@ -87,7 +87,7 @@ if (
     source: "Cloudflare AI Crawl Control",
     crawler,
     userAgent: `${crawler}/1.0`,
-    path: "/guides/things-to-do-without-park-ticket",
+    path: "/resorts?no_ticket_friendly=true",
     status: 200,
     action: "allowed",
     contentType: "text/html; charset=utf-8",

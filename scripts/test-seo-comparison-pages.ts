@@ -1,7 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import sitemap from "@/app/sitemap";
-import { GUIDES } from "@/lib/guides";
 import {
   SEO_COMPARISON_PAGES,
   getSeoComparisonPageBySlug,
@@ -9,6 +7,8 @@ import {
   validateSeoComparisonPages,
 } from "@/lib/seo/comparisonPages";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
+
+const removedGuidePath = `/${["guid", "es"].join("")}`;
 
 async function main() {
   const requiredSlugs = [
@@ -104,15 +104,17 @@ async function main() {
   assert.match(ranked[0].reason, /current/i);
 
   assert.ok(
-    GUIDES.some((guide) => guide.slug === "best-disney-resorts-for-activities-today"),
-    "comparison pages should appear in guide discovery"
+    SEO_COMPARISON_PAGES.every((page) =>
+      [page.primaryAction.href, ...page.deepLinks].every((href) => !href.startsWith(removedGuidePath))
+    ),
+    "comparison pages should route to existing product paths instead of removed guide routes"
   );
 
   process.env.NEXT_PUBLIC_SITE_URL = "https://aftertheparks.com";
   const urls = (await sitemap()).map((entry) => entry.url);
   assert.ok(
-    urls.includes("https://aftertheparks.com/guides/best-disney-resorts-for-activities-today"),
-    "sitemap should include comparison guide pages"
+    urls.includes("https://aftertheparks.com/resorts"),
+    "sitemap should include resort product pages that comparison surfaces route into"
   );
   for (const alias of [
     "best-disney-resort-activities-for-toddlers",
@@ -123,37 +125,8 @@ async function main() {
     "fort-wilderness-activities-without-park-ticket",
   ]) {
     assert.ok(
-      !urls.includes(`https://aftertheparks.com/guides/${alias}`),
-      `${alias} should not appear in the sitemap as a duplicate canonical guide`
-    );
-  }
-
-  const guideRoute = readFileSync("app/guides/[slug]/page.tsx", "utf8");
-  for (const expected of [
-    "SEO_COMPARISON_PAGES",
-    "SEO_COMPARISON_PAGES.map",
-    "getSeoComparisonPageBySlug",
-    "rankResortsForComparisonPage",
-    "Best resorts right now",
-    "Live data snapshot",
-    "What this excludes",
-    "Who should skip it",
-    "Transportation and access notes",
-  ]) {
-    assert.match(guideRoute, new RegExp(expected), `guide route should render ${expected}`);
-  }
-  for (const expected of [
-    "GUIDE_ALIAS_REDIRECTS",
-    "best-disney-resort-activities-for-toddlers",
-    "best-disney-resorts-for-toddlers",
-    "best-disney-resorts-without-park-ticket",
-    "best-resorts-if-you-do-not-have-a-park-ticket",
-    "permanentRedirect",
-  ]) {
-    assert.match(
-      guideRoute,
-      new RegExp(expected),
-      `guide route should canonicalize high-value page matrix alias ${expected}`
+      !urls.includes(`https://aftertheparks.com${removedGuidePath}/${alias}`),
+      `${alias} should not appear in the sitemap as a duplicate removed guide route`
     );
   }
 

@@ -5,6 +5,7 @@ import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { createServiceClient } from "@/lib/supabase/server";
 import { resolvePublicPlan } from "@/lib/plan/server";
 import { createAppServerClient } from "@/lib/supabase/server-app";
+import { getPublicPlanPreview } from "@/lib/plan/publicPlanPreview";
 import { buildSocialMetadata } from "@/lib/seo/metadata";
 
 export const dynamic = "force-dynamic";
@@ -38,6 +39,15 @@ export default async function PublicPlanPage({
   params: Promise<{ shareToken: string }>;
 }) {
   const { shareToken } = await params;
+  const previewPlan = getPublicPlanPreview(shareToken);
+  if (previewPlan) {
+    return (
+      <PlanClientBoundary syncOnMount>
+        <PublicPlanClient token={shareToken} initial={previewPlan} />
+      </PlanClientBoundary>
+    );
+  }
+
   const serviceClient = createServiceClient();
   if (!serviceClient) notFound();
 

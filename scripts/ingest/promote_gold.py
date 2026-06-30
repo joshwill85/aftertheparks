@@ -64,6 +64,53 @@ def _spans(field: dict[str, Any]) -> list[dict[str, Any]]:
     return spans if isinstance(spans, list) else []
 
 
+def _repair_public_text(value: str) -> str:
+    value = re.sub(r"\bages\s+I2\b", "ages 12", value)
+    value = value.replace("407-WWDW-PLAY", "407-WDW-PLAY")
+    value = re.sub(r"\bRecreation\s+Coa:\s*", "Recreation Cast Member.", value)
+    value = re.sub(r"\s*WI!\s*LD\s*Ww\s*ILDERNESS\s*BINGO\s*", " ", value, flags=re.I)
+    value = value.replace(
+        "complimentary kits available for purchase. marshmallows.",
+        "complimentary marshmallows. Kits available for purchase.",
+    )
+    value = value.replace(
+        "complimentary marshmallows. kits available for purchase.",
+        "complimentary marshmallows. Kits available for purchase.",
+    )
+    value = re.sub(
+        r"^joy the warm glow of the campfire",
+        "Enjoy the warm glow of the campfire",
+        value,
+        flags=re.I,
+    )
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _public_spans(field: dict[str, Any]) -> list[dict[str, Any]]:
+    public_spans: list[dict[str, Any]] = []
+    for span in _spans(field):
+        if not isinstance(span, dict):
+            continue
+        repaired = dict(span)
+        repaired_text = _repair_public_text(str(repaired.get("text") or ""))
+        if not repaired_text:
+            continue
+        repaired["text"] = repaired_text
+        public_spans.append(repaired)
+    return public_spans
+
+
+def _public_description_value(candidate: dict[str, Any]) -> str:
+    normalized = candidate["normalized_fields"]
+    description = _repair_public_text(str(normalized["description"]["value"] or ""))
+    slug = str(normalized.get("slug") or "")
+
+    if slug == "tasteful-artistry-at-disneys-wilderness-lodge":
+        description = re.sub(r"\s*To book, please call\s*$", "", description, flags=re.I)
+
+    return description.strip()
+
+
 def _complimentary_activity_price_evidence(normalized: dict[str, Any]) -> list[dict[str, Any]]:
     evidence: list[dict[str, Any]] = []
     seen: set[tuple[Any, Any, str]] = set()
@@ -95,24 +142,24 @@ def _public_record_from_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
         "title": {
             "value": normalized["title"]["value"],
             "source": normalized["title"].get("source", "pdf_layout"),
-            "spans": _spans(normalized["title"]),
+            "spans": _public_spans(normalized["title"]),
         },
         "schedule": {
             "text": normalized["schedule"]["text"],
             "start_time": normalized["schedule"].get("start_time"),
             "end_time": normalized["schedule"].get("end_time"),
             "source": normalized["schedule"].get("source", "pdf_layout"),
-            "spans": _spans(normalized["schedule"]),
+            "spans": _public_spans(normalized["schedule"]),
         },
         "location": {
             "value": normalized["location"]["value"],
             "source": normalized["location"].get("source", "pdf_layout"),
-            "spans": _spans(normalized["location"]),
+            "spans": _public_spans(normalized["location"]),
         },
         "description": {
-            "value": normalized["description"]["value"],
+            "value": _public_description_value(candidate),
             "source": normalized["description"].get("source", "pdf_layout"),
-            "spans": _spans(normalized["description"]),
+            "spans": _public_spans(normalized["description"]),
         },
         "claims": _claims_from_candidate(candidate),
     }

@@ -30,7 +30,7 @@ for (const expectedRoute of [
   "/today",
   "/tonight",
   "/disney-world-resort-activity-calendars",
-  "/guides/things-to-do-without-park-ticket",
+  "/resorts?no_ticket_friendly=true",
   "/llms.txt",
   "/llms-full.txt",
   "/robots.txt",

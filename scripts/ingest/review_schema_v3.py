@@ -24,6 +24,7 @@ DEFAULT_REVIEWED_SOURCE_DRIFT_REPORT_PATH = (
     PROCESSED_DIR / "review_queue" / "vision_v3_reviewed_source_drift_report.json"
 )
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
+DEFAULT_REVIEW_QUEUE_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_queue.json"
 
 
 def _now_iso() -> str:
@@ -92,6 +93,12 @@ def _is_non_field_review_approval(decision_or_task: dict[str, Any]) -> bool:
         original_task.get("candidate_type") == "dual_run_new_record"
         and original_task.get("field") == "new_record"
         and isinstance(original_task.get("dual_run_new_record"), dict)
+    ):
+        return True
+    if (
+        original_task.get("candidate_type") == "dual_run_missing_v2_record"
+        and original_task.get("field") == "missing_v2_record"
+        and isinstance(original_task.get("dual_run_missing_v2_record"), dict)
     ):
         return True
     return (
@@ -255,6 +262,15 @@ def _dual_run_review_key(decision: dict[str, Any]) -> tuple[str, str] | None:
     new_record_key = str(new_record.get("review_key") or "").strip()
     if new_record_key:
         return ("new_record", new_record_key)
+
+    missing_record = (
+        original_task.get("dual_run_missing_v2_record")
+        if isinstance(original_task.get("dual_run_missing_v2_record"), dict)
+        else {}
+    )
+    missing_record_key = str(missing_record.get("review_key") or "").strip()
+    if missing_record_key:
+        return ("missing_v2_record", missing_record_key)
     return None
 
 
@@ -289,7 +305,16 @@ def _dual_run_required_content_hash(decision: dict[str, Any]) -> str:
         if isinstance(original_task.get("dual_run_new_record"), dict)
         else {}
     )
-    return str(new_record.get("content_sha256") or "").strip()
+    new_record_hash = str(new_record.get("content_sha256") or "").strip()
+    if new_record_hash:
+        return new_record_hash
+
+    missing_record = (
+        original_task.get("dual_run_missing_v2_record")
+        if isinstance(original_task.get("dual_run_missing_v2_record"), dict)
+        else {}
+    )
+    return str(missing_record.get("content_sha256") or "").strip()
 
 
 def _dual_run_review_manifest(decision: dict[str, Any], key_value: str, required_hash: str) -> dict[str, Any]:
@@ -342,6 +367,120 @@ def _load_json_dict(path: Path) -> dict[str, Any]:
         return {}
     payload = json.loads(path.read_text())
     return payload if isinstance(payload, dict) else {}
+
+
+def _write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+
+
+def _load_review_decisions_payload(path: Path) -> tuple[list[dict[str, Any]], str]:
+    if not path.exists():
+        return [], "list"
+    payload = json.loads(path.read_text())
+    if isinstance(payload, dict) and isinstance(payload.get("decisions"), list):
+        return [item for item in payload["decisions"] if isinstance(item, dict)], "dict"
+    if isinstance(payload, list):
+        return [item for item in payload if isinstance(item, dict)], "list"
+    raise ValueError("invalid_review_decisions_file")
+
+
+def _write_review_decisions_payload(path: Path, decisions: list[dict[str, Any]], payload_shape: str) -> None:
+    if payload_shape == "dict":
+        _write_json(path, {"decisions": decisions})
+        return
+    _write_json(path, decisions)
+
+
+def _load_review_task(queue_path: Path, task_id: str) -> dict[str, Any]:
+    tasks = _load_json_list(queue_path)
+    matches = [task for task in tasks if str(task.get("task_id") or "").strip() == task_id]
+    if not matches:
+        raise ValueError(f"review_task_not_found:{task_id}")
+    if len(matches) > 1:
+        raise ValueError(f"review_task_not_unique:{task_id}")
+    return matches[0]
+
+
+def _parse_approved_fields_json(value: str | None) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    parsed = json.loads(value)
+    if not isinstance(parsed, dict):
+        raise ValueError("approved_fields_json_must_be_object")
+    return parsed
+
+
+def _default_approved_fields_from_task(task: dict[str, Any]) -> dict[str, Any]:
+    field_name = str(task.get("field") or "").strip()
+    if field_name == "price":
+        field_name = "fee"
+    if field_name not in APPROVABLE_FIELDS:
+        return {}
+    normalized_value = task.get("normalized_value")
+    if not _has_normalized_value(normalized_value):
+        return {}
+    approved_field: dict[str, Any] = {"normalized_value": normalized_value}
+    if task.get("candidate_value") is not None:
+        approved_field["raw_value"] = task.get("candidate_value")
+    return {field_name: approved_field}
+
+
+def record_review_decision_from_queue(
+    *,
+    queue_path: Path = DEFAULT_REVIEW_QUEUE_PATH,
+    decisions_path: Path = DEFAULT_REVIEW_DECISIONS_PATH,
+    task_id: str,
+    reviewer: str,
+    decision: str,
+    reason: str,
+    approved_fields: dict[str, Any] | None = None,
+    decided_at: str | None = None,
+    fixture_candidates_path: Path | None = None,
+    parser_rule_requests_path: Path | None = None,
+) -> dict[str, Any]:
+    task = _load_review_task(queue_path, task_id)
+    normalized_decision = decision.strip().lower()
+    selected_approved_fields = approved_fields
+    if normalized_decision in {"approve", "edit"} and selected_approved_fields is None:
+        selected_approved_fields = _default_approved_fields_from_task(task)
+    review_decision = build_review_decision(
+        task,
+        reviewer=reviewer,
+        decision=normalized_decision,
+        approved_fields=selected_approved_fields,
+        reason=reason,
+        decided_at=decided_at,
+    )
+    decisions, payload_shape = _load_review_decisions_payload(decisions_path)
+    decisions_by_task_id = {
+        str(existing.get("task_id") or ""): index
+        for index, existing in enumerate(decisions)
+        if str(existing.get("task_id") or "").strip()
+    }
+    existing_index = decisions_by_task_id.get(review_decision["task_id"])
+    if existing_index is None:
+        decisions.append(review_decision)
+    else:
+        decisions[existing_index] = review_decision
+    _write_review_decisions_payload(decisions_path, decisions, payload_shape)
+    fixture_output = fixture_candidates_path or decisions_path.parent / DEFAULT_FIXTURE_CANDIDATES_PATH.name
+    parser_output = parser_rule_requests_path or decisions_path.parent / DEFAULT_PARSER_RULE_REQUESTS_PATH.name
+    export_review_fixture_candidates(decisions_path=decisions_path, output_path=fixture_output)
+    export_parser_rule_update_requests(decisions_path=decisions_path, output_path=parser_output)
+    return {
+        "report_kind": "review_decision_v3_record",
+        "decisions_path": str(decisions_path),
+        "fixture_candidates_path": str(fixture_output),
+        "parser_rule_requests_path": str(parser_output),
+        "task_id": review_decision["task_id"],
+        "decision": review_decision["decision"],
+        "content_sha256": review_decision["content_sha256"],
+        "page_image_sha256": review_decision.get("page_image_sha256"),
+        "field_crop_sha256": review_decision.get("field_crop_sha256"),
+        "approved_field_names": sorted(review_decision.get("approved_fields") or {}),
+        "decision_count": len(decisions),
+    }
 
 
 def export_review_fixture_candidates(
@@ -441,9 +580,11 @@ def export_dual_run_review_keys(
     decisions = _load_json_list(decisions_path)
     reviewed_diff_keys: set[str] = set()
     reviewed_new_record_keys: set[str] = set()
+    reviewed_missing_v2_record_keys: set[str] = set()
     reviewed_status_transition_keys: set[str] = set()
     reviewed_diff_reviews: dict[str, dict[str, Any]] = {}
     reviewed_new_record_reviews: dict[str, dict[str, Any]] = {}
+    reviewed_missing_v2_record_reviews: dict[str, dict[str, Any]] = {}
     reviewed_status_transition_reviews: dict[str, dict[str, Any]] = {}
     skipped_non_approval = 0
     skipped_invalid_review = 0
@@ -483,6 +624,9 @@ def export_dual_run_review_keys(
         elif key_kind == "new_record":
             reviewed_new_record_keys.add(key_value)
             reviewed_new_record_reviews[key_value] = review_manifest
+        elif key_kind == "missing_v2_record":
+            reviewed_missing_v2_record_keys.add(key_value)
+            reviewed_missing_v2_record_reviews[key_value] = review_manifest
         elif key_kind == "status_transition":
             reviewed_status_transition_keys.add(key_value)
             reviewed_status_transition_reviews[key_value] = review_manifest
@@ -493,6 +637,7 @@ def export_dual_run_review_keys(
         "source_decisions_path": str(decisions_path),
         "reviewed_diff_keys": sorted(reviewed_diff_keys),
         "reviewed_new_record_keys": sorted(reviewed_new_record_keys),
+        "reviewed_missing_v2_record_keys": sorted(reviewed_missing_v2_record_keys),
         "reviewed_status_transition_keys": sorted(reviewed_status_transition_keys),
         "reviewed_diff_reviews": [
             reviewed_diff_reviews[key]
@@ -501,6 +646,10 @@ def export_dual_run_review_keys(
         "reviewed_new_record_reviews": [
             reviewed_new_record_reviews[key]
             for key in sorted(reviewed_new_record_reviews)
+        ],
+        "reviewed_missing_v2_record_reviews": [
+            reviewed_missing_v2_record_reviews[key]
+            for key in sorted(reviewed_missing_v2_record_reviews)
         ],
         "reviewed_status_transition_reviews": [
             reviewed_status_transition_reviews[key]
@@ -516,6 +665,7 @@ def export_dual_run_review_keys(
             "decision_count": len(decisions),
             "reviewed_diff_key_count": len(reviewed_diff_keys),
             "reviewed_new_record_key_count": len(reviewed_new_record_keys),
+            "reviewed_missing_v2_record_key_count": len(reviewed_missing_v2_record_keys),
             "reviewed_status_transition_key_count": len(reviewed_status_transition_keys),
             "skipped_non_approval_count": skipped_non_approval,
             "skipped_invalid_review_decision_count": skipped_invalid_review,
@@ -534,7 +684,10 @@ def export_reviewed_source_drift_report(
     try:
         from scripts.ingest.build_review_queue_v3 import build_review_tasks
     except ImportError:  # pragma: no cover - supports package-style imports
-        from .build_review_queue_v3 import build_review_tasks
+        try:
+            from build_review_queue_v3 import build_review_tasks
+        except ImportError:  # pragma: no cover - supports package-style imports
+            from .build_review_queue_v3 import build_review_tasks
 
     source_drift_report = _load_json_dict(source_drift_report_path)
     required_tasks = build_review_tasks([], source_drift_report=source_drift_report)
@@ -614,8 +767,18 @@ def export_reviewed_source_drift_report(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Export approved v3 review decisions as fixture candidates")
+    parser = argparse.ArgumentParser(description="Record or export v3 review decisions")
     parser.add_argument("decisions", type=Path, nargs="?", default=DEFAULT_REVIEW_DECISIONS_PATH)
+    parser.add_argument("--record-task-id", help="Append or replace a hash-bound review decision for this task id")
+    parser.add_argument("--queue", type=Path, default=DEFAULT_REVIEW_QUEUE_PATH)
+    parser.add_argument("--decision", choices=sorted(VALID_DECISIONS), default="approve")
+    parser.add_argument("--reviewer")
+    parser.add_argument("--reason")
+    parser.add_argument(
+        "--approved-fields-json",
+        help='Optional approved fields object, for example {"schedule":{"raw_value":"Daily at 1:30pm","normalized_value":{"start_time":"13:30"}}}',
+    )
+    parser.add_argument("--decided-at")
     parser.add_argument(
         "--export",
         choices=(
@@ -635,7 +798,18 @@ def main() -> None:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    if args.export == "parser-rule-requests":
+    if args.record_task_id:
+        report = record_review_decision_from_queue(
+            queue_path=args.queue,
+            decisions_path=args.decisions,
+            task_id=args.record_task_id,
+            reviewer=_require_text(args.reviewer, "reviewer"),
+            decision=args.decision,
+            reason=_require_text(args.reason, "reason"),
+            approved_fields=_parse_approved_fields_json(args.approved_fields_json),
+            decided_at=args.decided_at,
+        )
+    elif args.export == "parser-rule-requests":
         report = export_parser_rule_update_requests(
             decisions_path=args.decisions,
             output_path=args.output,

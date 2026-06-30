@@ -150,7 +150,7 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
     ],
   },
   {
-    path: "/guides/disney-world-non-park-day",
+    path: "/activities",
     kind: "html",
     requiredText: [
       'aria-label="Breadcrumb"',
@@ -184,7 +184,7 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
     ],
   },
   {
-    path: "/guides/things-to-do-without-park-ticket",
+    path: "/resorts?no_ticket_friendly=true",
     kind: "html",
     requiredText: [
       'aria-label="Breadcrumb"',
@@ -218,7 +218,7 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
     ],
   },
   {
-    path: "/guides/disney-springs-area-resort-activities",
+    path: "/activities?area=disney-springs",
     kind: "html",
     requiredText: [
       'aria-label="Breadcrumb"',
@@ -288,7 +288,7 @@ const DEFAULT_ROUTES: RouteAuditTarget[] = [
     requiredText: [
       "<urlset",
       "/disney-world-resort-activity-calendars",
-      "/guides/disney-springs-area-resort-activities",
+      "/activities?area=disney-springs",
     ],
   },
 ];

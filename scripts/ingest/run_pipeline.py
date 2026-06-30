@@ -13,6 +13,13 @@ ROOT = SCRIPTS.parents[1]
 SOURCE_INVENTORY_PATH = "data/processed/source_inventory.json"
 SOURCE_OVERRIDES_PATH = "data/processed/resort_pdf_source_overrides.json"
 RESORT_PDF_DATE_AUDIT_PATH = "data/processed/resort_pdf_date_audit.json"
+V3_REVIEW_DECISIONS_PATH = "data/processed/review_queue/vision_v3_review_decisions.json"
+V3_DUAL_RUN_REVIEW_KEYS_PATH = "data/processed/review_queue/vision_v3_dual_run_review_keys.json"
+V3_REVIEW_FIXTURE_CANDIDATES_PATH = "data/processed/review_queue/vision_v3_review_fixture_candidates.json"
+V3_PARSER_RULE_REQUESTS_PATH = "data/processed/review_queue/vision_v3_parser_rule_update_requests.json"
+V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH = (
+    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json"
+)
 
 
 def run(script: str, *args: str) -> None:
@@ -53,6 +60,13 @@ def _with_quarter(step: tuple[str, ...], quarter: str | None) -> tuple[str, ...]
     return (*step, "--quarter", quarter) if quarter else step
 
 
+def _promote_gold_v3_step(*, quarter: str | None) -> tuple[str, ...]:
+    step = ("promote_gold_v3.py", "--preview", "--include-approved-review")
+    if quarter:
+        step = (*step, "--expected-sources", SOURCE_INVENTORY_PATH, "--quarter", quarter)
+    return step
+
+
 def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> list[tuple[str, ...]]:
     if not local_only and not quarter:
         raise ValueError("vision_v3_quarter_required")
@@ -85,10 +99,56 @@ def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> l
     ]
     if quarter:
         steps.append(("source_drift_report.py", "--quarter", quarter))
+        steps.append(
+            (
+                "review_schema_v3.py",
+                V3_REVIEW_DECISIONS_PATH,
+                "--export",
+                "reviewed-source-drift-report",
+                "--source-drift-report",
+                "data/processed/source_drift_report.json",
+                "--output",
+                V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH,
+            )
+        )
     steps.extend(
         [
-            ("build_review_queue_v3.py",),
-            ("promote_gold_v3.py", "--preview", "--include-approved-review"),
+            (
+                "build_review_queue_v3.py",
+                *(
+                    ()
+                    if not quarter
+                    else (
+                        "--source-drift-report",
+                        V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH,
+                    )
+                ),
+            ),
+            (
+                "review_schema_v3.py",
+                V3_REVIEW_DECISIONS_PATH,
+                "--export",
+                "fixture-candidates",
+                "--output",
+                V3_REVIEW_FIXTURE_CANDIDATES_PATH,
+            ),
+            (
+                "review_schema_v3.py",
+                V3_REVIEW_DECISIONS_PATH,
+                "--export",
+                "parser-rule-requests",
+                "--output",
+                V3_PARSER_RULE_REQUESTS_PATH,
+            ),
+            _promote_gold_v3_step(quarter=quarter),
+            (
+                "review_schema_v3.py",
+                V3_REVIEW_DECISIONS_PATH,
+                "--export",
+                "dual-run-review-keys",
+                "--output",
+                V3_DUAL_RUN_REVIEW_KEYS_PATH,
+            ),
         ]
     )
     steps.extend([
@@ -104,12 +164,34 @@ def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> l
             "data/processed/eval/v3_source_statuses.json",
             "--review-tasks",
             "data/processed/review_queue/vision_v3_review_queue.json",
+            "--reviewed-diff-keys-file",
+            V3_DUAL_RUN_REVIEW_KEYS_PATH,
+            "--reviewed-status-transition-keys-file",
+            V3_DUAL_RUN_REVIEW_KEYS_PATH,
             *(() if not quarter else ("--quarter", quarter)),
+        ),
+        (
+            "build_review_queue_v3.py",
+            *(
+                ()
+                if not quarter
+                else (
+                    "--source-drift-report",
+                    V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH,
+                )
+            ),
         ),
         ("trust_report.py",),
     ])
     if not local_only:
-        steps.append(("publish_gold_v3.py", "--require-clean-preview", "--json"))
+        publish_step: tuple[str, ...] = ("publish_gold_v3.py", "--require-clean-preview", "--json")
+        if quarter:
+            publish_step = (
+                *publish_step,
+                "--source-drift-report",
+                V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH,
+            )
+        steps.append(publish_step)
     return steps
 
 

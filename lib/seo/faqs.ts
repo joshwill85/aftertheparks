@@ -15,12 +15,12 @@ export interface ResortFaqCounts {
 
 function priceAnswer(activity: ActivityOccurrence): string {
   if (activity.price.state === "free") {
-    return `${activity.title} is currently tracked as free in After the Parks data for ${activity.resort.name}. Confirm current eligibility, supplies, and access with the resort before you plan around it.`;
+    return `${activity.title} is currently listed as free for ${activity.resort.name}. Confirm current eligibility, supplies, and access with the resort before you plan around it.`;
   }
   if (activity.price.state === "fee") {
     return `${activity.title} may have a fee or paid component. Check the current official source and any reservation details before you go.`;
   }
-  return `The current cost for ${activity.title} is not fully confirmed in the tracked data. Check the official resort source before relying on it as a free or paid activity.`;
+  return `The current cost for ${activity.title} is not fully confirmed. Check the official resort source before relying on it as a free or paid activity.`;
 }
 
 function scheduleAnswer(activity: ActivityOccurrence, upcomingCount: number): string {
@@ -40,19 +40,19 @@ function weatherAnswer(activity: ActivityOccurrence): string | undefined {
     return undefined;
   }
   if (weather) {
-    return `${activity.title} has weather-sensitive details in the tracked data: ${weather} Confirm outdoor, poolside, boat, Skyliner, movie, and campfire plans before leaving your resort.`;
+    return `${activity.title} has weather-sensitive details: ${weather} Confirm outdoor, poolside, boat, Skyliner, movie, and campfire plans before leaving your resort.`;
   }
   return `${activity.title} may be affected by weather if it is outdoors, poolside, or transportation-sensitive. Check current conditions and the official resort source before you go.`;
 }
 
 function reservationAnswer(activity: ActivityOccurrence): string {
   if (activity.enrichment?.reservationRequired || activity.eligibility.reservation?.required) {
-    return `Yes. ${activity.title} is marked as requiring a reservation in the tracked data. Confirm the booking method, timing, cost, and eligibility with the official source.`;
+    return `Yes. ${activity.title} is marked as requiring a reservation. Confirm the booking method, timing, cost, and eligibility with the official source.`;
   }
   if (activity.enrichment?.reservationRecommended) {
     return `${activity.title} is marked as reservation-recommended. Walk-up availability may vary, so confirm before building a plan around it.`;
   }
-  return `${activity.title} is not currently marked as reservation-required in the tracked data, but eligibility and access can vary by resort, season, and operations.`;
+  return `${activity.title} is not currently marked as reservation-required, but eligibility and access can vary by resort, season, and operations.`;
 }
 
 export function buildActivityFaqItems(
@@ -96,12 +96,12 @@ export function buildResortFaqItems(
 ): SeoFaqItem[] {
   return [
     {
-      question: `What activities are currently tracked at ${resort.name}?`,
-      answer: `After the Parks currently tracks ${counts.scheduledCount} scheduled activit${counts.scheduledCount === 1 ? "y" : "ies"} and ${counts.offeringCount} standing offering${counts.offeringCount === 1 ? "" : "s"} for ${resort.name}. Use the resort page, today view, and tonight view for the current verified list.`,
+      question: `What activities are currently listed at ${resort.name}?`,
+      answer: `After the Parks currently lists ${counts.scheduledCount} scheduled activit${counts.scheduledCount === 1 ? "y" : "ies"} and ${counts.offeringCount} standing offering${counts.offeringCount === 1 ? "" : "s"} for ${resort.name}. Use the resort page, today view, and tonight view for the current verified list.`,
     },
     {
       question: `What can I do at ${resort.name} today or tonight?`,
-      answer: `${resort.name} currently has ${counts.todayCount} tracked activit${counts.todayCount === 1 ? "y" : "ies"} today and ${counts.tonightCount} tonight. Confirm same-day times and locations before leaving your room or crossing resorts.`,
+      answer: `${resort.name} currently has ${counts.todayCount} listed activit${counts.todayCount === 1 ? "y" : "ies"} today and ${counts.tonightCount} tonight. Confirm same-day times and locations before leaving your room or crossing resorts.`,
     },
     {
       question: `Are ${resort.name} activities official Disney schedules?`,

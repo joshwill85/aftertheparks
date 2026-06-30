@@ -63,7 +63,7 @@ assert.match(footer, /BrandAsset/, "site footer should use a shared brand asset"
 assert.match(footer, /guide-companion/, "site footer should use the wordless guide companion mark");
 assert.match(footer, /site-footer__brand-name/, "site footer should render readable brand text");
 assert.match(footer, /BrandMotif/, "site footer should include route motif");
-assert.match(footer, /not affiliated\s+with Disney/, "site footer should preserve the independent disclaimer");
+assert.match(footer, /not affiliated\s+with Disney/i, "site footer should preserve the independent disclaimer");
 
 const ogRoute = read("app/api/og/route.tsx");
 assert.match(ogRoute, /afterTheParksWordmark/, "OG route should include a brand wordmark treatment");
@@ -95,9 +95,6 @@ assert.match(tonightPage, /dark-lockup/, "tonight page should use the dark locku
 const aboutPage = read("app/about/page.tsx");
 assert.match(aboutPage, /AboutHero/, "about page should include the story-led hero");
 assert.match(aboutPage, /AboutStorySpine/, "about page should include the origin story spine");
-
-const guidesPage = read("app/guides/page.tsx");
-assert.match(guidesPage, /BrandMotif/, "guides page should use the route motif");
 
 const calendarPage = read("app/calendar/page.tsx");
 assert.match(calendarPage, /BrandAsset/, "calendar page should include map metaphor art");

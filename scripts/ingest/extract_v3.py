@@ -130,6 +130,7 @@ def _token_for_field(tokens: list[dict[str, Any]], field_hint: str, engine: str)
         "bbox_px": token.get("bbox_px"),
         "page_image_sha256": token.get("page_image_sha256"),
         "page_number": token.get("page_number"),
+        "inferred_location_from_title": token.get("inferred_location_from_title"),
     }
 
 
@@ -168,15 +169,26 @@ def _is_day_text(text: str) -> bool:
     return _clean_day_text(text) in DAY_NAMES
 
 
+def _looks_like_day_list(text: str) -> bool:
+    lowered = text.lower()
+    return sum(1 for day in DAY_NAMES if day in lowered) >= 2
+
+
 def _day_label(text: str) -> str:
     clean = _clean_day_text(text)
     return clean.capitalize() if clean in DAY_NAMES else text.strip()
 
 
 def _repair_ocr_time_text(text: str) -> str:
-    repaired = re.sub(r"(?<=\d:)O(?=\d)", "0", text, flags=re.IGNORECASE)
+    repaired = re.sub(r"\b(\d{1,2}):([0O]{2})(\s*[ap]\.?m\.?)", r"\1:00\3", text, flags=re.IGNORECASE)
+    repaired = re.sub(r"(?<=\d:)O(?=\d)", "0", repaired, flags=re.IGNORECASE)
     repaired = re.sub(r"(?<=\d:\d)O(?=\s*[ap]\.?m\.?)", "0", repaired, flags=re.IGNORECASE)
     return repaired
+
+
+def _slugify_value(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
+    return slug or "unknown"
 
 
 def _has_time(text: str) -> bool:
@@ -185,7 +197,45 @@ def _has_time(text: str) -> bool:
 
 def _looks_like_schedule(text: str) -> bool:
     lowered = text.lower()
-    return _has_time(text) or "dawn to dusk" in lowered
+    return (
+        _has_time(text)
+        or "dawn to dusk" in lowered
+        or (
+            re.search(r"\b(?:open\s*)?24\s*hours?\b", lowered) is not None
+            and re.search(r"\b7\s*days?\b", lowered) is not None
+        )
+    )
+
+
+def _schedule_semantic_key(value: object) -> tuple[Any, ...]:
+    normalized = normalize_schedule_text(value)
+    if normalized.get("schedule_type") == "recurring":
+        return (
+            "recurring",
+            tuple(normalized.get("days_of_week") or []),
+            normalized.get("start_time"),
+            normalized.get("end_time"),
+        )
+    if normalized.get("schedule_type") == "phrase":
+        return ("phrase", normalized.get("phrase"))
+    return ("unparsed",)
+
+
+def _schedule_continuation_tokens(tokens: list[dict[str, Any]], cursor: int) -> list[dict[str, Any]]:
+    if cursor + 2 >= len(tokens):
+        return []
+    current_text = _token_text(tokens[cursor]).strip()
+    next_text = _token_text(tokens[cursor + 1]).strip()
+    after_next_text = _token_text(tokens[cursor + 2]).strip()
+    if not current_text.endswith(";"):
+        return []
+    if not _looks_like_day_list(next_text) or not _looks_like_schedule(after_next_text):
+        return []
+    if abs(_bbox_center_y(tokens[cursor + 1]) - _bbox_center_y(tokens[cursor])) > 420:
+        return []
+    if abs(_bbox_center_y(tokens[cursor + 2]) - _bbox_center_y(tokens[cursor + 1])) > 420:
+        return []
+    return [tokens[cursor + 1], tokens[cursor + 2]]
 
 
 def _uppercase_ratio(text: str) -> float:
@@ -204,7 +254,7 @@ def _looks_like_title(text: str) -> bool:
 
 def _looks_like_location(text: str) -> bool:
     cleaned = text.strip()
-    if not cleaned or _is_day_text(cleaned) or _looks_like_schedule(cleaned):
+    if not cleaned or _is_day_text(cleaned) or _looks_like_day_list(cleaned) or _looks_like_schedule(cleaned):
         return False
     return not _looks_like_title(cleaned)
 
@@ -231,6 +281,26 @@ def _field_token_from_parts(
         "region_id": region.get("region_id"),
         "page_number": first.get("page_number") or region.get("page_number"),
         "page_image_sha256": first.get("page_image_sha256") or region.get("page_image_sha256"),
+    }
+
+
+def _implicit_location_token_from_title(
+    title_token: dict[str, Any],
+    *,
+    engine: str,
+    region: dict[str, Any],
+) -> dict[str, Any]:
+    title_text = _token_text(title_token)
+    return {
+        **title_token,
+        "engine": engine,
+        "text": title_text,
+        "token_text": title_text,
+        "field_hint": "location",
+        "inferred_location_from_title": True,
+        "region_id": region.get("region_id"),
+        "page_number": title_token.get("page_number") or region.get("page_number"),
+        "page_image_sha256": title_token.get("page_image_sha256") or region.get("page_image_sha256"),
     }
 
 
@@ -266,6 +336,40 @@ def _secondary_field_token(
 ) -> dict[str, Any] | None:
     if field_hint == "schedule":
         predicate = _looks_like_schedule
+        target_y = _bbox_center_y(primary_token)
+        primary_text = _token_text(primary_token)
+        if ";" in primary_text:
+            primary_time_count = len(TIME_RE.findall(_repair_ocr_time_text(primary_text)))
+            nearby_schedule_tokens = sorted(
+                [
+                    token for token in secondary_tokens
+                    if abs(_bbox_center_y(token) - target_y) <= max_distance * 5
+                    and (_looks_like_schedule(_token_text(token)) or _looks_like_day_list(_token_text(token)))
+                ],
+                key=lambda token: (
+                    float((token.get("bbox_px") or [0, 0, 0, 0])[1]),
+                    int(token.get("reading_order") or 0),
+                ),
+            )
+            for window_size in range(min(5, len(nearby_schedule_tokens)), 1, -1):
+                for start in range(0, len(nearby_schedule_tokens) - window_size + 1):
+                    window = nearby_schedule_tokens[start : start + window_size]
+                    combined_text = " ".join(_token_text(token) for token in window).strip()
+                    if len(TIME_RE.findall(_repair_ocr_time_text(combined_text))) != primary_time_count:
+                        continue
+                    agreement = evaluate_field_agreement(
+                        "schedule",
+                        primary_text=primary_text,
+                        secondary_text=combined_text,
+                    )
+                    if agreement.get("agreement") == "exact_after_normalization":
+                        return _field_token_from_parts(
+                            tokens=window,
+                            text=combined_text,
+                            field_hint=field_hint,
+                            engine=engine,
+                            region=region,
+                        )
     elif field_hint == "day_banner":
         predicate = _is_day_text
     elif field_hint == "location":
@@ -300,8 +404,75 @@ def _secondary_field_token(
                 engine=engine,
                 region=region,
             )
+        if primary_location_id != "unknown":
+            nearby_locations = sorted(
+                [
+                    token for token in secondary_tokens
+                    if _looks_like_location(_token_text(token))
+                    and abs(_bbox_center_y(token) - target_y) <= max_distance
+                ],
+                key=lambda token: _bbox_center_y(token),
+            )
+            for first, second in zip(nearby_locations, nearby_locations[1:]):
+                combined_text = f"{_token_text(first)} {_token_text(second)}"
+                if normalize_location_text(combined_text)["location_id"] == primary_location_id:
+                    return _field_token_from_parts(
+                        tokens=[first, second],
+                        text=combined_text,
+                        field_hint=field_hint,
+                        engine=engine,
+                        region=region,
+                    )
     else:
         predicate = _looks_like_title
+        target_y = _bbox_center_y(primary_token)
+        row_tokens = sorted(
+            [
+                token for token in secondary_tokens
+                if abs(_bbox_center_y(token) - target_y) <= max_distance
+            ],
+            key=lambda token: (
+                float((token.get("bbox_px") or [0, 0, 0, 0])[0]),
+                int(token.get("reading_order") or 0),
+            ),
+        )
+        primary_text = _token_text(primary_token)
+        for token in row_tokens:
+            text = _token_text(token)
+            if not _looks_like_title(text):
+                continue
+            agreement = evaluate_field_agreement(
+                "title",
+                primary_text=primary_text,
+                secondary_text=text,
+            )
+            if agreement.get("agreement") == "exact_after_normalization":
+                return _field_token_from_parts(
+                    tokens=[token],
+                    text=text,
+                    field_hint=field_hint,
+                    engine=engine,
+                    region=region,
+                )
+        for window_size in range(2, min(6, len(row_tokens)) + 1):
+            for start in range(0, len(row_tokens) - window_size + 1):
+                window = row_tokens[start : start + window_size]
+                combined_text = " ".join(_token_text(token) for token in window).strip()
+                if not _looks_like_title(combined_text):
+                    continue
+                agreement = evaluate_field_agreement(
+                    "title",
+                    primary_text=primary_text,
+                    secondary_text=combined_text,
+                )
+                if agreement.get("agreement") == "exact_after_normalization":
+                    return _field_token_from_parts(
+                        tokens=window,
+                        text=combined_text,
+                        field_hint=field_hint,
+                        engine=engine,
+                        region=region,
+                    )
     match = _nearest_engine_token(
         secondary_tokens,
         target_y=_bbox_center_y(primary_token),
@@ -310,6 +481,23 @@ def _secondary_field_token(
     )
     if not match:
         return None
+    if field_hint == "schedule":
+        match_index = secondary_tokens.index(match)
+        if match_index > 0:
+            previous = secondary_tokens[match_index - 1]
+            combined_text = f"{_token_text(previous)} {_token_text(match)}"
+            if (
+                _looks_like_day_list(_token_text(previous))
+                and abs(_bbox_center_y(previous) - _bbox_center_y(match)) <= max_distance
+                and _schedule_semantic_key(_token_text(primary_token)) == _schedule_semantic_key(combined_text)
+            ):
+                return _field_token_from_parts(
+                    tokens=[previous, match],
+                    text=combined_text,
+                    field_hint=field_hint,
+                    engine=engine,
+                    region=region,
+                )
     return _field_token_from_parts(
         tokens=[match],
         text=_token_text(match),
@@ -326,6 +514,15 @@ def _looks_like_fee_legend(text: str) -> bool:
 
 def _fee_marker_present(text: str) -> bool:
     return "($)" in text
+
+
+def _fee_marker_attached_to_title(title_text: str, evidence_text: str) -> bool:
+    title_key = re.sub(r"[^a-z0-9]+", "", title_text.lower())
+    if not title_key or "($)" not in evidence_text:
+        return False
+    before_marker = evidence_text.split("($)", 1)[0]
+    evidence_key = re.sub(r"[^a-z0-9]+", "", before_marker.lower())
+    return bool(evidence_key) and evidence_key == title_key
 
 
 def _fee_legend_token(snapshot: dict[str, Any], engine: str) -> dict[str, Any] | None:
@@ -389,11 +586,55 @@ def _heuristic_aframe_activity_token_groups(
         if not _looks_like_title(_token_text(title_token)):
             index += 1
             continue
-        if index + 2 >= len(primary_tokens):
+        if index + 1 >= len(primary_tokens):
             break
-        location_token = primary_tokens[index + 1]
-        schedule_token = primary_tokens[index + 2]
-        if not _looks_like_location(_token_text(location_token)) or not _looks_like_schedule(_token_text(schedule_token)):
+        location_tokens: list[dict[str, Any]] = []
+        cursor = index + 1
+        while (
+            cursor < len(primary_tokens)
+            and not _looks_like_schedule(_token_text(primary_tokens[cursor]))
+            and not _looks_like_day_list(_token_text(primary_tokens[cursor]))
+            and _looks_like_location(_token_text(primary_tokens[cursor]))
+        ):
+            location_tokens.append(primary_tokens[cursor])
+            cursor += 1
+        if cursor >= len(primary_tokens):
+            break
+        implicit_location_from_title = False
+        combined_location_schedule_token: dict[str, Any] | None = None
+        primary_combined_location: dict[str, Any] | None = None
+        primary_combined_schedule: dict[str, Any] | None = None
+        if not location_tokens and _looks_like_schedule(_token_text(primary_tokens[cursor])):
+            combined_location, combined_schedule = _movie_location_schedule_tokens(
+                token=primary_tokens[cursor],
+                engine=primary_engine,
+                region=region,
+            )
+            if combined_location and combined_schedule:
+                combined_location_schedule_token = primary_tokens[cursor]
+                primary_combined_location = combined_location
+                primary_combined_schedule = combined_schedule
+        if (
+            not location_tokens
+            and not primary_combined_location
+            and str(region.get("region_type") or "") != "movie_section"
+            and _looks_like_schedule(_token_text(primary_tokens[cursor]))
+        ):
+            implicit_location_from_title = True
+        schedule_tokens = [primary_tokens[cursor]]
+        if (
+            _looks_like_day_list(_token_text(primary_tokens[cursor]))
+            and cursor + 1 < len(primary_tokens)
+            and _looks_like_schedule(_token_text(primary_tokens[cursor + 1]))
+        ):
+            schedule_tokens.append(primary_tokens[cursor + 1])
+            cursor += 1
+        else:
+            continuation_tokens = _schedule_continuation_tokens(primary_tokens, cursor)
+            if continuation_tokens:
+                schedule_tokens.extend(continuation_tokens)
+                cursor += len(continuation_tokens)
+        if not (location_tokens or implicit_location_from_title or primary_combined_location) or not _looks_like_schedule(" ".join(_token_text(token) for token in schedule_tokens)):
             index += 1
             continue
 
@@ -404,36 +645,82 @@ def _heuristic_aframe_activity_token_groups(
             engine=primary_engine,
             region=region,
         )
-        primary_location = _field_token_from_parts(
-            tokens=[location_token],
-            text=_token_text(location_token),
-            field_hint="location",
-            engine=primary_engine,
-            region=region,
+        primary_location = (
+            primary_combined_location
+            if primary_combined_location
+            else _implicit_location_token_from_title(title_token, engine=primary_engine, region=region)
+            if implicit_location_from_title
+            else _field_token_from_parts(
+                tokens=location_tokens,
+                text=" ".join(_token_text(token) for token in location_tokens),
+                field_hint="location",
+                engine=primary_engine,
+                region=region,
+            )
         )
-        primary_schedule = _field_token_from_parts(
-            tokens=[schedule_token],
-            text=_token_text(schedule_token),
-            field_hint="schedule",
-            engine=primary_engine,
-            region=region,
+        primary_schedule = (
+            primary_combined_schedule
+            if primary_combined_schedule
+            else _field_token_from_parts(
+                tokens=schedule_tokens,
+                text=" ".join(_token_text(token) for token in schedule_tokens),
+                field_hint="schedule",
+                engine=primary_engine,
+                region=region,
+            )
         )
+        secondary_combined_location: dict[str, Any] | None = None
+        secondary_combined_schedule: dict[str, Any] | None = None
+        if combined_location_schedule_token:
+            secondary_combined_token = _nearest_engine_token(
+                secondary_tokens,
+                target_y=_bbox_center_y(combined_location_schedule_token),
+                predicate=lambda text: "|" in text or _has_time(text),
+                max_distance=380.0,
+            )
+            if secondary_combined_token:
+                secondary_combined_location, secondary_combined_schedule = _movie_location_schedule_tokens(
+                    token=secondary_combined_token,
+                    engine=secondary_engine,
+                    region=region,
+                )
         group = [token for token in (primary_title, primary_location, primary_schedule) if token]
         for primary_field in list(group):
             field_hint = str(primary_field.get("field_hint") or "")
-            secondary = _secondary_field_token(
-                secondary_tokens,
-                primary_token=primary_field,
-                field_hint=field_hint,
-                engine=secondary_engine,
-                region=region,
-                max_distance=380.0,
-            )
+            secondary = None
+            if field_hint == "location" and secondary_combined_location:
+                secondary = secondary_combined_location
+            elif field_hint == "schedule" and secondary_combined_schedule:
+                secondary = secondary_combined_schedule
+            if field_hint == "location" and implicit_location_from_title:
+                secondary_title = _secondary_field_token(
+                    secondary_tokens,
+                    primary_token=title_token,
+                    field_hint="title",
+                    engine=secondary_engine,
+                    region=region,
+                    max_distance=380.0,
+                )
+                if secondary_title:
+                    secondary = _implicit_location_token_from_title(
+                        secondary_title,
+                        engine=secondary_engine,
+                        region=region,
+                    )
+            if not secondary:
+                secondary = _secondary_field_token(
+                    secondary_tokens,
+                    primary_token=primary_field,
+                    field_hint=field_hint,
+                    engine=secondary_engine,
+                    region=region,
+                    max_distance=380.0,
+                )
             if secondary:
                 group.append(secondary)
         if {token.get("field_hint") for token in group} >= {"title", "schedule", "location"}:
             groups.append(group)
-        index += 3
+        index = cursor + 1
     return groups
 
 
@@ -455,6 +742,16 @@ def _movie_location_schedule_tokens(
         schedule_text = repaired[match.start() :].strip(" |")
     if not location_text or not schedule_text:
         return None, None
+    if re.fullmatch(
+        r"(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s*(?:at|from)?",
+        location_text,
+        flags=re.IGNORECASE,
+    ):
+        return None, None
+    if re.fullmatch(r"(?:daily|nightly)\s*(?:at|from)?", location_text, flags=re.IGNORECASE):
+        return None, None
+    if _looks_like_day_list(location_text):
+        return None, None
     location = _field_token_from_parts(
         tokens=[token],
         text=location_text,
@@ -472,11 +769,121 @@ def _movie_location_schedule_tokens(
     return location, schedule
 
 
+def _movie_location_schedule_tokens_from_split_row(
+    *,
+    location_token: dict[str, Any],
+    schedule_token: dict[str, Any],
+    engine: str,
+    region: dict[str, Any],
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    location_text = _token_text(location_token).split("|", 1)[0].strip(" |")
+    schedule_text = _token_text(schedule_token).strip(" |")
+    if not location_text or not schedule_text or not _has_time(schedule_text):
+        return None, None
+    location = _field_token_from_parts(
+        tokens=[location_token],
+        text=location_text,
+        field_hint="location",
+        engine=engine,
+        region=region,
+    )
+    schedule = _field_token_from_parts(
+        tokens=[schedule_token],
+        text=schedule_text,
+        field_hint="schedule",
+        engine=engine,
+        region=region,
+    )
+    return location, schedule
+
+
+def _split_row_location_schedule_pair(
+    tokens: list[dict[str, Any]],
+    *,
+    target_y: float,
+    max_distance: float = 450.0,
+) -> tuple[dict[str, Any], dict[str, Any]] | None:
+    pipe_tokens = [
+        token for token in tokens
+        if "|" in _token_text(token)
+        and not _has_time(_token_text(token))
+        and abs(_bbox_center_y(token) - target_y) <= max_distance
+    ]
+    time_tokens = [
+        token for token in tokens
+        if _has_time(_token_text(token))
+        and abs(_bbox_center_y(token) - target_y) <= max_distance
+    ]
+    candidates: list[tuple[float, dict[str, Any], dict[str, Any]]] = []
+    for pipe_token in pipe_tokens:
+        pipe_box = pipe_token.get("bbox_px") or [0, 0, 0, 0]
+        pipe_right = float(pipe_box[2])
+        for time_token in time_tokens:
+            time_box = time_token.get("bbox_px") or [0, 0, 0, 0]
+            time_left = float(time_box[0])
+            if time_left < pipe_right - 250:
+                continue
+            y_distance = abs(_bbox_center_y(pipe_token) - _bbox_center_y(time_token))
+            if y_distance > 160.0:
+                continue
+            candidates.append((abs(_bbox_center_y(pipe_token) - target_y) + y_distance, pipe_token, time_token))
+    if not candidates:
+        return None
+    _, location_token, schedule_token = sorted(candidates, key=lambda item: item[0])[0]
+    return location_token, schedule_token
+
+
 def _movie_title_text(text: str) -> str:
     cleaned = text.strip(" .")
     cleaned = re.sub(r"\s*\[(?:G|PG|PG-13)\]\s*$", "", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"\s+(?:G|PG|PG-13)\s*$", "", cleaned, flags=re.IGNORECASE)
     return cleaned.strip(" .")
+
+
+def _movie_title_fragment_key(value: object) -> str:
+    text = str(value or "").lower()
+    text = text.translate(str.maketrans({"0": "o", "1": "i", "3": "e", "5": "s"}))
+    return re.sub(r"[^a-z0-9]+", "", text)
+
+
+def _is_subsequence(needle: str, haystack: str) -> bool:
+    if not needle:
+        return False
+    position = 0
+    for character in haystack:
+        if position < len(needle) and needle[position] == character:
+            position += 1
+    return position == len(needle)
+
+
+def _recover_movie_title_token(
+    primary_movie_title: dict[str, Any],
+    secondary_movie_title: dict[str, Any],
+) -> tuple[dict[str, Any], bool]:
+    primary_text = _movie_title_text(_raw_text(primary_movie_title))
+    secondary_text = _movie_title_text(_raw_text(secondary_movie_title))
+    primary_key = _movie_title_fragment_key(primary_text)
+    secondary_key = _movie_title_fragment_key(secondary_text)
+    try:
+        primary_confidence = float(primary_movie_title.get("confidence"))
+        secondary_confidence = float(secondary_movie_title.get("confidence"))
+    except (TypeError, ValueError):
+        return primary_movie_title, False
+    primary_is_short_fragment = 2 <= len(primary_key) <= 4 and len(primary_key) <= max(4, int(len(secondary_key) * 0.45))
+    secondary_is_fuller = len(secondary_key) >= 6 and secondary_confidence >= 0.9
+    if (
+        primary_confidence < 0.8
+        and secondary_is_fuller
+        and primary_is_short_fragment
+        and _is_subsequence(primary_key, secondary_key)
+    ):
+        recovered = {
+            **secondary_movie_title,
+            "text": secondary_text,
+            "token_text": secondary_text,
+        }
+        return recovered, True
+    return primary_movie_title, False
 
 
 def _looks_like_movie_title(text: str) -> bool:
@@ -550,7 +957,7 @@ def _heuristic_aframe_movie_token_groups(
         secondary_tokens,
         target_y=_bbox_center_y(primary_title_source),
         predicate=lambda text: bool(re.search(r"\bmovie\s*under\s*the\s*stars\b|\bunder\s*the\s*stars\b|\bthe\s*stars\b", text, flags=re.IGNORECASE)),
-        max_distance=300.0,
+        max_distance=700.0,
     )
     secondary_location_schedule = _nearest_engine_token(
         secondary_tokens,
@@ -560,11 +967,23 @@ def _heuristic_aframe_movie_token_groups(
     )
     if not secondary_title_source or not secondary_location_schedule:
         return []
-    secondary_location, secondary_schedule = _movie_location_schedule_tokens(
-        token=secondary_location_schedule,
-        engine=secondary_engine,
-        region=region,
+    split_pair = _split_row_location_schedule_pair(
+        secondary_tokens,
+        target_y=_bbox_center_y(primary_location_schedule),
     )
+    if split_pair:
+        secondary_location, secondary_schedule = _movie_location_schedule_tokens_from_split_row(
+            location_token=split_pair[0],
+            schedule_token=split_pair[1],
+            engine=secondary_engine,
+            region=region,
+        )
+    else:
+        secondary_location, secondary_schedule = _movie_location_schedule_tokens(
+            token=secondary_location_schedule,
+            engine=secondary_engine,
+            region=region,
+        )
     if not secondary_location or not secondary_schedule:
         return []
 
@@ -657,6 +1076,152 @@ def _heuristic_aframe_movie_token_groups(
         if {token.get("field_hint") for token in group} >= {"title", "schedule", "location", "movie_title"}:
             groups.append(group)
     return groups
+
+
+def _partial_aframe_movie_review_candidates(
+    *,
+    snapshot: dict[str, Any],
+    region: dict[str, Any],
+    region_tokens: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if str(region.get("region_type") or "") != "movie_section":
+        return []
+    if any(token.get("field_hint") for token in region_tokens if isinstance(token, dict)):
+        return []
+
+    primary_engine, secondary_engine = _configured_engine_pair(snapshot)
+    primary_tokens = sorted(
+        [token for token in region_tokens if token.get("engine") == primary_engine],
+        key=lambda token: (float((token.get("bbox_px") or [0, 0, 0, 0])[1]), float((token.get("bbox_px") or [0, 0, 0, 0])[0])),
+    )
+    secondary_tokens = sorted(
+        [token for token in region_tokens if token.get("engine") == secondary_engine],
+        key=lambda token: (float((token.get("bbox_px") or [0, 0, 0, 0])[1]), float((token.get("bbox_px") or [0, 0, 0, 0])[0])),
+    )
+    if not primary_tokens:
+        return []
+
+    content_sha256 = str(snapshot.get("source_sha256") or "")
+    partials: list[dict[str, Any]] = []
+    for day_token in [token for token in primary_tokens if _is_day_text(_token_text(token).strip(" ."))]:
+        movie_title_token = _same_row_movie_title(primary_tokens, day_token) or _nearest_engine_token(
+            primary_tokens,
+            target_y=_bbox_center_y(day_token),
+            predicate=_looks_like_movie_title,
+            max_distance=180.0,
+        )
+        if not movie_title_token or movie_title_token is day_token:
+            continue
+
+        day_label = _day_label(_token_text(day_token))
+        secondary_day = next(
+            (
+                token for token in secondary_tokens
+                if _day_label(_token_text(token)) == day_label
+            ),
+            None,
+        )
+        secondary_movie_title = None
+        if secondary_day:
+            secondary_movie_title = _same_row_movie_title(secondary_tokens, secondary_day) or _nearest_engine_token(
+                secondary_tokens,
+                target_y=_bbox_center_y(movie_title_token),
+                predicate=_looks_like_movie_title,
+                max_distance=450.0,
+            )
+
+        primary_day = _field_token_from_parts(
+            tokens=[day_token],
+            text=day_label,
+            field_hint="schedule",
+            engine=primary_engine,
+            region=region,
+        )
+        secondary_day_token = (
+            _field_token_from_parts(
+                tokens=[secondary_day],
+                text=_day_label(_token_text(secondary_day)),
+                field_hint="schedule",
+                engine=secondary_engine,
+                region=region,
+            )
+            if secondary_day
+            else None
+        )
+        primary_movie = _field_token_from_parts(
+            tokens=[movie_title_token],
+            text=_movie_title_text(_token_text(movie_title_token)),
+            field_hint="movie_title",
+            engine=primary_engine,
+            region=region,
+        )
+        secondary_movie = (
+            _field_token_from_parts(
+                tokens=[secondary_movie_title],
+                text=_movie_title_text(_token_text(secondary_movie_title)),
+                field_hint="movie_title",
+                engine=secondary_engine,
+                region=region,
+            )
+            if secondary_movie_title
+            else None
+        )
+        if not primary_day or not primary_movie:
+            continue
+
+        schedule_normalized = normalize_schedule_text(day_label)
+        schedule_agreement = evaluate_field_agreement(
+            "schedule",
+            primary_text=day_label,
+            secondary_text=_raw_text(secondary_day_token),
+        )
+        movie_title_agreement = evaluate_field_agreement(
+            "title",
+            primary_text=_raw_text(primary_movie),
+            secondary_text=_raw_text(secondary_movie),
+        )
+        partials.append({
+            "source_title": None,
+            "normalized_title": None,
+            "movie_title": _raw_text(primary_movie),
+            "normalized_movie_title": movie_title_agreement["normalized_value"],
+            "location_text": None,
+            "normalized_location_id": None,
+            "schedule_raw": day_label,
+            "schedule_normalized": schedule_normalized,
+            "fee_required": None,
+            "validation_findings": ["partial_movie_row_review_required"],
+            "field_evidence": {
+                "region": _region_evidence(snapshot, region),
+                "schedule": build_field_evidence(
+                    field="schedule",
+                    raw_value=day_label,
+                    normalized_value=schedule_normalized,
+                    content_sha256=content_sha256,
+                    region=_field_region(region, primary_day, secondary_day_token),
+                    primary_engine=primary_day,
+                    secondary_engine=secondary_day_token,
+                    agreement=schedule_agreement["agreement"],
+                    review_status="required",
+                ),
+                "movie_title": build_field_evidence(
+                    field="movie_title",
+                    raw_value=_raw_text(primary_movie),
+                    normalized_value=movie_title_agreement["normalized_value"],
+                    content_sha256=content_sha256,
+                    region=_field_region(region, primary_movie, secondary_movie),
+                    primary_engine=primary_movie,
+                    secondary_engine=secondary_movie,
+                    agreement=movie_title_agreement["agreement"],
+                    review_status="required",
+                ),
+            },
+            "source_spans": {
+                "schedule": _source_span("schedule", primary_day, region=region),
+                "movie_title": _source_span("movie_title", primary_movie, region=region),
+            },
+        })
+    return partials
 
 
 def _heuristic_vertical_activity_token_groups(
@@ -884,6 +1449,8 @@ def _compose_schedule_text(schedule_token: dict[str, Any] | None, day_token: dic
         "daily",
         "nightly",
     )):
+        if re.match(r"^\s*from\b", schedule_text, flags=re.IGNORECASE):
+            return f"{day_text} {schedule_text[:1].lower()}{schedule_text[1:]}"
         return f"{day_text} at {schedule_text}"
     return schedule_text
 
@@ -941,7 +1508,8 @@ def _extracted_candidate(
     secondary_movie_title = _token_for_field(region_tokens, "movie_title", secondary_engine)
     primary_legend = _token_for_field(region_tokens, "fee_legend", primary_engine) or _fee_legend_token(snapshot, primary_engine)
     secondary_legend = _token_for_field(region_tokens, "fee_legend", secondary_engine) or _fee_legend_token(snapshot, secondary_engine)
-    if not all([primary_title, secondary_title, primary_schedule, secondary_schedule, primary_location, secondary_location]):
+    required_activity_fields = [primary_title, primary_schedule, secondary_schedule, primary_location, secondary_location]
+    if not all(required_activity_fields):
         return None
     if candidate_type == "movie" and not all([primary_movie_title, secondary_movie_title]):
         return None
@@ -972,22 +1540,52 @@ def _extracted_candidate(
         primary_text=_raw_text(primary_location),
         secondary_text=_raw_text(secondary_location),
     )
+    if (
+        primary_location.get("inferred_location_from_title")
+        and secondary_location.get("inferred_location_from_title")
+        and title_agreement.get("agreement") == "exact_after_normalization"
+    ):
+        location_agreement = {
+            **location_agreement,
+            "normalized_value": _slugify_value(_raw_text(primary_location)),
+            "agreement": "exact_after_normalization",
+        }
     movie_title_agreement = None
+    selected_movie_title = primary_movie_title
+    recovered_movie_title_from_secondary = False
     if candidate_type == "movie":
+        selected_movie_title, recovered_movie_title_from_secondary = _recover_movie_title_token(
+            primary_movie_title,
+            secondary_movie_title,
+        )
         movie_title_agreement = evaluate_field_agreement(
             "title",
-            primary_text=_raw_text(primary_movie_title),
+            primary_text=_raw_text(selected_movie_title),
             secondary_text=_raw_text(secondary_movie_title),
         )
     fee = reconcile_fee_evidence(
-        title_text=_raw_text(primary_title),
+        title_text=(
+            f"{_raw_text(primary_title)} ($)"
+            if _fee_marker_attached_to_title(_raw_text(primary_title), _raw_text(primary_legend))
+            else _raw_text(primary_title)
+        ),
         body_text="",
         legend_text=" ".join(text for text in (_raw_text(primary_legend), _raw_text(secondary_legend)) if text),
     )
-    primary_fee_text = "($)" if _fee_marker_present(_raw_text(primary_title)) else "no fee marker"
-    secondary_fee_text = "($)" if _fee_marker_present(_raw_text(secondary_title)) else "no fee marker"
-    primary_fee_engine = _fee_engine_token_from_title(primary_title, field_text=primary_fee_text)
-    secondary_fee_engine = _fee_engine_token_from_title(secondary_title, field_text=secondary_fee_text)
+    primary_fee_marker = _fee_marker_present(_raw_text(primary_title)) or _fee_marker_attached_to_title(
+        _raw_text(primary_title),
+        _raw_text(primary_legend),
+    )
+    secondary_fee_marker = _fee_marker_present(_raw_text(secondary_title)) or _fee_marker_attached_to_title(
+        _raw_text(secondary_title),
+        _raw_text(secondary_legend),
+    )
+    primary_fee_text = "($)" if primary_fee_marker else "no fee marker"
+    secondary_fee_text = "($)" if secondary_fee_marker else "no fee marker"
+    primary_fee_engine_source = primary_legend if primary_fee_marker and not _fee_marker_present(_raw_text(primary_title)) else primary_title
+    secondary_fee_engine_source = secondary_legend if secondary_fee_marker and not _fee_marker_present(_raw_text(secondary_title)) else secondary_title
+    primary_fee_engine = _fee_engine_token_from_title(primary_fee_engine_source, field_text=primary_fee_text)
+    secondary_fee_engine = _fee_engine_token_from_title(secondary_fee_engine_source, field_text=secondary_fee_text)
     fee_agreement = evaluate_field_agreement(
         "fee",
         primary_text=primary_fee_text,
@@ -1011,6 +1609,16 @@ def _extracted_candidate(
         }
     schedule_normalized = normalize_schedule_text(primary_schedule_text)
     location_normalized = normalize_location_text(_raw_text(primary_location))
+    if (
+        location_normalized.get("location_id") == "unknown"
+        and isinstance(primary_location, dict)
+        and primary_location.get("inferred_location_from_title")
+    ):
+        location_normalized = {
+            **location_normalized,
+            "location_id": _slugify_value(_raw_text(primary_location)),
+            "manual_review_required": False,
+        }
     findings: list[str] = []
     if fee["status"] != "validated":
         findings.extend(str(finding) for finding in fee.get("findings", []))
@@ -1055,7 +1663,7 @@ def _extracted_candidate(
             field="fee",
             raw_value=(
                 "no fee marker"
-                if fee.get("signals", {}).get("two_engine_no_fee_marker")
+                if fee.get("fee_required") is False
                 else " ".join(
                     text for text in (_raw_text(primary_title), _raw_text(primary_legend), _raw_text(secondary_legend)) if text
                 ).strip()
@@ -1069,22 +1677,27 @@ def _extracted_candidate(
             review_status="not_required" if fee_agreement["agreement"] == "exact_after_normalization" else "required",
         ),
     }
+    if primary_location.get("inferred_location_from_title"):
+        field_evidence["location"]["inferred_location_from_title"] = True
     movie_title = None
     normalized_movie_title = None
     if candidate_type == "movie" and movie_title_agreement is not None:
-        movie_title = _raw_text(primary_movie_title)
+        movie_title = _raw_text(selected_movie_title)
         normalized_movie_title = movie_title_agreement["normalized_value"]
         field_evidence["movie_title"] = build_field_evidence(
             field="movie_title",
             raw_value=movie_title,
             normalized_value=normalized_movie_title,
             content_sha256=content_sha256,
-            region=_field_region(region, primary_movie_title, secondary_movie_title),
+            region=_field_region(region, selected_movie_title, secondary_movie_title),
             primary_engine=primary_movie_title,
             secondary_engine=secondary_movie_title,
             agreement=movie_title_agreement["agreement"],
             review_status="not_required" if movie_title_agreement["agreement"] == "exact_after_normalization" else "required",
         )
+        if recovered_movie_title_from_secondary:
+            field_evidence["movie_title"]["recovered_from_secondary_ocr"] = True
+            field_evidence["movie_title"]["recovered_raw_value"] = movie_title
 
     source_spans = {
         "title": _source_span("title", primary_title, region=region),
@@ -1093,7 +1706,7 @@ def _extracted_candidate(
         "fee": _source_span("fee", primary_legend or primary_title, region=region),
     }
     if candidate_type == "movie":
-        source_spans["movie_title"] = _source_span("movie_title", primary_movie_title, region=region)
+        source_spans["movie_title"] = _source_span("movie_title", selected_movie_title, region=region)
 
     return {
         "source_title": _raw_text(primary_title),
@@ -1185,6 +1798,14 @@ def extract_candidates_from_snapshot(snapshot: dict[str, Any]) -> list[dict[str,
             )
             if extracted is not None:
                 extracted_group_results = [extracted]
+        if not extracted_group_results and region_type == "movie_section":
+            extracted_group_results = _partial_aframe_movie_review_candidates(
+                snapshot=snapshot,
+                region=region,
+                region_tokens=region_tokens,
+            )
+            if extracted_group_results:
+                extracted_candidate_type = "movie"
         if not extracted_group_results:
             extracted_group_results = [{
             "source_title": None,

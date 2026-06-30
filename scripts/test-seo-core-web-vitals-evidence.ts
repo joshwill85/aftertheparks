@@ -64,8 +64,8 @@ const goodRecords = [
   {
     checkedAt,
     source: "CrUX API",
-    routeGroup: "guide_pages",
-    representativePath: "/guides/things-to-do-without-park-ticket",
+    routeGroup: "calendar_pages",
+    representativePath: "/disney-world-resort-activity-calendars/summer-2026",
     device: "mobile",
     percentile: 75,
     lcpMs: 1900,

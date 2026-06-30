@@ -14,6 +14,8 @@ import type { Daypart } from "@/lib/types/occurrence";
 export type { Daypart };
 
 export const TIMEZONE = "America/New_York";
+export const EVENING_THRESHOLD_HOUR = 17;
+export const LATE_THRESHOLD_HOUR = 21;
 
 /** Current instant — use for all range comparisons. */
 export function nowInstant(): Date {
@@ -33,15 +35,15 @@ export function getDaypart(date: Date = getNowInOrlando(), force?: Daypart): Day
   if (force) return force;
   const hour = getHours(date);
   if (hour < 11) return "morning";
-  if (hour < 17) return "afternoon";
-  if (hour < 21) return "evening";
+  if (hour < EVENING_THRESHOLD_HOUR) return "afternoon";
+  if (hour < LATE_THRESHOLD_HOUR) return "evening";
   return "late";
 }
 
 export function daypartFromHour(hour: number): Daypart {
   if (hour < 11) return "morning";
-  if (hour < 17) return "afternoon";
-  if (hour < 21) return "evening";
+  if (hour < EVENING_THRESHOLD_HOUR) return "afternoon";
+  if (hour < LATE_THRESHOLD_HOUR) return "evening";
   return "late";
 }
 
@@ -111,13 +113,13 @@ export function addOrlandoDays(dateStr: string, days: number): string {
 
 export function isTonightWindow(date: Date = getNowInOrlando()): boolean {
   const hour = getHours(date);
-  return hour >= 17;
+  return hour >= EVENING_THRESHOLD_HOUR;
 }
 
 export function getTonightStart(date: Date = getNowInOrlando()): Date {
   const d = toZonedTime(date, TIMEZONE);
-  d.setHours(17, 0, 0, 0);
-  if (getHours(date) < 17) return d;
+  d.setHours(EVENING_THRESHOLD_HOUR, 0, 0, 0);
+  if (getHours(date) < EVENING_THRESHOLD_HOUR) return d;
   return date;
 }
 

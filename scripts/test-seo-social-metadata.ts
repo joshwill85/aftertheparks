@@ -45,13 +45,11 @@ async function main() {
   const { generateMetadata: activitiesMetadata } = await import("@/app/activities/page");
   const { generateMetadata: resortsMetadata } = await import("@/app/resorts/page");
   const { metadata: calendarMetadata } = await import("@/app/calendar/page");
-  const { metadata: guidesMetadata } = await import("@/app/guides/page");
   const { metadata: calendarHubMetadata } = await import("@/app/disney-world-resort-activity-calendars/page");
   const { generateMetadata: todayMetadata } = await import("@/app/today/page");
   const { generateMetadata: tonightMetadata } = await import("@/app/tonight/page");
   const { generateMetadata: activityMetadata } = await import("@/app/activities/[slug]/page");
   const { generateMetadata: resortMetadata } = await import("@/app/resorts/[slug]/page");
-  const { generateMetadata: guideMetadata } = await import("@/app/guides/[slug]/page");
   const { metadata: planMetadata } = await import("@/app/plan/page");
   const { generateMetadata: publicPlanMetadata } = await import("@/app/p/[shareToken]/page");
   const { generateMetadata: legacyPlanMetadata } = await import("@/app/plan/[shareId]/page");
@@ -97,7 +95,6 @@ async function main() {
       "no-ticket-friendly resorts page",
     ],
     [calendarMetadata, "calendar page"],
-    [guidesMetadata, "guides page"],
     [calendarHubMetadata, "calendar hub page"],
     [
       await todayMetadata({
@@ -140,12 +137,6 @@ async function main() {
       params: Promise.resolve({ slug: "polynesian-village-resort" }),
     }),
     "resort detail page"
-  );
-  assertSocialMetadata(
-    await guideMetadata({
-      params: Promise.resolve({ slug: "things-to-do-without-park-ticket" }),
-    }),
-    "guide detail page"
   );
 
   console.log("SEO social metadata tests passed.");

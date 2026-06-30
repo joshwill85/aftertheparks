@@ -1,0 +1,31 @@
+{
+  "report_kind": "review_queue_v3_report",
+  "schema_version": "review_queue_v3_report_001",
+  "summary": {
+    "all_tasks_have_existing_visual_artifacts": true,
+    "all_tasks_have_visual_artifacts": true,
+    "task_count": 38,
+    "task_count_by_finding": {
+      "engine_disagreement:location": 7,
+      "engine_disagreement:movie_title": 1,
+      "engine_disagreement:schedule": 10,
+      "engine_disagreement:title": 6,
+      "gold_conflict:v2_v3:schedule": 1,
+      "manual_review_required:missing_v2_record": 7,
+      "manual_review_required:new_record": 2,
+      "missing_field_engine_evidence:title": 1,
+      "partial_movie_row_review_required": 3
+    },
+    "task_count_by_type": {
+      "gold_conflict": 1,
+      "manual_review_required": 9,
+      "missing_field_engine_evidence:title": 1,
+      "ocr_disagreement": 24,
+      "partial_movie_row_review_required": 3
+    },
+    "visual_artifact_missing_count": 0,
+    "visual_artifact_missing_file_count": 0
+  },
+  "visual_artifact_missing_file_task_ids": [],
+  "visual_artifact_missing_task_ids": []
+}

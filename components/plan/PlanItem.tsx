@@ -10,8 +10,9 @@ import {
 import { getLivingState, livingStateLabel } from "@/lib/plan/living";
 import { activityDetailHref } from "@/lib/activities/links";
 import { trackPlanEvent } from "@/lib/plan/analytics";
+import { PlanSwapSuggestions } from "@/components/plan/PlanSwapSuggestions";
 import { EventWeatherSignal } from "@/components/weather/EventWeatherSignal";
-import type { PlanItem as PlanItemType } from "@/lib/types/occurrence";
+import type { ActivityOccurrence, PlanItem as PlanItemType } from "@/lib/types/occurrence";
 import { cn } from "@/lib/utils";
 
 function planItemToDisplayInput(item: PlanItemType) {
@@ -29,12 +30,18 @@ interface PlanItemCardProps {
   item: PlanItemType;
   onRemove: (id: string) => void;
   onUpdateNotes?: (id: string, notes: string) => void;
+  backupCandidates?: ActivityOccurrence[];
+  onSaveBackup?: (activity: ActivityOccurrence) => void;
+  onSwap?: (itemId: string, activity: ActivityOccurrence) => void;
 }
 
 function PlanItemCard({
   item,
   onRemove,
   onUpdateNotes,
+  backupCandidates = [],
+  onSaveBackup,
+  onSwap,
 }: PlanItemCardProps) {
   const [editingNotes, setEditingNotes] = useState(false);
   const [draftNotes, setDraftNotes] = useState(item.notes ?? "");
@@ -213,6 +220,15 @@ function PlanItemCard({
             )}
           </div>
         )}
+
+        {onSaveBackup && onSwap && backupCandidates.length > 0 && (
+          <PlanSwapSuggestions
+            item={item}
+            candidates={backupCandidates}
+            onSaveBackup={onSaveBackup}
+            onSwap={onSwap}
+          />
+        )}
       </div>
 
       <button
@@ -230,18 +246,27 @@ interface PlanItemProps {
   item: PlanItemType;
   onRemove: (id: string) => void;
   onUpdateNotes?: (id: string, notes: string) => void;
+  backupCandidates?: ActivityOccurrence[];
+  onSaveBackup?: (activity: ActivityOccurrence) => void;
+  onSwap?: (itemId: string, activity: ActivityOccurrence) => void;
 }
 
 export function PlanItem({
   item,
   onRemove,
   onUpdateNotes,
+  backupCandidates,
+  onSaveBackup,
+  onSwap,
 }: PlanItemProps) {
   return (
     <PlanItemCard
       item={item}
       onRemove={onRemove}
       onUpdateNotes={onUpdateNotes}
+      backupCandidates={backupCandidates}
+      onSaveBackup={onSaveBackup}
+      onSwap={onSwap}
     />
   );
 }

@@ -1,4 +1,5 @@
 import type { ForecastCompareResult } from "@/lib/weather/forecastCompare";
+import { WEATHER_DECISION_LABELS } from "@/lib/weather/guidance";
 
 export function ForecastCompare({ result }: { result: ForecastCompareResult }) {
   return (
@@ -6,9 +7,9 @@ export function ForecastCompare({ result }: { result: ForecastCompareResult }) {
       <h3>
         {result.allowed
           ? result.recommendation === "go_earlier"
-            ? "Go earlier"
-            : "Keep this timing"
-          : "Soft planning only"}
+            ? WEATHER_DECISION_LABELS.rainNearby
+            : WEATHER_DECISION_LABELS.goodForOutdoorPlans
+          : "Check closer to the date"}
       </h3>
       <p>{result.reason}</p>
     </section>

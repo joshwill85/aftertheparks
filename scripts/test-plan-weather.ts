@@ -16,6 +16,19 @@ for (const table of [
 const planItem = readFileSync("components/plan/PlanItem.tsx", "utf8");
 assert.match(planItem, /EventWeatherSignal/);
 assert.match(planItem, /item\.startDateTime/);
+assert.match(planItem, /PlanSwapSuggestions/);
+
+const swaps = readFileSync("lib/plan/swaps.ts", "utf8");
+assert.match(swaps, /buildPlanBackupSuggestions/);
+assert.match(swaps, /planItemNeedsWeatherBackup/);
+assert.match(swaps, /weatherFitValueForActivity/);
+
+const swapSuggestions = readFileSync("components/plan/PlanSwapSuggestions.tsx", "utf8");
+for (const label of ["Find indoor backup", "Swap this", "Save backup"]) {
+  assert.match(swapSuggestions, new RegExp(label));
+}
+assert.match(swapSuggestions, /buildPlanBackupSuggestions/);
+assert.match(swapSuggestions, /Confirm swap/);
 
 const timeline = readFileSync("components/plan/PlanTimeline.tsx", "utf8");
 assert.doesNotMatch(timeline, /PlanWeatherPanel/);

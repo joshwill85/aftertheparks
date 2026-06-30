@@ -10284,19 +10284,8 @@
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
       "page_image_sha256": "0247aae523afa797bfa25b90a11d8b7175a0be91eb60e1267920ca998af509c3",
       "page_number": 1,
-      "qr_decode_status": "decoded",
-      "qr_targets": [
-        {
-          "decoder": "opencv_qrcode",
-          "is_official_source": false,
-          "parent_content_sha256": "0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21",
-          "parent_source_document_id": "4424fc235f3f7f293ef1fcbc8182123c01a42a577136df0b141c63c93cf0dc6e",
-          "source_authority": "non_official",
-          "source_crop_sha256": "9bafc4855b4879a6376621f3a411e1fd68fd75221992c5b2425c178de51ee17d",
-          "source_role": "derived_source_link",
-          "target_url": "http://qr.disneyworld.com/AllStarMusic?r=qr"
-        }
-      ],
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
       "reading_order": 2,
       "region_family": "aframe_recreation",
       "region_id": "page-001-region-02",
@@ -10328,10 +10317,10 @@
         5184,
         2106,
         10800,
-        11664
+        15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_04-resort_activities_section.png",
-      "crop_sha256": "f89ca8316c12da8600966fa2e449393325a54077c87912e27e76d7c9ef5045a8",
+      "crop_sha256": "e567c2b5181058e8def8923aa0c37ff5d6c0443334317f9a30ed9da67e1c96c5",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",
@@ -10345,13 +10334,13 @@
     {
       "allow_auto_publish": true,
       "bbox_px": [
-        5184,
-        11664,
-        10800,
+        0,
+        8910,
+        5400,
         15552
       ],
       "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001-region_05-movie_section.png",
-      "crop_sha256": "03a4d19dc2534d204e134d3b934f7521c072ee33e101d4cde665f0c732716ec1",
+      "crop_sha256": "372891b3cb9ff9169c9e766331f3ff53ef702d81f96ec66de0d3aabdcb101ac7",
       "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_001.png",

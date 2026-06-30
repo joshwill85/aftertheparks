@@ -73,7 +73,7 @@ if (
     "/today",
     "/tonight",
     "/disney-world-resort-activity-calendars",
-    "/guides/things-to-do-without-park-ticket",
+    "/resorts?no_ticket_friendly=true",
     "/activities/movies-under-the-stars",
     "/resorts/polynesian-village-resort",
   ]) {
@@ -116,14 +116,14 @@ if (
       (record) =>
         !(
           record.engine === "Bing Webmaster Tools" &&
-          record.path === "/guides/things-to-do-without-park-ticket"
+          record.path === "/resorts?no_ticket_friendly=true"
         )
     ),
     { now: new Date("2026-06-28T12:00:00Z") }
   );
   assert.ok(
     missingAudit.issues.some(
-      (issue) => /Bing Webmaster Tools/.test(issue) && /things-to-do-without-park-ticket/.test(issue)
+      (issue) => /Bing Webmaster Tools/.test(issue) && /\/resorts\?no_ticket_friendly=true/.test(issue)
     ),
     "audit should require every priority path for each search engine"
   );

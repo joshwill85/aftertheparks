@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getFilteredActivities, getResorts } from "@/lib/data/activities";
-import { GUIDES } from "@/lib/guides";
-import { HIGH_VALUE_GUIDES, PRIORITY_ACTIVITY_SLUGS } from "@/lib/seo/routes";
+import { PRIORITY_ACTIVITY_SLUGS } from "@/lib/seo/routes";
 import { SEASONAL_CALENDAR_PAGES } from "@/lib/seo/seasonalCalendarPages";
 import type { ActivityOccurrence } from "@/lib/types/occurrence";
 
 export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
 function entry(
   url: string,
@@ -173,13 +173,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     activitySlugs.add(activity.activitySlug);
   }
 
-  const guideSlugs = new Set<string>(HIGH_VALUE_GUIDES.map((guide) => guide.slug));
-  for (const guide of GUIDES) {
-    if (guide.href.startsWith("/guides/")) {
-      guideSlugs.add(guide.slug);
-    }
-  }
-
   return [
     seoEntry(base, "/", "After the Parks", {
       lastModified: now,
@@ -203,11 +196,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
-    }),
-    seoEntry(base, "/guides", "Disney World Resort Planning Guides", {
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
     }),
     seoEntry(base, "/calendar", "Disney World Resort Activity Calendar", {
       lastModified: now,
@@ -280,13 +268,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: latestActivitySitemapLastModified(activities, slug, now),
         changeFrequency: "daily",
         priority: 0.78,
-      })
-    ),
-    ...Array.from(guideSlugs).map((slug) =>
-      seoEntry(base, `/guides/${slug}`, `${slug.replaceAll("-", " ")} guide`, {
-        lastModified: now,
-        changeFrequency: "weekly",
-        priority: 0.72,
       })
     ),
   ];

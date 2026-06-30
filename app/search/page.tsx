@@ -6,8 +6,7 @@ import { runSearch } from "@/lib/search/runSearch";
 
 export const metadata: Metadata = {
   title: "Search After the Parks",
-  description:
-    "Search current Walt Disney World resort activities, resorts, movies, guides, and planning categories.",
+  description: "Search activities, resorts, movies, categories, and planning pages.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/search" },
 };
@@ -38,7 +37,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <StarlightSearchEffect />
       <Hero
         title="Search After the Parks"
-        subtitle="Search activities, resorts, movies, guides, and categories."
+        subtitle="Search activities, resorts, movies, categories, and planning pages."
       />
       <SearchClient
         initialQuery={query}
@@ -48,7 +47,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 activities: initialPayload.activities,
                 officialOfferings: initialPayload.officialOfferings,
                 resorts: initialPayload.resorts,
-                guides: initialPayload.guides,
                 movies: initialPayload.movies,
                 hits: initialPayload.hits ?? [],
                 topHits: initialPayload.topHits,

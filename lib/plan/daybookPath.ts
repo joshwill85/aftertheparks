@@ -26,6 +26,8 @@ export interface PlanDaybookConnector {
   disclosure?: string;
   iconKey: IconKey;
   ariaLabel: string;
+  originResortName?: string;
+  destinationResortName?: string;
   transportOptions?: PlanTransportConnectionOption[];
 }
 
@@ -132,6 +134,8 @@ function connectorBetween(
         ariaLabel: `${formatMinutes(gapMinutes)} between ${previous.item.title} and ${
           current.item.title
         }. Transportation option: ${optionLabel}.`,
+        originResortName: previous.item.resortName,
+        destinationResortName: current.item.resortName,
         transportOptions,
       };
     }
@@ -145,6 +149,8 @@ function connectorBetween(
       ariaLabel: `${formatMinutes(gapMinutes)} between ${previous.item.title} and ${
         current.item.title
       } with a resort change from ${previous.item.resortName} to ${current.item.resortName}.`,
+      originResortName: previous.item.resortName,
+      destinationResortName: current.item.resortName,
     };
   }
 

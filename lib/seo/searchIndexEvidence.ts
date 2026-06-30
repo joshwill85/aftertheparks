@@ -29,9 +29,9 @@ export const PRIORITY_SEARCH_INDEX_PATHS = [
   "/resorts",
   "/disney-world-resort-activity-calendars",
   "/source-and-accuracy-policy",
-  "/guides/disney-world-non-park-day",
-  "/guides/things-to-do-without-park-ticket",
-  "/guides/disney-springs-area-resort-activities",
+  "/activities",
+  "/resorts?no_ticket_friendly=true",
+  "/activities?area=disney-springs",
   "/activities/movies-under-the-stars",
   "/resorts/polynesian-village-resort",
 ] as const;
@@ -73,7 +73,8 @@ function pathFromRecord(record: SearchIndexEvidenceRecord): string {
   const value = stringField(record, FIELD_ALIASES.path);
   if (!value) return "";
   try {
-    return new URL(value).pathname || "/";
+    const parsed = new URL(value);
+    return `${parsed.pathname || "/"}${parsed.search}`;
   } catch {
     return value.startsWith("/") ? value : "";
   }

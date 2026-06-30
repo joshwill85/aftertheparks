@@ -28,11 +28,13 @@ export const SEO_PERFORMANCE_ROUTE_PATTERNS = [
   { route: "/activities/[slug]/page", group: "activity_pages" },
   { route: "/resorts/page", group: "resort_pages" },
   { route: "/resorts/[slug]/page", group: "resort_pages" },
-  { route: "/guides/page", group: "guide_pages" },
-  { route: "/guides/[slug]/page", group: "guide_pages" },
   {
     route: "/disney-world-resort-activity-calendars/page",
     group: "homepage_calendar_hub",
+  },
+  {
+    route: "/disney-world-resort-activity-calendars/[season]/page",
+    group: "calendar_pages",
   },
   { route: "/calendar/page", group: "homepage_calendar_hub" },
 ] as const;

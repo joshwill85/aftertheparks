@@ -34,11 +34,11 @@ if (captureAgentReadinessEvidenceForHtml && renderAgentReadinessEvidenceJsonl) {
     <html>
       <head>
         <title>Things to Do Without a Park Ticket</title>
-        <link rel="canonical" href="https://aftertheparks.com/guides/things-to-do-without-park-ticket" />
+        <link rel="canonical" href="https://aftertheparks.com/resorts?no_ticket_friendly=true" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Things to Do Without a Park Ticket"}</script>
       </head>
       <body>
-        <nav aria-label="Breadcrumb"><a href="/guides">Guides</a></nav>
+        <nav aria-label="Breadcrumb"><a href="/resorts">Resorts</a></nav>
         <main>
           <h1>Things to Do at Disney World Without a Park Ticket</h1>
           <section>
@@ -58,7 +58,7 @@ if (captureAgentReadinessEvidenceForHtml && renderAgentReadinessEvidenceJsonl) {
     </html>`;
 
   const records = captureAgentReadinessEvidenceForHtml({
-    route: "/guides/things-to-do-without-park-ticket",
+    route: "/resorts?no_ticket_friendly=true",
     html: validHtml,
     status: 200,
     checkedAt: "2026-06-27T18:00:00Z",
@@ -71,7 +71,7 @@ if (captureAgentReadinessEvidenceForHtml && renderAgentReadinessEvidenceJsonl) {
     "capture should emit one record for each agent-readiness check"
   );
   assert.ok(
-    records.every((record) => record.route === "/guides/things-to-do-without-park-ticket"),
+    records.every((record) => record.route === "/resorts?no_ticket_friendly=true"),
     "capture should preserve the route on every record"
   );
   assert.ok(
@@ -133,14 +133,19 @@ for (const file of ["app/page.tsx", "app/activities/page.tsx", "app/resorts/page
 
 for (const file of ["app/page.tsx", "app/resorts/page.tsx"]) {
   const source = readFileSync(file, "utf8");
+  const freshnessComponentSource = readFileSync("components/seo/FreshnessFacts.tsx", "utf8");
   assert.match(
     source,
-    /Source and freshness/i,
+    /Source and freshness|FreshnessFacts/i,
     `${file} should expose a visible source/freshness section`
   );
-  assert.match(source, /Last verified/i, `${file} should expose last-verified evidence`);
   assert.match(
-    source,
+    `${source}\n${freshnessComponentSource}`,
+    /Last verified|lastVerified/i,
+    `${file} should expose last-verified evidence`
+  );
+  assert.match(
+    `${source}\n${freshnessComponentSource}`,
     /source-and-accuracy-policy/,
     `${file} should link to the source and accuracy policy`
   );

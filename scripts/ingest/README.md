@@ -47,7 +47,7 @@ pip install -r scripts/ingest/requirements.txt
 python scripts/ingest/run_pipeline.py --vision-v3 --quarter fy26-q4
 ```
 
-That lane renders source pages, builds vision snapshots, extracts and validates v3 candidates, generates source status/metrics, writes the quarterly source drift report, builds the v3 review queue, promotes a v3 preview, generates the dual-run report, refreshes the trust/monitoring report, and runs the guarded v3 readiness check. It does not publish v3 rows; public v3 writes still require `python publish_gold_v3.py --require-clean-preview --publish` after all gates pass.
+That lane renders source pages, builds vision snapshots, extracts and validates v3 candidates, generates source status/metrics, writes the quarterly source drift report, builds the v3 review queue, refreshes review-derived fixture/parser sidecars, promotes a v3 preview, generates the dual-run report, refreshes the trust/monitoring report, and runs the guarded v3 readiness check. It does not publish v3 rows; public v3 writes still require `python publish_gold_v3.py --require-clean-preview --publish` after all gates pass.
 
 The v3 vision lane uses `pypdfium2` for deterministic PDF page renders, `PaddleOCR` as the primary OCR/layout engine, and `RapidOCR` as the secondary comparator. `Docling` is supported as an optional parallel structural snapshot via `requirements-vision-v3-optional.txt`; it can pull platform-specific OCR dependencies, so keep it out of the default install unless that runtime is validated. If any OCR package is missing or fails, the v3 snapshot records a structured unavailable/error result and downstream publish gates fail closed instead of silently publishing guessed data.
 
@@ -73,7 +73,7 @@ Full-calendar fixtures must account for every extracted source candidate. Publis
 
 Magical Resort Guide is treated as third-party factual enrichment, not a source of record for which activities exist. `magical_resort_guide.py` reads public HTML pages and writes `data/processed/magical_resort_guide_facts.json`. `promote_gold.py` only joins those facts to existing Gold rows by calendar group and normalized activity slug, then preserves the official Disney `source_url`/`source_sha256` while adding `external_facts`, `enrichment`, price options, and `valid_from`/`valid_until` where available.
 
-Review queue:
+Review queue v2:
 
 ```bash
 npm run review:activities
@@ -82,6 +82,20 @@ python scripts/ingest/review_queue.py reject <candidate_id> --reviewer <name>
 ```
 
 Approvals can clear parser warnings only. They cannot override missing required source spans, fixture drift, or unsupported public claims.
+
+Review queue v3:
+
+```bash
+python scripts/ingest/review_schema_v3.py \
+  data/processed/review_queue/vision_v3_review_decisions.json \
+  --record-task-id <task_id> \
+  --decision approve \
+  --reviewer <name> \
+  --reason "Verified against source crop"
+```
+
+For field edits, pass `--approved-fields-json` with the reviewed raw and normalized value. v3 decisions are bound to the task's source hash, page-image hash, and crop hash; stale decisions are ignored by promotion and dual-run gates.
+Recording a v3 decision also refreshes `data/processed/review_queue/vision_v3_review_fixture_candidates.json` and `data/processed/review_queue/vision_v3_parser_rule_update_requests.json` so approved field reviews become regression material instead of one-off overrides.
 
 Bootstrap backfill (local extract without DB):
 

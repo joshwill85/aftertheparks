@@ -138,7 +138,7 @@ if (
             errorCategory: "blocked_by_robots",
             status: "open",
             validationState: "failed",
-            sampleUrls: ["https://aftertheparks.com/guides/things-to-do-without-park-ticket"],
+            sampleUrls: ["https://aftertheparks.com/resorts?no_ticket_friendly=true"],
             lastDetected: "2026-06-27T21:00:00Z",
             recommendedAction: "Confirm robots and noindex policy for no-ticket guide.",
           }
