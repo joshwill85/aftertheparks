@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ActivityDetailClient } from "@/components/atlas/ActivityDetailClient";
+import { MagicalActivityCarousel } from "@/components/atlas/MagicalActivityCarousel";
 import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SeoFaq } from "@/components/seo/SeoFaq";
@@ -15,6 +16,7 @@ import {
 import {
   getActivitiesByArea,
   getActivityBySlug,
+  getMovieNights,
   getResortBySlug,
   getSimilarActivities,
 } from "@/lib/data/activities";
@@ -96,13 +98,15 @@ export async function generateMetadata({
   };
 }
 
-function ActivitySeoFallback({
+async function ActivitySeoFallback({
   slug,
 }: {
   slug: string;
 }) {
   const activity = getSeoActivityBySlug(slug);
   if (!activity) return null;
+  const movieNights =
+    activity.slug === "movies-under-the-stars" ? await getMovieNights() : [];
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aftertheparks.com";
   const dateModified = new Date().toISOString();
   const faqItems: SeoFaqItem[] = [
@@ -289,6 +293,14 @@ function ActivitySeoFallback({
         </div>
       </section>
 
+      {movieNights.length > 0 && (
+        <MagicalActivityCarousel
+          title="Movie magic this week"
+          subtitle="Current resort movie cards in one starlit rail, with showtimes, locations, posters when available, and a details tap for each film."
+          movies={movieNights}
+        />
+      )}
+
       <section className="grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">
           <h2 className="font-display text-2xl font-semibold">Best for</h2>
@@ -397,10 +409,14 @@ export default async function ActivityDetailPage({
   const activityForDisplay: ActivityOccurrence = activity.activitySlug
     ? activity
     : { ...activity, activitySlug };
-  const [similar, nearbyActivities, homeResort] = await Promise.all([
+  const isMovieGuide =
+    activitySlug === "movies-under-the-stars" ||
+    activityForDisplay.category === "movies_under_stars";
+  const [similar, nearbyActivities, homeResort, movieNights] = await Promise.all([
     getSimilarActivities(activityForDisplay),
     getActivitiesByArea(activityForDisplay.resort.area),
     homeResortSlug ? getResortBySlug(homeResortSlug) : Promise.resolve(null),
+    isMovieGuide ? getMovieNights() : Promise.resolve([]),
   ]);
 
   const homeBase = homeResort
@@ -487,6 +503,7 @@ export default async function ActivityDetailPage({
           nearbyActivities={nearby}
           homeResort={homeBase}
           faqItems={faqItems}
+          movieNights={movieNights}
         />
       </PlanClientBoundary>
       <section className="mt-8 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] p-5">

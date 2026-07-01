@@ -3,14 +3,25 @@
 - Pipeline version: `vision_v3_gate0_5_spike`
 - Publish behavior: `no_publish`
 - Known failures included: `70`
+- Pending review tasks: `158`
+- Top review blocker: `port-orleans-riverside` (`36` tasks)
+- First production parser target: `vertical_digital_rec_sign`
 
 ## Dependencies
 
 - docling: missing (parallel structural snapshot)
-- paddleocr: missing (primary OCR/layout engine)
+- paddleocr: available (primary OCR/layout engine)
 - pdftoppm: available (legacy/debug PDF renderer currently used by render_pdf_pages.py)
 - pypdfium2: available (deterministic PDF page renderer)
-- rapidocr: missing (secondary OCR comparator)
+- rapidocr: available (secondary OCR comparator)
+
+## Runtime / Storage Metrics
+
+- Average render time/page: `5.726457854250001`
+- Average OCR time/page: `not_recorded`
+- Average page image size: `26378640` bytes
+- Average field crop size: `661411` bytes
+- Average crop/debug artifact size: `11334273` bytes
 
 ## Evaluation Questions
 

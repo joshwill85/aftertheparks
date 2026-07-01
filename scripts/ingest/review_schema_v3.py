@@ -109,6 +109,26 @@ def _is_non_field_review_approval(decision_or_task: dict[str, Any]) -> bool:
     )
 
 
+def _requires_review_visual_artifacts(decision_or_task: dict[str, Any]) -> bool:
+    original_task = (
+        decision_or_task.get("original_task")
+        if isinstance(decision_or_task.get("original_task"), dict)
+        else decision_or_task
+    )
+    if not isinstance(original_task, dict):
+        return False
+    return (
+        original_task.get("candidate_type") in {"dual_run_new_record", "dual_run_missing_v2_record"}
+        and original_task.get("field") in {"new_record", "missing_v2_record"}
+    )
+
+
+def _require_review_visual_artifacts(decision_or_task: dict[str, Any]) -> None:
+    _require_text(_task_page_image_sha256(decision_or_task), "page_image_sha256")
+    _require_text(decision_or_task.get("field_crop"), "field_crop")
+    _require_text(decision_or_task.get("field_crop_sha256"), "field_crop_sha256")
+
+
 def validate_review_decision(decision: dict[str, Any]) -> None:
     if not isinstance(decision, dict):
         raise ValueError("invalid_review_decision_shape")
@@ -123,13 +143,13 @@ def validate_review_decision(decision: dict[str, Any]) -> None:
     _require_text(decision.get("decided_at"), "decided_at")
     if decision_value in {"approve", "edit"}:
         if _is_non_field_review_approval(decision):
+            if _requires_review_visual_artifacts(decision):
+                _require_review_visual_artifacts(decision)
             return
         approved_fields = decision.get("approved_fields")
         if not isinstance(approved_fields, dict) or not approved_fields:
             raise ValueError("missing_approved_fields")
-        _require_text(decision.get("page_image_sha256"), "page_image_sha256")
-        _require_text(decision.get("field_crop"), "field_crop")
-        _require_text(decision.get("field_crop_sha256"), "field_crop_sha256")
+        _require_review_visual_artifacts(decision)
         _validate_approved_fields(approved_fields)
         _validate_approved_fields_match_task(decision, approved_fields)
 
@@ -149,10 +169,8 @@ def build_review_decision(
         non_field_approval = _is_non_field_review_approval(task)
         if not approved_fields and not non_field_approval:
             raise ValueError("missing_approved_fields")
-        if not non_field_approval:
-            _require_text(_task_page_image_sha256(task), "page_image_sha256")
-            _require_text(task.get("field_crop"), "field_crop")
-            _require_text(task.get("field_crop_sha256"), "field_crop_sha256")
+        if not non_field_approval or _requires_review_visual_artifacts(task):
+            _require_review_visual_artifacts(task)
         _validate_approved_fields(approved_fields or {})
 
     candidate = task.get("candidate") if isinstance(task.get("candidate"), dict) else {}
@@ -601,7 +619,12 @@ def export_dual_run_review_keys(
             validate_review_decision(decision)
             valid = True
         except ValueError:
-            valid = _is_minimally_valid_dual_run_review_decision(decision)
+            key = _dual_run_review_key(decision)
+            valid = (
+                key is not None
+                and key[0] == "status_transition"
+                and _is_minimally_valid_dual_run_review_decision(decision)
+            )
         if not valid:
             skipped_invalid_review += 1
             continue

@@ -1,5 +1,7 @@
 {
   "calendar_group_key": "port-orleans-riverside",
+  "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+  "captured_at": "2026-06-30T00:07:31.301331+00:00",
   "config": {
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "engine_routing_policy": "fixed_config",
@@ -46,6 +48,7 @@
     }
   },
   "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+  "currentness": "current",
   "debug_overlays": {
     "all": {
       "engines": {
@@ -10591,14 +10594,16 @@
   ],
   "errors": [],
   "family_classification": {
-    "allow_auto_publish": false,
-    "confidence": "medium",
+    "allow_auto_publish": true,
+    "confidence": "high",
     "document_family": "vertical_digital_rec_sign",
     "parser": "VerticalDigitalRecSignParser",
     "signals": [
-      "aspect_ratio:vertical_image"
+      "filename:vertical_digital_rec_sign"
     ]
   },
+  "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+  "http_status": 200,
   "lines": [
     {
       "bbox_px": [
@@ -16162,7 +16167,7 @@
   },
   "regions": [
     {
-      "allow_auto_publish": false,
+      "allow_auto_publish": true,
       "bbox_px": [
         0,
         0,
@@ -16182,7 +16187,7 @@
       "region_type": "header"
     },
     {
-      "allow_auto_publish": false,
+      "allow_auto_publish": true,
       "bbox_px": [
         0,
         964,
@@ -16202,7 +16207,7 @@
       "region_type": "day_banner"
     },
     {
-      "allow_auto_publish": false,
+      "allow_auto_publish": true,
       "bbox_px": [
         0,
         1928,
@@ -16222,7 +16227,7 @@
       "region_type": "vertical_activity_row"
     },
     {
-      "allow_auto_publish": false,
+      "allow_auto_publish": true,
       "bbox_px": [
         0,
         11867,
@@ -16244,10 +16249,11 @@
   ],
   "render_config": {
     "bbox_format": "[x1,y1,x2,y2]",
-    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "config_hash": "3bf9c8f4e165b6f0bb4c33dd73249838b81427e4f3a5a5ce3ea913d58a8fb262",
     "coordinate_origin": "top_left",
     "image_engine": "Pillow",
     "image_engine_version": "11.3.0",
+    "image_manifest_policy": "render_each_manifest_image_as_canonical_page",
     "image_policy": "exif_transpose_rgb_png",
     "output_format": "png",
     "pdf_dpi": 450,
@@ -16303,8 +16309,8 @@
     },
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "container_image_digest": null,
-    "git_sha": "88a9305ea4abb8f5c57a946faef43f8b26d1697c",
-    "lineage_hash": "267e3440268d3a1877731cd0b3cf9fc08160397d1a26b59b822ced303082139d",
+    "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+    "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
     "model_asset_hashes": {
       "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
       "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -16331,6 +16337,8 @@
     }
   },
   "snapshot_kind": "vision_layout_v3",
+  "source_document_id": "0b05025643c17f9d2e14ae8e28ed6100e160e5f6ed8c4cec2cde7d6a982ed6b9",
+  "source_kind": "official_image",
   "source_pages": [
     {
       "coordinate_contract": {
@@ -16350,6 +16358,7 @@
       "width_px": 1200
     }
   ],
+  "source_role": "resort_pdf",
   "source_sha256": "ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995",
   "source_type": "image",
   "status": "ocr_complete",

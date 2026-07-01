@@ -12,10 +12,12 @@ from typing import Any
 try:
     from config import PROCESSED_DIR
     from engine_agreement import evaluate_engine_agreement
+    from normalization_v3 import normalize_location_text, normalize_schedule_text
     from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .engine_agreement import evaluate_engine_agreement
+    from .normalization_v3 import normalize_location_text, normalize_schedule_text
     from .source_manifest import edition_matches_quarter
 
 
@@ -59,6 +61,9 @@ SOURCE_PROVENANCE_BLOCKING_FINDINGS = {
 EXTRACTION_BLOCKING_FINDINGS = {
     "missing_reviewable_field_evidence",
 }
+NON_ACTIVITY_TITLE_NORMALIZED_VALUES = {
+    "located near",
+}
 
 
 def _evidence_for(candidate: dict[str, Any], field_name: str) -> dict[str, Any] | None:
@@ -84,6 +89,10 @@ def _agreement_ok(candidate: dict[str, Any], field_name: str) -> bool:
     field = _evidence_for(candidate, field_name)
     if not isinstance(field, dict):
         return False
+    if field_name == "schedule" and _trusted_primary_schedule_with_unparsed_secondary(candidate):
+        return True
+    if field_name == "location" and _trusted_primary_location_with_unknown_secondary(candidate):
+        return True
     if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(candidate):
         return True
     return str(field.get("agreement") or "") == "exact_after_normalization"
@@ -230,7 +239,11 @@ def _engine_text_agreement_ok(candidate: dict[str, Any], field_name: str) -> boo
                 _candidate_normalized_value(candidate, field_name),
             )
         )
+    if field_name == "schedule" and _trusted_primary_schedule_with_unparsed_secondary(candidate):
+        return True
     if field_name == "location" and _location_uses_inferred_title_evidence(candidate):
+        return True
+    if field_name == "location" and _trusted_primary_location_with_unknown_secondary(candidate):
         return True
     if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(candidate):
         return True
@@ -278,7 +291,11 @@ def _engine_text_value_matches_candidate(candidate: dict[str, Any], field_name: 
             field.get("normalized_value"),
             _candidate_normalized_value(candidate, field_name),
         )
+    if field_name == "schedule" and _trusted_primary_schedule_with_unparsed_secondary(candidate):
+        return True
     if field_name == "location" and _location_uses_inferred_title_evidence(candidate):
+        return True
+    if field_name == "location" and _trusted_primary_location_with_unknown_secondary(candidate):
         return True
     if field_name == "movie_title" and _movie_title_recovered_from_secondary_ocr(candidate):
         field = _evidence_for(candidate, field_name)
@@ -319,6 +336,65 @@ def _location_uses_inferred_title_evidence(candidate: dict[str, Any]) -> bool:
     if str(field.get("agreement") or "") != "exact_after_normalization":
         return False
     return _field_values_match("location", field.get("normalized_value"), _candidate_normalized_value(candidate, "location"))
+
+
+def _record_confidence(record: dict[str, Any]) -> float | None:
+    try:
+        return float(record.get("confidence"))
+    except (TypeError, ValueError):
+        return None
+
+
+def _trusted_primary_schedule_with_unparsed_secondary(candidate: dict[str, Any]) -> bool:
+    field = _evidence_for(candidate, "schedule")
+    if not isinstance(field, dict):
+        return False
+    records = _required_engine_records(candidate, "schedule", _required_ocr_engine_names(candidate))
+    if records is None or len(records) < 2:
+        return False
+    primary_record, secondary_record = records[0], records[1]
+    primary_confidence = _record_confidence(primary_record)
+    if primary_confidence is None or primary_confidence < 0.98:
+        return False
+    primary_schedule = normalize_schedule_text(primary_record.get("text"))
+    secondary_schedule = normalize_schedule_text(secondary_record.get("text"))
+    if primary_schedule.get("schedule_type") == "unparsed":
+        return False
+    if secondary_schedule.get("schedule_type") != "unparsed":
+        return False
+    if not _field_values_match("schedule", field.get("normalized_value"), _candidate_normalized_value(candidate, "schedule")):
+        return False
+    field_signature = _schedule_signature(field.get("normalized_value"))
+    primary_start = primary_schedule.get("start_time")
+    if primary_start and field_signature.get("start_time") != primary_start:
+        return False
+    primary_end = primary_schedule.get("end_time")
+    if primary_end and field_signature.get("end_time") != primary_end:
+        return False
+    return True
+
+
+def _trusted_primary_location_with_unknown_secondary(candidate: dict[str, Any]) -> bool:
+    field = _evidence_for(candidate, "location")
+    if not isinstance(field, dict):
+        return False
+    records = _required_engine_records(candidate, "location", _required_ocr_engine_names(candidate))
+    if records is None or len(records) < 2:
+        return False
+    primary_record, secondary_record = records[0], records[1]
+    primary_confidence = _record_confidence(primary_record)
+    if primary_confidence is None or primary_confidence < 0.98:
+        return False
+    primary_location = normalize_location_text(primary_record.get("text"))
+    secondary_location = normalize_location_text(secondary_record.get("text"))
+    primary_location_id = primary_location.get("location_id")
+    if not primary_location_id or primary_location_id == "unknown":
+        return False
+    if secondary_location.get("location_id") != "unknown":
+        return False
+    if not _field_values_match("location", field.get("normalized_value"), primary_location_id):
+        return False
+    return _field_values_match("location", _candidate_normalized_value(candidate, "location"), primary_location_id)
 
 
 def _movie_title_recovered_from_secondary_ocr(candidate: dict[str, Any]) -> bool:
@@ -364,6 +440,14 @@ def _fee_marker_conflicts(candidate: dict[str, Any]) -> bool:
         return True
     engine_texts = _engine_texts(candidate, "fee")
     return any(text.strip() == "($)" for text in engine_texts) and candidate.get("fee_required") is False
+
+
+def _non_activity_title_findings(candidate: dict[str, Any]) -> list[str]:
+    title = str(candidate.get("normalized_title") or candidate.get("source_title") or "").strip().lower()
+    title = " ".join(title.split())
+    if title in NON_ACTIVITY_TITLE_NORMALIZED_VALUES or title.startswith("and "):
+        return ["non_activity_title:title"]
+    return []
 
 
 def _has_any_reviewable_evidence(candidate: dict[str, Any]) -> bool:
@@ -676,6 +760,7 @@ def validate_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     location_id = candidate.get("normalized_location_id")
     if not location_id or location_id == "unknown":
         findings.append("unknown_location")
+    findings.extend(_non_activity_title_findings(candidate))
     if _fee_marker_conflicts(candidate):
         findings.append("fee_marker_conflict")
     if "field_extraction_not_implemented" in findings and not _has_any_reviewable_field_evidence(candidate):
@@ -763,12 +848,17 @@ def validate_candidates_from_directory(
     for candidates_path in _candidate_paths(candidates_dir):
         try:
             payload = json.loads(candidates_path.read_text())
-            candidates = payload if isinstance(payload, list) else []
+            source_candidates = (
+                [candidate for candidate in payload if isinstance(candidate, dict)]
+                if isinstance(payload, list)
+                else []
+            )
             candidates = [
-                candidate for candidate in candidates
-                if isinstance(candidate, dict)
-                and _candidate_matches_filters(candidate, group=group, quarter=quarter)
+                candidate for candidate in source_candidates
+                if _candidate_matches_filters(candidate, group=group, quarter=quarter)
             ]
+            if (group or quarter) and not candidates:
+                continue
             validated = validate_candidates(candidates)
             all_validated_candidates.extend(validated)
             output_path = validated_output_path(candidates_path, output_dir=output_dir)

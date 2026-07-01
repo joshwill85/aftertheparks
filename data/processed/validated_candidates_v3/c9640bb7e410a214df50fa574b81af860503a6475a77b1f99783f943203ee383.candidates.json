@@ -44,11 +44,19 @@
             7024
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "995dd1c0425b37993c076a0b6b38de87ff39fc3b1483cf69fe65af2d32e5ebb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/fee-0556e7358a76.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -78,11 +86,19 @@
             7069
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "77f37c16aca1e1f5d1cf00e272dad17652759db1b3be91ec4fa6e981cb61fa3f",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/location-590ca9006a67.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -106,6 +122,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-03"
         }
       },
@@ -146,11 +165,19 @@
             7117
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "538be343c4c12216f3c492cedd4c2d83805f4779e89d281285bfb03ee088ee06",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/schedule-cf7d625e9f18.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -180,11 +207,19 @@
             7024
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "995dd1c0425b37993c076a0b6b38de87ff39fc3b1483cf69fe65af2d32e5ebb7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/title-0556e7358a76.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       }
@@ -247,8 +282,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -360,8 +395,7 @@
     "source_type": "image",
     "validation_findings": [
       "engine_disagreement:title",
-      "engine_disagreement:schedule",
-      "engine_disagreement:location"
+      "engine_disagreement:schedule"
     ],
     "validation_status": "needs_review",
     "weather_note": null
@@ -411,11 +445,19 @@
             7275
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "8c37051ebc9f29c22f8e8ac874f264a2e8e6d0a326d44d705acd951ae0167114",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/fee-1308dd276624.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -445,11 +487,19 @@
             7322
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "bb0b9d4477a7cfae1871daf399373d75a7c89fbb1ce5b2dbda412f789389687b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/location-29d8f851d646.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -473,6 +523,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-03"
         }
       },
@@ -512,11 +565,19 @@
             7373
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "beb15036413c2133ef93edc88f595324e29d68cdcb8d98d6a98fbdf931cbf825",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/schedule-e5bc6546c8a6.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -546,11 +607,19 @@
             7275
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "8c37051ebc9f29c22f8e8ac874f264a2e8e6d0a326d44d705acd951ae0167114",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/title-1308dd276624.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       }
@@ -613,8 +682,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -725,8 +794,7 @@
     "source_type": "image",
     "validation_findings": [
       "engine_disagreement:title",
-      "engine_disagreement:schedule",
-      "engine_disagreement:location"
+      "engine_disagreement:schedule"
     ],
     "validation_status": "needs_review",
     "weather_note": null
@@ -776,11 +844,19 @@
             9955
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "5690bb9acdfbcb6c34a457e44a6cf9974a2539763c9c50f499c0b95bed9e8450",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/fee-a8c6ae61a350.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -810,11 +886,19 @@
             10008
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "ca8e5f06ab7f87e410767b1153c67328dbd090c84b2fd7504402a43a4f31f793",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/location-45974e2881c5.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -838,6 +922,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-03"
         }
       },
@@ -878,11 +965,19 @@
             10059
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "6b489c2224e6859caace055759a83dfc70ded7fce835843724cd393f37955ea2",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/schedule-7d45d519b46f.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -912,11 +1007,19 @@
             9955
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "5690bb9acdfbcb6c34a457e44a6cf9974a2539763c9c50f499c0b95bed9e8450",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/title-a8c6ae61a350.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       }
@@ -979,8 +1082,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -1091,8 +1194,7 @@
     "source_title": "POOL PARTY",
     "source_type": "image",
     "validation_findings": [
-      "engine_disagreement:schedule",
-      "engine_disagreement:location"
+      "engine_disagreement:schedule"
     ],
     "validation_status": "needs_review",
     "weather_note": null
@@ -1142,11 +1244,19 @@
             11498
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "d569e1f9911f5e40aafe9136e534b85b8a5e1d630b0a9a22c75873ee30fb5bab",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/fee-0d88adf45aab.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -1176,11 +1286,19 @@
             11552
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "1edf48f0d31b778453d477c3b9be007e49bdb5ac0a6f52be9ab96b16ab9504fb",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/location-30c37654950e.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -1204,6 +1322,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-03"
         }
       },
@@ -1244,11 +1365,19 @@
             11603
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "42f1962e3c8bcff1012faf05495bdef70f09cec2419b4fedd9e5c0c4bac5df49",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/schedule-c9c03d829f36.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -1278,11 +1407,19 @@
             11498
           ],
           "content_sha256": "c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383",
-          "crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
+          "crop_sha256": "d569e1f9911f5e40aafe9136e534b85b8a5e1d630b0a9a22c75873ee30fb5bab",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page-001-region-03/title-0d88adf45aab.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001.png",
           "page_image_sha256": "8a69ae141676bd474f732386c989e1f04656806d064bdcd96fefa04022faf2e9",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            2031,
+            1200,
+            12506
+          ],
+          "region_crop_sha256": "7a7602bef4f9f29f969228ad3ebd7d60039ab383a6e36a8399438caeb3b0e195",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_001-region_03-vertical_activity_row.png",
           "region_id": "page-001-region-03"
         }
       }
@@ -1345,8 +1482,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -1458,8 +1595,7 @@
     "source_type": "image",
     "validation_findings": [
       "engine_disagreement:title",
-      "engine_disagreement:schedule",
-      "engine_disagreement:location"
+      "engine_disagreement:schedule"
     ],
     "validation_status": "needs_review",
     "weather_note": null

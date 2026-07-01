@@ -27,6 +27,12 @@ DEFAULT_VALIDATED_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 PROMOTABLE_STATUSES = {"auto_publishable", "manually_approved"}
 GOLD_CONFLICT_FIELDS = ("title", "schedule", "location", "price")
+DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+PUBLIC_LOCATION_LABELS = {
+    "contemporary_feature_pool_and_bay_cove_pool": "Contemporary Feature Pool and Bay Cove Pool",
+    "the_dig_site": "The Dig Site",
+    "the_reel_spot": "The Reel Spot",
+}
 
 
 def _now_iso() -> str:
@@ -37,6 +43,7 @@ def _slugify(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value)
     normalized = normalized.encode("ascii", "ignore").decode("ascii").lower()
     normalized = re.sub(r"\s*\(\$\)\s*", " ", normalized)
+    normalized = re.sub(r"\bde['']\s*(?=bayou\b)", "de ", normalized)
     normalized = re.sub(r"(?<=[a-z0-9])[''](?=[a-z0-9])", "", normalized)
     slug = re.sub(r"[^a-z0-9]+", "-", normalized).strip("-")
     return slug or "untitled"
@@ -74,6 +81,28 @@ def _candidate_field_crop_sha256s(
         crop_hash = source.get("crop_sha256") if isinstance(source, dict) else None
         if crop_hash:
             hashes.add(str(crop_hash))
+    return hashes
+
+
+def _candidate_field_page_image_sha256s(
+    candidate: dict[str, Any],
+    *,
+    field_names: set[str] | None = None,
+) -> set[str]:
+    hashes: set[str] = set()
+    field_evidence = candidate.get("field_evidence")
+    if not isinstance(field_evidence, dict):
+        return hashes
+    items = (
+        ((field_name, field_evidence.get(field_name)) for field_name in field_names)
+        if field_names is not None
+        else field_evidence.items()
+    )
+    for _field_name, evidence in items:
+        source = evidence.get("source") if isinstance(evidence, dict) else {}
+        page_hash = source.get("page_image_sha256") if isinstance(source, dict) else None
+        if page_hash:
+            hashes.add(str(page_hash))
     return hashes
 
 
@@ -273,6 +302,159 @@ def _normalize_field_value(value: Any) -> str:
     return " ".join(str(value or "").strip().lower().split())
 
 
+def _schedule_merge_signature(row: dict[str, Any]) -> tuple[Any, ...] | None:
+    schedule = row.get("schedule") if isinstance(row.get("schedule"), dict) else {}
+    normalized = schedule.get("normalized") if isinstance(schedule.get("normalized"), dict) else {}
+    if normalized.get("schedule_type") != "recurring":
+        return None
+    if not isinstance(normalized.get("days_of_week"), list) or not normalized.get("days_of_week"):
+        return None
+    return (
+        normalized.get("schedule_type"),
+        normalized.get("start_time"),
+        normalized.get("end_time"),
+        normalized.get("phrase"),
+        normalized.get("timezone"),
+    )
+
+
+def _merge_identity(row: dict[str, Any]) -> tuple[Any, ...] | None:
+    schedule_signature = _schedule_merge_signature(row)
+    if schedule_signature is None:
+        return None
+    identity = _gold_identity(row)
+    if identity is None:
+        return None
+    location = row.get("location") if isinstance(row.get("location"), dict) else {}
+    price = row.get("price") if isinstance(row.get("price"), dict) else {}
+    return (
+        *identity,
+        _normalize_field_value(location.get("id") or location.get("label")),
+        _normalize_field_value(price.get("state")),
+        schedule_signature,
+    )
+
+
+def _ordered_days(days: list[Any]) -> list[str]:
+    seen = {str(day) for day in days if str(day).strip()}
+    return [day for day in DAY_ORDER if day in seen]
+
+
+def _format_time(value: Any) -> str:
+    text = str(value or "")
+    match = re.match(r"^(\d{2}):(\d{2})$", text)
+    if not match:
+        return text
+    hour = int(match.group(1))
+    minute = match.group(2)
+    suffix = "am" if hour < 12 else "pm"
+    display_hour = hour % 12 or 12
+    return f"{display_hour}:{minute}{suffix}"
+
+
+def _format_day_list(days: list[str]) -> str:
+    if days == DAY_ORDER:
+        return "Daily"
+    if len(days) == 1:
+        return days[0]
+    if len(days) == 2:
+        return f"{days[0]} and {days[1]}"
+    return f"{', '.join(days[:-1])}, and {days[-1]}"
+
+
+def _merged_schedule_text(normalized: dict[str, Any]) -> str:
+    days = _ordered_days(normalized.get("days_of_week") if isinstance(normalized.get("days_of_week"), list) else [])
+    day_text = _format_day_list(days) if days else str(normalized.get("raw_text") or "").strip()
+    if normalized.get("start_time") and normalized.get("end_time"):
+        return f"{day_text} from {_format_time(normalized.get('start_time'))}-{_format_time(normalized.get('end_time'))}"
+    if normalized.get("start_time"):
+        return f"{day_text} at {_format_time(normalized.get('start_time'))}"
+    return day_text
+
+
+def _merge_duplicate_recurring_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    merged_rows: list[dict[str, Any]] = []
+    index_by_identity: dict[tuple[Any, ...], int] = {}
+    for row in rows:
+        identity = _merge_identity(row)
+        if identity is None or identity not in index_by_identity:
+            if identity is not None:
+                index_by_identity[identity] = len(merged_rows)
+            merged_rows.append(row)
+            continue
+        existing = merged_rows[index_by_identity[identity]]
+        existing_schedule = existing.get("schedule") if isinstance(existing.get("schedule"), dict) else {}
+        existing_normalized = dict(existing_schedule.get("normalized") or {})
+        row_schedule = row.get("schedule") if isinstance(row.get("schedule"), dict) else {}
+        row_normalized = row_schedule.get("normalized") if isinstance(row_schedule.get("normalized"), dict) else {}
+        merged_days = _ordered_days([
+            *(existing_normalized.get("days_of_week") or []),
+            *(row_normalized.get("days_of_week") or []),
+        ])
+        existing_normalized["days_of_week"] = merged_days
+        existing_normalized["raw_text"] = _merged_schedule_text(existing_normalized)
+        existing["schedule"] = {
+            **existing_schedule,
+            "text": existing_normalized["raw_text"],
+            "normalized": existing_normalized,
+        }
+        existing_evidence = existing.get("field_evidence") if isinstance(existing.get("field_evidence"), dict) else {}
+        row_evidence = row.get("field_evidence") if isinstance(row.get("field_evidence"), dict) else {}
+        existing_schedule_evidence = (
+            dict(existing_evidence.get("schedule"))
+            if isinstance(existing_evidence.get("schedule"), dict)
+            else {}
+        )
+        row_schedule_evidence = row_evidence.get("schedule") if isinstance(row_evidence.get("schedule"), dict) else {}
+        component_evidence = list(existing_schedule_evidence.get("merged_component_field_evidence") or [])
+        if not component_evidence and existing_schedule_evidence:
+            component_evidence.append(
+                {
+                    "raw_value": existing_schedule_evidence.get("raw_value"),
+                    "normalized_value": existing_schedule_evidence.get("normalized_value"),
+                    "source": existing_schedule_evidence.get("source"),
+                    "engines": existing_schedule_evidence.get("engines"),
+                    "agreement": existing_schedule_evidence.get("agreement"),
+                }
+            )
+        if row_schedule_evidence:
+            component_evidence.append(
+                {
+                    "raw_value": row_schedule_evidence.get("raw_value"),
+                    "normalized_value": row_schedule_evidence.get("normalized_value"),
+                    "source": row_schedule_evidence.get("source"),
+                    "engines": row_schedule_evidence.get("engines"),
+                    "agreement": row_schedule_evidence.get("agreement"),
+                }
+            )
+        if existing_schedule_evidence:
+            existing_evidence["schedule"] = {
+                **existing_schedule_evidence,
+                "raw_value": existing_normalized["raw_text"],
+                "normalized_value": existing_normalized,
+                "merged_component_field_evidence": component_evidence,
+            }
+            existing["field_evidence"] = existing_evidence
+        existing_spans = existing.get("source_spans") if isinstance(existing.get("source_spans"), dict) else {}
+        row_spans = row.get("source_spans") if isinstance(row.get("source_spans"), dict) else {}
+        merged_spans = dict(existing_spans)
+        for field_name, spans in row_spans.items():
+            if not isinstance(spans, list):
+                continue
+            current = merged_spans.get(field_name) if isinstance(merged_spans.get(field_name), list) else []
+            merged_spans[field_name] = [*current, *spans]
+        existing["source_spans"] = merged_spans
+        existing.setdefault("merged_component_rows", []).append(
+            {
+                "canonical_slug": row.get("canonical_slug"),
+                "title": row.get("title"),
+                "schedule_text": row_schedule.get("text"),
+                "source_sha256": row.get("source_sha256"),
+            }
+        )
+    return merged_rows
+
+
 def _gold_conflict(row: dict[str, Any], existing_gold: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
     identity = _gold_identity(row)
     if identity is None:
@@ -310,6 +492,9 @@ def _existing_gold_by_identity(existing_gold_rows: list[dict[str, Any]]) -> dict
 
 def _public_location_label(candidate: dict[str, Any]) -> str:
     label = str(candidate.get("location_text") or candidate.get("normalized_location_id") or "").strip()
+    normalized_location_id = str(candidate.get("normalized_location_id") or "").strip()
+    if normalized_location_id in PUBLIC_LOCATION_LABELS:
+        return PUBLIC_LOCATION_LABELS[normalized_location_id]
     field_evidence = candidate.get("field_evidence")
     location_evidence = field_evidence.get("location") if isinstance(field_evidence, dict) else {}
     if isinstance(location_evidence, dict) and location_evidence.get("inferred_location_from_title") is True:
@@ -317,6 +502,13 @@ def _public_location_label(candidate: dict[str, Any]) -> str:
         cleaned = re.sub(r"\s+", " ", cleaned)
         return cleaned or label
     return label
+
+
+def _public_schedule_text(candidate: dict[str, Any], schedule: dict[str, Any]) -> str | None:
+    text = str(schedule.get("raw_text") or candidate.get("schedule_raw") or "").strip()
+    if schedule.get("schedule_type") == "time_range":
+        text = re.sub(r"(?i)^from\s+", "", text).strip()
+    return text or None
 
 
 def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
@@ -357,7 +549,7 @@ def _gold_row(candidate: dict[str, Any]) -> dict[str, Any]:
             "label": location_label,
         },
         "schedule": {
-            "text": schedule.get("raw_text") or candidate.get("schedule_raw"),
+            "text": _public_schedule_text(candidate, schedule),
             "normalized": schedule,
         },
         "price": {
@@ -429,14 +621,19 @@ def build_gold_v3_preview(
                     continue
             current_decisions = [
                 decision for decision in decisions
+                for approved_field_names in [set(decision.get("approved_fields") or {})]
                 if review_approval_is_current(
                     decision,
                     current_content_sha256=str(candidate.get("content_sha256") or ""),
-                    current_page_image_sha256=_candidate_page_image_sha256(candidate),
+                    current_page_image_sha256=str(decision.get("page_image_sha256") or ""),
                 )
                 and str(decision.get("field_crop_sha256") or "") in _candidate_field_crop_sha256s(
                     candidate,
-                    field_names=set(decision.get("approved_fields") or {}),
+                    field_names=approved_field_names,
+                )
+                and str(decision.get("page_image_sha256") or "") in _candidate_field_page_image_sha256s(
+                    candidate,
+                    field_names=approved_field_names,
                 )
             ]
             if current_decisions:
@@ -465,6 +662,7 @@ def build_gold_v3_preview(
             skipped += 1
             continue
         rows.append(row)
+    rows = _merge_duplicate_recurring_rows(rows)
     return {
         "pipeline_version": "vision_v3_001",
         "publication_mode": "vision_v3_preview",

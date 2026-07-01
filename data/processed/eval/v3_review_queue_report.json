@@ -1,31 +1,275 @@
 {
   "report_kind": "review_queue_v3_report",
   "schema_version": "review_queue_v3_report_001",
+  "source_url_missing_task_ids": [],
   "summary": {
     "all_tasks_have_existing_visual_artifacts": true,
+    "all_tasks_have_source_urls": true,
     "all_tasks_have_visual_artifacts": true,
-    "task_count": 38,
+    "pending_task_count": 158,
+    "review_count_by_decision": {},
+    "reviewed_task_count": 0,
+    "source_url_missing_count": 0,
+    "task_count": 158,
+    "task_count_by_calendar_group": {
+      "all-star-movies": 5,
+      "all-star-music": 4,
+      "all-star-sports": 3,
+      "animal-kingdom-jambo": 7,
+      "animal-kingdom-kidani": 5,
+      "art-of-animation": 12,
+      "beach-yacht-club": 9,
+      "boardwalk": 5,
+      "caribbean-beach": 15,
+      "contemporary": 7,
+      "coronado-springs": 7,
+      "grand-floridian": 3,
+      "old-key-west": 7,
+      "polynesian": 3,
+      "pop-century": 8,
+      "port-orleans-french-quarter": 8,
+      "port-orleans-riverside": 36,
+      "riviera": 2,
+      "saratoga-springs": 4,
+      "wilderness-lodge": 8
+    },
+    "task_count_by_field": {
+      "fee": 9,
+      "location": 13,
+      "missing_v2_record": 40,
+      "movie_title": 1,
+      "new_record": 28,
+      "price": 5,
+      "schedule": 28,
+      "title": 32
+    },
     "task_count_by_finding": {
-      "engine_disagreement:location": 7,
+      "engine_disagreement:location": 4,
       "engine_disagreement:movie_title": 1,
-      "engine_disagreement:schedule": 10,
-      "engine_disagreement:title": 6,
-      "gold_conflict:v2_v3:schedule": 1,
-      "manual_review_required:missing_v2_record": 7,
-      "manual_review_required:new_record": 2,
-      "missing_field_engine_evidence:title": 1,
+      "engine_disagreement:schedule": 11,
+      "engine_disagreement:title": 25,
+      "fee_legend_missing_for_unmarked_title": 3,
+      "fee_marker_without_legend": 6,
+      "gold_conflict:v2_v3:location": 9,
+      "gold_conflict:v2_v3:price": 5,
+      "gold_conflict:v2_v3:schedule": 17,
+      "gold_conflict:v2_v3:title": 2,
+      "manual_review_required:missing_v2_record": 40,
+      "manual_review_required:new_record": 28,
+      "missing_field_engine_evidence:title": 2,
+      "non_activity_title:title": 2,
       "partial_movie_row_review_required": 3
     },
+    "task_count_by_source_url": {
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg": 36,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg": 8,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf": 5,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf": 4,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf": 3,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf": 5,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": 15,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": 12,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf": 5,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf": 2,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf": 3,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf": 8,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf": 3,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf": 4,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf": 8,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf": 9
+    },
+    "task_count_by_status": {
+      "pending": 158
+    },
     "task_count_by_type": {
-      "gold_conflict": 1,
-      "manual_review_required": 9,
-      "missing_field_engine_evidence:title": 1,
-      "ocr_disagreement": 24,
+      "gold_conflict": 33,
+      "manual_review_required": 77,
+      "missing_field_engine_evidence:title": 2,
+      "non_activity_title:title": 2,
+      "ocr_disagreement": 41,
       "partial_movie_row_review_required": 3
     },
     "visual_artifact_missing_count": 0,
     "visual_artifact_missing_file_count": 0
   },
+  "top_calendar_group_blockers": [
+    {
+      "calendar_group_key": "port-orleans-riverside",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg"
+      ],
+      "task_count": 36,
+      "task_count_by_field": {
+        "fee": 7,
+        "location": 1,
+        "missing_v2_record": 3,
+        "schedule": 5,
+        "title": 20
+      },
+      "task_count_by_type": {
+        "gold_conflict": 4,
+        "manual_review_required": 10,
+        "missing_field_engine_evidence:title": 1,
+        "ocr_disagreement": 21
+      }
+    },
+    {
+      "calendar_group_key": "caribbean-beach",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg"
+      ],
+      "task_count": 15,
+      "task_count_by_field": {
+        "location": 3,
+        "missing_v2_record": 3,
+        "schedule": 7,
+        "title": 2
+      },
+      "task_count_by_type": {
+        "gold_conflict": 2,
+        "manual_review_required": 3,
+        "ocr_disagreement": 10
+      }
+    },
+    {
+      "calendar_group_key": "art-of-animation",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg"
+      ],
+      "task_count": 12,
+      "task_count_by_field": {
+        "missing_v2_record": 5,
+        "schedule": 4,
+        "title": 3
+      },
+      "task_count_by_type": {
+        "manual_review_required": 5,
+        "ocr_disagreement": 7
+      }
+    },
+    {
+      "calendar_group_key": "beach-yacht-club",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf"
+      ],
+      "task_count": 9,
+      "task_count_by_field": {
+        "location": 1,
+        "missing_v2_record": 1,
+        "new_record": 4,
+        "title": 3
+      },
+      "task_count_by_type": {
+        "gold_conflict": 1,
+        "manual_review_required": 5,
+        "partial_movie_row_review_required": 3
+      }
+    },
+    {
+      "calendar_group_key": "pop-century",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg"
+      ],
+      "task_count": 8,
+      "task_count_by_field": {
+        "fee": 2,
+        "missing_v2_record": 6
+      },
+      "task_count_by_type": {
+        "manual_review_required": 8
+      }
+    },
+    {
+      "calendar_group_key": "port-orleans-french-quarter",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf"
+      ],
+      "task_count": 8,
+      "task_count_by_field": {
+        "location": 2,
+        "missing_v2_record": 2,
+        "new_record": 2,
+        "schedule": 1,
+        "title": 1
+      },
+      "task_count_by_type": {
+        "gold_conflict": 4,
+        "manual_review_required": 4
+      }
+    },
+    {
+      "calendar_group_key": "wilderness-lodge",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf"
+      ],
+      "task_count": 8,
+      "task_count_by_field": {
+        "location": 1,
+        "missing_v2_record": 3,
+        "new_record": 1,
+        "schedule": 1,
+        "title": 1
+      },
+      "task_count_by_type": {
+        "gold_conflict": 3,
+        "manual_review_required": 4,
+        "non_activity_title:title": 1
+      }
+    },
+    {
+      "calendar_group_key": "animal-kingdom-jambo",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf"
+      ],
+      "task_count": 7,
+      "task_count_by_field": {
+        "missing_v2_record": 2,
+        "new_record": 3,
+        "price": 1,
+        "title": 1
+      },
+      "task_count_by_type": {
+        "gold_conflict": 1,
+        "manual_review_required": 5,
+        "ocr_disagreement": 1
+      }
+    },
+    {
+      "calendar_group_key": "contemporary",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf"
+      ],
+      "task_count": 7,
+      "task_count_by_field": {
+        "location": 2,
+        "missing_v2_record": 1,
+        "new_record": 3,
+        "schedule": 1
+      },
+      "task_count_by_type": {
+        "gold_conflict": 3,
+        "manual_review_required": 4
+      }
+    },
+    {
+      "calendar_group_key": "coronado-springs",
+      "source_urls": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf"
+      ],
+      "task_count": 7,
+      "task_count_by_field": {
+        "missing_v2_record": 3,
+        "new_record": 4
+      },
+      "task_count_by_type": {
+        "manual_review_required": 7
+      }
+    }
+  ],
   "visual_artifact_missing_file_task_ids": [],
   "visual_artifact_missing_task_ids": []
 }

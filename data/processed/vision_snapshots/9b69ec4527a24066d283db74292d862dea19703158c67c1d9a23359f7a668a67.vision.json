@@ -99,18 +99,7 @@
       "page_number": 1
     }
   },
-  "derived_source_links": [
-    {
-      "decoder": "opencv_qrcode",
-      "is_official_source": false,
-      "parent_content_sha256": "9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67",
-      "parent_source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
-      "source_authority": "non_official",
-      "source_crop_sha256": "9edf87043879b3b620f829b48b982debc6054133a4baebb5da832cdb30dff238",
-      "source_role": "derived_source_link",
-      "target_url": "http://qr.disneyworld.com/All_Star_Sports_Resort?r=qr"
-    }
-  ],
+  "derived_source_links": [],
   "document_family": "aframe_recreation",
   "edition": "fy26-q3-0526",
   "engine_regions": [],
@@ -9646,10 +9635,11 @@
   ],
   "render_config": {
     "bbox_format": "[x1,y1,x2,y2]",
-    "config_hash": "03605d93bc7ff1ee4133de21d7a65ecbb6146df34bf185f9cc832968d9b932a0",
+    "config_hash": "3bf9c8f4e165b6f0bb4c33dd73249838b81427e4f3a5a5ce3ea913d58a8fb262",
     "coordinate_origin": "top_left",
     "image_engine": "Pillow",
     "image_engine_version": "11.3.0",
+    "image_manifest_policy": "render_each_manifest_image_as_canonical_page",
     "image_policy": "exif_transpose_rgb_png",
     "output_format": "png",
     "pdf_dpi": 450,
@@ -9705,8 +9695,8 @@
     },
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "container_image_digest": null,
-    "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-    "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+    "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+    "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
     "model_asset_hashes": {
       "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
       "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"

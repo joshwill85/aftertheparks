@@ -100,7 +100,7 @@
     }
   },
   "derived_source_links": [],
-  "document_family": "unknown_visual_schedule",
+  "document_family": "aframe_recreation",
   "edition": "fy26-q3-0526",
   "engine_regions": [],
   "engine_runs": [
@@ -6854,12 +6854,12 @@
   ],
   "errors": [],
   "family_classification": {
-    "allow_auto_publish": false,
-    "confidence": "low",
-    "document_family": "unknown_visual_schedule",
-    "parser": "GenericVisualScheduleParser",
+    "allow_auto_publish": true,
+    "confidence": "high",
+    "document_family": "aframe_recreation",
+    "parser": "AframeRecreationParser",
     "signals": [
-      "no_known_family_signal"
+      "filename:aframe_recreation"
     ]
   },
   "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
@@ -10447,24 +10447,126 @@
   },
   "regions": [
     {
-      "allow_auto_publish": false,
+      "allow_auto_publish": true,
       "bbox_px": [
         0,
         0,
         10800,
-        16200
+        2106
       ],
-      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_01-unknown.png",
-      "crop_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
-      "detection_confidence": 0.5,
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_01-header.png",
+      "crop_sha256": "5b455e26d23fad9d765b734011f3c7b410a46c6d493ac3079654718a1478faef",
+      "detection_confidence": 0.8,
       "detection_method": "vision_v3_static_family_region_scaffold",
       "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
       "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
       "page_number": 1,
       "reading_order": 1,
-      "region_family": "unknown_visual_schedule",
+      "region_family": "aframe_recreation",
       "region_id": "page-001-region-01",
-      "region_type": "unknown"
+      "region_type": "header"
+    },
+    {
+      "allow_auto_publish": true,
+      "bbox_px": [
+        0,
+        2106,
+        3888,
+        5022
+      ],
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_02-qr_callout.png",
+      "crop_sha256": "6524944be82f4372236c41b12bb9cb574fa22591888d30b37640e7ea5885fbdb",
+      "detection_confidence": 0.8,
+      "detection_method": "vision_v3_static_family_region_scaffold",
+      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+      "page_number": 1,
+      "qr_decode_status": "not_found",
+      "qr_targets": [],
+      "reading_order": 2,
+      "region_family": "aframe_recreation",
+      "region_id": "page-001-region-02",
+      "region_type": "qr_callout"
+    },
+    {
+      "allow_auto_publish": true,
+      "bbox_px": [
+        0,
+        4860,
+        5400,
+        8910
+      ],
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_03-wellness_section.png",
+      "crop_sha256": "3d0112fa83264976c29ad0af1afafae65f4e4ec564b37eca5ce629922dd206c3",
+      "detection_confidence": 0.8,
+      "detection_method": "vision_v3_static_family_region_scaffold",
+      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+      "page_number": 1,
+      "reading_order": 3,
+      "region_family": "aframe_recreation",
+      "region_id": "page-001-region-03",
+      "region_type": "wellness_section"
+    },
+    {
+      "allow_auto_publish": true,
+      "bbox_px": [
+        5184,
+        2106,
+        10800,
+        15552
+      ],
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_04-resort_activities_section.png",
+      "crop_sha256": "268b999f678deaddc663334f63b5457348ef7002245ae4068322a5a130857ad7",
+      "detection_confidence": 0.8,
+      "detection_method": "vision_v3_static_family_region_scaffold",
+      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+      "page_number": 1,
+      "reading_order": 4,
+      "region_family": "aframe_recreation",
+      "region_id": "page-001-region-04",
+      "region_type": "resort_activities_section"
+    },
+    {
+      "allow_auto_publish": true,
+      "bbox_px": [
+        0,
+        8910,
+        5400,
+        15552
+      ],
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_05-movie_section.png",
+      "crop_sha256": "d4163c5219bb3cb87bc081398e9d67343ae1334bcbc210f15f1ad1bd7f1224da",
+      "detection_confidence": 0.8,
+      "detection_method": "vision_v3_static_family_region_scaffold",
+      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+      "page_number": 1,
+      "reading_order": 5,
+      "region_family": "aframe_recreation",
+      "region_id": "page-001-region-05",
+      "region_type": "movie_section"
+    },
+    {
+      "allow_auto_publish": true,
+      "bbox_px": [
+        0,
+        15552,
+        10800,
+        16200
+      ],
+      "crop_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001-region_06-footer.png",
+      "crop_sha256": "cd9fcc4dab96948c5c5dc7d33ec0c464306b98646be7ec9421e2453cc50bf3f2",
+      "detection_confidence": 0.8,
+      "detection_method": "vision_v3_static_family_region_scaffold",
+      "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_001.png",
+      "page_image_sha256": "d02d26a5898565cb1539876c762230f5c0aec33c75c73f5ec4bf83dd5e2740b2",
+      "page_number": 1,
+      "reading_order": 6,
+      "region_family": "aframe_recreation",
+      "region_id": "page-001-region-06",
+      "region_type": "footer"
     }
   ],
   "render_config": {
@@ -10529,8 +10631,8 @@
     },
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "container_image_digest": null,
-    "git_sha": "88a9305ea4abb8f5c57a946faef43f8b26d1697c",
-    "lineage_hash": "267e3440268d3a1877731cd0b3cf9fc08160397d1a26b59b822ced303082139d",
+    "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+    "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
     "model_asset_hashes": {
       "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
       "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"

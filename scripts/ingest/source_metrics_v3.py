@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter, defaultdict
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,7 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 DEFAULT_SNAPSHOTS_PATH = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
+DEFAULT_SOURCE_INVENTORY_PATH = PROCESSED_DIR / "source_inventory.json"
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "eval" / "v3_source_metrics.json"
 AGREEMENT_OK = {"exact_after_normalization", "not_required", "manual_reviewed"}
 LOW_DESCRIPTION_CONFIDENCE_THRESHOLD = 0.5
@@ -220,6 +222,25 @@ def _rate(count: int, total: int) -> float:
     return count / total if total else 0.0
 
 
+def _first_present(*values: Any) -> Any:
+    for value in values:
+        if value is None:
+            continue
+        if isinstance(value, str) and not value.strip():
+            continue
+        return value
+    return None
+
+
+def _source_inventory_by_hash(source_inventory: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    rows: dict[str, dict[str, Any]] = {}
+    for source in source_inventory:
+        source_hash = _source_hash(source)
+        if source_hash:
+            rows[source_hash] = source
+    return rows
+
+
 def _field_metrics(candidates: list[dict[str, Any]]) -> dict[str, float]:
     total = len(candidates)
     counts: Counter[str] = Counter()
@@ -256,11 +277,36 @@ def _field_metrics(candidates: list[dict[str, Any]]) -> dict[str, float]:
     }
 
 
-def _source_metric_row(snapshot: dict[str, Any], candidates: list[dict[str, Any]]) -> dict[str, Any]:
+def _source_metric_row(
+    snapshot: dict[str, Any],
+    candidates: list[dict[str, Any]],
+    inventory_source: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     status_counts = _candidate_status_counts(candidates)
+    inventory_source = inventory_source or {}
     return {
         "source_sha256": _source_hash(snapshot),
-        "source_type": snapshot.get("source_type"),
+        "source_kind": _first_present(snapshot.get("source_kind"), inventory_source.get("source_kind")),
+        "source_type": _first_present(snapshot.get("source_type"), inventory_source.get("source_type")),
+        "canonical_url": _first_present(snapshot.get("canonical_url"), inventory_source.get("canonical_url")),
+        "fetched_url": _first_present(snapshot.get("fetched_url"), inventory_source.get("fetched_url")),
+        "storage_path": _first_present(snapshot.get("storage_path"), inventory_source.get("storage_path")),
+        "calendar_group_key": _first_present(
+            snapshot.get("calendar_group_key"),
+            inventory_source.get("calendar_group_key"),
+        ),
+        "edition": _first_present(_edition(snapshot), _edition(inventory_source)),
+        "mime_type": _first_present(snapshot.get("mime_type"), inventory_source.get("mime_type")),
+        "http_content_type": _first_present(
+            snapshot.get("http_content_type"),
+            inventory_source.get("http_content_type"),
+        ),
+        "detected_content_type": _first_present(
+            snapshot.get("detected_content_type"),
+            inventory_source.get("detected_content_type"),
+        ),
+        "file_extension": _first_present(snapshot.get("file_extension"), inventory_source.get("file_extension")),
+        "http_status": _first_present(snapshot.get("http_status"), inventory_source.get("http_status")),
         "page_count": _page_count(snapshot),
         "page_render_success": _page_render_success(snapshot),
         "ocr_success": _ocr_success(snapshot),
@@ -279,10 +325,13 @@ def build_source_metrics_report(
     *,
     snapshots: list[dict[str, Any]],
     candidates: list[dict[str, Any]],
+    source_inventory: list[dict[str, Any]] | None = None,
     quarter: str | None = None,
 ) -> dict[str, Any]:
     snapshots = _filter_quarter(snapshots, quarter)
     candidates = _filter_quarter(candidates, quarter)
+    source_inventory = _filter_quarter(source_inventory or [], quarter)
+    inventory_by_hash = _source_inventory_by_hash(source_inventory)
     candidates_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for candidate in candidates:
         source_hash = _source_hash(candidate)
@@ -290,7 +339,11 @@ def build_source_metrics_report(
             candidates_by_source[source_hash].append(candidate)
 
     sources = [
-        _source_metric_row(snapshot, candidates_by_source.get(_source_hash(snapshot), []))
+        _source_metric_row(
+            snapshot,
+            candidates_by_source.get(_source_hash(snapshot), []),
+            inventory_by_hash.get(_source_hash(snapshot), {}),
+        )
         for snapshot in sorted(snapshots, key=_source_hash)
         if _source_hash(snapshot)
     ]
@@ -302,6 +355,7 @@ def build_source_metrics_report(
     source_count = len(sources)
     return {
         "report_kind": "vision_v3_source_metrics",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "quarter": quarter,
         "summary": {
             "source_count": source_count,
@@ -327,6 +381,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build v3 per-source quality and candidate metrics")
     parser.add_argument("--snapshots", type=Path, default=DEFAULT_SNAPSHOTS_PATH)
     parser.add_argument("--candidates", type=Path, default=DEFAULT_CANDIDATES_PATH)
+    parser.add_argument("--source-inventory", type=Path, default=DEFAULT_SOURCE_INVENTORY_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--quarter")
     parser.add_argument("--json", action="store_true")
@@ -335,6 +390,7 @@ def main() -> None:
     report = build_source_metrics_report(
         snapshots=_json_objects(args.snapshots),
         candidates=_json_objects(args.candidates),
+        source_inventory=_json_objects(args.source_inventory),
         quarter=args.quarter,
     )
     if args.json:

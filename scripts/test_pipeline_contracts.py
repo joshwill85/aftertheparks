@@ -6333,6 +6333,8 @@ class PipelineContractsTest(unittest.TestCase):
                     "publish_gold_v3.py",
                     "--require-clean-preview",
                     "--json",
+                    "--source-metrics-report",
+                    "data/processed/eval/v3_source_metrics.json",
                     "--source-drift-report",
                     "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
                 ),
@@ -6346,6 +6348,8 @@ class PipelineContractsTest(unittest.TestCase):
                     "publish_gold_v3.py",
                     "--require-clean-preview",
                     "--json",
+                    "--source-metrics-report",
+                    "data/processed/eval/v3_source_metrics.json",
                     "--source-drift-report",
                     "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
                 )
@@ -6430,6 +6434,8 @@ class PipelineContractsTest(unittest.TestCase):
                     "publish_gold_v3.py",
                     "--require-clean-preview",
                     "--json",
+                    "--source-metrics-report",
+                    "data/processed/eval/v3_source_metrics.json",
                     "--source-drift-report",
                     "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
                 )

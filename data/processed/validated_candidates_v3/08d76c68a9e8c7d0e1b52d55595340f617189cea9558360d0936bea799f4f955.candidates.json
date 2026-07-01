@@ -11,18 +11,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -55,11 +44,19 @@
             6541
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "cbbcfdaeaf73f5bcb16de7fa079e7c62113a2defb1d3c89b7120701faa3e9737",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/fee-7b380a16a147.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -89,11 +86,19 @@
             6776
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "9018bc9536d420f90a48623c4c9ab8b60424e19f48971348db832b3fb92e2426",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/location-44fa5539bec5.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -117,6 +122,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-03"
         }
       },
@@ -156,11 +164,19 @@
             7006
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "8582d664ad1e1bf446b2b305db7f83c1576331e4ab740aedd166f58fb1a24857",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/schedule-8ba62fcbcc5b.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -190,11 +206,19 @@
             6541
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "cbbcfdaeaf73f5bcb16de7fa079e7c62113a2defb1d3c89b7120701faa3e9737",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/title-7b380a16a147.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       }
@@ -257,8 +281,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -383,18 +407,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -427,11 +440,19 @@
             8076
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "c444ba6745f42b6cc7f2ea91775c8943a37a4d5b1fa9eb1d4286f9963ee47437",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/fee-55d86c155264.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -462,11 +483,19 @@
             8076
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "c444ba6745f42b6cc7f2ea91775c8943a37a4d5b1fa9eb1d4286f9963ee47437",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/location-55d86c155264.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -490,6 +519,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-03"
         }
       },
@@ -536,11 +568,19 @@
             8327
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "ac1fa5c9c33f089bff336bbc2ead1bac28bbfd300c68b448940b3d9a2fe4df0d",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/schedule-5a078350e718.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       },
@@ -570,11 +610,19 @@
             8076
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
+          "crop_sha256": "c444ba6745f42b6cc7f2ea91775c8943a37a4d5b1fa9eb1d4286f9963ee47437",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-03/title-55d86c155264.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            4860,
+            5400,
+            8910
+          ],
+          "region_crop_sha256": "c730e2572a09e3546181ce1c9a6daf17b9ae2ec6b0b08e95f578d1ac06e45ce0",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_03-wellness_section.png",
           "region_id": "page-001-region-03"
         }
       }
@@ -637,8 +685,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -770,18 +818,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -814,11 +851,19 @@
             3143
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "632b3cc6421d849dce243ba084749bce7c949ad0c3bd8280dffd3884644af026",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-d2acb32e6a0e.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -849,11 +894,19 @@
             3143
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "632b3cc6421d849dce243ba084749bce7c949ad0c3bd8280dffd3884644af026",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-d2acb32e6a0e.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -877,6 +930,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -923,11 +979,19 @@
             3370
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "ec2e7892cdaea168c9e8c70d290bcee5774c4a994cbb41ffbc6456ce95a715e1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-751426deb39f.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -957,11 +1021,19 @@
             3143
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "632b3cc6421d849dce243ba084749bce7c949ad0c3bd8280dffd3884644af026",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-d2acb32e6a0e.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -1024,8 +1096,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -1157,18 +1229,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -1201,11 +1262,19 @@
             4216
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "f2cfbc3197e20084418c55b1448a6d47d7a62b7f444e26c0a27379c08728185b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-82a817c54036.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -1236,11 +1305,19 @@
             4216
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "f2cfbc3197e20084418c55b1448a6d47d7a62b7f444e26c0a27379c08728185b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-82a817c54036.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -1264,6 +1341,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -1310,11 +1390,19 @@
             4459
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "73a58356421d1326415a41fae76462c28eaff25cd09dbd3ecc0317e27ab0533e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-eeafd6ebf3c3.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -1344,11 +1432,19 @@
             4216
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "f2cfbc3197e20084418c55b1448a6d47d7a62b7f444e26c0a27379c08728185b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-82a817c54036.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -1411,8 +1507,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -1544,18 +1640,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -1588,11 +1673,19 @@
             5306
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "a6bec01e271ec43d37526ebf8ad9a8bb0a908aad9ed6dfde322e5be9d635129a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-e0659a8976ff.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -1622,11 +1715,19 @@
             5537
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "c7b533b92177fea8ba0d93f2f746d0b9ff7c9dbe9c2514c16783ed5e319ddd80",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-ecc099db727d.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -1650,6 +1751,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -1693,11 +1797,19 @@
             6019
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "3fb50673a9db53e3a7d6b95bd85201e6d5d917d8b39e96029bce5a1483cb667f",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-c6fcfe51bd24.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -1727,11 +1839,19 @@
             5306
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "a6bec01e271ec43d37526ebf8ad9a8bb0a908aad9ed6dfde322e5be9d635129a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-e0659a8976ff.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -1794,8 +1914,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -1924,18 +2044,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -1968,11 +2077,19 @@
             6873
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "8739242d23c0a1113fc00aad0bdc6370d48ef0cb5cf3a7cfe4b50c03cc94d10e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-a2c2734dc2a9.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2002,11 +2119,19 @@
             7108
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "653caa1311a861545e59b66e726dc016474a2043b7dab925dc097be292ccb1a0",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-240bba864e52.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2030,6 +2155,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -2075,11 +2203,19 @@
             7339
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "889565a348b8a3c2a9cf3c68cf8129df33cd3e876d060be3f548b68bacdf4736",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-02ad6ab06435.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2109,11 +2245,19 @@
             6873
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "8739242d23c0a1113fc00aad0bdc6370d48ef0cb5cf3a7cfe4b50c03cc94d10e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-a2c2734dc2a9.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -2176,8 +2320,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -2308,18 +2452,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -2352,11 +2485,19 @@
             8817
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "a61784cdc39809a974ad8fb38611759adea1154f9d223eab8712e2412458ee23",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-b98bbc386a8b.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2386,11 +2527,19 @@
             9056
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "7f476828d9fa84db8e6170472e3b6174fc84b064db85ba75188f593cf76bcf2b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-1934bb21ce6c.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2414,6 +2563,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -2451,11 +2603,19 @@
             9299
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "4bdc5435ba707bf73a39b85c2e5d813bf8733aec69835ffeca92b8fd45c48cbf",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-661aed747416.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2485,11 +2645,19 @@
             8817
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "a61784cdc39809a974ad8fb38611759adea1154f9d223eab8712e2412458ee23",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-b98bbc386a8b.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -2552,8 +2720,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -2676,18 +2844,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -2720,11 +2877,19 @@
             10385
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "cc92e238ed44621d83b6ee3d441f90c642a8474a14e7ef57043a0915491ad2e1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-8293e9cb8e8c.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2754,11 +2919,19 @@
             10632
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "ec08f9420081a53674fcb9d8ecb86f092eb4fcb8e0f4240b5bc4b8605d7e6cce",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-4ab2d5e21fe1.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2782,6 +2955,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -2828,11 +3004,19 @@
             10875
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "8eb5f575e0256b73b239de15ab62dd3df39a88897766fb1be6bd79a9f6d7f57b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-7fdf4004a46b.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -2862,11 +3046,19 @@
             10385
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "cc92e238ed44621d83b6ee3d441f90c642a8474a14e7ef57043a0915491ad2e1",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-8293e9cb8e8c.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -2929,8 +3121,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -3062,18 +3254,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -3106,11 +3287,19 @@
             11713
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "14de2946f5b1c0cc67c3e87ba48e86ae77fb0f3ac7f21bdf92e642fadefe2da9",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-ecc68b941511.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3140,11 +3329,19 @@
             11952
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "67472628810fb5fce5e63f1bce7e6d9d5d582d20d134d4d4e4ff5cc7f2c11837",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-7be3bdb26bde.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3168,6 +3365,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -3208,11 +3408,19 @@
             12199
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "13085637c978a398efbd27d2c2ff44fb30007b9fc98feed6c3cac12be86962c4",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-d6cab8f12d7c.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3242,11 +3450,19 @@
             11713
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "14de2946f5b1c0cc67c3e87ba48e86ae77fb0f3ac7f21bdf92e642fadefe2da9",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-ecc68b941511.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -3309,8 +3525,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -3436,18 +3652,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -3480,11 +3685,19 @@
             12592
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "ae58fab73ca82133650e34584ee5af5c39ae225fdcdd6b544126dfd272b5644b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-a1f849448b1e.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3514,11 +3727,19 @@
             12819
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "22af709cdd20fb0395772de6ddc31b58cab555d35d241b5550e4817dcc92adb4",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-f320e0794564.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3542,6 +3763,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -3584,11 +3808,19 @@
             13082
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "f3704c4df2bd7c7bb0fd7a3c2cf4421e6ce2bb318ae90f9c4d203617667e1120",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-f25bd99ae763.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3618,11 +3850,19 @@
             12592
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "ae58fab73ca82133650e34584ee5af5c39ae225fdcdd6b544126dfd272b5644b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-a1f849448b1e.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -3685,8 +3925,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -3814,18 +4054,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -3858,11 +4087,19 @@
             13904
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "4d09ceb55b15ed01aaf86a8a132ac539c786247d743132fb732ec4a8442a936e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/fee-9528af6999b2.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3892,11 +4129,19 @@
             14394
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "32cd0110c8fc67958a18297d27dd249eac217246f4d09c3264232d952845027a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/location-01d2ceafaef2.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3920,6 +4165,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-04"
         }
       },
@@ -3956,11 +4204,19 @@
             14394
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "32cd0110c8fc67958a18297d27dd249eac217246f4d09c3264232d952845027a",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/schedule-01d2ceafaef2.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       },
@@ -3990,11 +4246,19 @@
             13904
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
+          "crop_sha256": "4d09ceb55b15ed01aaf86a8a132ac539c786247d743132fb732ec4a8442a936e",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-04/title-9528af6999b2.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            5184,
+            2106,
+            10800,
+            15552
+          ],
+          "region_crop_sha256": "437e2c2607b55c339c402e9d990442918e3226111279d6ce6b1a24110b5c76c6",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_04-resort_activities_section.png",
           "region_id": "page-001-region-04"
         }
       }
@@ -4057,8 +4321,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -4180,18 +4444,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -4224,11 +4477,19 @@
             9902
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "8c461acf1796ef2aab174a087672a37407f6e6acd08bc154e5c1954c56c062ea",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/fee-168b919f7ba8.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       },
@@ -4258,11 +4519,19 @@
             11178
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "0f6c366af9e79b7696fd8e1e4e21677cf586672fe8b3567e385655e672705bbf",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/location-3fa5a1391707.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       },
@@ -4286,6 +4555,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-05"
         }
       },
@@ -4323,11 +4595,19 @@
             11413
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "fb121166dfa5aa56a5021a3f57353561ee697e108360189feb483294524f2a70",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/schedule-8d8a28b835d0.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       },
@@ -4357,11 +4637,19 @@
             9902
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "8c461acf1796ef2aab174a087672a37407f6e6acd08bc154e5c1954c56c062ea",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/title-168b919f7ba8.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       }
@@ -4424,8 +4712,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
@@ -4553,18 +4841,7 @@
     "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
     "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
     "currentness": "current",
-    "derived_source_links": [
-      {
-        "decoder": "opencv_qrcode",
-        "is_official_source": false,
-        "parent_content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-        "parent_source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
-        "source_authority": "non_official",
-        "source_crop_sha256": "913e40da084ef414b51d7d8fb00d2cd61b3c7d345b3c825e19cf43747b38a6ee",
-        "source_role": "derived_source_link",
-        "target_url": "https://qr.disneyworld.com/Jambo-House-Recreation-A-Frame"
-      }
-    ],
+    "derived_source_links": [],
     "description": null,
     "document_family": "aframe_recreation",
     "edition": "fy26-q3-0526-jambo",
@@ -4597,11 +4874,19 @@
             14058
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "521ba2f5ea53c765d27e94a60dd3a4abe43ac5debd6d773064016d03d3e36516",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/fee-4336206ee8bf.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       },
@@ -4631,11 +4916,19 @@
             14276
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "690f0dd9177b545cfe08b5169a924e7d08535b4d9bf3e23b1fedf623c9e2bcb5",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/location-a5e05b26a0cd.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       },
@@ -4659,6 +4952,9 @@
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
           "region_id": "page-001-region-05"
         }
       },
@@ -4698,11 +4994,19 @@
             14511
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "69a35e20de4c5e0c9b5dd9ae16b4ec8beb1c5bc684263569b1b8bc8c4a1016eb",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/schedule-fc87d3d5ed85.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       },
@@ -4732,11 +5036,19 @@
             14058
           ],
           "content_sha256": "08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955",
-          "crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
-          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
+          "crop_sha256": "521ba2f5ea53c765d27e94a60dd3a4abe43ac5debd6d773064016d03d3e36516",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page-001-region-05/title-4336206ee8bf.png",
           "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001.png",
           "page_image_sha256": "cd496397ce4b2cac2e6bf63d8182b9e9a00e4bd56e390e79c4542b857eb0f981",
           "page_number": 1,
+          "region_bbox_px": [
+            0,
+            8910,
+            5400,
+            15552
+          ],
+          "region_crop_sha256": "609fef947a282b9206784377142f80b772f0807453cc9ef36b4d3682f60f18a7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_001-region_05-movie_section.png",
           "region_id": "page-001-region-05"
         }
       }
@@ -4799,8 +5111,8 @@
       },
       "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
       "container_image_digest": null,
-      "git_sha": "fb8eebba8104270d4b736801b1bc3fe403ecafaa",
-      "lineage_hash": "54d48a0c1282be880294e0eea607eb71a4f4c90f743c69950c5718700095dd56",
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
       "model_asset_hashes": {
         "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
         "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"

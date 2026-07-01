@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import importlib.metadata
 import json
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -465,6 +466,7 @@ def render_source_documents_from_directory(
 
         source_sha256 = sha256_file(source_path)
         source_metadata = inventory_by_hash.get(source_sha256)
+        started_at = time.perf_counter()
         try:
             manifest = render_source_document(
                 source_path,
@@ -485,6 +487,7 @@ def render_source_documents_from_directory(
                 "page_count": manifest["page_count"],
                 "manifest_path": manifest["manifest_path"],
                 "error": None,
+                "render_elapsed_seconds": time.perf_counter() - started_at,
             }
             if manifest.get("source_document_id"):
                 page_rows = source_document_page_rows_from_manifest(manifest)
@@ -509,10 +512,14 @@ def render_source_documents_from_directory(
                 "source_document_page_count": 0,
                 "source_document_pages": [],
                 "error": str(exc),
+                "render_elapsed_seconds": time.perf_counter() - started_at,
             }
             _report_source_metadata(result, source_metadata)
             results.append(result)
 
+    rendered_results = [result for result in results if result["status"] == "rendered"]
+    rendered_page_count = sum(int(result.get("page_count") or 0) for result in rendered_results)
+    render_elapsed_seconds = sum(float(result.get("render_elapsed_seconds") or 0.0) for result in rendered_results)
     report = {
         "report_kind": "v3_render_source_pages",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -527,6 +534,10 @@ def render_source_documents_from_directory(
             "source_document_page_count": sum(
                 int(result.get("source_document_page_count") or 0)
                 for result in results
+            ),
+            "render_elapsed_seconds": render_elapsed_seconds,
+            "average_render_time_per_page_seconds": (
+                render_elapsed_seconds / rendered_page_count if rendered_page_count else None
             ),
         },
         "results": results,

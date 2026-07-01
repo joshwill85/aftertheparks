@@ -1,17 +1,17 @@
 {
   "candidates_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3",
-  "generated_at": "2026-06-30T06:51:30.181192+00:00",
+  "generated_at": "2026-06-30T23:53:11.107003+00:00",
   "group": null,
   "output_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3",
   "quarter": "fy26-q3",
   "report_kind": "v3_validate",
   "results": [
     {
-      "auto_publishable_count": 14,
+      "auto_publishable_count": 13,
       "candidate_count": 14,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62.candidates.json",
       "error": null,
-      "needs_review_count": 0,
+      "needs_review_count": 1,
       "rejected_count": 0,
       "status": "validated",
       "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62.candidates.json"
@@ -35,6 +35,16 @@
       "rejected_count": 0,
       "status": "validated",
       "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21.candidates.json"
+    },
+    {
+      "auto_publishable_count": 0,
+      "candidate_count": 2,
+      "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5.candidates.json",
+      "error": null,
+      "needs_review_count": 2,
+      "rejected_count": 0,
+      "status": "validated",
+      "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5.candidates.json"
     },
     {
       "auto_publishable_count": 12,
@@ -127,11 +137,11 @@
       "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988.candidates.json"
     },
     {
-      "auto_publishable_count": 13,
+      "auto_publishable_count": 12,
       "candidate_count": 13,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e.candidates.json",
       "error": null,
-      "needs_review_count": 0,
+      "needs_review_count": 1,
       "rejected_count": 0,
       "status": "validated",
       "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e.candidates.json"
@@ -177,6 +187,16 @@
       "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c.candidates.json"
     },
     {
+      "auto_publishable_count": 6,
+      "candidate_count": 33,
+      "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995.candidates.json",
+      "error": null,
+      "needs_review_count": 27,
+      "rejected_count": 0,
+      "status": "validated",
+      "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995.candidates.json"
+    },
+    {
       "auto_publishable_count": 9,
       "candidate_count": 10,
       "candidates_path": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0.candidates.json",
@@ -188,31 +208,35 @@
     }
   ],
   "summary": {
-    "auto_publishable_count": 190,
-    "candidate_count": 206,
-    "needs_review_count": 16,
+    "auto_publishable_count": 194,
+    "candidate_count": 241,
+    "needs_review_count": 47,
     "parser_error_count": 0,
     "rejected_count": 0,
     "validation_findings_by_status": {
       "auto_publishable": {},
       "needs_review": {
-        "engine_disagreement:fee": 1,
-        "engine_disagreement:location": 9,
+        "engine_disagreement:fee": 9,
+        "engine_disagreement:location": 8,
         "engine_disagreement:movie_title": 2,
-        "engine_disagreement:schedule": 14,
-        "engine_disagreement:title": 7,
-        "missing_field_engine_evidence:fee": 1,
+        "engine_disagreement:schedule": 17,
+        "engine_disagreement:title": 34,
+        "fee_legend_missing_for_unmarked_title": 3,
+        "fee_marker_without_legend": 6,
+        "missing_field_engine_evidence:fee": 3,
         "missing_field_engine_evidence:movie_title": 1,
         "missing_field_engine_evidence:schedule": 1,
-        "missing_field_engine_evidence:title": 1,
+        "missing_field_engine_evidence:title": 3,
+        "missing_field_normalized_value:fee": 3,
         "missing_required_field:fee": 3,
         "missing_required_field:location": 3,
         "missing_required_field:title": 3,
         "missing_source_span:fee": 3,
         "missing_source_span:location": 3,
         "missing_source_span:title": 3,
+        "non_activity_title:title": 2,
         "partial_movie_row_review_required": 3,
-        "unknown_location": 5,
+        "unknown_location": 7,
         "unparsed_schedule": 3
       },
       "rejected": {}

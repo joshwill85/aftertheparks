@@ -6,8 +6,13 @@ import { toDisplayActivity } from "@/lib/displayActivity";
 import { activityToEventCard } from "@/lib/events/mapToEventCard";
 import { weatherFitValueForActivity } from "@/lib/planning/activityFacts";
 import { isUncertainSchedule } from "@/lib/text/normalize";
-import type { ActivityOccurrence, ActivityPriceOption } from "@/lib/types/occurrence";
+import type {
+  ActivityOccurrence,
+  ActivityPriceOption,
+  MovieNightOccurrence,
+} from "@/lib/types/occurrence";
 import { ActivityGrid } from "@/components/atlas/ActivityGrid";
+import { MagicalActivityCarousel } from "@/components/atlas/MagicalActivityCarousel";
 import { DecisionSignals } from "@/components/activity/DecisionSignals";
 import { SaveButton } from "@/components/activity/SaveButton";
 import { usePlan } from "@/components/atlas/PlanProvider";
@@ -357,6 +362,7 @@ export function ActivityDetailClient({
   nearbyActivities = [],
   homeResort,
   faqItems,
+  movieNights = [],
 }: {
   activity: ActivityOccurrence;
   upcoming: ActivityOccurrence[];
@@ -364,6 +370,7 @@ export function ActivityDetailClient({
   nearbyActivities?: ActivityOccurrence[];
   homeResort?: { slug: string; area: string };
   faqItems: SeoFaqItem[];
+  movieNights?: MovieNightOccurrence[];
 }) {
   const { addActivity, isActivitySaved } = usePlan();
   const inPlan = isActivitySaved(activity);
@@ -396,6 +403,13 @@ export function ActivityDetailClient({
     Boolean(display.timeLabel);
   const optionalPriceOptions =
     activity.price.options?.filter((option) => option.priceBasis === "optional_add_on") ?? [];
+  const isMovieGuide =
+    activity.activitySlug === "movies-under-the-stars" ||
+    activity.category === "movies_under_stars";
+  const campfireCarouselActivities =
+    activity.category === "campfire"
+      ? [activity, ...upcoming].filter((item) => item.category === "campfire")
+      : [];
 
   const goodToKnow: string[] = [];
   const addGoodToKnow = (note?: string | null) => {
@@ -504,6 +518,22 @@ export function ActivityDetailClient({
             display={display}
             whenLabel={whenLabel}
           />
+
+          {isMovieGuide && movieNights.length > 0 && (
+            <MagicalActivityCarousel
+              title="Movie magic this week"
+              subtitle="A starlit rail of current resort movie cards, with showtimes, posters when available, and a details tap for each film."
+              movies={movieNights}
+            />
+          )}
+
+          {campfireCarouselActivities.length > 0 && (
+            <MagicalActivityCarousel
+              title="Campfire glow nearby"
+              subtitle="Cozy current campfire cards from the same activity family, ready for a low-effort evening pivot."
+              activities={campfireCarouselActivities}
+            />
+          )}
 
           {goodToKnow.length > 0 && (
             <EventDetailSection title="Before you go">

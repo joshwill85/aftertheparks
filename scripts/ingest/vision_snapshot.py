@@ -12,23 +12,10 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import time
 from typing import Any
 
 try:
-    from config import PROCESSED_DIR
-    from debug_overlays import build_debug_overlays
-    from family_classifier import classify_document_family
-    from normalization_v3 import build_runtime_lineage
-    from ocr.base import package_version
-    from ocr.docling_adapter import DoclingAdapter
-    from ocr.paddle_adapter import PaddleOcrAdapter
-    from ocr.rapidocr_adapter import RapidOcrAdapter
-    from quality_metrics import compute_snapshot_quality
-    from regions import segment_major_regions
-    from render_source_pages import stable_config_hash
-    from source_manifest import edition_matches_quarter
-    from db import SupabaseClient
-except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
     from .debug_overlays import build_debug_overlays
     from .family_classifier import classify_document_family
@@ -42,6 +29,20 @@ except ImportError:  # pragma: no cover - supports package-style imports
     from .render_source_pages import stable_config_hash
     from .source_manifest import edition_matches_quarter
     from .db import SupabaseClient
+except ImportError:  # pragma: no cover - supports direct script execution
+    from config import PROCESSED_DIR
+    from debug_overlays import build_debug_overlays
+    from family_classifier import classify_document_family
+    from normalization_v3 import build_runtime_lineage
+    from ocr.base import package_version
+    from ocr.docling_adapter import DoclingAdapter
+    from ocr.paddle_adapter import PaddleOcrAdapter
+    from ocr.rapidocr_adapter import RapidOcrAdapter
+    from quality_metrics import compute_snapshot_quality
+    from regions import segment_major_regions
+    from render_source_pages import stable_config_hash
+    from source_manifest import edition_matches_quarter
+    from db import SupabaseClient
 
 
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "vision_snapshots"
@@ -724,6 +725,7 @@ def build_vision_snapshots_from_directory(
 ) -> dict[str, Any]:
     results: list[dict[str, Any]] = []
     for manifest_path in _page_manifest_paths(page_images_dir):
+        started_at = time.perf_counter()
         try:
             page_manifest = json.loads(manifest_path.read_text())
             if not _manifest_matches_filters(page_manifest, group=group, quarter=quarter):
@@ -749,6 +751,7 @@ def build_vision_snapshots_from_directory(
                     "ocr_success": snapshot.get("quality", {}).get("ocr_success"),
                     "debug_overlay_path": snapshot.get("debug_overlays", {}).get("primary", {}).get("overlay_path"),
                     "error": None,
+                    "ocr_elapsed_seconds": time.perf_counter() - started_at,
                 }
             )
         except Exception as exc:
@@ -764,9 +767,12 @@ def build_vision_snapshots_from_directory(
                     "ocr_success": False,
                     "debug_overlay_path": None,
                     "error": str(exc),
+                    "ocr_elapsed_seconds": time.perf_counter() - started_at,
                 }
             )
 
+    snapshot_results = [result for result in results if result["snapshot_path"]]
+    ocr_elapsed_seconds = sum(float(result.get("ocr_elapsed_seconds") or 0.0) for result in snapshot_results)
     report = {
         "report_kind": "v3_vision_snapshot",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -778,6 +784,10 @@ def build_vision_snapshots_from_directory(
             "page_manifest_count": len(results),
             "snapshot_count": sum(1 for result in results if result["snapshot_path"]),
             "parser_error_count": sum(1 for result in results if result["status"] == "parser_error"),
+            "ocr_elapsed_seconds": ocr_elapsed_seconds,
+            "average_ocr_time_per_page_seconds": (
+                ocr_elapsed_seconds / len(snapshot_results) if snapshot_results else None
+            ),
         },
         "results": results,
     }
@@ -801,6 +811,103 @@ def _snapshot_matches_filters(
     return True
 
 
+def _vision_snapshot_report_result(
+    *,
+    snapshot: dict[str, Any],
+    snapshot_path: Path,
+    page_manifest_path: str | None = None,
+    ocr_elapsed_seconds: float | None = None,
+) -> dict[str, Any]:
+    return {
+        "status": snapshot.get("status"),
+        "page_manifest_path": page_manifest_path,
+        "snapshot_path": str(snapshot_path),
+        "source_sha256": snapshot.get("source_sha256"),
+        "calendar_group_key": snapshot.get("calendar_group_key"),
+        "edition": snapshot.get("edition"),
+        "document_family": snapshot.get("document_family"),
+        "ocr_success": snapshot.get("quality", {}).get("ocr_success"),
+        "debug_overlay_path": snapshot.get("debug_overlays", {}).get("primary", {}).get("overlay_path"),
+        "error": None,
+        "ocr_elapsed_seconds": ocr_elapsed_seconds,
+    }
+
+
+def build_vision_snapshot_report_from_existing_snapshots(
+    *,
+    snapshots_dir: Path = DEFAULT_OUTPUT_DIR,
+    report_path: Path | None = DEFAULT_REPORT_PATH,
+    group: str | None = None,
+    quarter: str | None = None,
+) -> dict[str, Any]:
+    results: list[dict[str, Any]] = []
+    for snapshot_path in sorted(snapshots_dir.glob("*.vision.json")):
+        try:
+            snapshot = json.loads(snapshot_path.read_text())
+            if not isinstance(snapshot, dict):
+                raise ValueError("snapshot_json_must_be_object")
+            if not _snapshot_matches_filters(snapshot, group=group, quarter=quarter):
+                continue
+            results.append(
+                _vision_snapshot_report_result(
+                    snapshot=snapshot,
+                    snapshot_path=snapshot_path,
+                    ocr_elapsed_seconds=snapshot.get("ocr_elapsed_seconds"),
+                )
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "status": "parser_error",
+                    "page_manifest_path": None,
+                    "snapshot_path": None,
+                    "snapshot_file_path": str(snapshot_path),
+                    "source_sha256": None,
+                    "calendar_group_key": None,
+                    "edition": None,
+                    "document_family": None,
+                    "ocr_success": False,
+                    "debug_overlay_path": None,
+                    "error": str(exc),
+                    "ocr_elapsed_seconds": None,
+                }
+            )
+
+    snapshot_results = [result for result in results if result["snapshot_path"]]
+    timed_results = [
+        result
+        for result in snapshot_results
+        if isinstance(result.get("ocr_elapsed_seconds"), (int, float))
+    ]
+    ocr_elapsed_seconds = (
+        sum(float(result["ocr_elapsed_seconds"]) for result in timed_results)
+        if timed_results
+        else None
+    )
+    report = {
+        "report_kind": "v3_vision_snapshot",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "snapshots_dir": str(snapshots_dir),
+        "output_dir": str(snapshots_dir),
+        "quarter": quarter,
+        "group": group,
+        "summary": {
+            "page_manifest_count": len(results),
+            "snapshot_count": len(snapshot_results),
+            "parser_error_count": sum(1 for result in results if result["status"] == "parser_error"),
+            "ocr_elapsed_seconds": ocr_elapsed_seconds,
+            "average_ocr_time_per_page_seconds": (
+                ocr_elapsed_seconds / len(timed_results) if timed_results and ocr_elapsed_seconds is not None else None
+            ),
+        },
+        "results": results,
+    }
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    return report
+
+
 def refresh_snapshot_regions(
     *,
     snapshots_dir: Path = DEFAULT_OUTPUT_DIR,
@@ -815,13 +922,20 @@ def refresh_snapshot_regions(
             snapshot = json.loads(snapshot_path.read_text())
             if not isinstance(snapshot, dict) or not _snapshot_matches_filters(snapshot, group=group, quarter=quarter):
                 continue
-            classification = snapshot.get("family_classification")
-            if not isinstance(classification, dict):
+            existing_classification = snapshot.get("family_classification")
+            reclassified = classify_document_family(snapshot)
+            if reclassified.get("document_family") != "unknown_visual_schedule":
+                classification = reclassified
+            elif isinstance(existing_classification, dict):
+                classification = existing_classification
+            else:
                 document_family = str(snapshot.get("document_family") or "unknown_visual_schedule")
                 classification = {
                     "document_family": document_family,
                     "allow_auto_publish": document_family != "unknown_visual_schedule",
                 }
+            snapshot["document_family"] = classification.get("document_family")
+            snapshot["family_classification"] = classification
             source_hash = str(snapshot.get("source_sha256") or snapshot_path.stem.replace(".vision", ""))
             region_result = segment_major_regions(
                 snapshot={
@@ -900,6 +1014,11 @@ def main() -> None:
         action="store_true",
         help="Refresh region crops in existing snapshots without rerunning OCR",
     )
+    parser.add_argument(
+        "--report-existing-snapshots",
+        action="store_true",
+        help="Summarize existing snapshot envelopes without rerunning OCR",
+    )
     parser.add_argument("--debug-output-dir", type=Path, default=PROCESSED_DIR / "vision_debug")
     parser.add_argument("--no-debug-overlays", action="store_true")
     parser.add_argument(
@@ -909,6 +1028,26 @@ def main() -> None:
     )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+
+    if args.report_existing_snapshots:
+        if args.page_manifest:
+            parser.error("--report-existing-snapshots is only supported for batch snapshot files")
+        report = build_vision_snapshot_report_from_existing_snapshots(
+            snapshots_dir=args.output_dir,
+            report_path=args.report_path,
+            group=args.group,
+            quarter=args.quarter,
+        )
+        if args.upsert_layout_snapshots:
+            report["activity_layout_snapshots_upsert"] = upsert_activity_layout_snapshots_from_report(
+                SupabaseClient(),
+                report,
+            )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(args.report_path)
+        return
 
     if args.refresh_regions_only:
         if args.page_manifest:

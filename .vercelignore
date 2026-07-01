@@ -5,4 +5,5 @@ supabase/.temp/
 *.pdf
 *.docx
 data/processed/page_images/
+data/processed/field_crops_v3/
 data/processed/vision_debug/

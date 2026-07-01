@@ -2129,6 +2129,141 @@ textarea.form-control {
   min-width: 0;
 }
 
+.magical-activity-carousel {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 1rem;
+  margin-block: 0.5rem 0.25rem;
+  padding-block: 1rem 0.35rem;
+  overflow: hidden;
+}
+
+.magical-activity-carousel::before {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: clamp(8rem, 30vw, 12rem);
+  border-radius: 18px;
+  background:
+    radial-gradient(1px 1px at 18px 24px, rgba(255, 255, 255, 0.86), transparent),
+    radial-gradient(1px 1px at 108px 52px, rgba(255, 221, 141, 0.72), transparent),
+    radial-gradient(1.2px 1.2px at 220px 36px, rgba(255, 255, 255, 0.78), transparent),
+    radial-gradient(1px 1px at 310px 76px, rgba(255, 221, 141, 0.66), transparent),
+    linear-gradient(135deg, rgba(18, 32, 54, 0.94), rgba(29, 75, 96, 0.82));
+  background-size: 360px 140px, 360px 140px, 360px 140px, 360px 140px, auto;
+  content: "";
+  pointer-events: none;
+}
+
+.magical-activity-carousel__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 42rem;
+  padding: 0.9rem 1rem 0;
+}
+
+.magical-activity-carousel__title {
+  margin: 0;
+  color: white;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 760;
+  line-height: 1.1;
+}
+
+.magical-activity-carousel__subtitle {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+.magical-activity-carousel__rail {
+  display: grid;
+  grid-auto-columns: minmax(17.5rem, 20rem);
+  grid-auto-flow: column;
+  gap: 0.9rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 0.2rem 1rem 0.85rem;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.magical-activity-carousel__rail::-webkit-scrollbar {
+  display: none;
+}
+
+.magical-activity-carousel__item {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.magical-activity-carousel__card {
+  min-height: 100%;
+}
+
+.magical-activity-carousel .event-card__hit-area {
+  flex-direction: column;
+  overflow: visible;
+}
+
+.magical-activity-carousel .event-card--has-save .event-card__hit-area {
+  padding-right: 14px;
+}
+
+.magical-activity-carousel .event-card__body,
+.magical-activity-carousel .event-card__title,
+.magical-activity-carousel .event-card__summary,
+.magical-activity-carousel .event-card__resort,
+.magical-activity-carousel .event-card__location,
+.magical-activity-carousel .event-card__extra,
+.magical-activity-carousel .event-card__day,
+.magical-activity-carousel .event-card__time,
+.magical-activity-carousel .event-card__footnote {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.magical-activity-carousel .event-card__media-shell {
+  width: 96px;
+}
+
+.magical-activity-carousel .event-card__media--category,
+.magical-activity-carousel .event-card__media--initial {
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+}
+
+.magical-activity-carousel .event-card__weather,
+.magical-activity-carousel .event-card--has-save .event-card__weather {
+  margin-right: 14px;
+  margin-bottom: 70px;
+}
+
+.magical-activity-carousel__attribution {
+  margin-inline: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 0.75rem;
+}
+
+@media (max-width: 520px) {
+  .magical-activity-carousel__header {
+    padding-inline: 0.75rem;
+  }
+
+  .magical-activity-carousel__rail {
+    grid-auto-columns: minmax(15.5rem, 82vw);
+    padding-inline: 0.75rem;
+    scroll-padding-inline: 0.75rem;
+  }
+}
+
 .event-card-list--cols-2 .event-card-list__item {
   height: 100%;
 }

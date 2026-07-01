@@ -18,6 +18,8 @@ except ImportError:  # pragma: no cover - supports package-style imports
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_queue.json"
 DEFAULT_VALIDATED_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_SOURCE_STATUSES_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json"
+DEFAULT_SOURCE_INVENTORY_PATH = PROCESSED_DIR / "source_inventory.json"
+DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 DEFAULT_EXISTING_GOLD_PATH = PROCESSED_DIR / "activity_gold_v2_preview.json"
 DEFAULT_GOLD_CONFLICTS_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
@@ -137,6 +139,19 @@ def _source_metadata(candidate: dict[str, Any]) -> dict[str, Any]:
     return {key: candidate.get(key) for key in keys if candidate.get(key) not in {None, ""}}
 
 
+def _source_inventory_by_hash(source_inventory: list[dict[str, Any]] | None) -> dict[str, dict[str, Any]]:
+    by_hash: dict[str, dict[str, Any]] = {}
+    for source in source_inventory or []:
+        source_hash = _source_hash(source)
+        if source_hash:
+            by_hash[source_hash] = source
+    return by_hash
+
+
+def _source_metadata_for_hash(source_hash: Any, source_inventory_by_hash: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return _source_metadata(source_inventory_by_hash.get(str(source_hash or "").strip(), {}))
+
+
 def _page_image_path(candidate: dict[str, Any], page_image_sha256: Any) -> str | None:
     requested_hash = str(page_image_sha256 or "").strip()
     if not requested_hash:
@@ -194,6 +209,33 @@ def _price_value(row: dict[str, Any]) -> str:
 
 def _candidate_title(candidate: dict[str, Any]) -> str:
     return str(candidate.get("normalized_title") or candidate.get("source_title") or "").strip()
+
+
+def _candidate_movie_title(candidate: dict[str, Any]) -> str:
+    return str(candidate.get("movie_title") or candidate.get("normalized_movie_title") or "").strip()
+
+
+def _candidate_summary(candidate: dict[str, Any]) -> dict[str, Any]:
+    title = _candidate_title(candidate)
+    movie_title = _candidate_movie_title(candidate)
+    schedule = _schedule_value(candidate)
+    location = _location_value(candidate)
+    display_label = (
+        title
+        or movie_title
+        or schedule
+        or location
+        or str(candidate.get("candidate_id") or "").strip()
+    )
+    return {
+        "candidate_display_label": display_label or None,
+        "candidate_title": title or None,
+        "title": title or None,
+        "candidate_movie_title": movie_title or None,
+        "candidate_schedule": schedule or None,
+        "candidate_location": location or None,
+        "candidate_fee_required": candidate.get("fee_required"),
+    }
 
 
 def _existing_gold_by_key(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -282,11 +324,13 @@ def _unreviewable_candidate_task(
     field_name: str | None,
 ) -> dict[str, Any]:
     visible_findings = list(dict.fromkeys([*findings, "missing_reviewable_evidence"]))
+    selected_evidence = _field_evidence(candidate, field_name)
     return {
         "task_id": str(candidate.get("candidate_id") or f"vision-v3-unreviewable-{index:04d}"),
         "candidate_id": candidate.get("candidate_id"),
         "task_type": "unreviewable_candidate",
         "field": field_name,
+        **_candidate_summary(candidate),
         "source_document_id": candidate.get("source_document_id"),
         "content_sha256": candidate.get("content_sha256"),
         "calendar_group_key": candidate.get("calendar_group_key"),
@@ -303,6 +347,7 @@ def _unreviewable_candidate_task(
         "normalized_value": None,
         "validation_findings": visible_findings,
         "source_metadata": _source_metadata(candidate),
+        "selected_field_evidence": selected_evidence,
         "candidate": candidate,
     }
 
@@ -336,6 +381,7 @@ def _candidate_review_task(
         "candidate_id": candidate.get("candidate_id"),
         "task_type": _task_type(findings),
         "field": field_name,
+        **_candidate_summary(candidate),
         "source_document_id": candidate.get("source_document_id"),
         "content_sha256": candidate.get("content_sha256"),
         "calendar_group_key": candidate.get("calendar_group_key"),
@@ -355,6 +401,7 @@ def _candidate_review_task(
         "normalized_value": evidence.get("normalized_value"),
         "validation_findings": findings,
         "source_metadata": _source_metadata(candidate),
+        "selected_field_evidence": evidence,
         "candidate": candidate,
     }
 
@@ -703,7 +750,11 @@ def _source_drift_review_tasks(source_drift_report: dict[str, Any] | None) -> li
     return tasks
 
 
-def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+def _dual_run_field_diff_review_tasks(
+    dual_run_report: dict[str, Any],
+    *,
+    source_inventory_by_hash: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
     tasks: list[dict[str, Any]] = []
     for index, diff in enumerate(dual_run_report.get("field_diffs") or [], start=1):
         if not isinstance(diff, dict) or diff.get("reviewed") is True:
@@ -712,6 +763,7 @@ def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[d
         field_name = str(diff.get("field") or "").strip() or None
         evidence = diff.get("v3_field_evidence") if isinstance(diff.get("v3_field_evidence"), dict) else {}
         source = evidence.get("source") if isinstance(evidence.get("source"), dict) else {}
+        content_sha256 = source.get("content_sha256") or diff.get("content_sha256")
         field_crop = source.get("crop_storage_path") or source.get("crop_path")
         task_suffix = "-".join(_slug_fragment(part) for part in diff_key.split(":"))
         tasks.append(
@@ -720,7 +772,7 @@ def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[d
                 "task_type": "gold_conflict",
                 "field": field_name,
                 "source_document_id": diff.get("source_document_id"),
-                "content_sha256": source.get("content_sha256"),
+                "content_sha256": content_sha256,
                 "calendar_group_key": diff.get("calendar_group_key"),
                 "canonical_slug": diff.get("canonical_slug"),
                 "review_key": diff_key,
@@ -737,6 +789,7 @@ def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[d
                 "candidate_value": diff.get("v3_value"),
                 "normalized_value": diff.get("v3_value"),
                 "validation_findings": [f"gold_conflict:v2_v3:{field_name or 'field'}"],
+                "source_metadata": _source_metadata_for_hash(content_sha256, source_inventory_by_hash),
                 "source_drift": {"old": diff.get("v2_value"), "new": diff.get("v3_value")},
                 "dual_run_diff": diff,
                 "dual_run_report": dual_run_report,
@@ -745,7 +798,11 @@ def _dual_run_field_diff_review_tasks(dual_run_report: dict[str, Any]) -> list[d
     return tasks
 
 
-def _dual_run_status_transition_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+def _dual_run_status_transition_review_tasks(
+    dual_run_report: dict[str, Any],
+    *,
+    source_inventory_by_hash: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
     unreviewed = {
         str(key)
         for key in dual_run_report.get("unreviewed_status_transition_keys") or []
@@ -780,6 +837,7 @@ def _dual_run_status_transition_review_tasks(dual_run_report: dict[str, Any]) ->
                 "candidate_value": transition.get("to_status"),
                 "normalized_value": transition_key,
                 "validation_findings": ["manual_review_required:status_transition"],
+                "source_metadata": _source_metadata_for_hash(transition.get("content_sha256"), source_inventory_by_hash),
                 "dual_run_status_transition": transition,
                 "dual_run_report": dual_run_report,
             }
@@ -787,7 +845,11 @@ def _dual_run_status_transition_review_tasks(dual_run_report: dict[str, Any]) ->
     return tasks
 
 
-def _dual_run_new_record_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+def _dual_run_new_record_review_tasks(
+    dual_run_report: dict[str, Any],
+    *,
+    source_inventory_by_hash: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
     unreviewed = {
         str(key)
         for key in dual_run_report.get("unreviewed_new_keys") or []
@@ -830,6 +892,7 @@ def _dual_run_new_record_review_tasks(dual_run_report: dict[str, Any]) -> list[d
                 "candidate_value": record.get("title") or record.get("canonical_slug"),
                 "normalized_value": review_key,
                 "validation_findings": ["manual_review_required:new_record"],
+                "source_metadata": _source_metadata_for_hash(record.get("content_sha256"), source_inventory_by_hash),
                 "dual_run_new_record": record,
                 "dual_run_report": dual_run_report,
             }
@@ -837,7 +900,11 @@ def _dual_run_new_record_review_tasks(dual_run_report: dict[str, Any]) -> list[d
     return tasks
 
 
-def _dual_run_missing_v2_record_review_tasks(dual_run_report: dict[str, Any]) -> list[dict[str, Any]]:
+def _dual_run_missing_v2_record_review_tasks(
+    dual_run_report: dict[str, Any],
+    *,
+    source_inventory_by_hash: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
     tasks: list[dict[str, Any]] = []
     for index, record in enumerate(dual_run_report.get("missing_v2_records") or [], start=1):
         if not isinstance(record, dict):
@@ -871,6 +938,8 @@ def _dual_run_missing_v2_record_review_tasks(dual_run_report: dict[str, Any]) ->
                 "candidate_value": record.get("title") or record.get("canonical_slug"),
                 "normalized_value": review_key,
                 "validation_findings": ["manual_review_required:missing_v2_record"],
+                "source_metadata": _source_metadata_for_hash(record.get("content_sha256"), source_inventory_by_hash)
+                or _source_metadata({"canonical_url": record.get("source_url"), "fetched_url": record.get("source_url")}),
                 "source_drift": {"old": v2_value, "new": None},
                 "dual_run_missing_v2_record": record,
                 "dual_run_report": dual_run_report,
@@ -879,15 +948,56 @@ def _dual_run_missing_v2_record_review_tasks(dual_run_report: dict[str, Any]) ->
     return tasks
 
 
-def _dual_run_review_tasks(dual_run_report: dict[str, Any] | None) -> list[dict[str, Any]]:
+def _dual_run_review_tasks(
+    dual_run_report: dict[str, Any] | None,
+    *,
+    source_inventory_by_hash: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
     if not dual_run_report or dual_run_report.get("status") in {None, "clean"}:
         return []
     return [
-        *_dual_run_field_diff_review_tasks(dual_run_report),
-        *_dual_run_status_transition_review_tasks(dual_run_report),
-        *_dual_run_new_record_review_tasks(dual_run_report),
-        *_dual_run_missing_v2_record_review_tasks(dual_run_report),
+        *_dual_run_field_diff_review_tasks(dual_run_report, source_inventory_by_hash=source_inventory_by_hash),
+        *_dual_run_status_transition_review_tasks(dual_run_report, source_inventory_by_hash=source_inventory_by_hash),
+        *_dual_run_new_record_review_tasks(dual_run_report, source_inventory_by_hash=source_inventory_by_hash),
+        *_dual_run_missing_v2_record_review_tasks(dual_run_report, source_inventory_by_hash=source_inventory_by_hash),
     ]
+
+
+def _current_review_decisions_by_task(review_decisions: list[dict[str, Any]] | None) -> dict[str, dict[str, Any]]:
+    decisions_by_task: dict[str, dict[str, Any]] = {}
+    for decision in review_decisions or []:
+        if not isinstance(decision, dict) or decision.get("decision") not in {"approve", "edit", "reject"}:
+            continue
+        task_id = str(decision.get("task_id") or "").strip()
+        if not task_id:
+            continue
+        current = decisions_by_task.get(task_id)
+        if current is None or str(decision.get("decided_at") or "") >= str(current.get("decided_at") or ""):
+            decisions_by_task[task_id] = decision
+    return decisions_by_task
+
+
+def _apply_review_decision_status(tasks: list[dict[str, Any]], review_decisions: list[dict[str, Any]] | None) -> None:
+    decisions_by_task = _current_review_decisions_by_task(review_decisions)
+    for task in tasks:
+        task.setdefault("status", "pending")
+        task_id = str(task.get("task_id") or "").strip()
+        decision = decisions_by_task.get(task_id)
+        if not decision:
+            continue
+        decision_hash = str(decision.get("content_sha256") or "").strip()
+        task_hash = str(task.get("content_sha256") or "").strip()
+        if decision_hash and task_hash and decision_hash != task_hash:
+            continue
+        task["status"] = "reviewed"
+        task["review_decision_status"] = decision.get("decision")
+        task["review_decision"] = {
+            "decision": decision.get("decision"),
+            "reviewer": decision.get("reviewer"),
+            "reason": decision.get("reason"),
+            "decided_at": decision.get("decided_at"),
+            "content_sha256": decision.get("content_sha256"),
+        }
 
 
 def build_review_tasks(
@@ -898,8 +1008,11 @@ def build_review_tasks(
     gold_conflicts: list[dict[str, Any]] | None = None,
     source_drift_report: dict[str, Any] | None = None,
     dual_run_report: dict[str, Any] | None = None,
+    source_inventory: list[dict[str, Any]] | None = None,
+    review_decisions: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     tasks: list[dict[str, Any]] = []
+    source_inventory_by_hash = _source_inventory_by_hash(source_inventory)
     existing_gold_by_key = _existing_gold_by_key(existing_gold_rows or [])
     for index, candidate in enumerate(candidates, start=1):
         if candidate.get("validation_status") not in {"needs_review", "parser_error", "source_error"}:
@@ -932,9 +1045,9 @@ def build_review_tasks(
     tasks.extend(_source_status_review_tasks(source_statuses or []))
     tasks.extend(_gold_conflict_review_tasks(gold_conflicts or [], existing_gold_by_key=existing_gold_by_key))
     tasks.extend(_source_drift_review_tasks(source_drift_report))
-    tasks.extend(_dual_run_review_tasks(dual_run_report))
-    for task in tasks:
-        task.setdefault("status", "pending")
+    tasks.extend(_dual_run_review_tasks(dual_run_report, source_inventory_by_hash=source_inventory_by_hash))
+    _attach_task_source_urls(tasks)
+    _apply_review_decision_status(tasks, review_decisions)
     return tasks
 
 
@@ -957,7 +1070,62 @@ def _count_by_primary_finding(tasks: list[dict[str, Any]]) -> dict[str, int]:
     return dict(sorted(counts.items()))
 
 
+def _source_url(task: dict[str, Any]) -> str:
+    task_source_url = str(task.get("source_url") or "").strip()
+    if task_source_url:
+        return task_source_url
+    source_metadata = task.get("source_metadata") if isinstance(task.get("source_metadata"), dict) else {}
+    return str(source_metadata.get("canonical_url") or source_metadata.get("fetched_url") or "").strip()
+
+
+def _attach_task_source_urls(tasks: list[dict[str, Any]]) -> None:
+    for task in tasks:
+        source_url = _source_url(task)
+        if source_url:
+            task["source_url"] = source_url
+
+
+def _count_by_source_url(tasks: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for task in tasks:
+        source_url = _source_url(task)
+        if source_url:
+            counts[source_url] = counts.get(source_url, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _top_calendar_group_blockers(tasks: list[dict[str, Any]], *, limit: int = 10) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for task in tasks:
+        calendar_group_key = str(task.get("calendar_group_key") or "").strip()
+        if calendar_group_key:
+            grouped.setdefault(calendar_group_key, []).append(task)
+    rows: list[dict[str, Any]] = []
+    for calendar_group_key, group_tasks in grouped.items():
+        source_urls = sorted({source_url for task in group_tasks if (source_url := _source_url(task))})
+        rows.append(
+            {
+                "calendar_group_key": calendar_group_key,
+                "task_count": len(group_tasks),
+                "task_count_by_type": _count_by_key(group_tasks, "task_type"),
+                "task_count_by_field": _count_by_key(group_tasks, "field"),
+                "source_urls": source_urls,
+            }
+        )
+    rows.sort(key=lambda row: (-int(row["task_count"]), str(row["calendar_group_key"])))
+    return rows[:limit]
+
+
 def build_review_queue_report(tasks: list[dict[str, Any]]) -> dict[str, Any]:
+    pending_tasks = [task for task in tasks if task.get("status") != "reviewed"]
+    source_url_missing_task_ids = [
+        str(task.get("task_id") or "")
+        for task in tasks
+        if not _source_url(task)
+    ]
+    source_url_missing_task_ids = [
+        task_id for task_id in source_url_missing_task_ids if task_id
+    ]
     missing_visual_artifact_task_ids = [
         str(task.get("task_id") or "")
         for task in tasks
@@ -979,13 +1147,24 @@ def build_review_queue_report(tasks: list[dict[str, Any]]) -> dict[str, Any]:
         "schema_version": "review_queue_v3_report_001",
         "summary": {
             "task_count": len(tasks),
+            "pending_task_count": sum(1 for task in tasks if task.get("status") == "pending"),
+            "reviewed_task_count": sum(1 for task in tasks if task.get("status") == "reviewed"),
             "task_count_by_type": _count_by_key(tasks, "task_type"),
+            "task_count_by_status": _count_by_key(tasks, "status"),
+            "review_count_by_decision": _count_by_key(tasks, "review_decision_status"),
             "task_count_by_finding": _count_by_primary_finding(tasks),
+            "task_count_by_calendar_group": _count_by_key(tasks, "calendar_group_key"),
+            "task_count_by_field": _count_by_key(tasks, "field"),
+            "task_count_by_source_url": _count_by_source_url(tasks),
+            "source_url_missing_count": len(source_url_missing_task_ids),
+            "all_tasks_have_source_urls": not source_url_missing_task_ids,
             "visual_artifact_missing_count": len(missing_visual_artifact_task_ids),
             "visual_artifact_missing_file_count": len(missing_visual_artifact_file_task_ids),
             "all_tasks_have_visual_artifacts": not missing_visual_artifact_task_ids,
             "all_tasks_have_existing_visual_artifacts": not missing_visual_artifact_file_task_ids,
         },
+        "top_calendar_group_blockers": _top_calendar_group_blockers(pending_tasks),
+        "source_url_missing_task_ids": source_url_missing_task_ids,
         "visual_artifact_missing_task_ids": missing_visual_artifact_task_ids,
         "visual_artifact_missing_file_task_ids": missing_visual_artifact_file_task_ids,
     }
@@ -1059,7 +1238,7 @@ def _review_command(task: dict[str, Any], decision: str) -> str:
         '--reviewer "reviewer-name" '
         '--reason "Verified against source crop"'
     )
-    if decision == "edit":
+    if decision in {"approve", "edit"}:
         approved_fields = _review_command_approved_fields(task)
         if approved_fields:
             command = f"{command} --approved-fields-json {_shell_single_quote(json.dumps(approved_fields, sort_keys=True))}"
@@ -1082,6 +1261,56 @@ def _review_command_approved_fields(task: dict[str, Any]) -> dict[str, Any]:
     return {field_name: approved_field}
 
 
+def _html_top_blockers(report: dict[str, Any]) -> str:
+    blockers = report.get("top_calendar_group_blockers")
+    if not isinstance(blockers, list) or not blockers:
+        return ""
+    rows: list[str] = []
+    for blocker in blockers[:10]:
+        if not isinstance(blocker, dict):
+            continue
+        calendar_group_key = str(blocker.get("calendar_group_key") or "").strip()
+        group_anchor = _slug_fragment(calendar_group_key)
+        task_count = int(blocker.get("task_count") or 0)
+        task_label = "task" if task_count == 1 else "tasks"
+        source_links: list[str] = []
+        for source_url in blocker.get("source_urls") or []:
+            source_url_text = str(source_url or "").strip()
+            if not source_url_text:
+                continue
+            source_links.append(
+                f'<a href="{html.escape(source_url_text, quote=True)}">{_html_text(source_url_text)}</a>'
+            )
+        rows.append(
+            "\n".join(
+                [
+                    "<tr>",
+                    f'<td><a href="#group-{html.escape(group_anchor, quote=True)}"><strong>{_html_text(calendar_group_key)}</strong></a></td>',
+                    f"<td>{task_count} {task_label}</td>",
+                    f"<td><code>{_html_text(blocker.get('task_count_by_field') or {})}</code></td>",
+                    f"<td><code>{_html_text(blocker.get('task_count_by_type') or {})}</code></td>",
+                    f"<td>{'<br>'.join(source_links) if source_links else 'n/a'}</td>",
+                    "</tr>",
+                ]
+            )
+        )
+    if not rows:
+        return ""
+    return "\n".join(
+        [
+            '<section class="top-blockers">',
+            "<h2>Top Blockers</h2>",
+            "<table>",
+            "<thead><tr><th>Calendar Group</th><th>Tasks</th><th>Fields</th><th>Types</th><th>Source URL</th></tr></thead>",
+            "<tbody>",
+            *rows,
+            "</tbody>",
+            "</table>",
+            "</section>",
+        ]
+    )
+
+
 def build_review_queue_html(
     tasks: list[dict[str, Any]],
     report: dict[str, Any] | None = None,
@@ -1091,11 +1320,75 @@ def build_review_queue_html(
     """Render a static local review page for the v3 review queue."""
     report = report or build_review_queue_report(tasks)
     summary = report.get("summary") if isinstance(report.get("summary"), dict) else {}
+    top_blockers_html = _html_top_blockers(report)
     relative_to = output_path.parent if output_path else None
     rows: list[str] = []
+    task_count_by_calendar_group = (
+        summary.get("task_count_by_calendar_group")
+        if isinstance(summary.get("task_count_by_calendar_group"), dict)
+        else {}
+    )
+    source_urls_by_calendar_group: dict[str, list[str]] = {}
+    for blocker in report.get("top_calendar_group_blockers") or []:
+        if not isinstance(blocker, dict):
+            continue
+        calendar_group_key = str(blocker.get("calendar_group_key") or "").strip()
+        source_urls = [str(source_url) for source_url in blocker.get("source_urls") or [] if str(source_url).strip()]
+        if calendar_group_key and source_urls:
+            source_urls_by_calendar_group[calendar_group_key] = source_urls
+    current_group_anchor: str | None = None
     for task in tasks:
         findings = task.get("validation_findings") if isinstance(task.get("validation_findings"), list) else []
         source_metadata = task.get("source_metadata") if isinstance(task.get("source_metadata"), dict) else {}
+        calendar_group_key = str(task.get("calendar_group_key") or "Unknown source").strip()
+        group_anchor = _slug_fragment(task.get("calendar_group_key"))
+        if group_anchor != current_group_anchor:
+            if current_group_anchor is not None:
+                rows.append("</section>")
+            current_group_anchor = group_anchor
+            group_task_count = int(task_count_by_calendar_group.get(calendar_group_key) or 0)
+            if group_task_count <= 0:
+                group_task_count = sum(
+                    1
+                    for candidate_task in tasks
+                    if str(candidate_task.get("calendar_group_key") or "Unknown source").strip() == calendar_group_key
+                )
+            group_task_label = "task" if group_task_count == 1 else "tasks"
+            group_source_urls = source_urls_by_calendar_group.get(calendar_group_key)
+            if group_source_urls is None:
+                group_source_urls = [
+                    str(url)
+                    for candidate_task in tasks
+                    if str(candidate_task.get("calendar_group_key") or "Unknown source").strip() == calendar_group_key
+                    for url in [
+                        (
+                            candidate_task.get("source_metadata")
+                            if isinstance(candidate_task.get("source_metadata"), dict)
+                            else {}
+                        ).get("canonical_url")
+                        or (
+                            candidate_task.get("source_metadata")
+                            if isinstance(candidate_task.get("source_metadata"), dict)
+                            else {}
+                        ).get("fetched_url")
+                    ]
+                    if str(url or "").strip()
+                ]
+            group_source_links = [
+                f'<a href="{html.escape(source_url, quote=True)}">{_html_text(source_url)}</a>'
+                for source_url in sorted(set(group_source_urls))
+            ]
+            rows.append(
+                "\n".join(
+                    [
+                        f'<section class="task-group" id="group-{html.escape(group_anchor, quote=True)}">',
+                        '<div class="task-group-heading">',
+                        f"<h2>{_html_text(calendar_group_key)} · {group_task_count} {group_task_label}</h2>",
+                        f"<div>{'<br>'.join(group_source_links) if group_source_links else 'No source URL recorded'}</div>",
+                        "</div>",
+                    ]
+                )
+            )
         existing_comparison = (
             task.get("existing_gold_comparison")
             if isinstance(task.get("existing_gold_comparison"), dict)
@@ -1110,6 +1403,8 @@ def build_review_queue_html(
                     f'<code>{_html_text(task.get("task_id"))}</code>',
                     "</div>",
                     '<div class="meta">',
+                    f"<span>Status: <strong>{_html_text(task.get('status') or 'pending')}</strong></span>",
+                    f"<span>Review decision: <strong>{_html_text(task.get('review_decision_status') or 'n/a')}</strong></span>",
                     f"<span>Field: <strong>{_html_text(task.get('field') or 'source')}</strong></span>",
                     f"<span>Candidate: <strong>{_html_text(task.get('candidate_type'))}</strong></span>",
                     f"<span>Slug: <strong>{_html_text(task.get('canonical_slug') or 'n/a')}</strong></span>",
@@ -1138,6 +1433,8 @@ def build_review_queue_html(
                 ]
             )
         )
+    if rows:
+        rows.append("</section>")
     return "\n".join(
         [
             "<!doctype html>",
@@ -1152,6 +1449,7 @@ def build_review_queue_html(
             "main{max-width:1180px;margin:0 auto;padding:24px}",
             "h1{font-size:24px;margin:0 0 8px} h2{font-size:18px;margin:0} h3{font-size:13px;margin:0 0 8px;color:#48515a}",
             ".summary{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}.summary strong{font-size:18px}",
+            ".top-blockers{margin-top:12px}.top-blockers table{width:100%;border-collapse:collapse;font-size:12px;background:#fbfbf8}.top-blockers th,.top-blockers td{border:1px solid #eceae3;padding:6px;text-align:left;vertical-align:top}.top-blockers h2{font-size:14px;margin:0 0 6px}",
             ".task{background:#fff;border:1px solid #d8d6ce;border-radius:8px;margin:0 0 18px;padding:16px}",
             ".task-heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid #eceae3;padding-bottom:12px}",
             ".meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:12px 0;font-size:13px}",
@@ -1171,6 +1469,7 @@ def build_review_queue_html(
             f"<span><strong>{_html_text(summary.get('visual_artifact_missing_count', 0))}</strong> missing visual artifacts</span>",
             f"<span>Types: <code>{_html_text(summary.get('task_count_by_type', {}))}</code></span>",
             "</div>",
+            top_blockers_html,
             "</header>",
             "<main>",
             *rows,
@@ -1239,6 +1538,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build v3 review queue tasks")
     parser.add_argument("validated_candidates", type=Path, nargs="?", default=DEFAULT_VALIDATED_CANDIDATES_PATH)
     parser.add_argument("--source-statuses", type=Path, default=DEFAULT_SOURCE_STATUSES_PATH)
+    parser.add_argument("--source-inventory", type=Path, default=DEFAULT_SOURCE_INVENTORY_PATH)
+    parser.add_argument("--review-decisions", type=Path, default=DEFAULT_REVIEW_DECISIONS_PATH)
     parser.add_argument("--existing-gold", type=Path, default=DEFAULT_EXISTING_GOLD_PATH)
     parser.add_argument("--gold-conflicts", type=Path, default=DEFAULT_GOLD_CONFLICTS_PATH)
     parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
@@ -1257,6 +1558,8 @@ def main() -> None:
         gold_conflicts=_load_gold_conflicts(args.gold_conflicts),
         source_drift_report=_load_json_dict(args.source_drift_report),
         dual_run_report=_load_json_dict(args.dual_run_report),
+        source_inventory=_load_json_list(args.source_inventory),
+        review_decisions=_load_json_list(args.review_decisions),
     )
     if args.json:
         print(json.dumps(tasks, indent=2, sort_keys=True))

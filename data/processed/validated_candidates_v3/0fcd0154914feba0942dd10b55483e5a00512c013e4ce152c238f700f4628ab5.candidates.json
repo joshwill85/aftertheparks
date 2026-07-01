@@ -1,0 +1,811 @@
+[
+  {
+    "calendar_group_key": "pop-century",
+    "candidate_id": "vision-v3-7ceeda5c64bf42b4ca87f502",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+    "captured_at": "2026-06-30T00:07:31.270292+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "official-schedule-0526",
+    "fee_required": null,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9990243315696716,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "no fee marker"
+          },
+          {
+            "confidence": 0.98524,
+            "engine": "rapidocr",
+            "text": "($)"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": null,
+        "raw_value": "MOVIE UNDER THE STARS MULAN (1998) G",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            205,
+            3132,
+            1027,
+            3260
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "2a0a8e8304d68c30b2e44a26e9efe7f9bccdd0e947d13b2c010296083319e367",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/fee-27f63754ed83.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9990114569664001,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "Hippy Dippy Pool Deck"
+          },
+          {
+            "confidence": 0.84829,
+            "engine": "rapidocr",
+            "text": "Botwcen 60s and 70s Buildings"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "unknown",
+        "raw_value": "Hippy Dippy Pool Deck",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            204,
+            3245,
+            678,
+            3309
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "8adc23ea2370de3bed8f32a3aff9550a89e0cf2967c824de8b22905b74800eff",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/location-5fa3bdc52d55.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9999225735664368,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "8:30pm"
+          },
+          {
+            "confidence": 0.74503,
+            "engine": "rapidocr",
+            "text": "From o.Xpn-?.3pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Monday"
+          ],
+          "parser": "schedule_parser_v3",
+          "raw_text": "Monday at 8:30pm",
+          "schedule_type": "recurring",
+          "start_time": "20:30",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Monday at 8:30pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            208,
+            3303,
+            363,
+            3355
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "f6cdb974838f6dbd68ff0919d824e7d57e722569bb6b4955fa721b51d4fd280f",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/schedule-5964000e9bdf.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9990243315696716,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MOVIE UNDER THE STARS MULAN (1998) G"
+          },
+          {
+            "confidence": 0.98524,
+            "engine": "rapidocr",
+            "text": "ON VINYL RECORDS ($)"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "movie under the stars mulan (1998)",
+        "raw_value": "MOVIE UNDER THE STARS MULAN (1998) G",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            205,
+            3132,
+            1027,
+            3260
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "2a0a8e8304d68c30b2e44a26e9efe7f9bccdd0e947d13b2c010296083319e367",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/title-27f63754ed83.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "Hippy Dippy Pool Deck",
+    "movie_title": null,
+    "normalized_location_id": "unknown",
+    "normalized_movie_title": null,
+    "normalized_title": "movie under the stars mulan (1998)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Monday"
+      ],
+      "parser": "schedule_parser_v3",
+      "raw_text": "Monday at 8:30pm",
+      "schedule_type": "recurring",
+      "start_time": "20:30",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Monday at 8:30pm",
+    "source_document_id": "7b91d036408dbcfe799340e73c5d91ebb9318f13a0d4841071ad674665bf4d2d",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            205,
+            3132,
+            1027,
+            3260
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "MOVIE UNDER THE STARS MULAN (1998) G"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            204,
+            3245,
+            678,
+            3309
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "Hippy Dippy Pool Deck"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            208,
+            3303,
+            363,
+            3355
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "Monday at 8:30pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            205,
+            3132,
+            1027,
+            3260
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "MOVIE UNDER THE STARS MULAN (1998) G"
+        }
+      ]
+    },
+    "source_title": "MOVIE UNDER THE STARS MULAN (1998) G",
+    "source_type": "image",
+    "validation_findings": [
+      "fee_legend_missing_for_unmarked_title",
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location",
+      "missing_field_normalized_value:fee",
+      "engine_disagreement:fee",
+      "unknown_location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  },
+  {
+    "calendar_group_key": "pop-century",
+    "candidate_id": "vision-v3-b5aec03b7f1ea28ec6227c3a",
+    "candidate_type": "activity",
+    "canonical_page_image_sha256s": [
+      "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768"
+    ],
+    "canonical_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+    "captured_at": "2026-06-30T00:07:31.270292+00:00",
+    "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+    "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+    "currentness": "current",
+    "derived_source_links": [],
+    "description": null,
+    "document_family": "vertical_digital_rec_sign",
+    "edition": "official-schedule-0526",
+    "fee_required": true,
+    "fetched_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+    "field_evidence": {
+      "fee": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9922702312469482,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "($)"
+          },
+          {
+            "confidence": 0.99202,
+            "engine": "rapidocr",
+            "text": "no fee marker"
+          }
+        ],
+        "field": "fee",
+        "normalized_value": true,
+        "raw_value": "MICKEY TIE-DYE ($)",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            201,
+            7219,
+            846,
+            7311
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "764cd187d536f24ab09133d38ee49acdd32cbc74a909ed942a4ed6bb2d25f135",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/fee-2f082d328047.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      },
+      "location": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9764382243156433,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "'90s Sign near Classic Hall"
+          },
+          {
+            "confidence": 0.76903,
+            "engine": "rapidocr",
+            "text": "Hppy D3lppy Pani 13mck"
+          }
+        ],
+        "field": "location",
+        "normalized_value": "unknown",
+        "raw_value": "'90s Sign near Classic Hall",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            201,
+            7274,
+            745,
+            7366
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "aaf03f0386e02b3eeec564afc48e64af3246059c8b6c0485b6a4f790b1591f8b",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/location-abc3929cffae.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      },
+      "region": {
+        "agreement": "not_evaluated",
+        "engines": [],
+        "field": "region",
+        "normalized_value": null,
+        "raw_value": null,
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": null,
+          "region_crop_sha256": null,
+          "region_crop_storage_path": null,
+          "region_id": "page-001-region-03"
+        }
+      },
+      "schedule": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9997302293777466,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "From 3:00pm-4:00pm"
+          },
+          {
+            "confidence": 0.60292,
+            "engine": "rapidocr",
+            "text": "tmn 22rer > 9pm"
+          }
+        ],
+        "field": "schedule",
+        "normalized_value": {
+          "confidence": "validated",
+          "days_of_week": [
+            "Thursday"
+          ],
+          "end_time": "16:00",
+          "parser": "schedule_parser_v3",
+          "raw_text": "Thursday from 3:00pm-4:00pm",
+          "schedule_type": "recurring",
+          "start_time": "15:00",
+          "timezone": "America/New_York"
+        },
+        "raw_value": "Thursday from 3:00pm-4:00pm",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            198,
+            7323,
+            644,
+            7418
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "1d4d05482accf2e84f78f3d75eb4b8e616d4eae81f06d9c577f3e154bc02db72",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/schedule-6dabbdd911c9.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      },
+      "title": {
+        "agreement": "disagreement",
+        "engines": [
+          {
+            "confidence": 0.9922702312469482,
+            "engine": "paddleocr_ppstructurev3",
+            "text": "MICKEY TIE-DYE ($)"
+          },
+          {
+            "confidence": 0.99202,
+            "engine": "rapidocr",
+            "text": "POOL PARTY"
+          }
+        ],
+        "field": "title",
+        "normalized_value": "mickey tie-dye ($)",
+        "raw_value": "MICKEY TIE-DYE ($)",
+        "review_status": "required",
+        "source": {
+          "bbox_px": [
+            201,
+            7219,
+            846,
+            7311
+          ],
+          "content_sha256": "0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5",
+          "crop_sha256": "764cd187d536f24ab09133d38ee49acdd32cbc74a909ed942a4ed6bb2d25f135",
+          "crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/field_crops_v3/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page-001-region-03/title-2f082d328047.png",
+          "page_image_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001.png",
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "page_number": 1,
+          "region_bbox_px": [
+            0,
+            1853,
+            1200,
+            11406
+          ],
+          "region_crop_sha256": "d6885766bdae4feeb0e990f56d405c25699f2538d770e871eaf4797b45d74be7",
+          "region_crop_storage_path": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_debug/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_001-region_03-vertical_activity_row.png",
+          "region_id": "page-001-region-03"
+        }
+      }
+    },
+    "http_status": 200,
+    "location_text": "'90s Sign near Classic Hall",
+    "movie_title": null,
+    "normalized_location_id": "unknown",
+    "normalized_movie_title": null,
+    "normalized_title": "mickey tie-dye ($)",
+    "pipeline_version": "vision_v3_001",
+    "region_id": "page-001-region-03",
+    "region_type": "vertical_activity_row",
+    "registration_required": null,
+    "runtime_lineage": {
+      "config": {
+        "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+        "engine_routing_policy": "fixed_config",
+        "image": {
+          "apply_exif_orientation": true,
+          "canonical_format": "png",
+          "preserve_original_bytes": true
+        },
+        "ocr": {
+          "docling_snapshot": {
+            "engine": "docling_snapshot",
+            "package": "docling",
+            "role": "parallel_structural_snapshot"
+          },
+          "docling_snapshot_enabled": false,
+          "optional": {
+            "surya_enabled": false
+          },
+          "primary": {
+            "engine": "paddleocr_ppstructurev3",
+            "mode": "ppstructurev3",
+            "package": "paddleocr",
+            "role": "primary_ocr_layout"
+          },
+          "secondary": {
+            "engine": "rapidocr",
+            "package": "rapidocr",
+            "role": "secondary_ocr_comparator"
+          }
+        },
+        "pipeline_version": "vision_v3_001",
+        "publish_gates": {
+          "allow_generic_family_auto_publish": false,
+          "require_engine_agreement_for_auto_publish": true,
+          "require_field_evidence": true,
+          "require_manual_review_on_disagreement": true
+        },
+        "render": {
+          "color_mode": "rgb",
+          "default_dpi": 450,
+          "max_dpi": 600,
+          "output_format": "png",
+          "pdf_engine": "pypdfium2"
+        }
+      },
+      "config_hash": "14cd9a8235106b54a845e1b932d3fa11519237bb08c7f066df7eb21932f163e9",
+      "container_image_digest": null,
+      "git_sha": "533697fd51c6c896cf5be211c490d1312da9388a",
+      "lineage_hash": "723f66279c5873a45da5d0badf76bd047d8c31e6bbd5652d099c7ccf66f06753",
+      "model_asset_hashes": {
+        "paddleocr_ppstructurev3": "46c7122b536cf8865537d403f7871f1b20a9c283db198a3c4ea5f607c24a5be3",
+        "rapidocr": "cdbe853ce15528edd0dc014d18a5085e7537c70623fb55b987e763610261f8c4"
+      },
+      "ocr_engine_configs": {
+        "paddleocr_ppstructurev3": {
+          "engine": "paddleocr_ppstructurev3",
+          "mode": "ppstructurev3",
+          "package": "paddleocr",
+          "role": "primary_ocr_layout"
+        },
+        "rapidocr": {
+          "engine": "rapidocr",
+          "package": "rapidocr",
+          "role": "secondary_ocr_comparator"
+        }
+      },
+      "package_versions": {
+        "Pillow": "11.3.0",
+        "docling": null,
+        "paddleocr": "3.7.0",
+        "pypdfium2": "5.10.1",
+        "rapidocr": "3.9.0"
+      }
+    },
+    "schedule_normalized": {
+      "confidence": "validated",
+      "days_of_week": [
+        "Thursday"
+      ],
+      "end_time": "16:00",
+      "parser": "schedule_parser_v3",
+      "raw_text": "Thursday from 3:00pm-4:00pm",
+      "schedule_type": "recurring",
+      "start_time": "15:00",
+      "timezone": "America/New_York"
+    },
+    "schedule_raw": "Thursday from 3:00pm-4:00pm",
+    "source_document_id": "7b91d036408dbcfe799340e73c5d91ebb9318f13a0d4841071ad674665bf4d2d",
+    "source_kind": "official_image",
+    "source_role": "resort_pdf",
+    "source_spans": {
+      "fee": [
+        {
+          "bbox_px": [
+            201,
+            7219,
+            846,
+            7311
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "fee",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ],
+      "location": [
+        {
+          "bbox_px": [
+            201,
+            7274,
+            745,
+            7366
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "location",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "'90s Sign near Classic Hall"
+        }
+      ],
+      "schedule": [
+        {
+          "bbox_px": [
+            198,
+            7323,
+            644,
+            7418
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "schedule",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "Thursday from 3:00pm-4:00pm"
+        }
+      ],
+      "title": [
+        {
+          "bbox_px": [
+            201,
+            7219,
+            846,
+            7311
+          ],
+          "engine": "paddleocr_ppstructurev3",
+          "field": "title",
+          "page": 1,
+          "page_image_sha256": "f46f202597dba027784f555a34d56c6e203acbf76593cbffa1fcdeb2a8fce768",
+          "region_id": "page-001-region-03",
+          "text": "MICKEY TIE-DYE ($)"
+        }
+      ]
+    },
+    "source_title": "MICKEY TIE-DYE ($)",
+    "source_type": "image",
+    "validation_findings": [
+      "fee_marker_without_legend",
+      "engine_disagreement:title",
+      "engine_disagreement:schedule",
+      "engine_disagreement:location",
+      "engine_disagreement:fee",
+      "unknown_location"
+    ],
+    "validation_status": "needs_review",
+    "weather_note": null
+  }
+]

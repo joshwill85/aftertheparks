@@ -14,10 +14,10 @@ import { AnswerBlock } from "@/components/seo/AnswerBlock";
 import { FreshnessFacts } from "@/components/seo/FreshnessFacts";
 import { IntentLinkCluster } from "@/components/seo/IntentLinkCluster";
 import {
-  getCuratedHomeActivities,
   getMovieNights,
   getResorts,
   getTodayActivities,
+  getTomorrowPreview,
   getTonightActivities,
 } from "@/lib/data/activities";
 import { buildResortEnrichment } from "@/lib/resorts/enrichment";
@@ -50,22 +50,22 @@ function mapsToRecords<T>(map: Map<string, T>): Record<string, T> {
 export default async function HomePage() {
   const [
     resorts,
-    { freeToday: freeActivities, littleKids: littleKidActivities },
     movieNights,
     todayActivities,
+    tomorrowActivities,
     tonightActivities,
   ] = await Promise.all([
     getResorts(),
-    getCuratedHomeActivities({ freeLimit: 6, kidsLimit: 4 }),
     getMovieNights(),
     getTodayActivities(),
+    getTomorrowPreview({}, 200),
     getTonightActivities(),
   ]);
 
   const enrichment = buildResortEnrichment(todayActivities, tonightActivities);
   const tonightMovies = movieNights.filter((m) => m.isTonight).slice(0, 3);
   const resortOptions = resorts.map((r) => ({ slug: r.slug, name: r.name }));
-  const popularActivities = [...freeActivities, ...littleKidActivities];
+  const currentActivities = [...todayActivities, ...tomorrowActivities];
   const sourceSummary = activitySourceSummary([
     ...todayActivities,
     ...tonightActivities,
@@ -142,7 +142,7 @@ export default async function HomePage() {
           </section>
         );
       case "popular":
-        return popularActivities.length > 0 ? (
+        return currentActivities.length > 0 ? (
           <section key={section} className="home-section" aria-labelledby="popular-activities-heading">
             <div className="home-section__header">
               <div>
@@ -150,7 +150,7 @@ export default async function HomePage() {
                   Current resort activities
                 </h2>
                 <p className="home-section__subtitle">
-                  Free and low-cost activities from Disney resort calendars.
+                  Today and tomorrow from Disney resort calendars.
                 </p>
               </div>
               <Link
@@ -160,7 +160,7 @@ export default async function HomePage() {
                 Browse all <IconGlyph iconKey="arrow_right" className="ml-1 text-sm" />
               </Link>
             </div>
-            <ActivityCollectionView activities={popularActivities} showResort />
+            <ActivityCollectionView activities={currentActivities} showResort />
           </section>
         ) : null;
       case "resorts":

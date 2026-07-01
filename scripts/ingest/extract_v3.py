@@ -10,6 +10,8 @@ from pathlib import Path
 import re
 from typing import Any
 
+from PIL import Image
+
 try:
     from config import PROCESSED_DIR
     from fee_validator import reconcile_fee_evidence
@@ -27,6 +29,8 @@ except ImportError:  # pragma: no cover - supports package-style imports
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "activity_candidates_v3"
 DEFAULT_SNAPSHOTS_DIR = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_extract_report.json"
+DEFAULT_FIELD_CROPS_DIR = PROCESSED_DIR / "field_crops_v3"
+_FIELD_CROP_IMAGE_CACHE: dict[str, Image.Image] = {}
 PUBLISHABLE_REGION_TYPES = {
     "resort_activities_section": "activity",
     "wellness_section": "activity",
@@ -1198,7 +1202,13 @@ def _partial_aframe_movie_review_candidates(
                     raw_value=day_label,
                     normalized_value=schedule_normalized,
                     content_sha256=content_sha256,
-                    region=_field_region(region, primary_day, secondary_day_token),
+                    region=_field_region(
+                        region,
+                        primary_day,
+                        secondary_day_token,
+                        content_sha256=content_sha256,
+                        field="schedule",
+                    ),
                     primary_engine=primary_day,
                     secondary_engine=secondary_day_token,
                     agreement=schedule_agreement["agreement"],
@@ -1209,7 +1219,13 @@ def _partial_aframe_movie_review_candidates(
                     raw_value=_raw_text(primary_movie),
                     normalized_value=movie_title_agreement["normalized_value"],
                     content_sha256=content_sha256,
-                    region=_field_region(region, primary_movie, secondary_movie),
+                    region=_field_region(
+                        region,
+                        primary_movie,
+                        secondary_movie,
+                        content_sha256=content_sha256,
+                        field="movie_title",
+                    ),
                     primary_engine=primary_movie,
                     secondary_engine=secondary_movie,
                     agreement=movie_title_agreement["agreement"],
@@ -1374,15 +1390,83 @@ def _configured_engine_pair(snapshot: dict[str, Any]) -> tuple[str, str]:
     return DEFAULT_PRIMARY_ENGINE, DEFAULT_SECONDARY_ENGINE
 
 
-def _field_region(region: dict[str, Any], primary: dict[str, Any] | None, secondary: dict[str, Any] | None) -> dict[str, Any]:
+def _field_crop_path(*, content_sha256: str, region_id: Any, field: str, bbox: Any) -> Path:
+    region_fragment = re.sub(r"[^A-Za-z0-9_.-]+", "-", str(region_id or "region")).strip("-") or "region"
+    bbox_digest = hashlib.sha256(json.dumps(bbox, separators=(",", ":")).encode()).hexdigest()[:12]
+    return DEFAULT_FIELD_CROPS_DIR / content_sha256 / region_fragment / f"{_slugify_value(field)}-{bbox_digest}.png"
+
+
+def _materialize_field_crop(
+    *,
+    content_sha256: str,
+    field: str,
+    region: dict[str, Any],
+    bbox: Any,
+) -> dict[str, Any]:
+    page_image_path = str(region.get("page_image_path") or "").strip()
+    if not page_image_path or not (isinstance(bbox, list) and len(bbox) == 4):
+        return {}
+    source_path = Path(page_image_path)
+    if not source_path.exists():
+        return {}
+    try:
+        cache_key = str(source_path)
+        image = _FIELD_CROP_IMAGE_CACHE.get(cache_key)
+        if image is None:
+            image = Image.open(source_path)
+            image.load()
+            _FIELD_CROP_IMAGE_CACHE[cache_key] = image
+        width, height = image.size
+        x1, y1, x2, y2 = [int(round(float(value))) for value in bbox]
+        x1 = max(0, min(width, x1))
+        x2 = max(0, min(width, x2))
+        y1 = max(0, min(height, y1))
+        y2 = max(0, min(height, y2))
+        if x2 <= x1 or y2 <= y1:
+            return {}
+        output_path = _field_crop_path(
+            content_sha256=content_sha256,
+            region_id=region.get("region_id"),
+            field=field,
+            bbox=[x1, y1, x2, y2],
+        )
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        image.crop((x1, y1, x2, y2)).save(output_path)
+    except Exception:
+        return {}
+    return {
+        "crop_path": str(output_path),
+        "crop_storage_path": str(output_path),
+        "crop_sha256": hashlib.sha256(output_path.read_bytes()).hexdigest(),
+    }
+
+
+def _field_region(
+    region: dict[str, Any],
+    primary: dict[str, Any] | None,
+    secondary: dict[str, Any] | None,
+    *,
+    content_sha256: str = "",
+    field: str = "field",
+) -> dict[str, Any]:
     bbox = None
     if isinstance(primary, dict):
         bbox = primary.get("bbox_px")
     if bbox is None and isinstance(secondary, dict):
         bbox = secondary.get("bbox_px")
+    field_crop = _materialize_field_crop(
+        content_sha256=content_sha256,
+        field=field,
+        region=region,
+        bbox=bbox,
+    )
     return {
         **region,
+        "region_bbox_px": region.get("bbox_px"),
+        "region_crop_sha256": region.get("crop_sha256"),
+        "region_crop_storage_path": region.get("crop_path") or region.get("crop_storage_path"),
         "bbox_px": bbox or region.get("bbox_px"),
+        **field_crop,
     }
 
 
@@ -1631,7 +1715,13 @@ def _extracted_candidate(
             raw_value=_raw_text(primary_title),
             normalized_value=title_agreement["normalized_value"],
             content_sha256=content_sha256,
-            region=_field_region(region, primary_title, secondary_title),
+            region=_field_region(
+                region,
+                primary_title,
+                secondary_title,
+                content_sha256=content_sha256,
+                field="title",
+            ),
             primary_engine=primary_title,
             secondary_engine=secondary_title,
             agreement=title_agreement["agreement"],
@@ -1642,7 +1732,13 @@ def _extracted_candidate(
             raw_value=primary_schedule_text,
             normalized_value=schedule_normalized,
             content_sha256=content_sha256,
-            region=_field_region(region, primary_schedule, secondary_schedule),
+            region=_field_region(
+                region,
+                primary_schedule,
+                secondary_schedule,
+                content_sha256=content_sha256,
+                field="schedule",
+            ),
             primary_engine=primary_schedule,
             secondary_engine=secondary_schedule,
             agreement=schedule_agreement["agreement"],
@@ -1653,7 +1749,13 @@ def _extracted_candidate(
             raw_value=_raw_text(primary_location),
             normalized_value=location_normalized["location_id"],
             content_sha256=content_sha256,
-            region=_field_region(region, primary_location, secondary_location),
+            region=_field_region(
+                region,
+                primary_location,
+                secondary_location,
+                content_sha256=content_sha256,
+                field="location",
+            ),
             primary_engine=primary_location,
             secondary_engine=secondary_location,
             agreement=location_agreement["agreement"],
@@ -1670,7 +1772,13 @@ def _extracted_candidate(
             ),
             normalized_value=fee["fee_required"],
             content_sha256=content_sha256,
-            region=_field_region(region, primary_fee_engine, secondary_fee_engine),
+            region=_field_region(
+                region,
+                primary_fee_engine,
+                secondary_fee_engine,
+                content_sha256=content_sha256,
+                field="fee",
+            ),
             primary_engine=primary_fee_engine,
             secondary_engine=secondary_fee_engine,
             agreement=fee_agreement["agreement"],
@@ -1689,7 +1797,13 @@ def _extracted_candidate(
             raw_value=movie_title,
             normalized_value=normalized_movie_title,
             content_sha256=content_sha256,
-            region=_field_region(region, selected_movie_title, secondary_movie_title),
+            region=_field_region(
+                region,
+                selected_movie_title,
+                secondary_movie_title,
+                content_sha256=content_sha256,
+                field="movie_title",
+            ),
             primary_engine=primary_movie_title,
             secondary_engine=secondary_movie_title,
             agreement=movie_title_agreement["agreement"],

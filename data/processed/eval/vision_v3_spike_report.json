@@ -1,6 +1,6 @@
 {
   "pipeline_version": "vision_v3_gate0_5_spike",
-  "generated_at": "2026-06-28T16:34:56.245234+00:00",
+  "generated_at": "2026-07-01T00:19:20.430904+00:00",
   "publish_behavior": "no_publish",
   "scope": "disposable_render_ocr_region_bakeoff",
   "format_coverage_samples": [
@@ -880,9 +880,34 @@
     "average_render_time_per_page",
     "average_ocr_time_per_page",
     "average_page_image_size",
+    "average_field_crop_size",
     "average_crop_debug_artifact_size",
     "recommended_retention_policy"
   ],
+  "runtime_storage_metrics": {
+    "average_render_time_per_page_seconds": 5.726457854250001,
+    "average_ocr_time_per_page_seconds": null,
+    "average_page_image_size_bytes": 26378640,
+    "average_field_crop_size_bytes": 661411,
+    "average_crop_debug_artifact_size_bytes": 11334273,
+    "page_image_sample_count": 20,
+    "field_crop_sample_count": 118,
+    "crop_debug_artifact_sample_count": 353,
+    "metric_status": {
+      "average_render_time_per_page_seconds": "recorded",
+      "average_ocr_time_per_page_seconds": "not_recorded",
+      "average_page_image_size_bytes": "recorded",
+      "average_field_crop_size_bytes": "recorded",
+      "average_crop_debug_artifact_size_bytes": "recorded"
+    }
+  },
+  "manual_review_metrics": {
+    "pending_task_count": 158,
+    "top_calendar_group_blocker": {
+      "calendar_group_key": "port-orleans-riverside",
+      "task_count": 36
+    }
+  },
   "retention_policy": {
     "keep": [
       "raw source forever",
@@ -896,17 +921,43 @@
       "alternate DPI render artifacts"
     ]
   },
+  "rollout_recommendation": {
+    "recommended_dpi": 450,
+    "engine_config": {
+      "primary": "paddleocr_ppstructurev3",
+      "secondary": "rapidocr",
+      "docling_snapshot_enabled": false
+    },
+    "first_production_parser_target": "vertical_digital_rec_sign",
+    "first_review_focus": {
+      "calendar_group_key": "port-orleans-riverside",
+      "task_count": 36
+    },
+    "storage_policy": {
+      "keep": [
+        "raw source forever",
+        "canonical page image hash/metadata",
+        "field crops needed for review/provenance",
+        "final vision snapshot JSON"
+      ],
+      "optional_short_retention": [
+        "full debug overlays",
+        "exploratory OCR dumps",
+        "alternate DPI render artifacts"
+      ]
+    }
+  },
   "dependency_status": {
     "pypdfium2": {
       "available": true,
       "role": "deterministic PDF page renderer"
     },
     "paddleocr": {
-      "available": false,
+      "available": true,
       "role": "primary OCR/layout engine"
     },
     "rapidocr": {
-      "available": false,
+      "available": true,
       "role": "secondary OCR comparator"
     },
     "docling": {

@@ -19,9 +19,11 @@ from urllib.parse import urlparse
 try:
     from config import PROCESSED_DIR, ROOT
     from engine_agreement import evaluate_engine_agreement
+    from normalization_v3 import normalize_location_text, normalize_schedule_text
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR, ROOT
     from .engine_agreement import evaluate_engine_agreement
+    from .normalization_v3 import normalize_location_text, normalize_schedule_text
 
 try:
     from db import SupabaseClient
@@ -36,6 +38,7 @@ DEFAULT_FLAGS_PATH = ROOT / "config" / "publish_flags.yaml"
 DEFAULT_PREVIEW_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_DUAL_RUN_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
 DEFAULT_SOURCE_DRIFT_REPORT_PATH = PROCESSED_DIR / "source_drift_report.json"
+DEFAULT_SOURCE_METRICS_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_source_metrics.json"
 DEFAULT_MONITORING_REPORT_PATH = PROCESSED_DIR / "source_trust_monitoring_report.json"
 DEFAULT_REVIEW_QUEUE_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_queue.json"
 DEFAULT_REVIEW_QUEUE_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_review_queue_report.json"
@@ -358,6 +361,80 @@ def _engine_text_agreement_ok(
     return agreement.get("agreement") == "exact_after_normalization"
 
 
+def _record_confidence(record: dict[str, Any]) -> float | None:
+    try:
+        return float(record.get("confidence"))
+    except (TypeError, ValueError):
+        return None
+
+
+def _trusted_primary_schedule_with_unparsed_secondary(
+    field_evidence: dict[str, Any],
+    row: dict[str, Any],
+    required_engine_names: tuple[str, ...],
+) -> bool:
+    records = _required_engine_records(field_evidence, required_engine_names)
+    if records is None or len(records) < 2:
+        return False
+    primary_record, secondary_record = records[0], records[1]
+    primary_confidence = _record_confidence(primary_record)
+    if primary_confidence is None or primary_confidence < 0.98:
+        return False
+    primary_schedule = normalize_schedule_text(primary_record.get("text"))
+    secondary_schedule = normalize_schedule_text(secondary_record.get("text"))
+    if primary_schedule.get("schedule_type") == "unparsed":
+        return False
+    if secondary_schedule.get("schedule_type") != "unparsed":
+        return False
+    if not _field_values_match("schedule", field_evidence.get("normalized_value"), _row_normalized_value(row, "schedule")):
+        return False
+    field_signature = _schedule_signature(field_evidence.get("normalized_value"))
+    primary_start = primary_schedule.get("start_time")
+    if primary_start and field_signature.get("start_time") != primary_start:
+        return False
+    primary_end = primary_schedule.get("end_time")
+    if primary_end and field_signature.get("end_time") != primary_end:
+        return False
+    return True
+
+
+def _trusted_primary_location_with_unknown_secondary(
+    field_evidence: dict[str, Any],
+    row: dict[str, Any],
+    required_engine_names: tuple[str, ...],
+) -> bool:
+    records = _required_engine_records(field_evidence, required_engine_names)
+    if records is None or len(records) < 2:
+        return False
+    primary_record, secondary_record = records[0], records[1]
+    primary_confidence = _record_confidence(primary_record)
+    if primary_confidence is None or primary_confidence < 0.98:
+        return False
+    primary_location = normalize_location_text(primary_record.get("text"))
+    secondary_location = normalize_location_text(secondary_record.get("text"))
+    primary_location_id = primary_location.get("location_id")
+    if not primary_location_id or primary_location_id == "unknown":
+        return False
+    if secondary_location.get("location_id") != "unknown":
+        return False
+    if not _field_values_match("location", field_evidence.get("normalized_value"), primary_location_id):
+        return False
+    return _field_values_match("location", _row_normalized_value(row, "location"), primary_location_id)
+
+
+def _trusted_primary_with_unusable_secondary(
+    field_name: str,
+    field_evidence: dict[str, Any],
+    row: dict[str, Any],
+    required_engine_names: tuple[str, ...],
+) -> bool:
+    if field_name == "schedule":
+        return _trusted_primary_schedule_with_unparsed_secondary(field_evidence, row, required_engine_names)
+    if field_name == "location":
+        return _trusted_primary_location_with_unknown_secondary(field_evidence, row, required_engine_names)
+    return False
+
+
 def _engine_text_agreement(
     field_name: str,
     field_evidence: dict[str, Any],
@@ -402,6 +479,19 @@ def _field_raw_values_match(field_name: str, left: Any, right: Any) -> bool:
     return _normalized_values_match(left, right)
 
 
+def _schedule_raw_display_cleanup_ok(field_evidence: dict[str, Any], row: dict[str, Any]) -> bool:
+    normalized_value = field_evidence.get("normalized_value")
+    if not _field_values_match("schedule", normalized_value, _row_normalized_value(row, "schedule")):
+        return False
+    if not isinstance(normalized_value, dict) or normalized_value.get("schedule_type") != "time_range":
+        return False
+    evidence_raw = str(field_evidence.get("raw_value") or "").strip()
+    row_raw = str(_row_raw_value(row, "schedule") or "").strip()
+    if not evidence_raw or not row_raw:
+        return False
+    return re.sub(r"(?i)^from\s+", "", evidence_raw).strip() == row_raw
+
+
 def _engine_text_value_matches_row(
     field_name: str,
     field_evidence: dict[str, Any],
@@ -416,6 +506,13 @@ def _engine_text_value_matches_row(
             field_evidence.get("normalized_value"),
             _row_normalized_value(row, field_name),
         )
+    if _trusted_primary_with_unusable_secondary(
+        field_name,
+        field_evidence,
+        row,
+        _required_ocr_engine_names(row),
+    ):
+        return True
     if field_name == "location" and _location_uses_inferred_title_evidence(field_evidence):
         return _field_values_match(
             field_name,
@@ -572,6 +669,39 @@ def _monitoring_report_errors(monitoring_report: dict[str, Any], preview: dict[s
     affected_rows = monitoring_report.get("affected_rows")
     if isinstance(affected_rows, list) and affected_rows:
         errors.append("monitoring_affected_rows")
+    return errors
+
+
+def _source_metrics_report_errors(source_metrics_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    if source_metrics_report.get("report_kind") != "vision_v3_source_metrics":
+        errors.append("invalid_source_metrics_report_kind")
+    generated_at = _parse_iso_datetime(source_metrics_report.get("generated_at"))
+    preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
+    if generated_at is None:
+        errors.append("source_metrics_report_missing_generated_at")
+    elif preview_generated_at is not None and generated_at < preview_generated_at:
+        errors.append("source_metrics_report_stale")
+    summary = source_metrics_report.get("summary")
+    if not isinstance(summary, dict):
+        errors.append("source_metrics_summary_missing")
+    else:
+        preview_summary = preview.get("summary") if isinstance(preview.get("summary"), dict) else {}
+        preview_candidate_count = preview_summary.get("input_candidates")
+        if preview_candidate_count is not None and _int_value(summary.get("candidate_count")) != _int_value(preview_candidate_count):
+            errors.append("source_metrics_candidate_count_mismatch")
+    sources = source_metrics_report.get("sources")
+    if not isinstance(sources, list):
+        errors.append("source_metrics_sources_missing")
+        sources = []
+    metric_source_hashes = {
+        str(source.get("source_sha256") or "").strip()
+        for source in sources
+        if isinstance(source, dict) and str(source.get("source_sha256") or "").strip()
+    }
+    preview_source_hashes = set(_preview_source_hashes(preview))
+    if preview_source_hashes and not preview_source_hashes.issubset(metric_source_hashes):
+        errors.append("source_metrics_missing_preview_sources")
     return errors
 
 
@@ -758,10 +888,14 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
 def _review_queue_errors(review_tasks: list[dict[str, Any]] | None) -> tuple[list[str], int]:
     if review_tasks is None:
         return ["missing_review_queue"], 0
-    pending_count = sum(1 for task in review_tasks if str(task.get("status") or "pending") == "pending")
+    pending_count = _pending_review_task_count(review_tasks)
     if pending_count:
         return ["pending_review_queue_tasks"], pending_count
     return [], 0
+
+
+def _pending_review_task_count(review_tasks: list[dict[str, Any]]) -> int:
+    return sum(1 for task in review_tasks if str(task.get("status") or "pending") == "pending")
 
 
 def _review_queue_report_errors(
@@ -781,6 +915,12 @@ def _review_queue_report_errors(
         return errors
     if _int_value(summary.get("task_count")) != len(review_tasks):
         errors.append("review_queue_report_task_count_mismatch")
+    if _int_value(summary.get("pending_task_count")) != _pending_review_task_count(review_tasks):
+        errors.append("review_queue_report_pending_task_count_mismatch")
+    if _int_value(summary.get("source_url_missing_count")):
+        errors.append("review_queue_report_missing_source_urls")
+    if summary.get("all_tasks_have_source_urls") is not True:
+        errors.append("review_queue_report_source_url_coverage_incomplete")
     if _int_value(summary.get("visual_artifact_missing_count")):
         errors.append("review_queue_report_missing_visual_artifacts")
     if summary.get("all_tasks_have_visual_artifacts") is not True:
@@ -1458,6 +1598,8 @@ def evaluate_publish_readiness(
     dual_run_report: dict[str, Any] | None = None,
     source_drift_report: dict[str, Any] | None = None,
     require_source_drift_report: bool = False,
+    source_metrics_report: dict[str, Any] | None = None,
+    require_source_metrics_report: bool = False,
     monitoring_report: dict[str, Any] | None = None,
     require_monitoring_report: bool = False,
     review_tasks: list[dict[str, Any]] | None = None,
@@ -1620,6 +1762,10 @@ def evaluate_publish_readiness(
                         _row_normalized_value(row, field_name),
                     )
                 )
+                and not (
+                    field_name == "schedule"
+                    and _schedule_raw_display_cleanup_ok(field_evidence, row)
+                )
                 and not _field_raw_values_match(field_name, field_evidence.get("raw_value"), _row_raw_value(row, field_name))
             ):
                 errors.append(f"row_critical_field_raw_value_mismatch:{index}:{field_name}")
@@ -1671,6 +1817,12 @@ def evaluate_publish_readiness(
                     field_evidence.get("agreement") != "exact_after_normalization"
                     or not _engine_text_agreement_ok(field_name, field_evidence, required_engine_names)
                 )
+                and not _trusted_primary_with_unusable_secondary(
+                    field_name,
+                    field_evidence,
+                    row,
+                    required_engine_names,
+                )
             ):
                 errors.append(f"row_unresolved_engine_disagreement:{index}:{field_name}")
             elif not manually_approved_field and not _engine_text_value_matches_row(field_name, field_evidence, row):
@@ -1683,6 +1835,11 @@ def evaluate_publish_readiness(
         errors.append("missing_source_drift_report")
     if source_drift_report is not None:
         errors.extend(_source_drift_report_errors(source_drift_report, preview))
+    if require_source_metrics_report and publish_v3_enabled:
+        if source_metrics_report is None:
+            errors.append("missing_source_metrics_report")
+        else:
+            errors.extend(_source_metrics_report_errors(source_metrics_report, preview))
     if require_monitoring_report and publish_v3_enabled:
         if monitoring_report is None:
             errors.append("missing_monitoring_report")
@@ -1709,6 +1866,7 @@ def main() -> None:
     parser.add_argument("--require-clean-preview", action="store_true")
     parser.add_argument("--dual-run-report", type=Path, default=DEFAULT_DUAL_RUN_REPORT_PATH)
     parser.add_argument("--source-drift-report", type=Path, default=DEFAULT_SOURCE_DRIFT_REPORT_PATH)
+    parser.add_argument("--source-metrics-report", type=Path, default=DEFAULT_SOURCE_METRICS_REPORT_PATH)
     parser.add_argument("--monitoring-report", type=Path, default=DEFAULT_MONITORING_REPORT_PATH)
     parser.add_argument("--review-queue", type=Path, default=DEFAULT_REVIEW_QUEUE_PATH)
     parser.add_argument("--review-queue-report", type=Path, default=DEFAULT_REVIEW_QUEUE_REPORT_PATH)
@@ -1726,6 +1884,9 @@ def main() -> None:
     source_drift_report = (
         json.loads(args.source_drift_report.read_text()) if args.source_drift_report.exists() else None
     )
+    source_metrics_report = (
+        json.loads(args.source_metrics_report.read_text()) if args.source_metrics_report.exists() else None
+    )
     monitoring_report = (
         json.loads(args.monitoring_report.read_text()) if args.monitoring_report.exists() else None
     )
@@ -1742,6 +1903,8 @@ def main() -> None:
         dual_run_report=dual_run_report,
         source_drift_report=source_drift_report,
         require_source_drift_report=True,
+        source_metrics_report=source_metrics_report,
+        require_source_metrics_report=True,
         monitoring_report=monitoring_report,
         require_monitoring_report=True,
         review_tasks=review_tasks,

@@ -17,6 +17,7 @@ V3_REVIEW_DECISIONS_PATH = "data/processed/review_queue/vision_v3_review_decisio
 V3_DUAL_RUN_REVIEW_KEYS_PATH = "data/processed/review_queue/vision_v3_dual_run_review_keys.json"
 V3_REVIEW_FIXTURE_CANDIDATES_PATH = "data/processed/review_queue/vision_v3_review_fixture_candidates.json"
 V3_PARSER_RULE_REQUESTS_PATH = "data/processed/review_queue/vision_v3_parser_rule_update_requests.json"
+V3_SOURCE_METRICS_REPORT_PATH = "data/processed/eval/v3_source_metrics.json"
 V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH = (
     "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json"
 )
@@ -188,6 +189,8 @@ def vision_v3_report_steps(*, local_only: bool, quarter: str | None = None) -> l
         if quarter:
             publish_step = (
                 *publish_step,
+                "--source-metrics-report",
+                V3_SOURCE_METRICS_REPORT_PATH,
                 "--source-drift-report",
                 V3_REVIEWED_SOURCE_DRIFT_REPORT_PATH,
             )
