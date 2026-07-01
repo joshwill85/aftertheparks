@@ -102,6 +102,14 @@ assert.equal(
   ).littleKids,
   true
 );
+assert.equal(
+  ageFitForActivity(
+    baseActivity({
+      summary: "Recommended for guests ages 12 and up.",
+    })
+  ).reason,
+  "Ages 12 and up."
+);
 
 assert.equal(
   timeWindowForActivity(

@@ -55,6 +55,12 @@ const DEFAULT_TONIGHT_METADATA = {
 };
 
 const STRATEGIC_TONIGHT_FILTER_METADATA: Record<string, typeof DEFAULT_TONIGHT_METADATA> = {
+  "free=true": {
+    title: "Free Disney Resort Activities Tonight",
+    description:
+      "Find free Walt Disney World resort activities tonight, including evening recreation, movies, campfires, games, and current schedule caveats.",
+    canonical: "/tonight?free=true",
+  },
   "weather=indoor": {
     title: "Indoor Disney Resort Activities Tonight",
     description:

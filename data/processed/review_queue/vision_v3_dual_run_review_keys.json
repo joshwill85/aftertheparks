@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T00:19:19.999801Z",
+  "generated_at": "2026-07-01T05:26:20.205814Z",
   "review_kind": "dual_run_review_keys_v3",
   "reviewed_diff_keys": [],
   "reviewed_diff_reviews": [],
@@ -10,5 +10,5 @@
   "reviewed_status_transition_keys": [],
   "reviewed_status_transition_reviews": [],
   "schema_version": "dual_run_review_keys_v3_001",
-  "source_decisions_path": "data/processed/review_queue/vision_v3_review_decisions.json"
+  "source_decisions_path": "data/review/vision_v3_review_decisions.json"
 }

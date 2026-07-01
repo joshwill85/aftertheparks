@@ -1,10 +1,13 @@
 import json
+import csv
 import hashlib
 import importlib
+import io
 import subprocess
 import sys
 import tempfile
 import unittest
+import warnings
 from pathlib import Path
 from typing import Any, Optional
 from unittest.mock import patch
@@ -34,7 +37,7 @@ from scripts.ingest.ocr.paddle_adapter import PaddleOcrAdapter
 from scripts.ingest.ocr.rapidocr_adapter import RapidOcrAdapter
 from scripts.ingest.ocr.docling_adapter import DoclingAdapter
 from scripts.ingest.ocr.schema import normalize_ocr_tokens
-from scripts.ingest import promote_gold_v3, publish_gold_v3
+from scripts.ingest import promote_gold_v3, publish_gold_v3, run_pipeline
 from scripts.ingest.promote_gold_v3 import build_gold_v3_preview
 from scripts.ingest.publish_gold_v3 import evaluate_publish_readiness, load_publish_flags
 from scripts.ingest.quality_metrics import compute_snapshot_quality
@@ -49,6 +52,7 @@ from scripts.ingest.regions.vertical_digital_rec_sign import VerticalDigitalRecS
 from scripts.ingest.regions import segment_major_regions
 from scripts.ingest import build_review_queue_v3
 from scripts.ingest.build_review_queue_v3 import (
+    build_review_checklist_csv,
     build_review_queue_html,
     build_review_queue_report,
     build_review_tasks,
@@ -69,7 +73,7 @@ from scripts.ingest.source_manifest import (
 )
 from scripts.ingest.spike_vision_v3_bakeoff import build_spike_report
 from scripts.ingest import source_status_v3
-from scripts.ingest.source_status_v3 import build_v3_source_statuses
+from scripts.ingest.source_status_v3 import SOURCE_STATUS_SCHEMA_VERSION, build_v3_source_statuses
 from scripts.ingest import trust_report
 from scripts.ingest import v3_dual_run_report
 from scripts.ingest.v3_dual_run_report import build_dual_run_report
@@ -77,6 +81,10 @@ from scripts.ingest import validate_v3
 from scripts.ingest.validate_v3 import validate_candidate
 from scripts.ingest import vision_snapshot
 from scripts.ingest.vision_snapshot import build_vision_snapshot
+
+
+def source_status_fixture(**overrides: Any) -> dict[str, Any]:
+    return {"schema_version": SOURCE_STATUS_SCHEMA_VERSION, **overrides}
 
 
 def publish_field_evidence_values(field: str) -> dict[str, Any]:
@@ -204,6 +212,7 @@ def clean_publish_v3_preview(*, generated_at: str = "2026-06-28T12:00:00+00:00")
 def clean_dual_run_coverage_report(preview: dict[str, Any] = None) -> dict[str, Any]:
     bound_preview = preview or clean_publish_v3_preview()
     return {
+        "report_version": "v3_dual_run_report_001",
         "generated_at": "2026-06-28T12:01:00+00:00",
         "status": "clean",
         "publish_blockers": [],
@@ -230,6 +239,8 @@ def clean_dual_run_coverage_report(preview: dict[str, Any] = None) -> dict[str, 
 
 def clean_source_drift_report(*, generated_at: str = "2026-06-28T12:01:00+00:00") -> dict[str, Any]:
     return {
+        "report_kind": "v3_quarter_source_drift",
+        "schema_version": "v3_quarter_source_drift_001",
         "generated_at": generated_at,
         "status": "clean",
         "publish_blockers": [],
@@ -265,12 +276,26 @@ def clean_source_metrics_report(
     )
     return {
         "report_kind": "vision_v3_source_metrics",
+        "schema_version": "vision_v3_source_metrics_001",
         "generated_at": generated_at,
+        "v3_preview_fingerprint": publish_gold_v3._dual_run_preview_fingerprint(bound_preview),
         "summary": {
             "source_count": len(source_hashes),
             "candidate_count": summary.get("input_candidates", len(rows)),
         },
         "sources": [{"source_sha256": source_hash} for source_hash in source_hashes],
+    }
+
+
+def clean_monitoring_report(*, generated_at: str = "2026-06-28T12:01:00+00:00") -> dict[str, Any]:
+    return {
+        "report_kind": "source_trust_monitoring_report",
+        "schema_version": "source_trust_monitoring_report_001",
+        "generated_at": generated_at,
+        "status": "pass",
+        "changed_sources": [],
+        "affected_rows": [],
+        "recommended_action": "none",
     }
 
 
@@ -296,11 +321,13 @@ def empty_review_queue_cli_defaults(
     include_review_decisions: bool = True,
     include_report_output: bool = True,
     include_html_output: bool = True,
+    include_checklist_output: bool = True,
 ) -> list[str]:
     empty_list_path = root / "empty_review_queue_default_list.json"
     empty_report_path = root / "empty_review_queue_default_report.json"
     report_output_path = root / "empty_review_queue_report_output.json"
     html_output_path = root / "empty_review_queue.html"
+    checklist_output_path = root / "empty_review_queue_checklist.csv"
     empty_list_path.write_text("[]")
     empty_report_path.write_text("{}")
     args: list[str] = []
@@ -322,6 +349,8 @@ def empty_review_queue_cli_defaults(
         args.extend(["--report-output", str(report_output_path)])
     if include_html_output:
         args.extend(["--html-output", str(html_output_path)])
+    if include_checklist_output:
+        args.extend(["--checklist-output", str(checklist_output_path)])
     return args
 
 
@@ -431,6 +460,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 manual_review_path=manual_review_path,
             )
 
+        self.assertEqual(report["report_kind"], "baseline_v2_report")
+        self.assertEqual(report["schema_version"], "baseline_v2_report_001")
         self.assertEqual(report["pipeline_version"], "vision_v3_gate0")
         self.assertEqual(report["summary"]["known_failure_candidate_count"], 3)
         self.assertEqual(report["summary"]["review_queue_count"], 1)
@@ -455,6 +486,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
 
         report = build_spike_report(baseline_report=baseline)
 
+        self.assertEqual(report["report_kind"], "vision_v3_spike_report")
+        self.assertEqual(report["schema_version"], "vision_v3_spike_report_001")
         self.assertEqual(report["pipeline_version"], "vision_v3_gate0_5_spike")
         self.assertEqual(report["publish_behavior"], "no_publish")
         self.assertIn("300", report["dpi_candidates"])
@@ -731,6 +764,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 quarter="FY26-Q3",
             )
 
+            self.assertEqual("v3_render_source_pages_001", report["schema_version"])
             self.assertEqual(1, report["summary"]["rendered_count"])
             self.assertEqual(0, report["summary"]["source_error_count"])
             self.assertEqual("rendered", report["results"][0]["status"])
@@ -740,6 +774,10 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             self.assertTrue(Path(report["results"][0]["manifest_path"]).exists())
             self.assertGreaterEqual(report["results"][0]["render_elapsed_seconds"], 0)
             self.assertGreaterEqual(report["summary"]["average_render_time_per_page_seconds"], 0)
+            self.assertGreater(report["summary"]["page_image_bytes"], 0)
+            self.assertGreater(report["summary"]["thumbnail_bytes"], 0)
+            self.assertGreater(report["summary"]["average_page_image_bytes"], 0)
+            self.assertGreater(report["summary"]["average_thumbnail_bytes"], 0)
             self.assertTrue(report_path.exists())
 
     def test_render_source_pages_batch_carries_source_inventory_metadata(self) -> None:
@@ -1005,6 +1043,30 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             str(cache_path),
             f"data/raw/source_documents/art-of-animation/fy26-q3-0526/{row['content_sha256']}.jpg",
         )
+
+    def test_bronze_source_document_row_records_pdf_page_count(self) -> None:
+        source_path = Path("data/raw/source_documents/boardwalk/fy26-q3-0526/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d.pdf")
+        data = source_path.read_bytes()
+
+        row = source_document_row(
+            data=data,
+            calendar_group_key="boardwalk",
+            canonical_url="https://example.com/boardwalk.pdf",
+            fetched_url="https://example.com/boardwalk.pdf",
+            edition="fy26-q3-0526",
+            http_metadata={
+                "etag": '"abc"',
+                "content_length": len(data),
+                "http_status": 200,
+                "content_type": "application/pdf",
+            },
+        )
+
+        self.assertEqual("pdf", row["source_type"])
+        self.assertEqual("application/pdf", row["mime_type"])
+        self.assertEqual(1, row["raw_page_count"])
+        self.assertIsNone(row["raw_width"])
+        self.assertIsNone(row["raw_height"])
 
     def test_fetch_source_uploads_bronze_image_with_detected_content_type(self) -> None:
         class FakeDb:
@@ -1601,6 +1663,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     report_path=report_path,
                 )
 
+            self.assertEqual("v3_vision_snapshot_001", report["schema_version"])
             self.assertEqual(1, report["summary"]["snapshot_count"])
             self.assertEqual(0, report["summary"]["parser_error_count"])
             self.assertEqual(page_manifest["source_sha256"], report["results"][0]["source_sha256"])
@@ -1657,6 +1720,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 )
 
             self.assertEqual("v3_vision_snapshot", report["report_kind"])
+            self.assertEqual("v3_vision_snapshot_001", report["schema_version"])
             self.assertEqual(2, report["summary"]["page_manifest_count"])
             self.assertEqual(2, report["summary"]["snapshot_count"])
             self.assertEqual(0, report["summary"]["parser_error_count"])
@@ -3345,6 +3409,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             page_path = root / "page.png"
+            field_crops_dir = root / "field_crops_v3"
             Image.new("RGB", (120, 100), color=(255, 255, 255)).save(page_path)
             region = {
                 "region_id": "page-001-region-03",
@@ -3396,14 +3461,15 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 ],
             }
 
-            candidates = extract_candidates_from_snapshot(snapshot)
+            with patch.object(extract_v3, "DEFAULT_FIELD_CROPS_DIR", field_crops_dir):
+                candidates = extract_candidates_from_snapshot(snapshot)
             candidate = candidates[0]
 
             title_source = candidate["field_evidence"]["title"]["source"]
             self.assertEqual([10, 20, 80, 35], title_source["bbox_px"])
             self.assertNotEqual("verticalrowcrop", title_source["crop_sha256"])
             self.assertTrue(Path(title_source["crop_storage_path"]).exists())
-            self.assertIn("/field_crops_v3/sourcehash/page-001-region-03/title-", title_source["crop_storage_path"])
+            self.assertIn(str(field_crops_dir / "sourcehash" / "page-001-region-03"), title_source["crop_storage_path"])
             self.assertEqual(title_source["crop_sha256"], hashlib.sha256(Path(title_source["crop_storage_path"]).read_bytes()).hexdigest())
             self.assertEqual("verticalrowcrop", title_source["region_crop_sha256"])
             self.assertEqual("vertical-row.png", title_source["region_crop_storage_path"])
@@ -4842,6 +4908,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 quarter="FY26-Q3",
             )
 
+            self.assertEqual("v3_extract_001", report["schema_version"])
             self.assertEqual(1, report["summary"]["snapshot_count"])
             self.assertEqual(1, report["summary"]["candidate_count"])
             self.assertEqual(0, report["summary"]["parser_error_count"])
@@ -5612,6 +5679,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 report_path=report_path,
             )
 
+            self.assertEqual("v3_validate_001", report["schema_version"])
             self.assertEqual(1, report["summary"]["candidate_count"])
             self.assertEqual(1, report["summary"]["auto_publishable_count"])
             self.assertEqual(0, report["summary"]["parser_error_count"])
@@ -5697,6 +5765,17 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "fetched_url": "https://cdn.example.test/boardwalk.pdf",
             "calendar_group_key": "boardwalk",
             "candidate_type": "activity",
+            "pipeline_version": "vision_v3_001",
+            "config_hash": "confighash",
+            "runtime_lineage": {
+                "config_hash": "confighash",
+                "lineage_hash": "lineagehash",
+                "git_sha": "abc123",
+                "config": {"dpi": 240},
+                "package_versions": {"pypdfium2": "4.30.0"},
+                "model_asset_hashes": {"paddleocr_ppstructurev3": "modelhash"},
+                "ocr_engine_configs": {"paddleocr_ppstructurev3": {"mode": "ppstructurev3"}},
+            },
             "field_evidence": {
                 "region": {
                     "source": {
@@ -5717,6 +5796,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("sourcehash", tasks[0]["content_sha256"])
         self.assertEqual("https://example.test/boardwalk.pdf", tasks[0]["source_url"])
         self.assertEqual("region.png", tasks[0]["field_crop"])
+        self.assertEqual("vision_v3_001", tasks[0]["pipeline_version"])
+        self.assertEqual("confighash", tasks[0]["config_hash"])
+        self.assertEqual("lineagehash", tasks[0]["runtime_lineage"]["lineage_hash"])
         hollow_candidate = json.loads(json.dumps(candidate))
         del hollow_candidate["field_evidence"]["region"]["source"]["page_image_sha256"]
         [unreviewable_task] = build_review_tasks([hollow_candidate])
@@ -5724,6 +5806,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("pending", unreviewable_task["status"])
         self.assertEqual("cand-1", unreviewable_task["task_id"])
         self.assertEqual("sourcehash", unreviewable_task["content_sha256"])
+        self.assertEqual("vision_v3_001", unreviewable_task["pipeline_version"])
+        self.assertEqual("confighash", unreviewable_task["config_hash"])
+        self.assertEqual("lineagehash", unreviewable_task["runtime_lineage"]["lineage_hash"])
         self.assertIn("missing_reviewable_evidence", unreviewable_task["validation_findings"])
         self.assertEqual(hollow_candidate, unreviewable_task["candidate"])
         manual_review_candidate = {
@@ -5852,30 +5937,529 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 }
             },
         }
-        decision = {
-            "task_id": "cand-review",
-            "candidate_id": "cand-review",
-            "content_sha256": "sourcehash",
-            "reviewer": "josh",
-            "decision": "approve",
-            "reason": "Verified against source crop",
-            "decided_at": "2026-06-28T12:05:00Z",
+        review_task = build_review_tasks([candidate])[0]
+        decision = build_review_decision(
+            review_task,
+            reviewer="josh",
+            decision="approve",
+            approved_fields={"schedule": {"normalized_value": {"start_time": "13:30"}}},
+            reason="Schedule time is visible in the rendered source crop.",
+            decided_at="2026-06-28T12:05:00Z",
+        )
+        legacy_partial_decision = {
+            key: value
+            for key, value in decision.items()
+            if key not in {"schema_version", "approved_fields", "original_task"}
         }
         stale_decision = {**decision, "task_id": "cand-review-location", "content_sha256": "oldhash"}
+        placeholder_reason_decision = {
+            **decision,
+            "reason": "Verified against source crop",
+            "decided_at": "2026-06-28T12:06:00Z",
+        }
 
         tasks = build_review_tasks([candidate], review_decisions=[stale_decision, decision])
         report = build_review_queue_report(tasks)
         html = build_review_queue_html(tasks, report)
+        placeholder_tasks = build_review_tasks([candidate], review_decisions=[placeholder_reason_decision])
+        legacy_partial_tasks = build_review_tasks([candidate], review_decisions=[legacy_partial_decision])
 
         self.assertEqual("reviewed", tasks[0]["status"])
         self.assertEqual("approve", tasks[0]["review_decision_status"])
         self.assertEqual("josh", tasks[0]["review_decision"]["reviewer"])
+        self.assertEqual("pending", placeholder_tasks[0]["status"])
+        self.assertEqual(["placeholder_review_reason"], placeholder_tasks[0]["stale_review_decision"]["stale_reasons"])
+        self.assertEqual("pending", legacy_partial_tasks[0]["status"])
+        self.assertEqual(
+            ["missing_review_decision_schema_version", "missing_approved_fields"],
+            legacy_partial_tasks[0]["stale_review_decision"]["stale_reasons"],
+        )
         self.assertEqual(1, report["summary"]["reviewed_task_count"])
         self.assertEqual(0, report["summary"]["pending_task_count"])
         self.assertEqual({"approve": 1}, report["summary"]["review_count_by_decision"])
         self.assertEqual([], report["top_calendar_group_blockers"])
         self.assertIn("Status: <strong>reviewed</strong>", html)
         self.assertIn("Review decision: <strong>approve</strong>", html)
+
+    def test_review_queue_v3_keeps_stale_page_or_crop_review_decisions_pending(self) -> None:
+        candidate = {
+            "candidate_id": "cand-review",
+            "validation_status": "needs_review",
+            "validation_findings": ["engine_disagreement:schedule"],
+            "source_document_id": "source-doc-1",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "activity",
+            "field_evidence": {
+                "schedule": {
+                    "field": "schedule",
+                    "raw_value": "Daily at 1:30pm",
+                    "normalized_value": {"start_time": "13:30"},
+                    "source": {
+                        "content_sha256": "sourcehash",
+                        "page_number": 1,
+                        "page_image_sha256": "pagehash-current",
+                        "bbox_px": [0, 0, 400, 300],
+                        "crop_storage_path": "schedule.png",
+                        "crop_sha256": "crop-current",
+                    },
+                    "engines": [{"text": "Daily at 1:30pm"}, {"text": "Daily at 7:30pm"}],
+                }
+            },
+        }
+        stale_page_decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "cand-review",
+            "candidate_id": "cand-review",
+            "content_sha256": "sourcehash",
+            "page_image_sha256": "pagehash-old",
+            "field_crop_sha256": "crop-current",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {"schedule": {"normalized_value": {"start_time": "13:30"}}},
+            "reason": "Schedule time is visible in the rendered source crop.",
+            "decided_at": "2026-06-28T12:05:00Z",
+        }
+        stale_crop_decision = {
+            **stale_page_decision,
+            "page_image_sha256": "pagehash-current",
+            "field_crop_sha256": "crop-old",
+            "decided_at": "2026-06-28T12:06:00Z",
+        }
+        missing_crop_hash_decision = {
+            **stale_page_decision,
+            "page_image_sha256": "pagehash-current",
+            "field_crop_sha256": None,
+            "decided_at": "2026-06-28T12:07:00Z",
+        }
+
+        tasks = build_review_tasks(
+            [candidate],
+            review_decisions=[stale_page_decision, stale_crop_decision, missing_crop_hash_decision],
+        )
+        report = build_review_queue_report(tasks)
+        html = build_review_queue_html(tasks, report)
+
+        self.assertEqual("pending", tasks[0]["status"])
+        self.assertNotIn("review_decision_status", tasks[0])
+        self.assertEqual(
+            {
+                "decision": "approve",
+                "reviewer": "josh",
+                "reason": "Schedule time is visible in the rendered source crop.",
+                "decided_at": "2026-06-28T12:07:00Z",
+                "content_sha256": "sourcehash",
+                "page_image_sha256": "pagehash-current",
+                "field_crop_sha256": None,
+                "stale_reasons": ["missing_review_field_crop_sha256"],
+            },
+            tasks[0]["stale_review_decision"],
+        )
+        self.assertEqual(1, report["summary"]["pending_task_count"])
+        self.assertEqual(0, report["summary"]["reviewed_task_count"])
+        self.assertEqual(1, report["summary"]["stale_review_decision_count"])
+        self.assertEqual(["cand-review"], report["stale_review_decision_task_ids"])
+        self.assertIn("Stale Review Decision", html)
+        self.assertIn("missing_review_field_crop_sha256", html)
+
+    def test_review_queue_v3_report_tracks_publish_gate_blocker_progress(self) -> None:
+        tasks = [
+            {
+                "task_id": "diff-reviewed",
+                "task_type": "gold_conflict",
+                "status": "reviewed",
+                "review_decision_status": "approve",
+                "calendar_group_key": "boardwalk",
+                "field": "schedule",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+            },
+            {
+                "task_id": "diff-pending",
+                "task_type": "gold_conflict",
+                "status": "pending",
+                "calendar_group_key": "boardwalk",
+                "field": "location",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+            },
+            {
+                "task_id": "new-pending",
+                "task_type": "manual_review_required",
+                "status": "pending",
+                "calendar_group_key": "boardwalk",
+                "field": "new_record",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+                "source_metadata": {"canonical_url": "https://example.test/pop.jpg"},
+            },
+            {
+                "task_id": "ocr-pending",
+                "task_type": "ocr_disagreement",
+                "status": "pending",
+                "calendar_group_key": "boardwalk",
+                "field": "schedule",
+            },
+        ]
+
+        report = build_review_queue_report(tasks)
+
+        self.assertRegex(report.get("generated_at", ""), r"^\d{4}-\d{2}-\d{2}T")
+        self.assertRegex(report["review_queue_fingerprint"], r"^[0-9a-f]{64}$")
+        self.assertEqual(3, report["summary"]["publish_gate_blocker_task_count"])
+        self.assertEqual(2, report["summary"]["pending_publish_gate_blocker_task_count"])
+        self.assertEqual(1, report["summary"]["reviewed_publish_gate_blocker_task_count"])
+        self.assertEqual(2, report["summary"]["publish_blocker_checklist_row_count"])
+        self.assertEqual(2, report["summary"]["publish_blocker_checklist_batch_count"])
+        self.assertEqual(
+            {
+                "unreviewed_new_v3_rows": 1,
+                "unreviewed_v2_v3_field_diffs": 1,
+            },
+            report["summary"]["pending_publish_gate_blocker_count_by_reason"],
+        )
+        self.assertEqual(
+            {
+                "total_task_count": 3,
+                "pending_task_count": 2,
+                "reviewed_task_count": 1,
+                "pending_task_ids": ["diff-pending", "new-pending"],
+                "reviewed_task_ids": ["diff-reviewed"],
+                "pending_review_artifact_missing_count": 2,
+                "pending_review_artifact_missing_task_ids": ["diff-pending", "new-pending"],
+                "all_pending_tasks_have_review_artifacts": False,
+                "pending_task_count_by_reason": {
+                    "unreviewed_new_v3_rows": 1,
+                    "unreviewed_v2_v3_field_diffs": 1,
+                },
+                "pending_task_ids_by_reason": {
+                    "unreviewed_new_v3_rows": ["new-pending"],
+                    "unreviewed_v2_v3_field_diffs": ["diff-pending"],
+                },
+                "pending_task_count_by_source_url": {
+                    "https://example.test/boardwalk.pdf": 1,
+                    "https://example.test/pop.jpg": 1,
+                },
+                "pending_task_ids_by_source_url": {
+                    "https://example.test/boardwalk.pdf": ["diff-pending"],
+                    "https://example.test/pop.jpg": ["new-pending"],
+                },
+                "pending_task_count_by_source_url_and_reason": {
+                    "https://example.test/boardwalk.pdf": {
+                        "unreviewed_v2_v3_field_diffs": 1,
+                    },
+                    "https://example.test/pop.jpg": {
+                        "unreviewed_new_v3_rows": 1,
+                    },
+                },
+                "total_task_count_by_reason": {
+                    "unreviewed_new_v3_rows": 1,
+                    "unreviewed_v2_v3_field_diffs": 2,
+                },
+            },
+            report["publish_gate_blockers"],
+        )
+        self.assertEqual(
+            [
+                {
+                    "review_batch_key": "https://example.test/boardwalk.pdf | unreviewed_v2_v3_field_diffs",
+                    "source_url": "https://example.test/boardwalk.pdf",
+                    "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                    "pending_task_count": 1,
+                    "calendar_group_keys": ["boardwalk"],
+                    "fields": ["location"],
+                    "task_ids": ["diff-pending"],
+                },
+                {
+                    "review_batch_key": "https://example.test/pop.jpg | unreviewed_new_v3_rows",
+                    "source_url": "https://example.test/pop.jpg",
+                    "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+                    "pending_task_count": 1,
+                    "calendar_group_keys": ["boardwalk"],
+                    "fields": ["new_record"],
+                    "task_ids": ["new-pending"],
+                },
+            ],
+            report["publish_blocker_batches"],
+        )
+
+    def test_review_queue_v3_report_fingerprint_changes_with_task_content(self) -> None:
+        tasks = [
+            {
+                "task_id": "diff-pending",
+                "task_type": "gold_conflict",
+                "status": "pending",
+                "calendar_group_key": "boardwalk",
+                "field": "location",
+                "content_sha256": "current-content",
+                "page_image_sha256": "current-page",
+                "field_crop_sha256": "current-crop",
+                "field_crop": "https://example.test/current-crop.png",
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+            }
+        ]
+
+        report = build_review_queue_report(tasks)
+        changed_report = build_review_queue_report(
+            [
+                {
+                    **tasks[0],
+                    "content_sha256": "changed-content",
+                    "page_image_sha256": "changed-page",
+                    "field_crop_sha256": "changed-crop",
+                }
+            ]
+        )
+
+        self.assertRegex(report["review_queue_fingerprint"], r"^[0-9a-f]{64}$")
+        self.assertNotEqual(
+            report["review_queue_fingerprint"],
+            changed_report["review_queue_fingerprint"],
+        )
+
+    def test_review_queue_v3_builds_publish_blocker_checklist_csv(self) -> None:
+        tasks = [
+            {
+                "task_id": "reviewed-diff",
+                "status": "reviewed",
+                "task_type": "gold_conflict",
+                "calendar_group_key": "boardwalk",
+                "field": "schedule",
+                "candidate_title": "Poolside Activities",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+            },
+            {
+                "task_id": "pending-diff",
+                "status": "pending",
+                "task_type": "gold_conflict",
+                "calendar_group_key": "boardwalk",
+                "field": "location",
+                "candidate_title": "Poolside Activities",
+                "candidate_value": "Luna Park Pool Deck",
+                "normalized_value": "luna_park_pool_deck",
+                "review_key": "boardwalk:poolside-activities:location",
+                "content_sha256": "sourcehash-boardwalk",
+                "page_image_path": "data/processed/source_pages/boardwalk/page-001.png",
+                "page_image_sha256": "pagehash-boardwalk",
+                "field_crop": "data/processed/field_crops/boardwalk/location.png",
+                "field_crop_sha256": "crophash-boardwalk-location",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+                "dual_run_diff": {
+                    "v2_value": "Luna Park Pool",
+                    "v3_value": "Luna Park Pool Deck",
+                },
+            },
+            {
+                "task_id": "pending-new",
+                "status": "pending",
+                "task_type": "manual_review_required",
+                "calendar_group_key": "pop-century",
+                "field": "new_record",
+                "candidate_value": "Groovy Campfire",
+                "review_key": "pop-century:groovy-campfire:new_record",
+                "content_sha256": "sourcehash-pop",
+                "page_image_path": "data/processed/source_pages/pop/page-001.png",
+                "page_image_sha256": "pagehash-pop",
+                "field_crop": "data/processed/field_crops/pop/title.png",
+                "field_crop_sha256": "crophash-pop-title",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+                "source_metadata": {"canonical_url": "https://example.test/pop.jpg"},
+                "dual_run_new_record": {
+                    "title": "Groovy Campfire",
+                    "schedule": {"text": "Nightly at 7:00pm"},
+                    "location": {"label": "Hippy Dippy Pool"},
+                    "price": {"state": "free"},
+                },
+            },
+            {
+                "task_id": "pending-diff-extra",
+                "status": "pending",
+                "task_type": "gold_conflict",
+                "calendar_group_key": "boardwalk",
+                "field": "schedule",
+                "candidate_title": "Campfire",
+                "candidate_value": "Daily at 7:00pm",
+                "normalized_value": "Daily at 7:00pm",
+                "review_key": "boardwalk:campfire:schedule",
+                "content_sha256": "sourcehash-boardwalk",
+                "page_image_path": "data/processed/source_pages/boardwalk/page-001.png",
+                "page_image_sha256": "pagehash-boardwalk",
+                "field_crop": "data/processed/field_crops/boardwalk/schedule.png",
+                "field_crop_sha256": "crophash-boardwalk-schedule",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+                "dual_run_diff": {
+                    "v2_value": "Nightly at 7:00pm",
+                    "v3_value": "Daily at 7:00pm",
+                },
+            },
+            {
+                "task_id": "ocr-only",
+                "status": "pending",
+                "task_type": "ocr_disagreement",
+                "calendar_group_key": "boardwalk",
+                "field": "schedule",
+            },
+        ]
+
+        csv_text = build_review_checklist_csv(tasks)
+        rows = list(csv.DictReader(io.StringIO(csv_text)))
+
+        self.assertEqual(
+            [
+                {
+                    "checklist_total_pending_task_count": "3",
+                    "checklist_total_batch_count": "2",
+                    "source_url": "https://example.test/boardwalk.pdf",
+                    "source_pending_task_count": "2",
+                    "calendar_group_key": "boardwalk",
+                    "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                    "reason_pending_task_count": "2",
+                    "source_reason_pending_task_count": "2",
+                    "review_batch_key": "https://example.test/boardwalk.pdf | unreviewed_v2_v3_field_diffs",
+                    "review_batch_index": "1",
+                    "review_batch_task_count": "2",
+                    "source_task_index": "1",
+                    "task_id": "pending-diff",
+                    "task_type": "gold_conflict",
+                    "field": "location",
+                    "candidate_title": "Poolside Activities",
+                    "review_key": "boardwalk:poolside-activities:location",
+                    "content_sha256": "sourcehash-boardwalk",
+                    "page_image_path": "data/processed/source_pages/boardwalk/page-001.png",
+                    "page_image_sha256": "pagehash-boardwalk",
+                    "field_crop": "data/processed/field_crops/boardwalk/location.png",
+                    "field_crop_sha256": "crophash-boardwalk-location",
+                    "v2_value": "Luna Park Pool",
+                    "v3_value": "Luna Park Pool Deck",
+                    "record_summary": "title=Poolside Activities; field=location; v2=Luna Park Pool; v3=Luna Park Pool Deck",
+                    "approve_command": rows[0]["approve_command"],
+                    "edit_command": rows[0]["edit_command"],
+                    "reject_command": rows[0]["reject_command"],
+                    "task_anchor": "#task-pending-diff",
+                },
+                {
+                    "checklist_total_pending_task_count": "3",
+                    "checklist_total_batch_count": "2",
+                    "source_url": "https://example.test/boardwalk.pdf",
+                    "source_pending_task_count": "2",
+                    "calendar_group_key": "boardwalk",
+                    "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                    "reason_pending_task_count": "2",
+                    "source_reason_pending_task_count": "2",
+                    "review_batch_key": "https://example.test/boardwalk.pdf | unreviewed_v2_v3_field_diffs",
+                    "review_batch_index": "2",
+                    "review_batch_task_count": "2",
+                    "source_task_index": "2",
+                    "task_id": "pending-diff-extra",
+                    "task_type": "gold_conflict",
+                    "field": "schedule",
+                    "candidate_title": "Campfire",
+                    "review_key": "boardwalk:campfire:schedule",
+                    "content_sha256": "sourcehash-boardwalk",
+                    "page_image_path": "data/processed/source_pages/boardwalk/page-001.png",
+                    "page_image_sha256": "pagehash-boardwalk",
+                    "field_crop": "data/processed/field_crops/boardwalk/schedule.png",
+                    "field_crop_sha256": "crophash-boardwalk-schedule",
+                    "v2_value": "Nightly at 7:00pm",
+                    "v3_value": "Daily at 7:00pm",
+                    "record_summary": "title=Campfire; field=schedule; v2=Nightly at 7:00pm; v3=Daily at 7:00pm",
+                    "approve_command": rows[1]["approve_command"],
+                    "edit_command": rows[1]["edit_command"],
+                    "reject_command": rows[1]["reject_command"],
+                    "task_anchor": "#task-pending-diff-extra",
+                },
+                {
+                    "checklist_total_pending_task_count": "3",
+                    "checklist_total_batch_count": "2",
+                    "source_url": "https://example.test/pop.jpg",
+                    "source_pending_task_count": "1",
+                    "calendar_group_key": "pop-century",
+                    "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+                    "reason_pending_task_count": "1",
+                    "source_reason_pending_task_count": "1",
+                    "review_batch_key": "https://example.test/pop.jpg | unreviewed_new_v3_rows",
+                    "review_batch_index": "1",
+                    "review_batch_task_count": "1",
+                    "source_task_index": "1",
+                    "task_id": "pending-new",
+                    "task_type": "manual_review_required",
+                    "field": "new_record",
+                    "candidate_title": "Groovy Campfire",
+                    "review_key": "pop-century:groovy-campfire:new_record",
+                    "content_sha256": "sourcehash-pop",
+                    "page_image_path": "data/processed/source_pages/pop/page-001.png",
+                    "page_image_sha256": "pagehash-pop",
+                    "field_crop": "data/processed/field_crops/pop/title.png",
+                    "field_crop_sha256": "crophash-pop-title",
+                    "v2_value": "",
+                    "v3_value": "",
+                    "record_summary": "calendar_group=pop-century; title=Groovy Campfire; schedule=Nightly at 7:00pm; location=Hippy Dippy Pool; price=free",
+                    "approve_command": rows[2]["approve_command"],
+                    "edit_command": rows[2]["edit_command"],
+                    "reject_command": rows[2]["reject_command"],
+                    "task_anchor": "#task-pending-new",
+                },
+            ],
+            rows,
+        )
+        self.assertIn('--record-task-id "pending-diff"', rows[0]["approve_command"])
+        self.assertIn("--decision approve", rows[0]["approve_command"])
+        self.assertIn('--reviewer "${VISION_V3_REVIEWER:?Set VISION_V3_REVIEWER}"', rows[0]["approve_command"])
+        self.assertIn('--reason "${VISION_V3_REVIEW_REASON:?Set VISION_V3_REVIEW_REASON}"', rows[0]["approve_command"])
+        self.assertNotIn("Verified against source crop", rows[0]["approve_command"])
+        self.assertNotIn("reviewer-name", rows[0]["approve_command"])
+        self.assertIn('"location"', rows[0]["approve_command"])
+        self.assertIn("luna_park_pool_deck", rows[0]["approve_command"])
+        self.assertIn(
+            "build_review_queue_v3.py --source-drift-report data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+            rows[0]["approve_command"],
+        )
+        self.assertIn("--output data/processed/eval/v3_dual_run_report.json", rows[0]["approve_command"])
+        self.assertIn('--record-task-id "pending-new"', rows[2]["approve_command"])
+        self.assertIn("--decision approve", rows[2]["approve_command"])
+        self.assertIn('--reviewer "${VISION_V3_REVIEWER:?Set VISION_V3_REVIEWER}"', rows[2]["approve_command"])
+        self.assertIn('--reason "${VISION_V3_REVIEW_REASON:?Set VISION_V3_REVIEW_REASON}"', rows[2]["approve_command"])
+        self.assertNotIn("reviewer-name", rows[2]["approve_command"])
+        self.assertNotIn("--approved-fields-json", rows[2]["approve_command"])
+
+    def test_review_queue_v3_checklist_summarizes_sparse_new_or_missing_records(self) -> None:
+        tasks = [
+            {
+                "task_id": "missing-v2-craft",
+                "status": "pending",
+                "task_type": "manual_review_required",
+                "calendar_group_key": "port-orleans-riverside",
+                "canonical_slug": "craft-activity",
+                "field": "missing_v2_record",
+                "candidate_value": "Craft Activity",
+                "review_key": "port-orleans-riverside:craft-activity:missing_v2_record",
+                "content_sha256": "sourcehash-por",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "v3_missing_v2_rows",
+                "source_metadata": {"canonical_url": "https://example.test/por.jpg"},
+                "dual_run_missing_v2_record": {
+                    "title": "Craft Activity",
+                },
+            }
+        ]
+
+        rows = list(csv.DictReader(io.StringIO(build_review_checklist_csv(tasks))))
+
+        self.assertEqual(
+            "calendar_group=port-orleans-riverside; slug=craft-activity; title=Craft Activity",
+            rows[0]["record_summary"],
+        )
 
     def test_review_queue_v3_adds_source_level_parser_error_tasks(self) -> None:
         source_statuses = [
@@ -5939,6 +6523,35 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("source-doc-unsupported", tasks[0]["source_document_id"])
         self.assertEqual(["unsupported_source_type:application/zip"], tasks[0]["validation_findings"])
 
+        sparse_tasks = build_review_tasks(
+            [],
+            source_statuses=[
+                {
+                    "source_document_id": "source-doc-inventory",
+                    "content_sha256": "inventoryhash",
+                    "calendar_group_key": "pop-century",
+                    "status": "source_error",
+                    "message": "fetch_failed",
+                }
+            ],
+            source_inventory=[
+                {
+                    "source_document_id": "source-doc-inventory",
+                    "content_sha256": "inventoryhash",
+                    "source_kind": "official_image",
+                    "source_role": "resort_pdf",
+                    "canonical_url": "https://example.com/pop-century.jpg",
+                    "fetched_url": "https://cdn.example.com/pop-century.jpg",
+                    "http_status": 503,
+                    "currentness": "current",
+                }
+            ],
+        )
+
+        self.assertEqual("https://example.com/pop-century.jpg", sparse_tasks[0]["source_url"])
+        self.assertEqual("official_image", sparse_tasks[0]["source_metadata"]["source_kind"])
+        self.assertEqual("https://cdn.example.com/pop-century.jpg", sparse_tasks[0]["source_metadata"]["fetched_url"])
+
     def test_review_queue_v3_cli_defaults_to_validated_candidates_directory(self) -> None:
         candidate = {
             "candidate_id": "cand-cli-review",
@@ -5965,6 +6578,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             validated_dir.mkdir()
             output_path = root / "review_queue.json"
             html_output_path = root / "review_queue.html"
+            checklist_output_path = root / "review_checklist.csv"
             (validated_dir / "one.json").write_text(json.dumps([candidate]))
 
             with patch.object(build_review_queue_v3, "DEFAULT_VALIDATED_CANDIDATES_PATH", validated_dir):
@@ -5977,18 +6591,26 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                         str(output_path),
                         "--html-output",
                         str(html_output_path),
-                        *empty_review_queue_cli_defaults(root, include_html_output=False),
+                        "--checklist-output",
+                        str(checklist_output_path),
+                        *empty_review_queue_cli_defaults(
+                            root,
+                            include_html_output=False,
+                            include_checklist_output=False,
+                        ),
                     ],
                 ):
                     build_review_queue_v3.main()
 
             tasks = json.loads(output_path.read_text())
             review_html = html_output_path.read_text()
+            checklist_rows = list(csv.DictReader(io.StringIO(checklist_output_path.read_text())))
 
         self.assertEqual(1, len(tasks))
         self.assertEqual("cand-cli-review", tasks[0]["task_id"])
         self.assertIn("Vision v3 Review Queue", review_html)
         self.assertIn("cand-cli-review", review_html)
+        self.assertEqual([], checklist_rows)
 
     def test_review_queue_v3_cli_accepts_source_statuses_for_parser_errors(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -6163,6 +6785,62 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(1, report["summary"]["visual_artifact_missing_count"])
         self.assertFalse(report["summary"]["all_tasks_have_visual_artifacts"])
 
+    def test_review_queue_v3_cli_can_skip_stale_dual_run_report(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            validated_dir = root / "validated"
+            dual_run_path = root / "stale_dual_run_report.json"
+            output_path = root / "review_queue.json"
+            validated_dir.mkdir()
+            dual_run_path.write_text(
+                json.dumps(
+                    {
+                        "status": "blocked",
+                        "unreviewed_new_keys": ["boardwalk:stale-activity"],
+                        "new_v3_records": [
+                            {
+                                "row_key": "boardwalk:stale-activity",
+                                "review_key": "boardwalk:stale-activity",
+                                "calendar_group_key": "boardwalk",
+                                "canonical_slug": "stale-activity",
+                                "title": "Stale Activity",
+                                "content_sha256": "sourcehash",
+                                "v3_field_evidence": {
+                                    "title": {
+                                        "source": {
+                                            "content_sha256": "sourcehash",
+                                            "page_number": 1,
+                                            "page_image_sha256": "pagehash",
+                                            "crop_sha256": "crophash",
+                                        }
+                                    }
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "build_review_queue_v3.py",
+                    str(validated_dir),
+                    "--dual-run-report",
+                    str(dual_run_path),
+                    "--no-dual-run-report",
+                    "--output",
+                    str(output_path),
+                    *empty_review_queue_cli_defaults(root),
+                ],
+            ):
+                build_review_queue_v3.main()
+
+            tasks = json.loads(output_path.read_text())
+
+        self.assertEqual([], tasks)
+
     def test_review_queue_v3_report_summarizes_backlog_and_visual_artifact_coverage(self) -> None:
         tasks = [
             {
@@ -6191,15 +6869,36 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "field": "new_record",
                 "source_metadata": {"canonical_url": "https://example.test/pop.jpg"},
             },
+            {
+                "task_id": "task-4",
+                "task_type": "gold_conflict",
+                "validation_findings": ["gold_conflict:v2_v3:location"],
+                "calendar_group_key": "pop-century",
+                "field": "location",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "source_metadata": {"canonical_url": "https://example.test/pop.jpg"},
+            },
+            {
+                "task_id": "task-5",
+                "task_type": "manual_review_required",
+                "validation_findings": ["manual_review_required:missing_v2_record"],
+                "calendar_group_key": "all-star-movies",
+                "field": "missing_v2_record",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "v3_missing_v2_rows",
+                "source_metadata": {"canonical_url": "https://example.test/all-star.pdf"},
+            },
         ]
 
         report = build_review_queue_report(tasks)
 
         self.assertEqual("review_queue_v3_report", report["report_kind"])
-        self.assertEqual(3, report["summary"]["task_count"])
+        self.assertEqual(5, report["summary"]["task_count"])
         self.assertEqual(
             {
-                "manual_review_required": 1,
+                "gold_conflict": 1,
+                "manual_review_required": 2,
                 "ocr_disagreement": 1,
                 "source_changed": 1,
             },
@@ -6208,23 +6907,103 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(
             {
                 "engine_disagreement:schedule": 1,
+                "gold_conflict:v2_v3:location": 1,
+                "manual_review_required:missing_v2_record": 1,
                 "manual_review_required:new_record": 1,
                 "source_changed:validation_failure": 1,
             },
             report["summary"]["task_count_by_finding"],
         )
-        self.assertEqual(1, report["summary"]["visual_artifact_missing_count"])
-        self.assertEqual(3, report["summary"]["visual_artifact_missing_file_count"])
+        self.assertEqual(3, report["summary"]["visual_artifact_missing_count"])
+        self.assertEqual(5, report["summary"]["visual_artifact_missing_file_count"])
         self.assertEqual(0, report["summary"]["source_url_missing_count"])
         self.assertTrue(report["summary"]["all_tasks_have_source_urls"])
-        self.assertEqual({"boardwalk": 2, "pop-century": 1}, report["summary"]["task_count_by_calendar_group"])
-        self.assertEqual({"new_record": 1, "schedule": 1, "source": 1}, report["summary"]["task_count_by_field"])
+        self.assertEqual(
+            {"all-star-movies": 1, "boardwalk": 2, "pop-century": 2},
+            report["summary"]["task_count_by_calendar_group"],
+        )
+        self.assertEqual(
+            {"location": 1, "missing_v2_record": 1, "new_record": 1, "schedule": 1, "source": 1},
+            report["summary"]["task_count_by_field"],
+        )
         self.assertEqual(
             {
+                "https://example.test/all-star.pdf": 1,
                 "https://example.test/boardwalk.pdf": 2,
-                "https://example.test/pop.jpg": 1,
+                "https://example.test/pop.jpg": 2,
             },
             report["summary"]["task_count_by_source_url"],
+        )
+        self.assertEqual(
+            {
+                "dual_run_field_diff": {
+                    "task_count": 1,
+                    "task_ids": ["task-4"],
+                    "task_count_by_field": {"location": 1},
+                },
+                "new_v3_record": {
+                    "task_count": 1,
+                    "task_ids": ["task-3"],
+                    "task_count_by_field": {"new_record": 1},
+                },
+                "missing_v2_record": {
+                    "task_count": 1,
+                    "task_ids": ["task-5"],
+                    "task_count_by_field": {"missing_v2_record": 1},
+                },
+                "ocr_or_parser_review": {
+                    "task_count": 1,
+                    "task_ids": ["task-1"],
+                    "task_count_by_field": {"schedule": 1},
+                },
+                "source_or_drift_review": {
+                    "task_count": 1,
+                    "task_ids": ["task-2"],
+                    "task_count_by_field": {"source": 1},
+                },
+            },
+            report["review_workstreams"],
+        )
+        self.assertEqual(
+            {
+                "total_task_count": 2,
+                "pending_task_count": 2,
+                "reviewed_task_count": 0,
+                "pending_task_ids": ["task-4", "task-5"],
+                "reviewed_task_ids": [],
+                "pending_review_artifact_missing_count": 2,
+                "pending_review_artifact_missing_task_ids": ["task-4", "task-5"],
+                "all_pending_tasks_have_review_artifacts": False,
+                "pending_task_count_by_reason": {
+                    "unreviewed_v2_v3_field_diffs": 1,
+                    "v3_missing_v2_rows": 1,
+                },
+                "pending_task_ids_by_reason": {
+                    "unreviewed_v2_v3_field_diffs": ["task-4"],
+                    "v3_missing_v2_rows": ["task-5"],
+                },
+                "pending_task_count_by_source_url": {
+                    "https://example.test/all-star.pdf": 1,
+                    "https://example.test/pop.jpg": 1,
+                },
+                "pending_task_ids_by_source_url": {
+                    "https://example.test/all-star.pdf": ["task-5"],
+                    "https://example.test/pop.jpg": ["task-4"],
+                },
+                "pending_task_count_by_source_url_and_reason": {
+                    "https://example.test/all-star.pdf": {
+                        "v3_missing_v2_rows": 1,
+                    },
+                    "https://example.test/pop.jpg": {
+                        "unreviewed_v2_v3_field_diffs": 1,
+                    },
+                },
+                "total_task_count_by_reason": {
+                    "unreviewed_v2_v3_field_diffs": 1,
+                    "v3_missing_v2_rows": 1,
+                },
+            },
+            report["publish_gate_blockers"],
         )
         self.assertEqual(
             [
@@ -6237,15 +7016,22 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 },
                 {
                     "calendar_group_key": "pop-century",
+                    "task_count": 2,
+                    "task_count_by_type": {"gold_conflict": 1, "manual_review_required": 1},
+                    "task_count_by_field": {"location": 1, "new_record": 1},
+                    "source_urls": ["https://example.test/pop.jpg"],
+                },
+                {
+                    "calendar_group_key": "all-star-movies",
                     "task_count": 1,
                     "task_count_by_type": {"manual_review_required": 1},
-                    "task_count_by_field": {"new_record": 1},
-                    "source_urls": ["https://example.test/pop.jpg"],
+                    "task_count_by_field": {"missing_v2_record": 1},
+                    "source_urls": ["https://example.test/all-star.pdf"],
                 },
             ],
             report["top_calendar_group_blockers"],
         )
-        self.assertEqual(["task-3"], report["visual_artifact_missing_task_ids"])
+        self.assertEqual(["task-3", "task-4", "task-5"], report["visual_artifact_missing_task_ids"])
         self.assertFalse(report["summary"]["all_tasks_have_visual_artifacts"])
         self.assertFalse(report["summary"]["all_tasks_have_existing_visual_artifacts"])
 
@@ -6278,9 +7064,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             field_crop = root / "fields" / "schedule.png"
             region_crop = root / "regions" / "region.png"
             page_image = root / "pages" / "page_001.png"
+            output_path = root / "vision_v3_review_queue.html"
+            checklist_path = root / "vision_v3_publish_blocker_checklist.csv"
             for path in (field_crop, region_crop, page_image):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(b"not-a-real-png-but-present")
+            checklist_path.write_text("task_id\n")
             tasks = [
                 {
                     "task_id": "task-1",
@@ -6291,7 +7080,14 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "calendar_group_key": "boardwalk",
                     "canonical_slug": "poolside-activities",
                     "review_key": "boardwalk:poolside-activities:schedule",
+                    "publish_gate_blocker": True,
+                    "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
                     "candidate_type": "activity",
+                    "candidate_display_label": "Poolside Activities",
+                    "candidate_title": "Poolside Activities",
+                    "candidate_schedule": "Daily at 1:30pm",
+                    "candidate_location": "Luna Park Pool",
+                    "candidate_fee_required": False,
                     "page_number": 1,
                     "page_image_sha256": "pagehash",
                     "page_image_path": str(page_image),
@@ -6308,24 +7104,76 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             ]
 
             report = build_review_queue_report(tasks)
-            html = build_review_queue_html(tasks, report)
+            html = build_review_queue_html(tasks, report, output_path=output_path)
 
         self.assertIn("Vision v3 Review Queue", html)
+        self.assertIn("Review Command Setup", html)
+        self.assertIn('export VISION_V3_REVIEWER="your-name"', html)
+        self.assertIn('export VISION_V3_REVIEW_REASON="source-backed rationale for this decision"', html)
         self.assertIn("Top Blockers", html)
+        self.assertIn("Review Workstreams", html)
+        self.assertIn("ocr_or_parser_review", html)
+        self.assertIn("Publish Gate Summary", html)
+        self.assertIn("<strong>1</strong> publish blockers", html)
+        self.assertIn("<strong>1</strong> pending publish blockers", html)
+        self.assertIn("<strong>0</strong> reviewed publish blockers", html)
+        self.assertIn("Review Artifacts", html)
+        self.assertIn('href="vision_v3_publish_blocker_checklist.csv"', html)
+        self.assertIn("Publish blocker checklist CSV", html)
+        self.assertIn("Publish Gate Blockers", html)
+        self.assertIn("Publish Gate Review Batches", html)
+        self.assertIn("https://example.com/official.pdf | unreviewed_v2_v3_field_diffs", html)
+        self.assertIn("unreviewed_v2_v3_field_diffs", html)
+        self.assertIn('<a href="#task-task-1"><strong>unreviewed_v2_v3_field_diffs</strong></a>', html)
+        self.assertIn('<a href="#task-task-1">task-1</a>', html)
+        self.assertIn('<article class="task" id="task-task-1">', html)
+        self.assertIn("1 task", html)
         self.assertIn("boardwalk", html)
         self.assertIn("1 task", html)
         self.assertIn('href="#group-boardwalk"', html)
         self.assertIn('id="group-boardwalk"', html)
         self.assertIn('<section class="task-group" id="group-boardwalk">', html)
         self.assertIn("boardwalk · 1 task", html)
+        self.assertIn("Poolside Activities", html)
+        self.assertIn("Schedule: <strong>Daily at 1:30pm</strong>", html)
+        self.assertIn("Location: <strong>Luna Park Pool</strong>", html)
+        self.assertIn("Fee required: <strong>False</strong>", html)
         self.assertIn("https://example.com/official.pdf", html)
         self.assertIn("engine_disagreement:schedule", html)
-        self.assertIn(f'href="{field_crop}"', html)
-        self.assertIn(f'src="{field_crop}"', html)
-        self.assertIn(f'href="{region_crop}"', html)
-        self.assertIn(f'href="{page_image}"', html)
+        self.assertIn('href="fields/schedule.png"', html)
+        self.assertIn('src="fields/schedule.png"', html)
+        self.assertIn('href="regions/region.png"', html)
+        self.assertIn('href="pages/page_001.png"', html)
         self.assertIn("python scripts/ingest/review_schema_v3.py", html)
         self.assertIn("--record-task-id &quot;task-1&quot;", html)
+        self.assertIn('${VISION_V3_REVIEW_REASON:?Set VISION_V3_REVIEW_REASON}', html)
+        self.assertIn('<button type="button" data-copy-command="task-1-approve">Approve</button>', html)
+        self.assertIn('<button type="button" data-copy-command="task-1-edit">Edit</button>', html)
+        self.assertIn('<button type="button" data-copy-command="task-1-reject">Reject</button>', html)
+        self.assertIn('<pre id="task-1-approve">', html)
+        self.assertIn("navigator.clipboard.writeText", html)
+        self.assertIn("--fixture-candidates-output data/processed/review_queue/vision_v3_review_fixture_candidates.json", html)
+        self.assertIn("--parser-rule-requests-output data/processed/review_queue/vision_v3_parser_rule_update_requests.json", html)
+        self.assertIn("--dual-run-review-keys-output data/processed/review_queue/vision_v3_dual_run_review_keys.json", html)
+        self.assertIn("&amp;&amp; python scripts/ingest/v3_dual_run_report.py", html)
+        self.assertIn("--reviewed-diff-keys-file data/processed/review_queue/vision_v3_dual_run_review_keys.json", html)
+        self.assertIn("&amp;&amp; python scripts/ingest/build_review_queue_v3.py", html)
+        approve_command_html = html[
+            html.index('<pre id="task-1-approve">') : html.index('<pre id="task-1-edit">')
+        ]
+        review_decision_index = approve_command_html.index("python scripts/ingest/review_schema_v3.py")
+        first_queue_rebuild_index = approve_command_html.index(
+            "&amp;&amp; python scripts/ingest/build_review_queue_v3.py"
+        )
+        dual_run_refresh_index = approve_command_html.index(
+            "&amp;&amp; python scripts/ingest/v3_dual_run_report.py"
+        )
+        final_queue_rebuild_index = approve_command_html.rindex(
+            "&amp;&amp; python scripts/ingest/build_review_queue_v3.py"
+        )
+        self.assertLess(review_decision_index, first_queue_rebuild_index)
+        self.assertLess(first_queue_rebuild_index, dual_run_refresh_index)
+        self.assertLess(dual_run_refresh_index, final_queue_rebuild_index)
         approve_command_start = html.index("--decision approve")
         edit_command_start = html.index("--decision edit")
         self.assertIn("--approved-fields-json", html[approve_command_start:edit_command_start])
@@ -6339,6 +7187,43 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("&lt;script&gt;alert(&#x27;bad&#x27;)&lt;/script&gt;", html)
         self.assertNotIn("<script>alert", html)
         self.assertIn("crop&lt;&amp;&gt;hash", html)
+
+    def test_review_queue_v3_html_lists_publish_gate_task_shortcuts(self) -> None:
+        tasks = [
+            {
+                "task_id": "diff-one",
+                "task_type": "gold_conflict",
+                "status": "pending",
+                "calendar_group_key": "boardwalk",
+                "field": "schedule",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "validation_findings": ["gold_conflict:v2_v3:schedule"],
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+            },
+            {
+                "task_id": "diff-two",
+                "task_type": "gold_conflict",
+                "status": "pending",
+                "calendar_group_key": "boardwalk",
+                "field": "location",
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+                "validation_findings": ["gold_conflict:v2_v3:location"],
+                "source_metadata": {"canonical_url": "https://example.test/boardwalk.pdf"},
+            },
+        ]
+
+        html = build_review_queue_html(tasks, build_review_queue_report(tasks))
+
+        self.assertIn('<a href="#task-diff-one">diff-one</a>', html)
+        self.assertIn('<a href="#task-diff-two">diff-two</a>', html)
+        self.assertIn("Publish Gate Source URLs", html)
+        self.assertIn('<a href="https://example.test/boardwalk.pdf">https://example.test/boardwalk.pdf</a>', html)
+        self.assertIn("2 tasks", html)
+        self.assertIn("&quot;unreviewed_v2_v3_field_diffs&quot;: 2", html)
+        self.assertIn('<article class="task" id="task-diff-one">', html)
+        self.assertIn('<article class="task" id="task-diff-two">', html)
 
     def test_review_queue_v3_html_marks_missing_local_artifact_without_broken_image(self) -> None:
         html = build_review_queue_html(
@@ -6820,12 +7705,80 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     },
                 },
             },
+            {
+                **base_candidate,
+                "candidate_id": "cand-fee-ocr-disagreement",
+                "validation_findings": [
+                    "fee_legend_missing_for_unmarked_title",
+                    "engine_disagreement:title",
+                    "engine_disagreement:schedule",
+                    "engine_disagreement:fee",
+                ],
+                "field_evidence": {
+                    **base_candidate["field_evidence"],
+                    "fee": {
+                        "raw_value": "no fee marker",
+                        "normalized_value": None,
+                        "source": {
+                            "content_sha256": "sourcehash",
+                            "page_number": 1,
+                            "page_image_sha256": "pagehash",
+                            "bbox_px": [20, 10, 120, 30],
+                            "crop_storage_path": "fee-disagreement.png",
+                            "crop_sha256": "feedisagreementcrop",
+                        },
+                        "engines": [
+                            {"engine": "paddleocr_ppstructurev3", "text": "no fee marker", "confidence": 0.97},
+                            {"engine": "rapidocr", "text": "($)", "confidence": 0.94},
+                        ],
+                    },
+                },
+            },
+            {
+                **base_candidate,
+                "candidate_id": "cand-non-activity-title",
+                "validation_findings": ["non_activity_title:title"],
+                "field_evidence": {
+                    **base_candidate["field_evidence"],
+                    "title": {
+                        "raw_value": "LOCATED NEAR",
+                        "normalized_value": "located near",
+                        "source": {
+                            "content_sha256": "sourcehash",
+                            "page_number": 1,
+                            "page_image_sha256": "pagehash",
+                            "bbox_px": [30, 10, 140, 30],
+                            "crop_storage_path": "non-activity-title.png",
+                            "crop_sha256": "nonactivitytitlecrop",
+                        },
+                        "engines": [],
+                    },
+                },
+            },
+            {
+                **base_candidate,
+                "candidate_id": "cand-partial-movie-row",
+                "candidate_type": "movie",
+                "validation_findings": [
+                    "partial_movie_row_review_required",
+                    "missing_required_field:title",
+                    "missing_required_field:location",
+                ],
+            },
         ]
 
         tasks = build_review_tasks(candidates)
 
         self.assertEqual(
-            ["low_quality_image", "source_changed", "gold_conflict", "manual_review_required"],
+            [
+                "low_quality_image",
+                "source_changed",
+                "gold_conflict",
+                "manual_review_required",
+                "ocr_disagreement",
+                "manual_review_required",
+                "missing_required_field",
+            ],
             [task["task_type"] for task in tasks],
         )
         self.assertEqual(
@@ -6834,11 +7787,29 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 ["source_changed:content_sha256"],
                 ["gold_conflict:schedule"],
                 ["fee_legend_missing_for_unmarked_title", "engine_disagreement:title"],
+                [
+                    "fee_legend_missing_for_unmarked_title",
+                    "engine_disagreement:title",
+                    "engine_disagreement:schedule",
+                    "engine_disagreement:fee",
+                ],
+                ["non_activity_title:title"],
+                [
+                    "partial_movie_row_review_required",
+                    "missing_required_field:title",
+                    "missing_required_field:location",
+                ],
             ],
             [task["validation_findings"] for task in tasks],
         )
         self.assertEqual("fee", tasks[3]["field"])
         self.assertEqual("fee.png", tasks[3]["field_crop"])
+        self.assertEqual("fee", tasks[4]["field"])
+        self.assertEqual("fee-disagreement.png", tasks[4]["field_crop"])
+        self.assertEqual("title", tasks[5]["field"])
+        self.assertEqual("non-activity-title.png", tasks[5]["field_crop"])
+        self.assertEqual("title", tasks[6]["field"])
+        self.assertEqual("regions/region.png", tasks[6]["field_crop"])
 
     def test_review_queue_v3_builds_gold_conflict_tasks_from_promotion_report(self) -> None:
         gold_conflicts = [
@@ -7185,6 +8156,53 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             task["source_metadata"],
         )
 
+    def test_review_queue_v3_source_drift_commands_export_reviewed_drift_report(self) -> None:
+        source_drift_report = {
+            "report_kind": "v3_quarter_source_drift",
+            "quarter": "fy26-q4",
+            "status": "review_required",
+            "publish_blockers": ["source_hash_changed"],
+            "source_reports": [
+                {
+                    "calendar_group_key": "boardwalk",
+                    "source_document_id": "source-doc-a",
+                    "status": "review_required",
+                    "old_hash": "oldhash",
+                    "new_hash": "newhash",
+                    "changed_schedules": [
+                        {
+                            "canonical_slug": "poolside-activities",
+                            "title": "Poolside Activities",
+                            "old": "Daily at 1:30pm",
+                            "new": "Daily at 2:30pm",
+                            "page_number": 1,
+                            "page_image_sha256": "pagehash",
+                            "page_image_path": "data/processed/source_pages/source-doc-a/page-001.png",
+                            "crop_storage_path": "data/processed/region_crops/source-doc-a/schedule.png",
+                            "crop_sha256": "crophash",
+                        }
+                    ],
+                    "publish_blockers": [],
+                }
+            ],
+        }
+
+        tasks = build_review_tasks([], source_drift_report=source_drift_report)
+        csv_text = build_review_checklist_csv([{**tasks[0], "publish_gate_blocker": True, "publish_gate_blocker_reason": "source_drift"}])
+        [row] = list(csv.DictReader(io.StringIO(csv_text)))
+        approve_command = row["approve_command"]
+
+        self.assertIn("--export reviewed-source-drift-report", approve_command)
+        self.assertIn("--source-drift-report data/processed/source_drift_report.json", approve_command)
+        self.assertIn(
+            "--output data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+            approve_command,
+        )
+        self.assertIn(
+            "build_review_queue_v3.py --source-drift-report data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+            approve_command,
+        )
+
     def test_review_queue_v3_keeps_source_drift_tasks_distinct_per_source_document(self) -> None:
         source_drift_report = {
             "report_kind": "v3_quarter_source_drift",
@@ -7372,6 +8390,16 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             ],
             [task["review_key"] for task in tasks],
         )
+        self.assertEqual([True, True, True, True], [task["publish_gate_blocker"] for task in tasks])
+        self.assertEqual(
+            [
+                "unreviewed_v2_v3_field_diffs",
+                "unreviewed_v3_status_transitions",
+                "unreviewed_new_v3_rows",
+                "v3_missing_v2_rows",
+            ],
+            [task["publish_gate_blocker_reason"] for task in tasks],
+        )
         self.assertEqual(
             ["poolside-activities", "poolside-activities", "movie-under-the-stars", "campfire"],
             [task["canonical_slug"] for task in tasks],
@@ -7410,6 +8438,132 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "dual-run-missing-v2-boardwalk-campfire-missing-v2-record",
             [task["task_id"] for task in reviewed_missing_tasks],
         )
+
+    def test_review_queue_materializes_missing_v2_visual_artifacts_for_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            page_image = root / "page_images" / "oldsourcehash" / "page_001.png"
+            page_image.parent.mkdir(parents=True)
+            Image.new("RGB", (300, 200), "white").save(page_image)
+            dual_run_report = {
+                "status": "blocked",
+                "missing_v2_records": [
+                    {
+                        "review_key": "boardwalk:campfire:missing_v2_record",
+                        "row_key": "boardwalk:campfire",
+                        "canonical_slug": "campfire",
+                        "calendar_group_key": "boardwalk",
+                        "title": "Campfire",
+                        "content_sha256": "oldsourcehash",
+                        "page_number": 1,
+                        "page_image_path": str(page_image),
+                        "field_bbox": [40, 50, 260, 80],
+                        "v2_value": {
+                            "title": "Campfire",
+                            "schedule": "Nightly at 6:30pm",
+                            "location": "Village Green Lawn",
+                            "price": "free",
+                        },
+                    }
+                ],
+            }
+
+            with patch.object(build_review_queue_v3, "PROCESSED_DIR", root):
+                tasks = build_review_tasks([], dual_run_report=dual_run_report)
+
+            task = tasks[0]
+            crop_path = Path(task["field_crop"])
+
+            self.assertEqual(hashlib.sha256(page_image.read_bytes()).hexdigest(), task["page_image_sha256"])
+            self.assertTrue(crop_path.exists())
+            self.assertEqual(hashlib.sha256(crop_path.read_bytes()).hexdigest(), task["field_crop_sha256"])
+            with Image.open(crop_path) as crop_image:
+                self.assertEqual((220, 30), crop_image.size)
+            decision = build_review_decision(
+                task,
+                reviewer="josh",
+                decision="approve",
+                reason="Verified old row was intentionally removed from v3",
+            )
+            self.assertEqual("approve", decision["decision"])
+
+    def test_review_queue_suppresses_expected_large_official_image_warning(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            page_image = root / "page_images" / "oldsourcehash" / "page_001.png"
+            page_image.parent.mkdir(parents=True)
+            Image.new("RGB", (120, 80), "white").save(page_image)
+            dual_run_report = {
+                "status": "blocked",
+                "missing_v2_records": [
+                    {
+                        "review_key": "boardwalk:campfire:missing_v2_record",
+                        "row_key": "boardwalk:campfire",
+                        "canonical_slug": "campfire",
+                        "calendar_group_key": "boardwalk",
+                        "title": "Campfire",
+                        "content_sha256": "oldsourcehash",
+                        "page_number": 1,
+                        "page_image_path": str(page_image),
+                        "field_bbox": [40, 50, 100, 70],
+                    }
+                ],
+            }
+
+            original_limit = Image.MAX_IMAGE_PIXELS
+            Image.MAX_IMAGE_PIXELS = 119 * 80
+            try:
+                with warnings.catch_warnings(record=True) as captured:
+                    warnings.simplefilter("always")
+                    with patch.object(build_review_queue_v3, "PROCESSED_DIR", root):
+                        tasks = build_review_tasks([], dual_run_report=dual_run_report)
+            finally:
+                Image.MAX_IMAGE_PIXELS = original_limit
+
+            warning_categories = [warning.category for warning in captured]
+
+            self.assertNotIn(Image.DecompressionBombWarning, warning_categories)
+            self.assertTrue(Path(tasks[0]["field_crop"]).exists())
+
+    def test_review_queue_uses_page_artifact_for_missing_v2_record_without_bbox(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            page_image = root / "page_images" / "oldsourcehash" / "page_001.png"
+            page_image.parent.mkdir(parents=True)
+            Image.new("RGB", (120, 80), "white").save(page_image)
+            dual_run_report = {
+                "status": "blocked",
+                "missing_v2_records": [
+                    {
+                        "review_key": "boardwalk:campfire:missing_v2_record",
+                        "row_key": "boardwalk:campfire",
+                        "canonical_slug": "campfire",
+                        "calendar_group_key": "boardwalk",
+                        "title": "Campfire",
+                        "content_sha256": "oldsourcehash",
+                        "page_number": 1,
+                        "page_image_path": str(page_image),
+                        "field_bbox": None,
+                    }
+                ],
+            }
+
+            with patch.object(build_review_queue_v3, "PROCESSED_DIR", root):
+                tasks = build_review_tasks([], dual_run_report=dual_run_report)
+
+            task = tasks[0]
+            page_hash = hashlib.sha256(page_image.read_bytes()).hexdigest()
+
+            self.assertEqual(page_hash, task["page_image_sha256"])
+            self.assertEqual(str(page_image), task["field_crop"])
+            self.assertEqual(page_hash, task["field_crop_sha256"])
+            decision = build_review_decision(
+                task,
+                reviewer="josh",
+                decision="approve",
+                reason="Verified old row should not publish in v3",
+            )
+            self.assertEqual("approve", decision["decision"])
 
     def test_promote_gold_v3_preview_only_includes_gated_rows_with_field_evidence(self) -> None:
         auto_candidate = {
@@ -9375,6 +10529,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
                 "rows": [{**clean_preview["rows"][0], "document_family": "vertical_digital_rec_sign"}],
             }
+            unknown_family_auto_publishable_preview = {
+                "publication_mode": "vision_v3_preview",
+                "generated_at": "2026-06-28T12:00:00+00:00",
+                "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                "rows": [{**clean_preview["rows"][0], "document_family": "unknown_visual_schedule"}],
+            }
             mismatched_field_source_hash_preview = {
                 "publication_mode": "vision_v3_preview",
                 "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
@@ -9520,6 +10680,68 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     }
                 ],
             }
+            manual_with_placeholder_reviewer_preview = {
+                "publication_mode": "vision_v3_preview",
+                "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                "rows": [
+                    {
+                        **clean_preview["rows"][0],
+                        "validation_status": "manually_approved",
+                        "review_status": "manual_review_approved",
+                        "review_decision": {
+                            "decision": "edit",
+                            "content_sha256": "sourcehash",
+                            "page_image_sha256": "pagehash",
+                            "field_crop_sha256": "schedulecrop",
+                            "reviewer": "reviewer-name",
+                            "decided_at": "2026-06-28T12:00:00Z",
+                            "reason": "Corrected visible schedule crop.",
+                            "approved_fields": {
+                                "schedule": {
+                                    "raw_value": "Daily at 1:30pm",
+                                    "normalized_value": {
+                                        "schedule_type": "recurring",
+                                        "days_of_week": ALL_DAYS,
+                                        "start_time": "13:30",
+                                        "timezone": "America/New_York",
+                                    },
+                                }
+                            },
+                        },
+                    }
+                ],
+            }
+            manual_with_placeholder_reason_preview = {
+                "publication_mode": "vision_v3_preview",
+                "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
+                "rows": [
+                    {
+                        **clean_preview["rows"][0],
+                        "validation_status": "manually_approved",
+                        "review_status": "manual_review_approved",
+                        "review_decision": {
+                            "decision": "edit",
+                            "content_sha256": "sourcehash",
+                            "page_image_sha256": "pagehash",
+                            "field_crop_sha256": "schedulecrop",
+                            "reviewer": "josh",
+                            "decided_at": "2026-06-28T12:00:00Z",
+                            "reason": "Verified against source crop",
+                            "approved_fields": {
+                                "schedule": {
+                                    "raw_value": "Daily at 1:30pm",
+                                    "normalized_value": {
+                                        "schedule_type": "recurring",
+                                        "days_of_week": ALL_DAYS,
+                                        "start_time": "13:30",
+                                        "timezone": "America/New_York",
+                                    },
+                                }
+                            },
+                        },
+                    }
+                ],
+            }
             manual_with_stale_crop_preview = {
                 "publication_mode": "vision_v3_preview",
                 "summary": {"gold_rows": 1, "skipped_not_publishable": 0},
@@ -9600,6 +10822,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 ],
             }
             blocked_source_drift_report = {
+                "report_kind": "v3_quarter_source_drift",
+                "schema_version": "v3_quarter_source_drift_001",
                 "generated_at": "2026-06-28T12:01:00+00:00",
                 "status": "review_required",
                 "publish_blockers": [
@@ -9609,6 +10833,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 ],
             }
             reviewed_source_drift_report_shell = {
+                "report_kind": "v3_quarter_source_drift",
+                "schema_version": "v3_quarter_source_drift_001",
                 "generated_at": "2026-06-28T12:01:00+00:00",
                 "status": "reviewed",
                 "review_status": "manual_review_approved",
@@ -9632,6 +10858,20 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 **reviewed_source_drift_report_shell,
                 "reviewed_source_drift_task_ids": ["source-drift-boardwalk-blocker-unrelated"],
                 "missing_source_drift_task_ids": [],
+            }
+            placeholder_reviewer_source_drift_report = {
+                **reviewed_source_drift_report,
+                "review_decision": {
+                    **reviewed_source_drift_report["review_decision"],
+                    "reviewer": "reviewer-name",
+                },
+            }
+            placeholder_reason_source_drift_report = {
+                **reviewed_source_drift_report,
+                "review_decision": {
+                    **reviewed_source_drift_report["review_decision"],
+                    "reason": "Verified against source crop",
+                },
             }
             incomplete_reviewed_source_drift_report = {
                 **reviewed_source_drift_report,
@@ -9660,6 +10900,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             rollout_disallowed_family = evaluate_publish_readiness(
                 disallowed_family_preview,
                 flags=load_publish_flags(rollout_flags),
+                dual_run_report=clean_dual_run_report,
+            )
+            unknown_family_auto_publishable = evaluate_publish_readiness(
+                unknown_family_auto_publishable_preview,
+                flags=load_publish_flags(enabled_flags),
                 dual_run_report=clean_dual_run_report,
             )
             dirty = evaluate_publish_readiness(
@@ -9852,6 +11097,16 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 flags=load_publish_flags(enabled_flags),
                 dual_run_report=clean_dual_run_report,
             )
+            manual_with_placeholder_reviewer = evaluate_publish_readiness(
+                manual_with_placeholder_reviewer_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+            )
+            manual_with_placeholder_reason = evaluate_publish_readiness(
+                manual_with_placeholder_reason_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+            )
             manual_with_stale_crop = evaluate_publish_readiness(
                 manual_with_stale_crop_preview,
                 flags=load_publish_flags(enabled_flags),
@@ -9890,6 +11145,18 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 flags=load_publish_flags(enabled_flags),
                 dual_run_report=clean_dual_run_report,
                 source_drift_report=forged_reviewed_source_drift_report,
+            )
+            source_drift_placeholder_reviewer = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+                source_drift_report=placeholder_reviewer_source_drift_report,
+            )
+            source_drift_placeholder_reason = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report=clean_dual_run_report,
+                source_drift_report=placeholder_reason_source_drift_report,
             )
             source_drift_incomplete_review = evaluate_publish_readiness(
                 clean_preview,
@@ -9941,6 +11208,17 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     },
                 },
             )
+            dual_run_stale_source_status_schema = evaluate_publish_readiness(
+                clean_preview,
+                flags=load_publish_flags(enabled_flags),
+                dual_run_report={
+                    **clean_dual_run_report,
+                    "source_coverage": {
+                        **clean_dual_run_report["source_coverage"],
+                        "stale_source_status_schema_ids": ["source-doc-schema"],
+                    },
+                },
+            )
 
         self.assertFalse(disabled["ready"])
         self.assertIn("v3_publish_disabled", disabled["errors"])
@@ -9952,6 +11230,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("row_calendar_group_not_enabled_for_v3:0", rollout_disallowed_group["errors"])
         self.assertFalse(rollout_disallowed_family["ready"])
         self.assertIn("row_document_family_not_enabled_for_v3:0", rollout_disallowed_family["errors"])
+        self.assertFalse(unknown_family_auto_publishable["ready"])
+        self.assertIn("row_document_family_not_auto_publishable:0", unknown_family_auto_publishable["errors"])
         self.assertFalse(dirty["ready"])
         self.assertIn("preview_has_skipped_candidates", dirty["errors"])
         self.assertFalse(missing_url["ready"])
@@ -10033,6 +11313,10 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("row_missing_manual_review_decided_at:0", manual_missing_review_metadata["errors"])
         self.assertIn("row_missing_manual_review_reason:0", manual_missing_review_metadata["errors"])
         self.assertIn("row_missing_manual_review_approved_fields:0", manual_missing_review_metadata["errors"])
+        self.assertFalse(manual_with_placeholder_reviewer["ready"])
+        self.assertIn("row_placeholder_manual_review_reviewer:0", manual_with_placeholder_reviewer["errors"])
+        self.assertFalse(manual_with_placeholder_reason["ready"])
+        self.assertIn("row_placeholder_manual_review_reason:0", manual_with_placeholder_reason["errors"])
         self.assertFalse(manual_with_stale_crop["ready"])
         self.assertIn("row_stale_manual_review_field_crop:0", manual_with_stale_crop["errors"])
         self.assertFalse(manual_with_wrong_field_crop["ready"])
@@ -10061,6 +11345,16 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "source_drift_report_review_manifest_mismatch",
             source_drift_forged_review["errors"],
         )
+        self.assertFalse(source_drift_placeholder_reviewer["ready"])
+        self.assertIn(
+            "source_drift_report_placeholder_reviewer",
+            source_drift_placeholder_reviewer["errors"],
+        )
+        self.assertFalse(source_drift_placeholder_reason["ready"])
+        self.assertIn(
+            "source_drift_report_placeholder_reason",
+            source_drift_placeholder_reason["errors"],
+        )
         self.assertFalse(source_drift_incomplete_review["ready"])
         self.assertIn(
             "source_drift_report_missing_reviewed_tasks",
@@ -10075,12 +11369,82 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("dual_run_missing_expected_sources", dual_run_empty_expected_sources["errors"])
         self.assertFalse(dual_run_incomplete_coverage["ready"])
         self.assertIn("dual_run_unprocessed_sources", dual_run_incomplete_coverage["errors"])
+        self.assertFalse(dual_run_stale_source_status_schema["ready"])
+        self.assertIn(
+            "dual_run_stale_source_status_schema",
+            dual_run_stale_source_status_schema["errors"],
+        )
+
+    def test_publish_gold_v3_rejects_unparseable_review_decided_at(self) -> None:
+        flags = {"public_gold_source": "v3", "v3_publish_enabled": True}
+        manual_preview = clean_publish_v3_preview()
+        manual_preview["rows"][0] = {
+            **manual_preview["rows"][0],
+            "validation_status": "manually_approved",
+            "review_status": "manual_review_approved",
+            "review_decision": {
+                "decision": "edit",
+                "content_sha256": "sourcehash",
+                "page_image_sha256": "pagehash",
+                "field_crop_sha256": "schedulecrop",
+                "reviewer": "josh",
+                "decided_at": "not-a-date",
+                "reason": "Corrected visible schedule crop.",
+                "approved_fields": {
+                    "schedule": {
+                        "raw_value": "Daily at 1:30pm",
+                        "normalized_value": {
+                            "schedule_type": "recurring",
+                            "days_of_week": ALL_DAYS,
+                            "start_time": "13:30",
+                            "timezone": "America/New_York",
+                        },
+                    }
+                },
+            },
+        }
+        source_drift_report = {
+            "generated_at": "2026-06-28T12:01:00+00:00",
+            "status": "reviewed",
+            "review_status": "manual_review_approved",
+            "calendar_group_key": "boardwalk",
+            "publish_blockers": ["recognized_family_changed"],
+            "reviewed_source_drift_task_ids": [
+                "source-drift-boardwalk-blocker-recognized-family-changed",
+            ],
+            "missing_source_drift_task_ids": [],
+            "review_decision": {
+                "decision": "approve",
+                "reviewer": "josh",
+                "decided_at": "not-a-date",
+                "reason": "Reviewed source drift report.",
+            },
+        }
+
+        manual_result = evaluate_publish_readiness(
+            manual_preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_coverage_report(manual_preview),
+        )
+        source_drift_result = evaluate_publish_readiness(
+            clean_publish_v3_preview(),
+            flags=flags,
+            dual_run_report=clean_dual_run_coverage_report(),
+            source_drift_report=source_drift_report,
+        )
+
+        self.assertFalse(manual_result["ready"])
+        self.assertIn("row_invalid_manual_review_decided_at:0", manual_result["errors"])
+        self.assertFalse(source_drift_result["ready"])
+        self.assertIn("source_drift_report_invalid_decided_at", source_drift_result["errors"])
 
     def test_publish_gold_v3_requires_fresh_passing_monitoring_report_when_enabled(self) -> None:
         preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
         flags = {"public_gold_source": "v3", "v3_publish_enabled": True}
         clean_dual_run_report = clean_dual_run_coverage_report()
         passing_monitoring_report = {
+            "report_kind": "source_trust_monitoring_report",
+            "schema_version": "source_trust_monitoring_report_001",
             "generated_at": "2026-06-28T12:01:00+00:00",
             "status": "pass",
             "changed_sources": [],
@@ -10106,6 +11470,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             flags=flags,
             dual_run_report=clean_dual_run_report,
             monitoring_report={
+                "report_kind": "source_trust_monitoring_report",
+                "schema_version": "source_trust_monitoring_report_001",
                 "generated_at": "2026-06-28T12:01:00+00:00",
                 "status": "blocked",
                 "changed_sources": ["source_freshness:hash_changed:https://example.com/calendar.pdf"],
@@ -10119,6 +11485,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             flags=flags,
             dual_run_report=clean_dual_run_report,
             monitoring_report={
+                "report_kind": "source_trust_monitoring_report",
+                "schema_version": "source_trust_monitoring_report_001",
                 "generated_at": "2026-06-28T12:01:00+00:00",
                 "status": "attention",
                 "changed_sources": [],
@@ -10134,6 +11502,34 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             monitoring_report=passing_monitoring_report,
             require_monitoring_report=True,
         )
+        wrong_kind = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report={**passing_monitoring_report, "report_kind": "other_report"},
+            require_monitoring_report=True,
+        )
+        missing_schema_version = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report={
+                key: value
+                for key, value in passing_monitoring_report.items()
+                if key != "schema_version"
+            },
+            require_monitoring_report=True,
+        )
+        stale_schema_version = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            monitoring_report={
+                **passing_monitoring_report,
+                "schema_version": "source_trust_monitoring_report_000",
+            },
+            require_monitoring_report=True,
+        )
 
         self.assertFalse(missing["ready"])
         self.assertIn("missing_monitoring_report", missing["errors"])
@@ -10144,6 +11540,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("monitoring_changed_sources", blocked["errors"])
         self.assertFalse(attention["ready"])
         self.assertIn("monitoring_affected_rows", attention["errors"])
+        self.assertFalse(wrong_kind["ready"])
+        self.assertIn("invalid_monitoring_report_kind", wrong_kind["errors"])
+        self.assertFalse(missing_schema_version["ready"])
+        self.assertIn("monitoring_report_missing_schema_version", missing_schema_version["errors"])
+        self.assertFalse(stale_schema_version["ready"])
+        self.assertIn("invalid_monitoring_report_schema_version", stale_schema_version["errors"])
         self.assertTrue(passed["ready"])
 
     def test_publish_gold_v3_requires_fresh_source_metrics_report_when_enabled(self) -> None:
@@ -10153,7 +11555,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         clean_dual_run_report = clean_dual_run_coverage_report()
         clean_metrics_report = {
             "report_kind": "vision_v3_source_metrics",
+            "schema_version": "vision_v3_source_metrics_001",
             "generated_at": "2026-06-28T12:01:00+00:00",
+            "v3_preview_fingerprint": publish_gold_v3._dual_run_preview_fingerprint(preview),
             "summary": {
                 "source_count": 1,
                 "candidate_count": preview["summary"]["input_candidates"],
@@ -10198,6 +11602,58 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             source_metrics_report={**clean_metrics_report, "sources": [{"source_sha256": "otherhash"}]},
             require_source_metrics_report=True,
         )
+        fingerprint_mismatch = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_metrics_report={**clean_metrics_report, "v3_preview_fingerprint": "old-preview-fingerprint"},
+            require_source_metrics_report=True,
+        )
+        missing_fingerprint = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_metrics_report={
+                key: value
+                for key, value in clean_metrics_report.items()
+                if key != "v3_preview_fingerprint"
+            },
+            require_source_metrics_report=True,
+        )
+        missing_schema_version = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_metrics_report={
+                key: value
+                for key, value in clean_metrics_report.items()
+                if key != "schema_version"
+            },
+            require_source_metrics_report=True,
+        )
+        stale_schema_version = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_metrics_report={**clean_metrics_report, "schema_version": "vision_v3_source_metrics_000"},
+            require_source_metrics_report=True,
+        )
+        missing_expected_source = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report={
+                **clean_dual_run_report,
+                "source_coverage": {
+                    **clean_dual_run_report["source_coverage"],
+                    "expected_source_count": 2,
+                    "expected_source_hashes": ["sourcehash", "source-without-preview-row"],
+                    "expected_source_hash_count": 2,
+                    "processed_source_count": 2,
+                },
+            },
+            source_metrics_report=clean_metrics_report,
+            require_source_metrics_report=True,
+        )
         passed = evaluate_publish_readiness(
             preview,
             flags=flags,
@@ -10216,12 +11672,52 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("source_metrics_candidate_count_mismatch", count_mismatch["errors"])
         self.assertFalse(missing_source["ready"])
         self.assertIn("source_metrics_missing_preview_sources", missing_source["errors"])
+        self.assertFalse(fingerprint_mismatch["ready"])
+        self.assertIn("source_metrics_preview_fingerprint_mismatch", fingerprint_mismatch["errors"])
+        self.assertFalse(missing_fingerprint["ready"])
+        self.assertIn("source_metrics_missing_preview_fingerprint", missing_fingerprint["errors"])
+        self.assertFalse(missing_schema_version["ready"])
+        self.assertIn("source_metrics_missing_schema_version", missing_schema_version["errors"])
+        self.assertFalse(stale_schema_version["ready"])
+        self.assertIn("invalid_source_metrics_schema_version", stale_schema_version["errors"])
+        self.assertFalse(missing_expected_source["ready"])
+        self.assertIn("source_metrics_missing_dual_run_expected_sources", missing_expected_source["errors"])
         self.assertTrue(passed["ready"], passed)
 
     def test_publish_gold_v3_blocks_pending_review_queue_when_required(self) -> None:
         preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
         flags = {"public_gold_source": "v3", "v3_publish_enabled": True}
         clean_dual_run_report = clean_dual_run_coverage_report()
+        blocked_dual_run_report = {
+            **clean_dual_run_coverage_report(preview),
+            "status": "blocked",
+            "publish_blockers": ["unreviewed_v2_v3_field_diffs"],
+            "manual_review_backlog": 1,
+            "unreviewed_diff_keys": ["boardwalk:poolside-activities:schedule"],
+            "field_diffs": [
+                {
+                    "diff_key": "boardwalk:poolside-activities:schedule",
+                    "calendar_group_key": "boardwalk",
+                    "canonical_slug": "poolside-activities",
+                    "field": "schedule",
+                    "v2_value": "Daily at 1:00pm",
+                    "v3_value": "Daily at 1:30pm",
+                    "content_sha256": "sourcehash",
+                    "v3_field_evidence": {
+                        "source": {
+                            "content_sha256": "sourcehash",
+                            "page_number": 1,
+                            "page_image_sha256": "pagehash",
+                            "page_image_path": "page.png",
+                            "crop_storage_path": "schedule.png",
+                            "crop_sha256": "schedulecrop",
+                            "bbox_px": [0, 0, 100, 40],
+                        },
+                        "engines": [{"text": "Daily at 1:30pm"}, {"text": "Daily at 1:30pm"}],
+                    },
+                }
+            ],
+        }
 
         missing = evaluate_publish_readiness(
             preview,
@@ -10249,7 +11745,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "status": "resolved",
                 "task_type": "ocr_disagreement",
                 "content_sha256": "hash-1",
-                "field_crop": "fields/review-1.png",
+                "field_crop": "https://example.test/review-1.png",
                 "source_url": "https://example.test/official.pdf",
                 "validation_findings": ["engine_disagreement:schedule"],
             }
@@ -10297,6 +11793,20 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             },
             require_review_queue=True,
         )
+        missing_visual_file_tasks = [
+            {
+                **resolved_tasks[0],
+                "field_crop": "fields/review-1.png",
+            }
+        ]
+        missing_visual_file_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=missing_visual_file_tasks,
+            review_queue_report=build_review_queue_report(missing_visual_file_tasks),
+            require_review_queue=True,
+        )
         missing_source_url_report = evaluate_publish_readiness(
             preview,
             flags=flags,
@@ -10324,6 +11834,253 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             },
             require_review_queue=True,
         )
+        stale_review_decision_tasks = [
+            {
+                **resolved_tasks[0],
+                "stale_review_decision": {
+                    "decision": "approve",
+                    "reviewer": "josh",
+                    "stale_reasons": ["stale_review_page_image_sha256"],
+                },
+            }
+        ]
+        stale_review_decision_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=stale_review_decision_tasks,
+            review_queue_report=build_review_queue_report(stale_review_decision_tasks),
+            require_review_queue=True,
+        )
+        current_content_tasks = [
+            {
+                **resolved_tasks[0],
+                "content_sha256": "current-content",
+                "page_image_sha256": "current-page",
+                "field_crop_sha256": "current-crop",
+            }
+        ]
+        stale_content_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=current_content_tasks,
+            review_queue_report=build_review_queue_report(
+                [
+                    {
+                        **current_content_tasks[0],
+                        "content_sha256": "stale-content",
+                        "page_image_sha256": "stale-page",
+                        "field_crop_sha256": "stale-crop",
+                    }
+                ]
+            ),
+            require_review_queue=True,
+        )
+        missing_fingerprint_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=resolved_tasks,
+            review_queue_report={
+                key: value
+                for key, value in resolved_report.items()
+                if key != "review_queue_fingerprint"
+            },
+            require_review_queue=True,
+        )
+        missing_schema_version_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=resolved_tasks,
+            review_queue_report={
+                key: value
+                for key, value in resolved_report.items()
+                if key != "schema_version"
+            },
+            require_review_queue=True,
+        )
+        stale_schema_version_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=resolved_tasks,
+            review_queue_report={**resolved_report, "schema_version": "review_queue_v3_report_000"},
+            require_review_queue=True,
+        )
+        missing_review_queue_generated_at_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=resolved_tasks,
+            review_queue_report={
+                key: value
+                for key, value in resolved_report.items()
+                if key != "generated_at"
+            },
+            require_review_queue=True,
+        )
+        stale_review_queue_generated_at_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=resolved_tasks,
+            review_queue_report={**resolved_report, "generated_at": "2026-06-28T11:59:00+00:00"},
+            require_review_queue=True,
+        )
+        stale_publish_gate_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=resolved_tasks,
+            review_queue_report={
+                **resolved_report,
+                "publish_gate_blockers": {
+                    **resolved_report["publish_gate_blockers"],
+                    "pending_task_count": 1,
+                    "pending_task_count_by_reason": {"unreviewed_new_v3_rows": 1},
+                },
+            },
+            require_review_queue=True,
+        )
+        unresolved_publish_gate_tasks = [
+            {
+                **resolved_tasks[0],
+                "publish_gate_blocker": True,
+                "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+            }
+        ]
+        stale_publish_gate_summary_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "summary": {
+                    **build_review_queue_report(unresolved_publish_gate_tasks)["summary"],
+                    "publish_gate_blocker_task_count": 2,
+                    "pending_publish_gate_blocker_task_count": 0,
+                    "reviewed_publish_gate_blocker_task_count": 2,
+                    "publish_blocker_checklist_row_count": 0,
+                    "publish_blocker_checklist_batch_count": 0,
+                    "pending_publish_gate_blocker_count_by_reason": {},
+                },
+            },
+            require_review_queue=True,
+        )
+        stale_publish_gate_reason_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "publish_gate_blockers": {
+                    **build_review_queue_report(unresolved_publish_gate_tasks)["publish_gate_blockers"],
+                    "pending_task_count_by_reason": {"unreviewed_v2_v3_field_diffs": 1},
+                },
+            },
+            require_review_queue=True,
+        )
+        stale_publish_gate_source_url_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "publish_gate_blockers": {
+                    **build_review_queue_report(unresolved_publish_gate_tasks)["publish_gate_blockers"],
+                    "pending_task_count_by_source_url": {"https://example.test/wrong.pdf": 1},
+                },
+            },
+            require_review_queue=True,
+        )
+        stale_publish_gate_reason_ids_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "publish_gate_blockers": {
+                    **build_review_queue_report(unresolved_publish_gate_tasks)["publish_gate_blockers"],
+                    "pending_task_ids_by_reason": {"unreviewed_new_v3_rows": ["wrong-task"]},
+                },
+            },
+            require_review_queue=True,
+        )
+        stale_publish_gate_source_url_ids_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "publish_gate_blockers": {
+                    **build_review_queue_report(unresolved_publish_gate_tasks)["publish_gate_blockers"],
+                    "pending_task_ids_by_source_url": {"https://example.test/official.pdf": ["wrong-task"]},
+                },
+            },
+            require_review_queue=True,
+        )
+        stale_publish_gate_pending_ids_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "publish_gate_blockers": {
+                    **build_review_queue_report(unresolved_publish_gate_tasks)["publish_gate_blockers"],
+                    "pending_task_ids": ["wrong-task"],
+                },
+            },
+            require_review_queue=True,
+        )
+        stale_publish_gate_batches_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report={
+                **build_review_queue_report(unresolved_publish_gate_tasks),
+                "publish_blocker_batches": [
+                    {
+                        **build_review_queue_report(unresolved_publish_gate_tasks)["publish_blocker_batches"][0],
+                        "task_ids": ["wrong-task"],
+                    }
+                ],
+            },
+            require_review_queue=True,
+        )
+        unresolved_publish_gate_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            review_tasks=unresolved_publish_gate_tasks,
+            review_queue_report=build_review_queue_report(unresolved_publish_gate_tasks),
+            require_review_queue=True,
+        )
+        missing_dual_run_review_task_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=blocked_dual_run_report,
+            review_tasks=[],
+            review_queue_report=build_review_queue_report([]),
+            require_review_queue=True,
+        )
+        covered_dual_run_tasks = build_review_tasks([], dual_run_report=blocked_dual_run_report)
+        covered_dual_run_review_task_report = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=blocked_dual_run_report,
+            review_tasks=covered_dual_run_tasks,
+            review_queue_report=build_review_queue_report(covered_dual_run_tasks),
+            require_review_queue=True,
+        )
 
         self.assertFalse(missing["ready"])
         self.assertIn("missing_review_queue", missing["errors"])
@@ -10336,12 +12093,186 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("review_queue_report_task_count_mismatch", stale_report["errors"])
         self.assertFalse(missing_visual_report["ready"])
         self.assertIn("review_queue_report_missing_visual_artifacts", missing_visual_report["errors"])
+        self.assertFalse(missing_visual_file_report["ready"])
+        self.assertIn("review_queue_report_missing_visual_artifact_files", missing_visual_file_report["errors"])
         self.assertFalse(missing_source_url_report["ready"])
         self.assertIn("review_queue_report_missing_source_urls", missing_source_url_report["errors"])
         self.assertFalse(stale_pending_report["ready"])
         self.assertIn("review_queue_report_pending_task_count_mismatch", stale_pending_report["errors"])
+        self.assertFalse(stale_review_decision_report["ready"])
+        self.assertIn("review_queue_report_stale_review_decisions", stale_review_decision_report["errors"])
+        self.assertFalse(stale_content_report["ready"])
+        self.assertIn("review_queue_report_fingerprint_mismatch", stale_content_report["errors"])
+        self.assertFalse(missing_fingerprint_report["ready"])
+        self.assertIn("review_queue_report_missing_fingerprint", missing_fingerprint_report["errors"])
+        self.assertFalse(missing_schema_version_report["ready"])
+        self.assertIn("review_queue_report_missing_schema_version", missing_schema_version_report["errors"])
+        self.assertFalse(stale_schema_version_report["ready"])
+        self.assertIn("invalid_review_queue_report_schema_version", stale_schema_version_report["errors"])
+        self.assertFalse(missing_review_queue_generated_at_report["ready"])
+        self.assertIn(
+            "review_queue_report_missing_generated_at",
+            missing_review_queue_generated_at_report["errors"],
+        )
+        self.assertFalse(stale_review_queue_generated_at_report["ready"])
+        self.assertIn("review_queue_report_stale", stale_review_queue_generated_at_report["errors"])
+        self.assertFalse(stale_publish_gate_report["ready"])
+        self.assertIn("review_queue_report_pending_publish_gate_blockers", stale_publish_gate_report["errors"])
+        self.assertFalse(stale_publish_gate_summary_report["ready"])
+        self.assertIn(
+            "review_queue_report_summary_publish_gate_blocker_count_mismatch",
+            stale_publish_gate_summary_report["errors"],
+        )
+        self.assertIn(
+            "review_queue_report_summary_pending_publish_gate_blocker_count_mismatch",
+            stale_publish_gate_summary_report["errors"],
+        )
+        self.assertIn(
+            "review_queue_report_summary_reviewed_publish_gate_blocker_count_mismatch",
+            stale_publish_gate_summary_report["errors"],
+        )
+        self.assertIn(
+            "review_queue_report_summary_publish_gate_blocker_reason_counts_mismatch",
+            stale_publish_gate_summary_report["errors"],
+        )
+        self.assertIn(
+            "review_queue_report_summary_publish_blocker_checklist_row_count_mismatch",
+            stale_publish_gate_summary_report["errors"],
+        )
+        self.assertIn(
+            "review_queue_report_summary_publish_blocker_checklist_batch_count_mismatch",
+            stale_publish_gate_summary_report["errors"],
+        )
+        self.assertFalse(stale_publish_gate_reason_report["ready"])
+        self.assertIn(
+            "review_queue_report_publish_gate_blocker_reason_counts_mismatch",
+            stale_publish_gate_reason_report["errors"],
+        )
+        self.assertFalse(stale_publish_gate_source_url_report["ready"])
+        self.assertIn(
+            "review_queue_report_publish_gate_blocker_source_url_counts_mismatch",
+            stale_publish_gate_source_url_report["errors"],
+        )
+        self.assertFalse(stale_publish_gate_reason_ids_report["ready"])
+        self.assertIn(
+            "review_queue_report_publish_gate_blocker_reason_task_ids_mismatch",
+            stale_publish_gate_reason_ids_report["errors"],
+        )
+        self.assertFalse(stale_publish_gate_source_url_ids_report["ready"])
+        self.assertIn(
+            "review_queue_report_publish_gate_blocker_source_url_task_ids_mismatch",
+            stale_publish_gate_source_url_ids_report["errors"],
+        )
+        self.assertFalse(stale_publish_gate_pending_ids_report["ready"])
+        self.assertIn(
+            "review_queue_report_pending_publish_gate_task_ids_mismatch",
+            stale_publish_gate_pending_ids_report["errors"],
+        )
+        self.assertFalse(stale_publish_gate_batches_report["ready"])
+        self.assertIn(
+            "review_queue_report_publish_blocker_batches_mismatch",
+            stale_publish_gate_batches_report["errors"],
+        )
+        self.assertFalse(unresolved_publish_gate_report["ready"])
+        self.assertIn("review_queue_report_pending_publish_gate_blockers", unresolved_publish_gate_report["errors"])
+        self.assertIn(
+            "review_queue_report_pending_publish_gate_review_artifacts_missing",
+            unresolved_publish_gate_report["errors"],
+        )
+        self.assertNotIn(
+            "review_queue_report_pending_publish_gate_blocker_count_mismatch",
+            unresolved_publish_gate_report["errors"],
+        )
+        self.assertFalse(missing_dual_run_review_task_report["ready"])
+        self.assertIn(
+            "review_queue_missing_dual_run_review_tasks",
+            missing_dual_run_review_task_report["errors"],
+        )
+        self.assertIn(
+            "dual-run-diff-boardwalk-poolside-activities-schedule",
+            missing_dual_run_review_task_report["missing_dual_run_review_task_ids"],
+        )
+        self.assertNotIn(
+            "review_queue_missing_dual_run_review_tasks",
+            covered_dual_run_review_task_report["errors"],
+        )
         self.assertTrue(resolved["ready"])
         self.assertEqual(0, resolved["pending_review_task_count"])
+
+    def test_publish_gold_v3_requires_source_backed_dual_run_review_manifests(self) -> None:
+        preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
+        flags = {"public_gold_source": "v3", "v3_publish_enabled": True}
+        base_review = {
+            "key": "boardwalk:poolside-activities:schedule",
+            "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "content_sha256": "sourcehash",
+            "page_image_sha256": "pagehash",
+            "field_crop_sha256": "schedulecrop",
+            "reviewer": "josh",
+            "decided_at": "2026-06-28T12:00:00Z",
+            "decision": "approve",
+            "reason": "Visible in the v3 crop.",
+        }
+        missing_source = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report={
+                **clean_dual_run_coverage_report(preview),
+                "reviewed_diff_reviews": [base_review],
+            },
+        )
+        non_public_source = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report={
+                **clean_dual_run_coverage_report(preview),
+                "reviewed_diff_reviews": [
+                    {
+                        **base_review,
+                        "source_url": "manual://boardwalk/review",
+                        "source_metadata": {"canonical_url": "manual://boardwalk/review"},
+                    }
+                ],
+            },
+        )
+        missing_metadata = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report={
+                **clean_dual_run_coverage_report(preview),
+                "reviewed_diff_reviews": [
+                    {
+                        **base_review,
+                        "source_url": "https://example.com/calendar.pdf",
+                    }
+                ],
+            },
+        )
+        passed = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report={
+                **clean_dual_run_coverage_report(preview),
+                "reviewed_diff_reviews": [
+                    {
+                        **base_review,
+                        "source_url": "https://example.com/calendar.pdf",
+                        "source_metadata": {
+                            "canonical_url": "https://example.com/calendar.pdf",
+                            "source_kind": "official_pdf",
+                        },
+                    }
+                ],
+            },
+        )
+
+        self.assertFalse(missing_source["ready"])
+        self.assertIn("dual_run_review_manifest_missing_source_url:reviewed_diff_reviews:0", missing_source["errors"])
+        self.assertFalse(non_public_source["ready"])
+        self.assertIn("dual_run_review_manifest_non_public_source_url:reviewed_diff_reviews:0", non_public_source["errors"])
+        self.assertFalse(missing_metadata["ready"])
+        self.assertIn("dual_run_review_manifest_missing_source_metadata:reviewed_diff_reviews:0", missing_metadata["errors"])
+        self.assertTrue(passed["ready"], passed)
 
     def test_publish_gold_v3_rejects_manual_review_bound_to_wrong_source_document(self) -> None:
         preview = clean_publish_v3_preview()
@@ -10841,12 +12772,51 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertFalse(missing["ready"])
         self.assertIn("dual_run_missing_preview_fingerprint", missing["errors"])
 
+    def test_publish_gold_v3_rejects_inconsistent_clean_dual_run_backlog(self) -> None:
+        preview = clean_publish_v3_preview()
+        inconsistent_report = {
+            **clean_dual_run_coverage_report(preview),
+            "status": "clean",
+            "publish_blockers": [],
+            "unreviewed_diff_keys": [],
+            "unreviewed_new_keys": ["boardwalk:poolside-activities"],
+            "unreviewed_missing_v2_keys": ["boardwalk:campfire"],
+            "unreviewed_status_transition_keys": [
+                "boardwalk:community-hall:needs_review_to_auto_publishable"
+            ],
+            "manual_review_backlog": 3,
+        }
+
+        readiness = evaluate_publish_readiness(
+            preview,
+            flags={"public_gold_source": "v3", "v3_publish_enabled": True},
+            dual_run_report=inconsistent_report,
+        )
+
+        self.assertFalse(readiness["ready"])
+        self.assertIn("unreviewed_new_v3_row:boardwalk:poolside-activities", readiness["errors"])
+        self.assertIn("unreviewed_missing_v2_row:boardwalk:campfire", readiness["errors"])
+        self.assertIn(
+            "unreviewed_status_transition:boardwalk:community-hall:needs_review_to_auto_publishable",
+            readiness["errors"],
+        )
+        self.assertIn("dual_run_manual_review_backlog_nonzero", readiness["errors"])
+
     def test_publish_gold_v3_requires_current_dual_run_report_timestamp(self) -> None:
         preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
         missing_generated_at_report = {
             key: value
             for key, value in clean_dual_run_coverage_report(preview).items()
             if key != "generated_at"
+        }
+        missing_version_report = {
+            key: value
+            for key, value in clean_dual_run_coverage_report(preview).items()
+            if key != "report_version"
+        }
+        stale_version_report = {
+            **clean_dual_run_coverage_report(preview),
+            "report_version": "v3_dual_run_report_000",
         }
         stale_report = {
             **clean_dual_run_coverage_report(preview),
@@ -10863,11 +12833,25 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             flags={"public_gold_source": "v3", "v3_publish_enabled": True},
             dual_run_report=stale_report,
         )
+        missing_version = evaluate_publish_readiness(
+            preview,
+            flags={"public_gold_source": "v3", "v3_publish_enabled": True},
+            dual_run_report=missing_version_report,
+        )
+        stale_version = evaluate_publish_readiness(
+            preview,
+            flags={"public_gold_source": "v3", "v3_publish_enabled": True},
+            dual_run_report=stale_version_report,
+        )
 
         self.assertFalse(missing["ready"])
         self.assertIn("dual_run_missing_generated_at", missing["errors"])
         self.assertFalse(stale["ready"])
         self.assertIn("dual_run_report_stale", stale["errors"])
+        self.assertFalse(missing_version["ready"])
+        self.assertIn("dual_run_missing_report_version", missing_version["errors"])
+        self.assertFalse(stale_version["ready"])
+        self.assertIn("invalid_dual_run_report_version", stale_version["errors"])
 
     def test_publish_gold_v3_requires_source_drift_report_when_enabled(self) -> None:
         preview = clean_publish_v3_preview(generated_at="2026-06-28T12:00:00+00:00")
@@ -10890,8 +12874,19 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "summary": {"source_count": 0, "clean_count": 0, "review_required_count": 0},
         }
         missing_generated_at_source_drift_report = {
+            "report_kind": "v3_quarter_source_drift",
+            "schema_version": "v3_quarter_source_drift_001",
             "status": "clean",
             "publish_blockers": [],
+        }
+        missing_schema_version_source_drift_report = {
+            key: value
+            for key, value in source_drift_report.items()
+            if key != "schema_version"
+        }
+        stale_schema_version_source_drift_report = {
+            **source_drift_report,
+            "schema_version": "v3_quarter_source_drift_000",
         }
 
         missing = evaluate_publish_readiness(
@@ -10935,6 +12930,36 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             source_drift_report=missing_generated_at_source_drift_report,
             require_source_drift_report=True,
         )
+        missing_schema_version = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_drift_report=missing_schema_version_source_drift_report,
+            require_source_drift_report=True,
+        )
+        stale_schema_version = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report=clean_dual_run_report,
+            source_drift_report=stale_schema_version_source_drift_report,
+            require_source_drift_report=True,
+        )
+        missing_expected_source = evaluate_publish_readiness(
+            preview,
+            flags=flags,
+            dual_run_report={
+                **clean_dual_run_report,
+                "source_coverage": {
+                    **clean_dual_run_report["source_coverage"],
+                    "expected_source_count": 2,
+                    "expected_source_hashes": ["sourcehash", "source-without-preview-row"],
+                    "expected_source_hash_count": 2,
+                    "processed_source_count": 2,
+                },
+            },
+            source_drift_report=source_drift_report,
+            require_source_drift_report=True,
+        )
 
         self.assertFalse(missing["ready"])
         self.assertIn("missing_source_drift_report", missing["errors"])
@@ -10947,6 +12972,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("source_drift_report_missing_preview_sources", missing_preview_sources["errors"])
         self.assertFalse(missing_generated_at["ready"])
         self.assertIn("source_drift_report_missing_generated_at", missing_generated_at["errors"])
+        self.assertFalse(missing_schema_version["ready"])
+        self.assertIn("source_drift_report_missing_schema_version", missing_schema_version["errors"])
+        self.assertFalse(stale_schema_version["ready"])
+        self.assertIn("invalid_source_drift_report_schema_version", stale_schema_version["errors"])
+        self.assertFalse(missing_expected_source["ready"])
+        self.assertIn("source_drift_report_missing_dual_run_expected_sources", missing_expected_source["errors"])
 
     def test_source_trust_monitoring_report_includes_generated_at(self) -> None:
         report = {
@@ -10957,6 +12988,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
 
         monitoring_report = trust_report._monitoring_report(report)
 
+        self.assertEqual("source_trust_monitoring_report", monitoring_report["report_kind"])
+        self.assertEqual("source_trust_monitoring_report_001", monitoring_report["schema_version"])
         self.assertEqual("2026-06-28T12:01:00+00:00", monitoring_report["generated_at"])
         self.assertEqual("pass", monitoring_report["status"])
 
@@ -11170,17 +13203,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             source_metrics_path.write_text(json.dumps(clean_source_metrics_report(json.loads(preview_path.read_text()))))
             review_queue_path.write_text("[]")
             review_queue_report_path.write_text(json.dumps(build_review_queue_report([])))
-            monitoring_path.write_text(
-                json.dumps(
-                    {
-                        "generated_at": "2026-06-28T12:01:00+00:00",
-                        "status": "pass",
-                        "changed_sources": [],
-                        "affected_rows": [],
-                        "recommended_action": "none",
-                    }
-                )
-            )
+            monitoring_path.write_text(json.dumps(clean_monitoring_report()))
 
             with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
                 with patch.object(publish_gold_v3, "DEFAULT_SOURCE_DRIFT_REPORT_PATH", drift_path):
@@ -11219,17 +13242,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             source_metrics_path.write_text(json.dumps(clean_source_metrics_report(json.loads(preview_path.read_text()))))
             review_queue_path.write_text("[]")
             review_queue_report_path.write_text(json.dumps(build_review_queue_report([])))
-            monitoring_path.write_text(
-                json.dumps(
-                    {
-                        "generated_at": "2026-06-28T12:01:00+00:00",
-                        "status": "pass",
-                        "changed_sources": [],
-                        "affected_rows": [],
-                        "recommended_action": "none",
-                    }
-                )
-            )
+            monitoring_path.write_text(json.dumps(clean_monitoring_report()))
 
             with patch.object(publish_gold_v3, "DEFAULT_PREVIEW_PATH", preview_path):
                 with patch.object(publish_gold_v3, "DEFAULT_DUAL_RUN_REPORT_PATH", dual_run_path):
@@ -11268,17 +13281,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             source_metrics_path.write_text(json.dumps(clean_source_metrics_report(json.loads(preview_path.read_text()))))
             review_queue_path.write_text("[]")
             review_queue_report_path.write_text(json.dumps(build_review_queue_report([])))
-            monitoring_path.write_text(
-                json.dumps(
-                    {
-                        "generated_at": "2026-06-28T12:01:00+00:00",
-                        "status": "pass",
-                        "changed_sources": [],
-                        "affected_rows": [],
-                        "recommended_action": "none",
-                    }
-                )
-            )
+            monitoring_path.write_text(json.dumps(clean_monitoring_report()))
             db = object()
             publish_calls: list[tuple[Any, dict[str, Any]]] = []
 
@@ -11333,13 +13336,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             source_metrics_path.write_text(json.dumps(clean_source_metrics_report(json.loads(preview_path.read_text()))))
             monitoring_path.write_text(
                 json.dumps(
-                    {
-                        "generated_at": "2026-06-28T12:01:00+00:00",
-                        "status": "pass",
-                        "changed_sources": [],
-                        "affected_rows": [],
-                        "recommended_action": "none",
-                    }
+                    clean_monitoring_report()
                 )
             )
             publish_calls: list[dict[str, Any]] = []
@@ -11370,6 +13367,114 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
 
             self.assertEqual(1, raised.exception.code)
             self.assertEqual([], publish_calls)
+
+    def test_publish_gold_v3_rollback_requires_scope_and_retires_matching_current_rows(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.selects: list[tuple[str, str, dict[str, str]]] = []
+                self.updates: list[tuple[str, dict[str, str], dict[str, Any]]] = []
+
+            def select(self, table: str, *, columns: str = "*", filters: Optional[dict[str, str]] = None) -> list[dict[str, Any]]:
+                self.selects.append((table, columns, filters or {}))
+                return [{"id": "boardwalk:poolside-activities"}, {"id": "boardwalk:campfire"}]
+
+            def update(self, table: str, filters: dict[str, str], values: dict[str, Any]) -> list[dict[str, Any]]:
+                self.updates.append((table, filters, values))
+                return []
+
+        db = RecordingDb()
+
+        with self.assertRaisesRegex(RuntimeError, "gold_v3_rollback_requires_source_hash_or_row_key"):
+            publish_gold_v3.rollback_gold_v3_rows(db)
+        result = publish_gold_v3.rollback_gold_v3_rows(
+            db,
+            source_sha256="sourcehash",
+            calendar_group_key="boardwalk",
+        )
+
+        self.assertEqual({"retired_gold_v3_rows": 2}, result)
+        self.assertEqual(
+            [
+                (
+                    "public_activity_gold",
+                    "id",
+                    {
+                        "is_current": "eq.true",
+                        "source_sha256": "eq.sourcehash",
+                        "calendar_group_key": "eq.boardwalk",
+                    },
+                )
+            ],
+            db.selects,
+        )
+        self.assertEqual(
+            [
+                ("public_activity_gold", {"id": "eq.boardwalk:poolside-activities"}, {"is_current": False}),
+                ("public_activity_gold", {"id": "eq.boardwalk:campfire"}, {"is_current": False}),
+            ],
+            db.updates,
+        )
+
+    def test_publish_gold_v3_cli_can_run_scoped_rollback_without_preview_readiness(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.selects: list[tuple[str, str, dict[str, str]]] = []
+                self.updates: list[tuple[str, dict[str, str], dict[str, Any]]] = []
+
+            def select(self, table: str, *, columns: str = "*", filters: Optional[dict[str, str]] = None) -> list[dict[str, Any]]:
+                self.selects.append((table, columns, filters or {}))
+                return [{"id": "boardwalk:poolside-activities"}]
+
+            def update(self, table: str, filters: dict[str, str], values: dict[str, Any]) -> list[dict[str, Any]]:
+                self.updates.append((table, filters, values))
+                return []
+
+        db = RecordingDb()
+        publish_calls: list[dict[str, Any]] = []
+
+        def publish_spy(*_args: Any, **_kwargs: Any) -> dict[str, int]:
+            publish_calls.append({"called": True})
+            return {}
+
+        with tempfile.TemporaryDirectory() as tmp:
+            missing_preview_path = Path(tmp) / "missing-preview.json"
+            with patch.object(publish_gold_v3, "SupabaseClient", return_value=db, create=True):
+                with patch.object(publish_gold_v3, "publish_gold_v3_preview", side_effect=publish_spy):
+                    with patch.object(
+                        sys,
+                        "argv",
+                        [
+                            "publish_gold_v3.py",
+                            str(missing_preview_path),
+                            "--rollback-source-sha256",
+                            "sourcehash",
+                            "--rollback-calendar-group",
+                            "boardwalk",
+                        ],
+                    ):
+                        publish_gold_v3.main()
+
+        self.assertEqual([], publish_calls)
+        self.assertEqual(
+            [
+                (
+                    "public_activity_gold",
+                    "id",
+                    {
+                        "is_current": "eq.true",
+                        "source_sha256": "eq.sourcehash",
+                        "calendar_group_key": "eq.boardwalk",
+                    },
+                )
+            ],
+            db.selects,
+        )
+        self.assertEqual(
+            [
+                ("public_activity_gold", {"id": "eq.boardwalk:poolside-activities"}, {"is_current": False}),
+            ],
+            db.updates,
+        )
 
     def test_publish_gold_v3_maps_ready_preview_rows_to_public_gold_contract(self) -> None:
         preview = clean_publish_v3_preview()
@@ -11529,6 +13634,181 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             result,
         )
         self.assertEqual([("check_activity_pipeline_v3_health", {})], db.rpc_calls)
+
+    def test_publish_gold_v3_preview_rejects_non_public_source_url_before_db_writes(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def rpc(self, fn: str, args=None) -> list[dict[str, Any]]:
+                return []
+
+        preview = clean_publish_v3_preview()
+        preview["rows"][0]["canonical_slug"] = "poolside-activities"
+        preview["rows"][0]["source_url"] = "manual://boardwalk/fy26-q3-0526/recreation"
+        db = RecordingDb()
+
+        with self.assertRaisesRegex(RuntimeError, "gold_v3_non_public_source_url:boardwalk:poolside-activities"):
+            publish_gold_v3.publish_gold_v3_preview(db, preview)
+
+        self.assertEqual([], db.upserts)
+        self.assertEqual([], db.inserts)
+
+    def test_publish_gold_v3_preview_rejects_unpromotable_status_before_db_writes(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def rpc(self, fn: str, args=None) -> list[dict[str, Any]]:
+                return []
+
+        preview = clean_publish_v3_preview()
+        preview["rows"][0]["canonical_slug"] = "poolside-activities"
+        preview["rows"][0]["validation_status"] = "needs_review"
+        db = RecordingDb()
+
+        with self.assertRaisesRegex(
+            RuntimeError,
+            "gold_v3_unpromotable_validation_status:boardwalk:poolside-activities",
+        ):
+            publish_gold_v3.publish_gold_v3_preview(db, preview)
+
+        self.assertEqual([], db.upserts)
+        self.assertEqual([], db.inserts)
+
+    def test_publish_gold_v3_preview_rejects_missing_field_provenance_before_db_writes(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return [{**row, "id": f"db-source-{row['content_sha256']}"} for row in payload] if table == "source_documents" else payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def rpc(self, fn: str, args=None) -> list[dict[str, Any]]:
+                return []
+
+        preview = clean_publish_v3_preview()
+        preview["rows"][0]["canonical_slug"] = "poolside-activities"
+        preview["rows"][0]["source_spans"].pop("schedule")
+        db = RecordingDb()
+
+        with self.assertRaisesRegex(
+            RuntimeError,
+            "gold_v3_missing_field_provenance:boardwalk:poolside-activities:schedule",
+        ):
+            publish_gold_v3.publish_gold_v3_preview(db, preview)
+
+        self.assertEqual([], db.upserts)
+        self.assertEqual([], db.inserts)
+
+    def test_publish_gold_v3_preview_rejects_incomplete_field_evidence_before_db_writes(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return [{**row, "id": f"db-source-{row['content_sha256']}"} for row in payload] if table == "source_documents" else payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def rpc(self, fn: str, args=None) -> list[dict[str, Any]]:
+                return []
+
+        preview = clean_publish_v3_preview()
+        preview["rows"][0]["canonical_slug"] = "poolside-activities"
+        preview["rows"][0]["field_evidence"]["schedule"]["source"].pop("crop_sha256")
+        db = RecordingDb()
+
+        with self.assertRaisesRegex(
+            RuntimeError,
+            "gold_v3_missing_field_crop_sha256:boardwalk:poolside-activities:schedule",
+        ):
+            publish_gold_v3.publish_gold_v3_preview(db, preview)
+
+        self.assertEqual([], db.upserts)
+        self.assertEqual([], db.inserts)
+
+    def test_publish_gold_v3_preview_rejects_inconsistent_field_evidence_before_db_writes(self) -> None:
+        class RecordingDb:
+            def __init__(self) -> None:
+                self.upserts: list[tuple[str, Any, str]] = []
+                self.inserts: list[tuple[str, Any]] = []
+
+            def upsert(self, table: str, rows: Any, on_conflict: str) -> list[dict[str, Any]]:
+                self.upserts.append((table, rows, on_conflict))
+                payload = rows if isinstance(rows, list) else [rows]
+                return [{**row, "id": f"db-source-{row['content_sha256']}"} for row in payload] if table == "source_documents" else payload
+
+            def insert(self, table: str, rows: Any) -> list[dict[str, Any]]:
+                self.inserts.append((table, rows))
+                payload = rows if isinstance(rows, list) else [rows]
+                return payload
+
+            def rpc(self, fn: str, args=None) -> list[dict[str, Any]]:
+                return []
+
+        hash_mismatch_preview = clean_publish_v3_preview()
+        hash_mismatch_preview["rows"][0]["canonical_slug"] = "poolside-activities"
+        hash_mismatch_preview["rows"][0]["field_evidence"]["schedule"]["source"]["content_sha256"] = "otherhash"
+        hash_db = RecordingDb()
+
+        with self.assertRaisesRegex(
+            RuntimeError,
+            "gold_v3_field_source_hash_mismatch:boardwalk:poolside-activities:schedule",
+        ):
+            publish_gold_v3.publish_gold_v3_preview(hash_db, hash_mismatch_preview)
+
+        page_mismatch_preview = clean_publish_v3_preview()
+        page_mismatch_preview["rows"][0]["canonical_slug"] = "poolside-activities"
+        page_mismatch_preview["rows"][0]["field_evidence"]["schedule"]["source"]["page_image_sha256"] = "otherpage"
+        page_db = RecordingDb()
+
+        with self.assertRaisesRegex(
+            RuntimeError,
+            "gold_v3_field_page_image_not_canonical:boardwalk:poolside-activities:schedule",
+        ):
+            publish_gold_v3.publish_gold_v3_preview(page_db, page_mismatch_preview)
+
+        self.assertEqual([], hash_db.upserts)
+        self.assertEqual([], hash_db.inserts)
+        self.assertEqual([], page_db.upserts)
+        self.assertEqual([], page_db.inserts)
 
     def test_publish_gold_v3_preview_fails_when_post_publish_health_fails(self) -> None:
         class RecordingDb:
@@ -12492,6 +14772,75 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("newhash", source_report["new_hash"])
         self.assertEqual(["poolside-activities"], [item["canonical_slug"] for item in source_report["changed_schedules"]])
 
+    def test_source_drift_report_quarter_cli_loads_unknown_regions_from_snapshot_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            old_dir = root / "old_candidates"
+            new_dir = root / "new_candidates"
+            snapshot_dir = root / "vision_snapshots"
+            output_path = root / "source_drift_report.json"
+            old_dir.mkdir()
+            new_dir.mkdir()
+            snapshot_dir.mkdir()
+            old_row = {
+                "candidate_type": "activity",
+                "calendar_group_key": "boardwalk",
+                "source_document_id": "source-doc-boardwalk",
+                "content_sha256": "oldhash",
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+            }
+            new_row = {
+                **old_row,
+                "content_sha256": "newhash",
+                "edition": "fy26-q4-0826",
+            }
+            (old_dir / "oldhash.validated.json").write_text(json.dumps([old_row]))
+            (new_dir / "newhash.validated.json").write_text(json.dumps([new_row]))
+            (snapshot_dir / "newhash.vision.json").write_text(
+                json.dumps(
+                    {
+                        "source_document_id": "source-doc-boardwalk",
+                        "content_sha256": "newhash",
+                        "regions": [
+                            {
+                                "region_id": "region-unknown-1",
+                                "region_family": "unknown",
+                                "page_number": 1,
+                                "page_image_sha256": "pagehash",
+                                "crop_sha256": "crophash",
+                                "crop_storage_path": "data/processed/field_crops_v3/newhash/region.png",
+                            }
+                        ],
+                    }
+                )
+            )
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "source_drift_report.py",
+                    "--quarter",
+                    "fy26-q4",
+                    "--old-candidates-dir",
+                    str(old_dir),
+                    "--new-candidates-dir",
+                    str(new_dir),
+                    "--new-regions",
+                    str(snapshot_dir),
+                    "--output",
+                    str(output_path),
+                ],
+            ):
+                source_drift_report.main()
+
+            report = json.loads(output_path.read_text())
+
+        source_report = report["source_reports"][0]
+        self.assertEqual("region-unknown-1", source_report["new_unknown_regions"][0]["region_id"])
+        self.assertIn("new_unknown_regions", report["publish_blockers"])
+
     def test_source_drift_report_treats_no_old_rows_as_first_v3_baseline(self) -> None:
         report = source_drift_report.build_quarter_source_drift_report(
             quarter="fy26-q3",
@@ -12588,6 +14937,50 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("review_required", by_source["source-doc-b"]["status"])
         self.assertEqual("hash-b", by_source["source-doc-b"]["old_hash"])
         self.assertEqual("hash-c", by_source["source-doc-b"]["new_hash"])
+
+    def test_source_drift_report_quarter_batch_carries_unknown_regions_per_source(self) -> None:
+        report = source_drift_report.build_quarter_source_drift_report(
+            quarter="fy26-q4",
+            old_rows=[
+                {
+                    "candidate_type": "activity",
+                    "calendar_group_key": "boardwalk",
+                    "source_document_id": "source-doc-boardwalk",
+                    "content_sha256": "oldhash",
+                    "canonical_slug": "poolside-activities",
+                    "title": "Poolside Activities",
+                },
+            ],
+            new_rows=[
+                {
+                    "candidate_type": "activity",
+                    "calendar_group_key": "boardwalk",
+                    "source_document_id": "source-doc-boardwalk",
+                    "content_sha256": "newhash",
+                    "canonical_slug": "poolside-activities",
+                    "title": "Poolside Activities",
+                },
+            ],
+            new_regions=[
+                {
+                    "source_document_id": "source-doc-boardwalk",
+                    "content_sha256": "newhash",
+                    "region_id": "region-unknown-1",
+                    "region_family": "unknown",
+                    "page_number": 1,
+                    "page_image_sha256": "pagehash",
+                    "crop_sha256": "crophash",
+                    "crop_storage_path": "data/processed/field_crops_v3/newhash/region.png",
+                },
+            ],
+        )
+
+        self.assertEqual("review_required", report["status"])
+        self.assertIn("new_unknown_regions", report["publish_blockers"])
+        source_report = report["source_reports"][0]
+        self.assertEqual(["new_unknown_regions"], source_report["publish_blockers"])
+        self.assertEqual("region-unknown-1", source_report["new_unknown_regions"][0]["region_id"])
+        self.assertEqual("pagehash", source_report["new_unknown_regions"][0]["page_image_sha256"])
 
     def test_schedule_normalization_handles_recurring_point_time_and_phrase_schedules(self) -> None:
         daily = normalize_schedule_text("Daily from 8:00am–11:00pm")
@@ -13221,6 +15614,60 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(0, report["summary"]["auto_publishable_count"])
         self.assertEqual(1, report["summary"]["needs_review_count"])
 
+    def test_source_metrics_v3_can_scope_to_official_visual_sources(self) -> None:
+        snapshots = [
+            {
+                "source_sha256": "official-pdf-hash",
+                "source_kind": "official_pdf",
+                "source_role": "resort_pdf",
+                "source_type": "pdf",
+                "source_pages": [{"page_number": 1}],
+            },
+            {
+                "source_sha256": "manual-image-hash",
+                "source_kind": "reviewed_visual_schedule_image",
+                "source_role": "image_manifest",
+                "source_type": "image",
+                "source_pages": [{"page_number": 1}],
+            },
+            {
+                "source_sha256": "html-hash",
+                "source_kind": "official_html",
+                "source_role": "supporting_page",
+                "source_type": "html",
+                "source_pages": [{"page_number": 1}],
+            },
+        ]
+        candidates = [
+            {
+                "content_sha256": "official-pdf-hash",
+                "candidate_type": "activity",
+                "validation_status": "auto_publishable",
+            },
+            {
+                "content_sha256": "manual-image-hash",
+                "candidate_type": "activity",
+                "validation_status": "needs_review",
+            },
+            {
+                "content_sha256": "html-hash",
+                "candidate_type": "activity",
+                "validation_status": "needs_review",
+            },
+        ]
+
+        report = build_source_metrics_report(
+            snapshots=snapshots,
+            candidates=candidates,
+            v3_visual_only=True,
+        )
+
+        self.assertEqual(1, report["summary"]["source_count"])
+        self.assertEqual(1, report["summary"]["candidate_count"])
+        self.assertEqual(["official-pdf-hash"], [row["source_sha256"] for row in report["sources"]])
+        self.assertEqual(1, report["summary"]["auto_publishable_count"])
+        self.assertEqual(0, report["summary"]["needs_review_count"])
+
     def test_source_metrics_v3_enriches_sources_from_bronze_inventory(self) -> None:
         snapshots = [{"source_sha256": "hash-1", "source_pages": [{"page_number": 1}]}]
         source_inventory = [
@@ -13260,6 +15707,25 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("application/pdf", source["detected_content_type"])
         self.assertEqual(".pdf", source["file_extension"])
         self.assertEqual(200, source["http_status"])
+
+    def test_source_metrics_v3_binds_report_to_gold_preview_fingerprint(self) -> None:
+        preview = clean_publish_v3_preview()
+
+        report = build_source_metrics_report(
+            snapshots=[
+                {
+                    "source_sha256": "sourcehash",
+                    "source_pages": [{"page_number": 1}],
+                }
+            ],
+            candidates=[],
+            preview=preview,
+        )
+
+        self.assertEqual(
+            publish_gold_v3._dual_run_preview_fingerprint(preview),
+            report["v3_preview_fingerprint"],
+        )
 
     def test_source_metrics_v3_cli_writes_report_from_snapshot_and_candidate_directories(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -13330,6 +15796,69 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("data/raw/pdfs/source.pdf", report["sources"][0]["storage_path"])
         self.assertEqual(1, report["sources"][0]["auto_publishable_count"])
 
+    def test_run_pipeline_generates_source_metrics_after_v3_preview(self) -> None:
+        steps = run_pipeline.vision_v3_report_steps(local_only=False, quarter="fy26-q4")
+        step_names = [step[0] for step in steps]
+        publish_step = next(step for step in steps if step[0] == "publish_gold_v3.py")
+        dual_run_step = next(step for step in steps if step[0] == "v3_dual_run_report.py")
+        source_drift_step = next(step for step in steps if step[0] == "source_drift_report.py")
+        source_metrics_step = next(step for step in steps if step[0] == "source_metrics_v3.py")
+        source_status_step = next(step for step in steps if step[0] == "source_status_v3.py")
+        review_queue_steps = [step for step in steps if step[0] == "build_review_queue_v3.py"]
+
+        self.assertEqual("data/processed/activity_gold_v3_preview.json", publish_step[1])
+        self.assertIn("--flags", publish_step)
+        self.assertIn("config/publish_flags.yaml", publish_step)
+        self.assertIn("--output", source_drift_step)
+        self.assertIn("data/processed/source_drift_report.json", source_drift_step)
+        self.assertIn("--new-regions", source_drift_step)
+        self.assertIn("data/processed/vision_snapshots", source_drift_step)
+        self.assertIn("--output", source_metrics_step)
+        self.assertIn("data/processed/eval/v3_source_metrics.json", source_metrics_step)
+        self.assertIn("--preview", source_metrics_step)
+        self.assertIn("data/processed/activity_gold_v3_preview.json", source_metrics_step)
+        self.assertIn("--v3-visual-only", source_metrics_step)
+        self.assertIn("--v3-visual-only", source_status_step)
+        self.assertIn("--output", dual_run_step)
+        self.assertIn("data/processed/eval/v3_dual_run_report.json", dual_run_step)
+        self.assertEqual(2, len(review_queue_steps))
+        for review_queue_step in review_queue_steps:
+            self.assertIn("--output", review_queue_step)
+            self.assertIn("data/processed/review_queue/vision_v3_review_queue.json", review_queue_step)
+            self.assertIn("--report-output", review_queue_step)
+            self.assertIn("data/processed/eval/v3_review_queue_report.json", review_queue_step)
+            self.assertIn("--html-output", review_queue_step)
+            self.assertIn("data/processed/review_queue/vision_v3_review_queue.html", review_queue_step)
+            self.assertIn("--checklist-output", review_queue_step)
+            self.assertIn("data/processed/review_queue/vision_v3_publish_blocker_checklist.csv", review_queue_step)
+        self.assertIn("--no-dual-run-report", review_queue_steps[0])
+        self.assertIn("--dual-run-report", review_queue_steps[-1])
+        self.assertIn("data/processed/eval/v3_dual_run_report.json", review_queue_steps[-1])
+        self.assertLess(
+            step_names.index("promote_gold_v3.py"),
+            step_names.index("publish_gold_v3.py"),
+        )
+        self.assertLess(
+            step_names.index("promote_gold_v3.py"),
+            step_names.index("source_metrics_v3.py"),
+        )
+        self.assertLess(
+            step_names.index("source_metrics_v3.py"),
+            step_names.index("publish_gold_v3.py"),
+        )
+        self.assertLess(
+            step_names.index("trust_report.py"),
+            step_names.index("publish_gold_v3.py"),
+        )
+        self.assertIn("--monitoring-report", publish_step)
+        self.assertIn("data/processed/source_trust_monitoring_report.json", publish_step)
+        self.assertIn("--review-queue", publish_step)
+        self.assertIn("data/processed/review_queue/vision_v3_review_queue.json", publish_step)
+        self.assertIn("--review-queue-report", publish_step)
+        self.assertIn("data/processed/eval/v3_review_queue_report.json", publish_step)
+        self.assertIn("--dual-run-report", publish_step)
+        self.assertIn("data/processed/eval/v3_dual_run_report.json", publish_step)
+
     def test_debug_overlays_write_reviewable_region_and_engine_images(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -13398,6 +15927,13 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "field_crop": "schedule.png",
             "field_crop_sha256": "crophash",
             "field": "schedule",
+            "source_metadata": {
+                "canonical_url": "https://example.com/official-calendar.pdf",
+                "fetched_url": "https://cdn.example.com/official-calendar.pdf",
+                "source_kind": "official_pdf",
+                "source_role": "resort_pdf",
+                "currentness": "current",
+            },
             "candidate": {
                 "candidate_id": "cand-1",
                 "calendar_group_key": "boardwalk",
@@ -13457,6 +15993,34 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 decided_at="2026-06-28T12:00:00Z",
             )
 
+        for placeholder_reviewer in ("reviewer-name", "your-name", "todo"):
+            with self.subTest(reviewer=placeholder_reviewer):
+                with self.assertRaisesRegex(ValueError, "placeholder_reviewer"):
+                    build_review_decision(
+                        task,
+                        reviewer=placeholder_reviewer,
+                        decision="approve",
+                        approved_fields={"schedule": {"raw_value": "Daily at 1:30pm", "normalized_value": "13:30"}},
+                        reason="Visible in crop.",
+                        decided_at="2026-06-28T12:00:00Z",
+                    )
+
+        for placeholder_reason in (
+            "Verified against source crop",
+            "source-backed rationale for this decision",
+            "reviewed",
+        ):
+            with self.subTest(reason=placeholder_reason):
+                with self.assertRaisesRegex(ValueError, "placeholder_reason"):
+                    build_review_decision(
+                        task,
+                        reviewer="josh",
+                        decision="approve",
+                        approved_fields={"schedule": {"raw_value": "Daily at 1:30pm", "normalized_value": "13:30"}},
+                        reason=placeholder_reason,
+                        decided_at="2026-06-28T12:00:00Z",
+                    )
+
         decision = build_review_decision(
             task,
             reviewer="josh",
@@ -13491,6 +16055,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         )
         self.assertEqual("review_fixture_candidate_v3", fixture_candidate["fixture_kind"])
         self.assertEqual("cand-1", fixture_candidate["candidate_id"])
+        self.assertEqual("https://example.com/official-calendar.pdf", fixture_candidate["source_url"])
+        self.assertEqual(
+            "https://example.com/official-calendar.pdf",
+            fixture_candidate["source_metadata"]["canonical_url"],
+        )
+        self.assertEqual("official_pdf", fixture_candidate["source_metadata"]["source_kind"])
         self.assertEqual("Daily at 1:30pm", fixture_candidate["approved_fields"]["schedule"]["raw_value"])
 
     def test_review_schema_records_queue_task_decision_file(self) -> None:
@@ -13502,6 +16072,17 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "page_image_sha256": "pagehash",
             "field_crop": "schedule.png",
             "field_crop_sha256": "schedulecrop",
+            "pipeline_version": "vision_v3_001",
+            "config_hash": "confighash",
+            "runtime_lineage": {
+                "config_hash": "confighash",
+                "lineage_hash": "lineagehash",
+                "git_sha": "abc123",
+                "config": {"dpi": 240},
+                "package_versions": {"pypdfium2": "4.30.0"},
+                "model_asset_hashes": {"paddleocr_ppstructurev3": "modelhash"},
+                "ocr_engine_configs": {"paddleocr_ppstructurev3": {"mode": "ppstructurev3"}},
+            },
             "candidate_value": "Daily at 1:30pm",
             "normalized_value": {
                 "schedule_type": "recurring",
@@ -13559,6 +16140,17 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "page_image_sha256": "pagehash",
             "field_crop": "schedule.png",
             "field_crop_sha256": "schedulecrop",
+            "pipeline_version": "vision_v3_001",
+            "config_hash": "confighash",
+            "runtime_lineage": {
+                "config_hash": "confighash",
+                "lineage_hash": "lineagehash",
+                "git_sha": "abc123",
+                "config": {"dpi": 240},
+                "package_versions": {"pypdfium2": "4.30.0"},
+                "model_asset_hashes": {"paddleocr_ppstructurev3": "modelhash"},
+                "ocr_engine_configs": {"paddleocr_ppstructurev3": {"mode": "ppstructurev3"}},
+            },
             "candidate_value": "Daily at 1:30pm",
             "normalized_value": {
                 "schedule_type": "recurring",
@@ -13598,8 +16190,65 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(str(parser_path), report["parser_rule_requests_path"])
         self.assertEqual("cand-1", fixture_payload["candidates"][0]["candidate_id"])
         self.assertEqual("sourcehash", fixture_payload["candidates"][0]["content_sha256"])
+        self.assertEqual("vision_v3_001", fixture_payload["candidates"][0]["pipeline_version"])
+        self.assertEqual("confighash", fixture_payload["candidates"][0]["config_hash"])
+        self.assertEqual("lineagehash", fixture_payload["candidates"][0]["runtime_lineage"]["lineage_hash"])
         self.assertEqual("vision-v3-cand-1", parser_payload["requests"][0]["task_id"])
+        self.assertEqual("vision_v3_001", parser_payload["requests"][0]["pipeline_version"])
+        self.assertEqual("confighash", parser_payload["requests"][0]["config_hash"])
+        self.assertEqual("lineagehash", parser_payload["requests"][0]["runtime_lineage"]["lineage_hash"])
         self.assertEqual(["engine_disagreement:schedule"], parser_payload["requests"][0]["validation_findings"])
+
+    def test_review_schema_recording_dual_run_approval_refreshes_review_keys_export(self) -> None:
+        task = {
+            "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "task_type": "gold_conflict",
+            "field": "schedule",
+            "content_sha256": "sourcehash",
+            "page_image_sha256": "pagehash",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "schedulecrop",
+            "candidate_value": "Daily at 1:30pm",
+            "normalized_value": "Daily at 1:30pm",
+            "candidate_type": "dual_run_diff",
+            "source_url": "https://example.com/boardwalk.pdf",
+            "source_metadata": {
+                "canonical_url": "https://example.com/boardwalk.pdf",
+                "source_kind": "official_pdf",
+            },
+            "dual_run_diff": {
+                "diff_key": "boardwalk:poolside-activities:schedule",
+                "row_key": "boardwalk:poolside-activities",
+                "field": "schedule",
+                "content_sha256": "sourcehash",
+                "v3_field_evidence": {"source": {"content_sha256": "sourcehash"}},
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            queue_path = root / "review_queue.json"
+            decisions_path = root / "review_decisions.json"
+            review_keys_path = root / "vision_v3_dual_run_review_keys.json"
+            queue_path.write_text(json.dumps([task]))
+
+            report = review_schema_v3.record_review_decision_from_queue(
+                queue_path=queue_path,
+                decisions_path=decisions_path,
+                task_id="dual-run-diff-boardwalk-poolside-activities-schedule",
+                reviewer="josh",
+                decision="approve",
+                reason="Reviewed v2/v3 schedule diff against source crop.",
+                decided_at="2026-06-28T12:00:00Z",
+            )
+
+            payload = json.loads(review_keys_path.read_text())
+
+        self.assertEqual(str(review_keys_path), report["dual_run_review_keys_path"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], payload["reviewed_diff_keys"])
+        self.assertEqual(
+            ["boardwalk:poolside-activities:schedule"],
+            [review["key"] for review in payload["reviewed_diff_reviews"]],
+        )
 
     def test_review_schema_record_cli_writes_queue_task_decision(self) -> None:
         task = {
@@ -13622,6 +16271,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             root = Path(tmp)
             queue_path = root / "review_queue.json"
             decisions_path = root / "review_decisions.json"
+            fixture_path = root / "custom_fixture_candidates.json"
+            parser_path = root / "custom_parser_rule_requests.json"
+            dual_run_keys_path = root / "custom_dual_run_review_keys.json"
             queue_path.write_text(json.dumps([task]))
 
             with patch.object(
@@ -13640,17 +16292,29 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "josh",
                     "--reason",
                     "Visible in source crop.",
+                    "--fixture-candidates-output",
+                    str(fixture_path),
+                    "--parser-rule-requests-output",
+                    str(parser_path),
+                    "--dual-run-review-keys-output",
+                    str(dual_run_keys_path),
                     "--json",
                 ],
             ):
                 review_schema_v3.main()
             [decision] = json.loads(decisions_path.read_text())
+            fixture_payload = json.loads(fixture_path.read_text())
+            parser_payload = json.loads(parser_path.read_text())
+            dual_run_payload = json.loads(dual_run_keys_path.read_text())
 
         self.assertEqual("approve", decision["decision"])
         self.assertEqual(
             {"location": {"raw_value": "Luna Park Pool Deck", "normalized_value": "luna_park_pool_deck"}},
             decision["approved_fields"],
         )
+        self.assertEqual("cand-1", fixture_payload["candidates"][0]["candidate_id"])
+        self.assertEqual("vision-v3-cand-1", parser_payload["requests"][0]["task_id"])
+        self.assertEqual([], dual_run_payload["reviewed_diff_keys"])
 
     def test_review_schema_accepts_canonical_page_image_sha256_task_field(self) -> None:
         task = {
@@ -13761,6 +16425,84 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("review_fixture_candidates_v3", payload["fixture_kind"])
         self.assertEqual("cand-1", payload["candidates"][0]["candidate_id"])
         self.assertEqual("sourcehash", payload["candidates"][0]["content_sha256"])
+
+    def test_review_schema_rejects_fixture_exports_with_stale_original_task_hashes(self) -> None:
+        task = {
+            "task_id": "cand-stale-source",
+            "task_type": "ocr_disagreement",
+            "field": "schedule",
+            "source_document_id": "source-doc-1",
+            "content_sha256": "current-sourcehash",
+            "page_image_sha256": "current-pagehash",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "current-crophash",
+            "candidate": {
+                "candidate_id": "cand-stale-source",
+                "calendar_group_key": "boardwalk",
+                "candidate_type": "activity",
+            },
+        }
+        approved = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            approved_fields={
+                "schedule": {
+                    "raw_value": "Daily at 1:30pm",
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "13:30",
+                        "timezone": "America/New_York",
+                    },
+                }
+            },
+            reason="Visible in crop.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        stale_source = {
+            **approved,
+            "task_id": "cand-stale-content",
+            "candidate_id": "cand-stale-content",
+            "content_sha256": "old-sourcehash",
+        }
+        stale_page = {
+            **approved,
+            "task_id": "cand-stale-page",
+            "candidate_id": "cand-stale-page",
+            "page_image_sha256": "old-pagehash",
+        }
+        stale_crop = {
+            **approved,
+            "task_id": "cand-stale-crop",
+            "candidate_id": "cand-stale-crop",
+            "field_crop_sha256": "old-crophash",
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            fixture_path = root / "fixture_candidates.json"
+            parser_path = root / "parser_rule_update_requests.json"
+            decisions_path.write_text(json.dumps([stale_source, stale_page, stale_crop]))
+
+            fixture_report = review_schema_v3.export_review_fixture_candidates(
+                decisions_path=decisions_path,
+                output_path=fixture_path,
+            )
+            parser_report = review_schema_v3.export_parser_rule_update_requests(
+                decisions_path=decisions_path,
+                output_path=parser_path,
+            )
+            fixture_payload = json.loads(fixture_path.read_text())
+            parser_payload = json.loads(parser_path.read_text())
+
+        self.assertEqual(0, fixture_report["summary"]["fixture_candidate_count"])
+        self.assertEqual(3, fixture_report["summary"]["skipped_invalid_review_decision_count"])
+        self.assertEqual([], fixture_payload["candidates"])
+        self.assertEqual(0, parser_report["summary"]["parser_rule_update_request_count"])
+        self.assertEqual(3, parser_report["summary"]["skipped_invalid_review_decision_count"])
+        self.assertEqual([], parser_payload["requests"])
 
     def test_review_schema_exports_parser_rule_update_requests_from_review_decisions(self) -> None:
         task = {
@@ -13889,6 +16631,10 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "https://example.com/official-calendar.pdf",
             payload["requests"][2]["source_metadata"]["canonical_url"],
         )
+        self.assertEqual(
+            "https://example.com/official-calendar.pdf",
+            payload["requests"][2]["source_url"],
+        )
         self.assertEqual("parser_error", payload["requests"][2]["source_status"]["status"])
 
     def test_review_schema_exports_dual_run_review_keys_from_review_decisions(self) -> None:
@@ -13903,6 +16649,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "field_crop_sha256": "schedulecrop",
             "candidate_type": "dual_run_diff",
             "calendar_group_key": "boardwalk",
+            "source_metadata": {
+                "canonical_url": "https://example.com/boardwalk.pdf",
+                "fetched_url": "https://cdn.example.com/boardwalk.pdf",
+                "source_kind": "official_pdf",
+            },
             "dual_run_diff": {
                 "diff_key": "boardwalk:poolside-activities:schedule",
                 "field": "schedule",
@@ -13943,8 +16694,28 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "content_sha256": "sourcehash",
                 "task_type": "manual_review_required",
                 "field": "status_transition",
+                "source_url": "https://example.com/boardwalk.pdf",
+                "source_metadata": {
+                    "canonical_url": "https://example.com/boardwalk.pdf",
+                    "source_kind": "official_pdf",
+                },
                 "dual_run_status_transition": {
                     "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable"
+                },
+            },
+        }
+        placeholder_status_transition = {
+            **approved_status_transition,
+            "task_id": "dual-run-status-boardwalk-movie-night-needs-review-to-auto-publishable",
+            "candidate_id": "dual-run-status-boardwalk-movie-night-needs-review-to-auto-publishable",
+            "reviewer": "reviewer-name",
+            "reason": "Placeholder reviewer should not count.",
+            "original_task": {
+                "content_sha256": "sourcehash",
+                "task_type": "manual_review_required",
+                "field": "status_transition",
+                "dual_run_status_transition": {
+                    "transition_key": "boardwalk:movie-night:needs_review_to_auto_publishable"
                 },
             },
         }
@@ -13958,7 +16729,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             root = Path(tmp)
             decisions_path = root / "review_decisions.json"
             output_path = root / "dual_run_review_keys.json"
-            decisions_path.write_text(json.dumps([approved_diff, approved_status_transition, rejected_diff, {}]))
+            decisions_path.write_text(json.dumps([approved_diff, approved_status_transition, placeholder_status_transition, rejected_diff, {}]))
 
             report = review_schema_v3.export_dual_run_review_keys(
                 decisions_path=decisions_path,
@@ -13967,11 +16738,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
 
             payload = json.loads(output_path.read_text())
 
-        self.assertEqual(4, report["summary"]["decision_count"])
+        self.assertEqual(5, report["summary"]["decision_count"])
         self.assertEqual(1, report["summary"]["reviewed_diff_key_count"])
         self.assertEqual(1, report["summary"]["reviewed_status_transition_key_count"])
         self.assertEqual(1, report["summary"]["skipped_non_approval_count"])
-        self.assertEqual(1, report["summary"]["skipped_invalid_review_decision_count"])
+        self.assertEqual(2, report["summary"]["skipped_invalid_review_decision_count"])
         self.assertEqual(["boardwalk:poolside-activities:schedule"], payload["reviewed_diff_keys"])
         self.assertEqual(
             ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
@@ -13982,6 +16753,14 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "key": "boardwalk:poolside-activities:schedule",
                 "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
                 "content_sha256": "sourcehash",
+                "source_url": "https://example.com/boardwalk.pdf",
+                "source_metadata": {
+                    "canonical_url": "https://example.com/boardwalk.pdf",
+                    "fetched_url": "https://cdn.example.com/boardwalk.pdf",
+                    "source_kind": "official_pdf",
+                },
+                "page_image_sha256": "pagehash",
+                "field_crop_sha256": "schedulecrop",
                 "reviewer": "josh",
                 "decided_at": "2026-06-28T12:00:00Z",
                 "decision": "approve",
@@ -13994,6 +16773,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
                 "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
                 "content_sha256": "sourcehash",
+                "source_url": "https://example.com/boardwalk.pdf",
+                "source_metadata": {
+                    "canonical_url": "https://example.com/boardwalk.pdf",
+                    "source_kind": "official_pdf",
+                },
                 "reviewer": "josh",
                 "decided_at": "2026-06-28T12:01:00Z",
                 "decision": "approve",
@@ -14001,6 +16785,74 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             },
             payload["reviewed_status_transition_reviews"][0],
         )
+
+    def test_review_schema_does_not_export_dual_run_reviews_without_source_provenance(self) -> None:
+        missing_source_decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "task_type": "gold_conflict",
+            "candidate_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "candidate_type": "dual_run_diff",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "sourcehash",
+            "page_image_sha256": "pagehash",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "schedulecrop",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {
+                "schedule": {
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "14:30",
+                    }
+                }
+            },
+            "reason": "Reviewed schedule diff without source provenance.",
+            "decided_at": "2026-06-28T12:00:00Z",
+            "original_task": {
+                "content_sha256": "sourcehash",
+                "page_image_sha256": "pagehash",
+                "field_crop_sha256": "schedulecrop",
+                "dual_run_diff": {
+                    "diff_key": "boardwalk:poolside-activities:schedule",
+                    "field": "schedule",
+                },
+            },
+        }
+        non_public_source_decision = {
+            **missing_source_decision,
+            "task_id": "dual-run-diff-boardwalk-movie-under-the-stars-schedule",
+            "candidate_id": "dual-run-diff-boardwalk-movie-under-the-stars-schedule",
+            "original_task": {
+                **missing_source_decision["original_task"],
+                "source_url": "manual://boardwalk/review",
+                "source_metadata": {"canonical_url": "manual://boardwalk/review"},
+                "dual_run_diff": {
+                    "diff_key": "boardwalk:movie-under-the-stars:schedule",
+                    "field": "schedule",
+                },
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([missing_source_decision, non_public_source_decision]))
+
+            report = review_schema_v3.export_dual_run_review_keys(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(2, report["summary"]["decision_count"])
+        self.assertEqual(0, report["summary"]["reviewed_diff_key_count"])
+        self.assertEqual(2, report["summary"]["skipped_missing_source_provenance_count"])
+        self.assertEqual([], payload["reviewed_diff_keys"])
+        self.assertEqual([], payload["reviewed_diff_reviews"])
 
     def test_review_schema_rejects_stale_dual_run_review_key_decisions(self) -> None:
         stale_diff_decision = {
@@ -14078,6 +16930,68 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual([], payload["reviewed_diff_keys"])
         self.assertEqual([], payload["reviewed_status_transition_keys"])
 
+    def test_review_schema_rejects_stale_dual_run_visual_review_artifacts(self) -> None:
+        current_task = {
+            "content_sha256": "sourcehash",
+            "page_image_sha256": "pagehash-current",
+            "field_crop_sha256": "schedulecrop-current",
+            "dual_run_diff": {
+                "diff_key": "boardwalk:poolside-activities:schedule",
+                "field": "schedule",
+            },
+        }
+        stale_page_decision = {
+            "schema_version": "review_decision_v3_001",
+            "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "task_type": "gold_conflict",
+            "candidate_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+            "candidate_type": "dual_run_diff",
+            "calendar_group_key": "boardwalk",
+            "content_sha256": "sourcehash",
+            "page_image_sha256": "pagehash-old",
+            "field_crop": "schedule.png",
+            "field_crop_sha256": "schedulecrop-current",
+            "reviewer": "josh",
+            "decision": "approve",
+            "approved_fields": {
+                "schedule": {
+                    "normalized_value": {
+                        "schedule_type": "recurring",
+                        "days_of_week": ALL_DAYS,
+                        "start_time": "14:30",
+                    }
+                }
+            },
+            "reason": "Reviewed against stale page image.",
+            "decided_at": "2026-06-28T12:00:00Z",
+            "original_task": current_task,
+        }
+        stale_crop_decision = {
+            **stale_page_decision,
+            "page_image_sha256": "pagehash-current",
+            "field_crop_sha256": "schedulecrop-old",
+            "reason": "Reviewed against stale crop.",
+            "decided_at": "2026-06-28T12:01:00Z",
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            output_path = root / "dual_run_review_keys.json"
+            decisions_path.write_text(json.dumps([stale_page_decision, stale_crop_decision]))
+
+            report = review_schema_v3.export_dual_run_review_keys(
+                decisions_path=decisions_path,
+                output_path=output_path,
+            )
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(2, report["summary"]["decision_count"])
+        self.assertEqual(0, report["summary"]["reviewed_diff_key_count"])
+        self.assertEqual(2, report["summary"]["skipped_stale_review_decision_count"])
+        self.assertEqual([], payload["reviewed_diff_keys"])
+        self.assertEqual([], payload["reviewed_diff_reviews"])
+
     def test_review_schema_rejects_dual_run_review_keys_without_task_hash(self) -> None:
         missing_task_hash_decision = {
             "schema_version": "review_decision_v3_001",
@@ -14148,6 +17062,28 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual({}, decision["approved_fields"])
         self.assertEqual(task["dual_run_status_transition"], decision["original_task"]["dual_run_status_transition"])
 
+    def test_review_schema_rejects_unparseable_review_decided_at(self) -> None:
+        task = {
+            "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
+            "task_type": "manual_review_required",
+            "field": "status_transition",
+            "content_sha256": "sourcehash",
+            "calendar_group_key": "boardwalk",
+            "candidate_type": "dual_run_status_transition",
+            "dual_run_status_transition": {
+                "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
+            },
+        }
+
+        with self.assertRaisesRegex(ValueError, "invalid_decided_at"):
+            build_review_decision(
+                task,
+                reviewer="josh",
+                decision="approve",
+                reason="Reviewed the status transition.",
+                decided_at="not-a-date",
+            )
+
     def test_review_schema_exports_hash_bound_new_record_approval(self) -> None:
         task = {
             "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
@@ -14159,6 +17095,10 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "field_crop_sha256": "cropnew",
             "calendar_group_key": "boardwalk",
             "candidate_type": "dual_run_new_record",
+            "source_metadata": {
+                "canonical_url": "https://example.com/boardwalk.pdf",
+                "source_kind": "official_pdf",
+            },
             "dual_run_new_record": {
                 "review_key": "boardwalk:poolside-activities:new_record",
                 "row_key": "boardwalk:poolside-activities",
@@ -14200,6 +17140,13 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "key": "boardwalk:poolside-activities:new_record",
                     "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
                     "content_sha256": "sourcehash",
+                    "source_url": "https://example.com/boardwalk.pdf",
+                    "source_metadata": {
+                        "canonical_url": "https://example.com/boardwalk.pdf",
+                        "source_kind": "official_pdf",
+                    },
+                    "page_image_sha256": "pagehash",
+                    "field_crop_sha256": "cropnew",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
                     "decision": "approve",
@@ -14220,6 +17167,10 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "field_crop_sha256": "cropmissing",
             "calendar_group_key": "boardwalk",
             "candidate_type": "dual_run_missing_v2_record",
+            "source_metadata": {
+                "canonical_url": "https://example.com/old-boardwalk.pdf",
+                "source_kind": "official_pdf",
+            },
             "dual_run_missing_v2_record": {
                 "review_key": "boardwalk:campfire:missing_v2_record",
                 "row_key": "boardwalk:campfire",
@@ -14260,6 +17211,13 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "key": "boardwalk:campfire:missing_v2_record",
                     "task_id": "dual-run-missing-v2-boardwalk-campfire-missing-v2-record",
                     "content_sha256": "oldsourcehash",
+                    "source_url": "https://example.com/old-boardwalk.pdf",
+                    "source_metadata": {
+                        "canonical_url": "https://example.com/old-boardwalk.pdf",
+                        "source_kind": "official_pdf",
+                    },
+                    "page_image_sha256": "oldpagehash",
+                    "field_crop_sha256": "cropmissing",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
                     "decision": "approve",
@@ -14534,6 +17492,70 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual([], payload["reviewed_source_drift_task_ids"])
         self.assertEqual([task["task_id"]], payload["missing_source_drift_task_ids"])
 
+    def test_review_schema_rejects_stale_source_drift_visual_review_artifacts(self) -> None:
+        source_drift_report = {
+            "report_kind": "v3_quarter_source_drift",
+            "quarter": "fy26-q4",
+            "status": "review_required",
+            "publish_blockers": ["activity_count_drift"],
+            "source_reports": [
+                {
+                    "calendar_group_key": "boardwalk",
+                    "source_document_id": "source-doc-a",
+                    "status": "review_required",
+                    "old_hash": "oldhash",
+                    "new_hash": "newhash",
+                    "new_titles": ["Campfire"],
+                    "new_title_details": [
+                        {
+                            "title": "Campfire",
+                            "page_image_sha256": "pagehash-current",
+                            "crop_storage_path": "crops/campfire-title.png",
+                            "crop_sha256": "titlecrop-current",
+                            "bbox_px": [20, 40, 180, 70],
+                            "text": "Campfire",
+                        }
+                    ],
+                    "publish_blockers": [],
+                }
+            ],
+        }
+        [task] = build_review_tasks([], source_drift_report=source_drift_report)
+        stale_decision = build_review_decision(
+            task,
+            reviewer="josh",
+            decision="approve",
+            reason="Reviewed source drift against old page evidence.",
+            decided_at="2026-06-28T12:00:00Z",
+        )
+        stale_decision["page_image_sha256"] = "pagehash-old"
+        stale_decision["original_task"] = {
+            **stale_decision["original_task"],
+            "page_image_sha256": "pagehash-old",
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            decisions_path = root / "review_decisions.json"
+            source_drift_path = root / "source_drift_report.json"
+            output_path = root / "reviewed_source_drift_report.json"
+            decisions_path.write_text(json.dumps([stale_decision]))
+            source_drift_path.write_text(json.dumps(source_drift_report))
+
+            report = review_schema_v3.export_reviewed_source_drift_report(
+                decisions_path=decisions_path,
+                source_drift_report_path=source_drift_path,
+                output_path=output_path,
+            )
+            payload = json.loads(output_path.read_text())
+
+        self.assertEqual(1, report["summary"]["required_source_drift_task_count"])
+        self.assertEqual(0, report["summary"]["reviewed_source_drift_task_count"])
+        self.assertEqual(1, report["summary"]["missing_source_drift_task_count"])
+        self.assertEqual(1, report["summary"]["skipped_stale_review_decision_count"])
+        self.assertEqual([], payload["reviewed_source_drift_task_ids"])
+        self.assertEqual([task["task_id"]], payload["missing_source_drift_task_ids"])
+
     def test_review_schema_rejects_source_drift_review_bound_to_wrong_source_document(self) -> None:
         source_drift_report = {
             "report_kind": "v3_quarter_source_drift",
@@ -14613,6 +17635,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             "decided_at": "2026-06-28T12:01:00Z",
             "original_task": {
                 "content_sha256": "sourcehash",
+                "source_url": "https://example.com/boardwalk.pdf",
+                "source_metadata": {
+                    "canonical_url": "https://example.com/boardwalk.pdf",
+                    "source_kind": "official_pdf",
+                },
                 "dual_run_status_transition": {
                     "transition_key": "boardwalk:poolside-activities:needs_review_to_auto_publishable"
                 }
@@ -14772,6 +17799,17 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "schedule": {"text": "Daily at 2:30pm"},
                     "location": {"label": "Luna Park Pool Deck"},
                     "price": {"state": "free"},
+                    "pipeline_version": "vision_v3_001",
+                    "config_hash": "confighash",
+                    "runtime_lineage": {
+                        "config_hash": "confighash",
+                        "lineage_hash": "lineagehash",
+                        "git_sha": "abc123",
+                        "config": {"dpi": 240},
+                        "package_versions": {"pypdfium2": "4.30.0"},
+                        "model_asset_hashes": {"paddleocr_ppstructurev3": "modelhash"},
+                        "ocr_engine_configs": {"paddleocr_ppstructurev3": {"mode": "ppstructurev3"}},
+                    },
                     "field_evidence": {
                         "schedule": {
                             "source": {
@@ -14806,6 +17844,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         report = build_dual_run_report(v2_rows=v2_rows, v3_preview=v3_preview, reviewed_diff_keys=[])
 
         self.assertEqual("blocked", report["status"])
+        self.assertEqual("v3_dual_run_report_001", report["schema_version"])
         self.assertRegex(report.get("generated_at", ""), r"^\d{4}-\d{2}-\d{2}T")
         self.assertEqual(2, report["v2_count"])
         self.assertEqual(2, report["v3_count"])
@@ -14829,6 +17868,9 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             ["boardwalk:poolside-activities:schedule"],
             [diff["review_key"] for diff in report["field_diffs"]],
         )
+        self.assertEqual("vision_v3_001", report["field_diffs"][0]["pipeline_version"])
+        self.assertEqual("confighash", report["field_diffs"][0]["config_hash"])
+        self.assertEqual("lineagehash", report["field_diffs"][0]["runtime_lineage"]["lineage_hash"])
         self.assertEqual(["boardwalk:poolside-activities:schedule"], report["unreviewed_diff_keys"])
         self.assertIn("v3_candidate_not_publishable:movie-under-the-stars", report["publish_blockers"])
 
@@ -14873,6 +17915,16 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 "location": {"label": "Village Green Lawn"},
                 "price": {"state": "free"},
                 "source_sha256": "oldsourcehash",
+                "field_provenance": {
+                    "title": [
+                        {
+                            "page": 1,
+                            "bbox": [40, 50, 260, 80],
+                            "page_image_sha256": "oldpagehash",
+                            "crop_sha256": "oldtitlecrop",
+                        }
+                    ]
+                },
             },
         ]
         reviewed = build_dual_run_report(
@@ -14883,6 +17935,13 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "key": "boardwalk:campfire:missing_v2_record",
                     "task_id": "dual-run-missing-v2-boardwalk-campfire-missing-v2-record",
                     "content_sha256": "oldsourcehash",
+                    "source_url": "https://example.com/old-boardwalk.pdf",
+                    "source_metadata": {
+                        "canonical_url": "https://example.com/old-boardwalk.pdf",
+                        "source_kind": "official_pdf",
+                    },
+                    "page_image_sha256": "oldpagehash",
+                    "field_crop_sha256": "oldtitlecrop",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
                     "decision": "approve",
@@ -14898,10 +17957,29 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "key": "boardwalk:campfire:missing_v2_record",
                     "task_id": "dual-run-missing-v2-boardwalk-campfire-missing-v2-record",
                     "content_sha256": "stalehash",
+                    "page_image_sha256": "oldpagehash",
+                    "field_crop_sha256": "oldtitlecrop",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
                     "decision": "approve",
                     "reason": "Reviewed stale record.",
+                }
+            ],
+        )
+        stale_visual = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview={"rows": []},
+            reviewed_missing_v2_record_reviews=[
+                {
+                    "key": "boardwalk:campfire:missing_v2_record",
+                    "task_id": "dual-run-missing-v2-boardwalk-campfire-missing-v2-record",
+                    "content_sha256": "oldsourcehash",
+                    "page_image_sha256": "stale-page",
+                    "field_crop_sha256": "oldtitlecrop",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Reviewed stale visual evidence.",
                 }
             ],
         )
@@ -14914,10 +17992,20 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual("clean", reviewed["status"])
         self.assertEqual([], reviewed["unreviewed_missing_v2_keys"])
         self.assertEqual(["boardwalk:campfire:missing_v2_record"], reviewed["reviewed_missing_v2_record_keys"])
+        self.assertEqual(
+            "https://example.com/old-boardwalk.pdf",
+            reviewed["reviewed_missing_v2_record_reviews"][0]["source_url"],
+        )
+        self.assertEqual(
+            "official_pdf",
+            reviewed["reviewed_missing_v2_record_reviews"][0]["source_metadata"]["source_kind"],
+        )
         self.assertNotIn("v3_missing_v2_rows", reviewed["publish_blockers"])
         self.assertEqual("blocked", stale["status"])
         self.assertEqual(["boardwalk:campfire"], stale["unreviewed_missing_v2_keys"])
         self.assertIn("v3_missing_v2_rows", stale["publish_blockers"])
+        self.assertEqual("blocked", stale_visual["status"])
+        self.assertEqual(["boardwalk:campfire"], stale_visual["unreviewed_missing_v2_keys"])
         self.assertEqual("blocked", bare_key["status"])
         self.assertEqual([], bare_key["reviewed_missing_v2_record_keys"])
         self.assertEqual(["boardwalk:campfire"], bare_key["unreviewed_missing_v2_keys"])
@@ -14932,6 +18020,13 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "schedule": {"text": "Daily at 1:30pm"},
                     "location": {"label": "Luna Park Pool Deck"},
                     "price": {"state": "free"},
+                    "pipeline_version": "vision_v3_001",
+                    "config_hash": "confighash",
+                    "runtime_lineage": {
+                        "config_hash": "confighash",
+                        "lineage_hash": "lineagehash",
+                        "git_sha": "abc123",
+                    },
                     "field_evidence": {
                         "title": {
                             "source": {
@@ -14966,7 +18061,14 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 {
                     "key": "boardwalk:poolside-activities:new_record",
                     "content_sha256": "sourcehash",
+                    "source_url": "https://example.com/boardwalk.pdf",
+                    "source_metadata": {
+                        "canonical_url": "https://example.com/boardwalk.pdf",
+                        "source_kind": "official_pdf",
+                    },
                     "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
+                    "page_image_sha256": "pagehash",
+                    "field_crop_sha256": "titlecrop",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
                     "decision": "approve",
@@ -14984,13 +18086,102 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(["boardwalk:poolside-activities"], blocked["unreviewed_new_keys"])
         self.assertEqual("titlecrop", blocked["new_v3_records"][0]["v3_field_evidence"]["title"]["source"]["crop_sha256"])
         self.assertEqual("pagehash", blocked["new_v3_records"][0]["v3_field_evidence"]["title"]["source"]["page_image_sha256"])
+        self.assertEqual("vision_v3_001", blocked["new_v3_records"][0]["pipeline_version"])
+        self.assertEqual("confighash", blocked["new_v3_records"][0]["config_hash"])
+        self.assertEqual("lineagehash", blocked["new_v3_records"][0]["runtime_lineage"]["lineage_hash"])
         self.assertIn("unreviewed_new_v3_rows", blocked["publish_blockers"])
         self.assertEqual("clean", reviewed["status"])
         self.assertEqual([], reviewed["unreviewed_new_keys"])
         self.assertEqual(["boardwalk:poolside-activities:new_record"], reviewed["reviewed_new_record_keys"])
+        self.assertEqual(
+            "https://example.com/boardwalk.pdf",
+            reviewed["reviewed_new_record_reviews"][0]["source_url"],
+        )
+        self.assertEqual("official_pdf", reviewed["reviewed_new_record_reviews"][0]["source_metadata"]["source_kind"])
         self.assertEqual("blocked", bare_key["status"])
         self.assertEqual(["boardwalk:poolside-activities"], bare_key["unreviewed_new_keys"])
         self.assertEqual([], bare_key["reviewed_new_record_keys"])
+
+    def test_dual_run_report_requires_current_visual_artifacts_for_new_v3_row_review(self) -> None:
+        v3_preview = {
+            "rows": [
+                {
+                    "canonical_slug": "poolside-activities",
+                    "title": "Poolside Activities",
+                    "calendar_group_key": "boardwalk",
+                    "schedule": {"text": "Daily at 1:30pm"},
+                    "location": {"label": "Luna Park Pool Deck"},
+                    "price": {"state": "free"},
+                    "field_evidence": {
+                        "title": {
+                            "source": {
+                                "content_sha256": "sourcehash",
+                                "page_number": 1,
+                                "page_image_sha256": "pagehash-current",
+                                "crop_storage_path": "fields/title.png",
+                                "crop_sha256": "titlecrop-current",
+                                "bbox_px": [12, 24, 240, 60],
+                            }
+                        }
+                    },
+                    "validation_status": "auto_publishable",
+                }
+            ],
+            "summary": {"skipped_not_publishable": 0},
+        }
+        review_key = "boardwalk:poolside-activities:new_record"
+        base_review = {
+            "key": review_key,
+            "content_sha256": "sourcehash",
+            "task_id": "dual-run-new-boardwalk-poolside-activities-new-record",
+            "reviewer": "josh",
+            "decided_at": "2026-06-28T12:00:00Z",
+            "decision": "approve",
+            "reason": "Reviewed new V3 row.",
+        }
+
+        stale_page = build_dual_run_report(
+            v2_rows=[],
+            v3_preview=v3_preview,
+            reviewed_new_record_reviews=[
+                {
+                    **base_review,
+                    "page_image_sha256": "pagehash-old",
+                    "field_crop_sha256": "titlecrop-current",
+                }
+            ],
+        )
+        stale_crop = build_dual_run_report(
+            v2_rows=[],
+            v3_preview=v3_preview,
+            reviewed_new_record_reviews=[
+                {
+                    **base_review,
+                    "page_image_sha256": "pagehash-current",
+                    "field_crop_sha256": "titlecrop-old",
+                }
+            ],
+        )
+        current = build_dual_run_report(
+            v2_rows=[],
+            v3_preview=v3_preview,
+            reviewed_new_record_reviews=[
+                {
+                    **base_review,
+                    "page_image_sha256": "pagehash-current",
+                    "field_crop_sha256": "titlecrop-current",
+                }
+            ],
+        )
+
+        self.assertEqual("blocked", stale_page["status"])
+        self.assertEqual([review_key], stale_page["new_v3_review_keys"])
+        self.assertEqual(["boardwalk:poolside-activities"], stale_page["unreviewed_new_keys"])
+        self.assertEqual("blocked", stale_crop["status"])
+        self.assertEqual(["boardwalk:poolside-activities"], stale_crop["unreviewed_new_keys"])
+        self.assertEqual("clean", current["status"])
+        self.assertEqual([review_key], current["reviewed_new_record_keys"])
+        self.assertEqual([], current["unreviewed_new_keys"])
 
     def test_dual_run_report_does_not_treat_legacy_unknown_price_as_conflict(self) -> None:
         v2_rows = [
@@ -15114,6 +18305,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 {
                     "key": "boardwalk:poolside-activities:schedule",
                     "content_sha256": "sourcehash",
+                    "source_url": "https://example.com/boardwalk.pdf",
+                    "source_metadata": {
+                        "canonical_url": "https://example.com/boardwalk.pdf",
+                        "source_kind": "official_pdf",
+                    },
                     "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
@@ -15128,6 +18324,71 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual([], bare_key["reviewed_diff_keys"])
         self.assertEqual("clean", reviewed["status"])
         self.assertEqual(["boardwalk:poolside-activities:schedule"], reviewed["reviewed_diff_keys"])
+        self.assertEqual(
+            "https://example.com/boardwalk.pdf",
+            reviewed["reviewed_diff_reviews"][0]["source_url"],
+        )
+        self.assertEqual("official_pdf", reviewed["reviewed_diff_reviews"][0]["source_metadata"]["source_kind"])
+
+    def test_dual_run_report_requires_valid_review_metadata_for_field_diff(self) -> None:
+        v2_rows = [
+            {
+                "canonical_slug": "poolside-activities",
+                "title": "Poolside Activities",
+                "calendar_group_key": "boardwalk",
+                "schedule": {"text": "Daily at 1:30pm"},
+            }
+        ]
+        v3_preview = {
+            "rows": [
+                {
+                    "canonical_slug": "poolside-activities",
+                    "title": "Poolside Activities",
+                    "calendar_group_key": "boardwalk",
+                    "schedule": {"text": "Daily at 2:30pm"},
+                    "validation_status": "auto_publishable",
+                    "field_evidence": {"schedule": {"source": {"content_sha256": "sourcehash"}}},
+                }
+            ]
+        }
+
+        placeholder_reviewer = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=v3_preview,
+            reviewed_diff_reviews=[
+                {
+                    "key": "boardwalk:poolside-activities:schedule",
+                    "content_sha256": "sourcehash",
+                    "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+                    "reviewer": "reviewer-name",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Reviewed schedule diff.",
+                }
+            ],
+        )
+        placeholder_reason = build_dual_run_report(
+            v2_rows=v2_rows,
+            v3_preview=v3_preview,
+            reviewed_diff_reviews=[
+                {
+                    "key": "boardwalk:poolside-activities:schedule",
+                    "content_sha256": "sourcehash",
+                    "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
+                    "reviewer": "josh",
+                    "decided_at": "2026-06-28T12:00:00Z",
+                    "decision": "approve",
+                    "reason": "Verified against source crop",
+                }
+            ],
+        )
+
+        self.assertEqual("blocked", placeholder_reviewer["status"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], placeholder_reviewer["unreviewed_diff_keys"])
+        self.assertEqual([], placeholder_reviewer["reviewed_diff_keys"])
+        self.assertEqual("blocked", placeholder_reason["status"])
+        self.assertEqual(["boardwalk:poolside-activities:schedule"], placeholder_reason["unreviewed_diff_keys"])
+        self.assertEqual([], placeholder_reason["reviewed_diff_keys"])
 
     def test_dual_run_report_blocks_needs_review_to_auto_publishable_without_new_evidence(self) -> None:
         previous_rows = [
@@ -15157,6 +18418,13 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                     "location": {"label": "Luna Park Pool Deck"},
                     "price": {"state": "free"},
                     "validation_status": "auto_publishable",
+                    "pipeline_version": "vision_v3_001",
+                    "config_hash": "confighash",
+                    "runtime_lineage": {
+                        "config_hash": "confighash",
+                        "lineage_hash": "lineagehash",
+                        "git_sha": "abc123",
+                    },
                     "field_evidence": {
                         "schedule": {
                             "source": {
@@ -15218,6 +18486,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 {
                     "key": "boardwalk:poolside-activities:needs_review_to_auto_publishable",
                     "content_sha256": "sourcehash",
+                    "source_url": "https://example.com/boardwalk.pdf",
+                    "source_metadata": {
+                        "canonical_url": "https://example.com/boardwalk.pdf",
+                        "source_kind": "official_pdf",
+                    },
                     "task_id": "dual-run-status-boardwalk-poolside-activities-needs-review-to-auto-publishable",
                     "reviewer": "josh",
                     "decided_at": "2026-06-28T12:00:00Z",
@@ -15238,10 +18511,21 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
             blocked["unreviewed_status_transition_keys"],
         )
+        self.assertEqual("vision_v3_001", blocked["status_transitions"][0]["pipeline_version"])
+        self.assertEqual("confighash", blocked["status_transitions"][0]["config_hash"])
+        self.assertEqual("lineagehash", blocked["status_transitions"][0]["runtime_lineage"]["lineage_hash"])
         self.assertIn("unreviewed_v3_status_transitions", blocked["publish_blockers"])
         self.assertEqual("clean", evidence_changed["status"])
         self.assertEqual([], evidence_changed["unreviewed_status_transition_keys"])
         self.assertEqual("clean", reviewed["status"])
+        self.assertEqual(
+            "https://example.com/boardwalk.pdf",
+            reviewed["reviewed_status_transition_reviews"][0]["source_url"],
+        )
+        self.assertEqual(
+            "official_pdf",
+            reviewed["reviewed_status_transition_reviews"][0]["source_metadata"]["source_kind"],
+        )
         self.assertEqual("blocked", bare_key["status"])
         self.assertEqual(
             ["boardwalk:poolside-activities:needs_review_to_auto_publishable"],
@@ -15303,6 +18587,8 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                             {
                                 "key": "boardwalk:poolside-activities:schedule",
                                 "content_sha256": "sourcehash",
+                                "page_image_sha256": "pagehash",
+                                "field_crop_sha256": "schedulecrop",
                                 "task_id": "dual-run-diff-boardwalk-poolside-activities-schedule",
                                 "reviewer": "josh",
                                 "decided_at": "2026-06-28T12:00:00Z",
@@ -15611,8 +18897,12 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             {"source_document_id": "source-doc-3", "calendar_group_key": "pop-century"},
         ]
         source_statuses = [
-            {"source_document_id": "source-doc-1", "status": "processed"},
-            {"source_document_id": "source-doc-3", "status": "source_error", "message": "download failed"},
+            source_status_fixture(source_document_id="source-doc-1", status="processed"),
+            source_status_fixture(
+                source_document_id="source-doc-3",
+                status="source_error",
+                message="download failed",
+            ),
         ]
 
         blocked = build_dual_run_report(
@@ -15627,7 +18917,7 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             expected_sources=expected_sources,
             v3_source_statuses=[
                 *source_statuses,
-                {"source_document_id": "source-doc-2", "status": "processed"},
+                source_status_fixture(source_document_id="source-doc-2", status="processed"),
             ],
             review_tasks=[
                 {"source_document_id": "source-doc-3", "task_type": "source_error"},
@@ -15963,11 +19253,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 }
             ],
             v3_source_statuses=[
-                {
-                    "source_document_id": "source-doc-1",
-                    "content_sha256": "source-hash",
-                    "status": "processed",
-                }
+                source_status_fixture(
+                    source_document_id="source-doc-1",
+                    content_sha256="source-hash",
+                    status="processed",
+                )
             ],
         )
 
@@ -15975,6 +19265,58 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(1, report["source_coverage"]["expected_source_count"])
         self.assertEqual(1, report["source_coverage"]["processed_source_count"])
         self.assertEqual([], report["source_coverage"]["unprocessed_source_ids"])
+
+    def test_dual_run_report_source_coverage_reports_duplicate_visual_sources(self) -> None:
+        report = build_dual_run_report(
+            v2_rows=[],
+            v3_preview={"rows": []},
+            expected_sources=[
+                {
+                    "source_document_id": "source-doc-a",
+                    "content_sha256": "source-hash-1",
+                    "calendar_group_key": "boardwalk",
+                },
+                {
+                    "source_document_id": "source-doc-a",
+                    "content_sha256": "source-hash-1",
+                    "calendar_group_key": "boardwalk",
+                },
+                {
+                    "source_document_id": "source-doc-b",
+                    "content_sha256": "source-hash-1",
+                    "calendar_group_key": "boardwalk",
+                },
+                {
+                    "source_document_id": "source-doc-c",
+                    "content_sha256": "source-hash-2",
+                    "calendar_group_key": "pop-century",
+                },
+            ],
+            v3_source_statuses=[
+                source_status_fixture(
+                    source_document_id="source-doc-a",
+                    content_sha256="source-hash-1",
+                    status="processed",
+                ),
+                source_status_fixture(
+                    source_document_id="source-doc-b",
+                    content_sha256="source-hash-1",
+                    status="processed",
+                ),
+                source_status_fixture(
+                    source_document_id="source-doc-c",
+                    content_sha256="source-hash-2",
+                    status="processed",
+                ),
+            ],
+        )
+
+        self.assertEqual("clean", report["status"])
+        self.assertEqual(4, report["source_coverage"]["expected_source_row_count"])
+        self.assertEqual(3, report["source_coverage"]["expected_source_count"])
+        self.assertEqual(2, report["source_coverage"]["expected_source_hash_count"])
+        self.assertEqual({"source-doc-a": 2}, report["source_coverage"]["duplicate_expected_source_ids"])
+        self.assertEqual({"source-hash-1": 3}, report["source_coverage"]["duplicate_expected_source_hashes"])
 
     def test_dual_run_report_source_coverage_matches_status_by_hash_when_ids_differ(self) -> None:
         report = build_dual_run_report(
@@ -15991,11 +19333,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 }
             ],
             v3_source_statuses=[
-                {
-                    "source_document_id": "snapshot-source-id",
-                    "content_sha256": "source-hash",
-                    "status": "processed",
-                }
+                source_status_fixture(
+                    source_document_id="snapshot-source-id",
+                    content_sha256="source-hash",
+                    status="processed",
+                )
             ],
         )
 
@@ -16044,16 +19386,16 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 },
             ],
             v3_source_statuses=[
-                {
-                    "source_document_id": "source-doc-q3",
-                    "content_sha256": "hash-q3",
-                    "status": "processed",
-                },
-                {
-                    "source_document_id": "source-doc-no-edition",
-                    "content_sha256": "hash-no-edition",
-                    "status": "processed",
-                }
+                source_status_fixture(
+                    source_document_id="source-doc-q3",
+                    content_sha256="hash-q3",
+                    status="processed",
+                ),
+                source_status_fixture(
+                    source_document_id="source-doc-no-edition",
+                    content_sha256="hash-no-edition",
+                    status="processed",
+                )
             ],
             quarter="fy26-q3",
         )
@@ -16098,11 +19440,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
             },
         ]
         source_statuses = [
-            {
-                "source_document_id": "source-doc-visual",
-                "content_sha256": "visual-hash",
-                "status": "processed",
-            }
+            source_status_fixture(
+                source_document_id="source-doc-visual",
+                content_sha256="visual-hash",
+                status="processed",
+            )
         ]
 
         scoped_clean = build_dual_run_report(
@@ -16226,6 +19568,33 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertIn("v3_stale_source_status_pipeline_version", report["publish_blockers"])
         self.assertIn("v3_unprocessed_sources", report["publish_blockers"])
 
+    def test_dual_run_report_surfaces_stale_source_status_schema_versions(self) -> None:
+        report = build_dual_run_report(
+            v2_rows=[],
+            v3_preview={"rows": []},
+            expected_sources=[
+                {
+                    "source_document_id": "source-doc-schema",
+                    "content_sha256": "source-hash",
+                    "calendar_group_key": "boardwalk",
+                }
+            ],
+            v3_source_statuses=[
+                {
+                    "source_document_id": "source-doc-schema",
+                    "content_sha256": "source-hash",
+                    "schema_version": "v3_source_status_000",
+                    "status": "processed",
+                }
+            ],
+        )
+
+        self.assertEqual("blocked", report["status"])
+        self.assertEqual(["source-doc-schema"], report["source_coverage"]["stale_source_status_schema_ids"])
+        self.assertEqual(["source-doc-schema"], report["source_coverage"]["unprocessed_source_ids"])
+        self.assertIn("v3_stale_source_status_schema", report["publish_blockers"])
+        self.assertIn("v3_unprocessed_sources", report["publish_blockers"])
+
     def test_source_status_v3_maps_expected_sources_to_processed_error_or_unprocessed(self) -> None:
         expected_sources = [
             {
@@ -16274,6 +19643,10 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
         self.assertEqual(
             ["processed", "source_error", "unprocessed"],
             [status["status"] for status in statuses],
+        )
+        self.assertEqual(
+            ["v3_source_status_001", "v3_source_status_001", "v3_source_status_001"],
+            [status["schema_version"] for status in statuses],
         )
         self.assertEqual("source-doc-1", statuses[0]["source_document_id"])
         self.assertEqual("snapshots/hash-1.vision.json", statuses[0]["snapshot_path"])
@@ -16387,6 +19760,53 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
 
         self.assertEqual(2, len(statuses))
         self.assertEqual(["source-doc-no-edition", "source-doc-q4"], sorted(status["source_document_id"] for status in statuses))
+        self.assertEqual(["processed", "processed"], [status["status"] for status in statuses])
+
+    def test_source_status_v3_can_scope_to_visual_resort_sources(self) -> None:
+        statuses = build_v3_source_statuses(
+            expected_sources=[
+                {
+                    "source_document_id": "source-doc-pdf",
+                    "content_sha256": "hash-pdf",
+                    "calendar_group_key": "boardwalk",
+                    "source_kind": "official_pdf",
+                    "source_role": "resort_pdf",
+                    "source_type": "pdf",
+                },
+                {
+                    "source_document_id": "source-doc-image",
+                    "content_sha256": "hash-image",
+                    "calendar_group_key": "pop-century",
+                    "source_kind": "official_image",
+                    "source_role": "resort_pdf",
+                    "source_type": "image",
+                },
+                {
+                    "source_document_id": "source-doc-html",
+                    "content_sha256": "hash-html",
+                    "calendar_group_key": "boardwalk",
+                    "source_kind": "official_html",
+                    "source_role": "resort_page",
+                    "source_type": "html",
+                },
+                {
+                    "source_document_id": "source-doc-manual",
+                    "content_sha256": "hash-manual",
+                    "calendar_group_key": "boardwalk",
+                    "source_kind": "official_manual_extract",
+                    "source_role": "manual_extract",
+                },
+            ],
+            snapshots=[
+                {"source_sha256": "hash-pdf", "status": "ocr_complete"},
+                {"source_sha256": "hash-image", "status": "ocr_complete"},
+                {"source_sha256": "hash-html", "status": "ocr_complete"},
+                {"source_sha256": "hash-manual", "status": "ocr_complete"},
+            ],
+            v3_visual_only=True,
+        )
+
+        self.assertEqual(["source-doc-pdf", "source-doc-image"], [status["source_document_id"] for status in statuses])
         self.assertEqual(["processed", "processed"], [status["status"] for status in statuses])
 
     def test_source_status_v3_preserves_parser_error_snapshots(self) -> None:
@@ -16597,7 +20017,15 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
                 json.dumps([{"source_document_id": "source-doc-1", "content_sha256": "hash-1"}])
             )
             source_statuses_path.write_text(
-                json.dumps([{"source_document_id": "source-doc-1", "content_sha256": "hash-1", "status": "parser_error"}])
+                json.dumps(
+                    [
+                        source_status_fixture(
+                            source_document_id="source-doc-1",
+                            content_sha256="hash-1",
+                            status="parser_error",
+                        )
+                    ]
+                )
             )
             review_tasks_path.write_text(
                 json.dumps([{"source_document_id": "source-doc-1", "content_sha256": "hash-1", "task_type": "parser_error"}])
@@ -16634,7 +20062,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
     def test_dual_run_report_blocks_parser_error_sources_without_review_tasks(self) -> None:
         expected_sources = [{"source_document_id": "source-doc-parser", "content_sha256": "hash-parser"}]
         source_statuses = [
-            {"source_document_id": "source-doc-parser", "content_sha256": "hash-parser", "status": "parser_error"}
+            source_status_fixture(
+                source_document_id="source-doc-parser",
+                content_sha256="hash-parser",
+                status="parser_error",
+            )
         ]
 
         blocked = build_dual_run_report(
@@ -16679,7 +20111,11 @@ class VisionV3ScaffoldingTests(unittest.TestCase):
     def test_dual_run_report_blocks_source_error_sources_without_review_tasks(self) -> None:
         expected_sources = [{"source_document_id": "source-doc-error", "content_sha256": "hash-error"}]
         source_statuses = [
-            {"source_document_id": "source-doc-error", "content_sha256": "hash-error", "status": "source_error"}
+            source_status_fixture(
+                source_document_id="source-doc-error",
+                content_sha256="hash-error",
+                status="source_error",
+            )
         ]
 
         blocked = build_dual_run_report(

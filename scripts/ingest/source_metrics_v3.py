@@ -11,15 +11,18 @@ from typing import Any
 
 try:
     from config import PROCESSED_DIR
+    from publish_gold_v3 import _dual_run_preview_fingerprint
     from source_manifest import edition_matches_quarter
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR
+    from .publish_gold_v3 import _dual_run_preview_fingerprint
     from .source_manifest import edition_matches_quarter
 
 
 DEFAULT_SNAPSHOTS_PATH = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_CANDIDATES_PATH = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_SOURCE_INVENTORY_PATH = PROCESSED_DIR / "source_inventory.json"
+DEFAULT_PREVIEW_PATH = PROCESSED_DIR / "activity_gold_v3_preview.json"
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "eval" / "v3_source_metrics.json"
 AGREEMENT_OK = {"exact_after_normalization", "not_required", "manual_reviewed"}
 LOW_DESCRIPTION_CONFIDENCE_THRESHOLD = 0.5
@@ -41,6 +44,13 @@ def _json_objects(path: Path) -> list[dict[str, Any]]:
     if isinstance(payload, list):
         return [row for row in payload if isinstance(row, dict)]
     return []
+
+
+def _json_dict(path: Path) -> dict[str, Any] | None:
+    if not path.exists() or path.is_dir():
+        return None
+    payload = json.loads(path.read_text())
+    return payload if isinstance(payload, dict) else None
 
 
 def _source_hash(row: dict[str, Any]) -> str:
@@ -241,6 +251,18 @@ def _source_inventory_by_hash(source_inventory: list[dict[str, Any]]) -> dict[st
     return rows
 
 
+def _is_v3_visual_source(row: dict[str, Any], inventory_source: dict[str, Any] | None = None) -> bool:
+    inventory_source = inventory_source or {}
+    source_role = str(_first_present(row.get("source_role"), inventory_source.get("source_role")) or "").strip()
+    source_type = str(_first_present(row.get("source_type"), inventory_source.get("source_type")) or "").strip()
+    source_kind = str(_first_present(row.get("source_kind"), inventory_source.get("source_kind")) or "").strip()
+    return (
+        source_role in {"resort_pdf", "supporting_price_image"}
+        and source_type in {"pdf", "image"}
+        and source_kind in {"official_pdf", "official_image"}
+    )
+
+
 def _field_metrics(candidates: list[dict[str, Any]]) -> dict[str, float]:
     total = len(candidates)
     counts: Counter[str] = Counter()
@@ -326,12 +348,32 @@ def build_source_metrics_report(
     snapshots: list[dict[str, Any]],
     candidates: list[dict[str, Any]],
     source_inventory: list[dict[str, Any]] | None = None,
+    preview: dict[str, Any] | None = None,
     quarter: str | None = None,
+    v3_visual_only: bool = False,
 ) -> dict[str, Any]:
     snapshots = _filter_quarter(snapshots, quarter)
     candidates = _filter_quarter(candidates, quarter)
     source_inventory = _filter_quarter(source_inventory or [], quarter)
     inventory_by_hash = _source_inventory_by_hash(source_inventory)
+    if v3_visual_only:
+        snapshots = [
+            snapshot
+            for snapshot in snapshots
+            if _is_v3_visual_source(snapshot, inventory_by_hash.get(_source_hash(snapshot), {}))
+        ]
+        scoped_hashes = {_source_hash(snapshot) for snapshot in snapshots if _source_hash(snapshot)}
+        candidates = [
+            candidate
+            for candidate in candidates
+            if _source_hash(candidate) in scoped_hashes or _is_v3_visual_source(candidate, inventory_by_hash.get(_source_hash(candidate), {}))
+        ]
+        source_inventory = [
+            source
+            for source in source_inventory
+            if _source_hash(source) in scoped_hashes or _is_v3_visual_source(source)
+        ]
+        inventory_by_hash = _source_inventory_by_hash(source_inventory)
     candidates_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for candidate in candidates:
         source_hash = _source_hash(candidate)
@@ -355,8 +397,10 @@ def build_source_metrics_report(
     source_count = len(sources)
     return {
         "report_kind": "vision_v3_source_metrics",
+        "schema_version": "vision_v3_source_metrics_001",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "quarter": quarter,
+        "v3_preview_fingerprint": _dual_run_preview_fingerprint(preview) if isinstance(preview, dict) else None,
         "summary": {
             "source_count": source_count,
             "page_count": sum(row["page_count"] for row in sources),
@@ -382,8 +426,10 @@ def main() -> None:
     parser.add_argument("--snapshots", type=Path, default=DEFAULT_SNAPSHOTS_PATH)
     parser.add_argument("--candidates", type=Path, default=DEFAULT_CANDIDATES_PATH)
     parser.add_argument("--source-inventory", type=Path, default=DEFAULT_SOURCE_INVENTORY_PATH)
+    parser.add_argument("--preview", type=Path, default=DEFAULT_PREVIEW_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--quarter")
+    parser.add_argument("--v3-visual-only", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
@@ -391,7 +437,9 @@ def main() -> None:
         snapshots=_json_objects(args.snapshots),
         candidates=_json_objects(args.candidates),
         source_inventory=_json_objects(args.source_inventory),
+        preview=_json_dict(args.preview),
         quarter=args.quarter,
+        v3_visual_only=args.v3_visual_only,
     )
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))

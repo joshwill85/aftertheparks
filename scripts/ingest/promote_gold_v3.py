@@ -615,8 +615,11 @@ def build_gold_v3_preview(
                 try:
                     for decision in decisions:
                         validate_review_decision(decision)
-                except ValueError:
-                    skipped_invalid_review += 1
+                except ValueError as exc:
+                    if str(exc).startswith("stale_review_"):
+                        skipped_stale_review += 1
+                    else:
+                        skipped_invalid_review += 1
                     skipped += 1
                     continue
             current_decisions = [

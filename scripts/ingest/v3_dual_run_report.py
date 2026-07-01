@@ -22,7 +22,20 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 
 DEFAULT_OUTPUT = PROCESSED_DIR / "eval" / "v3_dual_run_report.json"
+DUAL_RUN_REPORT_SCHEMA_VERSION = "v3_dual_run_report_001"
+SOURCE_STATUS_SCHEMA_VERSION = "v3_source_status_001"
 CRITICAL_FIELDS = ("title", "schedule", "location", "price")
+PLACEHOLDER_REVIEWERS = {"reviewer-name", "your-name", "todo", "tbd"}
+PLACEHOLDER_REVIEW_REASONS = {
+    "approved",
+    "ok",
+    "reason",
+    "reviewed",
+    "source-backed rationale for this decision",
+    "tbd",
+    "todo",
+    "verified against source crop",
+}
 
 
 def _now_iso() -> str:
@@ -106,6 +119,15 @@ def _field_evidence(row: dict[str, Any], field: str) -> dict[str, Any] | None:
     if field == "price" and isinstance(evidence.get("fee"), dict):
         return evidence["fee"]
     return None
+
+
+def _lineage_fields(row: dict[str, Any]) -> dict[str, Any]:
+    fields: dict[str, Any] = {}
+    for key in ("pipeline_version", "config_hash", "runtime_lineage", "snapshot_path"):
+        value = row.get(key)
+        if value not in (None, ""):
+            fields[key] = value
+    return fields
 
 
 def _repair_ocr_time_text(value: str) -> str:
@@ -373,10 +395,86 @@ def _review_records_by_key(records: list[dict[str, Any]] | None) -> dict[str, di
     return by_key
 
 
-def _review_record_matches_hash(record: dict[str, Any] | None, content_sha256: str) -> bool:
+def _is_placeholder_review_reason(value: Any) -> bool:
+    normalized_reason = " ".join(str(value or "").strip().lower().split())
+    return normalized_reason in PLACEHOLDER_REVIEW_REASONS
+
+
+def _review_record_matches_hash(
+    record: dict[str, Any] | None,
+    content_sha256: str,
+    *,
+    page_image_sha256: str | None = None,
+    field_crop_sha256: str | None = None,
+) -> bool:
     if not isinstance(record, dict):
         return False
-    return bool(content_sha256) and str(record.get("content_sha256") or "").strip() == content_sha256
+    if str(record.get("decision") or "").strip() != "approve":
+        return False
+    if not str(record.get("task_id") or "").strip():
+        return False
+    reviewer = str(record.get("reviewer") or "").strip()
+    if not reviewer or reviewer.lower() in PLACEHOLDER_REVIEWERS:
+        return False
+    reason = str(record.get("reason") or "").strip()
+    if not reason or _is_placeholder_review_reason(reason):
+        return False
+    decided_at = str(record.get("decided_at") or "").strip()
+    if not decided_at:
+        return False
+    try:
+        datetime.fromisoformat(decided_at.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if not bool(content_sha256) or str(record.get("content_sha256") or "").strip() != content_sha256:
+        return False
+    if page_image_sha256 is not None and str(record.get("page_image_sha256") or "").strip() != page_image_sha256:
+        return False
+    if field_crop_sha256 is not None and str(record.get("field_crop_sha256") or "").strip() != field_crop_sha256:
+        return False
+    return True
+
+
+def _matching_review_record(
+    record: dict[str, Any] | None,
+    content_sha256: str,
+    *,
+    page_image_sha256: str | None = None,
+    field_crop_sha256: str | None = None,
+) -> dict[str, Any] | None:
+    if _review_record_matches_hash(
+        record,
+        content_sha256,
+        page_image_sha256=page_image_sha256,
+        field_crop_sha256=field_crop_sha256,
+    ):
+        return dict(record or {})
+    return None
+
+
+def _first_visual_review_artifact(row: dict[str, Any], preferred_fields: tuple[str, ...] = ()) -> dict[str, str]:
+    evidence = row.get("field_evidence")
+    if not isinstance(evidence, dict):
+        return {}
+    field_names = [field_name for field_name in preferred_fields if field_name in evidence]
+    field_names.extend(field_name for field_name in evidence if field_name not in field_names)
+    for field_name in field_names:
+        field_evidence = evidence.get(field_name)
+        if not isinstance(field_evidence, dict):
+            continue
+        source = field_evidence.get("source")
+        if not isinstance(source, dict):
+            continue
+        page_image_sha256 = str(source.get("page_image_sha256") or "").strip()
+        field_crop_sha256 = str(source.get("crop_sha256") or source.get("field_crop_sha256") or "").strip()
+        artifacts: dict[str, str] = {}
+        if page_image_sha256:
+            artifacts["page_image_sha256"] = page_image_sha256
+        if field_crop_sha256:
+            artifacts["field_crop_sha256"] = field_crop_sha256
+        if artifacts:
+            return artifacts
+    return {}
 
 
 def _status_transition_key(row_key: str) -> str:
@@ -451,6 +549,15 @@ def _expected_v3_source_hashes(
     }
 
 
+def _duplicate_counts(values: list[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for value in values:
+        if not value:
+            continue
+        counts[value] = counts.get(value, 0) + 1
+    return {value: count for value, count in sorted(counts.items()) if count > 1}
+
+
 def _v2_comparable_rows(
     rows: list[dict[str, Any]],
     *,
@@ -470,7 +577,10 @@ def _source_coverage(
     quarter: str | None = None,
 ) -> dict[str, Any]:
     expected_sources = _filter_expected_v3_sources(expected_sources, quarter=quarter)
-    expected_ids = sorted({_source_id(source) for source in expected_sources or [] if _source_id(source)})
+    expected_source_ids = [_source_id(source) for source in expected_sources or [] if _source_id(source)]
+    expected_source_hash_values = [_source_hash(source) for source in expected_sources or [] if _source_hash(source)]
+    expected_hashes = sorted(set(expected_source_hash_values))
+    expected_ids = sorted(set(expected_source_ids))
     statuses_by_id = {
         _source_id(status): status
         for status in v3_source_statuses or []
@@ -516,7 +626,15 @@ def _source_coverage(
             and str(statuses_by_id[source_id].get("message") or "") == "stale_v3_snapshot_pipeline_version"
         )
     )
-    stale_id_set = set(stale_source_status_ids)
+    stale_source_status_schema_ids = sorted(
+        source_id
+        for source_id in expected_ids
+        if (
+            (status := status_for_expected(source_id))
+            and str(status.get("schema_version") or "") != SOURCE_STATUS_SCHEMA_VERSION
+        )
+    )
+    stale_id_set = set(stale_source_status_ids) | set(stale_source_status_schema_ids)
     processed_ids = sorted(
         source_id for source_id in expected_ids
         if source_id not in stale_id_set and str(status_for_expected(source_id).get("status") or "") == "processed"
@@ -558,19 +676,19 @@ def _source_coverage(
     source_error_without_review_task_ids = without_review_task(expected_source_error_ids, "source_error")
     return {
         "expected_source_count": len(expected_ids),
-        "expected_source_hashes": sorted(
-            {
-                _source_hash(source)
-                for source in expected_sources
-                if _source_hash(source)
-            }
-        ),
+        "expected_source_row_count": len(expected_sources),
+        "expected_source_id_count": len(expected_ids),
+        "expected_source_hash_count": len(expected_hashes),
+        "expected_source_hashes": expected_hashes,
+        "duplicate_expected_source_ids": _duplicate_counts(expected_source_ids),
+        "duplicate_expected_source_hashes": _duplicate_counts(expected_source_hash_values),
         "processed_source_count": len([source_id for source_id in expected_ids if source_id in set(processed_ids)]),
         "source_error_count": len([source_id for source_id in expected_ids if source_id in set(source_error_ids)]),
         "unprocessed_source_ids": unprocessed_ids,
         "source_error_ids": [source_id for source_id in source_error_ids if source_id in set(expected_ids)],
         "parser_error_ids": expected_parser_error_ids,
         "stale_source_status_ids": stale_source_status_ids,
+        "stale_source_status_schema_ids": stale_source_status_schema_ids,
         "stale_source_status_config_ids": stale_source_status_config_ids,
         "stale_source_status_pipeline_ids": stale_source_status_pipeline_ids,
         "parser_error_without_review_task_ids": parser_error_without_review_task_ids,
@@ -611,14 +729,21 @@ def build_dual_run_report(
     new_review_keys = {key: f"{key}:new_record" for key in new_keys}
     missing_review_keys = {key: f"{key}:missing_v2_record" for key in missing_keys}
     new_v3_records: list[dict[str, Any]] = []
+    reviewed_new_record_review_manifests: list[dict[str, Any]] = []
     for key in new_keys:
         row = v3_by_key[key]
         review_key = new_review_keys[key]
         content_hash = _row_content_hash(row)
-        reviewed_new_record = _review_record_matches_hash(
+        visual_artifact = _first_visual_review_artifact(row, ("title", "movie_title"))
+        reviewed_new_record_manifest = _matching_review_record(
             reviewed_new_record_reviews_by_key.get(review_key),
             content_hash,
+            page_image_sha256=visual_artifact.get("page_image_sha256"),
+            field_crop_sha256=visual_artifact.get("field_crop_sha256"),
         )
+        reviewed_new_record = reviewed_new_record_manifest is not None
+        if reviewed_new_record_manifest:
+            reviewed_new_record_review_manifests.append(reviewed_new_record_manifest)
         new_v3_records.append(
             {
                 "review_key": review_key,
@@ -630,21 +755,30 @@ def build_dual_run_report(
                 "source_document_id": _source_id(row) or None,
                 "v3_field_evidence": row.get("field_evidence") if isinstance(row.get("field_evidence"), dict) else {},
                 "reviewed": reviewed_new_record,
+                **_lineage_fields(row),
             }
         )
     unreviewed_new_keys = [
         record["row_key"] for record in new_v3_records if not record.get("reviewed")
     ]
     missing_v2_records: list[dict[str, Any]] = []
+    reviewed_missing_v2_record_review_manifests: list[dict[str, Any]] = []
     for key in missing_keys:
         row = v2_by_key[key]
         source_hash = _row_content_hash(row)
         provenance = _first_v2_field_provenance(row)
+        page_image_sha256 = str(provenance.get("page_image_sha256") or "").strip()
+        field_crop_sha256 = str(provenance.get("crop_sha256") or provenance.get("field_crop_sha256") or "").strip()
         review_key = missing_review_keys[key]
-        reviewed_missing_record = _review_record_matches_hash(
+        reviewed_missing_record_manifest = _matching_review_record(
             reviewed_missing_v2_record_reviews_by_key.get(review_key),
             source_hash,
+            page_image_sha256=page_image_sha256 or None,
+            field_crop_sha256=field_crop_sha256 or None,
         )
+        reviewed_missing_record = reviewed_missing_record_manifest is not None
+        if reviewed_missing_record_manifest:
+            reviewed_missing_v2_record_review_manifests.append(reviewed_missing_record_manifest)
         missing_v2_records.append(
             {
                 "review_key": review_key,
@@ -657,7 +791,9 @@ def build_dual_run_report(
                 "source_pdf_edition": row.get("source_pdf_edition") or (row.get("source") or {}).get("edition"),
                 "page_number": provenance.get("page") or 1,
                 "page_image_path": _v2_page_image_path(row),
+                "page_image_sha256": page_image_sha256 or None,
                 "field_bbox": provenance.get("bbox"),
+                "field_crop_sha256": field_crop_sha256 or None,
                 "v2_value": {
                     "title": _field_value(row, "title"),
                     "schedule": _field_value(row, "schedule"),
@@ -672,6 +808,7 @@ def build_dual_run_report(
     ]
 
     field_diffs: list[dict[str, Any]] = []
+    reviewed_diff_review_manifests: list[dict[str, Any]] = []
     for key in common_keys:
         v2_row = v2_by_key[key]
         v3_row = v3_by_key[key]
@@ -684,10 +821,25 @@ def build_dual_run_report(
             v3_field_evidence = _field_evidence(v3_row, field)
             v3_source = v3_field_evidence.get("source") if isinstance(v3_field_evidence, dict) else {}
             v3_content_hash = str(v3_source.get("content_sha256") or "").strip() if isinstance(v3_source, dict) else ""
-            reviewed_diff = _review_record_matches_hash(
+            v3_page_image_sha256 = (
+                str(v3_source.get("page_image_sha256") or "").strip()
+                if isinstance(v3_source, dict)
+                else ""
+            )
+            v3_field_crop_sha256 = (
+                str(v3_source.get("crop_sha256") or v3_source.get("field_crop_sha256") or "").strip()
+                if isinstance(v3_source, dict)
+                else ""
+            )
+            reviewed_diff_manifest = _matching_review_record(
                 reviewed_diff_reviews_by_key.get(diff_key),
                 v3_content_hash,
+                page_image_sha256=v3_page_image_sha256 or None,
+                field_crop_sha256=v3_field_crop_sha256 or None,
             )
+            reviewed_diff = reviewed_diff_manifest is not None
+            if reviewed_diff_manifest:
+                reviewed_diff_review_manifests.append(reviewed_diff_manifest)
             field_diffs.append(
                 {
                     "diff_key": diff_key,
@@ -700,6 +852,7 @@ def build_dual_run_report(
                     "v3_value": v3_value,
                     "reviewed": reviewed_diff,
                     "v3_field_evidence": v3_field_evidence,
+                    **_lineage_fields(v3_row),
                 }
             )
 
@@ -718,6 +871,7 @@ def build_dual_run_report(
     if unreviewed_missing_v2_keys:
         publish_blockers.append("v3_missing_v2_rows")
     status_transitions: list[dict[str, Any]] = []
+    reviewed_status_transition_review_manifests: list[dict[str, Any]] = []
     for key in sorted(set(previous_v3_by_key) & set(v3_by_key)):
         previous_row = previous_v3_by_key[key]
         current_row = v3_by_key[key]
@@ -728,10 +882,13 @@ def build_dual_run_report(
         current_evidence = _evidence_fingerprint(current_row)
         evidence_changed = previous_evidence != current_evidence
         current_content_hash = _first_content_hash_from_fingerprint(current_evidence)
-        reviewed_transition = _review_record_matches_hash(
+        reviewed_transition_manifest = _matching_review_record(
             reviewed_status_transition_reviews_by_key.get(transition_key),
             current_content_hash,
         )
+        reviewed_transition = reviewed_transition_manifest is not None
+        if reviewed_transition_manifest:
+            reviewed_status_transition_review_manifests.append(reviewed_transition_manifest)
         status_transitions.append(
             {
                 "transition_key": transition_key,
@@ -743,6 +900,7 @@ def build_dual_run_report(
                 "evidence_changed": evidence_changed,
                 "reviewed": reviewed_transition,
                 "content_sha256": current_content_hash or None,
+                **_lineage_fields(current_row),
             }
         )
     unreviewed_status_transition_keys = [
@@ -762,6 +920,8 @@ def build_dual_run_report(
         publish_blockers.append("v3_unprocessed_sources")
     if source_coverage["stale_source_status_ids"]:
         publish_blockers.append("v3_stale_source_status_hash")
+    if source_coverage["stale_source_status_schema_ids"]:
+        publish_blockers.append("v3_stale_source_status_schema")
     if source_coverage["stale_source_status_config_ids"]:
         publish_blockers.append("v3_stale_source_status_config_hash")
     if source_coverage["stale_source_status_pipeline_ids"]:
@@ -772,7 +932,8 @@ def build_dual_run_report(
         publish_blockers.append("source_error_without_review_task")
 
     return {
-        "report_version": "v3_dual_run_report_001",
+        "report_version": DUAL_RUN_REPORT_SCHEMA_VERSION,
+        "schema_version": DUAL_RUN_REPORT_SCHEMA_VERSION,
         "generated_at": _now_iso(),
         "status": "blocked" if publish_blockers else "clean",
         "v2_count": len(v2_rows),
@@ -794,6 +955,7 @@ def build_dual_run_report(
         "reviewed_new_record_keys": [
             record["review_key"] for record in new_v3_records if record.get("reviewed")
         ],
+        "reviewed_new_record_reviews": reviewed_new_record_review_manifests,
         "missing_in_v3": [_slug(v2_by_key[key]) for key in missing_keys],
         "missing_v2_review_keys": [missing_review_keys[key] for key in missing_keys],
         "missing_v2_records": missing_v2_records,
@@ -801,6 +963,7 @@ def build_dual_run_report(
         "reviewed_missing_v2_record_keys": [
             record["review_key"] for record in missing_v2_records if record.get("reviewed")
         ],
+        "reviewed_missing_v2_record_reviews": reviewed_missing_v2_record_review_manifests,
         "field_diffs": field_diffs,
         "source_coverage": source_coverage,
         "status_transitions": status_transitions,
@@ -813,12 +976,14 @@ def build_dual_run_report(
                 ],
             }
         ),
+        "reviewed_status_transition_reviews": reviewed_status_transition_review_manifests,
         "unreviewed_status_transition_keys": unreviewed_status_transition_keys,
         "reviewed_diff_keys": sorted(
             {
                 *[diff["diff_key"] for diff in field_diffs if diff.get("reviewed")],
             }
         ),
+        "reviewed_diff_reviews": reviewed_diff_review_manifests,
         "unreviewed_diff_keys": unreviewed_diff_keys,
         "publish_blockers": list(dict.fromkeys(publish_blockers)),
         "manual_review_backlog": len(unreviewed_diff_keys)

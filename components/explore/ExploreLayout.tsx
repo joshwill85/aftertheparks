@@ -54,11 +54,11 @@ export function ExploreLayout({
                 id="official-offerings-heading"
                 className="font-display text-2xl font-semibold"
               >
-                Other resort recreation
+                Standing resort offerings
               </h2>
               <p className="mt-1 text-sm text-[var(--color-muted)]">
-                Disney recreation listings from official sources that are not
-                tied to a dated calendar time.
+                Offerings that may not have a posted date or time. Confirm
+                hours, access, and availability before planning around them.
               </p>
             </div>
             <ActivityOfferingGrid

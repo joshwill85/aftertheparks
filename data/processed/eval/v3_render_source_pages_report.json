@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T12:01:04.324451+00:00",
+  "generated_at": "2026-07-01T07:48:21.642516+00:00",
   "group": null,
   "output_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images",
   "quarter": "fy26-q3",
@@ -17,7 +17,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/d9f46962f3b6a67c0895d47621bfdaffde4097d0d5132262a8c37ecb5a788c59/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 3.777656458,
+      "render_elapsed_seconds": 4.098010917000001,
       "source_document_id": "62c3260f33d925eec99ea321e948c27efb76c384dab0fb582febba00117a2c13",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -60,7 +60,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0b998b5d61724b2eaa07fa26413f2d4e084be699a09935da9c7586a707345f21/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 5.288141957999999,
+      "render_elapsed_seconds": 6.325584125,
       "source_document_id": "4424fc235f3f7f293ef1fcbc8182123c01a42a577136df0b141c63c93cf0dc6e",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -103,7 +103,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9b69ec4527a24066d283db74292d862dea19703158c67c1d9a23359f7a668a67/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 5.821849833,
+      "render_elapsed_seconds": 7.186704833,
       "source_document_id": "3b154caddb51197773bec53e101ce155899b6c12d8ed4bf9d15e7b59be1c6c7f",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -146,7 +146,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/08d76c68a9e8c7d0e1b52d55595340f617189cea9558360d0936bea799f4f955/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 5.984837417,
+      "render_elapsed_seconds": 6.928280125000001,
       "source_document_id": "e5867f484be089414fc9b97930825ad4baf5cc39a229308e5ffc4259a787260a",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -189,7 +189,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 6.332517500000002,
+      "render_elapsed_seconds": 9.656535875,
       "source_document_id": "8c085f9e28a251db549a40c552c567c623a1d383d04f1bd7822130eaca2fc986",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -232,7 +232,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/c9640bb7e410a214df50fa574b81af860503a6475a77b1f99783f943203ee383/page_manifest.json",
       "mime_type": "image/jpeg",
       "page_count": 1,
-      "render_elapsed_seconds": 0.6531104170000006,
+      "render_elapsed_seconds": 0.5295045829999978,
       "source_document_id": "af6ce71aa9b76b4858dab5a5e8eab23e3afc6e98137b48797064dc1a8ba9d8c3",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -275,7 +275,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/76bbef2867fb302bd11e62979face20e8ddeabca88c1d08fad7b92d127e5f4aa/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 6.547105584000004,
+      "render_elapsed_seconds": 9.717971083000002,
       "source_document_id": "a14a6dedc284910cdc501ebfb211047e0149ee9501cbdf5984c28a83da896d20",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -318,7 +318,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a372587f7f03bfcdf30dc86df4660d75df9763571e5cec7e4556ef96924df54d/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 6.981970666999999,
+      "render_elapsed_seconds": 11.963689457999998,
       "source_document_id": "7ef2aa11cbb765126be43f1902d578a4688e0044a14992104b42b343807954e1",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -361,7 +361,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae830088e8bd4a54f97b8aaec7c41955743779b96cfe9701eb008ff8fae38988/page_manifest.json",
       "mime_type": "image/jpeg",
       "page_count": 1,
-      "render_elapsed_seconds": 0.5789296250000007,
+      "render_elapsed_seconds": 0.5128225000000057,
       "source_document_id": "110f2f4264a912b7abd14503c89a72350c1604aeb142fa091f0ff55e5f49a5cf",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -404,7 +404,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/77d834d59445ae176b0916f42b9c8e51191949c159de236079e69e36d77dc4c1/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 5.844687042000004,
+      "render_elapsed_seconds": 10.078975542000002,
       "source_document_id": "04f658d731fee7796101de9cdb9e1851c15dc6a756089c6cae14fbdac0067986",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -447,7 +447,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/df1337369dc1ff05b734d44936898dbf70b61002310eeb4b85358aa81d3db50c/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 8.677077540999996,
+      "render_elapsed_seconds": 9.029573708000001,
       "source_document_id": "47e30131c544288511a6da0358c7b561fe4d5533d635612e456ed8fb0d4c8aa0",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -490,7 +490,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/43720bc35c4bd912a1d6a9a36fd9fb60759bb6c6f08874b4e846b8ff8a9b8b38/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 7.1407612920000005,
+      "render_elapsed_seconds": 10.825774667000005,
       "source_document_id": "ce2b57abe3d7f00e013c261f1c0762ae47dccd9d85221b634638d36cacff341c",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -533,7 +533,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ae8b06b46f7d95c76050178a15b851b129d26b57f0a11f90cd185f70fd4a2e8e/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 7.5065669580000005,
+      "render_elapsed_seconds": 8.299909,
       "source_document_id": "3b72da7965f25f06d543a0a3c4bdb53250f3fb80dd9eb8986227b2a5b076695d",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -576,7 +576,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/9507c1944319125f97490ff430dff33dd58a6b113668fd6c081bb1d970d16a5a/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 8.204933834000002,
+      "render_elapsed_seconds": 9.334775792000002,
       "source_document_id": "761372974296f28c558922100ed957c51cac85f7915ea7a3084b8b438558ba86",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -619,7 +619,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/0fcd0154914feba0942dd10b55483e5a00512c013e4ce152c238f700f4628ab5/page_manifest.json",
       "mime_type": "image/jpeg",
       "page_count": 1,
-      "render_elapsed_seconds": 0.8692228329999949,
+      "render_elapsed_seconds": 0.5834597079999924,
       "source_document_id": "7b91d036408dbcfe799340e73c5d91ebb9318f13a0d4841071ad674665bf4d2d",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -662,7 +662,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/cae77e7b517b9af215ee9de3f98101d06fbb8775c13c9670b005e0c43e0ea5bf/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 9.025924500000002,
+      "render_elapsed_seconds": 10.015588375000007,
       "source_document_id": "ed92f66eaaee102a38067bc7e5a2253bd3d5abffc0b686d6e8e08c990344b056",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -705,7 +705,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/ed1fdac6f09d54dd8045a9d8756c632092dfd500a044d6c0ce6afb43ff2c0995/page_manifest.json",
       "mime_type": "image/jpeg",
       "page_count": 1,
-      "render_elapsed_seconds": 0.5736379169999992,
+      "render_elapsed_seconds": 0.4663784170000014,
       "source_document_id": "0b05025643c17f9d2e14ae8e28ed6100e160e5f6ed8c4cec2cde7d6a982ed6b9",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -748,7 +748,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/94786b3c6f7914c3266a137c9899e194f645189ee90124261ad904e70ebcccf4/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 8.588779792000011,
+      "render_elapsed_seconds": 9.094333917,
       "source_document_id": "51e6ce58ef1db448f5275fece5826ff0fbbad226a50679f86212b61cdf6021ba",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -791,7 +791,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/a18d709bb07d40b30760e10ddaf155bc9815dc4db8ad97a533ddf19c95762df5/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 7.440652375000013,
+      "render_elapsed_seconds": 8.793868250000003,
       "source_document_id": "a95a68b00968dcbc871e9c3d43526cd3af6495e488e793df51ec54a9b7d06ddd",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -834,7 +834,7 @@
       "manifest_path": "/Users/josh/OrlandoCheckInGuide/data/processed/page_images/057a75ea0bbc752b88ea605e42ddc6662017ae339103618c706216553f7aaf62/page_manifest.json",
       "mime_type": "application/pdf",
       "page_count": 1,
-      "render_elapsed_seconds": 8.690793541999994,
+      "render_elapsed_seconds": 9.281583999999981,
       "source_document_id": "af4528d505c55170f22035d0280484c7a5a05d3bb56da4ed757a640cb2b87807",
       "source_document_page_count": 1,
       "source_document_pages": [
@@ -866,13 +866,18 @@
       "status": "rendered"
     }
   ],
+  "schema_version": "v3_render_source_pages_001",
   "source_documents_dir": "/Users/josh/OrlandoCheckInGuide/data/raw/source_documents",
   "summary": {
-    "average_render_time_per_page_seconds": 5.726457854250001,
-    "render_elapsed_seconds": 114.52915708500002,
+    "average_page_image_bytes": 26378640.5,
+    "average_render_time_per_page_seconds": 7.13616624375,
+    "average_thumbnail_bytes": 70415.4,
+    "page_image_bytes": 527572810,
+    "render_elapsed_seconds": 142.723324875,
     "rendered_count": 20,
     "source_count": 20,
     "source_document_page_count": 20,
-    "source_error_count": 0
+    "source_error_count": 0,
+    "thumbnail_bytes": 1408308
   }
 }

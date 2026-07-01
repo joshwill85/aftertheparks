@@ -1,6 +1,6 @@
 {
   "candidates_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/activity_candidates_v3",
-  "generated_at": "2026-06-30T23:53:11.107003+00:00",
+  "generated_at": "2026-07-01T07:58:15.179402+00:00",
   "group": null,
   "output_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3",
   "quarter": "fy26-q3",
@@ -207,6 +207,7 @@
       "validated_path": "/Users/josh/OrlandoCheckInGuide/data/processed/validated_candidates_v3/ff5d84a7fed37a99be2538b1150bb69f39a7c3abd70851b9dd7405d22de901d0.candidates.json"
     }
   ],
+  "schema_version": "v3_validate_001",
   "summary": {
     "auto_publishable_count": 194,
     "candidate_count": 241,

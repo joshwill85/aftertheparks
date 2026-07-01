@@ -47,7 +47,7 @@ export function BrowseFilterShell({
     [searchParams]
   );
   const hideDaypart = variant === "tonight";
-  const hideFreeOnly = variant === "tonight";
+  const hideFreeOnly = false;
   const effectiveFilters = useMemo(
     () => (hideFreeOnly ? { ...filters, free: false } : filters),
     [filters, hideFreeOnly]

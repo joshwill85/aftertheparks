@@ -91,7 +91,7 @@ python scripts/ingest/review_schema_v3.py \
   --record-task-id <task_id> \
   --decision approve \
   --reviewer <name> \
-  --reason "Verified against source crop"
+  --reason "Schedule text and time are visible in the rendered PDF crop."
 ```
 
 For field edits, pass `--approved-fields-json` with the reviewed raw and normalized value. v3 decisions are bound to the task's source hash, page-image hash, and crop hash; stale decisions are ignored by promotion and dual-run gates.

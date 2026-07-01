@@ -259,6 +259,7 @@ def build_source_drift_report(
         or publish_blockers
     )
     return {
+        "schema_version": "v3_quarter_source_drift_001",
         "generated_at": _now_iso(),
         "baseline_mode": baseline_mode,
         "status": "review_required" if manual_review_required else "clean",
@@ -307,6 +308,52 @@ def load_candidate_rows_from_directory(candidates_dir: Path) -> list[dict[str, A
     return rows
 
 
+def _region_rows_from_payload(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, list):
+        rows: list[dict[str, Any]] = []
+        for item in payload:
+            if not isinstance(item, dict):
+                continue
+            if isinstance(item.get("regions"), list):
+                rows.extend(_region_rows_from_payload(item))
+            else:
+                rows.append(item)
+        return rows
+    if not isinstance(payload, dict):
+        return []
+    regions = payload.get("regions")
+    if not isinstance(regions, list):
+        return []
+    source_defaults = {
+        "source_document_id": payload.get("source_document_id"),
+        "content_sha256": payload.get("content_sha256") or payload.get("source_sha256"),
+        "calendar_group_key": payload.get("calendar_group_key"),
+    }
+    rows = []
+    for region in regions:
+        if not isinstance(region, dict):
+            continue
+        row = dict(region)
+        for key, value in source_defaults.items():
+            if value not in {None, ""} and row.get(key) in {None, ""}:
+                row[key] = value
+        rows.append(row)
+    return rows
+
+
+def load_region_rows_from_path(path: Path | None) -> list[dict[str, Any]]:
+    if path is None or not path.exists():
+        return []
+    paths = sorted(path.glob("*.json")) if path.is_dir() else [path]
+    rows: list[dict[str, Any]] = []
+    for child in paths:
+        try:
+            rows.extend(_region_rows_from_payload(json.loads(child.read_text())))
+        except Exception:
+            continue
+    return rows
+
+
 def _calendar_group_key(row: dict[str, Any]) -> str:
     return str(row.get("calendar_group_key") or row.get("group") or "unknown")
 
@@ -340,6 +387,42 @@ def _source_hash_for(rows: list[dict[str, Any]]) -> str:
         if value:
             return str(value)
     return ""
+
+
+def _region_group_keys(region: dict[str, Any]) -> list[str]:
+    keys: list[str] = []
+    source_document_id = _source_document_id(region)
+    if source_document_id:
+        keys.append(f"source:{source_document_id}")
+    source_hash = _source_hash_for([region])
+    if source_hash:
+        keys.append(f"hash:{source_hash}")
+    calendar_group_key = _calendar_group_key(region)
+    if calendar_group_key != "unknown":
+        keys.append(f"calendar_group:{calendar_group_key}")
+    return keys
+
+
+def _group_regions_by_source(regions: list[dict[str, Any]] | None) -> dict[str, list[dict[str, Any]]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for region in regions or []:
+        for key in _region_group_keys(region):
+            grouped.setdefault(key, []).append(region)
+    return grouped
+
+
+def _dedupe_regions(regions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    seen: set[str] = set()
+    deduped: list[dict[str, Any]] = []
+    for index, region in enumerate(regions):
+        key = str(region.get("region_id") or "")
+        if not key:
+            key = json.dumps(region, sort_keys=True, default=str) if region else f"index:{index}"
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(region)
+    return deduped
 
 
 def _document_family_for(rows: list[dict[str, Any]]) -> str | None:
@@ -390,12 +473,14 @@ def build_quarter_source_drift_report(
     *,
     old_rows: list[dict[str, Any]],
     new_rows: list[dict[str, Any]],
+    new_regions: list[dict[str, Any]] | None = None,
     quarter: str | None,
     activity_count_threshold: int = 0,
     movie_count_threshold: int = 0,
 ) -> dict[str, Any]:
     old_by_group = _group_rows_by_source(old_rows)
     new_by_group = _group_rows_by_source(new_rows)
+    new_regions_by_group = _group_regions_by_source(new_regions)
     first_v3_baseline = not old_by_group and bool(new_by_group)
     source_reports: list[dict[str, Any]] = []
     aggregate_blockers: set[str] = set()
@@ -405,11 +490,15 @@ def build_quarter_source_drift_report(
         new_group_rows = new_by_group.get(group, [])
         old_hash = _source_hash_for(old_group_rows)
         new_hash = _source_hash_for(new_group_rows)
+        group_regions = list(new_regions_by_group.get(group, []))
+        if new_hash:
+            group_regions.extend(new_regions_by_group.get(f"hash:{new_hash}", []))
         report = build_source_drift_report(
             old_source_hash=old_hash,
             new_source_hash=new_hash,
             old_rows=old_group_rows,
             new_rows=new_group_rows,
+            new_regions=_dedupe_regions(group_regions),
             old_document_family=_document_family_for(old_group_rows),
             new_document_family=_document_family_for(new_group_rows),
             activity_count_threshold=activity_count_threshold,
@@ -438,6 +527,7 @@ def build_quarter_source_drift_report(
     status = "review_required" if review_required_count or aggregate_blockers else "clean"
     return {
         "report_kind": "v3_quarter_source_drift",
+        "schema_version": "v3_quarter_source_drift_001",
         "generated_at": _now_iso(),
         "quarter": quarter,
         "baseline_mode": "first_v3_baseline" if first_v3_baseline else None,
@@ -475,6 +565,7 @@ def main() -> None:
         report = build_quarter_source_drift_report(
             old_rows=load_candidate_rows_from_directory(args.old_candidates_dir),
             new_rows=load_candidate_rows_from_directory(args.new_candidates_dir),
+            new_regions=load_region_rows_from_path(args.new_regions),
             quarter=args.quarter,
             activity_count_threshold=args.activity_count_threshold,
             movie_count_threshold=args.movie_count_threshold,
@@ -502,7 +593,7 @@ def main() -> None:
 
     old_rows = json.loads(args.old.read_text())
     new_rows = json.loads(args.new.read_text())
-    new_regions = json.loads(args.new_regions.read_text()) if args.new_regions and args.new_regions.exists() else []
+    new_regions = load_region_rows_from_path(args.new_regions)
     report = build_source_drift_report(
         old_source_hash=str(args.old_source_hash),
         new_source_hash=str(args.new_source_hash),

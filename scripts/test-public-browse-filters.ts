@@ -67,6 +67,15 @@ const activitiesPage = readFileSync(
   join(repoRoot, "app/activities/page.tsx"),
   "utf8"
 );
+const tonightPage = readFileSync(join(repoRoot, "app/tonight/page.tsx"), "utf8");
+const browseFilterShell = readFileSync(
+  join(repoRoot, "components/explore/BrowseFilterShell.tsx"),
+  "utf8"
+);
+const resultSummary = readFileSync(
+  join(repoRoot, "components/explore/ResultSummary.tsx"),
+  "utf8"
+);
 const filterRail = readFileSync(
   join(repoRoot, "components/explore/FilterRail.tsx"),
   "utf8"
@@ -90,6 +99,12 @@ const requiredCategoryPages = [
     title: "Arcades and Games at Disney Resorts",
     subtitle: "indoor, low-effort backup",
     canonical: "/activities?category=arcade",
+  },
+  {
+    param: "category=movies_under_stars",
+    title: "Movies Under the Stars at Disney World Resorts",
+    subtitle: "outdoor movie listings",
+    canonical: "/activities?category=movies_under_stars",
   },
 ];
 
@@ -130,6 +145,27 @@ assert.doesNotMatch(
   activitiesPage + filterRail,
   /Category 1/,
   "Category pages and filters should not show placeholder Category 1 copy"
+);
+
+assert.doesNotMatch(
+  browseFilterShell,
+  /hideFreeOnly\s*=\s*variant\s*===\s*"tonight"/,
+  "Tonight should not hide or neutralize the Free only filter"
+);
+assert.match(
+  tonightPage,
+  /"free=true"/,
+  "Tonight should treat free=true as a supported strategic filter"
+);
+assert.match(
+  tonightPage,
+  /Free Disney Resort Activities Tonight/,
+  "Tonight free filter should have focused public metadata"
+);
+assert.match(
+  resultSummary,
+  /\{" · "\}/,
+  "Result summary should render a real text space before the active-filter separator"
 );
 
 console.log("Public browse filters contract passed.");

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T21:56:30.412948+00:00",
+  "generated_at": "2026-07-01T07:51:54.369083+00:00",
   "group": null,
   "output_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_snapshots",
   "quarter": "fy26-q3",
@@ -266,6 +266,7 @@
       "status": "ocr_complete"
     }
   ],
+  "schema_version": "v3_vision_snapshot_001",
   "snapshots_dir": "/Users/josh/OrlandoCheckInGuide/data/processed/vision_snapshots",
   "summary": {
     "average_ocr_time_per_page_seconds": null,

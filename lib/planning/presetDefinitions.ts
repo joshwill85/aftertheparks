@@ -69,8 +69,8 @@ export const INTENT_PRESETS: IntentPresetDefinition[] = [
   },
   {
     id: "no_booking_required",
-    label: "No booking required",
-    description: "Only when source evidence says walk-up or no reservation.",
+    label: "No reservation needed",
+    description: "Walk-up or no reservation noted.",
     explanation:
       "Not inferred from missing reservation data.",
   },

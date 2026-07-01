@@ -49,6 +49,7 @@ DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_PAGE_IMAGES_DIR = PROCESSED_DIR / "page_images"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_vision_snapshot_report.json"
 PIPELINE_VERSION = "vision_v3_001"
+VISION_SNAPSHOT_REPORT_SCHEMA_VERSION = "v3_vision_snapshot_001"
 ACTIVITY_LAYOUT_SNAPSHOTS_CONFLICT = "content_sha256,parser_version"
 PRIMARY_ENGINE = "paddleocr_ppstructurev3"
 SECONDARY_ENGINE = "rapidocr"
@@ -775,6 +776,7 @@ def build_vision_snapshots_from_directory(
     ocr_elapsed_seconds = sum(float(result.get("ocr_elapsed_seconds") or 0.0) for result in snapshot_results)
     report = {
         "report_kind": "v3_vision_snapshot",
+        "schema_version": VISION_SNAPSHOT_REPORT_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "page_images_dir": str(page_images_dir),
         "output_dir": str(output_dir),
@@ -886,6 +888,7 @@ def build_vision_snapshot_report_from_existing_snapshots(
     )
     report = {
         "report_kind": "v3_vision_snapshot",
+        "schema_version": VISION_SNAPSHOT_REPORT_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "snapshots_dir": str(snapshots_dir),
         "output_dir": str(snapshots_dir),

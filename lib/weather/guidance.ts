@@ -444,7 +444,7 @@ export function getWeatherGuidance(input: {
       actionGuidance,
       visualState: "normal",
       headline: "Outdoor activities look reasonable right now",
-      recommendedAction: "Outdoor activities are reasonable right now. Keep checking for rain, lightning, heat, or wind.",
+      recommendedAction: "Outdoor plans look reasonable right now. Keep checking for rain, lightning, heat, or wind.",
       affectedActivityTags: [],
     };
   }
@@ -489,6 +489,7 @@ function buildSummary(input: {
   rainChancePct?: number;
   conditionText?: string;
 }): string {
+  const conditionText = input.conditionText?.toLowerCase() ?? "";
   if (input.forecastStatus === "not_available_yet") {
     return "This event is outside the useful free forecast window, so show schedule guidance and invite a later recheck.";
   }
@@ -499,13 +500,17 @@ function buildSummary(input: {
     return "Lead with the official alert, then steer guests toward flexible indoor or covered backups.";
   }
   if (input.risk.indoorBackupRecommended) {
+    if (input.risk.rainRisk !== "low" || /rain|shower|drizzle|storm|thunder/.test(conditionText)) {
+      return "Rain may affect outdoor plans now. Choose indoor or covered activities first.";
+    }
     return `Build the day with a nearby backup${
       input.rainChancePct != null ? `; rain chance is ${input.rainChancePct}%` : ""
     }.`;
   }
-  return input.conditionText
-    ? `${input.conditionText} is reasonable right now. Keep checking for rain, lightning, heat, or wind.`
-    : "Outdoor activities are reasonable right now. Keep checking for rain, lightning, heat, or wind.";
+  if (/mist|fog|haze|damp/.test(conditionText)) {
+    return "Damp conditions may affect outdoor comfort. Keep walks short and confirm outdoor activities.";
+  }
+  return "Outdoor plans look reasonable right now. Keep checking for rain, lightning, heat, or wind.";
 }
 
 function nearTermHours(input: {
@@ -607,7 +612,7 @@ export function buildNearTermRainSignal(input: {
       answer: "likely",
       headline: "Rain likely in the next hour",
       summary: "Use an indoor or covered backup before committing to outdoor plans.",
-      detail: "Hourly forecast · not radar-confirmed",
+      detail: "Forecast only, not live radar.",
       source: "weatherapi_hourly",
       sourceLabel,
       rainChancePct,
@@ -628,7 +633,7 @@ export function buildNearTermRainSignal(input: {
       answer: "possible",
       headline: "Rain may affect the next hour.",
       summary: "Keep the plan flexible and choose a nearby backup.",
-      detail: "Hourly forecast · not radar-confirmed",
+      detail: "Forecast only, not live radar.",
       source: "weatherapi_hourly",
       sourceLabel,
       rainChancePct,
@@ -647,8 +652,8 @@ export function buildNearTermRainSignal(input: {
     ...base,
     answer: "unlikely",
     headline: "Rain looks unlikely in the next hour",
-    summary: "Rain looks unlikely in the next hour. This is forecast guidance, not live radar.",
-    detail: "Hourly forecast · not radar-confirmed",
+    summary: "Rain looks unlikely in the next hour. Forecast only, not live radar.",
+    detail: "Forecast only, not live radar.",
     source: "weatherapi_hourly",
     sourceLabel,
     rainChancePct,

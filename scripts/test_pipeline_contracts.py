@@ -6253,9 +6253,16 @@ class PipelineContractsTest(unittest.TestCase):
                 ("vision_snapshot.py", "--attach-regions", "--upsert-layout-snapshots", "--quarter", "fy26-q4"),
                 ("extract_v3.py", "--quarter", "fy26-q4"),
                 ("validate_v3.py", "--quarter", "fy26-q4"),
-                ("source_status_v3.py", "--quarter", "fy26-q4"),
-                ("source_metrics_v3.py", "--quarter", "fy26-q4"),
-                ("source_drift_report.py", "--quarter", "fy26-q4"),
+                ("source_status_v3.py", "--v3-visual-only", "--quarter", "fy26-q4"),
+                (
+                    "source_drift_report.py",
+                    "--quarter",
+                    "fy26-q4",
+                    "--new-regions",
+                    "data/processed/vision_snapshots",
+                    "--output",
+                    "data/processed/source_drift_report.json",
+                ),
                 (
                     "review_schema_v3.py",
                     "data/processed/review_queue/vision_v3_review_decisions.json",
@@ -6268,8 +6275,17 @@ class PipelineContractsTest(unittest.TestCase):
                 ),
                 (
                     "build_review_queue_v3.py",
+                    "--output",
+                    "data/processed/review_queue/vision_v3_review_queue.json",
+                    "--report-output",
+                    "data/processed/eval/v3_review_queue_report.json",
+                    "--html-output",
+                    "data/processed/review_queue/vision_v3_review_queue.html",
+                    "--checklist-output",
+                    "data/processed/review_queue/vision_v3_publish_blocker_checklist.csv",
                     "--source-drift-report",
                     "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                    "--no-dual-run-report",
                 ),
                 (
                     "review_schema_v3.py",
@@ -6297,6 +6313,16 @@ class PipelineContractsTest(unittest.TestCase):
                     "fy26-q4",
                 ),
                 (
+                    "source_metrics_v3.py",
+                    "--v3-visual-only",
+                    "--preview",
+                    "data/processed/activity_gold_v3_preview.json",
+                    "--output",
+                    "data/processed/eval/v3_source_metrics.json",
+                    "--quarter",
+                    "fy26-q4",
+                ),
+                (
                     "review_schema_v3.py",
                     "data/processed/review_queue/vision_v3_review_decisions.json",
                     "--export",
@@ -6320,19 +6346,42 @@ class PipelineContractsTest(unittest.TestCase):
                     "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
                     "--reviewed-status-transition-keys-file",
                     "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
+                    "--output",
+                    "data/processed/eval/v3_dual_run_report.json",
                     "--quarter",
                     "fy26-q4",
                 ),
                 (
                     "build_review_queue_v3.py",
+                    "--output",
+                    "data/processed/review_queue/vision_v3_review_queue.json",
+                    "--report-output",
+                    "data/processed/eval/v3_review_queue_report.json",
+                    "--html-output",
+                    "data/processed/review_queue/vision_v3_review_queue.html",
+                    "--checklist-output",
+                    "data/processed/review_queue/vision_v3_publish_blocker_checklist.csv",
                     "--source-drift-report",
                     "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+                    "--dual-run-report",
+                    "data/processed/eval/v3_dual_run_report.json",
                 ),
                 ("trust_report.py",),
                 (
                     "publish_gold_v3.py",
+                    "data/processed/activity_gold_v3_preview.json",
+                    "--flags",
+                    "config/publish_flags.yaml",
                     "--require-clean-preview",
                     "--json",
+                    "--monitoring-report",
+                    "data/processed/source_trust_monitoring_report.json",
+                    "--review-queue",
+                    "data/processed/review_queue/vision_v3_review_queue.json",
+                    "--review-queue-report",
+                    "data/processed/eval/v3_review_queue_report.json",
+                    "--dual-run-report",
+                    "data/processed/eval/v3_dual_run_report.json",
                     "--source-metrics-report",
                     "data/processed/eval/v3_source_metrics.json",
                     "--source-drift-report",
@@ -6346,8 +6395,19 @@ class PipelineContractsTest(unittest.TestCase):
             steps.index(
                 (
                     "publish_gold_v3.py",
+                    "data/processed/activity_gold_v3_preview.json",
+                    "--flags",
+                    "config/publish_flags.yaml",
                     "--require-clean-preview",
                     "--json",
+                    "--monitoring-report",
+                    "data/processed/source_trust_monitoring_report.json",
+                    "--review-queue",
+                    "data/processed/review_queue/vision_v3_review_queue.json",
+                    "--review-queue-report",
+                    "data/processed/eval/v3_review_queue_report.json",
+                    "--dual-run-report",
+                    "data/processed/eval/v3_dual_run_report.json",
                     "--source-metrics-report",
                     "data/processed/eval/v3_source_metrics.json",
                     "--source-drift-report",
@@ -6385,23 +6445,82 @@ class PipelineContractsTest(unittest.TestCase):
         self.assertIn(("vision_snapshot.py", "--attach-regions", "--upsert-layout-snapshots", "--quarter", "fy26-q4"), steps)
         self.assertIn(("extract_v3.py", "--quarter", "fy26-q4"), steps)
         self.assertIn(("validate_v3.py", "--quarter", "fy26-q4"), steps)
-        self.assertIn(("source_status_v3.py", "--quarter", "fy26-q4"), steps)
-        self.assertIn(("source_metrics_v3.py", "--quarter", "fy26-q4"), steps)
-        self.assertIn(("source_drift_report.py", "--quarter", "fy26-q4"), steps)
-        self.assertLess(
-            steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
-            steps.index(
-                (
-                    "build_review_queue_v3.py",
-                    "--source-drift-report",
-                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
-                )
+        self.assertIn(("source_status_v3.py", "--v3-visual-only", "--quarter", "fy26-q4"), steps)
+        self.assertIn(
+            (
+                "source_metrics_v3.py",
+                "--v3-visual-only",
+                "--preview",
+                "data/processed/activity_gold_v3_preview.json",
+                "--output",
+                "data/processed/eval/v3_source_metrics.json",
+                "--quarter",
+                "fy26-q4",
             ),
+            steps,
         )
-        review_queue_step = (
+        source_drift_step = (
+            "source_drift_report.py",
+            "--quarter",
+            "fy26-q4",
+            "--new-regions",
+            "data/processed/vision_snapshots",
+            "--output",
+            "data/processed/source_drift_report.json",
+        )
+        review_queue_without_dual_run_step = (
             "build_review_queue_v3.py",
+            "--output",
+            "data/processed/review_queue/vision_v3_review_queue.json",
+            "--report-output",
+            "data/processed/eval/v3_review_queue_report.json",
+            "--html-output",
+            "data/processed/review_queue/vision_v3_review_queue.html",
+            "--checklist-output",
+            "data/processed/review_queue/vision_v3_publish_blocker_checklist.csv",
             "--source-drift-report",
             "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+            "--no-dual-run-report",
+        )
+        review_queue_with_dual_run_step = (
+            "build_review_queue_v3.py",
+            "--output",
+            "data/processed/review_queue/vision_v3_review_queue.json",
+            "--report-output",
+            "data/processed/eval/v3_review_queue_report.json",
+            "--html-output",
+            "data/processed/review_queue/vision_v3_review_queue.html",
+            "--checklist-output",
+            "data/processed/review_queue/vision_v3_publish_blocker_checklist.csv",
+            "--source-drift-report",
+            "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+            "--dual-run-report",
+            "data/processed/eval/v3_dual_run_report.json",
+        )
+        publish_step = (
+            "publish_gold_v3.py",
+            "data/processed/activity_gold_v3_preview.json",
+            "--flags",
+            "config/publish_flags.yaml",
+            "--require-clean-preview",
+            "--json",
+            "--monitoring-report",
+            "data/processed/source_trust_monitoring_report.json",
+            "--review-queue",
+            "data/processed/review_queue/vision_v3_review_queue.json",
+            "--review-queue-report",
+            "data/processed/eval/v3_review_queue_report.json",
+            "--dual-run-report",
+            "data/processed/eval/v3_dual_run_report.json",
+            "--source-metrics-report",
+            "data/processed/eval/v3_source_metrics.json",
+            "--source-drift-report",
+            "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
+        )
+        self.assertIn(source_drift_step, steps)
+        self.assertLess(
+            steps.index(source_drift_step),
+            steps.index(review_queue_without_dual_run_step),
         )
         dual_run_step = (
             "v3_dual_run_report.py",
@@ -6419,28 +6538,15 @@ class PipelineContractsTest(unittest.TestCase):
             "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
             "--reviewed-status-transition-keys-file",
             "data/processed/review_queue/vision_v3_dual_run_review_keys.json",
+            "--output",
+            "data/processed/eval/v3_dual_run_report.json",
             "--quarter",
             "fy26-q4",
         )
-        review_queue_indexes = [index for index, step in enumerate(steps) if step == review_queue_step]
-        self.assertEqual(2, len(review_queue_indexes))
-        self.assertLess(review_queue_indexes[0], steps.index(dual_run_step))
-        self.assertLess(steps.index(dual_run_step), review_queue_indexes[1])
-        self.assertLess(review_queue_indexes[1], steps.index(("trust_report.py",)))
-        self.assertLess(
-            steps.index(("source_drift_report.py", "--quarter", "fy26-q4")),
-            steps.index(
-                (
-                    "publish_gold_v3.py",
-                    "--require-clean-preview",
-                    "--json",
-                    "--source-metrics-report",
-                    "data/processed/eval/v3_source_metrics.json",
-                    "--source-drift-report",
-                    "data/processed/review_queue/vision_v3_reviewed_source_drift_report.json",
-                )
-            ),
-        )
+        self.assertLess(steps.index(review_queue_without_dual_run_step), steps.index(dual_run_step))
+        self.assertLess(steps.index(dual_run_step), steps.index(review_queue_with_dual_run_step))
+        self.assertLess(steps.index(review_queue_with_dual_run_step), steps.index(("trust_report.py",)))
+        self.assertLess(steps.index(source_drift_step), steps.index(publish_step))
         self.assertIn(dual_run_step, steps)
 
     def test_vision_v3_production_lane_persists_internal_evidence_tables(self) -> None:

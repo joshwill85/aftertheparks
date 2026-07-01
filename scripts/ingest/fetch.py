@@ -8,6 +8,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from tempfile import NamedTemporaryFile
 from pathlib import Path
 from typing import Any
 
@@ -111,6 +112,22 @@ def _raw_image_dimensions(data: bytes) -> tuple[int | None, int | None]:
         return None, None
 
 
+def _raw_pdf_page_count(data: bytes) -> int | None:
+    try:
+        import pypdfium2
+
+        with NamedTemporaryFile(suffix=".pdf") as tmp:
+            tmp.write(data)
+            tmp.flush()
+            document = pypdfium2.PdfDocument(tmp.name)
+            try:
+                return len(document)
+            finally:
+                document.close()
+    except Exception:
+        return None
+
+
 def source_document_cache_path(
     *,
     calendar_group_key: str,
@@ -144,13 +161,14 @@ def source_document_row(
     detected = detect_source_content(data, fallback_path=Path(canonical_url))
     digest = sha256_bytes(data)
     width, height = _raw_image_dimensions(data) if detected.source_type == "image" else (None, None)
+    page_count = 1 if detected.source_type == "image" else _raw_pdf_page_count(data) if detected.source_type == "pdf" else None
     return {
         "source_type": detected.source_type,
         "mime_type": detected.mime_type,
         "http_content_type": _clean_http_content_type(http_metadata.get("content_type")),
         "detected_content_type": detected.mime_type,
         "file_extension": detected.file_extension,
-        "raw_page_count": 1 if detected.source_type == "image" else None,
+        "raw_page_count": page_count,
         "raw_width": width,
         "raw_height": height,
         "canonical_url": canonical_url,

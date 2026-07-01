@@ -18,6 +18,7 @@ except ImportError:  # pragma: no cover - supports package-style imports
 DEFAULT_EXPECTED_SOURCES_PATH = PROCESSED_DIR / "source_inventory.json"
 DEFAULT_SNAPSHOTS_PATH = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_OUTPUT_PATH = PROCESSED_DIR / "eval" / "v3_source_statuses.json"
+SOURCE_STATUS_SCHEMA_VERSION = "v3_source_status_001"
 SOURCE_METADATA_FIELDS = (
     "source_kind",
     "source_role",
@@ -91,6 +92,16 @@ def _edition(row: dict[str, Any]) -> str | None:
     )
 
 
+def _is_v3_visual_source(row: dict[str, Any]) -> bool:
+    source_type = str(row.get("source_type") or "").strip().lower()
+    source_kind = str(row.get("source_kind") or "").strip()
+    source_role = str(row.get("source_role") or "").strip()
+    return source_role in {"resort_pdf", "supporting_price_image"} and source_type in {"pdf", "image"} and source_kind in {
+        "official_pdf",
+        "official_image",
+    }
+
+
 def _filter_quarter(rows: list[dict[str, Any]], quarter: str | None) -> list[dict[str, Any]]:
     if not quarter:
         return rows
@@ -128,8 +139,11 @@ def build_v3_source_statuses(
     expected_sources: list[dict[str, Any]],
     snapshots: list[dict[str, Any]],
     quarter: str | None = None,
+    v3_visual_only: bool = False,
 ) -> list[dict[str, Any]]:
     expected_sources = _filter_quarter(expected_sources, quarter)
+    if v3_visual_only:
+        expected_sources = [source for source in expected_sources if _is_v3_visual_source(source)]
     snapshots_by_hash: dict[str, list[dict[str, Any]]] = {}
     for snapshot in snapshots:
         snapshot_hash = _source_hash(snapshot)
@@ -159,6 +173,7 @@ def build_v3_source_statuses(
             else None
         ) or (source_snapshots[0] if source_snapshots else None)
         base = {
+            "schema_version": SOURCE_STATUS_SCHEMA_VERSION,
             "source_document_id": source_id,
             "content_sha256": source_hash,
             "config_hash": expected_config_hash or None,
@@ -249,6 +264,11 @@ def main() -> None:
     parser.add_argument("--snapshots", type=Path, default=DEFAULT_SNAPSHOTS_PATH)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--quarter")
+    parser.add_argument(
+        "--v3-visual-only",
+        action="store_true",
+        help="Limit expected sources to official visual resort documents handled by v3.",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
@@ -256,6 +276,7 @@ def main() -> None:
         expected_sources=_json_objects(args.expected_sources),
         snapshots=_json_objects(args.snapshots),
         quarter=args.quarter,
+        v3_visual_only=args.v3_visual_only,
     )
     if args.json:
         print(json.dumps(statuses, indent=2, sort_keys=True))

@@ -30,6 +30,7 @@ DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "activity_candidates_v3"
 DEFAULT_SNAPSHOTS_DIR = PROCESSED_DIR / "vision_snapshots"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_extract_report.json"
 DEFAULT_FIELD_CROPS_DIR = PROCESSED_DIR / "field_crops_v3"
+EXTRACT_V3_REPORT_SCHEMA_VERSION = "v3_extract_001"
 _FIELD_CROP_IMAGE_CACHE: dict[str, Image.Image] = {}
 PUBLISHABLE_REGION_TYPES = {
     "resort_activities_section": "activity",
@@ -2051,6 +2052,7 @@ def extract_candidates_from_directory(
 
     report = {
         "report_kind": "v3_extract",
+        "schema_version": EXTRACT_V3_REPORT_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "snapshots_dir": str(snapshots_dir),
         "output_dir": str(output_dir),

@@ -25,7 +25,7 @@ function dedupeBySlot(activities: ActivityOccurrence[]): ActivityOccurrence[] {
 }
 
 export function normalizeTonightFilters(filters: ActivityFilters): ActivityFilters {
-  return { ...filters, free: false };
+  return filters;
 }
 
 export function getVisibleTonightActivities(

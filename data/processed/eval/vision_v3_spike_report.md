@@ -17,11 +17,11 @@
 
 ## Runtime / Storage Metrics
 
-- Average render time/page: `5.726457854250001`
+- Average render time/page: `7.13616624375`
 - Average OCR time/page: `not_recorded`
 - Average page image size: `26378640` bytes
-- Average field crop size: `661411` bytes
-- Average crop/debug artifact size: `11334273` bytes
+- Average field crop size: `1237249` bytes
+- Average crop/debug artifact size: `10479484` bytes
 
 ## Evaluation Questions
 

@@ -20,6 +20,7 @@ DEFAULT_FIXTURES_DIR = ROOT / "data/golden/activities"
 DEFAULT_REVIEW_QUEUE_PATH = ROOT / "data/processed/activity_review_queue_v2_preview.json"
 DEFAULT_MANUAL_REVIEW_PATH = ROOT / "data/processed/manual_review_report.json"
 DEFAULT_OUTPUT_PATH = ROOT / "data/processed/eval/baseline_v2_report.json"
+BASELINE_V2_REPORT_SCHEMA_VERSION = "baseline_v2_report_001"
 
 FORMAT_COVERAGE_SAMPLES = [
     {
@@ -184,6 +185,8 @@ def build_evaluation_report(
         group_counts[str(failure.get("calendar_group_key") or "unknown")] += 1
 
     return {
+        "report_kind": "baseline_v2_report",
+        "schema_version": BASELINE_V2_REPORT_SCHEMA_VERSION,
         "pipeline_version": "vision_v3_gate0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "publication_behavior": "read_only_no_publish",

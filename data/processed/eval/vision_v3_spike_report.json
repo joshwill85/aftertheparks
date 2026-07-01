@@ -1,6 +1,8 @@
 {
+  "report_kind": "vision_v3_spike_report",
+  "schema_version": "vision_v3_spike_report_001",
   "pipeline_version": "vision_v3_gate0_5_spike",
-  "generated_at": "2026-07-01T00:19:20.430904+00:00",
+  "generated_at": "2026-07-01T08:13:51.352974+00:00",
   "publish_behavior": "no_publish",
   "scope": "disposable_render_ocr_region_bakeoff",
   "format_coverage_samples": [
@@ -885,14 +887,14 @@
     "recommended_retention_policy"
   ],
   "runtime_storage_metrics": {
-    "average_render_time_per_page_seconds": 5.726457854250001,
+    "average_render_time_per_page_seconds": 7.13616624375,
     "average_ocr_time_per_page_seconds": null,
     "average_page_image_size_bytes": 26378640,
-    "average_field_crop_size_bytes": 661411,
-    "average_crop_debug_artifact_size_bytes": 11334273,
+    "average_field_crop_size_bytes": 1237249,
+    "average_crop_debug_artifact_size_bytes": 10479484,
     "page_image_sample_count": 20,
-    "field_crop_sample_count": 118,
-    "crop_debug_artifact_sample_count": 353,
+    "field_crop_sample_count": 158,
+    "crop_debug_artifact_sample_count": 393,
     "metric_status": {
       "average_render_time_per_page_seconds": "recorded",
       "average_ocr_time_per_page_seconds": "not_recorded",

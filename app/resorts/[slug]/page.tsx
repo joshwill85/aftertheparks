@@ -671,7 +671,7 @@ export default async function ResortDetailPage({
           </div>
           <div>
             <dt className="text-xs font-bold uppercase tracking-wide text-[var(--color-muted)]">
-              Verified activity rows
+              Verified listings
             </dt>
             <dd className="mt-1 font-semibold">{scheduledActivities.length}</dd>
           </div>

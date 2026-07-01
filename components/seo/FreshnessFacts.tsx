@@ -35,7 +35,7 @@ export function FreshnessFacts({
           </div>
         )}
         <div>
-          <dt className="font-bold text-[var(--color-muted)]">Verified activity rows</dt>
+          <dt className="font-bold text-[var(--color-muted)]">Verified listings</dt>
           <dd className="font-semibold">{activityCount}</dd>
         </div>
         <div>

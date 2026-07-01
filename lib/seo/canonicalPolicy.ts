@@ -8,6 +8,7 @@ const STRATEGIC_FILTERS_BY_PATH: Record<string, ReadonlySet<string>> = {
   "/activities": new Set([
     "category=arcade",
     "category=campfire",
+    "category=movies_under_stars",
     "category=poolside",
     "free=true",
     "weather=indoor",
@@ -17,7 +18,7 @@ const STRATEGIC_FILTERS_BY_PATH: Record<string, ReadonlySet<string>> = {
     "area=disney-springs",
   ]),
   "/today": new Set(["weather=indoor"]),
-  "/tonight": new Set(["weather=indoor"]),
+  "/tonight": new Set(["free=true", "weather=indoor"]),
   "/resorts": new Set(["no_ticket_friendly=true"]),
 };
 

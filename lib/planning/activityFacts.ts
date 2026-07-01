@@ -102,7 +102,7 @@ export function bookingStatusForActivity(
       label: "Walk-up only",
       confidence: "verified",
       reason:
-        "Source evidence says walk-ups are allowed and reservations are not required.",
+        "Walk-ups are listed and reservations are not required.",
     };
   }
 
@@ -112,9 +112,9 @@ export function bookingStatusForActivity(
   ) {
     return {
       status: "not_required_verified",
-      label: "No booking required",
+      label: "No reservation needed",
       confidence: "verified",
-      reason: "Source evidence says no reservation is required.",
+      reason: "Listed as no reservation required.",
     };
   }
 
@@ -163,7 +163,12 @@ export function ageFitForActivity(activity: ActivityOccurrence): AgeFitFact {
       minAge: parsed.minAge,
       maxAge: parsed.maxAge,
       confidence: "text_match",
-      reason: "Source text contains an explicit age range.",
+      reason:
+        parsed.minAge != null && parsed.maxAge != null
+          ? `Ages ${parsed.minAge}-${parsed.maxAge}.`
+          : parsed.minAge != null
+            ? `Ages ${parsed.minAge} and up.`
+            : "Age range listed.",
     };
   }
 

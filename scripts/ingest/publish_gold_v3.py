@@ -20,10 +20,12 @@ try:
     from config import PROCESSED_DIR, ROOT
     from engine_agreement import evaluate_engine_agreement
     from normalization_v3 import normalize_location_text, normalize_schedule_text
+    from validate_v3 import AUTO_PUBLISH_FAMILIES
 except ImportError:  # pragma: no cover - supports package-style imports
     from .config import PROCESSED_DIR, ROOT
     from .engine_agreement import evaluate_engine_agreement
     from .normalization_v3 import normalize_location_text, normalize_schedule_text
+    from .validate_v3 import AUTO_PUBLISH_FAMILIES
 
 try:
     from db import SupabaseClient
@@ -50,6 +52,17 @@ PROMOTABLE_ROW_STATUSES = {"auto_publishable", "manually_approved"}
 ACTIVITY_CANDIDATE_CONFLICT = "candidate_id"
 ACTIVITY_FIELD_PROVENANCE_CONFLICT = "candidate_id,field_name"
 DAY_RE = re.compile(r"\b(mon(?:day)?|tue(?:s|sday)?|wed(?:nesday)?|thu(?:r|rs|rsday)?|fri(?:day)?|sat(?:urday)?|sun(?:day)?)\b", re.IGNORECASE)
+PLACEHOLDER_REVIEWERS = {"reviewer-name", "your-name", "todo", "tbd"}
+PLACEHOLDER_REVIEW_REASONS = {
+    "approved",
+    "ok",
+    "reason",
+    "reviewed",
+    "source-backed rationale for this decision",
+    "tbd",
+    "todo",
+    "verified against source crop",
+}
 
 
 def _stable_uuid(key: str) -> str:
@@ -93,6 +106,15 @@ def _parse_iso_datetime(value: Any) -> datetime | None:
         return datetime.fromisoformat(text)
     except ValueError:
         return None
+
+
+def _is_placeholder_reviewer(value: Any) -> bool:
+    return str(value or "").strip().lower() in PLACEHOLDER_REVIEWERS
+
+
+def _is_placeholder_review_reason(value: Any) -> bool:
+    normalized_reason = " ".join(str(value or "").strip().lower().split())
+    return normalized_reason in PLACEHOLDER_REVIEW_REASONS
 
 
 def _field_page_hashes(row: dict[str, Any]) -> set[str]:
@@ -584,8 +606,17 @@ def _manual_review_field_mismatches(row: dict[str, Any], approved_fields: dict[s
     return mismatches
 
 
-def _source_drift_report_errors(source_drift_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
+def _source_drift_report_errors(
+    source_drift_report: dict[str, Any],
+    preview: dict[str, Any],
+    dual_run_report: dict[str, Any] | None = None,
+) -> list[str]:
     errors: list[str] = []
+    schema_version = str(source_drift_report.get("schema_version") or "").strip()
+    if not schema_version:
+        errors.append("source_drift_report_missing_schema_version")
+    elif schema_version != "v3_quarter_source_drift_001":
+        errors.append("invalid_source_drift_report_schema_version")
     generated_at = _parse_iso_datetime(source_drift_report.get("generated_at"))
     preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
     preview_source_hashes = set(_preview_source_hashes(preview))
@@ -619,16 +650,32 @@ def _source_drift_report_errors(source_drift_report: dict[str, Any], preview: di
             return errors
         if not str(review_decision.get("reviewer") or "").strip():
             errors.append("source_drift_report_missing_reviewer")
+        elif _is_placeholder_reviewer(review_decision.get("reviewer")):
+            errors.append("source_drift_report_placeholder_reviewer")
         if not str(review_decision.get("decided_at") or "").strip():
             errors.append("source_drift_report_missing_decided_at")
+        elif _parse_iso_datetime(review_decision.get("decided_at")) is None:
+            errors.append("source_drift_report_invalid_decided_at")
         if not str(review_decision.get("reason") or "").strip():
             errors.append("source_drift_report_missing_reason")
+        elif _is_placeholder_review_reason(review_decision.get("reason")):
+            errors.append("source_drift_report_placeholder_reason")
         return errors
 
     if status not in {None, "clean"}:
         errors.append("source_drift_report_blocked")
     if missing_preview_sources:
         errors.append("source_drift_report_missing_preview_sources")
+    source_coverage = dual_run_report.get("source_coverage") if isinstance(dual_run_report, dict) else None
+    expected_source_hashes = (
+        source_coverage.get("expected_source_hashes")
+        if isinstance(source_coverage, dict)
+        else None
+    )
+    if isinstance(expected_source_hashes, list):
+        expected_hashes = {str(source_hash).strip() for source_hash in expected_source_hashes if str(source_hash).strip()}
+        if expected_hashes and not expected_hashes.issubset(report_source_hashes):
+            errors.append("source_drift_report_missing_dual_run_expected_sources")
     for blocker in source_drift_report.get("publish_blockers") or []:
         errors.append(str(blocker))
     return errors
@@ -652,6 +699,13 @@ def _source_drift_report_new_hashes(source_drift_report: dict[str, Any]) -> set[
 
 def _monitoring_report_errors(monitoring_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    if monitoring_report.get("report_kind") != "source_trust_monitoring_report":
+        errors.append("invalid_monitoring_report_kind")
+    schema_version = str(monitoring_report.get("schema_version") or "").strip()
+    if not schema_version:
+        errors.append("monitoring_report_missing_schema_version")
+    elif schema_version != "source_trust_monitoring_report_001":
+        errors.append("invalid_monitoring_report_schema_version")
     generated_at = _parse_iso_datetime(monitoring_report.get("generated_at"))
     preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
     if generated_at is None:
@@ -672,10 +726,19 @@ def _monitoring_report_errors(monitoring_report: dict[str, Any], preview: dict[s
     return errors
 
 
-def _source_metrics_report_errors(source_metrics_report: dict[str, Any], preview: dict[str, Any]) -> list[str]:
+def _source_metrics_report_errors(
+    source_metrics_report: dict[str, Any],
+    preview: dict[str, Any],
+    dual_run_report: dict[str, Any] | None = None,
+) -> list[str]:
     errors: list[str] = []
     if source_metrics_report.get("report_kind") != "vision_v3_source_metrics":
         errors.append("invalid_source_metrics_report_kind")
+    schema_version = str(source_metrics_report.get("schema_version") or "").strip()
+    if not schema_version:
+        errors.append("source_metrics_missing_schema_version")
+    elif schema_version != "vision_v3_source_metrics_001":
+        errors.append("invalid_source_metrics_schema_version")
     generated_at = _parse_iso_datetime(source_metrics_report.get("generated_at"))
     preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
     if generated_at is None:
@@ -702,6 +765,21 @@ def _source_metrics_report_errors(source_metrics_report: dict[str, Any], preview
     preview_source_hashes = set(_preview_source_hashes(preview))
     if preview_source_hashes and not preview_source_hashes.issubset(metric_source_hashes):
         errors.append("source_metrics_missing_preview_sources")
+    source_coverage = dual_run_report.get("source_coverage") if isinstance(dual_run_report, dict) else None
+    expected_source_hashes = (
+        source_coverage.get("expected_source_hashes")
+        if isinstance(source_coverage, dict)
+        else None
+    )
+    if isinstance(expected_source_hashes, list):
+        expected_hashes = {str(source_hash).strip() for source_hash in expected_source_hashes if str(source_hash).strip()}
+        if expected_hashes and not expected_hashes.issubset(metric_source_hashes):
+            errors.append("source_metrics_missing_dual_run_expected_sources")
+    metrics_fingerprint = str(source_metrics_report.get("v3_preview_fingerprint") or "").strip()
+    if not metrics_fingerprint:
+        errors.append("source_metrics_missing_preview_fingerprint")
+    elif metrics_fingerprint != _dual_run_preview_fingerprint(preview):
+        errors.append("source_metrics_preview_fingerprint_mismatch")
     return errors
 
 
@@ -824,6 +902,11 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
     scoped_preview = _dual_run_scoped_preview(dual_run_report, preview)
     if len(scoped_preview.get("rows") or []) != len(preview.get("rows") or []):
         errors.append("dual_run_preview_has_unscoped_sources")
+    report_version = str(dual_run_report.get("report_version") or "").strip()
+    if not report_version:
+        errors.append("dual_run_missing_report_version")
+    elif report_version != "v3_dual_run_report_001":
+        errors.append("invalid_dual_run_report_version")
     generated_at = _parse_iso_datetime(dual_run_report.get("generated_at"))
     preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
     if generated_at is None:
@@ -837,6 +920,14 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
         errors.append(str(blocker))
     for diff_key in dual_run_report.get("unreviewed_diff_keys") or []:
         errors.append(f"unreviewed_diff:{diff_key}")
+    for row_key in dual_run_report.get("unreviewed_new_keys") or []:
+        errors.append(f"unreviewed_new_v3_row:{row_key}")
+    for row_key in dual_run_report.get("unreviewed_missing_v2_keys") or []:
+        errors.append(f"unreviewed_missing_v2_row:{row_key}")
+    for transition_key in dual_run_report.get("unreviewed_status_transition_keys") or []:
+        errors.append(f"unreviewed_status_transition:{transition_key}")
+    if _int_value(dual_run_report.get("manual_review_backlog")) > 0:
+        errors.append("dual_run_manual_review_backlog_nonzero")
 
     if "v3_count" not in dual_run_report:
         errors.append("dual_run_missing_v3_count")
@@ -873,6 +964,7 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
     source_coverage_blockers = {
         "unprocessed_source_ids": "dual_run_unprocessed_sources",
         "stale_source_status_ids": "dual_run_stale_source_status_hash",
+        "stale_source_status_schema_ids": "dual_run_stale_source_status_schema",
         "stale_source_status_config_ids": "dual_run_stale_source_status_config_hash",
         "stale_source_status_pipeline_ids": "dual_run_stale_source_status_pipeline_version",
         "parser_error_without_review_task_ids": "dual_run_parser_error_without_review_task",
@@ -882,6 +974,31 @@ def _dual_run_report_errors(dual_run_report: dict[str, Any], preview: dict[str, 
         values = source_coverage.get(field_name)
         if isinstance(values, list) and values:
             errors.append(error_name)
+    for review_field_name in (
+        "reviewed_diff_reviews",
+        "reviewed_new_record_reviews",
+        "reviewed_missing_v2_record_reviews",
+        "reviewed_status_transition_reviews",
+    ):
+        reviews = dual_run_report.get(review_field_name)
+        if not isinstance(reviews, list):
+            continue
+        for index, review in enumerate(reviews):
+            if not isinstance(review, dict):
+                continue
+            source_metadata = review.get("source_metadata") if isinstance(review.get("source_metadata"), dict) else {}
+            source_url = str(
+                review.get("source_url")
+                or source_metadata.get("canonical_url")
+                or source_metadata.get("fetched_url")
+                or ""
+            ).strip()
+            if not source_url:
+                errors.append(f"dual_run_review_manifest_missing_source_url:{review_field_name}:{index}")
+            elif not _is_public_source_url(source_url):
+                errors.append(f"dual_run_review_manifest_non_public_source_url:{review_field_name}:{index}")
+            if not source_metadata:
+                errors.append(f"dual_run_review_manifest_missing_source_metadata:{review_field_name}:{index}")
     return errors
 
 
@@ -898,9 +1015,146 @@ def _pending_review_task_count(review_tasks: list[dict[str, Any]]) -> int:
     return sum(1 for task in review_tasks if str(task.get("status") or "pending") == "pending")
 
 
+def _pending_publish_gate_blocker_count(review_tasks: list[dict[str, Any]]) -> int:
+    return sum(
+        1
+        for task in review_tasks
+        if task.get("publish_gate_blocker") is True
+        and str(task.get("status") or "pending") != "reviewed"
+    )
+
+
+def _count_by_text_key(rows: list[dict[str, Any]], key: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        value = str(row.get(key) or "").strip()
+        if value:
+            counts[value] = counts.get(value, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _review_task_source_url(task: dict[str, Any]) -> str:
+    source_metadata = task.get("source_metadata")
+    if not isinstance(source_metadata, dict):
+        source_metadata = {}
+    return str(
+        task.get("source_url")
+        or source_metadata.get("canonical_url")
+        or source_metadata.get("fetched_url")
+        or ""
+    ).strip()
+
+
+def _count_review_tasks_by_source_url(tasks: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for task in tasks:
+        source_url = _review_task_source_url(task)
+        if source_url:
+            counts[source_url] = counts.get(source_url, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _task_ids_by_text_key(rows: list[dict[str, Any]], key: str) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {}
+    for row in rows:
+        value = str(row.get(key) or "").strip()
+        task_id = str(row.get("task_id") or "").strip()
+        if value and task_id:
+            grouped.setdefault(value, []).append(task_id)
+    return {value: sorted(task_ids) for value, task_ids in sorted(grouped.items())}
+
+
+def _task_ids_by_source_url(rows: list[dict[str, Any]]) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {}
+    for row in rows:
+        source_url = _review_task_source_url(row)
+        task_id = str(row.get("task_id") or "").strip()
+        if source_url and task_id:
+            grouped.setdefault(source_url, []).append(task_id)
+    return {source_url: sorted(task_ids) for source_url, task_ids in sorted(grouped.items())}
+
+
+def _task_ids(rows: list[dict[str, Any]]) -> list[str]:
+    return sorted(str(row.get("task_id") or "").strip() for row in rows if str(row.get("task_id") or "").strip())
+
+
+def _normalize_task_ids_by_key(value: Any) -> dict[str, list[str]]:
+    if not isinstance(value, dict):
+        return {}
+    normalized: dict[str, list[str]] = {}
+    for key, task_ids in value.items():
+        group_key = str(key).strip()
+        if not group_key or not isinstance(task_ids, list):
+            continue
+        normalized[group_key] = sorted(str(task_id) for task_id in task_ids if str(task_id).strip())
+    return dict(sorted(normalized.items()))
+
+
+def _normalized_publish_blocker_batches(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    rows: list[dict[str, Any]] = []
+    for batch in value:
+        if not isinstance(batch, dict):
+            continue
+        batch_key = str(batch.get("review_batch_key") or "").strip()
+        if not batch_key:
+            continue
+        rows.append(
+            {
+                "review_batch_key": batch_key,
+                "source_url": str(batch.get("source_url") or "").strip(),
+                "publish_gate_blocker_reason": str(batch.get("publish_gate_blocker_reason") or "").strip(),
+                "pending_task_count": _int_value(batch.get("pending_task_count")),
+                "calendar_group_keys": sorted(
+                    str(value)
+                    for value in batch.get("calendar_group_keys") or []
+                    if str(value).strip()
+                ),
+                "fields": sorted(
+                    str(value)
+                    for value in batch.get("fields") or []
+                    if str(value).strip()
+                ),
+                "task_ids": sorted(
+                    str(value)
+                    for value in batch.get("task_ids") or []
+                    if str(value).strip()
+                ),
+            }
+        )
+    return sorted(rows, key=lambda row: str(row["review_batch_key"]))
+
+
+def _has_publish_blocker_review_artifacts(task: dict[str, Any]) -> bool:
+    return bool(
+        task.get("content_sha256")
+        and task.get("page_image_path")
+        and (task.get("page_image_sha256") or task.get("page_image"))
+        and task.get("field_crop")
+        and task.get("field_crop_sha256")
+    )
+
+
+def _local_artifact_exists(path: Any) -> bool:
+    path_text = str(path or "").strip()
+    if not path_text:
+        return False
+    if "://" in path_text or path_text.startswith("data:"):
+        return True
+    candidate_path = Path(path_text)
+    target_path = candidate_path if candidate_path.is_absolute() else ROOT / candidate_path
+    return target_path.exists()
+
+
+def _task_has_existing_visual_artifact(task: dict[str, Any]) -> bool:
+    return any(_local_artifact_exists(task.get(key)) for key in ("field_crop", "region_crop", "page_image_path"))
+
+
 def _review_queue_report_errors(
     review_tasks: list[dict[str, Any]] | None,
     review_queue_report: dict[str, Any] | None,
+    preview: dict[str, Any],
 ) -> list[str]:
     if review_tasks is None:
         return []
@@ -909,6 +1163,42 @@ def _review_queue_report_errors(
     errors: list[str] = []
     if review_queue_report.get("report_kind") != "review_queue_v3_report":
         errors.append("invalid_review_queue_report_kind")
+    schema_version = str(review_queue_report.get("schema_version") or "").strip()
+    if not schema_version:
+        errors.append("review_queue_report_missing_schema_version")
+    elif schema_version != "review_queue_v3_report_001":
+        errors.append("invalid_review_queue_report_schema_version")
+    generated_at = _parse_iso_datetime(review_queue_report.get("generated_at"))
+    preview_generated_at = _parse_iso_datetime(preview.get("generated_at"))
+    if generated_at is None:
+        errors.append("review_queue_report_missing_generated_at")
+    elif preview_generated_at is not None and generated_at < preview_generated_at:
+        errors.append("review_queue_report_stale")
+    try:
+        from scripts.ingest.build_review_queue_v3 import (
+            _publish_blocker_batches,
+            _sorted_publish_blocker_tasks,
+            review_queue_fingerprint,
+        )
+    except ImportError:  # pragma: no cover - supports package-style imports
+        try:
+            from .build_review_queue_v3 import (
+                _publish_blocker_batches,
+                _sorted_publish_blocker_tasks,
+                review_queue_fingerprint,
+            )
+        except ImportError:  # pragma: no cover - supports direct script execution
+            from build_review_queue_v3 import (
+                _publish_blocker_batches,
+                _sorted_publish_blocker_tasks,
+                review_queue_fingerprint,
+            )
+
+    report_fingerprint = str(review_queue_report.get("review_queue_fingerprint") or "").strip()
+    if not report_fingerprint:
+        errors.append("review_queue_report_missing_fingerprint")
+    elif report_fingerprint != review_queue_fingerprint(review_tasks):
+        errors.append("review_queue_report_fingerprint_mismatch")
     summary = review_queue_report.get("summary")
     if not isinstance(summary, dict):
         errors.append("review_queue_report_summary_missing")
@@ -925,6 +1215,158 @@ def _review_queue_report_errors(
         errors.append("review_queue_report_missing_visual_artifacts")
     if summary.get("all_tasks_have_visual_artifacts") is not True:
         errors.append("review_queue_report_visual_artifact_coverage_incomplete")
+    missing_visual_artifact_file_task_ids = [
+        str(task.get("task_id") or "")
+        for task in review_tasks
+        if not _task_has_existing_visual_artifact(task)
+    ]
+    missing_visual_artifact_file_task_ids = sorted(
+        task_id for task_id in missing_visual_artifact_file_task_ids if task_id
+    )
+    if _int_value(summary.get("visual_artifact_missing_file_count")) != len(
+        missing_visual_artifact_file_task_ids
+    ):
+        errors.append("review_queue_report_visual_artifact_file_count_mismatch")
+    report_missing_visual_file_task_ids = review_queue_report.get("visual_artifact_missing_file_task_ids")
+    if not isinstance(report_missing_visual_file_task_ids, list) or sorted(
+        str(task_id) for task_id in report_missing_visual_file_task_ids if str(task_id).strip()
+    ) != missing_visual_artifact_file_task_ids:
+        errors.append("review_queue_report_visual_artifact_file_task_ids_mismatch")
+    if missing_visual_artifact_file_task_ids:
+        errors.append("review_queue_report_missing_visual_artifact_files")
+    if summary.get("all_tasks_have_existing_visual_artifacts") is not (
+        not missing_visual_artifact_file_task_ids
+    ):
+        errors.append("review_queue_report_existing_visual_artifact_coverage_incomplete")
+    stale_review_decision_task_ids = [
+        str(task.get("task_id") or "")
+        for task in review_tasks
+        if isinstance(task.get("stale_review_decision"), dict)
+    ]
+    stale_review_decision_task_ids = sorted(
+        task_id for task_id in stale_review_decision_task_ids if task_id
+    )
+    if _int_value(summary.get("stale_review_decision_count")) != len(stale_review_decision_task_ids):
+        errors.append("review_queue_report_stale_review_decision_count_mismatch")
+    report_stale_review_task_ids = review_queue_report.get("stale_review_decision_task_ids")
+    if not isinstance(report_stale_review_task_ids, list) or sorted(
+        str(task_id) for task_id in report_stale_review_task_ids if str(task_id).strip()
+    ) != stale_review_decision_task_ids:
+        errors.append("review_queue_report_stale_review_decision_task_ids_mismatch")
+    if stale_review_decision_task_ids:
+        errors.append("review_queue_report_stale_review_decisions")
+    summary_blocker_tasks = [task for task in review_tasks if task.get("publish_gate_blocker") is True]
+    summary_pending_blocker_tasks = [
+        task
+        for task in summary_blocker_tasks
+        if str(task.get("status") or "pending") != "reviewed"
+    ]
+    summary_reviewed_blocker_tasks = [
+        task
+        for task in summary_blocker_tasks
+        if str(task.get("status") or "pending") == "reviewed"
+    ]
+    if _int_value(summary.get("publish_gate_blocker_task_count")) != len(summary_blocker_tasks):
+        errors.append("review_queue_report_summary_publish_gate_blocker_count_mismatch")
+    if _int_value(summary.get("pending_publish_gate_blocker_task_count")) != len(
+        summary_pending_blocker_tasks
+    ):
+        errors.append("review_queue_report_summary_pending_publish_gate_blocker_count_mismatch")
+    if _int_value(summary.get("reviewed_publish_gate_blocker_task_count")) != len(
+        summary_reviewed_blocker_tasks
+    ):
+        errors.append("review_queue_report_summary_reviewed_publish_gate_blocker_count_mismatch")
+    summary_reason_counts = summary.get("pending_publish_gate_blocker_count_by_reason")
+    expected_summary_reason_counts = _count_by_text_key(
+        summary_pending_blocker_tasks,
+        "publish_gate_blocker_reason",
+    )
+    if not isinstance(summary_reason_counts, dict) or {
+        str(key): _int_value(value)
+        for key, value in summary_reason_counts.items()
+        if str(key).strip()
+    } != expected_summary_reason_counts:
+        errors.append("review_queue_report_summary_publish_gate_blocker_reason_counts_mismatch")
+    expected_checklist_tasks = _sorted_publish_blocker_tasks(review_tasks)
+    expected_checklist_batches = _normalized_publish_blocker_batches(
+        _publish_blocker_batches(review_tasks)
+    )
+    if _int_value(summary.get("publish_blocker_checklist_row_count")) != len(
+        expected_checklist_tasks
+    ):
+        errors.append("review_queue_report_summary_publish_blocker_checklist_row_count_mismatch")
+    if _int_value(summary.get("publish_blocker_checklist_batch_count")) != len(
+        expected_checklist_batches
+    ):
+        errors.append("review_queue_report_summary_publish_blocker_checklist_batch_count_mismatch")
+    publish_gate_blockers = review_queue_report.get("publish_gate_blockers")
+    if not isinstance(publish_gate_blockers, dict):
+        errors.append("review_queue_report_publish_gate_blockers_missing")
+    else:
+        blocker_tasks = summary_blocker_tasks
+        pending_blocker_tasks = summary_pending_blocker_tasks
+        pending_missing_review_artifact_tasks = [
+            task for task in pending_blocker_tasks if not _has_publish_blocker_review_artifacts(task)
+        ]
+        pending_blocker_count = _pending_publish_gate_blocker_count(review_tasks)
+        if _int_value(publish_gate_blockers.get("total_task_count")) != len(blocker_tasks):
+            errors.append("review_queue_report_publish_gate_blocker_count_mismatch")
+        if _int_value(publish_gate_blockers.get("pending_task_count")) != pending_blocker_count:
+            errors.append("review_queue_report_pending_publish_gate_blocker_count_mismatch")
+        if _int_value(publish_gate_blockers.get("pending_review_artifact_missing_count")) != len(
+            pending_missing_review_artifact_tasks
+        ):
+            errors.append("review_queue_report_publish_gate_review_artifact_missing_count_mismatch")
+        report_missing_artifact_task_ids = publish_gate_blockers.get("pending_review_artifact_missing_task_ids")
+        if not isinstance(report_missing_artifact_task_ids, list) or sorted(
+            str(task_id) for task_id in report_missing_artifact_task_ids if str(task_id).strip()
+        ) != _task_ids(pending_missing_review_artifact_tasks):
+            errors.append("review_queue_report_publish_gate_review_artifact_task_ids_mismatch")
+        if publish_gate_blockers.get("all_pending_tasks_have_review_artifacts") is not (
+            not pending_missing_review_artifact_tasks
+        ):
+            errors.append("review_queue_report_publish_gate_review_artifact_coverage_mismatch")
+        if pending_missing_review_artifact_tasks:
+            errors.append("review_queue_report_pending_publish_gate_review_artifacts_missing")
+        report_pending_task_ids = publish_gate_blockers.get("pending_task_ids")
+        if not isinstance(report_pending_task_ids, list) or sorted(
+            str(task_id) for task_id in report_pending_task_ids if str(task_id).strip()
+        ) != _task_ids(pending_blocker_tasks):
+            errors.append("review_queue_report_pending_publish_gate_task_ids_mismatch")
+        expected_reason_counts = _count_by_text_key(pending_blocker_tasks, "publish_gate_blocker_reason")
+        report_reason_counts = publish_gate_blockers.get("pending_task_count_by_reason")
+        if not isinstance(report_reason_counts, dict) or {
+            str(key): _int_value(value)
+            for key, value in report_reason_counts.items()
+            if str(key).strip()
+        } != expected_reason_counts:
+            errors.append("review_queue_report_publish_gate_blocker_reason_counts_mismatch")
+        expected_source_url_counts = _count_review_tasks_by_source_url(pending_blocker_tasks)
+        report_source_url_counts = publish_gate_blockers.get("pending_task_count_by_source_url")
+        if not isinstance(report_source_url_counts, dict) or {
+            str(key): _int_value(value)
+            for key, value in report_source_url_counts.items()
+            if str(key).strip()
+        } != expected_source_url_counts:
+            errors.append("review_queue_report_publish_gate_blocker_source_url_counts_mismatch")
+        expected_reason_task_ids = _task_ids_by_text_key(pending_blocker_tasks, "publish_gate_blocker_reason")
+        if _normalize_task_ids_by_key(
+            publish_gate_blockers.get("pending_task_ids_by_reason")
+        ) != expected_reason_task_ids:
+            errors.append("review_queue_report_publish_gate_blocker_reason_task_ids_mismatch")
+        expected_source_url_task_ids = _task_ids_by_source_url(pending_blocker_tasks)
+        if _normalize_task_ids_by_key(
+            publish_gate_blockers.get("pending_task_ids_by_source_url")
+        ) != expected_source_url_task_ids:
+            errors.append("review_queue_report_publish_gate_blocker_source_url_task_ids_mismatch")
+        if _int_value(publish_gate_blockers.get("pending_task_count")):
+            errors.append("review_queue_report_pending_publish_gate_blockers")
+    expected_batches = _normalized_publish_blocker_batches(_publish_blocker_batches(review_tasks))
+    report_batches = review_queue_report.get("publish_blocker_batches")
+    if not isinstance(report_batches, list):
+        errors.append("review_queue_report_publish_blocker_batches_missing")
+    elif _normalized_publish_blocker_batches(report_batches) != expected_batches:
+        errors.append("review_queue_report_publish_blocker_batches_mismatch")
     return errors
 
 
@@ -932,13 +1374,49 @@ def _required_source_drift_task_ids(source_drift_report: dict[str, Any]) -> list
     try:
         from scripts.ingest.build_review_queue_v3 import build_review_tasks
     except ImportError:  # pragma: no cover - supports package-style imports
-        from .build_review_queue_v3 import build_review_tasks
+        try:
+            from .build_review_queue_v3 import build_review_tasks
+        except ImportError:  # pragma: no cover - supports direct script execution
+            from build_review_queue_v3 import build_review_tasks
 
     return sorted(
         str(task.get("task_id"))
         for task in build_review_tasks([], source_drift_report=source_drift_report)
         if str(task.get("task_id") or "").strip()
     )
+
+
+def _required_dual_run_review_task_ids(dual_run_report: dict[str, Any]) -> list[str]:
+    try:
+        from scripts.ingest.build_review_queue_v3 import build_review_tasks
+    except ImportError:  # pragma: no cover - supports package-style imports
+        try:
+            from .build_review_queue_v3 import build_review_tasks
+        except ImportError:  # pragma: no cover - supports direct script execution
+            from build_review_queue_v3 import build_review_tasks
+
+    return sorted(
+        str(task.get("task_id"))
+        for task in build_review_tasks([], dual_run_report=dual_run_report)
+        if task.get("publish_gate_blocker") is True and str(task.get("task_id") or "").strip()
+    )
+
+
+def _missing_dual_run_review_task_ids(
+    review_tasks: list[dict[str, Any]] | None,
+    dual_run_report: dict[str, Any] | None,
+) -> list[str]:
+    if review_tasks is None or dual_run_report is None:
+        return []
+    required_task_ids = _required_dual_run_review_task_ids(dual_run_report)
+    if not required_task_ids:
+        return []
+    review_task_ids = {
+        str(task.get("task_id") or "").strip()
+        for task in review_tasks
+        if str(task.get("task_id") or "").strip()
+    }
+    return [task_id for task_id in required_task_ids if task_id not in review_task_ids]
 
 
 def _lineage_errors(row: dict[str, Any], index: int) -> list[str]:
@@ -1110,12 +1588,61 @@ def _source_document_rows_by_hash(rows: list[dict[str, Any]]) -> dict[str, dict[
         source_hash = _source_hash(row)
         if not source_hash:
             raise RuntimeError(f"gold_v3_source_hash_missing:{_row_key(row)}")
+        source_url = _source_url(row)
+        if not source_url:
+            raise RuntimeError(f"gold_v3_source_url_missing:{_row_key(row)}")
+        if not _is_public_source_url(source_url):
+            raise RuntimeError(f"gold_v3_non_public_source_url:{_row_key(row)}")
         source_rows.setdefault(source_hash, _source_document_row_from_v3(row))
         for link in _derived_source_links(row):
             link_hash = _source_hash(link)
             if link_hash:
+                link_url = _source_url(link)
+                if not link_url:
+                    raise RuntimeError(f"gold_v3_derived_source_url_missing:{_row_key(row)}")
+                if not _is_public_source_url(link_url):
+                    raise RuntimeError(f"gold_v3_derived_non_public_source_url:{_row_key(row)}")
                 source_rows.setdefault(link_hash, _source_document_row_from_v3(link))
     return source_rows
+
+
+def _prewrite_public_row_contract_errors(rows: list[dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+    for row in rows:
+        if row.get("validation_status") not in PROMOTABLE_ROW_STATUSES:
+            errors.append(f"gold_v3_unpromotable_validation_status:{_row_key(row)}")
+        field_evidence = row.get("field_evidence") if isinstance(row.get("field_evidence"), dict) else {}
+        source_spans = row.get("source_spans") if isinstance(row.get("source_spans"), dict) else {}
+        source_hash = _source_hash(row)
+        canonical_page_hashes = _canonical_page_hashes(row)
+        for field_name in _critical_field_names(row):
+            if not isinstance(field_evidence.get(field_name), dict):
+                errors.append(f"gold_v3_missing_field_evidence:{_row_key(row)}:{field_name}")
+                continue
+            field_source = field_evidence[field_name].get("source")
+            if not isinstance(field_source, dict):
+                errors.append(f"gold_v3_missing_field_source:{_row_key(row)}:{field_name}")
+                continue
+            if not str(field_source.get("content_sha256") or "").strip():
+                errors.append(f"gold_v3_missing_field_content_sha256:{_row_key(row)}:{field_name}")
+            elif source_hash and str(field_source.get("content_sha256") or "").strip() != source_hash:
+                errors.append(f"gold_v3_field_source_hash_mismatch:{_row_key(row)}:{field_name}")
+            if not str(field_source.get("page_image_sha256") or "").strip():
+                errors.append(f"gold_v3_missing_field_page_image_sha256:{_row_key(row)}:{field_name}")
+            elif field_source.get("page_image_sha256") not in canonical_page_hashes:
+                errors.append(f"gold_v3_field_page_image_not_canonical:{_row_key(row)}:{field_name}")
+            if field_source.get("page_number") in {None, ""}:
+                errors.append(f"gold_v3_missing_field_page_number:{_row_key(row)}:{field_name}")
+            if not field_source.get("bbox_px"):
+                errors.append(f"gold_v3_missing_field_bbox_px:{_row_key(row)}:{field_name}")
+            if not str(field_source.get("crop_sha256") or "").strip():
+                errors.append(f"gold_v3_missing_field_crop_sha256:{_row_key(row)}:{field_name}")
+            if not str(field_source.get("crop_storage_path") or field_source.get("crop_path") or "").strip():
+                errors.append(f"gold_v3_missing_field_crop_path:{_row_key(row)}:{field_name}")
+            spans = source_spans.get(field_name)
+            if not isinstance(spans, list) or not spans:
+                errors.append(f"gold_v3_missing_field_provenance:{_row_key(row)}:{field_name}")
+    return errors
 
 
 def _source_document_ids_by_hash(source_documents: list[dict[str, Any]]) -> dict[str, str]:
@@ -1512,6 +2039,9 @@ def publish_gold_v3_preview(
     promoted_at: str | None = None,
 ) -> dict[str, int]:
     raw_preview_rows = [row for row in preview.get("rows") or [] if isinstance(row, dict)]
+    prewrite_errors = _prewrite_public_row_contract_errors(raw_preview_rows)
+    if prewrite_errors:
+        raise RuntimeError(prewrite_errors[0])
     source_document_rows_by_hash = _source_document_rows_by_hash(raw_preview_rows)
     preview_rows_by_source_hash: dict[str, dict[str, Any]] = {}
     for row in raw_preview_rows:
@@ -1590,6 +2120,31 @@ def publish_gold_v3_preview(
     }
 
 
+def rollback_gold_v3_rows(
+    db: Any,
+    *,
+    source_sha256: str | None = None,
+    canonical_slug: str | None = None,
+    calendar_group_key: str | None = None,
+) -> dict[str, int]:
+    filters = {"is_current": "eq.true"}
+    if source_sha256:
+        filters["source_sha256"] = f"eq.{source_sha256}"
+    if canonical_slug:
+        filters["canonical_slug"] = f"eq.{canonical_slug}"
+    if calendar_group_key:
+        filters["calendar_group_key"] = f"eq.{calendar_group_key}"
+    if len(filters) == 1:
+        raise RuntimeError("gold_v3_rollback_requires_source_hash_or_row_key")
+
+    rows = db.select("public_activity_gold", columns="id", filters=filters)
+    for row in rows:
+        row_id = row.get("id") if isinstance(row, dict) else None
+        if row_id:
+            db.update("public_activity_gold", {"id": f"eq.{row_id}"}, {"is_current": False})
+    return {"retired_gold_v3_rows": len(rows)}
+
+
 def evaluate_publish_readiness(
     preview: dict[str, Any],
     *,
@@ -1608,6 +2163,7 @@ def evaluate_publish_readiness(
 ) -> dict[str, Any]:
     errors: list[str] = []
     pending_review_task_count = 0
+    missing_dual_run_review_task_ids: list[str] = []
     publish_v3_enabled = flags.get("public_gold_source") == "v3" and flags.get("v3_publish_enabled") is True
     if not publish_v3_enabled:
         errors.append("v3_publish_disabled")
@@ -1648,6 +2204,8 @@ def evaluate_publish_readiness(
             errors.append(f"row_has_validation_findings:{index}")
         if row.get("validation_status") not in PROMOTABLE_ROW_STATUSES:
             errors.append(f"row_unpromotable_validation_status:{index}")
+        if row.get("document_family") not in AUTO_PUBLISH_FAMILIES:
+            errors.append(f"row_document_family_not_auto_publishable:{index}")
         source = row.get("source")
         source_hash = row.get("source_sha256")
         if isinstance(source, dict):
@@ -1679,10 +2237,16 @@ def evaluate_publish_readiness(
                         break
                 if not str(review_decision.get("reviewer") or "").strip():
                     errors.append(f"row_missing_manual_review_reviewer:{index}")
+                elif _is_placeholder_reviewer(review_decision.get("reviewer")):
+                    errors.append(f"row_placeholder_manual_review_reviewer:{index}")
                 if not str(review_decision.get("decided_at") or "").strip():
                     errors.append(f"row_missing_manual_review_decided_at:{index}")
+                elif _parse_iso_datetime(review_decision.get("decided_at")) is None:
+                    errors.append(f"row_invalid_manual_review_decided_at:{index}")
                 if not str(review_decision.get("reason") or "").strip():
                     errors.append(f"row_missing_manual_review_reason:{index}")
+                elif _is_placeholder_review_reason(review_decision.get("reason")):
+                    errors.append(f"row_placeholder_manual_review_reason:{index}")
                 if not isinstance(review_decision.get("approved_fields"), dict) or not review_decision.get("approved_fields"):
                     errors.append(f"row_missing_manual_review_approved_fields:{index}")
                 elif isinstance(review_decision.get("approved_fields"), dict):
@@ -1834,12 +2398,12 @@ def evaluate_publish_readiness(
     if require_source_drift_report and publish_v3_enabled and source_drift_report is None:
         errors.append("missing_source_drift_report")
     if source_drift_report is not None:
-        errors.extend(_source_drift_report_errors(source_drift_report, preview))
+        errors.extend(_source_drift_report_errors(source_drift_report, preview, dual_run_report))
     if require_source_metrics_report and publish_v3_enabled:
         if source_metrics_report is None:
             errors.append("missing_source_metrics_report")
         else:
-            errors.extend(_source_metrics_report_errors(source_metrics_report, preview))
+            errors.extend(_source_metrics_report_errors(source_metrics_report, preview, dual_run_report))
     if require_monitoring_report and publish_v3_enabled:
         if monitoring_report is None:
             errors.append("missing_monitoring_report")
@@ -1847,7 +2411,10 @@ def evaluate_publish_readiness(
             errors.extend(_monitoring_report_errors(monitoring_report, preview))
     if require_review_queue:
         review_errors, pending_review_task_count = _review_queue_errors(review_tasks)
-        review_errors.extend(_review_queue_report_errors(review_tasks, review_queue_report))
+        review_errors.extend(_review_queue_report_errors(review_tasks, review_queue_report, preview))
+        missing_dual_run_review_task_ids = _missing_dual_run_review_task_ids(review_tasks, dual_run_report)
+        if missing_dual_run_review_task_ids:
+            review_errors.append("review_queue_missing_dual_run_review_tasks")
         if publish_v3_enabled:
             errors.extend(review_errors)
     return {
@@ -1856,6 +2423,7 @@ def evaluate_publish_readiness(
         "row_count": len(rows),
         "mode": flags.get("public_gold_source"),
         "pending_review_task_count": pending_review_task_count,
+        "missing_dual_run_review_task_ids": missing_dual_run_review_task_ids,
     }
 
 
@@ -1872,7 +2440,27 @@ def main() -> None:
     parser.add_argument("--review-queue-report", type=Path, default=DEFAULT_REVIEW_QUEUE_REPORT_PATH)
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--publish", action="store_true", help="Write ready v3 preview rows to public Gold tables")
+    parser.add_argument("--rollback-source-sha256")
+    parser.add_argument("--rollback-calendar-group")
+    parser.add_argument("--rollback-canonical-slug")
     args = parser.parse_args()
+
+    if args.rollback_source_sha256 or args.rollback_canonical_slug or args.rollback_calendar_group:
+        if SupabaseClient is None:
+            raise RuntimeError("SupabaseClient unavailable")
+        print(
+            json.dumps(
+                rollback_gold_v3_rows(
+                    SupabaseClient(),
+                    source_sha256=args.rollback_source_sha256,
+                    canonical_slug=args.rollback_canonical_slug,
+                    calendar_group_key=args.rollback_calendar_group,
+                ),
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return
 
     if args.publish and not args.require_clean_preview:
         print("blocked")

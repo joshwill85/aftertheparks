@@ -25,9 +25,12 @@ for (const source of [statusStrip, eventWeatherSignal, weatherIconButton]) {
 assert.match(forecastCompare, /WEATHER_DECISION_LABELS/);
 
 assert.match(eventCard, /weatherDecisionLabel/);
-assert.match(guidance, /Outdoor activities are reasonable right now\. Keep checking for rain, lightning, heat, or wind\./);
+assert.match(guidance, /Outdoor plans look reasonable right now\. Keep checking for rain, lightning, heat, or wind\./);
+assert.match(guidance, /Rain may affect outdoor plans now\. Choose indoor or covered activities first\./);
+assert.match(guidance, /Damp conditions may affect outdoor comfort\. Keep walks short and confirm outdoor activities\./);
+assert.doesNotMatch(guidance, /is reasonable right now/);
 assert.match(guidance, /Rain may affect the next hour\./);
-assert.match(guidance, /Rain looks unlikely in the next hour\. This is forecast guidance, not live radar\./);
+assert.match(guidance, /Forecast only, not live radar\./);
 assert.match(weatherIconButton, /formatTempDual/);
 
 console.log("Weather card decision copy passed.");

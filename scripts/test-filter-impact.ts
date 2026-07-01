@@ -716,13 +716,13 @@ assert(
   "Resort filter should be the first filter section in the shared filter pane"
 );
 assert(
-  browseFilterShellSource.includes('const hideFreeOnly = variant === "tonight";'),
-  "Tonight browse shell should hide free-only filters because tonight is not a free-only browse surface"
+  browseFilterShellSource.includes("const hideFreeOnly = false;"),
+  "Tonight browse shell should keep free-only filters available"
 );
 assert(
   browseFilterShellSource.includes("hideFreeOnly={hideFreeOnly}") &&
     filterSheetSource.includes("hideFreeOnly={hideFreeOnly}"),
-  "Tonight free-filter hiding should apply to both desktop rail and mobile sheet"
+  "Free-filter visibility should apply consistently to both desktop rail and mobile sheet"
 );
 assert(
   filterRailSource.includes("if (!hideFreeOnly)") &&

@@ -89,7 +89,8 @@ export function ResultSummary({
         {summarySentence}
         {activeFilters > 0 && (
           <span className="ml-2 font-normal text-[var(--color-muted)]">
-            · {activeFilters} filter{activeFilters !== 1 ? "s" : ""} active
+            {" · "}
+            {activeFilters} filter{activeFilters !== 1 ? "s" : ""} active
           </span>
         )}
       </p>

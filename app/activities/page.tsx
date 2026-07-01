@@ -55,6 +55,12 @@ const STRATEGIC_ACTIVITY_FILTER_METADATA: Record<
       "Find Disney resort arcades and games for indoor, low-effort backup plans during arrival days, breaks, or flexible resort time.",
     canonical: "/activities?category=arcade",
   },
+  "category=movies_under_stars": {
+    title: "Movies Under the Stars at Disney World Resorts",
+    description:
+      "Browse current outdoor movie listings by resort, time, location, cost, and weather notes before you go.",
+    canonical: "/activities?category=movies_under_stars",
+  },
   "free=true": {
     title: "Free Walt Disney World Resort Activities",
     description:
@@ -200,9 +206,8 @@ export default async function ActivitiesPage({ searchParams }: PageProps) {
           { label: "See tonight", href: "/tonight" },
         ]}
       >
-        Use the activity directory to compare current resort recreation by
-        resort, time, category, cost, weather fit, reservation needs, and
-        transportation context.
+        Filter activities by resort, time, category, cost, booking needs,
+        weather fit, and how easy they are to reach.
       </AnswerBlock>
       <FreshnessFacts
         lastVerified={formatSeoDate(sourceSummary.latestVerified)}

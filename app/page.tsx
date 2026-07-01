@@ -110,7 +110,7 @@ export default async function HomePage() {
               { label: "Today", href: "/today", description: "Activities still available today." },
               { label: "Tonight", href: "/tonight", description: "Movies, campfires, and evening plans." },
               { label: "Resort calendars", href: "/disney-world-resort-activity-calendars", description: "Compare resort activity calendars." },
-              { label: "Free activities", href: "/activities?free=true", description: "Current free and low-cost options." },
+              { label: "Free activities", href: "/activities?free=true", description: "Free and low-cost activities from Disney resort calendars." },
               { label: "Choose your resort", href: "/resorts", description: "Start where you are staying." },
               { label: "Weather", href: "/weather", description: "Check rain, heat, and storm risk." },
             ]}

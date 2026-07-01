@@ -1,6 +1,8 @@
 {
+  "report_kind": "baseline_v2_report",
+  "schema_version": "baseline_v2_report_001",
   "pipeline_version": "vision_v3_gate0",
-  "generated_at": "2026-06-30T00:07:30.968219+00:00",
+  "generated_at": "2026-07-01T08:13:51.090214+00:00",
   "publication_behavior": "read_only_no_publish",
   "format_coverage_samples": [
     {

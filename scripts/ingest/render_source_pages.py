@@ -33,6 +33,7 @@ except ImportError:  # pragma: no cover - supports package-style imports
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "page_images"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_render_source_pages_report.json"
 DEFAULT_PDF_DPI = 450
+RENDER_SOURCE_PAGES_REPORT_SCHEMA_VERSION = "v3_render_source_pages_001"
 SOURCE_DOCUMENT_PAGES_CONFLICT = "source_document_id,page_number,canonical_image_sha256"
 THUMBNAIL_MAX_SIZE = (360, 360)
 SOURCE_METADATA_FIELDS = (
@@ -204,6 +205,16 @@ def _write_thumbnail(image_path: Path, thumb_path: Path) -> None:
         thumbnail.thumbnail(THUMBNAIL_MAX_SIZE)
         thumb_path.parent.mkdir(parents=True, exist_ok=True)
         thumbnail.save(thumb_path, "PNG")
+
+
+def _path_size(path_value: Any) -> int:
+    if not path_value:
+        return 0
+    try:
+        path = Path(str(path_value))
+        return path.stat().st_size if path.exists() else 0
+    except OSError:
+        return 0
 
 
 def _image_page(
@@ -520,8 +531,24 @@ def render_source_documents_from_directory(
     rendered_results = [result for result in results if result["status"] == "rendered"]
     rendered_page_count = sum(int(result.get("page_count") or 0) for result in rendered_results)
     render_elapsed_seconds = sum(float(result.get("render_elapsed_seconds") or 0.0) for result in rendered_results)
+    page_image_bytes = 0
+    thumbnail_bytes = 0
+    for result in rendered_results:
+        manifest_path = result.get("manifest_path")
+        if not manifest_path:
+            continue
+        try:
+            manifest = json.loads(Path(str(manifest_path)).read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        for page in manifest.get("pages") or []:
+            if not isinstance(page, dict):
+                continue
+            page_image_bytes += _path_size(page.get("canonical_image_path"))
+            thumbnail_bytes += _path_size(page.get("thumbnail_path"))
     report = {
         "report_kind": "v3_render_source_pages",
+        "schema_version": RENDER_SOURCE_PAGES_REPORT_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source_documents_dir": str(source_documents_dir),
         "output_dir": str(output_dir),
@@ -538,6 +565,14 @@ def render_source_documents_from_directory(
             "render_elapsed_seconds": render_elapsed_seconds,
             "average_render_time_per_page_seconds": (
                 render_elapsed_seconds / rendered_page_count if rendered_page_count else None
+            ),
+            "page_image_bytes": page_image_bytes,
+            "thumbnail_bytes": thumbnail_bytes,
+            "average_page_image_bytes": (
+                page_image_bytes / rendered_page_count if rendered_page_count else None
+            ),
+            "average_thumbnail_bytes": (
+                thumbnail_bytes / rendered_page_count if rendered_page_count else None
             ),
         },
         "results": results,

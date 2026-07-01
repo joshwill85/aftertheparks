@@ -35,6 +35,7 @@ DEFAULT_RENDER_REPORT_PATH = ROOT / "data/processed/eval/v3_render_source_pages_
 DEFAULT_VISION_SNAPSHOT_REPORT_PATH = ROOT / "data/processed/eval/v3_vision_snapshot_report.json"
 DEFAULT_REVIEW_QUEUE_REPORT_PATH = ROOT / "data/processed/eval/v3_review_queue_report.json"
 DEFAULT_REVIEW_QUEUE_PATH = ROOT / "data/processed/review_queue/vision_v3_review_queue.json"
+VISION_V3_SPIKE_REPORT_SCHEMA_VERSION = "vision_v3_spike_report_001"
 
 DPI_CANDIDATES = ["300", "450", "600"]
 RUNTIME_STORAGE_METRICS_REQUIRED = [
@@ -315,6 +316,8 @@ def build_spike_report(
     manual_metrics = _manual_review_metrics(review_queue_report)
 
     return {
+        "report_kind": "vision_v3_spike_report",
+        "schema_version": VISION_V3_SPIKE_REPORT_SCHEMA_VERSION,
         "pipeline_version": "vision_v3_gate0_5_spike",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "publish_behavior": "no_publish",

@@ -24,6 +24,7 @@ except ImportError:  # pragma: no cover - supports package-style imports
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "validated_candidates_v3"
 DEFAULT_CANDIDATES_DIR = PROCESSED_DIR / "activity_candidates_v3"
 DEFAULT_REPORT_PATH = PROCESSED_DIR / "eval" / "v3_validate_report.json"
+VALIDATE_V3_REPORT_SCHEMA_VERSION = "v3_validate_001"
 REQUIRED_CRITICAL_FIELDS = ("title", "schedule", "location", "fee")
 MOVIE_CRITICAL_FIELDS = ("movie_title",)
 RAW_VALUE_MATCH_FIELDS = {"title", "schedule", "location", "movie_title"}
@@ -893,6 +894,7 @@ def validate_candidates_from_directory(
 
     report = {
         "report_kind": "v3_validate",
+        "schema_version": VALIDATE_V3_REPORT_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "candidates_dir": str(candidates_dir),
         "output_dir": str(output_dir),

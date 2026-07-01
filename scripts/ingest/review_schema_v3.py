@@ -16,6 +16,17 @@ except ImportError:  # pragma: no cover - supports package-style imports
 
 VALID_DECISIONS = {"approve", "edit", "reject"}
 APPROVABLE_FIELDS = {"title", "schedule", "location", "fee", "movie_title"}
+PLACEHOLDER_REVIEWERS = {"reviewer-name", "your-name", "todo", "tbd"}
+PLACEHOLDER_REVIEW_REASONS = {
+    "approved",
+    "ok",
+    "reason",
+    "reviewed",
+    "source-backed rationale for this decision",
+    "tbd",
+    "todo",
+    "verified against source crop",
+}
 DEFAULT_REVIEW_DECISIONS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_decisions.json"
 DEFAULT_FIXTURE_CANDIDATES_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_review_fixture_candidates.json"
 DEFAULT_PARSER_RULE_REQUESTS_PATH = PROCESSED_DIR / "review_queue" / "vision_v3_parser_rule_update_requests.json"
@@ -36,6 +47,30 @@ def _require_text(value: object, field_name: str) -> str:
     if not text:
         raise ValueError(f"missing_{field_name}")
     return text
+
+
+def _require_reviewer(value: object) -> str:
+    reviewer = _require_text(value, "reviewer")
+    if reviewer.strip().lower() in PLACEHOLDER_REVIEWERS:
+        raise ValueError("placeholder_reviewer")
+    return reviewer
+
+
+def _require_reason(value: object) -> str:
+    reason = _require_text(value, "reason")
+    normalized_reason = " ".join(reason.lower().split())
+    if normalized_reason in PLACEHOLDER_REVIEW_REASONS:
+        raise ValueError("placeholder_reason")
+    return reason
+
+
+def _require_decided_at(value: object) -> str:
+    decided_at = _require_text(value, "decided_at")
+    try:
+        datetime.fromisoformat(decided_at.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ValueError("invalid_decided_at") from exc
+    return decided_at
 
 
 def _has_normalized_value(value: object) -> bool:
@@ -69,6 +104,26 @@ def _validate_approved_fields_match_task(decision_or_task: dict[str, Any], appro
     task_field = str(original_task.get("field") or "").strip()
     if task_field in APPROVABLE_FIELDS and set(approved_fields) != {task_field}:
         raise ValueError(f"approved_fields_do_not_match_task_field:{task_field}")
+
+
+def _validate_review_decision_matches_original_task(decision: dict[str, Any]) -> None:
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    if not original_task:
+        return
+    for decision_key, task_key, error_name in (
+        ("content_sha256", "content_sha256", "stale_review_content_sha256"),
+        ("source_document_id", "source_document_id", "stale_review_source_document_id"),
+        ("page_image_sha256", "page_image_sha256", "stale_review_page_image_sha256"),
+        ("field_crop_sha256", "field_crop_sha256", "stale_review_field_crop_sha256"),
+    ):
+        expected = str(original_task.get(task_key) or "").strip()
+        if task_key == "page_image_sha256":
+            expected = str(_task_page_image_sha256(original_task) or "").strip()
+        if not expected:
+            continue
+        actual = str(decision.get(decision_key) or "").strip()
+        if actual != expected:
+            raise ValueError(error_name)
 
 
 def _task_page_image_sha256(task: dict[str, Any]) -> Any:
@@ -138,9 +193,10 @@ def validate_review_decision(decision: dict[str, Any]) -> None:
     _require_text(decision.get("task_id"), "task_id")
     _require_text(decision.get("candidate_id"), "candidate_id")
     _require_text(decision.get("content_sha256"), "content_sha256")
-    _require_text(decision.get("reviewer"), "reviewer")
-    _require_text(decision.get("reason"), "reason")
-    _require_text(decision.get("decided_at"), "decided_at")
+    _require_reviewer(decision.get("reviewer"))
+    _require_reason(decision.get("reason"))
+    _require_decided_at(decision.get("decided_at"))
+    _validate_review_decision_matches_original_task(decision)
     if decision_value in {"approve", "edit"}:
         if _is_non_field_review_approval(decision):
             if _requires_review_visual_artifacts(decision):
@@ -186,10 +242,10 @@ def build_review_decision(
         "page_image_sha256": _task_page_image_sha256(task),
         "field_crop": task.get("field_crop"),
         "field_crop_sha256": task.get("field_crop_sha256"),
-        "reviewer": _require_text(reviewer, "reviewer"),
+        "reviewer": _require_reviewer(reviewer),
         "decision": decision,
         "approved_fields": approved_fields or {},
-        "reason": _require_text(reason, "reason"),
+        "reason": _require_reason(reason),
         "decided_at": decided_at or _now_iso(),
         "original_task": task,
     }
@@ -197,8 +253,40 @@ def build_review_decision(
     return review_decision
 
 
+def _original_task_source_metadata(original_task: dict[str, Any]) -> dict[str, Any]:
+    return (
+        original_task.get("source_metadata")
+        if isinstance(original_task.get("source_metadata"), dict)
+        else {}
+    )
+
+
+def _original_task_source_url(original_task: dict[str, Any], source_metadata: dict[str, Any]) -> str:
+    return str(
+        original_task.get("source_url")
+        or source_metadata.get("canonical_url")
+        or source_metadata.get("fetched_url")
+        or ""
+    ).strip()
+
+
+def _is_public_source_url(value: object) -> bool:
+    text = str(value or "").strip().lower()
+    return text.startswith("https://") or text.startswith("http://")
+
+
+def _dual_run_review_has_source_provenance(decision: dict[str, Any]) -> bool:
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    source_metadata = _original_task_source_metadata(original_task)
+    source_url = _original_task_source_url(original_task, source_metadata)
+    return bool(source_metadata and _is_public_source_url(source_url))
+
+
 def review_decision_creates_fixture_candidate(decision: dict[str, Any]) -> dict[str, Any]:
-    return {
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    source_metadata = _original_task_source_metadata(original_task)
+    source_url = _original_task_source_url(original_task, source_metadata)
+    fixture = {
         "fixture_kind": "review_fixture_candidate_v3",
         "schema_version": "review_fixture_candidate_v3_001",
         "candidate_id": decision.get("candidate_id"),
@@ -215,11 +303,22 @@ def review_decision_creates_fixture_candidate(decision: dict[str, Any]) -> dict[
         "review_reason": decision.get("reason"),
         "review_decided_at": decision.get("decided_at"),
     }
+    if source_metadata:
+        fixture["source_metadata"] = source_metadata
+    if source_url:
+        fixture["source_url"] = source_url
+    for key in ("pipeline_version", "config_hash", "runtime_lineage", "snapshot_path"):
+        value = original_task.get(key)
+        if value not in (None, ""):
+            fixture[key] = value
+    return fixture
 
 
 def review_decision_creates_parser_rule_update_request(decision: dict[str, Any]) -> dict[str, Any]:
     original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
-    return {
+    source_metadata = _original_task_source_metadata(original_task)
+    source_url = _original_task_source_url(original_task, source_metadata)
+    request = {
         "request_kind": "parser_rule_update_request_v3",
         "schema_version": "parser_rule_update_request_v3_001",
         "candidate_id": decision.get("candidate_id"),
@@ -236,7 +335,7 @@ def review_decision_creates_parser_rule_update_request(decision: dict[str, Any])
         "validation_findings": original_task.get("validation_findings") or [],
         "existing_gold_comparison": original_task.get("existing_gold_comparison"),
         "snapshot_path": original_task.get("snapshot_path"),
-        "source_metadata": original_task.get("source_metadata"),
+        "source_metadata": source_metadata or None,
         "source_status": original_task.get("source_status"),
         "decision": decision.get("decision"),
         "approved_fields": decision.get("approved_fields") or {},
@@ -245,14 +344,25 @@ def review_decision_creates_parser_rule_update_request(decision: dict[str, Any])
         "review_decided_at": decision.get("decided_at"),
         "suggested_action": "update_parser_rule_or_fixture",
     }
+    if source_url:
+        request["source_url"] = source_url
+    for key in ("pipeline_version", "config_hash", "runtime_lineage", "snapshot_path"):
+        value = original_task.get(key)
+        if value not in (None, ""):
+            request[key] = value
+    return request
 
 
 def _is_minimally_valid_dual_run_review_decision(decision: dict[str, Any]) -> bool:
     if not isinstance(decision, dict) or decision.get("decision") not in {"approve", "edit", "reject"}:
         return False
-    for field_name in ("task_id", "candidate_id", "content_sha256", "reviewer", "reason", "decided_at"):
+    for field_name in ("task_id", "candidate_id", "content_sha256", "reason", "decided_at"):
         if not str(decision.get(field_name) or "").strip():
             return False
+    try:
+        _require_reviewer(decision.get("reviewer"))
+    except ValueError:
+        return False
     return isinstance(decision.get("original_task"), dict)
 
 
@@ -335,8 +445,24 @@ def _dual_run_required_content_hash(decision: dict[str, Any]) -> str:
     return str(missing_record.get("content_sha256") or "").strip()
 
 
+def _dual_run_review_visual_artifacts_current(decision: dict[str, Any]) -> bool:
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    task_page_hash = str(_task_page_image_sha256(original_task) or "").strip()
+    decision_page_hash = str(decision.get("page_image_sha256") or "").strip()
+    if task_page_hash and decision_page_hash != task_page_hash:
+        return False
+    task_crop_hash = str(original_task.get("field_crop_sha256") or "").strip()
+    decision_crop_hash = str(decision.get("field_crop_sha256") or "").strip()
+    if task_crop_hash and decision_crop_hash != task_crop_hash:
+        return False
+    return True
+
+
 def _dual_run_review_manifest(decision: dict[str, Any], key_value: str, required_hash: str) -> dict[str, Any]:
-    return {
+    original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
+    source_metadata = _original_task_source_metadata(original_task)
+    source_url = _original_task_source_url(original_task, source_metadata)
+    manifest = {
         "key": key_value,
         "task_id": decision.get("task_id"),
         "content_sha256": required_hash,
@@ -345,6 +471,17 @@ def _dual_run_review_manifest(decision: dict[str, Any], key_value: str, required
         "decision": decision.get("decision"),
         "reason": decision.get("reason"),
     }
+    page_image_sha256 = str(decision.get("page_image_sha256") or "").strip()
+    field_crop_sha256 = str(decision.get("field_crop_sha256") or "").strip()
+    if page_image_sha256:
+        manifest["page_image_sha256"] = page_image_sha256
+    if field_crop_sha256:
+        manifest["field_crop_sha256"] = field_crop_sha256
+    if source_url:
+        manifest["source_url"] = source_url
+    if source_metadata:
+        manifest["source_metadata"] = source_metadata
+    return manifest
 
 
 def _is_source_drift_review_decision(decision: dict[str, Any]) -> bool:
@@ -359,6 +496,14 @@ def _is_source_drift_review_decision(decision: dict[str, Any]) -> bool:
 def _source_drift_review_matches_required_task(decision: dict[str, Any], required_task: dict[str, Any]) -> bool:
     original_task = decision.get("original_task") if isinstance(decision.get("original_task"), dict) else {}
     for key in ("task_id", "content_sha256", "source_document_id", "calendar_group_key"):
+        expected = str(required_task.get(key) or "").strip()
+        if not expected:
+            continue
+        decision_value = str(decision.get(key) or "").strip()
+        original_value = str(original_task.get(key) or "").strip()
+        if decision_value != expected or original_value != expected:
+            return False
+    for key in ("page_image_sha256", "field_crop_sha256"):
         expected = str(required_task.get(key) or "").strip()
         if not expected:
             continue
@@ -456,6 +601,7 @@ def record_review_decision_from_queue(
     decided_at: str | None = None,
     fixture_candidates_path: Path | None = None,
     parser_rule_requests_path: Path | None = None,
+    dual_run_review_keys_path: Path | None = None,
 ) -> dict[str, Any]:
     task = _load_review_task(queue_path, task_id)
     normalized_decision = decision.strip().lower()
@@ -484,13 +630,16 @@ def record_review_decision_from_queue(
     _write_review_decisions_payload(decisions_path, decisions, payload_shape)
     fixture_output = fixture_candidates_path or decisions_path.parent / DEFAULT_FIXTURE_CANDIDATES_PATH.name
     parser_output = parser_rule_requests_path or decisions_path.parent / DEFAULT_PARSER_RULE_REQUESTS_PATH.name
+    dual_run_keys_output = dual_run_review_keys_path or decisions_path.parent / DEFAULT_DUAL_RUN_REVIEW_KEYS_PATH.name
     export_review_fixture_candidates(decisions_path=decisions_path, output_path=fixture_output)
     export_parser_rule_update_requests(decisions_path=decisions_path, output_path=parser_output)
+    export_dual_run_review_keys(decisions_path=decisions_path, output_path=dual_run_keys_output)
     return {
         "report_kind": "review_decision_v3_record",
         "decisions_path": str(decisions_path),
         "fixture_candidates_path": str(fixture_output),
         "parser_rule_requests_path": str(parser_output),
+        "dual_run_review_keys_path": str(dual_run_keys_output),
         "task_id": review_decision["task_id"],
         "decision": review_decision["decision"],
         "content_sha256": review_decision["content_sha256"],
@@ -608,6 +757,7 @@ def export_dual_run_review_keys(
     skipped_invalid_review = 0
     skipped_stale_review = 0
     skipped_missing_review_hash = 0
+    skipped_missing_source_provenance = 0
     for decision in decisions:
         if not isinstance(decision, dict) or decision.get("decision") not in VALID_DECISIONS:
             skipped_invalid_review += 1
@@ -618,7 +768,11 @@ def export_dual_run_review_keys(
         try:
             validate_review_decision(decision)
             valid = True
-        except ValueError:
+        except ValueError as exc:
+            error_name = str(exc)
+            if error_name.startswith("stale_review_") and _dual_run_review_key(decision) is not None:
+                skipped_stale_review += 1
+                continue
             key = _dual_run_review_key(decision)
             valid = (
                 key is not None
@@ -638,6 +792,12 @@ def export_dual_run_review_keys(
             continue
         if decision_hash != required_hash:
             skipped_stale_review += 1
+            continue
+        if not _dual_run_review_visual_artifacts_current(decision):
+            skipped_stale_review += 1
+            continue
+        if not _dual_run_review_has_source_provenance(decision):
+            skipped_missing_source_provenance += 1
             continue
         key_kind, key_value = key
         review_manifest = _dual_run_review_manifest(decision, key_value, required_hash)
@@ -694,6 +854,7 @@ def export_dual_run_review_keys(
             "skipped_invalid_review_decision_count": skipped_invalid_review,
             "skipped_stale_review_decision_count": skipped_stale_review,
             "skipped_missing_review_hash_count": skipped_missing_review_hash,
+            "skipped_missing_source_provenance_count": skipped_missing_source_provenance,
         },
     }
 
@@ -734,7 +895,10 @@ def export_reviewed_source_drift_report(
             continue
         try:
             validate_review_decision(decision)
-        except ValueError:
+        except ValueError as exc:
+            if str(exc).startswith("stale_review_"):
+                skipped_stale_review += 1
+                continue
             skipped_invalid_review += 1
             continue
         if not _is_source_drift_review_decision(decision):
@@ -802,6 +966,9 @@ def main() -> None:
         help='Optional approved fields object, for example {"schedule":{"raw_value":"Daily at 1:30pm","normalized_value":{"start_time":"13:30"}}}',
     )
     parser.add_argument("--decided-at")
+    parser.add_argument("--fixture-candidates-output", type=Path)
+    parser.add_argument("--parser-rule-requests-output", type=Path)
+    parser.add_argument("--dual-run-review-keys-output", type=Path)
     parser.add_argument(
         "--export",
         choices=(
@@ -831,6 +998,9 @@ def main() -> None:
             reason=_require_text(args.reason, "reason"),
             approved_fields=_parse_approved_fields_json(args.approved_fields_json),
             decided_at=args.decided_at,
+            fixture_candidates_path=args.fixture_candidates_output,
+            parser_rule_requests_path=args.parser_rule_requests_output,
+            dual_run_review_keys_path=args.dual_run_review_keys_output,
         )
     elif args.export == "parser-rule-requests":
         report = export_parser_rule_update_requests(

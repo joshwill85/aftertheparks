@@ -6,7 +6,7 @@ export function nearTermRainShortCopy(signal?: NearTermRainSignal): string | und
   if (signal.answer === "storm_alert") return "Official storm alert nearby";
   if (signal.answer === "likely") return "Rain nearby";
   if (signal.answer === "possible") return "Rain may affect the next hour.";
-  return "Rain looks unlikely in the next hour. This is forecast guidance, not live radar.";
+  return "Rain looks unlikely in the next hour. Forecast only, not live radar.";
 }
 
 export function NearTermRainLine({

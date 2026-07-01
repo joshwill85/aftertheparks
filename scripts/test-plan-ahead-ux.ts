@@ -265,8 +265,13 @@ check("Plan Ahead speaks as a date planning tool", () => {
 
   assert.match(
     calendarPage,
-    /Pick a day of your trip to see resort activities, weather context, and easy backup ideas\./,
+    /Pick a day of your trip to see resort activities, weather context,\s+and easy backup ideas\./,
     "Calendar hero should use the trip-day planning subtitle"
+  );
+  assert.match(
+    calendarPage,
+    /browse-hero-compact/,
+    "Plan Ahead should use the compact hero so the first viewport shows text and planning controls"
   );
 
   for (const label of ["Today", "Tomorrow", "This weekend", "Trip dates", "Choose a date"]) {

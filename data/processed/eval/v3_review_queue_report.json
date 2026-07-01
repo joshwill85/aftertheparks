@@ -1,15 +1,1484 @@
 {
+  "generated_at": "2026-07-01T08:45:05.592281+00:00",
+  "publish_blocker_batches": [
+    {
+      "calendar_group_keys": [
+        "pop-century"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 6,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg",
+      "task_ids": [
+        "dual-run-missing-v2-pop-century-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-pop-century-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-pop-century-groovy-campfire-missing-v2-record",
+        "dual-run-missing-v2-pop-century-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-pop-century-nighttime-activities-missing-v2-record",
+        "dual-run-missing-v2-pop-century-pool-party-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "art-of-animation"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 5,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "task_ids": [
+        "dual-run-missing-v2-art-of-animation-campfire-at-pride-rock-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-pool-party-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "port-orleans-riverside"
+      ],
+      "fields": [
+        "schedule"
+      ],
+      "pending_task_count": 4,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "task_ids": [
+        "dual-run-diff-port-orleans-riverside-campfire-on-de-bayou-schedule",
+        "dual-run-diff-port-orleans-riverside-disney-character-greetings-schedule",
+        "dual-run-diff-port-orleans-riverside-pool-party-schedule",
+        "dual-run-diff-port-orleans-riverside-poolside-activities-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "coronado-springs"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 4,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-coronado-springs-arts-and-crafts-new-record",
+        "dual-run-new-coronado-springs-painting-experience-new-record",
+        "dual-run-new-coronado-springs-sangria-university-new-record",
+        "dual-run-new-coronado-springs-spanish-mosaic-art-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "port-orleans-french-quarter"
+      ],
+      "fields": [
+        "location",
+        "schedule",
+        "title"
+      ],
+      "pending_task_count": 4,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-location",
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-schedule",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-location",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-title"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "beach-yacht-club"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 4,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-beach-yacht-club-campfire-new-record",
+        "dual-run-new-beach-yacht-club-mickey-tie-dye-new-record",
+        "dual-run-new-beach-yacht-club-silent-disco-new-record",
+        "dual-run-new-beach-yacht-club-yo-ho-lets-glow-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "port-orleans-riverside"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "task_ids": [
+        "dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-movies"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-all-star-movies-mickey-tie-dye-new-record",
+        "dual-run-new-all-star-movies-poolside-activities-new-record",
+        "dual-run-new-all-star-movies-shine-like-a-star-glow-party-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "caribbean-beach"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "task_ids": [
+        "dual-run-missing-v2-caribbean-beach-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-pool-party-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "coronado-springs"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-coronado-springs-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-poolside-activities-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "contemporary"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-contemporary-cabana-rentals-new-record",
+        "dual-run-new-contemporary-motorized-boat-rentals-new-record",
+        "dual-run-new-contemporary-poolside-activities-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "contemporary"
+      ],
+      "fields": [
+        "location",
+        "schedule"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-contemporary-movie-under-the-stars-location",
+        "dual-run-diff-contemporary-movie-under-the-stars-schedule",
+        "dual-run-diff-contemporary-olympiad-fitness-center-location"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "animal-kingdom-jambo"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-animal-kingdom-jambo-arts-crafts-new-record",
+        "dual-run-new-animal-kingdom-jambo-wild-about-painting-new-record",
+        "dual-run-new-animal-kingdom-jambo-zahanati-fitness-center-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "old-key-west"
+      ],
+      "fields": [
+        "location",
+        "price",
+        "schedule"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-old-key-west-bike-rentals-location",
+        "dual-run-diff-old-key-west-bike-rentals-schedule",
+        "dual-run-diff-old-key-west-conch-flats-community-hall-price"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "saratoga-springs"
+      ],
+      "fields": [
+        "location",
+        "price",
+        "schedule"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-saratoga-springs-community-hall-price",
+        "dual-run-diff-saratoga-springs-glow-with-the-flow-location",
+        "dual-run-diff-saratoga-springs-movie-under-the-stars-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "wilderness-lodge"
+      ],
+      "fields": [
+        "location",
+        "schedule",
+        "title"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-wilderness-lodge-buttons-and-bells-game-arcade-title",
+        "dual-run-diff-wilderness-lodge-movie-under-the-stars-schedule",
+        "dual-run-diff-wilderness-lodge-storytime-yoga-location"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "wilderness-lodge"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 3,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-wilderness-lodge-family-activities-and-crafts-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-tasteful-artistry-at-disneys-wilderness-lodge-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-movies"
+      ],
+      "fields": [
+        "location",
+        "schedule"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-all-star-movies-reel-fun-arcade-location",
+        "dual-run-diff-all-star-movies-sorcerers-campfire-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-music"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-all-star-music-design-your-own-mosaic-missing-v2-record",
+        "dual-run-missing-v2-all-star-music-poolside-activities-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-sports"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-all-star-sports-poolside-activities-new-record",
+        "dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "boardwalk"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-boardwalk-crescent-lake-wellness-challenge-missing-v2-record",
+        "dual-run-missing-v2-boardwalk-pickleball-clinic-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "caribbean-beach"
+      ],
+      "fields": [
+        "schedule"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg",
+      "task_ids": [
+        "dual-run-diff-caribbean-beach-caribbean-campfire-schedule",
+        "dual-run-diff-caribbean-beach-disney-character-greetings-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "animal-kingdom-jambo"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-animal-kingdom-jambo-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-poolside-activities-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "animal-kingdom-kidani"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-animal-kingdom-kidani-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-poolside-activities-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "grand-floridian"
+      ],
+      "fields": [
+        "schedule"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-grand-floridian-arts-crafts-schedule",
+        "dual-run-diff-grand-floridian-movie-under-the-stars-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "old-key-west"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-old-key-west-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-old-key-west-sunset-celebration-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "port-orleans-french-quarter"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-port-orleans-french-quarter-arts-crafts-new-record",
+        "dual-run-new-port-orleans-french-quarter-glow-with-the-flow-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "port-orleans-french-quarter"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 2,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-port-orleans-french-quarter-mosaic-class-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-painting-on-de-bayou-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-music"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-all-star-music-complimentary-craft-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-music"
+      ],
+      "fields": [
+        "schedule"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-all-star-music-movie-under-the-stars-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "all-star-sports"
+      ],
+      "fields": [
+        "schedule"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-all-star-sports-movie-under-the-stars-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "boardwalk"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-boardwalk-disney-fit-yoga-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "boardwalk"
+      ],
+      "fields": [
+        "price"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-boardwalk-community-hall-price"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "contemporary"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-contemporary-the-magic-of-mosaics-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "animal-kingdom-jambo"
+      ],
+      "fields": [
+        "price"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-animal-kingdom-jambo-simbas-activity-center-price"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "animal-kingdom-kidani"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-animal-kingdom-kidani-arts-crafts-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "animal-kingdom-kidani"
+      ],
+      "fields": [
+        "price"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-animal-kingdom-kidani-community-hall-price"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "riviera"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-riviera-painting-on-the-riviera-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "riviera"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-riviera-nature-walk-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "old-key-west"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-old-key-west-conch-flats-mosaics-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "polynesian"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-polynesian-campfire-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "polynesian"
+      ],
+      "fields": [
+        "schedule"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-polynesian-movie-under-the-stars-schedule"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "polynesian"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-polynesian-make-your-own-kukui-nut-leis-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "saratoga-springs"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-saratoga-springs-bicycle-rentals-missing-v2-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "wilderness-lodge"
+      ],
+      "fields": [
+        "new_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_new_v3_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_new_v3_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-new-wilderness-lodge-wild-wilderness-bingo-new-record"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "beach-yacht-club"
+      ],
+      "fields": [
+        "location"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "unreviewed_v2_v3_field_diffs",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf | unreviewed_v2_v3_field_diffs",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-diff-beach-yacht-club-painting-in-the-vineyard-location"
+      ]
+    },
+    {
+      "calendar_group_keys": [
+        "beach-yacht-club"
+      ],
+      "fields": [
+        "missing_v2_record"
+      ],
+      "pending_task_count": 1,
+      "publish_gate_blocker_reason": "v3_missing_v2_rows",
+      "review_batch_key": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf | v3_missing_v2_rows",
+      "source_url": "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf",
+      "task_ids": [
+        "dual-run-missing-v2-beach-yacht-club-arts-crafts-missing-v2-record"
+      ]
+    }
+  ],
+  "publish_gate_blockers": {
+    "all_pending_tasks_have_review_artifacts": true,
+    "pending_review_artifact_missing_count": 0,
+    "pending_review_artifact_missing_task_ids": [],
+    "pending_task_count": 101,
+    "pending_task_count_by_reason": {
+      "unreviewed_new_v3_rows": 28,
+      "unreviewed_v2_v3_field_diffs": 33,
+      "v3_missing_v2_rows": 40
+    },
+    "pending_task_count_by_source_url": {
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg": 6,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf": 5,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf": 4,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf": 3,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf": 4,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": 5,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": 5,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf": 6,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf": 4,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf": 2,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf": 2,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf": 6,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf": 8,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf": 3,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf": 4,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf": 7,
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf": 6
+    },
+    "pending_task_count_by_source_url_and_reason": {
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg": {
+        "unreviewed_v2_v3_field_diffs": 4,
+        "v3_missing_v2_rows": 3
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg": {
+        "v3_missing_v2_rows": 6
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 3,
+        "unreviewed_v2_v3_field_diffs": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "unreviewed_v2_v3_field_diffs": 1,
+        "v3_missing_v2_rows": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 2,
+        "unreviewed_v2_v3_field_diffs": 1
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "unreviewed_v2_v3_field_diffs": 1,
+        "v3_missing_v2_rows": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": {
+        "unreviewed_v2_v3_field_diffs": 2,
+        "v3_missing_v2_rows": 3
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 4,
+        "v3_missing_v2_rows": 3
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 3,
+        "unreviewed_v2_v3_field_diffs": 3,
+        "v3_missing_v2_rows": 1
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": {
+        "v3_missing_v2_rows": 5
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 3,
+        "unreviewed_v2_v3_field_diffs": 1,
+        "v3_missing_v2_rows": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "unreviewed_v2_v3_field_diffs": 1,
+        "v3_missing_v2_rows": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "v3_missing_v2_rows": 1
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_v2_v3_field_diffs": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "unreviewed_v2_v3_field_diffs": 3,
+        "v3_missing_v2_rows": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 2,
+        "unreviewed_v2_v3_field_diffs": 4,
+        "v3_missing_v2_rows": 2
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "unreviewed_v2_v3_field_diffs": 1,
+        "v3_missing_v2_rows": 1
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_v2_v3_field_diffs": 3,
+        "v3_missing_v2_rows": 1
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 1,
+        "unreviewed_v2_v3_field_diffs": 3,
+        "v3_missing_v2_rows": 3
+      },
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf": {
+        "unreviewed_new_v3_rows": 4,
+        "unreviewed_v2_v3_field_diffs": 1,
+        "v3_missing_v2_rows": 1
+      }
+    },
+    "pending_task_ids": [
+      "dual-run-diff-all-star-movies-reel-fun-arcade-location",
+      "dual-run-diff-all-star-movies-sorcerers-campfire-schedule",
+      "dual-run-diff-all-star-music-movie-under-the-stars-schedule",
+      "dual-run-diff-all-star-sports-movie-under-the-stars-schedule",
+      "dual-run-diff-animal-kingdom-jambo-simbas-activity-center-price",
+      "dual-run-diff-animal-kingdom-kidani-community-hall-price",
+      "dual-run-diff-beach-yacht-club-painting-in-the-vineyard-location",
+      "dual-run-diff-boardwalk-community-hall-price",
+      "dual-run-diff-caribbean-beach-caribbean-campfire-schedule",
+      "dual-run-diff-caribbean-beach-disney-character-greetings-schedule",
+      "dual-run-diff-contemporary-movie-under-the-stars-schedule",
+      "dual-run-diff-contemporary-movie-under-the-stars-location",
+      "dual-run-diff-contemporary-olympiad-fitness-center-location",
+      "dual-run-diff-grand-floridian-arts-crafts-schedule",
+      "dual-run-diff-grand-floridian-movie-under-the-stars-schedule",
+      "dual-run-diff-old-key-west-bike-rentals-schedule",
+      "dual-run-diff-old-key-west-bike-rentals-location",
+      "dual-run-diff-old-key-west-conch-flats-community-hall-price",
+      "dual-run-diff-polynesian-movie-under-the-stars-schedule",
+      "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-schedule",
+      "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-location",
+      "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-title",
+      "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-location",
+      "dual-run-diff-port-orleans-riverside-campfire-on-de-bayou-schedule",
+      "dual-run-diff-port-orleans-riverside-disney-character-greetings-schedule",
+      "dual-run-diff-port-orleans-riverside-pool-party-schedule",
+      "dual-run-diff-port-orleans-riverside-poolside-activities-schedule",
+      "dual-run-diff-saratoga-springs-community-hall-price",
+      "dual-run-diff-saratoga-springs-glow-with-the-flow-location",
+      "dual-run-diff-saratoga-springs-movie-under-the-stars-schedule",
+      "dual-run-diff-wilderness-lodge-buttons-and-bells-game-arcade-title",
+      "dual-run-diff-wilderness-lodge-movie-under-the-stars-schedule",
+      "dual-run-diff-wilderness-lodge-storytime-yoga-location",
+      "dual-run-new-all-star-movies-mickey-tie-dye-new-record",
+      "dual-run-new-all-star-movies-poolside-activities-new-record",
+      "dual-run-new-all-star-movies-shine-like-a-star-glow-party-new-record",
+      "dual-run-new-all-star-music-complimentary-craft-new-record",
+      "dual-run-new-all-star-sports-poolside-activities-new-record",
+      "dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record",
+      "dual-run-new-animal-kingdom-jambo-arts-crafts-new-record",
+      "dual-run-new-animal-kingdom-jambo-wild-about-painting-new-record",
+      "dual-run-new-animal-kingdom-jambo-zahanati-fitness-center-new-record",
+      "dual-run-new-animal-kingdom-kidani-arts-crafts-new-record",
+      "dual-run-new-beach-yacht-club-campfire-new-record",
+      "dual-run-new-beach-yacht-club-mickey-tie-dye-new-record",
+      "dual-run-new-beach-yacht-club-silent-disco-new-record",
+      "dual-run-new-beach-yacht-club-yo-ho-lets-glow-new-record",
+      "dual-run-new-boardwalk-disney-fit-yoga-new-record",
+      "dual-run-new-contemporary-cabana-rentals-new-record",
+      "dual-run-new-contemporary-motorized-boat-rentals-new-record",
+      "dual-run-new-contemporary-poolside-activities-new-record",
+      "dual-run-new-coronado-springs-arts-and-crafts-new-record",
+      "dual-run-new-coronado-springs-painting-experience-new-record",
+      "dual-run-new-coronado-springs-sangria-university-new-record",
+      "dual-run-new-coronado-springs-spanish-mosaic-art-new-record",
+      "dual-run-new-old-key-west-conch-flats-mosaics-new-record",
+      "dual-run-new-polynesian-campfire-new-record",
+      "dual-run-new-port-orleans-french-quarter-arts-crafts-new-record",
+      "dual-run-new-port-orleans-french-quarter-glow-with-the-flow-new-record",
+      "dual-run-new-riviera-painting-on-the-riviera-new-record",
+      "dual-run-new-wilderness-lodge-wild-wilderness-bingo-new-record",
+      "dual-run-missing-v2-all-star-music-design-your-own-mosaic-missing-v2-record",
+      "dual-run-missing-v2-all-star-music-poolside-activities-missing-v2-record",
+      "dual-run-missing-v2-animal-kingdom-jambo-find-a-friend-missing-v2-record",
+      "dual-run-missing-v2-animal-kingdom-jambo-poolside-activities-missing-v2-record",
+      "dual-run-missing-v2-animal-kingdom-kidani-find-a-friend-missing-v2-record",
+      "dual-run-missing-v2-animal-kingdom-kidani-poolside-activities-missing-v2-record",
+      "dual-run-missing-v2-art-of-animation-campfire-at-pride-rock-missing-v2-record",
+      "dual-run-missing-v2-art-of-animation-craft-activity-missing-v2-record",
+      "dual-run-missing-v2-art-of-animation-disney-character-greetings-missing-v2-record",
+      "dual-run-missing-v2-art-of-animation-movie-under-the-stars-missing-v2-record",
+      "dual-run-missing-v2-art-of-animation-pool-party-missing-v2-record",
+      "dual-run-missing-v2-beach-yacht-club-arts-crafts-missing-v2-record",
+      "dual-run-missing-v2-boardwalk-crescent-lake-wellness-challenge-missing-v2-record",
+      "dual-run-missing-v2-boardwalk-pickleball-clinic-missing-v2-record",
+      "dual-run-missing-v2-caribbean-beach-craft-activity-missing-v2-record",
+      "dual-run-missing-v2-caribbean-beach-movie-under-the-stars-missing-v2-record",
+      "dual-run-missing-v2-caribbean-beach-pool-party-missing-v2-record",
+      "dual-run-missing-v2-contemporary-the-magic-of-mosaics-missing-v2-record",
+      "dual-run-missing-v2-coronado-springs-find-a-friend-missing-v2-record",
+      "dual-run-missing-v2-coronado-springs-nature-walk-missing-v2-record",
+      "dual-run-missing-v2-coronado-springs-poolside-activities-missing-v2-record",
+      "dual-run-missing-v2-old-key-west-movie-under-the-stars-missing-v2-record",
+      "dual-run-missing-v2-old-key-west-sunset-celebration-missing-v2-record",
+      "dual-run-missing-v2-polynesian-make-your-own-kukui-nut-leis-missing-v2-record",
+      "dual-run-missing-v2-pop-century-craft-activity-missing-v2-record",
+      "dual-run-missing-v2-pop-century-disney-character-greetings-missing-v2-record",
+      "dual-run-missing-v2-pop-century-groovy-campfire-missing-v2-record",
+      "dual-run-missing-v2-pop-century-movie-under-the-stars-missing-v2-record",
+      "dual-run-missing-v2-pop-century-nighttime-activities-missing-v2-record",
+      "dual-run-missing-v2-pop-century-pool-party-missing-v2-record",
+      "dual-run-missing-v2-port-orleans-french-quarter-mosaic-class-missing-v2-record",
+      "dual-run-missing-v2-port-orleans-french-quarter-painting-on-de-bayou-missing-v2-record",
+      "dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record",
+      "dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record",
+      "dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record",
+      "dual-run-missing-v2-riviera-nature-walk-missing-v2-record",
+      "dual-run-missing-v2-saratoga-springs-bicycle-rentals-missing-v2-record",
+      "dual-run-missing-v2-wilderness-lodge-family-activities-and-crafts-missing-v2-record",
+      "dual-run-missing-v2-wilderness-lodge-nature-walk-missing-v2-record",
+      "dual-run-missing-v2-wilderness-lodge-tasteful-artistry-at-disneys-wilderness-lodge-missing-v2-record"
+    ],
+    "pending_task_ids_by_reason": {
+      "unreviewed_new_v3_rows": [
+        "dual-run-new-all-star-movies-mickey-tie-dye-new-record",
+        "dual-run-new-all-star-movies-poolside-activities-new-record",
+        "dual-run-new-all-star-movies-shine-like-a-star-glow-party-new-record",
+        "dual-run-new-all-star-music-complimentary-craft-new-record",
+        "dual-run-new-all-star-sports-poolside-activities-new-record",
+        "dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record",
+        "dual-run-new-animal-kingdom-jambo-arts-crafts-new-record",
+        "dual-run-new-animal-kingdom-jambo-wild-about-painting-new-record",
+        "dual-run-new-animal-kingdom-jambo-zahanati-fitness-center-new-record",
+        "dual-run-new-animal-kingdom-kidani-arts-crafts-new-record",
+        "dual-run-new-beach-yacht-club-campfire-new-record",
+        "dual-run-new-beach-yacht-club-mickey-tie-dye-new-record",
+        "dual-run-new-beach-yacht-club-silent-disco-new-record",
+        "dual-run-new-beach-yacht-club-yo-ho-lets-glow-new-record",
+        "dual-run-new-boardwalk-disney-fit-yoga-new-record",
+        "dual-run-new-contemporary-cabana-rentals-new-record",
+        "dual-run-new-contemporary-motorized-boat-rentals-new-record",
+        "dual-run-new-contemporary-poolside-activities-new-record",
+        "dual-run-new-coronado-springs-arts-and-crafts-new-record",
+        "dual-run-new-coronado-springs-painting-experience-new-record",
+        "dual-run-new-coronado-springs-sangria-university-new-record",
+        "dual-run-new-coronado-springs-spanish-mosaic-art-new-record",
+        "dual-run-new-old-key-west-conch-flats-mosaics-new-record",
+        "dual-run-new-polynesian-campfire-new-record",
+        "dual-run-new-port-orleans-french-quarter-arts-crafts-new-record",
+        "dual-run-new-port-orleans-french-quarter-glow-with-the-flow-new-record",
+        "dual-run-new-riviera-painting-on-the-riviera-new-record",
+        "dual-run-new-wilderness-lodge-wild-wilderness-bingo-new-record"
+      ],
+      "unreviewed_v2_v3_field_diffs": [
+        "dual-run-diff-all-star-movies-reel-fun-arcade-location",
+        "dual-run-diff-all-star-movies-sorcerers-campfire-schedule",
+        "dual-run-diff-all-star-music-movie-under-the-stars-schedule",
+        "dual-run-diff-all-star-sports-movie-under-the-stars-schedule",
+        "dual-run-diff-animal-kingdom-jambo-simbas-activity-center-price",
+        "dual-run-diff-animal-kingdom-kidani-community-hall-price",
+        "dual-run-diff-beach-yacht-club-painting-in-the-vineyard-location",
+        "dual-run-diff-boardwalk-community-hall-price",
+        "dual-run-diff-caribbean-beach-caribbean-campfire-schedule",
+        "dual-run-diff-caribbean-beach-disney-character-greetings-schedule",
+        "dual-run-diff-contemporary-movie-under-the-stars-schedule",
+        "dual-run-diff-contemporary-movie-under-the-stars-location",
+        "dual-run-diff-contemporary-olympiad-fitness-center-location",
+        "dual-run-diff-grand-floridian-arts-crafts-schedule",
+        "dual-run-diff-grand-floridian-movie-under-the-stars-schedule",
+        "dual-run-diff-old-key-west-bike-rentals-schedule",
+        "dual-run-diff-old-key-west-bike-rentals-location",
+        "dual-run-diff-old-key-west-conch-flats-community-hall-price",
+        "dual-run-diff-polynesian-movie-under-the-stars-schedule",
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-schedule",
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-location",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-title",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-location",
+        "dual-run-diff-port-orleans-riverside-campfire-on-de-bayou-schedule",
+        "dual-run-diff-port-orleans-riverside-disney-character-greetings-schedule",
+        "dual-run-diff-port-orleans-riverside-pool-party-schedule",
+        "dual-run-diff-port-orleans-riverside-poolside-activities-schedule",
+        "dual-run-diff-saratoga-springs-community-hall-price",
+        "dual-run-diff-saratoga-springs-glow-with-the-flow-location",
+        "dual-run-diff-saratoga-springs-movie-under-the-stars-schedule",
+        "dual-run-diff-wilderness-lodge-buttons-and-bells-game-arcade-title",
+        "dual-run-diff-wilderness-lodge-movie-under-the-stars-schedule",
+        "dual-run-diff-wilderness-lodge-storytime-yoga-location"
+      ],
+      "v3_missing_v2_rows": [
+        "dual-run-missing-v2-all-star-music-design-your-own-mosaic-missing-v2-record",
+        "dual-run-missing-v2-all-star-music-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-campfire-at-pride-rock-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-pool-party-missing-v2-record",
+        "dual-run-missing-v2-beach-yacht-club-arts-crafts-missing-v2-record",
+        "dual-run-missing-v2-boardwalk-crescent-lake-wellness-challenge-missing-v2-record",
+        "dual-run-missing-v2-boardwalk-pickleball-clinic-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-pool-party-missing-v2-record",
+        "dual-run-missing-v2-contemporary-the-magic-of-mosaics-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-old-key-west-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-old-key-west-sunset-celebration-missing-v2-record",
+        "dual-run-missing-v2-polynesian-make-your-own-kukui-nut-leis-missing-v2-record",
+        "dual-run-missing-v2-pop-century-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-pop-century-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-pop-century-groovy-campfire-missing-v2-record",
+        "dual-run-missing-v2-pop-century-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-pop-century-nighttime-activities-missing-v2-record",
+        "dual-run-missing-v2-pop-century-pool-party-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-mosaic-class-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-painting-on-de-bayou-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record",
+        "dual-run-missing-v2-riviera-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-saratoga-springs-bicycle-rentals-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-family-activities-and-crafts-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-tasteful-artistry-at-disneys-wilderness-lodge-missing-v2-record"
+      ]
+    },
+    "pending_task_ids_by_source_url": {
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/cool-kids-summer/activity-schedule/PORS_CKS-Digital-Rec-Sign_052626-FINAL.jpg": [
+        "dual-run-diff-port-orleans-riverside-campfire-on-de-bayou-schedule",
+        "dual-run-diff-port-orleans-riverside-disney-character-greetings-schedule",
+        "dual-run-diff-port-orleans-riverside-pool-party-schedule",
+        "dual-run-diff-port-orleans-riverside-poolside-activities-schedule",
+        "dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/recreation/summer/Pop-Century_CKS-Digital-Rec-Sign_052626.jpg": [
+        "dual-run-missing-v2-pop-century-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-pop-century-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-pop-century-groovy-campfire-missing-v2-record",
+        "dual-run-missing-v2-pop-century-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-pop-century-nighttime-activities-missing-v2-record",
+        "dual-run-missing-v2-pop-century-pool-party-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Movies_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-all-star-movies-reel-fun-arcade-location",
+        "dual-run-diff-all-star-movies-sorcerers-campfire-schedule",
+        "dual-run-new-all-star-movies-mickey-tie-dye-new-record",
+        "dual-run-new-all-star-movies-poolside-activities-new-record",
+        "dual-run-new-all-star-movies-shine-like-a-star-glow-party-new-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Music_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-all-star-music-movie-under-the-stars-schedule",
+        "dual-run-new-all-star-music-complimentary-craft-new-record",
+        "dual-run-missing-v2-all-star-music-design-your-own-mosaic-missing-v2-record",
+        "dual-run-missing-v2-all-star-music-poolside-activities-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/All-Star-Sports_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-all-star-sports-movie-under-the-stars-schedule",
+        "dual-run-new-all-star-sports-poolside-activities-new-record",
+        "dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/BW_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-boardwalk-community-hall-price",
+        "dual-run-new-boardwalk-disney-fit-yoga-new-record",
+        "dual-run-missing-v2-boardwalk-crescent-lake-wellness-challenge-missing-v2-record",
+        "dual-run-missing-v2-boardwalk-pickleball-clinic-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CBR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": [
+        "dual-run-diff-caribbean-beach-caribbean-campfire-schedule",
+        "dual-run-diff-caribbean-beach-disney-character-greetings-schedule",
+        "dual-run-missing-v2-caribbean-beach-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-pool-party-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CSR_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-new-coronado-springs-arts-and-crafts-new-record",
+        "dual-run-new-coronado-springs-painting-experience-new-record",
+        "dual-run-new-coronado-springs-sangria-university-new-record",
+        "dual-run-new-coronado-springs-spanish-mosaic-art-new-record",
+        "dual-run-missing-v2-coronado-springs-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-poolside-activities-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/CTR_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-contemporary-movie-under-the-stars-schedule",
+        "dual-run-diff-contemporary-movie-under-the-stars-location",
+        "dual-run-diff-contemporary-olympiad-fitness-center-location",
+        "dual-run-new-contemporary-cabana-rentals-new-record",
+        "dual-run-new-contemporary-motorized-boat-rentals-new-record",
+        "dual-run-new-contemporary-poolside-activities-new-record",
+        "dual-run-missing-v2-contemporary-the-magic-of-mosaics-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAAR_CKS-Digital-Rec-Sign_052626-FINAL.jpg": [
+        "dual-run-missing-v2-art-of-animation-campfire-at-pride-rock-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-pool-party-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Jambo_DIGITAL.pdf": [
+        "dual-run-diff-animal-kingdom-jambo-simbas-activity-center-price",
+        "dual-run-new-animal-kingdom-jambo-arts-crafts-new-record",
+        "dual-run-new-animal-kingdom-jambo-wild-about-painting-new-record",
+        "dual-run-new-animal-kingdom-jambo-zahanati-fitness-center-new-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-poolside-activities-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DAKL_Aframe_Recreation-0526_Kidani_DIGITAL.pdf": [
+        "dual-run-diff-animal-kingdom-kidani-community-hall-price",
+        "dual-run-new-animal-kingdom-kidani-arts-crafts-new-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-poolside-activities-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/DRR_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-new-riviera-painting-on-the-riviera-new-record",
+        "dual-run-missing-v2-riviera-nature-walk-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/GF_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-grand-floridian-arts-crafts-schedule",
+        "dual-run-diff-grand-floridian-movie-under-the-stars-schedule"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/OKWR_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-old-key-west-bike-rentals-schedule",
+        "dual-run-diff-old-key-west-bike-rentals-location",
+        "dual-run-diff-old-key-west-conch-flats-community-hall-price",
+        "dual-run-new-old-key-west-conch-flats-mosaics-new-record",
+        "dual-run-missing-v2-old-key-west-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-old-key-west-sunset-celebration-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/POFQ_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-schedule",
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-location",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-title",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-location",
+        "dual-run-new-port-orleans-french-quarter-arts-crafts-new-record",
+        "dual-run-new-port-orleans-french-quarter-glow-with-the-flow-new-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-mosaic-class-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-painting-on-de-bayou-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/Polynesian_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-polynesian-movie-under-the-stars-schedule",
+        "dual-run-new-polynesian-campfire-new-record",
+        "dual-run-missing-v2-polynesian-make-your-own-kukui-nut-leis-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/SSR_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-saratoga-springs-community-hall-price",
+        "dual-run-diff-saratoga-springs-glow-with-the-flow-location",
+        "dual-run-diff-saratoga-springs-movie-under-the-stars-schedule",
+        "dual-run-missing-v2-saratoga-springs-bicycle-rentals-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/WL_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-wilderness-lodge-buttons-and-bells-game-arcade-title",
+        "dual-run-diff-wilderness-lodge-movie-under-the-stars-schedule",
+        "dual-run-diff-wilderness-lodge-storytime-yoga-location",
+        "dual-run-new-wilderness-lodge-wild-wilderness-bingo-new-record",
+        "dual-run-missing-v2-wilderness-lodge-family-activities-and-crafts-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-tasteful-artistry-at-disneys-wilderness-lodge-missing-v2-record"
+      ],
+      "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-services/services-standard-assets/ops-comm/wdw-csd/resort-collateral/recreation/fy26-q3/YB_Aframe_Recreation-0526_DIGITAL.pdf": [
+        "dual-run-diff-beach-yacht-club-painting-in-the-vineyard-location",
+        "dual-run-new-beach-yacht-club-campfire-new-record",
+        "dual-run-new-beach-yacht-club-mickey-tie-dye-new-record",
+        "dual-run-new-beach-yacht-club-silent-disco-new-record",
+        "dual-run-new-beach-yacht-club-yo-ho-lets-glow-new-record",
+        "dual-run-missing-v2-beach-yacht-club-arts-crafts-missing-v2-record"
+      ]
+    },
+    "reviewed_task_count": 0,
+    "reviewed_task_ids": [],
+    "total_task_count": 101,
+    "total_task_count_by_reason": {
+      "unreviewed_new_v3_rows": 28,
+      "unreviewed_v2_v3_field_diffs": 33,
+      "v3_missing_v2_rows": 40
+    }
+  },
   "report_kind": "review_queue_v3_report",
+  "review_queue_fingerprint": "b241652caf1b24078d51949008ce3335280e75a103367178a64ab40063263d2e",
+  "review_workstreams": {
+    "dual_run_field_diff": {
+      "task_count": 33,
+      "task_count_by_field": {
+        "location": 9,
+        "price": 5,
+        "schedule": 17,
+        "title": 2
+      },
+      "task_ids": [
+        "dual-run-diff-all-star-movies-reel-fun-arcade-location",
+        "dual-run-diff-all-star-movies-sorcerers-campfire-schedule",
+        "dual-run-diff-all-star-music-movie-under-the-stars-schedule",
+        "dual-run-diff-all-star-sports-movie-under-the-stars-schedule",
+        "dual-run-diff-animal-kingdom-jambo-simbas-activity-center-price",
+        "dual-run-diff-animal-kingdom-kidani-community-hall-price",
+        "dual-run-diff-beach-yacht-club-painting-in-the-vineyard-location",
+        "dual-run-diff-boardwalk-community-hall-price",
+        "dual-run-diff-caribbean-beach-caribbean-campfire-schedule",
+        "dual-run-diff-caribbean-beach-disney-character-greetings-schedule",
+        "dual-run-diff-contemporary-movie-under-the-stars-schedule",
+        "dual-run-diff-contemporary-movie-under-the-stars-location",
+        "dual-run-diff-contemporary-olympiad-fitness-center-location",
+        "dual-run-diff-grand-floridian-arts-crafts-schedule",
+        "dual-run-diff-grand-floridian-movie-under-the-stars-schedule",
+        "dual-run-diff-old-key-west-bike-rentals-schedule",
+        "dual-run-diff-old-key-west-bike-rentals-location",
+        "dual-run-diff-old-key-west-conch-flats-community-hall-price",
+        "dual-run-diff-polynesian-movie-under-the-stars-schedule",
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-schedule",
+        "dual-run-diff-port-orleans-french-quarter-movie-under-the-stars-location",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-title",
+        "dual-run-diff-port-orleans-french-quarter-south-quarter-games-arcade-location",
+        "dual-run-diff-port-orleans-riverside-campfire-on-de-bayou-schedule",
+        "dual-run-diff-port-orleans-riverside-disney-character-greetings-schedule",
+        "dual-run-diff-port-orleans-riverside-pool-party-schedule",
+        "dual-run-diff-port-orleans-riverside-poolside-activities-schedule",
+        "dual-run-diff-saratoga-springs-community-hall-price",
+        "dual-run-diff-saratoga-springs-glow-with-the-flow-location",
+        "dual-run-diff-saratoga-springs-movie-under-the-stars-schedule",
+        "dual-run-diff-wilderness-lodge-buttons-and-bells-game-arcade-title",
+        "dual-run-diff-wilderness-lodge-movie-under-the-stars-schedule",
+        "dual-run-diff-wilderness-lodge-storytime-yoga-location"
+      ]
+    },
+    "missing_v2_record": {
+      "task_count": 40,
+      "task_count_by_field": {
+        "missing_v2_record": 40
+      },
+      "task_ids": [
+        "dual-run-missing-v2-all-star-music-design-your-own-mosaic-missing-v2-record",
+        "dual-run-missing-v2-all-star-music-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-jambo-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-animal-kingdom-kidani-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-campfire-at-pride-rock-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-art-of-animation-pool-party-missing-v2-record",
+        "dual-run-missing-v2-beach-yacht-club-arts-crafts-missing-v2-record",
+        "dual-run-missing-v2-boardwalk-crescent-lake-wellness-challenge-missing-v2-record",
+        "dual-run-missing-v2-boardwalk-pickleball-clinic-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-caribbean-beach-pool-party-missing-v2-record",
+        "dual-run-missing-v2-contemporary-the-magic-of-mosaics-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-find-a-friend-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-coronado-springs-poolside-activities-missing-v2-record",
+        "dual-run-missing-v2-old-key-west-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-old-key-west-sunset-celebration-missing-v2-record",
+        "dual-run-missing-v2-polynesian-make-your-own-kukui-nut-leis-missing-v2-record",
+        "dual-run-missing-v2-pop-century-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-pop-century-disney-character-greetings-missing-v2-record",
+        "dual-run-missing-v2-pop-century-groovy-campfire-missing-v2-record",
+        "dual-run-missing-v2-pop-century-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-pop-century-nighttime-activities-missing-v2-record",
+        "dual-run-missing-v2-pop-century-pool-party-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-mosaic-class-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-french-quarter-painting-on-de-bayou-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-craft-activity-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-movie-under-the-stars-missing-v2-record",
+        "dual-run-missing-v2-port-orleans-riverside-nighttime-activities-missing-v2-record",
+        "dual-run-missing-v2-riviera-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-saratoga-springs-bicycle-rentals-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-family-activities-and-crafts-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-nature-walk-missing-v2-record",
+        "dual-run-missing-v2-wilderness-lodge-tasteful-artistry-at-disneys-wilderness-lodge-missing-v2-record"
+      ]
+    },
+    "new_v3_record": {
+      "task_count": 28,
+      "task_count_by_field": {
+        "new_record": 28
+      },
+      "task_ids": [
+        "dual-run-new-all-star-movies-mickey-tie-dye-new-record",
+        "dual-run-new-all-star-movies-poolside-activities-new-record",
+        "dual-run-new-all-star-movies-shine-like-a-star-glow-party-new-record",
+        "dual-run-new-all-star-music-complimentary-craft-new-record",
+        "dual-run-new-all-star-sports-poolside-activities-new-record",
+        "dual-run-new-all-star-sports-shine-like-a-star-glow-party-new-record",
+        "dual-run-new-animal-kingdom-jambo-arts-crafts-new-record",
+        "dual-run-new-animal-kingdom-jambo-wild-about-painting-new-record",
+        "dual-run-new-animal-kingdom-jambo-zahanati-fitness-center-new-record",
+        "dual-run-new-animal-kingdom-kidani-arts-crafts-new-record",
+        "dual-run-new-beach-yacht-club-campfire-new-record",
+        "dual-run-new-beach-yacht-club-mickey-tie-dye-new-record",
+        "dual-run-new-beach-yacht-club-silent-disco-new-record",
+        "dual-run-new-beach-yacht-club-yo-ho-lets-glow-new-record",
+        "dual-run-new-boardwalk-disney-fit-yoga-new-record",
+        "dual-run-new-contemporary-cabana-rentals-new-record",
+        "dual-run-new-contemporary-motorized-boat-rentals-new-record",
+        "dual-run-new-contemporary-poolside-activities-new-record",
+        "dual-run-new-coronado-springs-arts-and-crafts-new-record",
+        "dual-run-new-coronado-springs-painting-experience-new-record",
+        "dual-run-new-coronado-springs-sangria-university-new-record",
+        "dual-run-new-coronado-springs-spanish-mosaic-art-new-record",
+        "dual-run-new-old-key-west-conch-flats-mosaics-new-record",
+        "dual-run-new-polynesian-campfire-new-record",
+        "dual-run-new-port-orleans-french-quarter-arts-crafts-new-record",
+        "dual-run-new-port-orleans-french-quarter-glow-with-the-flow-new-record",
+        "dual-run-new-riviera-painting-on-the-riviera-new-record",
+        "dual-run-new-wilderness-lodge-wild-wilderness-bingo-new-record"
+      ]
+    },
+    "ocr_or_parser_review": {
+      "task_count": 57,
+      "task_count_by_field": {
+        "fee": 9,
+        "location": 4,
+        "movie_title": 1,
+        "schedule": 11,
+        "title": 32
+      },
+      "task_ids": [
+        "vision-v3-5c8d949a98796f24c56933ad",
+        "vision-v3-7e8ba13f9e678ea93621e75f",
+        "vision-v3-7ceeda5c64bf42b4ca87f502",
+        "vision-v3-b5aec03b7f1ea28ec6227c3a",
+        "vision-v3-932beb27d087ecf6f8e48912",
+        "vision-v3-27621d5e99db1cbcbcd7a07e",
+        "vision-v3-fb192141c4d790e26002b4b9",
+        "vision-v3-078538dfa52c049c86ce8056",
+        "vision-v3-e9800cec782372c2def30bb2",
+        "vision-v3-d671d2f2f3915cee12326e12-location",
+        "vision-v3-d671d2f2f3915cee12326e12-schedule",
+        "vision-v3-d671d2f2f3915cee12326e12-title",
+        "vision-v3-0bd7b9e1abd4066097d4c806-location",
+        "vision-v3-0bd7b9e1abd4066097d4c806-schedule",
+        "vision-v3-0bd7b9e1abd4066097d4c806-title",
+        "vision-v3-874e50880bc3a90f052a085d-location",
+        "vision-v3-874e50880bc3a90f052a085d-schedule",
+        "vision-v3-09be60e3a5e8d80047e5b114",
+        "vision-v3-e179c9a92d669ea3e75591eb",
+        "vision-v3-73eb6c3589031635f0f690d1",
+        "vision-v3-f05847b31f0416f5e1a8d924-schedule",
+        "vision-v3-f05847b31f0416f5e1a8d924-title",
+        "vision-v3-66039a243e90e9c50fcad5ef-schedule",
+        "vision-v3-66039a243e90e9c50fcad5ef-title",
+        "vision-v3-026c16f14d7af1e92772d62c",
+        "vision-v3-81f061632b0e7a49ca1da55c-schedule",
+        "vision-v3-81f061632b0e7a49ca1da55c-title",
+        "vision-v3-866ec84a4f76108fa9446df3",
+        "vision-v3-7fdf07a93f1052a8ab3ed5be",
+        "vision-v3-e6305cc048df30c1810b3445",
+        "vision-v3-7cf66ad5211c9e7ab0b883e2",
+        "vision-v3-cb823bbedfd87a743ad68f8d",
+        "vision-v3-e2c1f160d9e35e97112bb464",
+        "vision-v3-d1e6fe19e83beef487e9fefe",
+        "vision-v3-17bb2ae674d10444e216cbb2",
+        "vision-v3-fbc9f8ded4d37fb59388cf08",
+        "vision-v3-02b7974d8df5ca9621d152c2",
+        "vision-v3-0ff6023325990fc4d82d60bd",
+        "vision-v3-5d50da53212991e273abcca3",
+        "vision-v3-f43f086c808e33903d582b76",
+        "vision-v3-9edb079b54943d309900f6bd",
+        "vision-v3-382445bcbe7c4d7758adf014-schedule",
+        "vision-v3-382445bcbe7c4d7758adf014-title",
+        "vision-v3-e4a785076a03b2174d990125",
+        "vision-v3-26aa335a6ae46ace2f7420b5",
+        "vision-v3-62bc19f88e5edcc84fd4a429",
+        "vision-v3-4fc6d37287063d1cbe1681b5",
+        "vision-v3-05d1cac92cccb742fd387c69",
+        "vision-v3-4a9ff1c3540861b467fa9271",
+        "vision-v3-c16bed880fbaddc068741871",
+        "vision-v3-0eb8c577b5e8c272739fbbbb",
+        "vision-v3-a5a8b1ee00a3f8913ae51d2e",
+        "vision-v3-d4a70f84342aa9d708fe4a47-location",
+        "vision-v3-d4a70f84342aa9d708fe4a47-title",
+        "vision-v3-79f5fc84b0bd4bc33ee95c42",
+        "vision-v3-65446056802aecbcc5bea31f",
+        "vision-v3-0d5b27572e61c2747ec608d7"
+      ]
+    }
+  },
   "schema_version": "review_queue_v3_report_001",
   "source_url_missing_task_ids": [],
+  "stale_review_decision_task_ids": [],
   "summary": {
     "all_tasks_have_existing_visual_artifacts": true,
     "all_tasks_have_source_urls": true,
     "all_tasks_have_visual_artifacts": true,
+    "pending_publish_gate_blocker_count_by_reason": {
+      "unreviewed_new_v3_rows": 28,
+      "unreviewed_v2_v3_field_diffs": 33,
+      "v3_missing_v2_rows": 40
+    },
+    "pending_publish_gate_blocker_task_count": 101,
     "pending_task_count": 158,
+    "publish_blocker_checklist_batch_count": 47,
+    "publish_blocker_checklist_row_count": 101,
+    "publish_gate_blocker_task_count": 101,
     "review_count_by_decision": {},
+    "reviewed_publish_gate_blocker_task_count": 0,
     "reviewed_task_count": 0,
     "source_url_missing_count": 0,
+    "stale_review_decision_count": 0,
     "task_count": 158,
     "task_count_by_calendar_group": {
       "all-star-movies": 5,
@@ -41,7 +1510,7 @@
       "new_record": 28,
       "price": 5,
       "schedule": 28,
-      "title": 32
+      "title": 34
     },
     "task_count_by_finding": {
       "engine_disagreement:location": 4,
@@ -87,11 +1556,9 @@
     },
     "task_count_by_type": {
       "gold_conflict": 33,
-      "manual_review_required": 77,
-      "missing_field_engine_evidence:title": 2,
-      "non_activity_title:title": 2,
-      "ocr_disagreement": 41,
-      "partial_movie_row_review_required": 3
+      "manual_review_required": 72,
+      "missing_required_field": 3,
+      "ocr_disagreement": 50
     },
     "visual_artifact_missing_count": 0,
     "visual_artifact_missing_file_count": 0
@@ -112,9 +1579,8 @@
       },
       "task_count_by_type": {
         "gold_conflict": 4,
-        "manual_review_required": 10,
-        "missing_field_engine_evidence:title": 1,
-        "ocr_disagreement": 21
+        "manual_review_required": 5,
+        "ocr_disagreement": 27
       }
     },
     {
@@ -166,7 +1632,7 @@
       "task_count_by_type": {
         "gold_conflict": 1,
         "manual_review_required": 5,
-        "partial_movie_row_review_required": 3
+        "missing_required_field": 3
       }
     },
     {
@@ -180,7 +1646,8 @@
         "missing_v2_record": 6
       },
       "task_count_by_type": {
-        "manual_review_required": 8
+        "manual_review_required": 6,
+        "ocr_disagreement": 2
       }
     },
     {
@@ -212,12 +1679,11 @@
         "missing_v2_record": 3,
         "new_record": 1,
         "schedule": 1,
-        "title": 1
+        "title": 2
       },
       "task_count_by_type": {
         "gold_conflict": 3,
-        "manual_review_required": 4,
-        "non_activity_title:title": 1
+        "manual_review_required": 5
       }
     },
     {

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarClient } from "@/components/atlas/CalendarClient";
-import { Hero } from "@/components/atlas/Hero";
 import { BrandAsset } from "@/components/brand/BrandAsset";
 import { PlanClientBoundary } from "@/components/plan/PlanClientBoundary";
 import { sanitizePublicActivities, dedupeOccurrences } from "@/lib/api/publicActivities";
@@ -68,10 +67,27 @@ export default async function CalendarPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
-      <Hero
-        title="Plan Ahead"
-        subtitle="Pick a day of your trip to see resort activities, weather context, and easy backup ideas."
-      />
+      <section className="browse-hero-compact relative mb-5 overflow-hidden rounded-3xl border border-[var(--color-card-border)] p-6 md:p-10">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-60"
+          style={{
+            background: `radial-gradient(ellipse at 30% 20%, var(--hero-glow), transparent 50%),
+              radial-gradient(ellipse at 80% 80%, var(--hero-glow), transparent 40%)`,
+          }}
+        />
+        <div className="relative">
+          <p className="mb-2 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
+            Sunshine to Starlight
+          </p>
+          <h1 className="font-display max-w-3xl text-4xl font-bold leading-tight md:text-5xl">
+            Plan Ahead
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-[var(--color-muted)]">
+            Pick a day of your trip to see resort activities, weather context,
+            and easy backup ideas.
+          </p>
+        </div>
+      </section>
       <div className="mb-6 flex justify-center">
         <BrandAsset asset="pocket-map-only" className="brand-asset--map-panel" priority />
       </div>
